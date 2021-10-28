@@ -20,33 +20,21 @@
     <div class="card-body card-body-tag px-2 py-1">
       <% rec[:tags].each_with_index do |tag, i| %>
         <% if i == 0 %>
-          <a href="{{{catalogTagUri this }}}" class="tag-label">#<%= tag %></a>
+          <a href="{{{catalogTagUri this }}}" class="category-label event">#<%= tag %></a>
         <% else %>
           <a href="{{{catalogTagUri this }}}" class="tag-label">#<%= tag %></a>
         <% end %>
-        <p><%= rec[:title] %></p>
       <% end %>
     </div>
     <div class="card-body card-body-info px-2 py-1">
-      {{"料金はログインするまで見せない"}}
       <div class="d-md-flex mb-2 align-items-center justify-content-between">
-        {{"bookmarkCountに変更の可能性あり"}}
-        <!-- <div class="">
-            <i class="material-icons every">star</i>
-            <span class="value">{{reviewCount}}</span>
-        </div>-->
         <div class="">
           <i class="material-icons every">query_builder</i>
-          <span class="value">{{requiredTime}}</span>
+          <span class="value"><%= rec[:amount_time] %></span>
         </div>
         <div class="">
           <i class="price-mark">￥</i>
-          {{#if @root.isLogin}}
-          <span class="value">{{catalogCardPrice code regularPrice}}</span>
-          {{else}}
           <span class="value">会員のみ</span>
-          {{/if}}
-
         </div>
       </div>
     </div>
