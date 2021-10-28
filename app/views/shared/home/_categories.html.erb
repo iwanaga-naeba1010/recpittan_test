@@ -1,0 +1,19 @@
+<article class="container categorys d-none d-lg-block shadow">
+  <div class="d-flex justify-content-around">
+    {{#each categorys}}
+    <div class="category">
+      <a href="{{catalogCategoryUri frontName}}" class="card border-0 text-decoration-none recreation-category-item">
+        <div class="card-body zoom px-0">
+          <picture>
+            <source type="image/webp" srcset="{{catalogHomeUri}}/images/category/{{fileKey}}.webp">
+            <source type="image/jpeg" srcset="{{catalogHomeUri}}/images/category/{{fileKey}}.jpg">
+            <img src="{{catalogHomeUri}}/images/category/{{fileKey}}.jpg" class="rounded-circle" alt="介護レクリエーション - {{frontName}}">
+          </picture>
+          <h3 class="card-title pt-3">{{frontName}}</h3>
+          <h6 class="card-subtitle pt-2 mb-2 text-muted">{{{description}}}</h6>
+        </div>
+      </a>
+    </div>
+    {{/each}}
+  </div>
+</article>

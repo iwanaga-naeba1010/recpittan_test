@@ -1,0 +1,49 @@
+/* LIST ページ */
+.list {
+  .sub-title {
+    margin: 0;
+    color: #343A40;
+    font-size: rem(24);
+  }
+
+  .sub-description {
+    margin-top: rem(8);
+    color: #6C757D;
+    font-size: rem(24);
+  }
+
+  .pagination {
+    .page-item {
+      .page-link {
+        padding-top: rem(15);
+        padding-bottom: rem(15);
+        padding-left: rem(42);
+        padding-right: rem(42);
+        border-radius: rem(104);
+        color: #343A40;
+
+        a {
+          font-size: rem(14);
+          vertical-align: middle;
+        }
+
+        .material-icons {
+          font-size: rem(14);
+          vertical-align: middle;
+        }
+
+        span {
+          font-size: rem(14);
+          vertical-align: middle;
+        }
+      }
+
+      span.page-link {
+
+        font-size: rem(14);
+        vertical-align: middle;
+      }
+    }
+  }
+}
+

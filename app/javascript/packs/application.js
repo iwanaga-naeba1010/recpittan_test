@@ -16,3 +16,4 @@ require('jquery');
 // require('popper.js');
 import 'bootstrap';
 import '../stylesheets/application.scss';
+require.context('../images', true)

@@ -1,0 +1,41 @@
+// scss-docs-start grid-breakpoints
+$grid-breakpoints: (xs: 0,
+    sm: 576px,
+    md: 768px,
+    lg: 992px,
+    xl: 1200px,
+    xxl: 1400px) !default;
+
+$baseFontSize: 16;
+// 日本語フォント
+$jpFontFamily: -apple-system,
+BlinkMacSystemFont,
+Roboto,
+"Noto Sans JP",
+"Segoe UI",
+"Helvetica Neue",
+HelveticaNeue,
+YuGothic,
+"Yu Gothic Medium",
+"Yu Gothic",
+Verdana,
+Meiryo,
+sans-serif;
+// $jpFontFamily: "Noto Sans JP";
+$jpFontFamilyBold: -apple-system,
+BlinkMacSystemFont,
+Roboto,
+"Noto Sans JP",
+"Segoe UI semibold",
+"Helvetica Neue",
+HelveticaNeue,
+YuGothic,
+"Yu Gothic",
+"Segoe UI",
+Verdana,
+Meiryo,
+sans-serif;
+// $jpFontFamilyBold: "Noto Sans JP";
+
+$enFontFamily: 'Hind',
+sans-serif;

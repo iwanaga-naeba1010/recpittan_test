@@ -1,0 +1,76 @@
+<header class="sticky-top">
+  <nav class="navbar  navbar-expand-lg navbar-light bg-white">
+    <div class="container-fluid">
+      <div class="navbar-brand">
+        <a href="{{catalogHomeUri}}/">
+          <%= image_pack_tag 'logo.png' %>
+        </a>
+        <h1 class="logo-text d-none d-lg-block">すべての人へ選択肢を</h1>
+      </div>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
+        aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse justify-content-between navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link" href="https://everyplus.jp/service">ご依頼方法</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link">レク一覧</a>
+          </li>
+          <li class="nav-item px-2">
+            <form action="{{{catalogHomeUri}}}" method="POST" class="d-flex search">
+              <div class="input-group mr-sm-2">
+                <span class="input-group-text bg-white border-end-0"><i
+                  class="material-icons every">search</i></span>
+                <input class="form-control border-start-0" name="keyword" type="search"
+                  placeholder="キーワードを入力" aria-label="Search">
+                <input type="hidden" name="_csrf" value="{{csrfToken}}">
+                <button class="btn btn-cprimary text-white" type="submit">検索</button>
+              </div>
+            </form>
+          </li>
+        </ul>
+
+        <ul class="navbar-nav align-items-center ">
+          <li class="nav-item">
+            <a class="nav-link" href="tel://050-5306-7767">
+              <div class="tel-container d-flex align-items-center">
+                <span class="material-icons">call</span>
+                <div>
+                  <span class="tel-top">サービスに関するお問い合わせ</span><br>
+                  <span class="tel-center">050-5306-7767</span><br>
+                  <span class="tel-bottom">[平日 10:00～18:00]</span>
+                </div>
+              </div>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="https://everyplus.jp/contact">
+              お問い合せ
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link " href="{{{catalogHomeUri}}}/login">
+              ログイン
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link link-join" href="{{{catalogHomeUri}}}/registration">
+              新規登録
+            </a>
+          </li>
+        </ul>
+      </div>
+      <!-- <ul class="nav nav-pills">
+        <li class="nav-item"><a href="#" class="nav-link active" aria-current="page">Home</a></li>
+        <li class="nav-item"><a href="#" class="nav-link">Features</a></li>
+        <li class="nav-item"><a href="#" class="nav-link">Pricing</a></li>
+        <li class="nav-item"><a href="#" class="nav-link">FAQs</a></li>
+        <li class="nav-item"><a href="#" class="nav-link">About</a></li>
+      </ul> -->
+
+    </div>
+  </nav>
+</header>

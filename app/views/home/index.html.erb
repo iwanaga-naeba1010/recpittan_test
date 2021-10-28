@@ -1,15 +1,57 @@
-<h1>Home#index</h1>
-<p>Find me in app/views/home/index.html.erb</p>
-<div class="container">
-  <div class="row">
-    <div class="col">
-      Column
+<main class="top">
+  <div class="jumbotron jumbotron-top">
+    <div class="container top">
+      <h1 class="">利用者さんのやりたいを叶えるレクがここに</h1>
+      <h2 class="d-none">300種類以上のレクから検索</h2>
     </div>
-    <div class="col">
-      Column
-    </div>
-    <div class="col">
-      Column
-    </div>
+
+    <%= render 'shared/home/categories' %>
   </div>
-</div>
+  <article class="container top pt-4 px-0">
+    <div class="row py-2">
+      <div class="col-12">
+        <a class="nav-link" href="{{catalogHomeUri}}/yoshimoto">
+          <%= image_pack_tag 'yoshimoto.png', class: "img-fluid", alt: "Responsive image" %>
+        </a>
+      </div>
+    </div>
+    <div class="row py-2">
+      <div class="col-12">
+        <h1 class="sub-title">{{firstTitle}}</h1>
+        <p class="sub-description">{{subDescription}}</p>
+      </div>
+    </div>
+    <div class="row">
+      {{#each firstItems}}
+      {{> catalog_card this }}
+      {{/each}}
+    </div>
+  </article>
+  <article class="container pt-4 px-0">
+    <div class="row py-3">
+      <div class="col-12">
+        <h1 class="sub-title">{{secondTitle}}</h1>
+        <p class="sub-description">{{subDescription}}</p>
+      </div>
+    </div>
+    <div class="row">
+      {{#each secondItems}}
+      {{> catalog_card this }}
+      {{/each}}
+    </div>
+  </article>
+
+  <article class="container pt-4 px-0">
+    <div class="row py-3">
+      <div class="col-12">
+        <h1 class="sub-title">{{thirdTitle}}</h1>
+        <p class="sub-description">{{subDescription}}</p>
+      </div>
+    </div>
+    <div class="row">
+      {{#each thirdItems}}
+      {{> catalog_card this }}
+      {{/each}}
+    </div>
+  </article>
+</main>
