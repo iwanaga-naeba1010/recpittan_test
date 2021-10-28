@@ -48,9 +48,9 @@
       </div>
     </div>
     <div class="row">
-      {{#each thirdItems}}
-      {{> catalog_card this }}
-      {{/each}}
+      <% @yoshimoto_recs.each do |rec| %>
+        <%= render 'shared/home/card', rec: rec %>
+      <% end %>
     </div>
   </article>
 </main>

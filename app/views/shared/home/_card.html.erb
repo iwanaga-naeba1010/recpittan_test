@@ -20,7 +20,8 @@
     <div class="card-body card-body-tag px-2 py-1">
       <% rec[:tags].each_with_index do |tag, i| %>
         <% if i == 0 %>
-          <a href="{{{catalogTagUri this }}}" class="category-label event">#<%= tag %></a>
+          <!-- styleにカテゴリに応じてbackground colorを入れる -->
+          <a href="{{{catalogTagUri this }}}" class="category-label event" style="background-color: #FD7E14;">#<%= tag %></a>
         <% else %>
           <a href="{{{catalogTagUri this }}}" class="tag-label">#<%= tag %></a>
         <% end %>
