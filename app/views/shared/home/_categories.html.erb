@@ -6,8 +6,8 @@
           <div class="card-body zoom px-0">
             <picture>
               <source type="image/webp" srcset="<%= category[:image] %>">
-              <!--            <source type="image/jpeg" srcset="{{catalogHomeUri}}/images/category/{{fileKey}}.jpg">-->
-              <!--            <img src="<%#= category[:image] %>" class="rounded-circle" alt="介護レクリエーション - {{frontName}}">-->
+<!--              <source type="image/jpeg" srcset="{{catalogHomeUri}}/images/category/{{fileKey}}.jpg">-->
+              <img src="<%= category[:image] %>" class="rounded-circle" alt="介護レクリエーション - {{frontName}}">
             </picture>
             <h3 class="card-title pt-3"><%= category[:name] %></h3>
             <h6 class="card-subtitle pt-2 mb-2 text-muted"><%= category[:description] %><</h6>
@@ -15,6 +15,5 @@
         </a>
       </div>
     <% end %>
-    {{/each}}
   </div>
 </article>
