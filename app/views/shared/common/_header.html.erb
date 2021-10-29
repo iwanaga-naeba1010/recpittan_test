@@ -2,9 +2,9 @@
   <nav class="navbar  navbar-expand-lg navbar-light bg-white">
     <div class="container-fluid">
       <div class="navbar-brand">
-        <a href="{{catalogHomeUri}}/">
+        <%= link_to root_path do %>
           <%= image_pack_tag 'logo.png' %>
-        </a>
+        <% end %>
         <h1 class="logo-text d-none d-lg-block">すべての人へ選択肢を</h1>
       </div>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
@@ -70,7 +70,6 @@
         <li class="nav-item"><a href="#" class="nav-link">FAQs</a></li>
         <li class="nav-item"><a href="#" class="nav-link">About</a></li>
       </ul> -->
-
     </div>
   </nav>
 </header>
