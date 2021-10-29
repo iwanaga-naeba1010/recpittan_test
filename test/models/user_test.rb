@@ -16,8 +16,8 @@
 #  last_sign_in_at        :datetime
 #  last_sign_in_ip        :string
 #  locked_at              :datetime
-#  name                   :string           default("0"), not null
-#  name_kana              :string           default("0"), not null
+#  name                   :string           default(""), not null
+#  name_kana              :string           default(""), not null
 #  remember_created_at    :datetime
 #  reset_password_sent_at :datetime
 #  reset_password_token   :string

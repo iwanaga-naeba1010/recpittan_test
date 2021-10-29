@@ -10,9 +10,14 @@ ja:
       # html: '<abbr title="required">*</abbr>'
     placeholders:
       user:
-        company_name: 企業名
+        company_name: エブリ・プラス ケアホーム
+        facility_name: エブリ・プラス ケアホーム
+        name: 介護 花子
+        name_kana: カイゴ ハナコ
+        email: メールアドレス
+#        password: メールアドレス
 
-        keys: %i[role company_name facility_name name name_kana]
+#        keys: %i[role company_name facility_name name name_kana]
     error_notification:
       default_message: "エラーが発生しました。"
     # Examples
@@ -26,7 +31,7 @@ ja:
     #       email: 'E-mail.'
     hints:
       user:
-        company_name: 申請を行うために、企業名の入力が必要です
+#        company_name: 申請を行うために、企業名の入力が必要です
         company_address: 申請を行うために、企業住所の入力が必要です
         company_tel: 申請を行うために、企業電話番号の入力が必要です
         company_url: 申請を行うために、企業URLの入力が必要です
