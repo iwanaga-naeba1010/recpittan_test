@@ -1,0 +1,40 @@
+ja:
+  simple_form:
+    "yes": "承認済み"
+    "no": "未承認"
+    required:
+      text: "required"
+      mark: "*"
+      # You can uncomment the line below if you need to overwrite the whole required html.
+      # When using html, text and mark won't be used.
+      # html: '<abbr title="required">*</abbr>'
+    error_notification:
+      default_message: "エラーが発生しました。"
+    # Examples
+    # labels:
+    #   defaults:
+    #     password: 'Password'
+    #   user:
+    #     new:
+    #       email: 'E-mail to sign in.'
+    #     edit:
+    #       email: 'E-mail.'
+    hints:
+      user:
+        company_name: 申請を行うために、企業名の入力が必要です
+        company_address: 申請を行うために、企業住所の入力が必要です
+        company_tel: 申請を行うために、企業電話番号の入力が必要です
+        company_url: 申請を行うために、企業URLの入力が必要です
+        sample_postal_code: サンプル送付先が企業住所と異なる場合はこちらを記入してください
+        sample_address: サンプル送付先が企業住所と異なる場合はこちらを記入してください
+        department: サンプル送付先で指定する、部署名を記入してください。
+        addressee: サンプル送付先で指定する、宛名を記入してください。
+    #   defaults:
+    #     username: 'User name to sign in.'
+    #     password: 'No special characters, please.'
+    # include_blanks:
+    #   defaults:
+    #     age: 'Rather not say'
+    # prompts:
+    #   defaults:
+    #     age: 'Select your age'

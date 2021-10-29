@@ -1,0 +1,78 @@
+ja:
+  site:
+    name: INGREBANK
+    title: 化粧品、健康食品原料データベース(RMIF)INGREBANK
+    description: 業界初RMIF対応の化粧品、健康食品原料データベースのINGREBANK(イングレバンク)。表示名称、医薬部外品、全成分、INCI、MSDSを網羅。セミナー集客も
+    keywords:
+      cosmetic: 化粧品
+      oem: OEM
+  mail:
+    title:
+      common: 化粧品、健康食品原料データベース「INGREBANK」からのお知らせです
+      application_of_user_company: 【INGREBANK】閲覧申請が届いております
+      accepted_application_of_user_company: 【INGREBANK】閲覧申請が承認されました
+    separator: ===================================================
+    publisher: 【発行元】
+    about: 化粧品、健康食品原料データベース「INGREBANK」
+    form: お問合せフォーム
+  common:
+    errors_handler:
+      title: "%{status_code} Error Page"
+      stator_code: "%{status_code}"
+      retrurn_link: こちらからダッシュボードへ戻れます。
+      403:
+        summary: 権限がありません
+        description: このページへアクセスする権限がありません。
+      404:
+        summary: ページが見つかりません
+        description: このページは移動もしくは削除されており存在しません。
+      500:
+        summary: エラーが発生しました
+        description: ご不便をおかけし申し訳ございません。時間を置いてもう一度お試しください。
+  actions:
+    index: 一覧
+    show: 詳細
+    new: 追加
+    edit: 編集
+    destroy: 削除
+    download: ダウンロード
+  pages:
+    index: "%{model_name}一覧"
+    show: "%{model_name}詳細"
+    new: "%{model_name}追加"
+    edit: "%{model_name}編集"
+    post: "%{model_name}投稿"
+  action_messages:
+    created: "%{model_name}を追加しました！"
+    updated: "%{model_name}を修正しました！"
+    deleted: "%{model_name}を削除しました！"
+    unauthorized: "権限がありません"
+  wicked:
+    product_steps:
+      base: 原料基礎情報
+      jsln_ingredient_info: 化粧品表示名称情報
+      safety_evaluation_test_info: 安全性評価試験情報
+      treaty_info: 各種条約
+      animal_origin_raw_material_info: 反芻動物由来原料情報
+      regulatory_compliance_informations_info: 化粧品に関する規制への適合情報　ポジティブリスト、ネガティブリスト、ナノ情報
+      regulations_governing_ingredients_info: 使用可能な成分を規定する規制情報
+  time:
+    formats:
+      default: "%Y年%m月%d日 (%a) %H:%M"
+  page_title:
+    about: INGREBANKについて
+    tos: 利用規約
+    low: 特定商取引法
+    privacy: プライバシーポリシー
+    benten: BENTEN
+    company: 運営会社
+    contact: 原料メーカーの登録はこちら
+  url:
+    notion: 
+      about: https://cogane.notion.site/cogane/INGRE-BANK-5870f1bb69cc4e518d26c42ca722266c
+      tos: https://cogane.notion.site/INGRE-BANK-10ebfa1a982f4eb38e3d660116929efa
+      low: https://cogane.notion.site/818933e7725e42debef3db6f037f2d04
+      privacy: https://cogane.notion.site/7405929664c749378ecb9eaa4150e897
+    benten: https://bentenmarket.com
+    cogane: https://cogane.studio
+    contact: https://docs.google.com/forms/d/e/1FAIpQLSf-Rr7mkVbiFT4ygzte_ykGmlLHHgQSgkp4dZ2i_P2akHmdSQ/viewform

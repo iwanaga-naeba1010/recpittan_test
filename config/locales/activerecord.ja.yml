@@ -1,0 +1,196 @@
+ja:
+  activerecord:
+    models:
+      email: メール
+      company: 企業
+      factory: 工場
+      banner: バナー
+      user: ユーザー
+      user_company: ユーザー権限
+      user_billboard: 参加者
+      product: 原料
+      product_file: 関連資料
+      origin: 由来
+      safety_evaluation_test: 安全性評価試験
+      user_product_file: 関連資料ダウンロード履歴
+      jsln_ingredient: 化粧品表示名称
+      jsln_ingredient_name: 化粧品表示名称の名前
+      jsln_ingredient_name: 化粧品表示名称の名前
+      billboard: セミナー/PR
+      cite: ワシントン条約
+      cbd: 生物多様性条約
+      animal_origin_raw_material: 反芻動物由来原料
+      regulatory_compliance_information: 化粧品に関する規制への適合情報　ポジティブリスト、ネガティブリスト、ナノ
+      regulations_governing_ingredient: 使用可能な成分を規定する規制
+    attributes:
+      email:
+        title: タイトル
+        body: 内容
+      user:
+        email: メールアドレス
+        role: 権限
+        status_at: 日時
+        company_name: 企業名
+        company_address: 企業住所
+        company_tel: 企業電話番号
+        company_url: 企業URL
+        sample_postal_code: サンプル送付先郵便番号
+        sample_address: サンプル送付先住所
+        department: 部署
+        addressee: 宛名
+      company:
+        email: メールアドレス
+        name: 会社名
+        name_kana: 会社名（フリガナ）
+        address: 住所
+        description: 説明文
+        postal_code: 郵便番号
+        tel: 電話番号
+        url: URL
+      factory:
+        name: 名前
+        address: 住所
+        tel: 電話番号
+        url: URL
+        product: 原料
+      banner:
+        image: 画像
+        kind: 表示場所
+        company_id: 企業
+        company: 企業
+        order: 表示する順番
+        alt: 画像のAltテキスト
+        path: 遷移先リンク
+        description: メモ
+        is_finished: 終了していますか？
+      user_company:
+        company_id: 企業
+        company: 企業
+        user_id: ユーザー
+        user: ユーザー
+        role: 適用権限
+        status: 承認ステータス
+      product:
+        name: 原料名商品名
+        name_kana: 原料名商品名カナ
+        english_kana: 英語商品名
+        kind: 種類
+        packing: 荷姿
+        property: 配合目的
+        target_company: 対象国
+        is_sample_delivered: サンプル発送の有無
+        expences: 包装単位
+        description: 詳細
+        company: 製造国
+      product_file:
+        name: ファイル名
+        kind: 種類
+        image: 関連ファイル
+        product_id: 関連原料
+      origin:
+        calculated_organic_indices: 自然・オーガニック指数関連の指数を算出していますか？
+        provided_evidence_related_to_organic_index: 自然・オーガニック指数関連の根拠資料（証明書等）をご提供いただけますか？
+        producted_certified_organic: オーガニック認証を取得していますか？
+        certified_organization_of_organic: 認証を受けた団体を記載して下さい
+        provided_copy_of_organic_certification: オーガニック認証の証明書の写しをご提供いただけますか？
+        memo: 備考（その他特筆すべき事項があればお書き下さい）
+        rspo_certified: RSPO認証を取得していますか？
+        rspo_method: はいの場合、管理方法を選択して下さい（IP/SG/MB/B&C）
+        halal_certified: ハラール認証を取得していますか？
+        certified_organization_of_halal: はいの場合、取得している認証の種類（認証した団体、輸出可能な国など）を記載して下さい
+        product_id: 原料
+        product: 原料
+      safety_evaluation_test:
+        kind: 種類
+        safety_assessment_availability_of_reports: 安全性評価報告書の有無
+        availability_of_safety_assessment_reports: 安全性評価報告書の提供可否
+        animal_studies_and_other_studies: 動物試験/その他の試験
+        test_substance: 被験物質
+        summary_of_results: 結果概要
+        test_period: 試験実施時期
+        country: 試験実施国
+        purpose: 試験目的
+        glp_and_gcp: GLP/GCP準拠
+        product_id: 原料
+        product: 原料
+      user_product_file:
+        user_id: ユーザー
+        product_file_id: 関連資料
+      jsln_ingredient:
+        name: 表示名称
+        name_kana: 表示名称（フリガナ）
+        cas_number: CAS登録番号
+        chinese_name: 中文名称
+        definition: 定義
+        memo: 備考
+        body: 成分詳細
+        inci: INCI
+        kind: 種類
+        ingredient_number: 成分番号
+        regulation: 規制分類
+      jsln_ingredient_blog:
+        title: タイトル
+        body: 内容
+      jsln_ingredient_name:
+        name: 表示名称
+        kind: 種別
+        kind_text: 種別
+      billboard:
+        title: タイトル
+        address: 開催場所
+        body: 内容
+        kind: 種類
+        is_published: 公開/非公開
+        company_id: 企業
+        date: 開催日時
+        url: 参加URL(ZOOM、Google Meet、Teams 等)
+      billboard_file:
+        image: 画像・資料
+        kind: 種類
+      cite:
+        name_for_plant_or_animal: 動植物の名称がCITES附属書Ⅰ・Ⅱ・Ⅲに記載がありますか？
+        name_of_the_plant_or_animal: 動植物の名称を記載して下さい
+        applicable_annexes: 該当する附属書（Ⅰ・Ⅱ・Ⅲ）の何れかを選択して下さい
+        excluded_information: CITES附属書にて除外される情報がありますか？
+        details_of_information_to_be_excluded: はい（除外できる）の場合、その詳細を記載して下さい
+        artificial_breeding: いいえ（除外できない）の場合、人工繁殖ですか？
+        required_documents: 人口増殖の場合、輸出に伴う必要書類（繁殖証明書など）の提出が可能ですか？
+      cbd:
+        genetic_resources_used: 原材料に遺伝資源が使用されていますか？
+        country: 提供国を記載して下さい（非開示の場合は「非開示」と記載して下さい）
+        parties_to_the_cbd: 提供国は生物多様性条約（CBD）締約国ですか？
+        obtained_prior_consent_of_the_donor_country: 遺伝資源の取得に際し、提供国の事前の同意（PIC）を得ていますか？
+        contract_with_provider: 提供者との間で契約（MAT）を結んでいますか？
+        benefit_sharing: はいの場合、MATに従って、遺伝資源の取得や利益配分を行っていますか？
+      animal_origin_raw_material:
+        used_raw_materials: 反芻動物由来の原材料を使用していますか？
+        composed_of_animal_cells_and_tissues: 動物の細胞･組織から構成される
+        contains_components_derived_from_extracts_or_secretions: 動物の細胞･組織からの抽出物又は分泌物に由来する成分を含有する
+        contains_ingredients_derived_from_extracts_of_animal_urine: 動物の尿、血液等からの抽出物に由来する成分を含有する
+        applying_cell_culture_to_animal_derived_cells: 動物由来細胞に対して細胞培養又は遺伝子組換え技術を応用して製造される
+        using_above_ingredients_as_additives: 添加剤（製造過程の培地を含む）として上記の成分を用いて製造される
+        country_of_birth: 誕生国
+        country_where_one_keeps_animals: 飼育国
+        brutal_country: と畜国
+        treatment_to_prevent_transmissible_spongiform_encephalopathy: 伝達性海綿状脳症（BSEなど）を防止するための処理および作業
+        used_human_derived_ingredients: ヒト由来の原材料を使用していますか？
+      regulatory_compliance_information:
+        kind: 種別
+        japan: 日本
+        usa: アメリカ
+        eu: EU
+        china: 中国
+        asean: ASEAN
+        australia: オーストラリア
+        korea: 韓国
+        taiwan: 台湾
+        canada: カナダ
+        memo: 備考
+      regulations_governing_ingredient:
+        kind: 種別
+        memo: 備考
+        conformance_information: 適合情報
+    errors:
+      messages:
+        duration_over: が上限を越えています
+        at_least_one_content: 少なくとも1つの項目を入力してください

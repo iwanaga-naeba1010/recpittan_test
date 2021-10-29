@@ -1,0 +1,207 @@
+ja:
+  enumerize:
+    answer: &answer
+      # no/yesは文字で囲わないと正常に機能しないらしい
+      "no": いいえ
+      "yes": はい
+    banner:
+      top: トップページ
+    product:
+      kind:
+        pharmaceutical_machinery_law_comprehensive: 薬機法総合、医薬品等適性広告基準
+        comprehensive_prize_display_method: 景品表示法総合
+        health_promotion_law_comprehensive: 健康増進法総合
+        fair_competition_rules_for_cosmetics: 化粧品の公正競争規約
+        cosmetics_advertising_law: 化粧品の広告に関する法律
+        casebook_of_cosmetics_advertising: 化粧品広告の事例集
+        law_concerning_advertising_of_quasi_drugs: 医薬部外品の広告に関する法律
+        collection_of_advertising_cases_for_quasi_drugs: 医薬部外品の広告事例集
+    product_detail:
+      kind:
+        free: フリー訴求
+        appeal: アピール
+        property: プロパティ
+    origin:
+      rspo_method:
+        ip: IP
+        sg: SG
+        mb: MB
+        bc: B&C
+      calculated_organic_indices:
+        *answer
+      provided_evidence_related_to_organic_index:
+        *answer
+      producted_certified_organic:
+        *answer
+      provided_copy_of_organic_certification:
+        *answer
+      rspo_certified:
+        *answer
+      halal_certified:
+        *answer
+    safety_evaluation_test:
+      kind:
+        single_dose_toxicity: 単回投与毒性
+        skin_irritation_at_one_time: 皮膚一次刺激性
+        continuous_skin_irritation: 連続皮膚刺激性
+        eye_irritation: 眼刺激性
+        oral_mucosa_irritation: 口腔粘膜刺激性
+        skin_sensitivity: 皮膚感作性
+        phototoxicity: 光毒性
+        photosensitivity: 光感作性
+        genotoxicity: 遺伝毒性
+        carcinogenic: 発がん性
+        human_patch: ヒトパッチ
+        repeated_cast_and_toxicity: 反復投与毒性
+        reproductive_and_developmental_toxicity: 生殖発生毒性
+        absorption_and_distribution_and_metabolism_and_excretion: 吸収・分布・代謝・排泄（経皮吸収性）
+        other: その他
+      safety_assessment_availability_of_reports:
+        no: 無し
+        yes: あり
+        unknown: 不明
+        not_disclosed: 非公開
+        other: その他
+      availability_of_safety_assessment_reports:
+        no: 否
+        yes: 可
+        only_in_outline: 概要のみ可
+      animal_studies_and_other_studies:
+        animal_experiment: 動物実験
+        guinea_pig: モルモット
+        rat: ラット
+        human: ヒト
+        microbe: 微生物
+        in_sillico: in sillico
+      summary_of_results:
+        no_irritation: 刺激性なし
+        no_sensitization: 感作性なし
+        negative: 陰性
+        safe_product: 安全品
+      purpose:
+        cosmetic: 化粧品目的
+        non_cosmetic: 化粧品目的以外
+      glp_and_gcp:
+        none: なし
+        glp_compliant: GLP準拠
+        gcp_compliant: GCP準拠
+    user:
+      role:
+        user: 一般ユーザー
+        admin: 管理者ユーザー
+    user_company:
+      role:
+        read: 一般参加
+        write: 編集者
+        admin: 管理者
+      status:
+        in_progress: 申請中
+        accepted: 承認済
+        denied: 拒否
+    billboard:
+      kind:
+        seminar: セミナー
+        pr: PRブログ
+    billboard_file:
+      kind:
+        thumbnail: トップ画像
+        sample: サンプル
+        document: ドキュメント 
+    user_billboard:
+      status:
+        applied: 応募した
+        canceled: キャンセルした
+    product_file:
+      kind:
+        sample: サンプル画像
+        document: 資料
+    jsln_ingredient:
+      kind:
+        cosmetic: 化粧品
+        quasi_drug: 医薬部外品
+    jsln_ingredient_name:
+      kind:
+        inci: INCI
+        mid_inci: MID
+        eu_inci: 欧州INCI
+        japanese: 日本化粧品表示
+        japanese_kana: 日本化粧品表示かな
+        chinese: 中国中文名称
+        korean: 韓国ハングル名
+    cite:
+      applicable_annexes:
+        first: 附属書Ⅰ
+        second: 附属書Ⅱ
+        third: 附属書Ⅲ
+    animal_origin_raw_material:
+      used_raw_materials:
+        *answer
+      composed_of_animal_cells_and_tissues:
+        *answer
+      contains_components_derived_from_extracts_or_secretions:
+        *answer
+      contains_ingredients_derived_from_extracts_of_animal_urine:
+        *answer
+      applying_cell_culture_to_animal_derived_cells:
+        *answer
+      using_above_ingredients_as_additives:
+        *answer
+      used_human_derived_ingredients:
+    cbd:
+      genetic_resources_used:
+        *answer
+      parties_to_the_cbd:
+        *answer
+      obtained_prior_consent_of_the_donor_country:
+        *answer
+      contract_with_provider:
+        *answer
+      benefit_sharing:
+        *answer
+    regulatory_compliance_information:
+      japan:
+        *answer
+      usa:
+        *answer
+      eu:
+        *answer
+      china:
+        *answer
+      asean:
+        *answer
+      australia:
+        *answer
+      korea:
+        *answer
+      taiwan:
+        *answer
+      canada:
+        *answer
+      kind:
+        prohibited_ingredients: 使用禁止成分は含まれていますか？
+        ingredients_that_have_restrictions: 使用に制限がある成分は含まれていますか？
+        contain_any_usable_preservative_ingredients: 使用可能な防腐剤成分は含まれていますか？
+        contain_any_usable_dye_or_pigment_ingredients: 使用可能な色素・顔料成分は含まれていますか？
+        contain_usable_uv_filter_component: 使用可能なUVフィルター成分は含まれていますか？
+        contain_nanomaterials: ナノ物質は含まれていますか？
+    regulations_governing_ingredient:
+      conformance_information:
+        *answer
+      artificial_breeding:
+        *answer
+      details_of_information_to_be_excluded:
+        *answer
+      excluded_information:
+        *answer
+      name_for_plant_or_animal:
+        *answer
+      required_documents:
+      kind:
+        product_listed_in_the_quasi_drug_additive_list: 日本：医薬部外品添加物リストに収載されていますか？
+        used_as_an_active_ingredient_list_for_quasi_drugs: 日本：医薬部外品の有効成分リストとして使用できますか？
+        obtained_an_ndc_number_as_an_api: 米国：医薬品のAPI（原薬）としてNDC番号を取得していますか？
+        used_in_denatured_alcohol_formulations: 米国：変性アルコール処方に使用できますか？
+        included_in_the_list_of_active_ingredients_of_hair_dye: 中国：染毛剤の有効成分リストに収載されていますか？
+        included_in_the_list_of_active_ingredients_in_the_functional_cosmetics_standard: 韓国：機能性化粧品基準の有効成分リストに収載されていますか？
+        listed_in_the_list_of_ingredients_and_usage_restrictions_for_specific_use_cosmetics: 台湾：特定用途化粧品成分名稱及使用限制表に収載されていますか？
+

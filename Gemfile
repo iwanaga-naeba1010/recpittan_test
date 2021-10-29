@@ -34,6 +34,8 @@ group :development, :test do
 end
 
 group :development do
+  gem 'letter_opener_web'
+  gem 'rails-erd'
   gem 'pry-rails'
   gem 'pry-remote'
   # Access an interactive console on exception pages or by calling 'console' anywhere in the code.
@@ -53,6 +55,20 @@ group :test do
   # Easy installation and use of web drivers to run system tests with browsers
   gem 'webdrivers'
 end
+
+gem 'devise'
+gem 'dotenv-rails'
+gem 'rails-i18n' # devise 日本語化
+gem 'devise-i18n' # devise 日本語化
+# admin + UI theme
+gem 'activeadmin'
+gem 'arctic_admin'
+
+gem 'annotate'
+gem 'simple_form'
+gem 'enumerize'
+gem 'seed-fu'
+
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]

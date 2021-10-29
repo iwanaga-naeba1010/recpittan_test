@@ -2,5 +2,9 @@ Rails.application.routes.draw do
   root 'home#index'
   get 'home/index'
   get '/detail' => 'home#detail'
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+
+  devise_for :users, controllers: {
+    sessions: 'custom_devise/sessions'
+  }
+  mount LetterOpenerWeb::Engine, at: '/letter_opener' if Rails.env.development?
 end
