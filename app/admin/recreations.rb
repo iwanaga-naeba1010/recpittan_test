@@ -3,9 +3,7 @@
 ActiveAdmin.register Recreation do
   permit_params(
     %i[user_id title second_title minutes description flow_of_day borrow_item bring_your_own_item extra_information],
-    tag_ids: [],
-    recreation_tags_attributes: %i[id tag_id _destroy],
-    recreation_targets_attributes: %i[id target_id _destroy],
+    tag_ids: []
   )
   actions :all
 
@@ -35,15 +33,22 @@ ActiveAdmin.register Recreation do
       row :updated_at
     end
 
-    panel t('activerecord.models.tag'), style: 'margin-top: 30px;' do
-      table_for recreation.tags do
+    panel 'イベント種別', style: 'margin-top: 30px;' do
+      table_for recreation.tags.events do
         column :id
         column :name
       end
     end
 
-    panel t('activerecord.models.target'), style: 'margin-top: 30px;' do
-      table_for recreation.targets do
+    panel 'カテゴリー', style: 'margin-top: 30px;' do
+      table_for recreation.tags.categories do
+        column :id
+        column :name
+      end
+    end
+
+    panel '想定ターゲット', style: 'margin-top: 30px;' do
+      table_for recreation.tags.targets do
         column :id
         column :name
       end
@@ -69,26 +74,6 @@ ActiveAdmin.register Recreation do
     f.input :tags, label: 'イベント種別', as: :check_boxes, collection: Tag.events.all
     f.input :tags, label: 'カテゴリー', :as => :check_boxes, collection: Tag.categories.all
     f.input :tags, label: '想定ターゲット', :as => :check_boxes, collection: Tag.targets.all
-
-    # f.inputs 'カテゴリ' do
-    #   f.has_many :recreation_tags, heading: false, allow_destroy: true, new_record: true do |t|
-    #     t.input :tag_id, as: :select, collection: Tag.categories.all
-    #   end
-    # end
-    #
-    # f.inputs 'イベント種別' do
-    #   f.has_many :recreation_tags, heading: false, allow_destroy: true, new_record: true do |t|
-    #     if f.object.tags.any? { |tag| tag.kind == :event }
-    #       t.input :tag_id, as: :select, collection: Tag.events.all
-    #     end
-    #   end
-    # end
-    #
-    # f.inputs 'ターゲット層' do
-    #   f.has_many :recreation_tags, heading: false, allow_destroy: true, new_record: true do |t|
-    #     t.input :tag_id, as: :select, collection: Tag.targets.all
-    #   end
-    # end
 
     f.actions
   end
