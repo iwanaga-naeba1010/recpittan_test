@@ -28,6 +28,7 @@ ja:
         extra_information: その他
       tag:
         name: タグ名
+        kind: 種類
       target:
         name: 想定利用者
 

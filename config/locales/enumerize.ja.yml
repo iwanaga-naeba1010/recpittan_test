@@ -11,3 +11,8 @@ ja:
         user: 施設
         partner: パートナー
         admin: 管理者
+    tag:
+      kind:
+        category: カテゴリー
+        event_type: イベントタイプ
+        target: 利用者層
