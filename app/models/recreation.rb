@@ -28,9 +28,4 @@ class Recreation < ApplicationRecord
 
   has_many :recreation_tags, dependent: :destroy
   has_many :tags, through: :recreation_tags
-  accepts_nested_attributes_for :recreation_tags, allow_destroy: true
-
-  has_many :recreation_targets, dependent: :destroy
-  has_many :targets, through: :recreation_targets
-  accepts_nested_attributes_for :recreation_targets, allow_destroy: true
 end
