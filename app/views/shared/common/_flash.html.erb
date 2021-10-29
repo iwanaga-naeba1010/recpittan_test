@@ -2,7 +2,7 @@
   <div class="flash alert alert-primary">
     <%= flash[:notice] %>
   </div>
-<% else %>
+<% elsif flash[:alert] %>
   <div class="flash alert alert-warning">
     <%= flash[:alert] %>
   </div>
