@@ -4,10 +4,15 @@ ja:
     "no": "未承認"
     required:
       text: "required"
-      mark: "*"
+      mark: '<span class="label required">必須</span>'
       # You can uncomment the line below if you need to overwrite the whole required html.
       # When using html, text and mark won't be used.
       # html: '<abbr title="required">*</abbr>'
+    placeholders:
+      user:
+        company_name: 企業名
+
+        keys: %i[role company_name facility_name name name_kana]
     error_notification:
       default_message: "エラーが発生しました。"
     # Examples
