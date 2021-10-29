@@ -39,7 +39,9 @@
 
               <div class="row justify-content-between">
                 <div class="col-auto text-center">
-                  <span class="forgot-password">パスワードを忘れた方は<a href="{{{catalogHomeUri}}}/forgotPassword" class="clink">こちら</a></span>
+                  <span class="forgot-password">パスワードを忘れた方は
+                    <%= link_to 'こちら', new_user_password_path %>
+                  </span>
                 </div>
                 <div class="col-md-4 text-center">
                   <%= f.button :submit, 'ログイン', class: 'btn btn-cprimary rounded-pill w-100 font-14 py-3 px-4 font-weight-bold text-white' %>
