@@ -1,11 +1,9 @@
 ja:
   activerecord:
     models:
-      email: メール
-      company: 企業
-      factory: 工場
-      banner: バナー
       user: ユーザー
+      recreation: レク
+      tag: タグ
     attributes:
       email:
         title: タイトル
@@ -17,15 +15,19 @@ ja:
         name: ご担当社名
         name_kana: ご担当社名(カタカナ)
         email: メールアドレス
-      company:
-        email: メールアドレス
-        name: 会社名
-        name_kana: 会社名（フリガナ）
-        address: 住所
-        description: 説明文
-        postal_code: 郵便番号
-        tel: 電話番号
-        url: URL
+      recreation:
+        user: パートナー
+        title: タイトル
+        second_title: セカンドタイトル
+        minutes: 所要時間
+        description: このようなことをやります
+        flow_of_day: 当日の流れとタイムスケジュール
+        borrow_item: お借りしたいもの
+        bring_your_own_item: 持ち込むもの
+        extra_information: その他
+      tag:
+        name: タグ名
+
     errors:
       messages:
         duration_over: が上限を越えています

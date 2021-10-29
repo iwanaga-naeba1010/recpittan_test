@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 ActiveAdmin.register User do
-  permit_params(%i[email name role])
+  permit_params(%i[email role name name_kana company_name facility_name])
   actions :all, except: [:destroy]
 
   index do

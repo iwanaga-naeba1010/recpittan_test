@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_10_29_095509) do
+ActiveRecord::Schema.define(version: 2021_10_29_103847) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -27,6 +27,36 @@ ActiveRecord::Schema.define(version: 2021_10_29_095509) do
     t.index ["author_type", "author_id"], name: "index_active_admin_comments_on_author"
     t.index ["namespace"], name: "index_active_admin_comments_on_namespace"
     t.index ["resource_type", "resource_id"], name: "index_active_admin_comments_on_resource"
+  end
+
+  create_table "recreation_tags", force: :cascade do |t|
+    t.bigint "recreation_id", null: false
+    t.bigint "tag_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["recreation_id"], name: "index_recreation_tags_on_recreation_id"
+    t.index ["tag_id"], name: "index_recreation_tags_on_tag_id"
+  end
+
+  create_table "recreations", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.string "title"
+    t.string "second_title"
+    t.integer "minutes"
+    t.text "description"
+    t.text "flow_of_day"
+    t.text "borrow_item"
+    t.text "bring_your_own_item"
+    t.text "extra_information"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_recreations_on_user_id"
+  end
+
+  create_table "tags", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "users", force: :cascade do |t|
@@ -60,4 +90,7 @@ ActiveRecord::Schema.define(version: 2021_10_29_095509) do
     t.index ["unlock_token"], name: "index_users_on_unlock_token", unique: true
   end
 
+  add_foreign_key "recreation_tags", "recreations"
+  add_foreign_key "recreation_tags", "tags"
+  add_foreign_key "recreations", "users"
 end
