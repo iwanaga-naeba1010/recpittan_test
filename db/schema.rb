@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_10_29_110224) do
+ActiveRecord::Schema.define(version: 2021_10_29_114803) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -38,15 +38,6 @@ ActiveRecord::Schema.define(version: 2021_10_29_110224) do
     t.index ["tag_id"], name: "index_recreation_tags_on_tag_id"
   end
 
-  create_table "recreation_targets", force: :cascade do |t|
-    t.bigint "recreation_id", null: false
-    t.bigint "target_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["recreation_id"], name: "index_recreation_targets_on_recreation_id"
-    t.index ["target_id"], name: "index_recreation_targets_on_target_id"
-  end
-
   create_table "recreations", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.string "title"
@@ -67,12 +58,6 @@ ActiveRecord::Schema.define(version: 2021_10_29_110224) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "kind"
-  end
-
-  create_table "targets", force: :cascade do |t|
-    t.string "name"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "users", force: :cascade do |t|
@@ -108,7 +93,5 @@ ActiveRecord::Schema.define(version: 2021_10_29_110224) do
 
   add_foreign_key "recreation_tags", "recreations"
   add_foreign_key "recreation_tags", "tags"
-  add_foreign_key "recreation_targets", "recreations"
-  add_foreign_key "recreation_targets", "targets"
   add_foreign_key "recreations", "users"
 end

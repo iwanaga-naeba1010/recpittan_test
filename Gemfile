@@ -48,12 +48,23 @@ group :development do
   gem 'spring'
 end
 
+
 group :test do
-  # Adds support for Capybara system testing and selenium driver
-  gem 'capybara', '>= 3.26'
+  gem 'factory_bot_rails'
+  gem 'ffaker'
+  gem 'rspec-rails'
+  gem 'capybara'
   gem 'selenium-webdriver'
-  # Easy installation and use of web drivers to run system tests with browsers
-  gem 'webdrivers'
+  gem 'webdrivers', require: false
+  # gem 'chromedriver-helper' unless ENV.key?('CIRCLECI')。
+  gem 'database_cleaner'
+  gem 'simplecov', require: false
+  gem 'rails-controller-testing'
+  gem 'rspec-validator_spec_helper'
+  gem 'rspec-request_describer'
+  # gem 'rspec-json_matcher', github: 'whiteleaf7/rspec-json_matcher'
+  gem 'rspec-parameterized'
+  gem 'shoulda-matchers'
 end
 
 gem 'devise'
