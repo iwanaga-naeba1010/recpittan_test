@@ -4,6 +4,7 @@ ja:
       user: ユーザー
       recreation: レク
       tag: タグ
+      target: 利用者層
     attributes:
       email:
         title: タイトル
@@ -27,6 +28,8 @@ ja:
         extra_information: その他
       tag:
         name: タグ名
+      target:
+        name: 想定利用者
 
     errors:
       messages:
