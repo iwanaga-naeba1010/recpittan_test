@@ -16,6 +16,7 @@ class Tag < ApplicationRecord
   has_many :recreations, through: :recreation_tags
 
   enumerize :kind, in: { category: 0, event: 1, target: 2 }, default: 0
+  mount_uploader :image, ImageUploader
 
   scope :categories, -> { where(kind: :category) }
   scope :events, -> { where(kind: :event) }

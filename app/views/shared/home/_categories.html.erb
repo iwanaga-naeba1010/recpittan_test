@@ -5,12 +5,10 @@
         <a href="{{catalogCategoryUri frontName}}" class="card border-0 text-decoration-none recreation-category-item">
           <div class="card-body zoom px-0">
             <picture>
-              <source type="image/webp" srcset="<%= category[:image] %>">
-<!--              <source type="image/jpeg" srcset="{{catalogHomeUri}}/images/category/{{fileKey}}.jpg">-->
-              <img src="<%= category[:image] %>" class="rounded-circle" alt="介護レクリエーション - {{frontName}}">
+              <%= image_tag category.image.to_s, class: "rounded-circle", alt: "" %>
             </picture>
-            <h3 class="card-title pt-3"><%= category[:name] %></h3>
-            <h6 class="card-subtitle pt-2 mb-2 text-muted"><%= category[:description] %><</h6>
+            <h3 class="card-title pt-3"><%= category.name %></h3>
+            <h6 class="card-subtitle pt-2 mb-2 text-muted"><%= simple_format category.text %></h6>
           </div>
         </a>
       </div>

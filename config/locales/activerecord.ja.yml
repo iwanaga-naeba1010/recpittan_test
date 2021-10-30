@@ -29,6 +29,8 @@ ja:
       tag:
         name: タグ名
         kind: 種類
+        image: 画像
+        text: テキスト
       target:
         name: 想定利用者
 
