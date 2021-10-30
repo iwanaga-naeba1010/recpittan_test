@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: tags
@@ -10,9 +12,10 @@
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #
-
-one:
-  name: MyString
-
-two:
-  name: MyString
+FactoryBot.define do
+  factory :tag do
+    name { 'MyString' }
+    kind { 1 }
+    text { '' }
+  end
+end

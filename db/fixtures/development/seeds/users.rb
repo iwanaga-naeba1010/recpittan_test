@@ -36,7 +36,7 @@ User.seed do |s|
   s.role = 1
   s.email = 'user3@gmail.com'
   s.confirmed_at = Time.now.utc
-  s.name = 'user3'
+  s.name = 'span!'
   s.password = '11111111'
 end
 

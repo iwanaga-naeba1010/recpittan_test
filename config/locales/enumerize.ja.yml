@@ -14,5 +14,5 @@ ja:
     tag:
       kind:
         category: カテゴリー
-        event_type: イベントタイプ
+        event: イベント
         target: 利用者層
