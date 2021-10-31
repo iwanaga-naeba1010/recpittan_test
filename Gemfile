@@ -26,7 +26,6 @@ group :development do
   gem 'rack-mini-profiler', '~> 2.0'
   gem 'listen', '~> 3.3'
   gem 'spring'
-  gem 'seed-fu'
 end
 
 
@@ -65,6 +64,7 @@ gem 'simple_form'
 gem 'enumerize'
 
 gem 'carrierwave'
+gem 'seed-fu' # staging/productionでも使いたいから
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
