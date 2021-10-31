@@ -2,7 +2,8 @@
 
 ActiveAdmin.register Recreation do
   permit_params(
-    %i[user_id title second_title minutes description flow_of_day borrow_item bring_your_own_item extra_information youtube_id],
+    %i[user_id title second_title minutes description flow_of_day
+      borrow_item bring_your_own_item extra_information youtube_id price],
     tag_ids: [],
     recreation_images_attributes: [
       :id, :recreation_id, :image, :_destroy
@@ -16,6 +17,7 @@ ActiveAdmin.register Recreation do
     column :title
     column :second_title
     column :minutes
+    column :price
 
     actions
   end
@@ -33,6 +35,7 @@ ActiveAdmin.register Recreation do
       row :bring_your_own_item
       row :extra_information
       row :youtube_id
+      row :price
       row :created_at
       row :updated_at
     end
@@ -82,6 +85,7 @@ ActiveAdmin.register Recreation do
       f.input :bring_your_own_item
       f.input :extra_information
       f.input :youtube_id
+      f.input :price, hint: '「料金は相談してください」の場合は0を入力してください'
     end
 
     f.input :tags, label: 'イベント種別', as: :check_boxes, collection: Tag.events.all

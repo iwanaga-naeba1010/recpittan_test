@@ -9,6 +9,7 @@
 #  extra_information   :text
 #  flow_of_day         :text
 #  minutes             :integer
+#  price               :integer          default(0), not null
 #  second_title        :string
 #  title               :string
 #  created_at          :datetime         not null

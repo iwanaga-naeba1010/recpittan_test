@@ -37,6 +37,7 @@ ja:
         bring_your_own_item: 持ち込むもの
         extra_information: その他
         youtube_id: YouTubeID
+        price: 価格
       recreation_image:
         image: 画像
       tag:
