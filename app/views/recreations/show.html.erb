@@ -52,8 +52,6 @@
 
             <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
               <div class="carousel-inner">
-                <!--                <img src="https://recreation.sandbox.everyplus.jp/resource/thumbnail/y/cMMCH0e-WjM-320x180@1.webp" class="d-block w-100" alt="{{@root.item.name}} {{@index}}">-->
-                <%# if @recreation.youtube_id.present? %>
                 <div class="carousel-item" data-bs-interval="false">
                   <div class="ratio ratio-16x9">
                     <iframe src="https://www.youtube.com/embed/<%= @recreation.youtube_id %>" allowfullscreen></iframe>
@@ -91,18 +89,12 @@
             <div class="category-tags pb-2">
               <% @recreation.tags.events.each_with_index do |tag, i| %>
                 <% if i == 0 %>
-                  <!-- styleにカテゴリに応じてbackground colorを入れる -->
                   <a href="{{{catalogTagUri this }}}" class="category-label event" style="background-color: #FD7E14;">#<%= tag.name %></a>
                 <% else %>
                   <a href="{{{catalogTagUri this }}}" class="tag-label">#<%= tag.name %></a>
                 <% end %>
               <% end %>
             </div>
-            <!--          {{#unless isOnline}}-->
-            <!--          <div class="target-area pb-3">-->
-            <!--            <div>対象エリア：{{item.targetArea}}</div>-->
-            <!--          </div>-->
-            <!--          {{/unless}}-->
             <div class="description border-top py-3">
               <h3>このようなことをやります</h3>
               <p><%= simple_format @recreation.description %></p>
@@ -132,7 +124,6 @@
               <div class="row align-items-center">
                 <div class="col-md-4 text-center">
                   <%= image_tag @recreation.user.partner.image.to_s, class: "align-self-center rounded-circle", width: 90 %>
-                  <!--                  <img src="<%#= @recreation.user.image.to_s %>" class="align-self-center rounded-circle" alt="{{recreation.instructorPosition}}">-->
                   <h4><%= @recreation.user.partner.name %></h4>
                 </div>
                 <div class="col-md-8">
@@ -149,32 +140,12 @@
         <div id="leftInfo" class="sticky-md-top">
           <div class="card ">
             <div class="card-body">
-              <!--            {{#ifEquals showPricetype "show"}}-->
-              <!--            <h3 class="font-24">￥ {{numeral item.regularPrice}}<span> / 1回あたり</span></h3>-->
-              <!--            {{#if item.planMaterialAmount}}-->
-              <!--            <div class="text-muted">追加で材料費が1人あたり<b>￥ {{numeral item.regularMaterialPrice}} </b>発生します。</div>-->
-              <!--            {{/if}}-->
-              <!--            {{/ifEquals}}-->
-
-              <!--            {{#ifEquals showPricetype "hide"}}-->
-              <!--            非公開レク-->
-              <!--            <h3 class="title-b font-20">料金はお問い合わせください</h3>-->
-              <!--            <div class="text-muted">レク料金は非公開となっています。<br>知りたい場合はお問い合わせをしてください。</div>-->
-              <!--            {{/ifEquals}}-->
-              <h3 class="title-b font-20">会員限定</h3>
-              <div class="text-muted">料金をご覧になるには会員登録が必要です。<br>ログインすると表示されます。</div>
-
-              <!--            {{#if item.planMaterialAmount}}-->
-              <!--            <div class="text-muted">追加で材料費が1人あたり<b>￥ 会員限定 </b>発生します。</div>-->
-              <!--            {{/if}}-->
-              <!--            {{/ifEquals}}-->
-              <!--            {{"人数制限"}}-->
-              <!--            {{#if item.showCapacity}}-->
-              <!--            <div class="border border-bottom-0 mt-3 p-3">-->
-              <!--              <h4 class="title">参加人数制限 最大{{item.capacity}}人</h4>-->
-              <!--              <div class="text-muted">※目安30名様に1名のスタッフ様のサポートをお願い致します。</div>-->
-              <!--            </div>-->
-              <!--            {{/if}}-->
+              <% if user_signed_in? %>
+                <h3 class="font-24">¥ <%= price_pipe(@recreation.price) %><span> / 1回あたり</span></h3>
+              <% else %>
+                <h3 class="title-b font-20">会員限定</h3>
+                <div class="text-muted">料金をご覧になるには会員登録が必要です。<br>ログインすると表示されます。</div>
+              <% end %>
               <div class="border border-bottom-0 p-3">
                 <h4 class="title">所要時間 <%= @recreation.minutes %>分</h4>
                 <div class="text-muted">※ご要望に合わせてご相談が可能です。基本時間のため、ご要望にあわせて調節が可能です。</div>
@@ -187,15 +158,11 @@
               </div>
 
               <div class="action-area">
-                <!--              {{#ifEquals showPricetype "show"}}-->
-                <!--              <a href="{{catalogConsultUri item.code}}" class="btn-cpr">相談・依頼する</a>-->
-                <!--              {{/ifEquals}}-->
-
-                <!--              {{#ifEquals showPricetype "hide"}}-->
-                <!--              <button id="contact-price" class="btn-cpr">料金お問合せ</button>-->
-                <!--              {{/ifEquals}}-->
-
-                <a href="{{catalogHomeUri}}/login/o:{{item._id}}" class="btn-cpr">ログインして相談・依頼する</a>
+                <% if user_signed_in? %>
+                  <%= link_to '相談・依頼する', new_user_session_path, class: "btn-cpr" %>
+                <% else %>
+                  <%= link_to 'ログインして相談・依頼する', new_user_session_path, class: "btn-cpr" %>
+                <% end %>
               </div>
             </div>
 
@@ -223,43 +190,3 @@
     </div>
   </div>
 </main>
-<!-- 右メニュー -->
-<!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>-->
-<script>
-  jQuery(document).ready(function () {
-    var myModal = new bootstrap.Modal(document.getElementById('contact-price-modal'), {
-      keyboard: false
-    });
-
-    jQuery('#contact-price').click(function () {
-      console.log('OK');
-
-      jQuery.post(location.pathname + '/price', null, "json").done(function (res) {
-        myModal.show()
-      }).fail(function () {
-
-      })
-    });
-  });
-  (function () {
-    function i() {
-      if (document.body.clientWidth >= 769) {
-        document.querySelector('#leftInfo').style.top = document.querySelector('header').clientHeight + 'px';
-      } else {
-        document.querySelector('#leftInfo').style.top = 'auto';
-      }
-
-      // console.log('OK', document.querySelector('#leftInfo').style.top);
-    }
-
-    if (document.readyState === 'complete') {
-      i();
-    } else if (window.attachEvent) {
-      window.attachEvent('onload', l);
-    } else {
-      window.addEventListener('DOMContentLoaded', i, false);
-      window.addEventListener('load', i, false);
-      window.addEventListener('resize', i, false);
-    }
-  })();
-</script>

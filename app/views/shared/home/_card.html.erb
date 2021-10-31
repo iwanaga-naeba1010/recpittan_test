@@ -2,14 +2,7 @@
   <div class="card recreation-card h-100 shadow text-decoration-none">
     <%= link_to recreation_path(rec.id), class: "card-img-top zoom" do %>
       <picture loading="lazy">
-<!--        <source type="image/webp" srcset="https://recreation.sandbox.everyplus.jp/resource/thumbnail/y/cMMCH0e-WjM-320x180@1.webp">-->
-<!--        <source type="image/webp" srcset="<%#= rec[:image] %>">-->
-        <!--        <source type="image/jpeg" srcset="{{<%#= rec[:image] %>  media '320x180@1' 'jpg'}},-->
-        <!--                {{<%#= rec[:image] %>  media '320x180@1.5' 'jpg'}} 1.5x,-->
         <%= image_tag rec.recreation_images.first&.image.to_s, class: "img-fluid" %>
-<!--        <img loading="lazy"-->
-<!--             src="{{catalogCardThumbnailUri media '320x180@1' 'jpg'}}, {{catalogCardThumbnailUri media '320x180@1.5' 'jpg'}} 1.5x,"-->
-<!--             class="img-fluid" alt="介護レクリエーション - {{name}}">-->
       </picture>
     <% end %>
 
@@ -36,8 +29,13 @@
           <span class="value"><%= rec.minutes %></span>
         </div>
         <div class="">
-          <i class="price-mark">￥</i>
-          <span class="value">会員のみ</span>
+          <% if user_signed_in? %>
+            <i class="price-mark">￥</i>
+            <span class="value"><%= price_pipe(rec.price) %></span>
+          <% else %>
+            <i class="price-mark">￥</i>
+            <span class="value">会員のみ</span>
+          <% end %>
         </div>
       </div>
     </div>
