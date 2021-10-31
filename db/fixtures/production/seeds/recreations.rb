@@ -23,6 +23,7 @@ Recreation.seed do |s|
   s.bring_your_own_item = "なし"
   s.extra_information = "なし"
   s.user_id = 4
+  s.youtube_id = 'RGR24pRw69Y'
 end
 
 # カテゴリー
@@ -98,6 +99,7 @@ Recreation.seed do |s|
 
 日本各地を旅や営業を通して練り歩き、最後に辿り着いた伊勢の地。他の土地を知るからこそ、お伊勢さん特有の魅力をたっぷりとご案内させて頂きます！\n"
   s.user_id = 5
+  s.youtube_id = 'Iwo6Bc--stY'
 end
 
 # カテゴリー
