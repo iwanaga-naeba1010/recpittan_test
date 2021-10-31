@@ -40,4 +40,4 @@ log
 tmp
 .env
 coverage
-spec/examples.txt
+/spec/examples.txt
