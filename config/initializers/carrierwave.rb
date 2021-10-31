@@ -10,7 +10,7 @@ CarrierWave.configure do |config|
     region: ENV['AWS_REGION'],
   }
   config.fog_public = false
-  config.fog_directory  = ENV['AWS_BUCKET']
+  config.fog_directory  = ENV['AWS_BUCKET_NAME']
   config.fog_provider = 'fog/aws'
   if Rails.env.production?
     config.cache_storage = :fog
