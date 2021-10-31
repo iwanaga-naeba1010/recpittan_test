@@ -5,12 +5,12 @@
         <% @breadcrumbs.each do |b| %>
           <li class="breadcrumb-item"><a href="{{uri}}"><%= b[:name] %></a></li>
         <% end %>
-  <!--      <li class="breadcrumb-item"><a href="{{uri}}">{{label}}</a></li>-->
-  <!--      {{/unless}}-->
-  <!--      {{#if @last}}-->
-  <!--      <li class="breadcrumb-item active" aria-current="page"><span>{{label}}</span></li>-->
-  <!--      {{/if}}-->
-  <!--      {{/each}}-->
+        <!--      <li class="breadcrumb-item"><a href="{{uri}}">{{label}}</a></li>-->
+        <!--      {{/unless}}-->
+        <!--      {{#if @last}}-->
+        <!--      <li class="breadcrumb-item active" aria-current="page"><span>{{label}}</span></li>-->
+        <!--      {{/if}}-->
+        <!--      {{/each}}-->
       </ol>
     </nav>
   </div>
@@ -20,23 +20,56 @@
       <div class="col-md-7">
         <div class="card">
           <div class="card-body p-0">
-            <div id="recreationCarousel" class="carousel slide" data-bs-ride="carousel">
+
+            <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
               <div class="carousel-inner">
-<!--                <img src="<%#= @recreation[:image] %>" class="d-block w-100" alt="{{@root.item.name}} {{@index}}">-->
-                <img src="https://recreation.sandbox.everyplus.jp/resource/thumbnail/y/cMMCH0e-WjM-320x180@1.webp" class="d-block w-100" alt="{{@root.item.name}} {{@index}}">
-  <!--              {{#each item.files}}-->
-  <!--              {{#if video}}-->
-  <!--              <div class="carousel-item {{recreationCarouselIndex @index}}" data-bs-interval="false">-->
-  <!--                <div class="ratio ratio-16x9">-->
-  <!--                  <iframe src="https://www.youtube.com/embed/{{videoId}}" allowfullscreen></iframe>-->
-  <!--                </div>-->
-  <!--              </div>-->
-  <!--              {{else}}-->
-  <!--              <div class="carousel-item {{recreationCarouselIndex @index}}" data-bs-interval="10000">-->
-  <!--                <img src="<%#= @recreation[:image] %>" class="d-block w-100" alt="{{@root.item.name}} {{@index}}">-->
-  <!--              </div>-->
-  <!--              {{/if}}-->
-  <!--              {{/each}}-->
+                <% if @recreation.youtube_id.present? %>
+                  <div class="carousel-item active" data-interval="false">
+                    <div class="ratio ratio-16x9">
+                      <iframe src="https://www.youtube.com/embed/<%= @recreation.youtube_id %>" allowfullscreen></iframe>
+                    </div>
+                  </div>
+                <% end %>
+
+                <% @recreation.recreation_images.each_with_index do |image, i| %>
+                  <div class="carousel-item <%= 'active' if @recreation.youtube_id.blank? && i == 0 %>">
+                    <%= image_tag image.image.to_s, class: "d-block w-100" %>
+                  </div>
+                <% end %>
+              </div>
+              <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls"
+                      data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+              </button>
+              <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls"
+                      data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+              </button>
+            </div>
+
+
+            <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+              <div class="carousel-inner">
+                <!--                <img src="https://recreation.sandbox.everyplus.jp/resource/thumbnail/y/cMMCH0e-WjM-320x180@1.webp" class="d-block w-100" alt="{{@root.item.name}} {{@index}}">-->
+                <%# if @recreation.youtube_id.present? %>
+                <div class="carousel-item" data-bs-interval="false">
+                  <div class="ratio ratio-16x9">
+                    <iframe src="https://www.youtube.com/embed/<%= @recreation.youtube_id %>" allowfullscreen></iframe>
+                  </div>
+                </div>
+                <%# end %>
+                <div class="carousel-item {{recreationCarouselIndex @index}}" data-bs-interval="10000">
+                  <img src="https://recreation.sandbox.everyplus.jp/resource/thumbnail/y/cMMCH0e-WjM-320x180@1.webp" class="d-block w-100" alt="{{@root.item.name}} {{@index}}">
+                </div>
+                <div class="carousel-item {{recreationCarouselIndex @index}}" data-bs-interval="10000">
+                  <img src="https://recreation.sandbox.everyplus.jp/resource/thumbnail/y/cMMCH0e-WjM-320x180@1.webp" class="d-block w-100" alt="{{@root.item.name}} {{@index}}">
+                </div>
+                <div class="carousel-item {{recreationCarouselIndex @index}}" data-bs-interval="10000">
+                  <img src="https://recreation.sandbox.everyplus.jp/resource/thumbnail/y/cMMCH0e-WjM-320x180@1.webp" class="d-block w-100" alt="{{@root.item.name}} {{@index}}">
+                </div>
+
               </div>
               <button class="carousel-control-prev" type="button" data-bs-target="#recreationCarousel"
                       data-bs-slide="prev">
@@ -65,11 +98,11 @@
                 <% end %>
               <% end %>
             </div>
-  <!--          {{#unless isOnline}}-->
-  <!--          <div class="target-area pb-3">-->
-  <!--            <div>対象エリア：{{item.targetArea}}</div>-->
-  <!--          </div>-->
-  <!--          {{/unless}}-->
+            <!--          {{#unless isOnline}}-->
+            <!--          <div class="target-area pb-3">-->
+            <!--            <div>対象エリア：{{item.targetArea}}</div>-->
+            <!--          </div>-->
+            <!--          {{/unless}}-->
             <div class="description border-top py-3">
               <h3>このようなことをやります</h3>
               <p><%= simple_format @recreation.description %></p>
@@ -91,7 +124,7 @@
             </div>
             <div class="r-t-a">
               <h3>その他</h3>
-               <div class="text-muted">※状況にあわせて、変わる可能性がございます。</div>
+              <div class="text-muted">※状況にあわせて、変わる可能性がございます。</div>
               <p class="item-text "><%= simple_format @recreation.extra_information %></p>
             </div>
             <div class="">
@@ -99,7 +132,7 @@
               <div class="row align-items-center">
                 <div class="col-md-4 text-center">
                   <%= image_tag @recreation.user.partner.image.to_s, class: "align-self-center rounded-circle", width: 90 %>
-<!--                  <img src="<%#= @recreation.user.image.to_s %>" class="align-self-center rounded-circle" alt="{{recreation.instructorPosition}}">-->
+                  <!--                  <img src="<%#= @recreation.user.image.to_s %>" class="align-self-center rounded-circle" alt="{{recreation.instructorPosition}}">-->
                   <h4><%= @recreation.user.partner.name %></h4>
                 </div>
                 <div class="col-md-8">
@@ -116,32 +149,32 @@
         <div id="leftInfo" class="sticky-md-top">
           <div class="card ">
             <div class="card-body">
-  <!--            {{#ifEquals showPricetype "show"}}-->
-  <!--            <h3 class="font-24">￥ {{numeral item.regularPrice}}<span> / 1回あたり</span></h3>-->
-  <!--            {{#if item.planMaterialAmount}}-->
-  <!--            <div class="text-muted">追加で材料費が1人あたり<b>￥ {{numeral item.regularMaterialPrice}} </b>発生します。</div>-->
-  <!--            {{/if}}-->
-  <!--            {{/ifEquals}}-->
+              <!--            {{#ifEquals showPricetype "show"}}-->
+              <!--            <h3 class="font-24">￥ {{numeral item.regularPrice}}<span> / 1回あたり</span></h3>-->
+              <!--            {{#if item.planMaterialAmount}}-->
+              <!--            <div class="text-muted">追加で材料費が1人あたり<b>￥ {{numeral item.regularMaterialPrice}} </b>発生します。</div>-->
+              <!--            {{/if}}-->
+              <!--            {{/ifEquals}}-->
 
-  <!--            {{#ifEquals showPricetype "hide"}}-->
-  <!--            非公開レク-->
-  <!--            <h3 class="title-b font-20">料金はお問い合わせください</h3>-->
-  <!--            <div class="text-muted">レク料金は非公開となっています。<br>知りたい場合はお問い合わせをしてください。</div>-->
-  <!--            {{/ifEquals}}-->
+              <!--            {{#ifEquals showPricetype "hide"}}-->
+              <!--            非公開レク-->
+              <!--            <h3 class="title-b font-20">料金はお問い合わせください</h3>-->
+              <!--            <div class="text-muted">レク料金は非公開となっています。<br>知りたい場合はお問い合わせをしてください。</div>-->
+              <!--            {{/ifEquals}}-->
               <h3 class="title-b font-20">会員限定</h3>
               <div class="text-muted">料金をご覧になるには会員登録が必要です。<br>ログインすると表示されます。</div>
 
-  <!--            {{#if item.planMaterialAmount}}-->
-  <!--            <div class="text-muted">追加で材料費が1人あたり<b>￥ 会員限定 </b>発生します。</div>-->
-  <!--            {{/if}}-->
-  <!--            {{/ifEquals}}-->
-  <!--            {{"人数制限"}}-->
-  <!--            {{#if item.showCapacity}}-->
-  <!--            <div class="border border-bottom-0 mt-3 p-3">-->
-  <!--              <h4 class="title">参加人数制限 最大{{item.capacity}}人</h4>-->
-  <!--              <div class="text-muted">※目安30名様に1名のスタッフ様のサポートをお願い致します。</div>-->
-  <!--            </div>-->
-  <!--            {{/if}}-->
+              <!--            {{#if item.planMaterialAmount}}-->
+              <!--            <div class="text-muted">追加で材料費が1人あたり<b>￥ 会員限定 </b>発生します。</div>-->
+              <!--            {{/if}}-->
+              <!--            {{/ifEquals}}-->
+              <!--            {{"人数制限"}}-->
+              <!--            {{#if item.showCapacity}}-->
+              <!--            <div class="border border-bottom-0 mt-3 p-3">-->
+              <!--              <h4 class="title">参加人数制限 最大{{item.capacity}}人</h4>-->
+              <!--              <div class="text-muted">※目安30名様に1名のスタッフ様のサポートをお願い致します。</div>-->
+              <!--            </div>-->
+              <!--            {{/if}}-->
               <div class="border border-bottom-0 p-3">
                 <h4 class="title">所要時間 <%= @recreation.minutes %>分</h4>
                 <div class="text-muted">※ご要望に合わせてご相談が可能です。基本時間のため、ご要望にあわせて調節が可能です。</div>
@@ -154,13 +187,13 @@
               </div>
 
               <div class="action-area">
-  <!--              {{#ifEquals showPricetype "show"}}-->
-  <!--              <a href="{{catalogConsultUri item.code}}" class="btn-cpr">相談・依頼する</a>-->
-  <!--              {{/ifEquals}}-->
+                <!--              {{#ifEquals showPricetype "show"}}-->
+                <!--              <a href="{{catalogConsultUri item.code}}" class="btn-cpr">相談・依頼する</a>-->
+                <!--              {{/ifEquals}}-->
 
-  <!--              {{#ifEquals showPricetype "hide"}}-->
-  <!--              <button id="contact-price" class="btn-cpr">料金お問合せ</button>-->
-  <!--              {{/ifEquals}}-->
+                <!--              {{#ifEquals showPricetype "hide"}}-->
+                <!--              <button id="contact-price" class="btn-cpr">料金お問合せ</button>-->
+                <!--              {{/ifEquals}}-->
 
                 <a href="{{catalogHomeUri}}/login/o:{{item._id}}" class="btn-cpr">ログインして相談・依頼する</a>
               </div>
@@ -218,6 +251,7 @@
 
       // console.log('OK', document.querySelector('#leftInfo').style.top);
     }
+
     if (document.readyState === 'complete') {
       i();
     } else if (window.attachEvent) {
