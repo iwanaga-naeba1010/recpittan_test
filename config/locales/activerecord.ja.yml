@@ -5,6 +5,7 @@ ja:
       company: 施設情報
       partner: パートナー情報
       recreation: レク
+      recreation_image: レク画像
       tag: タグ
       target: 利用者層
     attributes:
@@ -35,6 +36,9 @@ ja:
         borrow_item: お借りしたいもの
         bring_your_own_item: 持ち込むもの
         extra_information: その他
+        youtube_id: YouTubeID
+      recreation_image:
+        image: 画像
       tag:
         name: タグ名
         kind: 種類

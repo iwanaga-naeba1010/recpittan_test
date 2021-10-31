@@ -2,8 +2,9 @@
 
 ActiveAdmin.register Recreation do
   permit_params(
-    %i[user_id title second_title minutes description flow_of_day borrow_item bring_your_own_item extra_information],
-    tag_ids: []
+    %i[user_id title second_title minutes description flow_of_day borrow_item bring_your_own_item extra_information youtube_id],
+    tag_ids: [],
+    recreation_images_attributes: [:image, :_destroy],
   )
   actions :all
 
@@ -29,6 +30,7 @@ ActiveAdmin.register Recreation do
       row :borrow_item
       row :bring_your_own_item
       row :extra_information
+      row :youtube_id
       row :created_at
       row :updated_at
     end
@@ -53,6 +55,14 @@ ActiveAdmin.register Recreation do
         column :name
       end
     end
+
+    panel t('activerecord.models.recreation_image'), style: 'margin-top: 30px;' do
+      table_for recreation.recreation_images do
+        column t('activerecord.attributes.recreation_image.image') do |rec|
+          image_tag rec&.image&.to_s, width: 50, height: 50
+        end
+      end
+    end
   end
 
   form do |f|
@@ -69,11 +79,18 @@ ActiveAdmin.register Recreation do
       f.input :borrow_item
       f.input :bring_your_own_item
       f.input :extra_information
+      f.input :youtube_id
     end
 
     f.input :tags, label: 'イベント種別', as: :check_boxes, collection: Tag.events.all
     f.input :tags, label: 'カテゴリー', :as => :check_boxes, collection: Tag.categories.all
     f.input :tags, label: '想定ターゲット', :as => :check_boxes, collection: Tag.targets.all
+
+    f.inputs t('activerecord.models.recreation_image') do
+      f.has_many :recreation_images, heading: false, allow_destroy: true, new_record: true do |ff|
+        ff.input :image
+      end
+    end
 
     f.actions
   end
