@@ -159,7 +159,7 @@
 
               <div class="action-area">
                 <% if user_signed_in? %>
-                  <%= link_to '相談・依頼する', new_user_session_path, class: "btn-cpr" %>
+                  <%= link_to '相談・依頼する', new_recreation_order_path(@recreation.id), class: "btn-cpr" %>
                 <% else %>
                   <%= link_to 'ログインして相談・依頼する', new_user_session_path, class: "btn-cpr" %>
                 <% end %>

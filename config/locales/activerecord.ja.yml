@@ -6,6 +6,7 @@ ja:
       partner: パートナー情報
       recreation: レク
       recreation_image: レク画像
+      order: 依頼
       tag: タグ
       target: 利用者層
     attributes:
@@ -40,6 +41,11 @@ ja:
         price: 価格
       recreation_image:
         image: 画像
+      order:
+        prefecture: 都道府県
+        city: 市区町村
+        is_order: 相談と依頼どちらをご希望ですか？
+
       tag:
         name: タグ名
         kind: 種類
