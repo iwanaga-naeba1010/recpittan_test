@@ -46,6 +46,7 @@ User.seed do |s|
   s.role = 1
   s.email = 'user4@gmail.com'
   s.confirmed_at = Time.now.utc
-  s.name = 'user4'
+  s.name = '前田竜、田中宏典'
   s.password = '11111111'
+  s.image = Rails.root.join("db/fixtures/images/maeda.png").open
 end

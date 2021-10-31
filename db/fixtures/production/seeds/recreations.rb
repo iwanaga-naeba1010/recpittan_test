@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+## 吉本
 Recreation.seed do |s|
   s.id = 1
   s.title = 'オモロさ折り紙付きコンビＳＰＡＮ！によるお笑い介護レクリエーション'
@@ -64,5 +65,80 @@ end
 
 RecreationTag.seed do |s|
   s.recreation_id = 1
+  s.tag_id = 20
+end
+
+## 横丁
+Recreation.seed do |s|
+  s.id = 2
+  s.title = '生中継！オンライン伊勢旅行'
+  s.second_title = '～おはらい町おかげ横丁ツアー～'
+  s.minutes = '40'
+  s.description = "おかげ横丁、おはらい町から伊勢神宮まで生中継双方向で撮影をしながら、様々なお土産店にも入店。３～５種類のお土産付き！ 実際に施設に届くお土産を試食しながらの参加となるので旅行している気分に！ご要望があれば、買い物もツアー後に可能です。ツアー最後には、伊勢神宮内宮入り口近くにある足に良いとされる「足神さん」 と呼ばれる宇治神社でツアーフィニッシュ。"
+  s.flow_of_day = "0:00～00:05 　ツアーのご紹介　コンダクター自己紹介\n
+
+00:05～00:20 　おはらい町探索　お店やお土産について\n
+
+お土産のご紹介\n
+
+00:20～00:30　人力車体験・クイズ等\n
+
+00:25～00:30　 内宮前\n
+
+00:30～00:40 　足神神社\n
+
+※スケジュールは変更する可能性がございます。"
+  s.borrow_item = "なし"
+  s.bring_your_own_item = "なし"
+  s.extra_information = "【前田竜】\n
+
+伊勢神宮内宮のお膝元で、生まれ育った日本一優しい物知りお兄さん。地元民ならではの地元トークを取り入れながら、ご案内をさせて頂きますので、是非遊びに来てください\n
+
+【田中宏典】\n
+
+日本各地を旅や営業を通して練り歩き、最後に辿り着いた伊勢の地。他の土地を知るからこそ、お伊勢さん特有の魅力をたっぷりとご案内させて頂きます！\n"
+  s.user_id = 5
+end
+
+# カテゴリー
+RecreationTag.seed do |s|
+  s.recreation_id = 2
+  s.tag_id = 9
+end
+
+RecreationTag.seed do |s|
+  s.recreation_id = 2
+  s.tag_id = 10
+end
+
+# イベント種別
+RecreationTag.seed do |s|
+  s.recreation_id = 2
+  s.tag_id = 9
+end
+
+RecreationTag.seed do |s|
+  s.recreation_id = 2
+  s.tag_id = 10
+end
+
+RecreationTag.seed do |s|
+  s.recreation_id = 2
+  s.tag_id =13
+end
+
+RecreationTag.seed do |s|
+  s.recreation_id = 2
+  s.tag_id = 14
+end
+
+# 利用者層
+RecreationTag.seed do |s|
+  s.recreation_id = 2
+  s.tag_id = 19
+end
+
+RecreationTag.seed do |s|
+  s.recreation_id = 2
   s.tag_id = 20
 end
