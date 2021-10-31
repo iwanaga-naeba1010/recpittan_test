@@ -26,6 +26,8 @@ group :development do
   gem 'rack-mini-profiler', '~> 2.0'
   gem 'listen', '~> 3.3'
   gem 'spring'
+  # 開発環境でUserを切り替える
+  gem 'switch_user'
 end
 
 

@@ -385,6 +385,7 @@ GEM
       activesupport (>= 4.0)
       sprockets (>= 3.0.0)
     ssrf_filter (1.0.7)
+    switch_user (1.5.4)
     thor (1.1.0)
     tilt (2.0.10)
     turbolinks (5.2.1)
@@ -461,6 +462,7 @@ DEPENDENCIES
   simple_form
   simplecov
   spring
+  switch_user
   turbolinks
   tzinfo-data
   web-console (>= 4.1.0)

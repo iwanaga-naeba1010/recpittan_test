@@ -42,9 +42,11 @@ class User < ApplicationRecord
   enumerize :role, in: { user: 0, partner: 1, admin: 2 }, default: 0
   mount_uploader :image, ImageUploader
 
+  # TODO: role == userの場合、の条件加えたい
   has_one :company, dependent: :destroy
   accepts_nested_attributes_for :company
 
+  # TODO: role == partnerの場合、の条件加えたい
   has_one :partner, dependent: :destroy
   accepts_nested_attributes_for :partner
 end
