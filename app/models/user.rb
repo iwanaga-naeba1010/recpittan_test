@@ -45,4 +45,7 @@ class User < ApplicationRecord
 
   enumerize :role, in: { user: 0, partner: 1, admin: 2 }, default: 0
   mount_uploader :image, ImageUploader
+
+  has_one :company, dependent: :destroy
+  accepts_nested_attributes_for :company
 end

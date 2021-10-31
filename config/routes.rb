@@ -7,7 +7,8 @@ Rails.application.routes.draw do
   resources :recreations
 
   devise_for :users, controllers: {
-    sessions: 'custom_devise/sessions'
+    sessions: 'custom_devise/sessions',
+    registrations: 'custom_devise/registrations'
   }
   mount LetterOpenerWeb::Engine, at: '/letter_opener' if Rails.env.development?
 end

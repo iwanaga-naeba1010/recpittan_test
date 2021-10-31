@@ -5,9 +5,11 @@ class CustomDevise::RegistrationsController < Devise::RegistrationsController
   before_action :configure_account_update_params, only: [:update]
 
   # GET /resource/sign_up
-  # def new
-  #   super
-  # end
+  def new
+    super do
+      resource.build_company
+    end
+  end
 
   # POST /resource
   # def create
@@ -44,7 +46,10 @@ class CustomDevise::RegistrationsController < Devise::RegistrationsController
   def configure_sign_up_params
     devise_parameter_sanitizer.permit(
       :sign_up,
-      keys: %i[role company_name facility_name name name_kana]
+      keys: [
+        :role,
+        company_attributes: [:name, :facility_name, :person_in_charge_name, :person_in_charge_name_kana]
+      ]
     )
   end
 
@@ -52,7 +57,10 @@ class CustomDevise::RegistrationsController < Devise::RegistrationsController
   def configure_account_update_params
     devise_parameter_sanitizer.permit(
       :account_update,
-      keys: %i[role company_name facility_name name name_kana]
+      keys: [
+        :role,
+        company_attributes: [:name, :facility_name, :person_in_charge_name, :person_in_charge_name_kana]
+      ]
     )
   end
 
