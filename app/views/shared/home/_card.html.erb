@@ -2,10 +2,10 @@
   <div class="card recreation-card h-100 shadow text-decoration-none">
     <%= link_to detail_path, class: "card-img-top zoom" do %>
       <picture loading="lazy">
-        <source type="image/webp" srcset="<%= rec[:image] %>">
+        <source type="image/webp" srcset="https://recreation.sandbox.everyplus.jp/resource/thumbnail/y/cMMCH0e-WjM-320x180@1.webp">
+<!--        <source type="image/webp" srcset="<%#= rec[:image] %>">-->
         <!--        <source type="image/jpeg" srcset="{{<%#= rec[:image] %>  media '320x180@1' 'jpg'}},-->
         <!--                {{<%#= rec[:image] %>  media '320x180@1.5' 'jpg'}} 1.5x,-->
-        <!--                {{<%= rec[:image] %>  media '320x180@2' 'jpg'}} 2x"/>-->
 
         <img loading="lazy"
              src="{{catalogCardThumbnailUri media '320x180@1' 'jpg'}}, {{catalogCardThumbnailUri media '320x180@1.5' 'jpg'}} 1.5x,"
@@ -15,17 +15,17 @@
 
     <%= link_to detail_path, class: "card-body card-body-main p-2 pb-0" do %>
       <h1 class="card-title mb-0">
-        <p><%= rec[:title] %></p>
+        <p><%= rec.title %></p>
       </h1>
     <% end %>
 
     <div class="card-body card-body-tag px-2 py-1">
-      <% rec[:tags].each_with_index do |tag, i| %>
+      <% rec.tags.events.limit(3).each_with_index do |tag, i| %>
         <% if i == 0 %>
           <!-- styleにカテゴリに応じてbackground colorを入れる -->
-          <a href="{{{catalogTagUri this }}}" class="category-label event" style="background-color: #FD7E14;">#<%= tag %></a>
+          <a href="{{{catalogTagUri this }}}" class="category-label event" style="background-color: #FD7E14;">#<%= tag.name %></a>
         <% else %>
-          <a href="{{{catalogTagUri this }}}" class="tag-label">#<%= tag %></a>
+          <a href="{{{catalogTagUri this }}}" class="tag-label">#<%= tag.name %></a>
         <% end %>
       <% end %>
     </div>
@@ -33,7 +33,7 @@
       <div class="d-md-flex mb-2 align-items-center justify-content-between">
         <div class="">
           <i class="material-icons every">query_builder</i>
-          <span class="value"><%= rec[:amount_time] %></span>
+          <span class="value"><%= rec.minutes %></span>
         </div>
         <div class="">
           <i class="price-mark">￥</i>

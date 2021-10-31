@@ -1,26 +1,27 @@
 class HomeController < ApplicationController
   def index
     @categories = Tag.categories
-    @yoshimoto_recs = [
-      {
-        title: '笑って健康！折りがとう！',
-        image: 'https://recreation.sandbox.everyplus.jp/resource/thumbnail/y/RGR24pRw69Y-320x180@1.webp',
-        tags: ['イベント', 'オンライン', '話題性あり'],
-        amount_time: 60,
-      },
-      {
-        title: 'オスペンギンの介護オモシレーション',
-        image: 'https://recreation.sandbox.everyplus.jp/resource/thumbnail/y/cMMCH0e-WjM-320x180@1.webp',
-        tags: ['イベント', 'オンライン', '話題性あり'],
-        amount_time: 60,
-      },
-      {
-        title: '～脳トレしながら、レギュラーとオンラインで交流しよう～',
-        image: 'https://recreation.sandbox.everyplus.jp/resource/thumbnail/y/-KZMhDb5dkM-320x180@1.webp',
-        tags: ['イベント', 'オンライン', '話題性あり'],
-        amount_time: 60,
-      },
-    ]
+    @recs = Recreation.all
+    # @yoshimoto_recs = [
+    #   {
+    #     title: '笑って健康！折りがとう！',
+    #     image: 'https://recreation.sandbox.everyplus.jp/resource/thumbnail/y/RGR24pRw69Y-320x180@1.webp',
+    #     tags: ['イベント', 'オンライン', '話題性あり'],
+    #     amount_time: 60,
+    #   },
+    #   {
+    #     title: 'オスペンギンの介護オモシレーション',
+    #     image: 'https://recreation.sandbox.everyplus.jp/resource/thumbnail/y/cMMCH0e-WjM-320x180@1.webp',
+    #     tags: ['イベント', 'オンライン', '話題性あり'],
+    #     amount_time: 60,
+    #   },
+    #   {
+    #     title: '～脳トレしながら、レギュラーとオンラインで交流しよう～',
+    #     image: 'https://recreation.sandbox.everyplus.jp/resource/thumbnail/y/-KZMhDb5dkM-320x180@1.webp',
+    #     tags: ['イベント', 'オンライン', '話題性あり'],
+    #     amount_time: 60,
+    #   },
+    # ]
   end
 
   def detail
