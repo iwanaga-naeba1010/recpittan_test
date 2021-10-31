@@ -6,7 +6,7 @@ file_names = %w[
   recreations.rb
 ]
 
-dir = Rails.root.join('db', 'fixtures', 'development', 'seeds')
+dir = Rails.root.join('db', 'fixtures', Rails.env.downcase, 'seeds')
 file_names.each do |file_name|
   puts "== Seed from #{dir}/#{file_name}"
   require "#{dir}/#{file_name}"
