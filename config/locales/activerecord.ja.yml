@@ -16,6 +16,7 @@ ja:
         name: ご担当社名
         name_kana: ご担当社名(カタカナ)
         email: メールアドレス
+        image: 画像
       recreation:
         user: パートナー
         title: タイトル

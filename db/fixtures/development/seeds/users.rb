@@ -38,6 +38,7 @@ User.seed do |s|
   s.confirmed_at = Time.now.utc
   s.name = 'span!'
   s.password = '11111111'
+  s.image = Rails.root.join("db/fixtures/images/span.png").open
 end
 
 User.seed do |s|
