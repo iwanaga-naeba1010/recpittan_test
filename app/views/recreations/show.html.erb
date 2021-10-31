@@ -33,7 +33,7 @@
 
                 <% @recreation.recreation_images.each_with_index do |image, i| %>
                   <div class="carousel-item <%= 'active' if @recreation.youtube_id.blank? && i == 0 %>">
-                    <%= image_tag image.image.to_s, class: "d-block w-100" %>
+                    <%= image_tag image&.image.to_s, class: "d-block w-100" %>
                   </div>
                 <% end %>
               </div>
@@ -123,7 +123,7 @@
               <h3>このレクリエーションの講師</h3>
               <div class="row align-items-center">
                 <div class="col-md-4 text-center">
-                  <%= image_tag @recreation.user.partner.image.to_s, class: "align-self-center rounded-circle", width: 90 %>
+                  <%= image_tag @recreation.user&.partner&.image.to_s, class: "align-self-center rounded-circle", width: 90 %>
                   <h4><%= @recreation.user.partner.name %></h4>
                 </div>
                 <div class="col-md-8">
