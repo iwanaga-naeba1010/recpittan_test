@@ -4,8 +4,8 @@ env:
   POSTGRES_USER: postgres
   PGHOST: localhost
   POSTGRES_PASSWORD: postgres
-  POSTGRES_DB: cosmeticdb_test
-  MAIL_SENDER_FROM: no-reply@uramen.net
+  POSTGRES_DB: ep_matching_test
+  MAIL_SENDER_FROM: no-reply@ep.net
 
 name: Lint check
 on: [push]
@@ -103,8 +103,4 @@ jobs:
 
       - name: Run rspec
         run: |
-            bundle exec rspec \
-              --format RspecJunitFormatter \
-              --out test_results/rspec/results.xml \
-              --format progress
-
+            bundle exec rspec

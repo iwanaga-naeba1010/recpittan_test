@@ -1,0 +1,192 @@
+<main class="detail">
+  <div class="container pt-2">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <% @breadcrumbs.each do |b| %>
+          <li class="breadcrumb-item"><a href="{{uri}}"><%= b[:name] %></a></li>
+        <% end %>
+        <!--      <li class="breadcrumb-item"><a href="{{uri}}">{{label}}</a></li>-->
+        <!--      {{/unless}}-->
+        <!--      {{#if @last}}-->
+        <!--      <li class="breadcrumb-item active" aria-current="page"><span>{{label}}</span></li>-->
+        <!--      {{/if}}-->
+        <!--      {{/each}}-->
+      </ol>
+    </nav>
+  </div>
+
+  <article class="container py-4 px-0">
+    <div class="row">
+      <div class="col-md-7">
+        <div class="card">
+          <div class="card-body p-0">
+
+            <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+              <div class="carousel-inner">
+                <% if @recreation.youtube_id.present? %>
+                  <div class="carousel-item active" data-interval="false">
+                    <div class="ratio ratio-16x9">
+                      <iframe src="https://www.youtube.com/embed/<%= @recreation.youtube_id %>" allowfullscreen></iframe>
+                    </div>
+                  </div>
+                <% end %>
+
+                <% @recreation.recreation_images.each_with_index do |image, i| %>
+                  <div class="carousel-item <%= 'active' if @recreation.youtube_id.blank? && i == 0 %>">
+                    <%= image_tag image&.image.to_s, class: "d-block w-100" %>
+                  </div>
+                <% end %>
+              </div>
+              <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls"
+                      data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+              </button>
+              <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls"
+                      data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+              </button>
+            </div>
+
+
+            <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+              <div class="carousel-inner">
+                <div class="carousel-item" data-bs-interval="false">
+                  <div class="ratio ratio-16x9">
+                    <iframe src="https://www.youtube.com/embed/<%= @recreation.youtube_id %>" allowfullscreen></iframe>
+                  </div>
+                </div>
+                <%# end %>
+                <div class="carousel-item {{recreationCarouselIndex @index}}" data-bs-interval="10000">
+                  <img src="https://recreation.sandbox.everyplus.jp/resource/thumbnail/y/cMMCH0e-WjM-320x180@1.webp" class="d-block w-100" alt="{{@root.item.name}} {{@index}}">
+                </div>
+                <div class="carousel-item {{recreationCarouselIndex @index}}" data-bs-interval="10000">
+                  <img src="https://recreation.sandbox.everyplus.jp/resource/thumbnail/y/cMMCH0e-WjM-320x180@1.webp" class="d-block w-100" alt="{{@root.item.name}} {{@index}}">
+                </div>
+                <div class="carousel-item {{recreationCarouselIndex @index}}" data-bs-interval="10000">
+                  <img src="https://recreation.sandbox.everyplus.jp/resource/thumbnail/y/cMMCH0e-WjM-320x180@1.webp" class="d-block w-100" alt="{{@root.item.name}} {{@index}}">
+                </div>
+
+              </div>
+              <button class="carousel-control-prev" type="button" data-bs-target="#recreationCarousel"
+                      data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+              </button>
+              <button class="carousel-control-next" type="button" data-bs-target="#recreationCarousel"
+                      data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+              </button>
+            </div>
+          </div>
+          <div class="card-body recreation">
+            <div class="d-flex flex-column-reverse">
+              <h1 class="card-title"><%= @recreation.title %></h1>
+              <h2 class="card-subtitle"><%= @recreation.second_title %></h2>
+            </div>
+            <div class="category-tags pb-2">
+              <% @recreation.tags.events.each_with_index do |tag, i| %>
+                <% if i == 0 %>
+                  <a href="{{{catalogTagUri this }}}" class="category-label event" style="background-color: #FD7E14;">#<%= tag.name %></a>
+                <% else %>
+                  <a href="{{{catalogTagUri this }}}" class="tag-label">#<%= tag.name %></a>
+                <% end %>
+              <% end %>
+            </div>
+            <div class="description border-top py-3">
+              <h3>このようなことをやります</h3>
+              <p><%= simple_format @recreation.description %></p>
+            </div>
+            <div class="border-top py-3">
+              <h3>当日の流れとタイムスケジュール</h3>
+              <p><%= simple_format @recreation.flow_of_day %></p>
+            </div>
+            <div class="border-top py-3"></div>
+            <div class="r-t-a">
+              <h3>お借りしたいもの</h3>
+              <div class="text-muted">※状況にあわせて、変わる可能性がございます。</div>
+              <p class="item-text"><%= simple_format @recreation.borrow_item %></p>
+            </div>
+            <div class="r-t-a">
+              <h3>持ち込むもの</h3>
+              <div class="text-muted">※状況にあわせて、変わる可能性がございます。</div>
+              <p class="item-text "><%= simple_format @recreation.bring_your_own_item %></p>
+            </div>
+            <div class="r-t-a">
+              <h3>その他</h3>
+              <div class="text-muted">※状況にあわせて、変わる可能性がございます。</div>
+              <p class="item-text "><%= simple_format @recreation.extra_information %></p>
+            </div>
+            <div class="">
+              <h3>このレクリエーションの講師</h3>
+              <div class="row align-items-center">
+                <div class="col-md-4 text-center">
+                  <%= image_tag @recreation.user&.partner&.image.to_s, class: "align-self-center rounded-circle", width: 90 %>
+                  <h4><%= @recreation.user&.partner&.name %></h4>
+                </div>
+                <div class="col-md-8">
+                  <h4 class="instructor-position h5"><%= @recreation.user&.partner&.title %></h4>
+                  <p class="instructor-content"><%= simple_format @recreation.user&.partner&.description %></p>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div id="leftInfo" class="sticky-md-top">
+          <div class="card ">
+            <div class="card-body">
+              <% if user_signed_in? %>
+                <h3 class="font-24">¥ <%= price_pipe(@recreation.price) %><span> / 1回あたり</span></h3>
+              <% else %>
+                <h3 class="title-b font-20">会員限定</h3>
+                <div class="text-muted">料金をご覧になるには会員登録が必要です。<br>ログインすると表示されます。</div>
+              <% end %>
+              <div class="border border-bottom-0 p-3">
+                <h4 class="title">所要時間 <%= @recreation.minutes %>分</h4>
+                <div class="text-muted">※ご要望に合わせてご相談が可能です。基本時間のため、ご要望にあわせて調節が可能です。</div>
+              </div>
+              <div class="border p-3">
+                <h4 class="title">対象者目安</h4>
+                <% @recreation.tags.targets.each do |target| %>
+                  <div class="text-muted">・<%= target.name %></div>
+                <% end %>
+              </div>
+
+              <div class="action-area">
+                <% if user_signed_in? %>
+                  <%= link_to '相談・依頼する', new_recreation_order_path(@recreation.id), class: "btn-cpr" %>
+                <% else %>
+                  <%= link_to 'ログインして相談・依頼する', new_user_session_path, class: "btn-cpr" %>
+                <% end %>
+              </div>
+            </div>
+
+            <%= render 'shared/home/order_flow' %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </article>
+
+  <div id="contact-price-modal" class="modal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">料金をお問い合わせしました</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p>「{{item.name}}」の料金をお問い合わせしました。エブリ・プラスのスタッフからメールで返信致します。少々お待ちください。</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-cprimary rounded-pill text-white" data-bs-dismiss="modal">閉じる</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
