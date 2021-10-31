@@ -4,6 +4,8 @@ Rails.application.routes.draw do
   get 'home/index'
   get '/detail' => 'home#detail'
 
+  resources :recreations
+
   devise_for :users, controllers: {
     sessions: 'custom_devise/sessions'
   }

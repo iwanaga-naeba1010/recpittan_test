@@ -1,0 +1,56 @@
+<main class="top">
+  <div class="jumbotron jumbotron-top">
+    <div class="container top">
+      <h1 class="">利用者さんのやりたいを叶えるレクがここに</h1>
+      <h2 class="d-none">300種類以上のレクから検索</h2>
+    </div>
+    <%= render 'shared/home/categories', categories: @categories %>
+  </div>
+  <article class="container top pt-4 px-0">
+    <div class="row py-2">
+      <div class="col-12">
+        <a class="nav-link" href="{{catalogHomeUri}}/yoshimoto">
+          <%= image_pack_tag 'yoshimoto.png', class: "img-fluid", alt: "Responsive image" %>
+        </a>
+      </div>
+    </div>
+    <div class="row py-2">
+      <div class="col-12">
+        <h1 class="sub-title">よしもとの人気レク</h1>
+<!--        <p class="sub-description">{{subDescription}}</p>-->
+      </div>
+    </div>
+    <div class="row">
+      <% @recs.each do |rec| %>
+        <%= render 'shared/home/card', rec: rec %>
+      <% end %>
+    </div>
+  </article>
+  <article class="container pt-4 px-0">
+    <div class="row py-3">
+      <div class="col-12">
+        <h1 class="sub-title">オンライ旅行の人気レク</h1>
+<!--        <p class="sub-description">{{subDescription}}</p>-->
+      </div>
+    </div>
+    <div class="row">
+      <% @recs.each do |rec| %>
+        <%= render 'shared/home/card', rec: rec %>
+      <% end %>
+    </div>
+  </article>
+
+  <article class="container pt-4 px-0">
+    <div class="row py-3">
+      <div class="col-12">
+        <h1 class="sub-title">オンライン音楽の人気レク</h1>
+<!--        <p class="sub-description">{{subDescription}}</p>-->
+      </div>
+    </div>
+    <div class="row">
+      <% @recs.each do |rec| %>
+        <%= render 'shared/home/card', rec: rec %>
+      <% end %>
+    </div>
+  </article>
+</main>
