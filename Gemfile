@@ -48,6 +48,10 @@ group :test do
   gem 'shoulda-matchers'
 end
 
+group :production do
+  gem 'fog-aws'
+end
+
 gem 'devise'
 gem 'dotenv-rails'
 gem 'rails-i18n' # devise 日本語化
