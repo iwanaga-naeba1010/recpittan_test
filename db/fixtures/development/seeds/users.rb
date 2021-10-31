@@ -9,7 +9,6 @@ User.seed do |s|
   s.role = 2
   s.email = 'admin@gmail.com'
   s.confirmed_at = Time.now.utc
-  s.name = 'admin'
   s.password = '11111111'
 end
 
@@ -18,7 +17,6 @@ User.seed do |s|
   s.role = 0
   s.email = 'user1@gmail.com'
   s.confirmed_at = Time.now.utc
-  s.name = 'user1'
   s.password = '11111111'
 end
 
@@ -27,7 +25,6 @@ User.seed do |s|
   s.role = 0
   s.email = 'user2@gmail.com'
   s.confirmed_at = Time.now.utc
-  s.name = 'user2'
   s.password = '11111111'
 end
 
@@ -36,8 +33,14 @@ User.seed do |s|
   s.role = 1
   s.email = 'user3@gmail.com'
   s.confirmed_at = Time.now.utc
-  s.name = 'span!'
   s.password = '11111111'
+end
+
+## User.id == 4のパートナー情報
+Partner.seed do |s|
+  s.id = 1
+  s.user_id = 4
+  s.name = 'span!'
   s.image = Rails.root.join("db/fixtures/images/span.png").open
 end
 

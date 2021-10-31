@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_10_31_083103) do
+ActiveRecord::Schema.define(version: 2021_10_31_090534) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -38,6 +38,17 @@ ActiveRecord::Schema.define(version: 2021_10_31_083103) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["user_id"], name: "index_companies_on_user_id"
+  end
+
+  create_table "partners", force: :cascade do |t|
+    t.string "name"
+    t.string "title"
+    t.text "description"
+    t.text "image"
+    t.bigint "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_partners_on_user_id"
   end
 
   create_table "recreation_tags", force: :cascade do |t|
@@ -75,10 +86,6 @@ ActiveRecord::Schema.define(version: 2021_10_31_083103) do
 
   create_table "users", force: :cascade do |t|
     t.integer "role", default: 0, null: false
-    t.string "company_name", default: "", null: false
-    t.string "facility_name", default: "", null: false
-    t.string "name", default: "", null: false
-    t.string "name_kana", default: "", null: false
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
@@ -106,6 +113,7 @@ ActiveRecord::Schema.define(version: 2021_10_31_083103) do
   end
 
   add_foreign_key "companies", "users"
+  add_foreign_key "partners", "users"
   add_foreign_key "recreation_tags", "recreations"
   add_foreign_key "recreation_tags", "tags"
   add_foreign_key "recreations", "users"

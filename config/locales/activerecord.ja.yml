@@ -2,7 +2,8 @@ ja:
   activerecord:
     models:
       user: ユーザー
-      company: 法人情報
+      company: 施設情報
+      partner: パートナー情報
       recreation: レク
       tag: タグ
       target: 利用者層
@@ -19,6 +20,11 @@ ja:
         facility_name: 施設名
         person_in_charge_name: ご担当社名
         person_in_charge_name_kana: ご担当社名(カタカナ)
+      partner:
+        name: 名前
+        title: 肩書き
+        description: 詳細
+        image: 画像
       recreation:
         user: パートナー
         title: タイトル

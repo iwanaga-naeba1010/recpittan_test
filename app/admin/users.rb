@@ -1,22 +1,22 @@
 # frozen_string_literal: true
 
-ActiveAdmin.register User do
-  permit_params(%i[email role name name_kana company_name facility_name image])
+# NOTE: 日本語にするとバグる
+ActiveAdmin.register User, as: 'Company' do
+  permit_params(
+    %i[email role],
+    company_attributes: [:name, :facility_name, :person_in_charge_name, :person_in_charge_name_kana],
+  )
   actions :all, except: [:destroy]
+
+  scope 'User', default: true do |users|
+    users.where(role: :user)
+  end
+
 
   index do
     id_column
     column :email
     column :role
-    column :name
-    column :name_kana
-    column :company_name
-    column :facility_name
-    column t('activerecord.attributes.user.image') do |user|
-      if user&.image.present?
-        image_tag user&.image&.to_s, width: 50, height: 50
-      end
-    end
     actions
   end
 
@@ -25,15 +25,17 @@ ActiveAdmin.register User do
       row :id
       row :email
       row :role
-      row :name
-      row :name_kana
-      row :company_name
-      row :facility_name
-      row t('activerecord.attributes.user.image') do |user|
-        image_tag user&.image&.to_s, width: 50, height: 50
-      end
       row :created_at
       row :updated_at
+    end
+
+    panel I18n.t('activerecord.models.company'), style: 'margin-top: 30px;' do
+      attributes_table_for company.company do
+        row :name
+        row :facility_name
+        row :person_in_charge_name
+        row :person_in_charge_name_kana
+      end
     end
   end
 
@@ -43,11 +45,13 @@ ActiveAdmin.register User do
     f.inputs do
       f.input :email
       f.input :role, as: :select, collection: User.role.values.map { |i| [i.text, i] }
-      f.input :name
-      f.input :name_kana
-      f.input :company_name
-      f.input :facility_name
-      f.input :image
+
+      f.inputs I18n.t('activerecord.models.company'), for: [:company, f.object.company || Company.new({ user_id: f.object.id })] do |ff|
+        ff.input :name
+        ff.input :facility_name
+        ff.input :person_in_charge_name
+        ff.input :person_in_charge_name_kana
+      end
     end
 
     f.actions
