@@ -18,10 +18,10 @@
 #  fk_rails_...  (recreation_id => recreations.id)
 #  fk_rails_...  (target_id => targets.id)
 #
-require "test_helper"
+require 'test_helper'
 
 class RecreationTargetTest < ActiveSupport::TestCase
-  # test "the truth" do
+  # test 'the truth' do
   #   assert true
   # end
 end

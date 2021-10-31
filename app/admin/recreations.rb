@@ -72,8 +72,8 @@ ActiveAdmin.register Recreation do
     end
 
     f.input :tags, label: 'イベント種別', as: :check_boxes, collection: Tag.events.all
-    f.input :tags, label: 'カテゴリー', :as => :check_boxes, collection: Tag.categories.all
-    f.input :tags, label: '想定ターゲット', :as => :check_boxes, collection: Tag.targets.all
+    f.input :tags, label: 'カテゴリー', as: :check_boxes, collection: Tag.categories.all
+    f.input :tags, label: '想定ターゲット', as: :check_boxes, collection: Tag.targets.all
 
     f.actions
   end
