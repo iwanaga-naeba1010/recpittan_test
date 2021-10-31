@@ -19,4 +19,6 @@
 class RecreationImage < ApplicationRecord
   belongs_to :recreation
   mount_uploader :image, ImageUploader
+
+  validates :image, presence: true
 end

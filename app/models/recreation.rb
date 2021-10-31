@@ -31,5 +31,5 @@ class Recreation < ApplicationRecord
   has_many :tags, through: :recreation_tags
 
   has_many :recreation_images, dependent: :destroy
-  accepts_nested_attributes_for :recreation_images
+  accepts_nested_attributes_for :recreation_images, allow_destroy: true
 end

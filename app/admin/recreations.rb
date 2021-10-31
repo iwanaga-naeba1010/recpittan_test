@@ -4,7 +4,9 @@ ActiveAdmin.register Recreation do
   permit_params(
     %i[user_id title second_title minutes description flow_of_day borrow_item bring_your_own_item extra_information youtube_id],
     tag_ids: [],
-    recreation_images_attributes: [:image, :_destroy],
+    recreation_images_attributes: [
+      :id, :recreation_id, :image, :_destroy
+    ],
   )
   actions :all
 
@@ -70,7 +72,7 @@ ActiveAdmin.register Recreation do
 
     f.inputs do
       # pertnerのみ表示
-      f.input :user, as: :select, collection: User.where(role: :partner)
+      f.input :user, as: :select, collection: User.where(role: :partner).map { |user| [user.partner.name, user.id] }
       f.input :title
       f.input :second_title
       f.input :minutes

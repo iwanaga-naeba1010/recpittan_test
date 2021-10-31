@@ -79,7 +79,9 @@ Partner.seed do |s|
   s.id = 2
   s.user_id = 5
   s.name = '前田竜、田中宏典'
-  s.title = ''
-  s.description = ''
+  s.title = '人力車　俥夫'
+  s.description = "皆さんのお声を聞いたり、個々にお手伝いいただく場面では、現地スタッフ様にご対応ご協力をお願いしております\n
+メイン（全体）画面の他にもう1台スマートフォンもしくはタブレットの接続もしていただけると、より高度なオンラインレクリエーションが実現します。
+可能な範囲でご準備頂けますと幸いです。"
   s.image = Rails.root.join("db/fixtures/images/maeda.png").open
 end

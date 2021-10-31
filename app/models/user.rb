@@ -42,9 +42,9 @@ class User < ApplicationRecord
 
   # TODO: role == userの場合、の条件加えたい
   has_one :company, dependent: :destroy
-  accepts_nested_attributes_for :company
+  accepts_nested_attributes_for :company, allow_destroy: true
 
   # TODO: role == partnerの場合、の条件加えたい
   has_one :partner, dependent: :destroy
-  accepts_nested_attributes_for :partner
+  accepts_nested_attributes_for :partner, allow_destroy: true
 end
