@@ -124,11 +124,11 @@
               <div class="row align-items-center">
                 <div class="col-md-4 text-center">
                   <%= image_tag @recreation.user&.partner&.image.to_s, class: "align-self-center rounded-circle", width: 90 %>
-                  <h4><%= @recreation.user.partner.name %></h4>
+                  <h4><%= @recreation.user&.partner&.name %></h4>
                 </div>
                 <div class="col-md-8">
-                  <h4 class="instructor-position h5"><%= @recreation.user.partner.title %></h4>
-                  <p class="instructor-content"><%= simple_format @recreation.user.partner.description %></p>
+                  <h4 class="instructor-position h5"><%= @recreation.user&.partner&.title %></h4>
+                  <p class="instructor-content"><%= simple_format @recreation.user&.partner&.description %></p>
                 </div>
 
               </div>
