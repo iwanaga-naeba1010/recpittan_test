@@ -3,7 +3,6 @@
 # Table name: users
 #
 #  id                     :bigint           not null, primary key
-#  company_name           :string           default(""), not null
 #  confirmation_sent_at   :datetime
 #  confirmation_token     :string
 #  confirmed_at           :datetime
@@ -11,13 +10,10 @@
 #  current_sign_in_ip     :string
 #  email                  :string           default(""), not null
 #  encrypted_password     :string           default(""), not null
-#  facility_name          :string           default(""), not null
 #  failed_attempts        :integer          default(0), not null
 #  last_sign_in_at        :datetime
 #  last_sign_in_ip        :string
 #  locked_at              :datetime
-#  name                   :string           default(""), not null
-#  name_kana              :string           default(""), not null
 #  remember_created_at    :datetime
 #  reset_password_sent_at :datetime
 #  reset_password_token   :string
@@ -43,4 +39,12 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   enumerize :role, in: { user: 0, partner: 1, admin: 2 }, default: 0
+
+  # TODO: role == userの場合、の条件加えたい
+  has_one :company, dependent: :destroy
+  accepts_nested_attributes_for :company, allow_destroy: true
+
+  # TODO: role == partnerの場合、の条件加えたい
+  has_one :partner, dependent: :destroy
+  accepts_nested_attributes_for :partner, allow_destroy: true
 end

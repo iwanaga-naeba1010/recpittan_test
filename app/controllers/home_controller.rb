@@ -29,9 +29,11 @@ class HomeController < ApplicationController
         amount_time: 60
       }
     ]
+    @categories = Tag.categories
+    @recs = Recreation.all
   end
 
-  def detail
+  def step
     @breadcrumbs = [
       { name: 'トップ' },
       { name: '一覧' },

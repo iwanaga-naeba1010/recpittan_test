@@ -1,0 +1,23 @@
+{
+  "name": "ep_matching",
+  "description": "settings for heroku ep_matching-dev review app",
+  "scripts": {
+    "postdeploy": "pg_dump $STAGING_DATABASE_URL | psql $DATABASE_URL && bundle exec rake db:migrate"
+  },
+  "formation": {
+    "web": {
+      "quantity": 1
+    }
+  },
+  "addons": [
+    "heroku-postgresql"
+  ],
+  "buildpacks": [
+    {
+      "url": "heroku/nodejs"
+    },
+    {
+      "url": "heroku/ruby"
+    }
+  ]
+}

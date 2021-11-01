@@ -23,6 +23,7 @@
 !/storage/.keep
 
 /public/assets
+/public/uploads
 .byebug_history
 
 # Ignore master key for decrypting credentials and more.
@@ -39,3 +40,4 @@ log
 tmp
 .env
 coverage
+/spec/examples.txt
