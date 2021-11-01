@@ -4,14 +4,13 @@
 ActiveAdmin.register User, as: 'Company' do
   permit_params(
     %i[email role],
-    company_attributes: [:name, :facility_name, :person_in_charge_name, :person_in_charge_name_kana],
+    company_attributes: [:name, :facility_name, :person_in_charge_name, :person_in_charge_name_kana]
   )
   actions :all, except: [:destroy]
 
   scope 'User', default: true do |users|
     users.where(role: :user)
   end
-
 
   index do
     id_column
