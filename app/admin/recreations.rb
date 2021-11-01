@@ -2,12 +2,11 @@
 
 ActiveAdmin.register Recreation do
   permit_params(
-    %i[user_id title second_title minutes description flow_of_day
-      borrow_item bring_your_own_item extra_information youtube_id price],
+    %i[user_id title second_title minutes description flow_of_day borrow_item bring_your_own_item extra_information youtube_id price],
     tag_ids: [],
     recreation_images_attributes: [
       :id, :recreation_id, :image, :_destroy
-    ],
+    ]
   )
   actions :all
 
