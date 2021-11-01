@@ -27,5 +27,10 @@ class Order < ApplicationRecord
   belongs_to :user
   belongs_to :recreation
 
+  # TODO: number_of_peopleは削除 => messageに追加
+
+  has_many :order_tags, dependent: :destroy
+  has_many :tags, through: :order_tags
+
   enumerize :order_type, in: { consult: 0, order: 1 }, default: 0
 end

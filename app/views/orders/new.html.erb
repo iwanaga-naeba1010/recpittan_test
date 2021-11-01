@@ -71,6 +71,7 @@
             相談・依頼フォーム
           </div>
           <%= simple_form_for @order, url: recreation_orders_path(@recreation), html: { class: "consult mt-3" } do |f| %>
+            <%= f.input :user_id, as: :hidden, input_html: { value: current_user.id } %>
             <div class="card-body">
               <div class="form-group">
                 <label for="consultType" class="title-b pb-3">
@@ -148,41 +149,15 @@
               <div class="row pt-3">
                 <label class="col-12 title-b pb-3">参加対象者の状態目安を教えてください</label>
                 <div class="form-group col-12">
-                  <div class="form-check">
-                    <input class="form-check-input" name="targetPersons[]" type="checkbox" value="ほぼ自立可"
-                           id="targetPersons1">
-                    <label class="form-check-label" for="targetPersons1">
-                      ほぼ自立可
-                    </label>
-                  </div>
-                  <div class="form-check">
-                    <input class="form-check-input" name="targetPersons[]" type="checkbox" value="ほぼ要介助"
-                           id="targetPersons2">
-                    <label class="form-check-label" for="targetPersons2">
-                      ほぼ要介助
-                    </label>
-                  </div>
-                  <div class="form-check">
-                    <input class="form-check-input" name="targetPersons[]" type="checkbox" value="ほぼ認知症"
-                           id="targetPersons3">
-                    <label class="form-check-label" for="targetPersons3">
-                      ほぼ認知症
-                    </label>
-                  </div>
-                  <div class="form-check">
-                    <input class="form-check-input" name="targetPersons[]" type="checkbox"
-                           value="介護度2以下が多い" id="targetPersons4">
-                    <label class="form-check-label" for="targetPersons4">
-                      介護度2以下が多い
-                    </label>
-                  </div>
-                  <div class="form-check">
-                    <input class="form-check-input" name="targetPersons[]" type="checkbox"
-                           value="介護度3以上が多い" id="targetPersons5">
-                    <label class="form-check-label" for="targetPersons5">
-                      介護度3以上が多い
-                    </label>
-                  </div>
+                  <% Tag.targets.each do |tag| %>
+                    <div class="form-check">
+                      <input class="form-check-input" name="order[tag_ids][]" type="checkbox" value="<%= tag.id %>"
+                             id="targetPersons1">
+                      <label class="form-check-label" for="targetPersons1">
+                        <%= tag.name %>
+                      </label>
+                    </div>
+                  <% end %>
                 </div>
               </div>
 
@@ -191,8 +166,7 @@
               <div class="form-group  row pt-3">
                 <label for="comment" class="col-12 title-b pb-3">相談したいことがありましたらご記入ください</label>
                 <div class="col-12" style="position: relative;">
-                                <textarea id="comment" name="comment" class="form-control" rows="7"
-                                          placeholder=""></textarea>
+                  <textarea id="comment" name="comment" class="form-control" rows="7" placeholder=""></textarea>
                   <div id="placeholderDiv" style="position: absolute;top: 15px;left: 15px;">
                     例）メイミさん、小林さんこんにちは。<br><br>
                     敬老の日のイベントとしての開催を検討しています。<br>

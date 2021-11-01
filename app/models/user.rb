@@ -47,4 +47,6 @@ class User < ApplicationRecord
   # TODO: role == partnerの場合、の条件加えたい
   has_one :partner, dependent: :destroy
   accepts_nested_attributes_for :partner, allow_destroy: true
+
+  has_many :orders, dependent: :destroy
 end
