@@ -7,7 +7,11 @@ Rails.application.routes.draw do
   resources :mypage, only: %i[index]
 
   resources :recreations, shallow: true do
-    resources :orders
+    resources :orders do
+      member do
+        get :chat
+      end
+    end
   end
 
   devise_for :users, controllers: {

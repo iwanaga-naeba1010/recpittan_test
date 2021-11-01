@@ -139,8 +139,7 @@
                 </div>
                 <div class="py-3">終了報告が完了するまでパートナーとチャットができます。</div>
 
-                <a href="{{catalogHomeUri}}/order/consult/{{taskId}}"
-                   class="btn btn-cprimary  font-14 py-2 px-4 font-weight-bold text-white">チャットへ進む</a>
+                <%= link_to 'チャットへ進む', chat_order_path(@order.id), class: 'btn btn-cprimary  font-14 py-2 px-4 font-weight-bold text-white' %>
 <!--                <span-->
 <!--                  class="btn btn-cprimary font-14 py-2 px-4 font-weight-bold text-white disabled">チャットへ進む</span>-->
               </div>

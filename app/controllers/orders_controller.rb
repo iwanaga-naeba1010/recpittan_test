@@ -13,11 +13,9 @@ class OrdersController < ApplicationController
   end
 
   def create
-    # binding.pry
     @order = @recreation.orders.build(params_create)
     # TODO: ここでMessageを追加
     #  params_create.to_h でデータ取得できる
-
 
     ActiveRecord::Base.transaction do
       @order.save
@@ -35,6 +33,16 @@ class OrdersController < ApplicationController
   end
 
   def show
+    @breadcrumbs = [
+      { name: 'トップ' },
+      { name: '一覧' },
+      { name: '旅行' },
+      { name: '～おはらい町おかげ横丁ツアー～' }
+    ]
+    @order = current_user.orders.find(params[:id])
+  end
+
+  def chat
     @breadcrumbs = [
       { name: 'トップ' },
       { name: '一覧' },
