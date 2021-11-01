@@ -35,6 +35,12 @@ class OrdersController < ApplicationController
   end
 
   def show
+    @breadcrumbs = [
+      { name: 'トップ' },
+      { name: '一覧' },
+      { name: '旅行' },
+      { name: '～おはらい町おかげ横丁ツアー～' }
+    ]
     @order = current_user.orders.find(params[:id])
   end
 

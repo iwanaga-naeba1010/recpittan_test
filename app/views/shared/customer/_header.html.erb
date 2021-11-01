@@ -7,7 +7,7 @@
     </div>
     <div class="row py-3">
       <div class="col-auto">
-        <% if active_link?('mypage') %>
+        <% if active_link?('mypage') || active_link?('orders') %>
           依頼履歴
         <% else %>
           <%= link_to '依頼履歴', mypage_index_path, class: "clink" %>
