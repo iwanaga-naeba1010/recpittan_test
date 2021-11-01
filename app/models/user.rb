@@ -49,4 +49,6 @@ class User < ApplicationRecord
   accepts_nested_attributes_for :partner, allow_destroy: true
 
   has_many :orders, dependent: :destroy
+
+  has_many :chats, dependent: :destroy
 end

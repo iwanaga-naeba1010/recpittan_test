@@ -13,13 +13,25 @@ class OrdersController < ApplicationController
   end
 
   def create
+    # binding.pry
     @order = @recreation.orders.build(params_create)
-    if @order.save
-      # ここをchat画面にする
+    # TODO: ここでMessageを追加
+    #  params_create.to_h でデータ取得できる
+
+
+    ActiveRecord::Base.transaction do
+      @order.save
+      message = Chat.create(
+        order_id: @order.id,
+        user_id: current_user.id,
+        message: "adadsdsada",
+        is_read: false,
+      )
+      # orderの詳細に飛ばす
       redirect_to root_path
-    else
-      render :new
     end
+  rescue => e
+    render :new
   end
 
   private
@@ -28,9 +40,14 @@ class OrdersController < ApplicationController
   end
 
   def params_create
+
+    # dates = [
+    #   { year: '', month: '', date: '', start_hour: '', start_minutes: '', end_hour: '', end_minutes: '' }
+    # ]
+
     # TODO: 日程を追加できること
     params.require(:order).permit(
-      :prefecture, :city, :order_type, :number_of_people, :user_id,
+      :prefecture, :city, :order_type, :number_of_people, :user_id, { dates: {} },
       { tag_ids: [] }
     )
   end

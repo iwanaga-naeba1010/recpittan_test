@@ -24,6 +24,9 @@
 #
 class Order < ApplicationRecord
   extend Enumerize
+  # controller のparamsに追加するため
+  attribute :dates
+
   belongs_to :user
   belongs_to :recreation
 
@@ -31,6 +34,8 @@ class Order < ApplicationRecord
 
   has_many :order_tags, dependent: :destroy
   has_many :tags, through: :order_tags
+
+  has_many :chats, dependent: :destroy
 
   enumerize :order_type, in: { consult: 0, order: 1 }, default: 0
 end
