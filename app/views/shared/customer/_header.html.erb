@@ -1,0 +1,26 @@
+<div id="customer-header" class="h-100 bg-white sticky-top">
+  <div class="container ">
+    <div class="row border-bottom">
+      <div class="col-8 pt-3 pb-1"><%= current_user.company.facility_name %></div>
+      <!-- TODO: プランを追加できるようにする -->
+      <div class="col-8 pb-3">単発プラン</div>
+    </div>
+    <div class="row py-3">
+      <div class="col-auto">
+        <% if active_link?('mypage') %>
+          依頼履歴
+        <% else %>
+          <%= link_to '依頼履歴', mypage_index_path, class: "clink" %>
+        <% end %>
+      </div>
+
+      <div class="col-auto">
+        <% if active_link?('hogehoge') %>
+          アカウント
+        <% else %>
+          <%= link_to 'アカウント', '#', class: "clink" %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

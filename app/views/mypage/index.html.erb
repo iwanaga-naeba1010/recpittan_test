@@ -1,0 +1,63 @@
+<%= render 'shared/customer/header' %>
+
+<main class="customer">
+  <div class="h-100 mt-4">
+    <div class="container order-container">
+      <div class="row py-3">
+        <div class="col-auto font-16 font-weight-bold">依頼履歴</div>
+        <div class="col-auto"><%= @orders.size %>件</div>
+      </div>
+      <div class="row border-bottom py-3">
+        <div class="col-2">依頼番号</div>
+        <div class="col-2">レク日時</div>
+        <div class="col-1 text-truncate">ステータス</div>
+        <div class="col-3">レク</div>
+        <div class="col-1">人数</div>
+        <div class="col-1">合計費用</div>
+        <div class="col-2"></div>
+      </div>
+    </div>
+  </div>
+  <div class="h-100">
+    <div class="container order-container">
+      <% @orders.each do |order| %>
+        <div class="row bg-white my-2 py-2 shadow-sm align-items-center">
+          <div class="col-2"><%= order.id %></div>
+          <div class="col-2"></div>
+          <div class="col-1"><%= order.order_type_text %></div>
+          <div class="col-3 text-2-truncate"><%= order.recreation.title %></div>
+          <div class="col-1"><%= order.number_of_people %>人</div>
+          <div class="col-1"><%= price_pipe order.recreation.price %></div>
+          <div class="col-2">
+            <%= link_to '詳細を見る', order_path(order.id), class: 'btn btn-cprimary  font-14 py-2 px-4 font-weight-bold text-white' %>
+          </div>
+          <div class="col-12 pt-2">
+            <div class="bg-ba01 border rounded p-3">
+              <span class="font-weight-bold">連絡事項</span>
+              <!--<span class="ps-5 color-ba08">{{"TODO 注意事項"}}</span>-->
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</main>
+
+<script>
+  jQuery(document).ready(function () {
+    if (document.querySelector('#customer-header')) {
+      function chsticky() {
+        if (document.body.clientWidth >= 769) {
+          document.querySelector('#customer-header').style.top = document.querySelector('header').clientHeight + 'px';
+        } else {
+          document.querySelector('#customer-header').style.top = 'auto';
+        }
+      }
+
+      chsticky();
+      jQuery(window).resize(function () {
+        chsticky();
+      });
+    }
+  });
+</script>

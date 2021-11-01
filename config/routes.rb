@@ -4,6 +4,8 @@ Rails.application.routes.draw do
   get 'home/index'
   get '/step' => 'home#step'
 
+  resources :mypage, only: %i[index]
+
   resources :recreations, shallow: true do
     resources :orders
   end

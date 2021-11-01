@@ -28,10 +28,14 @@ class OrdersController < ApplicationController
         is_read: false,
       )
       # orderの詳細に飛ばす
-      redirect_to root_path
+      redirect_to order_path(@order.id)
     end
   rescue => e
     render :new
+  end
+
+  def show
+    @order = current_user.orders.find(params[:id])
   end
 
   private

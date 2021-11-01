@@ -16,3 +16,7 @@ ja:
         category: カテゴリー
         event: イベント
         target: 利用者層
+    order:
+      order_type:
+        consult: 相談中
+        order: 依頼中
