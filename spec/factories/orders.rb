@@ -27,7 +27,7 @@ FactoryBot.define do
     user { nil }
     recreation { nil }
     number_of_people { 1 }
-    message { "MyText" }
+    message { 'MyText' }
     kind { 1 }
   end
 end

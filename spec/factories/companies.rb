@@ -21,10 +21,10 @@
 #
 FactoryBot.define do
   factory :company do
-    name { "MyString" }
-    facility_name { "MyString" }
-    person_in_charge_name { "MyString" }
-    person_in_charge_name_kana { "MyString" }
+    name { 'MyString' }
+    facility_name { 'MyString' }
+    person_in_charge_name { 'MyString' }
+    person_in_charge_name_kana { 'MyString' }
     user { nil }
   end
 end

@@ -2,12 +2,11 @@
 
 ActiveAdmin.register Recreation do
   permit_params(
-    %i[user_id title second_title minutes description flow_of_day
-      borrow_item bring_your_own_item extra_information youtube_id price],
+    %i[user_id title second_title minutes description flow_of_day borrow_item bring_your_own_item extra_information youtube_id price],
     tag_ids: [],
     recreation_images_attributes: [
       :id, :recreation_id, :image, :_destroy
-    ],
+    ]
   )
   actions :all
 
@@ -89,8 +88,8 @@ ActiveAdmin.register Recreation do
     end
 
     f.input :tags, label: 'イベント種別', as: :check_boxes, collection: Tag.events.all
-    f.input :tags, label: 'カテゴリー', :as => :check_boxes, collection: Tag.categories.all
-    f.input :tags, label: '想定ターゲット', :as => :check_boxes, collection: Tag.targets.all
+    f.input :tags, label: 'カテゴリー', as: :check_boxes, collection: Tag.categories.all
+    f.input :tags, label: '想定ターゲット', as: :check_boxes, collection: Tag.targets.all
 
     f.inputs t('activerecord.models.recreation_image') do
       f.has_many :recreation_images, heading: false, allow_destroy: true, new_record: true do |ff|

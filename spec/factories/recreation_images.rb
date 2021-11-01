@@ -19,6 +19,6 @@
 FactoryBot.define do
   factory :recreation_image do
     recreation { nil }
-    image { "MyText" }
+    image { 'MyText' }
   end
 end

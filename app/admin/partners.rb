@@ -4,14 +4,13 @@
 ActiveAdmin.register User, as: 'Partner' do
   permit_params(
     %i[email role],
-    partner_attributes: [:name, :title, :description, :image],
+    partner_attributes: [:name, :title, :description, :image]
   )
   actions :all, except: [:destroy]
 
   scope 'Partner', default: true do |users|
     users.where(role: :partner)
   end
-
 
   index do
     id_column

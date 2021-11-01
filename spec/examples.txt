@@ -1,0 +1,7 @@
+example_id                                     | status  | run_time        |
+---------------------------------------------- | ------- | --------------- |
+./spec/models/company_spec.rb[1:1]             | pending | 0.00003 seconds |
+./spec/models/order_spec.rb[1:1]               | pending | 0 seconds       |
+./spec/models/partner_spec.rb[1:1]             | pending | 0.00001 seconds |
+./spec/models/recreation_image_spec.rb[1:1]    | pending | 0.00001 seconds |
+./spec/requests/home_controller_spec.rb[1:1:1] | passed  | 0.19736 seconds |
