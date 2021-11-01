@@ -16,4 +16,6 @@ require('jquery');
 // require('popper.js');
 import 'bootstrap';
 import '../stylesheets/application.scss';
+import './hello_react';
+import './prefectures';
 require.context('../images', true)

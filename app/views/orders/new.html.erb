@@ -71,6 +71,7 @@
             相談・依頼フォーム
           </div>
           <%= simple_form_for @order, url: recreation_orders_path(@recreation), html: { class: "consult mt-3" } do |f| %>
+            <%= f.input :user_id, as: :hidden, input_html: { value: current_user.id } %>
             <div class="card-body">
               <div class="form-group">
                 <label for="consultType" class="title-b pb-3">
@@ -103,34 +104,34 @@
                   <div class="row">
                     <div class="col-12">希望日</div>
                     <div class="form-group col-3">
-                      <select id="desiredOneYear" name="desiredOneYear" class="form-select "><option style="display: none;">ー</option><option value="2021">2021</option><option value="2022">2022</option></select>
+                      <select id="dates1" name="order[dates][0][year]" class="form-select "><option style="display: none;">ー</option><option value="2021">2021</option><option value="2022">2022</option></select>
                     </div>
                     <div class="col-auto p-0 flex-v-c">年</div>
                     <div class="form-group col-3">
-                      <select id="desiredOneMonth" name="desiredOneMonth" class="form-select "><option style="display: none;">ー</option><option value="01">01</option><option value="02">02</option><option value="03">03</option><option value="04">04</option><option value="05">05</option><option value="06">06</option><option value="07">07</option><option value="08">08</option><option value="09">09</option><option value="10">10</option><option value="11">11</option><option value="12">12</option></select>
+                      <select id="desiredOneMonth" name="order[dates][0][month]" class="form-select "><option style="display: none;">ー</option><option value="01">01</option><option value="02">02</option><option value="03">03</option><option value="04">04</option><option value="05">05</option><option value="06">06</option><option value="07">07</option><option value="08">08</option><option value="09">09</option><option value="10">10</option><option value="11">11</option><option value="12">12</option></select>
                     </div>
                     <div class="col-auto p-0 flex-v-c">月</div>
                     <div class="form-group col-3">
-                      <select id="desiredOneDay" name="desiredOneDay" class="form-select "><option style="display: none;">ー</option><option value="01">01</option><option value="02">02</option><option value="03">03</option><option value="04">04</option><option value="05">05</option><option value="06">06</option><option value="07">07</option><option value="08">08</option><option value="09">09</option><option value="10">10</option><option value="11">11</option><option value="12">12</option><option value="13">13</option><option value="14">14</option><option value="15">15</option><option value="16">16</option><option value="17">17</option><option value="18">18</option><option value="19">19</option><option value="20">20</option><option value="21">21</option><option value="22">22</option><option value="23">23</option><option value="24">24</option><option value="25">25</option><option value="26">26</option><option value="27">27</option><option value="28">28</option><option value="29">29</option><option value="30">30</option><option value="31">31</option></select>
+                      <select id="desiredOneDay" name="order[dates][0][date]" class="form-select "><option style="display: none;">ー</option><option value="01">01</option><option value="02">02</option><option value="03">03</option><option value="04">04</option><option value="05">05</option><option value="06">06</option><option value="07">07</option><option value="08">08</option><option value="09">09</option><option value="10">10</option><option value="11">11</option><option value="12">12</option><option value="13">13</option><option value="14">14</option><option value="15">15</option><option value="16">16</option><option value="17">17</option><option value="18">18</option><option value="19">19</option><option value="20">20</option><option value="21">21</option><option value="22">22</option><option value="23">23</option><option value="24">24</option><option value="25">25</option><option value="26">26</option><option value="27">27</option><option value="28">28</option><option value="29">29</option><option value="30">30</option><option value="31">31</option></select>
                     </div>
                     <div class="col-auto p-0 flex-v-c">日</div>
                   </div>
                   <div class="row">
                     <div class="col-12">希望時間</div>
                     <div class="form-group col-2 pe-0">
-                      <select id="desiredOneHourSt" name="desiredOneHourSt" class="form-select "><option style="display: none;">ー</option><option value="08">08</option><option value="09">09</option><option value="10">10</option><option value="11">11</option><option value="12">12</option><option value="13">13</option><option value="14">14</option><option value="15">15</option><option value="16">16</option><option value="17">17</option><option value="18">18</option></select>
+                      <select id="desiredOneHourSt" name="order[dates][0][start_hour]" class="form-select "><option style="display: none;">ー</option><option value="08">08</option><option value="09">09</option><option value="10">10</option><option value="11">11</option><option value="12">12</option><option value="13">13</option><option value="14">14</option><option value="15">15</option><option value="16">16</option><option value="17">17</option><option value="18">18</option></select>
                     </div>
                     <div class="col-auto p-0 flex-v-c">:</div>
                     <div class="form-group col-2 pe-0">
-                      <select id="desiredOneMinuteSt" name="desiredOneMinuteSt" class="form-select "><option style="display: none;">ー</option><option value="00">00</option><option value="15">15</option><option value="30">30</option><option value="45">45</option></select>
+                      <select id="desiredOneMinuteSt" name="order[dates][0][start_minutes]" class="form-select "><option style="display: none;">ー</option><option value="00">00</option><option value="15">15</option><option value="30">30</option><option value="45">45</option></select>
                     </div>
                     <div class="col-auto p-0 flex-v-c">~</div>
                     <div class="form-group col-2 pe-0">
-                      <select id="desiredOneHourEn" name="desiredOneHourEn" class="form-select "><option style="display: none;">ー</option><option value="08">08</option><option value="09">09</option><option value="10">10</option><option value="11">11</option><option value="12">12</option><option value="13">13</option><option value="14">14</option><option value="15">15</option><option value="16">16</option><option value="17">17</option><option value="18">18</option></select>
+                      <select id="desiredOneHourEn" name="order[dates][0][end_hour]" class="form-select "><option style="display: none;">ー</option><option value="08">08</option><option value="09">09</option><option value="10">10</option><option value="11">11</option><option value="12">12</option><option value="13">13</option><option value="14">14</option><option value="15">15</option><option value="16">16</option><option value="17">17</option><option value="18">18</option></select>
                     </div>
                     <div class="col-auto p-0 flex-v-c">:</div>
                     <div class="form-group col-2 pe-0">
-                      <select id="desiredOneMinuteEn" name="desiredOneMinuteEn" class="form-select "><option style="display: none;">ー</option><option value="00">00</option><option value="15">15</option><option value="30">30</option><option value="45">45</option></select>
+                      <select id="desiredOneMinuteEn" name="order[dates][0][end_minutes]" class="form-select "><option style="display: none;">ー</option><option value="00">00</option><option value="15">15</option><option value="30">30</option><option value="45">45</option></select>
                     </div>
                   </div>
                 </div>
@@ -148,62 +149,24 @@
               <div class="row pt-3">
                 <label class="col-12 title-b pb-3">参加対象者の状態目安を教えてください</label>
                 <div class="form-group col-12">
-                  <div class="form-check">
-                    <input class="form-check-input" name="targetPersons[]" type="checkbox" value="ほぼ自立可"
-                           id="targetPersons1">
-                    <label class="form-check-label" for="targetPersons1">
-                      ほぼ自立可
-                    </label>
-                  </div>
-                  <div class="form-check">
-                    <input class="form-check-input" name="targetPersons[]" type="checkbox" value="ほぼ要介助"
-                           id="targetPersons2">
-                    <label class="form-check-label" for="targetPersons2">
-                      ほぼ要介助
-                    </label>
-                  </div>
-                  <div class="form-check">
-                    <input class="form-check-input" name="targetPersons[]" type="checkbox" value="ほぼ認知症"
-                           id="targetPersons3">
-                    <label class="form-check-label" for="targetPersons3">
-                      ほぼ認知症
-                    </label>
-                  </div>
-                  <div class="form-check">
-                    <input class="form-check-input" name="targetPersons[]" type="checkbox"
-                           value="介護度2以下が多い" id="targetPersons4">
-                    <label class="form-check-label" for="targetPersons4">
-                      介護度2以下が多い
-                    </label>
-                  </div>
-                  <div class="form-check">
-                    <input class="form-check-input" name="targetPersons[]" type="checkbox"
-                           value="介護度3以上が多い" id="targetPersons5">
-                    <label class="form-check-label" for="targetPersons5">
-                      介護度3以上が多い
-                    </label>
-                  </div>
+                  <% Tag.targets.each do |tag| %>
+                    <div class="form-check">
+                      <input class="form-check-input" name="order[tag_ids][]" type="checkbox" value="<%= tag.id %>"
+                             id="targetPersons1">
+                      <label class="form-check-label" for="targetPersons1">
+                        <%= tag.name %>
+                      </label>
+                    </div>
+                  <% end %>
                 </div>
               </div>
 
-              <div class="row pt-3">
-                <label class="col-12 title-b pb-3">都道府県と市区町村を選択してください</label>
-                <div class="form-group col-6">
-                  <label for="prefecture">都道府県</label>
-                  {{selectPrefecture 'prefecture' prefecture}}
-                </div>
-                <div class="form-group col-6">
-                  <label for="city">市区町村</label>
-                  <select id="city" class="form-select" name="city">
-                    <option style="display: none;">ー</option>
-                  </select>
-                </div>
-              </div>
+              <!-- NOTE(okubo): Prefecturesをreactで制御しているので触らないように!! -->
+              <div id="Prefectures" class="row pt-3"></div>
               <div class="form-group  row pt-3">
                 <label for="comment" class="col-12 title-b pb-3">相談したいことがありましたらご記入ください</label>
                 <div class="col-12" style="position: relative;">
-                                <textarea id="comment" name="comment" class="form-control" rows="7"
-                                          placeholder=""></textarea>
+                  <textarea id="comment" name="comment" class="form-control" rows="7" placeholder=""></textarea>
                   <div id="placeholderDiv" style="position: absolute;top: 15px;left: 15px;">
                     例）メイミさん、小林さんこんにちは。<br><br>
                     敬老の日のイベントとしての開催を検討しています。<br>

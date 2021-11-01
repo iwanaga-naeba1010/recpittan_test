@@ -15,6 +15,9 @@ class Tag < ApplicationRecord
   has_many :recreation_tags, dependent: :destroy
   has_many :recreations, through: :recreation_tags
 
+  has_many :order_tags, dependent: :destroy
+  has_many :orders, through: :order_tags
+
   enumerize :kind, in: { category: 0, event: 1, target: 2 }, default: 0
   mount_uploader :image, ImageUploader
 
