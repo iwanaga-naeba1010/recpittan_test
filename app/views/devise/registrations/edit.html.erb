@@ -21,7 +21,7 @@
 <!--<p>Unhappy? <%#= link_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></p>-->
 
 <%#= link_to "Back", :back %>
-
+<%= render 'shared/customer/header' %>
 <main class="customer">
   <article class="container py-4 px-0">
     <div class="row justify-content-center">
@@ -68,7 +68,7 @@
                   </div>
                   <div class="form-group col-6">
                     <label for="region">都道府県</label>
-                    <div id="PrefectureForEditUserForm"></div>
+                    <div id="PrefectureForEditUserForm" prefecture="<%= resource.company.prefecture %>"></div>
                   </div>
                   <div class="form-group col-6">
                     <label for="locality">市区町村</label>

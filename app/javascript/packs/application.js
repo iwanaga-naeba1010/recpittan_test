@@ -16,7 +16,6 @@ require('jquery');
 // require('popper.js');
 import 'bootstrap';
 import '../stylesheets/application.scss';
-import './hello_react';
 import './prefecture_and_city_for_order_form';
 import './prefecture_for_edit_user_form';
 require.context('../images', true)

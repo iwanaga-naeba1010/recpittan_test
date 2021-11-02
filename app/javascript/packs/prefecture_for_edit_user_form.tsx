@@ -16,7 +16,11 @@ interface PrefectureResponse {
   result: Prefecture[];
 }
 
-const App: React.FC = (): JSX.Element => {
+interface Props {
+  defaultPrefecture: string;
+}
+
+const App: React.FC<Props> = ({ defaultPrefecture }): JSX.Element => {
   const [prefectures, setPrefectures] = useState<Prefecture[]>([]);
   useEffect(() => {
     (async () => {
@@ -29,7 +33,8 @@ const App: React.FC = (): JSX.Element => {
   return (
     <select id="order_prefecture" name="user[company_attributes][prefecture]" className="form-select p-region">
       <option>ー</option>
-      { prefectures.map((pref) => <option value={ pref.prefName }>{ pref.prefName }</option>) }
+      { prefectures.map((pref) =>
+        <option value={ pref.prefName } selected={ pref.prefName === defaultPrefecture }>{ pref.prefName }</option>) }
     </select>
   );
 }
@@ -37,8 +42,9 @@ const App: React.FC = (): JSX.Element => {
 document.addEventListener('turbolinks:load', () => {
   const productDetailOfFree = document.querySelector('#PrefectureForEditUserForm');
   if (productDetailOfFree) {
+    const prefecture = productDetailOfFree.getAttribute('prefecture');
     ReactDOM.render(
-      <App />,
+      <App defaultPrefecture={prefecture} />,
       productDetailOfFree,
     )
   }
