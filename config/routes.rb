@@ -1,15 +1,27 @@
 Rails.application.routes.draw do
   ActiveAdmin.routes(self)
+
   root 'home#index'
   get 'home/index'
-  get '/step' => 'home#step'
 
-  # resources :mypage, only: %i[index]
   resources :customers, only: %i[index]
   namespace :customers do
     resources :chats, only: %i[create]
 
     resources :recreations, shallow: true do
+      resources :orders do
+        member do
+          get :chat
+        end
+      end
+    end
+  end
+
+  resources :partners, only: %i[index]
+  namespace :partners do
+    resources :chats, only: %i[create]
+
+    resources :orders, shallow: true do
       resources :orders do
         member do
           get :chat

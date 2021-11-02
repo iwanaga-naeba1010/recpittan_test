@@ -54,7 +54,13 @@
           <% if user_signed_in? %>
 
             <li class="nav-item">
-              <%= link_to customers_path, class: 'nav-link' do %>
+              <% mypage_path = if current_user.role.customer?
+                                 customers_path
+                               else
+                                 partners_path
+                               end
+              %>
+              <%= link_to mypage_path, class: 'nav-link' do %>
                 <span class="material-icons mypage">
                     account_circle
                 </span> マイページ
