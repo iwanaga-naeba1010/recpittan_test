@@ -26,6 +26,7 @@ class Order < ApplicationRecord
   extend Enumerize
   # controller のparamsに追加するため
   attribute :dates
+  attribute :message
 
   belongs_to :user
   belongs_to :recreation

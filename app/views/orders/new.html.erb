@@ -16,7 +16,9 @@
         <div class="row align-items-center mt-2">
           <div class="col-md-4">
             <picture loading="lazy">
-              <%= image_tag @recreation.recreation_images&.first.image.to_s, class: "img-fluid" %>
+              <% if @recreation.recreation_images.length >= 1 %>
+                <%= image_tag @recreation.recreation_images&.first&.image&.to_s, class: "img-fluid" %>
+              <% end %>
             </picture>
           </div>
           <div class="col-md-7 recreation">
@@ -93,55 +95,93 @@
               </div>
 
 
-
-
               <!-- has_manyを実装 -->
-              <div class="d-flex flex-row align-items-stretch">
-                <div class="desired-no d-flex align-items-center justify-content-center">
-                  <div>1</div>
-                </div>
-                <div class="flex-fill ps-3">
-                  <div class="row">
-                    <div class="col-12">希望日</div>
-                    <div class="form-group col-3">
-                      <select id="dates1" name="order[dates][0][year]" class="form-select "><option style="display: none;">ー</option><option value="2021">2021</option><option value="2022">2022</option></select>
-                    </div>
-                    <div class="col-auto p-0 flex-v-c">年</div>
-                    <div class="form-group col-3">
-                      <select id="desiredOneMonth" name="order[dates][0][month]" class="form-select "><option style="display: none;">ー</option><option value="01">01</option><option value="02">02</option><option value="03">03</option><option value="04">04</option><option value="05">05</option><option value="06">06</option><option value="07">07</option><option value="08">08</option><option value="09">09</option><option value="10">10</option><option value="11">11</option><option value="12">12</option></select>
-                    </div>
-                    <div class="col-auto p-0 flex-v-c">月</div>
-                    <div class="form-group col-3">
-                      <select id="desiredOneDay" name="order[dates][0][date]" class="form-select "><option style="display: none;">ー</option><option value="01">01</option><option value="02">02</option><option value="03">03</option><option value="04">04</option><option value="05">05</option><option value="06">06</option><option value="07">07</option><option value="08">08</option><option value="09">09</option><option value="10">10</option><option value="11">11</option><option value="12">12</option><option value="13">13</option><option value="14">14</option><option value="15">15</option><option value="16">16</option><option value="17">17</option><option value="18">18</option><option value="19">19</option><option value="20">20</option><option value="21">21</option><option value="22">22</option><option value="23">23</option><option value="24">24</option><option value="25">25</option><option value="26">26</option><option value="27">27</option><option value="28">28</option><option value="29">29</option><option value="30">30</option><option value="31">31</option></select>
-                    </div>
-                    <div class="col-auto p-0 flex-v-c">日</div>
+
+              <% 3.times do |i| %>
+                <div class="d-flex flex-row align-items-stretch my-2">
+                  <div class="desired-no d-flex align-items-center justify-content-center">
+                    <div><%= i + 1 %></div>
                   </div>
-                  <div class="row">
-                    <div class="col-12">希望時間</div>
-                    <div class="form-group col-2 pe-0">
-                      <select id="desiredOneHourSt" name="order[dates][0][start_hour]" class="form-select "><option style="display: none;">ー</option><option value="08">08</option><option value="09">09</option><option value="10">10</option><option value="11">11</option><option value="12">12</option><option value="13">13</option><option value="14">14</option><option value="15">15</option><option value="16">16</option><option value="17">17</option><option value="18">18</option></select>
+
+
+                  <div class="flex-fill ps-3">
+                    <div class="row">
+                      <div class="col-12">希望日</div>
+                      <div class="form-group col-3">
+                        <select id="dates1" name="order[dates][<%= i %>][year]" class="form-select ">
+                          <option style="display: none;">ー</option>
+                          <% @years.each do |year| %>
+                            <option value="<%= year %>"><%= year %></option>
+                          <% end %>
+                        </select>
+                      </div>
+                      <div class="col-auto p-0 flex-v-c">年</div>
+                      <div class="form-group col-3">
+                        <select id="desiredOneMonth" name="order[dates][<%= i %>][month]" class="form-select ">
+                          <option style="display: none;">ー</option>
+                          <% @months.each do |month| %>
+                            <option value="<%= month %>"><%= month %></option>
+                          <% end %>
+                        </select>
+                      </div>
+                      <div class="col-auto p-0 flex-v-c">月</div>
+                      <div class="form-group col-3">
+                        <select id="desiredOneDay" name="order[dates][<%= i %>][date]" class="form-select ">
+                          <option style="display: none;">ー</option>
+                          <% @dates.each do |date| %>
+                            <option value="<%= date %>"><%= date %></option>
+                          <% end %>
+                        </select>
+                      </div>
+                      <div class="col-auto p-0 flex-v-c">日</div>
                     </div>
-                    <div class="col-auto p-0 flex-v-c">:</div>
-                    <div class="form-group col-2 pe-0">
-                      <select id="desiredOneMinuteSt" name="order[dates][0][start_minutes]" class="form-select "><option style="display: none;">ー</option><option value="00">00</option><option value="15">15</option><option value="30">30</option><option value="45">45</option></select>
-                    </div>
-                    <div class="col-auto p-0 flex-v-c">~</div>
-                    <div class="form-group col-2 pe-0">
-                      <select id="desiredOneHourEn" name="order[dates][0][end_hour]" class="form-select "><option style="display: none;">ー</option><option value="08">08</option><option value="09">09</option><option value="10">10</option><option value="11">11</option><option value="12">12</option><option value="13">13</option><option value="14">14</option><option value="15">15</option><option value="16">16</option><option value="17">17</option><option value="18">18</option></select>
-                    </div>
-                    <div class="col-auto p-0 flex-v-c">:</div>
-                    <div class="form-group col-2 pe-0">
-                      <select id="desiredOneMinuteEn" name="order[dates][0][end_minutes]" class="form-select "><option style="display: none;">ー</option><option value="00">00</option><option value="15">15</option><option value="30">30</option><option value="45">45</option></select>
+                    <div class="row">
+                      <div class="col-12">希望時間</div>
+                      <div class="form-group col-2 pe-0">
+                        <select id="desiredOneHourSt" name="order[dates][<%= i %>][start_hour]" class="form-select ">
+                          <option style="display: none;">ー</option>
+                          <% @hours.each do |hour| %>
+                            <option value="<%= hour %>"><%= hour %></option>
+                          <% end %>
+                        </select>
+                      </div>
+                      <div class="col-auto p-0 flex-v-c">:</div>
+                      <div class="form-group col-2 pe-0">
+                        <select id="desiredOneMinuteSt" name="order[dates][<%= i %>][start_minutes]" class="form-select ">
+                          <option style="display: none;">ー</option>
+                          <% @minutes.each do |minute| %>
+                            <option value="<%= minute %>"><%= minute %></option>
+                          <% end %>
+                        </select>
+                      </div>
+                      <div class="col-auto p-0 flex-v-c">~</div>
+                      <div class="form-group col-2 pe-0">
+                        <select id="desiredOneHourEn" name="order[dates][<%= i %>][end_hour]" class="form-select ">
+                          <option style="display: none;">ー</option>
+                          <% @hours.each do |hour| %>
+                            <option value="<%= hour %>"><%= hour %></option>
+                          <% end %>
+                        </select>
+                      </div>
+                      <div class="col-auto p-0 flex-v-c">:</div>
+                      <div class="form-group col-2 pe-0">
+                        <select id="desiredOneMinuteEn" name="order[dates][<%= i %>][end_minutes]" class="form-select ">
+                          <option style="display: none;">ー</option>
+                          <% @minutes.each do |minute| %>
+                            <option value="<%= minute %>"><%= minute %></option>
+                          <% end %>
+                        </select>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
+              <% end %>
 
 
               <div class="row pt-3">
                 <label class="col-12 title-b pb-3" for="participant">おおよそ参加予定人数をご記入ください</label>
                 <div class="form-group col-3">
-                  <input class="form-control {{participantFormClass}}" id="participant" name="participant" type="tel" placeholder="人数を入力">
+                  <%= f.input :number_of_people, label: false, class: 'form-control' %>
                 </div>
                 <div class="col-auto p-0 flex-v-c">人</div>
               </div>
@@ -151,8 +191,7 @@
                 <div class="form-group col-12">
                   <% Tag.targets.each do |tag| %>
                     <div class="form-check">
-                      <input class="form-check-input" name="order[tag_ids][]" type="checkbox" value="<%= tag.id %>"
-                             id="targetPersons1">
+                      <input class="form-check-input" name="order[tag_ids][]" type="checkbox" value="<%= tag.id %>" id="targetPersons1">
                       <label class="form-check-label" for="targetPersons1">
                         <%= tag.name %>
                       </label>
@@ -166,14 +205,7 @@
               <div class="form-group  row pt-3">
                 <label for="comment" class="col-12 title-b pb-3">相談したいことがありましたらご記入ください</label>
                 <div class="col-12" style="position: relative;">
-                  <textarea id="comment" name="comment" class="form-control" rows="7" placeholder=""></textarea>
-                  <div id="placeholderDiv" style="position: absolute;top: 15px;left: 15px;">
-                    例）メイミさん、小林さんこんにちは。<br><br>
-                    敬老の日のイベントとしての開催を検討しています。<br>
-                    お元気な方が多く、子供っぽいような内容を好まない入居者さんが多いです。<br>
-                    そのような方でも楽しむことは対応可能でしょうか？<br>
-                    宜しくお願い致します。
-                  </div>
+                  <%= f.input :message, as: :text, input_html: { class: "form-control", rows: "7" }%>
                 </div>
               </div>
 
@@ -181,15 +213,10 @@
                 <div class="col-10">
                   <h4 class="title-b font-14 color-ba08">相談・依頼ボタンをクリックしても、正式に開催が決まるわけではありません。</h4>
                 </div>
-
                 <div class="col-6">
-                  <button id="submit-button" type="submit" name="action" value="preview"
-                          class="btn btn-cprimary rounded-pill w-100 font-14 py-3 px-4 font-weight-bold text-white">
-                    <span class="">パートナーにレク開催を相談・依頼する</span></button>
+                  <%= f.submit 'パートナーにレク開催を相談・依頼する', class: "btn btn-cprimary py-4 rounded-pill w-100 font-14 py-3 px-4 font-weight-bold text-white" %>
                 </div>
               </div>
-
-
             </div>
           <% end %>
 

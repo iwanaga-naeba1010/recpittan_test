@@ -15,9 +15,14 @@ ja:
         name: 介護 花子
         name_kana: カイゴ ハナコ
         email: メールアドレス
-#        password: メールアドレス
+      order:
+        number_of_people: 人数を入力
+        message: "例）メイミさん、小林さんこんにちは。
+                   敬老の日のイベントとしての開催を検討しています。\n
+                   お元気な方が多く、子供っぽいような内容を好まない入居者さんが多いです。
+                   そのような方でも楽しむことは対応可能でしょうか？
+                   宜しくお願い致します。"
 
-#        keys: %i[role company_name facility_name name name_kana]
     error_notification:
       default_message: "エラーが発生しました。"
     # Examples
