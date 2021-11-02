@@ -1,26 +1,48 @@
+inherit_from: .rubocop_todo.yml
+
+require:
+  - rubocop-rails
+
 AllCops:
-# 除外するディレクトリ（自動生成されたファイル）
-# デフォルト設定にある"vendor/**/*"が無効化されないように記述
- Exclude:
-   - "vendor/**/*" # rubocop config/default.yml
-   - "db/**/*"
-   - "config/**/*"
-   - "bin/*"
-   - "node_modules/**/*"
-   - "Gemfile"
+  Exclude:
+    - "vendor/**/*"
+    - "db/**/*"
+    - "bin/**/*"
+    - "Guardfile"
+    - "config/deploy.rb"
+    - "config/deploy/**/*"
+    - "config/unicorn/*"
+    - "config/initializers/**/*"
+    - "config/routes.rb"
+    - 'node_modules/**/*'
+    - 'lib/templates/**/*'
+  DisplayCopNames: true
+  TargetRubyVersion: 2.5
+  SuggestExtensions: false
+  NewCops: enable
 
+Rails:
+  Enabled: true
 
-# 1行あたりの文字数をチェックする
+Metrics/AbcSize:
+  Max: 35
+
+Metrics/CyclomaticComplexity:
+  Max: 15
+
 Layout/LineLength:
- Max: 140
-# 下記ファイルはチェックの対象から外す
- Exclude:
-   - "Rakefile"
-   - "spec/rails_helper.rb"
-   - "spec/spec_helper.rb"
+  Max: 140
+  AllowURI: true
+  URISchemes:
+    - http
+    - https
+  Exclude:
+    - "spec/**/*"
 
-# RSpecは1つのブロックあたりの行数が多くなるため、チェックの除外から外す
-# ブロック内の行数をチェックする
+Metrics/MethodLength:
+  CountComments: false
+  Max: 50
+
 Metrics/BlockLength:
   CountComments: false
   Max: 50
@@ -29,63 +51,200 @@ Metrics/BlockLength:
     - '**/*.rake'
     - 'spec/**/*.rb'
     - 'config/initializers/*.rb'
-    - 'app/admin/*.rb'
 
-# Assignment: 変数への代入
-# Branch: メソッド呼び出し
-# Condition: 条件文
-# 上記項目をRubocopが計算して基準値を超えると警告を出す（上記頭文字をとって'Abc'）
-Metrics/AbcSize:
- Max: 50
-
-# メソッドの中身が複雑になっていないか、Rubocopが計算して基準値を超えると警告を出す
-Metrics/PerceivedComplexity:
- Max: 8
-
-# 循環的複雑度が高すぎないかをチェック（ifやforなどを1メソッド内で使いすぎている）
-Metrics/CyclomaticComplexity:
- Max: 10
-
-# メソッドの行数が多すぎないかをチェック
-Metrics/MethodLength:
-  CountComments: false
-  Max: 50
-
-# ネストが深すぎないかをチェック（if文のネストもチェック）
-Metrics/BlockNesting:
- Max: 5
-
-# クラスの行数をチェック（無効）
-Metrics/ClassLength:
- Enabled: false
-
-# 空メソッドの場合に、1行のスタイルにしない　NG例：def style1; end
-Style/EmptyMethod:
- EnforcedStyle: expanded
-
-# クラス内にクラスが定義されていないかチェック（無効）
-Style/ClassAndModuleChildren:
- Enabled: false
-
-# 日本語でのコメントを許可
-Style/AsciiComments:
- Enabled: false
-
-# クラスやモジュール定義前に、それらの説明書きがあるかをチェック（無効）
 Style/Documentation:
- Enabled: false
+  Enabled: false
 
-# ％i（）構文を使用していないシンボルで構成される配列リテラルをチェック（無効）
-Style/SymbolArray:
- Enabled: false
+Style/AsciiComments:
+  Enabled: false
 
-# 文字列に値が代入されて変わっていないかチェック（無効）
+Style/GuardClause:
+  MinBodyLength: 3
+
+Bundler/OrderedGems:
+  Enabled: false
+
 Style/FrozenStringLiteralComment:
- Enabled: false
+  Enabled: true
 
-# メソッドパラメータ名の最小文字数を設定
-Naming/MethodParameterName:
- MinNameLength: 1
+Style/PercentLiteralDelimiters:
+  PreferredDelimiters:
+    "%":  "!!"
+    "%i": "[]"
+    "%q": "!!"
+    "%Q": "!!"
+    "%r": "!!"
+    "%s": "!!"
+    "%w": "[]"
+    "%W": "[]"
+    "%x": "()"
+
+Style/StringLiterals:
+  EnforcedStyle: single_quotes
+
+Metrics/ClassLength:
+  Enabled: false
+
+# 誤爆がひどいので無効に
+Lint/RedundantSplatExpansion:
+  Enabled: false
+
+Lint/AmbiguousOperator:
+  Enabled: false
+
+Style/DoubleNegation:
+  Enabled: false
+
+Style/ClassVars:
+  Enabled: true
+
+Style/WordArray:
+  MinSize: 4
+
+Style/SymbolArray:
+  MinSize: 4
+
+Metrics/PerceivedComplexity:
+  Max: 15
 
 Style/IfUnlessModifier:
   Enabled: false
+
+Style/TrailingCommaInArrayLiteral:
+  Enabled: false
+
+Style/TrailingCommaInHashLiteral:
+  Enabled: false
+
+Style/ClassAndModuleChildren:
+  Enabled: false
+
+Metrics/ModuleLength:
+  Enabled: false
+
+Style/AndOr:
+  EnforcedStyle: conditionals
+
+Style/Semicolon:
+  Exclude:
+    - "spec/**/*"
+
+Style/FormatString:
+  EnforcedStyle: format
+
+Style/NumericLiterals:
+  MinDigits: 7
+
+Naming/PredicateName:
+  ForbiddenPrefixes:
+    - "is_"
+    - "have_"
+  NamePrefix:
+    - "is_"
+    - "have_"
+
+Layout/FirstHashElementIndentation:
+  Enabled: false
+
+Layout/LeadingCommentSpace:
+  Enabled: true
+
+Style/LineEndConcatenation:
+  Enabled: true
+
+Style/MultilineBlockChain:
+  Enabled: false
+
+Style/MultilineTernaryOperator:
+  Enabled: true
+
+Style/NegatedIf:
+  Enabled: true
+
+Style/Not:
+  Enabled: true
+
+Style/RedundantSelf:
+  Enabled: false
+
+Style/MutableConstant:
+  Enabled: false
+
+Style/Lambda:
+  EnforcedStyle: literal
+
+Lint/UnderscorePrefixedVariableName:
+  Enabled: false
+
+Layout/EmptyLinesAroundClassBody:
+  Enabled: false
+
+Layout/MultilineOperationIndentation:
+  Enabled: false
+
+Style/EmptyCaseCondition:
+  Enabled: false
+
+Style/BlockDelimiters:
+  Exclude:
+    - 'spec/**/*.rb'
+
+Rails/DynamicFindBy:
+  Exclude:
+    - 'spec/system/**/*.rb'
+
+Layout/FirstArrayElementIndentation:
+  EnforcedStyle: consistent
+
+Style/NumericPredicate:
+  Enabled: false
+
+Layout/DotPosition:
+  Enabled: false
+
+Metrics/ParameterLists:
+  CountKeywordArgs: false
+
+Metrics/BlockNesting:
+  Max: 4
+
+Style/FormatStringToken:
+  Enabled: false
+
+Layout/SpaceAroundMethodCallOperator:
+  Enabled: true
+
+Lint/RaiseException:
+  Enabled: true
+
+Lint/StructNewOverride:
+  Enabled: false
+
+Style/ExponentialNotation:
+  Enabled: false
+
+Style/HashEachMethods:
+  Enabled: true
+
+Style/HashTransformKeys:
+  Enabled: false
+
+Style/HashTransformValues:
+  Enabled: false
+
+Layout/EmptyLinesAroundAttributeAccessor:
+  Enabled: true
+
+Lint/DeprecatedOpenSSLConstant:
+  Enabled: true
+
+Style/SlicingWithRange:
+  Enabled: true
+
+Lint/AmbiguousBlockAssociation:
+  Exclude:
+    - "spec/**/*"
+
+Layout/MultilineMethodCallIndentation:
+  Exclude:
+    - "spec/**/*"
