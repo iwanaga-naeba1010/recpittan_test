@@ -72,7 +72,7 @@
           <div class="card-header bg-white">
             相談・依頼フォーム
           </div>
-          <%= simple_form_for @order, url: recreation_orders_path(@recreation), html: { class: "consult mt-3" } do |f| %>
+          <%= simple_form_for @order, url: customers_recreation_orders_path(@recreation), html: { class: "consult mt-3" } do |f| %>
             <%= f.input :user_id, as: :hidden, input_html: { value: current_user.id } %>
             <div class="card-body">
               <div class="form-group">

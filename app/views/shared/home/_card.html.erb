@@ -1,12 +1,12 @@
 <section class="col-sm-6 col-md-4 col-lg-3 mb-4">
   <div class="card recreation-card h-100 shadow text-decoration-none">
-    <%= link_to recreation_path(rec.id), class: "card-img-top zoom" do %>
+    <%= link_to customers_recreation_path(rec.id), class: "card-img-top zoom" do %>
       <picture loading="lazy">
         <%= image_tag rec.recreation_images.first&.image.to_s, class: "img-fluid" %>
       </picture>
     <% end %>
 
-    <%= link_to recreation_path(rec.id), class: "card-body card-body-main p-2 pb-0" do %>
+    <%= link_to customers_recreation_path(rec.id), class: "card-body card-body-main p-2 pb-0" do %>
       <h1 class="card-title mb-0">
         <p><%= rec.title %></p>
       </h1>

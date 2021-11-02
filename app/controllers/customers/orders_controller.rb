@@ -1,4 +1,4 @@
-class OrdersController < ApplicationController
+class Customers::OrdersController < Customers::ApplicationController
   before_action :set_recreation, only: %i[new create]
 
   def new
@@ -53,7 +53,7 @@ class OrdersController < ApplicationController
         is_read: false,
       )
       # orderの詳細に飛ばす
-      redirect_to chat_order_path(@order.id)
+      redirect_to chat_customers_order_path(@order.id)
     end
   rescue => e
     render :new

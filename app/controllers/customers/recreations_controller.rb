@@ -1,4 +1,4 @@
-class RecreationsController < ApplicationController
+class Customers::RecreationsController < Customers::ApplicationController
   skip_before_action :authenticate_user!
 
   def index

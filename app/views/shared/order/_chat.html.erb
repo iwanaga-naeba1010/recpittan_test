@@ -86,7 +86,7 @@
 <!--      {{/each}}-->
     </div>
     <div class="card-footer bg-white">
-      <%= simple_form_for chat, url: chats_path, input: { class: 'chat' } do |f| %>
+      <%= simple_form_for chat, url: customers_chats_path, input: { class: 'chat' } do |f| %>
         <%= f.input :order_id, as: :hidden, input_html: { value: chat.order_id } %>
         <div class="row align-items-center">
           <div class="col-10 pe-0">

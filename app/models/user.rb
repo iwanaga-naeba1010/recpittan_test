@@ -38,7 +38,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable, :confirmable,
          :recoverable, :rememberable, :validatable
 
-  enumerize :role, in: { user: 0, partner: 1, admin: 2 }, default: 0
+  enumerize :role, in: { customer: 0, partner: 1, admin: 2 }, default: 0
 
   # TODO: role == userの場合、の条件加えたい
   has_one :company, dependent: :destroy
