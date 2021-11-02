@@ -31,11 +31,15 @@ const App: React.FC<Props> = ({ defaultPrefecture }): JSX.Element => {
   }, []);
 
   return (
-    <select id="order_prefecture" name="user[company_attributes][prefecture]" className="form-select p-region">
-      <option>ー</option>
-      { prefectures.map((pref) =>
-        <option value={ pref.prefName } selected={ pref.prefName === defaultPrefecture }>{ pref.prefName }</option>) }
-    </select>
+    // TODO: form全体をこちらに移行
+    // TODO: addressの自動変換も対応させる
+    <>
+      <select id="order_prefecture" name="user[company_attributes][prefecture]" className="form-select p-region">
+        <option>ー</option>
+        { prefectures.map((pref) =>
+          <option value={ pref.prefName } selected={ pref.prefName === defaultPrefecture }>{ pref.prefName }</option>) }
+      </select>
+    </>
   );
 }
 

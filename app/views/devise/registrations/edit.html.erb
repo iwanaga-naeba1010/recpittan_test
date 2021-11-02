@@ -60,11 +60,12 @@
                   <span class="p-country-name" style="display:none;">Japan</span>
                   <div class="form-group col-6">
                     <label for="postalCode">郵便番号</label>
-                    <div class="input-group mb-3">
-                      <%= ff.input :zip, label: false, input_html: { class: "form-control" } %>
+                    <div id="ZipForEditUserForm" zip="<%= resource.company.zip %>"></div>
+<!--                    <div class="input-group mb-3">-->
+                      <%#= ff.input :zip, label: false, input_html: { class: "form-control" } %>
 <!--                      <input class="form-control p-postal-code" size="8" maxlength="8" id="postalCode" name="postalCode" type="tel" placeholder="郵便番号を入力" value="{{postalCode}}">-->
-                      <button class="btn btn-outline-secondary p-postal-code-find" type="button" id="button-addon2">検索</button>
-                    </div>
+<!--                      <button class="btn btn-outline-secondary p-postal-code-find" type="button" id="button-addon2">検索</button>-->
+<!--                    </div>-->
                   </div>
                   <div class="form-group col-6">
                     <label for="region">都道府県</label>
