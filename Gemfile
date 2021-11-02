@@ -13,9 +13,19 @@ gem 'jbuilder'
 gem 'bootsnap'
 
 group :development, :test do
-  # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'rubocop', require: false
+  gem 'factory_bot_rails'
+  gem 'ffaker'
+  gem 'rspec-rails'
+  gem 'pry-rails'
+  gem 'pry-remote'
+  gem 'rubocop', require: false
+  gem 'rubocop-rails', require: false
+  gem 'brakeman', require: false
+  gem 'rails_best_practices', require: false
+  gem 'haml_lint', require: false
+  gem 'scss_lint', require: false
 end
 
 group :development do
@@ -23,12 +33,11 @@ group :development do
   gem 'rails-erd'
   gem 'pry-rails'
   gem 'pry-remote'
-  gem 'web-console', '>= 4.1.0'
-  gem 'rack-mini-profiler', '~> 2.0'
-  gem 'listen', '~> 3.3'
+  gem 'web-console'
+  gem 'rack-mini-profiler'
+  gem 'listen'
   gem 'spring'
 end
-
 
 group :test do
   gem 'factory_bot_rails'
@@ -37,13 +46,11 @@ group :test do
   gem 'capybara'
   gem 'selenium-webdriver'
   gem 'webdrivers', require: false
-  # gem 'chromedriver-helper' unless ENV.key?('CIRCLECI')。
   gem 'database_cleaner'
   gem 'simplecov', require: false
   gem 'rails-controller-testing'
   gem 'rspec-validator_spec_helper'
   gem 'rspec-request_describer'
-  # gem 'rspec-json_matcher', github: 'whiteleaf7/rspec-json_matcher'
   gem 'rspec-parameterized'
   gem 'shoulda-matchers'
 end

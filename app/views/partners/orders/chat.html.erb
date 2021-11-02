@@ -33,11 +33,11 @@
         </div>
         <div class="card mt-3">
           <div class="card-body p-0">
-<!--            {{#if item.showCapacity}}-->
-<!--            <div class="border-bottom p-2">-->
-<!--              <h4 class="title">参加人数制限 {{item.capacity}}人まで</h4>-->
-<!--            </div>-->
-<!--            {{/if}}-->
+            <!--            {{#if item.showCapacity}}-->
+            <!--            <div class="border-bottom p-2">-->
+            <!--              <h4 class="title">参加人数制限 {{item.capacity}}人まで</h4>-->
+            <!--            </div>-->
+            <!--            {{/if}}-->
             <div class="border-bottom p-2">
               <h4 class="title">所要時間 <%= @order.recreation.minutes %>分</h4>
             </div>
@@ -70,8 +70,8 @@
             </div>
 
 
-<!--            {{#if showFacilityTransport}}-->
-<!--            {{'交通費 編集モード'}}-->
+            <!--            {{#if showFacilityTransport}}-->
+            <!--            {{'交通費 編集モード'}}-->
             <form action="{{catalogHomeUri}}/order/consult/{{order._id}}/update" class="consult" method="POST">
               <input type="hidden" name="_csrf" value="{{csrfToken}}">
               <div class="row justify-content-between border-bottom-dotted py-2">
@@ -89,19 +89,19 @@
                 </div>
               </div>
             </form>
-<!--            {{else}}-->
-<!--            <div class="row justify-content-between border-bottom-dotted py-2">-->
-<!--              <div class="col-auto align-self-center">交通費-->
-<!--                {{#unless formalRequestDisabled}}-->
-<!--                <br>-->
-<!--                <a href="{{addGetParam 'tr' 1}}" class="clink">編集</a>-->
-<!--                {{/unless}}-->
-<!--              </div>-->
-<!--              <div class="col-auto">&yen;{{numeral order.facilityTransportPrice}}</div>-->
-<!--            </div>-->
-<!--            {{/if}}-->
-<!--            {{#if showFacilityExtraExpense}}-->
-<!--            {{'諸経費 編集モード'}}-->
+            <!--            {{else}}-->
+            <!--            <div class="row justify-content-between border-bottom-dotted py-2">-->
+            <!--              <div class="col-auto align-self-center">交通費-->
+            <!--                {{#unless formalRequestDisabled}}-->
+            <!--                <br>-->
+            <!--                <a href="{{addGetParam 'tr' 1}}" class="clink">編集</a>-->
+            <!--                {{/unless}}-->
+            <!--              </div>-->
+            <!--              <div class="col-auto">&yen;{{numeral order.facilityTransportPrice}}</div>-->
+            <!--            </div>-->
+            <!--            {{/if}}-->
+            <!--            {{#if showFacilityExtraExpense}}-->
+            <!--            {{'諸経費 編集モード'}}-->
             <form action="{{catalogHomeUri}}/order/consult/{{order._id}}/update" class="consult" method="POST">
               <input type="hidden" name="_csrf" value="{{csrfToken}}">
               <div class="row justify-content-between py-2">
@@ -118,69 +118,69 @@
                 </div>
               </div>
             </form>
-<!--            {{else}}-->
-<!--            <div class="row justify-content-between py-2">-->
-<!--              <div class="col-auto align-self-center">諸経費-->
-<!--                {{#unless formalRequestDisabled}}<br>-->
-<!--                <a href="{{addGetParam 'ex' 1}}" class="clink">編集</a>-->
-<!--                {{/unless}}-->
-<!--              </div>-->
-<!--              <div class="col-auto">&yen;{{numeral order.facilityExtraExpensePrice}}</div>-->
-<!--            </div>-->
-<!--            {{/if}}-->
-<!--            {{#if showAdditionalCount}}-->
-<!--            {{'追加施設数 編集モード'}}-->
-<!--            <form action="{{catalogHomeUri}}/order/consult/{{order._id}}/update" class="consult" method="POST">-->
-<!--              <input type="hidden" name="_csrf" value="{{csrfToken}}">-->
-<!--              <div class="row justify-content-between border-top-dotted py-2">-->
-<!--                <div class="col-3 align-self-center">追加施設数</div>-->
-<!--                <div class="col-7">-->
-<!--                  <input class="form-control text-end" name="additionalCount" type="number"-->
-<!--                         id="additionalCount" value="{{order.additionalCount}}">-->
-<!--                </div>-->
-<!--                <div class="col-2 py-0">-->
-<!--                  <button type="submit" name="action" value="additional_count_update"-->
-<!--                          class="btn btn-inline-edit">-->
-<!--                    <i class="material-icons color-pr10">done</i>-->
-<!--                  </button>-->
-<!--                </div>-->
-<!--              </div>-->
-<!--            </form>-->
-<!--            {{else}}-->
-<!--            {{#if isOnline}}-->
-<!--            <div class="row justify-content-between border-top-dotted py-2">-->
-<!--              <div class="col-12 align-self-center">追加施設数 {{order.additionalCount}} 施設<br>-->
-<!--                <a href="{{addGetParam 'fc' 1}}" class="clink">編集</a>-->
-<!--              </div>-->
-<!--              <div class="col-7 align-self-center">追加施設費</div>-->
-<!--              <div class="col-auto">-->
-<!--                &yen;{{numeral task.additionalPrice}}-->
-<!--              </div>-->
-<!--              <div col-12>-->
-<!--                <span class="text-muted font-12 color-ba08">※1施設追加する事に費用が発生します</span>-->
-<!--              </div>-->
-<!--            </div>-->
-<!--            {{/if}}-->
-<!--            {{/if}}-->
+            <!--            {{else}}-->
+            <!--            <div class="row justify-content-between py-2">-->
+            <!--              <div class="col-auto align-self-center">諸経費-->
+            <!--                {{#unless formalRequestDisabled}}<br>-->
+            <!--                <a href="{{addGetParam 'ex' 1}}" class="clink">編集</a>-->
+            <!--                {{/unless}}-->
+            <!--              </div>-->
+            <!--              <div class="col-auto">&yen;{{numeral order.facilityExtraExpensePrice}}</div>-->
+            <!--            </div>-->
+            <!--            {{/if}}-->
+            <!--            {{#if showAdditionalCount}}-->
+            <!--            {{'追加施設数 編集モード'}}-->
+            <!--            <form action="{{catalogHomeUri}}/order/consult/{{order._id}}/update" class="consult" method="POST">-->
+            <!--              <input type="hidden" name="_csrf" value="{{csrfToken}}">-->
+            <!--              <div class="row justify-content-between border-top-dotted py-2">-->
+            <!--                <div class="col-3 align-self-center">追加施設数</div>-->
+            <!--                <div class="col-7">-->
+            <!--                  <input class="form-control text-end" name="additionalCount" type="number"-->
+            <!--                         id="additionalCount" value="{{order.additionalCount}}">-->
+            <!--                </div>-->
+            <!--                <div class="col-2 py-0">-->
+            <!--                  <button type="submit" name="action" value="additional_count_update"-->
+            <!--                          class="btn btn-inline-edit">-->
+            <!--                    <i class="material-icons color-pr10">done</i>-->
+            <!--                  </button>-->
+            <!--                </div>-->
+            <!--              </div>-->
+            <!--            </form>-->
+            <!--            {{else}}-->
+            <!--            {{#if isOnline}}-->
+            <!--            <div class="row justify-content-between border-top-dotted py-2">-->
+            <!--              <div class="col-12 align-self-center">追加施設数 {{order.additionalCount}} 施設<br>-->
+            <!--                <a href="{{addGetParam 'fc' 1}}" class="clink">編集</a>-->
+            <!--              </div>-->
+            <!--              <div class="col-7 align-self-center">追加施設費</div>-->
+            <!--              <div class="col-auto">-->
+            <!--                &yen;{{numeral task.additionalPrice}}-->
+            <!--              </div>-->
+            <!--              <div col-12>-->
+            <!--                <span class="text-muted font-12 color-ba08">※1施設追加する事に費用が発生します</span>-->
+            <!--              </div>-->
+            <!--            </div>-->
+            <!--            {{/if}}-->
+            <!--            {{/if}}-->
             <div class="row justify-content-between border-top py-3">
               <div class="col-auto">合計</div>
               <div class="col-auto">&yen;~</div>
             </div>
             <div class="row justify-content-center  py-3">
               <div class="col-auto">
-<!--                {{#if formalRequestDisabled}}-->
-<!--                <span class="btn-cpr disabled">レクを正式依頼へ進む</span>-->
-<!--                {{else}}-->
+                <!--                {{#if formalRequestDisabled}}-->
+                <!--                <span class="btn-cpr disabled">レクを正式依頼へ進む</span>-->
+                <!--                {{else}}-->
                 <button id="order-modal" class="btn-cpr" data-bs-toggle="modal"
                         data-bs-target="#orderModal">レクを正式依頼へ進む
                 </button>
-<!--                {{/if}}-->
+                <!--                {{/if}}-->
               </div>
             </div>
           </div>
         </div>
       </div>
-      <%= render 'shared/customer/order/chat', order: @order, chat: @chat %>
+      <%= render 'shared/partner/order/chat', order: @order, chat: @chat %>
       <!-- 正式依頼 フォーム -->
       <!-- Modal -->
 
