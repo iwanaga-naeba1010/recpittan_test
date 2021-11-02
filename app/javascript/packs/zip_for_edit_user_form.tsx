@@ -1,8 +1,8 @@
 /**
- * Orderのprefecture/cityのform
+ * registration editの住所検索form
  */
 
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import ReactDOM from 'react-dom'
 import { get } from '../utils/requests/base';
 import * as $ from 'jquery';
@@ -31,35 +31,32 @@ const App: React.FC<Props> = ({ defaultZip }): JSX.Element => {
   const [zip, setZip] = useState<string>(defaultZip);
   
   const handleFetchZip = async (): Promise<void> => {
-    console.log(zip);
     const response = await get<Response>(`https://zipcloud.ibsnet.co.jp/api/search?zipcode=${zip}`);
-    console.log(response.results);
+    // NOTE: このreact fileで管理しないのでjqueryで操作
     $('#order_prefecture').val(response.results[0].address1);
     $('#user_company_attributes_city').val(response.results[0].address2);
     $('#user_company_attributes_street').val(response.results[0].address3);
   }
 
   return (
-    <>
-      <div className="input-group mb-3">
-        <div className="form-group string optional user_company_zip form-group-valid">
-          <input
-            className="form-control is-valid string optional form-control"
-            name="user[company_attributes][zip]"
-            id="user_company_attributes_zip"
-            value={zip}
-            onChange={(e) => setZip(e.target.value)}
-          />
-          </div>
-        <button
-          className="btn btn-outline-secondary p-postal-code-find"
-          type="button"
-          onClick={handleFetchZip}
-        >
-          検索
-        </button>
+    <div className="input-group mb-3">
+      <div className="form-group string optional user_company_zip form-group-valid">
+        <input
+          className="form-control is-valid string optional form-control"
+          name="user[company_attributes][zip]"
+          id="user_company_attributes_zip"
+          value={zip}
+          onChange={(e) => setZip(e.target.value)}
+        />
       </div>
-    </>
+      <button
+        className="btn btn-outline-secondary p-postal-code-find"
+        type="button"
+        onClick={handleFetchZip}
+      >
+        検索
+      </button>
+    </div>
   );
 }
 
