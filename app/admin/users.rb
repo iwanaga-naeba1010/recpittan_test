@@ -4,8 +4,12 @@
 ActiveAdmin.register User, as: 'Company' do
   permit_params(
     %i[email role],
-    company_attributes: [:name, :facility_name, :person_in_charge_name, :person_in_charge_name_kana]
+    company_attributes: [
+      :name, :facility_name, :person_in_charge_name, :person_in_charge_name_kana,
+      :zip, :prefecture, :city, :street, :building, :tel
+    ]
   )
+
   actions :all, except: [:destroy]
 
   scope 'User', default: true do |users|
@@ -34,6 +38,12 @@ ActiveAdmin.register User, as: 'Company' do
         row :facility_name
         row :person_in_charge_name
         row :person_in_charge_name_kana
+        row :zip
+        row :prefecture
+        row :city
+        row :street
+        row :building
+        row :tel
       end
     end
   end
@@ -50,6 +60,12 @@ ActiveAdmin.register User, as: 'Company' do
         ff.input :facility_name
         ff.input :person_in_charge_name
         ff.input :person_in_charge_name_kana
+        ff.input :zip
+        ff.input :prefecture
+        ff.input :city
+        ff.input :street
+        ff.input :building
+        ff.input :tel
       end
     end
 

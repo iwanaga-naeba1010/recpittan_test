@@ -21,7 +21,7 @@ Tag.seed do |s|
   s.name = '趣味'
   s.kind = :category
   s.text = "書道\n囲碁など"
-  s.image = Rails.root.join("db/fixturmount_uploader :image, ImageUploaderes/images/hobby.png").open
+  s.image = Rails.root.join("db/fixtures/images/hobby.png").open
 end
 
 Tag.seed do |s|
@@ -55,7 +55,6 @@ Tag.seed do |s|
   s.text = "大道芸\n落語など"
   s.image = Rails.root.join("db/fixtures/images/event.png").open
 end
-
 
 Tag.seed do |s|
   s.id = 8

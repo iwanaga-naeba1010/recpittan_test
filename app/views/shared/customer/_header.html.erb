@@ -1,7 +1,7 @@
 <div id="customer-header" class="h-100 bg-white sticky-top">
   <div class="container ">
     <div class="row border-bottom">
-      <div class="col-8 pt-3 pb-1"><%= current_user.company.facility_name %></div>
+      <div class="col-8 pt-3 pb-1"><%= current_user.company&.facility_name %></div>
       <!-- TODO: プランを追加できるようにする -->
       <div class="col-8 pb-3">単発プラン</div>
     </div>
@@ -18,7 +18,7 @@
         <% if active_link?('hogehoge') %>
           アカウント
         <% else %>
-          <%= link_to 'アカウント', '#', class: "clink" %>
+          <%= link_to 'アカウント', edit_user_registration_path, class: "clink" %>
         <% end %>
       </div>
     </div>

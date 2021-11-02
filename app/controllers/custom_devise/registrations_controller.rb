@@ -22,9 +22,11 @@ class CustomDevise::RegistrationsController < Devise::RegistrationsController
   # end
 
   # PUT /resource
-  # def update
-  #   super
-  # end
+  def update
+    super
+  # rescue StandardError => e
+  #   binding.pry
+  end
 
   # DELETE /resource
   # def destroy
@@ -58,10 +60,21 @@ class CustomDevise::RegistrationsController < Devise::RegistrationsController
     devise_parameter_sanitizer.permit(
       :account_update,
       keys: [
-        :role,
-        company_attributes: [:name, :facility_name, :person_in_charge_name, :person_in_charge_name_kana]
+        company_attributes: [
+          :id, :name, :facility_name, :person_in_charge_name, :person_in_charge_name_kana,
+          :zip, :prefecture, :city, :street, :building, :tel
+        ]
       ]
     )
+  end
+
+  # ユーザー情報更新時にパスワードが変わらないようにする他mのところ
+  def update_resource(resource, params)
+    resource.update_without_current_password(params)
+  end
+
+  def after_update_path_for(_resource)
+    edit_user_registration_path
   end
 
   # The path used after sign up.
