@@ -54,7 +54,7 @@
           <% if user_signed_in? %>
 
             <li class="nav-item">
-              <% mypage_path = if current_user.role.customer?
+              <% mypage_path = if current_user.role.customer? || current_user.role.admin?
                                  customers_path
                                else
                                  partners_path
