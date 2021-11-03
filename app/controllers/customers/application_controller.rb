@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Customers::ApplicationController < ApplicationController
   before_action :require_customer
 

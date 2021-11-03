@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Partners::OrdersController < Partners::ApplicationController
   before_action :set_recreation, only: %i[new create]
 
@@ -34,7 +36,7 @@ class Partners::OrdersController < Partners::ApplicationController
   end
 
   def parse_date(date)
-    "#{date["year"]}/#{date["month"]}/#{date["date"]} #{date["start_hour"]}:#{date["start_minutes"]}~#{date["end_hour"]}:#{date["end_minutes"]}"
+    "#{date['year']}/#{date['month']}/#{date['date']} #{date['start_hour']}:#{date['start_minutes']}~#{date['end_hour']}:#{date['end_minutes']}"
   end
 
   def params_create

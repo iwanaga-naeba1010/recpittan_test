@@ -25,7 +25,6 @@ class CustomDevise::RegistrationsController < Devise::RegistrationsController
   def update
     super
   # rescue StandardError => e
-  #   binding.pry
   end
 
   # DELETE /resource

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
@@ -15,12 +17,8 @@ gem 'bootsnap'
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'rubocop', require: false
-  gem 'factory_bot_rails'
-  gem 'ffaker'
-  gem 'rspec-rails'
   gem 'pry-rails'
   gem 'pry-remote'
-  gem 'rubocop', require: false
   gem 'rubocop-rails', require: false
   gem 'brakeman', require: false
   gem 'rails_best_practices', require: false
@@ -31,8 +29,6 @@ end
 group :development do
   gem 'letter_opener_web'
   gem 'rails-erd'
-  gem 'pry-rails'
-  gem 'pry-remote'
   gem 'web-console'
   gem 'rack-mini-profiler'
   gem 'listen'
@@ -78,4 +74,4 @@ gem 'seed-fu' # staging/productionでも使いたいから
 gem 'switch_user'
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
-gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]

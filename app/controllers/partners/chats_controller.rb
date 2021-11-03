@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Partners::ChatsController < Partners::ApplicationController
 
   def create
