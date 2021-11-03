@@ -75,7 +75,7 @@ class Customers::OrdersController < Customers::ApplicationController
       { name: '旅行' },
       { name: '～おはらい町おかげ横丁ツアー～' }
     ]
-    @order = @recreation.orders.build
+    # @order = @recreation.orders.build
     @years = [2021, 2022]
     @months = 1..12
     @dates = 1..31

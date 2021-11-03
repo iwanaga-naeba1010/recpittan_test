@@ -13,7 +13,7 @@ ActiveAdmin.register User, as: 'Company' do
   actions :all, except: [:destroy]
 
   scope 'User', default: true do |users|
-    users.where(role: :user)
+    users.where(role: :customer)
   end
 
   index do
