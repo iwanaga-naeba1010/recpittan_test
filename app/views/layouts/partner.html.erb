@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>MachingSystem</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
+
+  <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+  <%= stylesheet_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap&family=Material+Icons" rel="stylesheet">
+</head>
+
+<body>
+<%= render 'shared/common/header' %>
+<%= render 'shared/common/flash' %>
+
+<div class="partner-site d-flex flex-row">
+
+  <div class="sidebar d-none d-md-block d-xl-block">
+    <div class="header">
+      <h2 class="p-2">
+        Menu
+      </h2>
+    </div>
+    <div class="p-2">
+      <div class="sidebar-wrapper my-2 border-bottom">
+        <div class="lect_item">
+          <div>
+            <i class="fas fa-home fa-lg"></i>
+          </div>
+        </div>
+        <div class="right_item">
+          Home
+        </div>
+      </div>
+      <div class="sidebar-wrapper my-2 border-bottom">
+        <div class="lect_item">
+          <div>
+            <i class="far fa-calendar fa-lg"></i>
+          </div>
+        </div>
+        <div class="right_item">
+          開催決定済みのレク
+        </div>
+      </div>
+      <div class="sidebar-wrapper my-2 border-bottom">
+        <div class="lect_item">
+          <div>
+            <i class="far fa-sticky-note fa-lg"></i>
+          </div>
+        </div>
+        <div class="right_item">
+          利用規約
+        </div>
+      </div>
+      <div class="sidebar-wrapper my-2 border-bottom">
+        <div class="lect_item">
+          <div>
+            <i class="fas fa-sign-out-alt fa-lg"></i>
+          </div>
+        </div>
+        <div class="right_item">
+          ログアウト
+        </div>
+      </div>
+    </div>
+
+
+  </div>
+  <div class="main_contents">
+    <div class="header">
+      <div>
+        <h2 class="text-white font-weight-bold p-2">
+          相談中
+        </h2>
+      </div>
+    </div>
+    <div class="order-wrapper my-2 border-bottom">
+      <div class="company_name">
+        <h3>株式会社テスト</h3>
+      </div>
+      <div class="partner_name">
+        大久保のレク
+      </div>
+      <div class="status">
+        <span class="status__cunsult p-1">
+          相談したい
+        </span>
+      </div>
+      <div class="date">
+        11/03
+      </div>
+    </div>
+
+    <div class="order-wrapper my-2 border-bottom">
+      <div class="company_name">
+        <h3>株式会社テスト</h3>
+      </div>
+      <div class="partner_name">
+        大久保のレク
+      </div>
+      <div class="status">
+        <span class="status__cunsult p-1">
+          相談したい
+        </span>
+      </div>
+      <div class="date">
+        11/03
+      </div>
+    </div>
+
+    <div class="order-wrapper my-2 border-bottom">
+      <div class="company_name">
+        <h3>株式会社テスト</h3>
+      </div>
+      <div class="partner_name">
+        大久保のレク
+      </div>
+      <div class="status">
+        <span class="status__cunsult p-1">
+          相談したい
+        </span>
+      </div>
+      <div class="date">
+        11/03
+      </div>
+    </div>
+  </div>
+
+</div>
+
+
+<%#= yield %>
+<%= render 'shared/common/footer' %>
+</body>
+<!--<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"-->
+<!--        integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"-->
+<!--        crossorigin="anonymous"></script>-->
+<!--</html>-->

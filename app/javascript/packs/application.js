@@ -16,7 +16,10 @@ require('jquery');
 // require('popper.js');
 import 'bootstrap';
 import '../stylesheets/application.scss';
+import '../stylesheets/partner.scss';
 import './prefecture_and_city_for_order_form';
 import './prefecture_for_edit_user_form';
 import './zip_for_edit_user_form';
+
+import "@fortawesome/fontawesome-free/js/all"
 require.context('../images', true)
