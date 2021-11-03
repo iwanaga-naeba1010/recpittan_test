@@ -24,10 +24,10 @@
 #
 FactoryBot.define do
   factory :order do
-    user { nil }
-    recreation { nil }
+    user
+    recreation
     number_of_people { 1 }
     message { 'MyText' }
-    kind { 1 }
+    order_type { 1 }
   end
 end

@@ -32,17 +32,17 @@ jobs:
           bundle install --jobs 4 --retry 3 --path vendor/bundle
       - name: yarn install
         run: yarn install --check-files
-#      - name: Run rubocop
-#        run: bundle exec rubocop
+      - name: Run rubocop
+        run: bundle exec rubocop
 
 #      - name: Run haml lint
 #        run: bundle exec haml-lint app/views/
 
-#      - name: Run brakeman
-#        run: bundle exec brakeman
+      - name: Run brakeman
+        run: bundle exec brakeman
 
-#      - name: Run rails best practices
-#        run: bundle exec rails_best_practices -e node_modules
+      - name: Run rails best practices
+        run: bundle exec rails_best_practices -e node_modules
 
   rspec:
     runs-on: ubuntu-latest

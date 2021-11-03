@@ -1,5 +1,6 @@
 class Customers::RecreationsController < Customers::ApplicationController
   skip_before_action :authenticate_user!
+  skip_before_action :require_customer
 
   def index
     @categories = Tag.categories

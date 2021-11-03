@@ -35,20 +35,24 @@
 #
 FactoryBot.define do
   factory :user do
-    role { 0 }
+    role { :customer }
     email { FFaker::Internet.email }
     password { '11111111' }
-    name { 'username' }
     confirmed_at { Time.now.utc }
   end
 
-  trait :with_company do
+  trait :with_custoemr do
     after(:create) do |user|
-      user.build_company(attributes_for(:company))
-      user.role = :company
-      user.save
-      create_list(:job, 5, :with_application_information, company_id: user.company.id)
-      # job.build_application_information(attributes_for(:application_information))
+      create(:company, user_id: user.id)
+      user.update(role: :customer)
+    end
+  end
+
+  trait :with_partner do
+    after(:create) do |user|
+      create(:partner, user_id: user.id)
+      user.update(role: :partner)
+      create(:recreation, user_id: user.id)
     end
   end
 end
