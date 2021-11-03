@@ -2,6 +2,11 @@
 // Extra small devices (portrait phones, less than 576px)
 @media (max-width: 575.98px) {
   //display: none;
+  .chat_form{
+    .chat-message{
+      width: 300px !important;
+    }
+  }
 }
 
 // Small devices (landscape phones, less than 768px)
@@ -148,7 +153,7 @@ body {
       }
 
       .chat-message{
-        width: 100%;
+        width: 500px;
       }
 
       .send {
