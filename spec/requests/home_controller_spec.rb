@@ -3,9 +3,9 @@
 require 'rails_helper'
 
 RSpec.describe HomeController, type: :request do
-  describe 'GET /contact' do
+  describe 'GET /index' do
     it 'return http success' do
-      get root_path
+      get home_index_path
       expect(response).to have_http_status(:ok)
     end
   end
