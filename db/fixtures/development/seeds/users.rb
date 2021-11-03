@@ -30,14 +30,22 @@ User.seed do |s|
   s.password = '11111111'
 end
 
-## User.id == 2の施設情報
+User.seed do |s|
+  s.id = 3
+  s.role = :cs
+  s.email = 'cs@gmail.com'
+  s.confirmed_at = Time.now.utc
+  s.password = '11111111'
+end
+
+## User.id == 3の施設情報
 Company.seed do |s|
-  s.id = 2
-  s.user_id = 2
-  s.name = '大久保介護施設'
-  s.facility_name = '大久保介護施設'
-  s.person_in_charge_name = '大久保将広'
-  s.person_in_charge_name_kana = 'オオクボマサヒロ'
+  s.id = 100
+  s.user_id = 3
+  s.name = '佐藤介護施設'
+  s.facility_name = '佐藤介護施設'
+  s.person_in_charge_name = '佐藤亜以'
+  s.person_in_charge_name_kana = 'サトウアイ'
 end
 
 User.seed do |s|
