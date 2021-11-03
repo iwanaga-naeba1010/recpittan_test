@@ -21,7 +21,7 @@
     <!-- 施設 -->
     <div class="row justify-content-start instructor">
       <div class="col-md-auto">
-        <div class="name"><%= chat.user.company.name %></div>
+        <div class="name"><%= chat.user&.company&.name %></div>
         <div class="text card-header"><%= simple_format chat.message %></div>
       </div>
       <div class="col-auto align-self-end time"><%= time chat.created_at %></div>
