@@ -11,17 +11,29 @@
       </div>
     <% end %>
 
-    <!-- 施設 -->
-    <% if chat.user.role == :customer %>
+
+    <% if chat.user.role == :partner %>
+      <!-- パートナー -->
       <div class="mychat">
+        <div class="name"><%= chat.user.partner.name %></div>
         <div class="message"><%= simple_format chat.message %></div>
         <span class="time"><%= time chat.created_at %></span>
       </div>
-    <% elsif chat.user.role == :partner %>
-      <!-- パートナー -->
+    <% elsif chat.user.role == :customer %>
+      <!-- 施設 -->
       <div class="your-chat">
         <div class="col-md-auto">
-          <div class="name"><%= chat.user.partner.name %></div>
+<!--          <div class="name"><%#= chat.user.partner.name %></div>-->
+          <span class="time"><%= time chat.created_at %></span>
+          <div class="message"><%= simple_format chat.message %></div>
+        </div>
+      </div>
+    <% elsif chat.user.role == :admin %>
+      <!-- Admin -->
+      <div class="your-chat">
+        <div class="col-md-auto">
+          <!--          <div class="name"><%#= chat.user.partner.name %></div>-->
+          <div class="name">Adminから送信</div>
           <span class="time"><%= time chat.created_at %></span>
           <div class="message"><%= simple_format chat.message %></div>
         </div>
