@@ -5,7 +5,7 @@
     </div>
   <% elsif chat.created_at&.day != order.chats[i - 1].created_at&.day && chat.id.present? %>
     <div class="row justify-content-center pt-2">
-      <div class="col-auto date"><%= date chat.created_at %></div>
+      <div class="col-auto date border rounded-pill"><%= date chat.created_at %></div>
     </div>
   <% end %>
 

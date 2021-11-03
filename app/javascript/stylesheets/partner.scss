@@ -147,8 +147,11 @@ body {
         grid-column: 1;
       }
 
+      .chat-message{
+        width: 100%;
+      }
+
       .send {
-        cursor: pointer;
         grid-row: 1;
         grid-column: 2;
       }
