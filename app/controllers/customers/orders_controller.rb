@@ -25,6 +25,7 @@ class Customers::OrdersController < Customers::ApplicationController
       @order.save
       dates = params_create.to_h[:dates]
 
+      # TODO: 希望日時が空でも大丈夫なようにする
       message = "
       リクエスト内容
       #{@order.order_type_text}
@@ -56,6 +57,12 @@ class Customers::OrdersController < Customers::ApplicationController
       redirect_to chat_customers_order_path(@order.id)
     end
   rescue => e
+    @breadcrumbs = [
+      { name: 'トップ' },
+      { name: '一覧' },
+      { name: '旅行' },
+      { name: '～おはらい町おかげ横丁ツアー～' }
+    ]
     render :new
   end
 
@@ -66,6 +73,12 @@ class Customers::OrdersController < Customers::ApplicationController
       { name: '旅行' },
       { name: '～おはらい町おかげ横丁ツアー～' }
     ]
+    @order = @recreation.orders.build
+    @years = [2021, 2022]
+    @months = 1..12
+    @dates = 1..31
+    @hours = ['08', '09', '10', '11', '12', '13', '14', '15', '16', '17', '18']
+    @minutes = ['00', '15', '30', '45']
     @order = current_user.orders.find(params[:id])
   end
 

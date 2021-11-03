@@ -52,6 +52,7 @@ FactoryBot.define do
     after(:create) do |user|
       create(:partner, user_id: user.id)
       user.update(role: :partner)
+      create(:recreation, user_id: user.id)
     end
   end
 end
