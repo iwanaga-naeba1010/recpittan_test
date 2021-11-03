@@ -18,6 +18,10 @@
 @media (max-width: 1199.98px) {
 
 }
+body {
+  height: 100%;
+  background-color: white;
+}
 
 .partner-site {
   background-color: white;
@@ -58,7 +62,15 @@
     }
 
     .header {
+      margin-bottom: 0 !important;
       background-color: #3880ff;
+      h2 {
+        margin-bottom: 0 !important;
+      }
+    }
+    .sub_header {
+      //background-color: #3880ff;
+      box-shadow: rgba(100, 100, 111, 0.2) 0 0 10px 0;
     }
 
     .order-wrapper {

@@ -1,3 +1,11 @@
+<div class="header">
+  <div>
+    <h2 class="text-white font-weight-bold p-2">
+      相談中
+    </h2>
+  </div>
+</div>
+
 <% @orders.each do |order| %>
   <%= link_to chat_partners_order_path(order.id) do %>
     <div class="order-wrapper my-2 border-bottom p-3">
