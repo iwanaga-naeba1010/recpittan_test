@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: chats
@@ -23,7 +25,7 @@
 FactoryBot.define do
   factory :chat do
     order { nil }
-    message { "MyText" }
+    message { 'MyText' }
     is_read { false }
     user { nil }
   end

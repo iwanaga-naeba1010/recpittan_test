@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Customers::ChatsController < Customers::ApplicationController
 
   def create

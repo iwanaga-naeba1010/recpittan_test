@@ -4,7 +4,7 @@
 ActiveAdmin.register User, as: 'Partner' do
   permit_params(
     %i[email role],
-    partner_attributes: [:name, :title, :description, :image]
+    partner_attributes: %i[name title description image]
   )
   actions :all, except: [:destroy]
 

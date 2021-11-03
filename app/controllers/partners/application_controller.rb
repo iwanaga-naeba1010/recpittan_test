@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Partners::ApplicationController < ApplicationController
   before_action :require_partner
 

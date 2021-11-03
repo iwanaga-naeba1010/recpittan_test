@@ -9,6 +9,7 @@ ja:
       order: 依頼
       tag: タグ
       target: 利用者層
+      chat: チャット
     attributes:
       email:
         title: タイトル
@@ -45,7 +46,6 @@ ja:
         prefecture: 都道府県
         city: 市区町村
         is_order: 相談と依頼どちらをご希望ですか？
-
       tag:
         name: タグ名
         kind: 種類
@@ -53,7 +53,9 @@ ja:
         text: テキスト
       target:
         name: 想定利用者
-
+      chat:
+        message: メッセージ
+        is_read: 既読
     errors:
       messages:
         duration_over: が上限を越えています

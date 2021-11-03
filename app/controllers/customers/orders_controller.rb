@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Customers::OrdersController < Customers::ApplicationController
   before_action :set_recreation, only: %i[new create]
 
@@ -30,15 +32,15 @@ class Customers::OrdersController < Customers::ApplicationController
       リクエスト内容
       #{@order.order_type_text}
       希望日時
-      1:#{parse_date(dates["0"])}
-      2:#{parse_date(dates["1"])}
-      3:#{parse_date(dates["2"])}
+      1:#{parse_date(dates['0'])}
+      2:#{parse_date(dates['1'])}
+      3:#{parse_date(dates['2'])}
 
       希望人数
       #{@order.number_of_people}人
 
       介護度目安
-      #{@order.tags.map {|tag| tag.name}.join("\n")}
+      #{@order.tags.map {|tag| tag.name}.join('\n')}
 
       住所
       #{@order.prefecture}#{@order.city}
@@ -51,7 +53,7 @@ class Customers::OrdersController < Customers::ApplicationController
         order_id: @order.id,
         user_id: current_user.id,
         message: message,
-        is_read: false,
+        is_read: false
       )
       # orderの詳細に飛ばす
       redirect_to chat_customers_order_path(@order.id)
@@ -100,7 +102,7 @@ class Customers::OrdersController < Customers::ApplicationController
   end
 
   def parse_date(date)
-    "#{date["year"]}/#{date["month"]}/#{date["date"]} #{date["start_hour"]}:#{date["start_minutes"]}~#{date["end_hour"]}:#{date["end_minutes"]}"
+    "#{date['year']}/#{date['month']}/#{date['date']} #{date['start_hour']}:#{date['start_minutes']}~#{date['end_hour']}:#{date['end_minutes']}"
   end
 
   def params_create
