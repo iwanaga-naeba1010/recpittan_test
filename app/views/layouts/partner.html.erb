@@ -19,58 +19,8 @@
 <%= render 'shared/common/flash' %>
 
 <div class="partner-site d-flex flex-row">
+  <%= render 'shared/partner/sidebar' %>
 
-  <div class="sidebar d-none d-md-block d-xl-block">
-    <div class="header">
-      <h2 class="p-2">
-        Menu
-      </h2>
-    </div>
-    <div class="p-2">
-      <div class="sidebar-wrapper my-2 border-bottom">
-        <div class="lect_item">
-          <div>
-            <i class="fas fa-home fa-lg"></i>
-          </div>
-        </div>
-        <div class="right_item">
-          Home
-        </div>
-      </div>
-      <div class="sidebar-wrapper my-2 border-bottom">
-        <div class="lect_item">
-          <div>
-            <i class="far fa-calendar fa-lg"></i>
-          </div>
-        </div>
-        <div class="right_item">
-          開催決定済みのレク
-        </div>
-      </div>
-      <div class="sidebar-wrapper my-2 border-bottom">
-        <div class="lect_item">
-          <div>
-            <i class="far fa-sticky-note fa-lg"></i>
-          </div>
-        </div>
-        <div class="right_item">
-          利用規約
-        </div>
-      </div>
-      <div class="sidebar-wrapper my-2 border-bottom">
-        <div class="lect_item">
-          <div>
-            <i class="fas fa-sign-out-alt fa-lg"></i>
-          </div>
-        </div>
-        <div class="right_item">
-          ログアウト
-        </div>
-      </div>
-    </div>
-
-
-  </div>
   <div class="main_contents">
     <div class="header">
       <div>
@@ -79,62 +29,14 @@
         </h2>
       </div>
     </div>
-    <div class="order-wrapper my-2 border-bottom">
-      <div class="company_name">
-        <h3>株式会社テスト</h3>
-      </div>
-      <div class="partner_name">
-        大久保のレク
-      </div>
-      <div class="status">
-        <span class="status__cunsult p-1">
-          相談したい
-        </span>
-      </div>
-      <div class="date">
-        11/03
-      </div>
-    </div>
 
-    <div class="order-wrapper my-2 border-bottom">
-      <div class="company_name">
-        <h3>株式会社テスト</h3>
-      </div>
-      <div class="partner_name">
-        大久保のレク
-      </div>
-      <div class="status">
-        <span class="status__cunsult p-1">
-          相談したい
-        </span>
-      </div>
-      <div class="date">
-        11/03
-      </div>
-    </div>
+    <%= yield %>
 
-    <div class="order-wrapper my-2 border-bottom">
-      <div class="company_name">
-        <h3>株式会社テスト</h3>
-      </div>
-      <div class="partner_name">
-        大久保のレク
-      </div>
-      <div class="status">
-        <span class="status__cunsult p-1">
-          相談したい
-        </span>
-      </div>
-      <div class="date">
-        11/03
-      </div>
-    </div>
   </div>
-
 </div>
 
 
-<%#= yield %>
+
 <%= render 'shared/common/footer' %>
 </body>
 <!--<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"-->

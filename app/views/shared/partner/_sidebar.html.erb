@@ -1,0 +1,46 @@
+<div class="sidebar d-none d-md-block d-xl-block">
+  <div class="header">
+    <h2 class="p-2">
+      Menu
+    </h2>
+  </div>
+  <div class="p-2">
+    <%= link_to partners_path do %>
+      <div class="sidebar-wrapper my-2 border-bottom">
+        <div class="lect_item">
+          <i class="fas fa-home fa-lg"></i>
+        </div>
+        <div class="right_item">Home</div>
+      </div>
+    <% end %>
+
+
+    <div class="sidebar-wrapper my-2 border-bottom">
+      <div class="lect_item">
+        <div>
+          <i class="far fa-calendar fa-lg"></i>
+        </div>
+      </div>
+      <div class="right_item">
+        開催決定済みのレク
+      </div>
+    </div>
+    <%= link_to partners_tos_path do %>
+      <div class="sidebar-wrapper my-2 border-bottom">
+        <div class="lect_item">
+          <i class="far fa-sticky-note fa-lg"></i>
+        </div>
+        <div class="right_item">利用規約</div>
+      </div>
+    <% end %>
+
+    <%= link_to destroy_user_session_path, method: 'delete' do %>
+      <div class="sidebar-wrapper my-2 border-bottom">
+        <div class="lect_item">
+          <i class="fas fa-sign-out-alt fa-lg"></i>
+        </div>
+        <div class="right_item">ログアウト</div>
+      </div>
+    <% end %>
+  </div>
+</div>

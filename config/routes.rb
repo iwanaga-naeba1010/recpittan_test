@@ -19,13 +19,12 @@ Rails.application.routes.draw do
 
   resources :partners, only: %i[index]
   namespace :partners do
+    get :tos
     resources :chats, only: %i[create]
 
-    resources :orders, shallow: true do
-      resources :orders do
-        member do
-          get :chat
-        end
+    resources :orders do
+      member do
+        get :chat
       end
     end
   end

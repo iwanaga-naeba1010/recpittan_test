@@ -23,6 +23,11 @@
   background-color: white;
   .sidebar {
     width: 30%;
+    color: #6C757D;
+    a {
+      text-decoration: none;
+      color: #6C757D;
+    }
 
     .header {
       box-shadow: rgba(100, 100, 111, 0.2) 0 0 10px 0;
@@ -47,6 +52,10 @@
 
   .main_contents {
     width: 100%;
+    a {
+      text-decoration: none;
+      color: #6C757D;
+    }
 
     .header {
       background-color: #3880ff;
@@ -55,8 +64,8 @@
     .order-wrapper {
       border-bottom: #bbbbbb 1px;
       display: grid;
-      grid-auto-rows: 40px 40px 40px 1fr;
-      grid-template-columns: 200px 1fr;
+      grid-auto-rows: 40px 55px 40px 1fr;
+      grid-template-columns: 500px 1fr;
 
       .company_name {
         grid-row: 1;
