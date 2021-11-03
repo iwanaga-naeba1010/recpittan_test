@@ -1,0 +1,10 @@
+<div class="header">
+  <div>
+    <h2 class="text-white font-weight-bold p-2">
+      <%= link_to chat_partners_order_path(@order.id) do %>
+        <i class="fas fa-arrow-left text-white"></i>
+      <% end %>
+      <%= @order.recreation.user.partner.name %>
+    </h2>
+  </div>
+</div>

@@ -1,106 +1,32 @@
-<div class="col-md-7">
-  <div class="card chat-container">
-    <div class="card-header bg-white">
-      <%= order.recreation.user.partner.name %>さんとのチャット
+<% order.chats.each_with_index do |chat, i| %>
+  <% if i == 0 && chat.id.present? %>
+    <div class="row justify-content-center pt-2">
+      <div class="col-auto date"><%= date chat.created_at %></div>
     </div>
-    <div class="card-body bg-ba02">
-<!--      {{#each orderMessages}}-->
-
-<!--      {{#ifEquals type "date"}}-->
-<!--      {{"日時"}}-->
-
-      <%# binding.pry %>
-      <!-- TODO: リファクタしたい -->
-      <% order.chats.each_with_index do |chat, i| %>
-        <% if i == 0 && chat.id.present? %>
-          <div class="row justify-content-center pt-2">
-            <div class="col-auto date"><%= date chat.created_at %></div>
-          </div>
-        <% elsif chat.created_at&.day != order.chats[i - 1].created_at&.day && chat.id.present? %>
-          <div class="row justify-content-center pt-2">
-            <div class="col-auto date"><%= date chat.created_at %></div>
-          </div>
-        <% end %>
-
-        <!-- パートナー -->
-        <% if current_user.id == chat.user_id %>
-          <div class="row justify-content-start instructor pt-2">
-            <div class="col-auto align-self-start image pe-0">
-              <img src="{{catalogThumbnailUri userId '128x128' 'jpg'}}">
-            </div>
-            <div class="col-md-auto">
-              <div class="name"><%= chat.user.partner.name %></div>
-              <div class=" text"><%= simple_format chat.message %></div>
-            </div>
-            <div class="col-auto align-self-end time"><%= time chat.created_at %></div>
-          </div>
-        <% else %>
-          <!-- 施設 -->
-          <div class="row justify-content-end pt-2">
-            <div class="col-auto align-self-end time"><%= time chat.created_at %></div>
-            <div class="col-md-auto customer-text"><%= simple_format chat.message %></div>
-          </div>
-        <% end %>
-      <% end %>
-<!--      {{/ifEquals}}-->
-<!--      {{#ifEquals type "system"}}-->
-<!--      {{"システム"}}-->
-<!--      <div class="row justify-content-end pt-2">-->
-<!--        <div class="col-auto align-self-end time">{{time}}</div>-->
-<!--        <div class="col-md-auto system">{{nl2br message}}</div>-->
-<!--      </div>-->
-<!--      {{/ifEquals}}-->
-<!--      {{#ifEquals type "customer-text"}}-->
-<!--      {{"カスタマー"}}-->
-<!--      <div class="row justify-content-end pt-2">-->
-<!--        <div class="col-auto align-self-end time">{{time}}</div>-->
-<!--        <div class="col-md-auto customer-text">{{nl2br message}}</div>-->
-<!--      </div>-->
-<!--      {{/ifEquals}}-->
-
-<!--      {{#ifEquals type "instructor-text"}}-->
-<!--      {{"講師"}}-->
-<!--      <div class="row justify-content-start instructor pt-2">-->
-<!--        <div class="col-auto align-self-start image pe-0">-->
-<!--          <img src="{{catalogThumbnailUri userId '128x128' 'jpg'}}">-->
-<!--        </div>-->
-<!--        <div class="col-md-auto">-->
-<!--          <div class="name">{{name}}</div>-->
-<!--          <div class=" text">{{nl2br message}}</div>-->
-<!--        </div>-->
-<!--        <div class="col-auto align-self-end time">{{time}}</div>-->
-<!--      </div>-->
-<!--      {{/ifEquals}}-->
-<!--      {{#ifEquals type "support-text"}}-->
-<!--      {{"CS"}}-->
-<!--      <div class="row justify-content-start support pt-2">-->
-<!--        <div class="col-auto align-self-start image pe-0">-->
-<!--          <img src="{{catalogSupportThumbnailUri userId '128x128' 'jpg'}}">-->
-<!--        </div>-->
-<!--        <div class="col-md-auto">-->
-<!--          <div class="name">{{name}}</div>-->
-<!--          <div class=" text">{{nl2br message}}</div>-->
-<!--        </div>-->
-<!--        <div class="col-auto align-self-end time">{{time}}</div>-->
-<!--      </div>-->
-<!--      {{/ifEquals}}-->
-<!--      {{/each}}-->
+  <% elsif chat.created_at&.day != order.chats[i - 1].created_at&.day && chat.id.present? %>
+    <div class="row justify-content-center pt-2">
+      <div class="col-auto date"><%= date chat.created_at %></div>
     </div>
-    <div class="card-footer bg-white">
-      <%= simple_form_for chat, url: partners_chats_path, input: { class: 'chat' } do |f| %>
-        <%= f.input :order_id, as: :hidden, input_html: { value: chat.order_id } %>
-        <%#= f.input :user_id, as: :hidden, input_html: { value: current_user.id } %>
-        <div class="row align-items-center">
-          <div class="col-10 pe-0">
-            <%= f.input :message, as: :text, label: false, input_html: { class: "form-control chat-message" } %>
-          </div>
-          <div class="col-2 text-center px-1">
-            <%= f.submit '送信', class: "btn btn-send" %>
-          </div>
-        </div>
-      <% end %>
+  <% end %>
 
+  <!-- パートナー -->
+  <% if current_user.id == chat.user_id %>
+    <div class="row justify-content-end pt-2">
+      <div class="col-auto align-self-end time"><%= time chat.created_at %></div>
+      <div class="col-md-auto customer-text mychat">
+        <%= simple_format(chat.message) %>
+      </div>
     </div>
-    <a id="chatMessage"></a>
-  </div>
-</div>
+  <% else %>
+    <!-- 施設 -->
+    <div class="row justify-content-start instructor pt-2">
+      <div class="col-md-auto">
+        <div class="name"><%= chat.user.company.name %></div>
+        <div class=" text"><%= simple_format chat.message %></div>
+      </div>
+      <div class="col-auto align-self-end time"><%= time chat.created_at %></div>
+    </div>
+  <% end %>
+<% end %>
+
+
