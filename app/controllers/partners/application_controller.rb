@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class Partners::ApplicationController < ApplicationController
+  layout 'partner'
   before_action :require_partner
 
   def require_partner
