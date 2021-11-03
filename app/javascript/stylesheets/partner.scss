@@ -109,9 +109,15 @@ body {
 
   /* chat list */
   .chat {
+    width: 90%;
     .mychat {
       background-color: #3880ff;
       color: white;
+      border-radius: 5px;
+    }
+    .text {
+      background-color: #eee;
+      color: black;
       border-radius: 5px;
     }
   }

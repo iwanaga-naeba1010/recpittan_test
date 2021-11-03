@@ -24,11 +24,11 @@
   </div>
 </div>
 
-<div class="chat">
+<div class="chat card-body">
   <%= render 'shared/partner/order/chat', order: @order %>
 </div>
 
-<div class="chat_form border-top">
+<div class="chat_form border-top bg-light">
   <%= simple_form_for @chat, url: partners_chats_path, input: { class: 'chat' } do |f| %>
     <div class="m-1 chat-wrapper">
       <%= f.input :order_id, as: :hidden, input_html: { value: @chat.order_id } %>
@@ -43,5 +43,4 @@
       </div>
     </div>
   <% end %>
-
 </div>
