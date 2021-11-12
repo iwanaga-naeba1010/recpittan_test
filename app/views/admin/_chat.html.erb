@@ -23,7 +23,6 @@
       <!-- 施設 -->
       <div class="your-chat">
         <div class="col-md-auto">
-<!--          <div class="name"><%#= chat.user.partner.name %></div>-->
           <span class="time"><%= time chat.created_at %></span>
           <div class="message"><%= simple_format chat.message %></div>
         </div>
@@ -32,8 +31,16 @@
       <!-- Admin -->
       <div class="your-chat">
         <div class="col-md-auto">
-          <!--          <div class="name"><%#= chat.user.partner.name %></div>-->
           <div class="name">Adminから送信</div>
+          <span class="time"><%= time chat.created_at %></span>
+          <div class="message"><%= simple_format chat.message %></div>
+        </div>
+      </div>
+    <% elsif chat.user.role == :cs %>
+      <!-- cs -->
+      <div class="your-chat">
+        <div class="col-md-auto">
+          <div class="name">CSから送信</div>
           <span class="time"><%= time chat.created_at %></span>
           <div class="message"><%= simple_format chat.message %></div>
         </div>
@@ -41,11 +48,9 @@
     <% end %>
   <% end %>
   <%= simple_form_for Chat.new, url: admin_chats_path do |f| %>
-
     <%= f.input :user_id, as: :hidden, input_html: { value: current_user.id } %>
     <%= f.input :order_id, as: :hidden, input_html: { value: order.id } %>
     <%= f.input :message %>
-
     <%= f.submit '送信' %>
   <% end %>
 </main>

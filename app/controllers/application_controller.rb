@@ -17,6 +17,6 @@ class ApplicationController < ActionController::Base
       end
     end
 
-    redirect_to new_user_session_path unless current_user.role.admin?
+    redirect_to new_user_session_path unless current_user.role.admin? || current_user.role.cs?
   end
 end
