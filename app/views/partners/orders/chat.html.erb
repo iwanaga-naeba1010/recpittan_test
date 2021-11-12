@@ -1,3 +1,4 @@
+<div class="header-block">
 <div class="header">
   <div>
     <h2 class="text-white font-weight-bold p-2">
@@ -8,7 +9,6 @@
     </h2>
   </div>
 </div>
-
 <div class="sub_header p-3">
   <div class="d-flex">
     <div class="flex-grow-1">
@@ -23,25 +23,32 @@
     </div>
   </div>
 </div>
+</div>
 
-<div class="chat">
+<div class="chat card-body">
   <%= render 'shared/partner/order/chat', order: @order %>
 </div>
 
 <div class="chat_form border-top">
-  <%= simple_form_for @chat, url: partners_chats_path, input: { class: 'chat' } do |f| %>
+  <%= simple_form_for @chat, url: partners_chats_path do |f| %>
     <div class="m-1 chat-wrapper">
       <%= f.input :order_id, as: :hidden, input_html: { value: @chat.order_id } %>
       <%#= f.input :user_id, as: :hidden, input_html: { value: current_user.id } %>
-      <div class="message">
+      <div class="message d-flex">
         <%= f.input :message, as: :text, label: false, input_html: { class: "form-control chat-message" } %>
-      </div>
-      <div class="send">
-        <%= button_tag do %>
+        <div id="iconSubmit" class="send my-auto">
           <i class="far fa-paper-plane fa-2x"></i>
-        <% end %>
+        </div>
       </div>
+      <%= f.submit '送信', class: "d-none", id: "submitButton" %>
     </div>
   <% end %>
-
 </div>
+
+<script>
+  $(document).ready(() => {
+    $('#iconSubmit').on('click', () => {
+      $('#submitButton').trigger('click');
+    });
+  });
+</script>

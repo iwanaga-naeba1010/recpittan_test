@@ -1,11 +1,11 @@
 <% order.chats.each_with_index do |chat, i| %>
   <% if i == 0 && chat.id.present? %>
     <div class="row justify-content-center pt-2">
-      <div class="col-auto date"><%= date chat.created_at %></div>
+      <div class="col-auto date border rounded-pill"><%= date chat.created_at %></div>
     </div>
   <% elsif chat.created_at&.day != order.chats[i - 1].created_at&.day && chat.id.present? %>
     <div class="row justify-content-center pt-2">
-      <div class="col-auto date"><%= date chat.created_at %></div>
+      <div class="col-auto date border rounded-pill"><%= date chat.created_at %></div>
     </div>
   <% end %>
 
@@ -13,16 +13,16 @@
   <% if current_user.id == chat.user_id %>
     <div class="row justify-content-end pt-2">
       <div class="col-auto align-self-end time"><%= time chat.created_at %></div>
-      <div class="col-md-auto customer-text mychat">
+      <div class="col-md-auto customer-text mychat card-header">
         <%= simple_format(chat.message) %>
       </div>
     </div>
   <% else %>
     <!-- 施設 -->
-    <div class="row justify-content-start instructor pt-2">
+    <div class="row justify-content-start instructor">
       <div class="col-md-auto">
-        <div class="name"><%= chat.user.company.name %></div>
-        <div class=" text"><%= simple_format chat.message %></div>
+        <div class="name"><%= chat.user&.company&.name %></div>
+        <div class="text card-header"><%= simple_format chat.message %></div>
       </div>
       <div class="col-auto align-self-end time"><%= time chat.created_at %></div>
     </div>
