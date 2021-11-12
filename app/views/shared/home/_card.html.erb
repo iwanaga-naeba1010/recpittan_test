@@ -1,31 +1,24 @@
 <section class="col-sm-6 col-md-4 col-lg-3 mb-4">
   <div class="card recreation-card h-100 shadow text-decoration-none">
-    <%= link_to detail_path, class: "card-img-top zoom" do %>
+    <%= link_to customers_recreation_path(rec.id), class: "card-img-top zoom" do %>
       <picture loading="lazy">
-        <source type="image/webp" srcset="<%= rec[:image] %>">
-        <!--        <source type="image/jpeg" srcset="{{<%#= rec[:image] %>  media '320x180@1' 'jpg'}},-->
-        <!--                {{<%#= rec[:image] %>  media '320x180@1.5' 'jpg'}} 1.5x,-->
-        <!--                {{<%= rec[:image] %>  media '320x180@2' 'jpg'}} 2x"/>-->
-
-        <img loading="lazy"
-             src="{{catalogCardThumbnailUri media '320x180@1' 'jpg'}}, {{catalogCardThumbnailUri media '320x180@1.5' 'jpg'}} 1.5x,"
-             class="img-fluid" alt="介護レクリエーション - {{name}}">
+        <%= image_tag rec.recreation_images.first&.image.to_s, class: "img-fluid" %>
       </picture>
     <% end %>
 
-    <%= link_to detail_path, class: "card-body card-body-main p-2 pb-0" do %>
+    <%= link_to customers_recreation_path(rec.id), class: "card-body card-body-main p-2 pb-0" do %>
       <h1 class="card-title mb-0">
-        <p><%= rec[:title] %></p>
+        <p><%= rec.title %></p>
       </h1>
     <% end %>
 
     <div class="card-body card-body-tag px-2 py-1">
-      <% rec[:tags].each_with_index do |tag, i| %>
+      <% rec.tags.events.limit(3).each_with_index do |tag, i| %>
         <% if i == 0 %>
           <!-- styleにカテゴリに応じてbackground colorを入れる -->
-          <a href="{{{catalogTagUri this }}}" class="category-label event" style="background-color: #FD7E14;">#<%= tag %></a>
+          <a href="{{{catalogTagUri this }}}" class="category-label event" style="background-color: #FD7E14;">#<%= tag.name %></a>
         <% else %>
-          <a href="{{{catalogTagUri this }}}" class="tag-label">#<%= tag %></a>
+          <a href="{{{catalogTagUri this }}}" class="tag-label">#<%= tag.name %></a>
         <% end %>
       <% end %>
     </div>
@@ -33,11 +26,16 @@
       <div class="d-md-flex mb-2 align-items-center justify-content-between">
         <div class="">
           <i class="material-icons every">query_builder</i>
-          <span class="value"><%= rec[:amount_time] %></span>
+          <span class="value"><%= rec.minutes %></span>
         </div>
         <div class="">
-          <i class="price-mark">￥</i>
-          <span class="value">会員のみ</span>
+          <% if user_signed_in? %>
+            <i class="price-mark">￥</i>
+            <span class="value"><%= price_pipe(rec.price) %></span>
+          <% else %>
+            <i class="price-mark">￥</i>
+            <span class="value">会員のみ</span>
+          <% end %>
         </div>
       </div>
     </div>

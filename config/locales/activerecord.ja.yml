@@ -2,20 +2,32 @@ ja:
   activerecord:
     models:
       user: ユーザー
+      company: 施設情報
+      partner: パートナー情報
       recreation: レク
+      recreation_image: レク画像
+      order: 依頼
       tag: タグ
       target: 利用者層
+      chat: チャット
     attributes:
       email:
         title: タイトル
         body: 内容
       user:
         role: 権限
-        company_name: 法人名
-        facility_name: 施設名
-        name: ご担当社名
-        name_kana: ご担当社名(カタカナ)
         email: メールアドレス
+        image: 画像
+      company:
+        name: 法人名
+        facility_name: 施設名
+        person_in_charge_name: ご担当社名
+        person_in_charge_name_kana: ご担当社名(カタカナ)
+      partner:
+        name: 名前
+        title: 肩書き
+        description: 詳細
+        image: 画像
       recreation:
         user: パートナー
         title: タイトル
@@ -26,12 +38,24 @@ ja:
         borrow_item: お借りしたいもの
         bring_your_own_item: 持ち込むもの
         extra_information: その他
+        youtube_id: YouTubeID
+        price: 価格
+      recreation_image:
+        image: 画像
+      order:
+        prefecture: 都道府県
+        city: 市区町村
+        is_order: 相談と依頼どちらをご希望ですか？
       tag:
         name: タグ名
         kind: 種類
+        image: 画像
+        text: テキスト
       target:
         name: 想定利用者
-
+      chat:
+        message: メッセージ
+        is_read: 既読
     errors:
       messages:
         duration_over: が上限を越えています

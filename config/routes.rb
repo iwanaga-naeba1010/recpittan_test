@@ -1,11 +1,37 @@
 Rails.application.routes.draw do
   ActiveAdmin.routes(self)
+
   root 'home#index'
   get 'home/index'
-  get '/detail' => 'home#detail'
+
+  resources :customers, only: %i[index]
+  namespace :customers do
+    resources :chats, only: %i[create]
+
+    resources :recreations, shallow: true do
+      resources :orders do
+        member do
+          get :chat
+        end
+      end
+    end
+  end
+
+  resources :partners, only: %i[index]
+  namespace :partners do
+    get :tos
+    resources :chats, only: %i[create]
+
+    resources :orders do
+      member do
+        get :chat
+      end
+    end
+  end
 
   devise_for :users, controllers: {
-    sessions: 'custom_devise/sessions'
+    sessions: 'custom_devise/sessions',
+    registrations: 'custom_devise/registrations'
   }
   mount LetterOpenerWeb::Engine, at: '/letter_opener' if Rails.env.development?
 end

@@ -1,18 +1,25 @@
 # frozen_string_literal: true
 
-ActiveAdmin.register User do
-  permit_params(%i[email role name name_kana company_name facility_name])
+# NOTE: 日本語にするとバグる
+ActiveAdmin.register User, as: 'Company' do
+  permit_params(
+    %i[email role],
+    company_attributes: [
+      :name, :facility_name, :person_in_charge_name, :person_in_charge_name_kana,
+      :zip, :prefecture, :city, :street, :building, :tel
+    ]
+  )
+
   actions :all, except: [:destroy]
+
+  scope 'User', default: true do |users|
+    users.where(role: :customer)
+  end
 
   index do
     id_column
     column :email
     column :role
-    column :name
-    column :name_kana
-    column :company_name
-    column :facility_name
-
     actions
   end
 
@@ -21,12 +28,23 @@ ActiveAdmin.register User do
       row :id
       row :email
       row :role
-      row :name
-      row :name_kana
-      row :company_name
-      row :facility_name
       row :created_at
       row :updated_at
+    end
+
+    panel I18n.t('activerecord.models.company'), style: 'margin-top: 30px;' do
+      attributes_table_for company.company do
+        row :name
+        row :facility_name
+        row :person_in_charge_name
+        row :person_in_charge_name_kana
+        row :zip
+        row :prefecture
+        row :city
+        row :street
+        row :building
+        row :tel
+      end
     end
   end
 
@@ -36,10 +54,19 @@ ActiveAdmin.register User do
     f.inputs do
       f.input :email
       f.input :role, as: :select, collection: User.role.values.map { |i| [i.text, i] }
-      f.input :name
-      f.input :name_kana
-      f.input :company_name
-      f.input :facility_name
+
+      f.inputs I18n.t('activerecord.models.company'), for: [:company, f.object.company || Company.new({ user_id: f.object.id })] do |ff|
+        ff.input :name
+        ff.input :facility_name
+        ff.input :person_in_charge_name
+        ff.input :person_in_charge_name_kana
+        ff.input :zip
+        ff.input :prefecture
+        ff.input :city
+        ff.input :street
+        ff.input :building
+        ff.input :tel
+      end
     end
 
     f.actions

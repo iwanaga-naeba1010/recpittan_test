@@ -8,7 +8,7 @@
         <h1 class="logo-text d-none d-lg-block">すべての人へ選択肢を</h1>
       </div>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
-        aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+              aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse justify-content-between navbar-collapse" id="navbarNavDropdown">
@@ -25,7 +25,7 @@
                 <span class="input-group-text bg-white border-end-0"><i
                   class="material-icons every">search</i></span>
                 <input class="form-control border-start-0" name="keyword" type="search"
-                  placeholder="キーワードを入力" aria-label="Search">
+                       placeholder="キーワードを入力" aria-label="Search">
                 <input type="hidden" name="_csrf" value="{{csrfToken}}">
                 <button class="btn btn-cprimary text-white" type="submit">検索</button>
               </div>
@@ -52,8 +52,19 @@
             </a>
           </li>
           <% if user_signed_in? %>
+
             <li class="nav-item">
-              <%= link_to t('devise.logout'), destroy_user_session_path, method: 'delete', class: 'nav-link link-join' %>
+              <% mypage_path = if current_user.role.customer? || current_user.role.admin?
+                                 customers_path
+                               else
+                                 partners_path
+                               end
+              %>
+              <%= link_to mypage_path, class: 'nav-link' do %>
+                <span class="material-icons mypage">
+                    account_circle
+                </span> マイページ
+              <% end %>
             </li>
           <% else %>
             <li class="nav-item">

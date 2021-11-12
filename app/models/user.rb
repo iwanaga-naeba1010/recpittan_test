@@ -1,9 +1,10 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: users
 #
 #  id                     :bigint           not null, primary key
-#  company_name           :string           default(""), not null
 #  confirmation_sent_at   :datetime
 #  confirmation_token     :string
 #  confirmed_at           :datetime
@@ -11,17 +12,14 @@
 #  current_sign_in_ip     :string
 #  email                  :string           default(""), not null
 #  encrypted_password     :string           default(""), not null
-#  facility_name          :string           default(""), not null
 #  failed_attempts        :integer          default(0), not null
 #  last_sign_in_at        :datetime
 #  last_sign_in_ip        :string
 #  locked_at              :datetime
-#  name                   :string           default(""), not null
-#  name_kana              :string           default(""), not null
 #  remember_created_at    :datetime
 #  reset_password_sent_at :datetime
 #  reset_password_token   :string
-#  role                   :integer          default("user"), not null
+#  role                   :integer          default("customer"), not null
 #  sign_in_count          :integer          default(0), not null
 #  unconfirmed_email      :string
 #  unlock_token           :string
@@ -42,5 +40,32 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable, :confirmable,
          :recoverable, :rememberable, :validatable
 
-  enumerize :role, in: { user: 0, partner: 1, admin: 2 }, default: 0
+  enumerize :role, in: { customer: 0, partner: 1, admin: 2, cs: 3 }, default: 0
+
+  # TODO: role == userの場合、の条件加えたい
+  has_one :company, dependent: :destroy
+  accepts_nested_attributes_for :company, allow_destroy: true
+
+  # TODO: role == partnerの場合、の条件加えたい
+  has_one :partner, dependent: :destroy
+  accepts_nested_attributes_for :partner, allow_destroy: true
+
+  # TODO: role == partnerの場合の条件加えたい
+  has_many :recreations, dependent: :destroy
+
+  has_many :orders, dependent: :destroy
+
+  has_many :chats, dependent: :destroy
+
+  # passwordなしで保存できるようにする
+  def update_without_current_password(params, *options)
+    params.delete(:current_password)
+    if params[:password].blank? && params[:password_confirmation].blank?
+      params.delete(:password)
+      params.delete(:password_confirmation)
+    end
+    result = update(params, *options)
+    clean_up_passwords
+    result
+  end
 end

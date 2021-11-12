@@ -5,6 +5,8 @@ SimpleCov.start 'rails' do
   # add_group 'Decorators', 'app/decorators'
   add_filter 'app/channels'
   add_filter 'app/admin'
+  add_filter 'app/jobs/application_job.rb' # 継承元なので不要と判断
+  add_filter 'app/mailers/application_mailer.rb' # 継承元なので不要と判断
 end
 require 'spec_helper'
 ENV['RAILS_ENV'] ||= 'test'

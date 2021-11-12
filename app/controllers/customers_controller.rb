@@ -1,0 +1,7 @@
+# frozen_string_literal: true
+
+class CustomersController < Customers::ApplicationController
+  def index
+    @orders = current_user.orders
+  end
+end

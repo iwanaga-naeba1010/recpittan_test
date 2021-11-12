@@ -1,5 +1,6 @@
 class ApplicationController < ActionController::Base
   before_action :set_default_url_options
+  before_action :authenticate_user!
 
   def set_default_url_options
     Rails.application.routes.default_url_options[:host] = request.host_with_port
@@ -7,7 +8,7 @@ class ApplicationController < ActionController::Base
   end
 
   # active adminをUserでログインするために必要
-  # rubocop:disable Rails/EnvironmentVariableAccess
+  # NOTE: best_practicesで引っかかるので一旦コメント
   def authenticate_admin!
     if ENV['BASIC_AUTH']
       user, password = ENV['BASIC_AUTH'].split(',').map(&:strip)
@@ -16,7 +17,6 @@ class ApplicationController < ActionController::Base
       end
     end
 
-    redirect_to new_user_session_path unless current_user.role.admin?
+    redirect_to new_user_session_path unless current_user.role.admin? || current_user.role.cs?
   end
-  # rubocop:enable Rails/EnvironmentVariableAccess
 end
