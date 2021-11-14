@@ -20,7 +20,13 @@
 #
 FactoryBot.define do
   factory :recreation_image do
-    recreation { nil }
-    image { 'MyText' }
+    recreation
+    image do
+      ActionDispatch::Http::UploadedFile.new(
+        filename: 'test.png',
+        type: 'image/png',
+        tempfile: File.open(Rails.root.join('spec/files/test.png'))
+      )
+    end
   end
 end

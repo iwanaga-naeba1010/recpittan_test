@@ -37,7 +37,8 @@ ActiveAdmin.register Order do
     f.semantic_errors
 
     f.inputs do
-      f.input :user
+      f.input :user, as: :select, collection: User.customers.map { |i| [i.company.name, i.id] }
+
       f.input :recreation
       f.input :prefecture
       f.input :city

@@ -24,9 +24,9 @@
 #
 FactoryBot.define do
   factory :chat do
-    order { nil }
+    user
+    order
     message { 'MyText' }
     is_read { false }
-    user { nil }
   end
 end

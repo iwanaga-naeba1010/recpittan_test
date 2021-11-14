@@ -70,6 +70,8 @@ gem 'enumerize'
 gem 'carrierwave'
 gem 'seed-fu' # staging/productionでも使いたいから
 
+gem 'kaminari'
+
 # 開発環境でUserを切り替える
 gem 'switch_user'
 

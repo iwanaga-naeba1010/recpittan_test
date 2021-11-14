@@ -25,13 +25,19 @@
 #  unlock_token           :string
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
+#  company_id             :bigint
 #
 # Indexes
 #
+#  index_users_on_company_id            (company_id)
 #  index_users_on_confirmation_token    (confirmation_token) UNIQUE
 #  index_users_on_email                 (email) UNIQUE
 #  index_users_on_reset_password_token  (reset_password_token) UNIQUE
 #  index_users_on_unlock_token          (unlock_token) UNIQUE
+#
+# Foreign Keys
+#
+#  fk_rails_...  (company_id => companies.id)
 #
 FactoryBot.define do
   factory :user do
@@ -43,16 +49,28 @@ FactoryBot.define do
 
   trait :with_custoemr do
     after(:create) do |user|
-      create(:company, user_id: user.id)
-      user.update(role: :customer)
+      company = create(:company)
+      user.update(role: :customer, company_id: company.id)
     end
   end
 
   trait :with_partner do
     after(:create) do |user|
-      create(:partner, user_id: user.id)
+      partner = create(:partner, user_id: user.id)
       user.update(role: :partner)
-      create(:recreation, user_id: user.id)
+      create(:recreation, partner_id: partner.id)
+    end
+  end
+
+  trait :with_admin do
+    after(:create) do |user|
+      user.update(role: :admin)
+    end
+  end
+
+  trait :with_cs do
+    after(:create) do |user|
+      user.update(role: :cs)
     end
   end
 end

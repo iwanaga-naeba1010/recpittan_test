@@ -1,7 +1,8 @@
 # frozen_string_literal: true
 
 # NOTE: 日本語にするとバグる
-ActiveAdmin.register User, as: 'Company' do
+ActiveAdmin.register User do
+  menu priority: 2
   permit_params(
     %i[email role],
     company_attributes: [
@@ -11,10 +12,6 @@ ActiveAdmin.register User, as: 'Company' do
   )
 
   actions :all, except: [:destroy]
-
-  scope 'User', default: true do |users|
-    users.where(role: :customer)
-  end
 
   index do
     id_column
@@ -33,7 +30,7 @@ ActiveAdmin.register User, as: 'Company' do
     end
 
     panel I18n.t('activerecord.models.company'), style: 'margin-top: 30px;' do
-      attributes_table_for company.company do
+      attributes_table_for user.company do
         row :name
         row :facility_name
         row :person_in_charge_name

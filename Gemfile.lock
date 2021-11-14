@@ -494,6 +494,7 @@ DEPENDENCIES
   fog-aws
   haml_lint
   jbuilder
+  kaminari
   letter_opener_web
   listen
   pg

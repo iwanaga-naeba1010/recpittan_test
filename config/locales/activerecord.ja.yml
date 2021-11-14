@@ -2,11 +2,11 @@ ja:
   activerecord:
     models:
       user: ユーザー
-      company: 施設情報
-      partner: パートナー情報
+      company: 施設
+      partner: パートナー
       recreation: レク
       recreation_image: レク画像
-      order: 依頼
+      order: 案件
       tag: タグ
       target: 利用者層
       chat: チャット
@@ -29,7 +29,7 @@ ja:
         description: 詳細
         image: 画像
       recreation:
-        user: パートナー
+        partner: パートナー
         title: タイトル
         second_title: セカンドタイトル
         minutes: 所要時間
@@ -43,9 +43,13 @@ ja:
       recreation_image:
         image: 画像
       order:
+        user: 施設
+        recreation: レク
         prefecture: 都道府県
         city: 市区町村
         is_order: 相談と依頼どちらをご希望ですか？
+        number_of_people: 人数
+        order_type: オーダーの状態
       tag:
         name: タグ名
         kind: 種類

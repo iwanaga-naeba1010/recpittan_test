@@ -16,20 +16,20 @@
 #  title               :string
 #  created_at          :datetime         not null
 #  updated_at          :datetime         not null
-#  user_id             :bigint           not null
+#  partner_id          :bigint           not null
 #  youtube_id          :string
 #
 # Indexes
 #
-#  index_recreations_on_user_id  (user_id)
+#  index_recreations_on_partner_id  (partner_id)
 #
 # Foreign Keys
 #
-#  fk_rails_...  (user_id => users.id)
+#  fk_rails_...  (partner_id => partners.id)
 #
 FactoryBot.define do
   factory :recreation do
-    user
+    partner
     title { 'MyString' }
     second_title { 'MyString' }
     borrow_item { 'MyString' }
