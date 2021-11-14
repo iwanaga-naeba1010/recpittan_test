@@ -19,5 +19,5 @@
 #  updated_at                 :datetime         not null
 #
 class Company < ApplicationRecord
-  has_many :user, dependent: :destroy
+  has_many :users, dependent: :destroy
 end

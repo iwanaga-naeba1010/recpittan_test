@@ -1,7 +1,8 @@
 # frozen_string_literal: true
 
 # NOTE: 日本語にするとバグる
-ActiveAdmin.register User, as: 'Company' do
+ActiveAdmin.register User do
+  menu priority: 2
   permit_params(
     %i[email role],
     company_attributes: [
@@ -12,8 +13,12 @@ ActiveAdmin.register User, as: 'Company' do
 
   actions :all, except: [:destroy]
 
-  scope 'User', default: true do |users|
+  scope '施設', default: true do |users|
     users.where(role: :customer)
+  end
+
+  scope 'パートナー' do |users|
+    users.where(role: :partner)
   end
 
   index do

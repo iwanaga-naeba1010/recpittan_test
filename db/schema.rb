@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_14_062528) do
+ActiveRecord::Schema.define(version: 2021_11_14_064616) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -106,7 +106,6 @@ ActiveRecord::Schema.define(version: 2021_11_14_062528) do
   end
 
   create_table "recreations", force: :cascade do |t|
-    t.bigint "user_id", null: false
     t.string "title"
     t.string "second_title"
     t.integer "minutes"
@@ -119,7 +118,8 @@ ActiveRecord::Schema.define(version: 2021_11_14_062528) do
     t.datetime "updated_at", precision: 6, null: false
     t.string "youtube_id"
     t.integer "price", default: 0, null: false
-    t.index ["user_id"], name: "index_recreations_on_user_id"
+    t.bigint "partner_id", null: false
+    t.index ["partner_id"], name: "index_recreations_on_partner_id"
   end
 
   create_table "tags", force: :cascade do |t|
@@ -170,6 +170,6 @@ ActiveRecord::Schema.define(version: 2021_11_14_062528) do
   add_foreign_key "recreation_images", "recreations"
   add_foreign_key "recreation_tags", "recreations"
   add_foreign_key "recreation_tags", "tags"
-  add_foreign_key "recreations", "users"
+  add_foreign_key "recreations", "partners"
   add_foreign_key "users", "companies"
 end

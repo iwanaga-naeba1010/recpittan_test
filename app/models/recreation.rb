@@ -16,19 +16,19 @@
 #  title               :string
 #  created_at          :datetime         not null
 #  updated_at          :datetime         not null
-#  user_id             :bigint           not null
+#  partner_id          :bigint           not null
 #  youtube_id          :string
 #
 # Indexes
 #
-#  index_recreations_on_user_id  (user_id)
+#  index_recreations_on_partner_id  (partner_id)
 #
 # Foreign Keys
 #
-#  fk_rails_...  (user_id => users.id)
+#  fk_rails_...  (partner_id => partners.id)
 #
 class Recreation < ApplicationRecord
-  belongs_to :user
+  belongs_to :partner
 
   has_many :recreation_tags, dependent: :destroy
   has_many :tags, through: :recreation_tags

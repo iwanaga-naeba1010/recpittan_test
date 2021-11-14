@@ -2,8 +2,8 @@ ja:
   activerecord:
     models:
       user: ユーザー
-      company: 施設情報
-      partner: パートナー情報
+      company: 施設
+      partner: パートナー
       recreation: レク
       recreation_image: レク画像
       order: 案件

@@ -22,6 +22,13 @@
 #  fk_rails_...  (user_id => users.id)
 #
 class Partner < ApplicationRecord
-  belongs_to :user
   mount_uploader :image, ImageUploader
+
+  belongs_to :user
+  accepts_nested_attributes_for :user # active adminで利用
+
+  # TODO: role == partnerの場合の条件加えたい
+  has_many :recreations, dependent: :destroy
+
+  validates :name, presence: true
 end
