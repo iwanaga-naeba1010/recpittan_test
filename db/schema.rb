@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_02_074344) do
+ActiveRecord::Schema.define(version: 2021_11_14_062528) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -45,7 +45,6 @@ ActiveRecord::Schema.define(version: 2021_11_02_074344) do
     t.string "facility_name"
     t.string "person_in_charge_name"
     t.string "person_in_charge_name_kana"
-    t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "zip"
@@ -54,7 +53,6 @@ ActiveRecord::Schema.define(version: 2021_11_02_074344) do
     t.string "street"
     t.string "building"
     t.string "tel"
-    t.index ["user_id"], name: "index_companies_on_user_id"
   end
 
   create_table "order_tags", force: :cascade do |t|
@@ -154,6 +152,8 @@ ActiveRecord::Schema.define(version: 2021_11_02_074344) do
     t.datetime "locked_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "company_id"
+    t.index ["company_id"], name: "index_users_on_company_id"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
@@ -162,7 +162,6 @@ ActiveRecord::Schema.define(version: 2021_11_02_074344) do
 
   add_foreign_key "chats", "orders"
   add_foreign_key "chats", "users"
-  add_foreign_key "companies", "users"
   add_foreign_key "order_tags", "orders"
   add_foreign_key "order_tags", "tags"
   add_foreign_key "orders", "recreations"
@@ -172,4 +171,5 @@ ActiveRecord::Schema.define(version: 2021_11_02_074344) do
   add_foreign_key "recreation_tags", "recreations"
   add_foreign_key "recreation_tags", "tags"
   add_foreign_key "recreations", "users"
+  add_foreign_key "users", "companies"
 end
