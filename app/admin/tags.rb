@@ -2,7 +2,7 @@
 
 ActiveAdmin.register Tag do
   permit_params(%i[name kind text image])
-  actions :all, except: [:destroy]
+  actions :all
 
   # TODO: filterの設定がなぜかうまういかない
   filter :kind, as: :select, collection: Tag.kind.values.map { |i| [i.text, i] }

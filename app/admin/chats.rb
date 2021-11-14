@@ -2,7 +2,7 @@
 
 ActiveAdmin.register Chat do
   menu false # NOTE: サイドバーに表示しない設定
-  actions :create, :update
+  actions :create
   permit_params(
     %i[user_id recreation_id prefecture city number_of_people order_type],
   )

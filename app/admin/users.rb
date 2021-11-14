@@ -13,14 +13,6 @@ ActiveAdmin.register User do
 
   actions :all, except: [:destroy]
 
-  scope '施設', default: true do |users|
-    users.where(role: :customer)
-  end
-
-  scope 'パートナー' do |users|
-    users.where(role: :partner)
-  end
-
   index do
     id_column
     column :email
@@ -38,7 +30,7 @@ ActiveAdmin.register User do
     end
 
     panel I18n.t('activerecord.models.company'), style: 'margin-top: 30px;' do
-      attributes_table_for company.company do
+      attributes_table_for user.company do
         row :name
         row :facility_name
         row :person_in_charge_name

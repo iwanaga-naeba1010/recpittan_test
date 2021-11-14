@@ -61,4 +61,16 @@ FactoryBot.define do
       create(:recreation, partner_id: partner.id)
     end
   end
+
+  trait :with_admin do
+    after(:create) do |user|
+      user.update(role: :admin)
+    end
+  end
+
+  trait :with_cs do
+    after(:create) do |user|
+      user.update(role: :cs)
+    end
+  end
 end
