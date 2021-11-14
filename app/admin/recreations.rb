@@ -93,7 +93,7 @@ ActiveAdmin.register Recreation do
 
     f.inputs t('activerecord.models.recreation_image') do
       f.has_many :recreation_images, heading: false, allow_destroy: true, new_record: true do |ff|
-        ff.input :image
+        ff.input :image, as: :file, hint: image_tag(ff.object.image.to_s, width: 100)
       end
     end
 
