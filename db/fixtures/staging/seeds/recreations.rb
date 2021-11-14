@@ -22,7 +22,7 @@ Recreation.seed do |s|
   s.borrow_item = "なし"
   s.bring_your_own_item = "なし"
   s.extra_information = "なし"
-  s.user_id = 4
+  s.partner_id = 1
   s.youtube_id = 'RGR24pRw69Y'
 end
 
@@ -98,7 +98,7 @@ Recreation.seed do |s|
 【田中宏典】\n
 
 日本各地を旅や営業を通して練り歩き、最後に辿り着いた伊勢の地。他の土地を知るからこそ、お伊勢さん特有の魅力をたっぷりとご案内させて頂きます！\n"
-  s.user_id = 5
+  s.partner_id = 2
   s.youtube_id = 'Iwo6Bc--stY'
 end
 
