@@ -56,9 +56,9 @@ FactoryBot.define do
 
   trait :with_partner do
     after(:create) do |user|
-      create(:partner, user_id: user.id)
+      partner = create(:partner, user_id: user.id)
       user.update(role: :partner)
-      create(:recreation, user_id: user.id)
+      create(:recreation, partner_id: partner.id)
     end
   end
 end

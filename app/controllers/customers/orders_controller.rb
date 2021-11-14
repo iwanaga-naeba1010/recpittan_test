@@ -32,9 +32,7 @@ class Customers::OrdersController < Customers::ApplicationController
       リクエスト内容
       #{@order.order_type_text}
       希望日時
-      1:#{parse_date(dates['0'])}
-      2:#{parse_date(dates['1'])}
-      3:#{parse_date(dates['2'])}
+      #{parse_date(dates)}
 
       希望人数
       #{@order.number_of_people}人
@@ -65,6 +63,11 @@ class Customers::OrdersController < Customers::ApplicationController
       { name: '旅行' },
       { name: '～おはらい町おかげ横丁ツアー～' }
     ]
+    @years = [2021, 2022]
+    @months = 1..12
+    @dates = 1..31
+    @hours = ['08', '09', '10', '11', '12', '13', '14', '15', '16', '17', '18']
+    @minutes = ['00', '15', '30', '45']
     render :new
   end
 
@@ -101,8 +104,18 @@ class Customers::OrdersController < Customers::ApplicationController
     @recreation = Recreation.find(params[:recreation_id])
   end
 
-  def parse_date(date)
-    "#{date['year']}/#{date['month']}/#{date['date']} #{date['start_hour']}:#{date['start_minutes']}~#{date['end_hour']}:#{date['end_minutes']}"
+  def parse_date(dates)
+    return '' if dates.blank?
+
+    str = ''
+    accepted_attrs = ['0', '1', '2']
+    accepted_attrs.each do |attr|
+      # TODO: 入力が完了していない場合はvalidation error or チャット文章に含めない、という実装で
+      param = dates[attr]
+      str += "#{attr.to_i + 1}:#{param['year']}/#{param['month']}/#{param['date']} #{param['start_hour']}:#{param['start_minutes']}~#{param['end_hour']}:#{param['end_minutes']}\n"
+    end
+
+    str
   end
 
   def params_create

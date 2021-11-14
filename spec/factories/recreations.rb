@@ -29,7 +29,7 @@
 #
 FactoryBot.define do
   factory :recreation do
-    user
+    partner
     title { 'MyString' }
     second_title { 'MyString' }
     borrow_item { 'MyString' }

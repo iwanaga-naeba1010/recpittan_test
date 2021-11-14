@@ -23,9 +23,9 @@
 #
 FactoryBot.define do
   factory :partner do
+    user
     name { 'MyString' }
     title { 'MyString' }
     description { 'MyText' }
-    user { nil }
   end
 end
