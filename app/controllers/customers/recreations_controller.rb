@@ -6,7 +6,11 @@ class Customers::RecreationsController < Customers::ApplicationController
 
   def index
     @categories = Tag.categories
-    @recs = Recreation.all
+    @recs = Recreation.page(params[:page]).per(1)
+    @breadcrumbs = [
+      { name: 'トップ' },
+      { name: '一覧' }
+    ]
   end
 
   def show
