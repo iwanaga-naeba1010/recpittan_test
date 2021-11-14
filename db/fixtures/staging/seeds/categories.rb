@@ -56,7 +56,6 @@ Tag.seed do |s|
   s.image = Rails.root.join("db/fixtures/images/event.png").open
 end
 
-
 Tag.seed do |s|
   s.id = 8
   s.name = 'その他'
