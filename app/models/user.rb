@@ -60,6 +60,8 @@ class User < ApplicationRecord
 
   has_many :chats, dependent: :destroy
 
+  scope :customers, -> { where(role: :customer) }
+
   # passwordなしで保存できるようにする
   def update_without_current_password(params, *options)
     params.delete(:current_password)

@@ -2,7 +2,7 @@
 
 ActiveAdmin.register Recreation do
   permit_params(
-    %i[user_id title second_title minutes description flow_of_day borrow_item bring_your_own_item extra_information youtube_id price],
+    %i[partner_id title second_title minutes description flow_of_day borrow_item bring_your_own_item extra_information youtube_id price],
     tag_ids: [],
     recreation_images_attributes: [
       :id, :recreation_id, :image, :_destroy
@@ -24,7 +24,7 @@ ActiveAdmin.register Recreation do
   show do
     attributes_table do
       row :id
-      row :user
+      row :partner
       row :title
       row :second_title
       row :minutes
@@ -74,7 +74,7 @@ ActiveAdmin.register Recreation do
 
     f.inputs do
       # pertnerのみ表示
-      f.input :user, as: :select, collection: User.where(role: :partner).map { |user| [user.partner.name, user.id] }
+      f.input :partner, as: :select, collection: Partner.all.map { |partner| [partner.name, partner.id] }
       f.input :title
       f.input :second_title
       f.input :minutes
