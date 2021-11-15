@@ -82,11 +82,11 @@
                 </label>
                 <br>
                 <div class="form-check form-check-inline">
-                  <input class="form-check-input" type="radio" name="order[is_order]" id="consultTypeConsult" value="consult">
+                  <input class="form-check-input" type="radio" name="order[order_type]" id="consultTypeConsult" value="consult" checked>
                   <label class="form-check-label" for="consultTypeConsult">まずは相談したい</label>
                 </div>
                 <div class="form-check form-check-inline">
-                  <input class="form-check-input" type="radio" name="order[is_order]" id="consultTypeOrder" value="order">
+                  <input class="form-check-input" type="radio" name="order[order_type]" id="consultTypeOrder" value="order">
                   <label class="form-check-label" for="consultTypeOrder">依頼をしたい</label>
                 </div>
               </div>
@@ -96,13 +96,11 @@
 
 
               <!-- has_manyを実装 -->
-
               <% 3.times do |i| %>
                 <div class="d-flex flex-row align-items-stretch my-2">
                   <div class="desired-no d-flex align-items-center justify-content-center">
                     <div><%= i + 1 %></div>
                   </div>
-
 
                   <div class="flex-fill ps-3">
                     <div class="row">
