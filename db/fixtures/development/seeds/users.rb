@@ -21,6 +21,12 @@ Company.seed do |s|
   s.person_in_charge_name_kana = 'サトウアイ'
 end
 
+Plan.seed do |s|
+  s.id = 1
+  s.company_id = 1
+  s.kind = :free
+end
+
 User.seed do |s|
   s.id = 2
   s.company_id = 1
@@ -37,6 +43,12 @@ Company.seed do |s|
   s.facility_name = '佐藤介護施設'
   s.person_in_charge_name = '佐藤亜以'
   s.person_in_charge_name_kana = 'サトウアイ'
+end
+
+Plan.seed do |s|
+  s.id = 2
+  s.company_id = 3
+  s.kind = :free
 end
 
 User.seed do |s|
