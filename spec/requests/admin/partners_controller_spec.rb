@@ -36,16 +36,21 @@ RSpec.describe 'Partners', type: :request do
         expect(response).to redirect_to(admin_partner_path(Partner.last.id))
       end
 
-      it 'can create user_company and increase one company record' do
+      it 'can create partner' do
         expect {
           post admin_partners_path, params: { partner: attrs }
         }.to change(Partner, :count).by(+1)
       end
 
-      it 'can create user_company and increase one user record' do
+      it 'can create partner and increase one user record' do
         expect {
           post admin_partners_path, params: { partner: attrs }
         }.to change(User, :count).by(+1)
+      end
+
+      it 'can create user with partner role' do
+        post admin_partners_path, params: { partner: attrs }
+        expect(User.last.role).to eq :partner
       end
     end
 

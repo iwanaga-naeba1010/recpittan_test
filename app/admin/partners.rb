@@ -49,8 +49,12 @@ ActiveAdmin.register Partner do
       f.input :image, as: :file, hint: image_tag(f.object.image.to_s, width: 100)
 
       f.inputs I18n.t('activerecord.models.user'), for: [:user, f.object.user || User.new] do |ff|
-        ff.input :email
-        ff.input :role, as: :hidden, value: :partner
+
+        if ff.object.id.present?
+          ff.input :email, input_html: { disabled: true }, hint: 'ユーザーのEmail保護の観点から管理画面からは操作できません。システム責任者にご連絡ください。'
+        else
+          ff.input :email
+        end
       end
     end
 
@@ -65,6 +69,7 @@ ActiveAdmin.register Partner do
       partner.user.email = permitted_params[:partner].to_h[:user_attributes]['email']
       partner.user.password = password
       partner.user.confirmation_token = password
+      partner.user.role = :partner
       partner.user.skip_confirmation_notification!
       # TODO: 招待メールを送信
       # UserMailer.with(user: @user, password: password).invite.deliver_now
