@@ -26,7 +26,8 @@ RSpec.describe 'Companies', type: :request do
   end
 
   describe 'POST #create' do
-    let(:attrs) { attributes_for(:company) }
+    let(:attrs) { attributes_for(:company).merge(user_attributes: attributes_for(:user)) }
+
 
     context 'with valid parameters' do
       it 'return http success when user not logged in' do
@@ -35,10 +36,16 @@ RSpec.describe 'Companies', type: :request do
         expect(response).to redirect_to(admin_company_path(Company.last.id))
       end
 
-      it 'can create user_company and increase one record' do
+      it 'can create user_company and increase one company record' do
         expect {
           post admin_companies_path, params: { company: attrs }
         }.to change(Company, :count).by(+1)
+      end
+
+      it 'can create user_company and increase one user record' do
+        expect {
+          post admin_companies_path, params: { company: attrs }
+        }.to change(User, :count).by(+1)
       end
     end
 
