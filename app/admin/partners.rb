@@ -5,7 +5,7 @@ ActiveAdmin.register Partner do
   menu priority: 3
   permit_params(
     %i[name title description image],
-    user_attributes: %i[email role]
+    user_attributes: %i[id email role]
   )
   actions :all, except: [:destroy]
 
@@ -49,7 +49,6 @@ ActiveAdmin.register Partner do
       f.input :image, as: :file, hint: image_tag(f.object.image.to_s, width: 100)
 
       f.inputs I18n.t('activerecord.models.user'), for: [:user, f.object.user || User.new] do |ff|
-
         if ff.object.id.present?
           ff.input :email, input_html: { disabled: true }, hint: 'ユーザーのEmail保護の観点から管理画面からは操作できません。システム責任者にご連絡ください。'
         else
