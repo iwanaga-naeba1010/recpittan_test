@@ -28,7 +28,6 @@ RSpec.describe 'Companies', type: :request do
   describe 'POST #create' do
     let(:attrs) { attributes_for(:company).merge(user_attributes: attributes_for(:user)) }
 
-
     context 'with valid parameters' do
       it 'return http success when user not logged in' do
         post admin_companies_path, params: { company: attrs }
