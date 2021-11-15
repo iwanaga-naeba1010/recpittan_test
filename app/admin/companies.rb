@@ -92,8 +92,6 @@ ActiveAdmin.register Company do
       company.user.confirmation_token = password
       company.user.skip_confirmation_notification!
       # TODO: 招待メールを送信
-      # company.save
-      # binding.pry
       # UserMailer.with(user: @user, password: password).invite.deliver_now
 
       if company.save

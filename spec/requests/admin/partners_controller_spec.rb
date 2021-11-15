@@ -26,28 +26,31 @@ RSpec.describe 'Partners', type: :request do
     end
   end
 
-  # TODO: controllerを修正したらテストも追加
-  pending do
-    describe 'POST #create' do
-      let(:attrs) { attributes_for(:partner) }
+  describe 'POST #create' do
+    let(:attrs) { attributes_for(:partner).merge(user_attributes: attributes_for(:user)) }
 
-      context 'with valid parameters' do
-        it 'return http success when user not logged in' do
+    context 'with valid parameters' do
+      it 'return http success when user not logged in' do
+        post admin_partners_path, params: { partner: attrs }
+        expect(response).to have_http_status(:found)
+        expect(response).to redirect_to(admin_partner_path(Partner.last.id))
+      end
+
+      it 'can create user_company and increase one company record' do
+        expect {
           post admin_partners_path, params: { partner: attrs }
-          expect(response).to have_http_status(:found)
-          expect(response).to redirect_to(admin_partner_path(Partner.last.id))
-        end
-
-        it 'can create user_company and increase one record' do
-          expect {
-            post admin_partners_path, params: { partner: attrs }
-          }.to change(Partner, :count).by(+1)
-        end
+        }.to change(Partner, :count).by(+1)
       end
 
-      # TODO: 失敗パターンも実装
-      context 'with invalid parameters' do
+      it 'can create user_company and increase one user record' do
+        expect {
+          post admin_partners_path, params: { partner: attrs }
+        }.to change(User, :count).by(+1)
       end
+    end
+
+    # TODO: 失敗パターンも実装
+    context 'with invalid parameters' do
     end
   end
 
@@ -58,21 +61,18 @@ RSpec.describe 'Partners', type: :request do
     end
   end
 
-  # TODO: controllerを修正したらテストも追加
-  pending do
-    describe 'PUT #update' do
-      context 'when valid parameters' do
-        number_of_people = 10
-        it 'returns 302 status' do
-          put admin_order_path(order.id), params: { order: { number_of_people: number_of_people } }
-          expect(response).to have_http_status(:found)
-        end
+  describe 'PUT #update' do
+    context 'when valid parameters' do
+      name = 'test'
+      it 'returns 302 status' do
+        put admin_partner_path(partner.id), params: { partner: { name: name } }
+        expect(response).to have_http_status(:found)
+      end
 
-        it 'update status' do
-          expect {
-            put admin_order_path(order.id), params: { order: { number_of_people: number_of_people } }
-          }.to change { Order.find(order.id).number_of_people }.from(order.number_of_people).to(number_of_people)
-        end
+      it 'update status' do
+        expect {
+          put admin_partner_path(partner.id), params: { partner: { name: name } }
+        }.to change { Partner.find(partner.id).name }.from(partner.name).to(name)
       end
     end
   end
