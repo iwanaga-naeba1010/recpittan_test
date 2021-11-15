@@ -18,24 +18,5 @@
     </div>
     <%= paginate @recs %>
 
-    <nav aria-label="ページナビゲーション" class="mt-3">
-      <ul class="pagination justify-content-center">
-        <li class="page-item  mx-4">
-          <a class="page-link shadow" href="{{{addGetParam 'page' prevPage}}}"> <i
-            class="material-icons ">navigate_before</i>前へ</a>
-        </li>
-        <!--        <li class="page-item disabled mx-4">-->
-        <!--          <span class="page-link shadow"><i class="material-icons ">navigate_before</i>前へ</span>-->
-        <!--        </li>-->
-        <li class="page-item mx-4">
-          <a class="page-link shadow" href="{{{addGetParam 'page' nextPage}}}">
-            <span>次へ</span> <i class="material-icons ">navigate_next</i>
-          </a>
-        </li>
-        <!--        <li class="page-item disabled mx-4">-->
-        <!--          <a class="page-link shadow"> <span>次へ</span> <i class="material-icons ">navigate_next</i> </a>-->
-        <!--        </li>-->
-      </ul>
-    </nav>
   </article>
 </main>

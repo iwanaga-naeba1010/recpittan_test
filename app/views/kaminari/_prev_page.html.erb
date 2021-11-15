@@ -6,6 +6,18 @@
     per_page:      number of items to fetch per page
     remote:        data-remote
 -%>
-<span class="prev">
-  <%= link_to_unless current_page.first?, t('views.pagination.previous').html_safe, url, rel: 'prev', remote: remote %>
-</span>
+<!--<span class="prev">-->
+  <%#= link_to_unless current_page.first?, t('views.pagination.previous').html_safe, url, rel: 'prev', remote: remote %>
+<!--</span>-->
+
+<% if current_page.first? %>
+  <a class="page-link shadow" style="cursor: not-allowed;">
+    <i class="material-icons ">navigate_before</i>
+    前へ
+  </a>
+<% else %>
+  <%= link_to url, rel: 'prev', remote: remote, class: 'page-link shadow' do %>
+    <i class="material-icons ">navigate_before</i>
+    前へ
+  <% end %>
+<% end %>
