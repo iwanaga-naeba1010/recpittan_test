@@ -71,6 +71,7 @@ gem 'carrierwave'
 gem 'seed-fu' # staging/productionでも使いたいから
 
 gem 'kaminari'
+gem 'ransack'
 
 # 開発環境でUserを切り替える
 gem 'switch_user'
