@@ -71,9 +71,12 @@ ActiveAdmin.register Company do
       end
 
       f.inputs I18n.t('activerecord.models.user'), for: [:user, f.object.user || User.new({ company_id: f.object.id })] do |ff|
-        ff.input :email
+        if ff.object.id.present?
+          ff.input :email, input_html: { disabled: true }, hint: 'ユーザーのEmail保護の観点から管理画面からは操作できません。システム責任者にご連絡ください。'
+        else
+          ff.input :email
+        end
       end
-
     end
 
     f.actions
