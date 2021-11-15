@@ -5,7 +5,8 @@ ActiveAdmin.register Company do
   menu priority: 2
   permit_params(
     :name, :facility_name, :person_in_charge_name, :person_in_charge_name_kana,
-    :zip, :prefecture, :city, :street, :building, :tel
+    :zip, :prefecture, :city, :street, :building, :tel,
+    plan_attributes: %i[id company_id kind _destroy]
   )
 
   actions :all, except: [:destroy]
@@ -41,6 +42,12 @@ ActiveAdmin.register Company do
         row :email
       end
     end
+
+    panel I18n.t('activerecord.models.plan'), style: 'margin-top: 30px;' do
+      attributes_table_for company.plan do
+        row :kind_text
+      end
+    end
   end
 
   form do |f|
@@ -52,9 +59,15 @@ ActiveAdmin.register Company do
       f.input :person_in_charge_name
       f.input :person_in_charge_name_kana
       f.input :zip
+      f.input :prefecture
       f.input :city
       f.input :street
+      f.input :building
       f.input :tel
+
+      f.inputs I18n.t('activerecord.models.plan'), for: [:plan, f.object.plan || Plan.new({ company_id: f.object.id })] do |ff|
+        ff.input :kind, as: :select, collection: Plan.kind.values.map { |i| [i.text, i] }
+      end
 
     #   f.inputs I18n.t('activerecord.models.company'), for: [:company, f.object.company || Company.new({ user_id: f.object.id })] do |ff|
     #     ff.input :name

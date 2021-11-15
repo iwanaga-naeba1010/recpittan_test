@@ -3,6 +3,7 @@ ja:
     models:
       user: ユーザー
       company: 施設
+      plan: プラン
       partner: パートナー
       recreation: レク
       recreation_image: レク画像
@@ -23,6 +24,14 @@ ja:
         facility_name: 施設名
         person_in_charge_name: ご担当社名
         person_in_charge_name_kana: ご担当社名(カタカナ)
+        zip: 郵便番号
+        prefecture: 都道府県
+        city: 市区町村
+        street: 町名/番地
+        building: 建物名
+        tel: 電話番号
+      plan:
+        kind: 種類
       partner:
         name: 名前
         title: 肩書き

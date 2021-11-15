@@ -20,4 +20,7 @@
 #
 class Company < ApplicationRecord
   has_many :users, dependent: :destroy
+
+  has_one :plan, dependent: :destroy
+  accepts_nested_attributes_for :plan, allow_destroy: true
 end
