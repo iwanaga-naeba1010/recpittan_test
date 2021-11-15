@@ -5,8 +5,9 @@ class Customers::RecreationsController < Customers::ApplicationController
   skip_before_action :require_customer
 
   def index
+    @q = Recreation.ransack(params[:q])
     @categories = Tag.categories
-    @recs = Recreation.page(params[:page]).per(1)
+    @recs = @q.result.page(params[:page]).per(1)
     @breadcrumbs = [
       { name: 'トップ' },
       { name: '一覧' }

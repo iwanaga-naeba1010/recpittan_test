@@ -18,7 +18,7 @@ RSpec.describe 'Registrations', type: :system do
         input_text_boxes('#user_email', 'test@gmail.com')
         input_text_boxes('#user_password', '11111111')
         input_text_boxes('#user_password_confirmation', '11111111')
-        find('input[type="submit"]').click
+        click_button '登録'
 
         expect(page).to have_content '本人確認用のメールを送信しました。メール内のリンクからアカウントを有効化させてください。'
         expect(page).to have_current_path root_path

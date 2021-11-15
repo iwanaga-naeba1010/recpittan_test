@@ -20,16 +20,16 @@
             <%= link_to 'レク一覧', customers_recreations_path, class: 'nav-link' %>
           </li>
           <li class="nav-item px-2">
-            <form action="{{{catalogHomeUri}}}" method="POST" class="d-flex search">
+            <%= search_form_for Recreation.ransack(params[:q]), url: customers_recreations_path, class: "d-flex search" do |f| %>
               <div class="input-group mr-sm-2">
-                <span class="input-group-text bg-white border-end-0"><i
-                  class="material-icons every">search</i></span>
-                <input class="form-control border-start-0" name="keyword" type="search"
-                       placeholder="キーワードを入力" aria-label="Search">
-                <input type="hidden" name="_csrf" value="{{csrfToken}}">
-                <button class="btn btn-cprimary text-white" type="submit">検索</button>
+                <span class="input-group-text bg-white border-end-0">
+                  <i class="material-icons every">search</i>
+                </span>
+                <%= f.search_field :title_or_description_cont, class: 'form-control border-start-0', placeholder: 'キーワードを入力' %>
+                <br>
+                <%= f.submit '検索', class: 'btn btn-cprimary text-white' %>
               </div>
-            </form>
+            <% end %>
           </li>
         </ul>
 

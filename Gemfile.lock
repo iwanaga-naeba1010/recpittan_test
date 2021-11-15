@@ -507,6 +507,7 @@ DEPENDENCIES
   rails-erd
   rails-i18n
   rails_best_practices
+  ransack
   rspec-parameterized
   rspec-rails
   rspec-request_describer
