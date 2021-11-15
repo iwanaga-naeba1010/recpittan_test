@@ -23,4 +23,11 @@ class Company < ApplicationRecord
 
   has_one :plan, dependent: :destroy
   accepts_nested_attributes_for :plan, allow_destroy: true
+
+  after_create :create_plan
+
+  def create_plan
+    build_plan(kind: :free)
+    save
+  end
 end
