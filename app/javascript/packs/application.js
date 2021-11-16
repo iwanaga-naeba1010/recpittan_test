@@ -20,6 +20,7 @@ import '../stylesheets/partner.scss';
 import './prefecture_and_city_for_order_form';
 import './prefecture_for_edit_user_form';
 import './zip_for_edit_user_form';
+import './consult_recreation'; // recreationで料金相談するボタン
 
 import "@fortawesome/fontawesome-free/js/all"
 require.context('../images', true)

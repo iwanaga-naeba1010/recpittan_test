@@ -3,7 +3,10 @@ import axios, { AxiosResponse } from 'axios';
 const instance = (headers= {}) => {
   return axios.create({
     timeout: 15000,
-    headers: { 'Content-Type': 'application/json', ...headers },
+    headers: {
+      ...headers,
+      'Content-Type': 'application/json',
+    },
   });
 }
 

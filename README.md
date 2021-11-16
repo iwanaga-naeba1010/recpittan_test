@@ -39,6 +39,9 @@ docker-compose run --rm web bundle exec brakeman
 
 # best practicesの実行
 docker-compose run --rm web bundle exec rails_best_practices -e node_modules
+
+# webpackerの起動
+bin/webpack-dev-server
 ```
 
 ### gitのブランチの命名規則
