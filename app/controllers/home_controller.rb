@@ -6,5 +6,7 @@ class HomeController < ApplicationController
   def index
     @categories = Tag.categories
     @recs = Recreation.all
+
+    # SlackNotifier.new(channel: '#料金お問い合わせ').send('新規お問い合わせ', '料金お問い合わせのご連絡。')
   end
 end
