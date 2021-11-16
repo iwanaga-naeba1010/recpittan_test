@@ -6,6 +6,10 @@ env:
   POSTGRES_PASSWORD: postgres
   POSTGRES_DB: ep_matching_test
   MAIL_SENDER_FROM: no-reply@ep.net
+#  SLACK_WEBHOOK_URL: https://hooks.slack.com/services/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
+  SLACK_WEBHOOK: https://hooks.slack.com/services/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
+  SLACK_USERNAME: github_actions_bot
+  SLACK_CHANNEL: github-actions
 
 name: Lint check
 on: [push]
@@ -43,6 +47,23 @@ jobs:
 
       - name: Run rails best practices
         run: bundle exec rails_best_practices -e node_modules
+
+      #-- Slack通知 --#
+      # 成功
+      - name: Slack Notification on Success
+        if: ${{ success() }}
+        uses: rtCamp/action-slack-notify@v2
+        env:
+          SLACK_TITLE: Deploy Success
+          SLACK_COLOR: good
+
+      # 失敗
+      - name: Slack Notification on Failure
+        if: ${{ failure() }}
+        uses: rtCamp/action-slack-notify@v2
+        env:
+          SLACK_TITLE: Deploy Failure
+          SLACK_COLOR: danger
 
   rspec:
     runs-on: ubuntu-latest
@@ -104,3 +125,21 @@ jobs:
       - name: Run rspec
         run: |
             bundle exec rspec
+
+
+      #-- Slack通知 --#
+      # 成功
+      - name: Slack Notification on Success
+        if: ${{ success() }}
+        uses: rtCamp/action-slack-notify@v2
+        env:
+          SLACK_TITLE: Deploy Success
+          SLACK_COLOR: good
+
+      # 失敗
+      - name: Slack Notification on Failure
+        if: ${{ failure() }}
+        uses: rtCamp/action-slack-notify@v2
+        env:
+          SLACK_TITLE: Deploy Failure
+          SLACK_COLOR: danger

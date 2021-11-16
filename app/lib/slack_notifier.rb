@@ -3,11 +3,13 @@
 class SlackNotifier
   attr_reader :client, :channel
 
-  WEBHOOK_URL = ENV['SLACK_WEBHOOK_URL'] # 環境SLACK_WEBHOOK_URLにwebhook urlを格納
+  WEBHOOK_URL = ENV['SLACK_WEBHOOK'] # 環境SLACK_WEBHOOK_URLにwebhook urlを格納
   USER_NAME = "system bot"
 
   def initialize(channel:)
-    @client = Slack::Notifier.new(WEBHOOK_URL, channel: channel, username: USER_NAME)
+    # NOTE: production以外は開発用channelで管理
+    channel_depends_on_env = Rails.env.productoin? ? channel: '#開発用slack投稿確認channel'
+    @client = Slack::Notifier.new(WEBHOOK_URL, channel: channel_depends_on_env, username: USER_NAME)
   end
 
   def send(title, message)
