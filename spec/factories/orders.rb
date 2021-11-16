@@ -6,9 +6,12 @@
 #
 #  id               :bigint           not null, primary key
 #  city             :string
+#  date_and_time    :datetime
+#  is_accepted      :boolean          default(FALSE)
+#  is_online        :boolean          default(FALSE)
 #  number_of_people :integer
-#  order_type       :integer
 #  prefecture       :string
+#  status           :integer
 #  created_at       :datetime         not null
 #  updated_at       :datetime         not null
 #  recreation_id    :bigint           not null
@@ -30,6 +33,8 @@ FactoryBot.define do
     recreation
     number_of_people { 1 }
     message { 'MyText' }
-    order_type { 1 }
+    status { 1 }
+    is_online { false }
+    is_accepted { false }
   end
 end

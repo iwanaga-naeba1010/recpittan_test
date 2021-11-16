@@ -30,7 +30,7 @@ class Customers::OrdersController < Customers::ApplicationController
       # TODO: 希望日時が空でも大丈夫なようにする
       message = "
       リクエスト内容
-      #{@order.order_type_text}
+      #{@order.status_text}
       希望日時
       #{parse_date(dates)}
 
@@ -57,6 +57,7 @@ class Customers::OrdersController < Customers::ApplicationController
       redirect_to chat_customers_order_path(@order.id)
     end
   rescue => e
+    binding.pry
     @breadcrumbs = [
       { name: 'トップ' },
       { name: '一覧' },
@@ -120,7 +121,9 @@ class Customers::OrdersController < Customers::ApplicationController
 
   def params_create
     params.require(:order).permit(
-      :prefecture, :city, :order_type, :number_of_people, :user_id, :message, { dates: {} },
+      :prefecture, :city, :status, :number_of_people, :user_id, :message,
+      :is_online, :is_accepted, :date_and_time,
+      { dates: {} },
       { tag_ids: [] }
     )
   end
