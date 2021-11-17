@@ -199,7 +199,21 @@
               </div>
 
               <!-- NOTE(okubo): Prefecturesをreactで制御しているので触らないように!! -->
-              <div id="Prefectures" class="row pt-3"></div>
+              <div class="row pt-3">
+                <label class="col-12 title-b pb-3">都道府県と市区町村を選択してください</label>
+                <div class="form-group col-6">
+                  <%= f.input :prefecture, as: :select, collection: [['-', '-']], input_html: { class: 'form-select p-region' } %>
+                </div>
+
+                <div class="form-group col-6">
+<!--                  <label for="city">市区町村</label>-->
+                  <%= f.input :city, as: :select, collection: [['-', '-']], input_html: { class: 'form-select p-region' } %>
+<!--                  <select id="order_city" name="order[city]" class="form-select">-->
+<!--                    <option>ー</option>-->
+<!--                  </select>-->
+                </div>
+              </div>
+
               <div class="form-group  row pt-3">
                 <label for="comment" class="col-12 title-b pb-3">相談したいことがありましたらご記入ください</label>
                 <div class="col-12" style="position: relative;">

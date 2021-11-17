@@ -37,7 +37,6 @@ const App: React.FC = (): JSX.Element => {
       console.log(response.result);
       setPrefectures(response.result);
     })();
-    
   }, []);
   
   const handleChangePrefecture = async (prefName: string): Promise<void> => {
