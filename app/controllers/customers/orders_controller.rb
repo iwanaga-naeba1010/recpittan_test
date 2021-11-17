@@ -3,6 +3,33 @@
 class Customers::OrdersController < Customers::ApplicationController
   before_action :set_recreation, only: %i[new create]
 
+  def show
+    @breadcrumbs = [
+      { name: 'トップ' },
+      { name: '一覧' },
+      { name: '旅行' },
+      { name: '～おはらい町おかげ横丁ツアー～' }
+    ]
+    # @order = @recreation.orders.build
+    @years = [2021, 2022]
+    @months = 1..12
+    @dates = 1..31
+    @hours = ['08', '09', '10', '11', '12', '13', '14', '15', '16', '17', '18']
+    @minutes = ['00', '15', '30', '45']
+    @order = current_user.orders.find(params[:id])
+  end
+
+  def chat
+    @breadcrumbs = [
+      { name: 'トップ' },
+      { name: '一覧' },
+      { name: '旅行' },
+      { name: '～おはらい町おかげ横丁ツアー～' }
+    ]
+    @order = current_user.orders.find(params[:id])
+    @chat = current_user.chats.build(order_id: @order.id)
+  end
+
   def new
     @breadcrumbs = [
       { name: 'トップ' },
@@ -17,7 +44,6 @@ class Customers::OrdersController < Customers::ApplicationController
     @dates = 1..31
     @hours = ['08', '09', '10', '11', '12', '13', '14', '15', '16', '17', '18']
     @minutes = ['00', '15', '30', '45']
-
   end
 
   def create
@@ -72,31 +98,13 @@ class Customers::OrdersController < Customers::ApplicationController
     render :new
   end
 
-  def show
-    @breadcrumbs = [
-      { name: 'トップ' },
-      { name: '一覧' },
-      { name: '旅行' },
-      { name: '～おはらい町おかげ横丁ツアー～' }
-    ]
-    # @order = @recreation.orders.build
-    @years = [2021, 2022]
-    @months = 1..12
-    @dates = 1..31
-    @hours = ['08', '09', '10', '11', '12', '13', '14', '15', '16', '17', '18']
-    @minutes = ['00', '15', '30', '45']
+  def update
     @order = current_user.orders.find(params[:id])
-  end
-
-  def chat
-    @breadcrumbs = [
-      { name: 'トップ' },
-      { name: '一覧' },
-      { name: '旅行' },
-      { name: '～おはらい町おかげ横丁ツアー～' }
-    ]
-    @order = current_user.orders.find(params[:id])
-    @chat = current_user.chats.build(order_id: @order.id)
+    if @order.update(status: :order)
+      redirect_to chat_customers_order_path(@order.id), notice: '正式に依頼しました'
+    else
+      redirect_to chat_customers_order_path(@order.id), alert: '失敗しました。もう一度お試しください'
+    end
   end
 
   private
