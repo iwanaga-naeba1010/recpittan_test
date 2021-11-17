@@ -30,6 +30,19 @@ class Customers::OrdersController < Customers::ApplicationController
     @chat = current_user.chats.build(order_id: @order.id)
   end
 
+  def complete
+    @order = current_user.orders.find(params[:id])
+    return redirect_to chat_customers_order_path(@order.id) if @order.status.consult?
+
+    @breadcrumbs = [
+      { name: 'トップ' },
+      { name: '一覧' },
+      { name: '旅行' },
+      { name: '～おはらい町おかげ横丁ツアー～' }
+    ]
+
+  end
+
   def new
     @breadcrumbs = [
       { name: 'トップ' },
@@ -101,7 +114,7 @@ class Customers::OrdersController < Customers::ApplicationController
   def update
     @order = current_user.orders.find(params[:id])
     if @order.update(status: :order)
-      redirect_to chat_customers_order_path(@order.id), notice: '正式に依頼しました'
+      redirect_to complete_customers_order_path(@order.id), notice: '正式に依頼しました'
     else
       redirect_to chat_customers_order_path(@order.id), alert: '失敗しました。もう一度お試しください'
     end

@@ -44,4 +44,9 @@ class Order < ApplicationRecord
   has_many :chats, dependent: :destroy
 
   enumerize :status, in: { consult: 0, order: 1 }, default: 0
+
+  # TODO: 残りの住所も入れれるようにする
+  def full_address
+    "#{prefecture}#{city}"
+  end
 end

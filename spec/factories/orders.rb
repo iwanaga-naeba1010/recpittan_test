@@ -33,7 +33,7 @@ FactoryBot.define do
     recreation
     number_of_people { 1 }
     message { 'MyText' }
-    status { 1 }
+    status { 0 }
     is_online { false }
     is_accepted { false }
   end
