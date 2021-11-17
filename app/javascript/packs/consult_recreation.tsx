@@ -1,23 +1,20 @@
 /**
- * Orderのprefecture/cityのform
+ * 料金表示がない場合、slackに通知送るので、その処理
  */
 
-import React, { useEffect } from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom'
-import { get, post } from '../utils/requests/base';
+import { post } from '../utils/requests/base';
 
 interface Props {
   recreationId: number;
 }
+
 const App: React.FC<Props> = ({ recreationId }): JSX.Element => {
-  useEffect(() => {
-    // $('co/ntact-price-modal').modal();
-  }, []);
-  
   const handleSend = async (): Promise<void> => {
     const token = document.querySelector('[name=csrf-token]').getAttribute('content');
     try {
-      const response: any = await post(`/api/slack_notifiers`, { recreation_id: recreationId }, { 'X-CSRF-TOKEN': token });
+      await post(`/api/slack_notifiers`, { recreation_id: recreationId }, { 'X-CSRF-TOKEN': token });
       $('#priceModalTrigger').trigger('click');
     } catch (e) {
       console.log(e);
@@ -40,7 +37,6 @@ const App: React.FC<Props> = ({ recreationId }): JSX.Element => {
 document.addEventListener('turbolinks:load', () => {
   const elm = document.querySelector('#ConsultRecreation');
   const recreationId = JSON.parse(elm.getAttribute('data-recreationId'));
-  console.log(recreationId);
 
   if (elm) {
     ReactDOM.render(
