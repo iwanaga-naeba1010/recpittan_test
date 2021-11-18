@@ -87,8 +87,9 @@ ActiveAdmin.register Recreation do
       f.input :price, hint: '「料金は相談してください」の場合は0を入力してください'
     end
 
-    f.input :tags, label: 'イベント種別', as: :check_boxes, collection: Tag.events.all
-    f.input :tags, label: 'カテゴリー', as: :check_boxes, collection: Tag.categories.all
+    f.input :tags, label: 'カテゴリー', as: :select, collection: Tag.categories.all, multiple: false,
+            hint: 'カテゴリーは一つだけ選択してください。色付きのボタンを生成します'
+    f.input :tags, label: 'タグ', as: :check_boxes, collection: Tag.events.all
     f.input :tags, label: '想定ターゲット', as: :check_boxes, collection: Tag.targets.all
 
     f.inputs t('activerecord.models.recreation_image') do
