@@ -12,6 +12,7 @@ Rails.application.routes.draw do
       resources :orders do
         member do
           get :chat
+          get :complete
         end
       end
     end
@@ -27,6 +28,10 @@ Rails.application.routes.draw do
         get :chat
       end
     end
+  end
+
+  namespace :api do
+    resources :slack_notifiers, only: %i[create]
   end
 
   devise_for :users, controllers: {

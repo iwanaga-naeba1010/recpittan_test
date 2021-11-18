@@ -149,7 +149,13 @@
 
               <div class="action-area">
                 <% if user_signed_in? %>
-                  <%= link_to '相談・依頼する', new_customers_recreation_order_path(@recreation.id), class: "btn-cpr" %>
+                  <!-- 0円の場合はslackに飛ばしで営業が対応 -->
+                  <% if @recreation.price == 0 %>
+                    <!-- React呼び出し -->
+                    <div id="ConsultRecreation" data-recreationId=<%= @recreation.id %>></div>
+                  <% else %>
+                    <%= link_to '相談・依頼する', new_customers_recreation_order_path(@recreation.id), class: "btn-cpr" %>
+                  <% end %>
                 <% else %>
                   <%= link_to 'ログインして相談・依頼する', new_user_session_path, class: "btn-cpr" %>
                 <% end %>
@@ -162,21 +168,25 @@
       </div>
     </div>
   </article>
+</main>
 
-  <div id="contact-price-modal" class="modal" tabindex="-1">
-    <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title">料金をお問い合わせしました</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <p>「{{item.name}}」の料金をお問い合わせしました。エブリ・プラスのスタッフからメールで返信致します。少々お待ちください。</p>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-cprimary rounded-pill text-white" data-bs-dismiss="modal">閉じる</button>
-        </div>
+<!-- NOTE: trigger経由でpriceModalを発火 -->
+<div id="priceModalTrigger" data-bs-toggle="modal" data-bs-target="#priceModal" class="d-none"></div>
+<!-- NOTE: reactで制御しているが、要素をnestさせるとclick不可の状態に陥ることあるので、railsで使っている。 -->
+<div id="priceModal" class="modal fade" tabindex="-1" aria-labelledby="contact-price-modalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">料金をお問い合わせしました</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p>「<%= @recreation.title %>」の料金をお問い合わせしました。エブリ・プラスのスタッフからメールで返信致します。少々お待ちください。</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-cprimary rounded-pill text-white" data-bs-dismiss="modal">閉じる</button>
       </div>
     </div>
   </div>
-</main>
+</div>
+

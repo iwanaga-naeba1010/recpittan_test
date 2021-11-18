@@ -82,11 +82,11 @@
                 </label>
                 <br>
                 <div class="form-check form-check-inline">
-                  <input class="form-check-input" type="radio" name="order[order_type]" id="consultTypeConsult" value="consult" checked>
+                  <input class="form-check-input" type="radio" name="order[status]" id="consultTypeConsult" value="consult" checked>
                   <label class="form-check-label" for="consultTypeConsult">まずは相談したい</label>
                 </div>
                 <div class="form-check form-check-inline">
-                  <input class="form-check-input" type="radio" name="order[order_type]" id="consultTypeOrder" value="order">
+                  <input class="form-check-input" type="radio" name="order[status]" id="consultTypeOrder" value="order">
                   <label class="form-check-label" for="consultTypeOrder">依頼をしたい</label>
                 </div>
               </div>
@@ -198,8 +198,17 @@
                 </div>
               </div>
 
-              <!-- NOTE(okubo): Prefecturesをreactで制御しているので触らないように!! -->
-              <div id="Prefectures" class="row pt-3"></div>
+              <div class="row pt-3">
+                <label class="col-12 title-b pb-3">都道府県と市区町村を選択してください</label>
+                <div class="form-group col-6">
+                  <%= f.input :prefecture, as: :select, collection: [], input_html: { class: 'form-select p-region' } %>
+                </div>
+
+                <div class="form-group col-6">
+                  <%= f.input :city, as: :select, collection: [], input_html: { class: 'form-select p-region' } %>
+                </div>
+              </div>
+
               <div class="form-group  row pt-3">
                 <label for="comment" class="col-12 title-b pb-3">相談したいことがありましたらご記入ください</label>
                 <div class="col-12" style="position: relative;">
@@ -222,6 +231,5 @@
       </div>
     </div>
   </article>
-  {{addJquery}}
 
 </main>

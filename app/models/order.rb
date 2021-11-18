@@ -6,9 +6,12 @@
 #
 #  id               :bigint           not null, primary key
 #  city             :string
+#  date_and_time    :datetime
+#  is_accepted      :boolean          default(FALSE)
+#  is_online        :boolean          default(FALSE)
 #  number_of_people :integer
-#  order_type       :integer
 #  prefecture       :string
+#  status           :integer
 #  created_at       :datetime         not null
 #  updated_at       :datetime         not null
 #  recreation_id    :bigint           not null
@@ -40,5 +43,10 @@ class Order < ApplicationRecord
 
   has_many :chats, dependent: :destroy
 
-  enumerize :order_type, in: { consult: 0, order: 1 }, default: 0
+  enumerize :status, in: { consult: 0, order: 1 }, default: 0
+
+  # TODO: 残りの住所も入れれるようにする
+  def full_address
+    "#{prefecture}#{city}"
+  end
 end

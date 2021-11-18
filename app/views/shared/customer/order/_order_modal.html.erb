@@ -6,7 +6,9 @@
         <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
       </div>
       <div class="modal-body p-2">
-        <form action="{{catalogHomeUri}}/order/consult/{{order._id}}" class="order h-adr" method="POST">
+        <%= simple_form_for order, url: customers_order_path(order.id), html: { class: 'order h-adr' } do |f| %>
+
+          <!--        <form action="{{catalogHomeUri}}/order/consult/{{order._id}}" class="order h-adr" method="POST">-->
           <div class="container-fluid">
             <div class="row pb-3">
               <div class="col-auto">
@@ -20,34 +22,123 @@
             <div class="row">
               <div class="col-12">希望日</div>
               <div class="form-group col-3">
-                <select id="year" name="year" class="form-select "><option style="display: none;">ー</option><option value="2021">2021</option><option value="2022">2022</option></select>
+                <select id="year" name="year" class="form-select ">
+                  <option style="display: none;">ー</option>
+                  <option value="2021">2021</option>
+                  <option value="2022">2022</option>
+                </select>
               </div>
               <div class="col-auto p-0 flex-v-c">年</div>
               <div class="form-group col-3">
-                <select id="month" name="month" class="form-select "><option style="display: none;">ー</option><option value="01">01</option><option value="02">02</option><option value="03">03</option><option value="04">04</option><option value="05">05</option><option value="06">06</option><option value="07">07</option><option value="08">08</option><option value="09">09</option><option value="10">10</option><option value="11">11</option><option value="12">12</option></select>
+                <select id="month" name="month" class="form-select ">
+                  <option style="display: none;">ー</option>
+                  <option value="01">01</option>
+                  <option value="02">02</option>
+                  <option value="03">03</option>
+                  <option value="04">04</option>
+                  <option value="05">05</option>
+                  <option value="06">06</option>
+                  <option value="07">07</option>
+                  <option value="08">08</option>
+                  <option value="09">09</option>
+                  <option value="10">10</option>
+                  <option value="11">11</option>
+                  <option value="12">12</option>
+                </select>
               </div>
               <div class="col-auto p-0 flex-v-c">月</div>
               <div class="form-group col-3">
-                <select id="day" name="day" class="form-select "><option style="display: none;">ー</option><option value="01">01</option><option value="02">02</option><option value="03">03</option><option value="04">04</option><option value="05">05</option><option value="06">06</option><option value="07">07</option><option value="08">08</option><option value="09">09</option><option value="10">10</option><option value="11">11</option><option value="12">12</option><option value="13">13</option><option value="14">14</option><option value="15">15</option><option value="16">16</option><option value="17">17</option><option value="18">18</option><option value="19">19</option><option value="20">20</option><option value="21">21</option><option value="22">22</option><option value="23">23</option><option value="24">24</option><option value="25">25</option><option value="26">26</option><option value="27">27</option><option value="28">28</option><option value="29">29</option><option value="30">30</option><option value="31">31</option></select>
+                <select id="day" name="day" class="form-select ">
+                  <option style="display: none;">ー</option>
+                  <option value="01">01</option>
+                  <option value="02">02</option>
+                  <option value="03">03</option>
+                  <option value="04">04</option>
+                  <option value="05">05</option>
+                  <option value="06">06</option>
+                  <option value="07">07</option>
+                  <option value="08">08</option>
+                  <option value="09">09</option>
+                  <option value="10">10</option>
+                  <option value="11">11</option>
+                  <option value="12">12</option>
+                  <option value="13">13</option>
+                  <option value="14">14</option>
+                  <option value="15">15</option>
+                  <option value="16">16</option>
+                  <option value="17">17</option>
+                  <option value="18">18</option>
+                  <option value="19">19</option>
+                  <option value="20">20</option>
+                  <option value="21">21</option>
+                  <option value="22">22</option>
+                  <option value="23">23</option>
+                  <option value="24">24</option>
+                  <option value="25">25</option>
+                  <option value="26">26</option>
+                  <option value="27">27</option>
+                  <option value="28">28</option>
+                  <option value="29">29</option>
+                  <option value="30">30</option>
+                  <option value="31">31</option>
+                </select>
               </div>
               <div class="col-auto p-0 flex-v-c">日</div>
             </div>
             <div class="row">
               <div class="col-12">希望時間</div>
               <div class="form-group col-2 pe-0">
-                <select id="hourSt" name="hourSt" class="form-select "><option style="display: none;">ー</option><option value="08">08</option><option value="09">09</option><option value="10">10</option><option value="11">11</option><option value="12">12</option><option value="13">13</option><option value="14">14</option><option value="15">15</option><option value="16">16</option><option value="17">17</option><option value="18">18</option></select>
+                <select id="hourSt" name="hourSt" class="form-select ">
+                  <option style="display: none;">ー</option>
+                  <option value="08">08</option>
+                  <option value="09">09</option>
+                  <option value="10">10</option>
+                  <option value="11">11</option>
+                  <option value="12">12</option>
+                  <option value="13">13</option>
+                  <option value="14">14</option>
+                  <option value="15">15</option>
+                  <option value="16">16</option>
+                  <option value="17">17</option>
+                  <option value="18">18</option>
+                </select>
               </div>
               <div class="col-auto p-0 flex-v-c">:</div>
               <div class="form-group col-2 pe-0">
-                <select id="minuteSt" name="minuteSt" class="form-select "><option style="display: none;">ー</option><option value="00">00</option><option value="15">15</option><option value="30">30</option><option value="45">45</option></select>
+                <select id="minuteSt" name="minuteSt" class="form-select ">
+                  <option style="display: none;">ー</option>
+                  <option value="00">00</option>
+                  <option value="15">15</option>
+                  <option value="30">30</option>
+                  <option value="45">45</option>
+                </select>
               </div>
               <div class="col-auto p-0 flex-v-c">~</div>
               <div class="form-group col-2 pe-0">
-                <select id="hourEn" name="hourEn" class="form-select "><option style="display: none;">ー</option><option value="08">08</option><option value="09">09</option><option value="10">10</option><option value="11">11</option><option value="12">12</option><option value="13">13</option><option value="14">14</option><option value="15">15</option><option value="16">16</option><option value="17">17</option><option value="18">18</option></select>
+                <select id="hourEn" name="hourEn" class="form-select ">
+                  <option style="display: none;">ー</option>
+                  <option value="08">08</option>
+                  <option value="09">09</option>
+                  <option value="10">10</option>
+                  <option value="11">11</option>
+                  <option value="12">12</option>
+                  <option value="13">13</option>
+                  <option value="14">14</option>
+                  <option value="15">15</option>
+                  <option value="16">16</option>
+                  <option value="17">17</option>
+                  <option value="18">18</option>
+                </select>
               </div>
               <div class="col-auto p-0 flex-v-c">:</div>
               <div class="form-group col-2 pe-0">
-                <select id="minuteEn" name="minuteEn" class="form-select "><option style="display: none;">ー</option><option value="00">00</option><option value="15">15</option><option value="30">30</option><option value="45">45</option></select>
+                <select id="minuteEn" name="minuteEn" class="form-select ">
+                  <option style="display: none;">ー</option>
+                  <option value="00">00</option>
+                  <option value="15">15</option>
+                  <option value="30">30</option>
+                  <option value="45">45</option>
+                </select>
               </div>
             </div>
             <div class="row pt-3">
@@ -58,35 +149,35 @@
                        name="participant" type="tel" placeholder="半角英数で入力">
               </div>
               <div class="col-auto p-0 flex-v-c">人</div>
-<!--              {{#if hasError}}-->
-<!--              <div class="invalid-feedback d-block">-->
-<!--                <span>{{participantError}}</span>-->
-<!--              </div>-->
-<!--              {{/if}}-->
+              <!--              {{#if hasError}}-->
+              <!--              <div class="invalid-feedback d-block">-->
+              <!--                <span>{{participantError}}</span>-->
+              <!--              </div>-->
+              <!--              {{/if}}-->
             </div>
-<!--            {{#if isOnline}}-->
-<!--            {{'オンラインレク'}}-->
-<!--            <div class="row pt-3">-->
-<!--              <label class="col-12 title-b pb-3"-->
-<!--                     for="facilityCount">追加で参加する施設がある場合施設数をご記入ください</label>-->
-<!--              <div class="form-group col-3">-->
-<!--                <input class="form-control {{facilityCountFormClass}}" id="facilityCount"-->
-<!--                       name="facilityCount" type="tel" placeholder="施設数を入力"-->
-<!--                       value="{{facilityCount}}">-->
-<!--              </div>-->
-<!--              <div class="col-auto p-0 flex-v-c">施設</div>-->
-<!--              {{#if hasError}}-->
-<!--              <div class="invalid-feedback d-block">-->
-<!--                <span>{{facilityCountError}}</span>-->
-<!--              </div>-->
-<!--              {{/if}}-->
-<!--            </div>-->
-<!--            {{else}}-->
+            <!--            {{#if isOnline}}-->
+            <!--            {{'オンラインレク'}}-->
+            <!--            <div class="row pt-3">-->
+            <!--              <label class="col-12 title-b pb-3"-->
+            <!--                     for="facilityCount">追加で参加する施設がある場合施設数をご記入ください</label>-->
+            <!--              <div class="form-group col-3">-->
+            <!--                <input class="form-control {{facilityCountFormClass}}" id="facilityCount"-->
+            <!--                       name="facilityCount" type="tel" placeholder="施設数を入力"-->
+            <!--                       value="{{facilityCount}}">-->
+            <!--              </div>-->
+            <!--              <div class="col-auto p-0 flex-v-c">施設</div>-->
+            <!--              {{#if hasError}}-->
+            <!--              <div class="invalid-feedback d-block">-->
+            <!--                <span>{{facilityCountError}}</span>-->
+            <!--              </div>-->
+            <!--              {{/if}}-->
+            <!--            </div>-->
+            <!--            {{else}}-->
             <div class="row pt-3">
               <span class="p-country-name" style="display:none;">Japan</span>
               <label class="col-12 title-b pb-3" for="participant">
                 <span>住所を入力してください</span>
-<!--                {{order.postalCode}}-->
+                <!--                {{order.postalCode}}-->
                 <span class="label required">必須</span>
               </label>
               <div class="form-group col-6">
@@ -136,18 +227,18 @@
                   <div class="col-auto">諸経費</div>
                   <div class="col-auto">&yen;2,000</div>
                 </div>
-<!--                {{#if isOnline}}-->
-<!--                <div class="row justify-content-between border-top-dotted py-2">-->
-<!--                  <div class="col-auto align-self-center">-->
-<!--                    <span id="facilityCountText">追加施設費 / {{total.additionalCount}}施設</span>-->
-<!--                  </div>-->
-<!--                  <div class="col-auto" id="additionalPrice">{{total.facilityAdditionalPrice}}</div>-->
-<!--                  <div class="col-12">-->
-<!--                    <span class="text-muted font-12 color-ba08">-->
-<!--                      ※1施設追加する事に&yen;{{numeralorder.facilityAdditionalPrice}}が発生します-->
-<!--                    </span>-->
-<!--                  </div>-->
-<!--                </div>-->
+                <!--                {{#if isOnline}}-->
+                <!--                <div class="row justify-content-between border-top-dotted py-2">-->
+                <!--                  <div class="col-auto align-self-center">-->
+                <!--                    <span id="facilityCountText">追加施設費 / {{total.additionalCount}}施設</span>-->
+                <!--                  </div>-->
+                <!--                  <div class="col-auto" id="additionalPrice">{{total.facilityAdditionalPrice}}</div>-->
+                <!--                  <div class="col-12">-->
+                <!--                    <span class="text-muted font-12 color-ba08">-->
+                <!--                      ※1施設追加する事に&yen;{{numeralorder.facilityAdditionalPrice}}が発生します-->
+                <!--                    </span>-->
+                <!--                  </div>-->
+                <!--                </div>-->
 
                 <div class="row justify-content-between border-top py-3">
                   <div class="col-auto">合計</div>
@@ -170,15 +261,17 @@
                 <span class="text-muted">※パートナーが承諾をする事で正式に開催が決まります</span>
               </div>
               <div class="col-7 text-center">
-                <input type="hidden" name="_csrf" value="{{csrfToken}}">
-                <button id="submit-button" type="submit" name="action" value="preview"
-                        class="btn btn-cprimary rounded-pill font-14 py-3 px-4 font-weight-bold text-white"
-                        {{submitDisabled}}>
-                  <span class="">パートナーにレク開催を正式依頼する</span></button>
+                <%= f.submit 'パートナーにレク開催を正式依頼する', class: 'btn btn-cprimary rounded-pill font-14 py-3 px-4 font-weight-bold text-white' %>
+<!--                <input type="hidden" name="_csrf" value="{{csrfToken}}">-->
+<!--                <button id="submit-button" type="submit" name="action" value="preview"-->
+<!--                        class="btn btn-cprimary rounded-pill font-14 py-3 px-4 font-weight-bold text-white"-->
+<!--                        {{submitDisabled}}>-->
+<!--                  <span class="">パートナーにレク開催を正式依頼する</span></button>-->
               </div>
             </div>
           </div>
-        </form>
+        <% end %>
+        <!--        </form>-->
       </div>
     </div>
   </div>
