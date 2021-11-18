@@ -4,9 +4,7 @@ ActiveAdmin.register Recreation do
   permit_params(
     %i[partner_id title second_title minutes description flow_of_day borrow_item bring_your_own_item extra_information youtube_id price],
     tag_ids: [],
-    recreation_images_attributes: [
-      :id, :recreation_id, :image, :_destroy
-    ]
+    recreation_images_attributes: %i[id recreation_id image _destroy]
   )
   actions :all
 
@@ -87,8 +85,7 @@ ActiveAdmin.register Recreation do
       f.input :price, hint: '「料金は相談してください」の場合は0を入力してください'
     end
 
-    f.input :tags, label: 'カテゴリー', as: :select, collection: Tag.categories.all, multiple: false,
-            hint: 'カテゴリーは一つだけ選択してください。色付きのボタンを生成します'
+    f.input :tags, label: 'カテゴリー', as: :select, collection: Tag.categories.all, multiple: false, hint: 'カテゴリーは一つだけ選択してください。色付きのボタンを生成します'
     f.input :tags, label: 'タグ', as: :check_boxes, collection: Tag.events.all
     f.input :tags, label: '想定ターゲット', as: :check_boxes, collection: Tag.targets.all
 

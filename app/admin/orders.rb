@@ -2,7 +2,7 @@
 
 ActiveAdmin.register Order do
   permit_params(
-    %i[user_id recreation_id prefecture city number_of_people status is_online is_accepted date_and_time],
+    %i[user_id recreation_id prefecture city number_of_people status is_online is_accepted date_and_time]
   )
   actions :all, except: [:destroy]
 

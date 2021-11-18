@@ -23,10 +23,10 @@ class CustomDevise::RegistrationsController < Devise::RegistrationsController
   # end
 
   # PUT /resource
-  def update
-    super
+  # def update
+  #   super
   # rescue StandardError => e
-  end
+  # end
 
   # DELETE /resource
   # def destroy
@@ -60,9 +60,9 @@ class CustomDevise::RegistrationsController < Devise::RegistrationsController
     devise_parameter_sanitizer.permit(
       :account_update,
       keys: [
-        company_attributes: [
-          :id, :name, :facility_name, :person_in_charge_name, :person_in_charge_name_kana,
-          :zip, :prefecture, :city, :street, :building, :tel
+        company_attributes: %i[
+          id name facility_name person_in_charge_name person_in_charge_name_kana
+          zip prefecture city street building tel
         ]
       ]
     )
