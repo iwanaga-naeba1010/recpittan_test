@@ -68,11 +68,11 @@
         <%= render 'shared/home/order_flow' %>
       </div>
       <div class="col-md-7">
-        <div class="card ">
+        <div class="card">
           <div class="card-header bg-white">
             相談・依頼フォーム
           </div>
-          <%= simple_form_for @order, url: customers_recreation_orders_path(@recreation), html: { class: "consult mt-3" } do |f| %>
+          <%= simple_form_for @order, url: customers_recreation_orders_path(@recreation), remote: true, html: { class: "consult mt-3" } do |f| %>
             <%= f.input :user_id, as: :hidden, input_html: { value: current_user.id } %>
             <div class="card-body">
               <div class="form-group">
@@ -230,5 +230,30 @@
       </div>
     </div>
   </article>
-
 </main>
+
+
+<!-- NOTE: trigger経由でpriceModalを発火 -->
+<div id="priceModalTrigger" data-bs-toggle="modal" data-bs-target="#priceModal" class="d-none"></div>
+<!-- NOTE: reactで制御しているが、要素をnestさせるとclick不可の状態に陥ることあるので、railsで使っている。 -->
+<div id="priceModal" class="modal fade" tabindex="-1" aria-labelledby="contact-price-modalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">相談・依頼フォームの送信が完了しました</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p>
+          レクの相談・依頼フォームの送信が完了しました。<br />
+          エブリ・プラスのスタッフがパートナーへ連絡し調整いたします。調整が完了次第エブリ・プラスのスタッフからメールにて返信いたします。今しばらくお待ちください
+        </p>
+<!--        <p>「<%#= @recreation.title %>」の料金をお問い合わせしました。エブリ・プラスのスタッフからメールで返信致します。少々お待ちください。</p>-->
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-cprimary rounded-pill text-white" data-bs-dismiss="modal">閉じる</button>
+      </div>
+    </div>
+  </div>
+</div>
+

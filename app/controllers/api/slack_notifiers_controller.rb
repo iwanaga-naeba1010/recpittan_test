@@ -2,7 +2,6 @@
 
 class Api::SlackNotifiersController < Api::ApplicationController
 
-  # TODO: テスト書く
   def create
     recreation = Recreation.find(params[:recreation_id].to_i)
     message = <<EOS
