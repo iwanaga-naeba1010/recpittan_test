@@ -67,9 +67,10 @@ class Customers::OrdersController < Customers::ApplicationController
       dates = params_create.to_h[:dates]
 
       # TODO: 希望日時が空でも大丈夫なようにする
+      # TODO: EOS入力にすればタブが入ってしまったようなmessageは解消が可能
       message = "
       リクエスト内容
-      #{@order.status_text}
+      #{@order.title}
       希望日時
       #{parse_date(dates)}
 
@@ -92,11 +93,22 @@ class Customers::OrdersController < Customers::ApplicationController
         message: message,
         is_read: false
       )
+      slack_message = <<EOS
+会社名: #{current_user.company.name}
+管理画面URL: #{admin_company_url(current_user.company.id)}
+担当者名: #{current_user.company.person_in_charge_name}
+電話番号: #{current_user.company.tel}
+
+レク名: #{@recreation.title}
+パートナー名: #{@recreation.partner.name}
+------------------
+#{message}
+EOS
+      SlackNotifier.new(channel: '#料金お問い合わせ').send('新規お問い合わせ', slack_message)
       # orderの詳細に飛ばす
       redirect_to chat_customers_order_path(@order.id)
     end
   rescue => e
-    binding.pry
     @breadcrumbs = [
       { name: 'トップ' },
       { name: '一覧' },
@@ -142,7 +154,7 @@ class Customers::OrdersController < Customers::ApplicationController
 
   def params_create
     params.require(:order).permit(
-      :prefecture, :city, :status, :number_of_people, :user_id, :message,
+      :title, :prefecture, :city, :status, :number_of_people, :user_id, :message,
       :is_online, :is_accepted, :date_and_time,
       { dates: {} },
       { tag_ids: [] }
