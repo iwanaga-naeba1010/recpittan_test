@@ -10,7 +10,7 @@ class Customers::OrdersController < Customers::ApplicationController
       { name: '旅行' },
       { name: '～おはらい町おかげ横丁ツアー～' }
     ]
-    # @order = @recreation.orders.build
+
     @years = [2021, 2022]
     @months = 1..12
     @dates = 1..31
@@ -67,24 +67,25 @@ class Customers::OrdersController < Customers::ApplicationController
       dates = params_create.to_h[:dates]
 
       # TODO: 希望日時が空でも大丈夫なようにする
-      message = "
-      リクエスト内容
-      #{@order.status_text}
-      希望日時
-      #{parse_date(dates)}
+      # TODO: EOS入力にすればタブが入ってしまったようなmessageは解消が可能
+      message =<<EOS
+リクエスト内容
+#{@order.title}
+希望日時
+#{parse_date(dates)}
 
-      希望人数
-      #{@order.number_of_people}人
+希望人数
+#{@order.number_of_people}人
 
-      介護度目安
-      #{@order.tags.map {|tag| tag.name}.join('\n')}
+介護度目安
+#{@order.tags.map {|tag| tag.name}.join('\n')}
 
-      住所
-      #{@order.prefecture}#{@order.city}
+住所
+#{@order.prefecture}#{@order.city}
 
-      相談したい事
-      #{params_create[:message]}
-      "
+相談したい事
+#{params_create[:message]}
+EOS
 
       Chat.create(
         order_id: @order.id,
@@ -92,11 +93,24 @@ class Customers::OrdersController < Customers::ApplicationController
         message: message,
         is_read: false
       )
+      slack_message = <<EOS
+会社名: #{current_user.company.name}
+管理画面URL: #{admin_company_url(current_user.company.id)}
+担当者名: #{current_user.company.person_in_charge_name}
+電話番号: #{current_user.company.tel}
+
+レク名: #{@recreation.title}
+パートナー名: #{@recreation.partner.name}
+------------------
+#{message}
+EOS
+      SlackNotifier.new(channel: '#料金お問い合わせ').send('新規お問い合わせ', slack_message)
       # orderの詳細に飛ばす
-      redirect_to chat_customers_order_path(@order.id)
+      # TODO: 正式、Chatリリースの場合は元のMPA redirectに変更する
+      # redirect_to chat_customers_order_path(@order.id)
+      render json: @order
     end
   rescue => e
-    binding.pry
     @breadcrumbs = [
       { name: 'トップ' },
       { name: '一覧' },
@@ -108,7 +122,9 @@ class Customers::OrdersController < Customers::ApplicationController
     @dates = 1..31
     @hours = ['08', '09', '10', '11', '12', '13', '14', '15', '16', '17', '18']
     @minutes = ['00', '15', '30', '45']
-    render :new
+    # TODO: リリースするときはrender: newに戻す
+    render json: {}, status: 422
+    # render :new
   end
 
   def update
@@ -142,7 +158,7 @@ class Customers::OrdersController < Customers::ApplicationController
 
   def params_create
     params.require(:order).permit(
-      :prefecture, :city, :status, :number_of_people, :user_id, :message,
+      :title, :prefecture, :city, :status, :number_of_people, :user_id, :message,
       :is_online, :is_accepted, :date_and_time,
       { dates: {} },
       { tag_ids: [] }
