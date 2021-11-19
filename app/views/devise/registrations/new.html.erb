@@ -46,17 +46,18 @@
               <div class="form-check mb-3">
                 <input class="form-check-input {{formPrivacyPolicyClass}}" type="checkbox" name="privacyPolicy" value="true" {{privacyPolicy}} id="privacyPolicy">
                 <label class="form-check-label" for="privacyPolicy">
-                  <a href="https://everyplus.jp/policy_privacy" target="_blank" class="clink">利用規約</a>に同意します。
+                  <%= link_to '利用規約', 'https://everyplus.jp/tos/index.html', class: 'clink', target: '_blank' %>
+                  に同意します。
                 </label>
               </div>
               <div class="form-check mb-3">
                 <input class="form-check-input {{formPrivacyPolicyClass}}" type="checkbox" name="privacyPolicy" value="true" {{privacyPolicy}} id="privacyPolicy">
                 <label class="form-check-label" for="privacyPolicy">
-                  <a href="https://everyplus.jp/policy_privacy" target="_blank" class="clink">プライバシーポリシー</a>に同意します。
+                  <%= link_to 'プライバシーポリシー', 'https://everyplus.jp/policy_privacy', class: 'clink', target: '_blank' %>
+                  に同意します。
                 </label>
               </div>
               <div class="row justify-content-md-center mt-3">
-<!--                <input type="hidden" name="_csrf" value="{{csrfToken}}">-->
                 <div class="col-md-3">
                   <%= f.button :submit, '登録', class: "btn btn-cprimary rounded-pill w-100 font-14 py-3 px-4 font-weight-bold text-white" %>
                 </div>
