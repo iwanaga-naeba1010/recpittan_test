@@ -2,9 +2,15 @@
   <div class="container pt-2">
     <nav aria-label="breadcrumb">
       <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="{{catalogHomeUri}}">トップ</a></li>
-        <li class="breadcrumb-item"><a href="{{catalogHomeUri}}/login">ログイン</a></li>
-        <li class="breadcrumb-item active" aria-current="page"><span>パスワード再発行</span></li>
+        <li class="breadcrumb-item">
+          <%= link_to 'トップ', root_path %>
+        </li>
+        <li class="breadcrumb-item">
+          <%= link_to 'ログイン', new_user_session_path %>
+        </li>
+        <li class="breadcrumb-item active" aria-current="page">
+          <span>パスワード再発行</span>
+        </li>
       </ol>
     </nav>
   </div>
