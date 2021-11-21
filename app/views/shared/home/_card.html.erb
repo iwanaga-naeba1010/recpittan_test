@@ -13,12 +13,13 @@
     <% end %>
 
     <div class="card-body card-body-tag px-2 py-1">
-      <% rec.tags.limit(3).each_with_index do |tag, i| %>
-        <% if i == 0 %>
-          <!-- styleにカテゴリに応じてbackground colorを入れる -->
-          <a href="{{{catalogTagUri this }}}" class="category-label event" style="background-color: #FD7E14;">#<%= tag.name %></a>
-        <% else %>
-          <a href="{{{catalogTagUri this }}}" class="tag-label">#<%= tag.name %></a>
+      <% category_tag = rec.tags.map { |tag| tag if tag.kind.category? }.compact.first %>
+        <% if category_tag.present? %>
+        <a href="{{{catalogTagUri this }}}" class="category-label event" style="background-color: #FD7E14;">#<%= category_tag.name %></a>
+        <% end %>
+      <% rec.tags.limit(2).each do |tag| %>
+        <% if tag.kind != 0  %>
+        <a href="{{{catalogTagUri this }}}" class="tag-label">#<%= tag.name %></a>
         <% end %>
       <% end %>
     </div>
