@@ -10,8 +10,13 @@ module ApplicationHelper
 
     category_tag = tags.map { |tag| tag if tag.kind.category? }.compact.first
     content_tag :div do
-      concat(content_tag(:a, category_tag&.name, class: 'category-label event mr-1', style: "background-color: #{categoryname_to_color_code(category_tag&.name)}"))
-      tags.collect { |tag| concat(content_tag(:a, tag&.name, class: 'tag-label mr-1')) }
+      if category_tag.present?
+        tags = tags - [category_tag]
+        concat link_to category_tag&.name, customers_recreations_path(q: { tags_id_eq: category_tag.id }),
+                       class: 'category-label event',
+                       style: "margin-right: 4px; background-color: #{categoryname_to_color_code(category_tag&.name)}"
+      end
+      tags.collect { |tag| concat(link_to tag.name, customers_recreations_path(q: { tags_id_eq: tag.id }), class: 'tag-label', style: 'margin-right: 4px;') }
     end
   end
 

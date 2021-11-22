@@ -2,7 +2,7 @@
   <div class="d-flex justify-content-around">
     <% categories.each do |category| %>
       <div class="category">
-        <%= link_to customers_recreations_path(q: { tags_id_eq: category.id  }), class: 'card border-0 text-decoration-none recreation-category-item' do %>
+        <%= link_to customers_recreations_path(q: { tags_id_eq: category.id }), class: 'card border-0 text-decoration-none recreation-category-item' do %>
           <div class="card-body zoom px-0">
             <picture>
               <%= image_tag category.image.to_s, class: "rounded-circle", alt: "" %>
