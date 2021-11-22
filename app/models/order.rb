@@ -29,9 +29,6 @@
 #
 class Order < ApplicationRecord
   extend Enumerize
-  # controller のparamsに追加するため
-  attribute :dates
-  attribute :message
 
   belongs_to :user
   belongs_to :recreation
@@ -44,6 +41,11 @@ class Order < ApplicationRecord
   has_many :chats, dependent: :destroy
 
   enumerize :status, in: { consult: 0, order: 1 }, default: 0
+
+  # controller のparamsに追加するため
+  attribute :title # まずは相談したい、のメッセージ部分
+  attribute :dates
+  attribute :message
 
   # TODO: 残りの住所も入れれるようにする
   def full_address

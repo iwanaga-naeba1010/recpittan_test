@@ -2,9 +2,15 @@
   <div class="container pt-2">
     <nav aria-label="breadcrumb">
       <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="{{catalogHomeUri}}">トップ</a></li>
-        <li class="breadcrumb-item"><a href="{{catalogHomeUri}}/login">ログイン</a></li>
-        <li class="breadcrumb-item active" aria-current="page"><span>パスワード再発行</span></li>
+        <li class="breadcrumb-item">
+          <%= link_to 'トップ', root_path %>
+        </li>
+        <li class="breadcrumb-item">
+          <%= link_to 'ログイン', new_user_session_path %>
+        </li>
+        <li class="breadcrumb-item active" aria-current="page">
+          <span>パスワード再発行</span>
+        </li>
       </ol>
     </nav>
   </div>
@@ -18,11 +24,12 @@
             <%= simple_form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
               <div class="input-group mb-3">
                 <div class="input-group-prepend">
-                    <span class="input-group-text">
-                        <span class="material-icons">email</span>
-                    </span>
+                  <span class="input-group-text">
+                    <span class="material-icons">email</span>
+                  </span>
                 </div>
-                <input class="form-control string email required" autocomplete="email" autofocus="autofocus" required="required" aria-required="true" placeholder="メールアドレス" type="email" value="" name="user[email]" id="user_email" _>
+                <%= f.input :email, label: false, input_html: { class: 'form-control string email required w-100' } %>
+<!--                <input class="form-control string email required" autocomplete="email" autofocus="autofocus" required="required" aria-required="true" placeholder="メールアドレス" type="email" value="" name="user[email]" id="user_email"/>-->
               </div>
               <div class="row justify-content-between">
                 <div class="col-auto text-center">
@@ -33,7 +40,7 @@
               </div>
               </div>
             <% end %>
-            </div>
+          </div>
       </div>
     </div>
   </div>

@@ -36,7 +36,8 @@ Rails.application.routes.draw do
 
   devise_for :users, controllers: {
     sessions: 'custom_devise/sessions',
-    registrations: 'custom_devise/registrations'
+    registrations: 'custom_devise/registrations',
+    passwords: 'custom_devise/passwords'
   }
   mount LetterOpenerWeb::Engine, at: '/letter_opener' if Rails.env.development?
 end
