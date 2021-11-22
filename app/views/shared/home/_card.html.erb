@@ -13,15 +13,7 @@
     <% end %>
 
     <div class="card-body card-body-tag px-2 py-1">
-      <% category_tag = rec.tags.map { |tag| tag if tag.kind.category? }.compact.first %>
-        <% if category_tag.present? %>
-        <a href="{{{catalogTagUri this }}}" class="category-label event" style="background-color: #FD7E14;">#<%= category_tag.name %></a>
-        <% end %>
-      <% rec.tags.limit(2).each do |tag| %>
-        <% if tag.kind != 0  %>
-        <a href="{{{catalogTagUri this }}}" class="tag-label">#<%= tag.name %></a>
-        <% end %>
-      <% end %>
+      <%= tags_to_html(rec.tags) %>
     </div>
     <div class="card-body card-body-info px-2 py-1">
       <div class="d-md-flex mb-2 align-items-center justify-content-between">

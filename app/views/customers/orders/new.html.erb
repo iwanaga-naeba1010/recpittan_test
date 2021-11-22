@@ -24,9 +24,7 @@
           <div class="col-md-7 recreation">
             <h1 class="title-b line-height-140"><%= @recreation.title %></h1>
             <div class=" category-tags">
-              <% @recreation.tags.events.each do |tag| %>
-                <a href="{{{catalogTagUri this }}}" class="tag-label"><%= tag.name %></a>
-              <% end %>
+              <%= tags_to_html(@recreation.tags) %>
             </div>
           </div>
         </div>

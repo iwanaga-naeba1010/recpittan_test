@@ -77,13 +77,7 @@
               <h2 class="card-subtitle"><%= @recreation.second_title %></h2>
             </div>
             <div class="category-tags pb-2">
-              <% @recreation.tags.events.each_with_index do |tag, i| %>
-                <% if i == 0 %>
-                  <a href="{{{catalogTagUri this }}}" class="category-label event" style="background-color: #FD7E14;">#<%= tag.name %></a>
-                <% else %>
-                  <a href="{{{catalogTagUri this }}}" class="tag-label">#<%= tag.name %></a>
-                <% end %>
-              <% end %>
+              <%= tags_to_html(@recreation.tags) %>
             </div>
             <div class="description border-top py-3">
               <h3>このようなことをやります</h3>

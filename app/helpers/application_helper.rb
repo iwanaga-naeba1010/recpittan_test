@@ -5,37 +5,36 @@ module ApplicationHelper
     controller.controller_name.in?(target)
   end
 
-  def tags_to_html(tags:)
-    # 最初のcategoryは取得できた→tagsの中から削除も必要
-    category_tag = rec.tags.map { |tag| tag if tag.kind.category? }.compact.first
+  def tags_to_html(tags)
+    return if tags.blank?
+
+    category_tag = tags.map { |tag| tag if tag.kind.category? }.compact.first
     content_tag :div do
-      [tag - category_tag].each_with_index do |tag, i|
-        if i == 0
-          # ここにstyleもしくは、classを当てるi
-          content_tag(:span, category_tag.name)
-        end
-        # こっちは普通
-        content_tag(:span, tag.name)
-      end
+      concat(content_tag(:a, category_tag&.name, class: 'category-label event mr-1', style: "background-color: #{categoryname_to_color_code(category_tag&.name)}"))
+      tags.collect { |tag| concat(content_tag(:a, tag&.name, class: 'tag-label mr-1')) }
     end
   end
 
-  # case category_tag
-  # when category_tag.name == '音楽'
-  #   'background-color: #F24051;'
-  # when category_tag.name == '健康'
-  #   'background-color: #95C15D;'
-  # when category_tag.name == '趣味'
-  #   'background-color: #8C428C;'
-  # when category_tag.name == '創作'
-  #   'background-color: #4276FC;'
-  # when category_tag.name == '旅行'
-  #   'background-color: #FE607D;'
-  # when category_tag.name == '飲食'
-  #   'background-color: #F3B30C;'
-  # when category_tag.name == 'イベント'
-  #   'background-color: #FD7E14;'
-  # when category_tag.name == 'その他'
-  #   'background-color: #339999;'
-  # end
+  def categoryname_to_color_code(categoryname)
+    case categoryname
+    when '音楽'
+      '#F24051;'
+    when '健康'
+      '#95C15D;'
+    when '趣味'
+      '#8C428C;'
+    when '創作'
+      '#4276FC;'
+    when '旅行'
+      '#FE607D;'
+    when '飲食'
+      '#F3B30C;'
+    when 'イベント'
+      '#FD7E14;'
+    when 'その他'
+      '#339999;'
+    else
+      ''
+    end
+  end
 end
