@@ -7,7 +7,7 @@ class Customers::RecreationsController < Customers::ApplicationController
   def index
     @q = Recreation.ransack(params[:q])
     @categories = Tag.categories
-    @recs = @q.result.page(params[:page]).per(1)
+    @recs = @q.result.page(params[:page]).per(10)
   end
 
   def show
