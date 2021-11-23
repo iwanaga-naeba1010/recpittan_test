@@ -5,9 +5,19 @@
         <li class="breadcrumb-item">
           <%= link_to 'トップ', root_path %>
         </li>
-        <li class="breadcrumb-item active">
-          <span>一覧</span>
-        </li>
+        <!-- NOTE: タグがあればタグをパンクズに入れる -->
+        <% if @tag&.present? %>
+          <li class="breadcrumb-item">
+            <%= link_to '一覧', customers_recreations_path %>
+          </li>
+          <li class="breadcrumb-item active">
+            <span><%= @tag.name %></span>
+          </li>
+        <% else %>
+          <li class="breadcrumb-item active">
+            <span>一覧</span>
+          </li>
+        <% end %>
       </ol>
     </nav>
   </div>

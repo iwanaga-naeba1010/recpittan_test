@@ -4,6 +4,12 @@ Rails.application.routes.draw do
   root 'home#index'
   get 'home/index'
 
+  devise_for :users, controllers: {
+    sessions: 'custom_devise/sessions',
+    registrations: 'custom_devise/registrations',
+    passwords: 'custom_devise/passwords'
+  }
+
   resources :customers, only: %i[index]
   namespace :customers do
     resources :chats, only: %i[create]
@@ -34,10 +40,6 @@ Rails.application.routes.draw do
     resources :slack_notifiers, only: %i[create]
   end
 
-  devise_for :users, controllers: {
-    sessions: 'custom_devise/sessions',
-    registrations: 'custom_devise/registrations',
-    passwords: 'custom_devise/passwords'
-  }
+  get '*path' => 'errors#routing_error', via: :all
   mount LetterOpenerWeb::Engine, at: '/letter_opener' if Rails.env.development?
 end
