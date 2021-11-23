@@ -22,6 +22,7 @@ import './zip_for_edit_user_form';
 import './consult_recreation'; // recreationで料金相談するボタン
 import './prefectures';
 import '../events/order_form';
+import '../events/recreations';
 
 import "@fortawesome/fontawesome-free/js/all"
 require.context('../images', true)
