@@ -8,10 +8,13 @@
         <li class="breadcrumb-item">
           <%= link_to '一覧', customers_recreations_path %>
         </li>
-        <li class="breadcrumb-item">
-          <!-- TODO: Tag.categories.firstを表示 + ransack入れる -->
-          <%= link_to '旅行', customers_recreations_path %>
-        </li>
+        <% category_tag = @recreation.tags.categories&.first %>
+        <% if category_tag.present? %>
+          <li class="breadcrumb-item">
+            <!-- TODO: Tag.categories.firstを表示 + ransack入れる -->
+            <%= link_to category_tag.name, customers_recreations_path(q: { tags_id_eq: category_tag.id }) %>
+          </li>
+        <% end %>
         <li class="breadcrumb-item active">
           <!-- TODO: Tag.categories.firstを表示 + ransack入れる -->
           <span><%= @recreation.title %></span>
