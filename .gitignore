@@ -38,6 +38,7 @@ yarn-debug.log*
 .idea
 log
 tmp
-.env
 coverage
 /spec/examples.txt
+
+.env
