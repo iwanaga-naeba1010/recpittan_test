@@ -5,7 +5,7 @@ ActiveAdmin.register Partner do
   menu priority: 3
   permit_params(
     %i[name title description image],
-    user_attributes: %i[email role]
+    user_attributes: %i[id email role]
   )
   actions :all, except: [:destroy]
 
@@ -49,14 +49,37 @@ ActiveAdmin.register Partner do
       f.input :image, as: :file, hint: image_tag(f.object.image.to_s, width: 100)
 
       f.inputs I18n.t('activerecord.models.user'), for: [:user, f.object.user || User.new] do |ff|
-        # TODO: emailの確認メール必要かも。
-        # TODO: あと変更するとエラーメッセージも出ないので、最初からdisableからhint入れておくと良いかも
-        ff.input :email
-        # TODO: roleが正常に入っていない可能性あり
-        ff.input :role, as: :hidden, value: :partner
+        if ff.object.id.present?
+          ff.input :email, input_html: { disabled: true }, hint: 'ユーザーのEmail保護の観点から管理画面からは操作できません。システム責任者にご連絡ください。'
+        else
+          ff.input :email
+        end
       end
     end
 
     f.actions
+  end
+
+  controller do
+    def create
+      password = [*'A'..'Z', *'a'..'z', *0..9].sample(16).join
+
+      partner = Partner.new(permitted_params[:partner])
+      partner.user.email = permitted_params[:partner].to_h[:user_attributes]['email']
+      partner.user.password = password
+      partner.user.confirmation_token = password
+      partner.user.role = :partner
+      partner.user.skip_confirmation_notification!
+      # TODO: 招待メールを送信
+      # UserMailer.with(user: @user, password: password).invite.deliver_now
+
+      if partner.save
+        redirect_to admin_partner_path(partner.id)
+      else
+        # HACK: superを毎回呼ぶとcompany.createがダブルっぽいので、失敗した時のrenderのためにsuper入れる。
+        # ちなみにrender :newは機能しない
+        super
+      end
+    end
   end
 end

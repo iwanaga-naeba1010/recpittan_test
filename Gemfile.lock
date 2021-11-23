@@ -244,6 +244,7 @@ GEM
       racc (~> 1.4)
     nokogiri (1.12.5-x86_64-linux)
       racc (~> 1.4)
+    oj (3.13.9)
     orm_adapter (0.5.0)
     parallel (1.21.0)
     parser (3.0.2.0)
@@ -424,6 +425,7 @@ GEM
       simplecov_json_formatter (~> 0.1)
     simplecov-html (0.12.3)
     simplecov_json_formatter (0.1.3)
+    slack-notifier (2.4.0)
     slop (3.6.0)
     spring (3.0.0)
     sprockets (4.0.2)
@@ -497,6 +499,7 @@ DEPENDENCIES
   kaminari
   letter_opener_web
   listen
+  oj
   pg
   pry-rails
   pry-remote
@@ -507,6 +510,7 @@ DEPENDENCIES
   rails-erd
   rails-i18n
   rails_best_practices
+  ransack
   rspec-parameterized
   rspec-rails
   rspec-request_describer
@@ -520,6 +524,7 @@ DEPENDENCIES
   shoulda-matchers
   simple_form
   simplecov
+  slack-notifier
   spring
   switch_user
   turbolinks

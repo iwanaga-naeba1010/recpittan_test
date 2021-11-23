@@ -19,5 +19,19 @@
 #  updated_at                 :datetime         not null
 #
 class Company < ApplicationRecord
-  has_many :users, dependent: :destroy
+  # NOTE: 現状1名のUserしか想定していないためhas_one。複数に対応させる場合は、has_manyに変更でいける
+  has_one :user, dependent: :destroy
+  accepts_nested_attributes_for :user, allow_destroy: true
+
+  has_one :plan, dependent: :destroy
+  accepts_nested_attributes_for :plan, allow_destroy: true
+
+  after_create :create_plan
+
+  validates :name, :facility_name, presence: true
+
+  def create_plan
+    build_plan(kind: :free)
+    save
+  end
 end

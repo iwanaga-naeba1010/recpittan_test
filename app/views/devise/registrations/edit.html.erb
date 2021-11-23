@@ -119,7 +119,9 @@
                 <span class="font-weight-normal font-14 color-ba08">ご利用中のプラン</span>
               </div>
               <div class="col-12 pt-2">
-                <span class="font-weight-normal font-14 color-ba10"> 定期プラン</span>
+                <span class="font-weight-normal font-14 color-ba10">
+                  <%= current_user.company&.plan&.kind_text %>
+                </span>
               </div>
 
             </div>

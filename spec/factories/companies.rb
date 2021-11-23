@@ -20,6 +20,7 @@
 #
 FactoryBot.define do
   factory :company do
+    user
     name { 'MyString' }
     facility_name { 'MyString' }
     person_in_charge_name { 'MyString' }

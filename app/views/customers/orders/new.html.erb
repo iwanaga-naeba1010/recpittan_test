@@ -24,9 +24,7 @@
           <div class="col-md-7 recreation">
             <h1 class="title-b line-height-140"><%= @recreation.title %></h1>
             <div class=" category-tags">
-              <% @recreation.tags.events.each do |tag| %>
-                <a href="{{{catalogTagUri this }}}" class="tag-label"><%= tag.name %></a>
-              <% end %>
+              <%= tags_to_html(@recreation.tags) %>
             </div>
           </div>
         </div>
@@ -68,11 +66,11 @@
         <%= render 'shared/home/order_flow' %>
       </div>
       <div class="col-md-7">
-        <div class="card ">
+        <div class="card">
           <div class="card-header bg-white">
             相談・依頼フォーム
           </div>
-          <%= simple_form_for @order, url: customers_recreation_orders_path(@recreation), html: { class: "consult mt-3" } do |f| %>
+          <%= simple_form_for @order, url: customers_recreation_orders_path(@recreation), remote: true, html: { class: "consult mt-3" } do |f| %>
             <%= f.input :user_id, as: :hidden, input_html: { value: current_user.id } %>
             <div class="card-body">
               <div class="form-group">
@@ -82,11 +80,11 @@
                 </label>
                 <br>
                 <div class="form-check form-check-inline">
-                  <input class="form-check-input" type="radio" name="order[is_order]" id="consultTypeConsult" value="consult">
+                  <input class="form-check-input" type="radio" name="order[title]" id="consultTypeConsult" value="まずは相談したい" checked>
                   <label class="form-check-label" for="consultTypeConsult">まずは相談したい</label>
                 </div>
                 <div class="form-check form-check-inline">
-                  <input class="form-check-input" type="radio" name="order[is_order]" id="consultTypeOrder" value="order">
+                  <input class="form-check-input" type="radio" name="order[title]" id="consultTypeOrder" value="依頼をしたい">
                   <label class="form-check-label" for="consultTypeOrder">依頼をしたい</label>
                 </div>
               </div>
@@ -94,15 +92,12 @@
                 <label class="title-b pb-3">開催したい希望日と時間を選択してください</label>
               </div>
 
-
               <!-- has_manyを実装 -->
-
               <% 3.times do |i| %>
                 <div class="d-flex flex-row align-items-stretch my-2">
                   <div class="desired-no d-flex align-items-center justify-content-center">
                     <div><%= i + 1 %></div>
                   </div>
-
 
                   <div class="flex-fill ps-3">
                     <div class="row">
@@ -200,8 +195,17 @@
                 </div>
               </div>
 
-              <!-- NOTE(okubo): Prefecturesをreactで制御しているので触らないように!! -->
-              <div id="Prefectures" class="row pt-3"></div>
+              <div class="row pt-3">
+                <label class="col-12 title-b pb-3">都道府県と市区町村を選択してください</label>
+                <div class="form-group col-6">
+                  <%= f.input :prefecture, as: :select, collection: [], input_html: { class: 'form-select p-region' } %>
+                </div>
+
+                <div class="form-group col-6">
+                  <%= f.input :city, as: :select, collection: [], input_html: { class: 'form-select p-region' } %>
+                </div>
+              </div>
+
               <div class="form-group  row pt-3">
                 <label for="comment" class="col-12 title-b pb-3">相談したいことがありましたらご記入ください</label>
                 <div class="col-12" style="position: relative;">
@@ -224,6 +228,30 @@
       </div>
     </div>
   </article>
-  {{addJquery}}
-
 </main>
+
+
+<!-- NOTE: trigger経由でpriceModalを発火 -->
+<div id="priceModalTrigger" data-bs-toggle="modal" data-bs-target="#priceModal" class="d-none"></div>
+<!-- NOTE: reactで制御しているが、要素をnestさせるとclick不可の状態に陥ることあるので、railsで使っている。 -->
+<div id="priceModal" class="modal fade" tabindex="-1" aria-labelledby="contact-price-modalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">相談・依頼フォームの送信が完了しました</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p>
+          レクの相談・依頼フォームの送信が完了しました。<br />
+          エブリ・プラスのスタッフがパートナーへ連絡し調整いたします。調整が完了次第エブリ・プラスのスタッフからメールにて返信いたします。今しばらくお待ちください
+        </p>
+<!--        <p>「<%#= @recreation.title %>」の料金をお問い合わせしました。エブリ・プラスのスタッフからメールで返信致します。少々お待ちください。</p>-->
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-cprimary rounded-pill text-white" data-bs-dismiss="modal">閉じる</button>
+      </div>
+    </div>
+  </div>
+</div>
+

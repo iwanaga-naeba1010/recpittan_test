@@ -18,6 +18,10 @@ ja:
         event: イベント
         target: 利用者層
     order:
-      order_type:
+      status:
         consult: 相談中
         order: 依頼中
+    plan:
+      kind:
+        free: フリー
+        paid: 定期

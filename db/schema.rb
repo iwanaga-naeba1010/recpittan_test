@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_14_064616) do
+ActiveRecord::Schema.define(version: 2021_11_16_054451) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -68,11 +68,14 @@ ActiveRecord::Schema.define(version: 2021_11_14_064616) do
     t.bigint "user_id", null: false
     t.bigint "recreation_id", null: false
     t.integer "number_of_people"
-    t.integer "order_type"
+    t.integer "status"
     t.string "prefecture"
     t.string "city"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.boolean "is_online", default: false
+    t.boolean "is_accepted", default: false
+    t.datetime "date_and_time"
     t.index ["recreation_id"], name: "index_orders_on_recreation_id"
     t.index ["user_id"], name: "index_orders_on_user_id"
   end
@@ -86,6 +89,14 @@ ActiveRecord::Schema.define(version: 2021_11_14_064616) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["user_id"], name: "index_partners_on_user_id"
+  end
+
+  create_table "plans", force: :cascade do |t|
+    t.bigint "company_id", null: false
+    t.integer "kind"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["company_id"], name: "index_plans_on_company_id"
   end
 
   create_table "recreation_images", force: :cascade do |t|
@@ -167,6 +178,7 @@ ActiveRecord::Schema.define(version: 2021_11_14_064616) do
   add_foreign_key "orders", "recreations"
   add_foreign_key "orders", "users"
   add_foreign_key "partners", "users"
+  add_foreign_key "plans", "companies"
   add_foreign_key "recreation_images", "recreations"
   add_foreign_key "recreation_tags", "recreations"
   add_foreign_key "recreation_tags", "tags"

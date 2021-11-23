@@ -19,7 +19,7 @@ ActiveAdmin.register Tag do
     attributes_table do
       row :id
       row :name
-      row :kind_text
+      row(:kind)
       row :text
       row t('activerecord.attributes.tag.image') do |tag|
         image_tag tag&.image&.to_s, width: 50, height: 50

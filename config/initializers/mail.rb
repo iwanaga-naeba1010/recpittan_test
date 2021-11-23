@@ -2,7 +2,7 @@ if Rails.env.production?
   ActionMailer::Base.raise_delivery_errors = true
   ActionMailer::Base.perform_caching = false
   ActionMailer::Base.perform_deliveries = true
-  ActionMailer::Base.default_url_options = { host: 'ingrebank.com' }
+  ActionMailer::Base.default_url_options = { host: 'everyplus.jp' }
   ActionMailer::Base.delivery_method = :smtp
   ActionMailer::Base.smtp_settings = {
     address: ENV['MAIL_ADDRESS'],
@@ -11,7 +11,7 @@ if Rails.env.production?
     user_name: ENV['MAIL_USER_NAME'],
     password: ENV['MAIL_PASSWORD'],
     authentication: 'plain',
-    enable_starttls_auto: true
+    enable_starttls_auto: false
   }
 elsif Rails.env.development?
   ActionMailer::Base.perform_caching = false

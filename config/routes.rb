@@ -12,6 +12,7 @@ Rails.application.routes.draw do
       resources :orders do
         member do
           get :chat
+          get :complete
         end
       end
     end
@@ -29,9 +30,14 @@ Rails.application.routes.draw do
     end
   end
 
+  namespace :api do
+    resources :slack_notifiers, only: %i[create]
+  end
+
   devise_for :users, controllers: {
     sessions: 'custom_devise/sessions',
-    registrations: 'custom_devise/registrations'
+    registrations: 'custom_devise/registrations',
+    passwords: 'custom_devise/passwords'
   }
   mount LetterOpenerWeb::Engine, at: '/letter_opener' if Rails.env.development?
 end
