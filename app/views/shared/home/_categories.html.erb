@@ -1,17 +1,111 @@
 <article class="container categorys d-none d-lg-block shadow">
   <div class="d-flex justify-content-around">
     <% categories.each do |category| %>
-      <div class="category">
-        <%= link_to customers_recreations_path(q: { tags_id_eq: category.id }), class: 'card border-0 text-decoration-none recreation-category-item' do %>
-          <div class="card-body zoom px-0">
-            <picture>
-              <%= image_tag category.image.to_s, class: "rounded-circle", alt: "" %>
-            </picture>
-            <h3 class="card-title pt-3"><%= category.name %></h3>
-            <h6 class="card-subtitle pt-2 mb-2 text-muted"><%= simple_format category.text %></h6>
-          </div>
-        <% end %>
-      </div>
+      <% if category.name == '音楽' %>
+        <div class="category">
+          <%= link_to customers_recreations_path(q: { tags_id_eq: category.id }), class: 'card border-0 text-decoration-none recreation-category-item' do %>
+            <div class="card-body zoom px-0">
+              <picture>
+                <%= image_pack_tag 'media/images/category/music.jpg', class: "rounded-circle", alt: "" %>
+              </picture>
+              <h3 class="card-title pt-3">音楽</h3>
+              <h6 class="card-subtitle pt-2 mb-2 text-muted"><p>音楽療法
+                <br>和太鼓演奏など</p></h6>
+            </div>
+          <% end %>
+        </div>
+      <% elsif category.name == '健康' %>
+        <div class="category">
+          <%= link_to customers_recreations_path(q: { tags_id_eq: category.id }), class: 'card border-0 text-decoration-none recreation-category-item' do %>
+            <div class="card-body zoom px-0">
+              <picture>
+                <%= image_pack_tag 'media/images/category/health.jpg', class: "rounded-circle", alt: "" %>
+              </picture>
+              <h3 class="card-title pt-3">健康</h3>
+              <h6 class="card-subtitle pt-2 mb-2 text-muted"><p>体操、フラダンス
+                <br>嚥下予防など</p></h6>
+            </div>
+          <% end %>
+        </div>
+      <% elsif category.name == '趣味' %>
+        <div class="category">
+          <%= link_to customers_recreations_path(q: { tags_id_eq: category.id }), class: 'card border-0 text-decoration-none recreation-category-item' do %>
+            <div class="card-body zoom px-0">
+              <picture>
+                <%= image_pack_tag 'media/images/category/hobby.jpg', class: "rounded-circle", alt: "" %>
+              </picture>
+              <h3 class="card-title pt-3">趣味</h3>
+              <h6 class="card-subtitle pt-2 mb-2 text-muted"><p>書道
+                <br>囲碁など</p></h6>
+            </div>
+          <% end %>
+        </div>
+      <% elsif category.name == '創作' %>
+        <div class="category">
+          <%= link_to customers_recreations_path(q: { tags_id_eq: category.id }), class: 'card border-0 text-decoration-none recreation-category-item' do %>
+            <div class="card-body zoom px-0">
+              <picture>
+                <%= image_pack_tag 'media/images/category/art.jpg', class: "rounded-circle", alt: "" %>
+              </picture>
+              <h3 class="card-title pt-3">創作</h3>
+              <h6 class="card-subtitle pt-2 mb-2 text-muted"><p>生花
+                <br>ガラス工芸など</p></h6>
+            </div>
+          <% end %>
+        </div>
+      <% elsif category.name == '旅行' %>
+        <div class="category">
+          <%= link_to customers_recreations_path(q: { tags_id_eq: category.id }), class: 'card border-0 text-decoration-none recreation-category-item' do %>
+            <div class="card-body zoom px-0">
+              <picture>
+                <%= image_pack_tag 'media/images/category/travel.jpg', class: "rounded-circle", alt: "" %>
+              </picture>
+              <h3 class="card-title pt-3">旅行</h3>
+              <h6 class="card-subtitle pt-2 mb-2 text-muted"><p>エステ
+                <br>ネイルなど</p></h6>
+            </div>
+          <% end %>
+        </div>
+      <% elsif category.name == '飲食' %>
+        <div class="category">
+          <%= link_to customers_recreations_path(q: { tags_id_eq: category.id }), class: 'card border-0 text-decoration-none recreation-category-item' do %>
+            <div class="card-body zoom px-0">
+              <picture>
+                <%= image_pack_tag 'media/images/category/food.jpg', class: "rounded-circle", alt: "" %>
+              </picture>
+              <h3 class="card-title pt-3">飲食</h3>
+              <h6 class="card-subtitle pt-2 mb-2 text-muted"><p>マグロ解体ショー
+                <br>和菓子作りなど</p></h6>
+            </div>
+          <% end %>
+        </div>
+      <% elsif category.name == 'イベント' %>
+        <div class="category">
+          <%= link_to customers_recreations_path(q: { tags_id_eq: category.id }), class: 'card border-0 text-decoration-none recreation-category-item' do %>
+            <div class="card-body zoom px-0">
+              <picture>
+                <%= image_pack_tag 'media/images/category/event.jpg', class: "rounded-circle", alt: "" %>
+              </picture>
+              <h3 class="card-title pt-3">イベント</h3>
+              <h6 class="card-subtitle pt-2 mb-2 text-muted"><p>大道芸
+                <br>落語など</p></h6>
+            </div>
+          <% end %>
+        </div>
+      <% elsif category.name == 'その他' %>
+        <div class="category">
+          <%= link_to customers_recreations_path(q: { tags_id_eq: category.id }), class: 'card border-0 text-decoration-none recreation-category-item' do %>
+            <div class="card-body zoom px-0">
+              <picture>
+                <%= image_pack_tag 'media/images/category/others.jpg', class: "rounded-circle", alt: "" %>
+              </picture>
+              <h3 class="card-title pt-3">その他</h3>
+              <h6 class="card-subtitle pt-2 mb-2 text-muted"><p>アニマルセラピー
+                <br>写真撮影など</p></h6>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
     <% end %>
   </div>
 </article>
