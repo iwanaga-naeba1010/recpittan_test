@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_24_063658) do
+ActiveRecord::Schema.define(version: 2021_11_24_075010) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -53,6 +53,14 @@ ActiveRecord::Schema.define(version: 2021_11_24_063658) do
     t.string "street"
     t.string "building"
     t.string "tel"
+  end
+
+  create_table "order_memos", force: :cascade do |t|
+    t.bigint "order_id", null: false
+    t.text "body"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["order_id"], name: "index_order_memos_on_order_id"
   end
 
   create_table "order_tags", force: :cascade do |t|
@@ -171,6 +179,7 @@ ActiveRecord::Schema.define(version: 2021_11_24_063658) do
 
   add_foreign_key "chats", "orders"
   add_foreign_key "chats", "users"
+  add_foreign_key "order_memos", "orders"
   add_foreign_key "order_tags", "orders"
   add_foreign_key "order_tags", "tags"
   add_foreign_key "orders", "recreations"
