@@ -40,6 +40,9 @@ class Order < ApplicationRecord
 
   has_many :chats, dependent: :destroy
 
+  has_many :order_memos, dependent: :destroy
+  accepts_nested_attributes_for :order_memos, allow_destroy: true
+
   enumerize :status, in: { consult: 0, order: 1 }, default: 0
 
   # controller のparamsに追加するため

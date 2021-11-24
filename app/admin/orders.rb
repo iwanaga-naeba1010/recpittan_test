@@ -2,7 +2,7 @@
 
 ActiveAdmin.register Order do
   permit_params(
-    %i[user_id recreation_id prefecture city number_of_people status is_online is_accepted date_and_time]
+    %i[user_id recreation_id prefecture city number_of_people status is_online is_accepted date_and_time],
   )
   actions :all, except: [:destroy]
 
@@ -15,24 +15,33 @@ ActiveAdmin.register Order do
   end
 
   show do
-    attributes_table do
-      row :id
-      row :status
-      row :user
-      row :recreation
-      row :prefecture
-      row :city
-      row :number_of_people
-      row :is_online
-      row :is_accepted
-      row :date_and_time
+    tabs do
+      tab '詳細' do
+        attributes_table do
+          row :id
+          row :status
+          row :user
+          row :recreation
+          row :prefecture
+          row :city
+          row :number_of_people
+          row :is_online
+          row :is_accepted
+          row :date_and_time
 
-      row :created_at
-      row :updated_at
-    end
+          row :created_at
+          row :updated_at
+        end
+      end
+      tab 'メモ' do
+        render 'admin/order_memo', order: order
+      end
 
-    panel 'チャット', style: 'margin-top: 30px;' do
-      render 'admin/chat', order: order
+      tab 'チャット' do
+        panel 'チャット', style: 'margin-top: 30px;' do
+          render 'admin/chat', order: order
+        end
+      end
     end
   end
 
