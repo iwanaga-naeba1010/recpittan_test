@@ -13,12 +13,15 @@ module RecreationsHelper
     category_tag = tags.map { |tag| tag if tag.kind.category? }.compact.first
     content_tag :div do
       if category_tag.present?
-        tags = tags - [category_tag]
+        tags -= [category_tag]
         concat link_to category_tag&.name, customers_recreations_path(q: { tags_id_eq: category_tag.id }),
                        class: 'category-label event',
                        style: "margin-right: 4px; background-color: #{categoryname_to_color_code(category_tag&.name)}"
       end
-      tags.collect { |tag| concat(link_to "##{tag.name}", customers_recreations_path(q: { tags_id_eq: tag.id }), class: 'tag-label', style: 'margin-right: 4px;') }
+      tags.collect do |tag|
+        concat(link_to("##{tag.name}", customers_recreations_path(q: { tags_id_eq: tag.id }), class: 'tag-label',
+                                                                                              style: 'margin-right: 4px;'))
+      end
     end
   end
 

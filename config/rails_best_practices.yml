@@ -13,7 +13,9 @@ MoveCodeIntoControllerCheck: { }
 MoveCodeIntoHelperCheck: { array_count: 3 }
 MoveCodeIntoModelCheck: { use_count: 2 }
 MoveFinderToNamedScopeCheck: { }
-MoveModelLogicIntoModelCheck: { use_count: 4 }
+MoveModelLogicIntoModelCheck:
+  ignored_files:
+    - "app/controllers/customers/orders_controller.rb"
 NeedlessDeepNestingCheck: { nested_count: 2 }
 NotRescueExceptionCheck: { }
 NotUseDefaultRouteCheck: { }
@@ -25,7 +27,13 @@ RemoveEmptyHelpersCheck:
     - "app/helpers/home_helper.rb"
 #RemoveTabCheck: { }
 RemoveTrailingWhitespaceCheck: { }
-RemoveUnusedMethodsInControllersCheck: { except_methods: [] }
+RemoveUnusedMethodsInControllersCheck: {
+  except_methods: [
+    'ApplicationController#authenticate_admin!',
+    'CustomDevise::RegistrationsController#update_resource',
+    'CustomDevise::RegistrationsController#after_update_path_for',
+  ]
+}
 RemoveUnusedMethodsInHelpersCheck: { except_methods: [] }
 RemoveUnusedMethodsInModelsCheck: { except_methods: [] }
 ReplaceComplexCreationWithFactoryMethodCheck: { attribute_assignment_count: 2 }

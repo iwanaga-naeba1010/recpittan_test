@@ -16,7 +16,7 @@
             正式依頼が完了しました<br>ありがとうございます！
           </div>
           <div class="card-body">
-            <p>「<%= @order.recreation.title %>」を正式依頼いただきありがとうございます！</p>
+            <p>「<%= @order.recreation_title %>」を正式依頼いただきありがとうございます！</p>
             <div class="alert alert-danger color-at-re10" role="alert">
               パートナーが依頼を承諾するとレクが正式に開催されます。承諾されましたらメールにてお知らせいたします。もうしばらくお待ちください。
             </div>
@@ -45,7 +45,7 @@
                       </picture>
                     </div>
                     <div class="col-md-8 recreation">
-                      <h1 class="font-16 font-weight-bold line-height-140"><%= @order.recreation.title %></h1>
+                      <h1 class="font-16 font-weight-bold line-height-140"><%= @order.recreation_title %></h1>
                       <div class=" category-tags">
                         <% @order.recreation.tags.events.each_with_index do |tag, i| %>
                           <div class="col-auto px-1">
