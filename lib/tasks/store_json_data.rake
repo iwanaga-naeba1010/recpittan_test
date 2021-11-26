@@ -16,9 +16,9 @@ namespace :store_json_data do
     #   "acceptInfo": { "date": { "$date": "2021-09-28T09:49:15.286Z" }, "ip": "114.180.183.16" },
     #   "email": "tani.koichi7@gmail.com",
     #   "No": 1,
-    #   "userType": "customer",
-    #   "userName": "谷　浩一",
-    #   "userNamePhoneticName": "タニ　コウイチ",
+    #   "userType": "customer",ok
+    #   "userName": "谷　浩一",ok
+    #   "userNamePhoneticName": "タニ　コウイチ",ok
     #   "password": "$2b$10$Zn2HSiSF5azhKTKQXH4wOOg./9Vbpcv3MrA44gV8HgyFN0SlUyE5K",
     #   "__v": 0,
     #   "forgotPassword": "08e51f10-45b7-4185-ae90-85baacbdee18" }
@@ -48,45 +48,41 @@ namespace :store_json_data do
     file_folder = Rails.root.join('lib', 'tasks')
     users = JSON.parse(File.read(file_folder.join('users.json')))
     facilities = JSON.parse(File.read(file_folder.join('facilities.json')))
-    binding.pry
-    users.each do |user|
-      instance = User.new(
-        email: user['email']
-      )
+    # binding.pry
 
-      facility = {} # TODO: facilityを検索
+    # facilities.map { |f| f if f['_id']['$oid'] == '61273b68f959d852d633bcc8' }.compact.first
 
-      instance.build_company(
-        name: facility['companyName'],
-        facility_name: facility['name'],
-        # prefecture: JpPrefecture::Prefecture.find(13)
-        zip: facility['postalCode'],
-        street: facility['street'],
-        address: facility['address'],
-        region: facility['region'],
-        locality: facility['locality'],
-      # Table name: companies
-      #
-      #  id                         :bigint           not null, primary key
-      #  building                   :string
-      #  city                       :string
-      #  facility_name              :string
-      #  name                       :string
-      #  person_in_charge_name      :string
-      #  person_in_charge_name_kana :string
-      #  prefecture                 :string
-      #  street                     :string
-      #  tel                        :string
-      #  zip                        :string
-      #  created_at                 :datetime         not null
-      #  updated_at                 :datetime         not null
-      #
+    ActiveRecord::Base.transaction do
+      users.each do |user|
+        instance = User.new(
+          email: user['email'],
+          role: user['userType'] == 'customer' ? :customer : :partner,
+          password: [*'A'..'Z', *'a'..'z', *0..9].sample(16).join
+        )
+        instance.skip_confirmation_notification!
 
+        if user['userType'] == 'customer'
+          next if user['facilities'][0].blank?
 
-
-      )
+          facility = facilities.map { |f| f if f['_id']['$oid'] ==  user['facilities'][0]['$oid'] }.compact.first
+          # Plan tableも関係するので、その調整も必要
+          instance.build_company(
+            name: facility['companyName'],
+            facility_name: facility['name'],
+            # prefecture: JpPrefecture::Prefecture.find(13)
+            zip: facility['postalCode'],
+            street: facility['street'],
+            address: facility['address'],
+            region: facility['region'],
+            locality: facility['locality'],
+            person_in_charge_name: facility['userName'],
+            person_in_charge_name_kana: facility['userNamePhoneticName'],
+            )
+        end
+        instance.save
+      end
     end
-
-    puts users
+  rescue StandardError => e
+    puts e
   end
 end
