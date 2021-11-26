@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_24_075010) do
+ActiveRecord::Schema.define(version: 2021_11_26_130617) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -53,6 +53,10 @@ ActiveRecord::Schema.define(version: 2021_11_24_075010) do
     t.string "street"
     t.string "building"
     t.string "tel"
+    t.string "address"
+    t.string "phone"
+    t.string "region"
+    t.string "locality"
   end
 
   create_table "order_memos", force: :cascade do |t|

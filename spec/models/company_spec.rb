@@ -5,13 +5,17 @@
 # Table name: companies
 #
 #  id                         :bigint           not null, primary key
+#  address                    :string
 #  building                   :string
 #  city                       :string
 #  facility_name              :string
+#  locality                   :string
 #  name                       :string
 #  person_in_charge_name      :string
 #  person_in_charge_name_kana :string
+#  phone                      :string
 #  prefecture                 :string
+#  region                     :string
 #  street                     :string
 #  tel                        :string
 #  zip                        :string
