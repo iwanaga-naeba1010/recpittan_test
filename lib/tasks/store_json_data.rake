@@ -115,23 +115,11 @@ namespace :store_json_data do
           )
         elsif user['userType'] == 'instructor'
           next if user['_id']['$oid'].blank?
-          # TODO: なぜか登録されていないrecreationがあるので、多分漏れが生じている。
-          # 直せばほぼほぼOK
 
-          # if recreations.map { |f| f if f['instructorId']['$oid'] ==  user['_id']['$oid'] }.compact.length > 1
-          #   recreations.map { |f| f if f['instructorId']['$oid'] ==  user['_id']['$oid'] }.compact.map{ |tmp| tmp['title'] }
-          #   binding.pry
-          # end
           # NOTE: recreationsは複数ある場合あるので、複数で
           recs = recreations.map { |f| f if f['instructorId']['$oid'] ==  user['_id']['$oid'] }.compact
 
           next if recs.blank?
-
-          # instance.build_partner(
-          #   name: rec['instructorName'],
-          #   title: rec['instructorPosition'],
-          #   description: rec['instructorProfile'],
-          # )
 
           # TODO: YoutubeIdを取得する
           recs.each do |rec|
@@ -193,8 +181,6 @@ namespace :store_json_data do
     end
   rescue StandardError => e
     puts e
-    binding.pry
-
   end
 
   def code_to_tag(code)

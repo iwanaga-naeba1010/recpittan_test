@@ -7,7 +7,6 @@ class HomeController < ApplicationController
     @categories = sort_categories(Tag.categories)
     @yoshimoto = Tag.find_by(name: '吉本')
 
-    # binding.pry
     @yoshimoto_recs = Recreation
       .where(title: [
         '笑って健康！折りがとう！',
