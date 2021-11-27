@@ -159,13 +159,19 @@ namespace :store_json_data do
             new_rec.tags << tag
           end
 
-          # TODO: ここがisOnlineなら、それをflagで追加する
-
-
           category = code_to_tag(rec['baseCode'].split(rec['baseCode'].first)[1])
 
           if category.present?
             new_rec.tags << code_to_tag(rec['baseCode'].split(rec['baseCode'].first)[1])
+
+            if rec['baseCode'].first == 'Y'
+              new_rec.tags << Tag.find_or_create_by(name: '吉本', kind: :tag)
+            end
+
+            if rec['baseCode'].split(rec['baseCode'].first)[1].to_i >= 10
+              new_rec.is_online = true
+              new_rec.tags << Tag.find_or_create_by(name: 'オンライン', kind: :tag)
+            end
           end
 
           # rec['baseCode'].split(rec['baseCode'].first)[1]
