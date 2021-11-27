@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
   ActiveAdmin.routes(self)
+  # switch userの設定
+  get 'switch_user', to: 'switch_user#set_current_user' if Rails.env.development?
+  get 'switch_user/remember_user', to: 'switch_user#remember_user' if Rails.env.development?
 
   root 'home#index'
   get 'home/index'

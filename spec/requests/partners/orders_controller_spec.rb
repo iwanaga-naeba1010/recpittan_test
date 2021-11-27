@@ -3,12 +3,12 @@
 require 'rails_helper'
 
 RSpec.describe Partners::OrdersController, type: :request do
-  let(:partner) { (create :user, :with_partner).partner }
+  let(:partner) { create :user, :with_recreations }
   let(:customer) { create :user, :with_custoemr }
   let(:order) { create :order, recreation_id: partner.recreations.first.id, user_id: customer.id }
 
   before do
-    sign_in partner.user
+    sign_in partner
   end
 
   describe 'GET /show' do

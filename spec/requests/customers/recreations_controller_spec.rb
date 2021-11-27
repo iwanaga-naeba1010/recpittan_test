@@ -25,13 +25,13 @@ RSpec.describe Customers::RecreationsController, type: :request do
   end
 
   describe 'GET /show' do
-    it 'return http success when user not logged in' do
-      sign_out user
+    it 'returns http success when user logged in' do
       get customers_recreation_path(recreation)
       expect(response).to have_http_status(:ok)
     end
 
     it 'return http success when user not logged in' do
+      sign_out user
       get customers_recreation_path(recreation)
       expect(response).to have_http_status(:ok)
     end

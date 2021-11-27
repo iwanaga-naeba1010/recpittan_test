@@ -50,10 +50,10 @@ RSpec.describe Customers::OrdersController, type: :request do
       end
     end
 
-    it 'return http success when user not logged in' do
-      get customers_recreation_path(recreation)
-      expect(response).to have_http_status(:ok)
-    end
+    # it 'return http success when user not logged in' do
+    #   get customers_recreation_path(recreation)
+    #   expect(response).to have_http_status(:ok)
+    # end
   end
 
   describe 'GET /show' do

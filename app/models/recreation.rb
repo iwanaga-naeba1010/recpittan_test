@@ -43,6 +43,7 @@
 #  fk_rails_...  (user_id => users.id)
 #
 class Recreation < ApplicationRecord
+  mount_uploader :instructor_image, ImageUploader
   has_many :recreation_tags, dependent: :destroy
   has_many :tags, through: :recreation_tags
 

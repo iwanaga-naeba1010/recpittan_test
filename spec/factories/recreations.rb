@@ -55,5 +55,15 @@ FactoryBot.define do
     price { 20000 }
     description { 'MyText' }
     youtube_id { '' }
+    instructor_name { 'MyText' }
+    instructor_title { 'MyText' }
+    instructor_description { 'MyText' }
+    instructor_image do
+      ActionDispatch::Http::UploadedFile.new(
+        filename: 'test.png',
+        type: 'image/png',
+        tempfile: File.open(Rails.root.join('spec/files/test.png'))
+      )
+    end
   end
 end
