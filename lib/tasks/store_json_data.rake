@@ -160,6 +160,13 @@ namespace :store_json_data do
             tag = Tag.find_or_create_by(name: target, kind: :target)
             new_rec.tags << tag
           end
+
+          rec['tags'].each do |t|
+            tag = Tag.find_or_create_by(name: t, kind: :tag)
+            new_rec.tags << tag
+          end
+
+
         end
 
         instance.save
