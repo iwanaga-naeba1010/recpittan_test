@@ -9,7 +9,7 @@ class Partners::ChatsController < Partners::ApplicationController
       redirect_to chat_partners_order_path(@chat.order_id)
     else
       @order = current_user.recreations.map do |rec|
-        rec.orders.map { |order| order if order.id ==  params_create[:order_id].to_i }
+        rec.orders.map { |order| order if order.id == params_create[:order_id].to_i }
       end.flatten.compact.first
 
       # @chat = @order.chats.build(user_id: current_user.id)
