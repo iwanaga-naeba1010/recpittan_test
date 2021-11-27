@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_27_032800) do
+ActiveRecord::Schema.define(version: 2021_11_27_043710) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -151,6 +151,7 @@ ActiveRecord::Schema.define(version: 2021_11_27_032800) do
     t.integer "instructor_amount"
     t.string "instructor_position"
     t.boolean "is_public"
+    t.string "base_code"
     t.index ["partner_id"], name: "index_recreations_on_partner_id"
   end
 

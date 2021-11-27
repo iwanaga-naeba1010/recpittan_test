@@ -5,6 +5,7 @@
 # Table name: recreations
 #
 #  id                         :bigint           not null, primary key
+#  base_code                  :string
 #  borrow_item                :text
 #  bring_your_own_item        :text
 #  capacity                   :integer
