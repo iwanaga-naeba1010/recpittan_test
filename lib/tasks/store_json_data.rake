@@ -81,7 +81,7 @@ namespace :store_json_data do
 
     file_folder = Rails.root.join('lib', 'tasks')
     users = JSON.parse(File.read(file_folder.join('users.json')))
-                .map { |user| user if user['userType'] != 'customer' }.compact
+                .map { |user| user if user['userType'] != 'customer' }.compact # TODO: 本番はここ外す
     facilities = JSON.parse(File.read(file_folder.join('facilities.json')))
     recreations = JSON.parse(File.read(file_folder.join('recreations.json')))
     # binding.pry
@@ -130,7 +130,7 @@ namespace :store_json_data do
             description: rec['instructorProfile'],
           )
 
-          instance.partner.recreations.build(
+          new_rec = instance.partner.recreations.build(
             flyer_color: rec['flyerColor'],
             prefectures: rec['prefectures'],
             regular_price: rec['regularPrice'], # NOTE: ここが表示価格
@@ -155,10 +155,13 @@ namespace :store_json_data do
           # TODO: ここにtagsを検索して入れる、なければ追加
           # TODO: categoryを検索して追加
           # TODO: categoryはyoshimotoやオンラインがあるから、それを切り分けてさらに追加する　
-          #
 
-
+          rec['targetPersons'].each do |target|
+            tag = Tag.find_or_create_by(name: target, kind: :target)
+            new_rec.tags << tag
+          end
         end
+
         instance.save
       end
     end
