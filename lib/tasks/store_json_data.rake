@@ -144,38 +144,32 @@ namespace :store_json_data do
             base_code: rec['baseCode'],
           )
 
-          # TODO: ここにtargetsを検索して入れる、なければ追加
-          # TODO: ここにtagsを検索して入れる、なければ追加
-          # TODO: categoryを検索して追加
-          # TODO: categoryはyoshimotoやオンラインがあるから、それを切り分けてさらに追加する　
-
+          # NOTE: targetのタグを作成 or 検索して追加
           rec['targetPersons'].each do |target|
             tag = Tag.find_or_create_by(name: target, kind: :target)
             new_rec.tags << tag
           end
 
+          # NOTE: 通常のtagを作成 or 検索して追加
           rec['tags'].each do |t|
             tag = Tag.find_or_create_by(name: t, kind: :tag)
             new_rec.tags << tag
           end
 
+          # NOTE: 色付きラベルのcategoryを作成 or 検索して追加
           category = code_to_tag(rec['baseCode'].split(rec['baseCode'].first)[1])
-
           if category.present?
-            new_rec.tags << code_to_tag(rec['baseCode'].split(rec['baseCode'].first)[1])
-
-            if rec['baseCode'].first == 'Y'
-              new_rec.tags << Tag.find_or_create_by(name: '吉本', kind: :tag)
-            end
-
-            if rec['baseCode'].split(rec['baseCode'].first)[1].to_i >= 10
-              new_rec.is_online = true
-              new_rec.tags << Tag.find_or_create_by(name: 'オンライン', kind: :tag)
-            end
+            new_rec.tags << category
           end
-
-          # rec['baseCode'].split(rec['baseCode'].first)[1]
-          # => ["", "17"]
+          # NOTE: baseCodeがYで吉本なら吉本のタグを作成 or 検索して追加
+          if rec['baseCode'].first == 'Y'
+            new_rec.tags << Tag.find_or_create_by(name: '吉本', kind: :tag)
+          end
+          # NOTE: baseCodeが10以上でオンラインならオンラインのタグを作成 or 検索して追加
+          if rec['baseCode'].split(rec['baseCode'].first)[1].to_i >= 10
+            new_rec.is_online = true
+            # new_rec.tags << Tag.find_or_create_by(name: 'オンライン', kind: :tag)
+          end
         end
 
         instance.save
