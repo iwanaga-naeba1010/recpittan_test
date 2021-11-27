@@ -1,4 +1,4 @@
-require "json"
+require 'json'
 require 'pry'
 
 namespace :store_json_data do
@@ -84,12 +84,6 @@ namespace :store_json_data do
                 .map { |user| user if user['userType'] != 'customer' }.compact # TODO: 本番はここ外す
     facilities = JSON.parse(File.read(file_folder.join('facilities.json')))
     recreations = JSON.parse(File.read(file_folder.join('recreations.json')))
-    # binding.pry
-
-    # facilities.map { |f| f if f['_id']['$oid'] == '61273b68f959d852d633bcc8' }.compact.first
-
-    # TODO: instructorはrecreationの中に入っている。recreationsを作るタイミングで一緒にinstructorも生成
-
 
     ActiveRecord::Base.transaction do
       users.each do |user|
@@ -140,17 +134,16 @@ namespace :store_json_data do
             second_title: rec['name'],
             description: rec['description'],
             capacity: rec['capacity'],
-          #   "targetPersons":["軽度認知症
             minutes: rec['requiredTime'],
             flow_of_day: rec['flowOfDay'],
             borrow_item: rec['borrowItem'],
             bring_your_own_item: rec['bringYourOwnItem'],
             is_public: rec['isPublic'],
-          #   "tags":["話題性あり", "行事", "男性にも人気", "プロ", "ほぼ自立", "軽度認知症", "介護度2以下", "スタッフ見守りのみ", "鑑賞型"],
             extra_information: rec['extraInformation'],
             instructor_amount: rec['instructorAmount'],
             base_code: rec['baseCode'],
           )
+
           # TODO: ここにtargetsを検索して入れる、なければ追加
           # TODO: ここにtagsを検索して入れる、なければ追加
           # TODO: categoryを検索して追加
@@ -166,7 +159,17 @@ namespace :store_json_data do
             new_rec.tags << tag
           end
 
+          # TODO: ここがisOnlineなら、それをflagで追加する
 
+
+          category = code_to_tag(rec['baseCode'].split(rec['baseCode'].first)[1])
+
+          if category.present?
+            new_rec.tags << code_to_tag(rec['baseCode'].split(rec['baseCode'].first)[1])
+          end
+
+          # rec['baseCode'].split(rec['baseCode'].first)[1]
+          # => ["", "17"]
         end
 
         instance.save
@@ -174,5 +177,46 @@ namespace :store_json_data do
     end
   rescue StandardError => e
     puts e
+  end
+
+  def code_to_tag(code)
+    case code
+    when '01', '11'
+      Tag.find_or_create_by(name: '音楽', kind: :category)
+    when '02', '12'
+      Tag.find_or_create_by(name: '健康', kind: :category)
+    when '03', '13'
+      Tag.find_or_create_by(name: '趣味', kind: :category)
+    when '04', '14'
+      Tag.find_or_create_by(name: '創作', kind: :category)
+    when '05', '15'
+      Tag.find_or_create_by(name: '旅行', kind: :category)
+    when '06', '16'
+      Tag.find_or_create_by(name: '食べ物', kind: :category)
+    when '07', '17'
+      Tag.find_or_create_by(name: 'イベント', kind: :category)
+    when '08', '18'
+      Tag.find_or_create_by(name: 'その他', kind: :category)
+    end
+
+    # 01:音楽
+    # 02:健康
+    # 03:趣味
+    # 04:創作
+    # 05:旅行
+    # 06:食べ物
+    # 07:イベント
+    # 08:その他
+    # 09:使用不可
+    # 10:なんでも
+    # 11:音楽
+    # 12:健康
+    # 13:趣味
+    # 14:創作
+    # 15:旅行
+    # 16:食べ物
+    # 17:イベント
+    # 18:その他
+    # 19:使用不可
   end
 end

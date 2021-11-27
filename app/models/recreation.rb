@@ -16,6 +16,7 @@
 #  instructor_amount          :integer
 #  instructor_material_amount :integer
 #  instructor_position        :string
+#  is_online                  :boolean          default(FALSE)
 #  is_public                  :boolean
 #  minutes                    :integer
 #  prefectures                :string           default([]), is an Array
