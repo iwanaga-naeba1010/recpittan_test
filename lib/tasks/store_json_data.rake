@@ -112,7 +112,8 @@ namespace :store_json_data do
           )
         elsif user['userType'] == 'instructor'
           next if user['_id']['$oid'].blank?
-
+          # TODO: なぜか登録されていないrecreationがあるので、多分漏れが生じている。
+          # 直せばほぼほぼOK
           rec = recreations.map { |f| f if f['instructorId']['$oid'] ==  user['_id']['$oid'] }.compact.first
 
           next if rec.blank?
