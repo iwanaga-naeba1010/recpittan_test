@@ -4,7 +4,8 @@ require 'rails_helper'
 
 RSpec.describe Customers::RecreationsController, type: :request do
   let(:user) { create :user, :with_custoemr }
-  let(:recreation) { create :recreation }
+  let(:partner) { create :user, :with_recreations }
+  let(:recreation) { partner.recreations.first }
 
   before do
     sign_in user

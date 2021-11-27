@@ -24,7 +24,7 @@
         <div class="">
           <% if user_signed_in? %>
             <i class="price-mark">￥</i>
-            <span class="value"><%= price_pipe(rec.price) %></span>
+            <span class="value"><%= price_pipe(rec.regular_price) %></span>
           <% else %>
             <i class="price-mark">￥</i>
             <span class="value">会員のみ</span>

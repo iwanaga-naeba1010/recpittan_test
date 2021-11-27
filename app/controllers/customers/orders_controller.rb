@@ -100,7 +100,7 @@ EOS
 電話番号: #{current_user.company.tel}
 
 レク名: #{@recreation.title}
-パートナー名: #{@recreation.partner.name}
+パートナー名: #{@recreation.instructor_name}
 ------------------
 #{message}
 EOS

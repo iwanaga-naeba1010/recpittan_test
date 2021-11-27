@@ -4,7 +4,7 @@ require 'rails_helper'
 
 RSpec.describe Customers::OrdersController, type: :request do
   let(:user) { create :user, :with_custoemr }
-  let(:partner) { (create :user, :with_partner).partner }
+  let(:partner) { create :user, :with_recreations }
   let(:recreation) { partner.recreations.first }
   let(:order) { create :order, recreation_id: recreation.id, user_id: user.id }
 
