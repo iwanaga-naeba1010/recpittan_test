@@ -11,7 +11,7 @@
       <div class="col-12">
         <!-- TODO: リリースのタイミングで有効化する -->
         <!-- TODO: Yoshimotoのタグができたらこちらに追加する -->
-        <%= link_to customers_recreations_path(q: { tags_id_eq: @yoshimoto.id }), class: 'nav-link' do %>
+        <%= link_to customers_recreations_path(q: { tags_id_eq: @yoshimoto&.id }), class: 'nav-link' do %>
           <%= image_pack_tag 'yoshimoto.png', class: "img-fluid", alt: "Responsive image" %>
         <% end %>
       </div>

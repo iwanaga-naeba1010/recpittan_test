@@ -43,6 +43,8 @@ class HomeController < ApplicationController
   end
 
   def sort_categories(categories)
+    return [] if categories.blank?
+
     categories = categories.to_a
     [
       categories.map { |c| c if c.name == '音楽' }.compact.first,

@@ -49,6 +49,22 @@ ja:
         extra_information: その他
         youtube_id: YouTubeID
         price: 価格
+        base_code: base_code
+        capacity: キャパシティ
+        flyer_color: チラシ色
+        regular_price: 販売価格
+        instructor_amount: インストラクター - 謝礼
+        instructor_material_amount: インストラクター - 支払材料費
+        regular_material_price: 販売材料費
+        instructor_name: インストラクター名
+#        instructor_position: フライヤーカラー
+        instructor_title: インストラクタータイトル
+        instructor_description: インストラクター詳細
+        instructor_image: インストラクター画像
+        is_online: オンラインかどうか
+        is_public: 公開かどうか
+        prefectures: 都道府県
+
       recreation_image:
         image: 画像
       order:
