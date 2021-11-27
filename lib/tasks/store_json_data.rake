@@ -140,8 +140,8 @@ namespace :store_json_data do
               regular_price: rec['regularPrice'], # NOTE: ここが表示価格
               regular_material_price: rec['regularMaterialPrice'],
               instructor_material_amount: rec['instructorMaterialAmount'],
-              title: rec['title'],
-              second_title: rec['name'],
+              title: rec['name'],
+              second_title: rec['title'],
               description: rec['description'],
               capacity: rec['capacity'],
               minutes: rec['requiredTime'],
@@ -186,7 +186,7 @@ namespace :store_json_data do
           end
         end
 
-        data = instance
+        # data = instance
         instance.save!
       end
     end
