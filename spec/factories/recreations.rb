@@ -16,7 +16,7 @@
 #  title               :string
 #  created_at          :datetime         not null
 #  updated_at          :datetime         not null
-#  partner_id          :bigint
+#  partner_id          :bigint           not null
 #  youtube_id          :string
 #
 # Indexes

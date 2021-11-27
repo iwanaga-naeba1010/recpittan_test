@@ -137,7 +137,7 @@ ActiveRecord::Schema.define(version: 2021_11_24_075010) do
     t.datetime "updated_at", precision: 6, null: false
     t.string "youtube_id"
     t.integer "price", default: 0, null: false
-    t.bigint "partner_id"
+    t.bigint "partner_id", null: false
     t.index ["partner_id"], name: "index_recreations_on_partner_id"
   end
 

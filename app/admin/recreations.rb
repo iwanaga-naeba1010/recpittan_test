@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-# rubocop:disable Metrics/BlockLength
 ActiveAdmin.register Recreation do
   permit_params(
     %i[partner_id title second_title minutes description flow_of_day borrow_item bring_your_own_item extra_information youtube_id price],
@@ -99,4 +98,3 @@ ActiveAdmin.register Recreation do
     f.actions
   end
 end
-# rubocop:enable Metrics/BlockLength

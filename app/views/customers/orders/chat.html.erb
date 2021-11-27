@@ -19,7 +19,7 @@
             </picture>
           </div>
           <div class="col-md-7 recreation">
-            <h1 class="title-b line-height-140"><%= @order.recreation_title %></h1>
+            <h1 class="title-b line-height-140"><%= @order.recreation.title %></h1>
             <div class=" category-tags">
               <% @order.recreation.tags.events.each_with_index do |tag, i| %>
                 <% if i == 0 %>
@@ -39,7 +39,7 @@
             <!--            </div>-->
             <!--            {{/if}}-->
             <div class="border-bottom p-2">
-              <h4 class="title">所要時間 <%= @order.recreation_minutes %>分</h4>
+              <h4 class="title">所要時間 <%= @order.recreation.minutes %>分</h4>
             </div>
             <div class="p-2">
               <h4 class="title">対象者目安</h4>

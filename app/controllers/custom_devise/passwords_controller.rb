@@ -7,11 +7,9 @@ class CustomDevise::PasswordsController < Devise::PasswordsController
   # end
 
   # POST /resource/password
-  # rubocop:disable Lint/UselessMethodDefinition
   def create
     super
   end
-  # rubocop:enable Lint/UselessMethodDefinition
 
   # GET /resource/password/edit?reset_password_token=abcdef
   # def edit
@@ -19,11 +17,9 @@ class CustomDevise::PasswordsController < Devise::PasswordsController
   # end
 
   # PUT /resource/password
-  # rubocop:disable Lint/UselessMethodDefinition
-  def update
-    super
-  end
-  # rubocop:enable Lint/UselessMethodDefinition
+  # def update
+  #   super
+  # end
 
   # protected
 
@@ -32,9 +28,8 @@ class CustomDevise::PasswordsController < Devise::PasswordsController
   # end
 
   # The path used after sending reset password instructions
-  # NOTE: best_practicesで引っかかるので一旦コメント
-  # def after_sending_reset_password_instructions_path_for(_resource_name)
-  #   new_user_session_path
-  #   # super(resource_name)
-  # end
+  def after_sending_reset_password_instructions_path_for(resource_name)
+    new_user_session_path
+    # super(resource_name)
+  end
 end

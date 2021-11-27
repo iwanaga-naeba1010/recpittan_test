@@ -43,10 +43,6 @@ class Order < ApplicationRecord
   has_many :order_memos, dependent: :destroy
   accepts_nested_attributes_for :order_memos, allow_destroy: true
 
-  delegate :title, to: :recreation, prefix: true
-  delegate :price, to: :recreation, prefix: true
-  delegate :minutes, to: :recreation, prefix: true
-
   enumerize :status, in: { consult: 0, order: 1 }, default: 0
 
   # controller のparamsに追加するため
