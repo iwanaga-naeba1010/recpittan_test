@@ -133,6 +133,7 @@ namespace :store_json_data do
           #   description: rec['instructorProfile'],
           # )
 
+          # TODO: YoutubeIdを取得する
           recs.each do |rec|
             new_rec = instance.recreations.build(
               flyer_color: rec['flyerColor'],
