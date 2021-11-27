@@ -11,7 +11,7 @@
       <div class="col-12">
         <!-- TODO: リリースのタイミングで有効化する -->
         <!-- TODO: Yoshimotoのタグができたらこちらに追加する -->
-        <%= link_to customers_recreations_path, class: 'nav-link' do %>
+        <%= link_to customers_recreations_path(q: { tags_id_eq: @yoshimoto&.id }), class: 'nav-link' do %>
           <%= image_pack_tag 'yoshimoto.png', class: "img-fluid", alt: "Responsive image" %>
         <% end %>
       </div>
@@ -19,11 +19,10 @@
     <div class="row py-2">
       <div class="col-12">
         <h1 class="sub-title">よしもとの人気レク</h1>
-        <!--        <p class="sub-description">{{subDescription}}</p>-->
       </div>
     </div>
     <div class="row">
-      <% @recs.each do |rec| %>
+      <% @yoshimoto_recs.each do |rec| %>
         <%= render 'shared/home/card', rec: rec %>
       <% end %>
     </div>
@@ -32,11 +31,10 @@
     <div class="row py-3">
       <div class="col-12">
         <h1 class="sub-title">オンライン旅行の人気レク</h1>
-        <!--        <p class="sub-description">{{subDescription}}</p>-->
       </div>
     </div>
     <div class="row">
-      <% @recs.each do |rec| %>
+      <% @travel_recs.each do |rec| %>
         <%= render 'shared/home/card', rec: rec %>
       <% end %>
     </div>
@@ -46,11 +44,10 @@
     <div class="row py-3">
       <div class="col-12">
         <h1 class="sub-title">オンライン音楽の人気レク</h1>
-        <!--        <p class="sub-description">{{subDescription}}</p>-->
       </div>
     </div>
     <div class="row">
-      <% @recs.each do |rec| %>
+      <% @music_recs.each do |rec| %>
         <%= render 'shared/home/card', rec: rec %>
       <% end %>
     </div>

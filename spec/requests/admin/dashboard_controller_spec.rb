@@ -6,7 +6,7 @@ RSpec.describe 'Dashboard', type: :request do
   let(:admin) { create :user, :with_admin }
   let(:cs) { create :user, :with_cs }
   let(:customer) { create :user, :with_custoemr }
-  let(:partner) { create :user, :with_partner }
+  let(:partner) { create :user, :with_recreations }
 
   before do
     sign_in admin

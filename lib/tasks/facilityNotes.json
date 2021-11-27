@@ -1,0 +1,3764 @@
+[
+  {
+    "_id": {
+      "$oid": "618da6b99c24ce4ca96238e7"
+    },
+    "createdAt": {
+      "$date": "2021-11-11T23:26:49.62Z"
+    },
+    "updatedAt": {
+      "$date": "2021-11-11T14:41:45.41Z"
+    },
+    "isDeleted": false,
+    "version": 3,
+    "userId": {
+      "$oid": "6135a7834def5e321383a659"
+    },
+    "facilityId": {
+      "$oid": "6135a7834def5e321383a656"
+    },
+    "content": "ログインしました",
+    "type": "loginLog",
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "618dbac69c24ce4ca96241ef"
+    },
+    "createdAt": {
+      "$date": "2021-11-12T00:52:22.787Z"
+    },
+    "updatedAt": {
+      "$date": "2021-11-11T14:41:45.41Z"
+    },
+    "isDeleted": false,
+    "version": 3,
+    "userId": {
+      "$oid": "612c33854def5e32138399c9"
+    },
+    "facilityId": {
+      "$oid": "612c33854def5e32138399c6"
+    },
+    "content": "ログインしました",
+    "type": "loginLog",
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "618dbe0c9c24ce4ca9624550"
+    },
+    "createdAt": {
+      "$date": "2021-11-12T01:06:20.904Z"
+    },
+    "updatedAt": {
+      "$date": "2021-11-11T14:41:45.41Z"
+    },
+    "isDeleted": false,
+    "version": 3,
+    "userId": {
+      "$oid": "614a89f9661f293e1b1d6825"
+    },
+    "facilityId": {
+      "$oid": "614a89f8661f293e1b1d6820"
+    },
+    "content": "ログインしました",
+    "type": "loginLog",
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "618dc78745776a4caabb0934"
+    },
+    "createdAt": {
+      "$date": "2021-11-12T01:46:47.27Z"
+    },
+    "updatedAt": {
+      "$date": "2021-11-11T14:41:45.413Z"
+    },
+    "isDeleted": false,
+    "version": 3,
+    "userId": {
+      "$oid": "612993f3f959d852d633be68"
+    },
+    "facilityId": {
+      "$oid": "612993f3f959d852d633be65"
+    },
+    "content": "ログインしました",
+    "type": "loginLog",
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "618dcb709c24ce4ca96249a0"
+    },
+    "createdAt": {
+      "$date": "2021-11-12T02:03:28.289Z"
+    },
+    "updatedAt": {
+      "$date": "2021-11-11T14:41:45.41Z"
+    },
+    "isDeleted": false,
+    "version": 3,
+    "userId": {
+      "$oid": "6135a7834def5e321383a659"
+    },
+    "facilityId": {
+      "$oid": "6135a7834def5e321383a656"
+    },
+    "content": "ログインしました",
+    "type": "loginLog",
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "618dcc319c24ce4ca96249b9"
+    },
+    "createdAt": {
+      "$date": "2021-11-12T02:06:41.834Z"
+    },
+    "updatedAt": {
+      "$date": "2021-11-11T14:41:45.41Z"
+    },
+    "isDeleted": false,
+    "version": 3,
+    "userId": {
+      "$oid": "6127927a064dd252e09ab818"
+    },
+    "facilityId": {
+      "$oid": "61279278064dd252e09ab815"
+    },
+    "content": "ログインしました",
+    "type": "loginLog",
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "618dcd2302116e4cf8724969"
+    },
+    "createdAt": {
+      "$date": "2021-11-12T02:10:43.817Z"
+    },
+    "updatedAt": {
+      "$date": "2021-11-11T14:41:45.4Z"
+    },
+    "isDeleted": false,
+    "version": 3,
+    "userId": {
+      "$oid": "617b914e4000a20418883916"
+    },
+    "facilityId": {
+      "$oid": "617b914e4000a20418883911"
+    },
+    "content": "ログインしました",
+    "type": "loginLog",
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "618de55b02116e4cf872529b"
+    },
+    "createdAt": {
+      "$date": "2021-11-12T03:54:03.685Z"
+    },
+    "updatedAt": {
+      "$date": "2021-11-11T14:41:45.4Z"
+    },
+    "isDeleted": false,
+    "version": 3,
+    "userId": {
+      "$oid": "6135a7834def5e321383a659"
+    },
+    "facilityId": {
+      "$oid": "6135a7834def5e321383a656"
+    },
+    "content": "ログインしました",
+    "type": "loginLog",
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "618dfb1202116e4cf8726867"
+    },
+    "createdAt": {
+      "$date": "2021-11-12T05:26:42.216Z"
+    },
+    "updatedAt": {
+      "$date": "2021-11-11T14:41:45.4Z"
+    },
+    "isDeleted": false,
+    "version": 3,
+    "userId": {
+      "$oid": "6130a2ff798e2e32093ee7f2"
+    },
+    "facilityId": {
+      "$oid": "6130a2ff798e2e32093ee7ef"
+    },
+    "content": "ログインしました",
+    "type": "loginLog",
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "618dfbc445776a4caabb1f5e"
+    },
+    "createdAt": {
+      "$date": "2021-11-12T05:29:40.455Z"
+    },
+    "updatedAt": {
+      "$date": "2021-11-11T14:41:45.413Z"
+    },
+    "isDeleted": false,
+    "version": 3,
+    "userId": {
+      "$oid": "6130a2ff798e2e32093ee7f2"
+    },
+    "facilityId": {
+      "$oid": "6130a2ff798e2e32093ee7ef"
+    },
+    "content": "E110004 - 【著作権料負担無！】歌とトークで綴る昭和ヒットパレードの詳細にアクセスしました。",
+    "type": "accessLog",
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "618dfe8802116e4cf872703e"
+    },
+    "createdAt": {
+      "$date": "2021-11-12T05:41:28.693Z"
+    },
+    "updatedAt": {
+      "$date": "2021-11-11T14:41:45.4Z"
+    },
+    "isDeleted": false,
+    "version": 3,
+    "userId": {
+      "$oid": "6130a2ff798e2e32093ee7f2"
+    },
+    "facilityId": {
+      "$oid": "6130a2ff798e2e32093ee7ef"
+    },
+    "content": "E110004 - 【著作権料負担無！】歌とトークで綴る昭和ヒットパレードの詳細にアクセスしました。",
+    "type": "accessLog",
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "618dfead02116e4cf8727141"
+    },
+    "createdAt": {
+      "$date": "2021-11-12T05:42:05.06Z"
+    },
+    "updatedAt": {
+      "$date": "2021-11-11T14:41:45.4Z"
+    },
+    "isDeleted": false,
+    "version": 3,
+    "userId": {
+      "$oid": "617b914e4000a20418883916"
+    },
+    "facilityId": {
+      "$oid": "617b914e4000a20418883911"
+    },
+    "content": "ログインしました",
+    "type": "loginLog",
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "618dfeb345776a4caabb2642"
+    },
+    "createdAt": {
+      "$date": "2021-11-12T05:42:11.01Z"
+    },
+    "updatedAt": {
+      "$date": "2021-11-11T14:41:45.413Z"
+    },
+    "isDeleted": false,
+    "version": 3,
+    "userId": {
+      "$oid": "6127927a064dd252e09ab818"
+    },
+    "facilityId": {
+      "$oid": "61279278064dd252e09ab815"
+    },
+    "content": "ログインしました",
+    "type": "loginLog",
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "618dfec902116e4cf872715e"
+    },
+    "createdAt": {
+      "$date": "2021-11-12T05:42:33.853Z"
+    },
+    "updatedAt": {
+      "$date": "2021-11-11T14:41:45.4Z"
+    },
+    "isDeleted": false,
+    "version": 3,
+    "userId": {
+      "$oid": "6127927a064dd252e09ab818"
+    },
+    "facilityId": {
+      "$oid": "61279278064dd252e09ab815"
+    },
+    "content": "E110004 - 【著作権料負担無！】歌とトークで綴る昭和ヒットパレードの詳細にアクセスしました。",
+    "type": "accessLog",
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "618e017645776a4caabb2c60"
+    },
+    "createdAt": {
+      "$date": "2021-11-12T05:53:58.953Z"
+    },
+    "updatedAt": {
+      "$date": "2021-11-11T14:41:45.413Z"
+    },
+    "isDeleted": false,
+    "version": 3,
+    "userId": {
+      "$oid": "6130a2ff798e2e32093ee7f2"
+    },
+    "facilityId": {
+      "$oid": "6130a2ff798e2e32093ee7ef"
+    },
+    "content": "E110004 - 【著作権料負担無！】歌とトークで綴る昭和ヒットパレードの詳細にアクセスしました。",
+    "type": "accessLog",
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "618e01c445776a4caabb2c6d"
+    },
+    "createdAt": {
+      "$date": "2021-11-12T05:55:16.559Z"
+    },
+    "updatedAt": {
+      "$date": "2021-11-11T14:41:45.413Z"
+    },
+    "isDeleted": false,
+    "version": 3,
+    "userId": {
+      "$oid": "6136ffe04def5e321383a876"
+    },
+    "facilityId": {
+      "$oid": "6136ffe04def5e321383a873"
+    },
+    "content": "ログインしました",
+    "type": "loginLog",
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "618e01e99c24ce4ca9627a40"
+    },
+    "createdAt": {
+      "$date": "2021-11-12T05:55:53.571Z"
+    },
+    "updatedAt": {
+      "$date": "2021-11-11T14:41:45.41Z"
+    },
+    "isDeleted": false,
+    "version": 3,
+    "userId": {
+      "$oid": "6136ffe04def5e321383a876"
+    },
+    "facilityId": {
+      "$oid": "6136ffe04def5e321383a873"
+    },
+    "content": "E010008 - 懐メロ教室の詳細にアクセスしました。",
+    "type": "accessLog",
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "618e024e02116e4cf8727a3d"
+    },
+    "createdAt": {
+      "$date": "2021-11-12T05:57:34.246Z"
+    },
+    "updatedAt": {
+      "$date": "2021-11-11T14:41:45.4Z"
+    },
+    "isDeleted": false,
+    "version": 3,
+    "userId": {
+      "$oid": "6136ffe04def5e321383a876"
+    },
+    "facilityId": {
+      "$oid": "6136ffe04def5e321383a873"
+    },
+    "content": "E110004 - 【著作権料負担無！】歌とトークで綴る昭和ヒットパレードの詳細にアクセスしました。",
+    "type": "accessLog",
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "618e02d09c24ce4ca9627c54"
+    },
+    "createdAt": {
+      "$date": "2021-11-12T05:59:44.654Z"
+    },
+    "updatedAt": {
+      "$date": "2021-11-11T14:41:45.41Z"
+    },
+    "isDeleted": false,
+    "version": 3,
+    "userId": {
+      "$oid": "6136ffe04def5e321383a876"
+    },
+    "facilityId": {
+      "$oid": "6136ffe04def5e321383a873"
+    },
+    "content": "E120005 - 介護福祉士が伝える救命活動法の詳細にアクセスしました。",
+    "type": "accessLog",
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "618e02e89c24ce4ca9627c62"
+    },
+    "createdAt": {
+      "$date": "2021-11-12T06:00:08.13Z"
+    },
+    "updatedAt": {
+      "$date": "2021-11-11T14:41:45.41Z"
+    },
+    "isDeleted": false,
+    "version": 3,
+    "userId": {
+      "$oid": "6136ffe04def5e321383a876"
+    },
+    "facilityId": {
+      "$oid": "6136ffe04def5e321383a873"
+    },
+    "content": "E110019 - 【オンライン】ジュークのほのぼのウクレレコンサートの詳細にアクセスしました。",
+    "type": "accessLog",
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "618e03999c24ce4ca9627e50"
+    },
+    "createdAt": {
+      "$date": "2021-11-12T06:03:05.393Z"
+    },
+    "updatedAt": {
+      "$date": "2021-11-11T14:41:45.41Z"
+    },
+    "isDeleted": false,
+    "version": 3,
+    "userId": {
+      "$oid": "6136ffe04def5e321383a876"
+    },
+    "facilityId": {
+      "$oid": "6136ffe04def5e321383a873"
+    },
+    "content": "E070012 - 出張寿司の詳細にアクセスしました。",
+    "type": "accessLog",
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "618e03c39c24ce4ca9627f55"
+    },
+    "createdAt": {
+      "$date": "2021-11-12T06:03:47.819Z"
+    },
+    "updatedAt": {
+      "$date": "2021-11-11T14:41:45.41Z"
+    },
+    "isDeleted": false,
+    "version": 3,
+    "userId": {
+      "$oid": "6136ffe04def5e321383a876"
+    },
+    "facilityId": {
+      "$oid": "6136ffe04def5e321383a873"
+    },
+    "content": "E070012 - 出張寿司の詳細にアクセスしました。",
+    "type": "accessLog",
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "618e049045776a4caabb3453"
+    },
+    "createdAt": {
+      "$date": "2021-11-12T06:07:12.078Z"
+    },
+    "updatedAt": {
+      "$date": "2021-11-11T14:41:45.413Z"
+    },
+    "isDeleted": false,
+    "version": 3,
+    "userId": {
+      "$oid": "6136ffe04def5e321383a876"
+    },
+    "facilityId": {
+      "$oid": "6136ffe04def5e321383a873"
+    },
+    "content": "Y170004 - 笑顔歌(えがおか)計画！の詳細にアクセスしました。",
+    "type": "accessLog",
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "618e051b45776a4caabb3464"
+    },
+    "createdAt": {
+      "$date": "2021-11-12T06:09:31.491Z"
+    },
+    "updatedAt": {
+      "$date": "2021-11-11T14:41:45.413Z"
+    },
+    "isDeleted": false,
+    "version": 3,
+    "userId": {
+      "$oid": "6136ffe04def5e321383a876"
+    },
+    "facilityId": {
+      "$oid": "6136ffe04def5e321383a873"
+    },
+    "content": "Y170007 - レギュラーの楽しく『お笑い』介護レク♪の詳細にアクセスしました。",
+    "type": "accessLog",
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "618e060202116e4cf8727fa8"
+    },
+    "createdAt": {
+      "$date": "2021-11-12T06:13:22.871Z"
+    },
+    "updatedAt": {
+      "$date": "2021-11-11T14:41:45.4Z"
+    },
+    "isDeleted": false,
+    "version": 3,
+    "userId": {
+      "$oid": "613025a7798e2e32093ee46c"
+    },
+    "facilityId": {
+      "$oid": "613025a7798e2e32093ee469"
+    },
+    "content": "ログインしました",
+    "type": "loginLog",
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "618e307902116e4cf872b0a4"
+    },
+    "createdAt": {
+      "$date": "2021-11-12T09:14:33.61Z"
+    },
+    "updatedAt": {
+      "$date": "2021-11-11T14:41:45.4Z"
+    },
+    "isDeleted": false,
+    "version": 3,
+    "userId": {
+      "$oid": "617b914e4000a20418883916"
+    },
+    "facilityId": {
+      "$oid": "617b914e4000a20418883911"
+    },
+    "content": "ログインしました",
+    "type": "loginLog",
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "618e52c102116e4cf872dd89"
+    },
+    "createdAt": {
+      "$date": "2021-11-12T11:40:49.737Z"
+    },
+    "updatedAt": {
+      "$date": "2021-11-11T14:41:45.4Z"
+    },
+    "isDeleted": false,
+    "version": 3,
+    "userId": {
+      "$oid": "61278f7f064dd252e09ab80b"
+    },
+    "facilityId": {
+      "$oid": "61278f7d064dd252e09ab808"
+    },
+    "content": "ログインしました",
+    "type": "loginLog",
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "618e52d345776a4caabbaf5d"
+    },
+    "createdAt": {
+      "$date": "2021-11-12T11:41:07.449Z"
+    },
+    "updatedAt": {
+      "$date": "2021-11-11T14:41:45.413Z"
+    },
+    "isDeleted": false,
+    "version": 3,
+    "userId": {
+      "$oid": "61278f7f064dd252e09ab80b"
+    },
+    "facilityId": {
+      "$oid": "61278f7d064dd252e09ab808"
+    },
+    "content": "E170023 - オンラインドッグセラピー（動物介在介護）の詳細にアクセスしました。",
+    "type": "accessLog",
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "618e56fb9c24ce4ca962f0d6"
+    },
+    "createdAt": {
+      "$date": "2021-11-12T11:58:51.846Z"
+    },
+    "updatedAt": {
+      "$date": "2021-11-11T14:41:45.41Z"
+    },
+    "isDeleted": false,
+    "version": 3,
+    "userId": {
+      "$oid": "617b914e4000a20418883916"
+    },
+    "facilityId": {
+      "$oid": "617b914e4000a20418883911"
+    },
+    "content": "ログインしました",
+    "type": "loginLog",
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "618ef97402116e4cf8733f9d"
+    },
+    "createdAt": {
+      "$date": "2021-11-12T23:32:04.504Z"
+    },
+    "updatedAt": {
+      "$date": "2021-11-11T14:41:45.4Z"
+    },
+    "isDeleted": false,
+    "version": 3,
+    "userId": {
+      "$oid": "6178ec861f4eac04341b787e"
+    },
+    "facilityId": {
+      "$oid": "6178ec851f4eac04341b7879"
+    },
+    "content": "ログインしました",
+    "type": "loginLog",
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "618f03579c24ce4ca9633ecf"
+    },
+    "createdAt": {
+      "$date": "2021-11-13T00:14:15.573Z"
+    },
+    "updatedAt": {
+      "$date": "2021-11-11T14:41:45.41Z"
+    },
+    "isDeleted": false,
+    "version": 3,
+    "userId": {
+      "$oid": "61429f51798e2e32093ef8c1"
+    },
+    "facilityId": {
+      "$oid": "61429f50798e2e32093ef8be"
+    },
+    "content": "ログインしました",
+    "type": "loginLog",
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "618f04f69c24ce4ca9633f11"
+    },
+    "createdAt": {
+      "$date": "2021-11-13T00:21:10.26Z"
+    },
+    "updatedAt": {
+      "$date": "2021-11-11T14:41:45.41Z"
+    },
+    "isDeleted": false,
+    "version": 3,
+    "userId": {
+      "$oid": "6180f9539419a6041deef2e0"
+    },
+    "facilityId": {
+      "$oid": "6180f9539419a6041deef2db"
+    },
+    "content": "ログインしました",
+    "type": "loginLog",
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "618f17ed02116e4cf8734d66"
+    },
+    "createdAt": {
+      "$date": "2021-11-13T01:42:05.403Z"
+    },
+    "updatedAt": {
+      "$date": "2021-11-11T14:41:45.4Z"
+    },
+    "isDeleted": false,
+    "version": 3,
+    "userId": {
+      "$oid": "61306a29798e2e32093ee68b"
+    },
+    "facilityId": {
+      "$oid": "61306a29798e2e32093ee688"
+    },
+    "content": "ログインしました",
+    "type": "loginLog",
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "618f2c9f9c24ce4ca96346b9"
+    },
+    "createdAt": {
+      "$date": "2021-11-13T03:10:23.616Z"
+    },
+    "updatedAt": {
+      "$date": "2021-11-11T14:41:45.41Z"
+    },
+    "isDeleted": false,
+    "version": 3,
+    "userId": {
+      "$oid": "612993f3f959d852d633be68"
+    },
+    "facilityId": {
+      "$oid": "612993f3f959d852d633be65"
+    },
+    "content": "ログインしました",
+    "type": "loginLog",
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "618f653b45776a4caabc210f"
+    },
+    "createdAt": {
+      "$date": "2021-11-13T07:11:55.382Z"
+    },
+    "updatedAt": {
+      "$date": "2021-11-11T14:41:45.413Z"
+    },
+    "isDeleted": false,
+    "version": 3,
+    "userId": {
+      "$oid": "61306a29798e2e32093ee68b"
+    },
+    "facilityId": {
+      "$oid": "61306a29798e2e32093ee688"
+    },
+    "content": "ログインしました",
+    "type": "loginLog",
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "618f7f9c02116e4cf873525f"
+    },
+    "createdAt": {
+      "$date": "2021-11-13T09:04:28.543Z"
+    },
+    "updatedAt": {
+      "$date": "2021-11-11T14:41:45.4Z"
+    },
+    "isDeleted": false,
+    "version": 3,
+    "userId": {
+      "$oid": "6178ec861f4eac04341b787e"
+    },
+    "facilityId": {
+      "$oid": "6178ec851f4eac04341b7879"
+    },
+    "content": "ログインしました",
+    "type": "loginLog",
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "618f811902116e4cf873527d"
+    },
+    "createdAt": {
+      "$date": "2021-11-13T09:10:49.714Z"
+    },
+    "updatedAt": {
+      "$date": "2021-11-11T14:41:45.4Z"
+    },
+    "isDeleted": false,
+    "version": 3,
+    "userId": {
+      "$oid": "61306a29798e2e32093ee68b"
+    },
+    "facilityId": {
+      "$oid": "61306a29798e2e32093ee688"
+    },
+    "content": "ログインしました",
+    "type": "loginLog",
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "618f83ce02116e4cf87352c0"
+    },
+    "createdAt": {
+      "$date": "2021-11-13T09:22:22.55Z"
+    },
+    "updatedAt": {
+      "$date": "2021-11-11T14:41:45.4Z"
+    },
+    "isDeleted": false,
+    "version": 3,
+    "userId": {
+      "$oid": "61306a29798e2e32093ee68b"
+    },
+    "facilityId": {
+      "$oid": "61306a29798e2e32093ee688"
+    },
+    "content": "E170023 - オンラインドッグセラピー（動物介在介護）の詳細にアクセスしました。",
+    "type": "accessLog",
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "618f845a9c24ce4ca9634e71"
+    },
+    "createdAt": {
+      "$date": "2021-11-13T09:24:42.175Z"
+    },
+    "updatedAt": {
+      "$date": "2021-11-11T14:41:45.41Z"
+    },
+    "isDeleted": false,
+    "version": 3,
+    "userId": {
+      "$oid": "61306a29798e2e32093ee68b"
+    },
+    "facilityId": {
+      "$oid": "61306a29798e2e32093ee688"
+    },
+    "content": "E110013 - 【オンライン】懐メロ・童謡コンサートの詳細にアクセスしました。",
+    "type": "accessLog",
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "619055a902116e4cf873549f"
+    },
+    "createdAt": {
+      "$date": "2021-11-14T00:17:45.476Z"
+    },
+    "updatedAt": {
+      "$date": "2021-11-11T14:41:45.4Z"
+    },
+    "isDeleted": false,
+    "version": 3,
+    "userId": {
+      "$oid": "6188b5639419a6041df02c7f"
+    },
+    "facilityId": {
+      "$oid": "6188b5639419a6041df02c7a"
+    },
+    "content": "ログインしました",
+    "type": "loginLog",
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "619055cd45776a4caabc2357"
+    },
+    "createdAt": {
+      "$date": "2021-11-14T00:18:21.074Z"
+    },
+    "updatedAt": {
+      "$date": "2021-11-11T14:41:45.413Z"
+    },
+    "isDeleted": false,
+    "version": 3,
+    "userId": {
+      "$oid": "6188b5639419a6041df02c7f"
+    },
+    "facilityId": {
+      "$oid": "6188b5639419a6041df02c7a"
+    },
+    "content": "E110004 - 【著作権料負担無！】歌とトークで綴る昭和ヒットパレードの詳細にアクセスしました。",
+    "type": "accessLog",
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "619056269c24ce4ca9635030"
+    },
+    "createdAt": {
+      "$date": "2021-11-14T00:19:50.649Z"
+    },
+    "updatedAt": {
+      "$date": "2021-11-11T14:41:45.41Z"
+    },
+    "isDeleted": false,
+    "version": 3,
+    "userId": {
+      "$oid": "6188b5639419a6041df02c7f"
+    },
+    "facilityId": {
+      "$oid": "6188b5639419a6041df02c7a"
+    },
+    "content": "E110004 - 【著作権料負担無！】歌とトークで綴る昭和ヒットパレードの詳細にアクセスしました。",
+    "type": "accessLog",
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "6190a7ee9c24ce4ca9635e60"
+    },
+    "createdAt": {
+      "$date": "2021-11-14T06:08:46.697Z"
+    },
+    "updatedAt": {
+      "$date": "2021-11-11T14:41:45.41Z"
+    },
+    "isDeleted": false,
+    "version": 3,
+    "userId": {
+      "$oid": "613025a7798e2e32093ee46c"
+    },
+    "facilityId": {
+      "$oid": "613025a7798e2e32093ee469"
+    },
+    "content": "ログインしました",
+    "type": "loginLog",
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "6191975245776a4caabc35f8"
+    },
+    "createdAt": {
+      "$date": "2021-11-14T23:10:10.711Z"
+    },
+    "updatedAt": {
+      "$date": "2021-11-11T14:41:45.413Z"
+    },
+    "isDeleted": false,
+    "version": 3,
+    "userId": {
+      "$oid": "61306a29798e2e32093ee68b"
+    },
+    "facilityId": {
+      "$oid": "61306a29798e2e32093ee688"
+    },
+    "content": "ログインしました",
+    "type": "loginLog",
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "6191af1b9c24ce4ca9636700"
+    },
+    "createdAt": {
+      "$date": "2021-11-15T00:51:39.175Z"
+    },
+    "updatedAt": {
+      "$date": "2021-11-11T14:41:45.41Z"
+    },
+    "isDeleted": false,
+    "version": 3,
+    "userId": {
+      "$oid": "61306a29798e2e32093ee68b"
+    },
+    "facilityId": {
+      "$oid": "61306a29798e2e32093ee688"
+    },
+    "content": "ログインしました",
+    "type": "loginLog",
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "6191b4ea02116e4cf8736c02"
+    },
+    "createdAt": {
+      "$date": "2021-11-15T01:16:26.956Z"
+    },
+    "updatedAt": {
+      "$date": "2021-11-11T14:41:45.4Z"
+    },
+    "isDeleted": false,
+    "version": 3,
+    "userId": {
+      "$oid": "6130a2ff798e2e32093ee7f2"
+    },
+    "facilityId": {
+      "$oid": "6130a2ff798e2e32093ee7ef"
+    },
+    "content": "ログインしました",
+    "type": "loginLog",
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "6191b60e45776a4caabc376c"
+    },
+    "createdAt": {
+      "$date": "2021-11-15T01:21:18.736Z"
+    },
+    "updatedAt": {
+      "$date": "2021-11-11T14:41:45.413Z"
+    },
+    "isDeleted": false,
+    "version": 3,
+    "userId": {
+      "$oid": "6178ec861f4eac04341b787e"
+    },
+    "facilityId": {
+      "$oid": "6178ec851f4eac04341b7879"
+    },
+    "content": "ログインしました",
+    "type": "loginLog",
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "6191b72745776a4caabc3795"
+    },
+    "createdAt": {
+      "$date": "2021-11-15T01:25:59.449Z"
+    },
+    "updatedAt": {
+      "$date": "2021-11-11T14:41:45.413Z"
+    },
+    "isDeleted": false,
+    "version": 3,
+    "userId": {
+      "$oid": "617b914e4000a20418883916"
+    },
+    "facilityId": {
+      "$oid": "617b914e4000a20418883911"
+    },
+    "content": "ログインしました",
+    "type": "loginLog",
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "6191b9539c24ce4ca9636a3d"
+    },
+    "createdAt": {
+      "$date": "2021-11-15T01:35:15.648Z"
+    },
+    "updatedAt": {
+      "$date": "2021-11-11T14:41:45.41Z"
+    },
+    "isDeleted": false,
+    "version": 3,
+    "userId": {
+      "$oid": "617b914e4000a20418883916"
+    },
+    "facilityId": {
+      "$oid": "617b914e4000a20418883911"
+    },
+    "content": "ログインしました",
+    "type": "loginLog",
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "6191c98f9c24ce4ca9637145"
+    },
+    "createdAt": {
+      "$date": "2021-11-15T02:44:31.41Z"
+    },
+    "updatedAt": {
+      "$date": "2021-11-11T14:41:45.41Z"
+    },
+    "isDeleted": false,
+    "version": 3,
+    "userId": {
+      "$oid": "61306a29798e2e32093ee68b"
+    },
+    "facilityId": {
+      "$oid": "61306a29798e2e32093ee688"
+    },
+    "content": "ログインしました",
+    "type": "loginLog",
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "6191e8c202116e4cf87381ca"
+    },
+    "createdAt": {
+      "$date": "2021-11-15T04:57:38.06Z"
+    },
+    "updatedAt": {
+      "$date": "2021-11-11T14:41:45.4Z"
+    },
+    "isDeleted": false,
+    "version": 3,
+    "userId": {
+      "$oid": "61306a29798e2e32093ee68b"
+    },
+    "facilityId": {
+      "$oid": "61306a29798e2e32093ee688"
+    },
+    "content": "ログインしました",
+    "type": "loginLog",
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "6191fc8b45776a4caabc5247"
+    },
+    "createdAt": {
+      "$date": "2021-11-15T06:22:03.593Z"
+    },
+    "updatedAt": {
+      "$date": "2021-11-11T14:41:45.413Z"
+    },
+    "isDeleted": false,
+    "version": 3,
+    "userId": {
+      "$oid": "6178ec861f4eac04341b787e"
+    },
+    "facilityId": {
+      "$oid": "6178ec851f4eac04341b7879"
+    },
+    "content": "ログインしました",
+    "type": "loginLog",
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "6192092202116e4cf873899a"
+    },
+    "createdAt": {
+      "$date": "2021-11-15T07:15:46.743Z"
+    },
+    "updatedAt": {
+      "$date": "2021-11-11T14:41:45.4Z"
+    },
+    "isDeleted": false,
+    "version": 3,
+    "userId": {
+      "$oid": "6130a2ff798e2e32093ee7f2"
+    },
+    "facilityId": {
+      "$oid": "6130a2ff798e2e32093ee7ef"
+    },
+    "content": "ログインしました",
+    "type": "loginLog",
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "619221f09c24ce4ca96391e6"
+    },
+    "createdAt": {
+      "$date": "2021-11-15T09:01:36.584Z"
+    },
+    "updatedAt": {
+      "$date": "2021-11-11T14:41:45.41Z"
+    },
+    "isDeleted": false,
+    "version": 3,
+    "userId": {
+      "$oid": "6130a2ff798e2e32093ee7f2"
+    },
+    "facilityId": {
+      "$oid": "6130a2ff798e2e32093ee7ef"
+    },
+    "content": "ログインしました",
+    "type": "loginLog",
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "619224019c24ce4ca96392f9"
+    },
+    "createdAt": {
+      "$date": "2021-11-15T09:10:25.457Z"
+    },
+    "updatedAt": {
+      "$date": "2021-11-11T14:41:45.41Z"
+    },
+    "isDeleted": false,
+    "version": 3,
+    "userId": {
+      "$oid": "6127927a064dd252e09ab818"
+    },
+    "facilityId": {
+      "$oid": "61279278064dd252e09ab815"
+    },
+    "content": "ログインしました",
+    "type": "loginLog",
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "6192240a9c24ce4ca9639301"
+    },
+    "createdAt": {
+      "$date": "2021-11-15T09:10:34.364Z"
+    },
+    "updatedAt": {
+      "$date": "2021-11-11T14:41:45.41Z"
+    },
+    "isDeleted": false,
+    "version": 3,
+    "userId": {
+      "$oid": "6127927a064dd252e09ab818"
+    },
+    "facilityId": {
+      "$oid": "61279278064dd252e09ab815"
+    },
+    "content": "E170013 - 東京目黒　美空ひばり記念館見学ツアーの詳細にアクセスしました。",
+    "type": "accessLog",
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "61922d3745776a4caabc6d15"
+    },
+    "createdAt": {
+      "$date": "2021-11-15T09:49:43.267Z"
+    },
+    "updatedAt": {
+      "$date": "2021-11-11T14:41:45.413Z"
+    },
+    "isDeleted": false,
+    "version": 3,
+    "userId": {
+      "$oid": "61306a29798e2e32093ee68b"
+    },
+    "facilityId": {
+      "$oid": "61306a29798e2e32093ee688"
+    },
+    "content": "ログインしました",
+    "type": "loginLog",
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "6193062645776a4caabc91ed"
+    },
+    "createdAt": {
+      "$date": "2021-11-16T01:15:18.14Z"
+    },
+    "updatedAt": {
+      "$date": "2021-11-11T14:41:45.413Z"
+    },
+    "isDeleted": false,
+    "version": 3,
+    "userId": {
+      "$oid": "61429f51798e2e32093ef8c1"
+    },
+    "facilityId": {
+      "$oid": "61429f50798e2e32093ef8be"
+    },
+    "content": "ログインしました",
+    "type": "loginLog",
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "6193062602116e4cf873c4ce"
+    },
+    "createdAt": {
+      "$date": "2021-11-16T01:15:18.253Z"
+    },
+    "updatedAt": {
+      "$date": "2021-11-11T14:41:45.4Z"
+    },
+    "isDeleted": false,
+    "version": 3,
+    "userId": {
+      "$oid": "61429f51798e2e32093ef8c1"
+    },
+    "facilityId": {
+      "$oid": "61429f50798e2e32093ef8be"
+    },
+    "content": "E170021 - 粋な演芸 江戸太神楽を楽しむエンタメレクリエーションの詳細にアクセスしました。",
+    "type": "accessLog",
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "619325c29c24ce4ca963cbe6"
+    },
+    "createdAt": {
+      "$date": "2021-11-16T03:30:10.771Z"
+    },
+    "updatedAt": {
+      "$date": "2021-11-11T14:41:45.41Z"
+    },
+    "isDeleted": false,
+    "version": 3,
+    "userId": {
+      "$oid": "61306a29798e2e32093ee68b"
+    },
+    "facilityId": {
+      "$oid": "61306a29798e2e32093ee688"
+    },
+    "content": "ログインしました",
+    "type": "loginLog",
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "619338f402116e4cf873c65b"
+    },
+    "createdAt": {
+      "$date": "2021-11-16T04:52:04.931Z"
+    },
+    "updatedAt": {
+      "$date": "2021-11-11T14:41:45.4Z"
+    },
+    "isDeleted": false,
+    "version": 3,
+    "userId": {
+      "$oid": "6127927a064dd252e09ab818"
+    },
+    "facilityId": {
+      "$oid": "61279278064dd252e09ab815"
+    },
+    "content": "ログインしました",
+    "type": "loginLog",
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "619338fd45776a4caabc9395"
+    },
+    "createdAt": {
+      "$date": "2021-11-16T04:52:13.362Z"
+    },
+    "updatedAt": {
+      "$date": "2021-11-11T14:41:45.413Z"
+    },
+    "isDeleted": false,
+    "version": 3,
+    "userId": {
+      "$oid": "6127927a064dd252e09ab818"
+    },
+    "facilityId": {
+      "$oid": "61279278064dd252e09ab815"
+    },
+    "content": "E170013 - 東京目黒　美空ひばり記念館見学ツアーの詳細にアクセスしました。",
+    "type": "accessLog",
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "619339bb45776a4caabc939d"
+    },
+    "createdAt": {
+      "$date": "2021-11-16T04:55:23.936Z"
+    },
+    "updatedAt": {
+      "$date": "2021-11-11T14:41:45.413Z"
+    },
+    "isDeleted": false,
+    "version": 3,
+    "userId": {
+      "$oid": "6127927a064dd252e09ab818"
+    },
+    "facilityId": {
+      "$oid": "61279278064dd252e09ab815"
+    },
+    "content": "E010013 - 思い出の唄　ギター弾き語りの詳細にアクセスしました。",
+    "type": "accessLog",
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "619339e802116e4cf873c669"
+    },
+    "createdAt": {
+      "$date": "2021-11-16T04:56:08.66Z"
+    },
+    "updatedAt": {
+      "$date": "2021-11-11T14:41:45.4Z"
+    },
+    "isDeleted": false,
+    "version": 3,
+    "userId": {
+      "$oid": "6127927a064dd252e09ab818"
+    },
+    "facilityId": {
+      "$oid": "61279278064dd252e09ab815"
+    },
+    "content": "Y170010 - よしもとお笑い介護ブ！にお任せプランの詳細にアクセスしました。",
+    "type": "accessLog",
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "619339fa02116e4cf873c676"
+    },
+    "createdAt": {
+      "$date": "2021-11-16T04:56:26.621Z"
+    },
+    "updatedAt": {
+      "$date": "2021-11-11T14:41:45.4Z"
+    },
+    "isDeleted": false,
+    "version": 3,
+    "userId": {
+      "$oid": "6127927a064dd252e09ab818"
+    },
+    "facilityId": {
+      "$oid": "61279278064dd252e09ab815"
+    },
+    "content": "Y170010 - よしもとお笑い介護ブ！にお任せプランの詳細にアクセスしました。",
+    "type": "accessLog",
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "61933c9d9c24ce4ca963cc96"
+    },
+    "createdAt": {
+      "$date": "2021-11-16T05:07:41.698Z"
+    },
+    "updatedAt": {
+      "$date": "2021-11-11T14:41:45.41Z"
+    },
+    "isDeleted": false,
+    "version": 3,
+    "userId": {
+      "$oid": "6136dcf04def5e321383a809"
+    },
+    "facilityId": {
+      "$oid": "6136dcf04def5e321383a806"
+    },
+    "content": "ログインしました",
+    "type": "loginLog",
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "619347659c24ce4ca963d3ca"
+    },
+    "createdAt": {
+      "$date": "2021-11-16T05:53:41.558Z"
+    },
+    "updatedAt": {
+      "$date": "2021-11-11T14:41:45.41Z"
+    },
+    "isDeleted": false,
+    "version": 3,
+    "userId": {
+      "$oid": "6158af47bfd942df1c1c661d"
+    },
+    "facilityId": {
+      "$oid": "6158af47bfd942df1c1c6618"
+    },
+    "content": "ログインしました",
+    "type": "loginLog",
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "6193477c02116e4cf873cb61"
+    },
+    "createdAt": {
+      "$date": "2021-11-16T05:54:04.112Z"
+    },
+    "updatedAt": {
+      "$date": "2021-11-11T14:41:45.4Z"
+    },
+    "isDeleted": false,
+    "version": 3,
+    "userId": {
+      "$oid": "6158af47bfd942df1c1c661d"
+    },
+    "facilityId": {
+      "$oid": "6158af47bfd942df1c1c6618"
+    },
+    "content": "E170021 - 粋な演芸 江戸太神楽を楽しむエンタメレクリエーションの詳細にアクセスしました。",
+    "type": "accessLog",
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "61935b949c24ce4ca963d632"
+    },
+    "createdAt": {
+      "$date": "2021-11-16T07:19:48.05Z"
+    },
+    "updatedAt": {
+      "$date": "2021-11-11T14:41:45.41Z"
+    },
+    "isDeleted": false,
+    "version": 3,
+    "userId": {
+      "$oid": "61479173d5bbfeece08e0645"
+    },
+    "facilityId": {
+      "$oid": "61479172d5bbfeece08e05fb"
+    },
+    "content": "ログインしました",
+    "type": "loginLog",
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "61936ac002116e4cf873d2e1"
+    },
+    "createdAt": {
+      "$date": "2021-11-16T08:24:32.269Z"
+    },
+    "updatedAt": {
+      "$date": "2021-11-11T14:41:45.4Z"
+    },
+    "isDeleted": false,
+    "version": 3,
+    "userId": {
+      "$oid": "61479173d5bbfeece08e0645"
+    },
+    "facilityId": {
+      "$oid": "61479172d5bbfeece08e05fb"
+    },
+    "content": "ログインしました",
+    "type": "loginLog",
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "61943ec702116e4cf873dd40"
+    },
+    "createdAt": {
+      "$date": "2021-11-16T23:29:11.009Z"
+    },
+    "updatedAt": {
+      "$date": "2021-11-11T14:41:45.4Z"
+    },
+    "isDeleted": false,
+    "version": 3,
+    "userId": {
+      "$oid": "6178ec861f4eac04341b787e"
+    },
+    "facilityId": {
+      "$oid": "6178ec851f4eac04341b7879"
+    },
+    "content": "ログインしました",
+    "type": "loginLog",
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "61946e4e9c24ce4ca963f7a4"
+    },
+    "createdAt": {
+      "$date": "2021-11-17T02:51:58.937Z"
+    },
+    "updatedAt": {
+      "$date": "2021-11-11T14:41:45.41Z"
+    },
+    "isDeleted": false,
+    "version": 3,
+    "userId": {
+      "$oid": "6158af47bfd942df1c1c661d"
+    },
+    "facilityId": {
+      "$oid": "6158af47bfd942df1c1c6618"
+    },
+    "content": "ログインしました",
+    "type": "loginLog",
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "61946e6e45776a4caabcbee7"
+    },
+    "createdAt": {
+      "$date": "2021-11-17T02:52:30.668Z"
+    },
+    "updatedAt": {
+      "$date": "2021-11-11T14:41:45.413Z"
+    },
+    "isDeleted": false,
+    "version": 3,
+    "userId": {
+      "$oid": "6158af47bfd942df1c1c661d"
+    },
+    "facilityId": {
+      "$oid": "6158af47bfd942df1c1c6618"
+    },
+    "content": "E120001 - 【オンライン】脳とカラダのらくらく体操の詳細にアクセスしました。",
+    "type": "accessLog",
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "61946e769c24ce4ca963f7b1"
+    },
+    "createdAt": {
+      "$date": "2021-11-17T02:52:38.763Z"
+    },
+    "updatedAt": {
+      "$date": "2021-11-11T14:41:45.41Z"
+    },
+    "isDeleted": false,
+    "version": 3,
+    "userId": {
+      "$oid": "6158af47bfd942df1c1c661d"
+    },
+    "facilityId": {
+      "$oid": "6158af47bfd942df1c1c6618"
+    },
+    "content": "E020006 - いきいき体操教室の詳細にアクセスしました。",
+    "type": "accessLog",
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "61946eaa9c24ce4ca963f7be"
+    },
+    "createdAt": {
+      "$date": "2021-11-17T02:53:30.328Z"
+    },
+    "updatedAt": {
+      "$date": "2021-11-11T14:41:45.41Z"
+    },
+    "isDeleted": false,
+    "version": 3,
+    "userId": {
+      "$oid": "6158af47bfd942df1c1c661d"
+    },
+    "facilityId": {
+      "$oid": "6158af47bfd942df1c1c6618"
+    },
+    "content": "E120004 - 座ったままで楽々健康長寿体操の詳細にアクセスしました。",
+    "type": "accessLog",
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "61946f519c24ce4ca963f7d1"
+    },
+    "createdAt": {
+      "$date": "2021-11-17T02:56:17.302Z"
+    },
+    "updatedAt": {
+      "$date": "2021-11-11T14:41:45.41Z"
+    },
+    "isDeleted": false,
+    "version": 3,
+    "userId": {
+      "$oid": "6158af47bfd942df1c1c661d"
+    },
+    "facilityId": {
+      "$oid": "6158af47bfd942df1c1c6618"
+    },
+    "content": "E020010 - 笑顔で楽しく健康体操の詳細にアクセスしました。",
+    "type": "accessLog",
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "61946f569c24ce4ca963f7d9"
+    },
+    "createdAt": {
+      "$date": "2021-11-17T02:56:22.236Z"
+    },
+    "updatedAt": {
+      "$date": "2021-11-11T14:41:45.41Z"
+    },
+    "isDeleted": false,
+    "version": 3,
+    "userId": {
+      "$oid": "6158af47bfd942df1c1c661d"
+    },
+    "facilityId": {
+      "$oid": "6158af47bfd942df1c1c6618"
+    },
+    "content": "E020009 - 脳トレ笑い体操の詳細にアクセスしました。",
+    "type": "accessLog",
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "61946f5e02116e4cf873ebaf"
+    },
+    "createdAt": {
+      "$date": "2021-11-17T02:56:30.02Z"
+    },
+    "updatedAt": {
+      "$date": "2021-11-11T14:41:45.4Z"
+    },
+    "isDeleted": false,
+    "version": 3,
+    "userId": {
+      "$oid": "6158af47bfd942df1c1c661d"
+    },
+    "facilityId": {
+      "$oid": "6158af47bfd942df1c1c6618"
+    },
+    "content": "N120001 - 生ごぼう体操！の詳細にアクセスしました。",
+    "type": "accessLog",
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "6194710a45776a4caabcbf21"
+    },
+    "createdAt": {
+      "$date": "2021-11-17T03:03:38.825Z"
+    },
+    "updatedAt": {
+      "$date": "2021-11-11T14:41:45.413Z"
+    },
+    "isDeleted": false,
+    "version": 3,
+    "userId": {
+      "$oid": "6158af47bfd942df1c1c661d"
+    },
+    "facilityId": {
+      "$oid": "6158af47bfd942df1c1c6618"
+    },
+    "content": "E010017 - オンラインで美しい童謡音楽レクリエーション教室の詳細にアクセスしました。",
+    "type": "accessLog",
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "619471329c24ce4ca963f8d9"
+    },
+    "createdAt": {
+      "$date": "2021-11-17T03:04:18.827Z"
+    },
+    "updatedAt": {
+      "$date": "2021-11-11T14:41:45.41Z"
+    },
+    "isDeleted": false,
+    "version": 3,
+    "userId": {
+      "$oid": "6158af47bfd942df1c1c661d"
+    },
+    "facilityId": {
+      "$oid": "6158af47bfd942df1c1c6618"
+    },
+    "content": "E010017 - オンラインで美しい童謡音楽レクリエーション教室の詳細にアクセスしました。",
+    "type": "accessLog",
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "619473049c24ce4ca963f8eb"
+    },
+    "createdAt": {
+      "$date": "2021-11-17T03:12:04.651Z"
+    },
+    "updatedAt": {
+      "$date": "2021-11-11T14:41:45.41Z"
+    },
+    "isDeleted": false,
+    "version": 3,
+    "userId": {
+      "$oid": "6158af47bfd942df1c1c661d"
+    },
+    "facilityId": {
+      "$oid": "6158af47bfd942df1c1c6618"
+    },
+    "content": "E010017 - オンラインで美しい童謡音楽レクリエーション教室の詳細にアクセスしました。",
+    "type": "accessLog",
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "6194730e02116e4cf873ecd0"
+    },
+    "createdAt": {
+      "$date": "2021-11-17T03:12:14.669Z"
+    },
+    "updatedAt": {
+      "$date": "2021-11-11T14:41:45.4Z"
+    },
+    "isDeleted": false,
+    "version": 3,
+    "userId": {
+      "$oid": "61306a29798e2e32093ee68b"
+    },
+    "facilityId": {
+      "$oid": "61306a29798e2e32093ee688"
+    },
+    "content": "ログインしました",
+    "type": "loginLog",
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "6194741202116e4cf873ed08"
+    },
+    "createdAt": {
+      "$date": "2021-11-17T03:16:34.618Z"
+    },
+    "updatedAt": {
+      "$date": "2021-11-11T14:41:45.4Z"
+    },
+    "isDeleted": false,
+    "version": 3,
+    "userId": {
+      "$oid": "6158af47bfd942df1c1c661d"
+    },
+    "facilityId": {
+      "$oid": "6158af47bfd942df1c1c6618"
+    },
+    "content": "E010017 - オンラインで美しい童謡音楽レクリエーション教室の詳細にアクセスしました。",
+    "type": "accessLog",
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "6194748d02116e4cf873ed1a"
+    },
+    "createdAt": {
+      "$date": "2021-11-17T03:18:37.531Z"
+    },
+    "updatedAt": {
+      "$date": "2021-11-11T14:41:45.4Z"
+    },
+    "isDeleted": false,
+    "version": 3,
+    "userId": {
+      "$oid": "6158af47bfd942df1c1c661d"
+    },
+    "facilityId": {
+      "$oid": "6158af47bfd942df1c1c6618"
+    },
+    "content": "E010017 - オンラインで美しい童謡音楽レクリエーション教室の詳細にアクセスしました。",
+    "type": "accessLog",
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "619474bb9c24ce4ca963fa3e"
+    },
+    "createdAt": {
+      "$date": "2021-11-17T03:19:23.375Z"
+    },
+    "updatedAt": {
+      "$date": "2021-11-11T14:41:45.41Z"
+    },
+    "isDeleted": false,
+    "version": 3,
+    "userId": {
+      "$oid": "6158af47bfd942df1c1c661d"
+    },
+    "facilityId": {
+      "$oid": "6158af47bfd942df1c1c6618"
+    },
+    "content": "E120004 - 座ったままで楽々健康長寿体操の詳細にアクセスしました。",
+    "type": "accessLog",
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "619475c19c24ce4ca963fa5d"
+    },
+    "createdAt": {
+      "$date": "2021-11-17T03:23:45.968Z"
+    },
+    "updatedAt": {
+      "$date": "2021-11-11T14:41:45.41Z"
+    },
+    "isDeleted": false,
+    "version": 3,
+    "userId": {
+      "$oid": "6158af47bfd942df1c1c661d"
+    },
+    "facilityId": {
+      "$oid": "6158af47bfd942df1c1c6618"
+    },
+    "content": "E120004 - 座ったままで楽々健康長寿体操の詳細にアクセスしました。",
+    "type": "accessLog",
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "6194765a9c24ce4ca963fb62"
+    },
+    "createdAt": {
+      "$date": "2021-11-17T03:26:18.768Z"
+    },
+    "updatedAt": {
+      "$date": "2021-11-11T14:41:45.41Z"
+    },
+    "isDeleted": false,
+    "version": 3,
+    "userId": {
+      "$oid": "6158af47bfd942df1c1c661d"
+    },
+    "facilityId": {
+      "$oid": "6158af47bfd942df1c1c6618"
+    },
+    "content": "E010017 - オンラインで美しい童謡音楽レクリエーション教室の詳細にアクセスしました。",
+    "type": "accessLog",
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "61947b589c24ce4ca963fb8d"
+    },
+    "createdAt": {
+      "$date": "2021-11-17T03:47:36.798Z"
+    },
+    "updatedAt": {
+      "$date": "2021-11-11T14:41:45.41Z"
+    },
+    "isDeleted": false,
+    "version": 3,
+    "userId": {
+      "$oid": "6127927a064dd252e09ab818"
+    },
+    "facilityId": {
+      "$oid": "61279278064dd252e09ab815"
+    },
+    "content": "ログインしました",
+    "type": "loginLog",
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "61947b6302116e4cf873f057"
+    },
+    "createdAt": {
+      "$date": "2021-11-17T03:47:47.171Z"
+    },
+    "updatedAt": {
+      "$date": "2021-11-11T14:41:45.4Z"
+    },
+    "isDeleted": false,
+    "version": 3,
+    "userId": {
+      "$oid": "6127927a064dd252e09ab818"
+    },
+    "facilityId": {
+      "$oid": "61279278064dd252e09ab815"
+    },
+    "content": "E110009 - シルバーリトミック（健康音楽教室）の詳細にアクセスしました。",
+    "type": "accessLog",
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "61947bdc02116e4cf873f05f"
+    },
+    "createdAt": {
+      "$date": "2021-11-17T03:49:48.105Z"
+    },
+    "updatedAt": {
+      "$date": "2021-11-11T14:41:45.4Z"
+    },
+    "isDeleted": false,
+    "version": 3,
+    "userId": {
+      "$oid": "6127927a064dd252e09ab818"
+    },
+    "facilityId": {
+      "$oid": "61279278064dd252e09ab815"
+    },
+    "content": "E110004 - 【著作権料負担無！】歌とトークで綴る昭和ヒットパレードの詳細にアクセスしました。",
+    "type": "accessLog",
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "61947c559c24ce4ca963fba9"
+    },
+    "createdAt": {
+      "$date": "2021-11-17T03:51:49.656Z"
+    },
+    "updatedAt": {
+      "$date": "2021-11-11T14:41:45.41Z"
+    },
+    "isDeleted": false,
+    "version": 3,
+    "userId": {
+      "$oid": "6127927a064dd252e09ab818"
+    },
+    "facilityId": {
+      "$oid": "61279278064dd252e09ab815"
+    },
+    "content": "E170013 - 東京目黒　美空ひばり記念館見学ツアーの詳細にアクセスしました。",
+    "type": "accessLog",
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "61947c8302116e4cf873f0c3"
+    },
+    "createdAt": {
+      "$date": "2021-11-17T03:52:35.865Z"
+    },
+    "updatedAt": {
+      "$date": "2021-11-11T14:41:45.4Z"
+    },
+    "isDeleted": false,
+    "version": 3,
+    "userId": {
+      "$oid": "6127927a064dd252e09ab818"
+    },
+    "facilityId": {
+      "$oid": "61279278064dd252e09ab815"
+    },
+    "content": "N120001 - 生ごぼう体操！の詳細にアクセスしました。",
+    "type": "accessLog",
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "61947dfd45776a4caabcc4e4"
+    },
+    "createdAt": {
+      "$date": "2021-11-17T03:58:53.229Z"
+    },
+    "updatedAt": {
+      "$date": "2021-11-11T14:41:45.413Z"
+    },
+    "isDeleted": false,
+    "version": 3,
+    "userId": {
+      "$oid": "6127927a064dd252e09ab818"
+    },
+    "facilityId": {
+      "$oid": "61279278064dd252e09ab815"
+    },
+    "content": "E120004 - 座ったままで楽々健康長寿体操の詳細にアクセスしました。",
+    "type": "accessLog",
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "61947f4b02116e4cf873f1be"
+    },
+    "createdAt": {
+      "$date": "2021-11-17T04:04:27.684Z"
+    },
+    "updatedAt": {
+      "$date": "2021-11-11T14:41:45.4Z"
+    },
+    "isDeleted": false,
+    "version": 3,
+    "userId": {
+      "$oid": "6127927a064dd252e09ab818"
+    },
+    "facilityId": {
+      "$oid": "61279278064dd252e09ab815"
+    },
+    "content": "E010008 - 懐メロ教室の詳細にアクセスしました。",
+    "type": "accessLog",
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "61947f749c24ce4ca963fc1b"
+    },
+    "createdAt": {
+      "$date": "2021-11-17T04:05:08.959Z"
+    },
+    "updatedAt": {
+      "$date": "2021-11-11T14:41:45.41Z"
+    },
+    "isDeleted": false,
+    "version": 3,
+    "userId": {
+      "$oid": "6127927a064dd252e09ab818"
+    },
+    "facilityId": {
+      "$oid": "61279278064dd252e09ab815"
+    },
+    "content": "E010014 - ピアノと歌のポップス&ジャズコンサートの詳細にアクセスしました。",
+    "type": "accessLog",
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "61947f8802116e4cf873f1c6"
+    },
+    "createdAt": {
+      "$date": "2021-11-17T04:05:28.846Z"
+    },
+    "updatedAt": {
+      "$date": "2021-11-11T14:41:45.4Z"
+    },
+    "isDeleted": false,
+    "version": 3,
+    "userId": {
+      "$oid": "6127927a064dd252e09ab818"
+    },
+    "facilityId": {
+      "$oid": "61279278064dd252e09ab815"
+    },
+    "content": "E010017 - オンラインで美しい童謡音楽レクリエーション教室の詳細にアクセスしました。",
+    "type": "accessLog",
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "6194808c02116e4cf873f2c1"
+    },
+    "createdAt": {
+      "$date": "2021-11-17T04:09:48.711Z"
+    },
+    "updatedAt": {
+      "$date": "2021-11-11T14:41:45.4Z"
+    },
+    "isDeleted": false,
+    "version": 3,
+    "userId": {
+      "$oid": "6127927a064dd252e09ab818"
+    },
+    "facilityId": {
+      "$oid": "61279278064dd252e09ab815"
+    },
+    "content": "Y170009 - 歌とギターのコンサートの詳細にアクセスしました。",
+    "type": "accessLog",
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "619480bc02116e4cf873f2d0"
+    },
+    "createdAt": {
+      "$date": "2021-11-17T04:10:36.607Z"
+    },
+    "updatedAt": {
+      "$date": "2021-11-11T14:41:45.4Z"
+    },
+    "isDeleted": false,
+    "version": 3,
+    "userId": {
+      "$oid": "6127927a064dd252e09ab818"
+    },
+    "facilityId": {
+      "$oid": "61279278064dd252e09ab815"
+    },
+    "content": "E010017 - オンラインで美しい童謡音楽レクリエーション教室の詳細にアクセスしました。",
+    "type": "accessLog",
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "619486569c24ce4ca963fdde"
+    },
+    "createdAt": {
+      "$date": "2021-11-17T04:34:30.789Z"
+    },
+    "updatedAt": {
+      "$date": "2021-11-11T14:41:45.41Z"
+    },
+    "isDeleted": false,
+    "version": 3,
+    "userId": {
+      "$oid": "6130a2ff798e2e32093ee7f2"
+    },
+    "facilityId": {
+      "$oid": "6130a2ff798e2e32093ee7ef"
+    },
+    "content": "ログインしました",
+    "type": "loginLog",
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "61948dcf02116e4cf873f61f"
+    },
+    "createdAt": {
+      "$date": "2021-11-17T05:06:23.853Z"
+    },
+    "updatedAt": {
+      "$date": "2021-11-11T14:41:45.4Z"
+    },
+    "isDeleted": false,
+    "version": 3,
+    "userId": {
+      "$oid": "617b827c4000a20418882734"
+    },
+    "facilityId": {
+      "$oid": "617b827c4000a2041888272f"
+    },
+    "content": "ログインしました",
+    "type": "loginLog",
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "6194a63102116e4cf873fad8"
+    },
+    "createdAt": {
+      "$date": "2021-11-17T06:50:25.426Z"
+    },
+    "updatedAt": {
+      "$date": "2021-11-11T14:41:45.4Z"
+    },
+    "isDeleted": false,
+    "version": 3,
+    "userId": {
+      "$oid": "6127927a064dd252e09ab818"
+    },
+    "facilityId": {
+      "$oid": "61279278064dd252e09ab815"
+    },
+    "content": "ログインしました",
+    "type": "loginLog",
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "6194a6379c24ce4ca9640ab2"
+    },
+    "createdAt": {
+      "$date": "2021-11-17T06:50:31.341Z"
+    },
+    "updatedAt": {
+      "$date": "2021-11-11T14:41:45.41Z"
+    },
+    "isDeleted": false,
+    "version": 3,
+    "userId": {
+      "$oid": "6127927a064dd252e09ab818"
+    },
+    "facilityId": {
+      "$oid": "61279278064dd252e09ab815"
+    },
+    "content": "E010001 - 幸せ配達人けんちゃんの昭和歌謡ショーの詳細にアクセスしました。",
+    "type": "accessLog",
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "6194a71345776a4caabcd615"
+    },
+    "createdAt": {
+      "$date": "2021-11-17T06:54:11.141Z"
+    },
+    "updatedAt": {
+      "$date": "2021-11-11T14:41:45.413Z"
+    },
+    "isDeleted": false,
+    "version": 3,
+    "userId": {
+      "$oid": "6127927a064dd252e09ab818"
+    },
+    "facilityId": {
+      "$oid": "61279278064dd252e09ab815"
+    },
+    "content": "E120004 - 座ったままで楽々健康長寿体操の詳細にアクセスしました。",
+    "type": "accessLog",
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "6194bc6445776a4caabce59e"
+    },
+    "createdAt": {
+      "$date": "2021-11-17T08:25:08.951Z"
+    },
+    "updatedAt": {
+      "$date": "2021-11-11T14:41:45.413Z"
+    },
+    "isDeleted": false,
+    "version": 3,
+    "userId": {
+      "$oid": "6158af47bfd942df1c1c661d"
+    },
+    "facilityId": {
+      "$oid": "6158af47bfd942df1c1c6618"
+    },
+    "content": "ログインしました",
+    "type": "loginLog",
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "6194bc7345776a4caabce5a6"
+    },
+    "createdAt": {
+      "$date": "2021-11-17T08:25:23.908Z"
+    },
+    "updatedAt": {
+      "$date": "2021-11-11T14:41:45.413Z"
+    },
+    "isDeleted": false,
+    "version": 3,
+    "userId": {
+      "$oid": "6158af47bfd942df1c1c661d"
+    },
+    "facilityId": {
+      "$oid": "6158af47bfd942df1c1c6618"
+    },
+    "content": "E040001 - パステル和アート体験の詳細にアクセスしました。",
+    "type": "accessLog",
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "61958d1a9c24ce4ca9645ecf"
+    },
+    "createdAt": {
+      "$date": "2021-11-17T23:15:38.828Z"
+    },
+    "updatedAt": {
+      "$date": "2021-11-11T14:41:45.41Z"
+    },
+    "isDeleted": false,
+    "version": 3,
+    "userId": {
+      "$oid": "6136dcf04def5e321383a809"
+    },
+    "facilityId": {
+      "$oid": "6136dcf04def5e321383a806"
+    },
+    "content": "ログインしました",
+    "type": "loginLog",
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "61959dd945776a4caabd48b8"
+    },
+    "createdAt": {
+      "$date": "2021-11-18T00:27:05.019Z"
+    },
+    "updatedAt": {
+      "$date": "2021-11-11T14:41:45.413Z"
+    },
+    "isDeleted": false,
+    "version": 3,
+    "userId": {
+      "$oid": "6188b5639419a6041df02c7f"
+    },
+    "facilityId": {
+      "$oid": "6188b5639419a6041df02c7a"
+    },
+    "content": "ログインしました",
+    "type": "loginLog",
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "6195b2969c24ce4ca964753a"
+    },
+    "createdAt": {
+      "$date": "2021-11-18T01:55:34.124Z"
+    },
+    "updatedAt": {
+      "$date": "2021-11-11T14:41:45.41Z"
+    },
+    "isDeleted": false,
+    "version": 3,
+    "userId": {
+      "$oid": "617b827c4000a20418882734"
+    },
+    "facilityId": {
+      "$oid": "617b827c4000a2041888272f"
+    },
+    "content": "ログインしました",
+    "type": "loginLog",
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "6195bd619c24ce4ca96480ea"
+    },
+    "createdAt": {
+      "$date": "2021-11-18T02:41:37.754Z"
+    },
+    "updatedAt": {
+      "$date": "2021-11-11T14:41:45.41Z"
+    },
+    "isDeleted": false,
+    "version": 3,
+    "userId": {
+      "$oid": "61443c724def5e321383b114"
+    },
+    "facilityId": {
+      "$oid": "61443c724def5e321383b111"
+    },
+    "content": "ログインしました",
+    "type": "loginLog",
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "6195bd6e45776a4caabd6010"
+    },
+    "createdAt": {
+      "$date": "2021-11-18T02:41:50.201Z"
+    },
+    "updatedAt": {
+      "$date": "2021-11-11T14:41:45.413Z"
+    },
+    "isDeleted": false,
+    "version": 3,
+    "userId": {
+      "$oid": "61443c724def5e321383b114"
+    },
+    "facilityId": {
+      "$oid": "61443c724def5e321383b111"
+    },
+    "content": "E110004 - 【著作権料負担無！】歌とトークで綴る昭和ヒットパレードの詳細にアクセスしました。",
+    "type": "accessLog",
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "6195c08702116e4cf87470e7"
+    },
+    "createdAt": {
+      "$date": "2021-11-18T02:55:03.383Z"
+    },
+    "updatedAt": {
+      "$date": "2021-11-11T14:41:45.4Z"
+    },
+    "isDeleted": false,
+    "version": 3,
+    "userId": {
+      "$oid": "6188b5639419a6041df02c7f"
+    },
+    "facilityId": {
+      "$oid": "6188b5639419a6041df02c7a"
+    },
+    "content": "ログインしました",
+    "type": "loginLog",
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "6195dfaf45776a4caabd85b4"
+    },
+    "createdAt": {
+      "$date": "2021-11-18T05:07:59.344Z"
+    },
+    "updatedAt": {
+      "$date": "2021-11-11T14:41:45.413Z"
+    },
+    "isDeleted": false,
+    "version": 3,
+    "userId": {
+      "$oid": "61479173d5bbfeece08e0645"
+    },
+    "facilityId": {
+      "$oid": "61479172d5bbfeece08e05fb"
+    },
+    "content": "ログインしました",
+    "type": "loginLog",
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "6195dfc202116e4cf8749883"
+    },
+    "createdAt": {
+      "$date": "2021-11-18T05:08:18.754Z"
+    },
+    "updatedAt": {
+      "$date": "2021-11-11T14:41:45.4Z"
+    },
+    "isDeleted": false,
+    "version": 3,
+    "userId": {
+      "$oid": "6188b5639419a6041df02c7f"
+    },
+    "facilityId": {
+      "$oid": "6188b5639419a6041df02c7a"
+    },
+    "content": "ログインしました",
+    "type": "loginLog",
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "6195e27b9c24ce4ca964a42a"
+    },
+    "createdAt": {
+      "$date": "2021-11-18T05:19:55.066Z"
+    },
+    "updatedAt": {
+      "$date": "2021-11-11T14:41:45.41Z"
+    },
+    "isDeleted": false,
+    "version": 3,
+    "userId": {
+      "$oid": "6188b5639419a6041df02c7f"
+    },
+    "facilityId": {
+      "$oid": "6188b5639419a6041df02c7a"
+    },
+    "content": "E110004 - 【著作権料負担無！】歌とトークで綴る昭和ヒットパレードの詳細にアクセスしました。",
+    "type": "accessLog",
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "6196ef739c24ce4ca964b697"
+    },
+    "createdAt": {
+      "$date": "2021-11-19T00:27:31.5Z"
+    },
+    "updatedAt": {
+      "$date": "2021-11-11T14:41:45.41Z"
+    },
+    "isDeleted": false,
+    "version": 3,
+    "userId": {
+      "$oid": "61443c724def5e321383b114"
+    },
+    "facilityId": {
+      "$oid": "61443c724def5e321383b111"
+    },
+    "content": "ログインしました",
+    "type": "loginLog",
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "6196ef7d9c24ce4ca964b69f"
+    },
+    "createdAt": {
+      "$date": "2021-11-19T00:27:41.052Z"
+    },
+    "updatedAt": {
+      "$date": "2021-11-11T14:41:45.41Z"
+    },
+    "isDeleted": false,
+    "version": 3,
+    "userId": {
+      "$oid": "61443c724def5e321383b114"
+    },
+    "facilityId": {
+      "$oid": "61443c724def5e321383b111"
+    },
+    "content": "E110004 - 【著作権料負担無！】歌とトークで綴る昭和ヒットパレードの詳細にアクセスしました。",
+    "type": "accessLog",
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "6197004602116e4cf874b38d"
+    },
+    "createdAt": {
+      "$date": "2021-11-19T01:39:18.431Z"
+    },
+    "updatedAt": {
+      "$date": "2021-11-11T14:41:45.4Z"
+    },
+    "isDeleted": false,
+    "version": 3,
+    "userId": {
+      "$oid": "6196ff2845776a4caabd9d28"
+    },
+    "facilityId": {
+      "$oid": "6196ff2745776a4caabd9d23"
+    },
+    "content": "ログインしました",
+    "type": "loginLog",
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "6197005745776a4caabda911"
+    },
+    "createdAt": {
+      "$date": "2021-11-19T01:39:35.946Z"
+    },
+    "updatedAt": {
+      "$date": "2021-11-11T14:41:45.413Z"
+    },
+    "isDeleted": false,
+    "version": 3,
+    "userId": {
+      "$oid": "6196ff2845776a4caabd9d28"
+    },
+    "facilityId": {
+      "$oid": "6196ff2745776a4caabd9d23"
+    },
+    "content": "Y170001 - 笑って健康！折りがとう！の詳細にアクセスしました。",
+    "type": "accessLog",
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "6197007102116e4cf874b396"
+    },
+    "createdAt": {
+      "$date": "2021-11-19T01:40:01.505Z"
+    },
+    "updatedAt": {
+      "$date": "2021-11-11T14:41:45.4Z"
+    },
+    "isDeleted": false,
+    "version": 3,
+    "userId": {
+      "$oid": "6196ff2845776a4caabd9d28"
+    },
+    "facilityId": {
+      "$oid": "6196ff2745776a4caabd9d23"
+    },
+    "content": "Y170003 - オスペンギンの介護オモシレーションの詳細にアクセスしました。",
+    "type": "accessLog",
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "6197007f02116e4cf874b39f"
+    },
+    "createdAt": {
+      "$date": "2021-11-19T01:40:15.209Z"
+    },
+    "updatedAt": {
+      "$date": "2021-11-11T14:41:45.4Z"
+    },
+    "isDeleted": false,
+    "version": 3,
+    "userId": {
+      "$oid": "6196ff2845776a4caabd9d28"
+    },
+    "facilityId": {
+      "$oid": "6196ff2745776a4caabd9d23"
+    },
+    "content": "Y170007 - レギュラーの楽しく『お笑い』介護レク♪の詳細にアクセスしました。",
+    "type": "accessLog",
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "6197008b02116e4cf874b3a8"
+    },
+    "createdAt": {
+      "$date": "2021-11-19T01:40:27.251Z"
+    },
+    "updatedAt": {
+      "$date": "2021-11-11T14:41:45.4Z"
+    },
+    "isDeleted": false,
+    "version": 3,
+    "userId": {
+      "$oid": "6196ff2845776a4caabd9d28"
+    },
+    "facilityId": {
+      "$oid": "6196ff2745776a4caabd9d23"
+    },
+    "content": "Y170008 - 上原チョーと一緒に楽しく踊ろう「トゥートゥー体操」の詳細にアクセスしました。",
+    "type": "accessLog",
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "6197009845776a4caabda91d"
+    },
+    "createdAt": {
+      "$date": "2021-11-19T01:40:40.88Z"
+    },
+    "updatedAt": {
+      "$date": "2021-11-11T14:41:45.413Z"
+    },
+    "isDeleted": false,
+    "version": 3,
+    "userId": {
+      "$oid": "6196ff2845776a4caabd9d28"
+    },
+    "facilityId": {
+      "$oid": "6196ff2745776a4caabd9d23"
+    },
+    "content": "Y170010 - よしもとお笑い介護ブ！にお任せプランの詳細にアクセスしました。",
+    "type": "accessLog",
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "619700a89c24ce4ca964bd5b"
+    },
+    "createdAt": {
+      "$date": "2021-11-19T01:40:56.347Z"
+    },
+    "updatedAt": {
+      "$date": "2021-11-11T14:41:45.41Z"
+    },
+    "isDeleted": false,
+    "version": 3,
+    "userId": {
+      "$oid": "6196ff2845776a4caabd9d28"
+    },
+    "facilityId": {
+      "$oid": "6196ff2745776a4caabd9d23"
+    },
+    "content": "Y170005 - ～オモロさ折り紙付きコンビspan!によるお笑い介護レクリエーション～の詳細にアクセスしました。",
+    "type": "accessLog",
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "619700ae9c24ce4ca964bd63"
+    },
+    "createdAt": {
+      "$date": "2021-11-19T01:41:02.683Z"
+    },
+    "updatedAt": {
+      "$date": "2021-11-11T14:41:45.41Z"
+    },
+    "isDeleted": false,
+    "version": 3,
+    "userId": {
+      "$oid": "6196ff2845776a4caabd9d28"
+    },
+    "facilityId": {
+      "$oid": "6196ff2745776a4caabd9d23"
+    },
+    "content": "Y170011 - 【コラボ企画】オール巨人リモートコンサートの詳細にアクセスしました。",
+    "type": "accessLog",
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "619700de02116e4cf874b3b8"
+    },
+    "createdAt": {
+      "$date": "2021-11-19T01:41:50.575Z"
+    },
+    "updatedAt": {
+      "$date": "2021-11-11T14:41:45.4Z"
+    },
+    "isDeleted": false,
+    "version": 3,
+    "userId": {
+      "$oid": "6196ff2845776a4caabd9d28"
+    },
+    "facilityId": {
+      "$oid": "6196ff2745776a4caabd9d23"
+    },
+    "content": "Y170005 - ～オモロさ折り紙付きコンビspan!によるお笑い介護レクリエーション～の詳細にアクセスしました。",
+    "type": "accessLog",
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "619700e302116e4cf874b3c0"
+    },
+    "createdAt": {
+      "$date": "2021-11-19T01:41:55.394Z"
+    },
+    "updatedAt": {
+      "$date": "2021-11-11T14:41:45.4Z"
+    },
+    "isDeleted": false,
+    "version": 3,
+    "userId": {
+      "$oid": "6196ff2845776a4caabd9d28"
+    },
+    "facilityId": {
+      "$oid": "6196ff2745776a4caabd9d23"
+    },
+    "content": "Y170001 - 笑って健康！折りがとう！の詳細にアクセスしました。",
+    "type": "accessLog",
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "619700f19c24ce4ca964bd6b"
+    },
+    "createdAt": {
+      "$date": "2021-11-19T01:42:09.478Z"
+    },
+    "updatedAt": {
+      "$date": "2021-11-11T14:41:45.41Z"
+    },
+    "isDeleted": false,
+    "version": 3,
+    "userId": {
+      "$oid": "6196ff2845776a4caabd9d28"
+    },
+    "facilityId": {
+      "$oid": "6196ff2745776a4caabd9d23"
+    },
+    "content": "Y170008 - 上原チョーと一緒に楽しく踊ろう「トゥートゥー体操」の詳細にアクセスしました。",
+    "type": "accessLog",
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "6197017e9c24ce4ca964bdbf"
+    },
+    "createdAt": {
+      "$date": "2021-11-19T01:44:30.091Z"
+    },
+    "updatedAt": {
+      "$date": "2021-11-11T14:41:45.41Z"
+    },
+    "isDeleted": false,
+    "version": 3,
+    "userId": {
+      "$oid": "6196ff2845776a4caabd9d28"
+    },
+    "facilityId": {
+      "$oid": "6196ff2745776a4caabd9d23"
+    },
+    "content": "E170012 - 介護福祉士のお笑いライブの詳細にアクセスしました。",
+    "type": "accessLog",
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "619701c502116e4cf874b3f9"
+    },
+    "createdAt": {
+      "$date": "2021-11-19T01:45:41.588Z"
+    },
+    "updatedAt": {
+      "$date": "2021-11-11T14:41:45.4Z"
+    },
+    "isDeleted": false,
+    "version": 3,
+    "userId": {
+      "$oid": "6196ff2845776a4caabd9d28"
+    },
+    "facilityId": {
+      "$oid": "6196ff2745776a4caabd9d23"
+    },
+    "content": "E110004 - 【著作権料負担無！】歌とトークで綴る昭和ヒットパレードの詳細にアクセスしました。",
+    "type": "accessLog",
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "619702a245776a4caabdaa4a"
+    },
+    "createdAt": {
+      "$date": "2021-11-19T01:49:22.626Z"
+    },
+    "updatedAt": {
+      "$date": "2021-11-11T14:41:45.413Z"
+    },
+    "isDeleted": false,
+    "version": 3,
+    "userId": {
+      "$oid": "6196ff2845776a4caabd9d28"
+    },
+    "facilityId": {
+      "$oid": "6196ff2745776a4caabd9d23"
+    },
+    "content": "Y170003 - オスペンギンの介護オモシレーションの詳細にアクセスしました。",
+    "type": "accessLog",
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "619702cf9c24ce4ca964bdcc"
+    },
+    "createdAt": {
+      "$date": "2021-11-19T01:50:07.644Z"
+    },
+    "updatedAt": {
+      "$date": "2021-11-11T14:41:45.41Z"
+    },
+    "isDeleted": false,
+    "version": 3,
+    "userId": {
+      "$oid": "6196ff2845776a4caabd9d28"
+    },
+    "facilityId": {
+      "$oid": "6196ff2745776a4caabd9d23"
+    },
+    "content": "Y170005 - ～オモロさ折り紙付きコンビspan!によるお笑い介護レクリエーション～の詳細にアクセスしました。",
+    "type": "accessLog",
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "6197031e9c24ce4ca964bdd9"
+    },
+    "createdAt": {
+      "$date": "2021-11-19T01:51:26.298Z"
+    },
+    "updatedAt": {
+      "$date": "2021-11-11T14:41:45.41Z"
+    },
+    "isDeleted": false,
+    "version": 3,
+    "userId": {
+      "$oid": "6196ff2845776a4caabd9d28"
+    },
+    "facilityId": {
+      "$oid": "6196ff2745776a4caabd9d23"
+    },
+    "content": "E170006 - 葉っぱは楽器！みんなで歌って笑おう！の詳細にアクセスしました。",
+    "type": "accessLog",
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "619704619c24ce4ca964bdf1"
+    },
+    "createdAt": {
+      "$date": "2021-11-19T01:56:49.788Z"
+    },
+    "updatedAt": {
+      "$date": "2021-11-11T14:41:45.41Z"
+    },
+    "isDeleted": false,
+    "version": 3,
+    "userId": {
+      "$oid": "6197040045776a4caabdaa59"
+    },
+    "facilityId": {
+      "$oid": "6197040045776a4caabdaa54"
+    },
+    "content": "ログインしました",
+    "type": "loginLog",
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "619706239c24ce4ca964bdff"
+    },
+    "createdAt": {
+      "$date": "2021-11-19T02:04:19.366Z"
+    },
+    "updatedAt": {
+      "$date": "2021-11-11T14:41:45.41Z"
+    },
+    "isDeleted": false,
+    "version": 3,
+    "userId": {
+      "$oid": "6196ff2845776a4caabd9d28"
+    },
+    "facilityId": {
+      "$oid": "6196ff2745776a4caabd9d23"
+    },
+    "content": "Y170007 - レギュラーの楽しく『お笑い』介護レク♪の詳細にアクセスしました。",
+    "type": "accessLog",
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "6197095c45776a4caabdb669"
+    },
+    "createdAt": {
+      "$date": "2021-11-19T02:18:04.389Z"
+    },
+    "updatedAt": {
+      "$date": "2021-11-11T14:41:45.413Z"
+    },
+    "isDeleted": false,
+    "version": 3,
+    "userId": {
+      "$oid": "612993f3f959d852d633be68"
+    },
+    "facilityId": {
+      "$oid": "612993f3f959d852d633be65"
+    },
+    "content": "ログインしました",
+    "type": "loginLog",
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "619746bf45776a4caabdcdb8"
+    },
+    "createdAt": {
+      "$date": "2021-11-19T06:39:59.031Z"
+    },
+    "updatedAt": {
+      "$date": "2021-11-11T14:41:45.413Z"
+    },
+    "isDeleted": false,
+    "version": 3,
+    "userId": {
+      "$oid": "613725744def5e321383a90e"
+    },
+    "facilityId": {
+      "$oid": "613725744def5e321383a90b"
+    },
+    "content": "ログインしました",
+    "type": "loginLog",
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "61974dba45776a4caabdd2c2"
+    },
+    "createdAt": {
+      "$date": "2021-11-19T07:09:46.016Z"
+    },
+    "updatedAt": {
+      "$date": "2021-11-11T14:41:45.413Z"
+    },
+    "isDeleted": false,
+    "version": 3,
+    "userId": {
+      "$oid": "6130a2ff798e2e32093ee7f2"
+    },
+    "facilityId": {
+      "$oid": "6130a2ff798e2e32093ee7ef"
+    },
+    "content": "ログインしました",
+    "type": "loginLog",
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "619754ff9c24ce4ca964e4c3"
+    },
+    "createdAt": {
+      "$date": "2021-11-19T07:40:47.836Z"
+    },
+    "updatedAt": {
+      "$date": "2021-11-11T14:41:45.41Z"
+    },
+    "isDeleted": false,
+    "version": 3,
+    "userId": {
+      "$oid": "61443c724def5e321383b114"
+    },
+    "facilityId": {
+      "$oid": "61443c724def5e321383b111"
+    },
+    "content": "ログインしました",
+    "type": "loginLog",
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "6197551145776a4caabdd58e"
+    },
+    "createdAt": {
+      "$date": "2021-11-19T07:41:05.751Z"
+    },
+    "updatedAt": {
+      "$date": "2021-11-11T14:41:45.413Z"
+    },
+    "isDeleted": false,
+    "version": 3,
+    "userId": {
+      "$oid": "61443c724def5e321383b114"
+    },
+    "facilityId": {
+      "$oid": "61443c724def5e321383b111"
+    },
+    "content": "E110004 - 【著作権料負担無！】歌とトークで綴る昭和ヒットパレードの詳細にアクセスしました。",
+    "type": "accessLog",
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "6197656445776a4caabdde75"
+    },
+    "createdAt": {
+      "$date": "2021-11-19T08:50:44.785Z"
+    },
+    "updatedAt": {
+      "$date": "2021-11-11T14:41:45.413Z"
+    },
+    "isDeleted": false,
+    "version": 3,
+    "userId": {
+      "$oid": "61443c724def5e321383b114"
+    },
+    "facilityId": {
+      "$oid": "61443c724def5e321383b111"
+    },
+    "content": "ログインしました",
+    "type": "loginLog",
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "6197658445776a4caabddf70"
+    },
+    "createdAt": {
+      "$date": "2021-11-19T08:51:16.938Z"
+    },
+    "updatedAt": {
+      "$date": "2021-11-11T14:41:45.413Z"
+    },
+    "isDeleted": false,
+    "version": 3,
+    "userId": {
+      "$oid": "61443c724def5e321383b114"
+    },
+    "facilityId": {
+      "$oid": "61443c724def5e321383b111"
+    },
+    "content": "E110004 - 【著作権料負担無！】歌とトークで綴る昭和ヒットパレードの詳細にアクセスしました。",
+    "type": "accessLog",
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "61982fcb02116e4cf874f1d3"
+    },
+    "createdAt": {
+      "$date": "2021-11-19T23:14:19.433Z"
+    },
+    "updatedAt": {
+      "$date": "2021-11-11T14:41:45.4Z"
+    },
+    "isDeleted": false,
+    "version": 3,
+    "userId": {
+      "$oid": "61306a29798e2e32093ee68b"
+    },
+    "facilityId": {
+      "$oid": "61306a29798e2e32093ee688"
+    },
+    "content": "ログインしました",
+    "type": "loginLog",
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "61987dee02116e4cf874f227"
+    },
+    "createdAt": {
+      "$date": "2021-11-20T04:47:42.428Z"
+    },
+    "updatedAt": {
+      "$date": "2021-11-11T14:41:45.4Z"
+    },
+    "isDeleted": false,
+    "version": 3,
+    "userId": {
+      "$oid": "61987daf45776a4caabde681"
+    },
+    "facilityId": {
+      "$oid": "61987dae45776a4caabde67c"
+    },
+    "content": "ログインしました",
+    "type": "loginLog",
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "6198bf7245776a4caabdf304"
+    },
+    "createdAt": {
+      "$date": "2021-11-20T09:27:14.554Z"
+    },
+    "updatedAt": {
+      "$date": "2021-11-11T14:41:45.413Z"
+    },
+    "isDeleted": false,
+    "version": 3,
+    "userId": {
+      "$oid": "617b827c4000a20418882734"
+    },
+    "facilityId": {
+      "$oid": "617b827c4000a2041888272f"
+    },
+    "content": "ログインしました",
+    "type": "loginLog",
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "6199e71c02116e4cf874f434"
+    },
+    "createdAt": {
+      "$date": "2021-11-21T06:28:44.222Z"
+    },
+    "updatedAt": {
+      "$date": "2021-11-11T14:41:45.4Z"
+    },
+    "isDeleted": false,
+    "version": 3,
+    "userId": {
+      "$oid": "615db9bbb4d30bdf1d762533"
+    },
+    "facilityId": {
+      "$oid": "615db9bbb4d30bdf1d76252e"
+    },
+    "content": "ログインしました",
+    "type": "loginLog",
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "6199e7259c24ce4ca964f32f"
+    },
+    "createdAt": {
+      "$date": "2021-11-21T06:28:53.839Z"
+    },
+    "updatedAt": {
+      "$date": "2021-11-11T14:41:45.41Z"
+    },
+    "isDeleted": false,
+    "version": 3,
+    "userId": {
+      "$oid": "615db9bbb4d30bdf1d762533"
+    },
+    "facilityId": {
+      "$oid": "615db9bbb4d30bdf1d76252e"
+    },
+    "content": "E030004 - フラワーマルシェの詳細にアクセスしました。",
+    "type": "accessLog",
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "6199e73345776a4caabdf411"
+    },
+    "createdAt": {
+      "$date": "2021-11-21T06:29:07.388Z"
+    },
+    "updatedAt": {
+      "$date": "2021-11-11T14:41:45.413Z"
+    },
+    "isDeleted": false,
+    "version": 3,
+    "userId": {
+      "$oid": "615db9bbb4d30bdf1d762533"
+    },
+    "facilityId": {
+      "$oid": "615db9bbb4d30bdf1d76252e"
+    },
+    "content": "E030006 - ｉＰａｄを知ろうの詳細にアクセスしました。",
+    "type": "accessLog",
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "6199e74a02116e4cf874f43c"
+    },
+    "createdAt": {
+      "$date": "2021-11-21T06:29:30.148Z"
+    },
+    "updatedAt": {
+      "$date": "2021-11-11T14:41:45.4Z"
+    },
+    "isDeleted": false,
+    "version": 3,
+    "userId": {
+      "$oid": "615db9bbb4d30bdf1d762533"
+    },
+    "facilityId": {
+      "$oid": "615db9bbb4d30bdf1d76252e"
+    },
+    "content": "E080001 - フットケアの詳細にアクセスしました。",
+    "type": "accessLog",
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "6199e76d9c24ce4ca964f33c"
+    },
+    "createdAt": {
+      "$date": "2021-11-21T06:30:05.467Z"
+    },
+    "updatedAt": {
+      "$date": "2021-11-11T14:41:45.41Z"
+    },
+    "isDeleted": false,
+    "version": 3,
+    "userId": {
+      "$oid": "615db9bbb4d30bdf1d762533"
+    },
+    "facilityId": {
+      "$oid": "615db9bbb4d30bdf1d76252e"
+    },
+    "content": "E130004 - オンライン　己書の詳細にアクセスしました。",
+    "type": "accessLog",
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "6199e7769c24ce4ca964f344"
+    },
+    "createdAt": {
+      "$date": "2021-11-21T06:30:14.659Z"
+    },
+    "updatedAt": {
+      "$date": "2021-11-11T14:41:45.41Z"
+    },
+    "isDeleted": false,
+    "version": 3,
+    "userId": {
+      "$oid": "615db9bbb4d30bdf1d762533"
+    },
+    "facilityId": {
+      "$oid": "615db9bbb4d30bdf1d76252e"
+    },
+    "content": "E130005 - オンライン　パステルアートの詳細にアクセスしました。",
+    "type": "accessLog",
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "6199e99145776a4caabdf429"
+    },
+    "createdAt": {
+      "$date": "2021-11-21T06:39:13.167Z"
+    },
+    "updatedAt": {
+      "$date": "2021-11-11T14:41:45.413Z"
+    },
+    "isDeleted": false,
+    "version": 3,
+    "userId": {
+      "$oid": "615db9bbb4d30bdf1d762533"
+    },
+    "facilityId": {
+      "$oid": "615db9bbb4d30bdf1d76252e"
+    },
+    "content": "E070008 - バルーンパフォーマンスショーの詳細にアクセスしました。",
+    "type": "accessLog",
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "6199f00e9c24ce4ca964f35b"
+    },
+    "createdAt": {
+      "$date": "2021-11-21T07:06:54.63Z"
+    },
+    "updatedAt": {
+      "$date": "2021-11-11T14:41:45.41Z"
+    },
+    "isDeleted": false,
+    "version": 3,
+    "userId": {
+      "$oid": "615db9bbb4d30bdf1d762533"
+    },
+    "facilityId": {
+      "$oid": "615db9bbb4d30bdf1d76252e"
+    },
+    "content": "E080002 - 願隆寺住職の法話の詳細にアクセスしました。",
+    "type": "accessLog",
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "619ac00345776a4caabdf4f2"
+    },
+    "createdAt": {
+      "$date": "2021-11-21T21:54:11.463Z"
+    },
+    "updatedAt": {
+      "$date": "2021-11-11T14:41:45.413Z"
+    },
+    "isDeleted": false,
+    "version": 3,
+    "userId": {
+      "$oid": "61306a29798e2e32093ee68b"
+    },
+    "facilityId": {
+      "$oid": "61306a29798e2e32093ee688"
+    },
+    "content": "ログインしました",
+    "type": "loginLog",
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "619ae2d845776a4caabdf5d2"
+    },
+    "createdAt": {
+      "$date": "2021-11-22T00:22:48.609Z"
+    },
+    "updatedAt": {
+      "$date": "2021-11-11T14:41:45.413Z"
+    },
+    "isDeleted": false,
+    "version": 3,
+    "userId": {
+      "$oid": "61443c724def5e321383b114"
+    },
+    "facilityId": {
+      "$oid": "61443c724def5e321383b111"
+    },
+    "content": "ログインしました",
+    "type": "loginLog",
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "619aeca402116e4cf874f63c"
+    },
+    "createdAt": {
+      "$date": "2021-11-22T01:04:36.327Z"
+    },
+    "updatedAt": {
+      "$date": "2021-11-11T14:41:45.4Z"
+    },
+    "isDeleted": false,
+    "version": 3,
+    "userId": {
+      "$oid": "614a9e4cf9d8af59e770bf4d"
+    },
+    "facilityId": {
+      "$oid": "61278a4df959d852d633bd4a"
+    },
+    "content": "ログインしました",
+    "type": "loginLog",
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "619b13c345776a4caabdfe8b"
+    },
+    "createdAt": {
+      "$date": "2021-11-22T03:51:31.764Z"
+    },
+    "updatedAt": {
+      "$date": "2021-11-11T14:41:45.413Z"
+    },
+    "isDeleted": false,
+    "version": 3,
+    "userId": {
+      "$oid": "61306a29798e2e32093ee68b"
+    },
+    "facilityId": {
+      "$oid": "61306a29798e2e32093ee688"
+    },
+    "content": "ログインしました",
+    "type": "loginLog",
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "619b182f45776a4caabdffbe"
+    },
+    "createdAt": {
+      "$date": "2021-11-22T04:10:23.336Z"
+    },
+    "updatedAt": {
+      "$date": "2021-11-11T14:41:45.413Z"
+    },
+    "isDeleted": false,
+    "version": 3,
+    "userId": {
+      "$oid": "6127927a064dd252e09ab818"
+    },
+    "facilityId": {
+      "$oid": "61279278064dd252e09ab815"
+    },
+    "content": "ログインしました",
+    "type": "loginLog",
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "619b182f02116e4cf875080f"
+    },
+    "createdAt": {
+      "$date": "2021-11-22T04:10:23.451Z"
+    },
+    "updatedAt": {
+      "$date": "2021-11-11T14:41:45.4Z"
+    },
+    "isDeleted": false,
+    "version": 3,
+    "userId": {
+      "$oid": "6127927a064dd252e09ab818"
+    },
+    "facilityId": {
+      "$oid": "61279278064dd252e09ab815"
+    },
+    "content": "E010008 - 懐メロ教室の詳細にアクセスしました。",
+    "type": "accessLog",
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "619b1e2602116e4cf8750919"
+    },
+    "createdAt": {
+      "$date": "2021-11-22T04:35:50.202Z"
+    },
+    "updatedAt": {
+      "$date": "2021-11-11T14:41:45.4Z"
+    },
+    "isDeleted": false,
+    "version": 3,
+    "userId": {
+      "$oid": "6178ec861f4eac04341b787e"
+    },
+    "facilityId": {
+      "$oid": "6178ec851f4eac04341b7879"
+    },
+    "content": "ログインしました",
+    "type": "loginLog",
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "619b589845776a4caabe0b6b"
+    },
+    "createdAt": {
+      "$date": "2021-11-22T08:45:12.533Z"
+    },
+    "updatedAt": {
+      "$date": "2021-11-11T14:41:45.413Z"
+    },
+    "isDeleted": false,
+    "version": 3,
+    "userId": {
+      "$oid": "61443c724def5e321383b114"
+    },
+    "facilityId": {
+      "$oid": "61443c724def5e321383b111"
+    },
+    "content": "ログインしました",
+    "type": "loginLog",
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "619b603002116e4cf875129b"
+    },
+    "createdAt": {
+      "$date": "2021-11-22T09:17:36.092Z"
+    },
+    "updatedAt": {
+      "$date": "2021-11-11T14:41:45.4Z"
+    },
+    "isDeleted": false,
+    "version": 3,
+    "userId": {
+      "$oid": "617b827c4000a20418882734"
+    },
+    "facilityId": {
+      "$oid": "617b827c4000a2041888272f"
+    },
+    "content": "ログインしました",
+    "type": "loginLog",
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "619b660045776a4caabe0bac"
+    },
+    "createdAt": {
+      "$date": "2021-11-22T09:42:24.217Z"
+    },
+    "updatedAt": {
+      "$date": "2021-11-11T14:41:45.413Z"
+    },
+    "isDeleted": false,
+    "version": 3,
+    "userId": {
+      "$oid": "614a89f9661f293e1b1d6825"
+    },
+    "facilityId": {
+      "$oid": "614a89f8661f293e1b1d6820"
+    },
+    "content": "ログインしました",
+    "type": "loginLog",
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "619b822a02116e4cf87517a4"
+    },
+    "createdAt": {
+      "$date": "2021-11-22T11:42:34.796Z"
+    },
+    "updatedAt": {
+      "$date": "2021-11-11T14:41:45.4Z"
+    },
+    "isDeleted": false,
+    "version": 3,
+    "userId": {
+      "$oid": "61306a29798e2e32093ee68b"
+    },
+    "facilityId": {
+      "$oid": "61306a29798e2e32093ee688"
+    },
+    "content": "ログインしました",
+    "type": "loginLog",
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "619c23be9c24ce4ca9651b1c"
+    },
+    "createdAt": {
+      "$date": "2021-11-22T23:11:58.467Z"
+    },
+    "updatedAt": {
+      "$date": "2021-11-11T14:41:45.41Z"
+    },
+    "isDeleted": false,
+    "version": 3,
+    "userId": {
+      "$oid": "6178ec861f4eac04341b787e"
+    },
+    "facilityId": {
+      "$oid": "6178ec851f4eac04341b7879"
+    },
+    "content": "ログインしました",
+    "type": "loginLog",
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "619c3af845776a4caabe17fb"
+    },
+    "createdAt": {
+      "$date": "2021-11-23T00:51:04.145Z"
+    },
+    "updatedAt": {
+      "$date": "2021-11-11T14:41:45.413Z"
+    },
+    "isDeleted": false,
+    "version": 3,
+    "userId": {
+      "$oid": "6188b5639419a6041df02c7f"
+    },
+    "facilityId": {
+      "$oid": "6188b5639419a6041df02c7a"
+    },
+    "content": "ログインしました",
+    "type": "loginLog",
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "619c3c6d45776a4caabe1816"
+    },
+    "createdAt": {
+      "$date": "2021-11-23T00:57:17.022Z"
+    },
+    "updatedAt": {
+      "$date": "2021-11-11T14:41:45.413Z"
+    },
+    "isDeleted": false,
+    "version": 3,
+    "userId": {
+      "$oid": "61429f51798e2e32093ef8c1"
+    },
+    "facilityId": {
+      "$oid": "61429f50798e2e32093ef8be"
+    },
+    "content": "ログインしました",
+    "type": "loginLog",
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "619c540345776a4caabe18d7"
+    },
+    "createdAt": {
+      "$date": "2021-11-23T02:37:55.713Z"
+    },
+    "updatedAt": {
+      "$date": "2021-11-11T14:41:45.413Z"
+    },
+    "isDeleted": false,
+    "version": 3,
+    "userId": {
+      "$oid": "61429f51798e2e32093ef8c1"
+    },
+    "facilityId": {
+      "$oid": "61429f50798e2e32093ef8be"
+    },
+    "content": "ログインしました",
+    "type": "loginLog",
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "619c5a5002116e4cf87527b8"
+    },
+    "createdAt": {
+      "$date": "2021-11-23T03:04:48.912Z"
+    },
+    "updatedAt": {
+      "$date": "2021-11-11T14:41:45.4Z"
+    },
+    "isDeleted": false,
+    "version": 3,
+    "userId": {
+      "$oid": "61429f51798e2e32093ef8c1"
+    },
+    "facilityId": {
+      "$oid": "61429f50798e2e32093ef8be"
+    },
+    "content": "ログインしました",
+    "type": "loginLog",
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "619c8bd502116e4cf875285f"
+    },
+    "createdAt": {
+      "$date": "2021-11-23T06:36:05.358Z"
+    },
+    "updatedAt": {
+      "$date": "2021-11-11T14:41:45.4Z"
+    },
+    "isDeleted": false,
+    "version": 3,
+    "userId": {
+      "$oid": "61429f51798e2e32093ef8c1"
+    },
+    "facilityId": {
+      "$oid": "61429f50798e2e32093ef8be"
+    },
+    "content": "ログインしました",
+    "type": "loginLog",
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "619c9ad69c24ce4ca9651dfa"
+    },
+    "createdAt": {
+      "$date": "2021-11-23T07:40:06.467Z"
+    },
+    "updatedAt": {
+      "$date": "2021-11-11T14:41:45.41Z"
+    },
+    "isDeleted": false,
+    "version": 3,
+    "userId": {
+      "$oid": "61429f51798e2e32093ef8c1"
+    },
+    "facilityId": {
+      "$oid": "61429f50798e2e32093ef8be"
+    },
+    "content": "ログインしました",
+    "type": "loginLog",
+    "__v": 0
+  },
+  {
+    "_id": {
+      "$oid": "619cbf649c24ce4ca96523b3"
+    },
+    "createdAt": {
+      "$date": "2021-11-23T10:16:04.45Z"
+    },
+    "updatedAt": {
+      "$date": "2021-11-11T14:41:45.41Z"
+    },
+    "isDeleted": false,
+    "version": 3,
+    "userId": {
+      "$oid": "6188b5639419a6041df02c7f"
+    },
+    "facilityId": {
+      "$oid": "6188b5639419a6041df02c7a"
+    },
+    "content": "ログインしました",
+    "type": "loginLog",
+    "__v": 0
+  }
+]

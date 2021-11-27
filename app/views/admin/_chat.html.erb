@@ -15,7 +15,7 @@
     <% if chat.user_role == :partner %>
       <!-- パートナー -->
       <div class="mychat">
-        <div class="name"><%= chat.partner.name %></div>
+        <div class="name"><%= chat.user.name %></div>
         <div class="message"><%= simple_format chat.message %></div>
         <span class="time"><%= time chat.created_at %></span>
       </div>

@@ -93,17 +93,17 @@ class Customers::OrdersController < Customers::ApplicationController
         message: message,
         is_read: false
       )
-      slack_message = <<~SQL.squish
-        会社名: #{current_user.company.name}
-        管理画面URL: #{admin_company_url(current_user.company.id)}
-        担当者名: #{current_user.company.person_in_charge_name}
-        電話番号: #{current_user.company.tel}
+      slack_message = <<EOS
+会社名: #{current_user.company.name}
+管理画面URL: #{admin_company_url(current_user.company.id)}
+担当者名: #{current_user.company.person_in_charge_name}
+電話番号: #{current_user.company.tel}
 
-        レク名: #{@recreation.title}
-        パートナー名: #{@recreation.partner_name}
-        ------------------
-        #{message}
-      SQL
+レク名: #{@recreation.title}
+パートナー名: #{@recreation.instructor_name}
+------------------
+#{message}
+EOS
       SlackNotifier.new(channel: '#料金お問い合わせ').send('新規お問い合わせ', slack_message)
       # orderの詳細に飛ばす
       # TODO: 正式、Chatリリースの場合は元のMPA redirectに変更する
