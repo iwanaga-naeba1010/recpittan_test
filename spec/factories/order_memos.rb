@@ -21,6 +21,6 @@
 FactoryBot.define do
   factory :order_memo do
     order
-    body { 'MyText' }
+    body { "MyText" }
   end
 end

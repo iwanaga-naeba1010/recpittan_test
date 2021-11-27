@@ -1,14 +1,13 @@
 # frozen_string_literal: true
 
 # NOTE: 日本語にするとバグる
-# rubocop:disable Metrics/BlockLength
 ActiveAdmin.register User do
   menu priority: 2
   permit_params(
     %i[email role],
-    company_attributes: %i[
-      name facility_name person_in_charge_name person_in_charge_name_kana
-      zip prefecture city street building tel
+    company_attributes: [
+      :name, :facility_name, :person_in_charge_name, :person_in_charge_name_kana,
+      :zip, :prefecture, :city, :street, :building, :tel
     ]
   )
 
@@ -70,4 +69,3 @@ ActiveAdmin.register User do
     f.actions
   end
 end
-# rubocop:enable Metrics/BlockLength

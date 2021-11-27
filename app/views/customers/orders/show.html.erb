@@ -37,7 +37,7 @@
                     </picture>
                   </div>
                   <div class="col-md-8 recreation">
-                    <h1 class="font-16 font-weight-bold line-height-140"><%= @order.recreation_title %></h1>
+                    <h1 class="font-16 font-weight-bold line-height-140"><%= @order.recreation.title %></h1>
                     <div class="row category-tags">
                       <% @order.recreation.tags.events.each_with_index do |tag, i| %>
                         <div class="col-auto px-1">
@@ -93,7 +93,7 @@
 <!--            {{/if}}-->
             <div class="row py-2">
               <div class="col-lg-3 col-4 label">合計費用</div>
-              <div class="col-auto"><%= price_pipe @order.recreation_price %></div>
+              <div class="col-auto"><%= price_pipe @order.recreation.price %></div>
             </div>
             <div class="row py-2">
               <div class="col-lg-3 col-4 label">ステータス</div>

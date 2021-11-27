@@ -26,7 +26,5 @@ class Chat < ApplicationRecord
   belongs_to :order
   belongs_to :user
 
-  delegate :role, to: :user, prefix: true
-
   validates :message, presence: true
 end
