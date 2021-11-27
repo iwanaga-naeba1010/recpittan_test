@@ -91,12 +91,12 @@
               <h3>このレクリエーションの講師</h3>
               <div class="row align-items-center">
                 <div class="col-md-4 text-center">
-                  <%= image_tag @recreation.partner&.image.to_s, class: "align-self-center rounded-circle", width: 90 %>
-                  <h4><%= @recreation.partner&.name %></h4>
+                  <%= image_tag @recreation&.instructor_image&.to_s, class: "align-self-center rounded-circle", width: 90 %>
+                  <h4><%= @recreation.instructor_name %></h4>
                 </div>
                 <div class="col-md-8">
-                  <h4 class="instructor-position h5"><%= @recreation.partner&.title %></h4>
-                  <p class="instructor-content"><%= simple_format @recreation.partner&.description %></p>
+                  <h4 class="instructor-position h5"><%= @recreation.instructor_title %></h4>
+                  <p class="instructor-content"><%= simple_format @recreation.instructor_description %></p>
                 </div>
               </div>
             </div>
@@ -109,7 +109,7 @@
           <div class="card ">
             <div class="card-body">
               <% if user_signed_in? %>
-                <h3 class="font-24">¥ <%= price_pipe(@recreation.price) %><span> / 1回あたり</span></h3>
+                <h3 class="font-24">¥ <%= price_pipe(@recreation.regular_price) %><span> / 1回あたり</span></h3>
               <% else %>
                 <h3 class="title-b font-20">会員限定</h3>
                 <div class="text-muted">料金をご覧になるには会員登録が必要です。<br>ログインすると表示されます。</div>
@@ -128,7 +128,7 @@
               <div class="action-area">
                 <% if user_signed_in? %>
                   <!-- 0円の場合はslackに飛ばしで営業が対応 -->
-                  <% if @recreation.price == 0 %>
+                  <% if @recreation.regular_price == 0 %>
                     <!-- React呼び出し -->
                     <div id="ConsultRecreation" data-recreationId=<%= @recreation.id %>></div>
                   <% else %>

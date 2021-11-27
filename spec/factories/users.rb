@@ -23,6 +23,8 @@
 #  sign_in_count          :integer          default(0), not null
 #  unconfirmed_email      :string
 #  unlock_token           :string
+#  username               :string
+#  username_kana          :string
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
 #  company_id             :bigint
@@ -54,11 +56,10 @@ FactoryBot.define do
     end
   end
 
-  trait :with_partner do
+  trait :with_recreations do
     after(:create) do |user|
-      partner = create(:partner, user_id: user.id)
       user.update(role: :partner)
-      create(:recreation, partner_id: partner.id)
+       create(:recreation, user_id: user.id)
     end
   end
 

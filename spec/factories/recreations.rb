@@ -4,32 +4,47 @@
 #
 # Table name: recreations
 #
-#  id                  :bigint           not null, primary key
-#  borrow_item         :text
-#  bring_your_own_item :text
-#  description         :text
-#  extra_information   :text
-#  flow_of_day         :text
-#  minutes             :integer
-#  price               :integer          default(0), not null
-#  second_title        :string
-#  title               :string
-#  created_at          :datetime         not null
-#  updated_at          :datetime         not null
-#  partner_id          :bigint           not null
-#  youtube_id          :string
+#  id                         :bigint           not null, primary key
+#  base_code                  :string
+#  borrow_item                :text
+#  bring_your_own_item        :text
+#  capacity                   :integer
+#  description                :text
+#  extra_information          :text
+#  flow_of_day                :text
+#  flyer_color                :string
+#  instructor_amount          :integer
+#  instructor_description     :text
+#  instructor_image           :text
+#  instructor_material_amount :integer
+#  instructor_name            :string
+#  instructor_position        :string
+#  instructor_title           :string
+#  is_online                  :boolean          default(FALSE)
+#  is_public                  :boolean
+#  minutes                    :integer
+#  prefectures                :string           default([]), is an Array
+#  price                      :integer          default(0), not null
+#  regular_material_price     :integer
+#  regular_price              :integer
+#  second_title               :string
+#  title                      :string
+#  created_at                 :datetime         not null
+#  updated_at                 :datetime         not null
+#  user_id                    :bigint           not null
+#  youtube_id                 :string
 #
 # Indexes
 #
-#  index_recreations_on_partner_id  (partner_id)
+#  index_recreations_on_user_id  (user_id)
 #
 # Foreign Keys
 #
-#  fk_rails_...  (partner_id => partners.id)
+#  fk_rails_...  (user_id => users.id)
 #
 FactoryBot.define do
   factory :recreation do
-    partner
+    user
     title { 'MyString' }
     second_title { 'MyString' }
     borrow_item { 'MyString' }
@@ -40,5 +55,15 @@ FactoryBot.define do
     price { 20000 }
     description { 'MyText' }
     youtube_id { '' }
+    instructor_name { 'MyText' }
+    instructor_title { 'MyText' }
+    instructor_description { 'MyText' }
+    instructor_image do
+      ActionDispatch::Http::UploadedFile.new(
+        filename: 'test.png',
+        type: 'image/png',
+        tempfile: File.open(Rails.root.join('spec/files/test.png'))
+      )
+    end
   end
 end

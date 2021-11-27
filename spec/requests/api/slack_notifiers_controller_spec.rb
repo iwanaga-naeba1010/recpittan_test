@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 RSpec.describe Api::SlackNotifiersController, type: :request do
-  let(:partner) { (create :user, :with_partner).partner }
+  let(:partner) { create :user, :with_recreations }
   let(:customer) { create :user, :with_custoemr }
   let(:recreation) { partner.recreations.first }
 

@@ -11,7 +11,7 @@ class Api::SlackNotifiersController < Api::ApplicationController
 電話番号: #{current_user.company.tel}
 
 レク名: #{recreation.title}
-パートナー名: #{recreation.partner.name}
+パートナー名: #{recreation.instructor_name}
 EOS
     SlackNotifier.new(channel: '#料金お問い合わせ').send('新規お問い合わせ', message)
     render_json({ status: 'success' })

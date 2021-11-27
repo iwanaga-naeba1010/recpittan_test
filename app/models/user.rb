@@ -23,6 +23,8 @@
 #  sign_in_count          :integer          default(0), not null
 #  unconfirmed_email      :string
 #  unlock_token           :string
+#  username               :string
+#  username_kana          :string
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
 #  company_id             :bigint
@@ -52,9 +54,7 @@ class User < ApplicationRecord
   belongs_to :company, optional: true
   accepts_nested_attributes_for :company, allow_destroy: true
 
-  # TODO: role == partnerの場合、の条件加えたい
-  has_one :partner, dependent: :destroy
-  accepts_nested_attributes_for :partner, allow_destroy: true
+  has_many :recreations, dependent: :destroy
 
   has_many :orders, dependent: :destroy
 
