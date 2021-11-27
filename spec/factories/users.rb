@@ -59,7 +59,7 @@ FactoryBot.define do
   trait :with_recreations do
     after(:create) do |user|
       user.update(role: :partner)
-       create(:recreation, user_id: user.id)
+      create(:recreation, user_id: user.id)
     end
   end
 

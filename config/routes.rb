@@ -17,8 +17,8 @@ Rails.application.routes.draw do
   namespace :customers do
     resources :chats, only: %i[create]
 
-    resources :recreations, shallow: true do
-      resources :orders do
+    resources :recreations, only: [:show, :index], shallow: true do
+      resources :orders, except: [:edit, :destroy, :index] do
         member do
           get :chat
           get :complete
@@ -32,7 +32,7 @@ Rails.application.routes.draw do
     get :tos
     resources :chats, only: %i[create]
 
-    resources :orders do
+    resources :orders, only: %i[show] do
       member do
         get :chat
       end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'json'
 require 'pry'
 
@@ -111,13 +113,13 @@ namespace :store_json_data do
             region: facility['region'],
             locality: facility['locality'],
             person_in_charge_name: facility['userName'],
-            person_in_charge_name_kana: facility['userNamePhoneticName'],
+            person_in_charge_name_kana: facility['userNamePhoneticName']
           )
         elsif user['userType'] == 'instructor'
           next if user['_id']['$oid'].blank?
 
           # NOTE: recreationsは複数ある場合あるので、複数で
-          recs = recreations.map { |f| f if f['instructorId']['$oid'] ==  user['_id']['$oid'] }.compact
+          recs = recreations.map { |f| f if f['instructorId']['$oid'] == user['_id']['$oid'] }.compact
 
           next if recs.blank?
 
@@ -148,7 +150,7 @@ namespace :store_json_data do
               instructor_name: rec['instructorName'],
               instructor_title: rec['instructorPosition'],
               instructor_description: rec['instructorProfile'],
-              youtube_id: youtube_id.present? ? youtube_id : '',
+              youtube_id: youtube_id.present? ? youtube_id : ''
             )
 
             # NOTE: targetのタグを作成 or 検索して追加

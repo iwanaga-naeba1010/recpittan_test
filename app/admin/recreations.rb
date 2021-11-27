@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# rubocop:disable Metrics/BlockLength
 ActiveAdmin.register Recreation do
   permit_params(
     %i[
@@ -134,3 +135,4 @@ ActiveAdmin.register Recreation do
     f.actions
   end
 end
+# rubocop:enable Metrics/BlockLength

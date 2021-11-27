@@ -51,4 +51,9 @@ class Recreation < ApplicationRecord
   accepts_nested_attributes_for :recreation_images, allow_destroy: true
 
   has_many :orders, dependent: :destroy
+
+  delegate :name, to: :partner, prefix: true
+  delegate :title, to: :partner, prefix: true
+  delegate :description, to: :partner, prefix: true
+  delegate :image, to: :partner, prefix: true
 end

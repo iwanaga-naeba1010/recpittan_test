@@ -1,4 +1,4 @@
-# # frozen_string_literal: true
+# frozen_string_literal: true
 #
 # # NOTE: 日本語にするとバグる
 # ActiveAdmin.register Partner do

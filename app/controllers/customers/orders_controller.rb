@@ -14,8 +14,8 @@ class Customers::OrdersController < Customers::ApplicationController
     @years = [2021, 2022]
     @months = 1..12
     @dates = 1..31
-    @hours = ['08', '09', '10', '11', '12', '13', '14', '15', '16', '17', '18']
-    @minutes = ['00', '15', '30', '45']
+    @hours = %w[08 09 10 11 12 13 14 15 16 17 18]
+    @minutes = %w[00 15 30 45]
     @order = current_user.orders.find(params[:id])
   end
 
@@ -40,7 +40,6 @@ class Customers::OrdersController < Customers::ApplicationController
       { name: '旅行' },
       { name: '～おはらい町おかげ横丁ツアー～' }
     ]
-
   end
 
   def new
@@ -55,10 +54,11 @@ class Customers::OrdersController < Customers::ApplicationController
     @years = [2021, 2022]
     @months = 1..12
     @dates = 1..31
-    @hours = ['08', '09', '10', '11', '12', '13', '14', '15', '16', '17', '18']
-    @minutes = ['00', '15', '30', '45']
+    @hours = %w[08 09 10 11 12 13 14 15 16 17 18]
+    @minutes = %w[00 15 30 45]
   end
 
+  # rubocop:disable Metrics/AbcSize
   def create
     @order = @recreation.orders.build(params_create)
 
@@ -68,24 +68,24 @@ class Customers::OrdersController < Customers::ApplicationController
 
       # TODO: 希望日時が空でも大丈夫なようにする
       # TODO: EOS入力にすればタブが入ってしまったようなmessageは解消が可能
-      message =<<EOS
-リクエスト内容
-#{@order.title}
-希望日時
-#{parse_date(dates)}
+      message = <<~SQL.squish
+        リクエスト内容
+        #{@order.title}
+        希望日時
+        #{parse_date(dates)}
 
-希望人数
-#{@order.number_of_people}人
+        希望人数
+        #{@order.number_of_people}人
 
-介護度目安
-#{@order.tags.map {|tag| tag.name}.join('\n')}
+        介護度目安
+        #{@order.tags.map(&:name).join('\n')}
 
-住所
-#{@order.prefecture}#{@order.city}
+        住所
+        #{@order.prefecture}#{@order.city}
 
-相談したい事
-#{params_create[:message]}
-EOS
+        相談したい事
+        #{params_create[:message]}
+      SQL
 
       Chat.create(
         order_id: @order.id,
@@ -110,7 +110,8 @@ EOS
       # redirect_to chat_customers_order_path(@order.id)
       render json: @order
     end
-  rescue => e
+  # rubocop:disable Lint/UselessAssignment
+  rescue StandardError => e
     @breadcrumbs = [
       { name: 'トップ' },
       { name: '一覧' },
@@ -120,12 +121,13 @@ EOS
     @years = [2021, 2022]
     @months = 1..12
     @dates = 1..31
-    @hours = ['08', '09', '10', '11', '12', '13', '14', '15', '16', '17', '18']
-    @minutes = ['00', '15', '30', '45']
+    @hours = %w[08 09 10 11 12 13 14 15 16 17 18]
+    @minutes = %w[00 15 30 45]
     # TODO: リリースするときはrender: newに戻す
-    render json: {}, status: 422
+    render json: {}, status: :unprocessable_entity
     # render :new
   end
+  # rubocop:enable Lint/UselessAssignment
 
   def update
     @order = current_user.orders.find(params[:id])
@@ -135,6 +137,7 @@ EOS
       redirect_to chat_customers_order_path(@order.id), alert: '失敗しました。もう一度お試しください'
     end
   end
+  # rubocop:enable Metrics/AbcSize
 
   private
 
@@ -150,7 +153,9 @@ EOS
     accepted_attrs.each do |attr|
       # TODO: 入力が完了していない場合はvalidation error or チャット文章に含めない、という実装で
       param = dates[attr]
+      # rubocop:disable Layout/LineLength
       str += "#{attr.to_i + 1}:#{param['year']}/#{param['month']}/#{param['date']} #{param['start_hour']}:#{param['start_minutes']}~#{param['end_hour']}:#{param['end_minutes']}\n"
+      # rubocop:enable Layout/LineLength
     end
 
     str

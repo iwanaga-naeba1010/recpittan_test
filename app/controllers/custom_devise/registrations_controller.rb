@@ -13,9 +13,11 @@ class CustomDevise::RegistrationsController < Devise::RegistrationsController
   end
 
   # POST /resource
-  # def create
-  #   super
-  # end
+  # rubocop:disable Lint/UselessMethodDefinition
+  def create
+    super
+  end
+  # rubocop:enable Lint/UselessMethodDefinition
 
   # GET /resource/edit
   # def edit
@@ -25,7 +27,8 @@ class CustomDevise::RegistrationsController < Devise::RegistrationsController
   # PUT /resource
   def update
     super
-  # rescue StandardError => e
+    initialize_internals
+    # rescue StandardError => e
   end
 
   # DELETE /resource
@@ -50,7 +53,7 @@ class CustomDevise::RegistrationsController < Devise::RegistrationsController
       :sign_up,
       keys: [
         :role,
-        company_attributes: [:name, :facility_name, :person_in_charge_name, :person_in_charge_name_kana]
+        { company_attributes: %i[name facility_name person_in_charge_name person_in_charge_name_kana] }
       ]
     )
   end
