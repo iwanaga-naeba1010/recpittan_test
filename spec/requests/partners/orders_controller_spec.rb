@@ -21,7 +21,7 @@ RSpec.describe Partners::OrdersController, type: :request do
 
     context 'with invalid user' do
       it 'return 302 when customer accessed' do
-        sign_out partner.user
+        sign_out partner
         sign_in customer
         get partners_order_path(order.id)
         expect(response).to have_http_status(:found)
@@ -29,7 +29,7 @@ RSpec.describe Partners::OrdersController, type: :request do
       end
 
       it 'return 302 when user not logged in' do
-        sign_out partner.user
+        sign_out partner
         get partners_order_path(order.id)
         expect(response).to have_http_status(:found)
         expect(response).to redirect_to new_user_session_path
@@ -55,7 +55,7 @@ RSpec.describe Partners::OrdersController, type: :request do
       end
 
       it 'return 302 when user not logged in' do
-        sign_out partner.user
+        sign_out partner
         get chat_partners_order_path(order.id)
         expect(response).to have_http_status(:found)
         expect(response).to redirect_to new_user_session_path
