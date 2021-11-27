@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_27_064026) do
+ActiveRecord::Schema.define(version: 2021_11_27_094856) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -92,17 +92,6 @@ ActiveRecord::Schema.define(version: 2021_11_27_064026) do
     t.index ["user_id"], name: "index_orders_on_user_id"
   end
 
-  create_table "partners", force: :cascade do |t|
-    t.string "name"
-    t.string "title"
-    t.text "description"
-    t.text "image"
-    t.bigint "user_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["user_id"], name: "index_partners_on_user_id"
-  end
-
   create_table "plans", force: :cascade do |t|
     t.bigint "company_id", null: false
     t.integer "kind"
@@ -141,7 +130,6 @@ ActiveRecord::Schema.define(version: 2021_11_27_064026) do
     t.datetime "updated_at", precision: 6, null: false
     t.string "youtube_id"
     t.integer "price", default: 0, null: false
-    t.bigint "partner_id", null: false
     t.string "flyer_color"
     t.string "prefectures", default: [], array: true
     t.integer "regular_price"
@@ -153,7 +141,12 @@ ActiveRecord::Schema.define(version: 2021_11_27_064026) do
     t.boolean "is_public"
     t.string "base_code"
     t.boolean "is_online", default: false
-    t.index ["partner_id"], name: "index_recreations_on_partner_id"
+    t.bigint "user_id", null: false
+    t.string "instructor_name"
+    t.string "instructor_title"
+    t.text "instructor_description"
+    t.text "instructor_image"
+    t.index ["user_id"], name: "index_recreations_on_user_id"
   end
 
   create_table "tags", force: :cascade do |t|
@@ -185,6 +178,8 @@ ActiveRecord::Schema.define(version: 2021_11_27_064026) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "company_id"
+    t.string "username"
+    t.string "username_kana"
     t.index ["company_id"], name: "index_users_on_company_id"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
@@ -199,11 +194,10 @@ ActiveRecord::Schema.define(version: 2021_11_27_064026) do
   add_foreign_key "order_tags", "tags"
   add_foreign_key "orders", "recreations"
   add_foreign_key "orders", "users"
-  add_foreign_key "partners", "users"
   add_foreign_key "plans", "companies"
   add_foreign_key "recreation_images", "recreations"
   add_foreign_key "recreation_tags", "recreations"
   add_foreign_key "recreation_tags", "tags"
-  add_foreign_key "recreations", "partners"
+  add_foreign_key "recreations", "users"
   add_foreign_key "users", "companies"
 end

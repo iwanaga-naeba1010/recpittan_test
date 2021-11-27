@@ -83,11 +83,14 @@ namespace :store_json_data do
     users = JSON.parse(File.read(file_folder.join('users.json'))).map { |user| user if user['userType'] != 'customer' }.compact # TODO: 本番はここ外す
     facilities = JSON.parse(File.read(file_folder.join('facilities.json')))
     recreations = JSON.parse(File.read(file_folder.join('recreations.json')))
-
+    # binding.pry
+    data = nil
     ActiveRecord::Base.transaction do
       users.each do |user|
         instance = User.new(
           email: user['email'],
+          username: user['userName'],
+          username_kana: user['userNamePhoneticName'],
           role: user['userType'] == 'customer' ? :customer : :partner,
           password: [*'A'..'Z', *'a'..'z', *0..9].sample(16).join
         )
@@ -114,69 +117,83 @@ namespace :store_json_data do
           next if user['_id']['$oid'].blank?
           # TODO: なぜか登録されていないrecreationがあるので、多分漏れが生じている。
           # 直せばほぼほぼOK
-          rec = recreations.map { |f| f if f['instructorId']['$oid'] ==  user['_id']['$oid'] }.compact.first
 
-          next if rec.blank?
+          # if recreations.map { |f| f if f['instructorId']['$oid'] ==  user['_id']['$oid'] }.compact.length > 1
+          #   recreations.map { |f| f if f['instructorId']['$oid'] ==  user['_id']['$oid'] }.compact.map{ |tmp| tmp['title'] }
+          #   binding.pry
+          # end
+          # NOTE: recreationsは複数ある場合あるので、複数で
+          recs = recreations.map { |f| f if f['instructorId']['$oid'] ==  user['_id']['$oid'] }.compact
 
-          instance.build_partner(
-            name: rec['instructorName'],
-            title: rec['instructorPosition'],
-            description: rec['instructorProfile'],
-          )
+          next if recs.blank?
 
-          new_rec = instance.partner.recreations.build(
-            flyer_color: rec['flyerColor'],
-            prefectures: rec['prefectures'],
-            regular_price: rec['regularPrice'], # NOTE: ここが表示価格
-            regular_material_price: rec['regularMaterialPrice'],
-            instructor_material_amount: rec['instructorMaterialAmount'],
-            title: rec['title'],
-            second_title: rec['name'],
-            description: rec['description'],
-            capacity: rec['capacity'],
-            minutes: rec['requiredTime'],
-            flow_of_day: rec['flowOfDay'],
-            borrow_item: rec['borrowItem'],
-            bring_your_own_item: rec['bringYourOwnItem'],
-            is_public: rec['isPublic'],
-            extra_information: rec['extraInformation'],
-            instructor_amount: rec['instructorAmount'],
-            base_code: rec['baseCode'],
-          )
+          # instance.build_partner(
+          #   name: rec['instructorName'],
+          #   title: rec['instructorPosition'],
+          #   description: rec['instructorProfile'],
+          # )
 
-          # NOTE: targetのタグを作成 or 検索して追加
-          rec['targetPersons'].each do |target|
-            tag = Tag.find_or_create_by(name: target, kind: :target)
-            new_rec.tags << tag
-          end
+          recs.each do |rec|
+            new_rec = instance.recreations.build(
+              flyer_color: rec['flyerColor'],
+              prefectures: rec['prefectures'],
+              regular_price: rec['regularPrice'], # NOTE: ここが表示価格
+              regular_material_price: rec['regularMaterialPrice'],
+              instructor_material_amount: rec['instructorMaterialAmount'],
+              title: rec['title'],
+              second_title: rec['name'],
+              description: rec['description'],
+              capacity: rec['capacity'],
+              minutes: rec['requiredTime'],
+              flow_of_day: rec['flowOfDay'],
+              borrow_item: rec['borrowItem'],
+              bring_your_own_item: rec['bringYourOwnItem'],
+              is_public: rec['isPublic'],
+              extra_information: rec['extraInformation'],
+              instructor_amount: rec['instructorAmount'],
+              base_code: rec['baseCode'],
+              instructor_name: rec['instructorName'],
+              instructor_title: rec['instructorPosition'],
+              instructor_description: rec['instructorProfile'],
+            )
 
-          # NOTE: 通常のtagを作成 or 検索して追加
-          rec['tags'].each do |t|
-            tag = Tag.find_or_create_by(name: t, kind: :tag)
-            new_rec.tags << tag
-          end
+            # NOTE: targetのタグを作成 or 検索して追加
+            rec['targetPersons'].each do |target|
+              tag = Tag.find_or_create_by(name: target, kind: :target)
+              new_rec.tags << tag
+            end
 
-          # NOTE: 色付きラベルのcategoryを作成 or 検索して追加
-          category = code_to_tag(rec['baseCode'].split(rec['baseCode'].first)[1])
-          if category.present?
-            new_rec.tags << category
-          end
-          # NOTE: baseCodeがYで吉本なら吉本のタグを作成 or 検索して追加
-          if rec['baseCode'].first == 'Y'
-            new_rec.tags << Tag.find_or_create_by(name: '吉本', kind: :tag)
-          end
-          # NOTE: baseCodeが10以上でオンラインならオンラインのタグを作成 or 検索して追加
-          if rec['baseCode'].split(rec['baseCode'].first)[1].to_i >= 10
-            new_rec.is_online = true
-            # new_rec.tags << Tag.find_or_create_by(name: 'オンライン', kind: :tag)
+            # NOTE: 通常のtagを作成 or 検索して追加
+            rec['tags'].each do |t|
+              tag = Tag.find_or_create_by(name: t, kind: :tag)
+              new_rec.tags << tag
+            end
+
+            # NOTE: 色付きラベルのcategoryを作成 or 検索して追加
+            category = code_to_tag(rec['baseCode'].split(rec['baseCode'].first)[1])
+            if category.present?
+              new_rec.tags << category
+            end
+            # NOTE: baseCodeがYで吉本なら吉本のタグを作成 or 検索して追加
+            if rec['baseCode'].first == 'Y'
+              new_rec.tags << Tag.find_or_create_by(name: '吉本', kind: :tag)
+            end
+            # NOTE: baseCodeが10以上でオンラインならオンラインのタグを作成 or 検索して追加
+            if rec['baseCode'].split(rec['baseCode'].first)[1].to_i >= 10
+              new_rec.is_online = true
+              # new_rec.tags << Tag.find_or_create_by(name: 'オンライン', kind: :tag)
+            end
           end
         end
 
-        instance.save
+        data = instance
+        instance.save!
       end
     end
   rescue StandardError => e
     puts e
+    binding.pry
+
   end
 
   def code_to_tag(code)

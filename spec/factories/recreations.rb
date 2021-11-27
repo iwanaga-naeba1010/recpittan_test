@@ -14,8 +14,12 @@
 #  flow_of_day                :text
 #  flyer_color                :string
 #  instructor_amount          :integer
+#  instructor_description     :text
+#  instructor_image           :text
 #  instructor_material_amount :integer
+#  instructor_name            :string
 #  instructor_position        :string
+#  instructor_title           :string
 #  is_online                  :boolean          default(FALSE)
 #  is_public                  :boolean
 #  minutes                    :integer
@@ -27,16 +31,16 @@
 #  title                      :string
 #  created_at                 :datetime         not null
 #  updated_at                 :datetime         not null
-#  partner_id                 :bigint           not null
+#  user_id                    :bigint           not null
 #  youtube_id                 :string
 #
 # Indexes
 #
-#  index_recreations_on_partner_id  (partner_id)
+#  index_recreations_on_user_id  (user_id)
 #
 # Foreign Keys
 #
-#  fk_rails_...  (partner_id => partners.id)
+#  fk_rails_...  (user_id => users.id)
 #
 FactoryBot.define do
   factory :recreation do
