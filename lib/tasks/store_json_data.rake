@@ -123,6 +123,10 @@ namespace :store_json_data do
 
           # TODO: YoutubeIdを取得する
           recs.each do |rec|
+            youtube_id = rec['media'].map { |media| media['videoId'] if media['videoId'].present? }.compact.first
+            if youtube_id
+              puts youtube_id
+            end
             new_rec = instance.recreations.build(
               flyer_color: rec['flyerColor'],
               prefectures: rec['prefectures'],
@@ -144,6 +148,7 @@ namespace :store_json_data do
               instructor_name: rec['instructorName'],
               instructor_title: rec['instructorPosition'],
               instructor_description: rec['instructorProfile'],
+              youtube_id: youtube_id.present? ? youtube_id : '',
             )
 
             # NOTE: targetのタグを作成 or 検索して追加
