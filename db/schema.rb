@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_26_130617) do
+ActiveRecord::Schema.define(version: 2021_11_27_032800) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -142,6 +142,15 @@ ActiveRecord::Schema.define(version: 2021_11_26_130617) do
     t.string "youtube_id"
     t.integer "price", default: 0, null: false
     t.bigint "partner_id", null: false
+    t.string "flyer_color"
+    t.string "prefectures", default: [], array: true
+    t.integer "regular_price"
+    t.integer "regular_material_price"
+    t.integer "instructor_material_amount"
+    t.integer "capacity"
+    t.integer "instructor_amount"
+    t.string "instructor_position"
+    t.boolean "is_public"
     t.index ["partner_id"], name: "index_recreations_on_partner_id"
   end
 

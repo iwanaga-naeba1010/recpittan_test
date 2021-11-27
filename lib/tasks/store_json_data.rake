@@ -44,13 +44,52 @@ namespace :store_json_data do
     #   "postalCode": "",ok
     #   "verified": false
     # }
+    # recreation = {
+    #   "_id":{"$oid":"614620b9631729d898e5bf94"},
+    #   "createdAt":{"$date":"2021-09-18T17:24:09.784Z"},
+    #   "updatedAt":{"$date":"2021-10-21T13:22:17.384Z"},
+    #   "code":"E170001",
+    #   "flyerColor":"blue",
+    #   "prefectures":["23"],
+    #   "regularPrice":33800,
+    #   "regularMaterialPrice":0,
+    #   "instructorMaterialAmount":0,
+    #   "title":"寄席や演芸場に行った気分で大爆笑",
+    #   "description":"落語や演芸は予め収録されたTV番組や動画などの映像よりもライブで観るのが数倍数十倍数百倍もよりたのしめます。オンラインでの生配信により同じ時間を共有する事によって寄席や演芸場に行った気分でお笑い頂きます。",
+    #   "capacity":0,
+    #   "targetPersons":["軽度認知症", "ほぼ自立", "介護度2以下が多い", "寝たきり"],
+    #   "requiredTime":45,
+    #   "flowOfDay":"寄席で演じてるように簡単な自己紹介から小噺を喋って落語を１席で３０分くらい。ご希望の時間に応じて長くも短くも時間調整は可能です。落語の演目によって短いのもあれば長いものもあるので、短い演目を２、３席とか長い演目をたっぷりとか。他に「南京玉すだれ」や「踊り」などの余興芸も披露できます。",
+    #   "borrowItem":"-",
+    #   "bringYourOwnItem":"-",
+    #   "tags":["話題性あり", "行事", "男性にも人気", "プロ", "ほぼ自立", "軽度認知症", "介護度2以下", "スタッフ見守りのみ", "鑑賞型"],
+    #   "instructorPosition":"-",
+    #   "instructorName":"昔昔亭桃之助",
+    #   "instructorProfile":"時間の調整はいくらでも。短い演目で数席、または長い演目でたっぷり、はたまた漫談や小噺、南京玉すだれ、踊り等々お時間の都合に合わせて演じます。また、謝礼額もご相談に応じます。",
+    #   "extraInformation":"<p><br></p><p><br></p>",
+    #   "reviewCount":0,
+    #   "bookmarkCount":0,
+    #   "isPublic":true,
+    #   "isDeleted":false,
+    #   "version":3,
+    #   "name":"オンライン落語会　",
+    #   "baseCode":"E17",
+    #   "instructorId":{"$oid":"6146131cd50760d4fde589de"},
+    #   "instructorAmount":25000,
+    #   "media":[{"fileId":"", "_id":{"$oid":"61462303631729d898e5bfdc"}, "type":"video", "videoId":"S1YfmVN3oHc"}, {"fileId":"61462302d8ed50d8708b20e7", "_id":{"$oid":"61462303631729d898e5bfdd"}, "type":"picture", "videoId":""}],
+    #   "instructorImage":{"$oid":"61462060631729d898e5bf57"}, "__v":7}
 
     file_folder = Rails.root.join('lib', 'tasks')
     users = JSON.parse(File.read(file_folder.join('users.json')))
+                .map { |user| user if user['userType'] != 'customer' }.compact
     facilities = JSON.parse(File.read(file_folder.join('facilities.json')))
+    recreations = JSON.parse(File.read(file_folder.join('recreations.json')))
     # binding.pry
 
     # facilities.map { |f| f if f['_id']['$oid'] == '61273b68f959d852d633bcc8' }.compact.first
+
+    # TODO: instructorはrecreationの中に入っている。recreationsを作るタイミングで一緒にinstructorも生成
+
 
     ActiveRecord::Base.transaction do
       users.each do |user|
@@ -65,7 +104,7 @@ namespace :store_json_data do
           next if user['facilities'][0].blank?
 
           facility = facilities.map { |f| f if f['_id']['$oid'] ==  user['facilities'][0]['$oid'] }.compact.first
-          # Plan tableも関係するので、その調整も必要
+          # TODO: Plan tableも関係するので、その調整も必要
           instance.build_company(
             name: facility['companyName'],
             facility_name: facility['name'],
@@ -77,7 +116,24 @@ namespace :store_json_data do
             locality: facility['locality'],
             person_in_charge_name: facility['userName'],
             person_in_charge_name_kana: facility['userNamePhoneticName'],
-            )
+          )
+        elsif user['userType'] == 'instructor'
+          next if user['_id']['$oid'].blank?
+
+          rec = recreations.map { |f| f if f['instructorId']['$oid'] ==  user['_id']['$oid'] }.compact.first
+
+          next if rec.blank?
+
+          instance.build_partner(
+            name: rec['instructorName'],
+            title: rec['instructorPosition'],
+            description: rec['instructorProfile'],
+          )
+          # TODO: recreationはinstructorId['$oid']をuser.idから検索で取得可能
+          # TODO: partner作成
+          # TODO: partnerにrecreationsを追加
+
+
         end
         instance.save
       end
