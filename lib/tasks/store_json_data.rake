@@ -80,8 +80,7 @@ namespace :store_json_data do
     #   "instructorImage":{"$oid":"61462060631729d898e5bf57"}, "__v":7}
 
     file_folder = Rails.root.join('lib', 'tasks')
-    users = JSON.parse(File.read(file_folder.join('users.json')))
-                .map { |user| user if user['userType'] != 'customer' }.compact # TODO: 本番はここ外す
+    users = JSON.parse(File.read(file_folder.join('users.json'))).map { |user| user if user['userType'] != 'customer' }.compact # TODO: 本番はここ外す
     facilities = JSON.parse(File.read(file_folder.join('facilities.json')))
     recreations = JSON.parse(File.read(file_folder.join('recreations.json')))
 
@@ -180,25 +179,6 @@ namespace :store_json_data do
   end
 
   def code_to_tag(code)
-    case code
-    when '01', '11'
-      Tag.find_or_create_by(name: '音楽', kind: :category)
-    when '02', '12'
-      Tag.find_or_create_by(name: '健康', kind: :category)
-    when '03', '13'
-      Tag.find_or_create_by(name: '趣味', kind: :category)
-    when '04', '14'
-      Tag.find_or_create_by(name: '創作', kind: :category)
-    when '05', '15'
-      Tag.find_or_create_by(name: '旅行', kind: :category)
-    when '06', '16'
-      Tag.find_or_create_by(name: '食べ物', kind: :category)
-    when '07', '17'
-      Tag.find_or_create_by(name: 'イベント', kind: :category)
-    when '08', '18'
-      Tag.find_or_create_by(name: 'その他', kind: :category)
-    end
-
     # 01:音楽
     # 02:健康
     # 03:趣味
@@ -218,5 +198,23 @@ namespace :store_json_data do
     # 17:イベント
     # 18:その他
     # 19:使用不可
+    case code
+    when '01', '11'
+      Tag.find_or_create_by(name: '音楽', kind: :category)
+    when '02', '12'
+      Tag.find_or_create_by(name: '健康', kind: :category)
+    when '03', '13'
+      Tag.find_or_create_by(name: '趣味', kind: :category)
+    when '04', '14'
+      Tag.find_or_create_by(name: '創作', kind: :category)
+    when '05', '15'
+      Tag.find_or_create_by(name: '旅行', kind: :category)
+    when '06', '16'
+      Tag.find_or_create_by(name: '食べ物', kind: :category)
+    when '07', '17'
+      Tag.find_or_create_by(name: 'イベント', kind: :category)
+    when '08', '18'
+      Tag.find_or_create_by(name: 'その他', kind: :category)
+    end
   end
 end

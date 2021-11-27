@@ -23,4 +23,7 @@ class Tag < ApplicationRecord
   scope :categories, -> { where(kind: :category) }
   scope :events, -> { where(kind: :tag) } # TODO: tagsに変更
   scope :targets, -> { where(kind: :target) }
+
+  # NOTE: 一覧表示の際にtargets以外を表示
+  scope :categories_and_tags, -> { where(kind: :category).or(where(kind: :tag)) }
 end
