@@ -7,5 +7,6 @@ class PartnersController < Partners::ApplicationController
 
   # TODO: ここでtosのhtmlデータを取得して表示する
   # https://everyplus.jp/tos/partner/index.html?
-  def tos; end
+  # NOTE: best_practicesで引っかかるので一旦コメント
+  # def tos; end
 end

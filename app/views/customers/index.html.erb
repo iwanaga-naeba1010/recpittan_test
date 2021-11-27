@@ -25,9 +25,9 @@
           <div class="col-2"><%= order.id %></div>
           <div class="col-2"></div>
           <div class="col-1"><%= order.status_text %></div>
-          <div class="col-3 text-2-truncate"><%= order.recreation.title %></div>
+          <div class="col-3 text-2-truncate"><%= order.recreation_title %></div>
           <div class="col-1"><%= order.number_of_people %>人</div>
-          <div class="col-1"><%= price_pipe order.recreation.price %></div>
+          <div class="col-1"><%= price_pipe order.recreation_price %></div>
           <div class="col-2">
             <%= link_to '詳細を見る', customers_order_path(order.id), class: 'btn btn-cprimary  font-14 py-2 px-4 font-weight-bold text-white' %>
           </div>
