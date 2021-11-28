@@ -24,7 +24,11 @@
         <div class="">
           <% if user_signed_in? %>
             <i class="price-mark">￥</i>
-            <span class="value"><%= price_pipe(rec.regular_price) %></span>
+            <% if rec.is_public_price %>
+              <span class="value"><%= price_pipe(rec.regular_price) %></span>
+            <% else %>
+              <span class="value">お問い合わせ下さい</span>
+            <% end %>
           <% else %>
             <i class="price-mark">￥</i>
             <span class="value">会員のみ</span>

@@ -172,6 +172,7 @@ namespace :store_json_data do
             end
             # NOTE: baseCodeがYで吉本なら吉本のタグを作成 or 検索して追加
             if rec['baseCode'].first == 'Y'
+              new_rec.is_public_price = false
               new_rec.tags << Tag.find_or_create_by(name: '吉本', kind: :tag)
             end
             # NOTE: baseCodeが10以上でオンラインならオンラインのタグを作成 or 検索して追加

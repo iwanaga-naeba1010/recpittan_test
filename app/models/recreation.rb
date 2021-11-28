@@ -22,6 +22,7 @@
 #  instructor_title           :string
 #  is_online                  :boolean          default(FALSE)
 #  is_public                  :boolean
+#  is_public_price            :boolean          default(TRUE)
 #  minutes                    :integer
 #  prefectures                :string           default([]), is an Array
 #  price                      :integer          default(0), not null

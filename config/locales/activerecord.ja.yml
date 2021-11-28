@@ -64,6 +64,7 @@ ja:
         is_online: オンラインかどうか
         is_public: 公開かどうか
         prefectures: 都道府県
+        is_public_price: 料金を公開
 
       recreation_image:
         image: 画像
