@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require 'json'
-require 'pry'
 
 namespace :store_json_data do
   task run: :environment do
