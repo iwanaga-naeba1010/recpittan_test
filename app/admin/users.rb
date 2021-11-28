@@ -1,13 +1,14 @@
 # frozen_string_literal: true
 
 # NOTE: 日本語にするとバグる
+# rubocop:disable Metrics/BlockLength
 ActiveAdmin.register User do
   menu priority: 2
   permit_params(
     %i[email role],
-    company_attributes: [
-      :name, :facility_name, :person_in_charge_name, :person_in_charge_name_kana,
-      :zip, :prefecture, :city, :street, :building, :tel
+    company_attributes: %i[
+      name facility_name person_in_charge_name person_in_charge_name_kana
+      zip prefecture city street building tel
     ]
   )
 
@@ -16,7 +17,8 @@ ActiveAdmin.register User do
   index do
     id_column
     column :email
-    column :role
+    column :role_text
+    column :username
     actions
   end
 
@@ -25,6 +27,8 @@ ActiveAdmin.register User do
       row :id
       row :email
       row :role
+      row :username
+      row :username_kana
       row :created_at
       row :updated_at
     end
@@ -49,6 +53,8 @@ ActiveAdmin.register User do
     f.semantic_errors
 
     f.inputs do
+      f.input :username
+      f.input :username_kana
       f.input :email
       f.input :role, as: :select, collection: User.role.values.map { |i| [i.text, i] }
 
@@ -69,3 +75,4 @@ ActiveAdmin.register User do
     f.actions
   end
 end
+# rubocop:enable Metrics/BlockLength

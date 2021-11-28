@@ -9,6 +9,7 @@ ja:
     user:
       role:
         user: 施設
+        customer: 施設
         partner: パートナー
         admin: 管理者
         cs: カスタマーサクセス

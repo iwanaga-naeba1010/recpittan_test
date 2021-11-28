@@ -2,23 +2,29 @@
 
 module RecreationsHelper
   def price_pipe(price)
-    return 'お問い合せください' if price.zero? || price.blank?
+    return 'お問い合せください' if price == 0 || price.blank?
 
     number_to_currency(price)
   end
 
-  def tags_to_html(tags)
+  def tags_to_html(tags, limit = true)
     return if tags.blank?
 
     category_tag = tags.map { |tag| tag if tag.kind.category? }.compact.first
     content_tag :div do
       if category_tag.present?
-        tags = tags - [category_tag]
+        tags -= [category_tag]
         concat link_to category_tag&.name, customers_recreations_path(q: { tags_id_eq: category_tag.id }),
                        class: 'category-label event',
                        style: "margin-right: 4px; background-color: #{categoryname_to_color_code(category_tag&.name)}"
       end
-      tags.collect { |tag| concat(link_to "##{tag.name}", customers_recreations_path(q: { tags_id_eq: tag.id }), class: 'tag-label', style: 'margin-right: 4px;') }
+      if limit
+        tags = tags.first(2)
+      end
+      tags.collect do |tag|
+        concat(link_to("##{tag.name}", customers_recreations_path(q: { tags_id_eq: tag.id }), class: 'tag-label',
+                                                                                              style: 'margin-right: 4px;'))
+      end
     end
   end
 

@@ -5,7 +5,7 @@ require 'rails_helper'
 RSpec.describe 'Recreations', type: :request do
   let(:admin) { create :user, :with_admin }
   let(:customer) { create :user, :with_custoemr }
-  let(:partner) { (create :user, :with_partner).partner }
+  let(:partner) { create :user, :with_recreations }
   let!(:recreation) { partner.recreations.first }
 
   before do
@@ -27,10 +27,11 @@ RSpec.describe 'Recreations', type: :request do
   end
 
   describe 'POST #create' do
-    let(:attrs) { attributes_for(:recreation, partner_id: partner.id) }
+    let(:attrs) { attributes_for(:recreation, user_id: partner.id) }
 
     context 'with valid parameters' do
       it 'return http success when user not logged in' do
+        # binding.pry
         post admin_recreations_path, params: { recreation: attrs }
         expect(response).to have_http_status(:found)
         expect(response).to redirect_to(admin_recreation_path(Recreation.last.id))

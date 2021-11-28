@@ -5,7 +5,7 @@
         <%= link_to partners_path do %>
           <i class="fas fa-arrow-left text-white"></i>
         <% end %>
-        <%= @order.recreation.partner.name %>
+        <%= @order.recreation.instructor_name %>
       </h2>
     </div>
   </div>
@@ -16,7 +16,7 @@
       </div>
 
       <div class="flex-grow-1">
-        <%= price_pipe(@order.recreation.price) %>
+        <%= price_pipe(@order.recreation.regular_price) %>
         <%= link_to partners_order_path(@order.id) do %>
           <i class="fas fa-chevron-right"></i>
         <% end %>
@@ -26,7 +26,7 @@
 </div>
 
 <div class="chat card-body">
-  <%= render 'shared/partner/order/chat', order: @order %>
+  <%#= render 'shared/partner/order/chat', order: @order %>
 </div>
 
 <div class="chat_form border-top">

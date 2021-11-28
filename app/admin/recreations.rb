@@ -1,8 +1,15 @@
 # frozen_string_literal: true
 
+# rubocop:disable Metrics/BlockLength
 ActiveAdmin.register Recreation do
   permit_params(
-    %i[partner_id title second_title minutes description flow_of_day borrow_item bring_your_own_item extra_information youtube_id price],
+    %i[
+      user_id title second_title minutes description
+      flow_of_day borrow_item bring_your_own_item extra_information youtube_id price
+      base_code capacity flyer_color regular_price instructor_amount instructor_material_amount
+      regular_material_price instructor_name instructor_title instructor_description instructor_image
+      is_online is_public prefectures is_public_price
+    ],
     tag_ids: [],
     recreation_images_attributes: %i[id recreation_id image _destroy]
   )
@@ -14,7 +21,8 @@ ActiveAdmin.register Recreation do
     column :title
     column :second_title
     column :minutes
-    column :price
+    column :regular_price
+    column :is_public_price
 
     actions
   end
@@ -33,6 +41,26 @@ ActiveAdmin.register Recreation do
       row :extra_information
       row :youtube_id
       row :price
+      row :base_code
+      row :capacity
+      row :flyer_color
+      row :regular_price
+      row :instructor_amount
+      row :instructor_material_amount
+      row :regular_material_price
+      row :instructor_name
+      row :instructor_title
+      row :instructor_description
+      row :instructor_image
+      row t('activerecord.attributes.recreation.instructor_image') do |rec|
+        image_tag rec&.instructor_image&.to_s, width: 50, height: 50
+      end
+
+      row :is_online
+      row :is_public
+      row :prefectures
+      row :is_public_price
+
       row :created_at
       row :updated_at
     end
@@ -72,7 +100,7 @@ ActiveAdmin.register Recreation do
 
     f.inputs do
       # pertnerのみ表示
-      f.input :partner, as: :select, collection: Partner.all.map { |partner| [partner.name, partner.id] }
+      f.input :user_id, as: :select, collection: User.where(role: :partner).map { |partner| [partner.username, partner.id] }
       f.input :title
       f.input :second_title
       f.input :minutes
@@ -82,7 +110,24 @@ ActiveAdmin.register Recreation do
       f.input :bring_your_own_item
       f.input :extra_information
       f.input :youtube_id
-      f.input :price, hint: '「料金は相談してください」の場合は0を入力してください'
+      f.input :price
+
+      f.input :base_code
+      f.input :capacity
+      f.input :flyer_color
+      f.input :regular_price
+      f.input :instructor_amount
+      f.input :instructor_material_amount
+      f.input :regular_material_price
+      f.input :instructor_name
+      f.input :instructor_title
+      f.input :instructor_description
+      f.input :instructor_image, hint: image_tag(f.object.instructor_image.to_s, width: 100)
+      f.input :is_online
+      f.input :is_public
+      f.input :is_public_price
+      f.input :prefectures
+
     end
 
     f.input :tags, label: 'カテゴリー', as: :select, collection: Tag.categories.all, multiple: false, hint: 'カテゴリーは一つだけ選択してください。色付きのボタンを生成します'
@@ -98,3 +143,4 @@ ActiveAdmin.register Recreation do
     f.actions
   end
 end
+# rubocop:enable Metrics/BlockLength

@@ -5,7 +5,7 @@ require 'rails_helper'
 RSpec.describe 'Users', type: :request do
   let(:admin) { create :user, :with_admin }
   let(:customer) { create :user, :with_custoemr }
-  let(:partner) { (create :user, :with_partner).partner }
+  let(:partner) { create :user, :with_recreations }
 
   before do
     sign_in admin

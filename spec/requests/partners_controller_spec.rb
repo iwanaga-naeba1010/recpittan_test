@@ -3,11 +3,11 @@
 require 'rails_helper'
 
 RSpec.describe PartnersController, type: :request do
-  let(:user) { create :user, :with_partner }
+  let(:partner) { create :user, :with_recreations }
   let(:custoemr) { create :user, :with_custoemr }
 
   before do
-    sign_in user
+    sign_in partner
   end
 
   describe 'GET /index' do
@@ -20,7 +20,7 @@ RSpec.describe PartnersController, type: :request do
 
     context 'with invalid user' do
       it 'return 302 when customer accessed' do
-        sign_out user
+        sign_out partner
         sign_in custoemr
         get partners_path
         expect(response).to have_http_status(:found)
@@ -28,7 +28,7 @@ RSpec.describe PartnersController, type: :request do
       end
 
       it 'return 302 when user not logged in' do
-        sign_out user
+        sign_out partner
         get partners_path
         expect(response).to have_http_status(:found)
         expect(response).to redirect_to new_user_session_path

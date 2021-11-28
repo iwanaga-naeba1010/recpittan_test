@@ -30,7 +30,7 @@
           <div class="card-body p-0">
             <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
               <div class="carousel-inner">
-                <% if @recreation.youtube_id.present? %>
+                <% if @recreation.youtube_id? %>
                   <div id="youtubeSection" class="carousel-item active" data-interval="false">
                     <div class="ratio ratio-16x9">
                       <iframe src="https://www.youtube.com/embed/<%= @recreation.youtube_id %>" allowfullscreen></iframe>
@@ -61,7 +61,7 @@
               <h2 class="card-subtitle"><%= @recreation.second_title %></h2>
             </div>
             <div class="category-tags pb-2">
-              <%= tags_to_html(@recreation.tags) %>
+              <%= tags_to_html(@recreation.tags, false) %>
             </div>
             <div class="description border-top py-3">
               <h3>このようなことをやります</h3>
@@ -91,12 +91,12 @@
               <h3>このレクリエーションの講師</h3>
               <div class="row align-items-center">
                 <div class="col-md-4 text-center">
-                  <%= image_tag @recreation.partner&.image.to_s, class: "align-self-center rounded-circle", width: 90 %>
-                  <h4><%= @recreation.partner&.name %></h4>
+                  <%= image_tag @recreation&.instructor_image&.to_s, class: "align-self-center rounded-circle", width: 90 %>
+                  <h4><%= @recreation.instructor_name %></h4>
                 </div>
                 <div class="col-md-8">
-                  <h4 class="instructor-position h5"><%= @recreation.partner&.title %></h4>
-                  <p class="instructor-content"><%= simple_format @recreation.partner&.description %></p>
+                  <h4 class="instructor-position h5"><%= @recreation.instructor_title %></h4>
+                  <p class="instructor-content"><%= simple_format @recreation.instructor_description %></p>
                 </div>
               </div>
             </div>
@@ -109,7 +109,12 @@
           <div class="card ">
             <div class="card-body">
               <% if user_signed_in? %>
-                <h3 class="font-24">¥ <%= price_pipe(@recreation.price) %><span> / 1回あたり</span></h3>
+                <% if @recreation.is_public_price %>
+                  <h3 class="font-24">¥ <%= price_pipe(@recreation.regular_price) %><span> / 1回あたり</span></h3>
+                <% else %>
+                  <h3 class="title-b font-20">料金はお問い合わせください</h3>
+                  <div class="text-muted">レク料金は非公開となっています。<br>知りたい場合はお問い合わせをしてください。</div>
+                <% end %>
               <% else %>
                 <h3 class="title-b font-20">会員限定</h3>
                 <div class="text-muted">料金をご覧になるには会員登録が必要です。<br>ログインすると表示されます。</div>
@@ -128,11 +133,11 @@
               <div class="action-area">
                 <% if user_signed_in? %>
                   <!-- 0円の場合はslackに飛ばしで営業が対応 -->
-                  <% if @recreation.price == 0 %>
+                  <% if @recreation.is_public_price %>
+                    <%= link_to '相談・依頼する', new_customers_recreation_order_path(@recreation.id), class: "btn-cpr" %>
+                  <% else %>
                     <!-- React呼び出し -->
                     <div id="ConsultRecreation" data-recreationId=<%= @recreation.id %>></div>
-                  <% else %>
-                    <%= link_to '相談・依頼する', new_customers_recreation_order_path(@recreation.id), class: "btn-cpr" %>
                   <% end %>
                 <% else %>
                   <%= link_to 'ログインして相談・依頼する', new_user_session_path, class: "btn-cpr" %>

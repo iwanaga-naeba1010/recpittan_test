@@ -3,13 +3,13 @@
 require 'rails_helper'
 
 RSpec.describe Partners::ChatsController, type: :request do
-  let(:partner) { (create :user, :with_partner).partner }
+  let(:partner) { create :user, :with_recreations }
   let(:customer) { create :user, :with_custoemr }
   let(:recreation) { partner.recreations.first }
   let(:order) { create :order, recreation_id: recreation.id, user_id: customer.id }
 
   before do
-    sign_in partner.user
+    sign_in partner
   end
 
   describe 'POST /create' do
