@@ -15,7 +15,14 @@ class CustomDevise::RegistrationsController < Devise::RegistrationsController
   # POST /resource
   # rubocop:disable Lint/UselessMethodDefinition
   def create
-    super
+    super do
+      resource.update(
+        username: params[:user][:company_attributes][:person_in_charge_name],
+        username_kana: params[:user][:company_attributes][:person_in_charge_name_kana]
+      )
+      # resource.username =  params[:user][:company_attributes][:person_in_charge_name]
+      # resource.username_kana =  params[:user][:company_attributes][:person_in_charge_name_kana]
+    end
   end
   # rubocop:enable Lint/UselessMethodDefinition
 

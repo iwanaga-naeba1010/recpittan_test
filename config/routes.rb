@@ -43,6 +43,6 @@ Rails.application.routes.draw do
     resources :slack_notifiers, only: %i[create]
   end
 
-  get '*path' => 'errors#routing_error', via: :all
   mount LetterOpenerWeb::Engine, at: '/letter_opener' if Rails.env.development?
+  get '*path' => 'errors#routing_error', via: :all
 end

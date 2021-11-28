@@ -82,7 +82,7 @@ namespace :store_json_data do
     #   "instructorImage":{"$oid":"61462060631729d898e5bf57"}, "__v":7}
 
     file_folder = Rails.root.join('lib', 'tasks')
-    users = JSON.parse(File.read(file_folder.join('users.json'))).map { |user| user if user['userType'] != 'customer' }.compact # TODO: 本番はここ外す
+    users = JSON.parse(File.read(file_folder.join('users.json')))
     facilities = JSON.parse(File.read(file_folder.join('facilities.json')))
     recreations = JSON.parse(File.read(file_folder.join('recreations.json')))
 
@@ -183,7 +183,7 @@ namespace :store_json_data do
           end
         end
 
-        instance.save!
+        instance.save
       end
     end
   rescue StandardError => e

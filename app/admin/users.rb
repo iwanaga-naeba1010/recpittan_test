@@ -17,7 +17,8 @@ ActiveAdmin.register User do
   index do
     id_column
     column :email
-    column :role
+    column :role_text
+    column :username
     actions
   end
 
@@ -26,6 +27,8 @@ ActiveAdmin.register User do
       row :id
       row :email
       row :role
+      row :username
+      row :username_kana
       row :created_at
       row :updated_at
     end
@@ -50,6 +53,8 @@ ActiveAdmin.register User do
     f.semantic_errors
 
     f.inputs do
+      f.input :username
+      f.input :username_kana
       f.input :email
       f.input :role, as: :select, collection: User.role.values.map { |i| [i.text, i] }
 
