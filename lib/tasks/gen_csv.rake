@@ -145,6 +145,9 @@ namespace :gen_csv do
         recreation['name'],
         recreation['instructorName'],
         task['status'],
+        '',
+        task['numberOfPeople'],
+        recreation['targetPersons'],
       ]
       # puts task['projectNumber']
       # puts task['projectNumber']
@@ -158,6 +161,9 @@ namespace :gen_csv do
         'レク名',
         'レクパートナー名',
         'ステータス',
+        '希望日時',
+        '希望人数',
+        '介護度目安',
       ]
       parsed_data.map { |data| csv << data }
     end
