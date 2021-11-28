@@ -148,6 +148,9 @@ namespace :gen_csv do
         '',
         task['numberOfPeople'],
         recreation['targetPersons'],
+        "#{task['postalCode']}#{task['region']}#{task['locality']}#{task['street']}#{task['address']}",
+        task['orderNote'],
+        task['additionalCount'],
       ]
       # puts task['projectNumber']
       # puts task['projectNumber']
@@ -164,6 +167,9 @@ namespace :gen_csv do
         '希望日時',
         '希望人数',
         '介護度目安',
+        '住所',
+        '相談したいこと',
+        '追加施設数',
       ]
       parsed_data.map { |data| csv << data }
     end
