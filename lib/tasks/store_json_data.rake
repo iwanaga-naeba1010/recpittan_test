@@ -85,8 +85,7 @@ namespace :store_json_data do
     users = JSON.parse(File.read(file_folder.join('users.json'))).map { |user| user if user['userType'] != 'customer' }.compact # TODO: 本番はここ外す
     facilities = JSON.parse(File.read(file_folder.join('facilities.json')))
     recreations = JSON.parse(File.read(file_folder.join('recreations.json')))
-    # binding.pry
-    data = nil
+
     ActiveRecord::Base.transaction do
       users.each do |user|
         instance = User.new(
@@ -126,9 +125,9 @@ namespace :store_json_data do
           # TODO: YoutubeIdを取得する
           recs.each do |rec|
             youtube_id = rec['media'].map { |media| media['videoId'] if media['videoId'].present? }.compact.first
-            if youtube_id
-              puts youtube_id
-            end
+            # if youtube_id
+            #   puts youtube_id
+            # end
             new_rec = instance.recreations.build(
               flyer_color: rec['flyerColor'],
               prefectures: rec['prefectures'],
@@ -160,7 +159,8 @@ namespace :store_json_data do
             end
 
             # NOTE: 通常のtagを作成 or 検索して追加
-            rec['tags'].each do |t|
+            # NOTE: tagsとtargetPersonsはダブっているところあるので、そこは消す
+            (rec['tags'] - rec['targetPersons']).each do |t|
               tag = Tag.find_or_create_by(name: t, kind: :tag)
               new_rec.tags << tag
             end
@@ -182,7 +182,6 @@ namespace :store_json_data do
           end
         end
 
-        # data = instance
         instance.save!
       end
     end

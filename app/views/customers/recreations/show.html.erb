@@ -61,7 +61,7 @@
               <h2 class="card-subtitle"><%= @recreation.second_title %></h2>
             </div>
             <div class="category-tags pb-2">
-              <%= tags_to_html(@recreation.tags) %>
+              <%= tags_to_html(@recreation.tags, false) %>
             </div>
             <div class="description border-top py-3">
               <h3>このようなことをやります</h3>

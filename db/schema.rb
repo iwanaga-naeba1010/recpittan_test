@@ -130,8 +130,6 @@ ActiveRecord::Schema.define(version: 2021_11_27_094856) do
     t.datetime "updated_at", precision: 6, null: false
     t.string "youtube_id"
     t.integer "price", default: 0, null: false
-    t.bigint "partner_id"
-    t.index ["partner_id"], name: "index_recreations_on_partner_id"
     t.string "flyer_color"
     t.string "prefectures", default: [], array: true
     t.integer "regular_price"
