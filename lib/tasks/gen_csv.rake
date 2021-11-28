@@ -136,127 +136,31 @@ namespace :gen_csv do
 
         f if f['facilities'][0]['$oid'] == task['facilityId']['$oid']
       }.compact.first
-      puts user['userName']
+      recreation = recreations.map { |r| r if r['_id']['$oid'] == task['recreationId']['$oid'] }.compact.first
 
       parsed_data << [
         task['projectNumber'],
         facility['name'],
         user['userName'],
+        recreation['name'],
+        recreation['instructorName'],
+        task['status'],
       ]
       # puts task['projectNumber']
       # puts task['projectNumber']
     end
 
     CSV.open('./gen.csv', 'w') do |csv|
-      csv << ['案件 No', '施設名', '施設担当者']
+      csv << [
+        '案件 No',
+        '施設名',
+        '施設担当者',
+        'レク名',
+        'レクパートナー名',
+        'ステータス',
+      ]
       parsed_data.map { |data| csv << data }
     end
-    # tasks.first['facilityId']['$oid']
 
-
-    # binding.pry
-
-  #   ActiveRecord::Base.transaction do
-  #     users.each do |user|
-  #       instance = User.new(
-  #         email: user['email'],
-  #         username: user['userName'],
-  #         username_kana: user['userNamePhoneticName'],
-  #         role: user['userType'] == 'customer' ? :customer : :partner,
-  #         password: [*'A'..'Z', *'a'..'z', *0..9].sample(16).join
-  #       )
-  #       instance.skip_confirmation_notification!
-  #
-  #       if user['userType'] == 'customer'
-  #         next if user['facilities'][0].blank?
-  #
-  #         facility = facilities.map { |f| f if f['_id']['$oid'] == user['facilities'][0]['$oid'] }.compact.first
-  #         # TODO: Plan tableも関係するので、その調整も必要
-  #         instance.build_company(
-  #           name: facility['companyName'],
-  #           facility_name: facility['name'],
-  #           # prefecture: JpPrefecture::Prefecture.find(13)
-  #           zip: facility['postalCode'],
-  #           street: facility['street'],
-  #           address: facility['address'],
-  #           region: facility['region'],
-  #           locality: facility['locality'],
-  #           person_in_charge_name: facility['userName'],
-  #           person_in_charge_name_kana: facility['userNamePhoneticName']
-  #         )
-  #       elsif user['userType'] == 'instructor'
-  #         next if user['_id']['$oid'].blank?
-  #
-  #         # NOTE: recreationsは複数ある場合あるので、複数で
-  #         recs = recreations.map { |f| f if f['instructorId']['$oid'] == user['_id']['$oid'] }.compact
-  #
-  #         next if recs.blank?
-  #
-  #         # TODO: YoutubeIdを取得する
-  #         recs.each do |rec|
-  #           youtube_id = rec['media'].map { |media| media['videoId'] if media['videoId'].present? }.compact.first
-  #           # if youtube_id
-  #           #   puts youtube_id
-  #           # end
-  #           new_rec = instance.recreations.build(
-  #             flyer_color: rec['flyerColor'],
-  #             prefectures: rec['prefectures'],
-  #             regular_price: rec['regularPrice'], # NOTE: ここが表示価格
-  #             regular_material_price: rec['regularMaterialPrice'],
-  #             instructor_material_amount: rec['instructorMaterialAmount'],
-  #             title: rec['name'],
-  #             second_title: rec['title'],
-  #             description: rec['description'],
-  #             capacity: rec['capacity'],
-  #             minutes: rec['requiredTime'],
-  #             flow_of_day: rec['flowOfDay'],
-  #             borrow_item: rec['borrowItem'],
-  #             bring_your_own_item: rec['bringYourOwnItem'],
-  #             is_public: rec['isPublic'],
-  #             extra_information: rec['extraInformation'],
-  #             instructor_amount: rec['instructorAmount'],
-  #             base_code: rec['baseCode'],
-  #             instructor_name: rec['instructorName'],
-  #             instructor_title: rec['instructorPosition'],
-  #             instructor_description: rec['instructorProfile'],
-  #             youtube_id: youtube_id.present? ? youtube_id : ''
-  #           )
-  #
-  #           # NOTE: targetのタグを作成 or 検索して追加
-  #           rec['targetPersons'].each do |target|
-  #             tag = Tag.find_or_create_by(name: target, kind: :target)
-  #             new_rec.tags << tag
-  #           end
-  #
-  #           # NOTE: 通常のtagを作成 or 検索して追加
-  #           # NOTE: tagsとtargetPersonsはダブっているところあるので、そこは消す
-  #           (rec['tags'] - rec['targetPersons']).each do |t|
-  #             tag = Tag.find_or_create_by(name: t, kind: :tag)
-  #             new_rec.tags << tag
-  #           end
-  #
-  #           # NOTE: 色付きラベルのcategoryを作成 or 検索して追加
-  #           category = code_to_tag(rec['baseCode'].split(rec['baseCode'].first)[1])
-  #           if category.present?
-  #             new_rec.tags << category
-  #           end
-  #           # NOTE: baseCodeがYで吉本なら吉本のタグを作成 or 検索して追加
-  #           if rec['baseCode'].first == 'Y'
-  #             new_rec.is_public_price = false
-  #             new_rec.tags << Tag.find_or_create_by(name: '吉本', kind: :tag)
-  #           end
-  #           # NOTE: baseCodeが10以上でオンラインならオンラインのタグを作成 or 検索して追加
-  #           if rec['baseCode'].split(rec['baseCode'].first)[1].to_i >= 10
-  #             new_rec.is_online = true
-  #             # new_rec.tags << Tag.find_or_create_by(name: 'オンライン', kind: :tag)
-  #           end
-  #         end
-  #       end
-  #
-  #       instance.save
-  #     end
-  #   end
-  # rescue StandardError => e
-  #   puts e
   end
 end
