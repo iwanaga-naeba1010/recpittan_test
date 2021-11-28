@@ -159,6 +159,11 @@ namespace :gen_csv do
         task['instructorMaterialCost'],
         task['instructorTransportCost'],
         task['instructorExtraExpenseCost'],
+        task['facilityAdditionalPrice'],
+        task['instructorAdditionalPrice'],
+        task['adjustmentCost'],
+        '',
+        '',
       ]
       # puts task['projectNumber']
       # puts task['projectNumber']
@@ -187,7 +192,11 @@ namespace :gen_csv do
         'instructorMaterialCost',
         'instructorTransportCost',
         'instructorExtraExpenseCost',
-        'instructorExtraExpenseCost',
+        'facilityAdditionalPrice',
+        'instructorAdditionalPrice',
+        'adjustmentCost',
+        '開催日時',
+        '終了日時',
       ]
 
 
