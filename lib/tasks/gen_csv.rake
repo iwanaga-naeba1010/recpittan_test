@@ -119,6 +119,22 @@ namespace :gen_csv do
     #   "__v":0
     # },
 
+
+    # message = {
+    #   "_id":{"$oid":"61528f35e00e30bc81acd4ff"},
+    #   "createdAt":{"$date":"2021-09-28T03:42:45.298Z"},
+    #   "updatedAt":{"$date":"2021-09-25T02:00:35.588Z"},
+    #   "userType":"system",
+    #   "messageType":"text",
+    #   "isSeen":false,
+    #   "isDeleted":false,
+    #   "version":3,
+    #   "taskId":{"$oid":"61528f35e00e30bc81acd4fa"},
+    #   "sendUserId":{"$oid":"61273b6bf959d852d633bccb"},
+    #   "text":"リクエスト内容\n\nまずは相談したい\n\n希望日時\n1:2021/11/01 ー:ー~ー:ー\n\n希望人数\n10人\n\n住所\n青森県\n\n相談したい事\nテスト",
+    #   "__v":0
+    # }
+
     file_folder = Rails.root.join('lib', 'tasks')
     users = JSON.parse(File.read(file_folder.join('users.json')))
     facilities = JSON.parse(File.read(file_folder.join('facilities.json')))
@@ -127,7 +143,6 @@ namespace :gen_csv do
     messages = JSON.parse(File.read(file_folder.join('messages.json')))
 
     parsed_data = []
-    # binding.pry
 
     tasks.each do |task|
       facility = facilities.map { |f| f if f['_id']['$oid'] == task['facilityId']['$oid'] }.compact.first
@@ -137,21 +152,33 @@ namespace :gen_csv do
         f if f['facilities'][0]['$oid'] == task['facilityId']['$oid']
       }.compact.first
       recreation = recreations.map { |r| r if r['_id']['$oid'] == task['recreationId']['$oid'] }.compact.first
+      targetMessages = messages.map { |m| m if m['taskId']['$oid'] == task['_id']['$oid'] }.compact
+      puts '-----------------------'
+      puts targetMessages
+      puts '-----------------------'
 
+
+      # if targetMessages.present?
+      #   if targetMessages.length > 1
+      #     targetMessages.map{ |m| DateTime.parse m['createdAt']['$date'] }
+      #     targetMessages = targetMessages.map { |m| DateTime.parse m['createdAt']['$date'] }
+      #   end
+      #   # binding.pry
+      # end
       parsed_data << [
-        task['projectNumber'],
-        facility['name'],
-        user['userName'],
-        recreation['name'],
-        recreation['instructorName'],
-        task['status'],
-        '',
-        task['numberOfPeople'],
-        recreation['targetPersons'],
-        "#{task['postalCode']}#{task['region']}#{task['locality']}#{task['street']}#{task['address']}",
-        task['orderNote'],
-        task['additionalCount'],
-        task['facilityPrice'],
+        task['projectNumber'], # 案件 No
+        facility['name'], #施設名
+        user['userName'],#施設担当者
+        recreation['name'],#レク名
+        recreation['instructorName'],#レクパートナー名
+        task['status'],#ステータス
+        '',#希望日時
+        task['numberOfPeople'], #希望人数
+        recreation['targetPersons'],#介護度目安
+        "#{task['postalCode']}#{task['region']}#{task['locality']}#{task['street']}#{task['address']}", #住所
+        task['orderNote'],#相談したいこと
+        task['additionalCount'],#追加施設数
+        task['facilityPrice'],#請求開催費
         task['facilityMaterialPrice'],
         task['facilityTransportPrice'],
         task['facilityExtraExpensePrice'],
@@ -164,7 +191,11 @@ namespace :gen_csv do
         task['adjustmentCost'],
         '',
         '',
+        targetMessages.map { |m| m['text'] }.join("\n-------Message区切り線---------\n")
       ]
+      # targetMessages.each do |m|
+      #   parsed_data << m['text']
+      # end
       # puts task['projectNumber']
       # puts task['projectNumber']
     end
@@ -184,7 +215,6 @@ namespace :gen_csv do
         '相談したいこと',
         '追加施設数',
         '請求開催費',
-        'facilityPrice',
         'facilityMaterialPrice',
         'facilityTransportPrice',
         'facilityExtraExpensePrice',
@@ -197,10 +227,8 @@ namespace :gen_csv do
         'adjustmentCost',
         '開催日時',
         '終了日時',
+        'チャット'
       ]
-
-
-
 
       parsed_data.map { |data| csv << data }
     end
