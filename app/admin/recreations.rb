@@ -5,7 +5,7 @@ ActiveAdmin.register Recreation do
   permit_params(
     %i[
       user_id title second_title minutes description
-      flow_of_day borrow_item bring_your_own_item extra_information youtube_id price
+      flow_of_day borrow_item bring_your_own_item extra_information youtube_id
       base_code capacity flyer_color regular_price instructor_amount instructor_material_amount
       regular_material_price instructor_name instructor_title instructor_description instructor_image
       is_online is_public prefectures is_public_price
@@ -40,7 +40,7 @@ ActiveAdmin.register Recreation do
       row :bring_your_own_item
       row :extra_information
       row :youtube_id
-      row :price
+      # row :price
       row :base_code
       row :capacity
       row :flyer_color
@@ -51,7 +51,7 @@ ActiveAdmin.register Recreation do
       row :instructor_name
       row :instructor_title
       row :instructor_description
-      row :instructor_image
+      # row :instructor_image
       row t('activerecord.attributes.recreation.instructor_image') do |rec|
         image_tag rec&.instructor_image&.to_s, width: 50, height: 50
       end
@@ -110,11 +110,11 @@ ActiveAdmin.register Recreation do
       f.input :bring_your_own_item
       f.input :extra_information
       f.input :youtube_id
-      f.input :price
+      # f.input :price
 
       f.input :base_code
       f.input :capacity
-      f.input :flyer_color
+      f.input :flyer_color, as: :string
       f.input :regular_price
       f.input :instructor_amount
       f.input :instructor_material_amount

@@ -1,10 +1,9 @@
 # frozen_string_literal: true
 
-# rubocop:disable Metrics/BlockLength
 ActiveAdmin.register Order do
   permit_params(
-    %i[user_id recreation_id prefecture city number_of_people status is_online is_accepted date_and_time]
-  )
+    %i[user_id recreation_id prefecture city number_of_people status is_online is_accepted date_and_time],
+    )
   actions :all, except: [:destroy]
 
   index do
@@ -64,5 +63,34 @@ ActiveAdmin.register Order do
 
     f.actions
   end
+
+  controller do
+    def create
+      # TODO: 人数など必要なカラムも入れる
+
+      message = <<EOS
+リクエスト内容
+相談したい
+希望日時
+1.
+2.
+3.
+
+希望人数
+-人
+
+介護度目安
+
+住所
+
+相談したい事
+
+EOS
+
+      order = Order.new(permitted_params[:order])
+      order.chats.build(user_id: current_user.id, message: message)
+      order.save
+      redirect_to admin_order_path(order.id)
+    end
+  end
 end
-# rubocop:enable Metrics/BlockLength
