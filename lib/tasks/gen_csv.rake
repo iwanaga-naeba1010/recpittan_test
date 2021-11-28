@@ -151,6 +151,14 @@ namespace :gen_csv do
         "#{task['postalCode']}#{task['region']}#{task['locality']}#{task['street']}#{task['address']}",
         task['orderNote'],
         task['additionalCount'],
+        task['facilityPrice'],
+        task['facilityMaterialPrice'],
+        task['facilityTransportPrice'],
+        task['facilityExtraExpensePrice'],
+        task['instructorCost'],
+        task['instructorMaterialCost'],
+        task['instructorTransportCost'],
+        task['instructorExtraExpenseCost'],
       ]
       # puts task['projectNumber']
       # puts task['projectNumber']
@@ -170,7 +178,21 @@ namespace :gen_csv do
         '住所',
         '相談したいこと',
         '追加施設数',
+        '請求開催費',
+        'facilityPrice',
+        'facilityMaterialPrice',
+        'facilityTransportPrice',
+        'facilityExtraExpensePrice',
+        'instructorCost',
+        'instructorMaterialCost',
+        'instructorTransportCost',
+        'instructorExtraExpenseCost',
+        'instructorExtraExpenseCost',
       ]
+
+
+
+
       parsed_data.map { |data| csv << data }
     end
 
