@@ -7,7 +7,7 @@ class HomeController < ApplicationController
     @categories = sort_categories(Tag.categories)
     @yoshimoto = Tag.find_by(name: '吉本')
 
-    @yoshimoto_recs = Recreation
+    @yoshimoto_recs = Recreation.public_recs
       .where(title: [
         '笑って健康！折りがとう！',
         'オスペンギンの介護オモシレーション',
@@ -17,7 +17,7 @@ class HomeController < ApplicationController
         '【コラボ企画】オール巨人リモートコンサート',
         'よしもとお笑い介護ブ！にお任せプラン'
       ])
-    @travel_recs = Recreation
+    @travel_recs = Recreation.public_recs
        .where(title: [
          'ルワンダ伝統アートの工房訪問',
          'オンラインでカンボジアの日常をぶらり旅',
@@ -25,7 +25,7 @@ class HomeController < ApplicationController
          '～おはらい町おかげ横丁ツアー～',
        ])
 
-    @music_recs = Recreation
+    @music_recs = Recreation.public_recs
       .where(title: [
         '【著作権料負担無！】歌とトークで綴る昭和ヒットパレード',
         'ギターとともに楽しいひとときを…ギターとともに楽しいひとときを…',

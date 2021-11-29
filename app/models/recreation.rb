@@ -57,4 +57,6 @@ class Recreation < ApplicationRecord
   delegate :title, to: :partner, prefix: true
   delegate :description, to: :partner, prefix: true
   delegate :image, to: :partner, prefix: true
+
+  scope :public_recs, -> { where(is_public: true) }
 end
