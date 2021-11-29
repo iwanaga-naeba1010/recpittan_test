@@ -5,7 +5,7 @@ class Customers::RecreationsController < Customers::ApplicationController
   skip_before_action :require_customer
 
   def index
-    @q = Recreation.ransack(params[:q])
+    @q = Recreation.public_recs.ransack(params[:q])
     @categories = Tag.categories
     @recs = @q.result(distinct: true).page(params[:page]).per(30)
     value =  @q.base.conditions&.first&.values&.first&.value
@@ -16,6 +16,6 @@ class Customers::RecreationsController < Customers::ApplicationController
   end
 
   def show
-    @recreation = Recreation.find(params[:id])
+    @recreation = Recreation.public_recs.find(params[:id])
   end
 end
