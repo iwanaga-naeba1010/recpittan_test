@@ -59,6 +59,7 @@ FactoryBot.define do
     instructor_name { 'MyText' }
     instructor_title { 'MyText' }
     instructor_description { 'MyText' }
+    is_public { true }
     instructor_image do
       ActionDispatch::Http::UploadedFile.new(
         filename: 'test.png',
