@@ -1,18 +1,22 @@
 <main class="top">
-  <div class="jumbotron jumbotron-top">
-    <div class="container top">
-      <h1 class="">利用者さんのやりたいを叶えるレクがここに</h1>
-      <h2 class="d-none">300種類以上のレクから検索</h2>
+  <% cache('home/top_section') do %>
+    <div class="jumbotron jumbotron-top">
+      <div class="container top">
+        <h1 class="">利用者さんのやりたいを叶えるレクがここに</h1>
+        <h2 class="d-none">300種類以上のレクから検索</h2>
+      </div>
+      <%= render 'shared/home/categories', categories: @categories %>
     </div>
-    <%= render 'shared/home/categories', categories: @categories %>
-  </div>
+  <% end %>
   <article class="container top pt-4 px-0">
     <div class="row py-2">
       <div class="col-12">
         <!-- TODO: リリースのタイミングで有効化する -->
         <!-- TODO: Yoshimotoのタグができたらこちらに追加する -->
-        <%= link_to customers_recreations_path(q: { tags_id_eq: @yoshimoto&.id }), class: 'nav-link' do %>
-          <%= image_pack_tag 'yoshimoto.png', class: "img-fluid", alt: "Responsive image" %>
+        <% cache('home/yoshimoto_section') do %>
+          <%= link_to customers_recreations_path(q: { tags_id_eq: @yoshimoto&.id }), class: 'nav-link' do %>
+            <%= image_pack_tag 'yoshimoto.png', class: "img-fluid", alt: "Responsive image" %>
+          <% end %>
         <% end %>
       </div>
     </div>

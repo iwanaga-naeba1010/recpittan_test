@@ -328,6 +328,7 @@ GEM
     rb-fsevent (0.11.0)
     rb-inotify (0.10.1)
       ffi (~> 1.0)
+    redis (4.5.1)
     regexp_parser (2.1.1)
     require_all (3.0.0)
     responders (3.0.1)
@@ -511,6 +512,7 @@ DEPENDENCIES
   rails-i18n
   rails_best_practices
   ransack
+  redis
   rspec-parameterized
   rspec-rails
   rspec-request_describer
