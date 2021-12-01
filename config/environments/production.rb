@@ -17,6 +17,16 @@ Rails.application.configure do
   # Full error reports are disabled and caching is turned on.
   config.consider_all_requests_local       = false
   config.action_controller.perform_caching = true
+  config.cache_store = :redis_cache_store, {
+    url: ENV['REDIS_URL'],
+    connect_timeout: 30,
+    read_timeout: 0.2,
+    write_timeout: 0.2,
+    reconnect_attempts: 1,
+    error_handler: -> (method:, returning:, exception:) {
+      # Raven.capture_exception(exception, level: 'error', tags: { method: method, returning: returning })
+    }
+  }
 
   # Ensures that a master key has been made available in either ENV['RAILS_MASTER_KEY']
   # or in config/master.key. This key is used to decrypt credentials (and other encrypted files).
