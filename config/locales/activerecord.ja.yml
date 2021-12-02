@@ -79,6 +79,8 @@ ja:
         status: オーダーの状態
         is_accepted: パートナーが承認したかどうか
         date_and_time: 開催日時
+        transportation_expenses: 交通費
+        expenses: 諸経費
       tag:
         name: タグ名
         kind: 種類
