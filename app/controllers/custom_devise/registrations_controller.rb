@@ -32,11 +32,10 @@ class CustomDevise::RegistrationsController < Devise::RegistrationsController
   # end
 
   # PUT /resource
-  def update
-    super
-    initialize_internals
-    # rescue StandardError => e
-  end
+  # def update
+  #   super
+  #   # rescue StandardError => e
+  # end
 
   # DELETE /resource
   # def destroy
