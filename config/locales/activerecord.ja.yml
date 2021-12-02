@@ -77,7 +77,6 @@ ja:
         city: 市区町村
         number_of_people: 人数
         status: オーダーの状態
-        is_online: オンラインレクかどうか
         is_accepted: パートナーが承認したかどうか
         date_and_time: 開催日時
       tag:

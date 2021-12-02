@@ -14,15 +14,21 @@
     <thead>
       <tr class="border-bottom">
         <td class="pt-2 pb-2 w-25">施設名</td>
-        <td class="pt-2 pb-2 text-black text-end">有料老人ホームえぶりプラス</td>
+        <td class="pt-2 pb-2 text-black text-end">
+          <%= @order.user.company.name %>
+        </td>
       </tr>
       <tr class="border-bottom">
         <td class="pt-2 pb-2 w-25">担当者</td>
-        <td class="pt-2 pb-2 text-black text-end">向　宇希</td>
+        <td class="pt-2 pb-2 text-black text-end">
+          <%= @order.user.company.person_in_charge_name %>
+        </td>
       </tr>
       <tr class="border-bottom">
         <td class="pt-2 pb-2 w-25">住所</td>
-        <td class="pt-2 pb-2 text-black text-end">愛知県名古屋市中村区井深町1-1新名古屋センタービル本陣街</td>
+        <td class="pt-2 pb-2 text-black text-end">
+          <%= @order.user.company.full_address %>
+        </td>
       </tr>
     </tbody>
   </table>
@@ -32,15 +38,21 @@
       <thead>
         <tr class="border-bottom">
           <td class="pt-2 pb-2 w-25">レク名</td>
-          <td class="pt-2 pb-2 text-black text-end">オモロさ折り紙付きコンビＳＰＡＮ！によるお笑い介護レクリエーション</td>
+          <td class="pt-2 pb-2 text-black text-end">
+            <%= @order.recreation.title %>
+          </td>
         </tr>
         <tr class="border-bottom">
           <td class="pt-2 pb-2 w-25">レク環境</td>
-          <td class="pt-2 pb-2 text-black text-end">オンライン</td>
+          <td class="pt-2 pb-2 text-black text-end">
+            <%= @order.recreation.is_online ? 'オンライン' : 'オフライン' %>
+          </td>
         </tr>
         <tr class="border-bottom">
           <td class="pt-2 pb-2 w-25">ステータス</td>
-          <td class="pt-2 pb-2 text-black text-end">相談中</td>
+          <td class="pt-2 pb-2 text-black text-end">
+            相談中
+          </td>
         </tr>
       </tbody>
     </table>
@@ -51,7 +63,9 @@
       <thead>
         <tr class="border-bottom">
           <td class="pt-2 pb-2 text-black w-75">開催費</td>
-          <td class="pt-2 pb-2 text-black text-end">¥15,000</td>
+          <td class="pt-2 pb-2 text-black text-end">
+            <%= price_pipe @order.recreation.regular_price %>
+          </td>
         </tr>
         <tr class="border-bottom">
           <td class="pt-2 pb-2 text-black w-75">材料費/1人あたり<br>※材料費は人数分の費用が発生します。</td>

@@ -8,7 +8,6 @@
 #  city             :string
 #  date_and_time    :datetime
 #  is_accepted      :boolean          default(FALSE)
-#  is_online        :boolean          default(FALSE)
 #  number_of_people :integer
 #  prefecture       :string
 #  status           :integer
@@ -34,7 +33,6 @@ FactoryBot.define do
     number_of_people { 1 }
     message { 'MyText' }
     status { 0 }
-    is_online { false }
     is_accepted { false }
   end
 end
