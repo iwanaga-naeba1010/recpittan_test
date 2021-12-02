@@ -33,6 +33,31 @@ const App: React.FC<Props> = ({ orderId, defaultExpense, target }): JSX.Element 
     }
   }, []);
   
+  // NOTE: それぞれの箇所でid指定だとかなり大変なので、chat.html.erbの画面下部にdummyのHTMLを用意し、そこから取得
+  const applyExpenses = () => {
+    const regularPrice: number = Number($('#regularPrice').text());
+    const regularMaterialPrice: number = Number($('#regularMaterialPrice').text());
+    const expensesPrice: number = Number($('#expensesPrice').text());
+    const transportationExpensesPrice: number = Number($('#transportationExpensesPrice').text());
+    const totalPrice: string = '¥' + (regularPrice + regularMaterialPrice + expensesPrice + transportationExpensesPrice).toLocaleString() + '円';
+    // NOTE: サイドバーの合計金額
+    $('#totalPriceForSidenav').text(totalPrice);
+    // NOTE: 正式依頼の合計金額
+    $('#expensesForOrderForm').text('¥' + expensesPrice.toLocaleString() + '円');
+    $('#transportationExpensesForOrderForm').text('¥' + transportationExpensesPrice.toLocaleString() + '円');
+    $('#totalPriceForOrderForm').text(totalPrice);
+  }
+  
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setExpense(Number(e.target.value));
+    if (target === 'expenses') {
+      $('#expensesPrice').text(Number(e.target.value));
+    } else {
+      $('#transportationExpensesPrice').text(Number(e.target.value));
+    }
+    applyExpenses();
+  }
+  
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>): Promise<void> => {
     const token = document.querySelector('[name=csrf-token]').getAttribute('content');
     e.preventDefault();
@@ -49,10 +74,6 @@ const App: React.FC<Props> = ({ orderId, defaultExpense, target }): JSX.Element 
     } catch (e) {
       setIsSent(false);
     }
-    // // NOTE: このreact fileで管理しないのでjqueryで操作
-    // $('#order_prefecture').val(response.results[0].address1);
-    // $('#user_company_attributes_city').val(response.results[0].address2);
-    // $('#user_company_attributes_street').val(response.results[0].address3);
   }
 
   return (
@@ -81,7 +102,7 @@ const App: React.FC<Props> = ({ orderId, defaultExpense, target }): JSX.Element 
                   id={`${target}`}
                   className="form-control text-end"
                   type="number"
-                  value={ expense } onChange={(e) => setExpense(Number(e.target.value))}
+                  value={ expense } onChange={(e) => handleChange(e)}
                 />
               </div>
         

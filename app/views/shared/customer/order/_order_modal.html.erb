@@ -210,22 +210,30 @@
                 <h5 class="card-title title-b">レク 費用</h5>
                 <div class="row justify-content-between border-bottom-dotted pb-2">
                   <div class="col-auto">開催費</div>
-                  <div class="col-auto">&yen;40,500</div>
+                  <div class="col-auto">&yen;
+                    <%= order.recreation.regular_price %>
+                  </div>
                 </div>
                 <div class="row justify-content-between border-bottom-dotted py-2">
                   <div class="col-auto">
                     <span id="participantNum">材料費/1人</span><br>
                     <span class="text-muted font-12 color-ba08">※材料費は人数分の費用が発生します</span>
                   </div>
-                  <div id="materialPrice" class="col-auto">&yen;1,000</div>
+                  <div id="materialPrice" class="col-auto">&yen;
+                    <%= order.recreation.regular_material_price %>
+                  </div>
                 </div>
                 <div class="row justify-content-between border-bottom-dotted pb-2">
                   <div class="col-auto">交通費</div>
-                  <div class="col-auto">&yen;2,000</div>
+                  <div id="transportationExpensesForOrderForm" class="col-auto">&yen;
+                    <%= order.transportation_expenses %>
+                  </div>
                 </div>
                 <div class="row justify-content-between border-bottom-dotted pb-2">
                   <div class="col-auto">諸経費</div>
-                  <div class="col-auto">&yen;2,000</div>
+                  <div id="expensesForOrderForm" class="col-auto">&yen;
+                    <%= order.expenses %>
+                  </div>
                 </div>
                 <!--                {{#if isOnline}}-->
                 <!--                <div class="row justify-content-between border-top-dotted py-2">-->
@@ -242,7 +250,9 @@
 
                 <div class="row justify-content-between border-top py-3">
                   <div class="col-auto">合計</div>
-                  <div class="col-auto">&yen;40,500~</div>
+                  <div id="totalPriceForOrderForm" class="col-auto">&yen;
+                    <%= price_pipe(order.recreation.regular_price + order.recreation.regular_material_price + order.transportation_expenses + order.expenses) %>
+                  </div>
                 </div>
               </div>
             </div>
