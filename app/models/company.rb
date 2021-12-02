@@ -38,4 +38,8 @@ class Company < ApplicationRecord
     build_plan(kind: :free)
     save
   end
+
+  def full_address
+    "#{prefecture}#{city}#{street}#{building}"
+  end
 end

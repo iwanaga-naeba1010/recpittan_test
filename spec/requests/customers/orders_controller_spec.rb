@@ -36,18 +36,18 @@ RSpec.describe Customers::OrdersController, type: :request do
 
     context 'with valid parameters' do
       # TODO: 正式リリースのタイミングでこちらに戻す
-      # it 'return http success when user not logged in' do
-      #   post customers_recreation_orders_path(recreation), params: { order: order_attrs }
-      #   expect(response).to have_http_status(:found)
-      #   expect(response).to redirect_to(chat_customers_order_path(Order.last.id))
-      # end
       it 'return http success when user not logged in' do
         post customers_recreation_orders_path(recreation), params: { order: order_attrs }
-        expect(response.status).to eq 200
-        # binding.pry
-        expect(response.parsed_body['id']).not_to be nil
-        # expect(response).to redirect_to(chat_customers_order_path(Order.last.id))
+        expect(response).to have_http_status(:found)
+        expect(response).to redirect_to(chat_customers_order_path(Order.last.id))
       end
+      # it 'return http success when user not logged in' do
+      #   post customers_recreation_orders_path(recreation), params: { order: order_attrs }
+      #   expect(response.status).to eq 200
+      #   # binding.pry
+      #   expect(response.parsed_body['id']).not_to be nil
+      #   # expect(response).to redirect_to(chat_customers_order_path(Order.last.id))
+      # end
     end
 
     # it 'return http success when user not logged in' do

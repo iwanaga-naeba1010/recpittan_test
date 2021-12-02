@@ -8,7 +8,6 @@
 #  city             :string
 #  date_and_time    :datetime
 #  is_accepted      :boolean          default(FALSE)
-#  is_online        :boolean          default(FALSE)
 #  number_of_people :integer
 #  prefecture       :string
 #  status           :integer

@@ -2,7 +2,7 @@
 
 ActiveAdmin.register Order do
   permit_params(
-    %i[user_id recreation_id prefecture city number_of_people status is_online is_accepted date_and_time],
+    %i[user_id recreation_id prefecture city number_of_people status is_accepted date_and_time],
     )
   actions :all, except: [:destroy]
 
@@ -25,7 +25,6 @@ ActiveAdmin.register Order do
           row :prefecture
           row :city
           row :number_of_people
-          row :is_online
           row :is_accepted
           row :date_and_time
 
@@ -56,7 +55,6 @@ ActiveAdmin.register Order do
       f.input :city
       f.input :number_of_people
       f.input :status, as: :select, collection: Order.status.values.map { |i| [i.text, i] }
-      f.input :is_online
       f.input :is_accepted
       f.input :date_and_time
     end

@@ -68,7 +68,7 @@ class Customers::OrdersController < Customers::ApplicationController
 
       # TODO: 希望日時が空でも大丈夫なようにする
       # TODO: EOS入力にすればタブが入ってしまったようなmessageは解消が可能
-      message = <<~SQL.squish
+      message = <<EOS
         リクエスト内容
         #{@order.title}
         希望日時
@@ -85,7 +85,7 @@ class Customers::OrdersController < Customers::ApplicationController
 
         相談したい事
         #{params_create[:message]}
-      SQL
+EOS
 
       Chat.create(
         order_id: @order.id,
@@ -107,8 +107,8 @@ EOS
       SlackNotifier.new(channel: '#料金お問い合わせ').send('新規お問い合わせ', slack_message)
       # orderの詳細に飛ばす
       # TODO: 正式、Chatリリースの場合は元のMPA redirectに変更する
-      # redirect_to chat_customers_order_path(@order.id)
-      render json: @order
+      redirect_to chat_customers_order_path(@order.id)
+      # render json: @order
     end
   # rubocop:disable Lint/UselessAssignment
   rescue StandardError => e
