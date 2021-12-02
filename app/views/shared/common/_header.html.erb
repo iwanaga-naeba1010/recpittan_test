@@ -60,11 +60,11 @@
                                end
               %>
               <!-- TODO: リリースのタイミングで有効化する -->
-              <%#= link_to mypage_path, class: 'nav-link' do %>
-<!--                <span class="material-icons mypage">-->
-<!--                    account_circle-->
-<!--                </span> マイページ-->
-              <%# end %>
+              <%= link_to mypage_path, class: 'nav-link' do %>
+                <span class="material-icons mypage">
+                    account_circle
+                </span> マイページ
+              <% end %>
             </li>
           <% else %>
             <li class="nav-item">
