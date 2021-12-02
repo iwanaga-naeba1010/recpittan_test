@@ -16,9 +16,7 @@
 #
 # Foreign Keys
 #
-#  fk_rails_...                (order_id => orders.id)
-#  order_memos_order_id_fkey   (order_id => orders.id)
-#  order_memos_order_id_fkey1  (order_id => orders.id)
+#  fk_rails_...  (order_id => orders.id)
 #
 class OrderMemo < ApplicationRecord
   belongs_to :order
