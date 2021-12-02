@@ -87,7 +87,7 @@ const App: React.FC<Props> = ({ orderId, defaultExpense, target }): JSX.Element 
               <a className="clink" onClick={() => setIsSent(false)}>編集</a>
             </div>
             <div className="col-auto">&yen;
-              { expense }
+              { expense.toLocaleString() + '円' }
             </div>
           </div>
         )
