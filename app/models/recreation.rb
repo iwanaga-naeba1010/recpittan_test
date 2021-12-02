@@ -41,7 +41,9 @@
 #
 # Foreign Keys
 #
-#  fk_rails_...  (user_id => users.id)
+#  fk_rails_...               (user_id => users.id)
+#  recreations_user_id_fkey   (user_id => users.id)
+#  recreations_user_id_fkey1  (user_id => users.id)
 #
 class Recreation < ApplicationRecord
   mount_uploader :instructor_image, ImageUploader

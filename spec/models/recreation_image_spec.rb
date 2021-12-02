@@ -16,7 +16,9 @@
 #
 # Foreign Keys
 #
-#  fk_rails_...  (recreation_id => recreations.id)
+#  fk_rails_...                           (recreation_id => recreations.id)
+#  recreation_images_recreation_id_fkey   (recreation_id => recreations.id)
+#  recreation_images_recreation_id_fkey1  (recreation_id => recreations.id)
 #
 require 'rails_helper'
 

@@ -23,8 +23,12 @@
 #
 # Foreign Keys
 #
-#  fk_rails_...  (recreation_id => recreations.id)
-#  fk_rails_...  (user_id => users.id)
+#  fk_rails_...                (recreation_id => recreations.id)
+#  fk_rails_...                (user_id => users.id)
+#  orders_recreation_id_fkey   (recreation_id => recreations.id)
+#  orders_recreation_id_fkey1  (recreation_id => recreations.id)
+#  orders_user_id_fkey         (user_id => users.id)
+#  orders_user_id_fkey1        (user_id => users.id)
 #
 FactoryBot.define do
   factory :order do

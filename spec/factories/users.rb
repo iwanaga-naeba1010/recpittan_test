@@ -39,7 +39,9 @@
 #
 # Foreign Keys
 #
-#  fk_rails_...  (company_id => companies.id)
+#  fk_rails_...            (company_id => companies.id)
+#  users_company_id_fkey   (company_id => companies.id)
+#  users_company_id_fkey1  (company_id => companies.id)
 #
 FactoryBot.define do
   factory :user do
