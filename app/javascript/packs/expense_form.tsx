@@ -1,56 +1,53 @@
 /**
- * recreationのorderの交通費のform
+ * recreationのorderの交通費・諸経費のform
  */
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import ReactDOM from 'react-dom'
 import { put } from '../utils/requests/base';
 import * as $ from 'jquery';
 
-interface Address {
-  address1: string;
-  address2: string;
-  address3: string;
-  kana1: string;
-  kana2: string;
-  kana3: string;
-  prefCode: number;
-  zipcide: number;
+interface Order {
+  expenses: number;
+  transportation_expenses: number;
 }
 
 interface Response {
-  message: string;
-  results: Address[];
+  order: Order;
 }
+type TargetEnum = 'expenses' | 'transportation_expenses';
 
 interface Props {
   orderId: number;
   defaultExpense: number;
-  target: string;
+  target: TargetEnum;
 }
 
 const App: React.FC<Props> = ({ orderId, defaultExpense, target }): JSX.Element => {
   const [expense, setExpense] = useState<number>(defaultExpense);
+  const [isSent, setIsSent] = useState<boolean>(false);
+  
+  useEffect(() => {
+    if (defaultExpense !== 0) {
+      setIsSent(true);
+    }
+  }, []);
   
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>): Promise<void> => {
-    console.log('haitta1');
     const token = document.querySelector('[name=csrf-token]').getAttribute('content');
     e.preventDefault();
 
     let body = {};
     body[target] = expense;
-    console.log('haitta2');
     try {
-      const response = await put<any>(
+      await put<Response>(
         `/api/orders/${orderId}`,
         { order: body },
         { 'X-CSRF-TOKEN': token }
       );
-      // TODO: 正式依頼formも修正
-      // TODO: 編集modeと閲覧だけmodeを切り分ける
-      console.log(response);
+      setIsSent(true);
     } catch (e) {
-    
+      setIsSent(false);
     }
     // // NOTE: このreact fileで管理しないのでjqueryで操作
     // $('#order_prefecture').val(response.results[0].address1);
@@ -59,27 +56,45 @@ const App: React.FC<Props> = ({ orderId, defaultExpense, target }): JSX.Element 
   }
 
   return (
-    <form className="consult" onSubmit={(e) => handleSubmit(e)}>
-      <div className="row justify-content-between border-bottom-dotted py-2">
-        <div className="col-3 align-self-center">
-          { target === 'expenses' ? '諸経費' : '交通費' }
-        </div>
-        <div className="col-7">
-          <input
-            id={`${target}`}
-            className="form-control text-end"
-            type="number"
-            value={ expense } onChange={(e) => setExpense(Number(e.target.value))}
-          />
-        </div>
-
-        <div className="col-2 py-0">
-          <button type="submit" name="action" value="transport_upadte" className="btn btn-inline-edit">
-            <i className="material-icons color-pr10">done</i>
-          </button>
-        </div>
-      </div>
-    </form>
+    <>
+      { isSent
+      ? (
+          <div className="row justify-content-between border-bottom-dotted py-2">
+            <div className="col-auto align-self-center">
+              { target === 'expenses' ? '諸経費' : '交通費' }
+              <br/>
+              <a className="clink" onClick={() => setIsSent(false)}>編集</a>
+            </div>
+            <div className="col-auto">&yen;
+              { expense }
+            </div>
+          </div>
+        )
+      : (
+          <form className="consult" onSubmit={(e) => handleSubmit(e)}>
+            <div className="row justify-content-between border-bottom-dotted py-2">
+              <div className="col-3 align-self-center">
+                { target === 'expenses' ? '諸経費' : '交通費' }
+              </div>
+              <div className="col-7">
+                <input
+                  id={`${target}`}
+                  className="form-control text-end"
+                  type="number"
+                  value={ expense } onChange={(e) => setExpense(Number(e.target.value))}
+                />
+              </div>
+        
+              <div className="col-2 py-0">
+                <button type="submit" name="action" value="transport_upadte" className="btn btn-inline-edit">
+                  <i className="material-icons color-pr10">done</i>
+                </button>
+              </div>
+            </div>
+          </form>
+        )
+      }
+    </>
   );
 }
 
@@ -88,12 +103,8 @@ document.addEventListener('turbolinks:load', () => {
   const expenses = document.querySelector('#ExpenseForm');
   if (transportationExpenses) {
     const expense: number = Number(transportationExpenses.getAttribute('expense'));
-    const target: string = transportationExpenses.getAttribute('target');
+    const target: TargetEnum = transportationExpenses.getAttribute('target') as TargetEnum;
     const orderId: number = Number(transportationExpenses.getAttribute('orderId'));
-    console.log('----');
-    console.log(expense);
-    console.log(target);
-    console.log(orderId);
     ReactDOM.render(
       <App orderId={orderId} defaultExpense={expense} target={target} />,
       transportationExpenses,
@@ -101,12 +112,8 @@ document.addEventListener('turbolinks:load', () => {
   }
   if (expenses) {
     const expense: number = Number(expenses.getAttribute('expense'));
-    const target: string = expenses.getAttribute('target');
+    const target: TargetEnum = expenses.getAttribute('target') as TargetEnum;
     const orderId: number = Number(expenses.getAttribute('orderId'));
-    console.log('----');
-    console.log(expense);
-    console.log(target);
-    console.log(orderId);
     ReactDOM.render(
       <App orderId={orderId} defaultExpense={expense} target={target} />,
       expenses,
