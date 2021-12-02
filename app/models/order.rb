@@ -59,4 +59,13 @@ class Order < ApplicationRecord
   def full_address
     "#{prefecture}#{city}"
   end
+
+  def total_price
+    regular_price = recreation.regular_price || 0
+    regular_material_price = recreation.regular_material_price || 0
+    order_transportation_expenses = transportation_expenses || 0
+    order_expenses = expenses || 0
+
+    regular_price + regular_material_price + order_transportation_expenses + order_expenses
+  end
 end
