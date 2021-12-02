@@ -61,34 +61,43 @@
           <div class="card-body py-0">
             <div class="row justify-content-between border-bottom-dotted pb-2">
               <div class="col-auto">開催費</div>
-              <div class="col-auto">&yen;</div>
+              <div class="col-auto">&yen;
+                <%= price_pipe @order.recreation.regular_price %>
+              </div>
             </div>
             <div class="row justify-content-between border-bottom-dotted py-2">
               <div class="col-auto">材料費/1人<br><span
                 class="text-muted font-12 color-ba08">※材料費は人数分の費用が発生します</span></div>
-              <div class="col-auto">&yen;</div>
+              <div class="col-auto">&yen;
+                <%= number_to_currency @order.recreation.regular_material_price %></div>
             </div>
 
 
             <!--            {{#if showFacilityTransport}}-->
             <!--            {{'交通費 編集モード'}}-->
-            <form action="{{catalogHomeUri}}/order/consult/{{order._id}}/update" class="consult" method="POST">
-              <input type="hidden" name="_csrf" value="{{csrfToken}}">
-              <div class="row justify-content-between border-bottom-dotted py-2">
-                <div class="col-3 align-self-center">交通費</div>
-                <div class="col-7">
-                  <input class="form-control text-end" name="facilityTransportPrice" type="number"
-                         id="facilityTransportPrice" min="0" value="{{order.facilityTransportPrice}}">
-                </div>
-                <div class="col-2 py-0">
+            <div
+              id="TransportationExpenseForm"
+              expense="<%= @order.transportation_expenses %>"
+              target="transportation_expenses"
+              orderId="<%= @order.id %>">
+            </div>
+<!--            <form action="{{catalogHomeUri}}/order/consult/{{order._id}}/update" class="consult" method="POST">-->
+<!--              <input type="hidden" name="_csrf" value="{{csrfToken}}">-->
+<!--              <div class="row justify-content-between border-bottom-dotted py-2">-->
+<!--                <div class="col-3 align-self-center">交通費</div>-->
+<!--                <div class="col-7">-->
+<!--                  <input class="form-control text-end" name="facilityTransportPrice" type="number"-->
+<!--                         id="facilityTransportPrice" min="0" value="{{order.facilityTransportPrice}}">-->
+<!--                </div>-->
+<!--                <div class="col-2 py-0">-->
 
-                  <button type="submit" name="action" value="transport_upadte"
-                          class="btn btn-inline-edit">
-                    <i class="material-icons color-pr10">done</i>
-                  </button>
-                </div>
-              </div>
-            </form>
+<!--                  <button type="submit" name="action" value="transport_upadte"-->
+<!--                          class="btn btn-inline-edit">-->
+<!--                    <i class="material-icons color-pr10">done</i>-->
+<!--                  </button>-->
+<!--                </div>-->
+<!--              </div>-->
+<!--            </form>-->
             <!--            {{else}}-->
             <!--            <div class="row justify-content-between border-bottom-dotted py-2">-->
             <!--              <div class="col-auto align-self-center">交通費-->
@@ -102,22 +111,29 @@
             <!--            {{/if}}-->
             <!--            {{#if showFacilityExtraExpense}}-->
             <!--            {{'諸経費 編集モード'}}-->
-            <form action="{{catalogHomeUri}}/order/consult/{{order._id}}/update" class="consult" method="POST">
-              <input type="hidden" name="_csrf" value="{{csrfToken}}">
-              <div class="row justify-content-between py-2">
-                <div class="col-3 align-self-center">諸経費</div>
-                <div class="col-7">
-                  <input class="form-control text-end" name="facilityExtraExpensePrice" type="number"
-                         id="facilityExtraExpensePrice" value="{{order.facilityExtraExpensePrice}}">
-                </div>
-                <div class="col-2 py-0">
-                  <button type="submit" name="action" value="extra_expense_update"
-                          class="btn btn-inline-edit">
-                    <i class="material-icons color-pr10">done</i>
-                  </button>
-                </div>
-              </div>
-            </form>
+            <div
+              id="ExpenseForm"
+              expense="<%= @order.expenses %>"
+              target="expenses"
+              orderId="<%= @order.id %>">
+            </div>
+
+<!--            <form action="{{catalogHomeUri}}/order/consult/{{order._id}}/update" class="consult" method="POST">-->
+<!--              <input type="hidden" name="_csrf" value="{{csrfToken}}">-->
+<!--              <div class="row justify-content-between py-2">-->
+<!--                <div class="col-3 align-self-center">諸経費</div>-->
+<!--                <div class="col-7">-->
+<!--                  <input class="form-control text-end" name="facilityExtraExpensePrice" type="number"-->
+<!--                         id="facilityExtraExpensePrice" value="{{order.facilityExtraExpensePrice}}">-->
+<!--                </div>-->
+<!--                <div class="col-2 py-0">-->
+<!--                  <button type="submit" name="action" value="extra_expense_update"-->
+<!--                          class="btn btn-inline-edit">-->
+<!--                    <i class="material-icons color-pr10">done</i>-->
+<!--                  </button>-->
+<!--                </div>-->
+<!--              </div>-->
+<!--            </form>-->
             <!--            {{else}}-->
             <!--            <div class="row justify-content-between py-2">-->
             <!--              <div class="col-auto align-self-center">諸経費-->

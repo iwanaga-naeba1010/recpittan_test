@@ -20,6 +20,7 @@ import '../stylesheets/partner.scss';
 import './prefecture_for_edit_user_form';
 import './zip_for_edit_user_form';
 import './consult_recreation'; // recreationで料金相談するボタン
+import './expense_form';
 import './prefectures';
 import '../events/order_form';
 import '../events/recreations';

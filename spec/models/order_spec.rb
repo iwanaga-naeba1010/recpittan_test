@@ -4,17 +4,19 @@
 #
 # Table name: orders
 #
-#  id               :bigint           not null, primary key
-#  city             :string
-#  date_and_time    :datetime
-#  is_accepted      :boolean          default(FALSE)
-#  number_of_people :integer
-#  prefecture       :string
-#  status           :integer
-#  created_at       :datetime         not null
-#  updated_at       :datetime         not null
-#  recreation_id    :bigint           not null
-#  user_id          :bigint           not null
+#  id                      :bigint           not null, primary key
+#  city                    :string
+#  date_and_time           :datetime
+#  expenses                :integer
+#  is_accepted             :boolean          default(FALSE)
+#  number_of_people        :integer
+#  prefecture              :string
+#  status                  :integer
+#  transportation_expenses :integer
+#  created_at              :datetime         not null
+#  updated_at              :datetime         not null
+#  recreation_id           :bigint           not null
+#  user_id                 :bigint           not null
 #
 # Indexes
 #
