@@ -209,9 +209,39 @@
               <div class="form-group  row pt-3">
                 <label for="comment" class="col-12 title-b pb-3">相談したいことがありましたらご記入ください</label>
                 <div class="col-12" style="position: relative;">
-                  <%= f.input :message, label: false, as: :text, input_html: { class: "form-control", rows: "7" }%>
+                  <%= f.input :message, label: false, as: :text, input_html: { class: "form-control", rows: "7" } %>
                 </div>
               </div>
+              <% if @recreation.is_online %>
+                <div class="row pt-3">
+                  <label class="col-12 title-b pt-2">※このレクはオンライン環境が必要です</label>
+                  <div class="col-12">
+                    <span class="text color-ba08">レクをご利用いただくためにはオンライン環境が必要です。</span>
+                  </div>
+                  <div class="col-12 py-3 muted-box">
+                    <div class="row ">
+                      <div class="col-12 my-2">
+                        <h4 class="title-b font-14 color-ba08">オンライン環境がない方へ</h4>
+                      </div>
+                    </div>
+                    <div class="row pb-3">
+                      <div class="col-auto text color-ba08"> 1</div>
+                      <div class="col-10 px-0 text color-ba08">
+                        期間限定でNTTの無料サポートが受けられます。<br>
+                        <a href="https://form.run/@info-1631354048" target="_blank" class="clink"> NTT無料サポートを申し込む</a>
+                      </div>
+                    </div>
+                    <div class="row d-none">
+                      <div class="col-auto text color-ba08"> 2</div>
+                      <div class="col-10 px-0 text color-ba08 d-none">
+                        エブリ・プラスが推奨する簡単にできるオンライン環境をご紹介しています。<br>
+                        <a href="https://tayori.com/faq/5c0acac6bcdec23e3eac9bdf17d9e7f727d1c3cb" target="_blank" class="clink">
+                          オンライン環境のヘルプを見る</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              <% end %>
 
               <div class="row justify-content-center pt-3">
                 <div class="col-10">
@@ -243,10 +273,10 @@
       </div>
       <div class="modal-body">
         <p>
-          レクの相談・依頼フォームの送信が完了しました。<br />
+          レクの相談・依頼フォームの送信が完了しました。<br/>
           エブリ・プラスのスタッフがパートナーへ連絡し調整いたします。調整が完了次第エブリ・プラスのスタッフからメールにて返信いたします。今しばらくお待ちください
         </p>
-<!--        <p>「<%#= @recreation.title %>」の料金をお問い合わせしました。エブリ・プラスのスタッフからメールで返信致します。少々お待ちください。</p>-->
+        <!--        <p>「<%#= @recreation.title %>」の料金をお問い合わせしました。エブリ・プラスのスタッフからメールで返信致します。少々お待ちください。</p>-->
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-cprimary rounded-pill text-white" data-bs-dismiss="modal">閉じる</button>
