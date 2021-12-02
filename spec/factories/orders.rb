@@ -35,6 +35,8 @@ FactoryBot.define do
     number_of_people { 1 }
     message { 'MyText' }
     status { 0 }
+    transportation_expenses { 0 }
+    expenses { 0 }
     is_accepted { false }
   end
 end
