@@ -4,12 +4,27 @@
   <div class="container pt-2">
     <nav aria-label="breadcrumb">
       <ol class="breadcrumb">
-        <% @breadcrumbs.each do |b| %>
-          <li class="breadcrumb-item"><a href="{{uri}}"><%= b[:name] %></a></li>
+        <li class="breadcrumb-item">
+          <%= link_to 'トップ', root_path %>
+        </li>
+        <li class="breadcrumb-item">
+          <%= link_to '一覧', customers_recreations_path %>
+        </li>
+        <% category_tag = @order.recreation.tags.categories&.first %>
+        <% if category_tag.present? %>
+          <li class="breadcrumb-item">
+            <!-- TODO: Tag.categories.firstを表示 + ransack入れる -->
+            <%= link_to category_tag.name, customers_recreations_path(q: { tags_id_eq: category_tag.id }) %>
+          </li>
         <% end %>
+        <li class="breadcrumb-item active">
+          <!-- TODO: Tag.categories.firstを表示 + ransack入れる -->
+          <span><%= @order.recreation.title %></span>
+        </li>
       </ol>
     </nav>
   </div>
+
   <article class="container py-1 px-0">
     <div class="row">
       <div class="col-md-4">

@@ -2,38 +2,25 @@
 
 class Customers::OrdersController < Customers::ApplicationController
   before_action :set_recreation, only: %i[new create]
+  before_action :set_order, only: %i[show chat update complete]
 
-  def show
-    # TODO: パンクズの設定も必要
-    @breadcrumbs = [
-      { name: 'トップ' },
-      { name: '一覧' },
-      { name: '旅行' },
-      { name: '～おはらい町おかげ横丁ツアー～' }
-    ]
-
+  def new
+    @recreation = Recreation.find(params[:recreation_id])
+    @order = @recreation.orders.build
     @years = [2021, 2022]
     @months = 1..12
     @dates = 1..31
     @hours = %w[08 09 10 11 12 13 14 15 16 17 18]
     @minutes = %w[00 15 30 45]
-    @order = current_user.orders.find(params[:id])
   end
 
+  def show; end
+
   def chat
-    # TODO: パンクズの設定も必要
-    @breadcrumbs = [
-      { name: 'トップ' },
-      { name: '一覧' },
-      { name: '旅行' },
-      { name: '～おはらい町おかげ横丁ツアー～' }
-    ]
-    @order = current_user.orders.find(params[:id])
     @chat = current_user.chats.build(order_id: @order.id)
   end
 
   def complete
-    @order = current_user.orders.find(params[:id])
     return redirect_to chat_customers_order_path(@order.id) if @order.status.consult?
 
     # TODO: パンクズの設定も必要
@@ -43,23 +30,6 @@ class Customers::OrdersController < Customers::ApplicationController
       { name: '旅行' },
       { name: '～おはらい町おかげ横丁ツアー～' }
     ]
-  end
-
-  def new
-    # TODO: パンクズの設定も必要
-    @breadcrumbs = [
-      { name: 'トップ' },
-      { name: '一覧' },
-      { name: '旅行' },
-      { name: '～おはらい町おかげ横丁ツアー～' }
-    ]
-    @recreation = Recreation.find(params[:recreation_id])
-    @order = @recreation.orders.build
-    @years = [2021, 2022]
-    @months = 1..12
-    @dates = 1..31
-    @hours = %w[08 09 10 11 12 13 14 15 16 17 18]
-    @minutes = %w[00 15 30 45]
   end
 
   # rubocop:disable Metrics/AbcSize
@@ -135,7 +105,6 @@ EOS
   # rubocop:enable Lint/UselessAssignment
 
   def update
-    @order = current_user.orders.find(params[:id])
     if @order.update(status: :order)
       redirect_to complete_customers_order_path(@order.id), notice: '正式に依頼しました'
     else
@@ -148,6 +117,10 @@ EOS
 
   def set_recreation
     @recreation = Recreation.find(params[:recreation_id])
+  end
+
+  def set_order
+    @order = current_user.orders.find(params[:id])
   end
 
   def parse_date(dates)
