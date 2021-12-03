@@ -29,7 +29,9 @@
                         <span class="material-icons">email</span>
                     </span>
                 </div>
-                <input class="form-control string email required" required="required" aria-required="true" placeholder="メールアドレス" type="email" value="" name="user[email]" id="user_email"/>
+                <div class="form-group flex-grow-1">
+                  <%= f.input :email, label: false, required: true, input_html: { class: 'form-control' } %>
+                </div>
               </div>
 
               <div class="input-group mb-3">
@@ -38,7 +40,9 @@
                       <span class="material-icons">lock</span>
                   </span>
                 </div>
-                <input class="form-control password required form-control" required="required" aria-required="true" type="password" name="user[password]" id="user_password"/>
+                <div class="form-group flex-grow-1">
+                  <%= f.input :password, label: false, required: true, hint: ("#{@minimum_password_length} 文字以上で入力してください" if @minimum_password_length), placeholder: 'パスワード', input_html: { autocomplete: "new-password" } %>
+                </div>
               </div>
 
               <div class="row justify-content-between">
