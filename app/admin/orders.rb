@@ -2,7 +2,10 @@
 
 ActiveAdmin.register Order do
   permit_params(
-    %i[user_id recreation_id prefecture city number_of_people status is_accepted date_and_time transportation_expenses expenses],
+    %i[
+      user_id recreation_id zip prefecture city street building number_of_people status
+      is_accepted date_and_time transportation_expenses expenses
+    ],
     )
   actions :all, except: [:destroy]
 
@@ -22,8 +25,11 @@ ActiveAdmin.register Order do
           row :status
           row :user
           row :recreation
+          row :zip
           row :prefecture
           row :city
+          row :street
+          row :building
           row :number_of_people
           row :is_accepted
           row :date_and_time
@@ -53,8 +59,11 @@ ActiveAdmin.register Order do
       f.input :user, as: :select, collection: User.customers.map { |i| [i.company&.name, i.id] }
 
       f.input :recreation
+      f.input :zip
       f.input :prefecture
       f.input :city
+      f.input :street
+      f.input :building
       f.input :number_of_people
       f.input :status, as: :select, collection: Order.status.values.map { |i| [i.text, i] }
       f.input :is_accepted

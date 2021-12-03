@@ -5,6 +5,7 @@
 # Table name: orders
 #
 #  id                      :bigint           not null, primary key
+#  building                :string
 #  city                    :string
 #  date_and_time           :datetime
 #  expenses                :integer
@@ -12,7 +13,9 @@
 #  number_of_people        :integer
 #  prefecture              :string
 #  status                  :integer
+#  street                  :string
 #  transportation_expenses :integer
+#  zip                     :string
 #  created_at              :datetime         not null
 #  updated_at              :datetime         not null
 #  recreation_id           :bigint           not null
