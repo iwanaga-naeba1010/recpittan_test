@@ -14,4 +14,6 @@ class Partners::OrdersController < Partners::ApplicationController
     end.flatten.compact.first
     @chat = current_user.chats.build(order_id: @order.id)
   end
+
+  def confirm; end
 end

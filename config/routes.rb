@@ -35,6 +35,7 @@ Rails.application.routes.draw do
     resources :orders, only: %i[show] do
       member do
         get :chat
+        get :confirm
       end
     end
   end
