@@ -47,30 +47,12 @@
                     <div class="col-md-4">
                       <picture loading="lazy">
                         <%= image_tag @order.recreation.recreation_images&.first&.image.to_s, class: "img-fluid" %>
-<!--                        <source type="image/webp" srcset="{{catalogCardThumbnailUri recreation.media '320x180@1' 'webp'}},-->
-<!--                                              {{catalogCardThumbnailUri recreation.media '320x180@1.5' 'webp'}} 1.5x,-->
-<!--                                              {{catalogCardThumbnailUri recreation.media '320x180@2' 'webp'}} 2x">-->
-<!--                        <source type="image/jpeg" srcset="{{catalogCardThumbnailUri recreation.media '320x180@1' 'jpg'}},-->
-<!--                                              {{catalogCardThumbnailUri recreation.media '320x180@1.5' 'jpg'}} 1.5x,-->
-<!--                                              {{catalogCardThumbnailUri recreation.media '320x180@2' 'jpg'}} 2x" />-->
-
-<!--                        <img loading="lazy"-->
-<!--                             src="{{catalogCardThumbnailUri recreation.media '320x180@1' 'jpg'}}, {{catalogCardThumbnailUri recreation.media '320x180@1.5' 'jpg'}} 1.5x,"-->
-<!--                             class="img-fluid" alt="介護レクリエーション - {{recreation.name}}">-->
                       </picture>
                     </div>
                     <div class="col-md-8 recreation">
                       <h1 class="font-16 font-weight-bold line-height-140"><%= @order.recreation_title %></h1>
                       <div class=" category-tags">
-                        <% @order.recreation.tags.events.each_with_index do |tag, i| %>
-                          <div class="col-auto px-1">
-                            <% if i == 0 %>
-                              <a href="{{{catalogTagUri this }}}" class="category-label event" style="background-color: #FD7E14;">#<%= tag.name %></a>
-                            <% else %>
-                              <a href="{{{catalogTagUri this }}}" class="tag-label">#<%= tag.name %></a>
-                            <% end %>
-                          </div>
-                        <% end %>
+                        <%= tags_to_html(@order.recreation.tags, false) %>
                       </div>
                     </div>
                   </div>
@@ -84,12 +66,12 @@
                 <div class="col-lg-3 col-4 label">参加人数</div>
                 <div class="col-auto"><%= @order.number_of_people %>人</div>
               </div>
-<!--              {{#if isOnline}}-->
-<!--              <div class="row py-2">-->
-<!--                <div class="col-lg-3 col-4 label">参加施設数</div>-->
-<!--                <div class="col-auto">1施設 （追加施設数{{additionalCount}}軒）</div>-->
-<!--              </div>-->
-<!--              {{/if}}-->
+              <% if @order.recreation.is_online %>
+                <div class="row py-2">
+                  <div class="col-lg-3 col-4 label">参加施設数</div>
+                  <div class="col-auto">1施設 （追加施設数 - 軒）</div>
+                </div>
+              <% end %>
               <div class="row py-2">
                 <div class="col-lg-3 col-4 label">施設住所</div>
                 <div class="col-auto">
@@ -99,14 +81,15 @@
               <div class="row py-2 border-bottom">
                 <div class="col-lg-3 col-4 label">合計費用</div>
                 <div class="col-auto">
-                  &yen;10,000
+                  &yen;
+                  <%= number_to_currency @order.total_price %>
                 </div>
               </div>
             </div>
             <div class="row justify-content-center py-3">
               <div class="col-12 py-3 text-center">
                 <%= link_to '依頼中のレクを確認する', customers_order_path(@order.id), class: 'btn-cpr' %>
-<!--                <a class="btn-cpr" href="{{catalogHomeUri}}/customer/order/detail/{{taskId}}">依頼中のレクを確認する</a>-->
+                <!--                <a class="btn-cpr" href="{{catalogHomeUri}}/customer/order/detail/{{taskId}}">依頼中のレクを確認する</a>-->
               </div>
               <div class="col-12 py-3 text-center">
                 <%= link_to 'トップへ戻る', root_path, class: 'clink' %>

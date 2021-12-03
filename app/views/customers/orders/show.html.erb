@@ -48,21 +48,13 @@
                 <div class="row align-items-center mt-2">
                   <div class="col-md-4">
                     <picture loading="lazy">
-                      <%= image_tag @order.recreation.recreation_images&.first&.image.to_s, class: "img-fluid" %>
+                      <%= image_tag @order.recreation.recreation_images&.first&.image.to_s, class: 'img-fluid' %>
                     </picture>
                   </div>
                   <div class="col-md-8 recreation">
                     <h1 class="font-16 font-weight-bold line-height-140"><%= @order.recreation_title %></h1>
                     <div class="row category-tags">
-                      <% @order.recreation.tags.events.each_with_index do |tag, i| %>
-                        <div class="col-auto px-1">
-                          <% if i == 0 %>
-                            <a href="{{{catalogTagUri this }}}" class="category-label event" style="background-color: #FD7E14;">#<%= tag.name %></a>
-                          <% else %>
-                            <a href="{{{catalogTagUri this }}}" class="tag-label">#<%= tag.name %></a>
-                          <% end %>
-                        </div>
-                      <% end %>
+                      <%= tags_to_html(@order.recreation.tags, false) %>
                     </div>
                   </div>
                   <div class="col-12 py-1">
@@ -95,17 +87,17 @@
               <div class="col-lg-3 col-4 label">参加人数</div>
               <div class="col-auto"><%= @order.number_of_people %>人</div>
             </div>
-<!--            {{#if isOnline}}-->
-<!--            <div class="row py-2">-->
-<!--              <div class="col-lg-3 col-4 label">参加施設数</div>-->
-<!--              <div class="col-auto">{{additionalCount}}</div>-->
-<!--            </div>-->
-<!--            {{else}}-->
-<!--            <div class="row py-2">-->
-<!--              <div class="col-lg-3 col-4 label">施設住所</div>-->
-<!--              <div class="col-auto">{{address}}</div>-->
-<!--            </div>-->
-<!--            {{/if}}-->
+            <!--            {{#if isOnline}}-->
+            <!--            <div class="row py-2">-->
+            <!--              <div class="col-lg-3 col-4 label">参加施設数</div>-->
+            <!--              <div class="col-auto">{{additionalCount}}</div>-->
+            <!--            </div>-->
+            <!--            {{else}}-->
+            <div class="row py-2">
+              <div class="col-lg-3 col-4 label">施設住所</div>
+              <div class="col-auto"><%= @order.full_address %></div>
+            </div>
+            <!--            {{/if}}-->
             <div class="row py-2">
               <div class="col-lg-3 col-4 label">合計費用</div>
               <div class="col-auto"><%= price_pipe @order.recreation.regular_price %></div>
@@ -115,50 +107,49 @@
               <div class="col-auto"><%= @order.status_text %></div>
             </div>
 
-<!--            {{"チャット / 終了報告"}}-->
+            <!--            {{"チャット / 終了報告"}}-->
             <div class="row p-3 justify-content-around">
-<!--              {{#if showReport}}-->
-<!--              <div class="col-5 action pb-3">-->
-<!--                <div class="action-header pt-3">-->
-<!--                  チャット-->
-<!--                </div>-->
-<!--                <div class="py-3" style="min-height: 5rem;">終了報告が完了するまでパートナーとチャットができます。</div>-->
-<!--                {{#if chatActive}}-->
-<!--                <a href="{{catalogHomeUri}}/order/consult/{{taskId}}"-->
-<!--                   class="btn btn-cprimary  font-14 py-2 px-4 font-weight-bold text-white">チャットへ進む</a>-->
-<!--                {{else}}-->
-<!--                <span-->
-<!--                  class="btn btn-cprimary font-14 py-2 px-4 font-weight-bold text-white disabled">チャットへ進む</span>-->
-<!--                {{/if}}-->
-<!--              </div>-->
-<!--              <div class="col-6 action pb-3">-->
-<!--                <div class="action-header pt-3">-->
-<!--                  終了報告-->
-<!--                </div>-->
-<!--                <div class="py-3" style="min-height: 5rem;">レクが開催後、パートナーから終了報告の承認依頼が届きます。内容を確認して承認してください。-->
-<!--                </div>-->
-<!--                {{#if reportActive}}-->
-<!--                <a href="{{catalogHomeUri}}/customer/order/report/{{taskId}}"-->
-<!--                   class="btn btn-cprimary font-14 py-2 px-4 font-weight-bold text-white">終了報告を確認</a>-->
-<!--                {{else}}-->
-<!--                <span class="btn btn-cprimary font-14 py-2 px-4 font-weight-bold text-white disabled ">-->
-<!--                                {{#if chatActive}} 終了報告を確認-->
-<!--                                {{else}} 終了報告を確認済み-->
-<!--                                {{/if}}</span>-->
-<!--                {{/if}}-->
-<!--              </div>-->
+              <!--              {{#if showReport}}-->
+              <!--              <div class="col-5 action pb-3">-->
+              <!--                <div class="action-header pt-3">-->
+              <!--                  チャット-->
+              <!--                </div>-->
+              <!--                <div class="py-3" style="min-height: 5rem;">終了報告が完了するまでパートナーとチャットができます。</div>-->
+              <!--                {{#if chatActive}}-->
+              <!--                <a href="{{catalogHomeUri}}/order/consult/{{taskId}}"-->
+              <!--                   class="btn btn-cprimary  font-14 py-2 px-4 font-weight-bold text-white">チャットへ進む</a>-->
+              <!--                {{else}}-->
+              <!--                <span-->
+              <!--                  class="btn btn-cprimary font-14 py-2 px-4 font-weight-bold text-white disabled">チャットへ進む</span>-->
+              <!--                {{/if}}-->
+              <!--              </div>-->
+              <!--              <div class="col-6 action pb-3">-->
+              <!--                <div class="action-header pt-3">-->
+              <!--                  終了報告-->
+              <!--                </div>-->
+              <!--                <div class="py-3" style="min-height: 5rem;">レクが開催後、パートナーから終了報告の承認依頼が届きます。内容を確認して承認してください。-->
+              <!--                </div>-->
+              <!--                {{#if reportActive}}-->
+              <!--                <a href="{{catalogHomeUri}}/customer/order/report/{{taskId}}"-->
+              <!--                   class="btn btn-cprimary font-14 py-2 px-4 font-weight-bold text-white">終了報告を確認</a>-->
+              <!--                {{else}}-->
+              <!--                <span class="btn btn-cprimary font-14 py-2 px-4 font-weight-bold text-white disabled ">-->
+              <!--                                {{#if chatActive}} 終了報告を確認-->
+              <!--                                {{else}} 終了報告を確認済み-->
+              <!--                                {{/if}}</span>-->
+              <!--                {{/if}}-->
+              <!--              </div>-->
 
               <div class="col-12 action pb-3">
                 <div class="action-header pt-3">
                   チャット
                 </div>
                 <div class="py-3">終了報告が完了するまでパートナーとチャットができます。</div>
-
                 <%= link_to 'チャットへ進む', chat_customers_order_path(@order.id), class: 'btn btn-cprimary  font-14 py-2 px-4 font-weight-bold text-white' %>
-<!--                <span-->
-<!--                  class="btn btn-cprimary font-14 py-2 px-4 font-weight-bold text-white disabled">チャットへ進む</span>-->
               </div>
+
             </div>
+
             <!-- 小計 -->
             <div class="card mt-4">
               <div class="card-header bg-white pb-3">
@@ -167,37 +158,48 @@
               <div class="card-body py-0">
                 <div class="row justify-content-between border-bottom-dotted py-2">
                   <div class="col-auto">開催費</div>
-                  <div class="col-auto">&yen;</div>
+                  <div class="col-auto">&yen;
+                    <%= number_to_currency @order.recreation.regular_price %>
+                  </div>
                 </div>
                 <div class="row justify-content-between border-bottom-dotted py-2">
                   <div class="col-auto">材料費/1人<br><span
                     class="text-muted font-12 color-ba08">※材料費は人数分の費用が発生します</span></div>
-                  <div class="col-auto">&yen;</div>
+                  <div class="col-auto">&yen;
+                    <%= number_to_currency @order.recreation.regular_material_price %>
+                  </div>
                 </div>
                 <div class="row justify-content-between border-bottom-dotted py-2">
                   <div class="col-auto">交通費</div>
-                  <div class="col-auto">&yen;</div>
+                  <div class="col-auto">&yen;
+                    <%= number_to_currency @order.transportation_expenses %>
+                  </div>
                 </div>
                 <div class="row justify-content-between border-bottom-dotted py-2">
                   <div class="col-auto">諸経費</div>
-                  <div class="col-auto">&yen;</div>
+                  <div class="col-auto">&yen;
+                    <%= number_to_currency @order.expenses %>
+                  </div>
                 </div>
-<!--                {{#if isOnline}}-->
-<!--                <div class="row justify-content-between border-top-dotted py-2">-->
-<!--                  <div class="col-auto align-self-center">-->
-<!--                    <span id="facilityCount">追加施設費 / 施設</span>-->
-<!--                  </div>-->
-<!--                  <div class="col-auto" id="additionalPrice"></div>-->
-<!--                  <div class="col-12">-->
-<!--                    <span class="text-muted font-12 color-ba08">-->
-<!--                      ※1施設追加する事に&yen;が発生します-->
-<!--                    </span>-->
-<!--                  </div>-->
-<!--                </div>-->
-<!--                {{/if}}-->
+                <% if @order.recreation.is_online %>
+                  <div class="row justify-content-between border-top-dotted py-2">
+                    <div class="col-auto align-self-center">
+                      <span id="facilityCount">追加施設費 / 施設</span>
+                    </div>
+                    <div class="col-auto" id="additionalPrice"></div>
+                    <div class="col-12">
+                      <span class="text-muted font-12 color-ba08">
+                        ※1施設追加する事に&yen;が発生します
+                      </span>
+                    </div>
+                  </div>
+                <% end %>
+
                 <div class="row justify-content-between border-top py-3">
                   <div class="col-auto">合計</div>
-                  <div class="col-auto">&yen;</div>
+                  <div class="col-auto">&yen;
+                    <%= number_to_currency @order.total_price %>
+                  </div>
                 </div>
               </div>
             </div>
@@ -221,21 +223,3 @@
     </div>
   </article>
 </main>
-
-<!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>-->
-<script>
-  jQuery(document).ready(function () {
-    function chsticky() {
-      if (document.body.clientWidth >= 769) {
-        document.querySelector('#customer-header').style.top = document.querySelector('header').clientHeight + 'px';
-      } else {
-        document.querySelector('#customer-header').style.top = 'auto';
-      }
-    }
-
-    chsticky();
-    jQuery(window).resize(function () {
-      chsticky();
-    });
-  });
-</script>
