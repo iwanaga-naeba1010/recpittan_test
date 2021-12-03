@@ -120,7 +120,7 @@
                       <div class="form-group col-3">
                         <select id="dates1" name="order[dates][<%= i %>][year]" class="form-select">
                           <option style="display: none;">ー</option>
-                          <% @years.each do |year| %>
+                          <% [2021, 2022].each do |year| %>
                             <option value="<%= year %>"><%= year %></option>
                           <% end %>
                         </select>
@@ -129,7 +129,7 @@
                       <div class="form-group col-3">
                         <select id="desiredOneMonth" name="order[dates][<%= i %>][month]" class="form-select ">
                           <option style="display: none;">ー</option>
-                          <% @months.each do |month| %>
+                          <% (1..12).each do |month| %>
                             <option value="<%= month %>"><%= month %></option>
                           <% end %>
                         </select>
@@ -138,7 +138,7 @@
                       <div class="form-group col-3">
                         <select id="desiredOneDay" name="order[dates][<%= i %>][date]" class="form-select ">
                           <option style="display: none;">ー</option>
-                          <% @dates.each do |date| %>
+                          <% (1..31).each do |date| %>
                             <option value="<%= date %>"><%= date %></option>
                           <% end %>
                         </select>
@@ -150,7 +150,7 @@
                       <div class="form-group col-2 pe-0">
                         <select id="desiredOneHourSt" name="order[dates][<%= i %>][start_hour]" class="form-select ">
                           <option style="display: none;">ー</option>
-                          <% @hours.each do |hour| %>
+                          <% %w[08 09 10 11 12 13 14 15 16 17 18].each do |hour| %>
                             <option value="<%= hour %>"><%= hour %></option>
                           <% end %>
                         </select>
@@ -159,7 +159,7 @@
                       <div class="form-group col-2 pe-0">
                         <select id="desiredOneMinuteSt" name="order[dates][<%= i %>][start_minutes]" class="form-select ">
                           <option style="display: none;">ー</option>
-                          <% @minutes.each do |minute| %>
+                          <% %w[00 15 30 45].each do |minute| %>
                             <option value="<%= minute %>"><%= minute %></option>
                           <% end %>
                         </select>
@@ -168,7 +168,7 @@
                       <div class="form-group col-2 pe-0">
                         <select id="desiredOneHourEn" name="order[dates][<%= i %>][end_hour]" class="form-select ">
                           <option style="display: none;">ー</option>
-                          <% @hours.each do |hour| %>
+                          <% %w[08 09 10 11 12 13 14 15 16 17 18].each do |hour| %>
                             <option value="<%= hour %>"><%= hour %></option>
                           <% end %>
                         </select>
@@ -177,7 +177,7 @@
                       <div class="form-group col-2 pe-0">
                         <select id="desiredOneMinuteEn" name="order[dates][<%= i %>][end_minutes]" class="form-select ">
                           <option style="display: none;">ー</option>
-                          <% @minutes.each do |minute| %>
+                          <% %w[00 15 30 45].each do |minute| %>
                             <option value="<%= minute %>"><%= minute %></option>
                           <% end %>
                         </select>

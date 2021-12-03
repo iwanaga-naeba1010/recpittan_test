@@ -7,11 +7,6 @@ class Customers::OrdersController < Customers::ApplicationController
   def new
     @recreation = Recreation.find(params[:recreation_id])
     @order = @recreation.orders.build
-    @years = [2021, 2022]
-    @months = 1..12
-    @dates = 1..31
-    @hours = %w[08 09 10 11 12 13 14 15 16 17 18]
-    @minutes = %w[00 15 30 45]
   end
 
   def show; end
@@ -21,15 +16,7 @@ class Customers::OrdersController < Customers::ApplicationController
   end
 
   def complete
-    return redirect_to chat_customers_order_path(@order.id) if @order.status.consult?
-
-    # TODO: パンクズの設定も必要
-    @breadcrumbs = [
-      { name: 'トップ' },
-      { name: '一覧' },
-      { name: '旅行' },
-      { name: '～おはらい町おかげ横丁ツアー～' }
-    ]
+    redirect_to chat_customers_order_path(@order.id) if @order.status.consult?
   end
 
   # rubocop:disable Metrics/AbcSize
@@ -80,27 +67,11 @@ EOS
 EOS
       SlackNotifier.new(channel: '#料金お問い合わせ').send('新規お問い合わせ', slack_message)
       # orderの詳細に飛ばす
-      # TODO: 正式、Chatリリースの場合は元のMPA redirectに変更する
       redirect_to chat_customers_order_path(@order.id)
-      # render json: @order
     end
   # rubocop:disable Lint/UselessAssignment
-  rescue StandardError => e
-    # TODO: パンクズの設定も必要
-    @breadcrumbs = [
-      { name: 'トップ' },
-      { name: '一覧' },
-      { name: '旅行' },
-      { name: '～おはらい町おかげ横丁ツアー～' }
-    ]
-    @years = [2021, 2022]
-    @months = 1..12
-    @dates = 1..31
-    @hours = %w[08 09 10 11 12 13 14 15 16 17 18]
-    @minutes = %w[00 15 30 45]
-    # TODO: リリースするときはrender: newに戻す
-    render json: {}, status: :unprocessable_entity
-    # render :new
+  rescue StandardError
+    render :new
   end
   # rubocop:enable Lint/UselessAssignment
 
@@ -143,7 +114,6 @@ EOS
     params.require(:order).permit(
       :title, :prefecture, :city, :status, :number_of_people, :user_id, :message,
       :is_online, :is_accepted, :date_and_time,
-
 
       # TODO: datesをobjectではなくarrayでまとめることで多分対応が可能となる
       # TODO: 当然テストや他の箇所のテストなども変わってしまうが、
