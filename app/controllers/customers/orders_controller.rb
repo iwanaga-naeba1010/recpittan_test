@@ -76,6 +76,7 @@ EOS
   # rubocop:enable Lint/UselessAssignment
 
   def update
+    # TODO: statusだけでなく、日時など全ての情報を更新できるようにする
     if @order.update(status: :order)
       redirect_to complete_customers_order_path(@order.id), notice: '正式に依頼しました'
     else
