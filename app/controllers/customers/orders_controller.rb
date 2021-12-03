@@ -4,6 +4,7 @@ class Customers::OrdersController < Customers::ApplicationController
   before_action :set_recreation, only: %i[new create]
 
   def show
+    # TODO: パンクズの設定も必要
     @breadcrumbs = [
       { name: 'トップ' },
       { name: '一覧' },
@@ -20,6 +21,7 @@ class Customers::OrdersController < Customers::ApplicationController
   end
 
   def chat
+    # TODO: パンクズの設定も必要
     @breadcrumbs = [
       { name: 'トップ' },
       { name: '一覧' },
@@ -34,6 +36,7 @@ class Customers::OrdersController < Customers::ApplicationController
     @order = current_user.orders.find(params[:id])
     return redirect_to chat_customers_order_path(@order.id) if @order.status.consult?
 
+    # TODO: パンクズの設定も必要
     @breadcrumbs = [
       { name: 'トップ' },
       { name: '一覧' },
@@ -43,6 +46,7 @@ class Customers::OrdersController < Customers::ApplicationController
   end
 
   def new
+    # TODO: パンクズの設定も必要
     @breadcrumbs = [
       { name: 'トップ' },
       { name: '一覧' },
@@ -112,6 +116,7 @@ EOS
     end
   # rubocop:disable Lint/UselessAssignment
   rescue StandardError => e
+    # TODO: パンクズの設定も必要
     @breadcrumbs = [
       { name: 'トップ' },
       { name: '一覧' },
@@ -165,6 +170,14 @@ EOS
     params.require(:order).permit(
       :title, :prefecture, :city, :status, :number_of_people, :user_id, :message,
       :is_online, :is_accepted, :date_and_time,
+
+
+      # TODO: datesをobjectではなくarrayでまとめることで多分対応が可能となる
+      # TODO: 当然テストや他の箇所のテストなども変わってしまうが、
+      # 1. railsはarrayだけを管理すればOK
+      # 2. formに値を持たせてそのままrenderingする
+      # 3. newだけではなく、正式orderの実行もdates[0]の指定だけで住むので、全体的にコードの可読性が高くなる。
+      # ということを期待できるので、非常に良い選択肢と考えられる
       { dates: {} },
       { tag_ids: [] }
     )
