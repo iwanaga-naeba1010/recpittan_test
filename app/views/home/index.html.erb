@@ -15,7 +15,7 @@
         <!-- TODO: Yoshimotoのタグができたらこちらに追加する -->
         <% cache('home/yoshimoto_section') do %>
           <%= link_to customers_recreations_path(q: { tags_id_eq: @yoshimoto&.id }), class: 'nav-link' do %>
-            <%= image_pack_tag 'yoshimoto.png', class: "img-fluid", alt: "Responsive image" %>
+            <%= image_pack_tag 'yoshimoto.png', class: 'img-fluid', alt: '吉本レク画像', loading: 'lazy' %>
           <% end %>
         <% end %>
       </div>
