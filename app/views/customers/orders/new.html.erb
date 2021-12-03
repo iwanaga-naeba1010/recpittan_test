@@ -17,7 +17,7 @@
           <div class="col-md-4">
             <picture loading="lazy">
               <% if @recreation.recreation_images.length >= 1 %>
-                <%= image_tag @recreation.recreation_images&.first&.image&.to_s, class: "img-fluid" %>
+                <%= image_tag @recreation.recreation_images&.first&.image&.to_s, class: 'img-fluid' %>
               <% end %>
             </picture>
           </div>
@@ -31,12 +31,12 @@
         <h3 class="title-b">レク情報</h3>
         <div class="card ">
           <div class="card-body p-0">
-            <!--            {{#if item.showCapacity}}-->
-            <!--            <div class="border-bottom p-2">-->
-            <!--              <h4 class="title">参加人数制限 {{item.capacity}}人</h4>-->
-            <!--              <div class="text-muted">※目安30名様に1名のスタッフ様のサポートをお願い致します。</div>-->
-            <!--            </div>-->
-            <!--            {{/if}}-->
+            <!--{{#if item.showCapacity}}-->
+            <!--<div class="border-bottom p-2">-->
+            <!--<h4 class="title">参加人数制限 {{item.capacity}}人</h4>-->
+            <!--<div class="text-muted">※目安30名様に1名のスタッフ様のサポートをお願い致します。</div>-->
+            <!--</div>-->
+            <!--{{/if}}-->
             <div class="border-bottom p-2">
               <h4 class="title">所要時間 <%= @recreation.minutes %>分</h4>
               <div class="text-muted">※ご要望に合わせてご相談が可能です。基本時間のため、ご要望にあわせて調節が可能です。</div>
@@ -65,6 +65,7 @@
         </div>
         <%= render 'shared/home/order_flow' %>
       </div>
+
       <div class="col-md-7">
         <div class="card">
           <div class="card-header bg-white">
@@ -103,7 +104,7 @@
                     <div class="row">
                       <div class="col-12">希望日</div>
                       <div class="form-group col-3">
-                        <select id="dates1" name="order[dates][<%= i %>][year]" class="form-select ">
+                        <select id="dates1" name="order[dates][<%= i %>][year]" class="form-select">
                           <option style="display: none;">ー</option>
                           <% @years.each do |year| %>
                             <option value="<%= year %>"><%= year %></option>
@@ -171,7 +172,6 @@
                   </div>
                 </div>
               <% end %>
-
 
               <div class="row pt-3">
                 <label class="col-12 title-b pb-3" for="participant">おおよそ参加予定人数をご記入ください</label>
@@ -260,7 +260,6 @@
   </article>
 </main>
 
-
 <!-- NOTE: trigger経由でpriceModalを発火 -->
 <div id="priceModalTrigger" data-bs-toggle="modal" data-bs-target="#priceModal" class="d-none"></div>
 <!-- NOTE: reactで制御しているが、要素をnestさせるとclick不可の状態に陥ることあるので、railsで使っている。 -->
@@ -276,7 +275,7 @@
           レクの相談・依頼フォームの送信が完了しました。<br/>
           エブリ・プラスのスタッフがパートナーへ連絡し調整いたします。調整が完了次第エブリ・プラスのスタッフからメールにて返信いたします。今しばらくお待ちください
         </p>
-        <!--        <p>「<%#= @recreation.title %>」の料金をお問い合わせしました。エブリ・プラスのスタッフからメールで返信致します。少々お待ちください。</p>-->
+        <!--<p>「<%#= @recreation.title %>」の料金をお問い合わせしました。エブリ・プラスのスタッフからメールで返信致します。少々お待ちください。</p>-->
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-cprimary rounded-pill text-white" data-bs-dismiss="modal">閉じる</button>
