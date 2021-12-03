@@ -60,7 +60,7 @@ class Order < ApplicationRecord
 
   # TODO: 残りの住所も入れれるようにする
   def full_address
-    "#{prefecture}#{city}"
+    "〒#{zip} #{prefecture}#{city}#{street}#{building}"
   end
 
   def total_price

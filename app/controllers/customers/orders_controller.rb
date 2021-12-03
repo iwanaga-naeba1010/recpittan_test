@@ -77,10 +77,11 @@ EOS
 
   def update
     # TODO: statusだけでなく、日時など全ての情報を更新できるようにする
-    # binding.pry
     date = params_create.to_h[:dates]['0']
-    str_to_date = DateTime.new(date['year'].to_i, date['month'].to_i, date['date'].to_i, date['start_hour'].to_i, date['start_minutes'].to_i)
+    str_to_date = Time.new(date['year'].to_i, date['month'].to_i, date['date'].to_i, date['start_hour'].to_i, date['start_minutes'].to_i)
     # TODO: ここもしかしたら動いてないかも
+    @order.update(date_and_time: str_to_date)
+
     @order.date_and_time = str_to_date
     if @order.update(params_create)
       redirect_to complete_customers_order_path(@order.id), notice: '正式に依頼しました'
@@ -118,7 +119,7 @@ EOS
 
   def params_create
     params.require(:order).permit(
-      :title, :prefecture, :city, :status, :number_of_people, :user_id, :message,
+      :title, :zip, :prefecture, :city, :street, :building, :status, :number_of_people, :user_id, :message,
       :is_online, :is_accepted, :date_and_time,
 
       # TODO: datesをobjectではなくarrayでまとめることで多分対応が可能となる
