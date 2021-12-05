@@ -4,17 +4,22 @@
 #
 # Table name: orders
 #
-#  id               :bigint           not null, primary key
-#  city             :string
-#  date_and_time    :datetime
-#  is_accepted      :boolean          default(FALSE)
-#  number_of_people :integer
-#  prefecture       :string
-#  status           :integer
-#  created_at       :datetime         not null
-#  updated_at       :datetime         not null
-#  recreation_id    :bigint           not null
-#  user_id          :bigint           not null
+#  id                      :bigint           not null, primary key
+#  building                :string
+#  city                    :string
+#  date_and_time           :datetime
+#  expenses                :integer
+#  is_accepted             :boolean          default(FALSE)
+#  number_of_people        :integer
+#  prefecture              :string
+#  status                  :integer
+#  street                  :string
+#  transportation_expenses :integer
+#  zip                     :string
+#  created_at              :datetime         not null
+#  updated_at              :datetime         not null
+#  recreation_id           :bigint           not null
+#  user_id                 :bigint           not null
 #
 # Indexes
 #
@@ -55,6 +60,15 @@ class Order < ApplicationRecord
 
   # TODO: 残りの住所も入れれるようにする
   def full_address
-    "#{prefecture}#{city}"
+    "〒#{zip} #{prefecture}#{city}#{street}#{building}"
+  end
+
+  def total_price
+    regular_price = recreation.regular_price || 0
+    regular_material_price = recreation.regular_material_price || 0
+    order_transportation_expenses = transportation_expenses || 0
+    order_expenses = expenses || 0
+
+    regular_price + regular_material_price + order_transportation_expenses + order_expenses
   end
 end

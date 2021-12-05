@@ -63,21 +63,27 @@
       <thead>
         <tr class="border-bottom">
           <td class="pt-2 pb-2 text-black w-75">開催費</td>
-          <td class="pt-2 pb-2 text-black text-end">
-            <%= price_pipe @order.recreation.regular_price %>
+          <td class="pt-2 pb-2 text-black text-end">¥
+            <%= number_to_currency @order.recreation.regular_price %>
           </td>
         </tr>
         <tr class="border-bottom">
           <td class="pt-2 pb-2 text-black w-75">材料費/1人あたり<br>※材料費は人数分の費用が発生します。</td>
-          <td class="pt-2 pb-2 text-black text-end">¥0</td>
+          <td class="pt-2 pb-2 text-black text-end">¥
+            <%= number_to_currency @order.recreation.regular_material_price %>
+          </td>
         </tr>
         <tr class="border-bottom">
           <td class="pt-2 pb-2 text-black w-75">交通費</td>
-          <td class="pt-2 pb-2 text-black text-end">¥5,000</td>
+          <td class="pt-2 pb-2 text-black text-end">¥
+            <%= number_to_currency @order.transportation_expenses %>
+          </td>
         </tr>
         <tr class="border-bottom">
           <td class="pt-2 pb-2 text-black w-75">諸経費</td>
-          <td class="pt-2 pb-2 text-black text-end">¥5,000</td>
+          <td class="pt-2 pb-2 text-black text-end">¥
+            <%= number_to_currency @order.expenses %>
+          </td>
         </tr>
         <tr class="border-bottom">
           <td class="pt-2 pb-2 text-black w-75">追加施設費/追加施設 0施設<br>※1施設追加する事に費用が発生します。</td>
@@ -85,7 +91,8 @@
         </tr>
         <tr class="border-bottom text-black font-weight-bold">
           <td class="pt-2 pb-2">合計</td>
-          <td class="pt-2 pb-2 text-end">¥25,000</td>
+          <td class="pt-2 pb-2 text-end">¥
+            <%= number_to_currency @order.total_price %></td>
         </tr>
       </tbody>
     </table>

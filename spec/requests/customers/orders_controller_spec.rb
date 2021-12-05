@@ -90,16 +90,63 @@ RSpec.describe Customers::OrdersController, type: :request do
 
   describe 'PUT /update' do
     context 'when valid parameters' do
+      params = {
+        status: :order, dates: { '0' => { year: '2022', month: '1', date: '1', start_hour: '09', start_minutes: '00', end_hour: '10', end_minutes: '00' } },
+        number_of_people: 11, zip: '4536111', prefecture: '愛知県', city: '名古屋市中村区', street: '平池町グローバルゲート　１１階', building: 'building'
+      }
       it 'returns 302 status' do
-        # TODO: 後々カラムを入れて検証する
-        put customers_order_path(order.id), params: { order: {} }
+        put customers_order_path(order.id), params: { order: params }
         expect(response).to have_http_status(:found)
+      end
+
+      it 'update date_and_time' do
+        date = Time.new(
+          params[:dates]['0'][:year].to_i,
+          params[:dates]['0'][:month].to_i,
+          params[:dates]['0'][:date].to_i,
+          params[:dates]['0'][:start_hour].to_i,
+          params[:dates]['0'][:start_minutes].to_i,
+        )
+
+        expect {
+          put customers_order_path(order.id), params: { order: params }
+        }.to change { Order.find(order.id).date_and_time }.from(order.date_and_time).to(date)
       end
 
       it 'update status' do
         expect {
-          put customers_order_path(order.id), params: { order: {} }
+          put customers_order_path(order.id), params: { order: params }
         }.to change { Order.find(order.id).status }.from(order.status).to('order')
+      end
+      it 'update number_of_people' do
+        expect {
+          put customers_order_path(order.id), params: { order: params }
+        }.to change { Order.find(order.id).number_of_people }.from(order.number_of_people).to(params[:number_of_people])
+      end
+      it 'update zip' do
+        expect {
+          put customers_order_path(order.id), params: { order: params }
+        }.to change { Order.find(order.id).zip }.from(order.zip).to(params[:zip])
+      end
+      it 'update prefecture' do
+        expect {
+          put customers_order_path(order.id), params: { order: params }
+        }.to change { Order.find(order.id).prefecture }.from(order.prefecture).to(params[:prefecture])
+      end
+      it 'update city' do
+        expect {
+          put customers_order_path(order.id), params: { order: params }
+        }.to change { Order.find(order.id).city }.from(order.city).to(params[:city])
+      end
+      it 'update street' do
+        expect {
+          put customers_order_path(order.id), params: { order: params }
+        }.to change { Order.find(order.id).street }.from(order.street).to(params[:street])
+      end
+      it 'update building' do
+        expect {
+          put customers_order_path(order.id), params: { order: params }
+        }.to change { Order.find(order.id).building }.from(order.building).to(params[:building])
       end
     end
 

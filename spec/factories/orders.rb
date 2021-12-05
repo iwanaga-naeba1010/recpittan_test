@@ -4,17 +4,22 @@
 #
 # Table name: orders
 #
-#  id               :bigint           not null, primary key
-#  city             :string
-#  date_and_time    :datetime
-#  is_accepted      :boolean          default(FALSE)
-#  number_of_people :integer
-#  prefecture       :string
-#  status           :integer
-#  created_at       :datetime         not null
-#  updated_at       :datetime         not null
-#  recreation_id    :bigint           not null
-#  user_id          :bigint           not null
+#  id                      :bigint           not null, primary key
+#  building                :string
+#  city                    :string
+#  date_and_time           :datetime
+#  expenses                :integer
+#  is_accepted             :boolean          default(FALSE)
+#  number_of_people        :integer
+#  prefecture              :string
+#  status                  :integer
+#  street                  :string
+#  transportation_expenses :integer
+#  zip                     :string
+#  created_at              :datetime         not null
+#  updated_at              :datetime         not null
+#  recreation_id           :bigint           not null
+#  user_id                 :bigint           not null
 #
 # Indexes
 #
@@ -33,6 +38,8 @@ FactoryBot.define do
     number_of_people { 1 }
     message { 'MyText' }
     status { 0 }
+    transportation_expenses { 0 }
+    expenses { 0 }
     is_accepted { false }
   end
 end

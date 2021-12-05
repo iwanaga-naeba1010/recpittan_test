@@ -41,6 +41,7 @@ Rails.application.routes.draw do
 
   namespace :api do
     resources :slack_notifiers, only: %i[create]
+    resources :orders, only: %i[update]
   end
 
   mount LetterOpenerWeb::Engine, at: '/letter_opener' if Rails.env.development?

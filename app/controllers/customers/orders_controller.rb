@@ -2,60 +2,21 @@
 
 class Customers::OrdersController < Customers::ApplicationController
   before_action :set_recreation, only: %i[new create]
+  before_action :set_order, only: %i[show chat update complete]
 
-  def show
-    @breadcrumbs = [
-      { name: 'トップ' },
-      { name: '一覧' },
-      { name: '旅行' },
-      { name: '～おはらい町おかげ横丁ツアー～' }
-    ]
-
-    @years = [2021, 2022]
-    @months = 1..12
-    @dates = 1..31
-    @hours = %w[08 09 10 11 12 13 14 15 16 17 18]
-    @minutes = %w[00 15 30 45]
-    @order = current_user.orders.find(params[:id])
+  def new
+    @recreation = Recreation.find(params[:recreation_id])
+    @order = @recreation.orders.build
   end
 
+  def show; end
+
   def chat
-    @breadcrumbs = [
-      { name: 'トップ' },
-      { name: '一覧' },
-      { name: '旅行' },
-      { name: '～おはらい町おかげ横丁ツアー～' }
-    ]
-    @order = current_user.orders.find(params[:id])
     @chat = current_user.chats.build(order_id: @order.id)
   end
 
   def complete
-    @order = current_user.orders.find(params[:id])
-    return redirect_to chat_customers_order_path(@order.id) if @order.status.consult?
-
-    @breadcrumbs = [
-      { name: 'トップ' },
-      { name: '一覧' },
-      { name: '旅行' },
-      { name: '～おはらい町おかげ横丁ツアー～' }
-    ]
-  end
-
-  def new
-    @breadcrumbs = [
-      { name: 'トップ' },
-      { name: '一覧' },
-      { name: '旅行' },
-      { name: '～おはらい町おかげ横丁ツアー～' }
-    ]
-    @recreation = Recreation.find(params[:recreation_id])
-    @order = @recreation.orders.build
-    @years = [2021, 2022]
-    @months = 1..12
-    @dates = 1..31
-    @hours = %w[08 09 10 11 12 13 14 15 16 17 18]
-    @minutes = %w[00 15 30 45]
+    redirect_to chat_customers_order_path(@order.id) if @order.status.consult?
   end
 
   # rubocop:disable Metrics/AbcSize
@@ -106,32 +67,22 @@ EOS
 EOS
       SlackNotifier.new(channel: '#料金お問い合わせ').send('新規お問い合わせ', slack_message)
       # orderの詳細に飛ばす
-      # TODO: 正式、Chatリリースの場合は元のMPA redirectに変更する
       redirect_to chat_customers_order_path(@order.id)
-      # render json: @order
     end
   # rubocop:disable Lint/UselessAssignment
-  rescue StandardError => e
-    @breadcrumbs = [
-      { name: 'トップ' },
-      { name: '一覧' },
-      { name: '旅行' },
-      { name: '～おはらい町おかげ横丁ツアー～' }
-    ]
-    @years = [2021, 2022]
-    @months = 1..12
-    @dates = 1..31
-    @hours = %w[08 09 10 11 12 13 14 15 16 17 18]
-    @minutes = %w[00 15 30 45]
-    # TODO: リリースするときはrender: newに戻す
-    render json: {}, status: :unprocessable_entity
-    # render :new
+  rescue StandardError
+    render :new
   end
   # rubocop:enable Lint/UselessAssignment
 
   def update
-    @order = current_user.orders.find(params[:id])
-    if @order.update(status: :order)
+    date = params_create.to_h[:dates]['0']
+    str_to_date = Time.new(date['year'].to_i, date['month'].to_i, date['date'].to_i, date['start_hour'].to_i, date['start_minutes'].to_i)
+
+    # TODO: 若干負債だけど、今は許容する
+    @order.update(date_and_time: str_to_date)
+
+    if @order.update(params_create)
       redirect_to complete_customers_order_path(@order.id), notice: '正式に依頼しました'
     else
       redirect_to chat_customers_order_path(@order.id), alert: '失敗しました。もう一度お試しください'
@@ -143,6 +94,10 @@ EOS
 
   def set_recreation
     @recreation = Recreation.find(params[:recreation_id])
+  end
+
+  def set_order
+    @order = current_user.orders.find(params[:id])
   end
 
   def parse_date(dates)
@@ -163,8 +118,15 @@ EOS
 
   def params_create
     params.require(:order).permit(
-      :title, :prefecture, :city, :status, :number_of_people, :user_id, :message,
+      :title, :zip, :prefecture, :city, :street, :building, :status, :number_of_people, :user_id, :message,
       :is_online, :is_accepted, :date_and_time,
+
+      # TODO: datesをobjectではなくarrayでまとめることで多分対応が可能となる
+      # TODO: 当然テストや他の箇所のテストなども変わってしまうが、
+      # 1. railsはarrayだけを管理すればOK
+      # 2. formに値を持たせてそのままrenderingする
+      # 3. newだけではなく、正式orderの実行もdates[0]の指定だけで住むので、全体的にコードの可読性が高くなる。
+      # ということを期待できるので、非常に良い選択肢と考えられる
       { dates: {} },
       { tag_ids: [] }
     )

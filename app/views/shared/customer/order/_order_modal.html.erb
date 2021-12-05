@@ -7,80 +7,43 @@
       </div>
       <div class="modal-body p-2">
         <%= simple_form_for order, url: customers_order_path(order.id), html: { class: 'order h-adr' } do |f| %>
-
-          <!--        <form action="{{catalogHomeUri}}/order/consult/{{order._id}}" class="order h-adr" method="POST">-->
+          <%= f.input :status, as: :hidden, input_html: { value: :order } %>
           <div class="container-fluid">
             <div class="row pb-3">
               <div class="col-auto">
                 <h3 class="title-b p-0">開催したい希望日と時間を選択してください
                   <span class="label required">必須</span>
                 </h3>
-                <span class="text-muted">パートナー都合で希望日時の開催が難しい場合がございます。事前にチャットでの開催日時の相談をお願いします。
-                                        </span>
+                <span class="text-muted">
+                  パートナー都合で希望日時の開催が難しい場合がございます。事前にチャットでの開催日時の相談をお願いします。
+                </span>
               </div>
             </div>
             <div class="row">
               <div class="col-12">希望日</div>
               <div class="form-group col-3">
-                <select id="year" name="year" class="form-select ">
+                <select id="year" name="order[dates][0][year]" class="form-select ">
                   <option style="display: none;">ー</option>
-                  <option value="2021">2021</option>
-                  <option value="2022">2022</option>
+                  <% [2021, 2022].each do |year| %>
+                    <option value="<%= year %>"><%= year %></option>
+                  <% end %>
                 </select>
               </div>
               <div class="col-auto p-0 flex-v-c">年</div>
               <div class="form-group col-3">
-                <select id="month" name="month" class="form-select ">
+                <select id="month" name="order[dates][0][month]" class="form-select ">
                   <option style="display: none;">ー</option>
-                  <option value="01">01</option>
-                  <option value="02">02</option>
-                  <option value="03">03</option>
-                  <option value="04">04</option>
-                  <option value="05">05</option>
-                  <option value="06">06</option>
-                  <option value="07">07</option>
-                  <option value="08">08</option>
-                  <option value="09">09</option>
-                  <option value="10">10</option>
-                  <option value="11">11</option>
-                  <option value="12">12</option>
+                  <% (1..12).each do |month| %>
+                    <option value="<%= month %>"><%= month %></option>
+                  <% end %>
                 </select>
               </div>
               <div class="col-auto p-0 flex-v-c">月</div>
               <div class="form-group col-3">
-                <select id="day" name="day" class="form-select ">
-                  <option style="display: none;">ー</option>
-                  <option value="01">01</option>
-                  <option value="02">02</option>
-                  <option value="03">03</option>
-                  <option value="04">04</option>
-                  <option value="05">05</option>
-                  <option value="06">06</option>
-                  <option value="07">07</option>
-                  <option value="08">08</option>
-                  <option value="09">09</option>
-                  <option value="10">10</option>
-                  <option value="11">11</option>
-                  <option value="12">12</option>
-                  <option value="13">13</option>
-                  <option value="14">14</option>
-                  <option value="15">15</option>
-                  <option value="16">16</option>
-                  <option value="17">17</option>
-                  <option value="18">18</option>
-                  <option value="19">19</option>
-                  <option value="20">20</option>
-                  <option value="21">21</option>
-                  <option value="22">22</option>
-                  <option value="23">23</option>
-                  <option value="24">24</option>
-                  <option value="25">25</option>
-                  <option value="26">26</option>
-                  <option value="27">27</option>
-                  <option value="28">28</option>
-                  <option value="29">29</option>
-                  <option value="30">30</option>
-                  <option value="31">31</option>
+                <select id="day" name="order[dates][0][date]" class="form-select ">
+                  <% (1..31).each do |date| %>
+                    <option value="<%= date %>"><%= date %></option>
+                  <% end %>
                 </select>
               </div>
               <div class="col-auto p-0 flex-v-c">日</div>
@@ -88,72 +51,50 @@
             <div class="row">
               <div class="col-12">希望時間</div>
               <div class="form-group col-2 pe-0">
-                <select id="hourSt" name="hourSt" class="form-select ">
+                <select id="hourSt" name="order[dates][0][start_hour]" class="form-select ">
                   <option style="display: none;">ー</option>
-                  <option value="08">08</option>
-                  <option value="09">09</option>
-                  <option value="10">10</option>
-                  <option value="11">11</option>
-                  <option value="12">12</option>
-                  <option value="13">13</option>
-                  <option value="14">14</option>
-                  <option value="15">15</option>
-                  <option value="16">16</option>
-                  <option value="17">17</option>
-                  <option value="18">18</option>
+                  <% %w[08 09 10 11 12 13 14 15 16 17 18].each do |hour| %>
+                    <option value="<%= hour %>"><%= hour %></option>
+                  <% end %>
                 </select>
               </div>
               <div class="col-auto p-0 flex-v-c">:</div>
               <div class="form-group col-2 pe-0">
-                <select id="minuteSt" name="minuteSt" class="form-select ">
+                <select id="minuteSt" name="order[dates][0][start_minutes]" class="form-select ">
                   <option style="display: none;">ー</option>
-                  <option value="00">00</option>
-                  <option value="15">15</option>
-                  <option value="30">30</option>
-                  <option value="45">45</option>
+                  <% %w[00 15 30 45].each do |minute| %>
+                    <option value="<%= minute %>"><%= minute %></option>
+                  <% end %>
                 </select>
               </div>
               <div class="col-auto p-0 flex-v-c">~</div>
               <div class="form-group col-2 pe-0">
-                <select id="hourEn" name="hourEn" class="form-select ">
+                <select id="hourEn" name="order[dates][0][end_hour]" class="form-select ">
                   <option style="display: none;">ー</option>
-                  <option value="08">08</option>
-                  <option value="09">09</option>
-                  <option value="10">10</option>
-                  <option value="11">11</option>
-                  <option value="12">12</option>
-                  <option value="13">13</option>
-                  <option value="14">14</option>
-                  <option value="15">15</option>
-                  <option value="16">16</option>
-                  <option value="17">17</option>
-                  <option value="18">18</option>
+                  <% %w[08 09 10 11 12 13 14 15 16 17 18].each do |hour| %>
+                    <option value="<%= hour %>"><%= hour %></option>
+                  <% end %>
                 </select>
               </div>
               <div class="col-auto p-0 flex-v-c">:</div>
               <div class="form-group col-2 pe-0">
-                <select id="minuteEn" name="minuteEn" class="form-select ">
+                <select id="minuteEn" name="order[dates][0][end_minutes]" class="form-select ">
                   <option style="display: none;">ー</option>
-                  <option value="00">00</option>
-                  <option value="15">15</option>
-                  <option value="30">30</option>
-                  <option value="45">45</option>
+                  <% %w[00 15 30 45].each do |minute| %>
+                    <option value="<%= minute %>"><%= minute %></option>
+                  <% end %>
                 </select>
               </div>
             </div>
             <div class="row pt-3">
-              <label class="col-12 title-b pb-3" for="participant">希望人数を入力してください<span
-                class="label required">必須</span></label>
+              <label class="col-12 title-b pb-3" for="participant">
+                希望人数を入力してください
+                <span class="label required">必須</span>
+              </label>
               <div class="form-group col-3">
-                <input class="form-control text-right {{participantFromClass}}" id="participant"
-                       name="participant" type="tel" placeholder="半角英数で入力">
+                <%= f.input :number_of_people, class: 'form-control text-right' %>
               </div>
               <div class="col-auto p-0 flex-v-c">人</div>
-              <!--              {{#if hasError}}-->
-              <!--              <div class="invalid-feedback d-block">-->
-              <!--                <span>{{participantError}}</span>-->
-              <!--              </div>-->
-              <!--              {{/if}}-->
             </div>
             <!--            {{#if isOnline}}-->
             <!--            {{'オンラインレク'}}-->
@@ -183,25 +124,22 @@
               <div class="form-group col-6">
                 <label for="postalCode">郵便番号</label>
                 <div class="input-group mb-3">
-                  <input class="form-control p-postal-code" size="8" maxlength="8" id="postalCode" name="postalCode" type="tel" placeholder="郵便番号を入力">
-                  <button class="btn btn-outline-secondary p-postal-code-find" type="button" id="button-addon2">検索</button>
+                  <!-- TODO: 横幅いっぱいにする -->
+                  <%= f.input :zip, label: false, class: 'form-control p-postal-code', placeholder: '郵便番号を入力' %>
+                  <button id="searchAddressWithZipForOrder" class="btn btn-outline-secondary p-postal-code-find" type="button">検索</button>
                 </div>
               </div>
               <div class="form-group col-6">
-                <label for="region">都道府県</label>
-                <select id="region" name="region" class="form-select p-region"></select>
+                <%= f.input :prefecture, as: :select, collection: [[]], class: 'form-select p-region' %>
               </div>
               <div class="form-group col-6">
-                <label for="locality">市区町村</label>
-                <input class="form-control p-locality" id="locality" name="locality" type="tel" placeholder="郵便番号を入力">
+                <%= f.input :city, class: 'form-select p-locality' %>
               </div>
               <div class="form-group col-6">
-                <label for="street">町名/番地</label>
-                <input class="form-control p-street-address" id="street" name="street" type="tel" placeholder="郵便番号を入力">
+                <%= f.input :street, class: 'form-select p-street-address' %>
               </div>
               <div class="form-group col-12">
-                <label for="address">建物名</label>
-                <input class="form-control" id="address p-extended-address" name="address" type="tel" placeholder="郵便番号を入力">
+                <%= f.input :building, class: 'form-control' %>
               </div>
             </div>
 
@@ -210,22 +148,30 @@
                 <h5 class="card-title title-b">レク 費用</h5>
                 <div class="row justify-content-between border-bottom-dotted pb-2">
                   <div class="col-auto">開催費</div>
-                  <div class="col-auto">&yen;40,500</div>
+                  <div class="col-auto">&yen;
+                    <%= order.recreation.regular_price %>
+                  </div>
                 </div>
                 <div class="row justify-content-between border-bottom-dotted py-2">
                   <div class="col-auto">
                     <span id="participantNum">材料費/1人</span><br>
                     <span class="text-muted font-12 color-ba08">※材料費は人数分の費用が発生します</span>
                   </div>
-                  <div id="materialPrice" class="col-auto">&yen;1,000</div>
+                  <div id="materialPrice" class="col-auto">&yen;
+                    <%= order.recreation.regular_material_price %>
+                  </div>
                 </div>
                 <div class="row justify-content-between border-bottom-dotted pb-2">
                   <div class="col-auto">交通費</div>
-                  <div class="col-auto">&yen;2,000</div>
+                  <div id="transportationExpensesForOrderForm" class="col-auto">&yen;
+                    <%= order.transportation_expenses %>
+                  </div>
                 </div>
                 <div class="row justify-content-between border-bottom-dotted pb-2">
                   <div class="col-auto">諸経費</div>
-                  <div class="col-auto">&yen;2,000</div>
+                  <div id="expensesForOrderForm" class="col-auto">&yen;
+                    <%= order.expenses %>
+                  </div>
                 </div>
                 <!--                {{#if isOnline}}-->
                 <!--                <div class="row justify-content-between border-top-dotted py-2">-->
@@ -242,7 +188,9 @@
 
                 <div class="row justify-content-between border-top py-3">
                   <div class="col-auto">合計</div>
-                  <div class="col-auto">&yen;40,500~</div>
+                  <div id="totalPriceForOrderForm" class="col-auto">&yen;
+                    <%= price_pipe(order.total_price) %>
+                  </div>
                 </div>
               </div>
             </div>

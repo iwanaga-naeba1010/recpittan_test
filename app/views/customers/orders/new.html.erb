@@ -2,9 +2,23 @@
   <div class="container pt-2">
     <nav aria-label="breadcrumb">
       <ol class="breadcrumb">
-        <% @breadcrumbs.each do |b| %>
-          <li class="breadcrumb-item"><a href="{{uri}}"><%= b[:name] %></a></li>
+        <li class="breadcrumb-item">
+          <%= link_to 'トップ', root_path %>
+        </li>
+        <li class="breadcrumb-item">
+          <%= link_to '一覧', customers_recreations_path %>
+        </li>
+        <% category_tag = @order.recreation.tags.categories&.first %>
+        <% if category_tag.present? %>
+          <li class="breadcrumb-item">
+            <!-- TODO: Tag.categories.firstを表示 + ransack入れる -->
+            <%= link_to category_tag.name, customers_recreations_path(q: { tags_id_eq: category_tag.id }) %>
+          </li>
         <% end %>
+        <li class="breadcrumb-item active">
+          <!-- TODO: Tag.categories.firstを表示 + ransack入れる -->
+          <span><%= @order.recreation.title %></span>
+        </li>
       </ol>
     </nav>
   </div>
@@ -17,7 +31,7 @@
           <div class="col-md-4">
             <picture loading="lazy">
               <% if @recreation.recreation_images.length >= 1 %>
-                <%= image_tag @recreation.recreation_images&.first&.image&.to_s, class: "img-fluid" %>
+                <%= image_tag @recreation.recreation_images&.first&.image&.to_s, class: 'img-fluid' %>
               <% end %>
             </picture>
           </div>
@@ -31,12 +45,12 @@
         <h3 class="title-b">レク情報</h3>
         <div class="card ">
           <div class="card-body p-0">
-            <!--            {{#if item.showCapacity}}-->
-            <!--            <div class="border-bottom p-2">-->
-            <!--              <h4 class="title">参加人数制限 {{item.capacity}}人</h4>-->
-            <!--              <div class="text-muted">※目安30名様に1名のスタッフ様のサポートをお願い致します。</div>-->
-            <!--            </div>-->
-            <!--            {{/if}}-->
+            <!--{{#if item.showCapacity}}-->
+            <!--<div class="border-bottom p-2">-->
+            <!--<h4 class="title">参加人数制限 {{item.capacity}}人</h4>-->
+            <!--<div class="text-muted">※目安30名様に1名のスタッフ様のサポートをお願い致します。</div>-->
+            <!--</div>-->
+            <!--{{/if}}-->
             <div class="border-bottom p-2">
               <h4 class="title">所要時間 <%= @recreation.minutes %>分</h4>
               <div class="text-muted">※ご要望に合わせてご相談が可能です。基本時間のため、ご要望にあわせて調節が可能です。</div>
@@ -65,6 +79,7 @@
         </div>
         <%= render 'shared/home/order_flow' %>
       </div>
+
       <div class="col-md-7">
         <div class="card">
           <div class="card-header bg-white">
@@ -103,9 +118,9 @@
                     <div class="row">
                       <div class="col-12">希望日</div>
                       <div class="form-group col-3">
-                        <select id="dates1" name="order[dates][<%= i %>][year]" class="form-select ">
+                        <select id="dates1" name="order[dates][<%= i %>][year]" class="form-select">
                           <option style="display: none;">ー</option>
-                          <% @years.each do |year| %>
+                          <% [2021, 2022].each do |year| %>
                             <option value="<%= year %>"><%= year %></option>
                           <% end %>
                         </select>
@@ -114,7 +129,7 @@
                       <div class="form-group col-3">
                         <select id="desiredOneMonth" name="order[dates][<%= i %>][month]" class="form-select ">
                           <option style="display: none;">ー</option>
-                          <% @months.each do |month| %>
+                          <% (1..12).each do |month| %>
                             <option value="<%= month %>"><%= month %></option>
                           <% end %>
                         </select>
@@ -123,7 +138,7 @@
                       <div class="form-group col-3">
                         <select id="desiredOneDay" name="order[dates][<%= i %>][date]" class="form-select ">
                           <option style="display: none;">ー</option>
-                          <% @dates.each do |date| %>
+                          <% (1..31).each do |date| %>
                             <option value="<%= date %>"><%= date %></option>
                           <% end %>
                         </select>
@@ -135,7 +150,7 @@
                       <div class="form-group col-2 pe-0">
                         <select id="desiredOneHourSt" name="order[dates][<%= i %>][start_hour]" class="form-select ">
                           <option style="display: none;">ー</option>
-                          <% @hours.each do |hour| %>
+                          <% %w[08 09 10 11 12 13 14 15 16 17 18].each do |hour| %>
                             <option value="<%= hour %>"><%= hour %></option>
                           <% end %>
                         </select>
@@ -144,7 +159,7 @@
                       <div class="form-group col-2 pe-0">
                         <select id="desiredOneMinuteSt" name="order[dates][<%= i %>][start_minutes]" class="form-select ">
                           <option style="display: none;">ー</option>
-                          <% @minutes.each do |minute| %>
+                          <% %w[00 15 30 45].each do |minute| %>
                             <option value="<%= minute %>"><%= minute %></option>
                           <% end %>
                         </select>
@@ -153,7 +168,7 @@
                       <div class="form-group col-2 pe-0">
                         <select id="desiredOneHourEn" name="order[dates][<%= i %>][end_hour]" class="form-select ">
                           <option style="display: none;">ー</option>
-                          <% @hours.each do |hour| %>
+                          <% %w[08 09 10 11 12 13 14 15 16 17 18].each do |hour| %>
                             <option value="<%= hour %>"><%= hour %></option>
                           <% end %>
                         </select>
@@ -162,7 +177,7 @@
                       <div class="form-group col-2 pe-0">
                         <select id="desiredOneMinuteEn" name="order[dates][<%= i %>][end_minutes]" class="form-select ">
                           <option style="display: none;">ー</option>
-                          <% @minutes.each do |minute| %>
+                          <% %w[00 15 30 45].each do |minute| %>
                             <option value="<%= minute %>"><%= minute %></option>
                           <% end %>
                         </select>
@@ -171,7 +186,6 @@
                   </div>
                 </div>
               <% end %>
-
 
               <div class="row pt-3">
                 <label class="col-12 title-b pb-3" for="participant">おおよそ参加予定人数をご記入ください</label>
@@ -209,9 +223,39 @@
               <div class="form-group  row pt-3">
                 <label for="comment" class="col-12 title-b pb-3">相談したいことがありましたらご記入ください</label>
                 <div class="col-12" style="position: relative;">
-                  <%= f.input :message, label: false, as: :text, input_html: { class: "form-control", rows: "7" }%>
+                  <%= f.input :message, label: false, as: :text, input_html: { class: "form-control", rows: "7" } %>
                 </div>
               </div>
+              <% if @recreation.is_online %>
+                <div class="row pt-3">
+                  <label class="col-12 title-b pt-2">※このレクはオンライン環境が必要です</label>
+                  <div class="col-12">
+                    <span class="text color-ba08">レクをご利用いただくためにはオンライン環境が必要です。</span>
+                  </div>
+                  <div class="col-12 py-3 muted-box">
+                    <div class="row ">
+                      <div class="col-12 my-2">
+                        <h4 class="title-b font-14 color-ba08">オンライン環境がない方へ</h4>
+                      </div>
+                    </div>
+                    <div class="row pb-3">
+                      <div class="col-auto text color-ba08"> 1</div>
+                      <div class="col-10 px-0 text color-ba08">
+                        期間限定でNTTの無料サポートが受けられます。<br>
+                        <a href="https://form.run/@info-1631354048" target="_blank" class="clink"> NTT無料サポートを申し込む</a>
+                      </div>
+                    </div>
+                    <div class="row d-none">
+                      <div class="col-auto text color-ba08"> 2</div>
+                      <div class="col-10 px-0 text color-ba08 d-none">
+                        エブリ・プラスが推奨する簡単にできるオンライン環境をご紹介しています。<br>
+                        <a href="https://tayori.com/faq/5c0acac6bcdec23e3eac9bdf17d9e7f727d1c3cb" target="_blank" class="clink">
+                          オンライン環境のヘルプを見る</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              <% end %>
 
               <div class="row justify-content-center pt-3">
                 <div class="col-10">
@@ -230,7 +274,6 @@
   </article>
 </main>
 
-
 <!-- NOTE: trigger経由でpriceModalを発火 -->
 <div id="priceModalTrigger" data-bs-toggle="modal" data-bs-target="#priceModal" class="d-none"></div>
 <!-- NOTE: reactで制御しているが、要素をnestさせるとclick不可の状態に陥ることあるので、railsで使っている。 -->
@@ -243,10 +286,10 @@
       </div>
       <div class="modal-body">
         <p>
-          レクの相談・依頼フォームの送信が完了しました。<br />
+          レクの相談・依頼フォームの送信が完了しました。<br/>
           エブリ・プラスのスタッフがパートナーへ連絡し調整いたします。調整が完了次第エブリ・プラスのスタッフからメールにて返信いたします。今しばらくお待ちください
         </p>
-<!--        <p>「<%#= @recreation.title %>」の料金をお問い合わせしました。エブリ・プラスのスタッフからメールで返信致します。少々お待ちください。</p>-->
+        <!--<p>「<%#= @recreation.title %>」の料金をお問い合わせしました。エブリ・プラスのスタッフからメールで返信致します。少々お待ちください。</p>-->
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-cprimary rounded-pill text-white" data-bs-dismiss="modal">閉じる</button>
