@@ -1,19 +1,19 @@
-<div class="p-5">
-  <p class="mb-0">正式依頼確認ページ</p>
-  <div class="header">
-    <div>
-      <h2 class="text-white font-weight-bold p-2">
-        <%= link_to "#" do %>
-          <i class="fas fa-arrow-left text-white"></i>
-        <% end %>
-        <%= @order.recreation.instructor_name %>
-      </h2>
-    </div>
-    <%# TODO: ハンバーガーメニューを追加 %>
+<div class="header">
+  <div>
+    <h2 class="text-white font-weight-bold text-center p-2">
+      正式依頼を確認
+    </h2>
+    <%= render 'shared/partner/sidebar_toggle' %>
   </div>
+</div>
+
+<div class="body bg-white border p-3 mb-3">
   <div class="p-4 text-center text-black">
     <h3 class="font-weight-bold">正式依頼が届きました！<br>早速返信しましょう</h3>
-    <p>老人ホーム、エブリからレクの正式依頼が届きました。以下の内容をご確認いただき返信しましょう。</p>
+    <p>
+      <%= @order.user.company.name %>
+      からレクの正式依頼が届きました。以下の内容をご確認いただき返信しましょう。
+    </p>
   </div>
 
   <div class="body bg-white border p-3 mb-3">
@@ -22,15 +22,15 @@
       <thead>
         <tr class="border-bottom">
           <td class="pt-2 pb-2 w-25">施設名</td>
-          <td class="pt-2 pb-2 text-black">有料老人ホームえぶりプラス</td>
+          <td class="pt-2 pb-2 text-black"><%= @order.user.company.facility_name %></td>
         </tr>
         <tr class="border-bottom">
           <td class="pt-2 pb-2 w-25">担当者</td>
-          <td class="pt-2 pb-2 text-black">向　宇希</td>
+          <td class="pt-2 pb-2 text-black"><%= @order.user.company.person_in_charge_name %></td>
         </tr>
         <tr class="border-bottom">
           <td class="pt-2 pb-2 w-25">住所</td>
-          <td class="pt-2 pb-2 text-black">愛知県名古屋市中村区井深町1-1新名古屋センタービル本陣街</td>
+          <td class="pt-2 pb-2 text-black"><%= @order.user.company.full_address %></td>
         </tr>
       </tbody>
     </table>
@@ -40,19 +40,19 @@
         <thead>
           <tr class="border-bottom">
             <td class="pt-2 pb-2 w-25">レク名</td>
-            <td class="pt-2 pb-2 text-black">オモロさ折り紙付きコンビＳＰＡＮ！によるお笑い介護レクリエーション</td>
+            <td class="pt-2 pb-2 text-black"><%= @order.recreation.title %></td>
           </tr>
           <tr class="border-bottom">
             <td class="pt-2 pb-2 w-25">レク環境</td>
-            <td class="pt-2 pb-2 text-black">オンライン</td>
+            <td class="pt-2 pb-2 text-black"><%= @order.recreation.is_online ? 'オンライン' : 'オフライン' %></td>
           </tr>
           <tr class="border-bottom">
             <td class="pt-2 pb-2 w-25">希望日時</td>
-            <td class="pt-2 pb-2 text-black">2021年9月22日　14:00 - 14:40</td>
+            <td class="pt-2 pb-2 text-black"><%= @order.desired_time %></td>
           </tr>
           <tr class="border-bottom">
             <td class="pt-2 pb-2 w-25">希望人数</td>
-            <td class="pt-2 pb-2 text-black">20人</td>
+            <td class="pt-2 pb-2 text-black"><%= @order.number_of_people %>人</td>
           </tr>
         </tbody>
       </table>
@@ -63,19 +63,19 @@
         <thead>
           <tr class="border-bottom">
             <td class="pt-2 pb-2 text-black w-75">謝礼</td>
-            <td class="pt-2 pb-2 text-black">¥30,000</td>
+            <td class="pt-2 pb-2 text-black"><%= number_to_currency @order.recreation.regular_price %></td>
           </tr>
           <tr class="border-bottom">
             <td class="pt-2 pb-2 text-black w-75">材料費(1人あたり)<br>※材料費は人数分の費用が発生します。</td>
-            <td class="pt-2 pb-2 text-black">¥0</td>
+            <td class="pt-2 pb-2 text-black"><%= number_to_currency @order.recreation.regular_material_price %></td>
           </tr>
           <tr class="border-bottom">
             <td class="pt-2 pb-2 text-black w-75">交通費</td>
-            <td class="pt-2 pb-2 text-black">¥0</td>
+            <td class="pt-2 pb-2 text-black"><%= number_to_currency @order.transportation_expenses %></td>
           </tr>
           <tr class="border-bottom text-black font-weight-bold">
             <td class="pt-2 pb-2">合計</td>
-            <td class="pt-2 pb-2">¥35,500</td>
+            <td class="pt-2 pb-2"><%= number_to_currency @order.total_price %></td>
           </tr>
         </tbody>
       </table>

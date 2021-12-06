@@ -72,4 +72,15 @@ class Order < ApplicationRecord
 
     regular_price + regular_material_price + order_transportation_expenses + order_expenses
   end
+
+  def desired_time
+    return '' if date_and_time.blank?
+
+    date = date_and_time.strftime('%Y年%m月%d日')
+    start_time = date_and_time.strftime('%H:%M')
+    end_time = (date_and_time + recreation.minutes.minutes).strftime('%H:%M')
+
+    # TODO: エラーハンドリング入れた方が良いかも
+    "#{date} #{start_time} ~ #{end_time}"
+  end
 end
