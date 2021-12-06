@@ -46,7 +46,12 @@ class Order < ApplicationRecord
   delegate :price, to: :recreation, prefix: true
   delegate :minutes, to: :recreation, prefix: true
 
-  enumerize :status, in: { consult: 0, order: 1 }, default: 0
+  enumerize :status, in: {
+    in_progress: 10, waiting_for_a_reply_from_partner: 20, waiting_for_a_reply_from_facility: 30,
+    facility_request_in_progress: 40, request_denied: 50, waiting_for_an_event_to_take_place: 60,
+    unreported_completed: 70, final_report_admits_not: 80, finished: 200,
+    invoice_issued: 210,  paid: 220, canceled: 400, travled: 500
+  }, default: 10
 
   # controller のparamsに追加するため
   attribute :title # まずは相談したい、のメッセージ部分
