@@ -73,7 +73,7 @@ RSpec.describe Customers::OrdersController, type: :request do
   describe 'GET /complete' do
     context 'with valid order status' do
       it 'returns http success' do
-        order.update(status: :order)
+        order.update(date_and_time: Time.current)
         get complete_customers_order_path(order)
         expect(response).to have_http_status(:ok)
       end
@@ -91,7 +91,7 @@ RSpec.describe Customers::OrdersController, type: :request do
   describe 'PUT /update' do
     context 'when valid parameters' do
       params = {
-        status: :order, dates: { '0' => { year: '2022', month: '1', date: '1', start_hour: '09', start_minutes: '00', end_hour: '10', end_minutes: '00' } },
+        status: :waiting_for_a_reply_from_partner, dates: { '0' => { year: '2022', month: '1', date: '1', start_hour: '09', start_minutes: '00', end_hour: '10', end_minutes: '00' } },
         number_of_people: 11, zip: '4536111', prefecture: '愛知県', city: '名古屋市中村区', street: '平池町グローバルゲート　１１階', building: 'building'
       }
       it 'returns 302 status' do
@@ -116,7 +116,7 @@ RSpec.describe Customers::OrdersController, type: :request do
       it 'update status' do
         expect {
           put customers_order_path(order.id), params: { order: params }
-        }.to change { Order.find(order.id).status }.from(order.status).to('order')
+        }.to change { Order.find(order.id).status }.from(order.status).to('waiting_for_a_reply_from_partner')
       end
       it 'update number_of_people' do
         expect {
