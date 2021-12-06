@@ -1,0 +1,94 @@
+<div class="p-5">
+  <p class="mb-0">正式依頼確認ページ</p>
+  <div class="header">
+    <div>
+      <h2 class="text-white font-weight-bold p-2">
+        <%= link_to "#" do %>
+          <i class="fas fa-arrow-left text-white"></i>
+        <% end %>
+        <%= @order.recreation.instructor_name %>
+      </h2>
+    </div>
+    <%# TODO: ハンバーガーメニューを追加 %>
+  </div>
+  <div class="p-4 text-center text-black">
+    <h3 class="font-weight-bold">正式依頼が届きました！<br>早速返信しましょう</h3>
+    <p>老人ホーム、エブリからレクの正式依頼が届きました。以下の内容をご確認いただき返信しましょう。</p>
+  </div>
+
+  <div class="body bg-white border p-3 mb-3">
+    <h4 class="text-black font-weight-bold">施設情報</h4>
+    <table class="w-100">
+      <thead>
+        <tr class="border-bottom">
+          <td class="pt-2 pb-2 w-25">施設名</td>
+          <td class="pt-2 pb-2 text-black">有料老人ホームえぶりプラス</td>
+        </tr>
+        <tr class="border-bottom">
+          <td class="pt-2 pb-2 w-25">担当者</td>
+          <td class="pt-2 pb-2 text-black">向　宇希</td>
+        </tr>
+        <tr class="border-bottom">
+          <td class="pt-2 pb-2 w-25">住所</td>
+          <td class="pt-2 pb-2 text-black">愛知県名古屋市中村区井深町1-1新名古屋センタービル本陣街</td>
+        </tr>
+      </tbody>
+    </table>
+    <div>
+      <h4 class="text-black font-weight-bold pt-3">レク情報</h4>
+      <table class="w-100">
+        <thead>
+          <tr class="border-bottom">
+            <td class="pt-2 pb-2 w-25">レク名</td>
+            <td class="pt-2 pb-2 text-black">オモロさ折り紙付きコンビＳＰＡＮ！によるお笑い介護レクリエーション</td>
+          </tr>
+          <tr class="border-bottom">
+            <td class="pt-2 pb-2 w-25">レク環境</td>
+            <td class="pt-2 pb-2 text-black">オンライン</td>
+          </tr>
+          <tr class="border-bottom">
+            <td class="pt-2 pb-2 w-25">希望日時</td>
+            <td class="pt-2 pb-2 text-black">2021年9月22日　14:00 - 14:40</td>
+          </tr>
+          <tr class="border-bottom">
+            <td class="pt-2 pb-2 w-25">希望人数</td>
+            <td class="pt-2 pb-2 text-black">20人</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="border m-2 p-2">
+      <h4 class="text-black font-weight-bold">レク費用</h4>
+      <table class="w-100">
+        <thead>
+          <tr class="border-bottom">
+            <td class="pt-2 pb-2 text-black w-75">謝礼</td>
+            <td class="pt-2 pb-2 text-black">¥30,000</td>
+          </tr>
+          <tr class="border-bottom">
+            <td class="pt-2 pb-2 text-black w-75">材料費(1人あたり)<br>※材料費は人数分の費用が発生します。</td>
+            <td class="pt-2 pb-2 text-black">¥0</td>
+          </tr>
+          <tr class="border-bottom">
+            <td class="pt-2 pb-2 text-black w-75">交通費</td>
+            <td class="pt-2 pb-2 text-black">¥0</td>
+          </tr>
+          <tr class="border-bottom text-black font-weight-bold">
+            <td class="pt-2 pb-2">合計</td>
+            <td class="pt-2 pb-2">¥35,500</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div>
+      <p class="text-black font-weight-bold pt-2">注意事項</p>
+      <ul>
+        <li>費用は必要な項目がありましたら、施設に伝えてください。施設が費用を追加することができます。</li>
+      </ul>
+    </div>
+    <div class="col-md-12 text-center pt-5">
+      <button type="button" class="btn btn-danger btn-lg btn-block w-100 p-3 mt-2 mb-2">却下する</button>
+      <button type="button" class="btn btn-primary btn-lg btn-block w-100 p-3 mt-2 mb-2">承諾する</button>
+    </div>
+  </div>
+</div>
