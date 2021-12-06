@@ -1,9 +1,8 @@
 <div class="header">
-  <div>
     <h2 class="text-white font-weight-bold p-2">
       相談中
     </h2>
-  </div>
+    <%= render 'shared/partner/sidebar_toggle' %>
 </div>
 
 <% @orders.each do |order| %>
