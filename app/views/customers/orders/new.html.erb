@@ -200,8 +200,8 @@
                 <div class="form-group col-12">
                   <% Tag.targets.each do |tag| %>
                     <div class="form-check">
-                      <input class="form-check-input" name="order[tag_ids][]" type="checkbox" value="<%= tag.id %>" id="targetPersons1">
-                      <label class="form-check-label" for="targetPersons1">
+                      <input class="form-check-input" name="order[tags][]" type="checkbox" value="<%= tag.name %>">
+                      <label class="form-check-label">
                         <%= tag.name %>
                       </label>
                     </div>
