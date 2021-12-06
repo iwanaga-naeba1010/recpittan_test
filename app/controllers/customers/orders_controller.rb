@@ -39,7 +39,7 @@ class Customers::OrdersController < Customers::ApplicationController
         #{@order.number_of_people}人
 
         介護度目安
-        #{@order.tags.map(&:name).join('\n')}
+        #{params_create[:tags]&.join('\n')}
 
         住所
         #{@order.prefecture}#{@order.city}
@@ -120,7 +120,6 @@ EOS
     params.require(:order).permit(
       :title, :zip, :prefecture, :city, :street, :building, :status, :number_of_people, :user_id, :message,
       :is_online, :is_accepted, :date_and_time,
-
       # TODO: datesをobjectではなくarrayでまとめることで多分対応が可能となる
       # TODO: 当然テストや他の箇所のテストなども変わってしまうが、
       # 1. railsはarrayだけを管理すればOK
@@ -128,7 +127,7 @@ EOS
       # 3. newだけではなく、正式orderの実行もdates[0]の指定だけで住むので、全体的にコードの可読性が高くなる。
       # ということを期待できるので、非常に良い選択肢と考えられる
       { dates: {} },
-      { tag_ids: [] }
+      { tags: [] }
     )
   end
 end
