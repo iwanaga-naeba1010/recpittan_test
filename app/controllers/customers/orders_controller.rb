@@ -23,8 +23,6 @@ class Customers::OrdersController < Customers::ApplicationController
   def create
     @order = @recreation.orders.build(params_create)
 
-    # TODO: ここでTagを文字列化させる必要性あり
-
     ActiveRecord::Base.transaction do
       @order.save
       dates = params_create.to_h[:dates]
