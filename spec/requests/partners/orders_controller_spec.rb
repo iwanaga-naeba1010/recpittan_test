@@ -65,9 +65,21 @@ RSpec.describe Partners::OrdersController, type: :request do
 
   describe 'GET /confirm' do
     context 'with valid user' do
-      it 'return http success' do
+      it 'returns http success' do
         get confirm_partners_order_path(order.id)
         expect(response).to have_http_status(:ok)
+        expect(response).to render_template('partners/orders/confirm')
+      end
+
+      it 'renders accept template' do
+        get confirm_partners_order_path(id: order.id, is_confirm: :accept)
+        expect(response).to have_http_status(:ok)
+        expect(response).to render_template('partners/orders/accept')
+      end
+      it 'renders accept template' do
+        get confirm_partners_order_path(id: order.id, is_confirm: :deny)
+        expect(response).to have_http_status(:ok)
+        expect(response).to render_template('partners/orders/deny')
       end
     end
 
