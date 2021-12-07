@@ -100,4 +100,41 @@ RSpec.describe Partners::OrdersController, type: :request do
       end
     end
   end
+
+  describe 'PUT /update' do
+    context 'when valid parameters' do
+      it 'returns 302 status' do
+        put partners_order_path(order.id), params: { order: { status: :facility_request_in_progress } }
+        expect(response).to have_http_status(:found)
+      end
+
+      it 'update date_and_time' do
+        order.update(date_and_time: Time.current)
+        expect {
+          put partners_order_path(order.id), params: { order: { date_and_time: '' } }
+        }.to change { Order.find(order.id).date_and_time }.from(order.date_and_time).to(nil)
+      end
+
+      it 'update status' do
+        expect {
+          put partners_order_path(order.id), params: { order: { status: :facility_request_in_progress } }
+        }.to change { Order.find(order.id).status }.from(order.status).to('facility_request_in_progress')
+      end
+
+      it 'update is_accepted' do
+        expect {
+          put partners_order_path(order.id), params: { order: { is_accepted: true } }
+        }.to change { Order.find(order.id).is_accepted }.from(order.is_accepted).to(true)
+      end
+    end
+
+    # TODO: 後々実装
+    context 'with invalid right' do
+      # it 'redirects to root path when role is read' do
+      #   put managers_billboard_path(billboard.id), params: { billboard: { title: 'billbaordtitle' } }
+      #   expect(response).to have_http_status(:found)
+      #   expect(response).to redirect_to users_path
+      # end
+    end
+  end
 end

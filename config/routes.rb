@@ -32,7 +32,7 @@ Rails.application.routes.draw do
     get :tos
     resources :chats, only: %i[create]
 
-    resources :orders, only: %i[show] do
+    resources :orders, only: %i[show update] do
       member do
         get :chat
         get :confirm
