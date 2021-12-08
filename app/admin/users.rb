@@ -4,6 +4,10 @@
 # rubocop:disable Metrics/BlockLength
 ActiveAdmin.register User do
 
+  scope :customer, default: true do
+    User.where(role: :customer)
+  end
+
   # TODO: customerのみ抽出
   menu priority: 2
   permit_params(
@@ -14,7 +18,7 @@ ActiveAdmin.register User do
     ]
   )
 
-  actions :all, except: [:destroy]
+  actions :all
 
   index do
     id_column
