@@ -31,7 +31,6 @@ RSpec.describe 'Recreations', type: :request do
 
     context 'with valid parameters' do
       it 'return http success when user not logged in' do
-        # binding.pry
         post admin_recreations_path, params: { recreation: attrs }
         expect(response).to have_http_status(:found)
         expect(response).to redirect_to(admin_recreation_path(Recreation.last.id))
