@@ -10,13 +10,8 @@
 #  updated_at :datetime         not null
 #  company_id :bigint           not null
 #
-# Indexes
-#
-#  index_plans_on_company_id  (company_id)
-#
 # Foreign Keys
 #
-#  fk_rails_...           (company_id => companies.id)
 #  plans_company_id_fkey  (company_id => companies.id)
 #
 require 'rails_helper'
