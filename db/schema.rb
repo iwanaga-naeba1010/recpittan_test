@@ -71,13 +71,6 @@ ActiveRecord::Schema.define(version: 2021_12_08_093201) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "order_tags", force: :cascade do |t|
-    t.bigint "order_id", null: false
-    t.bigint "tag_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "orders", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "recreation_id", null: false
@@ -185,8 +178,6 @@ ActiveRecord::Schema.define(version: 2021_12_08_093201) do
   add_foreign_key "chats", "orders", name: "chats_order_id_fkey"
   add_foreign_key "chats", "users", name: "chats_user_id_fkey"
   add_foreign_key "order_memos", "orders", name: "order_memos_order_id_fkey"
-  add_foreign_key "order_tags", "orders", name: "order_tags_order_id_fkey"
-  add_foreign_key "order_tags", "tags", name: "order_tags_tag_id_fkey"
   add_foreign_key "orders", "recreations", name: "orders_recreation_id_fkey"
   add_foreign_key "orders", "users", name: "orders_user_id_fkey"
   add_foreign_key "plans", "companies", name: "plans_company_id_fkey"

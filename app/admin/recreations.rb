@@ -100,7 +100,11 @@ ActiveAdmin.register Recreation do
 
     f.inputs do
       # pertnerのみ表示
-      f.input :user_id, as: :select, collection: User.where(role: :partner).map { |partner| [partner.username, partner.id] }
+      f.input :user_id,
+              label: 'パートナー',
+              as: :select,
+              collection: User.where(role: :partner).map { |partner| [partner.username, partner.id] },
+              input_html: { class: 'select2' }
       f.input :title
       f.input :second_title
       f.input :minutes
