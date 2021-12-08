@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_28_032757) do
+ActiveRecord::Schema.define(version: 2021_12_06_062202) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -67,15 +67,6 @@ ActiveRecord::Schema.define(version: 2021_11_28_032757) do
     t.index ["order_id"], name: "index_order_memos_on_order_id"
   end
 
-  create_table "order_tags", force: :cascade do |t|
-    t.bigint "order_id", null: false
-    t.bigint "tag_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["order_id"], name: "index_order_tags_on_order_id"
-    t.index ["tag_id"], name: "index_order_tags_on_tag_id"
-  end
-
   create_table "orders", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "recreation_id", null: false
@@ -85,9 +76,13 @@ ActiveRecord::Schema.define(version: 2021_11_28_032757) do
     t.string "city"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.boolean "is_online", default: false
     t.boolean "is_accepted", default: false
     t.datetime "date_and_time"
+    t.integer "transportation_expenses"
+    t.integer "expenses"
+    t.string "zip"
+    t.string "street"
+    t.string "building"
     t.index ["recreation_id"], name: "index_orders_on_recreation_id"
     t.index ["user_id"], name: "index_orders_on_user_id"
   end
@@ -191,8 +186,6 @@ ActiveRecord::Schema.define(version: 2021_11_28_032757) do
   add_foreign_key "chats", "orders"
   add_foreign_key "chats", "users"
   add_foreign_key "order_memos", "orders"
-  add_foreign_key "order_tags", "orders"
-  add_foreign_key "order_tags", "tags"
   add_foreign_key "orders", "recreations"
   add_foreign_key "orders", "users"
   add_foreign_key "plans", "companies"

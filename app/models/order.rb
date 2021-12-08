@@ -4,18 +4,22 @@
 #
 # Table name: orders
 #
-#  id               :bigint           not null, primary key
-#  city             :string
-#  date_and_time    :datetime
-#  is_accepted      :boolean          default(FALSE)
-#  is_online        :boolean          default(FALSE)
-#  number_of_people :integer
-#  prefecture       :string
-#  status           :integer
-#  created_at       :datetime         not null
-#  updated_at       :datetime         not null
-#  recreation_id    :bigint           not null
-#  user_id          :bigint           not null
+#  id                      :bigint           not null, primary key
+#  building                :string
+#  city                    :string
+#  date_and_time           :datetime
+#  expenses                :integer
+#  is_accepted             :boolean          default(FALSE)
+#  number_of_people        :integer
+#  prefecture              :string
+#  status                  :integer
+#  street                  :string
+#  transportation_expenses :integer
+#  zip                     :string
+#  created_at              :datetime         not null
+#  updated_at              :datetime         not null
+#  recreation_id           :bigint           not null
+#  user_id                 :bigint           not null
 #
 # Indexes
 #
@@ -34,10 +38,6 @@ class Order < ApplicationRecord
   belongs_to :recreation
 
   # TODO: number_of_peopleは削除 => messageに追加
-
-  has_many :order_tags, dependent: :destroy
-  has_many :tags, through: :order_tags
-
   has_many :chats, dependent: :destroy
 
   has_many :order_memos, dependent: :destroy
