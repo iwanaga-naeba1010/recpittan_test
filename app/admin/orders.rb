@@ -56,7 +56,6 @@ ActiveAdmin.register Order do
       f.input :city
       f.input :number_of_people
       f.input :status, as: :select, collection: Order.status.values.map { |i| [i.text, i] }
-      f.input :is_online
       f.input :is_accepted
       f.input :date_and_time
     end

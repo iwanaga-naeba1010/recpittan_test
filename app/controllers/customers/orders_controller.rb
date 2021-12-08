@@ -78,7 +78,7 @@ class Customers::OrdersController < Customers::ApplicationController
         #{@order.number_of_people}人
 
         介護度目安
-        #{@order.tags.map(&:name).join('\n')}
+        #{params_create[:tags]&.join('\n')}
 
         住所
         #{@order.prefecture}#{@order.city}
@@ -166,7 +166,7 @@ EOS
       :title, :prefecture, :city, :status, :number_of_people, :user_id, :message,
       :is_online, :is_accepted, :date_and_time,
       { dates: {} },
-      { tag_ids: [] }
+      { tags: [] }
     )
   end
 end
