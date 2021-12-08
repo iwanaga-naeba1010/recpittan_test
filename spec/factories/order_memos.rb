@@ -10,13 +10,9 @@
 #  updated_at :datetime         not null
 #  order_id   :bigint           not null
 #
-# Indexes
-#
-#  index_order_memos_on_order_id  (order_id)
-#
 # Foreign Keys
 #
-#  fk_rails_...  (order_id => orders.id)
+#  order_memos_order_id_fkey  (order_id => orders.id)
 #
 FactoryBot.define do
   factory :order_memo do
