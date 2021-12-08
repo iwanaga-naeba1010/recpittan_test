@@ -49,15 +49,18 @@ ActiveAdmin.register Order do
     f.semantic_errors
 
     f.inputs do
-      f.input :user, as: :select, collection: User.customers.map { |i| [i.company&.name, i.id] }
-
-      f.input :recreation
+      f.input :user,
+              as: :select,
+              collection: User.customers.map { |i| [i.company&.name, i.id] },
+              input_html: { class: 'select2' }
+      f.input :recreation,
+              input_html: { class: 'select2' }
       f.input :prefecture
       f.input :city
       f.input :number_of_people
       f.input :status, as: :select, collection: Order.status.values.map { |i| [i.text, i] }
       f.input :is_accepted
-      f.input :date_and_time
+      f.input :date_and_time, as: :date_time_picker
     end
 
     f.actions

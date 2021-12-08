@@ -36,7 +36,7 @@ ActiveAdmin.register Partner do
       attributes_table_for partner.recreations do
         row :id
         row :title do |rec|
-          link_to '詳細', admin_recreation_path(rec.id)
+          link_to rec.title, admin_recreation_path(rec.id)
         end
       end
     end

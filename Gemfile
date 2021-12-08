@@ -62,6 +62,7 @@ gem 'devise-i18n' # devise 日本語化
 # admin + UI theme
 gem 'activeadmin'
 gem 'arctic_admin'
+gem 'activeadmin_addons'
 
 gem 'annotate'
 gem 'simple_form'
