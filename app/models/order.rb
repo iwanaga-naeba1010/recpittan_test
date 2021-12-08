@@ -17,15 +17,10 @@
 #  recreation_id    :bigint           not null
 #  user_id          :bigint           not null
 #
-# Indexes
-#
-#  index_orders_on_recreation_id  (recreation_id)
-#  index_orders_on_user_id        (user_id)
-#
 # Foreign Keys
 #
-#  fk_rails_...  (recreation_id => recreations.id)
-#  fk_rails_...  (user_id => users.id)
+#  orders_recreation_id_fkey  (recreation_id => recreations.id)
+#  orders_user_id_fkey        (user_id => users.id)
 #
 class Order < ApplicationRecord
   extend Enumerize
@@ -34,10 +29,6 @@ class Order < ApplicationRecord
   belongs_to :recreation
 
   # TODO: number_of_peopleは削除 => messageに追加
-
-  has_many :order_tags, dependent: :destroy
-  has_many :tags, through: :order_tags
-
   has_many :chats, dependent: :destroy
 
   has_many :order_memos, dependent: :destroy
@@ -53,6 +44,7 @@ class Order < ApplicationRecord
   attribute :title # まずは相談したい、のメッセージ部分
   attribute :dates
   attribute :message
+  attribute :tags
 
   # TODO: 残りの住所も入れれるようにする
   def full_address

@@ -1,78 +1,85 @@
-# frozen_string_literal: true
-
-# NOTE: 日本語にするとバグる
-# rubocop:disable Metrics/BlockLength
-ActiveAdmin.register User do
-  menu priority: 2
-  permit_params(
-    %i[email role],
-    company_attributes: %i[
-      name facility_name person_in_charge_name person_in_charge_name_kana
-      zip prefecture city street building tel
-    ]
-  )
-
-  actions :all, except: [:destroy]
-
-  index do
-    id_column
-    column :email
-    column :role_text
-    column :username
-    actions
-  end
-
-  show do
-    attributes_table do
-      row :id
-      row :email
-      row :role
-      row :username
-      row :username_kana
-      row :created_at
-      row :updated_at
-    end
-
-    panel I18n.t('activerecord.models.company'), style: 'margin-top: 30px;' do
-      attributes_table_for user.company do
-        row :name
-        row :facility_name
-        row :person_in_charge_name
-        row :person_in_charge_name_kana
-        row :zip
-        row :prefecture
-        row :city
-        row :street
-        row :building
-        row :tel
-      end
-    end
-  end
-
-  form do |f|
-    f.semantic_errors
-
-    f.inputs do
-      f.input :username
-      f.input :username_kana
-      f.input :email
-      f.input :role, as: :select, collection: User.role.values.map { |i| [i.text, i] }
-
-      f.inputs I18n.t('activerecord.models.company'), for: [:company, f.object.company || Company.new({ user_id: f.object.id })] do |ff|
-        ff.input :name
-        ff.input :facility_name
-        ff.input :person_in_charge_name
-        ff.input :person_in_charge_name_kana
-        ff.input :zip
-        ff.input :prefecture
-        ff.input :city
-        ff.input :street
-        ff.input :building
-        ff.input :tel
-      end
-    end
-
-    f.actions
-  end
-end
-# rubocop:enable Metrics/BlockLength
+# # frozen_string_literal: true
+#
+# # NOTE: 日本語にするとバグる
+# # rubocop:disable Metrics/BlockLength
+# ActiveAdmin.register User do
+#
+#   scope :customer, default: true do
+#     User.where(role: :customer)
+#   end
+#
+#   # TODO: customerのみ抽出
+#   menu priority: 2
+#   permit_params(
+#     %i[email role],
+#     company_attributes: %i[
+#       name facility_name person_in_charge_name person_in_charge_name_kana
+#       zip prefecture city street building tel
+#     ]
+#   )
+#
+#   actions :all
+#
+#   index do
+#     id_column
+#     column :email
+#     column :role_text
+#     column :username
+#     actions
+#   end
+#
+#   show do
+#     attributes_table do
+#       row :id
+#       row :email
+#       row :role
+#       row :username
+#       row :username_kana
+#       row :created_at
+#       row :updated_at
+#     end
+#
+#     panel I18n.t('activerecord.models.company'), style: 'margin-top: 30px;' do
+#       attributes_table_for user.company do
+#         row :name
+#         row :facility_name
+#         row :person_in_charge_name
+#         row :person_in_charge_name_kana
+#         row :zip
+#         row :prefecture
+#         row :city
+#         row :street
+#         row :building
+#         row :tel
+#       end
+#     end
+#   end
+#
+#   form do |f|
+#     f.semantic_errors
+#
+#     f.inputs do
+#       f.input :username
+#       f.input :username_kana
+#       f.input :email
+#       # f.input :role, as: :select, collection: User.role.values.map { |i| [i.text, i] }
+#       f.input :role, as: :select, collection: [['パートナー', :partner], ['施設', :customer]]
+#
+#       # f.inputs I18n.t('activerecord.models.company'), for: [:company, f.object.company || Company.new({ user_id: f.object.id })] do |ff|
+#       #   ff.input :name
+#       #   ff.input :facility_name
+#       #   ff.input :person_in_charge_name
+#       #   ff.input :person_in_charge_name_kana
+#       #   ff.input :zip
+#       #   ff.input :prefecture
+#       #   ff.input :city
+#       #   ff.input :street
+#       #   ff.input :building
+#       #   ff.input :tel
+#       # end
+#     end
+#
+#     f.actions
+#   end
+# end
+# # rubocop:enable Metrics/BlockLength

@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 # == Schema Information
 #
 # Table name: users
@@ -33,37 +31,5 @@
 #
 #  users_company_id_fkey  (company_id => companies.id)
 #
-FactoryBot.define do
-  factory :user do
-    role { :customer }
-    email { FFaker::Internet.email }
-    password { '11111111' }
-    confirmed_at { Time.now.utc }
-  end
-
-  trait :with_custoemr do
-    after(:create) do |user|
-      company = create(:company)
-      user.update(role: :customer, company_id: company.id)
-    end
-  end
-
-  trait :with_recreations do
-    after(:create) do |user|
-      user.update(role: :partner)
-      create(:recreation, user_id: user.id)
-    end
-  end
-
-  trait :with_admin do
-    after(:create) do |user|
-      user.update(role: :admin)
-    end
-  end
-
-  trait :with_cs do
-    after(:create) do |user|
-      user.update(role: :cs)
-    end
-  end
+class Partner < User
 end
