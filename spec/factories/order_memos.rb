@@ -16,7 +16,8 @@
 #
 # Foreign Keys
 #
-#  fk_rails_...  (order_id => orders.id)
+#  fk_rails_...               (order_id => orders.id)
+#  order_memos_order_id_fkey  (order_id => orders.id)
 #
 FactoryBot.define do
   factory :order_memo do

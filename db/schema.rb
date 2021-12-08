@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_12_03_071027) do
+ActiveRecord::Schema.define(version: 2021_12_06_151539) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -57,6 +57,15 @@ ActiveRecord::Schema.define(version: 2021_12_03_071027) do
     t.string "phone"
     t.string "region"
     t.string "locality"
+  end
+
+  create_table "email_templates", force: :cascade do |t|
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.string "explanation"
+    t.string "title"
+    t.text "body"
+    t.text "signature"
   end
 
   create_table "order_memos", force: :cascade do |t|
@@ -161,6 +170,11 @@ ActiveRecord::Schema.define(version: 2021_12_03_071027) do
     t.integer "kind"
   end
 
+  create_table "templates", force: :cascade do |t|
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "users", force: :cascade do |t|
     t.integer "role", default: 0, null: false
     t.string "email", default: "", null: false
@@ -193,16 +207,29 @@ ActiveRecord::Schema.define(version: 2021_12_03_071027) do
   end
 
   add_foreign_key "chats", "orders"
+  add_foreign_key "chats", "orders", name: "chats_order_id_fkey"
   add_foreign_key "chats", "users"
+  add_foreign_key "chats", "users", name: "chats_user_id_fkey"
   add_foreign_key "order_memos", "orders"
+  add_foreign_key "order_memos", "orders", name: "order_memos_order_id_fkey"
   add_foreign_key "order_tags", "orders"
+  add_foreign_key "order_tags", "orders", name: "order_tags_order_id_fkey"
   add_foreign_key "order_tags", "tags"
+  add_foreign_key "order_tags", "tags", name: "order_tags_tag_id_fkey"
   add_foreign_key "orders", "recreations"
+  add_foreign_key "orders", "recreations", name: "orders_recreation_id_fkey"
   add_foreign_key "orders", "users"
+  add_foreign_key "orders", "users", name: "orders_user_id_fkey"
   add_foreign_key "plans", "companies"
+  add_foreign_key "plans", "companies", name: "plans_company_id_fkey"
   add_foreign_key "recreation_images", "recreations"
+  add_foreign_key "recreation_images", "recreations", name: "recreation_images_recreation_id_fkey"
   add_foreign_key "recreation_tags", "recreations"
+  add_foreign_key "recreation_tags", "recreations", name: "recreation_tags_recreation_id_fkey"
   add_foreign_key "recreation_tags", "tags"
+  add_foreign_key "recreation_tags", "tags", name: "recreation_tags_tag_id_fkey"
   add_foreign_key "recreations", "users"
+  add_foreign_key "recreations", "users", name: "recreations_user_id_fkey"
   add_foreign_key "users", "companies"
+  add_foreign_key "users", "companies", name: "users_company_id_fkey"
 end

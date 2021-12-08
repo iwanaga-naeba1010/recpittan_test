@@ -16,7 +16,8 @@
 #
 # Foreign Keys
 #
-#  fk_rails_...  (company_id => companies.id)
+#  fk_rails_...           (company_id => companies.id)
+#  plans_company_id_fkey  (company_id => companies.id)
 #
 require 'rails_helper'
 

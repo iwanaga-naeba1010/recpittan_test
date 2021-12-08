@@ -28,8 +28,10 @@
 #
 # Foreign Keys
 #
-#  fk_rails_...  (recreation_id => recreations.id)
-#  fk_rails_...  (user_id => users.id)
+#  fk_rails_...               (recreation_id => recreations.id)
+#  fk_rails_...               (user_id => users.id)
+#  orders_recreation_id_fkey  (recreation_id => recreations.id)
+#  orders_user_id_fkey        (user_id => users.id)
 #
 class Order < ApplicationRecord
   extend Enumerize
