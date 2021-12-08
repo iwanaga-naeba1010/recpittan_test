@@ -27,6 +27,16 @@ ActiveAdmin.register Partner do
       row :created_at
       row :updated_at
     end
+
+    panel I18n.t('activerecord.models.recreation'), style: 'margin-top: 30px;' do
+      attributes_table_for partner.recreations do
+        row :id
+        row :title do |rec|
+          link_to '詳細', admin_recreation_path(rec.id)
+        end
+      end
+    end
+
   end
 
   form do |f|
@@ -35,7 +45,13 @@ ActiveAdmin.register Partner do
     f.inputs do
       f.input :username
       f.input :username_kana
-      f.input :email # TODO: ここはdisableで
+
+      if f.object&.id.present?
+        f.input :email, hint: 'データの競合を避けるために許可していません。システム管理者にご連絡ください', input_html: { disabled: true }
+      else
+        f.input :email
+      end
+
       f.input :role, as: :hidden, input_html: { value: :partner }
     end
 
