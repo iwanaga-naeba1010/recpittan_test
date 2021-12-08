@@ -36,6 +36,7 @@ Rails.application.routes.draw do
       member do
         get :chat
         get :confirm
+        get :complete
       end
     end
   end

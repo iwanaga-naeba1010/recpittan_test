@@ -21,7 +21,15 @@
   <div class="body bg-white p-3 mb-3">
     <div class="col-md-12 text-center pt-5">
       <%= link_to 'キャンセル', confirm_partners_order_path, class: 'text-white btn btn-secondary btn-lg btn-block w-100 p-3 mt-2 mb-2' %>
-      <%= link_to '承認する', confirm_partners_order_path(is_confirm: :deny), class: 'text-white btn btn-primary btn-lg btn-block btn-block w-100 p-3' %>
+
+      <%= simple_form_for @order, url: partners_order_path(
+        id: @order,
+        redirect_path: partners_order_path(@order),
+        message: '承認しました'
+      ) do |f| %>
+        <%= f.input :is_accepted, as: :hidden, input_html: { value: true } %>
+        <%= f.submit '承認する', class: 'text-white btn btn-primary btn-lg btn-block btn-block w-100 p-3' %>
+      <% end %>
     </div>
   </div>
 </div>

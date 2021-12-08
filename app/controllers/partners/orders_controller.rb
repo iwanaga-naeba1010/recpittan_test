@@ -12,8 +12,16 @@ class Partners::OrdersController < Partners::ApplicationController
   def update
     # TODO: 承認した場合はis_accepted = trueする
     # TODO: 拒否した場合は、date_and_timeをnilにする
+    redirect_path = partners_order_path(@order)
+    message = '更新しました！'
+    if params[:redirect_path]
+      redirect_path = params[:redirect_path]
+    end
+    if params[:message]
+      message = params[:message]
+    end
     @order.update(params_create)
-    redirect_to partners_order_path(@order.id)
+    redirect_to redirect_path, notice: message
   end
 
   def confirm
@@ -24,6 +32,10 @@ class Partners::OrdersController < Partners::ApplicationController
     elsif is_confirm == 'accept'
       return render 'partners/orders/accept'
     end
+  end
+
+  def complete
+
   end
 
   private

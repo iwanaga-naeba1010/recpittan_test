@@ -9,11 +9,11 @@
 
 <div class="body bg-white p-3 mb-3">
   <div class="p-4 text-center text-black">
-<!--    <h3 class="font-weight-bold">正式依頼が届きました！<br>早速返信しましょう</h3>-->
+    <!--    <h3 class="font-weight-bold">正式依頼が届きました！<br>早速返信しましょう</h3>-->
     <p>
       <%= @order.user.company.name %>
       からレクの正式依頼をお断りします。よろしいでしょうか？
-      <br />
+      <br/>
       お断りした後はチャットで理由を説明しましょう！
     </p>
   </div>
@@ -21,7 +21,15 @@
   <div class="body bg-white p-3 mb-3">
     <div class="col-md-12 text-center pt-5">
       <%= link_to 'キャンセル', confirm_partners_order_path, class: 'text-white btn btn-secondary btn-lg btn-block w-100 p-3 mt-2 mb-2' %>
-      <%= link_to 'お断りする', confirm_partners_order_path(is_confirm: :deny), class: 'text-white btn btn-danger btn-lg btn-block w-100 p-3 mt-2 mb-2' %>
+
+      <%= simple_form_for @order, url: partners_order_path(
+        id: @order,
+        redirect_path: chat_partners_order_path(@order),
+        message: 'お断りしました'
+      ) do |f| %>
+        <%= f.input :date_and_time, as: :hidden, input_html: { value: nil } %>
+        <%= f.submit 'お断りする', class: 'text-white btn btn-danger btn-lg btn-block w-100 p-3 mt-2 mb-2' %>
+      <% end %>
     </div>
   </div>
 </div>

@@ -126,6 +126,17 @@ RSpec.describe Partners::OrdersController, type: :request do
           put partners_order_path(order.id), params: { order: { is_accepted: true } }
         }.to change { Order.find(order.id).is_accepted }.from(order.is_accepted).to(true)
       end
+
+      it 'redirects to params[:redirect_path]' do
+        put partners_order_path(id: order.id, redirect_path: chat_partners_order_path(order.id)), params: { order: { date_and_time: '' } }
+        expect(response).to redirect_to chat_partners_order_path(order.id)
+      end
+
+      it 'uses params[:message]' do
+        put partners_order_path(id: order.id, message: '修正'), params: { order: { date_and_time: '' } }
+        expect(flash[:notice]).to eq '修正'
+        # expect(response.body).should include('修正')
+      end
     end
 
     # TODO: 後々実装
@@ -135,6 +146,33 @@ RSpec.describe Partners::OrdersController, type: :request do
       #   expect(response).to have_http_status(:found)
       #   expect(response).to redirect_to users_path
       # end
+    end
+  end
+
+  describe 'GET /confirm' do
+    context 'with valid user' do
+      it 'returns http success' do
+        get complete_partners_order_path(order.id)
+        expect(response).to have_http_status(:ok)
+        # expect(response).to render_template('partners/orders/confirm')
+      end
+    end
+
+    context 'with invalid user' do
+      it 'return 302 when customer accessed' do
+        sign_out partner
+        sign_in customer
+        get complete_partners_order_path(order.id)
+        expect(response).to have_http_status(:found)
+        expect(response).to redirect_to root_path
+      end
+
+      it 'return 302 when user not logged in' do
+        sign_out partner
+        get complete_partners_order_path(order.id)
+        expect(response).to have_http_status(:found)
+        expect(response).to redirect_to new_user_session_path
+      end
     end
   end
 end
