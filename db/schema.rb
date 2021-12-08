@@ -68,8 +68,8 @@ ActiveRecord::Schema.define(version: 2021_12_06_062202) do
     t.integer "status"
     t.string "prefecture"
     t.string "city"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.boolean "is_accepted", default: false
     t.datetime "date_and_time"
     t.integer "transportation_expenses"
@@ -77,8 +77,6 @@ ActiveRecord::Schema.define(version: 2021_12_06_062202) do
     t.string "zip"
     t.string "street"
     t.string "building"
-    t.index ["recreation_id"], name: "index_orders_on_recreation_id"
-    t.index ["user_id"], name: "index_orders_on_user_id"
   end
 
   create_table "plans", force: :cascade do |t|
@@ -132,7 +130,6 @@ ActiveRecord::Schema.define(version: 2021_12_06_062202) do
     t.text "instructor_description"
     t.text "instructor_image"
     t.boolean "is_public_price", default: true
-    t.index ["user_id"], name: "index_recreations_on_user_id"
   end
 
   create_table "tags", force: :cascade do |t|
@@ -166,22 +163,17 @@ ActiveRecord::Schema.define(version: 2021_12_06_062202) do
     t.bigint "company_id"
     t.string "username"
     t.string "username_kana"
-    t.index ["company_id"], name: "index_users_on_company_id"
-    t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
-    t.index ["email"], name: "index_users_on_email", unique: true
-    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
-    t.index ["unlock_token"], name: "index_users_on_unlock_token", unique: true
   end
 
-  add_foreign_key "chats", "orders"
-  add_foreign_key "chats", "users"
-  add_foreign_key "order_memos", "orders"
-  add_foreign_key "orders", "recreations"
-  add_foreign_key "orders", "users"
-  add_foreign_key "plans", "companies"
-  add_foreign_key "recreation_images", "recreations"
-  add_foreign_key "recreation_tags", "recreations"
-  add_foreign_key "recreation_tags", "tags"
-  add_foreign_key "recreations", "users"
-  add_foreign_key "users", "companies"
+  add_foreign_key "chats", "orders", name: "chats_order_id_fkey"
+  add_foreign_key "chats", "users", name: "chats_user_id_fkey"
+  add_foreign_key "order_memos", "orders", name: "order_memos_order_id_fkey"
+  add_foreign_key "orders", "recreations", name: "orders_recreation_id_fkey"
+  add_foreign_key "orders", "users", name: "orders_user_id_fkey"
+  add_foreign_key "plans", "companies", name: "plans_company_id_fkey"
+  add_foreign_key "recreation_images", "recreations", name: "recreation_images_recreation_id_fkey"
+  add_foreign_key "recreation_tags", "recreations", name: "recreation_tags_recreation_id_fkey"
+  add_foreign_key "recreation_tags", "tags", name: "recreation_tags_tag_id_fkey"
+  add_foreign_key "recreations", "users", name: "recreations_user_id_fkey"
+  add_foreign_key "users", "companies", name: "users_company_id_fkey"
 end
