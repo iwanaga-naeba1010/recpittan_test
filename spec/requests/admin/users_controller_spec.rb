@@ -4,7 +4,7 @@ require 'rails_helper'
 
 RSpec.describe 'Users', type: :request do
   let(:admin) { create :user, :with_admin }
-  let(:customer) { create :user, :with_custoemr }
+  let!(:customer) { create :user, :with_custoemr }
   let(:partner) { create :user, :with_recreations }
 
   before do
@@ -76,16 +76,16 @@ RSpec.describe 'Users', type: :request do
     end
   end
 
-  # describe 'DELETE #destroy' do
-  #   context 'success' do
-  #     it 'reduce one record' do
-  #       expect { delete admin_company_path(company.id) }.to change(Company, :count).by(-1)
-  #     end
-  #
-  #     it 'redirects to managers company billboards path' do
-  #       delete admin_company_path(company.id)
-  #       expect(response).to redirect_to admin_companies_path
-  #     end
-  #   end
-  # end
+  describe 'DELETE #destroy' do
+    context 'success' do
+      it 'reduce one record' do
+        expect { delete admin_user_path(customer.id) }.to change(User, :count).by(-1)
+      end
+
+      it 'redirects to managers company billboards path' do
+        delete admin_user_path(customer.id)
+        expect(response).to redirect_to admin_users_path
+      end
+    end
+  end
 end
