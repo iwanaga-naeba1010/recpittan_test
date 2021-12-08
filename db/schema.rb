@@ -22,11 +22,8 @@ ActiveRecord::Schema.define(version: 2021_12_06_062202) do
     t.bigint "resource_id"
     t.string "author_type"
     t.bigint "author_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["author_type", "author_id"], name: "index_active_admin_comments_on_author"
-    t.index ["namespace"], name: "index_active_admin_comments_on_namespace"
-    t.index ["resource_type", "resource_id"], name: "index_active_admin_comments_on_resource"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "chats", force: :cascade do |t|
@@ -34,10 +31,8 @@ ActiveRecord::Schema.define(version: 2021_12_06_062202) do
     t.text "message"
     t.boolean "is_read"
     t.bigint "user_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["order_id"], name: "index_chats_on_order_id"
-    t.index ["user_id"], name: "index_chats_on_user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "companies", force: :cascade do |t|
@@ -45,8 +40,8 @@ ActiveRecord::Schema.define(version: 2021_12_06_062202) do
     t.string "facility_name"
     t.string "person_in_charge_name"
     t.string "person_in_charge_name_kana"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.string "zip"
     t.string "prefecture"
     t.string "city"
@@ -62,9 +57,8 @@ ActiveRecord::Schema.define(version: 2021_12_06_062202) do
   create_table "order_memos", force: :cascade do |t|
     t.bigint "order_id", null: false
     t.text "body"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["order_id"], name: "index_order_memos_on_order_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "orders", force: :cascade do |t|
@@ -74,8 +68,8 @@ ActiveRecord::Schema.define(version: 2021_12_06_062202) do
     t.integer "status"
     t.string "prefecture"
     t.string "city"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.boolean "is_accepted", default: false
     t.datetime "date_and_time"
     t.integer "transportation_expenses"
@@ -83,33 +77,27 @@ ActiveRecord::Schema.define(version: 2021_12_06_062202) do
     t.string "zip"
     t.string "street"
     t.string "building"
-    t.index ["recreation_id"], name: "index_orders_on_recreation_id"
-    t.index ["user_id"], name: "index_orders_on_user_id"
   end
 
   create_table "plans", force: :cascade do |t|
     t.bigint "company_id", null: false
     t.integer "kind"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["company_id"], name: "index_plans_on_company_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "recreation_images", force: :cascade do |t|
     t.bigint "recreation_id", null: false
     t.text "image"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["recreation_id"], name: "index_recreation_images_on_recreation_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "recreation_tags", force: :cascade do |t|
     t.bigint "recreation_id", null: false
     t.bigint "tag_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["recreation_id"], name: "index_recreation_tags_on_recreation_id"
-    t.index ["tag_id"], name: "index_recreation_tags_on_tag_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "recreations", force: :cascade do |t|
@@ -121,8 +109,8 @@ ActiveRecord::Schema.define(version: 2021_12_06_062202) do
     t.text "borrow_item"
     t.text "bring_your_own_item"
     t.text "extra_information"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.string "youtube_id"
     t.integer "price", default: 0, null: false
     t.string "flyer_color"
@@ -142,13 +130,12 @@ ActiveRecord::Schema.define(version: 2021_12_06_062202) do
     t.text "instructor_description"
     t.text "instructor_image"
     t.boolean "is_public_price", default: true
-    t.index ["user_id"], name: "index_recreations_on_user_id"
   end
 
   create_table "tags", force: :cascade do |t|
     t.string "name"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.integer "kind"
   end
 
@@ -171,27 +158,22 @@ ActiveRecord::Schema.define(version: 2021_12_06_062202) do
     t.integer "failed_attempts", default: 0, null: false
     t.string "unlock_token"
     t.datetime "locked_at"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.bigint "company_id"
     t.string "username"
     t.string "username_kana"
-    t.index ["company_id"], name: "index_users_on_company_id"
-    t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
-    t.index ["email"], name: "index_users_on_email", unique: true
-    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
-    t.index ["unlock_token"], name: "index_users_on_unlock_token", unique: true
   end
 
-  add_foreign_key "chats", "orders"
-  add_foreign_key "chats", "users"
-  add_foreign_key "order_memos", "orders"
-  add_foreign_key "orders", "recreations"
-  add_foreign_key "orders", "users"
-  add_foreign_key "plans", "companies"
-  add_foreign_key "recreation_images", "recreations"
-  add_foreign_key "recreation_tags", "recreations"
-  add_foreign_key "recreation_tags", "tags"
-  add_foreign_key "recreations", "users"
-  add_foreign_key "users", "companies"
+  add_foreign_key "chats", "orders", name: "chats_order_id_fkey"
+  add_foreign_key "chats", "users", name: "chats_user_id_fkey"
+  add_foreign_key "order_memos", "orders", name: "order_memos_order_id_fkey"
+  add_foreign_key "orders", "recreations", name: "orders_recreation_id_fkey"
+  add_foreign_key "orders", "users", name: "orders_user_id_fkey"
+  add_foreign_key "plans", "companies", name: "plans_company_id_fkey"
+  add_foreign_key "recreation_images", "recreations", name: "recreation_images_recreation_id_fkey"
+  add_foreign_key "recreation_tags", "recreations", name: "recreation_tags_recreation_id_fkey"
+  add_foreign_key "recreation_tags", "tags", name: "recreation_tags_tag_id_fkey"
+  add_foreign_key "recreations", "users", name: "recreations_user_id_fkey"
+  add_foreign_key "users", "companies", name: "users_company_id_fkey"
 end
