@@ -46,7 +46,7 @@ class Order < ApplicationRecord
     in_progress: 10, waiting_for_a_reply_from_partner: 20, waiting_for_a_reply_from_facility: 30,
     facility_request_in_progress: 40, request_denied: 50, waiting_for_an_event_to_take_place: 60,
     unreported_completed: 70, final_report_admits_not: 80, finished: 200,
-    invoice_issued: 210,  paid: 220, canceled: 400, travled: 500
+    invoice_issued: 210, paid: 220, canceled: 400, travled: 500
   }, default: 10
 
   # controller のparamsに追加するため
@@ -54,6 +54,55 @@ class Order < ApplicationRecord
   attribute :dates
   attribute :message
   attribute :tags
+
+  before_save :switch_status_befire_save
+
+  def switch_status_befire_save
+    # NOTE: 終了している案件のstatusを変更しても処理は挟まない
+    if self.status.finished? || self.status.invoice_issued? || self.status.paid? || self.status.canceled? || self.status.travled?
+      return self
+    end
+
+    if self.date_and_time.present? && !self.is_accepted
+      self.status = :facility_request_in_progress
+      return self
+    end
+
+    if self.date_and_time.present? && self.is_accepted
+      self.status = :waiting_for_an_event_to_take_place
+      return self
+    end
+
+    if self.date_and_time.present? && self.is_accepted && (Time.current >= self.date_and_time) # TODO: レポート書いていないこと
+      self.status = :unreported_completed
+      return self
+    end
+
+    # TODO: レポート書いているけど、施設が承認していないこと
+    # if self.date_and_time.present? && self.is_accepted && (Time.current >= self.date_and_time) && レポート書いたこと
+    # self.status = :final_report_admits_not
+    # end
+
+    # TODO: レポート書いた && 施設が承認したこと
+    # if self.date_and_time.present? && self.is_accepted && (Time.current >= self.date_and_time) && レポート書いたこと
+    # self.status = :finished
+    # end
+
+    # NOTE: 最後のチャットに応じてstatus変更
+    last_chat = self.chats.last
+    return self if last_chat.blank?
+
+    if last_chat.user.role.customer?
+      self.status = :waiting_for_a_reply_from_partner
+      return self
+    elsif last_chat.user.role.partner?
+      self.status = :waiting_for_a_reply_from_facility
+      return self
+    else
+      self.status = :in_progress
+      return self
+    end
+  end
 
   # TODO: 残りの住所も入れれるようにする
   def full_address

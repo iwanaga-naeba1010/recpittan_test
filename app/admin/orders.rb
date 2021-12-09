@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 ActiveAdmin.register Order do
+  includes :user
+
   permit_params(
     %i[
       user_id recreation_id zip prefecture city street building number_of_people status
@@ -22,7 +24,7 @@ ActiveAdmin.register Order do
       tab '詳細' do
         attributes_table do
           row :id
-          row :status
+          row(:status) {|rec| rec.status_text}
           row :user
           row :recreation
           row :zip
@@ -58,7 +60,7 @@ ActiveAdmin.register Order do
     f.inputs do
       f.input :user,
               as: :select,
-              collection: User.customers.map { |i| [i.company&.name, i.id] },
+              collection: User.includes(:company).customers.map { |i| [i.company&.name, i.id] },
               input_html: { class: 'select2' }
       f.input :recreation,
               input_html: { class: 'select2' }
