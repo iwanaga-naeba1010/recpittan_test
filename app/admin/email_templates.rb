@@ -1,5 +1,5 @@
 ActiveAdmin.register EmailTemplate do
-    permit_params(%i[explanation title body  signature])
+    permit_params(%i[explanation title body signature])
     actions :all
 
     index do
