@@ -113,11 +113,6 @@ RSpec.describe Customers::OrdersController, type: :request do
         }.to change { Order.find(order.id).date_and_time }.from(order.date_and_time).to(date)
       end
 
-      it 'update status' do
-        expect {
-          put customers_order_path(order.id), params: { order: params }
-        }.to change { Order.find(order.id).status }.from(order.status).to('waiting_for_a_reply_from_partner')
-      end
       it 'update number_of_people' do
         expect {
           put customers_order_path(order.id), params: { order: params }
