@@ -70,6 +70,12 @@ class Order < ApplicationRecord
       return self
     end
 
+    # NOTE: 完了してレポート書いたけど、施設が承認していないこと
+    if self.date_and_time.present? && self.is_accepted && (Time.current >= self.date_and_time) && self.report&.present? && !self.report&.is_accepted
+      self.status = :final_report_admits_not
+      return self
+    end
+
     if self.date_and_time.present? && !self.is_accepted
       self.status = :facility_request_in_progress
       return self
@@ -79,11 +85,6 @@ class Order < ApplicationRecord
       self.status = :waiting_for_an_event_to_take_place
       return self
     end
-
-    # TODO: レポート書いているけど、施設が承認していないこと
-    # if self.date_and_time.present? && self.is_accepted && (Time.current >= self.date_and_time) && レポート書いたこと
-    # self.status = :final_report_admits_not
-    # end
 
     # TODO: レポート書いた && 施設が承認したこと
     # if self.date_and_time.present? && self.is_accepted && (Time.current >= self.date_and_time) && レポート書いたこと
