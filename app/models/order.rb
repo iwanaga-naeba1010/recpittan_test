@@ -32,11 +32,12 @@ class Order < ApplicationRecord
   belongs_to :user
   belongs_to :recreation
 
-  # TODO: number_of_peopleは削除 => messageに追加
   has_many :chats, dependent: :destroy
 
   has_many :order_memos, dependent: :destroy
   accepts_nested_attributes_for :order_memos, allow_destroy: true
+
+  has_one :report, dependent: :destroy
 
   delegate :title, to: :recreation, prefix: true
   delegate :price, to: :recreation, prefix: true
@@ -63,6 +64,12 @@ class Order < ApplicationRecord
       return self
     end
 
+    # NOTE: 完了したがレポート書いていないこと
+    if self.date_and_time.present? && self.is_accepted && (Time.current >= self.date_and_time) && self.report.blank?
+      self.status = :unreported_completed
+      return self
+    end
+
     if self.date_and_time.present? && !self.is_accepted
       self.status = :facility_request_in_progress
       return self
@@ -70,11 +77,6 @@ class Order < ApplicationRecord
 
     if self.date_and_time.present? && self.is_accepted
       self.status = :waiting_for_an_event_to_take_place
-      return self
-    end
-
-    if self.date_and_time.present? && self.is_accepted && (Time.current >= self.date_and_time) # TODO: レポート書いていないこと
-      self.status = :unreported_completed
       return self
     end
 

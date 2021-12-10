@@ -60,13 +60,33 @@ RSpec.describe Order, type: :model do
       end
 
       it 'changes to facility_request_in_progress when customer requested but partner was not accepted' do
-        order.update(date_and_time: Time.current, is_accepted: false)
+        current_time = Time.current
+        order.update(date_and_time: current_time.tomorrow, is_accepted: false)
         expect(order.status).to eq :facility_request_in_progress
       end
 
       it 'changes to waiting_for_an_event_to_take_place when customer requested and partner was accepted' do
-        order.update(date_and_time: Time.current, is_accepted: true)
+        current_time = Time.current
+        order.update(date_and_time: current_time.tomorrow, is_accepted: true)
         expect(order.status).to eq :waiting_for_an_event_to_take_place
+      end
+
+      it 'changes to waiting_for_an_event_to_take_place when customer requested and partner was accepted' do
+        #
+        # if self.date_and_time.present? && self.is_accepted && (Time.current >= self.date_and_time) && self.report.blank?
+        #   self.status = :unreported_completed
+        #   return self
+        # NOTE: 依頼を入れいることと受け入れたことを設定。
+        current_time = Time.current
+        order.update(date_and_time: current_time.ago(1.days), is_accepted: true)
+
+        # NOTE 開催時間よりも過ぎたことを実行
+        # order.build_report(attributes_for :report)
+        # order.save
+        # order.update(updated_at: Time.current)
+
+        # order.save
+        expect(order.status).to eq :unreported_completed
       end
     end
   end
