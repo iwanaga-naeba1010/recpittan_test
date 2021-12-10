@@ -58,6 +58,16 @@ RSpec.describe Order, type: :model do
         order.update(status: :travled)
         expect(order.status).to eq :travled
       end
+
+      it 'changes to facility_request_in_progress when customer requested but partner was not accepted' do
+        order.update(date_and_time: Time.current, is_accepted: false)
+        expect(order.status).to eq :facility_request_in_progress
+      end
+
+      it 'changes to waiting_for_an_event_to_take_place when customer requested and partner was accepted' do
+        order.update(date_and_time: Time.current, is_accepted: true)
+        expect(order.status).to eq :waiting_for_an_event_to_take_place
+      end
     end
   end
 end
