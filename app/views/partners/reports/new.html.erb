@@ -1,0 +1,42 @@
+<div class="header">
+  <div>
+    <h2 class="text-white font-weight-bold p-2">
+      <%= link_to partners_order_path(@order.id) do %>
+        <i class="fas fa-arrow-left text-white"></i>
+      <% end %>
+      終了報告
+    </h2>
+    <%= render 'shared/partner/sidebar_toggle' %>
+  </div>
+</div>
+<div class="body bg-white border p-3 mb-3">
+<!--  <h4 class="text-black font-weight-bold">施設情報</h4>-->
+
+  <div class="p-4 text-black">
+    <p class="">
+      お疲れ様でした。
+      <br />
+      終了報告をご記入ください。内容は施設が確認をします。
+      送信した終了報告を内容を受取額が翌々月末に振り込まれます。
+      間違っている場合はチャットにて訂正依頼が届きます。
+    </p>
+  </div>
+  <div class="p-4 text-black">
+    <p class="font-weight-bold">
+      項目を入力してください
+    </p>
+    <p>
+
+    </p>
+  </div>
+
+  <div class="col-md-12 text-center">
+    <% if @order.date_and_time.present? && !@order.is_accepted %>
+      <%= link_to '正式依頼の内容を確認する', confirm_partners_order_path(@order.id), class: 'text-white btn btn-primary btn-lg btn-block w-75 p-3' %>
+    <% elsif @order.date_and_time.blank? && !@order.is_accepted %>
+      <button class="text-white btn btn-secondary btn-lg btn-block w-75 p-3 disabled">正式依頼の内容を確認する</button>
+    <% elsif @order.date_and_time.present? && @order.is_accepted %>
+      <button class="text-white btn btn-secondary btn-lg btn-block w-75 p-3 disabled">承認済みです</button>
+    <% end %>
+  </div>
+</div>

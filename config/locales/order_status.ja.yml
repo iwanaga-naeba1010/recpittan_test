@@ -1,0 +1,33 @@
+ja:
+  # Order.statusのenumデータ
+  # enumerizeはadminのみ
+  customer:
+    order:
+      status:
+        in_progress: 相談中
+        waiting_for_a_reply_from_partner: 相談中
+        waiting_for_a_reply_from_facility: 相談中
+        facility_request_in_progress: 正式依頼済み
+        request_denied: 相談中
+        waiting_for_an_event_to_take_place: 開催待ち
+        unreported_completed: 開催済み
+        final_report_admits_not: 終了報告確認中
+        finished: 終了報告承認済み
+        invoice_issued: 請求書発行済み
+        paid: ー（請求書発行済み）
+        canceled: キャンセル済み
+  partner:
+    order:
+      status:
+        in_progress: 相談中
+        waiting_for_a_reply_from_partner: 相談中
+        waiting_for_a_reply_from_facility: 相談中
+        facility_request_in_progress: 正式依頼確認中
+        request_denied: 相談中
+        waiting_for_an_event_to_take_place: 開催待ち
+        unreported_completed: 開催済み
+        final_report_admits_not: 終了報告送信済み
+        finished: 終了報告承認済み
+        invoice_issued: ー（終了報告承認済み）
+        paid: 支払済み
+        canceled: キャンセル済み

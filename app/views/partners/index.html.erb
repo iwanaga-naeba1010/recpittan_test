@@ -16,11 +16,11 @@
       </div>
       <div class="status">
         <span class="status__cunsult p-1">
-          相談したい
+          <%= I18n.t("partner.order.status.#{order.status}") %>
         </span>
       </div>
       <div class="date">
-        11/03
+        <%= date order.created_at %>
       </div>
     </div>
   <% end %>

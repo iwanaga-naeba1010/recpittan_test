@@ -27,14 +27,13 @@
 </div>
 
 <div class="chat card-body">
-  <%#= render 'shared/partner/order/chat', order: @order %>
+  <%= render 'shared/partner/order/chat', order: @order %>
 </div>
 
 <div class="chat_form border-top">
-  <%= simple_form_for @chat, url: partners_chats_path do |f| %>
+  <%= simple_form_for @chat, url: partners_order_chats_path(@order.id) do |f| %>
     <div class="m-1 chat-wrapper">
-      <%= f.input :order_id, as: :hidden, input_html: { value: @chat.order_id } %>
-      <%#= f.input :user_id, as: :hidden, input_html: { value: current_user.id } %>
+      <%= f.input :user_id, as: :hidden, input_html: { value: current_user.id } %>
 
       <div class="message d-flex">
         <%= f.input :message, as: :text, label: false, input_html: { class: "form-control chat-message" } %>

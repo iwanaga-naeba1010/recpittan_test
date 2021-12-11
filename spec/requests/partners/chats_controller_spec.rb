@@ -13,11 +13,11 @@ RSpec.describe Partners::ChatsController, type: :request do
   end
 
   describe 'POST /create' do
-    let(:chat_attrs) { attributes_for(:chat, order_id: order.id) }
+    let(:chat_attrs) { attributes_for(:chat, order_id: order.id, user_id: partner.id) }
 
     context 'with valid parameters' do
       it 'return http success when user not logged in' do
-        post partners_chats_path(recreation.id), params: { chat: chat_attrs }
+        post partners_order_chats_path(order.id), params: { chat: chat_attrs }
         expect(response).to have_http_status(:found)
         expect(response).to redirect_to(chat_partners_order_path(order.id))
       end

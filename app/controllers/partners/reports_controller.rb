@@ -1,13 +1,29 @@
 # frozen_string_literal: true
 
-class Partners::OrdersController < Partners::ApplicationController
+class Partners::ReportsController < Partners::ApplicationController
   before_action :set_order
 
-  def show; end
-
-  def chat
-    @chat = current_user.chats.build(order_id: @order.id)
+  def new
+    @report = @order.build_report
   end
+
+  def create
+    @order.build_report(params_create)
+
+    if @order.save
+      redirect_to partners_order_path, notice: 'レポートを投稿しました！'
+    else
+      render :new
+    end
+  end
+
+  def edit
+    @report = @order.report.find(params[:id])
+  end
+
+  # def update
+  #   @report = @order.report.find(params[:id])
+  # end
 
   def update
     # TODO: 承認した場合はis_accepted = trueする
@@ -42,11 +58,14 @@ class Partners::OrdersController < Partners::ApplicationController
 
   def set_order
     @order = current_user.recreations.map do |rec|
-      rec.orders.map { |order| order if order.id == params[:id].to_i }
+      rec.orders.map { |order| order if order.id == params[:order_id].to_i }
     end.flatten.compact.first
   end
 
   def params_create
-    params.require(:order).permit(:status, :is_accepted, :date_and_time)
+    params.require(:report).permit(
+      :body, :expenses, :facility_count, :is_accepted,
+      :number_of_people, :transportation_expenses
+    )
   end
 end
