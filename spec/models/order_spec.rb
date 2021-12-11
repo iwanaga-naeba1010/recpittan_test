@@ -29,5 +29,69 @@
 require 'rails_helper'
 
 RSpec.describe Order, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  let(:partner) { create :user, :with_recreations }
+  let(:customer) { create :user, :with_custoemr }
+  let(:order) { create :order, recreation_id: partner.recreations.first.id, user_id: customer.id }
+  describe 'before_save::switch_status_befire_save' do
+    context 'with valid parameters' do
+      it 'changes nothing when status is finished' do
+        order.update(status: :finished)
+        expect(order.status).to eq :finished
+      end
+
+      it 'changes nothing when status is invoice_issued' do
+        order.update(status: :invoice_issued)
+        expect(order.status).to eq :invoice_issued
+      end
+
+      it 'changes nothing when status is paid' do
+        order.update(status: :paid)
+        expect(order.status).to eq :paid
+      end
+
+      it 'changes nothing when status is canceled' do
+        order.update(status: :canceled)
+        expect(order.status).to eq :canceled
+      end
+
+      it 'changes nothing when status is travled' do
+        order.update(status: :travled)
+        expect(order.status).to eq :travled
+      end
+
+      it 'changes to facility_request_in_progress when customer requested but partner was not accepted' do
+        current_time = Time.current
+        order.update(date_and_time: current_time.tomorrow, is_accepted: false)
+        expect(order.status).to eq :facility_request_in_progress
+      end
+
+      it 'changes to waiting_for_an_event_to_take_place when customer requested and partner was accepted' do
+        current_time = Time.current
+        order.update(date_and_time: current_time.tomorrow, is_accepted: true)
+        expect(order.status).to eq :waiting_for_an_event_to_take_place
+      end
+
+      it 'changes to unreported_completed after finished recreation but partner did not complete report yet' do
+        current_time = Time.current
+        order.update(date_and_time: current_time.ago(1.days), is_accepted: true)
+        expect(order.status).to eq :unreported_completed
+      end
+
+      it 'changes to final_report_admits_not after finished recreation and partner completed report but customer did not accepted' do
+        current_time = Time.current
+        # NOTE: reportを事前に作成しないと発火しないので注意が必要
+        order.create_report(attributes_for :report)
+        order.update(date_and_time: current_time.ago(1.days), is_accepted: true)
+        expect(order.status).to eq :final_report_admits_not
+      end
+
+      it 'changes to finished after finished recreation and partner completed report and customer accepted' do
+        current_time = Time.current
+        # NOTE: reportを事前に作成しないと発火しないので注意が必要
+        order.create_report(attributes_for(:report, is_accepted: true))
+        order.update(date_and_time: current_time.ago(1.days), is_accepted: true)
+        expect(order.status).to eq :finished
+      end
+    end
+  end
 end

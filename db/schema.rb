@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_12_08_093201) do
+ActiveRecord::Schema.define(version: 2021_12_10_075241) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -142,6 +142,19 @@ ActiveRecord::Schema.define(version: 2021_12_08_093201) do
     t.boolean "is_public_price", default: true
   end
 
+  create_table "reports", force: :cascade do |t|
+    t.bigint "order_id", null: false
+    t.boolean "is_accepted"
+    t.integer "facility_count"
+    t.integer "number_of_people"
+    t.integer "transportation_expenses"
+    t.integer "expenses"
+    t.text "body"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["order_id"], name: "index_reports_on_order_id"
+  end
+
   create_table "tags", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
@@ -185,5 +198,6 @@ ActiveRecord::Schema.define(version: 2021_12_08_093201) do
   add_foreign_key "recreation_tags", "recreations", name: "recreation_tags_recreation_id_fkey"
   add_foreign_key "recreation_tags", "tags", name: "recreation_tags_tag_id_fkey"
   add_foreign_key "recreations", "users", name: "recreations_user_id_fkey"
+  add_foreign_key "reports", "orders"
   add_foreign_key "users", "companies", name: "users_company_id_fkey"
 end

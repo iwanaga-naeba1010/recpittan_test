@@ -1,25 +1,29 @@
 # frozen_string_literal: true
 
 class Partners::ChatsController < Partners::ApplicationController
+  before_action :set_order
 
   def create
-    @chat = current_user.chats.build(params_create)
+    @order.chats.build(params_create)
 
-    if @chat.save
-      redirect_to chat_partners_order_path(@chat.order_id)
+    # NOTE: Order経由で保存することでbefore_saveを発火させている
+    if @order.save
+      redirect_to chat_partners_order_path(@order.id)
     else
-      @order = current_user.recreations.map do |rec|
-        rec.orders.map { |order| order if order.id == params_create[:order_id].to_i }
-      end.flatten.compact.first
-
-      # @chat = @order.chats.build(user_id: current_user.id)
       render 'partners/orders/chat'
     end
   end
 
   private
 
+  def set_order
+    # binding.pry
+    @order = current_user.recreations.map do |rec|
+      rec.orders.map { |order| order if order.id == params[:order_id].to_i }
+    end.flatten.compact.first
+  end
+
   def params_create
-    params.require(:chat).permit(:message, :order_id)
+    params.require(:chat).permit(:message, :user_id)
   end
 end

@@ -13,48 +13,48 @@
   <h4 class="text-black font-weight-bold">施設情報</h4>
   <table class="w-100">
     <thead>
-      <tr class="border-bottom">
-        <td class="pt-2 pb-2 w-25">施設名</td>
-        <td class="pt-2 pb-2 text-black text-end">
-          <%= @order.user.company.name %>
-        </td>
-      </tr>
-      <tr class="border-bottom">
-        <td class="pt-2 pb-2 w-25">担当者</td>
-        <td class="pt-2 pb-2 text-black text-end">
-          <%= @order.user.company.person_in_charge_name %>
-        </td>
-      </tr>
-      <tr class="border-bottom">
-        <td class="pt-2 pb-2 w-25">住所</td>
-        <td class="pt-2 pb-2 text-black text-end">
-          <%= @order.user.company.full_address %>
-        </td>
-      </tr>
+    <tr class="border-bottom">
+      <td class="pt-2 pb-2 w-25">施設名</td>
+      <td class="pt-2 pb-2 text-black text-end">
+        <%= @order.user.company.name %>
+      </td>
+    </tr>
+    <tr class="border-bottom">
+      <td class="pt-2 pb-2 w-25">担当者</td>
+      <td class="pt-2 pb-2 text-black text-end">
+        <%= @order.user.company.person_in_charge_name %>
+      </td>
+    </tr>
+    <tr class="border-bottom">
+      <td class="pt-2 pb-2 w-25">住所</td>
+      <td class="pt-2 pb-2 text-black text-end">
+        <%= @order.user.company.full_address %>
+      </td>
+    </tr>
     </tbody>
   </table>
   <div>
     <h4 class="text-black font-weight-bold pt-3">レク情報</h4>
     <table class="w-100">
       <thead>
-        <tr class="border-bottom">
-          <td class="pt-2 pb-2 w-25">レク名</td>
-          <td class="pt-2 pb-2 text-black text-end">
-            <%= @order.recreation.title %>
-          </td>
-        </tr>
-        <tr class="border-bottom">
-          <td class="pt-2 pb-2 w-25">レク環境</td>
-          <td class="pt-2 pb-2 text-black text-end">
-            <%= @order.recreation.is_online ? 'オンライン' : 'オフライン' %>
-          </td>
-        </tr>
-        <tr class="border-bottom">
-          <td class="pt-2 pb-2 w-25">ステータス</td>
-          <td class="pt-2 pb-2 text-black text-end">
-            相談中
-          </td>
-        </tr>
+      <tr class="border-bottom">
+        <td class="pt-2 pb-2 w-25">レク名</td>
+        <td class="pt-2 pb-2 text-black text-end">
+          <%= @order.recreation.title %>
+        </td>
+      </tr>
+      <tr class="border-bottom">
+        <td class="pt-2 pb-2 w-25">レク環境</td>
+        <td class="pt-2 pb-2 text-black text-end">
+          <%= @order.recreation.is_online ? 'オンライン' : 'オフライン' %>
+        </td>
+      </tr>
+      <tr class="border-bottom">
+        <td class="pt-2 pb-2 w-25">ステータス</td>
+        <td class="pt-2 pb-2 text-black text-end">
+          相談中
+        </td>
+      </tr>
       </tbody>
     </table>
   </div>
@@ -62,39 +62,39 @@
     <h4 class="text-black font-weight-bold">レク費用</h4>
     <table class="w-100">
       <thead>
-        <tr class="border-bottom">
-          <td class="pt-2 pb-2 text-black w-75">開催費</td>
-          <td class="pt-2 pb-2 text-black text-end">¥
-            <%= number_to_currency @order.recreation.regular_price %>
-          </td>
-        </tr>
-        <tr class="border-bottom">
-          <td class="pt-2 pb-2 text-black w-75">材料費/1人あたり<br>※材料費は人数分の費用が発生します。</td>
-          <td class="pt-2 pb-2 text-black text-end">¥
-            <%= number_to_currency @order.recreation.regular_material_price %>
-          </td>
-        </tr>
-        <tr class="border-bottom">
-          <td class="pt-2 pb-2 text-black w-75">交通費</td>
-          <td class="pt-2 pb-2 text-black text-end">¥
-            <%= number_to_currency @order.transportation_expenses %>
-          </td>
-        </tr>
-        <tr class="border-bottom">
-          <td class="pt-2 pb-2 text-black w-75">諸経費</td>
-          <td class="pt-2 pb-2 text-black text-end">¥
-            <%= number_to_currency @order.expenses %>
-          </td>
-        </tr>
-        <tr class="border-bottom">
-          <td class="pt-2 pb-2 text-black w-75">追加施設費/追加施設 0施設<br>※1施設追加する事に費用が発生します。</td>
-          <td class="pt-2 pb-2 text-black text-end">¥0</td>
-        </tr>
-        <tr class="border-bottom text-black font-weight-bold">
-          <td class="pt-2 pb-2">合計</td>
-          <td class="pt-2 pb-2 text-end">¥
-            <%= number_to_currency @order.total_price %></td>
-        </tr>
+      <tr class="border-bottom">
+        <td class="pt-2 pb-2 text-black w-75">開催費</td>
+        <td class="pt-2 pb-2 text-black text-end">¥
+          <%= number_to_currency @order.recreation.regular_price %>
+        </td>
+      </tr>
+      <tr class="border-bottom">
+        <td class="pt-2 pb-2 text-black w-75">材料費/1人あたり<br>※材料費は人数分の費用が発生します。</td>
+        <td class="pt-2 pb-2 text-black text-end">¥
+          <%= number_to_currency @order.recreation.regular_material_price %>
+        </td>
+      </tr>
+      <tr class="border-bottom">
+        <td class="pt-2 pb-2 text-black w-75">交通費</td>
+        <td class="pt-2 pb-2 text-black text-end">¥
+          <%= number_to_currency @order.transportation_expenses %>
+        </td>
+      </tr>
+      <tr class="border-bottom">
+        <td class="pt-2 pb-2 text-black w-75">諸経費</td>
+        <td class="pt-2 pb-2 text-black text-end">¥
+          <%= number_to_currency @order.expenses %>
+        </td>
+      </tr>
+      <tr class="border-bottom">
+        <td class="pt-2 pb-2 text-black w-75">追加施設費/追加施設 0施設<br>※1施設追加する事に費用が発生します。</td>
+        <td class="pt-2 pb-2 text-black text-end">¥0</td>
+      </tr>
+      <tr class="border-bottom text-black font-weight-bold">
+        <td class="pt-2 pb-2">合計</td>
+        <td class="pt-2 pb-2 text-end">¥
+          <%= number_to_currency @order.total_price %></td>
+      </tr>
       </tbody>
     </table>
   </div>
@@ -105,8 +105,15 @@
       <li>施設から期日までに連絡がない場合は、施設に確認のご連絡をお願い致します。</li>
     </ul>
     <p>施設から正式依頼が届いた場合、次へ進むことができます。</p>
+    <%= link_to 'レポートはこちら', new_partners_order_report_path(@order.id) %>
   </div>
   <div class="col-md-12 text-center">
-    <button type="button" class="btn btn-secondary btn-lg btn-block w-75 p-3">正式依頼の内容を確認する</button>
+    <% if @order.date_and_time.present? && !@order.is_accepted %>
+      <%= link_to '正式依頼の内容を確認する', confirm_partners_order_path(@order.id), class: 'text-white btn btn-primary btn-lg btn-block w-75 p-3' %>
+    <% elsif @order.date_and_time.blank? && !@order.is_accepted %>
+      <button class="text-white btn btn-secondary btn-lg btn-block w-75 p-3 disabled">正式依頼の内容を確認する</button>
+    <% elsif @order.date_and_time.present? && @order.is_accepted %>
+      <button class="text-white btn btn-secondary btn-lg btn-block w-75 p-3 disabled">承認済みです</button>
+    <% end %>
   </div>
 </div>

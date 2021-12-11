@@ -106,7 +106,7 @@
             </div>
             <div class="row py-2">
               <div class="col-lg-3 col-4 label">ステータス</div>
-              <div class="col-auto"><%= @order.status_text %></div>
+              <div class="col-auto"><%= I18n.t("customer.order.status.#{@order.status}") %></div>
             </div>
 
             <!--            {{"チャット / 終了報告"}}-->

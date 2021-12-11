@@ -16,7 +16,7 @@ class Customers::OrdersController < Customers::ApplicationController
   end
 
   def complete
-    redirect_to chat_customers_order_path(@order.id) if @order.status.consult?
+    redirect_to chat_customers_order_path(@order.id) if @order.date_and_time.blank?
   end
 
   # rubocop:disable Metrics/AbcSize
@@ -79,14 +79,15 @@ EOS
     date = params_create.to_h[:dates]['0']
     str_to_date = Time.new(date['year'].to_i, date['month'].to_i, date['date'].to_i, date['start_hour'].to_i, date['start_minutes'].to_i)
 
-    # TODO: 若干負債だけど、今は許容する
-    @order.update(date_and_time: str_to_date)
+    ActiveRecord::Base.transaction do
+      # TODO: 若干負債だけど、今は許容する
+      @order.update(date_and_time: str_to_date)
 
-    if @order.update(params_create)
+      @order.update(params_create)
       redirect_to complete_customers_order_path(@order.id), notice: '正式に依頼しました'
-    else
-      redirect_to chat_customers_order_path(@order.id), alert: '失敗しました。もう一度お試しください'
     end
+  rescue StandardError
+    redirect_to chat_customers_order_path(@order.id), alert: '失敗しました。もう一度お試しください'
   end
   # rubocop:enable Metrics/AbcSize
 
