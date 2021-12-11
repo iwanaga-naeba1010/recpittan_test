@@ -105,6 +105,7 @@
       <li>施設から期日までに連絡がない場合は、施設に確認のご連絡をお願い致します。</li>
     </ul>
     <p>施設から正式依頼が届いた場合、次へ進むことができます。</p>
+    <%= link_to 'レポートはこちら', new_partners_order_report_path(@order.id) %>
   </div>
   <div class="col-md-12 text-center">
     <% if @order.date_and_time.present? && !@order.is_accepted %>
