@@ -13,5 +13,10 @@
 #
 FactoryBot.define do
   factory :email_template do
+    explanation { 'MyText' }
+    title { 'MyText' }
+    body { 'MyText' }
+    signature { 'MyText' }
+    kind { 1 }
   end
 end
