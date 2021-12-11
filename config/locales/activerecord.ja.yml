@@ -8,6 +8,7 @@ ja:
       recreation: レク
       recreation_image: レク画像
       order: 案件
+      email_template: テンプレート
       tag: タグ
       target: 利用者層
       chat: チャット
@@ -94,6 +95,11 @@ ja:
       chat:
         message: メッセージ
         is_read: 既読
+      email_template:
+        explanation: このメールについて
+        title: タイトル
+        body: 本文
+        signature: 署名
     errors:
       messages:
         duration_over: が上限を越えています

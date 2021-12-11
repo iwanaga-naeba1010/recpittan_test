@@ -54,6 +54,16 @@ ActiveRecord::Schema.define(version: 2021_12_10_075241) do
     t.string "locality"
   end
 
+  create_table "email_templates", force: :cascade do |t|
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.string "explanation"
+    t.string "title"
+    t.text "body"
+    t.text "signature"
+    t.integer "kind"
+  end
+
   create_table "order_memos", force: :cascade do |t|
     t.bigint "order_id", null: false
     t.text "body"
