@@ -1,0 +1,96 @@
+<div class="p-3">
+  <p class="mb-0">終了報告ページ</p>
+  <div class="header">
+    <div class="d-flex align-items-center justify-content-center position-relative">
+      <h2 class="m-2 pb-2 text-white font-weight-bold position-absolute start-0">
+        <%= link_to "#" do %>
+          <i class="fas fa-arrow-left text-white"></i>
+        <% end %>
+      </h2>
+      <h2 class="m-2 pb-2 text-white font-weight-bold">終了報告</h2>
+      <%= render 'shared/partner/sidebar_toggle'%>
+    </div>
+  </div>
+  <div class="p-4 text-black">
+    <p>お疲れさまでした。<br>終了報告をご記入ください。内容は施設が確認をします。送信した終了報告を内容を受け取り額が翌々月末に振り込まれます。間違っている場合はチャットにて訂正依頼が届きます。</p>
+  </div>
+
+  <div class="body bg-white border p-3 mb-3">
+    <h4 class="text-black font-weight-bold">項目を入力してください</h4>
+    <table class="w-100">
+      <thead>
+        <tr>
+          <td class="pt-2 pb-2 w-25 border-bottom text-black">追加で参加した人数</td>
+        </tr>
+        <tr>
+          <td class="pt-2 pb-2 w-25">オンラインの場合、2施設目から追加で参加した施設数を数字で記入してください。追加1施設あたり+1,000円が謝礼に追加されます。</td>
+        </tr>
+        <tr>
+          <td class="pt-2 pb-2 w-25 border-bottom text-black">参加人数</td>
+        </tr>
+        <tr>
+          <td class="pt-2 pb-2 w-25">参加人数をもとに材料費を算出します。</td>
+        </tr>
+        <tr>
+          <td class="pt-2 pb-2 w-25 border-bottom text-black">交通費</td>
+        </tr>
+        <tr>
+          <td class="pt-2 pb-2 w-25"></td>
+        </tr>
+        <tr>
+          <td class="pt-2 pb-2 w-25 border-bottom text-black">諸経費</td>
+        </tr>
+        <tr>
+          <td class="pt-2 pb-2 w-25">交通費、諸経費は施設から事前承認があった場合のみ請求が可能です。記載金額から10%引かれた金額が入金されます。</td>
+        </tr>
+        <tr>
+          <td class="pt-2 pb-2 w-25 border-bottom text-black">施設へのメッセージ</td>
+        </tr>
+        <tr>
+          <td class="pt-2 pb-2 w-25">施設への感謝のメッセージや感想などをお書きください。<br>例)この度は、敬老の日という特別な日に開催をいただきありがとうございます。<br>また、老人ホーム えぶりプラスの皆さまにお会いできることを楽しみにしています。</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="border m-2 p-2">
+      <h4 class="text-black font-weight-bold">受取額</h4>
+      <table class="w-100">
+        <thead>
+          <tr class="border-bottom">
+            <td class="pt-2 pb-2 text-black w-75">開催費</td>
+            <td class="pt-2 pb-2 text-black">¥30,000</td>
+          </tr>
+          <tr class="border-bottom">
+            <td class="pt-2 pb-2 text-black w-75">材料費/10人<br><span class="text-secondary">※材料費は人数分の費用が発生します。</span></td>
+            <td class="pt-2 pb-2 text-black">¥30,000</td>
+          </tr>
+          <tr class="border-bottom">
+            <td class="pt-2 pb-2 text-black w-75">交通費</td>
+            <td class="pt-2 pb-2 text-black">¥3,000</td>
+          </tr>
+          <tr class="border-bottom">
+            <td class="pt-2 pb-2 text-black w-75">諸経費</td>
+            <td class="pt-2 pb-2 text-black">¥10,000</td>
+          </tr>
+          <tr class="border-bottom">
+            <td class="pt-2 pb-2 text-black w-75">追加施設日/追加施設数0施設<br><span class="text-secondary">※1施設追加する事に費用が発生します。</span></td>
+            <td class="pt-2 pb-2 text-black">¥0</td>
+          </tr>
+          <tr class="border-bottom text-black font-weight-bold">
+            <td class="pt-2 pb-2">合計</td>
+            <td class="pt-2 pb-2">¥73,000</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="m-2 p-2 bg-light">
+      <p class="text-black font-weight-bold pt-2">※振込について</p>
+      <p class="text-black">振込は翌々月の12月末に行われます。土日祝日の場合次の営業日となります。</p>
+    </div>
+    <div class="p-2 mt-2">
+      <p class="text-black">一度送信した終了報告は修正ができません。よくご確認の上、送信ボタンを押してください。</p>
+    </div>
+    <div class="col-md-12 text-center">
+      <button type="button" class="btn btn-primary btn-lg btn-block w-100 p-3 mb-2">終了報告を送信する</button>
+    </div>
+  </div>
+</div>

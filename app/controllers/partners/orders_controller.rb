@@ -38,6 +38,12 @@ class Partners::OrdersController < Partners::ApplicationController
 
   end
 
+  def reports
+    @order = current_user.recreations.map do |rec|
+      rec.orders.map { |order| order if order.id == params[:id].to_i }
+    end.flatten.compact.first
+  end
+
   private
 
   def set_order
