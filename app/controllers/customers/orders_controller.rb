@@ -25,6 +25,7 @@ class Customers::OrdersController < Customers::ApplicationController
 
     ActiveRecord::Base.transaction do
       @order.save
+      ChatStartMailer.notify(@recreation, @order).deliver
       dates = params_create.to_h[:dates]
 
       # TODO: 希望日時が空でも大丈夫なようにする
