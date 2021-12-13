@@ -1,0 +1,336 @@
+<main class="customer">
+
+  <div class="container pt-2">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        {{#each breadcrumb}}
+        {{#unless @last}}
+        <li class="breadcrumb-item"><a href="{{uri}}">{{label}}</a></li>
+        {{/unless}}
+        {{#if @last}}
+        <li class="breadcrumb-item active" aria-current="page"><span>{{label}}</span></li>
+        {{/if}}
+        {{/each}}
+      </ol>
+    </nav>
+  </div>
+  <article class="container py-1 px-0">
+    <div class="row">
+      <div class="col-md-4">
+        <a href="{{backURI}}" class="clink "><i class="material-icons ">navigate_before</i> 戻る</a>
+      </div>
+    </div>
+    <div class="row justify-content-center">
+      <div class="col-8 mb-5">
+        <div class="card order-detail">
+          <div class="card-header bg-white">
+            依頼内容
+          </div>
+          <div class="card-body">
+            <div class="row py-2">
+              <div class="col-lg-3 col-4 label">案件番号</div>
+              <div class="col-auto">{{projectNumber}}</div>
+            </div>
+            <div class="row py-2">
+              <div class="col-auto">
+                請求書を発行するために、終了報告の確認をお願い致します。
+                内容ご確認の上、承認をお願い致します。確認いただいた内容の請求書を翌月５日までに発行致します。
+
+                介護レクイベントプラットフォーム えぶりプラス をご利用いただきありがとうございます。
+                今後も弊社では利用者さんがより楽しく選択肢のある生活をサポートできるサービス提供を目指して参ります。サービス向上のために、アンケートのご協力をお願い致します。
+
+              </div>
+            </div>
+            <div class="container-fluid mt-2 action">
+              <div class="row">
+                <div class="col-lg-3 col-4 label py-2">追加施設数</div>
+                <div class="col-lg-9 col-8 py-2">{{numeral report.additionalCount}}施設</div>
+
+                <div class="col-lg-3 col-4 label py-2">参加人数</div>
+                <div class="col-lg-9 col-8 py-2 ">{{numeral report.people}}人</div>
+
+                <div class="col-lg-3 col-4 label py-2">パートナーからのメッセージ</div>
+                <div class="col-lg-9 col-8 py-2">
+                  <pre>{{report.instructorMessage}}</pre>
+                </div>
+              </div>
+            </div>
+            <div class="container-fluid mt-4 action">
+              <div class="row">
+                <div class="col-12 label py-2">レク費用</div>
+              </div>
+              <div class="row justify-content-between border-bottom-dotted py-2 ">
+
+                <div class="col-lg-3 col-4 label py-2">開催費</div>
+                <div class="col-lg-9 col-8 py-2 text-end ">&yen;{{numeral total.facilityPrice}}</div>
+              </div>
+              <div class="row justify-content-between  py-2">
+                <div class="col-auto">材料費 / {{numeral report.people}}人<br><span
+                  class="text-muted font-12 color-ba08">※材料費は人数分の費用が発生します</span></div>
+                <div class="col-auto">&yen;{{numeral total.facilityMaterialPrice}}</div>
+              </div>
+              {{#unless isOnline}}
+              <div class="row justify-content-between border-bottom-dotted py-2">
+                <div class="col-auto">交通費</div>
+                <div class="col-auto">&yen;{{numeral total.facilityTransportPrice}}</div>
+              </div>
+              {{/unless}}
+              <div class="row justify-content-between border-bottom-dotted py-2">
+                <div class="col-auto">諸経費</div>
+                <div class="col-auto">&yen;{{numeral total.facilityExtraExpensePrice}}</div>
+              </div>
+              {{#if isOnline}}
+              <div class="row justify-content-between border-top-dotted py-2">
+                <div class="col-auto align-self-center">
+                  <span id="facilityCount">追加施設費 / {{total.additionalCount}}施設</span>
+                </div>
+                <div class="col-auto" id="additionalPrice">{{total.facilityAdditionalPrice}}
+                </div>
+                <div class="col-12">
+                                <span class="text-muted font-12 color-ba08">※1施設追加する事に&yen;{{numeral
+                                    total.facilityAdditionalPrice}}が発生します</span>
+                </div>
+              </div>
+              {{/if}}
+              <div class="row justify-content-between border-top py-3">
+                <div class="col-auto">合計</div>
+                <div class="col-auto">&yen;{{numeral total.total}}</div>
+              </div>
+            </div>
+
+            <div class="row border-top mt-5 pt-3">
+              <div class="col-3 label">レク</div>
+              <div class="col-9">
+                <div class="row align-items-center mt-2">
+                  <div class="col-md-4">
+                    <picture loading="lazy">
+                      <source type="image/webp" srcset="{{catalogCardThumbnailUri recreation.media '320x180@1' 'webp'}},
+                                        {{catalogCardThumbnailUri recreation.media '320x180@1.5' 'webp'}} 1.5x,
+                                        {{catalogCardThumbnailUri recreation.media '320x180@2' 'webp'}} 2x">
+                      <source type="image/jpeg" srcset="{{catalogCardThumbnailUri recreation.media '320x180@1' 'jpg'}},
+                                        {{catalogCardThumbnailUri recreation.media '320x180@1.5' 'jpg'}} 1.5x,
+                                        {{catalogCardThumbnailUri recreation.media '320x180@2' 'jpg'}} 2x"/>
+
+                      <img loading="lazy"
+                           src="{{catalogCardThumbnailUri recreation.media '320x180@1' 'jpg'}}, {{catalogCardThumbnailUri recreation.media '320x180@1.5' 'jpg'}} 1.5x,"
+                           class="img-fluid" alt="介護レクリエーション - {{recreation.name}}">
+                    </picture>
+                  </div>
+                  <div class="col-md-8 recreation">
+                    <h1 class="font-16 font-weight-bold line-height-140">{{recreation.name}}</h1>
+                    <div class="row category-tags">
+                      <div class="col-auto px-1">
+                        {{{catalogCardCategoryLink recreation.baseCode}}}
+                      </div>
+                      {{#each recreation.tags}}
+                      <div class="col-auto px-1">
+                        <a href="{{{catalogTagUri this }}}" class="tag-label"># {{this}}</a>
+                      </div>
+                      {{/each}}
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-3 label pt-3">開催日時</div>
+              <div class="col-9 pt-3">{{scheduledDateText}}</div>
+
+            </div>
+          </div>
+          <!-- フォーム -->
+          <div class="card-body">
+            <form id="report" action="{{catalogHomeUri}}/customer/order/report/{{orderId}}" class="order"
+                  method="POST">
+              <div class="">
+                <label class="form-label">1. 参加者に合わせた工夫の満足度を教えてください。</label>
+                <select name="questionRate1" class="start-rating">
+                  <option value="" selected></option>
+                  <option value="1">★★★★★満足</option>
+                  <option value="2">★★★★やや満足</option>
+                  <option value="3">★★★どちらとも言えない</option>
+                  <option value="4">★★やや不満</option>
+                  <option value="5">★不満</option>
+                </select>
+              </div>
+              <div class="">
+                <label class="form-label">2. パートナーのコミュニケーション力の満足度を教えてください。</label>
+                <select name="questionRate2" class="start-rating">
+                  <option value="" selected></option>
+                  <option value="1">★★★★★満足</option>
+                  <option value="2">★★★★やや満足</option>
+                  <option value="3">★★★どちらとも言えない</option>
+                  <option value="4">★★やや不満</option>
+                  <option value="5">★不満</option>
+                </select>
+              </div>
+              <div class="">
+                <label class="form-label">3. 開催までのやりとりのスムーズさの満足度を教えてください。</label>
+                <select name="questionRate3" class="start-rating">
+                  <option value="" selected></option>
+                  <option value="1">★★★★★満足</option>
+                  <option value="2">★★★★やや満足</option>
+                  <option value="3">★★★どちらとも言えない</option>
+                  <option value="4">★★やや不満</option>
+                  <option value="5">★不満</option>
+                </select>
+              </div>
+              <div class="">
+                <label class="form-label">4. 料金納得度を教えてください。</label>
+                <select name="questionRate4" class="start-rating">
+                  <option value="" selected></option>
+                  <option value="1">★★★★★満足</option>
+                  <option value="2">★★★★やや満足</option>
+                  <option value="3">★★★どちらとも言えない</option>
+                  <option value="4">★★やや不満</option>
+                  <option value="5">★不満</option>
+                </select>
+              </div>
+              <div class="">
+                <label class="form-label">5. もう1度開催したいと思いますか？</label>
+                <select name="questionRate5" class="start-rating">
+                  <option value="" selected></option>
+                  <option value="1">★★★★★満足</option>
+                  <option value="2">★★★★やや満足</option>
+                  <option value="3">★★★どちらとも言えない</option>
+                  <option value="4">★★やや不満</option>
+                  <option value="5">★不満</option>
+                </select>
+              </div>
+              <div class="">
+                <label class="form-label">6. 感想をご記入ください。</label>
+                <textarea name="questionText1" class="form-control" id="exampleFormControlTextarea1"
+                          rows="3"></textarea>
+              </div>
+              <div class="pt-3">
+                <label class="form-label">7. その他ご意見をご記入ください。※Webサイトへは公開されません</label>
+                <textarea name="questionText2" class="form-control" id="exampleFormControlTextarea1"
+                          rows="3"></textarea>
+              </div>
+              <div class="row pt-3">
+                <div class="col-auto">
+                  <input type="hidden" name="_csrf" value="{{csrfToken}}">
+                  <button class="btn btn-cprimary font-14 py-2 px-4 font-weight-bold reject text-white"
+                          type="button" data-bs-toggle="modal" data-bs-target="#rejectModal">お断りする
+                  </button>
+                </div>
+                <div class="col-auto">
+
+                  <button class="btn btn-cprimary font-14 py-2 px-4 font-weight-bold text-white"
+                          type="button" data-bs-toggle="modal" data-bs-target="#approveModal">承認する
+                  </button>
+                  <input type="hidden" name="action" value="">
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+
+      </div>
+  </article>
+</main>
+<div class="modal fade" id="approveModal" tabindex="-1" aria-labelledby="approveModalLabel" aria-hidden="true">
+  <div class="modal-dialog ">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="approveModalLabel">終了報告を承認</h5>
+        <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
+      </div>
+      <div class="modal-body p-2">
+        <p>一度承認すると変更はできません。材料費、追加事業所数など、ご確認の上、承認をお願い致します。</p>
+
+        <div class="row justify-content-end pt-3">
+          <div class="col-auto">
+            <button class="btn btn-cancel font-14 py-2 px-4 font-weight-bold" data-bs-dismiss="modal"
+                    type="button">キャンセル
+            </button>
+          </div>
+          <div class="col-auto">
+
+            <button class="btn btn-cprimary send font-14 py-2 px-4 font-weight-bold  text-white"
+                    data-action="approve" type="button">承認する
+            </button>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="rejectModal" tabindex="-1" aria-labelledby="rejectModalLabel" aria-hidden="true">
+  <div class="modal-dialog ">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="rejectModalLabel">終了報告の承認をお断り</h5>
+        <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
+      </div>
+      <div class="modal-body p-2">
+        <p>内容が間違っている場合、お断りをお願い致します。訂正内容をパートナーにチャットで伝えてください。正しい内容として、再度終了報告を提出致します。
+          ご不明な点がありましたらよくある質問またはお問い合わせをお願いします。</p>
+
+        <div class="row justify-content-end pt-3">
+          <div class="col-auto">
+            <button class="btn btn-cancel font-14 py-2 px-4 font-weight-bold" data-bs-dismiss="modal"
+                    type="button">キャンセル
+            </button>
+          </div>
+          <div class="col-auto">
+
+            <button class="btn btn-cprimary send font-14 py-2 px-4 font-weight-bold  text-white"
+                    data-action="reject" type="button">お断りする
+            </button>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<link href="https://cdn.jsdelivr.net/gh/kartik-v/bootstrap-star-rating@4.1.2/css/star-rating.min.css" media="all"
+      rel="stylesheet" type="text/css"/>
+<link href="https://cdn.jsdelivr.net/gh/kartik-v/bootstrap-star-rating@4.1.2/themes/krajee-svg/theme.css" media="all"
+      rel="stylesheet" type="text/css"/>
+<script src="https://cdn.jsdelivr.net/gh/kartik-v/bootstrap-star-rating@4.1.2/js/star-rating.min.js"
+        type="text/javascript"></script>
+
+<script>
+  jQuery(document).ready(function () {
+    function chsticky() {
+      if (document.body.clientWidth >= 769) {
+        document.querySelector('#customer-header').style.top = document.querySelector('header').clientHeight + 'px';
+      } else {
+        document.querySelector('#customer-header').style.top = 'auto';
+      }
+    }
+
+    chsticky();
+    jQuery(window).resize(function () {
+      chsticky();
+    });
+    //        $('.start-rating').rating();
+    $('.start-rating').rating({
+      theme: 'krajee-svg',
+      starCaptions: (val) => val,
+      clearButton: '',
+      clearCaption: '未入力',
+      step: 1,
+      starCaptions: {
+        1: '不満',
+        2: 'やや不満',
+        3: 'どちらとも言えない',
+        4: 'やや満足',
+        5: '満足'
+      }
+    })
+    // $('select').hide()
+    $('.send').click(function () {
+      var action = $(this).data('action');
+      console.log('action', action);
+      $('input[name="action"]').val(action);
+      $('#report').submit();
+    })
+    // $('#questionThreeText').on('keyup', function () {
+    //     var length = $(this).val().length
+    //     $('#char-num').text(length)
+    // })
+  });
+</script>

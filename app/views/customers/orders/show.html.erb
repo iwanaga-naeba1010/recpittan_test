@@ -109,47 +109,26 @@
               <div class="col-auto"><%= I18n.t("customer.order.status.#{@order.status}") %></div>
             </div>
 
-            <!--            {{"チャット / 終了報告"}}-->
             <div class="row p-3 justify-content-around">
-              <!--              {{#if showReport}}-->
-              <!--              <div class="col-5 action pb-3">-->
-              <!--                <div class="action-header pt-3">-->
-              <!--                  チャット-->
-              <!--                </div>-->
-              <!--                <div class="py-3" style="min-height: 5rem;">終了報告が完了するまでパートナーとチャットができます。</div>-->
-              <!--                {{#if chatActive}}-->
-              <!--                <a href="{{catalogHomeUri}}/order/consult/{{taskId}}"-->
-              <!--                   class="btn btn-cprimary  font-14 py-2 px-4 font-weight-bold text-white">チャットへ進む</a>-->
-              <!--                {{else}}-->
-              <!--                <span-->
-              <!--                  class="btn btn-cprimary font-14 py-2 px-4 font-weight-bold text-white disabled">チャットへ進む</span>-->
-              <!--                {{/if}}-->
-              <!--              </div>-->
-              <!--              <div class="col-6 action pb-3">-->
-              <!--                <div class="action-header pt-3">-->
-              <!--                  終了報告-->
-              <!--                </div>-->
-              <!--                <div class="py-3" style="min-height: 5rem;">レクが開催後、パートナーから終了報告の承認依頼が届きます。内容を確認して承認してください。-->
-              <!--                </div>-->
-              <!--                {{#if reportActive}}-->
-              <!--                <a href="{{catalogHomeUri}}/customer/order/report/{{taskId}}"-->
-              <!--                   class="btn btn-cprimary font-14 py-2 px-4 font-weight-bold text-white">終了報告を確認</a>-->
-              <!--                {{else}}-->
-              <!--                <span class="btn btn-cprimary font-14 py-2 px-4 font-weight-bold text-white disabled ">-->
-              <!--                                {{#if chatActive}} 終了報告を確認-->
-              <!--                                {{else}} 終了報告を確認済み-->
-              <!--                                {{/if}}</span>-->
-              <!--                {{/if}}-->
-              <!--              </div>-->
-
-              <div class="col-12 action pb-3">
+              <div class="col action pb-3">
                 <div class="action-header pt-3">
                   チャット
                 </div>
                 <div class="py-3">終了報告が完了するまでパートナーとチャットができます。</div>
                 <%= link_to 'チャットへ進む', chat_customers_order_path(@order.id), class: 'btn btn-cprimary  font-14 py-2 px-4 font-weight-bold text-white' %>
               </div>
-
+              <% if @order&.report&.id.present? %>
+                <div class="col action pb-3">
+                  <div class="action-header pt-3">終了報告</div>
+                  <div class="py-3" style="min-height: 5rem;">レクが開催後、パートナーから終了報告の承認依頼が届きます。内容を確認して承認してください。
+                  </div>
+                  <% if @order.report.is_accepted? %>
+                    <span class="btn btn-cprimary font-14 py-2 px-4 font-weight-bold text-white disabled ">終了報告を確認済み</span>
+                  <% else %>
+                    <%= link_to '終了報告を確認', edit_customers_report_path(@order.report&.id), class: 'btn btn-cprimary font-14 py-2 px-4 font-weight-bold text-white' %>
+                  <% end %>
+                </div>
+              <% end %>
             </div>
 
             <!-- 小計 -->
