@@ -3,21 +3,32 @@
   <div class="container pt-2">
     <nav aria-label="breadcrumb">
       <ol class="breadcrumb">
-        {{#each breadcrumb}}
-        {{#unless @last}}
-        <li class="breadcrumb-item"><a href="{{uri}}">{{label}}</a></li>
-        {{/unless}}
-        {{#if @last}}
-        <li class="breadcrumb-item active" aria-current="page"><span>{{label}}</span></li>
-        {{/if}}
-        {{/each}}
+        <li class="breadcrumb-item">
+          <%= link_to 'トップ', root_path %>
+        </li>
+        <li class="breadcrumb-item">
+          <%= link_to '一覧', customers_recreations_path %>
+        </li>
+        <% category_tag = @report.order.recreation.tags.categories&.first %>
+        <% if category_tag.present? %>
+          <li class="breadcrumb-item">
+            <!-- TODO: Tag.categories.firstを表示 + ransack入れる -->
+            <%= link_to category_tag.name, customers_recreations_path(q: { tags_id_eq: category_tag.id }) %>
+          </li>
+        <% end %>
+        <li class="breadcrumb-item active">
+          <!-- TODO: Tag.categories.firstを表示 + ransack入れる -->
+          <span><%= @report.order.recreation.title %></span>
+        </li>
       </ol>
     </nav>
   </div>
   <article class="container py-1 px-0">
     <div class="row">
       <div class="col-md-4">
-        <a href="{{backURI}}" class="clink "><i class="material-icons ">navigate_before</i> 戻る</a>
+        <%= link_to customers_order_path(@report.order.id), class: 'clink' do %>
+          <i class="material-icons ">navigate_before</i> 戻る
+        <% end %>
       </div>
     </div>
     <div class="row justify-content-center">
@@ -29,7 +40,7 @@
           <div class="card-body">
             <div class="row py-2">
               <div class="col-lg-3 col-4 label">案件番号</div>
-              <div class="col-auto">{{projectNumber}}</div>
+              <div class="col-auto"><%= @report.order.id %></div>
             </div>
             <div class="row py-2">
               <div class="col-auto">
@@ -38,7 +49,6 @@
 
                 介護レクイベントプラットフォーム えぶりプラス をご利用いただきありがとうございます。
                 今後も弊社では利用者さんがより楽しく選択肢のある生活をサポートできるサービス提供を目指して参ります。サービス向上のために、アンケートのご協力をお願い致します。
-
               </div>
             </div>
             <div class="container-fluid mt-2 action">
@@ -47,11 +57,11 @@
                 <div class="col-lg-9 col-8 py-2">{{numeral report.additionalCount}}施設</div>
 
                 <div class="col-lg-3 col-4 label py-2">参加人数</div>
-                <div class="col-lg-9 col-8 py-2 ">{{numeral report.people}}人</div>
+                <div class="col-lg-9 col-8 py-2 "><%= @report.number_of_people %>人</div>
 
                 <div class="col-lg-3 col-4 label py-2">パートナーからのメッセージ</div>
                 <div class="col-lg-9 col-8 py-2">
-                  <pre>{{report.instructorMessage}}</pre>
+                  <pre><%= @report.body %></pre>
                 </div>
               </div>
             </div>
@@ -62,39 +72,42 @@
               <div class="row justify-content-between border-bottom-dotted py-2 ">
 
                 <div class="col-lg-3 col-4 label py-2">開催費</div>
-                <div class="col-lg-9 col-8 py-2 text-end ">&yen;{{numeral total.facilityPrice}}</div>
+                <div class="col-lg-9 col-8 py-2 text-end ">&yen;<%= number_to_currency @report.order.recreation.regular_price %></div>
               </div>
               <div class="row justify-content-between  py-2">
-                <div class="col-auto">材料費 / {{numeral report.people}}人<br><span
+                <div class="col-auto">材料費 / <%= @report.number_of_people %>人<br><span
                   class="text-muted font-12 color-ba08">※材料費は人数分の費用が発生します</span></div>
-                <div class="col-auto">&yen;{{numeral total.facilityMaterialPrice}}</div>
+                <div class="col-auto">&yen;<%= number_to_currency @report.order.recreation.regular_material_price %></div>
               </div>
-              {{#unless isOnline}}
-              <div class="row justify-content-between border-bottom-dotted py-2">
-                <div class="col-auto">交通費</div>
-                <div class="col-auto">&yen;{{numeral total.facilityTransportPrice}}</div>
-              </div>
-              {{/unless}}
+
+              <% if @report.order.recreation.is_online %>
+                <div class="row justify-content-between border-top-dotted py-2">
+                  <div class="col-auto align-self-center">
+                    <span id="facilityCount">追加施設費 / {{total.additionalCount}}施設</span>
+                  </div>
+                  <div class="col-auto" id="additionalPrice">{{total.facilityAdditionalPrice}}
+                  </div>
+                  <div class="col-12">
+                    <span class="text-muted font-12 color-ba08">
+                      ※1施設追加する事に&yen;{{numeraltotal.facilityAdditionalPrice}}が発生します
+                    </span>
+                  </div>
+                </div>
+              <% else %>
+                <div class="row justify-content-between border-bottom-dotted py-2">
+                  <div class="col-auto">交通費</div>
+                  <div class="col-auto">&yen;<%= number_to_currency @report.transportation_expenses %></div>
+                </div>
+              <% end %>
+
               <div class="row justify-content-between border-bottom-dotted py-2">
                 <div class="col-auto">諸経費</div>
-                <div class="col-auto">&yen;{{numeral total.facilityExtraExpensePrice}}</div>
+                <div class="col-auto">&yen;<%= number_to_currency @report.expenses %></div>
               </div>
-              {{#if isOnline}}
-              <div class="row justify-content-between border-top-dotted py-2">
-                <div class="col-auto align-self-center">
-                  <span id="facilityCount">追加施設費 / {{total.additionalCount}}施設</span>
-                </div>
-                <div class="col-auto" id="additionalPrice">{{total.facilityAdditionalPrice}}
-                </div>
-                <div class="col-12">
-                                <span class="text-muted font-12 color-ba08">※1施設追加する事に&yen;{{numeral
-                                    total.facilityAdditionalPrice}}が発生します</span>
-                </div>
-              </div>
-              {{/if}}
+
               <div class="row justify-content-between border-top py-3">
                 <div class="col-auto">合計</div>
-                <div class="col-auto">&yen;{{numeral total.total}}</div>
+                <div class="col-auto">&yen;<%= number_to_currency @report.order.total_price %></div>
               </div>
             </div>
 
@@ -104,36 +117,24 @@
                 <div class="row align-items-center mt-2">
                   <div class="col-md-4">
                     <picture loading="lazy">
-                      <source type="image/webp" srcset="{{catalogCardThumbnailUri recreation.media '320x180@1' 'webp'}},
-                                        {{catalogCardThumbnailUri recreation.media '320x180@1.5' 'webp'}} 1.5x,
-                                        {{catalogCardThumbnailUri recreation.media '320x180@2' 'webp'}} 2x">
-                      <source type="image/jpeg" srcset="{{catalogCardThumbnailUri recreation.media '320x180@1' 'jpg'}},
-                                        {{catalogCardThumbnailUri recreation.media '320x180@1.5' 'jpg'}} 1.5x,
-                                        {{catalogCardThumbnailUri recreation.media '320x180@2' 'jpg'}} 2x"/>
-
-                      <img loading="lazy"
-                           src="{{catalogCardThumbnailUri recreation.media '320x180@1' 'jpg'}}, {{catalogCardThumbnailUri recreation.media '320x180@1.5' 'jpg'}} 1.5x,"
-                           class="img-fluid" alt="介護レクリエーション - {{recreation.name}}">
+                      <%= image_tag @report.order.recreation.recreation_images&.first&.image.to_s, class: 'img-fluid', loading: 'lazy' %>
                     </picture>
                   </div>
                   <div class="col-md-8 recreation">
-                    <h1 class="font-16 font-weight-bold line-height-140">{{recreation.name}}</h1>
+                    <h1 class="font-16 font-weight-bold line-height-140"><%= @report.order.recreation.title %></h1>
                     <div class="row category-tags">
+                      <!--                      <div class="col-auto px-1">-->
+                      <!--                        {{{catalogCardCategoryLink recreation.baseCode}}}-->
+                      <!--                      </div>-->
                       <div class="col-auto px-1">
-                        {{{catalogCardCategoryLink recreation.baseCode}}}
+                        <%= tags_to_html(@report.order.recreation.tags, false) %>
                       </div>
-                      {{#each recreation.tags}}
-                      <div class="col-auto px-1">
-                        <a href="{{{catalogTagUri this }}}" class="tag-label"># {{this}}</a>
-                      </div>
-                      {{/each}}
                     </div>
                   </div>
                 </div>
               </div>
               <div class="col-3 label pt-3">開催日時</div>
-              <div class="col-9 pt-3">{{scheduledDateText}}</div>
-
+              <div class="col-9 pt-3"><%= dotted_datetime @report.order.date_and_time %></div>
             </div>
           </div>
           <!-- フォーム -->
@@ -213,7 +214,6 @@
                   </button>
                 </div>
                 <div class="col-auto">
-
                   <button class="btn btn-cprimary font-14 py-2 px-4 font-weight-bold text-white"
                           type="button" data-bs-toggle="modal" data-bs-target="#approveModal">承認する
                   </button>
@@ -223,8 +223,8 @@
             </form>
           </div>
         </div>
-
       </div>
+    </div>
   </article>
 </main>
 <div class="modal fade" id="approveModal" tabindex="-1" aria-labelledby="approveModalLabel" aria-hidden="true">

@@ -4,8 +4,9 @@ class Customers::ReportsController < Customers::ApplicationController
   before_action :set_report
 
   def edit; end
+
   def update
-    if @order.update(date_and_time: str_to_date)
+    if @order.update(params_create)
       redirect_to customers_order_path(@order.id), notice: '終了報告を更新しました'
     else
       render :edit
@@ -16,7 +17,7 @@ class Customers::ReportsController < Customers::ApplicationController
 
   def set_report
     @report = current_user.orders.map do |order|
-      order if order&.report&.id == params[:id].to_i
+      order.report if order&.report&.id == params[:id].to_i
     end.compact&.first
   end
 
