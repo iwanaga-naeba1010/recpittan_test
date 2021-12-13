@@ -178,4 +178,31 @@ RSpec.describe Partners::OrdersController, type: :request do
       end
     end
   end
+
+  describe 'GET /report' do
+    context 'with valid user' do
+      it 'returns http success' do
+        get report_partners_order_path(order.id)
+        expect(response).to have_http_status(:ok)
+        # expect(response).to render_template('partners/orders/confirm')
+      end
+    end
+
+    context 'with invalid user' do
+      it 'return 302 when customer accessed' do
+        sign_out partner
+        sign_in customer
+        get report_partners_order_path(order.id)
+        expect(response).to have_http_status(:found)
+        expect(response).to redirect_to root_path
+      end
+
+      it 'return 302 when user not logged in' do
+        sign_out partner
+        get report_partners_order_path(order.id)
+        expect(response).to have_http_status(:found)
+        expect(response).to redirect_to new_user_session_path
+      end
+    end
+  end
 end

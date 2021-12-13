@@ -37,6 +37,7 @@ Rails.application.routes.draw do
         get :chat
         get :confirm
         get :complete
+        get :report
       end
 
       resources :chats, only: %i[create]
