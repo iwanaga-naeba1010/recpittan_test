@@ -11,7 +11,7 @@ class Partners::ReportsController < Partners::ApplicationController
     @order.build_report(params_create)
 
     if @order.save
-      redirect_to partners_order_path, notice: 'レポートを投稿しました！'
+      redirect_to partners_order_path(@order.id), notice: 'レポートを投稿しました！'
     else
       render :new
     end
@@ -51,7 +51,6 @@ class Partners::ReportsController < Partners::ApplicationController
   end
 
   def complete
-
   end
 
   private
@@ -65,7 +64,7 @@ class Partners::ReportsController < Partners::ApplicationController
   def params_create
     params.require(:report).permit(
       :body, :expenses, :facility_count, :is_accepted,
-      :number_of_people, :transportation_expenses
+      :additional_number_of_people, :number_of_people, :transportation_expenses
     )
   end
 end
