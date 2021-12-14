@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_12_13_070742) do
+ActiveRecord::Schema.define(version: 2021_12_14_045411) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -62,6 +62,20 @@ ActiveRecord::Schema.define(version: 2021_12_13_070742) do
     t.text "body"
     t.text "signature"
     t.integer "kind"
+  end
+
+  create_table "evaluations", force: :cascade do |t|
+    t.bigint "report_id", null: false
+    t.integer "ingenuity"
+    t.integer "communication"
+    t.integer "smoothness"
+    t.integer "price"
+    t.integer "want_to_order_agein"
+    t.text "message"
+    t.text "other_message"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["report_id"], name: "index_evaluations_on_report_id"
   end
 
   create_table "order_memos", force: :cascade do |t|
@@ -144,7 +158,6 @@ ActiveRecord::Schema.define(version: 2021_12_13_070742) do
 
   create_table "reports", force: :cascade do |t|
     t.bigint "order_id", null: false
-    t.boolean "is_accepted"
     t.integer "facility_count"
     t.integer "number_of_people"
     t.integer "transportation_expenses"
@@ -153,6 +166,7 @@ ActiveRecord::Schema.define(version: 2021_12_13_070742) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "additional_number_of_people"
+    t.integer "status"
     t.index ["order_id"], name: "index_reports_on_order_id"
   end
 
@@ -191,6 +205,7 @@ ActiveRecord::Schema.define(version: 2021_12_13_070742) do
 
   add_foreign_key "chats", "orders", name: "chats_order_id_fkey"
   add_foreign_key "chats", "users", name: "chats_user_id_fkey"
+  add_foreign_key "evaluations", "reports"
   add_foreign_key "order_memos", "orders", name: "order_memos_order_id_fkey"
   add_foreign_key "orders", "recreations", name: "orders_recreation_id_fkey"
   add_foreign_key "orders", "users", name: "orders_user_id_fkey"

@@ -4,6 +4,12 @@ ja:
       # no/yesは文字で囲わないと正常に機能しないらしい
       "no": いいえ
       "yes": はい
+    evaluation_list: &evaluation_list
+      satisfied: 満足
+      somewhat_satisfied: やや満足
+      neither: どちらとも言えない
+      somewhat_dissatisfied: やや不満
+      dissatisfied: 不満
     banner:
       top: トップページ
     user:
@@ -33,6 +39,17 @@ ja:
         paid: 支払済
         canceled: キャンセル
         travled: トラブル(支払か請求有)
+    evaluation:
+      ingenuity:
+        *evaluation_list
+      communication:
+        *evaluation_list
+      smoothness:
+        *evaluation_list
+      price:
+        *evaluation_list
+      want_to_order_agein:
+        *evaluation_list
     plan:
       kind:
         free: フリー

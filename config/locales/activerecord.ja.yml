@@ -8,6 +8,8 @@ ja:
       recreation: レク
       recreation_image: レク画像
       order: 案件
+      report: レポート
+      evaluation: 評価
       email_template: テンプレート
       tag: タグ
       target: 利用者層
@@ -85,6 +87,23 @@ ja:
         date_and_time: 開催日時
         transportation_expenses: 交通費
         expenses: 諸経費
+      report:
+        additional_number_of_people: 追加人数
+        number_of_people: 参加人数
+        transportation_expenses: 交通費
+        expenses: 諸経費
+        facility_count: 施設数
+        is_accepted: 施設承諾
+        body: メッセージ
+      evaluation:
+        ingenuity: 工夫の満足度
+        communication: コミュニケーション力の満足度
+        smoothness: スムーズさの満足度
+        price: 料金の満足度
+        want_to_order_agein: もう一度開催したいと思うか
+        message: 感想
+        other_message: その他意見
+
       tag:
         name: タグ名
         kind: 種類

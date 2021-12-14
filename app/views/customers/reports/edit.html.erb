@@ -1,5 +1,4 @@
 <main class="customer">
-
   <div class="container pt-2">
     <nav aria-label="breadcrumb">
       <ol class="breadcrumb">
@@ -23,6 +22,7 @@
       </ol>
     </nav>
   </div>
+
   <article class="container py-1 px-0">
     <div class="row">
       <div class="col-md-4">
@@ -139,81 +139,61 @@
           </div>
           <!-- フォーム -->
           <div class="card-body">
-            <form id="report" action="{{catalogHomeUri}}/customer/order/report/{{orderId}}" class="order"
-                  method="POST">
-              <div class="mb-3">
-                <label class="form-label">1. 参加者に合わせた工夫の満足度を教えてください。</label>
-                <div>
-                  <select name="questionRate1" class="start-rating">
-                    <option value="" selected></option>
-                    <option value="1">満足</option>
-                    <option value="2">やや満足</option>
-                    <option value="3">どちらとも言えない</option>
-                    <option value="4">やや不満</option>
-                    <option value="5">不満</option>
-                  </select>
+
+            <%= simple_form_for @report, url: customers_report_path(@report), input: { class: 'order' } do |f| %>
+              <!--            <form id="report" action="{{catalogHomeUri}}/customer/order/report/{{orderId}}" class="order" method="POST">-->
+
+              <%= f.fields_for :evaluation do |ff|  %>
+                <div class="mb-3">
+                  <label class="form-label">1. 参加者に合わせた工夫の満足度を教えてください。</label>
+                  <div>
+                    <%= ff.input :ingenuity, as: :select, collection: Evaluation.ingenuity.values.map { |i| [i.text, i] }, input_html: { class: 'start-rating w-100' } %>
+                  </div>
                 </div>
-              </div>
-              <div class="mb-3">
-                <label class="form-label">2. パートナーのコミュニケーション力の満足度を教えてください。</label>
-                <div>
-                  <select name="questionRate1" class="start-rating">
-                    <option value="" selected></option>
-                    <option value="1">満足</option>
-                    <option value="2">やや満足</option>
-                    <option value="3">どちらとも言えない</option>
-                    <option value="4">やや不満</option>
-                    <option value="5">不満</option>
-                  </select>
+                <div class="mb-3">
+                  <label class="form-label">2. パートナーのコミュニケーション力の満足度を教えてください。</label>
+                  <div>
+                    <%= ff.input :communication, as: :select, collection: Evaluation.communication.values.map { |i| [i.text, i] }, input_html: { class: 'start-rating w-100' } %>
+                  </div>
                 </div>
-              </div>
-              <div class="mb-3">
-                <label class="form-label">3. 開催までのやりとりのスムーズさの満足度を教えてください。</label>
-                <div>
-                  <select name="questionRate1" class="start-rating">
-                    <option value="" selected></option>
-                    <option value="1">満足</option>
-                    <option value="2">やや満足</option>
-                    <option value="3">どちらとも言えない</option>
-                    <option value="4">やや不満</option>
-                    <option value="5">不満</option>
-                  </select>
+
+                <div class="mb-3">
+                  <label class="form-label">3. 開催までのやりとりのスムーズさの満足度を教えてください。</label>
+                  <div>
+                    <%= ff.input :smoothness, as: :select, collection: Evaluation.smoothness.values.map { |i| [i.text, i] }, input_html: { class: 'start-rating w-100' } %>
+                  </div>
                 </div>
-              </div>
-              <div class="mb-3">
-                <label class="form-label">4. 料金納得度を教えてください。</label>
-                <div>
-                  <select name="questionRate1" class="start-rating">
-                    <option value="" selected></option>
-                    <option value="1">満足</option>
-                    <option value="2">やや満足</option>
-                    <option value="3">どちらとも言えない</option>
-                    <option value="4">やや不満</option>
-                    <option value="5">不満</option>
-                  </select>
+
+                <div class="mb-3">
+                  <label class="form-label">4. 料金納得度を教えてください。</label>
+                  <div>
+                    <%= ff.input :price, as: :select, collection: Evaluation.price.values.map { |i| [i.text, i] }, input_html: { class: 'start-rating w-100' } %>
+
+                  </div>
                 </div>
-              </div>
-              <div class="mb-3">
-                <label class="form-label">5. もう1度開催したいと思いますか？</label>
-                <div>
-                  <select name="questionRate1" class="start-rating">
-                    <option value="" selected></option>
-                    <option value="1">満足</option>
-                    <option value="2">やや満足</option>
-                    <option value="3">どちらとも言えない</option>
-                    <option value="4">やや不満</option>
-                    <option value="5">不満</option>
-                  </select>
+
+                <div class="mb-3">
+                  <label class="form-label">5. もう1度開催したいと思いますか？</label>
+                  <div>
+                    <%= ff.input :want_to_order_agein, as: :select, collection: Evaluation.want_to_order_agein.values.map { |i| [i.text, i] }, input_html: { class: 'start-rating w-100' } %>
+                  </div>
                 </div>
-              </div>
-              <div class="">
-                <label class="form-label">6. 感想をご記入ください。</label>
-                <textarea name="questionText1" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-              </div>
-              <div class="pt-3">
-                <label class="form-label">7. その他ご意見をご記入ください。※Webサイトへは公開されません</label>
-                <textarea name="questionText2" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-              </div>
+
+                <div class="">
+                  <label class="form-label">6. 感想をご記入ください。</label>
+                  <%= ff.input :message, label: false, input_html: { class: 'form-control', rows: 3 } %>
+<!--                  <textarea name="questionText1" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>-->
+                </div>
+                <div class="pt-3">
+                  <label class="form-label">7. その他ご意見をご記入ください。※Webサイトへは公開されません</label>
+                  <%= ff.input :other_message, label: false, input_html: { class: 'form-control', rows: 3 } %>
+                </div>
+              <% end %>
+
+
+              <!-- TODO: ここにd-noneでbutton作る -->
+
+
               <div class="row pt-3">
                 <div class="col-auto">
                   <input type="hidden" name="_csrf" value="{{csrfToken}}">
@@ -226,13 +206,15 @@
                   <input type="hidden" name="action" value="">
                 </div>
               </div>
-            </form>
+              <!--            </form>-->
+            <% end %>
           </div>
         </div>
       </div>
     </div>
   </article>
 </main>
+
 <div class="modal fade" id="approveModal" tabindex="-1" aria-labelledby="approveModalLabel" aria-hidden="true">
   <div class="modal-dialog ">
     <div class="modal-content">
@@ -245,16 +227,10 @@
 
         <div class="row justify-content-end pt-3">
           <div class="col-auto">
-            <button class="btn btn-cancel font-14 py-2 px-4 font-weight-bold" data-bs-dismiss="modal"
-                    type="button">キャンセル
-            </button>
+            <button class="btn btn-cancel font-14 py-2 px-4 font-weight-bold" data-bs-dismiss="modal" type="button">キャンセル</button>
           </div>
           <div class="col-auto">
-
-            <button class="btn btn-cprimary send font-14 py-2 px-4 font-weight-bold  text-white"
-                    data-action="approve" type="button">承認する
-            </button>
-
+            <button class="btn btn-cprimary send font-14 py-2 px-4 font-weight-bold  text-white" data-action="approve" type="button">承認する</button>
           </div>
         </div>
       </div>
@@ -270,73 +246,18 @@
       </div>
       <div class="modal-body p-2">
         <p>内容が間違っている場合、お断りをお願い致します。訂正内容をパートナーにチャットで伝えてください。正しい内容として、再度終了報告を提出致します。
-          ご不明な点がありましたらよくある質問またはお問い合わせをお願いします。</p>
+          ご不明な点がありましたらよくある質問またはお問い合わせをお願いします。
+        </p>
 
         <div class="row justify-content-end pt-3">
           <div class="col-auto">
-            <button class="btn btn-cancel font-14 py-2 px-4 font-weight-bold" data-bs-dismiss="modal"
-                    type="button">キャンセル
-            </button>
+            <button class="btn btn-cancel font-14 py-2 px-4 font-weight-bold" data-bs-dismiss="modal" type="button">キャンセル</button>
           </div>
           <div class="col-auto">
-
-            <button class="btn btn-cprimary send font-14 py-2 px-4 font-weight-bold  text-white"
-                    data-action="reject" type="button">お断りする
-            </button>
-
+            <button class="btn btn-cprimary send font-14 py-2 px-4 font-weight-bold  text-white" data-action="reject" type="button">お断りする</button>
           </div>
         </div>
       </div>
     </div>
   </div>
 </div>
-<!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>-->
-<!--<link href="https://cdn.jsdelivr.net/gh/kartik-v/bootstrap-star-rating@4.1.2/css/star-rating.min.css" media="all"-->
-<!--      rel="stylesheet" type="text/css"/>-->
-<!--<link href="https://cdn.jsdelivr.net/gh/kartik-v/bootstrap-star-rating@4.1.2/themes/krajee-svg/theme.css" media="all"-->
-<!--      rel="stylesheet" type="text/css"/>-->
-<!--<script src="https://cdn.jsdelivr.net/gh/kartik-v/bootstrap-star-rating@4.1.2/js/star-rating.min.js"-->
-<!--        type="text/javascript"></script>-->
-
-<!--<script>-->
-<!--  jQuery(document).ready(function () {-->
-<!--    function chsticky() {-->
-<!--      if (document.body.clientWidth >= 769) {-->
-<!--        document.querySelector('#customer-header').style.top = document.querySelector('header').clientHeight + 'px';-->
-<!--      } else {-->
-<!--        document.querySelector('#customer-header').style.top = 'auto';-->
-<!--      }-->
-<!--    }-->
-
-<!--    chsticky();-->
-<!--    jQuery(window).resize(function () {-->
-<!--      chsticky();-->
-<!--    });-->
-<!--    //        $('.start-rating').rating();-->
-<!--    $('.start-rating').rating({-->
-<!--      theme: 'krajee-svg',-->
-<!--      starCaptions: (val) => val,-->
-<!--      clearButton: '',-->
-<!--      clearCaption: '未入力',-->
-<!--      step: 1,-->
-<!--      starCaptions: {-->
-<!--        1: '不満',-->
-<!--        2: 'やや不満',-->
-<!--        3: 'どちらとも言えない',-->
-<!--        4: 'やや満足',-->
-<!--        5: '満足'-->
-<!--      }-->
-<!--    })-->
-<!--    // $('select').hide()-->
-<!--    $('.send').click(function () {-->
-<!--      var action = $(this).data('action');-->
-<!--      console.log('action', action);-->
-<!--      $('input[name="action"]').val(action);-->
-<!--      $('#report').submit();-->
-<!--    })-->
-<!--    // $('#questionThreeText').on('keyup', function () {-->
-<!--    //     var length = $(this).val().length-->
-<!--    //     $('#char-num').text(length)-->
-<!--    // })-->
-<!--  });-->
-<!--</script>-->

@@ -7,8 +7,8 @@
 #  body                        :text
 #  expenses                    :integer
 #  facility_count              :integer
-#  is_accepted                 :boolean
 #  number_of_people            :integer
+#  status                      :integer
 #  transportation_expenses     :integer
 #  created_at                  :datetime         not null
 #  updated_at                  :datetime         not null
@@ -23,5 +23,10 @@
 #  fk_rails_...  (order_id => orders.id)
 #
 class Report < ApplicationRecord
+  extend Enumerize
   belongs_to :order
+  has_one :evaluation, dependent: :destroy
+  accepts_nested_attributes_for :evaluation, allow_destroy: true
+
+  enumerize :status, in: { in_progress: 0, denied: 1, accepted: 2 }, default: 0
 end

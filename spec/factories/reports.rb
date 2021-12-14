@@ -7,8 +7,8 @@
 #  body                        :text
 #  expenses                    :integer
 #  facility_count              :integer
-#  is_accepted                 :boolean
 #  number_of_people            :integer
+#  status                      :integer
 #  transportation_expenses     :integer
 #  created_at                  :datetime         not null
 #  updated_at                  :datetime         not null
@@ -25,7 +25,7 @@
 FactoryBot.define do
   factory :report do
     order
-    is_accepted { false }
+    status { :in_progress }
     facility_count { 1 }
     number_of_people { 1 }
     transportation_expenses { 1 }
