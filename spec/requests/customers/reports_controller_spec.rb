@@ -34,6 +34,7 @@ RSpec.describe Customers::ReportsController, type: :request do
   describe 'PUT /update' do
     context 'when valid parameters' do
       let(:attr) { attributes_for :report, order_id: order.id }
+      let(:evaluation_attr) { attributes_for :evaluation, report_id: report.id }
 
       it 'returns 302 status' do
         put customers_report_path(report.id), params: { report: attr }
@@ -46,6 +47,21 @@ RSpec.describe Customers::ReportsController, type: :request do
         }.to change { Report.find(report.id).status }.from(report.status).to('denied')
       end
 
+      it 'creates an evaluation' do
+        expect {
+          put customers_report_path(report.id), params: { report: { evaluation_attributes: evaluation_attr } }
+        }.to change(Evaluation, :count).by(+1)
+      end
+
+      # TODO: 理想な全部やりたいけど、時間の都合上一旦むし
+      # it 'update evaluation ingenuity' do
+      #   evaluation_attr[:ingenuity] = :neither
+      #   expect {
+      #     put customers_report_path(report.id), params: { report: { evaluation_attributes: evaluation_attr } }
+      #   }.to change {
+      #     Report.find(report.id).evaluation.ingenuity
+      #   }.from(nil).to('neither')
+      # end
     end
   end
 end

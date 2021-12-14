@@ -24,7 +24,7 @@
 #
 FactoryBot.define do
   factory :evaluation do
-    report { nil }
+    report
     ingenuity { 1 }
     communication { 1 }
     smoothness { 1 }
