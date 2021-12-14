@@ -156,14 +156,12 @@
                     <%= ff.input :communication, as: :select, collection: Evaluation.communication.values.map { |i| [i.text, i] }, input_html: { class: 'start-rating w-100' } %>
                   </div>
                 </div>
-
                 <div class="mb-3">
                   <label class="form-label">3. 開催までのやりとりのスムーズさの満足度を教えてください。</label>
                   <div>
                     <%= ff.input :smoothness, as: :select, collection: Evaluation.smoothness.values.map { |i| [i.text, i] }, input_html: { class: 'start-rating w-100' } %>
                   </div>
                 </div>
-
                 <div class="mb-3">
                   <label class="form-label">4. 料金納得度を教えてください。</label>
                   <div>
@@ -171,25 +169,21 @@
 
                   </div>
                 </div>
-
                 <div class="mb-3">
                   <label class="form-label">5. もう1度開催したいと思いますか？</label>
                   <div>
                     <%= ff.input :want_to_order_agein, as: :select, collection: Evaluation.want_to_order_agein.values.map { |i| [i.text, i] }, input_html: { class: 'start-rating w-100' } %>
                   </div>
                 </div>
-
                 <div class="">
                   <label class="form-label">6. 感想をご記入ください。</label>
                   <%= ff.input :message, label: false, input_html: { class: 'form-control', rows: 3 } %>
-<!--                  <textarea name="questionText1" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>-->
                 </div>
                 <div class="pt-3">
                   <label class="form-label">7. その他ご意見をご記入ください。※Webサイトへは公開されません</label>
                   <%= ff.input :other_message, label: false, input_html: { class: 'form-control', rows: 3 } %>
                 </div>
               <% end %>
-
 
               <!-- TODO: ここにd-noneでbutton作る -->
 
@@ -206,6 +200,10 @@
                   <input type="hidden" name="action" value="">
                 </div>
               </div>
+              <div class="d-none">
+                <%= f.submit '送信' %>
+              </div>
+
               <!--            </form>-->
             <% end %>
           </div>
@@ -230,7 +228,7 @@
             <button class="btn btn-cancel font-14 py-2 px-4 font-weight-bold" data-bs-dismiss="modal" type="button">キャンセル</button>
           </div>
           <div class="col-auto">
-            <button class="btn btn-cprimary send font-14 py-2 px-4 font-weight-bold  text-white" data-action="approve" type="button">承認する</button>
+            <button id="approveModalSubmit" class="btn btn-cprimary send font-14 py-2 px-4 font-weight-bold  text-white" data-action="approve" type="button">承認する</button>
           </div>
         </div>
       </div>
@@ -254,7 +252,7 @@
             <button class="btn btn-cancel font-14 py-2 px-4 font-weight-bold" data-bs-dismiss="modal" type="button">キャンセル</button>
           </div>
           <div class="col-auto">
-            <button class="btn btn-cprimary send font-14 py-2 px-4 font-weight-bold  text-white" data-action="reject" type="button">お断りする</button>
+            <button id="rejectModalSubmit" class="btn btn-cprimary send font-14 py-2 px-4 font-weight-bold  text-white" data-action="reject" type="button">お断りする</button>
           </div>
         </div>
       </div>

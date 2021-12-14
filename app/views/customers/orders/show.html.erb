@@ -122,7 +122,7 @@
                   <div class="action-header pt-3">終了報告</div>
                   <div class="py-3" style="min-height: 5rem;">レクが開催後、パートナーから終了報告の承認依頼が届きます。内容を確認して承認してください。
                   </div>
-                  <% if @order.report.is_accepted? %>
+                  <% if @order.report.status.accepted? %>
                     <span class="btn btn-cprimary font-14 py-2 px-4 font-weight-bold text-white disabled ">終了報告を確認済み</span>
                   <% else %>
                     <%= link_to '終了報告を確認', edit_customers_report_path(@order.report&.id), class: 'btn btn-cprimary font-14 py-2 px-4 font-weight-bold text-white' %>

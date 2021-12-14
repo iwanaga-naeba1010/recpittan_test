@@ -8,8 +8,13 @@ class Customers::ReportsController < Customers::ApplicationController
   end
 
   def update
-    if @order.update(params_create)
-      redirect_to customers_order_path(@order.id), notice: '終了報告を更新しました'
+    order = @report.order
+    order.report.status = params_create[:status]
+    order.report.build_evaluation(params_create[:evaluation_attributes])
+    if order.report.update(params_create)
+      # NOTE: statusを更新する必要は一切ないが、更新しないとstatusが動的に変更しないためHACK的な感じで実装
+      order.update(status: :finished)
+      redirect_to customers_order_path(order.id), notice: '終了報告を更新しました'
     else
       render :edit
     end
@@ -25,9 +30,8 @@ class Customers::ReportsController < Customers::ApplicationController
 
   def params_create
     params.require(:report).permit(
-      :body, :expenses, :facility_count, :is_accepted,
-      :additional_number_of_people, :number_of_people, :transportation_expenses,
-      evaluation_images_attributes: %i[
+      :status,
+      evaluation_attributes: %i[
         id report_id ingenuity communication smoothness want_to_order_agein
         message other_message price _destroy
       ]
