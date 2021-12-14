@@ -9,9 +9,6 @@ RSpec.describe ChatStartMailer, type: :mailer do
   let(:customer) { create :user, :with_custoemr }
   let(:order) { create :order, recreation_id: partner.recreations.first.id, user_id: customer.id }
 
-  # let(:consultant_user) { create(:consultant_user, :with_consultant_company, :with_invite_company) }
-  # let(:user) { consultant_user.consultant_company.companies.first.user }
-
   describe 'chat_start' do
     let(:mail) { ChatStartMailer.notify(recreation, order) }
 
