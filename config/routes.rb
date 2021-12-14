@@ -24,6 +24,7 @@ Rails.application.routes.draw do
         end
 
         resources :chats, only: %i[create]
+        resources :reports, only: %i[edit update]
       end
     end
   end
@@ -37,7 +38,6 @@ Rails.application.routes.draw do
         get :chat
         get :confirm
         get :complete
-        get :report
       end
 
       resources :chats, only: %i[create]

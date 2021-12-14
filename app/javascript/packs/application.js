@@ -24,6 +24,7 @@ import '../events/order_form';
 import '../events/recreations';
 import '../events/edit_user_profile_form';
 import '../events/toggle_event_for_sidebar';
+import '../events/customer_report_form';
 
 import "@fortawesome/fontawesome-free/js/all"
 require.context('../images', true)

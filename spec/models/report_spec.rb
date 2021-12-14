@@ -7,8 +7,8 @@
 #  body                        :text
 #  expenses                    :integer
 #  facility_count              :integer
-#  is_accepted                 :boolean
 #  number_of_people            :integer
+#  status                      :integer
 #  transportation_expenses     :integer
 #  created_at                  :datetime         not null
 #  updated_at                  :datetime         not null

@@ -1,0 +1,261 @@
+<main class="customer">
+  <div class="container pt-2">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+          <%= link_to 'トップ', root_path %>
+        </li>
+        <li class="breadcrumb-item">
+          <%= link_to '一覧', customers_recreations_path %>
+        </li>
+        <% category_tag = @report.order.recreation.tags.categories&.first %>
+        <% if category_tag.present? %>
+          <li class="breadcrumb-item">
+            <!-- TODO: Tag.categories.firstを表示 + ransack入れる -->
+            <%= link_to category_tag.name, customers_recreations_path(q: { tags_id_eq: category_tag.id }) %>
+          </li>
+        <% end %>
+        <li class="breadcrumb-item active">
+          <!-- TODO: Tag.categories.firstを表示 + ransack入れる -->
+          <span><%= @report.order.recreation.title %></span>
+        </li>
+      </ol>
+    </nav>
+  </div>
+
+  <article class="container py-1 px-0">
+    <div class="row">
+      <div class="col-md-4">
+        <%= link_to customers_order_path(@report.order.id), class: 'clink' do %>
+          <i class="material-icons ">navigate_before</i> 戻る
+        <% end %>
+      </div>
+    </div>
+    <div class="row justify-content-center">
+      <div class="col-8 mb-5">
+        <div class="card order-detail">
+          <div class="card-header bg-white">
+            依頼内容
+          </div>
+          <div class="card-body">
+            <div class="row py-2">
+              <div class="col-lg-3 col-4 label">案件番号</div>
+              <div class="col-auto"><%= @report.order.id %></div>
+            </div>
+            <div class="row py-2">
+              <div class="col-auto">
+                請求書を発行するために、終了報告の確認をお願い致します。
+                内容ご確認の上、承認をお願い致します。確認いただいた内容の請求書を翌月５日までに発行致します。
+
+                介護レクイベントプラットフォーム えぶりプラス をご利用いただきありがとうございます。
+                今後も弊社では利用者さんがより楽しく選択肢のある生活をサポートできるサービス提供を目指して参ります。サービス向上のために、アンケートのご協力をお願い致します。
+              </div>
+            </div>
+            <div class="container-fluid mt-2 action">
+              <div class="row">
+                <div class="col-lg-3 col-4 label py-2">追加施設数</div>
+                <div class="col-lg-9 col-8 py-2">{{numeral report.additionalCount}}施設</div>
+
+                <div class="col-lg-3 col-4 label py-2">参加人数</div>
+                <div class="col-lg-9 col-8 py-2 "><%= @report.number_of_people %>人</div>
+
+                <div class="col-lg-3 col-4 label py-2">パートナーからのメッセージ</div>
+                <div class="col-lg-9 col-8 py-2">
+                  <pre><%= @report.body %></pre>
+                </div>
+              </div>
+            </div>
+            <div class="container-fluid mt-4 action">
+              <div class="row">
+                <div class="col-12 label py-2">レク費用</div>
+              </div>
+              <div class="row justify-content-between border-bottom-dotted py-2 ">
+
+                <div class="col-lg-3 col-4 label py-2">開催費</div>
+                <div class="col-lg-9 col-8 py-2 text-end ">&yen;<%= number_to_currency @report.order.recreation.regular_price %></div>
+              </div>
+              <div class="row justify-content-between  py-2">
+                <div class="col-auto">材料費 / <%= @report.number_of_people %>人<br><span
+                  class="text-muted font-12 color-ba08">※材料費は人数分の費用が発生します</span></div>
+                <div class="col-auto">&yen;<%= number_to_currency @report.order.recreation.regular_material_price %></div>
+              </div>
+
+              <% if @report.order.recreation.is_online %>
+                <div class="row justify-content-between border-top-dotted py-2">
+                  <div class="col-auto align-self-center">
+                    <span id="facilityCount">追加施設費 / {{total.additionalCount}}施設</span>
+                  </div>
+                  <div class="col-auto" id="additionalPrice">{{total.facilityAdditionalPrice}}
+                  </div>
+                  <div class="col-12">
+                    <span class="text-muted font-12 color-ba08">
+                      ※1施設追加する事に&yen;{{numeraltotal.facilityAdditionalPrice}}が発生します
+                    </span>
+                  </div>
+                </div>
+              <% else %>
+                <div class="row justify-content-between border-bottom-dotted py-2">
+                  <div class="col-auto">交通費</div>
+                  <div class="col-auto">&yen;<%= number_to_currency @report.transportation_expenses %></div>
+                </div>
+              <% end %>
+
+              <div class="row justify-content-between border-bottom-dotted py-2">
+                <div class="col-auto">諸経費</div>
+                <div class="col-auto">&yen;<%= number_to_currency @report.expenses %></div>
+              </div>
+
+              <div class="row justify-content-between border-top py-3">
+                <div class="col-auto">合計</div>
+                <div class="col-auto">&yen;<%= number_to_currency @report.order.total_price %></div>
+              </div>
+            </div>
+
+            <div class="row border-top mt-5 pt-3">
+              <div class="col-3 label">レク</div>
+              <div class="col-9">
+                <div class="row align-items-center mt-2">
+                  <div class="col-md-4">
+                    <picture loading="lazy">
+                      <%= image_tag @report.order.recreation.recreation_images&.first&.image.to_s, class: 'img-fluid', loading: 'lazy' %>
+                    </picture>
+                  </div>
+                  <div class="col-md-8 recreation">
+                    <h1 class="font-16 font-weight-bold line-height-140"><%= @report.order.recreation.title %></h1>
+                    <div class="row category-tags">
+                      <!--                      <div class="col-auto px-1">-->
+                      <!--                        {{{catalogCardCategoryLink recreation.baseCode}}}-->
+                      <!--                      </div>-->
+                      <div class="col-auto px-1">
+                        <%= tags_to_html(@report.order.recreation.tags, false) %>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-3 label pt-3">開催日時</div>
+              <div class="col-9 pt-3"><%= dotted_datetime @report.order.date_and_time %></div>
+            </div>
+          </div>
+          <!-- フォーム -->
+          <div class="card-body">
+
+            <%= simple_form_for @report, url: customers_report_path(@report), input: { class: 'order' } do |f| %>
+              <!--            <form id="report" action="{{catalogHomeUri}}/customer/order/report/{{orderId}}" class="order" method="POST">-->
+
+              <%= f.fields_for :evaluation do |ff|  %>
+                <div class="mb-3">
+                  <label class="form-label">1. 参加者に合わせた工夫の満足度を教えてください。</label>
+                  <div>
+                    <%= ff.input :ingenuity, as: :select, collection: Evaluation.ingenuity.values.map { |i| [i.text, i] }, input_html: { class: 'start-rating w-100' } %>
+                  </div>
+                </div>
+                <div class="mb-3">
+                  <label class="form-label">2. パートナーのコミュニケーション力の満足度を教えてください。</label>
+                  <div>
+                    <%= ff.input :communication, as: :select, collection: Evaluation.communication.values.map { |i| [i.text, i] }, input_html: { class: 'start-rating w-100' } %>
+                  </div>
+                </div>
+                <div class="mb-3">
+                  <label class="form-label">3. 開催までのやりとりのスムーズさの満足度を教えてください。</label>
+                  <div>
+                    <%= ff.input :smoothness, as: :select, collection: Evaluation.smoothness.values.map { |i| [i.text, i] }, input_html: { class: 'start-rating w-100' } %>
+                  </div>
+                </div>
+                <div class="mb-3">
+                  <label class="form-label">4. 料金納得度を教えてください。</label>
+                  <div>
+                    <%= ff.input :price, as: :select, collection: Evaluation.price.values.map { |i| [i.text, i] }, input_html: { class: 'start-rating w-100' } %>
+
+                  </div>
+                </div>
+                <div class="mb-3">
+                  <label class="form-label">5. もう1度開催したいと思いますか？</label>
+                  <div>
+                    <%= ff.input :want_to_order_agein, as: :select, collection: Evaluation.want_to_order_agein.values.map { |i| [i.text, i] }, input_html: { class: 'start-rating w-100' } %>
+                  </div>
+                </div>
+                <div class="">
+                  <label class="form-label">6. 感想をご記入ください。</label>
+                  <%= ff.input :message, label: false, input_html: { class: 'form-control', rows: 3 } %>
+                </div>
+                <div class="pt-3">
+                  <label class="form-label">7. その他ご意見をご記入ください。※Webサイトへは公開されません</label>
+                  <%= ff.input :other_message, label: false, input_html: { class: 'form-control', rows: 3 } %>
+                </div>
+              <% end %>
+
+              <!-- TODO: ここにd-noneでbutton作る -->
+
+
+              <div class="row pt-3">
+                <div class="col-auto">
+                  <input type="hidden" name="_csrf" value="{{csrfToken}}">
+                  <button class="btn btn-cprimary font-14 py-2 px-4 font-weight-bold reject text-white" type="button" data-bs-toggle="modal" data-bs-target="#rejectModal">お断りする
+                  </button>
+                </div>
+                <div class="col-auto">
+                  <button class="btn btn-cprimary font-14 py-2 px-4 font-weight-bold text-white" type="button" data-bs-toggle="modal" data-bs-target="#approveModal">承認する
+                  </button>
+                  <input type="hidden" name="action" value="">
+                </div>
+              </div>
+              <div class="d-none">
+                <%= f.submit '送信' %>
+              </div>
+
+              <!--            </form>-->
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </article>
+</main>
+
+<div class="modal fade" id="approveModal" tabindex="-1" aria-labelledby="approveModalLabel" aria-hidden="true">
+  <div class="modal-dialog ">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="approveModalLabel">終了報告を承認</h5>
+        <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
+      </div>
+      <div class="modal-body p-2">
+        <p>一度承認すると変更はできません。材料費、追加事業所数など、ご確認の上、承認をお願い致します。</p>
+
+        <div class="row justify-content-end pt-3">
+          <div class="col-auto">
+            <button class="btn btn-cancel font-14 py-2 px-4 font-weight-bold" data-bs-dismiss="modal" type="button">キャンセル</button>
+          </div>
+          <div class="col-auto">
+            <button id="approveModalSubmit" class="btn btn-cprimary send font-14 py-2 px-4 font-weight-bold  text-white" data-action="approve" type="button">承認する</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="rejectModal" tabindex="-1" aria-labelledby="rejectModalLabel" aria-hidden="true">
+  <div class="modal-dialog ">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="rejectModalLabel">終了報告の承認をお断り</h5>
+        <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
+      </div>
+      <div class="modal-body p-2">
+        <p>内容が間違っている場合、お断りをお願い致します。訂正内容をパートナーにチャットで伝えてください。正しい内容として、再度終了報告を提出致します。
+          ご不明な点がありましたらよくある質問またはお問い合わせをお願いします。
+        </p>
+
+        <div class="row justify-content-end pt-3">
+          <div class="col-auto">
+            <button class="btn btn-cancel font-14 py-2 px-4 font-weight-bold" data-bs-dismiss="modal" type="button">キャンセル</button>
+          </div>
+          <div class="col-auto">
+            <button id="rejectModalSubmit" class="btn btn-cprimary send font-14 py-2 px-4 font-weight-bold  text-white" data-action="reject" type="button">お断りする</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

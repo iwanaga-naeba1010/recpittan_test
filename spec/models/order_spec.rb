@@ -88,7 +88,7 @@ RSpec.describe Order, type: :model do
       it 'changes to finished after finished recreation and partner completed report and customer accepted' do
         current_time = Time.current
         # NOTE: reportを事前に作成しないと発火しないので注意が必要
-        order.create_report(attributes_for(:report, is_accepted: true))
+        order.create_report(attributes_for(:report, status: :accepted))
         order.update(date_and_time: current_time.ago(1.days), is_accepted: true)
         expect(order.status).to eq :finished
       end
