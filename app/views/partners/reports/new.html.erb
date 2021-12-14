@@ -11,12 +11,11 @@
 </div>
 
 <div class="p-3">
-
   <div class="p-4 text-black">
     <p>お疲れさまでした。<br>終了報告をご記入ください。内容は施設が確認をします。送信した終了報告を内容を受け取り額が翌々月末に振り込まれます。間違っている場合はチャットにて訂正依頼が届きます。</p>
   </div>
 
   <div class="body bg-white border p-3 mb-3">
-    <%= render 'partners/reports/form', report: @order, url: partners_order_reports_path(@order.id) %>
+    <%= render 'partners/reports/form', report: @report, url: partners_order_reports_path(@order.id) %>
   </div>
 </div>
