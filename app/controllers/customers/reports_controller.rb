@@ -13,7 +13,7 @@ class Customers::ReportsController < Customers::ApplicationController
     order.report.build_evaluation(params_create[:evaluation_attributes])
     if order.report.update(params_create)
       # NOTE: statusを更新する必要は一切ないが、更新しないとstatusが動的に変更しないためHACK的な感じで実装
-      order.update(status: :finished)
+      order.update(status: :final_report_admits_not)
       redirect_to customers_order_path(order.id), notice: '終了報告を更新しました'
     else
       render :edit

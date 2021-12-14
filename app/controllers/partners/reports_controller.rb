@@ -18,26 +18,16 @@ class Partners::ReportsController < Partners::ApplicationController
   end
 
   def edit
-    @report = @order.report.find(params[:id])
+    @report = @order.report
   end
 
-  # def update
-  #   @report = @order.report.find(params[:id])
-  # end
-
   def update
-    # TODO: 承認した場合はis_accepted = trueする
-    # TODO: 拒否した場合は、date_and_timeをnilにする
-    redirect_path = partners_order_path(@order)
-    message = '更新しました！'
-    if params[:redirect_path]
-      redirect_path = params[:redirect_path]
+    if @order.report.update(params_create)
+      @order.update(status: :final_report_admits_not)
+      redirect_to partners_order_path(@order.id), notice: 'レポートを更新しました！'
+    else
+      render :edit
     end
-    if params[:message]
-      message = params[:message]
-    end
-    @order.update(params_create)
-    redirect_to redirect_path, notice: message
   end
 
   def confirm
@@ -63,7 +53,7 @@ class Partners::ReportsController < Partners::ApplicationController
 
   def params_create
     params.require(:report).permit(
-      :body, :expenses, :facility_count, :is_accepted,
+      :body, :expenses, :facility_count,
       :additional_number_of_people, :number_of_people, :transportation_expenses
     )
   end
