@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class CustomerOrderDenyMailer < ApplicationMailer
+class OrderDenyMailer < ApplicationMailer
   def notify(order, user)
     template = EmailTemplate.find_by(kind: 7)
     @recreation = order.recreation

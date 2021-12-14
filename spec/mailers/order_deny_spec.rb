@@ -2,14 +2,14 @@
 
 require 'rails_helper'
 
-RSpec.describe CustomerOrderAcceptMailer, type: :mailer do
-  let!(:template) { create :email_template, kind: 6 }
+RSpec.describe OrderDenyMailer, type: :mailer do
+  let!(:template) { create :email_template, kind: 7 }
   let(:partner) { create :user, :with_recreations }
   let(:customer) { create :user, :with_custoemr }
   let(:order) { create :order, recreation_id: partner.recreations.first.id, user_id: customer.id }
 
   describe 'order_accept' do
-    let(:mail) { CustomerOrderAcceptMailer.notify(order, customer) }
+    let(:mail) { OrderDenyMailer.notify(order, customer) }
 
     it 'renders the subject' do
       expect(mail.subject).to eq(template.title)
