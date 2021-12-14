@@ -30,4 +30,22 @@ RSpec.describe Customers::ReportsController, type: :request do
       end
     end
   end
+
+  describe 'PUT /update' do
+    context 'when valid parameters' do
+      let(:attr) { attributes_for :report, order_id: order.id }
+
+      it 'returns 302 status' do
+        put customers_report_path(report.id), params: { report: attr }
+        expect(response).to have_http_status(:found)
+      end
+
+      it 'update status' do
+        expect {
+          put customers_report_path(report.id), params: { report: { status: :denied } }
+        }.to change { Report.find(report.id).status }.from(report.status).to('denied')
+      end
+
+    end
+  end
 end
