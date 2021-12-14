@@ -141,81 +141,87 @@
           <div class="card-body">
             <form id="report" action="{{catalogHomeUri}}/customer/order/report/{{orderId}}" class="order"
                   method="POST">
-              <div class="">
+              <div class="mb-3">
                 <label class="form-label">1. 参加者に合わせた工夫の満足度を教えてください。</label>
-                <select name="questionRate1" class="start-rating">
-                  <option value="" selected></option>
-                  <option value="1">★★★★★満足</option>
-                  <option value="2">★★★★やや満足</option>
-                  <option value="3">★★★どちらとも言えない</option>
-                  <option value="4">★★やや不満</option>
-                  <option value="5">★不満</option>
-                </select>
+                <div>
+                  <select name="questionRate1" class="start-rating">
+                    <option value="" selected></option>
+                    <option value="1">満足</option>
+                    <option value="2">やや満足</option>
+                    <option value="3">どちらとも言えない</option>
+                    <option value="4">やや不満</option>
+                    <option value="5">不満</option>
+                  </select>
+                </div>
               </div>
-              <div class="">
+              <div class="mb-3">
                 <label class="form-label">2. パートナーのコミュニケーション力の満足度を教えてください。</label>
-                <select name="questionRate2" class="start-rating">
-                  <option value="" selected></option>
-                  <option value="1">★★★★★満足</option>
-                  <option value="2">★★★★やや満足</option>
-                  <option value="3">★★★どちらとも言えない</option>
-                  <option value="4">★★やや不満</option>
-                  <option value="5">★不満</option>
-                </select>
+                <div>
+                  <select name="questionRate1" class="start-rating">
+                    <option value="" selected></option>
+                    <option value="1">満足</option>
+                    <option value="2">やや満足</option>
+                    <option value="3">どちらとも言えない</option>
+                    <option value="4">やや不満</option>
+                    <option value="5">不満</option>
+                  </select>
+                </div>
               </div>
-              <div class="">
+              <div class="mb-3">
                 <label class="form-label">3. 開催までのやりとりのスムーズさの満足度を教えてください。</label>
-                <select name="questionRate3" class="start-rating">
-                  <option value="" selected></option>
-                  <option value="1">★★★★★満足</option>
-                  <option value="2">★★★★やや満足</option>
-                  <option value="3">★★★どちらとも言えない</option>
-                  <option value="4">★★やや不満</option>
-                  <option value="5">★不満</option>
-                </select>
+                <div>
+                  <select name="questionRate1" class="start-rating">
+                    <option value="" selected></option>
+                    <option value="1">満足</option>
+                    <option value="2">やや満足</option>
+                    <option value="3">どちらとも言えない</option>
+                    <option value="4">やや不満</option>
+                    <option value="5">不満</option>
+                  </select>
+                </div>
               </div>
-              <div class="">
+              <div class="mb-3">
                 <label class="form-label">4. 料金納得度を教えてください。</label>
-                <select name="questionRate4" class="start-rating">
-                  <option value="" selected></option>
-                  <option value="1">★★★★★満足</option>
-                  <option value="2">★★★★やや満足</option>
-                  <option value="3">★★★どちらとも言えない</option>
-                  <option value="4">★★やや不満</option>
-                  <option value="5">★不満</option>
-                </select>
+                <div>
+                  <select name="questionRate1" class="start-rating">
+                    <option value="" selected></option>
+                    <option value="1">満足</option>
+                    <option value="2">やや満足</option>
+                    <option value="3">どちらとも言えない</option>
+                    <option value="4">やや不満</option>
+                    <option value="5">不満</option>
+                  </select>
+                </div>
               </div>
-              <div class="">
+              <div class="mb-3">
                 <label class="form-label">5. もう1度開催したいと思いますか？</label>
-                <select name="questionRate5" class="start-rating">
-                  <option value="" selected></option>
-                  <option value="1">★★★★★満足</option>
-                  <option value="2">★★★★やや満足</option>
-                  <option value="3">★★★どちらとも言えない</option>
-                  <option value="4">★★やや不満</option>
-                  <option value="5">★不満</option>
-                </select>
+                <div>
+                  <select name="questionRate1" class="start-rating">
+                    <option value="" selected></option>
+                    <option value="1">満足</option>
+                    <option value="2">やや満足</option>
+                    <option value="3">どちらとも言えない</option>
+                    <option value="4">やや不満</option>
+                    <option value="5">不満</option>
+                  </select>
+                </div>
               </div>
               <div class="">
                 <label class="form-label">6. 感想をご記入ください。</label>
-                <textarea name="questionText1" class="form-control" id="exampleFormControlTextarea1"
-                          rows="3"></textarea>
+                <textarea name="questionText1" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
               </div>
               <div class="pt-3">
                 <label class="form-label">7. その他ご意見をご記入ください。※Webサイトへは公開されません</label>
-                <textarea name="questionText2" class="form-control" id="exampleFormControlTextarea1"
-                          rows="3"></textarea>
+                <textarea name="questionText2" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
               </div>
               <div class="row pt-3">
                 <div class="col-auto">
                   <input type="hidden" name="_csrf" value="{{csrfToken}}">
-                  <button class="btn btn-cprimary font-14 py-2 px-4 font-weight-bold reject text-white"
-                          type="button" data-bs-toggle="modal" data-bs-target="#rejectModal">お断りする
+                  <button class="btn btn-cprimary font-14 py-2 px-4 font-weight-bold reject text-white" type="button" data-bs-toggle="modal" data-bs-target="#rejectModal">お断りする
                   </button>
                 </div>
                 <div class="col-auto">
-                  <button class="btn btn-cprimary font-14 py-2 px-4 font-weight-bold text-white"
-                          type="button" data-bs-toggle="modal" data-bs-target="#approveModal">承認する
+                  <button class="btn btn-cprimary font-14 py-2 px-4 font-weight-bold text-white" type="button" data-bs-toggle="modal" data-bs-target="#approveModal">承認する
                   </button>
                   <input type="hidden" name="action" value="">
                 </div>
@@ -284,53 +290,53 @@
     </div>
   </div>
 </div>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<link href="https://cdn.jsdelivr.net/gh/kartik-v/bootstrap-star-rating@4.1.2/css/star-rating.min.css" media="all"
-      rel="stylesheet" type="text/css"/>
-<link href="https://cdn.jsdelivr.net/gh/kartik-v/bootstrap-star-rating@4.1.2/themes/krajee-svg/theme.css" media="all"
-      rel="stylesheet" type="text/css"/>
-<script src="https://cdn.jsdelivr.net/gh/kartik-v/bootstrap-star-rating@4.1.2/js/star-rating.min.js"
-        type="text/javascript"></script>
+<!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>-->
+<!--<link href="https://cdn.jsdelivr.net/gh/kartik-v/bootstrap-star-rating@4.1.2/css/star-rating.min.css" media="all"-->
+<!--      rel="stylesheet" type="text/css"/>-->
+<!--<link href="https://cdn.jsdelivr.net/gh/kartik-v/bootstrap-star-rating@4.1.2/themes/krajee-svg/theme.css" media="all"-->
+<!--      rel="stylesheet" type="text/css"/>-->
+<!--<script src="https://cdn.jsdelivr.net/gh/kartik-v/bootstrap-star-rating@4.1.2/js/star-rating.min.js"-->
+<!--        type="text/javascript"></script>-->
 
-<script>
-  jQuery(document).ready(function () {
-    function chsticky() {
-      if (document.body.clientWidth >= 769) {
-        document.querySelector('#customer-header').style.top = document.querySelector('header').clientHeight + 'px';
-      } else {
-        document.querySelector('#customer-header').style.top = 'auto';
-      }
-    }
+<!--<script>-->
+<!--  jQuery(document).ready(function () {-->
+<!--    function chsticky() {-->
+<!--      if (document.body.clientWidth >= 769) {-->
+<!--        document.querySelector('#customer-header').style.top = document.querySelector('header').clientHeight + 'px';-->
+<!--      } else {-->
+<!--        document.querySelector('#customer-header').style.top = 'auto';-->
+<!--      }-->
+<!--    }-->
 
-    chsticky();
-    jQuery(window).resize(function () {
-      chsticky();
-    });
-    //        $('.start-rating').rating();
-    $('.start-rating').rating({
-      theme: 'krajee-svg',
-      starCaptions: (val) => val,
-      clearButton: '',
-      clearCaption: '未入力',
-      step: 1,
-      starCaptions: {
-        1: '不満',
-        2: 'やや不満',
-        3: 'どちらとも言えない',
-        4: 'やや満足',
-        5: '満足'
-      }
-    })
-    // $('select').hide()
-    $('.send').click(function () {
-      var action = $(this).data('action');
-      console.log('action', action);
-      $('input[name="action"]').val(action);
-      $('#report').submit();
-    })
-    // $('#questionThreeText').on('keyup', function () {
-    //     var length = $(this).val().length
-    //     $('#char-num').text(length)
-    // })
-  });
-</script>
+<!--    chsticky();-->
+<!--    jQuery(window).resize(function () {-->
+<!--      chsticky();-->
+<!--    });-->
+<!--    //        $('.start-rating').rating();-->
+<!--    $('.start-rating').rating({-->
+<!--      theme: 'krajee-svg',-->
+<!--      starCaptions: (val) => val,-->
+<!--      clearButton: '',-->
+<!--      clearCaption: '未入力',-->
+<!--      step: 1,-->
+<!--      starCaptions: {-->
+<!--        1: '不満',-->
+<!--        2: 'やや不満',-->
+<!--        3: 'どちらとも言えない',-->
+<!--        4: 'やや満足',-->
+<!--        5: '満足'-->
+<!--      }-->
+<!--    })-->
+<!--    // $('select').hide()-->
+<!--    $('.send').click(function () {-->
+<!--      var action = $(this).data('action');-->
+<!--      console.log('action', action);-->
+<!--      $('input[name="action"]').val(action);-->
+<!--      $('#report').submit();-->
+<!--    })-->
+<!--    // $('#questionThreeText').on('keyup', function () {-->
+<!--    //     var length = $(this).val().length-->
+<!--    //     $('#char-num').text(length)-->
+<!--    // })-->
+<!--  });-->
+<!--</script>-->
