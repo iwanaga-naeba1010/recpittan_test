@@ -6,7 +6,6 @@ RSpec.describe CustomerPasswordChangeMailer, type: :mailer do
   let!(:template) { create :email_template, kind: 3 }
   let(:customer) { create :user, :with_custoemr }
 
-
   describe 'chat_start' do
     let(:mail) { CustomerPasswordChangeMailer.notify(customer) }
 
