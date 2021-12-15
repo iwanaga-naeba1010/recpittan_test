@@ -82,6 +82,7 @@ ja:
         street: 町名/番地
         building: 建物名
         number_of_people: 人数
+        number_of_facilities: 追加施設数
         status: オーダーの状態
         is_accepted: パートナーが承認したかどうか
         date_and_time: 開催日時

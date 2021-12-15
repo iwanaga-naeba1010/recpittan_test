@@ -92,10 +92,23 @@
                 <span class="label required">必須</span>
               </label>
               <div class="form-group col-3">
-                <%= f.input :number_of_people, class: 'form-control text-right' %>
+                <%= f.input :number_of_people, label: false, class: 'form-control text-right' %>
               </div>
               <div class="col-auto p-0 flex-v-c">人</div>
             </div>
+
+            <% if order.recreation.is_online %>
+              <div class="row pt-3">
+                <label class="col-12 title-b pb-3" for="participant">
+                  追加で参加する施設がある場合施設数をご記入ください
+                  <span class="label required">必須</span>
+                </label>
+                <div class="form-group col-3">
+                  <%= f.input :number_of_facilities, label: false, class: 'form-control text-right' %>
+                </div>
+                <div class="col-auto p-0 flex-v-c">施設</div>
+              </div>
+            <% end %>
             <!--            {{#if isOnline}}-->
             <!--            {{'オンラインレク'}}-->
             <!--            <div class="row pt-3">-->

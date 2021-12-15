@@ -43,6 +43,7 @@ const App: React.FC<Props> = ({ orderId, defaultNumberOfFacilities }): JSX.Eleme
     // NOTE: 正式依頼の合計金額
     $('#expensesForOrderForm').text('¥' + expensesPrice.toLocaleString() + '円');
     $('#transportationExpensesForOrderForm').text('¥' + transportationExpensesPrice.toLocaleString() + '円');
+    $('#order_number_of_facilities').val(facilities); // TODO: たまに動いていないので、こちらの対処必要
     $('#totalPriceForOrderForm').text(totalPrice);
   }
   
