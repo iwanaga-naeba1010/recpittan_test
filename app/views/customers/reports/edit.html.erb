@@ -80,7 +80,13 @@
                   <span class="text-muted font-12 color-ba08">※材料費は人数分の費用が発生します</span>
                 </div>
                 <% if @report.number_of_people.present? %>
-                  <div class="col-auto">&yen;<%= number_to_currency @report.order.recreation.regular_material_price * @report.number_of_people %></div>
+                  <div class="col-auto">&yen;
+                    <% if @report.number_of_people.present? && @report.order.recreation.regular_material_price.present? %>
+                      <%= number_to_currency @report.order.recreation.regular_material_price * @report.number_of_people %>
+                    <% else %>
+                      <%= number_to_currency 0 %>
+                    <% end %>
+                  </div>
                 <% else %>
                   <div class="col-auto">&yen;<%= number_to_currency 0 %></div>
                 <% end %>
