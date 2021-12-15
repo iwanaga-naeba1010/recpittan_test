@@ -9,8 +9,7 @@ class Customers::ChatsController < Customers::ApplicationController
     if @order.save
       redirect_to chat_customers_order_path(@order.id)
     else
-      # @order = current_user.orders.find(@order.id)
-      render 'customers/orders/chat'
+      redirect_to chat_customers_order_path(@order.id), alert: '送信に失敗しました'
     end
   end
 
