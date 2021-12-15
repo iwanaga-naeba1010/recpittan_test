@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_12_15_132532) do
+ActiveRecord::Schema.define(version: 2021_12_15_134537) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -160,7 +160,7 @@ ActiveRecord::Schema.define(version: 2021_12_15_132532) do
 
   create_table "reports", force: :cascade do |t|
     t.bigint "order_id", null: false
-    t.integer "facility_count"
+    t.integer "number_of_facilities"
     t.integer "number_of_people"
     t.integer "transportation_expenses"
     t.integer "expenses"

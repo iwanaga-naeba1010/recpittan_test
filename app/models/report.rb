@@ -5,7 +5,7 @@
 #  id                      :bigint           not null, primary key
 #  body                    :text
 #  expenses                :integer
-#  facility_count          :integer
+#  number_of_facilities    :integer
 #  number_of_people        :integer
 #  status                  :integer
 #  transportation_expenses :integer

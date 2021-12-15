@@ -53,7 +53,7 @@ class Partners::ReportsController < Partners::ApplicationController
 
   def params_create
     params.require(:report).permit(
-      :body, :expenses, :facility_count,
+      :body, :expenses, :number_of_facilities,
       :number_of_people, :number_of_people, :transportation_expenses
     )
   end

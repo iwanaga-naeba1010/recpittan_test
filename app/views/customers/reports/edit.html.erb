@@ -54,7 +54,7 @@
             <div class="container-fluid mt-2 action">
               <div class="row">
                 <div class="col-lg-3 col-4 label py-2">追加施設数</div>
-                <div class="col-lg-9 col-8 py-2"><%= @report.facility_count %>施設</div>
+                <div class="col-lg-9 col-8 py-2"><%= @report.number_of_facilities %>施設</div>
 
                 <div class="col-lg-3 col-4 label py-2">参加人数</div>
                 <div class="col-lg-9 col-8 py-2 "><%= @report.number_of_people %>人</div>
@@ -96,10 +96,10 @@
               <% if @report.order.recreation.is_online %>
                 <div class="row justify-content-between border-top-dotted py-2">
                   <div class="col-auto align-self-center">
-                    <span id="facilityCount">追加施設費 / <%= @report.facility_count %>施設</span>
+                    <span id="facilityCount">追加施設費 / <%= @report.number_of_facilities %>施設</span>
                   </div>
                   <div class="col-auto" id="additionalPrice">
-                    <%= number_to_currency(@report.facility_count * 1000) %>
+                    <%= number_to_currency(@report.number_of_facilities * 1000) %>
                   </div>
                   <div class="col-12">
                     <span class="text-muted font-12 color-ba08">

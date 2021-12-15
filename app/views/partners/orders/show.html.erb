@@ -91,11 +91,10 @@
         </td>
         <td class="pt-2 pb-2 text-black text-end">
           <% if @order.number_of_facilities.present? %>
-            <%= number_to_currency @order.number_of_facilities * 1000 %>
+            <%= number_to_currency @order.number_of_facilities * (@order.recreation.additional_facility_fee - 1000) %>
           <% else %>
             <%= number_to_currency 0 %>
           <% end %>
-
         </td>
       </tr>
       <tr class="border-bottom text-black font-weight-bold">

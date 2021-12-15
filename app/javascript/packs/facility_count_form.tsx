@@ -17,10 +17,11 @@ interface Response {
 
 interface Props {
   orderId: number;
+  additionalFee: number;
   defaultNumberOfFacilities: number;
 }
 
-const App: React.FC<Props> = ({ orderId, defaultNumberOfFacilities }): JSX.Element => {
+const App: React.FC<Props> = ({ orderId, defaultNumberOfFacilities, additionalFee }): JSX.Element => {
   const [facilities, setFacilities] = useState<number>(defaultNumberOfFacilities);
   const [isSent, setIsSent] = useState<boolean>(false);
   
@@ -49,13 +50,13 @@ const App: React.FC<Props> = ({ orderId, defaultNumberOfFacilities }): JSX.Eleme
     $('#transportationExpensesForOrderForm').text('¥' + transportationExpensesPrice.toLocaleString() + '円');
     $('#order_number_of_facilities').val(numberOfFacilities); // TODO: たまに動いていないので、こちらの対処必要
     $('#numberOfFacilitiesForOrderFormLabel').text(numberOfFacilities + '施設'); // TODO: たまに動いていないので、こちらの対処必要
-    $('#numberOfFacilitiesForOrderForm').text((numberOfFacilities * 2000).toLocaleString() + '円'); // TODO: たまに動いていないので、こちらの対処必要
+    $('#numberOfFacilitiesForOrderForm').text((numberOfFacilities * additionalFee).toLocaleString() + '円'); // TODO: たまに動いていないので、こちらの対処必要
     $('#totalPriceForOrderForm').text(totalPrice);
   }
   
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFacilities(Number(e.target.value));
-    $('#additionalFacilitiesPrice').text(Number(e.target.value) * 2000);
+    $('#additionalFacilitiesPrice').text(Number(e.target.value) * additionalFee);
     // if (target === 'expenses') {
     //   $('#expensesPrice').text(Number(e.target.value));
     // } else {
@@ -131,8 +132,10 @@ document.addEventListener('turbolinks:load', () => {
   if (numberOfFacilitiesForm) {
     const facilities: number = Number(numberOfFacilitiesForm.getAttribute('numberOfFacilities'));
     const orderId: number = Number(numberOfFacilitiesForm.getAttribute('orderId'));
+    let additionalFee: number = Number(numberOfFacilitiesForm.getAttribute('additionalFee'));
+    additionalFee = additionalFee - 1000; // エブリの取り分1000円引く
     ReactDOM.render(
-      <App orderId={orderId} defaultNumberOfFacilities={facilities} />,
+      <App orderId={orderId} defaultNumberOfFacilities={facilities} additionalFee={additionalFee} />,
       numberOfFacilitiesForm,
     )
   }
