@@ -58,6 +58,10 @@ class Order < ApplicationRecord
 
   before_save :switch_status_befire_save
 
+  scope :is_held, -> { where('orders.date_and_time <= ?', Time.current) }
+
+  scope :is_not_held, -> { where('orders.date_and_time >= ?', Time.current).or(Order.where(date_and_time: nil)) }
+
   def switch_status_befire_save
     # NOTE: 終了している案件のstatusを変更しても処理は挟まない
     if self.status.finished? || self.status.invoice_issued? || self.status.paid? || self.status.canceled? || self.status.travled?
