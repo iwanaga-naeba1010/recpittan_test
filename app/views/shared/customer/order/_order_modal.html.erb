@@ -186,6 +186,25 @@
                     <%= order.expenses %>
                   </div>
                 </div>
+
+                <% if order.recreation.is_online %>
+                  <div class="row justify-content-between border-bottom-dotted pb-2">
+                    <div class="col-auto">追加施設費 / <span id="numberOfFacilitiesForOrderFormLabel"><%= order.number_of_facilities %> 施設</span></div>
+                    <div id="numberOfFacilitiesForOrderForm" class="col-auto">&yen;
+                      <% if order.number_of_facilities.present? %>
+                        <%= number_to_currency order.number_of_facilities * 2000 %>
+                      <% else %>
+                        <%= number_to_currency 0 %>
+                      <% end %>
+                    </div>
+                  </div>
+                <% end %>
+
+                ここに追加施設数を追加
+
+                あとは、formでエラー出たらredirectでエラー怒らないようにする
+
+
                 <!--                {{#if isOnline}}-->
                 <!--                <div class="row justify-content-between border-top-dotted py-2">-->
                 <!--                  <div class="col-auto align-self-center">-->
@@ -223,11 +242,11 @@
               </div>
               <div class="col-7 text-center">
                 <%= f.submit 'パートナーにレク開催を正式依頼する', class: 'btn btn-cprimary rounded-pill font-14 py-3 px-4 font-weight-bold text-white' %>
-<!--                <input type="hidden" name="_csrf" value="{{csrfToken}}">-->
-<!--                <button id="submit-button" type="submit" name="action" value="preview"-->
-<!--                        class="btn btn-cprimary rounded-pill font-14 py-3 px-4 font-weight-bold text-white"-->
-<!--                        {{submitDisabled}}>-->
-<!--                  <span class="">パートナーにレク開催を正式依頼する</span></button>-->
+                <!--                <input type="hidden" name="_csrf" value="{{csrfToken}}">-->
+                <!--                <button id="submit-button" type="submit" name="action" value="preview"-->
+                <!--                        class="btn btn-cprimary rounded-pill font-14 py-3 px-4 font-weight-bold text-white"-->
+                <!--                        {{submitDisabled}}>-->
+                <!--                  <span class="">パートナーにレク開催を正式依頼する</span></button>-->
               </div>
             </div>
           </div>

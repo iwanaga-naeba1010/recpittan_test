@@ -31,19 +31,25 @@ const App: React.FC<Props> = ({ orderId, defaultNumberOfFacilities }): JSX.Eleme
   }, []);
   
   // NOTE: それぞれの箇所でid指定だとかなり大変なので、chat.html.erbの画面下部にdummyのHTMLを用意し、そこから取得
-  const applyExpenses = () => {
+  const applyExpenses = (numberOfFacilities: number) => {
     const regularPrice: number = Number($('#regularPrice').text());
     const regularMaterialPrice: number = Number($('#regularMaterialPrice').text());
     const expensesPrice: number = Number($('#expensesPrice').text());
     const transportationExpensesPrice: number = Number($('#transportationExpensesPrice').text());
     const additionalFacilitiesPrice: number = Number($('#additionalFacilitiesPrice').text());
     const totalPrice: string = '¥' + (regularPrice + regularMaterialPrice + expensesPrice + transportationExpensesPrice + additionalFacilitiesPrice).toLocaleString() + '円';
+    
+    console.log(numberOfFacilities);
+    console.log(numberOfFacilities + '施設');
+    
     // NOTE: サイドバーの合計金額
     $('#totalPriceForSidenav').text(totalPrice);
     // NOTE: 正式依頼の合計金額
     $('#expensesForOrderForm').text('¥' + expensesPrice.toLocaleString() + '円');
     $('#transportationExpensesForOrderForm').text('¥' + transportationExpensesPrice.toLocaleString() + '円');
-    $('#order_number_of_facilities').val(facilities); // TODO: たまに動いていないので、こちらの対処必要
+    $('#order_number_of_facilities').val(numberOfFacilities); // TODO: たまに動いていないので、こちらの対処必要
+    $('#numberOfFacilitiesForOrderFormLabel').text(numberOfFacilities + '施設'); // TODO: たまに動いていないので、こちらの対処必要
+    $('#numberOfFacilitiesForOrderForm').text((numberOfFacilities * 2000).toLocaleString() + '円'); // TODO: たまに動いていないので、こちらの対処必要
     $('#totalPriceForOrderForm').text(totalPrice);
   }
   
@@ -55,7 +61,7 @@ const App: React.FC<Props> = ({ orderId, defaultNumberOfFacilities }): JSX.Eleme
     // } else {
     //   $('#transportationExpensesPrice').text(Number(e.target.value));
     // }
-    applyExpenses();
+    applyExpenses(Number(e.target.value));
   }
   
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>): Promise<void> => {
