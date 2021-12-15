@@ -124,7 +124,7 @@ class Order < ApplicationRecord
     order_transportation_expenses = transportation_expenses || 0
     order_expenses = expenses || 0
     # TODO: recから計算する
-    fee = is_partner ? 1000 : 2000
+    fee = is_partner ? recreation.additional_facility_fee - 1000 : recreation.additional_facility_fee
 
     # TODO: 0円もしくはnilは0で計算
     additional_facilities_price = number_of_facilities.blank? ? 0 : number_of_facilities

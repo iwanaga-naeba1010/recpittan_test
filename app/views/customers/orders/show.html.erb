@@ -102,7 +102,7 @@
             <!--            {{/if}}-->
             <div class="row py-2">
               <div class="col-lg-3 col-4 label">合計費用</div>
-              <div class="col-auto"><%= price_pipe @order.recreation.regular_price %></div>
+              <div class="col-auto"><%= number_to_currency @order.total_price(is_partner: false) %></div>
             </div>
             <div class="row py-2">
               <div class="col-lg-3 col-4 label">ステータス</div>
@@ -165,9 +165,16 @@
                 <% if @order.recreation.is_online %>
                   <div class="row justify-content-between border-top-dotted py-2">
                     <div class="col-auto align-self-center">
-                      <span id="facilityCount">追加施設費 / 施設</span>
+                      <span id="facilityCount">追加施設費 / <%= @order.number_of_facilities %> 施設</span>
                     </div>
-                    <div class="col-auto" id="additionalPrice"></div>
+                    <div class="col-auto" id="additionalPrice">&yen;
+                      <% if @order.number_of_facilities.present? %>
+                        <%= number_to_currency @order.number_of_facilities * @order.recreation.additional_facility_fee %>
+                      <% else %>
+                        <%= number_to_currency 0 %>
+                      <% end %>
+
+                    </div>
                     <div class="col-12">
                       <span class="text-muted font-12 color-ba08">
                         ※1施設追加する事に&yen;が発生します

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_12_15_080014) do
+ActiveRecord::Schema.define(version: 2021_12_15_132532) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -155,6 +155,7 @@ ActiveRecord::Schema.define(version: 2021_12_15_080014) do
     t.text "instructor_description"
     t.text "instructor_image"
     t.boolean "is_public_price", default: true
+    t.integer "additional_facility_fee", default: 2000
   end
 
   create_table "reports", force: :cascade do |t|
