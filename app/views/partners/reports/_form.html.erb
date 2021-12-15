@@ -1,8 +1,8 @@
 <%= simple_form_for report, url: url do |f| %>
   <h4 class="text-black font-weight-bold">項目を入力してください</h4>
   <div>
-    <p class="pt-2 pb-2 w-25 border-bottom text-black w-100">追加で参加した人数</p>
-    <%= f.input :additional_number_of_people, label: false %>
+    <p class="pt-2 pb-2 w-25 border-bottom text-black w-100">追加で参加した施設数</p>
+    <%= f.input :facility_count, label: false %>
     <span class="pt-2 pb-2 w-25">オンラインの場合、2施設目から追加で参加した施設数を数字で記入してください。追加1施設あたり+1,000円が謝礼に追加されます。</span>
   </div>
 
@@ -40,7 +40,7 @@
       </tr>
       <tr class="border-bottom">
         <td class="pt-2 pb-2 text-black w-75">材料費/10人<br><span class="text-secondary">※材料費は人数分の費用が発生します。</span></td>
-        <td class="pt-2 pb-2 text-black">¥30,000</td>
+        <td class="pt-2 pb-2 text-black"><%= number_to_currency @order.recreation.regular_material_price %></td>
       </tr>
       <tr class="border-bottom">
         <td class="pt-2 pb-2 text-black w-75">交通費</td>
@@ -48,12 +48,14 @@
       </tr>
       <tr class="border-bottom">
         <td class="pt-2 pb-2 text-black w-75">諸経費</td>
-        <td class="pt-2 pb-2 text-black">¥10,000</td>
+        <td class="pt-2 pb-2 text-black"><%= number_to_currency @order.expenses %></td>
       </tr>
       <tr class="border-bottom">
-        <td class="pt-2 pb-2 text-black w-75">追加施設日/追加施設数0施設<br><span class="text-secondary">※1施設追加する事に費用が発生します。</span>
+        <td class="pt-2 pb-2 text-black w-75">追加施設費/追加施設数 0施設<br><span class="text-secondary">※1施設追加する事に費用が発生します。</span>
         </td>
-        <td class="pt-2 pb-2 text-black">¥0</td>
+        <td id="facilityCount" class="pt-2 pb-2 text-black">
+          <%= number_to_currency(@order.report.facility_count * 1000) %>
+        </td>
       </tr>
       <tr class="border-bottom text-black font-weight-bold">
         <td class="pt-2 pb-2">合計</td>
