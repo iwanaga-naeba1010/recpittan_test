@@ -41,6 +41,31 @@ ActiveAdmin.register Order do
           row :created_at
           row :updated_at
         end
+
+        panel '終了報告', style: 'margin-top: 30px;' do
+          table_for order.report do
+            column :id
+            column :status
+            column :number_of_facilities
+            column :number_of_people
+            column :expenses
+            column :transportation_expenses
+            column :body
+          end
+        end
+
+        panel '評価', style: 'margin-top: 30px;' do
+          table_for order.report&.evaluation do
+            column(:communication) { |evaluation| evaluation&.communication_text }
+            column(:ingenuity) { |evaluation| evaluation&.ingenuity_text }
+            column(:price) { |evaluation| evaluation&.price_text }
+            column(:smoothness) { |evaluation| evaluation&.smoothness_text }
+            column(:want_to_order_agein) { |evaluation| evaluation&.want_to_order_agein_text }
+            column :message
+            column :other_message
+
+          end
+        end
       end
       tab 'メモ' do
         render 'admin/order_memo', order: order
@@ -51,6 +76,7 @@ ActiveAdmin.register Order do
           render 'admin/chat', order: order
         end
       end
+
     end
   end
 
