@@ -82,7 +82,7 @@
                 <div class="col-lg-3 col-4 label">合計費用</div>
                 <div class="col-auto">
                   &yen;
-                  <%= number_to_currency @order.total_price %>
+                  <%= number_to_currency @order.total_price(is_partner: false) %>
                 </div>
               </div>
             </div>

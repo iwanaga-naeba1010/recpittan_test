@@ -70,6 +70,7 @@ ja:
         is_public: 公開かどうか
         prefectures: 都道府県
         is_public_price: 料金を公開
+        additional_facility_fee: 施設追加費用
 
       recreation_image:
         image: 画像
@@ -82,6 +83,7 @@ ja:
         street: 町名/番地
         building: 建物名
         number_of_people: 人数
+        number_of_facilities: 追加施設数
         status: オーダーの状態
         is_accepted: パートナーが承認したかどうか
         date_and_time: 開催日時
@@ -90,6 +92,7 @@ ja:
       report:
         additional_number_of_people: 追加人数
         number_of_people: 参加人数
+        number_of_facilities: 追加施設数
         transportation_expenses: 交通費
         expenses: 諸経費
         facility_count: 施設数

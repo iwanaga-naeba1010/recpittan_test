@@ -14,16 +14,17 @@
       </div>
     <% end %>
 
-    <div class="sidebar-wrapper my-2 border-bottom">
-      <div class="lect_item">
-        <div>
+    <%= link_to partners_path(is_held: true) do %>
+      <div class="sidebar-wrapper my-2 border-bottom">
+        <div class="lect_item">
           <i class="far fa-calendar fa-lg"></i>
         </div>
+        <div class="right_item">
+          開催決定済みのレク
+        </div>
       </div>
-      <div class="right_item">
-        開催決定済みのレク
-      </div>
-    </div>
+    <% end %>
+
     <%= link_to 'https://everyplus.jp/tos/index.html', target: '_blank' do %>
       <div class="sidebar-wrapper my-2 border-bottom">
         <div class="lect_item">

@@ -10,6 +10,7 @@
 #  date_and_time           :datetime
 #  expenses                :integer
 #  is_accepted             :boolean          default(FALSE)
+#  number_of_facilities    :integer
 #  number_of_people        :integer
 #  prefecture              :string
 #  status                  :integer
@@ -57,6 +58,10 @@ class Order < ApplicationRecord
   attribute :tags
 
   before_save :switch_status_befire_save
+
+  scope :is_held, -> { where('orders.date_and_time <= ?', Time.current) }
+
+  scope :is_not_held, -> { where('orders.date_and_time >= ?', Time.current).or(Order.where(date_and_time: nil)) }
 
   def switch_status_befire_save
     # NOTE: 終了している案件のstatusを変更しても処理は挟まない
@@ -113,13 +118,19 @@ class Order < ApplicationRecord
     "〒#{zip} #{prefecture}#{city}#{street}#{building}"
   end
 
-  def total_price
+  def total_price(is_partner:)
     regular_price = recreation.regular_price || 0
     regular_material_price = recreation.regular_material_price || 0
     order_transportation_expenses = transportation_expenses || 0
     order_expenses = expenses || 0
+    # TODO: recから計算する
+    fee = is_partner ? recreation.additional_facility_fee - 1000 : recreation.additional_facility_fee
 
-    regular_price + regular_material_price + order_transportation_expenses + order_expenses
+    # TODO: 0円もしくはnilは0で計算
+    additional_facilities_price = number_of_facilities.blank? ? 0 : number_of_facilities
+    additional_facilities_price = number_of_facilities * fee if additional_facilities_price != 0
+
+    regular_price + regular_material_price + order_transportation_expenses + order_expenses + additional_facilities_price
   end
 
   def desired_time

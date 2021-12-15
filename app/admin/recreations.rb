@@ -8,7 +8,7 @@ ActiveAdmin.register Recreation do
       flow_of_day borrow_item bring_your_own_item extra_information youtube_id
       base_code capacity flyer_color regular_price instructor_amount instructor_material_amount
       regular_material_price instructor_name instructor_title instructor_description instructor_image
-      is_online is_public prefectures is_public_price
+      is_online is_public prefectures is_public_price additional_facility_fee
     ],
     tag_ids: [],
     recreation_images_attributes: %i[id recreation_id image _destroy]
@@ -51,6 +51,7 @@ ActiveAdmin.register Recreation do
       row :instructor_name
       row :instructor_title
       row :instructor_description
+      row :additional_facility_fee
       # row :instructor_image
       row t('activerecord.attributes.recreation.instructor_image') do |rec|
         image_tag rec&.instructor_image&.to_s, width: 50, height: 50
@@ -131,6 +132,7 @@ ActiveAdmin.register Recreation do
       f.input :is_public
       f.input :is_public_price
       f.input :prefectures
+      f.input :additional_facility_fee, hint: 'エブリ・プラス取り分の1000円 + パートナー支払い分の合計を入力してください'
 
     end
 

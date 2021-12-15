@@ -54,14 +54,14 @@ RSpec.describe Partners::OrdersController, type: :request do
   describe 'PUT /update' do
     context 'when valid parameters' do
       it 'returns 302 status' do
-        put partners_order_report_path(order_id: order.id, id: report.id), params: { report: { additional_number_of_people: 11 } }
+        put partners_order_report_path(order_id: order.id, id: report.id), params: { report: { number_of_people: 11 } }
         expect(response).to have_http_status(:found)
       end
 
-      it 'updates additional_number_of_people' do
+      it 'updates number_of_people' do
         expect {
-          put partners_order_report_path(order_id: order.id, id: report.id), params: { report: { additional_number_of_people: 11 } }
-        }.to change { Report.find(report.id).additional_number_of_people }.from(report.additional_number_of_people).to(11)
+          put partners_order_report_path(order_id: order.id, id: report.id), params: { report: { number_of_people: 11 } }
+        }.to change { Report.find(report.id).number_of_people }.from(report.number_of_people).to(11)
       end
 
       it 'updates number_of_people' do
@@ -96,7 +96,7 @@ RSpec.describe Partners::OrdersController, type: :request do
 
       it 'creates an evaluation' do
         expect {
-          put partners_order_report_path(order_id: order.id, id: report.id), params: { report: { additional_number_of_people: 11 } }
+          put partners_order_report_path(order_id: order.id, id: report.id), params: { report: { number_of_people: 11 } }
         }.not_to change(Evaluation, :count)
       end
 
@@ -111,5 +111,4 @@ RSpec.describe Partners::OrdersController, type: :request do
       # end
     end
   end
-
 end

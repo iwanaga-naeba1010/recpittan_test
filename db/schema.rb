@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_12_14_045411) do
+ActiveRecord::Schema.define(version: 2021_12_15_134537) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -101,6 +101,7 @@ ActiveRecord::Schema.define(version: 2021_12_14_045411) do
     t.string "zip"
     t.string "street"
     t.string "building"
+    t.integer "number_of_facilities"
   end
 
   create_table "plans", force: :cascade do |t|
@@ -154,18 +155,18 @@ ActiveRecord::Schema.define(version: 2021_12_14_045411) do
     t.text "instructor_description"
     t.text "instructor_image"
     t.boolean "is_public_price", default: true
+    t.integer "additional_facility_fee", default: 2000
   end
 
   create_table "reports", force: :cascade do |t|
     t.bigint "order_id", null: false
-    t.integer "facility_count"
+    t.integer "number_of_facilities"
     t.integer "number_of_people"
     t.integer "transportation_expenses"
     t.integer "expenses"
     t.text "body"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.integer "additional_number_of_people"
     t.integer "status"
     t.index ["order_id"], name: "index_reports_on_order_id"
   end

@@ -76,10 +76,10 @@ EOS
   # rubocop:enable Lint/UselessAssignment
 
   def update
-    date = params_create.to_h[:dates]['0']
-    str_to_date = Time.new(date['year'].to_i, date['month'].to_i, date['date'].to_i, date['start_hour'].to_i, date['start_minutes'].to_i)
-
     ActiveRecord::Base.transaction do
+      date = params_create.to_h[:dates]['0']
+      str_to_date = Time.new(date['year'].to_i, date['month'].to_i, date['date'].to_i, date['start_hour'].to_i, date['start_minutes'].to_i)
+
       # TODO: 若干負債だけど、今は許容する
       @order.update(date_and_time: str_to_date)
 
@@ -119,7 +119,8 @@ EOS
 
   def params_create
     params.require(:order).permit(
-      :title, :zip, :prefecture, :city, :street, :building, :status, :number_of_people, :user_id, :message,
+      :title, :zip, :prefecture, :city, :street, :building, :status, :number_of_people, :number_of_facilities,
+      :user_id, :message,
       :is_online, :is_accepted, :date_and_time,
       # TODO: datesをobjectではなくarrayでまとめることで多分対応が可能となる
       # TODO: 当然テストや他の箇所のテストなども変わってしまうが、
