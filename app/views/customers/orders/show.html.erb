@@ -179,7 +179,7 @@
                 <div class="row justify-content-between border-top py-3">
                   <div class="col-auto">合計</div>
                   <div class="col-auto">&yen;
-                    <%= number_to_currency @order.total_price %>
+                    <%= number_to_currency @order.total_price(is_partner: false) %>
                   </div>
                 </div>
               </div>

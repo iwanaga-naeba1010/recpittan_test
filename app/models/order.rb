@@ -118,13 +118,14 @@ class Order < ApplicationRecord
     "〒#{zip} #{prefecture}#{city}#{street}#{building}"
   end
 
-  def total_price
+  def total_price(is_partner:)
     regular_price = recreation.regular_price || 0
     regular_material_price = recreation.regular_material_price || 0
     order_transportation_expenses = transportation_expenses || 0
     order_expenses = expenses || 0
     # TODO: recから計算する
-    additional_facilities_price = number_of_facilities * 2000 || 0
+    fee = is_partner ? 1000 : 2000
+    additional_facilities_price = number_of_facilities * fee || 0
 
     regular_price + regular_material_price + order_transportation_expenses + order_expenses + additional_facilities_price
   end

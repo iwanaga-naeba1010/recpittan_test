@@ -63,7 +63,7 @@
       </tr>
       <tr class="border-bottom text-black font-weight-bold">
         <td class="pt-2 pb-2">合計</td>
-        <td class="pt-2 pb-2"><%= number_to_currency @order.total_price %></td>
+        <td class="pt-2 pb-2"><%= number_to_currency @order.total_price(is_partner: true) %></td>
       </tr>
       </thead>
     </table>

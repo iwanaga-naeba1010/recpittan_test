@@ -75,9 +75,16 @@
                 <div class="col-lg-9 col-8 py-2 text-end ">&yen;<%= number_to_currency @report.order.recreation.regular_price %></div>
               </div>
               <div class="row justify-content-between  py-2">
-                <div class="col-auto">材料費 / <%= @report.number_of_people %>人<br><span
-                  class="text-muted font-12 color-ba08">※材料費は人数分の費用が発生します</span></div>
-                <div class="col-auto">&yen;<%= number_to_currency @report.order.recreation.regular_material_price %></div>
+                <div class="col-auto">材料費 / <%= @report.number_of_people %>人
+                  <br>
+                  <span class="text-muted font-12 color-ba08">※材料費は人数分の費用が発生します</span>
+                </div>
+                <% if @report.number_of_people.present? %>
+                  <div class="col-auto">&yen;<%= number_to_currency @report.order.recreation.regular_material_price * @report.number_of_people %></div>
+                <% else %>
+                  <div class="col-auto">&yen;<%= number_to_currency 0 %></div>
+                <% end %>
+
               </div>
 
               <% if @report.order.recreation.is_online %>
@@ -108,7 +115,7 @@
 
               <div class="row justify-content-between border-top py-3">
                 <div class="col-auto">合計</div>
-                <div class="col-auto">&yen;<%= number_to_currency @report.order.total_price %></div>
+                <div class="col-auto">&yen;<%= number_to_currency @report.order.total_price(is_partner: false) %></div>
               </div>
             </div>
 
@@ -144,7 +151,7 @@
             <%= simple_form_for @report, url: customers_report_path(@report), input: { class: 'order' } do |f| %>
               <!--            <form id="report" action="{{catalogHomeUri}}/customer/order/report/{{orderId}}" class="order" method="POST">-->
 
-              <%= f.fields_for :evaluation do |ff|  %>
+              <%= f.fields_for :evaluation do |ff| %>
                 <div class="mb-3">
                   <label class="form-label">1. 参加者に合わせた工夫の満足度を教えてください。</label>
                   <div>
