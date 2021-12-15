@@ -119,7 +119,8 @@ EOS
 
   def params_create
     params.require(:order).permit(
-      :title, :zip, :prefecture, :city, :street, :building, :status, :number_of_people, :user_id, :message,
+      :title, :zip, :prefecture, :city, :street, :building, :status, :number_of_people, :number_of_facilities,
+      :user_id, :message,
       :is_online, :is_accepted, :date_and_time,
       # TODO: datesをobjectではなくarrayでまとめることで多分対応が可能となる
       # TODO: 当然テストや他の箇所のテストなども変わってしまうが、

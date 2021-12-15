@@ -19,6 +19,7 @@ import '../stylesheets/application.scss';
 import '../stylesheets/partner.scss';
 import './consult_recreation'; // recreationで料金相談するボタン
 import './expense_form';
+import './facility_count_form';
 import './prefectures';
 import '../events/order_form';
 import '../events/recreations';

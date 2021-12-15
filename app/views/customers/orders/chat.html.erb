@@ -106,6 +106,12 @@
               orderId="<%= @order.id %>">
             </div>
 
+            <div
+              id="NumberOfFacilitiesForm"
+              numberOfFacilities="<%= @order.number_of_facilities %>"
+              orderId="<%= @order.id %>">
+            </div>
+
             <!--            {{'追加施設数 編集モード'}}-->
             <!--            <form action="{{catalogHomeUri}}/order/consult/{{order._id}}/update" class="consult" method="POST">-->
             <!--              <input type="hidden" name="_csrf" value="{{csrfToken}}">-->
@@ -125,18 +131,18 @@
             <!--            </form>-->
             <!--            {{else}}-->
             <!--            {{#if isOnline}}-->
-            <!--            <div class="row justify-content-between border-top-dotted py-2">-->
-            <!--              <div class="col-12 align-self-center">追加施設数 {{order.additionalCount}} 施設<br>-->
-            <!--                <a href="{{addGetParam 'fc' 1}}" class="clink">編集</a>-->
-            <!--              </div>-->
-            <!--              <div class="col-7 align-self-center">追加施設費</div>-->
-            <!--              <div class="col-auto">-->
-            <!--                &yen;{{numeral task.additionalPrice}}-->
-            <!--              </div>-->
-            <!--              <div col-12>-->
-            <!--                <span class="text-muted font-12 color-ba08">※1施設追加する事に費用が発生します</span>-->
-            <!--              </div>-->
-            <!--            </div>-->
+<!--                        <div class="row justify-content-between border-top-dotted py-2">-->
+<!--                          <div class="col-12 align-self-center">追加施設数 {{order.additionalCount}} 施設<br>-->
+<!--                            <a href="{{addGetParam 'fc' 1}}" class="clink">編集</a>-->
+<!--                          </div>-->
+<!--                          <div class="col-7 align-self-center">追加施設費</div>-->
+<!--                          <div class="col-auto">-->
+<!--                            &yen;{{numeral task.additionalPrice}}-->
+<!--                          </div>-->
+<!--                          <div col-12>-->
+<!--                            <span class="text-muted font-12 color-ba08">※1施設追加する事に費用が発生します</span>-->
+<!--                          </div>-->
+<!--                        </div>-->
 
             <div class="row justify-content-between border-top py-3">
               <div class="col-auto">合計</div>
@@ -172,5 +178,7 @@
   <div id="regularPrice"><%= @order.recreation.regular_price %></div>
   <div id="regularMaterialPrice"><%= @order.recreation.regular_material_price %></div>
   <div id="transportationExpensesPrice"><%= @order.transportation_expenses %></div>
+  <!-- TODO: recの金額に合わせる -->
+  <div id="additionalFacilitiesPrice"><%= @order.number_of_facilities * 2000 %></div>
   <div id="expensesPrice"><%= @order.expenses %></div>
 </div>

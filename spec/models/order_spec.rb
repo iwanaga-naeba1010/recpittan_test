@@ -10,6 +10,7 @@
 #  date_and_time           :datetime
 #  expenses                :integer
 #  is_accepted             :boolean          default(FALSE)
+#  number_of_facilities    :integer
 #  number_of_people        :integer
 #  prefecture              :string
 #  status                  :integer
