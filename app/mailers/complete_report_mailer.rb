@@ -2,6 +2,7 @@
 
 class CompleteReportMailer < ApplicationMailer
   def notify(order)
+    # TODO enumで再定義
     @template = EmailTemplate.find_by(kind: 17)
     @recreation = order.recreation
     @user = @recreation.user

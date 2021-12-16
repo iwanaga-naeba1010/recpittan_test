@@ -2,6 +2,7 @@
 
 class OrderAcceptMailer < ApplicationMailer
   def notify(order, user)
+    # TODO enumで再定義
     @template = EmailTemplate.find_by(kind: 6)
     @recreation = order.recreation
     @email = user.email
