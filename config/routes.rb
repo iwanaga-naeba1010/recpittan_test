@@ -42,7 +42,7 @@ Rails.application.routes.draw do
 
       resources :chats, only: %i[create]
       resources :reports, only: %i[new create edit update] do
-        collection do
+        member do
           get :complete
         end
       end
