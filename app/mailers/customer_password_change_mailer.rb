@@ -2,11 +2,11 @@
 
 class CustomerPasswordChangeMailer < ApplicationMailer
   def notify(user)
-    template = EmailTemplate.find_by(kind: 3)
+    @template = EmailTemplate.find_by(kind: 3)
     @user_name = user.username
     @email = user.email
     @url = edit_user_password_url
 
-    mail from: 'info@everyplus.jp', to: @email, subject: template.title
+    mail from: 'info@everyplus.jp', to: @email, subject: @template.title
   end
 end

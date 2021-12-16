@@ -1,4 +1,2 @@
-<% temple = EmailTemplate.find_by(kind: 5) %>
-
-<%= simple_format ERB.new(temple.body).result(binding) %>
-<%= simple_format temple.signature %>
+<%= simple_format ERB.new(@template.body).result(binding) %>
+<%= simple_format @template.signature %>
