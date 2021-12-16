@@ -41,7 +41,11 @@ Rails.application.routes.draw do
       end
 
       resources :chats, only: %i[create]
-      resources :reports, only: %i[new create edit update]
+      resources :reports, only: %i[new create edit update] do
+        collection do
+          get :complete
+        end
+      end
     end
   end
 
