@@ -4,7 +4,7 @@ class ReportAcceptMailer < ApplicationMailer
   def notify(order)
     template = EmailTemplate.find_by(kind: 16)
     @recreation = order.recreation
-    @user = User.find(@recreation.user_id)
+    @user = @recreation.user
     @user_name = @user.username
     @email = @user.email
 

@@ -4,7 +4,7 @@ class PartnerChatStartMailer < ApplicationMailer
   def notify(order, customer_user)
     template = EmailTemplate.find_by(kind: 12)
     @recreation = order.recreation
-    @user = User.find(@recreation.user_id)
+    @user = @recreation.user
     @user_name = @user.username
     @email = @user.email
     @facility_name = customer_user.company.name

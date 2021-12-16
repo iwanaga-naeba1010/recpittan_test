@@ -4,7 +4,7 @@ class CompleteReportMailer < ApplicationMailer
   def notify(order)
     template = EmailTemplate.find_by(kind: 17)
     @recreation = order.recreation
-    @user = User.find(@recreation.user_id)
+    @user = @recreation.user
     @user_name = @user.username
     @email = @user.email
     @url = chat_partners_order_url(order.id)
