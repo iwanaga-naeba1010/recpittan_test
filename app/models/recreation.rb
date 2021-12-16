@@ -50,6 +50,8 @@ class Recreation < ApplicationRecord
 
   has_many :orders, dependent: :destroy
 
+  belongs_to :user
+
   delegate :name, to: :partner, prefix: true
   delegate :title, to: :partner, prefix: true
   delegate :description, to: :partner, prefix: true
