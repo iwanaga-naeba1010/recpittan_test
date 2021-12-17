@@ -38,4 +38,10 @@ FactoryBot.define do
     expenses { 0 }
     is_accepted { false }
   end
+
+  trait :with_report do
+    after(:create) do |order|
+      create(:report, order_id: order.id)
+    end
+  end
 end

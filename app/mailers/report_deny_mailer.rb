@@ -2,8 +2,7 @@
 
 class ReportDenyMailer < ApplicationMailer
   def notify(order)
-    # TODO enumで再定義
-    @template = EmailTemplate.find_by(kind: 15)
+    @template = EmailTemplate.find_by(kind: 'report_deny')
     @recreation = order.recreation
     @user = @recreation.user
     @user_name = @user.username

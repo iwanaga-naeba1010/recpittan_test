@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 RSpec.describe 'Registrations', type: :system do
-  let!(:template) { create :email_template }
+  let!(:template) { create :email_template, kind: 'customer_email_authenticatin' }
 
   before do
     visit new_user_registration_path
