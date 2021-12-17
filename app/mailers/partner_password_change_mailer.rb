@@ -2,7 +2,6 @@
 
 class PartnerPasswordChangeMailer < ApplicationMailer
   def notify(user)
-    # TODO enumで再定義
     @template = EmailTemplate.find_by(kind: 'partner_password_change')
     @user_name = user.username
     @email = user.email

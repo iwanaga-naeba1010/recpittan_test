@@ -2,7 +2,6 @@
 
 class ReportAcceptMailer < ApplicationMailer
   def notify(order)
-    # TODO enumで再定義
     @template = EmailTemplate.find_by(kind: 'report_accept')
     @recreation = order.recreation
     @user = @recreation.user

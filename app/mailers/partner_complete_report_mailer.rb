@@ -2,7 +2,6 @@
 
 class PartnerCompleteReportMailer < ApplicationMailer
   def notify(order)
-    # TODO enumで再定義
     @template = EmailTemplate.find_by(kind: 'partner_complete_report')
     @recreation = order.recreation
     report = order.report

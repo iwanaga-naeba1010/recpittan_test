@@ -2,7 +2,6 @@
 
 class CustomerChatMailer < ApplicationMailer
   def notify(order)
-    # TODO enumで再定義
     @template = EmailTemplate.find_by(kind: 'customer_chat')
     @recreation = order.recreation
     user = order.user
