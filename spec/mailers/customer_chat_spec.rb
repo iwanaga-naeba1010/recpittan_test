@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 RSpec.describe CustomerChatMailer, type: :mailer do
-  let!(:template) { create :email_template, kind: 5 }
+  let!(:template) { create :email_template, kind: 'customer_chat' }
   let(:partner) { create :user, :with_recreations }
   let(:customer) { create :user, :with_custoemr }
   let(:order) { create :order, recreation_id: partner.recreations.first.id, user_id: customer.id }

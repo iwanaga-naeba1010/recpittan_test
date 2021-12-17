@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 RSpec.describe PartnerCompleteReportMailer, type: :mailer do
-  let!(:template) { create :email_template, kind: 17 }
+  let!(:template) { create :email_template, kind: 'partner_complete_report' }
   let(:partner) { create :user, :with_recreations }
   let(:customer) { create :user, :with_custoemr }
   let(:order) { create :order, :with_report, recreation_id: partner.recreations.first.id, user_id: customer.id }

@@ -3,7 +3,7 @@
 class OrderDenyMailer < ApplicationMailer
   def notify(order)
     # TODO enumで再定義
-    @template = EmailTemplate.find_by(kind: 7)
+    @template = EmailTemplate.find_by(kind: 'order_deny')
     @recreation = order.recreation
     user = order.user
     @email = user.email

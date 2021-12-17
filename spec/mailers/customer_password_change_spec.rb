@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 RSpec.describe CustomerPasswordChangeMailer, type: :mailer do
-  let!(:template) { create :email_template, kind: 3 }
+  let!(:template) { create :email_template, kind: 'customer_password_change' }
   let(:customer) { create :user, :with_custoemr }
 
   describe 'chat_start' do

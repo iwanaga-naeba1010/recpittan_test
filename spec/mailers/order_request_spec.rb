@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 RSpec.describe OrderRequestMailer, type: :mailer do
-  let!(:template) { create :email_template, kind: 14 }
+  let!(:template) { create :email_template, kind: 'order_request' }
   let(:partner) { create :user, :with_recreations }
   let(:customer) { create :user, :with_custoemr }
   let(:order) { create :order, recreation_id: partner.recreations.first.id, user_id: customer.id }
