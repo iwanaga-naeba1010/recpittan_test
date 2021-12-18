@@ -69,6 +69,10 @@ class Order < ApplicationRecord
 
   scope :is_not_held, -> { where('orders.date_and_time >= ?', Time.current).or(Order.where(date_and_time: nil)) }
 
+  validates :regular_price, :regular_material_price, :instructor_amount,
+            :instructor_material_amount, :expenses, :transportation_expenses,
+            :additional_facility_fee, presence: true
+
   def switch_status_befire_save
     # NOTE: 終了している案件のstatusを変更しても処理は挟まない
     if self.status.finished? || self.status.invoice_issued? || self.status.paid? || self.status.canceled? || self.status.travled?
