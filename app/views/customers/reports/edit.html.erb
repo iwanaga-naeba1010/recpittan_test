@@ -99,11 +99,11 @@
                     <span id="facilityCount">追加施設費 / <%= @report.number_of_facilities %>施設</span>
                   </div>
                   <div class="col-auto" id="additionalPrice">
-                    <%= number_to_currency(@report.number_of_facilities * 1000) %>
+                    <%= number_to_currency(@report.number_of_facilities * @report.order.additional_facility_fee) %>
                   </div>
                   <div class="col-12">
                     <span class="text-muted font-12 color-ba08">
-                      ※1施設追加する事に&yen;<%= number_to_currency 1000 %>が発生します
+                      ※1施設追加する事に&yen;<%= number_to_currency @report.order.additional_facility_fee %>が発生します
                     </span>
                   </div>
                 </div>
@@ -121,7 +121,7 @@
 
               <div class="row justify-content-between border-top py-3">
                 <div class="col-auto">合計</div>
-                <div class="col-auto">&yen;<%= number_to_currency @report.order.total_price(is_partner: false) %></div>
+                <div class="col-auto">&yen;<%= number_to_currency @report.order.total_price_for_customer %></div>
               </div>
             </div>
 

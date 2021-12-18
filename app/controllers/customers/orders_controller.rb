@@ -67,7 +67,7 @@ EOS
 EOS
       SlackNotifier.new(channel: '#料金お問い合わせ').send('新規お問い合わせ', slack_message)
       # orderの詳細に飛ばす
-      redirect_to chat_customers_order_path(@recreation.id)
+      redirect_to chat_customers_order_path(@order.id)
     end
   # rubocop:disable Lint/UselessAssignment
   rescue StandardError

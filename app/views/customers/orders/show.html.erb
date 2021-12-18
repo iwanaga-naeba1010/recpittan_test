@@ -102,7 +102,7 @@
             <!--            {{/if}}-->
             <div class="row py-2">
               <div class="col-lg-3 col-4 label">合計費用</div>
-              <div class="col-auto"><%= number_to_currency @order.total_price(is_partner: false) %></div>
+              <div class="col-auto"><%= number_to_currency @order.total_price_for_customer %></div>
             </div>
             <div class="row py-2">
               <div class="col-lg-3 col-4 label">ステータス</div>
@@ -140,14 +140,14 @@
                 <div class="row justify-content-between border-bottom-dotted py-2">
                   <div class="col-auto">開催費</div>
                   <div class="col-auto">&yen;
-                    <%= number_to_currency @order.recreation.regular_price %>
+                    <%= number_to_currency @order.regular_price %>
                   </div>
                 </div>
                 <div class="row justify-content-between border-bottom-dotted py-2">
                   <div class="col-auto">材料費/1人<br><span
                     class="text-muted font-12 color-ba08">※材料費は人数分の費用が発生します</span></div>
                   <div class="col-auto">&yen;
-                    <%= number_to_currency @order.recreation.regular_material_price %>
+                    <%= number_to_currency @order.regular_material_price %>
                   </div>
                 </div>
                 <div class="row justify-content-between border-bottom-dotted py-2">
@@ -162,6 +162,12 @@
                     <%= number_to_currency @order.expenses %>
                   </div>
                 </div>
+                <div class="row justify-content-between border-bottom-dotted py-2">
+                  <div class="col-auto">サポート費用</div>
+                  <div class="col-auto">&yen;
+                    <%= number_to_currency @order.support_price %>
+                  </div>
+                </div>
                 <% if @order.recreation.is_online %>
                   <div class="row justify-content-between border-top-dotted py-2">
                     <div class="col-auto align-self-center">
@@ -169,7 +175,7 @@
                     </div>
                     <div class="col-auto" id="additionalPrice">&yen;
                       <% if @order.number_of_facilities.present? %>
-                        <%= number_to_currency @order.number_of_facilities * @order.recreation.additional_facility_fee %>
+                        <%= number_to_currency @order.number_of_facilities * @order.additional_facility_fee %>
                       <% else %>
                         <%= number_to_currency 0 %>
                       <% end %>
@@ -177,7 +183,7 @@
                     </div>
                     <div class="col-12">
                       <span class="text-muted font-12 color-ba08">
-                        ※1施設追加する事に&yen;が発生します
+                        ※1施設追加する事に<%= number_to_currency @order.additional_facility_fee %>が発生します
                       </span>
                     </div>
                   </div>
@@ -186,7 +192,7 @@
                 <div class="row justify-content-between border-top py-3">
                   <div class="col-auto">合計</div>
                   <div class="col-auto">&yen;
-                    <%= number_to_currency @order.total_price(is_partner: false) %>
+                    <%= number_to_currency @order.total_price_for_customer %>
                   </div>
                 </div>
               </div>

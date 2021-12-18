@@ -124,24 +124,24 @@ class Order < ApplicationRecord
     "〒#{zip} #{prefecture}#{city}#{street}#{building}"
   end
 
+  def total_facility_price_for_customer
+    if number_of_facilities.present?
+      number_of_facilities * additional_facility_fee
+    else
+      0
+    end
+  end
+
+  def total_material_price_for_customer
+    if number_of_people.present?
+      number_of_people * regular_material_price
+    else
+      0
+    end
+  end
+
   def total_price_for_customer
-    # regular_price = recreation.regular_price || 0
-    # regular_material_price = recreation.regular_material_price || 0
-    # order_transportation_expenses = transportation_expenses || 0
-    # order_expenses = expenses || 0
-
-    material_price = if number_of_people.present?
-                       regular_material_price * number_of_people
-                     else
-                       0
-                     end
-    additional_facilities_price = if number_of_facilities.present?
-                                    number_of_facilities * additional_facility_fee
-                                  else
-                                    0
-                                  end
-
-    regular_price + material_price + order_transportation_expenses + expenses + additional_facilities_price + support_price
+    regular_price + total_material_price_for_customer + transportation_expenses + expenses + total_facility_price_for_customer + support_price
   end
 
   # def total_price(is_partner:)
