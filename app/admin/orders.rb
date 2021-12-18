@@ -93,6 +93,16 @@ ActiveAdmin.register Order do
         end
       end
 
+      tab '請求情報' do
+        panel '施設請求額', style: 'margin-top: 30px;' do
+          render 'admin/order_fee_table', order: order, kind: :customer
+        end
+
+        panel 'パートナー請求額', style: 'margin-top: 30px;' do
+          render 'admin/order_fee_table', order: order, kind: :partner
+        end
+      end
+
     end
   end
 
