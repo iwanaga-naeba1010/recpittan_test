@@ -128,6 +128,16 @@ class Order < ApplicationRecord
     "〒#{zip} #{prefecture}#{city}#{street}#{building}"
   end
 
+  def additional_facility_fee_for_partner
+    # NOTE: エブリプラスが1000円を運営費用として取得するので、その金額
+    additional_facility_fee - 1000
+  end
+
+  def expenses_for_partner
+    # NOTE: エブリプラスが10%を運営費用として取得するのでその金額
+    expenses * 0.9
+  end
+
   def total_facility_price_for_customer
     if number_of_facilities.present?
       number_of_facilities * additional_facility_fee
@@ -138,8 +148,7 @@ class Order < ApplicationRecord
 
   def total_facility_price_for_partner
     if number_of_facilities.present?
-      # NOTE: エブリプラスが1000円を運営費用として取得するので、その金額
-      number_of_facilities * (additional_facility_fee - 1000)
+      number_of_facilities * additional_facility_fee_for_partner
     else
       0
     end
@@ -166,7 +175,7 @@ class Order < ApplicationRecord
   end
 
   def total_price_for_partner
-    instructor_amount + total_material_price_for_partner + transportation_expenses + expenses + total_facility_price_for_partner
+    instructor_amount + total_material_price_for_partner + transportation_expenses + expenses_for_partner + total_facility_price_for_partner
   end
 
   # def total_price(is_partner:)

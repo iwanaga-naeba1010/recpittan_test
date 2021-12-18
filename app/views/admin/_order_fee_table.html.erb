@@ -6,8 +6,18 @@
     </tr>
 
     <tr>
-      <td>材料費(合計)</td>
+      <td>材料費</td>
       <td><%= number_to_currency order.total_material_price_for_customer %></td>
+    </tr>
+
+    <tr>
+      <td>材料費/名</td>
+      <td><%= number_to_currency order.regular_material_price %></td>
+    </tr>
+
+    <tr>
+      <td>参加人数</td>
+      <td><%= order.number_of_people %>人</td>
     </tr>
 
     <tr>
@@ -21,13 +31,23 @@
     </tr>
 
     <tr>
-      <td>サポート費用</td>
+      <td>調整費用</td>
       <td><%= number_to_currency order.support_price %></td>
     </tr>
 
     <tr>
-      <td>施設追加費用</td>
+      <td>施設追加費用(合計)</td>
       <td><%= number_to_currency order.total_facility_price_for_customer %></td>
+    </tr>
+
+    <tr>
+      <td>施設追加費用/施設</td>
+      <td><%= number_to_currency order.additional_facility_fee %></td>
+    </tr>
+
+    <tr>
+      <td>施設追加数</td>
+      <td><%= order.number_of_facilities %>施設</td>
     </tr>
 
     <tr>
@@ -50,18 +70,38 @@
     </tr>
 
     <tr>
+      <td>材料費/名</td>
+      <td><%= number_to_currency order.instructor_material_amount %></td>
+    </tr>
+
+    <tr>
+      <td>参加人数</td>
+      <td><%= order.number_of_people %>人</td>
+    </tr>
+
+    <tr>
       <td>交通費</td>
       <td><%= number_to_currency order.transportation_expenses %></td>
     </tr>
 
     <tr>
       <td>諸経費</td>
-      <td><%= number_to_currency order.expenses %></td>
+      <td><%= number_to_currency order.expenses_for_partner %></td>
     </tr>
 
     <tr>
-      <td>施設追加費用</td>
+      <td>施設追加費用(合計)</td>
       <td><%= number_to_currency order.total_facility_price_for_partner %></td>
+    </tr>
+
+    <tr>
+      <td>施設追加費用/施設</td>
+      <td><%= number_to_currency order.additional_facility_fee_for_partner %></td>
+    </tr>
+
+    <tr>
+      <td>施設追加数</td>
+      <td><%= order.number_of_facilities %>施設</td>
     </tr>
 
     <tr>
