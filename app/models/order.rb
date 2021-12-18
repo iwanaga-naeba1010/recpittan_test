@@ -132,6 +132,15 @@ class Order < ApplicationRecord
     end
   end
 
+  def total_facility_price_for_partner
+    if number_of_facilities.present?
+      # NOTE: エブリプラスが1000円を運営費用として取得するので、その金額
+      number_of_facilities * (additional_facility_fee - 1000)
+    else
+      0
+    end
+  end
+
   def total_material_price_for_customer
     if number_of_people.present?
       number_of_people * regular_material_price
@@ -140,8 +149,20 @@ class Order < ApplicationRecord
     end
   end
 
+  def total_material_price_for_partner
+    if number_of_people.present?
+      number_of_people * instructor_material_amount
+    else
+      0
+    end
+  end
+
   def total_price_for_customer
     regular_price + total_material_price_for_customer + transportation_expenses + expenses + total_facility_price_for_customer + support_price
+  end
+
+  def total_price_for_partner
+    instructor_amount + total_material_price_for_partner + transportation_expenses + expenses + total_facility_price_for_partner
   end
 
   # def total_price(is_partner:)
