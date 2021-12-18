@@ -43,7 +43,7 @@ ja:
         description: 詳細
         image: 画像
       recreation:
-        user: パートナー
+        partner: パートナー
         title: タイトル
         second_title: セカンドタイトル
         minutes: 所要時間
@@ -87,6 +87,11 @@ ja:
         status: オーダーの状態
         is_accepted: パートナーが承認したかどうか
         date_and_time: 開催日時
+        regular_price: 価格
+        instructor_amount: パートナー謝礼
+        instructor_material_amount: パートナー材料費
+        regular_material_price: 施設請求材料費
+        additional_facility_fee: 施設追加費用
         transportation_expenses: 交通費
         expenses: 諸経費
       report:
