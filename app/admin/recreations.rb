@@ -30,7 +30,7 @@ ActiveAdmin.register Recreation do
   show do
     attributes_table do
       row :id
-      row :partner
+      row :user
       row :title
       row :second_title
       row :minutes

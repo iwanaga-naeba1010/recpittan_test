@@ -5,7 +5,7 @@ ActiveAdmin.register Order do
 
   permit_params(
     %i[
-      user_id recreation_id zip prefecture city street building number_of_people status
+      user_id recreation_id zip prefecture city street building number_of_people number_of_facilities status
       is_accepted date_and_time transportation_expenses expenses
     ],
     )
@@ -33,6 +33,7 @@ ActiveAdmin.register Order do
           row :street
           row :building
           row :number_of_people
+          row :number_of_facilitiese
           row :is_accepted
           row :date_and_time
           row :transportation_expenses
@@ -96,6 +97,7 @@ ActiveAdmin.register Order do
       f.input :street
       f.input :building
       f.input :number_of_people
+      f.input :number_of_facilities
       f.input :status, as: :select, collection: Order.status.values.map { |i| [i.text, i] }
       f.input :is_accepted
       f.input :date_and_time, as: :date_time_picker
