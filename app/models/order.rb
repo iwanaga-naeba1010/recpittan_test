@@ -9,7 +9,7 @@
 #  building                   :string
 #  city                       :string
 #  date_and_time              :datetime
-#  expenses                   :integer
+#  expenses                   :integer          default(0)
 #  instructor_amount          :integer          default(0)
 #  instructor_material_amount :integer          default(0)
 #  is_accepted                :boolean          default(FALSE)
@@ -20,7 +20,8 @@
 #  regular_price              :integer          default(0)
 #  status                     :integer
 #  street                     :string
-#  transportation_expenses    :integer
+#  support_price              :integer          default(0)
+#  transportation_expenses    :integer          default(0)
 #  zip                        :string
 #  created_at                 :datetime         not null
 #  updated_at                 :datetime         not null
@@ -123,20 +124,40 @@ class Order < ApplicationRecord
     "〒#{zip} #{prefecture}#{city}#{street}#{building}"
   end
 
-  def total_price(is_partner:)
-    regular_price = recreation.regular_price || 0
-    regular_material_price = recreation.regular_material_price || 0
-    order_transportation_expenses = transportation_expenses || 0
-    order_expenses = expenses || 0
-    # TODO: recから計算する
-    fee = is_partner ? recreation.additional_facility_fee - 1000 : recreation.additional_facility_fee
+  def total_price_for_customer
+    # regular_price = recreation.regular_price || 0
+    # regular_material_price = recreation.regular_material_price || 0
+    # order_transportation_expenses = transportation_expenses || 0
+    # order_expenses = expenses || 0
 
-    # TODO: 0円もしくはnilは0で計算
-    additional_facilities_price = number_of_facilities.blank? ? 0 : number_of_facilities
-    additional_facilities_price = number_of_facilities * fee if additional_facilities_price != 0
+    material_price = if number_of_people.present?
+                       regular_material_price * number_of_people
+                     else
+                       0
+                     end
+    additional_facilities_price = if number_of_facilities.present?
+                                    number_of_facilities * additional_facility_fee
+                                  else
+                                    0
+                                  end
 
-    regular_price + regular_material_price + order_transportation_expenses + order_expenses + additional_facilities_price
+    regular_price + material_price + order_transportation_expenses + expenses + additional_facilities_price + support_price
   end
+
+  # def total_price(is_partner:)
+  #   regular_price = recreation.regular_price || 0
+  #   regular_material_price = recreation.regular_material_price || 0
+  #   order_transportation_expenses = transportation_expenses || 0
+  #   order_expenses = expenses || 0
+  #   # TODO: recから計算する
+  #   fee = is_partner ? recreation.additional_facility_fee - 1000 : recreation.additional_facility_fee
+  #
+  #   # TODO: 0円もしくはnilは0で計算
+  #   additional_facilities_price = number_of_facilities.blank? ? 0 : number_of_facilities
+  #   additional_facilities_price = number_of_facilities * fee if additional_facilities_price != 0
+  #
+  #   regular_price + regular_material_price + order_transportation_expenses + order_expenses + additional_facilities_price
+  # end
 
   def desired_time
     return '' if date_and_time.blank?

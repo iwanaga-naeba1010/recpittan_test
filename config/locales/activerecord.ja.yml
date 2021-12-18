@@ -91,6 +91,7 @@ ja:
         instructor_amount: パートナー謝礼
         instructor_material_amount: パートナー材料費
         regular_material_price: 施設請求材料費
+        support_price: 調整費用
         additional_facility_fee: 施設追加費用
         transportation_expenses: 交通費
         expenses: 諸経費

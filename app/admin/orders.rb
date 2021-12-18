@@ -14,6 +14,7 @@ ActiveAdmin.register Order do
       instructor_material_amount
       additional_facility_fee
       transportation_expenses
+      support_price
       expenses
     ],
     )
@@ -51,6 +52,7 @@ ActiveAdmin.register Order do
           row :additional_facility_fee
           row :transportation_expenses
           row :expenses
+          row :support_price
 
           row :created_at
           row :updated_at
@@ -120,6 +122,7 @@ ActiveAdmin.register Order do
       f.input :regular_material_price
       f.input :instructor_material_amount
       f.input :additional_facility_fee
+      f.input :support_price
 
       f.input :transportation_expenses
       f.input :expenses

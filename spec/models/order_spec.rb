@@ -9,7 +9,7 @@
 #  building                   :string
 #  city                       :string
 #  date_and_time              :datetime
-#  expenses                   :integer
+#  expenses                   :integer          default(0)
 #  instructor_amount          :integer          default(0)
 #  instructor_material_amount :integer          default(0)
 #  is_accepted                :boolean          default(FALSE)
@@ -20,7 +20,8 @@
 #  regular_price              :integer          default(0)
 #  status                     :integer
 #  street                     :string
-#  transportation_expenses    :integer
+#  support_price              :integer          default(0)
+#  transportation_expenses    :integer          default(0)
 #  zip                        :string
 #  created_at                 :datetime         not null
 #  updated_at                 :datetime         not null
