@@ -4,23 +4,29 @@
 #
 # Table name: orders
 #
-#  id                      :bigint           not null, primary key
-#  building                :string
-#  city                    :string
-#  date_and_time           :datetime
-#  expenses                :integer
-#  is_accepted             :boolean          default(FALSE)
-#  number_of_facilities    :integer
-#  number_of_people        :integer
-#  prefecture              :string
-#  status                  :integer
-#  street                  :string
-#  transportation_expenses :integer
-#  zip                     :string
-#  created_at              :datetime         not null
-#  updated_at              :datetime         not null
-#  recreation_id           :bigint           not null
-#  user_id                 :bigint           not null
+#  id                         :bigint           not null, primary key
+#  additional_facility_fee    :integer          default(0)
+#  building                   :string
+#  city                       :string
+#  date_and_time              :datetime
+#  expenses                   :integer          default(0)
+#  instructor_amount          :integer          default(0)
+#  instructor_material_amount :integer          default(0)
+#  is_accepted                :boolean          default(FALSE)
+#  number_of_facilities       :integer
+#  number_of_people           :integer
+#  prefecture                 :string
+#  regular_material_price     :integer          default(0)
+#  regular_price              :integer          default(0)
+#  status                     :integer
+#  street                     :string
+#  support_price              :integer          default(0)
+#  transportation_expenses    :integer          default(0)
+#  zip                        :string
+#  created_at                 :datetime         not null
+#  updated_at                 :datetime         not null
+#  recreation_id              :bigint           not null
+#  user_id                    :bigint           not null
 #
 # Foreign Keys
 #
@@ -62,6 +68,10 @@ class Order < ApplicationRecord
   scope :is_held, -> { where('orders.date_and_time <= ?', Time.current) }
 
   scope :is_not_held, -> { where('orders.date_and_time >= ?', Time.current).or(Order.where(date_and_time: nil)) }
+
+  validates :regular_price, :regular_material_price, :instructor_amount,
+            :instructor_material_amount, :expenses, :transportation_expenses,
+            :additional_facility_fee, presence: true
 
   def switch_status_befire_save
     # NOTE: 終了している案件のstatusを変更しても処理は挟まない
@@ -118,20 +128,61 @@ class Order < ApplicationRecord
     "〒#{zip} #{prefecture}#{city}#{street}#{building}"
   end
 
-  def total_price(is_partner:)
-    regular_price = recreation.regular_price || 0
-    regular_material_price = recreation.regular_material_price || 0
-    order_transportation_expenses = transportation_expenses || 0
-    order_expenses = expenses || 0
-    # TODO: recから計算する
-    fee = is_partner ? recreation.additional_facility_fee - 1000 : recreation.additional_facility_fee
-
-    # TODO: 0円もしくはnilは0で計算
-    additional_facilities_price = number_of_facilities.blank? ? 0 : number_of_facilities
-    additional_facilities_price = number_of_facilities * fee if additional_facilities_price != 0
-
-    regular_price + regular_material_price + order_transportation_expenses + order_expenses + additional_facilities_price
+  def total_facility_price_for_customer
+    if number_of_facilities.present?
+      number_of_facilities * additional_facility_fee
+    else
+      0
+    end
   end
+
+  def total_facility_price_for_partner
+    if number_of_facilities.present?
+      # NOTE: エブリプラスが1000円を運営費用として取得するので、その金額
+      number_of_facilities * (additional_facility_fee - 1000)
+    else
+      0
+    end
+  end
+
+  def total_material_price_for_customer
+    if number_of_people.present?
+      number_of_people * regular_material_price
+    else
+      0
+    end
+  end
+
+  def total_material_price_for_partner
+    if number_of_people.present?
+      number_of_people * instructor_material_amount
+    else
+      0
+    end
+  end
+
+  def total_price_for_customer
+    regular_price + total_material_price_for_customer + transportation_expenses + expenses + total_facility_price_for_customer + support_price
+  end
+
+  def total_price_for_partner
+    instructor_amount + total_material_price_for_partner + transportation_expenses + expenses + total_facility_price_for_partner
+  end
+
+  # def total_price(is_partner:)
+  #   regular_price = recreation.regular_price || 0
+  #   regular_material_price = recreation.regular_material_price || 0
+  #   order_transportation_expenses = transportation_expenses || 0
+  #   order_expenses = expenses || 0
+  #   # TODO: recから計算する
+  #   fee = is_partner ? recreation.additional_facility_fee - 1000 : recreation.additional_facility_fee
+  #
+  #   # TODO: 0円もしくはnilは0で計算
+  #   additional_facilities_price = number_of_facilities.blank? ? 0 : number_of_facilities
+  #   additional_facilities_price = number_of_facilities * fee if additional_facilities_price != 0
+  #
+  #   regular_price + regular_material_price + order_transportation_expenses + order_expenses + additional_facilities_price
+  # end
 
   def desired_time
     return '' if date_and_time.blank?

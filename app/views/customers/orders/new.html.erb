@@ -8,7 +8,7 @@
         <li class="breadcrumb-item">
           <%= link_to '一覧', customers_recreations_path %>
         </li>
-        <% category_tag = @order.recreation.tags.categories&.first %>
+        <% category_tag = @recreation.tags.categories&.first %>
         <% if category_tag.present? %>
           <li class="breadcrumb-item">
             <!-- TODO: Tag.categories.firstを表示 + ransack入れる -->
@@ -17,7 +17,7 @@
         <% end %>
         <li class="breadcrumb-item active">
           <!-- TODO: Tag.categories.firstを表示 + ransack入れる -->
-          <span><%= @order.recreation.title %></span>
+          <span><%= @recreation.title %></span>
         </li>
       </ol>
     </nav>
@@ -87,6 +87,13 @@
           </div>
           <%= simple_form_for @order, url: customers_recreation_orders_path(@recreation), html: { class: 'consult mt-3' } do |f| %>
             <%= f.input :user_id, as: :hidden, input_html: { value: current_user.id } %>
+
+            <%= f.input :regular_price, as: :hidden, input_html: { value: @recreation.regular_price } %>
+            <%= f.input :instructor_amount, as: :hidden, input_html: { value: @recreation.instructor_amount } %>
+            <%= f.input :regular_material_price, as: :hidden, input_html: { value: @recreation.regular_material_price } %>
+            <%= f.input :instructor_material_amount, as: :hidden, input_html: { value: @recreation.instructor_material_amount } %>
+            <%= f.input :additional_facility_fee, as: :hidden, input_html: { value: @recreation.additional_facility_fee } %>
+
             <div class="card-body">
               <div class="form-group">
                 <label for="consultType" class="title-b pb-3">

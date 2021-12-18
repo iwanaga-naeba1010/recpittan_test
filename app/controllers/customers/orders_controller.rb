@@ -24,7 +24,7 @@ class Customers::OrdersController < Customers::ApplicationController
     @order = @recreation.orders.build(params_create)
 
     ActiveRecord::Base.transaction do
-      @order.save
+      @order.save!
       dates = params_create.to_h[:dates]
 
       # TODO: 希望日時が空でも大丈夫なようにする
@@ -119,15 +119,17 @@ EOS
 
   def params_create
     params.require(:order).permit(
-      :title, :zip, :prefecture, :city, :street, :building, :status, :number_of_people, :number_of_facilities,
+      :title, :zip, :prefecture, :city, :street, :building, :status,
+      :number_of_people, :number_of_facilities,
       :user_id, :message,
-      :is_online, :is_accepted, :date_and_time,
-      # TODO: datesをobjectではなくarrayでまとめることで多分対応が可能となる
-      # TODO: 当然テストや他の箇所のテストなども変わってしまうが、
-      # 1. railsはarrayだけを管理すればOK
-      # 2. formに値を持たせてそのままrenderingする
-      # 3. newだけではなく、正式orderの実行もdates[0]の指定だけで住むので、全体的にコードの可読性が高くなる。
-      # ということを期待できるので、非常に良い選択肢と考えられる
+      :is_online, :is_accepted,
+      # TODO: ここに追加したカラムを挿入する
+      :regular_price,
+      :instructor_amount,
+      :regular_material_price,
+      :instructor_material_amount,
+      :additional_facility_fee,
+      :date_and_time,
       { dates: {} },
       { tags: [] }
     )
