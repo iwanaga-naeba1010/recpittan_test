@@ -214,11 +214,11 @@
               <div class="row pt-3">
                 <label class="col-12 title-b pb-3">参加対象者の状態目安を教えてください</label>
                 <div class="form-group col-12">
-                  <% Tag.targets.each do |tag| %>
+                  <% %w[ほぼ自立可 ほぼ要介助 ほぼ認知症 介護度2以下が多い 介護度3以上が多い].each do |tag| %>
                     <div class="form-check">
-                      <input class="form-check-input" name="order[tags][]" type="checkbox" value="<%= tag.name %>">
+                      <input class="form-check-input" name="order[tags][]" type="checkbox" value="<%= tag %>">
                       <label class="form-check-label">
-                        <%= tag.name %>
+                        <%= tag %>
                       </label>
                     </div>
                   <% end %>
@@ -258,7 +258,7 @@
                       <div class="col-auto text color-ba08"> 1</div>
                       <div class="col-10 px-0 text color-ba08">
                         期間限定でNTTの無料サポートが受けられます。<br>
-                        <a href="https://form.run/@info-1631354048" target="_blank" class="clink"> NTT無料サポートを申し込む</a>
+                        <a href="https://form.run/@info-1638765255" target="_blank" class="clink"> NTT無料サポートを申し込む</a>
                       </div>
                     </div>
                     <div class="row d-none">

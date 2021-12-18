@@ -28,7 +28,9 @@
   <article class="container py-1 px-0">
     <div class="row">
       <div class="col-md-4">
-        <a href="{{backURI}}" class="clink "><i class="material-icons ">navigate_before</i> 戻る</a>
+        <%= link_to customers_path, class: 'clink' do  %>
+          <i class="material-icons ">navigate_before</i> 戻る
+        <% end %>
       </div>
     </div>
     <div class="row justify-content-center">
@@ -58,7 +60,7 @@
                     </div>
                   </div>
                   <div class="col-12 py-1">
-                    <%= link_to customers_recreations_path(@order.recreation.id), class: "clink" do %>
+                    <%= link_to customers_recreation_path(@order.recreation.id), class: "clink" do %>
                       レクの詳細を見る
                       <i class="material-icons ">navigate_next</i></a>
                     <% end %>
@@ -67,17 +69,17 @@
               </div>
             </div>
 
-            <div class="row py-2">
-              <div class="col-lg-3 col-4 "></div>
-              <div class="col-auto rounded border p-3">
-                <h2 class="font-14 font-weight-bold line-height-120 color-ba10 py-2">チラシ</h2>
-                <span class="font-14 font-weight-normal line-height-120 color-ba08 py-2">レクのチラシをダウンロードして印刷することができます。</span>
-                <div class="py-2">
-                  <a href="{{catalogflyerUri taskId}}" class="clink ">チラシをダウンロード
-                    <i class="material-icons ">navigate_next</i></a>
-                </div>
-              </div>
-            </div>
+            <!-- <div class="row py-2"> -->
+            <!--   <div class="col-lg-3 col-4 "></div> -->
+            <!--   <div class="col-auto rounded border p-3"> -->
+            <!--     <h2 class="font-14 font-weight-bold line-height-120 color-ba10 py-2">チラシ</h2> -->
+            <!--     <span class="font-14 font-weight-normal line-height-120 color-ba08 py-2">レクのチラシをダウンロードして印刷することができます。</span> -->
+            <!--     <div class="py-2"> -->
+            <!--       <a href="{{catalogflyerUri taskId}}" class="clink ">チラシをダウンロード -->
+            <!--         <i class="material-icons ">navigate_next</i></a> -->
+            <!--     </div> -->
+            <!--   </div> -->
+            <!-- </div> -->
 
             <div class="row py-2">
               <div class="col-lg-3 col-4 label">開催日時</div>

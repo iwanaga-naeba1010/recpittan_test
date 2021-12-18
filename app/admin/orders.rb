@@ -98,7 +98,7 @@ ActiveAdmin.register Order do
           render 'admin/order_fee_table', order: order, kind: :customer
         end
 
-        panel 'パートナー請求額', style: 'margin-top: 30px;' do
+        panel 'パートナー支払額', style: 'margin-top: 30px;' do
           render 'admin/order_fee_table', order: order, kind: :partner
         end
       end
