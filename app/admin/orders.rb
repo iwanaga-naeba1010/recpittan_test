@@ -7,7 +7,9 @@ ActiveAdmin.register Order do
     %i[
       user_id recreation_id zip prefecture city street building number_of_people
       number_of_facilities status
-      is_accepted date_and_time
+      is_accepted
+      start_at
+      end_at
       regular_price
       instructor_amount
       regular_material_price
@@ -44,7 +46,8 @@ ActiveAdmin.register Order do
           row :number_of_people
           row :number_of_facilitiese
           row :is_accepted
-          row :date_and_time
+          row :start_at
+          row :end_at
           row :regular_price
           row :instructor_amount
           row :regular_material_price
@@ -125,7 +128,8 @@ ActiveAdmin.register Order do
       f.input :number_of_facilities
       f.input :status, as: :select, collection: Order.status.values.map { |i| [i.text, i] }
       f.input :is_accepted
-      f.input :date_and_time, as: :date_time_picker
+      f.input :start_at, as: :date_time_picker
+      f.input :end_at, as: :date_time_picker
 
       f.input :regular_price
       f.input :instructor_amount

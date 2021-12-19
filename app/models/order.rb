@@ -8,7 +8,7 @@
 #  additional_facility_fee    :integer          default(0)
 #  building                   :string
 #  city                       :string
-#  date_and_time              :datetime
+#  end_at                     :datetime
 #  expenses                   :integer          default(0)
 #  instructor_amount          :integer          default(0)
 #  instructor_material_amount :integer          default(0)
@@ -18,6 +18,7 @@
 #  prefecture                 :string
 #  regular_material_price     :integer          default(0)
 #  regular_price              :integer          default(0)
+#  start_at                   :datetime
 #  status                     :integer
 #  street                     :string
 #  support_price              :integer          default(0)
@@ -65,9 +66,9 @@ class Order < ApplicationRecord
 
   before_save :switch_status_befire_save
 
-  scope :is_held, -> { where('orders.date_and_time <= ?', Time.current) }
+  scope :is_held, -> { where('orders.start_at <= ?', Time.current) }
 
-  scope :is_not_held, -> { where('orders.date_and_time >= ?', Time.current).or(Order.where(date_and_time: nil)) }
+  scope :is_not_held, -> { where('orders.start_at >= ?', Time.current).or(Order.where(start_at: nil)) }
 
   validates :regular_price, :regular_material_price, :instructor_amount,
             :instructor_material_amount, :expenses, :transportation_expenses,
@@ -80,29 +81,29 @@ class Order < ApplicationRecord
     end
 
     # NOTE: 完了したがレポート書いていないこと
-    if self.date_and_time.present? && self.is_accepted && (Time.current >= self.date_and_time) && self.report.blank?
+    if self.start_at.present? && self.is_accepted && (Time.current >= self.start_at) && self.report.blank?
       self.status = :unreported_completed
       return self
     end
 
     # NOTE: 完了してレポート書いたけど、施設が承認していないこと
-    if self.date_and_time.present? && self.is_accepted && (Time.current >= self.date_and_time) && self.report&.present? && !self.report&.status.accepted?
+    if self.start_at.present? && self.is_accepted && (Time.current >= self.start_at) && self.report&.present? && !self.report&.status.accepted?
       self.status = :final_report_admits_not
       return self
     end
 
     # NOTE: 完了してレポート書いて、施設が承認してfinishな状態
-    if self.date_and_time.present? && self.is_accepted && (Time.current >= self.date_and_time) && self.report&.present? && self.report&.status.accepted?
+    if self.start_at.present? && self.is_accepted && (Time.current >= self.start_at) && self.report&.present? && self.report&.status.accepted?
       self.status = :finished
       return self
     end
 
-    if self.date_and_time.present? && !self.is_accepted
+    if self.start_at.present? && !self.is_accepted
       self.status = :facility_request_in_progress
       return self
     end
 
-    if self.date_and_time.present? && self.is_accepted
+    if self.start_at.present? && self.is_accepted
       self.status = :waiting_for_an_event_to_take_place
       return self
     end
@@ -194,11 +195,11 @@ class Order < ApplicationRecord
   # end
 
   def desired_time
-    return '' if date_and_time.blank?
+    return '' if start_at.blank? || end_at.blank?
 
-    date = date_and_time.strftime('%Y年%m月%d日')
-    start_time = date_and_time.strftime('%H:%M')
-    end_time = (date_and_time + recreation.minutes.minutes).strftime('%H:%M')
+    date = start_at.strftime('%Y年%m月%d日')
+    start_time = start_at.strftime('%H:%M')
+    end_time = end_at.strftime('%H:%M')
 
     # TODO: エラーハンドリング入れた方が良いかも
     "#{date} #{start_time} ~ #{end_time}"

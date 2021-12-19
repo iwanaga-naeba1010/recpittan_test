@@ -8,7 +8,7 @@
 #  additional_facility_fee    :integer          default(0)
 #  building                   :string
 #  city                       :string
-#  date_and_time              :datetime
+#  end_at                     :datetime
 #  expenses                   :integer          default(0)
 #  instructor_amount          :integer          default(0)
 #  instructor_material_amount :integer          default(0)
@@ -18,6 +18,7 @@
 #  prefecture                 :string
 #  regular_material_price     :integer          default(0)
 #  regular_price              :integer          default(0)
+#  start_at                   :datetime
 #  status                     :integer
 #  street                     :string
 #  support_price              :integer          default(0)
@@ -68,19 +69,19 @@ RSpec.describe Order, type: :model do
 
       it 'changes to facility_request_in_progress when customer requested but partner was not accepted' do
         current_time = Time.current
-        order.update(date_and_time: current_time.tomorrow, is_accepted: false)
+        order.update(start_at: current_time.tomorrow, is_accepted: false)
         expect(order.status).to eq :facility_request_in_progress
       end
 
       it 'changes to waiting_for_an_event_to_take_place when customer requested and partner was accepted' do
         current_time = Time.current
-        order.update(date_and_time: current_time.tomorrow, is_accepted: true)
+        order.update(start_at: current_time.tomorrow, is_accepted: true)
         expect(order.status).to eq :waiting_for_an_event_to_take_place
       end
 
       it 'changes to unreported_completed after finished recreation but partner did not complete report yet' do
         current_time = Time.current
-        order.update(date_and_time: current_time.ago(1.days), is_accepted: true)
+        order.update(start_at: current_time.ago(1.days), is_accepted: true)
         expect(order.status).to eq :unreported_completed
       end
 
@@ -88,7 +89,7 @@ RSpec.describe Order, type: :model do
         current_time = Time.current
         # NOTE: reportを事前に作成しないと発火しないので注意が必要
         order.create_report(attributes_for :report)
-        order.update(date_and_time: current_time.ago(1.days), is_accepted: true)
+        order.update(start_at: current_time.ago(1.days), is_accepted: true)
         expect(order.status).to eq :final_report_admits_not
       end
 
@@ -96,7 +97,7 @@ RSpec.describe Order, type: :model do
         current_time = Time.current
         # NOTE: reportを事前に作成しないと発火しないので注意が必要
         order.create_report(attributes_for(:report, status: :accepted))
-        order.update(date_and_time: current_time.ago(1.days), is_accepted: true)
+        order.update(start_at: current_time.ago(1.days), is_accepted: true)
         expect(order.status).to eq :finished
       end
     end

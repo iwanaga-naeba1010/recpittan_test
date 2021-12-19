@@ -110,11 +110,11 @@ RSpec.describe Partners::OrdersController, type: :request do
 
       # NOTE: localでは問題ないが、github workflowでは落ちるので一旦pend
       pending '' do
-        it 'update date_and_time' do
-          order.update(date_and_time: Time.current)
+        it 'update start_at' do
+          order.update(start_at: Time.current)
           expect {
-            put partners_order_path(order.id), params: { order: { date_and_time: '' } }
-          }.to change { Order.find(order.id).date_and_time }.from(order.date_and_time).to(nil)
+            put partners_order_path(order.id), params: { order: { start_at: '' } }
+          }.to change { Order.find(order.id).start_at }.from(order.start_at).to(nil)
         end
       end
 
@@ -131,12 +131,12 @@ RSpec.describe Partners::OrdersController, type: :request do
       end
 
       it 'redirects to params[:redirect_path]' do
-        put partners_order_path(id: order.id, redirect_path: chat_partners_order_path(order.id)), params: { order: { date_and_time: '' } }
+        put partners_order_path(id: order.id, redirect_path: chat_partners_order_path(order.id)), params: { order: { start_at: '' } }
         expect(response).to redirect_to chat_partners_order_path(order.id)
       end
 
       it 'uses params[:message]' do
-        put partners_order_path(id: order.id, message: '修正'), params: { order: { date_and_time: '' } }
+        put partners_order_path(id: order.id, message: '修正'), params: { order: { start_at: '' } }
         expect(flash[:notice]).to eq '修正'
         # expect(response.body).should include('修正')
       end

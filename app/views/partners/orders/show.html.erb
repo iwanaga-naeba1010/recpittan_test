@@ -118,11 +118,11 @@
 
   </div>
   <div class="col-md-12 text-center">
-    <% if @order.date_and_time.present? && !@order.is_accepted %>
+    <% if @order.start_at.present? && !@order.is_accepted %>
       <%= link_to '正式依頼の内容を確認する', confirm_partners_order_path(@order.id), class: 'text-white btn btn-primary btn-lg btn-block w-75 p-3' %>
-    <% elsif @order.date_and_time.blank? && !@order.is_accepted %>
+    <% elsif @order.start_at.blank? && !@order.is_accepted %>
       <button class="text-white btn btn-secondary btn-lg btn-block w-75 p-3 disabled">正式依頼の内容を確認する</button>
-    <% elsif @order.date_and_time.present? && @order.is_accepted %>
+    <% elsif @order.start_at.present? && @order.is_accepted %>
       <button class="text-white btn btn-secondary btn-lg btn-block w-75 p-3 disabled">承認済みです</button>
     <% end %>
   </div>
