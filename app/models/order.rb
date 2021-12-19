@@ -68,7 +68,8 @@ class Order < ApplicationRecord
 
   scope :is_held, -> { where('orders.start_at <= ?', Time.current) }
 
-  scope :is_not_held, -> { where('orders.start_at >= ?', Time.current).or(Order.where(start_at: nil)) }
+  scope :is_not_held, -> { where('orders.start_at >= ?', Time.current) }
+  scope :start_at_is_blank, -> { where(start_at: nil) }
 
   validates :regular_price, :regular_material_price, :instructor_amount,
             :instructor_material_amount, :expenses, :transportation_expenses,
