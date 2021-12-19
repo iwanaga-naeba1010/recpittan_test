@@ -8,7 +8,14 @@ class SlackNotifier
 
   def initialize(channel:)
     # NOTE: production以外は開発用channelで管理
-    channel_depends_on_env = Rails.env.production? ? channel : '#開発用slack投稿確認channel'
+    channel_depends_on_env = '#開発用slack投稿確認channel'
+    # NOTE: staging等では本番のslackに飛ばしたくないので、制限を設けている
+    disable_slack = (ENV['DISABLE_SLACK'].to_s.downcase == 'true')
+
+    if Rails.env.production? && !disable_slack
+      channel_depends_on_env = channel
+    end
+
     @client = Slack::Notifier.new(WEBHOOK_URL, channel: channel_depends_on_env, username: USER_NAME)
   end
 
