@@ -8,7 +8,7 @@
 #  additional_facility_fee    :integer          default(0)
 #  building                   :string
 #  city                       :string
-#  date_and_time              :datetime
+#  end_at                     :datetime
 #  expenses                   :integer          default(0)
 #  instructor_amount          :integer          default(0)
 #  instructor_material_amount :integer          default(0)
@@ -18,6 +18,7 @@
 #  prefecture                 :string
 #  regular_material_price     :integer          default(0)
 #  regular_price              :integer          default(0)
+#  start_at                   :datetime
 #  status                     :integer
 #  street                     :string
 #  support_price              :integer          default(0)

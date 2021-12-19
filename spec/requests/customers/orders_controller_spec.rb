@@ -73,7 +73,7 @@ RSpec.describe Customers::OrdersController, type: :request do
   describe 'GET /complete' do
     context 'with valid order status' do
       it 'returns http success' do
-        order.update(date_and_time: Time.current)
+        order.update(start_at: Time.current)
         get complete_customers_order_path(order)
         expect(response).to have_http_status(:ok)
       end
@@ -99,7 +99,7 @@ RSpec.describe Customers::OrdersController, type: :request do
         expect(response).to have_http_status(:found)
       end
 
-      it 'update date_and_time' do
+      it 'update start_at' do
         date = Time.new(
           params[:dates]['0'][:year].to_i,
           params[:dates]['0'][:month].to_i,
@@ -110,7 +110,7 @@ RSpec.describe Customers::OrdersController, type: :request do
 
         expect {
           put customers_order_path(order.id), params: { order: params }
-        }.to change { Order.find(order.id).date_and_time }.from(order.date_and_time).to(date)
+        }.to change { Order.find(order.id).start_at }.from(order.start_at).to(date)
       end
 
       it 'update number_of_people' do

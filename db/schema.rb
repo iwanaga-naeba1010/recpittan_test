@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_12_18_080047) do
+ActiveRecord::Schema.define(version: 2021_12_19_081616) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -95,7 +95,7 @@ ActiveRecord::Schema.define(version: 2021_12_18_080047) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "is_accepted", default: false
-    t.datetime "date_and_time"
+    t.datetime "start_at"
     t.integer "transportation_expenses", default: 0
     t.integer "expenses", default: 0
     t.string "zip"
@@ -108,6 +108,7 @@ ActiveRecord::Schema.define(version: 2021_12_18_080047) do
     t.integer "instructor_material_amount", default: 0
     t.integer "additional_facility_fee", default: 0
     t.integer "support_price", default: 0
+    t.datetime "end_at"
   end
 
   create_table "plans", force: :cascade do |t|

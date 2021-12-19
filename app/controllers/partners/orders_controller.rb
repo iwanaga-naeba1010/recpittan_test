@@ -11,7 +11,7 @@ class Partners::OrdersController < Partners::ApplicationController
 
   def update
     # TODO: 承認した場合はis_accepted = trueする
-    # TODO: 拒否した場合は、date_and_timeをnilにする
+    # TODO: 拒否した場合は、start_atをnilにする
     redirect_path = partners_order_path(@order)
     message = '更新しました！'
     if params[:redirect_path]
@@ -47,6 +47,6 @@ class Partners::OrdersController < Partners::ApplicationController
   end
 
   def params_create
-    params.require(:order).permit(:status, :is_accepted, :date_and_time)
+    params.require(:order).permit(:status, :is_accepted, :start_at)
   end
 end
