@@ -78,10 +78,11 @@ EOS
   def update
     ActiveRecord::Base.transaction do
       date = params_create.to_h[:dates]['0']
-      str_to_date = Time.new(date['year'].to_i, date['month'].to_i, date['date'].to_i, date['start_hour'].to_i, date['start_minutes'].to_i)
+      start_at = Time.new(date['year'].to_i, date['month'].to_i, date['date'].to_i, date['start_hour'].to_i, date['start_minutes'].to_i)
 
+      end_at = Time.new(date['year'].to_i, date['month'].to_i, date['date'].to_i, date['end_hour'].to_i, date['end_minutes'].to_i)
       # TODO: 若干負債だけど、今は許容する
-      @order.update(start_at: str_to_date)
+      @order.update(start_at: start_at, end_at: end_at)
 
       @order.update(params_create)
       redirect_to complete_customers_order_path(@order.id), notice: '正式に依頼しました'
