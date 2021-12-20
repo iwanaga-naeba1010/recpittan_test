@@ -55,6 +55,12 @@
           <%= I18n.t("partner.order.status.#{@order.status}") %>
         </td>
       </tr>
+      <tr class="border-bottom">
+        <td class="pt-2 pb-2 w-25">開催日時</td>
+        <td class="pt-2 pb-2 text-black text-end">
+          <%= @order.desired_time %>
+        </td>
+      </tr>
       </tbody>
     </table>
   </div>
