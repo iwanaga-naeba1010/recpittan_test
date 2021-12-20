@@ -15,9 +15,11 @@
             <%= link_to category_tag.name, customers_recreations_path(q: { tags_id_eq: category_tag.id }) %>
           </li>
         <% end %>
+        <li class="breadcrumb-item">
+          <span><%= link_to @order.recreation.title, customers_recreation_path(@order.recreation.id) %></span>
+        </li>
         <li class="breadcrumb-item active">
-          <!-- TODO: Tag.categories.firstを表示 + ransack入れる -->
-          <span><%= @order.recreation.title %></span>
+          <span>正式依頼完了</span>
         </li>
       </ol>
     </nav>
