@@ -66,10 +66,8 @@ class Order < ApplicationRecord
 
   before_save :switch_status_befire_save
 
-  scope :is_held, -> { where('orders.start_at <= ?', Time.current) }
-
-  scope :is_not_held, -> { where('orders.start_at >= ?', Time.current) }
-  scope :start_at_is_blank, -> { where(start_at: nil) }
+  scope :accepted_by_partner, -> { where(is_accepted: true) }
+  scope :not_accepted_by_partner, -> { where(is_accepted: false) }
 
   validates :regular_price, :regular_material_price, :instructor_amount,
             :instructor_material_amount, :expenses, :transportation_expenses,
