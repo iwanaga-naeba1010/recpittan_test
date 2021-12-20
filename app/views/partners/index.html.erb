@@ -1,6 +1,10 @@
 <div class="header">
     <h2 class="text-white font-weight-bold p-2">
-      相談中
+      <% if params[:is_accepted] == 'true' %>
+        開催決定済みのレク一覧
+      <% else %>
+          チャット一覧
+      <% end %>
     </h2>
     <%= render 'shared/partner/sidebar_toggle' %>
 </div>
