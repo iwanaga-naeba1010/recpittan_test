@@ -17,7 +17,7 @@
         <div class="py-2 flex-shrink-1 bd-highlight"><i class="fas fa-chevron-right"></i></div>
       </div>
     <% end %>
-   <% path = @order.report.present? ? edit_partners_report_path(@order.report.id) : new_partners_order_report_path(@order.id) %>
+   <% path = @order.report.present? ? edit_partners_order_report_path(id: @order.report.id, order_id: @order.id) : new_partners_order_report_path(@order.id) %>
     <%= link_to path do %>
       <div class="d-flex bd-highlight border-bottom">
         <div class="py-2 w-100 bd-highlight">終了報告</div>
