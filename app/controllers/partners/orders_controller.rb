@@ -3,7 +3,12 @@
 class Partners::OrdersController < Partners::ApplicationController
   before_action :set_order
 
-  def show; end
+  def show
+    is_accepted = params[:is_accepted]
+    if is_accepted = (is_accepted == 'true')
+      return render 'partners/orders/accepted_detail'
+    end
+  end
 
   def chat
     @chat = current_user.chats.build(order_id: @order.id)

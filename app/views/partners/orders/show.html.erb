@@ -1,7 +1,8 @@
 <div class="header">
   <div>
     <h2 class="text-white font-weight-bold p-2">
-      <%= link_to chat_partners_order_path(@order.id) do %>
+      <% path = @order.is_accepted ? partners_order_path(id: @order.id, is_accepted: @order.is_accepted) : chat_partners_order_path(@order.id) %>
+      <%= link_to path do %>
         <i class="fas fa-arrow-left text-white"></i>
       <% end %>
       <%= @order.recreation.instructor_name %>

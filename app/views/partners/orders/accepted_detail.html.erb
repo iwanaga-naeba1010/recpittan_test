@@ -1,0 +1,40 @@
+<div class="header">
+  <div>
+    <h2 class="text-white font-weight-bold p-2">
+      <%= link_to chat_partners_order_path(@order.id) do %>
+        <i class="fas fa-arrow-left text-white"></i>
+      <% end %>
+      詳細
+    </h2>
+    <%= render 'shared/partner/sidebar_toggle' %>
+  </div>
+</div>
+<div class="body bg-white p-3 mb-3">
+  <div>
+    <%= link_to partners_order_path(@order.id) do  %>
+      <div class="d-flex bd-highlight border-bottom">
+        <div class="py-2 w-100 bd-highlight">開催詳細</div>
+        <div class="py-2 flex-shrink-1 bd-highlight"><i class="fas fa-chevron-right"></i></div>
+      </div>
+    <% end %>
+   <% path = @order.report.present? ? edit_partners_report_path(@order.report.id) : new_partners_order_report_path(@order.id) %>
+    <%= link_to path do %>
+      <div class="d-flex bd-highlight border-bottom">
+        <div class="py-2 w-100 bd-highlight">終了報告</div>
+        <div class="py-2 flex-shrink-1 bd-highlight"><i class="fas fa-chevron-right"></i></div>
+      </div>
+    <% end %>
+    <%= link_to 'https://form.run/@info-1638765255', target: '_blank' do %>
+      <div class="d-flex bd-highlight border-bottom">
+        <div class="py-2 w-100 bd-highlight">日程を変更したい場合</div>
+        <div class="py-2 flex-shrink-1 bd-highlight"><i class="fas fa-chevron-right"></i></div>
+      </div>
+    <% end %>
+  </div>
+  <div class="font-weight-bold my-3">
+    連絡事項
+  </div>
+  <div>
+    連絡事項はありません。
+  </div>
+</div>
