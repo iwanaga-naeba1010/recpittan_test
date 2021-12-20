@@ -17,6 +17,16 @@ RSpec.describe Partners::OrdersController, type: :request do
         get partners_order_path(order.id)
         expect(response).to have_http_status(:ok)
       end
+      it 'renders show page when partner not accepted' do
+        get partners_order_path(order.id)
+        expect(response).to have_http_status(:ok)
+        expect(response).to render_template('partners/orders/show')
+      end
+      it 'renders accepted_deital page when partner accepted' do
+        get partners_order_path(id: order.id, is_accepted: true)
+        expect(response).to have_http_status(:ok)
+        expect(response).to render_template('partners/orders/accepted_detail')
+      end
     end
 
     context 'with invalid user' do
