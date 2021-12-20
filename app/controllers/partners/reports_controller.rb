@@ -11,7 +11,7 @@ class Partners::ReportsController < Partners::ApplicationController
     @order.build_report(params_create)
 
     if @order.save
-      redirect_to partners_order_path(@order.id), notice: 'レポートを投稿しました！'
+      redirect_to partners_order_path(@order.id), notice: '終了報告を投稿しました！'
     else
       render :new
     end
@@ -24,7 +24,7 @@ class Partners::ReportsController < Partners::ApplicationController
   def update
     if @order.report.update(params_create)
       @order.update(status: :final_report_admits_not)
-      redirect_to partners_order_path(@order.id), notice: 'レポートを更新しました！'
+      redirect_to partners_order_path(@order.id), notice: '終了報告を更新しました！'
     else
       render :edit
     end
