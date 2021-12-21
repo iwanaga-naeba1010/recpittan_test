@@ -88,6 +88,9 @@ EOS
       @order.update(start_at: start_at, end_at: end_at)
 
       @order.update(params_create)
+
+      # TODO: jobで送信したい
+      OrderRequestMailer.notify(@order, current_user).deliver_now
       redirect_to complete_customers_order_path(@order.id), notice: '正式に依頼しました'
     end
   rescue StandardError
