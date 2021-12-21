@@ -68,54 +68,63 @@
                 <div class="col-12 label py-2">レク費用</div>
               </div>
               <div class="row justify-content-between border-bottom-dotted py-2 ">
-
                 <div class="col-lg-3 col-4 label py-2">開催費</div>
                 <div class="col-lg-9 col-8 py-2 text-end ">&yen;<%= number_to_currency @report.order.recreation.regular_price %></div>
               </div>
-              <div class="row justify-content-between  py-2">
-                <div class="col-auto">材料費 / <%= @report.number_of_people %>人
+              <div class="row justify-content-between border-bottom-dotted py-2 ">
+                <div class="col-lg-3 col-4 label py-2">材料費(合計)</div>
+                <div class="col-lg-9 col-8 py-2 text-end ">&yen;<%= number_to_currency @report.order.total_material_price_for_customer %></div>
+              </div>
+
+              <div class="row justify-content-between border-bottom-dotted py-2">
+                <div class="col-auto">材料費/名 
                   <br>
                   <span class="text-muted font-12 color-ba08">※材料費は人数分の費用が発生します</span>
                 </div>
-                <% if @report.number_of_people.present? %>
-                  <div class="col-auto">&yen;
-                    <% if @report.number_of_people.present? && @report.order.recreation.regular_material_price.present? %>
-                      <%= number_to_currency @report.order.recreation.regular_material_price * @report.number_of_people %>
-                    <% else %>
-                      <%= number_to_currency 0 %>
-                    <% end %>
-                  </div>
-                <% else %>
-                  <div class="col-auto">&yen;<%= number_to_currency 0 %></div>
-                <% end %>
-
+                <div class="col-auto">&yen;
+                  <%= number_to_currency @report.order.regular_material_price %>
+                </div>
               </div>
 
+
+
+
+              <div class="row justify-content-between border-bottom-dotted py-2 ">
+                <div class="col-lg-3 col-4 label py-2">参加人数</div>
+                <div class="col-lg-9 col-8 py-2 text-end "><%= @report.order.number_of_people %>人</div>
+              </div>
+
+              <div class="row justify-content-between border-bottom-dotted py-2 ">
+                <div class="col-lg-3 col-4 label py-2">交通費</div>
+                <div class="col-lg-9 col-8 py-2 text-end ">&yen;<%= number_to_currency @report.order.transportation_expenses %></div>
+              </div>
+
+              <div class="row justify-content-between border-bottom-dotted py-2 ">
+                <div class="col-lg-3 col-4 label py-2">諸経費</div>
+                <div class="col-lg-9 col-8 py-2 text-end ">&yen;<%= number_to_currency @report.order.expenses %></div>
+              </div>
+              <div class="row justify-content-between border-bottom-dotted py-2 ">
+                <div class="col-lg-3 col-4 label py-2">調整費用</div>
+                <div class="col-lg-9 col-8 py-2 text-end ">&yen;<%= number_to_currency @report.order.support_price %></div>
+              </div>
+
+
               <% if @report.order.recreation.is_online %>
+                <div class="row justify-content-between border-bottom-dotted py-2 ">
+                  <div class="col-lg-3 col-4 label py-2">追加施設費用(合計)</div>
+                  <div class="col-lg-9 col-8 py-2 text-end ">&yen;<%= number_to_currency @report.order.total_facility_price_for_customer %></div>
+                </div>
+
                 <div class="row justify-content-between border-top-dotted py-2">
-                  <div class="col-auto align-self-center">
-                    <span id="facilityCount">追加施設費 / <%= @report.number_of_facilities %>施設</span>
-                  </div>
-                  <div class="col-auto" id="additionalPrice">
-                    <%= number_to_currency(@report.number_of_facilities * @report.order.additional_facility_fee) %>
-                  </div>
+                  <div class="col-auto align-self-center"><span id="facilityCount">施設追加費用/施設</span></div>
+                  <div class="col-auto" id="additionalPrice"><%= @report.number_of_facilities %>施設</div>
                   <div class="col-12">
                     <span class="text-muted font-12 color-ba08">
                       ※1施設追加する事に&yen;<%= number_to_currency @report.order.additional_facility_fee %>が発生します
                     </span>
                   </div>
                 </div>
-              <% else %>
-                <div class="row justify-content-between border-bottom-dotted py-2">
-                  <div class="col-auto">交通費</div>
-                  <div class="col-auto">&yen;<%= number_to_currency @report.transportation_expenses %></div>
-                </div>
               <% end %>
-
-              <div class="row justify-content-between border-bottom-dotted py-2">
-                <div class="col-auto">諸経費</div>
-                <div class="col-auto">&yen;<%= number_to_currency @report.expenses %></div>
-              </div>
 
               <div class="row justify-content-between border-top py-3">
                 <div class="col-auto">合計</div>
