@@ -31,7 +31,6 @@ class Partners::OrdersController < Partners::ApplicationController
       OrderAcceptMailer.notify(@order).deliver_now
     end
 
-    binding.pry
     if params_create[:is_accepted] == 'false'
       OrderDenyMailer.notify(@order).deliver_now
     end

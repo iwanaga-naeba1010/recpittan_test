@@ -11,6 +11,7 @@ class Partners::ReportsController < Partners::ApplicationController
     @order.build_report(params_create)
 
     if @order.save
+      CustomerCompleteReportMailer.notify(@order).deliver_now
       redirect_to partners_order_path(@order.id), notice: '終了報告を投稿しました！'
     else
       render :new
