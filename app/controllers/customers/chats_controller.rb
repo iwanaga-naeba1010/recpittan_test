@@ -7,6 +7,8 @@ class Customers::ChatsController < Customers::ApplicationController
     # NOTE: Orderで保存することで、保存時にstatusのチェック機能を発火させる。
     @order.chats.build(params_create)
     if @order.save
+      # TODO: jobで送信したい
+      PartnerChatMailer.notify(@order, current_user).deliver_now
       redirect_to chat_customers_order_path(@order.id)
     else
       redirect_to chat_customers_order_path(@order.id), alert: '送信に失敗しました'

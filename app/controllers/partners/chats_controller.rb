@@ -15,6 +15,7 @@ class Partners::ChatsController < Partners::ApplicationController
 #{params_create[:message]}
 EOF
       SlackNotifier.new(channel: '#パートナーチャット').send('パートナーからチャットが届きました', message)
+      CustomerChatMailer.notify(@order).deliver_now
       redirect_to chat_partners_order_path(@order.id)
     else
       render 'partners/orders/chat'

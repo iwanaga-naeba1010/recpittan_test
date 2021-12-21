@@ -66,6 +66,9 @@ EOS
 #{message}
 EOS
       SlackNotifier.new(channel: '#料金お問い合わせ').send('新規お問い合わせ', slack_message)
+      # TODO: jobで回した方が良い
+      CustomerChatStartMailer.notify(@order, current_user).deliver_now
+      PartnerChatStartMailer.notify(@order, current_user).deliver_now
       # orderの詳細に飛ばす
       redirect_to chat_customers_order_path(@order.id)
     end
@@ -85,6 +88,9 @@ EOS
       @order.update(start_at: start_at, end_at: end_at)
 
       @order.update(params_create)
+
+      # TODO: jobで送信したい
+      OrderRequestMailer.notify(@order, current_user).deliver_now
       redirect_to complete_customers_order_path(@order.id), notice: '正式に依頼しました'
     end
   rescue StandardError

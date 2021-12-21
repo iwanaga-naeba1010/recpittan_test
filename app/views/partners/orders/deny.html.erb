@@ -27,7 +27,8 @@
         redirect_path: chat_partners_order_path(@order),
         message: 'お断りしました'
       ) do |f| %>
-        <%= f.input :date_and_time, as: :hidden, input_html: { value: nil } %>
+        <%= f.input :start_at, as: :hidden, input_html: { value: nil } %>
+        <%= f.input :is_accepted, as: :hidden, input_html: { value: false } %>
         <%= f.submit 'お断りする', class: 'text-white btn btn-danger btn-lg btn-block w-100 p-3 mt-2 mb-2' %>
       <% end %>
     </div>

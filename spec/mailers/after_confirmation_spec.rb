@@ -1,13 +1,11 @@
-# frozen_string_literal: true
-
+require "rails_helper"
 require 'rake'
-require 'rails_helper'
 
-RSpec.describe CustomerCompleteReportMailer, type: :mailer do
-  let!(:template) { create :email_template, kind: 'customer_complete_report' }
+RSpec.describe AfterConfirmationMailer, type: :mailer do
+  let!(:template) { create :email_template, kind: 'after_confirmation' }
   let(:partner) { create :user, :with_recreations }
   let(:customer) { create :user, :with_custoemr }
-  let(:order) { create :order, :with_report, recreation_id: partner.recreations.first.id, user_id: customer.id }
+  let(:order) { create :order, recreation_id: partner.recreations.first.id, user_id: customer.id }
 
   before :all do
     Rails.application.load_tasks
@@ -15,7 +13,7 @@ RSpec.describe CustomerCompleteReportMailer, type: :mailer do
   end
 
   describe 'chat_start' do
-    let(:mail) { CustomerCompleteReportMailer.notify(order) }
+    let(:mail) { AfterConfirmationMailer.notify(customer) }
 
     # it 'renders the subject' do
     #   expect(mail.subject).to eq(template.title)

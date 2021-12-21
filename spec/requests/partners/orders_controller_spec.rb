@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'rails_helper'
+require 'rake'
 
 RSpec.describe Partners::OrdersController, type: :request do
   let(:partner) { create :user, :with_recreations }
@@ -9,6 +10,8 @@ RSpec.describe Partners::OrdersController, type: :request do
 
   before do
     sign_in partner
+    Rails.application.load_tasks
+    Rake::Task['import:email_templates'].invoke
   end
 
   describe 'GET /show' do
