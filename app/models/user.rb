@@ -58,6 +58,7 @@ class User < ApplicationRecord
   def after_confirmation
     # binding.pry
     # Do something...
+    AfterConfirmationMailer.notify(self).deliver_now
   end
   # passwordなしで保存できるようにする
   def update_without_current_password(params, *options)
