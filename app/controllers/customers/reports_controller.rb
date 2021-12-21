@@ -14,6 +14,12 @@ class Customers::ReportsController < Customers::ApplicationController
     if order.report.update(params_create)
       # NOTE: statusを更新する必要は一切ないが、更新しないとstatusが動的に変更しないためHACK的な感じで実装
       order.update(status: :final_report_admits_not)
+
+    # enumerize :status, in: { in_progress: 0, denied: 1, accepted: 2 }, default: 0
+      if order.report.status.denied?
+        ReportDenyMailer.notify(order).deliver_now
+      end
+
       redirect_to customers_order_path(order.id), notice: '終了報告を更新しました'
     else
       render :edit
