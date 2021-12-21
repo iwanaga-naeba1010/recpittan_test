@@ -26,6 +26,15 @@ class Partners::OrdersController < Partners::ApplicationController
       message = params[:message]
     end
     @order.update(params_create)
+
+    if params_create[:is_accepted] == 'true'
+      OrderAcceptMailer.notify(@order).deliver_now
+    end
+
+    binding.pry
+    if params_create[:is_accepted] == 'false'
+      OrderDenyMailer.notify(@order).deliver_now
+    end
     redirect_to redirect_path, notice: message
   end
 
