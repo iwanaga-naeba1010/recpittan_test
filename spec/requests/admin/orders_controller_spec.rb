@@ -69,6 +69,18 @@ RSpec.describe 'Orders', type: :request do
           put admin_order_path(order.id), params: { order: { number_of_people: number_of_people } }
         }.to change { Order.find(order.id).number_of_people }.from(order.number_of_people).to(number_of_people)
       end
+
+      it 'creates a report when status is finished or upper' do
+        expect {
+          put admin_order_path(order.id), params: { order: { number_of_people: number_of_people, status: :finished } }
+        }.to change(Report, :count).by(+1)
+      end
+
+      it 'creates an evaluation when status is finished or upper' do
+        expect {
+          put admin_order_path(order.id), params: { order: { number_of_people: number_of_people, status: :finished } }
+        }.to change(Evaluation, :count).by(+1)
+      end
     end
   end
 

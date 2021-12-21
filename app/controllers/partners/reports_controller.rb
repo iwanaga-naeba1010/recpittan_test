@@ -25,6 +25,7 @@ class Partners::ReportsController < Partners::ApplicationController
   def update
     if @order.report.update(params_create)
       @order.update(status: :final_report_admits_not)
+      CustomerCompleteReportMailer.notify(@order).deliver_now
       redirect_to partners_order_path(@order.id), notice: '終了報告を更新しました！'
     else
       render :edit

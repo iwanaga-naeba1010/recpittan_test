@@ -173,5 +173,40 @@ EOS
       order.save
       redirect_to admin_order_path(order.id)
     end
+
+    def update
+      # NOTE: finished以降でreportと評価がなければ自動で追加する修正
+      order = Order.find(params[:id].to_i)
+      list = ['finished', 'invoice_issued', 'paid', 'canceled', 'travled']
+
+      is_contains = list.map { |l| permitted_params[:order][:status]&.include?(l) }.compact.uniq.delete_if { |v| v==false }
+
+      if is_contains&.first == true
+
+        if order.report.blank?
+          order.create_report(
+            expenses: order.expenses,
+            number_of_facilities: order.number_of_facilities,
+            number_of_people: order.number_of_people,
+            status: :accepted,
+            transportation_expenses: order.transportation_expenses
+          )
+          order.report.create_evaluation(
+            communication: 0,
+            ingenuity: 0,
+            price: 0,
+            smoothness: 0,
+            want_to_order_agein: 0,
+            message: '管理画面からの自動入力です',
+            other_message: '管理画面からの自動入力です'
+          )
+        end
+      end
+
+      order.update(permitted_params[:order])
+      redirect_to admin_order_path(order.id)
+
+    end
   end
+
 end
