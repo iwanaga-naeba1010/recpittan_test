@@ -56,7 +56,6 @@ class User < ApplicationRecord
 
   # NOTE: deviseの認証が発火した時に動く。
   def after_confirmation
-    # binding.pry
     # Do something...
     AfterConfirmationMailer.notify(self).deliver_now
   end

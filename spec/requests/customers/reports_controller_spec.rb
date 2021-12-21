@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'rails_helper'
+require 'rake'
 
 RSpec.describe Customers::ReportsController, type: :request do
   let(:user) { create :user, :with_custoemr }
@@ -11,6 +12,11 @@ RSpec.describe Customers::ReportsController, type: :request do
 
   before do
     sign_in user
+  end
+
+  before :all do
+    Rails.application.load_tasks
+    Rake::Task['import:email_templates'].invoke
   end
 
   describe 'GET /edit' do

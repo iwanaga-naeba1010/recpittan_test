@@ -3,20 +3,17 @@ require 'csv'
 # rake import:email_templates
 namespace :import do
   task email_templates: :environment do
-    list = []
-    CSV.foreach('db/email_templates.csv', encoding: 'Shift_JIS:UTF-8', headers: true) do |row|
-      list << {
-        id:  row["id"],
-        explanation: row["explanation"],
-        body: row["body"],
-        title: row["title"],
-        signature: row["signature"],
-        kind: row["kind"]
-      }
-    end
     puts "start to create email_templates data"
     begin
-      EmailTemplate.create!(list)
+      CSV.foreach('db/email_templates.csv', encoding: 'Shift_JIS:UTF-8', headers: true) do |row|
+        EmailTemplate.find_or_create_by(kind: row['kind']) do |et|
+          et.explanation = row["explanation"]
+          et.body =  row["body"]
+          et.title = row["title"]
+          et.signature = row["signature"]
+          et.kind = row["kind"]
+        end
+      end
       puts "completed!!"
     rescue ActiveModel::UnknownAttributeError => invalid
       puts "raised error : unKnown attribute "
