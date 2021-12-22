@@ -42,7 +42,7 @@
       </tr>
       <tr class="border-bottom">
         <td class="pt-2 pb-2 text-black w-75">材料費(合計)</td>
-        <td class="pt-2 pb-2 text-black"><%= number_to_currency @order.total_material_price_for_partner %></td>
+        <td id="totalMaterialPrice" class="pt-2 pb-2 text-black"><%= number_to_currency @order.total_material_price_for_partner %></td>
       </tr>
       <tr class="border-bottom">
         <td class="pt-2 pb-2 text-black w-75">
@@ -53,7 +53,7 @@
 
       <tr class="border-bottom">
         <td class="pt-2 pb-2 text-black w-75">参加人数</td>
-        <td class="pt-2 pb-2 text-black"><%= @order.number_of_people %>人</td>
+        <td id="numberOfPeople" class="pt-2 pb-2 text-black"><%= @order.number_of_people %>人</td>
       </tr>
 
       <tr class="border-bottom">
@@ -68,7 +68,7 @@
         <td class="pt-2 pb-2 text-black w-75">施設追加費用(合計)</td>
         <td id="totalNumberOfFacilityPrice" class="pt-2 pb-2 text-black">
             <%= number_to_currency @order.total_facility_price_for_partner %>
-        </td>
+      </td>
       <tr class="border-bottom">
         <td class="pt-2 pb-2 text-black w-75">
           施設追加費用/施設 <br>
@@ -77,9 +77,8 @@
         <td class="pt-2 pb-2 text-black">
           <%= number_to_currency @order.additional_facility_fee_for_partner %>
         </td>
+        </tr>
       </tr>
-      </tr>
-
       <tr class="border-bottom text-black font-weight-bold">
         <td class="pt-2 pb-2">合計(税込)</td>
         <td class="pt-2 pb-2"><%= number_to_currency @order.total_price_for_partner %></td>
@@ -103,7 +102,6 @@
 
 <!-- dummyの数字、eventで使うため -->
 <div class="d-none">
-  <div id="additionalFacilityFee">
-    <%= @order.additional_facility_fee_for_partner %>
-  </div>
+  <div id="additionalFacilityFee"><%= @order.additional_facility_fee_for_partner %></div>
+  <div id="instructoMaterialAmount"><%= @order.instructor_material_amount %></div>
 </div>
