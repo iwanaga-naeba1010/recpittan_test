@@ -5,12 +5,13 @@ import * as $ from 'jquery';
 
 (() => {
   document.addEventListener('turbolinks:load', () => {
-    $('#report_facility_count').on('change', () => {
-      const PRICE_PER_ADDIOTIONAL_FACILITY: number = 1000;
-      // console.log($('#report_facility_count').val());
+    $('#report_number_of_facilities').on('change', () => {
+      const PRICE_PER_ADDIOTIONAL_FACILITY: number = Number($('#additionalFacilityFee').text());
       console.log('chaged');
-      const facilityCount: number = Number($('#report_facility_count').val());
-      $('#facilityCount').text((facilityCount * PRICE_PER_ADDIOTIONAL_FACILITY).toLocaleString() + '円');
+      console.log(PRICE_PER_ADDIOTIONAL_FACILITY);
+
+      const numberOfFacilities: number = Number($('#report_number_of_facilities').val());
+      $('#totalNumberOfFacilityPrice').text((numberOfFacilities * PRICE_PER_ADDIOTIONAL_FACILITY).toLocaleString() + '円');
     })
   });
 })();

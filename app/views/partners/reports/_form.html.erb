@@ -66,7 +66,7 @@
       </tr>
       <tr class="border-bottom">
         <td class="pt-2 pb-2 text-black w-75">施設追加費用(合計)</td>
-        <td id="facilityCount" class="pt-2 pb-2 text-black">
+        <td id="totalNumberOfFacilityPrice" class="pt-2 pb-2 text-black">
             <%= number_to_currency @order.total_facility_price_for_partner %>
         </td>
       <tr class="border-bottom">
@@ -74,15 +74,11 @@
           施設追加費用/施設 <br>
           <span class="text-secondary">※1施設追加するごとに費用が発生します。</span>
         </td>
-        <td id="facilityCount" class="pt-2 pb-2 text-black">
-            <%= number_to_currency @order.additional_facility_fee_for_partner %>
+        <td class="pt-2 pb-2 text-black">
+          <%= number_to_currency @order.additional_facility_fee_for_partner %>
         </td>
       </tr>
-
-      
       </tr>
-
-
 
       <tr class="border-bottom text-black font-weight-bold">
         <td class="pt-2 pb-2">合計(税込)</td>
@@ -104,3 +100,10 @@
     <%= f.submit '終了報告を送信する', class: 'btn btn-primary btn-lg btn-block w-100 p-3 mb-2' %>
   </div>
 <% end %>
+
+<!-- dummyの数字、eventで使うため -->
+<div class="d-none">
+  <div id="additionalFacilityFee">
+    <%= @order.additional_facility_fee_for_partner %>
+  </div>
+</div>
