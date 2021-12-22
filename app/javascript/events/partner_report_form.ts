@@ -20,6 +20,22 @@ import * as $ from 'jquery';
       $('#totalMaterialPrice').text((numberOfPeople * PRICE_PER_ADDIOTIONAL_PERSON) + '円');
       // NOTE: 追加人数
       $('#numberOfPeople').text(numberOfPeople + '人');
-    })
+    });
+
+    // NOTE 交通費に関するイベント
+    $('#report_transportation_expenses').on('change', () => {
+      const transportationEpenses: number = Number($('#report_transportation_expenses').val());
+      // NOTE: 材料費総額
+      $('#transportationEpenses').text(transportationEpenses + '円');
+    });
+
+
+    // NOTE: 諸経費に関するイベント
+    $('#report_expenses').on('change', () => {
+      const expenses: number = Number($('#report_expenses').val());
+      // NOTE: 材料費総額
+      $('#expenses').text((expenses * 0.9) + '円');
+    });
+
   });
 })();

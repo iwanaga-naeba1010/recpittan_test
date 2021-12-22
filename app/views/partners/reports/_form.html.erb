@@ -58,11 +58,11 @@
 
       <tr class="border-bottom">
         <td class="pt-2 pb-2 text-black w-75">交通費</td>
-        <td class="pt-2 pb-2 text-black"><%= number_to_currency @order.transportation_expenses %></td>
+        <td id="transportationEpenses" class="pt-2 pb-2 text-black"><%= number_to_currency @order.transportation_expenses %></td>
       </tr>
       <tr class="border-bottom">
         <td class="pt-2 pb-2 text-black w-75">諸経費</td>
-        <td class="pt-2 pb-2 text-black"><%= number_to_currency @order.expenses_for_partner %></td>
+        <td id="expenses" class="pt-2 pb-2 text-black"><%= number_to_currency @order.expenses_for_partner %></td>
       </tr>
       <tr class="border-bottom">
         <td class="pt-2 pb-2 text-black w-75">施設追加費用(合計)</td>
