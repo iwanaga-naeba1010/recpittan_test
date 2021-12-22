@@ -33,9 +33,9 @@ class Partners::ReportsController < Partners::ApplicationController
       @order.update(
         status: :final_report_admits_not,
         number_of_people: params_create[:number_of_people],
-        transportation_expenses: params_create[:transportation_expenses],
-        expenses: params_create[:expenses],
-        number_of_facilities: params_create[:number_of_facilities],
+        transportation_expenses: params_create[:transportation_expenses].to_i,
+        expenses: params_create[:expenses].to_i,
+        number_of_facilities: params_create[:number_of_facilities].to_i,
       )
       CustomerCompleteReportMailer.notify(@order).deliver_now
       redirect_to partners_order_path(@order.id), notice: '終了報告を更新しました！'
