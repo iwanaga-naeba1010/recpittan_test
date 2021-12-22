@@ -5,6 +5,7 @@
 # Table name: recreations
 #
 #  id                         :bigint           not null, primary key
+#  additional_facility_fee    :integer          default(2000)
 #  base_code                  :string
 #  borrow_item                :text
 #  bring_your_own_item        :text
@@ -48,6 +49,8 @@ class Recreation < ApplicationRecord
   accepts_nested_attributes_for :recreation_images, allow_destroy: true
 
   has_many :orders, dependent: :destroy
+
+  belongs_to :user
 
   delegate :name, to: :partner, prefix: true
   delegate :title, to: :partner, prefix: true

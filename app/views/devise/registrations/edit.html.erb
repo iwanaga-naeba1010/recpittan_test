@@ -36,13 +36,22 @@
                   <span class="p-country-name" style="display:none;">Japan</span>
                   <div class="form-group col-6">
                     <label for="postalCode">郵便番号</label>
-                    <!-- NOTE: zipからdataをreactに渡しているので削除しただめ -->
-                    <div id="ZipForEditUserForm" zip="<%= resource.company.zip %>"></div>
+                    <div class="input-group mb-3">
+                      <div class="form-group string optional user_company_zip form-group-valid">
+                        <%= ff.input :zip, label: false, class: 'form-control is-valid string optional form-control' %>
+                      </div>
+                      <button
+                        id="searchAddressWithZipInRegistrationEditForm"
+                        class="btn btn-outline-secondary p-postal-code-find"
+                        type="button"
+                      >
+                        検索
+                      </button>
+                    </div>
+
                   </div>
                   <div class="form-group col-6">
-                    <label for="region">都道府県</label>
-                    <!-- NOTE: prefectureからdataをreactに渡しているので削除しただめ -->
-                    <div id="PrefectureForEditUserForm" prefecture="<%= resource.company.prefecture %>"></div>
+                    <%= ff.input :prefecture, as: :select, collection: [[]], class: 'form-select p-region' %>
                   </div>
                   <div class="form-group col-6">
                     <label for="locality">市区町村</label>
@@ -65,11 +74,9 @@
                 </div>
                 <div class="row">
                   <div class="col-md-6">
-                    <label for="userName" class="form-label">ご担当者名</label>
                     <%= ff.input :person_in_charge_name, input_html: { class: "form-control" } %>
                   </div>
                   <div class="col-md-6">
-                    <label for="userNamePhoneticName" class="form-label">ご担当者名（カタカナ）</label>
                     <%= ff.input :person_in_charge_name_kana, input_html: { class: "form-control" } %>
                   </div>
                 </div>
@@ -93,7 +100,7 @@
               <div class="row">
                 <div class="col-auto">
                   <span class="font-weight-normal font-14 color-ba08">パスワード変更したい方は</span>
-                  <a class="clink" href="{{catalogHomeUri}}/forgotPassword">こちら</a>
+                    <%= link_to 'こちら', edit_user_password_path, class: 'clink' %>
                 </div>
               </div>
               <div class="row pt-2">

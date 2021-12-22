@@ -1,27 +1,27 @@
 # frozen_string_literal: true
 
 class Customers::ChatsController < Customers::ApplicationController
+  before_action :set_order
 
   def create
-    @chat = current_user.chats.build(params_create)
-
-    if @chat.save
-      redirect_to chat_customers_order_path(@chat.order_id)
+    # NOTE: Orderで保存することで、保存時にstatusのチェック機能を発火させる。
+    @order.chats.build(params_create)
+    if @order.save
+      # TODO: jobで送信したい
+      PartnerChatMailer.notify(@order, current_user).deliver_now
+      redirect_to chat_customers_order_path(@order.id)
     else
-      @breadcrumbs = [
-        { name: 'トップ' },
-        { name: '一覧' },
-        { name: '旅行' },
-        { name: '～おはらい町おかげ横丁ツアー～' }
-      ]
-      @order = current_user.orders.find(@chat.order_id)
-      render 'orders/chat'
+      redirect_to chat_customers_order_path(@order.id), alert: '送信に失敗しました'
     end
   end
 
   private
 
+  def set_order
+    @order = current_user.orders.find(params[:order_id])
+  end
+
   def params_create
-    params.require(:chat).permit(:message, :order_id)
+    params.require(:chat).permit(:message, :user_id)
   end
 end

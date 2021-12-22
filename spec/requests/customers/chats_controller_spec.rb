@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'rails_helper'
+require 'rake'
 
 RSpec.describe Customers::ChatsController, type: :request do
   let(:user) { create :user, :with_custoemr }
@@ -10,6 +11,8 @@ RSpec.describe Customers::ChatsController, type: :request do
 
   before do
     sign_in user
+    Rails.application.load_tasks
+    Rake::Task['import:email_templates'].invoke
   end
 
   describe 'POST /create' do
@@ -17,7 +20,7 @@ RSpec.describe Customers::ChatsController, type: :request do
 
     context 'with valid parameters' do
       it 'return http success when user not logged in' do
-        post customers_chats_path(recreation), params: { chat: chat_attrs }
+        post customers_order_chats_path(order.id), params: { chat: chat_attrs }
         expect(response).to have_http_status(:found)
         expect(response).to redirect_to(chat_customers_order_path(order.id))
       end

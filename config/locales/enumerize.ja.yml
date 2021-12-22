@@ -4,6 +4,12 @@ ja:
       # no/yesは文字で囲わないと正常に機能しないらしい
       "no": いいえ
       "yes": はい
+    evaluation_list: &evaluation_list
+      satisfied: 満足
+      somewhat_satisfied: やや満足
+      neither: どちらとも言えない
+      somewhat_dissatisfied: やや不満
+      dissatisfied: 不満
     banner:
       top: トップページ
     user:
@@ -20,8 +26,30 @@ ja:
         target: 利用者層
     order:
       status:
-        consult: 相談中
-        order: 依頼中
+        in_progress: 相談中
+        waiting_for_a_reply_from_partner: PT回答待ち
+        waiting_for_a_reply_from_facility: 施設回答待ち
+        facility_request_in_progress: 施設依頼中
+        request_denied: PT依頼拒否
+        waiting_for_an_event_to_take_place: 実地待ち
+        unreported_completed: 終了報告未
+        final_report_admits_not: 終了報告承認未
+        finished: 完了
+        invoice_issued: 請求書発行済
+        paid: 支払済
+        canceled: キャンセル
+        travled: トラブル(支払か請求有)
+    evaluation:
+      ingenuity:
+        *evaluation_list
+      communication:
+        *evaluation_list
+      smoothness:
+        *evaluation_list
+      price:
+        *evaluation_list
+      want_to_order_agein:
+        *evaluation_list
     plan:
       kind:
         free: フリー

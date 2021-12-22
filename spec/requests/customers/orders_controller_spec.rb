@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'rails_helper'
+require 'rake'
 
 RSpec.describe Customers::OrdersController, type: :request do
   let(:user) { create :user, :with_custoemr }
@@ -12,6 +13,12 @@ RSpec.describe Customers::OrdersController, type: :request do
     sign_in user
   end
 
+  before :all do
+    Rails.application.load_tasks
+    Rake::Task['import:email_templates'].invoke
+  end
+
+  # NOTE: 事前にEmailTemplateを用意する必要あるため、設定
   describe 'GET /new' do
     context 'with valid user' do
       it 'return http success' do
@@ -36,18 +43,18 @@ RSpec.describe Customers::OrdersController, type: :request do
 
     context 'with valid parameters' do
       # TODO: 正式リリースのタイミングでこちらに戻す
-      # it 'return http success when user not logged in' do
-      #   post customers_recreation_orders_path(recreation), params: { order: order_attrs }
-      #   expect(response).to have_http_status(:found)
-      #   expect(response).to redirect_to(chat_customers_order_path(Order.last.id))
-      # end
       it 'return http success when user not logged in' do
         post customers_recreation_orders_path(recreation), params: { order: order_attrs }
-        expect(response.status).to eq 200
-        # binding.pry
-        expect(response.parsed_body['id']).not_to be nil
-        # expect(response).to redirect_to(chat_customers_order_path(Order.last.id))
+        expect(response).to have_http_status(:found)
+        expect(response).to redirect_to(chat_customers_order_path(Order.last.id))
       end
+      # it 'return http success when user not logged in' do
+      #   post customers_recreation_orders_path(recreation), params: { order: order_attrs }
+      #   expect(response.status).to eq 200
+      #   # binding.pry
+      #   expect(response.parsed_body['id']).not_to be nil
+      #   # expect(response).to redirect_to(chat_customers_order_path(Order.last.id))
+      # end
     end
 
     # it 'return http success when user not logged in' do
@@ -73,7 +80,7 @@ RSpec.describe Customers::OrdersController, type: :request do
   describe 'GET /complete' do
     context 'with valid order status' do
       it 'returns http success' do
-        order.update(status: :order)
+        order.update(start_at: Time.current)
         get complete_customers_order_path(order)
         expect(response).to have_http_status(:ok)
       end
@@ -90,16 +97,58 @@ RSpec.describe Customers::OrdersController, type: :request do
 
   describe 'PUT /update' do
     context 'when valid parameters' do
+      params = {
+        status: :waiting_for_a_reply_from_partner, dates: { '0' => { year: '2022', month: '1', date: '1', start_hour: '09', start_minutes: '00', end_hour: '10', end_minutes: '00' } },
+        number_of_people: 11, zip: '4536111', prefecture: '愛知県', city: '名古屋市中村区', street: '平池町グローバルゲート　１１階', building: 'building'
+      }
       it 'returns 302 status' do
-        # TODO: 後々カラムを入れて検証する
-        put customers_order_path(order.id), params: { order: {} }
+        put customers_order_path(order.id), params: { order: params }
         expect(response).to have_http_status(:found)
       end
 
-      it 'update status' do
+      it 'update start_at' do
+        date = Time.new(
+          params[:dates]['0'][:year].to_i,
+          params[:dates]['0'][:month].to_i,
+          params[:dates]['0'][:date].to_i,
+          params[:dates]['0'][:start_hour].to_i,
+          params[:dates]['0'][:start_minutes].to_i,
+        )
+
         expect {
-          put customers_order_path(order.id), params: { order: {} }
-        }.to change { Order.find(order.id).status }.from(order.status).to('order')
+          put customers_order_path(order.id), params: { order: params }
+        }.to change { Order.find(order.id).start_at }.from(order.start_at).to(date)
+      end
+
+      it 'update number_of_people' do
+        expect {
+          put customers_order_path(order.id), params: { order: params }
+        }.to change { Order.find(order.id).number_of_people }.from(order.number_of_people).to(params[:number_of_people])
+      end
+      it 'update zip' do
+        expect {
+          put customers_order_path(order.id), params: { order: params }
+        }.to change { Order.find(order.id).zip }.from(order.zip).to(params[:zip])
+      end
+      it 'update prefecture' do
+        expect {
+          put customers_order_path(order.id), params: { order: params }
+        }.to change { Order.find(order.id).prefecture }.from(order.prefecture).to(params[:prefecture])
+      end
+      it 'update city' do
+        expect {
+          put customers_order_path(order.id), params: { order: params }
+        }.to change { Order.find(order.id).city }.from(order.city).to(params[:city])
+      end
+      it 'update street' do
+        expect {
+          put customers_order_path(order.id), params: { order: params }
+        }.to change { Order.find(order.id).street }.from(order.street).to(params[:street])
+      end
+      it 'update building' do
+        expect {
+          put customers_order_path(order.id), params: { order: params }
+        }.to change { Order.find(order.id).building }.from(order.building).to(params[:building])
       end
     end
 

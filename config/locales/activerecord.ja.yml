@@ -8,6 +8,9 @@ ja:
       recreation: レク
       recreation_image: レク画像
       order: 案件
+      report: 終了報告
+      evaluation: 評価
+      email_template: テンプレート
       tag: タグ
       target: 利用者層
       chat: チャット
@@ -54,32 +57,63 @@ ja:
         base_code: base_code
         capacity: キャパシティ
         flyer_color: チラシ色
-        regular_price: 販売価格
-        instructor_amount: インストラクター - 謝礼
-        instructor_material_amount: インストラクター - 支払材料費
-        regular_material_price: 販売材料費
-        instructor_name: インストラクター名
+        regular_price: 価格
+        instructor_amount: パートナー謝礼
+        instructor_material_amount: パートナー材料費
+        regular_material_price: 施設請求材料費
+        instructor_name: パートナー名
 #        instructor_position: フライヤーカラー
-        instructor_title: インストラクタータイトル
-        instructor_description: インストラクター詳細
-        instructor_image: インストラクター画像
-        is_online: オンラインかどうか
-        is_public: 公開かどうか
+        instructor_title: パートナータイトル
+        instructor_description: パートナー詳細
+        instructor_image: パートナー画像
+        is_online: オンライン
+        is_public: 公開
         prefectures: 都道府県
         is_public_price: 料金を公開
+        additional_facility_fee: 施設追加費用
 
       recreation_image:
         image: 画像
       order:
         user: 施設
         recreation: レク
+        zip: 郵便番号
         prefecture: 都道府県
         city: 市区町村
+        street: 町名/番地
+        building: 建物名
         number_of_people: 人数
+        number_of_facilities: 追加施設数
         status: オーダーの状態
-        is_online: オンラインレクかどうか
         is_accepted: パートナーが承認したかどうか
-        date_and_time: 開催日時
+        start_at: 開催日時
+        end_at: 終了日時
+        regular_price: 価格
+        instructor_amount: パートナー謝礼
+        instructor_material_amount: パートナー材料費
+        regular_material_price: 施設請求材料費
+        support_price: 調整費用
+        additional_facility_fee: 施設追加費用
+        transportation_expenses: 交通費
+        expenses: 諸経費
+      report:
+        additional_number_of_people: 追加人数
+        number_of_people: 参加人数
+        number_of_facilities: 追加施設数
+        transportation_expenses: 交通費
+        expenses: 諸経費
+        facility_count: 施設数
+        is_accepted: 施設承諾
+        body: メッセージ
+      evaluation:
+        ingenuity: 工夫の満足度
+        communication: コミュニケーション力の満足度
+        smoothness: スムーズさの満足度
+        price: 料金の満足度
+        want_to_order_agein: もう一度開催したいと思うか
+        message: 感想
+        other_message: その他意見
+
       tag:
         name: タグ名
         kind: 種類
@@ -90,6 +124,11 @@ ja:
       chat:
         message: メッセージ
         is_read: 既読
+      email_template:
+        explanation: このメールについて
+        title: タイトル
+        body: 本文
+        signature: 署名
     errors:
       messages:
         duration_over: が上限を越えています
