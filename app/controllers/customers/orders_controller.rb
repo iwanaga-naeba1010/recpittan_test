@@ -2,60 +2,21 @@
 
 class Customers::OrdersController < Customers::ApplicationController
   before_action :set_recreation, only: %i[new create]
+  before_action :set_order, only: %i[show chat update complete]
 
-  def show
-    @breadcrumbs = [
-      { name: 'トップ' },
-      { name: '一覧' },
-      { name: '旅行' },
-      { name: '～おはらい町おかげ横丁ツアー～' }
-    ]
-
-    @years = [2021, 2022]
-    @months = 1..12
-    @dates = 1..31
-    @hours = %w[08 09 10 11 12 13 14 15 16 17 18]
-    @minutes = %w[00 15 30 45]
-    @order = current_user.orders.find(params[:id])
+  def new
+    @recreation = Recreation.find(params[:recreation_id])
+    @order = @recreation.orders.build
   end
 
+  def show; end
+
   def chat
-    @breadcrumbs = [
-      { name: 'トップ' },
-      { name: '一覧' },
-      { name: '旅行' },
-      { name: '～おはらい町おかげ横丁ツアー～' }
-    ]
-    @order = current_user.orders.find(params[:id])
     @chat = current_user.chats.build(order_id: @order.id)
   end
 
   def complete
-    @order = current_user.orders.find(params[:id])
-    return redirect_to chat_customers_order_path(@order.id) if @order.status.consult?
-
-    @breadcrumbs = [
-      { name: 'トップ' },
-      { name: '一覧' },
-      { name: '旅行' },
-      { name: '～おはらい町おかげ横丁ツアー～' }
-    ]
-  end
-
-  def new
-    @breadcrumbs = [
-      { name: 'トップ' },
-      { name: '一覧' },
-      { name: '旅行' },
-      { name: '～おはらい町おかげ横丁ツアー～' }
-    ]
-    @recreation = Recreation.find(params[:recreation_id])
-    @order = @recreation.orders.build
-    @years = [2021, 2022]
-    @months = 1..12
-    @dates = 1..31
-    @hours = %w[08 09 10 11 12 13 14 15 16 17 18]
-    @minutes = %w[00 15 30 45]
+    redirect_to chat_customers_order_path(@order.id) if @order.start_at.blank?
   end
 
   # rubocop:disable Metrics/AbcSize
@@ -63,12 +24,12 @@ class Customers::OrdersController < Customers::ApplicationController
     @order = @recreation.orders.build(params_create)
 
     ActiveRecord::Base.transaction do
-      @order.save
+      @order.save!
       dates = params_create.to_h[:dates]
 
       # TODO: 希望日時が空でも大丈夫なようにする
       # TODO: EOS入力にすればタブが入ってしまったようなmessageは解消が可能
-      message = <<~SQL.squish
+      message = <<EOS
         リクエスト内容
         #{@order.title}
         希望日時
@@ -85,7 +46,7 @@ class Customers::OrdersController < Customers::ApplicationController
 
         相談したい事
         #{params_create[:message]}
-      SQL
+EOS
 
       Chat.create(
         order_id: @order.id,
@@ -105,37 +66,35 @@ class Customers::OrdersController < Customers::ApplicationController
 #{message}
 EOS
       SlackNotifier.new(channel: '#料金お問い合わせ').send('新規お問い合わせ', slack_message)
+      # TODO: jobで回した方が良い
+      CustomerChatStartMailer.notify(@order, current_user).deliver_now
+      PartnerChatStartMailer.notify(@order, current_user).deliver_now
       # orderの詳細に飛ばす
-      # TODO: 正式、Chatリリースの場合は元のMPA redirectに変更する
-      # redirect_to chat_customers_order_path(@order.id)
-      render json: @order
+      redirect_to chat_customers_order_path(@order.id)
     end
   # rubocop:disable Lint/UselessAssignment
-  rescue StandardError => e
-    @breadcrumbs = [
-      { name: 'トップ' },
-      { name: '一覧' },
-      { name: '旅行' },
-      { name: '～おはらい町おかげ横丁ツアー～' }
-    ]
-    @years = [2021, 2022]
-    @months = 1..12
-    @dates = 1..31
-    @hours = %w[08 09 10 11 12 13 14 15 16 17 18]
-    @minutes = %w[00 15 30 45]
-    # TODO: リリースするときはrender: newに戻す
-    render json: {}, status: :unprocessable_entity
-    # render :new
+  rescue StandardError
+    render :new
   end
   # rubocop:enable Lint/UselessAssignment
 
   def update
-    @order = current_user.orders.find(params[:id])
-    if @order.update(status: :order)
+    ActiveRecord::Base.transaction do
+      date = params_create.to_h[:dates]['0']
+      start_at = Time.new(date['year'].to_i, date['month'].to_i, date['date'].to_i, date['start_hour'].to_i, date['start_minutes'].to_i)
+
+      end_at = Time.new(date['year'].to_i, date['month'].to_i, date['date'].to_i, date['end_hour'].to_i, date['end_minutes'].to_i)
+      # TODO: 若干負債だけど、今は許容する
+      @order.update(start_at: start_at, end_at: end_at)
+
+      @order.update(params_create)
+
+      # TODO: jobで送信したい
+      OrderRequestMailer.notify(@order, current_user).deliver_now
       redirect_to complete_customers_order_path(@order.id), notice: '正式に依頼しました'
-    else
-      redirect_to chat_customers_order_path(@order.id), alert: '失敗しました。もう一度お試しください'
     end
+  rescue StandardError
+    redirect_to chat_customers_order_path(@order.id), alert: '失敗しました。もう一度お試しください'
   end
   # rubocop:enable Metrics/AbcSize
 
@@ -143,6 +102,10 @@ EOS
 
   def set_recreation
     @recreation = Recreation.find(params[:recreation_id])
+  end
+
+  def set_order
+    @order = current_user.orders.find(params[:id])
   end
 
   def parse_date(dates)
@@ -163,8 +126,17 @@ EOS
 
   def params_create
     params.require(:order).permit(
-      :title, :prefecture, :city, :status, :number_of_people, :user_id, :message,
-      :is_online, :is_accepted, :date_and_time,
+      :title, :zip, :prefecture, :city, :street, :building, :status,
+      :number_of_people, :number_of_facilities,
+      :user_id, :message,
+      :is_online, :is_accepted,
+      # TODO: ここに追加したカラムを挿入する
+      :regular_price,
+      :instructor_amount,
+      :regular_material_price,
+      :instructor_material_amount,
+      :additional_facility_fee,
+      :start_at,
       { dates: {} },
       { tags: [] }
     )

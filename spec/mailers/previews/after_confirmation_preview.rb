@@ -1,0 +1,4 @@
+# Preview all emails at http://localhost:3000/rails/mailers/after_confirmation
+class AfterConfirmationPreview < ActionMailer::Preview
+
+end

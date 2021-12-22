@@ -12,9 +12,6 @@
 #
 # Foreign Keys
 #
-#  order_tags_order_id_fkey  (order_id => orders.id)
-#  order_tags_tag_id_fkey    (tag_id => tags.id)
-#
 class OrderTag < ApplicationRecord
   belongs_to :order
   belongs_to :tag

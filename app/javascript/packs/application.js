@@ -17,13 +17,16 @@ require('jquery');
 import 'bootstrap';
 import '../stylesheets/application.scss';
 import '../stylesheets/partner.scss';
-import './prefecture_for_edit_user_form';
-import './zip_for_edit_user_form';
 import './consult_recreation'; // recreationで料金相談するボタン
+import './expense_form';
+import './facility_count_form';
 import './prefectures';
 import '../events/order_form';
 import '../events/recreations';
+import '../events/edit_user_profile_form';
 import '../events/toggle_event_for_sidebar';
+import '../events/customer_report_form';
+import '../events/partner_report_form';
 
 import "@fortawesome/fontawesome-free/js/all"
 require.context('../images', true)

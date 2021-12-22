@@ -1,0 +1,25 @@
+<div class="header">
+  <div class="d-flex align-items-center justify-content-center position-relative">
+    <h2 class="m-2 pb-2 text-white font-weight-bold position-absolute start-0">
+      <%= link_to partners_order_path(@report.order.id) do %>
+        <i class="fas fa-arrow-left text-white"></i>
+      <% end %>
+    </h2>
+    <h2 class="m-2 pb-2 text-white font-weight-bold">終了報告</h2>
+    <%= render 'shared/partner/sidebar_toggle' %>
+  </div>
+</div>
+
+<div class="p-3">
+  <div class="p-4 text-black">
+    <p>
+      下記の項目をご記入ください。内容は施設が確認します。
+      送信した終了報告の内容を施設が承認いたしましたら、受取額が翌々月末に振り込まれます。
+      内容に間違いがある場合はチャットにて訂正依頼が届きます。
+    </p>
+  </div>
+
+  <div class="body bg-white border p-3 mb-3">
+    <%= render 'partners/reports/form', report: @report, url: partners_order_reports_path(@order.id) %>
+  </div>
+</div>

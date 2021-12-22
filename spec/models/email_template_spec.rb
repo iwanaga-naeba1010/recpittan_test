@@ -1,0 +1,18 @@
+# == Schema Information
+#
+# Table name: email_templates
+#
+#  id          :bigint           not null, primary key
+#  body        :text
+#  explanation :string
+#  kind        :integer
+#  signature   :text
+#  title       :string
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
+#
+require 'rails_helper'
+
+RSpec.describe EmailTemplate, type: :model do
+  pending "add some examples to (or delete) #{__FILE__}"
+end

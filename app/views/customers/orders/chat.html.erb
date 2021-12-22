@@ -2,16 +2,32 @@
   <div class="container pt-2">
     <nav aria-label="breadcrumb">
       <ol class="breadcrumb">
-        <% @breadcrumbs.each do |b| %>
-          <li class="breadcrumb-item"><a href="{{uri}}"><%= b[:name] %></a></li>
-        <% end %>
+        <li class="breadcrumb-item">
+          <%= link_to 'トップ', root_path %>
+        </li>
+        <li class="breadcrumb-item">
+          <%= link_to 'マイページ', customers_path %>
+        </li>
+        <li class="breadcrumb-item">
+          <%= link_to '依頼履歴', customers_path %>
+        </li>
+        <li class="breadcrumb-item">
+          <%= link_to '依頼詳細', customers_order_path(@order.id) %>
+        </li>
+        <li class="breadcrumb-item active">
+          <!-- TODO: Tag.categories.firstを表示 + ransack入れる -->
+          <span class="text-secondary">チャット</span>
+        </li>
       </ol>
     </nav>
   </div>
+
   <article class="container py-4 px-0">
     <div class="row">
       <div class="col-md-4">
-        <a href="" class="clink "><i class="material-icons ">navigate_before</i> 戻る</a>
+        <%= link_to customers_order_path(@order.id), class: 'clink' do %>
+          <i class="material-icons ">navigate_before</i> 戻る
+        <% end %>
         <div class="row align-items-center mt-2">
           <div class="col-md-4">
             <picture loading="lazy">
@@ -33,11 +49,16 @@
         </div>
         <div class="card mt-3">
           <div class="card-body p-0">
-            <!--            {{#if item.showCapacity}}-->
-            <!--            <div class="border-bottom p-2">-->
-            <!--              <h4 class="title">参加人数制限 {{item.capacity}}人まで</h4>-->
-            <!--            </div>-->
-            <!--            {{/if}}-->
+            <% if @order.recreation.capacity %>
+              <div class="border-bottom p-2">
+                <h4 class="title">
+                  参加人数制限
+                  <%= @order.recreation.capacity %>
+                  人まで
+                </h4>
+              </div>
+            <% end %>
+
             <div class="border-bottom p-2">
               <h4 class="title">所要時間 <%= @order.recreation_minutes %>分</h4>
             </div>
@@ -48,7 +69,7 @@
               <% end %>
             </div>
             <div class="p-2">
-              <%= link_to customers_recreations_path(@order.recreation.id), class: "clink" do %>
+              <%= link_to customers_recreation_path(@order.recreation.id), class: "clink" do %>
                 <span class="material-icons-text">レクの詳細を見る</span>
                 <i class="material-icons ">navigate_next</i>
               <% end %>
@@ -61,124 +82,69 @@
           <div class="card-body py-0">
             <div class="row justify-content-between border-bottom-dotted pb-2">
               <div class="col-auto">開催費</div>
-              <div class="col-auto">&yen;</div>
+              <div class="col-auto">&yen;
+                <%= price_pipe @order.regular_price %>
+              </div>
             </div>
             <div class="row justify-content-between border-bottom-dotted py-2">
               <div class="col-auto">材料費/1人<br><span
                 class="text-muted font-12 color-ba08">※材料費は人数分の費用が発生します</span></div>
-              <div class="col-auto">&yen;</div>
+              <div class="col-auto">&yen;
+                <%= number_to_currency @order.regular_material_price %></div>
             </div>
 
+            <div
+              id="TransportationExpenseForm"
+              expense="<%= @order.transportation_expenses %>"
+              target="transportation_expenses"
+              orderId="<%= @order.id %>">
+            </div>
 
-            <!--            {{#if showFacilityTransport}}-->
-            <!--            {{'交通費 編集モード'}}-->
-            <form action="{{catalogHomeUri}}/order/consult/{{order._id}}/update" class="consult" method="POST">
-              <input type="hidden" name="_csrf" value="{{csrfToken}}">
-              <div class="row justify-content-between border-bottom-dotted py-2">
-                <div class="col-3 align-self-center">交通費</div>
-                <div class="col-7">
-                  <input class="form-control text-end" name="facilityTransportPrice" type="number"
-                         id="facilityTransportPrice" min="0" value="{{order.facilityTransportPrice}}">
-                </div>
-                <div class="col-2 py-0">
+            <div
+              id="ExpenseForm"
+              expense="<%= @order.expenses %>"
+              target="expenses"
+              orderId="<%= @order.id %>">
+            </div>
 
-                  <button type="submit" name="action" value="transport_upadte"
-                          class="btn btn-inline-edit">
-                    <i class="material-icons color-pr10">done</i>
-                  </button>
-                </div>
-              </div>
-            </form>
-            <!--            {{else}}-->
-            <!--            <div class="row justify-content-between border-bottom-dotted py-2">-->
-            <!--              <div class="col-auto align-self-center">交通費-->
-            <!--                {{#unless formalRequestDisabled}}-->
-            <!--                <br>-->
-            <!--                <a href="{{addGetParam 'tr' 1}}" class="clink">編集</a>-->
-            <!--                {{/unless}}-->
-            <!--              </div>-->
-            <!--              <div class="col-auto">&yen;{{numeral order.facilityTransportPrice}}</div>-->
-            <!--            </div>-->
-            <!--            {{/if}}-->
-            <!--            {{#if showFacilityExtraExpense}}-->
-            <!--            {{'諸経費 編集モード'}}-->
-            <form action="{{catalogHomeUri}}/order/consult/{{order._id}}/update" class="consult" method="POST">
-              <input type="hidden" name="_csrf" value="{{csrfToken}}">
-              <div class="row justify-content-between py-2">
-                <div class="col-3 align-self-center">諸経費</div>
-                <div class="col-7">
-                  <input class="form-control text-end" name="facilityExtraExpensePrice" type="number"
-                         id="facilityExtraExpensePrice" value="{{order.facilityExtraExpensePrice}}">
-                </div>
-                <div class="col-2 py-0">
-                  <button type="submit" name="action" value="extra_expense_update"
-                          class="btn btn-inline-edit">
-                    <i class="material-icons color-pr10">done</i>
-                  </button>
-                </div>
-              </div>
-            </form>
-            <!--            {{else}}-->
-            <!--            <div class="row justify-content-between py-2">-->
-            <!--              <div class="col-auto align-self-center">諸経費-->
-            <!--                {{#unless formalRequestDisabled}}<br>-->
-            <!--                <a href="{{addGetParam 'ex' 1}}" class="clink">編集</a>-->
-            <!--                {{/unless}}-->
-            <!--              </div>-->
-            <!--              <div class="col-auto">&yen;{{numeral order.facilityExtraExpensePrice}}</div>-->
-            <!--            </div>-->
-            <!--            {{/if}}-->
-            <!--            {{#if showAdditionalCount}}-->
-            <!--            {{'追加施設数 編集モード'}}-->
-            <!--            <form action="{{catalogHomeUri}}/order/consult/{{order._id}}/update" class="consult" method="POST">-->
-            <!--              <input type="hidden" name="_csrf" value="{{csrfToken}}">-->
-            <!--              <div class="row justify-content-between border-top-dotted py-2">-->
-            <!--                <div class="col-3 align-self-center">追加施設数</div>-->
-            <!--                <div class="col-7">-->
-            <!--                  <input class="form-control text-end" name="additionalCount" type="number"-->
-            <!--                         id="additionalCount" value="{{order.additionalCount}}">-->
-            <!--                </div>-->
-            <!--                <div class="col-2 py-0">-->
-            <!--                  <button type="submit" name="action" value="additional_count_update"-->
-            <!--                          class="btn btn-inline-edit">-->
-            <!--                    <i class="material-icons color-pr10">done</i>-->
-            <!--                  </button>-->
-            <!--                </div>-->
-            <!--              </div>-->
-            <!--            </form>-->
+            <div
+              id="NumberOfFacilitiesForm"
+              numberOfFacilities="<%= @order.number_of_facilities %>"
+              additionalFee="<%= @order.additional_facility_fee %>"
+              orderId="<%= @order.id %>">
+            </div>
+
             <!--            {{else}}-->
             <!--            {{#if isOnline}}-->
-            <!--            <div class="row justify-content-between border-top-dotted py-2">-->
-            <!--              <div class="col-12 align-self-center">追加施設数 {{order.additionalCount}} 施設<br>-->
-            <!--                <a href="{{addGetParam 'fc' 1}}" class="clink">編集</a>-->
-            <!--              </div>-->
-            <!--              <div class="col-7 align-self-center">追加施設費</div>-->
-            <!--              <div class="col-auto">-->
-            <!--                &yen;{{numeral task.additionalPrice}}-->
-            <!--              </div>-->
-            <!--              <div col-12>-->
-            <!--                <span class="text-muted font-12 color-ba08">※1施設追加する事に費用が発生します</span>-->
-            <!--              </div>-->
-            <!--            </div>-->
-            <!--            {{/if}}-->
-            <!--            {{/if}}-->
+            <!--                        <div class="row justify-content-between border-top-dotted py-2">-->
+            <!--                          <div class="col-12 align-self-center">追加施設数 {{order.additionalCount}} 施設<br>-->
+            <!--                            <a href="{{addGetParam 'fc' 1}}" class="clink">編集</a>-->
+            <!--                          </div>-->
+            <!--                          <div class="col-7 align-self-center">追加施設費</div>-->
+            <!--                          <div class="col-auto">-->
+            <!--                            &yen;{{numeral task.additionalPrice}}-->
+            <!--                          </div>-->
+            <!--                          <div col-12>-->
+            <!--                            <span class="text-muted font-12 color-ba08">※1施設追加する事に費用が発生します</span>-->
+            <!--                          </div>-->
+            <!--                        </div>-->
+
             <div class="row justify-content-between border-top py-3">
-              <div class="col-auto">合計</div>
-              <div class="col-auto">&yen;~</div>
+              <div class="col-auto">合計(税別)</div>
+              <div id="totalPriceForSidenav" class="col-auto">&yen;
+                <%= price_pipe(@order.total_price_for_customer) %>
+              </div>
             </div>
             <div class="row justify-content-center py-3">
               <div class="col-auto">
-                <!--                {{#if formalRequestDisabled}}-->
-                <!--                <span class="btn-cpr disabled">レクを正式依頼へ進む</span>-->
-                <!--                {{else}}-->
-                <% if @order.status.consult? %>
+                <!-- NOTE: 正式依頼するタイミングでstart_atが入るので、こちら利用 -->
+                <% if @order.start_at.blank? %>
                   <button id="order-modal" class="btn-cpr" data-bs-toggle="modal" data-bs-target="#orderModal">
                     レクを正式依頼へ進む
                   </button>
-                  <% else %>
+                <% else %>
                   <button class="btn-cpr disabled">正式依頼済みです</button>
                 <% end %>
-                <!--{{/if}}-->
               </div>
             </div>
           </div>
@@ -191,3 +157,19 @@
     <%= render 'shared/customer/order/order_modal', order: @order %>
   </article>
 </main>
+
+<!-- NOTE: Reactで動的に料金を制御するための値table的な箇所. 絶対に消しちゃだめ!!!! -->
+<div class="invisible">
+  <div id="regularPrice"><%= @order.regular_price %></div>
+  <div id="regularMaterialPrice"><%= @order.regular_material_price %></div>
+  <div id="transportationExpensesPrice"><%= @order.transportation_expenses %></div>
+  <!-- TODO: recの金額に合わせる -->
+  <div id="additionalFacilitiesPrice">
+    <% if @order.number_of_facilities.present? %>
+      <%= @order.number_of_facilities * 2000 %>
+    <% else %>
+      0
+    <% end %>
+  </div>
+  <div id="expensesPrice"><%= @order.expenses %></div>
+</div>

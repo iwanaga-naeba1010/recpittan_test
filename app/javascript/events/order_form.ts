@@ -1,13 +1,15 @@
 /**
- * order/newのprefectureとcityを動的に扱うformです
+ * order/newと正式依頼のprefectureとcityを動的に扱うformです
  */
 import * as $ from 'jquery';
 import { findAllPrefectures, findCityByPrefectureCode } from '../packs/prefectures';
+import { findAddressByZip } from '../packs/zip';
 
 (() => {
   document.addEventListener('turbolinks:load', async () => {
     // 都道府県を初期化
     const prefectures = await findAllPrefectures();
+    // NOTE: order/newだけでなく正式依頼formのも適用される
     prefectures.result.map((prefecture) => {
       $('#order_prefecture').append($('<option>', {
         value: prefecture.prefName,
@@ -36,6 +38,15 @@ import { findAllPrefectures, findCityByPrefectureCode } from '../packs/prefectur
   
     $(document).on('ajax:error', () => {
       console.log('失敗!!!!');
+    });
+
+    // NOTE: 正式依頼のzipの郵便番号をevent経由で動的set
+    $('#searchAddressWithZipForOrder').on('click', async () => {
+      const zip: string = $('#order_zip').val() as string;
+      const address = await findAddressByZip(zip);
+      $('#order_prefecture').val(address.results[0].address1);
+      $('#order_city').val(address.results[0].address2);
+      $('#order_street').val(address.results[0].address3);
     });
   });
 })();

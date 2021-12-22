@@ -15,7 +15,6 @@ Rails.application.routes.draw do
 
   resources :customers, only: %i[index]
   namespace :customers do
-    resources :chats, only: %i[create]
 
     resources :recreations, only: [:show, :index], shallow: true do
       resources :orders, except: [:edit, :destroy, :index] do
@@ -23,6 +22,9 @@ Rails.application.routes.draw do
           get :chat
           get :complete
         end
+
+        resources :chats, only: %i[create]
+        resources :reports, only: %i[edit update]
       end
     end
   end
@@ -30,17 +32,26 @@ Rails.application.routes.draw do
   resources :partners, only: %i[index]
   namespace :partners do
     get :tos
-    resources :chats, only: %i[create]
 
-    resources :orders, only: %i[show] do
+    resources :orders, only: %i[show update] do
       member do
         get :chat
+        get :confirm
+        get :complete
+      end
+
+      resources :chats, only: %i[create]
+      resources :reports, only: %i[new create edit update] do
+        member do
+          get :complete
+        end
       end
     end
   end
 
   namespace :api do
     resources :slack_notifiers, only: %i[create]
+    resources :orders, only: %i[update]
   end
 
   mount LetterOpenerWeb::Engine, at: '/letter_opener' if Rails.env.development?
