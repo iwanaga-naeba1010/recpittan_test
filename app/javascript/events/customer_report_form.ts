@@ -8,7 +8,7 @@ import * as $ from 'jquery';
     // NOTE: 都道府県を初期化
     const accept = () => {};
     const deny = () => {};
-    
+
     $('#approveModalSubmit').on('click', () => {
       // TODO: status:acceptedをformにhiddenで入れる
       // TODO: その後submitをclickeさせる
@@ -20,7 +20,7 @@ import * as $ from 'jquery';
       $('input[type=submit]').click();
       console.log('approveModalSubmit clicked!!!');
     })
-  
+
     $('#rejectModalSubmit').on('click', () => {
       // TODO: status:deniedをformにhiddenで入れる
       // TODO: その後submitをclickeさせる
