@@ -1,7 +1,8 @@
 <div class="header">
   <div>
     <h2 class="text-white font-weight-bold p-2">
-      <%= link_to "#" do %>
+      <% path = @order.is_accepted ? partners_order_path(id: @order.id, is_accepted: @order.is_accepted) : chat_partners_order_path(@order.id) %>
+      <%= link_to path do %>
         <i class="fas fa-arrow-left text-white"></i>
       <% end %>
       <%= @order.recreation.instructor_name %>
@@ -13,36 +14,54 @@
   <h4 class="text-black font-weight-bold">施設情報</h4>
   <table class="w-100">
     <thead>
-      <tr class="border-bottom">
-        <td class="pt-2 pb-2 w-25">施設名</td>
-        <td class="pt-2 pb-2 text-black text-end">有料老人ホームえぶりプラス</td>
-      </tr>
-      <tr class="border-bottom">
-        <td class="pt-2 pb-2 w-25">担当者</td>
-        <td class="pt-2 pb-2 text-black text-end">向　宇希</td>
-      </tr>
-      <tr class="border-bottom">
-        <td class="pt-2 pb-2 w-25">住所</td>
-        <td class="pt-2 pb-2 text-black text-end">愛知県名古屋市中村区井深町1-1新名古屋センタービル本陣街</td>
-      </tr>
+    <tr class="border-bottom">
+      <td class="pt-2 pb-2 w-25">施設名</td>
+      <td class="pt-2 pb-2 text-black text-end">
+        <%= @order.user.company.name %>
+      </td>
+    </tr>
+    <tr class="border-bottom">
+      <td class="pt-2 pb-2 w-25">担当者</td>
+      <td class="pt-2 pb-2 text-black text-end">
+        <%= @order.user.company.person_in_charge_name %>
+      </td>
+    </tr>
+    <tr class="border-bottom">
+      <td class="pt-2 pb-2 w-25">住所</td>
+      <td class="pt-2 pb-2 text-black text-end">
+        <%= @order.user.company.full_address %>
+      </td>
+    </tr>
     </tbody>
   </table>
   <div>
     <h4 class="text-black font-weight-bold pt-3">レク情報</h4>
     <table class="w-100">
       <thead>
-        <tr class="border-bottom">
-          <td class="pt-2 pb-2 w-25">レク名</td>
-          <td class="pt-2 pb-2 text-black text-end">オモロさ折り紙付きコンビＳＰＡＮ！によるお笑い介護レクリエーション</td>
-        </tr>
-        <tr class="border-bottom">
-          <td class="pt-2 pb-2 w-25">レク環境</td>
-          <td class="pt-2 pb-2 text-black text-end">オンライン</td>
-        </tr>
-        <tr class="border-bottom">
-          <td class="pt-2 pb-2 w-25">ステータス</td>
-          <td class="pt-2 pb-2 text-black text-end">相談中</td>
-        </tr>
+      <tr class="border-bottom">
+        <td class="pt-2 pb-2 w-25">レク名</td>
+        <td class="pt-2 pb-2 text-black text-end">
+          <%= @order.recreation.title %>
+        </td>
+      </tr>
+      <tr class="border-bottom">
+        <td class="pt-2 pb-2 w-25">レク環境</td>
+        <td class="pt-2 pb-2 text-black text-end">
+          <%= @order.recreation.is_online ? 'オンライン' : 'オフライン' %>
+        </td>
+      </tr>
+      <tr class="border-bottom">
+        <td class="pt-2 pb-2 w-25">ステータス</td>
+        <td class="pt-2 pb-2 text-black text-end">
+          <%= I18n.t("partner.order.status.#{@order.status}") %>
+        </td>
+      </tr>
+      <tr class="border-bottom">
+        <td class="pt-2 pb-2 w-25">開催日時</td>
+        <td class="pt-2 pb-2 text-black text-end">
+          <%= @order.desired_time %>
+        </td>
+      </tr>
       </tbody>
     </table>
   </div>
@@ -50,30 +69,42 @@
     <h4 class="text-black font-weight-bold">レク費用</h4>
     <table class="w-100">
       <thead>
-        <tr class="border-bottom">
-          <td class="pt-2 pb-2 text-black w-75">開催費</td>
-          <td class="pt-2 pb-2 text-black text-end">¥15,000</td>
-        </tr>
-        <tr class="border-bottom">
-          <td class="pt-2 pb-2 text-black w-75">材料費/1人あたり<br>※材料費は人数分の費用が発生します。</td>
-          <td class="pt-2 pb-2 text-black text-end">¥0</td>
-        </tr>
-        <tr class="border-bottom">
-          <td class="pt-2 pb-2 text-black w-75">交通費</td>
-          <td class="pt-2 pb-2 text-black text-end">¥5,000</td>
-        </tr>
-        <tr class="border-bottom">
-          <td class="pt-2 pb-2 text-black w-75">諸経費</td>
-          <td class="pt-2 pb-2 text-black text-end">¥5,000</td>
-        </tr>
-        <tr class="border-bottom">
-          <td class="pt-2 pb-2 text-black w-75">追加施設費/追加施設 0施設<br>※1施設追加する事に費用が発生します。</td>
-          <td class="pt-2 pb-2 text-black text-end">¥0</td>
-        </tr>
-        <tr class="border-bottom text-black font-weight-bold">
-          <td class="pt-2 pb-2">合計</td>
-          <td class="pt-2 pb-2 text-end">¥25,000</td>
-        </tr>
+      <tr class="border-bottom">
+        <td class="pt-2 pb-2 text-black w-75">開催費</td>
+        <td class="pt-2 pb-2 text-black text-end">¥
+          <%= number_to_currency @order.instructor_amount %>
+        </td>
+      </tr>
+      <tr class="border-bottom">
+        <td class="pt-2 pb-2 text-black w-75">材料費/1人あたり<br><span class="text-secondary">※材料費は人数分の費用が発生します。</span></td>
+        <td class="pt-2 pb-2 text-black text-end">¥
+          <%= number_to_currency @order.instructor_material_amount %>
+        </td>
+      </tr>
+      <tr class="border-bottom">
+        <td class="pt-2 pb-2 text-black w-75">交通費</td>
+        <td class="pt-2 pb-2 text-black text-end">¥
+          <%= number_to_currency @order.transportation_expenses %>
+        </td>
+      </tr>
+      <tr class="border-bottom">
+        <td class="pt-2 pb-2 text-black w-75">諸経費</td>
+        <td class="pt-2 pb-2 text-black text-end">¥
+          <%= number_to_currency @order.expenses_for_partner %>
+        </td>
+      </tr>
+      <tr class="border-bottom">
+        <td class="pt-2 pb-2 text-black w-75">追加施設費/追加施設 <%= @order.number_of_facilities %>施設<br>※1施設追加する事に費用が発生します。
+        </td>
+        <td class="pt-2 pb-2 text-black text-end">
+            <%= number_to_currency @order.total_facility_price_for_partner %>
+        </td>
+      </tr>
+      <tr class="border-bottom text-black font-weight-bold">
+        <td class="pt-2 pb-2">合計(税込)</td>
+        <td class="pt-2 pb-2 text-end">¥
+          <%= number_to_currency @order.total_price_for_partner %></td>
+      </tr>
       </tbody>
     </table>
   </div>
@@ -83,9 +114,56 @@
       <li>材料費が発生するなど人数確認が必要なレクの場合、期日までに参加人数の確認の依頼をお願い致します。</li>
       <li>施設から期日までに連絡がない場合は、施設に確認のご連絡をお願い致します。</li>
     </ul>
-    <p>施設から正式依頼が届いた場合、次へ進むことができます。</p>
   </div>
-  <div class="col-md-12 text-center">
-    <button type="button" class="btn btn-secondary btn-lg btn-block w-75 p-3">正式依頼の内容を確認する</button>
+
+  <div class="col-md-12">
+    <% if @order.start_at.present? && !@order.is_accepted %>
+      <p>施設から正式依頼が届いた場合、次へ進むことができます。</p>
+      <div class="text-center my-3">
+        <%= link_to '正式依頼の内容を確認する', confirm_partners_order_path(@order.id), class: 'text-white btn btn-primary btn-lg btn-block w-75 p-3' %>
+      </div
+    <!-- 日字指定 && 承認していない || 日時が未来 && 承認した -->
+    <% elsif (@order.start_at.blank? && !@order.is_accepted) || (@order.start_at >= Time.current && @order.is_accepted) %>
+      <p>施設から正式依頼が届いた場合、次へ進むことができます。</p>
+      <div class="text-center my-3">
+        <button class="text-white btn btn-secondary btn-lg btn-block w-75 p-3 disabled">正式依頼の内容を確認する</button>
+      </div>
+    <!--開始時間が過ぎている && レポートがない -->
+    <% elsif @order.start_at <= Time.current && @order.report.blank? %>
+      <p>開催が終了した後、レクの終了報告を行いますと受取額が明確になります。</p>
+      <% path = @order.report.blank? ? new_partners_order_report_path(@order.id) : edit_partners_order_report_path(id: @order.report.id, order_id: @order.id) %>
+      <div class="text-center my-3">
+        <%= link_to '終了報告をする', path, class: 'mx-auto text-white btn btn-primary btn-lg btn-block w-75 p-3' %>
+      </div>
+      <p>
+        日程を変更したい場合は以下の点をご確認の上
+        <%= link_to 'お問い合わせください。', 'https://form.run/@info-1638765255', target: '_blank', class: 'text-info' %>
+      </p>
+      <ul>
+        <li>原則レクの正式依頼が承認された場合キャンセルはできません。</li>
+        <li>正式依頼承認後、日程を変更したい場合は施設とチャットで変更時間を調整していただき、決まった日時をエブリプラスにご連絡ください。</li>
+      </ul>
+    <% elsif @order.start_at <= Time.current && @order.report.present? %>
+      <p>開催が終了した後、レクの終了報告を行いますと受取額が明確になります。</p>
+      <div class="text-center my-3">
+        <button class="text-white btn btn-secondary btn-lg btn-block w-75 p-3 disabled">終了報告済みです</button>
+      </div>
+      <div class="my-3 p-3 rounded" style="background-color: #dcdcdc">
+        <p>※振込について</p>
+        振込は翌々月末に行われます。土日祝日の場合次の営業日となります。
+      </div>
+      <p>
+        日程を変更したい場合は以下の点をご確認の上
+        <%= link_to 'お問い合わせください。', 'https://form.run/@info-1638765255', target: '_blank', class: 'text-info' %>
+      </p>
+      <ul>
+        <li>原則レクの正式依頼が承認された場合キャンセルはできません。</li>
+        <li>正式依頼承認後、日程を変更したい場合は施設とチャットで変更時間を調整していただき、決まった日時をエブリプラスにご連絡ください。</li>
+      </ul>
+    <% else %>
+      <div class="text-center my-3">
+        <button class="text-white btn btn-secondary btn-lg btn-block w-75 p-3 disabled">正式依頼の内容を確認する</button>
+      </div>
+    <% end %>
   </div>
 </div>

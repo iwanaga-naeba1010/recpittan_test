@@ -1,8 +1,24 @@
 # frozen_string_literal: true
 
 ActiveAdmin.register Order do
+  includes :user
+
   permit_params(
-    %i[user_id recreation_id prefecture city number_of_people status is_online is_accepted date_and_time],
+    %i[
+      user_id recreation_id zip prefecture city street building number_of_people
+      number_of_facilities status
+      is_accepted
+      start_at
+      end_at
+      regular_price
+      instructor_amount
+      regular_material_price
+      instructor_material_amount
+      additional_facility_fee
+      transportation_expenses
+      support_price
+      expenses
+    ],
     )
   actions :all, except: [:destroy]
 
@@ -19,18 +35,55 @@ ActiveAdmin.register Order do
       tab '詳細' do
         attributes_table do
           row :id
-          row :status
+          row(:status) {|rec| rec.status_text}
           row :user
           row :recreation
+          row :zip
           row :prefecture
           row :city
+          row :street
+          row :building
           row :number_of_people
-          row :is_online
+          row :number_of_facilitiese
           row :is_accepted
-          row :date_and_time
+          row :start_at
+          row :end_at
+          row :regular_price
+          row :instructor_amount
+          row :regular_material_price
+          row :instructor_material_amount
+          row :additional_facility_fee
+          row :transportation_expenses
+          row :expenses
+          row :support_price
 
           row :created_at
           row :updated_at
+        end
+
+        panel '終了報告', style: 'margin-top: 30px;' do
+          table_for order.report do
+            column :id
+            column :status
+            column :number_of_facilities
+            column :number_of_people
+            column :expenses
+            column :transportation_expenses
+            column :body
+          end
+        end
+
+        panel '評価', style: 'margin-top: 30px;' do
+          table_for order.report&.evaluation do
+            column(:communication) { |evaluation| evaluation&.communication_text }
+            column(:ingenuity) { |evaluation| evaluation&.ingenuity_text }
+            column(:price) { |evaluation| evaluation&.price_text }
+            column(:smoothness) { |evaluation| evaluation&.smoothness_text }
+            column(:want_to_order_agein) { |evaluation| evaluation&.want_to_order_agein_text }
+            column :message
+            column :other_message
+
+          end
         end
       end
       tab 'メモ' do
@@ -42,6 +95,17 @@ ActiveAdmin.register Order do
           render 'admin/chat', order: order
         end
       end
+
+      tab '請求情報' do
+        panel '施設請求額', style: 'margin-top: 30px;' do
+          render 'admin/order_fee_table', order: order, kind: :customer
+        end
+
+        panel 'パートナー支払額', style: 'margin-top: 30px;' do
+          render 'admin/order_fee_table', order: order, kind: :partner
+        end
+      end
+
     end
   end
 
@@ -51,16 +115,31 @@ ActiveAdmin.register Order do
     f.inputs do
       f.input :user,
               as: :select,
-              collection: User.customers.map { |i| [i.company&.name, i.id] },
+              collection: User.includes(:company).customers.map { |i| [i.company&.name, i.id] },
               input_html: { class: 'select2' }
       f.input :recreation,
               input_html: { class: 'select2' }
+      f.input :zip
       f.input :prefecture
       f.input :city
+      f.input :street
+      f.input :building
       f.input :number_of_people
+      f.input :number_of_facilities
       f.input :status, as: :select, collection: Order.status.values.map { |i| [i.text, i] }
       f.input :is_accepted
-      f.input :date_and_time, as: :date_time_picker
+      f.input :start_at, as: :date_time_picker
+      f.input :end_at, as: :date_time_picker
+
+      f.input :regular_price
+      f.input :instructor_amount
+      f.input :regular_material_price
+      f.input :instructor_material_amount
+      f.input :additional_facility_fee
+      f.input :support_price
+
+      f.input :transportation_expenses
+      f.input :expenses
     end
 
     f.actions
@@ -94,5 +173,40 @@ EOS
       order.save
       redirect_to admin_order_path(order.id)
     end
+
+    def update
+      # NOTE: finished以降でreportと評価がなければ自動で追加する修正
+      order = Order.find(params[:id].to_i)
+      list = ['finished', 'invoice_issued', 'paid', 'canceled', 'travled']
+
+      is_contains = list.map { |l| permitted_params[:order][:status]&.include?(l) }.compact.uniq.delete_if { |v| v==false }
+
+      if is_contains&.first == true
+
+        if order.report.blank?
+          order.create_report(
+            expenses: order.expenses,
+            number_of_facilities: order.number_of_facilities,
+            number_of_people: order.number_of_people,
+            status: :accepted,
+            transportation_expenses: order.transportation_expenses
+          )
+          order.report.create_evaluation(
+            communication: 0,
+            ingenuity: 0,
+            price: 0,
+            smoothness: 0,
+            want_to_order_agein: 0,
+            message: '管理画面からの自動入力です',
+            other_message: '管理画面からの自動入力です'
+          )
+        end
+      end
+
+      order.update(permitted_params[:order])
+      redirect_to admin_order_path(order.id)
+
+    end
   end
+
 end

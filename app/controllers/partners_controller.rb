@@ -2,11 +2,15 @@
 
 class PartnersController < Partners::ApplicationController
   def index
-    @orders = current_user.recreations.map(&:orders).flatten
-  end
+    is_accepted = params[:is_accepted]&.to_s&.downcase == 'true'
 
-  # TODO: ここでtosのhtmlデータを取得して表示する
-  # https://everyplus.jp/tos/partner/index.html?
-  # NOTE: best_practicesで引っかかるので一旦コメント
-  # def tos; end
+    unless is_accepted
+      @orders = current_user.recreations.map do |rec|
+        rec.orders.not_accepted_by_partner
+      end.flatten.uniq
+      return
+    end
+
+    @orders = current_user.recreations.map { |rec| rec.orders.accepted_by_partner }.flatten.uniq
+  end
 end
