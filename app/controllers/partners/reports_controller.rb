@@ -9,6 +9,12 @@ class Partners::ReportsController < Partners::ApplicationController
 
   def create
     @order.build_report(params_create)
+    # NOTE: 冗長だけど、更新のために必要
+    @order.status = :final_report_admits_not
+    @order.number_of_people = params_create[:number_of_people]
+    @order.transportation_expenses = params_create[:transportation_expenses]
+    @order.expenses = params_create[:transportation_expenses]
+    @order.number_of_facilities = params_create[:number_of_facilities]
 
     if @order.save
       CustomerCompleteReportMailer.notify(@order).deliver_now
@@ -24,7 +30,13 @@ class Partners::ReportsController < Partners::ApplicationController
 
   def update
     if @order.report.update(params_create)
-      @order.update(status: :final_report_admits_not)
+      @order.update(
+        status: :final_report_admits_not,
+        number_of_people: params_create[:number_of_people],
+        transportation_expenses: params_create[:transportation_expenses],
+        expenses: params_create[:expenses],
+        number_of_facilities: params_create[:number_of_facilities],
+      )
       CustomerCompleteReportMailer.notify(@order).deliver_now
       redirect_to partners_order_path(@order.id), notice: '終了報告を更新しました！'
     else
@@ -56,7 +68,7 @@ class Partners::ReportsController < Partners::ApplicationController
   def params_create
     params.require(:report).permit(
       :body, :expenses, :number_of_facilities,
-      :number_of_people, :number_of_people, :transportation_expenses
+      :number_of_people, :transportation_expenses
     )
   end
 end
