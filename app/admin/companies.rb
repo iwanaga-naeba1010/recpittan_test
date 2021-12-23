@@ -13,6 +13,13 @@ ActiveAdmin.register Company do
 
   actions :all, except: [:destroy]
 
+  filter :id
+  filter :name
+  filter :facility_name
+  filter :person_in_charge_name
+  filter :zip
+  filter :prefecture
+
   index do
     id_column
     column :name

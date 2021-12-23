@@ -1,16 +1,15 @@
 # frozen_string_literal: true
 
-# NOTE: 日本語にするとバグる
 ActiveAdmin.register Partner do
-  scope :partner, default: true do
-    User.where(role: :partner)
-  end
-
   menu priority: 3
   permit_params(
     %i[username username_kana role email]
   )
   actions :all
+
+  filter :id
+  filter :username
+  filter :email
 
   index do
     id_column

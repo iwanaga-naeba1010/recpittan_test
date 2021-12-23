@@ -22,6 +22,9 @@ ActiveAdmin.register Order do
     )
   actions :all
 
+  filter :user, collection: proc { User.includes(:company).customers.map { |i| [i.company&.facility_name, i.id] } }
+  filter :recreation
+
   index do
     id_column
     column(:user) { |order| link_to order.user.company.facility_name, admin_company_path(order.user.company.id) }
@@ -205,7 +208,6 @@ EOS
 
       order.update(permitted_params[:order])
       redirect_to admin_order_path(order.id)
-
     end
   end
 
