@@ -15,6 +15,12 @@ ActiveAdmin.register Recreation do
   )
   actions :all
 
+  filter :title
+  filter :second_title
+  filter :minutes
+  filter :regular_price
+  filter :is_public
+
   index do
     id_column
     column :user
