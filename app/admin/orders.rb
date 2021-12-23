@@ -24,7 +24,7 @@ ActiveAdmin.register Order do
 
   index do
     id_column
-    column :user
+    column(:user) { |order| link_to order.user.company.facility_name, admin_company_path(order.user.company.id) }
     column :recreation
 
     actions
