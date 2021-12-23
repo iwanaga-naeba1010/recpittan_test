@@ -20,11 +20,14 @@ ActiveAdmin.register Order do
       expenses
     ],
     )
-  actions :all, except: [:destroy]
+  actions :all
+
+  filter :user, collection: proc { User.includes(:company).customers.map { |i| [i.company&.facility_name, i.id] } }
+  filter :recreation
 
   index do
     id_column
-    column :user
+    column(:user) { |order| link_to order.user.company.facility_name, admin_company_path(order.user.company.id) }
     column :recreation
 
     actions
@@ -36,7 +39,7 @@ ActiveAdmin.register Order do
         attributes_table do
           row :id
           row(:status) {|rec| rec.status_text}
-          row :user
+          row(:user) { |rec| link_to order.user.company.facility_name, admin_company_path(order.user.company.id) }
           row :recreation
           row :zip
           row :prefecture
@@ -115,7 +118,7 @@ ActiveAdmin.register Order do
     f.inputs do
       f.input :user,
               as: :select,
-              collection: User.includes(:company).customers.map { |i| [i.company&.name, i.id] },
+              collection: User.includes(:company).customers.map { |i| [i.company&.facility_name, i.id] },
               input_html: { class: 'select2' }
       f.input :recreation,
               input_html: { class: 'select2' }
@@ -205,7 +208,6 @@ EOS
 
       order.update(permitted_params[:order])
       redirect_to admin_order_path(order.id)
-
     end
   end
 

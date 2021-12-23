@@ -32,4 +32,6 @@
 #  users_company_id_fkey  (company_id => companies.id)
 #
 class Partner < User
+  # NOTE: 本来使うべきではないが、管理画面のためだけに使うので、ひとまず許容
+  default_scope { where(role: :partner) }
 end
