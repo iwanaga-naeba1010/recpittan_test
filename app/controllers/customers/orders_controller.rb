@@ -42,6 +42,10 @@ class Customers::OrdersController < Customers::ApplicationController
       message = <<EOS
         リクエスト内容
         #{@order.title}
+
+        希望日時
+        #{parse_order_date(@order.order_dates)}
+
         希望人数
         #{@order.number_of_people}人
 
@@ -130,6 +134,27 @@ EOS
 
     str
   end
+
+
+
+
+
+  def parse_order_date(dates)
+    return '' if dates.blank?
+
+    str = ''
+    dates.each_with_index do |date, i|
+      str += "#{i + 1}:#{date.year}/#{date.month}/#{date.date} #{date.start_hour}:#{date.start_minute}~#{date.end_hour}:#{date.end_minute}\n"
+    end
+
+    str
+  end
+
+
+
+
+
+
 
   def params_create
     params.require(:order).permit(
