@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_12_19_081616) do
+ActiveRecord::Schema.define(version: 2021_12_26_125428) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -76,6 +76,20 @@ ActiveRecord::Schema.define(version: 2021_12_19_081616) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["report_id"], name: "index_evaluations_on_report_id"
+  end
+
+  create_table "order_dates", force: :cascade do |t|
+    t.bigint "order_id", null: false
+    t.integer "year"
+    t.integer "month"
+    t.integer "date"
+    t.integer "start_hour"
+    t.integer "start_minute"
+    t.integer "end_hour"
+    t.integer "end_minute"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["order_id"], name: "index_order_dates_on_order_id"
   end
 
   create_table "order_memos", force: :cascade do |t|
@@ -214,6 +228,7 @@ ActiveRecord::Schema.define(version: 2021_12_19_081616) do
   add_foreign_key "chats", "orders", name: "chats_order_id_fkey"
   add_foreign_key "chats", "users", name: "chats_user_id_fkey"
   add_foreign_key "evaluations", "reports"
+  add_foreign_key "order_dates", "orders"
   add_foreign_key "order_memos", "orders", name: "order_memos_order_id_fkey"
   add_foreign_key "orders", "recreations", name: "orders_recreation_id_fkey"
   add_foreign_key "orders", "users", name: "orders_user_id_fkey"

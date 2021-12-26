@@ -7,6 +7,7 @@ class Customers::OrdersController < Customers::ApplicationController
   def new
     @recreation = Recreation.find(params[:recreation_id])
     @order = @recreation.orders.build
+    @order.order_dates.build
   end
 
   def show; end
@@ -22,19 +23,25 @@ class Customers::OrdersController < Customers::ApplicationController
   # rubocop:disable Metrics/AbcSize
   def create
     @order = @recreation.orders.build(params_create)
+    # date_value = params_create.to_h[:dates].to_a[0].to_a[1].values
+    # date = []
+    # date_value.each do |v|
+    #   date << v if v === "ー"
+    # end
+
+    # unless date.length === 0 || date.length === 7
+    #   render new
+    # end
 
     ActiveRecord::Base.transaction do
       @order.save!
-      dates = params_create.to_h[:dates]
+      # dates = params_create.to_h[:dates]
 
       # TODO: 希望日時が空でも大丈夫なようにする
       # TODO: EOS入力にすればタブが入ってしまったようなmessageは解消が可能
       message = <<EOS
         リクエスト内容
         #{@order.title}
-        希望日時
-        #{parse_date(dates)}
-
         希望人数
         #{@order.number_of_people}人
 
@@ -67,8 +74,8 @@ EOS
 EOS
       SlackNotifier.new(channel: '#料金お問い合わせ').send('新規お問い合わせ', slack_message)
       # TODO: jobで回した方が良い
-      CustomerChatStartMailer.notify(@order, current_user).deliver_now
-      PartnerChatStartMailer.notify(@order, current_user).deliver_now
+      # CustomerChatStartMailer.notify(@order, current_user).deliver_now
+      # PartnerChatStartMailer.notify(@order, current_user).deliver_now
       # orderの詳細に飛ばす
       redirect_to chat_customers_order_path(@order.id)
     end
@@ -137,8 +144,11 @@ EOS
       :instructor_material_amount,
       :additional_facility_fee,
       :start_at,
-      { dates: {} },
-      { tags: [] }
+      # { dates: {} },
+      { tags: [] },
+      order_dates_attributes:[
+        :id, :year, :month, :date, :start_hour, :start_minute, :end_hour, :end_minute,
+      ]
     )
   end
 end

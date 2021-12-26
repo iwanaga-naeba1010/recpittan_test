@@ -45,6 +45,9 @@ class Order < ApplicationRecord
   has_many :order_memos, dependent: :destroy
   accepts_nested_attributes_for :order_memos, allow_destroy: true
 
+  has_many :order_dates
+  accepts_nested_attributes_for :order_dates
+
   has_one :report, dependent: :destroy
 
   delegate :title, to: :recreation, prefix: true
@@ -60,7 +63,7 @@ class Order < ApplicationRecord
 
   # controller のparamsに追加するため
   attribute :title # まずは相談したい、のメッセージ部分
-  attribute :dates
+  # attribute :dates
   attribute :message
   attribute :tags
 
