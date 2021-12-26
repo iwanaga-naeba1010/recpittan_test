@@ -35,6 +35,7 @@ class Customers::OrdersController < Customers::ApplicationController
 
     ActiveRecord::Base.transaction do
       @order.save!
+      binding.pry
       # dates = params_create.to_h[:dates]
 
       # TODO: 希望日時が空でも大丈夫なようにする
@@ -135,10 +136,6 @@ EOS
     str
   end
 
-
-
-
-
   def parse_order_date(dates)
     return '' if dates.blank?
 
@@ -149,12 +146,6 @@ EOS
 
     str
   end
-
-
-
-
-
-
 
   def params_create
     params.require(:order).permit(
@@ -169,7 +160,6 @@ EOS
       :instructor_material_amount,
       :additional_facility_fee,
       :start_at,
-      # { dates: {} },
       { tags: [] },
       order_dates_attributes:[
         :id, :year, :month, :date, :start_hour, :start_minute, :end_hour, :end_minute,

@@ -96,6 +96,14 @@ ja:
         additional_facility_fee: 施設追加費用
         transportation_expenses: 交通費
         expenses: 諸経費
+      order_date:
+        year: 年
+        month: 月
+        date: 日
+        start_hour: 希望時間
+        start_minute: ""
+        end_hour: ""
+        end_minute: ""
       report:
         additional_number_of_people: 追加人数
         number_of_people: 参加人数
