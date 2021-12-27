@@ -27,17 +27,16 @@ class Customers::OrdersController < Customers::ApplicationController
 
     entry_date = []
     @order.order_dates.each do |d|
+      order_date = "#{d.year}/#{d.month}/#{d.date}"
       date_ary = [d.year, d.month, d.date, d.start_hour, d.start_minute, d.end_hour, d.end_minute]
-      entry_date << d if date_ary.compact.length === 0 || date_ary.compact.length === 7
-    end
-
-    if entry_date.length != 3
-      render new
+      entry_date << d if (date_ary.compact.length === 7 && Date.today.strftime("%Y/%m/%d") <= order_date) || date_ary.compact.length === 0
     end
 
     ActiveRecord::Base.transaction do
-      @order.order_dates.map{|d| d.destroy if d.year.nil?}
+      @order.order_dates.map{|d| d.destroy if d.year.nil? && d.month.nil? && d.date.nil? && d.start_hour.nil? && d.start_minute.nil? && d.end_hour.nil? && d.end_minute.nil?}
       @order.save!
+
+      # render new if entry_date.length != 3
 
       # TODO: 希望日時が空でも大丈夫なようにする
       # TODO: EOS入力にすればタブが入ってしまったようなmessageは解消が可能
@@ -79,6 +78,7 @@ EOS
 #{message}
 EOS
       SlackNotifier.new(channel: '#料金お問い合わせ').send('新規お問い合わせ', slack_message)
+
       # TODO: jobで回した方が良い
       # CustomerChatStartMailer.notify(@order, current_user).deliver_now
       # PartnerChatStartMailer.notify(@order, current_user).deliver_now
