@@ -24,19 +24,20 @@ class Customers::OrdersController < Customers::ApplicationController
   # rubocop:disable Metrics/AbcSize
   def create
     @order = @recreation.orders.build(params_create)
-    # date_value = params_create.to_h[:dates].to_a[0].to_a[1].values
-    # date = []
-    # date_value.each do |v|
-    #   date << v if v === "ー"
-    # end
 
-    # unless date.length === 0 || date.length === 7
-    #   render new
-    # end
+    entry_date = []
+    @order.order_dates.each do |d|
+      date_ary = [d.year, d.month, d.date, d.start_hour, d.start_minute, d.end_hour, d.end_minute]
+      entry_date << d if date_ary.compact.length === 0 || date_ary.compact.length === 7
+    end
+
+    unless entry_date.length === 3
+      render new
+    end
 
     ActiveRecord::Base.transaction do
+      @order.order_dates.map{|d| d.destroy if d.year.nil?}
       @order.save!
-      # dates = params_create.to_h[:dates]
 
       # TODO: 希望日時が空でも大丈夫なようにする
       # TODO: EOS入力にすればタブが入ってしまったようなmessageは解消が可能
@@ -120,22 +121,6 @@ EOS
     @order = current_user.orders.find(params[:id])
   end
 
-  def parse_date(dates)
-    return '' if dates.blank?
-
-    str = ''
-    accepted_attrs = ['0', '1', '2']
-    accepted_attrs.each do |attr|
-      # TODO: 入力が完了していない場合はvalidation error or チャット文章に含めない、という実装で
-      param = dates[attr]
-      # rubocop:disable Layout/LineLength
-      str += "#{attr.to_i + 1}:#{param['year']}/#{param['month']}/#{param['date']} #{param['start_hour']}:#{param['start_minutes']}~#{param['end_hour']}:#{param['end_minutes']}\n"
-      # rubocop:enable Layout/LineLength
-    end
-
-    str
-  end
-
   def parse_order_date(dates)
     return '' if dates.blank?
 
@@ -145,6 +130,9 @@ EOS
     end
 
     str
+  end
+
+  def save_date(dates)
   end
 
   def params_create
