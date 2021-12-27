@@ -7,8 +7,8 @@ class Customers::OrdersController < Customers::ApplicationController
   def new
     @recreation = Recreation.find(params[:recreation_id])
     @order = @recreation.orders.build
-    @order.order_dates.build
-    # 3.times { @order.order_dates.build }
+    # @order.order_dates.build
+    3.times { @order.order_dates.build }
   end
 
   def show; end
@@ -31,7 +31,7 @@ class Customers::OrdersController < Customers::ApplicationController
       entry_date << d if date_ary.compact.length === 0 || date_ary.compact.length === 7
     end
 
-    unless entry_date.length === 3
+    if entry_date.length != 3
       render new
     end
 
@@ -119,6 +119,22 @@ EOS
 
   def set_order
     @order = current_user.orders.find(params[:id])
+  end
+
+  def parse_date(dates)
+    return '' if dates.blank?
+
+    str = ''
+    accepted_attrs = ['0', '1', '2']
+    accepted_attrs.each do |attr|
+      # TODO: 入力が完了していない場合はvalidation error or チャット文章に含めない、という実装で
+      param = dates[attr]
+      # rubocop:disable Layout/LineLength
+      str += "#{attr.to_i + 1}:#{param['year']}/#{param['month']}/#{param['date']} #{param['start_hour']}:#{param['start_minutes']}~#{param['end_hour']}:#{param['end_minutes']}\n"
+      # rubocop:enable Layout/LineLength
+    end
+
+    str
   end
 
   def parse_order_date(dates)

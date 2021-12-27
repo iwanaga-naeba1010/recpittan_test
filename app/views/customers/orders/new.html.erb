@@ -117,15 +117,11 @@
                 <label class="title-b pb-3">開催したい希望日と時間を選択してください</label>
               </div>
 
-              <!-- has_manyを実装 -->
-              <% 3.times do |i| %>
-
+              <%= f.fields_for :order_dates do |ff| %>
                 <div class="d-flex flex-row align-items-stretch my-2">
                   <div class="desired-no d-flex align-items-center justify-content-center">
-                    <div><%= i + 1 %></div>
+                    <div><%= ff.index + 1 %></div>
                   </div>
-
-                  <%= f.fields_for :order_dates do |ff| %>
                     <div class="flex-fill ps-3">
                       <div class="row">
                         <div class="col-12">希望日</div>
@@ -157,8 +153,6 @@
                         </div>
                       </div>
                     </div>
-                  <% end %>
-
                 </div>
               <% end %>
 
