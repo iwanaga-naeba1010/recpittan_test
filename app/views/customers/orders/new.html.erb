@@ -130,31 +130,30 @@
                       <div class="row">
                         <div class="col-12">希望日</div>
                         <div class="form-group col-3">
-                          <%= ff.select :year, {'2021': 1, '2022': 2}, { include_blank: '-'}, { class: 'form-control' , required: true } %>
-                          <%# <%= ff.input :year %>
+                          <%= ff.collection_select :year, Year.all, :value, :value , { prompt: '-' }, class:'form-control' %>
                         </div>
                         <div class="form-group col-3">
-                          <%= ff.input :month %>
+                          <%= ff.collection_select :month, Month.all, :value , :value , { prompt: '-' }, class:'form-control' %>
                         </div>
                         <div class="form-group col-3">
-                          <%= ff.input :date %>
+                          <%= ff.collection_select :date, Day.all, :value , :value , { prompt: '-' }, class:'form-control' %>
                         </div>
                       </div>
-                      <div class="row">
+                      <div class="row  mt-3">
                         <div class="form-group col-2 pe-0">
-                          <%= ff.input :start_hour %>
+                          <%= ff.collection_select :start_hour, Hour.all, :value , :value , { prompt: '-' }, class:'form-control' %>
                         </div>
                         <div class="col-auto p-0 flex-v-c">:</div>
                         <div class="form-group col-2 pe-0">
-                          <%= ff.input :start_minute %>
+                          <%= ff.collection_select :start_minute, Minute.all, :value , :value , { prompt: '-' }, class:'form-control' %>
                         </div>
                         <div class="col-auto p-0 flex-v-c">~</div>
                         <div class="form-group col-2 pe-0">
-                          <%= ff.input :end_hour %>
+                          <%= ff.collection_select :end_hour, Hour.all, :value , :value , { prompt: '-' }, class:'form-control' %>
                         </div>
                         <div class="col-auto p-0 flex-v-c">:</div>
                         <div class="form-group col-2 pe-0">
-                          <%= ff.input :end_minute %>
+                          <%= ff.collection_select :end_minute, Minute.all, :value , :value , { prompt: '-' }, class:'form-control' %>
                         </div>
                       </div>
                     </div>
