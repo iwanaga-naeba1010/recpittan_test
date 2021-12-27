@@ -34,11 +34,8 @@ class Customers::OrdersController < Customers::ApplicationController
 
     ActiveRecord::Base.transaction do
       @order.order_dates.map{|d| d.destroy if d.year.nil? && d.month.nil? && d.date.nil? && d.start_hour.nil? && d.start_minute.nil? && d.end_hour.nil? && d.end_minute.nil?}
-      @order.save!
+      @order.save! if entry_date.length === 3
 
-      # render new if entry_date.length != 3
-
-      # TODO: 希望日時が空でも大丈夫なようにする
       # TODO: EOS入力にすればタブが入ってしまったようなmessageは解消が可能
       message = <<EOS
         リクエスト内容
