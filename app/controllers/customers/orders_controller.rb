@@ -8,6 +8,7 @@ class Customers::OrdersController < Customers::ApplicationController
     @recreation = Recreation.find(params[:recreation_id])
     @order = @recreation.orders.build
     @order.order_dates.build
+    # 3.times { @order.order_dates.build }
   end
 
   def show; end

@@ -119,6 +119,7 @@
 
               <!-- has_manyを実装 -->
               <% 3.times do |i| %>
+
                 <div class="d-flex flex-row align-items-stretch my-2">
                   <div class="desired-no d-flex align-items-center justify-content-center">
                     <div><%= i + 1 %></div>
@@ -129,7 +130,8 @@
                       <div class="row">
                         <div class="col-12">希望日</div>
                         <div class="form-group col-3">
-                          <%= ff.input :year %>
+                          <%= ff.select :year, {'2021': 1, '2022': 2}, { include_blank: '-'}, { class: 'form-control' , required: true } %>
+                          <%# <%= ff.input :year %>
                         </div>
                         <div class="form-group col-3">
                           <%= ff.input :month %>
