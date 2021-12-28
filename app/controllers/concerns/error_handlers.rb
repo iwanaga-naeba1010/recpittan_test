@@ -3,7 +3,7 @@
 module ErrorHandlers
   extend ActiveSupport::Concern
 
-  unless Rails.env.development?
+  unless Rails.env.production?
     included do
       rescue_from Exception, with: :rescue500
       rescue_from ActionController::ActionControllerError, with: :rescue403
