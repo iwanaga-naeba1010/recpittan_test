@@ -7,7 +7,7 @@ RSpec.describe Customers::OrdersController, type: :request do
   let(:user) { create :user, :with_custoemr }
   let(:partner) { create :user, :with_recreations }
   let(:recreation) { partner.recreations.first }
-  let(:order) { create :order, recreation_id: recreation.id, user_id: user.id }
+  let(:order) { create :order, :with_order_dates, recreation_id: recreation.id, user_id: user.id }
 
   before do
     sign_in user
@@ -113,11 +113,11 @@ RSpec.describe Customers::OrdersController, type: :request do
 
       it 'update start_at' do
         date = Time.new(
-          params[:dates]['0'][:year].to_i,
-          params[:dates]['0'][:month].to_i,
-          params[:dates]['0'][:date].to_i,
-          params[:dates]['0'][:start_hour].to_i,
-          params[:dates]['0'][:start_minutes].to_i,
+          order.order_dates[0].year,
+          order.order_dates[0].month,
+          order.order_dates[0].date,
+          order.order_dates[0].start_hour,
+          order.order_dates[0].start_minute,
         )
 
         expect {

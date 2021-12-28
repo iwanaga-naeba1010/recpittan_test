@@ -90,10 +90,9 @@ EOS
 
   def update
     ActiveRecord::Base.transaction do
-      date = params_create.to_h[:dates]['0']
-      start_at = Time.new(date['year'].to_i, date['month'].to_i, date['date'].to_i, date['start_hour'].to_i, date['start_minutes'].to_i)
-
-      end_at = Time.new(date['year'].to_i, date['month'].to_i, date['date'].to_i, date['end_hour'].to_i, date['end_minutes'].to_i)
+      order_date = @order.order_dates[0]
+      start_at = Time.new(order_date.year, order_date.month, order_date.date, order_date.start_hour, order_date.start_minute)
+      end_at = Time.new(order_date.year, order_date.month, order_date.date, order_date.end_hour, order_date.end_minute)
       # TODO: 若干負債だけど、今は許容する
       @order.update(start_at: start_at, end_at: end_at)
 
