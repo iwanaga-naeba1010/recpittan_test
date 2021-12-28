@@ -26,10 +26,13 @@ class Customers::OrdersController < Customers::ApplicationController
 
     entry_date = []
     @order.order_dates.each do |d|
-      order_date = "#{d.year}/#{d.month}/#{d.date}"
       date_ary = [d.year, d.month, d.date, d.start_hour, d.start_minute, d.end_hour, d.end_minute]
+      if date_ary.reject(&:empty?).length === 7
+        start_at = Time.new(d.year.to_i, d.month.to_i, d.date.to_i, d.start_hour.to_i, d.start_minute.to_i)
+        end_at = Time.new(d.year.to_i, d.month.to_i, d.date.to_i, d.end_hour.to_i, d.end_minute.to_i)
+      end
       date_ary.reject(&:empty?)
-      entry_date << d if (date_ary.reject(&:empty?).length === 7 && Date.today.strftime("%Y/%m/%d") <= order_date) || date_ary.reject(&:empty?).length === 0
+      entry_date << d if (date_ary.reject(&:empty?).length === 7 && Time.now < start_at && start_at < end_at) || date_ary.reject(&:empty?).length === 0
     end
 
     ActiveRecord::Base.transaction do
