@@ -7,7 +7,6 @@ class Customers::OrdersController < Customers::ApplicationController
   def new
     @recreation = Recreation.find(params[:recreation_id])
     @order = @recreation.orders.build
-    # @order.order_dates.build
     3.times { @order.order_dates.build }
   end
 
@@ -77,8 +76,8 @@ EOS
       SlackNotifier.new(channel: '#料金お問い合わせ').send('新規お問い合わせ', slack_message)
 
       # TODO: jobで回した方が良い
-      # CustomerChatStartMailer.notify(@order, current_user).deliver_now
-      # PartnerChatStartMailer.notify(@order, current_user).deliver_now
+      CustomerChatStartMailer.notify(@order, current_user).deliver_now
+      PartnerChatStartMailer.notify(@order, current_user).deliver_now
       # orderの詳細に飛ばす
       redirect_to chat_customers_order_path(@order.id)
     end
@@ -99,7 +98,7 @@ EOS
       @order.update(params_create)
 
       # TODO: jobで送信したい
-      # OrderRequestMailer.notify(@order, current_user).deliver_now
+      OrderRequestMailer.notify(@order, current_user).deliver_now
       redirect_to complete_customers_order_path(@order.id), notice: '正式に依頼しました'
     end
   rescue StandardError

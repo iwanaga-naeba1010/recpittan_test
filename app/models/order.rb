@@ -63,7 +63,6 @@ class Order < ApplicationRecord
 
   # controller のparamsに追加するため
   attribute :title # まずは相談したい、のメッセージ部分
-  # attribute :dates
   attribute :message
   attribute :tags
 
