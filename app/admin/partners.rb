@@ -25,7 +25,6 @@ ActiveAdmin.register Partner do
       row :id
       row :username
       row :username_kana
-      row :username_kana
 
       row :created_at
       row :updated_at
