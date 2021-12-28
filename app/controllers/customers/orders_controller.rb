@@ -28,11 +28,12 @@ class Customers::OrdersController < Customers::ApplicationController
     @order.order_dates.each do |d|
       order_date = "#{d.year}/#{d.month}/#{d.date}"
       date_ary = [d.year, d.month, d.date, d.start_hour, d.start_minute, d.end_hour, d.end_minute]
-      entry_date << d if (date_ary.compact.length === 7 && Date.today.strftime("%Y/%m/%d") <= order_date) || date_ary.compact.length === 0
+      date_ary.reject(&:empty?)
+      entry_date << d if (date_ary.reject(&:empty?).length === 7 && Date.today.strftime("%Y/%m/%d") <= order_date) || date_ary.reject(&:empty?).length === 0
     end
 
     ActiveRecord::Base.transaction do
-      @order.order_dates.map{|d| d.destroy if d.year.nil? && d.month.nil? && d.date.nil? && d.start_hour.nil? && d.start_minute.nil? && d.end_hour.nil? && d.end_minute.nil?}
+      @order.order_dates.map{|d| d.destroy if d.year.empty? && d.month.empty? && d.date.empty? && d.start_hour.empty? && d.start_minute.empty? && d.end_hour.empty? && d.end_minute.empty?}
       @order.save! if entry_date.length === 3
 
       # TODO: EOS入力にすればタブが入ってしまったようなmessageは解消が可能
@@ -90,8 +91,8 @@ EOS
   def update
     ActiveRecord::Base.transaction do
       order_date = @order.order_dates[0]
-      start_at = Time.new(order_date.year, order_date.month, order_date.date, order_date.start_hour, order_date.start_minute)
-      end_at = Time.new(order_date.year, order_date.month, order_date.date, order_date.end_hour, order_date.end_minute)
+      start_at = Time.new(order_date.year.to_i, order_date.month.to_i, order_date.date.to_i, order_date.start_hour.to_i, order_date.start_minute.to_i)
+      end_at = Time.new(order_date.year.to_i, order_date.month.to_i, order_date.date.to_i, order_date.end_hour.to_i, order_date.end_minute.to_i)
       # TODO: 若干負債だけど、今は許容する
       @order.update(start_at: start_at, end_at: end_at)
 

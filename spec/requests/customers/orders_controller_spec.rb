@@ -41,9 +41,9 @@ RSpec.describe Customers::OrdersController, type: :request do
   describe 'POST /create' do
     let(:order_attrs) { attributes_for(:order, recreation_id: recreation.id, user_id: user.id,
       order_dates_attributes: [
-        { year: 2022, month: 1, date: 1, start_hour: 13, start_minute: 30, end_hour: 14, end_minute: 30 },
-        { year: 2022, month: 1, date: 2, start_hour: 13, start_minute: 30, end_hour: 14, end_minute: 30 },
-        { year: 2022, month: 1, date: 3, start_hour: 13, start_minute: 30, end_hour: 14, end_minute: 30 }
+        { year: '2022', month: '1', date: '1', start_hour: '13', start_minute: '00', end_hour: '14', end_minute: '30' },
+        { year: '2022', month: '1', date: '2', start_hour: '13', start_minute: '30', end_hour: '14', end_minute: '30' },
+        { year: '2022', month: '1', date: '3', start_hour: '13', start_minute: '30', end_hour: '14', end_minute: '30' }
       ])
     }
 
@@ -113,11 +113,11 @@ RSpec.describe Customers::OrdersController, type: :request do
 
       it 'update start_at' do
         date = Time.new(
-          order.order_dates[0].year,
-          order.order_dates[0].month,
-          order.order_dates[0].date,
-          order.order_dates[0].start_hour,
-          order.order_dates[0].start_minute,
+          order.order_dates[0].year.to_i,
+          order.order_dates[0].month.to_i,
+          order.order_dates[0].date.to_i,
+          order.order_dates[0].start_hour.to_i,
+          order.order_dates[0].start_minute.to_i,
         )
 
         expect {

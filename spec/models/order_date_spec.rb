@@ -3,13 +3,13 @@
 # Table name: order_dates
 #
 #  id           :bigint           not null, primary key
-#  date         :integer
-#  end_hour     :integer
-#  end_minute   :integer
-#  month        :integer
-#  start_hour   :integer
-#  start_minute :integer
-#  year         :integer
+#  date         :string
+#  end_hour     :string
+#  end_minute   :string
+#  month        :string
+#  start_hour   :string
+#  start_minute :string
+#  year         :string
 #  created_at   :datetime         not null
 #  updated_at   :datetime         not null
 #  order_id     :bigint           not null

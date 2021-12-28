@@ -3,13 +3,13 @@
 # Table name: order_dates
 #
 #  id           :bigint           not null, primary key
-#  date         :integer
-#  end_hour     :integer
-#  end_minute   :integer
-#  month        :integer
-#  start_hour   :integer
-#  start_minute :integer
-#  year         :integer
+#  date         :string
+#  end_hour     :string
+#  end_minute   :string
+#  month        :string
+#  start_hour   :string
+#  start_minute :string
+#  year         :string
 #  created_at   :datetime         not null
 #  updated_at   :datetime         not null
 #  order_id     :bigint           not null
@@ -25,12 +25,12 @@
 FactoryBot.define do
   factory :order_date do
     order
-    year { 2022 }
-    month { 1 }
-    date { 1 }
-    start_hour { 13 }
-    start_minute { 30 }
-    end_hour { 14 }
-    end_minute { 30 }
+    year { '2022' }
+    month { '1' }
+    date { '1' }
+    start_hour { '13' }
+    start_minute { '00' }
+    end_hour { '14' }
+    end_minute { '30' }
   end
 end
