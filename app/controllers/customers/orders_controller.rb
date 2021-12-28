@@ -24,16 +24,7 @@ class Customers::OrdersController < Customers::ApplicationController
   def create
     @order = @recreation.orders.build(params_create)
 
-    entry_date = []
-    @order.order_dates.each do |d|
-      date_ary = [d.year, d.month, d.date, d.start_hour, d.start_minute, d.end_hour, d.end_minute]
-      if date_ary.reject(&:empty?).length === 7
-        start_at = Time.new(d.year.to_i, d.month.to_i, d.date.to_i, d.start_hour.to_i, d.start_minute.to_i)
-        end_at = Time.new(d.year.to_i, d.month.to_i, d.date.to_i, d.end_hour.to_i, d.end_minute.to_i)
-      end
-      date_ary.reject(&:empty?)
-      entry_date << d if (date_ary.reject(&:empty?).length === 7 && Time.now < start_at && start_at < end_at) || date_ary.reject(&:empty?).length === 0
-    end
+    entry_date = date_validate_check(@order.order_dates)
 
     ActiveRecord::Base.transaction do
       @order.order_dates.map{|d| d.destroy if d.year.empty? && d.month.empty? && d.date.empty? && d.start_hour.empty? && d.start_minute.empty? && d.end_hour.empty? && d.end_minute.empty?}
@@ -120,20 +111,19 @@ EOS
     @order = current_user.orders.find(params[:id])
   end
 
-  def parse_date(dates)
-    return '' if dates.blank?
-
-    str = ''
-    accepted_attrs = ['0', '1', '2']
-    accepted_attrs.each do |attr|
-      # TODO: 入力が完了していない場合はvalidation error or チャット文章に含めない、という実装で
-      param = dates[attr]
-      # rubocop:disable Layout/LineLength
-      str += "#{attr.to_i + 1}:#{param['year']}/#{param['month']}/#{param['date']} #{param['start_hour']}:#{param['start_minutes']}~#{param['end_hour']}:#{param['end_minutes']}\n"
-      # rubocop:enable Layout/LineLength
+  def date_validate_check(order_dates)
+    entry_date = []
+    order_dates.each do |d|
+      date_ary = [d.year, d.month, d.date, d.start_hour, d.start_minute, d.end_hour, d.end_minute]
+      if date_ary.reject(&:empty?).length === 7
+        start_at = Time.new(d.year.to_i, d.month.to_i, d.date.to_i, d.start_hour.to_i, d.start_minute.to_i)
+        end_at = Time.new(d.year.to_i, d.month.to_i, d.date.to_i, d.end_hour.to_i, d.end_minute.to_i)
+      end
+      date_ary.reject(&:empty?)
+      entry_date << d if (date_ary.reject(&:empty?).length === 7 && Time.now < start_at && start_at < end_at) || date_ary.reject(&:empty?).length === 0
     end
 
-    str
+    entry_date
   end
 
   def parse_order_date(dates)
@@ -145,9 +135,6 @@ EOS
     end
 
     str
-  end
-
-  def save_date(dates)
   end
 
   def params_create
