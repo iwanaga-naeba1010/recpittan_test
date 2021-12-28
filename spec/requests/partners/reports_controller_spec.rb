@@ -35,6 +35,7 @@ RSpec.describe Partners::OrdersController, type: :request do
       # it 'return http success when user not logged in' do
       #   post customers_recreation_orders_path(recreation), params: { order: order_attrs }
       #   expect(response.status).to eq 200
+      # # binding.pry
       #   expect(response.parsed_body['id']).not_to be nil
       #   # expect(response).to redirect_to(chat_customers_order_path(Order.last.id))
       # end
