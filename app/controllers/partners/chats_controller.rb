@@ -25,7 +25,6 @@ EOF
   private
 
   def set_order
-    # binding.pry
     @order = current_user.recreations.map do |rec|
       rec.orders.map { |order| order if order.id == params[:order_id].to_i }
     end.flatten.compact.first
