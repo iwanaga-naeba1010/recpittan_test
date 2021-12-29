@@ -79,7 +79,7 @@ EOS
     end
   # rubocop:disable Lint/UselessAssignment
   rescue StandardError
-    flash.now[:alert] = '失敗しました。もう一度お試しください'
+    flash.now[:alert] = '開催の希望日が無効な日付です。ご確認のうえ、もう一度入力してください。'
     render :new
   end
   # rubocop:enable Lint/UselessAssignment
