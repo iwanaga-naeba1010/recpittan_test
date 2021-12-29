@@ -68,16 +68,18 @@ EOS
 ------------------
 #{message}
 EOS
-      SlackNotifier.new(channel: '#料金お問い合わせ').send('新規お問い合わせ', slack_message)
 
       # TODO: jobで回した方が良い
       CustomerChatStartMailer.notify(@order, current_user).deliver_now
       PartnerChatStartMailer.notify(@order, current_user).deliver_now
+
+      SlackNotifier.new(channel: '#料金お問い合わせ').send('新規お問い合わせ', slack_message)
       # orderの詳細に飛ばす
       redirect_to chat_customers_order_path(@order.id)
     end
   # rubocop:disable Lint/UselessAssignment
   rescue StandardError
+    flash.now[:alert] = '失敗しました。もう一度お試しください'
     render :new
   end
   # rubocop:enable Lint/UselessAssignment
