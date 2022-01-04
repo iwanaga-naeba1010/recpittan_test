@@ -55,7 +55,7 @@ class Order < ApplicationRecord
   delegate :price, to: :recreation, prefix: true
   delegate :minutes, to: :recreation, prefix: true
 
-  validate :empty_order_date
+  validate :reject_empty_date
 
   enumerize :status, in: {
     in_progress: 10, waiting_for_a_reply_from_partner: 20, waiting_for_a_reply_from_facility: 30,
@@ -210,7 +210,7 @@ class Order < ApplicationRecord
     "#{date} #{start_time} ~ #{end_time}"
   end
 
-  def empty_order_date
+  def reject_empty_date
     empty_date = []
     order_dates.each do |d|
       date_ary = [d.year, d.month, d.date, d.start_hour, d.start_minute, d.end_hour, d.end_minute]

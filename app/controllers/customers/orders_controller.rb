@@ -77,7 +77,6 @@ EOS
     end
   # rubocop:disable Lint/UselessAssignment
   rescue StandardError
-    # flash.now[:alert] = '開催日は1つ以上設定してください。'
     render :new
   end
   # rubocop:enable Lint/UselessAssignment
