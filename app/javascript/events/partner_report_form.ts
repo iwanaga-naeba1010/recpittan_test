@@ -60,9 +60,9 @@ import * as $ from 'jquery';
       const dummyTransportationExpenses: number = Number($('#dummyTransportationExpenses').text());
       const dummyExpenses: number = Number($('#dummyExpenses').text());
       const dummyTotalFacilityFee: number = Number($('#dummyTotalFacilityFee').text());
+      const dummyZoomPrice: number = Number($('#dummyZoomPrice').text());
 
-      const totalPrice: number = dummyInstructorAmount + dummyTotalMaterialPrice + dummyTransportationExpenses + dummyExpenses + dummyTotalFacilityFee;
-      // instructor_amount + total_material_price_for_partner + transportation_expenses + expenses_for_partner + total_facility_price_for_partner
+      const totalPrice: number = dummyInstructorAmount + dummyTotalMaterialPrice + dummyTransportationExpenses + dummyExpenses + dummyTotalFacilityFee - dummyZoomPrice;
       $('#totalPrice').text(totalPrice.toLocaleString() + '円');
     }
   });
