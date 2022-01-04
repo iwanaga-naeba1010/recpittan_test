@@ -46,11 +46,16 @@ class Order < ApplicationRecord
   has_many :order_memos, dependent: :destroy
   accepts_nested_attributes_for :order_memos, allow_destroy: true
 
+  has_many :order_dates
+  accepts_nested_attributes_for :order_dates
+
   has_one :report, dependent: :destroy
 
   delegate :title, to: :recreation, prefix: true
   delegate :price, to: :recreation, prefix: true
   delegate :minutes, to: :recreation, prefix: true
+
+  validate :reject_empty_date
 
   enumerize :status, in: {
     in_progress: 10, waiting_for_a_reply_from_partner: 20, waiting_for_a_reply_from_facility: 30,
@@ -61,7 +66,6 @@ class Order < ApplicationRecord
 
   # controller のparamsに追加するため
   attribute :title # まずは相談したい、のメッセージ部分
-  attribute :dates
   attribute :message
   attribute :tags
 
@@ -204,5 +208,17 @@ class Order < ApplicationRecord
 
     # TODO: エラーハンドリング入れた方が良いかも
     "#{date} #{start_time} ~ #{end_time}"
+  end
+
+  def reject_empty_date
+    empty_date = []
+    order_dates.each do |d|
+      date_ary = [d.year, d.month, d.date, d.start_hour, d.start_minute, d.end_hour, d.end_minute]
+      date_ary.reject(&:empty?)
+      empty_date << d if date_ary.reject(&:empty?).length === 0
+    end
+
+    errors.add(:orders, '開催日は1つ以上設定してください。') if empty_date.length === 3
+    @dates_validate_error = true if empty_date.length === 3
   end
 end

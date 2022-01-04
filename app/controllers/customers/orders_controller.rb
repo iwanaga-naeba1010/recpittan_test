@@ -7,6 +7,7 @@ class Customers::OrdersController < Customers::ApplicationController
   def new
     @recreation = Recreation.find(params[:recreation_id])
     @order = @recreation.orders.build
+    3.times { @order.order_dates.build }
   end
 
   def show; end
@@ -24,16 +25,16 @@ class Customers::OrdersController < Customers::ApplicationController
     @order = @recreation.orders.build(params_create)
 
     ActiveRecord::Base.transaction do
+      @order.order_dates.map{|d| d.destroy if d.year.empty? && d.month.empty? && d.date.empty? && d.start_hour.empty? && d.start_minute.empty? && d.end_hour.empty? && d.end_minute.empty?}
       @order.save!
-      dates = params_create.to_h[:dates]
 
-      # TODO: 希望日時が空でも大丈夫なようにする
       # TODO: EOS入力にすればタブが入ってしまったようなmessageは解消が可能
       message = <<EOS
         リクエスト内容
         #{@order.title}
+
         希望日時
-        #{parse_date(dates)}
+        #{parse_order_date(@order.order_dates)}
 
         希望人数
         #{@order.number_of_people}人
@@ -65,10 +66,12 @@ EOS
 ------------------
 #{message}
 EOS
-      SlackNotifier.new(channel: '#料金お問い合わせ').send('新規お問い合わせ', slack_message)
+
       # TODO: jobで回した方が良い
       CustomerChatStartMailer.notify(@order, current_user).deliver_now
       PartnerChatStartMailer.notify(@order, current_user).deliver_now
+
+      SlackNotifier.new(channel: '#料金お問い合わせ').send('新規お問い合わせ', slack_message)
       # orderの詳細に飛ばす
       redirect_to chat_customers_order_path(@order.id)
     end
@@ -80,10 +83,9 @@ EOS
 
   def update
     ActiveRecord::Base.transaction do
-      date = params_create.to_h[:dates]['0']
-      start_at = Time.new(date['year'].to_i, date['month'].to_i, date['date'].to_i, date['start_hour'].to_i, date['start_minutes'].to_i)
-
-      end_at = Time.new(date['year'].to_i, date['month'].to_i, date['date'].to_i, date['end_hour'].to_i, date['end_minutes'].to_i)
+      order_date = @order.order_dates[0]
+      start_at = Time.new(order_date.year.to_i, order_date.month.to_i, order_date.date.to_i, order_date.start_hour.to_i, order_date.start_minute.to_i)
+      end_at = Time.new(order_date.year.to_i, order_date.month.to_i, order_date.date.to_i, order_date.end_hour.to_i, order_date.end_minute.to_i)
       # TODO: 若干負債だけど、今は許容する
       @order.update(start_at: start_at, end_at: end_at)
 
@@ -108,17 +110,12 @@ EOS
     @order = current_user.orders.find(params[:id])
   end
 
-  def parse_date(dates)
+  def parse_order_date(dates)
     return '' if dates.blank?
 
     str = ''
-    accepted_attrs = ['0', '1', '2']
-    accepted_attrs.each do |attr|
-      # TODO: 入力が完了していない場合はvalidation error or チャット文章に含めない、という実装で
-      param = dates[attr]
-      # rubocop:disable Layout/LineLength
-      str += "#{attr.to_i + 1}:#{param['year']}/#{param['month']}/#{param['date']} #{param['start_hour']}:#{param['start_minutes']}~#{param['end_hour']}:#{param['end_minutes']}\n"
-      # rubocop:enable Layout/LineLength
+    dates.each_with_index do |date, i|
+      str += "#{i + 1}:#{date.year}/#{date.month}/#{date.date} #{date.start_hour}:#{date.start_minute}~#{date.end_hour}:#{date.end_minute}\n"
     end
 
     str
@@ -137,8 +134,10 @@ EOS
       :instructor_material_amount,
       :additional_facility_fee,
       :start_at,
-      { dates: {} },
-      { tags: [] }
+      { tags: [] },
+      order_dates_attributes:[
+        :id, :year, :month, :date, :start_hour, :start_minute, :end_hour, :end_minute,
+      ]
     )
   end
 end

@@ -52,4 +52,10 @@ FactoryBot.define do
       create(:report, order_id: order.id)
     end
   end
+
+  trait :with_order_dates do
+    after(:create) do |order|
+      create(:order_date, order_id: order.id)
+    end
+  end
 end

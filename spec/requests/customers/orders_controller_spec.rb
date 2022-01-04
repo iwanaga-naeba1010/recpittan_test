@@ -7,7 +7,7 @@ RSpec.describe Customers::OrdersController, type: :request do
   let(:user) { create :user, :with_custoemr }
   let(:partner) { create :user, :with_recreations }
   let(:recreation) { partner.recreations.first }
-  let(:order) { create :order, recreation_id: recreation.id, user_id: user.id }
+  let(:order) { create :order, :with_order_dates, recreation_id: recreation.id, user_id: user.id }
 
   before do
     sign_in user
@@ -39,28 +39,37 @@ RSpec.describe Customers::OrdersController, type: :request do
 
   # TODO: テスト書きたいが、エラー出て時間かかりそうなので一旦スルー
   describe 'POST /create' do
-    let(:order_attrs) { attributes_for(:order, recreation_id: recreation.id, user_id: user.id) }
 
     context 'with valid parameters' do
-      # TODO: 正式リリースのタイミングでこちらに戻す
+      let(:order_attrs) { attributes_for(:order, recreation_id: recreation.id, user_id: user.id,
+        order_dates_attributes: [
+          { year: '2030', month: '1', date: '1', start_hour: '13', start_minute: '00', end_hour: '14', end_minute: '30' },
+          { year: '2030', month: '1', date: '2', start_hour: '13', start_minute: '30', end_hour: '14', end_minute: '30' },
+          { year: '2030', month: '1', date: '3', start_hour: '13', start_minute: '30', end_hour: '14', end_minute: '30' }
+        ])
+      }
+
       it 'return http success when user not logged in' do
         post customers_recreation_orders_path(recreation), params: { order: order_attrs }
         expect(response).to have_http_status(:found)
         expect(response).to redirect_to(chat_customers_order_path(Order.last.id))
       end
-      # it 'return http success when user not logged in' do
-      #   post customers_recreation_orders_path(recreation), params: { order: order_attrs }
-      #   expect(response.status).to eq 200
-      #   # binding.pry
-      #   expect(response.parsed_body['id']).not_to be nil
-      #   # expect(response).to redirect_to(chat_customers_order_path(Order.last.id))
-      # end
     end
 
-    # it 'return http success when user not logged in' do
-    #   get customers_recreation_path(recreation)
-    #   expect(response).to have_http_status(:ok)
-    # end
+    context 'with invalid parameters' do
+      let(:order_attrs) { attributes_for(:order, recreation_id: recreation.id, user_id: user.id,
+        order_dates_attributes: [
+          { year: '2022', month: '1', date: '1', start_hour: '13', start_minute: '00', end_hour: '14', end_minute: '30' },
+          { year: '2022', month: '1', date: '2', start_hour: '13', start_minute: '30', end_hour: '14', end_minute: '30' },
+          { year: '2022', month: '1', date: '3', start_hour: '13', start_minute: '30', end_hour: '14', end_minute: '30' }
+        ])
+      }
+
+      it 'return http success when user not logged in' do
+        post customers_recreation_orders_path(recreation), params: { order: order_attrs }
+        expect(response).to have_http_status(:ok)
+      end
+    end
   end
 
   describe 'GET /show' do
@@ -98,7 +107,7 @@ RSpec.describe Customers::OrdersController, type: :request do
   describe 'PUT /update' do
     context 'when valid parameters' do
       params = {
-        status: :waiting_for_a_reply_from_partner, dates: { '0' => { year: '2022', month: '1', date: '1', start_hour: '09', start_minutes: '00', end_hour: '10', end_minutes: '00' } },
+        status: :waiting_for_a_reply_from_partner, dates: { '0' => { year: '2030', month: '1', date: '1', start_hour: '09', start_minutes: '00', end_hour: '10', end_minutes: '00' } },
         number_of_people: 11, zip: '4536111', prefecture: '愛知県', city: '名古屋市中村区', street: '平池町グローバルゲート　１１階', building: 'building'
       }
       it 'returns 302 status' do
@@ -107,13 +116,7 @@ RSpec.describe Customers::OrdersController, type: :request do
       end
 
       it 'update start_at' do
-        date = Time.new(
-          params[:dates]['0'][:year].to_i,
-          params[:dates]['0'][:month].to_i,
-          params[:dates]['0'][:date].to_i,
-          params[:dates]['0'][:start_hour].to_i,
-          params[:dates]['0'][:start_minutes].to_i,
-        )
+        date = Time.new(2030, 12, 31, 13, 0)
 
         expect {
           put customers_order_path(order.id), params: { order: params }
