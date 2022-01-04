@@ -24,6 +24,7 @@
 #  support_price              :integer          default(0)
 #  transportation_expenses    :integer          default(0)
 #  zip                        :string
+#  zoom_price                 :integer          default(0)
 #  created_at                 :datetime         not null
 #  updated_at                 :datetime         not null
 #  recreation_id              :bigint           not null

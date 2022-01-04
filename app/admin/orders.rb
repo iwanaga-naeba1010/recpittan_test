@@ -18,8 +18,9 @@ ActiveAdmin.register Order do
       transportation_expenses
       support_price
       expenses
-    ],
-    )
+      zoom_price
+    ]
+  )
   actions :all
 
   filter :user, collection: proc { User.includes(:company).customers.map { |i| [i.company&.facility_name, i.id] } }
@@ -60,6 +61,7 @@ ActiveAdmin.register Order do
           row :transportation_expenses
           row :expenses
           row :support_price
+          row :zoom_price
 
           row :created_at
           row :updated_at
@@ -144,6 +146,7 @@ ActiveAdmin.register Order do
 
       f.input :transportation_expenses
       f.input :expenses
+      f.input :zoom_price
     end
 
     f.actions

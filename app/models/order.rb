@@ -24,6 +24,7 @@
 #  support_price              :integer          default(0)
 #  transportation_expenses    :integer          default(0)
 #  zip                        :string
+#  zoom_price                 :integer          default(0)
 #  created_at                 :datetime         not null
 #  updated_at                 :datetime         not null
 #  recreation_id              :bigint           not null
@@ -175,7 +176,8 @@ class Order < ApplicationRecord
   end
 
   def total_price_for_partner
-    instructor_amount + total_material_price_for_partner + transportation_expenses + expenses_for_partner + total_facility_price_for_partner
+    # NOTE(okubo): zoom_priceは運営が入力する
+    instructor_amount + total_material_price_for_partner + transportation_expenses + expenses_for_partner + total_facility_price_for_partner - zoom_price
   end
 
   # def total_price(is_partner:)
