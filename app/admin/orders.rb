@@ -26,6 +26,34 @@ ActiveAdmin.register Order do
   filter :user, collection: proc { User.includes(:company).customers.map { |i| [i.company&.facility_name, i.id] } }
   filter :recreation
 
+  csv do
+    column :id
+    column(:status) { |order| order.status_text }
+    column(:user) { |order| order.user.company.facility_name }
+    column(:recreation) { |order| order.recreation.title }
+    column :zip
+    column :prefecture
+    column :city
+    column :street
+    column :building
+    column :number_of_people
+    column :number_of_facilities
+    column :is_accepted
+    column :start_at
+    column :end_at
+    column :regular_price
+    column :instructor_amount
+    column :regular_material_price
+    column :instructor_material_amount
+    column :additional_facility_fee
+    column :transportation_expenses
+    column :expenses
+    column :support_price
+    column :zoom_price
+    column('パートナー支払額') { |order| order.total_price_for_partner }
+    column('施設請求額') { |order| order.total_price_for_customer }
+  end
+
   index do
     id_column
     column(:user) { |order| link_to order.user.company.facility_name, admin_company_path(order.user.company.id) }
