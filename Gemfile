@@ -74,6 +74,8 @@ gem 'seed-fu' # staging/productionでも使いたいから
 gem 'kaminari'
 gem 'ransack'
 
+gem 'active_hash'
+
 # 開発環境でUserを切り替える
 gem 'switch_user'
 
