@@ -25,9 +25,9 @@
 FactoryBot.define do
   factory :order_date do
     order
-    year { '2022' }
-    month { '1' }
-    date { '1' }
+    year { '2030' }
+    month { '12' }
+    date { '31' }
     start_hour { '13' }
     start_minute { '00' }
     end_hour { '14' }
