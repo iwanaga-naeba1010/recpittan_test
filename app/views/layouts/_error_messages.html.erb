@@ -2,7 +2,7 @@
   <div class="alert alert-warning pb-1">
     <ul>
       <% model.errors.full_messages.each do |message| %>
-        <li><%= message.delete(model.class.name.pluralize) %></li>
+        <p><%= message.delete(model.class.name.pluralize) %></p>
       <% end %>
     </ul>
   </div>
