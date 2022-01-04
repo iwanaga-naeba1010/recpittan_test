@@ -89,6 +89,7 @@
             相談・依頼フォーム
           </div>
           <%= simple_form_for @order, url: customers_recreation_orders_path(@recreation), html: { class: 'consult mt-3' } do |f| %>
+            <%= render 'layouts/error_messages', model: f.object %>
             <%= f.input :user_id, as: :hidden, input_html: { value: current_user.id } %>
 
             <%= f.input :regular_price, as: :hidden, input_html: { value: @recreation.regular_price } %>
@@ -154,6 +155,7 @@
                       </div>
                     </div>
                 </div>
+                <%= render 'layouts/error_messages', model: ff.object %>
               <% end %>
 
               <div class="row pt-3">

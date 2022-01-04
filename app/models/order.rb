@@ -54,6 +54,8 @@ class Order < ApplicationRecord
   delegate :price, to: :recreation, prefix: true
   delegate :minutes, to: :recreation, prefix: true
 
+  validate :empty_order_date
+
   enumerize :status, in: {
     in_progress: 10, waiting_for_a_reply_from_partner: 20, waiting_for_a_reply_from_facility: 30,
     facility_request_in_progress: 40, request_denied: 50, waiting_for_an_event_to_take_place: 60,
@@ -204,5 +206,17 @@ class Order < ApplicationRecord
 
     # TODO: エラーハンドリング入れた方が良いかも
     "#{date} #{start_time} ~ #{end_time}"
+  end
+
+  def empty_order_date
+    empty_date = []
+    order_dates.each do |d|
+      date_ary = [d.year, d.month, d.date, d.start_hour, d.start_minute, d.end_hour, d.end_minute]
+      date_ary.reject(&:empty?)
+      empty_date << d if date_ary.reject(&:empty?).length === 0
+    end
+
+    errors.add(:orders, '開催日は1つ以上設定してください。') if empty_date.length === 3
+    @dates_validate_error = true if empty_date.length === 3
   end
 end

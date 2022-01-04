@@ -24,12 +24,9 @@ class Customers::OrdersController < Customers::ApplicationController
   def create
     @order = @recreation.orders.build(params_create)
 
-    entry_date, empty_date = date_validate_check(@order.order_dates)
-    total_length = entry_date.length + empty_date.length
-
     ActiveRecord::Base.transaction do
       @order.order_dates.map{|d| d.destroy if d.year.empty? && d.month.empty? && d.date.empty? && d.start_hour.empty? && d.start_minute.empty? && d.end_hour.empty? && d.end_minute.empty?}
-      @order.save! if total_length === 3 && empty_date.length != 3
+      @order.save!
 
       # TODO: EOS入力にすればタブが入ってしまったようなmessageは解消が可能
       message = <<EOS
@@ -80,7 +77,7 @@ EOS
     end
   # rubocop:disable Lint/UselessAssignment
   rescue StandardError
-    flash.now[:alert] = '開催の希望日が無効な日付です。ご確認のうえ、もう一度入力してください。'
+    # flash.now[:alert] = '開催日は1つ以上設定してください。'
     render :new
   end
   # rubocop:enable Lint/UselessAssignment
@@ -112,23 +109,6 @@ EOS
 
   def set_order
     @order = current_user.orders.find(params[:id])
-  end
-
-  def date_validate_check(order_dates)
-    entry_date = []
-    empty_date = []
-    order_dates.each do |d|
-      date_ary = [d.year, d.month, d.date, d.start_hour, d.start_minute, d.end_hour, d.end_minute]
-      if date_ary.reject(&:empty?).length === 7
-        start_at = Time.new(d.year.to_i, d.month.to_i, d.date.to_i, d.start_hour.to_i, d.start_minute.to_i)
-        end_at = Time.new(d.year.to_i, d.month.to_i, d.date.to_i, d.end_hour.to_i, d.end_minute.to_i)
-      end
-      date_ary.reject(&:empty?)
-      entry_date << d if (date_ary.reject(&:empty?).length === 7 && Time.now < start_at && start_at < end_at)
-      empty_date << d if date_ary.reject(&:empty?).length === 0
-    end
-
-    return entry_date, empty_date
   end
 
   def parse_order_date(dates)
