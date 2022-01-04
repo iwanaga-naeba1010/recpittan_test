@@ -189,7 +189,6 @@ EOS
       is_contains = list.map { |l| permitted_params[:order][:status]&.include?(l) }.compact.uniq.delete_if { |v| v==false }
 
       if is_contains&.first == true
-
         if order.report.blank?
           order.create_report(
             expenses: order.expenses,
