@@ -18,17 +18,47 @@ ActiveAdmin.register Order do
       transportation_expenses
       support_price
       expenses
-    ],
-    )
+      zoom_price
+    ]
+  )
   actions :all
 
   filter :user, collection: proc { User.includes(:company).customers.map { |i| [i.company&.facility_name, i.id] } }
   filter :recreation
 
+  csv do
+    column :id
+    column(:status) { |order| order.status_text }
+    column(:user) { |order| order.user.company.facility_name }
+    column(:recreation) { |order| order.recreation.title }
+    column :zip
+    column :prefecture
+    column :city
+    column :street
+    column :building
+    column :number_of_people
+    column :number_of_facilities
+    column :is_accepted
+    column :start_at
+    column :end_at
+    column :regular_price
+    column :instructor_amount
+    column :regular_material_price
+    column :instructor_material_amount
+    column :additional_facility_fee
+    column :transportation_expenses
+    column :expenses
+    column :support_price
+    column :zoom_price
+    column('パートナー支払額') { |order| order.total_price_for_partner }
+    column('施設請求額') { |order| order.total_price_for_customer }
+  end
+
   index do
     id_column
     column(:user) { |order| link_to order.user.company.facility_name, admin_company_path(order.user.company.id) }
     column :recreation
+    column(:status) { |order| order.status_text }
 
     actions
   end
@@ -59,6 +89,7 @@ ActiveAdmin.register Order do
           row :transportation_expenses
           row :expenses
           row :support_price
+          row :zoom_price
 
           row :created_at
           row :updated_at
@@ -143,6 +174,7 @@ ActiveAdmin.register Order do
 
       f.input :transportation_expenses
       f.input :expenses
+      f.input :zoom_price
     end
 
     f.actions
@@ -185,7 +217,6 @@ EOS
       is_contains = list.map { |l| permitted_params[:order][:status]&.include?(l) }.compact.uniq.delete_if { |v| v==false }
 
       if is_contains&.first == true
-
         if order.report.blank?
           order.create_report(
             expenses: order.expenses,
