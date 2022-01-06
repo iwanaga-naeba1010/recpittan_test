@@ -11,10 +11,10 @@ class Partners::ChatsController < Partners::ApplicationController
       message = <<-EOF
 パートナー名： #{@order.recreation&.instructor_name}
 管理画面案件URL： #{admin_order_url(@order.id)}
-内容；
+内容:
 #{params_create[:message]}
 EOF
-      SlackNotifier.new(channel: '#パートナーチャット').send('パートナーからチャットが届きました', message)
+      SlackNotifier.new(channel: '#アクティブチャットスレッド').send('パートナーからチャットが届きました', message)
       CustomerChatMailer.notify(@order).deliver_now
       redirect_to chat_partners_order_path(@order.id)
     else
