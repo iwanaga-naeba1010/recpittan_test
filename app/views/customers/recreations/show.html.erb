@@ -29,23 +29,27 @@
         <div class="card">
           <div class="card-body p-0">
             <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
-              <% if @recreation.youtube_id? %>
-                <div id="youtubeSection" class="carousel-item active" data-interval="false">
-                  <div class="ratio ratio-16x9">
-                    <iframe src="https://www.youtube.com/embed/<%= @recreation.youtube_id %>" allowfullscreen></iframe>
+              <div class="carousel-inner">
+                <% if @recreation.youtube_id? %>
+                  <div id="youtubeSection" class="carousel-item active" data-interval="false">
+                    <div class="ratio ratio-16x9">
+                      <iframe src="https://www.youtube.com/embed/<%= @recreation.youtube_id %>" allowfullscreen></iframe>
+                    </div>
                   </div>
-                </div>
-              <% end %>
+                <% end %>
 
-              <% @recreation.recreation_images.each_with_index do |image, i| %>
-                <div class="carousel-item <%= 'active' if @recreation.youtube_id.blank? && i == 0 %>" data-bs-interval="10000">
-                  <%= image_tag image&.image.to_s, class: 'd-block w-100 custom-height' %>
-                </div>
+                <% @recreation.recreation_images.each_with_index do |image, i| %>
+                  <div class="carousel-item <%= 'active' if @recreation.youtube_id.blank? && i == 0 %>" data-bs-interval="10000">
+                    <%= image_tag image&.image.to_s, class: 'd-block w-100 custom-height' %>
+                  </div>
+                <% end %>
+              </div>
+              <% if @recreation.youtube_id.nil? %>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+                  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                  <span class="visually-hidden">Previous</span>
+                </button>
               <% end %>
-              <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Previous</span>
-              </button>
               <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
                 <span class="carousel-control-next-icon" aria-hidden="true"></span>
                 <span class="visually-hidden">Next</span>
