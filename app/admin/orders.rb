@@ -19,6 +19,7 @@ ActiveAdmin.register Order do
       support_price
       expenses
       zoom_price
+      contract_number
     ]
   )
   actions :all
@@ -50,6 +51,7 @@ ActiveAdmin.register Order do
     column :expenses
     column :support_price
     column :zoom_price
+    column :contract_number
     column('パートナー支払額') { |order| order.total_price_for_partner }
     column('施設請求額') { |order| order.total_price_for_customer }
   end
@@ -58,6 +60,7 @@ ActiveAdmin.register Order do
     id_column
     column(:user) { |order| link_to order.user.company.facility_name, admin_company_path(order.user.company.id) }
     column :recreation
+    column :start_at
     column(:status) { |order| order.status_text }
 
     actions
@@ -90,6 +93,7 @@ ActiveAdmin.register Order do
           row :expenses
           row :support_price
           row :zoom_price
+          row :contract_number
 
           row :created_at
           row :updated_at
@@ -175,6 +179,7 @@ ActiveAdmin.register Order do
       f.input :transportation_expenses
       f.input :expenses
       f.input :zoom_price
+      f.input :contract_number, hint: 'スプレッドシート管理のIDを紐づけるための項目です。将来的にシステムに移行しますが、現在は入力のみとなっております。'
     end
 
     f.actions
@@ -241,5 +246,4 @@ EOS
       redirect_to admin_order_path(order.id)
     end
   end
-
 end
