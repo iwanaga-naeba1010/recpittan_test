@@ -7,7 +7,7 @@ class OrderAcceptMailer < ApplicationMailer
     user = order.user
     @email = user.email
     @user_name = user.username
-    @url = customers_recreation_url(@recreation.id)
+    @url = customers_url
 
     mail from: 'info@everyplus.jp', to: @email, subject: @template.title
   end
