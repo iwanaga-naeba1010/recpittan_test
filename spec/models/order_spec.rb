@@ -8,6 +8,7 @@
 #  additional_facility_fee    :integer          default(0)
 #  building                   :string
 #  city                       :string
+#  contract_number            :string
 #  end_at                     :datetime
 #  expenses                   :integer          default(0)
 #  instructor_amount          :integer          default(0)
