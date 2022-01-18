@@ -84,7 +84,7 @@ ja:
         building: 建物名
         number_of_people: 人数
         number_of_facilities: 追加施設数
-        status: オーダーの状態
+        status: ステータス
         is_accepted: パートナーが承認したかどうか
         start_at: 開催日時
         end_at: 終了日時
@@ -123,7 +123,6 @@ ja:
         want_to_order_agein: もう一度開催したいと思うか
         message: 感想
         other_message: その他意見
-
       tag:
         name: タグ名
         kind: 種類

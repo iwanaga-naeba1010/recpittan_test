@@ -26,10 +26,11 @@ ActiveAdmin.register Order do
 
   filter :user, collection: proc { User.includes(:company).customers.map { |i| [i.company&.facility_name, i.id] } }
   filter :recreation
+  filter :status, collection: proc { Order.status.values.map { |i| [i.text, i.value] } }
 
   csv do
     column :id
-    column(:status) { |order| order.status_text }
+    column(:status, &:status_text)
     column(:user) { |order| order.user.company.facility_name }
     column(:recreation) { |order| order.recreation.title }
     column :zip
@@ -52,8 +53,8 @@ ActiveAdmin.register Order do
     column :support_price
     column :zoom_price
     column :contract_number
-    column('パートナー支払額') { |order| order.total_price_for_partner }
-    column('施設請求額') { |order| order.total_price_for_customer }
+    column('パートナー支払額', &:total_price_for_partner)
+    column('施設請求額', &:total_price_for_customer)
   end
 
   index do
@@ -61,7 +62,7 @@ ActiveAdmin.register Order do
     column(:user) { |order| link_to order.user.company.facility_name, admin_company_path(order.user.company.id) }
     column :recreation
     column :start_at
-    column(:status) { |order| order.status_text }
+    column(:status, &:status_text)
 
     actions
   end
