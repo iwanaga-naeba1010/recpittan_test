@@ -88,6 +88,7 @@ class Order < ApplicationRecord
     # NOTE: 完了したがレポート書いていないこと
     if self.start_at.present? && self.is_accepted && (Time.current >= self.start_at) && self.report.blank?
       self.status = :unreported_completed
+      PartnerCompleteReportMailer.notify(self).deliver_now
       return self
     end
 
