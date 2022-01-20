@@ -15,24 +15,26 @@ interface Order {
 interface Response {
   order: Order;
 }
+
 type TargetEnum = 'expenses' | 'transportation_expenses';
 
 interface Props {
   orderId: number;
   defaultExpense: number;
   target: TargetEnum;
+  canEdit: boolean;
 }
 
-const App: React.FC<Props> = ({ orderId, defaultExpense, target }): JSX.Element => {
+const App: React.FC<Props> = ({ orderId, defaultExpense, target, canEdit }): JSX.Element => {
   const [expense, setExpense] = useState<number>(defaultExpense);
   const [isSent, setIsSent] = useState<boolean>(false);
-  
+
   useEffect(() => {
     if (defaultExpense !== 0) {
       setIsSent(true);
     }
   }, []);
-  
+
   // NOTE: それぞれの箇所でid指定だとかなり大変なので、chat.html.erbの画面下部にdummyのHTMLを用意し、そこから取得
   const applyExpenses = () => {
     const regularPrice: number = Number($('#regularPrice').text());
@@ -47,7 +49,7 @@ const App: React.FC<Props> = ({ orderId, defaultExpense, target }): JSX.Element 
     $('#transportationExpensesForOrderForm').text('¥' + transportationExpensesPrice.toLocaleString() + '円');
     $('#totalPriceForOrderForm').text(totalPrice);
   }
-  
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setExpense(Number(e.target.value));
     if (target === 'expenses') {
@@ -57,7 +59,7 @@ const App: React.FC<Props> = ({ orderId, defaultExpense, target }): JSX.Element 
     }
     applyExpenses();
   }
-  
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>): Promise<void> => {
     const token = document.querySelector('[name=csrf-token]').getAttribute('content');
     e.preventDefault();
@@ -83,8 +85,8 @@ const App: React.FC<Props> = ({ orderId, defaultExpense, target }): JSX.Element 
           <div className="row justify-content-between border-bottom-dotted py-2">
             <div className="col-auto align-self-center">
               { target === 'expenses' ? '諸経費' : '交通費' }
-              <br/>
-              <a className="clink" onClick={() => setIsSent(false)}>編集</a>
+              <br />
+              {!canEdit && <a className="clink" onClick={() => setIsSent(false)}>編集</a> }
             </div>
             <div className="col-auto">&yen;
               { expense.toLocaleString() + '円' }
@@ -105,7 +107,7 @@ const App: React.FC<Props> = ({ orderId, defaultExpense, target }): JSX.Element 
                   value={ expense } onChange={(e) => handleChange(e)}
                 />
               </div>
-        
+
               <div className="col-2 py-0">
                 <button type="submit" name="action" value="transport_upadte" className="btn btn-inline-edit">
                   <i className="material-icons color-pr10">done</i>
@@ -126,8 +128,10 @@ document.addEventListener('turbolinks:load', () => {
     const expense: number = Number(transportationExpenses.getAttribute('expense'));
     const target: TargetEnum = transportationExpenses.getAttribute('target') as TargetEnum;
     const orderId: number = Number(transportationExpenses.getAttribute('orderId'));
+    const canEdit: boolean = transportationExpenses.getAttribute('canEdit') === 'true';
+
     ReactDOM.render(
-      <App orderId={orderId} defaultExpense={expense} target={target} />,
+      <App orderId={orderId} defaultExpense={expense} target={target} canEdit={canEdit} />,
       transportationExpenses,
     )
   }
@@ -135,8 +139,10 @@ document.addEventListener('turbolinks:load', () => {
     const expense: number = Number(expenses.getAttribute('expense'));
     const target: TargetEnum = expenses.getAttribute('target') as TargetEnum;
     const orderId: number = Number(expenses.getAttribute('orderId'));
+    const canEdit: boolean = expenses.getAttribute('canEdit') === 'true';
+
     ReactDOM.render(
-      <App orderId={orderId} defaultExpense={expense} target={target} />,
+      <App orderId={orderId} defaultExpense={expense} target={target} canEdit={canEdit} />,
       expenses,
     )
   }
