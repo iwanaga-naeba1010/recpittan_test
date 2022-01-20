@@ -45,7 +45,7 @@ ja:
       recreation:
         partner: パートナー
         title: タイトル
-        second_title: セカンドタイトル
+        second_title: サブタイトル
         minutes: 所要時間
         description: このようなことをやります
         flow_of_day: 当日の流れとタイムスケジュール
