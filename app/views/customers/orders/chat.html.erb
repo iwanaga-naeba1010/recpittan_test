@@ -92,21 +92,24 @@
               id="TransportationExpenseForm"
               expense="<%= @order.transportation_expenses %>"
               target="transportation_expenses"
-              orderId="<%= @order.id %>">
+              orderId="<%= @order.id %>"
+              canEdit="<%= @order.start_at.present? %>">
             </div>
 
             <div
               id="ExpenseForm"
               expense="<%= @order.expenses %>"
               target="expenses"
-              orderId="<%= @order.id %>">
+              orderId="<%= @order.id %>"
+              canEdit="<%= @order.start_at.present? %>">
             </div>
 
             <div
               id="NumberOfFacilitiesForm"
               numberOfFacilities="<%= @order.number_of_facilities %>"
               additionalFee="<%= @order.additional_facility_fee %>"
-              orderId="<%= @order.id %>">
+              orderId="<%= @order.id %>"
+              canEdit="<%= @order.start_at.present? %>">
             </div>
 
             <!--            {{else}}-->

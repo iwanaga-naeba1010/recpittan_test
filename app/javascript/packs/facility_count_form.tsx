@@ -19,18 +19,19 @@ interface Props {
   orderId: number;
   additionalFee: number;
   defaultNumberOfFacilities: number;
+  canEdit: boolean;
 }
 
-const App: React.FC<Props> = ({ orderId, defaultNumberOfFacilities, additionalFee }): JSX.Element => {
+const App: React.FC<Props> = ({ orderId, defaultNumberOfFacilities, additionalFee, canEdit }): JSX.Element => {
   const [facilities, setFacilities] = useState<number>(defaultNumberOfFacilities);
   const [isSent, setIsSent] = useState<boolean>(false);
-  
+
   useEffect(() => {
     if (defaultNumberOfFacilities !== 0) {
       setIsSent(true);
     }
   }, []);
-  
+
   // NOTE: それぞれの箇所でid指定だとかなり大変なので、chat.html.erbの画面下部にdummyのHTMLを用意し、そこから取得
   const applyExpenses = (numberOfFacilities: number) => {
     const regularPrice: number = Number($('#regularPrice').text());
@@ -39,10 +40,10 @@ const App: React.FC<Props> = ({ orderId, defaultNumberOfFacilities, additionalFe
     const transportationExpensesPrice: number = Number($('#transportationExpensesPrice').text());
     const additionalFacilitiesPrice: number = Number($('#additionalFacilitiesPrice').text());
     const totalPrice: string = '¥' + (regularPrice + regularMaterialPrice + expensesPrice + transportationExpensesPrice + additionalFacilitiesPrice).toLocaleString() + '円';
-    
+
     console.log(numberOfFacilities);
     console.log(numberOfFacilities + '施設');
-    
+
     // NOTE: サイドバーの合計金額
     $('#totalPriceForSidenav').text(totalPrice);
     // NOTE: 正式依頼の合計金額
@@ -53,7 +54,7 @@ const App: React.FC<Props> = ({ orderId, defaultNumberOfFacilities, additionalFe
     $('#numberOfFacilitiesForOrderForm').text((numberOfFacilities * additionalFee).toLocaleString() + '円'); // TODO: たまに動いていないので、こちらの対処必要
     $('#totalPriceForOrderForm').text(totalPrice);
   }
-  
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFacilities(Number(e.target.value));
     $('#additionalFacilitiesPrice').text(Number(e.target.value) * additionalFee);
@@ -64,7 +65,7 @@ const App: React.FC<Props> = ({ orderId, defaultNumberOfFacilities, additionalFe
     // }
     applyExpenses(Number(e.target.value));
   }
-  
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>): Promise<void> => {
     const token = document.querySelector('[name=csrf-token]').getAttribute('content');
     e.preventDefault();
@@ -89,9 +90,9 @@ const App: React.FC<Props> = ({ orderId, defaultNumberOfFacilities, additionalFe
       ? (
           <div className="row justify-content-between border-bottom-dotted py-2">
             <div className="col-auto align-self-center">
-              追加施設費 / 追加施設数 { facilities }施設
-              <br/>
-              <a className="clink" onClick={() => setIsSent(false)}>編集</a>
+              追加施設費 / 追加施設数 {facilities}施設
+              <br />
+              { !canEdit && <a className="clink" onClick={() => setIsSent(false)}>編集</a> }
             </div>
             <div className="col-auto">&yen;
               {/* TODO: recの金額から算出 */}
@@ -113,7 +114,7 @@ const App: React.FC<Props> = ({ orderId, defaultNumberOfFacilities, additionalFe
                   value={ facilities } onChange={(e) => handleChange(e)}
                 />
               </div>
-        
+
               <div className="col-2 py-0">
                 <button type="submit" name="action" value="transport_upadte" className="btn btn-inline-edit">
                   <i className="material-icons color-pr10">done</i>
@@ -133,9 +134,11 @@ document.addEventListener('turbolinks:load', () => {
     const facilities: number = Number(numberOfFacilitiesForm.getAttribute('numberOfFacilities'));
     const orderId: number = Number(numberOfFacilitiesForm.getAttribute('orderId'));
     let additionalFee: number = Number(numberOfFacilitiesForm.getAttribute('additionalFee'));
+    const canEdit: boolean = numberOfFacilitiesForm.getAttribute('canEdit') === 'true';
+
     additionalFee = additionalFee - 1000; // エブリの取り分1000円引く
     ReactDOM.render(
-      <App orderId={orderId} defaultNumberOfFacilities={facilities} additionalFee={additionalFee} />,
+      <App orderId={orderId} defaultNumberOfFacilities={facilities} additionalFee={additionalFee} canEdit={canEdit} />,
       numberOfFacilitiesForm,
     )
   }
