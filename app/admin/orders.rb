@@ -271,9 +271,9 @@ EOS
     def update
       order = Order.find(params[:id].to_i)
 
-      if order.status.value >= 70 && params[:order][:evaluation].present?
+      if order.status.value >= 70 && permitted_params[:order][:evaluation].present?
         # TODO(okubo): 評価更新する
-        evaluation_params = params[:order][:evaluation]
+        evaluation_params = permitted_params[:order][:evaluation]
         attrs = {
           ingenuity: evaluation_params[:ingenuity],
           communication: evaluation_params[:communication],
@@ -287,17 +287,24 @@ EOS
         # NOTE(okubo): 評価はあれば更新で、なければ作成
         order.report&.evaluation.present? ? order.report.evaluation.update(attrs) : order.report.create_evaluation(attrs)
         # NOTE(okubo): レポートの更新。order.statusにも影響あるので、重要
-        order.report.update!(status: params[:order][:report][:status])
+        # binding.pry
+        order.report.update!(status: permitted_params[:order][:report][:status])
         order.update!(status: order.status)
 
+        # NOTE(okubo): reportのstatusによってメール切り替え
+        ReportDenyMailer.notify(order).deliver_now if order.report.stauts.denied?
+        PartnerCompleteReportMailer.notify(order).deliver_now if order.report.stauts.accepted?
         return redirect_to admin_order_path(order.id)
       end
 
-      order.update!(params[:order])
-      if order.status == :facility_request_in_progress && params[:order][:start_at].present?
+      order.update!(permitted_params[:order])
+
+      # NOTE(okubo): 正式依頼のメール発火
+      if order.status == :facility_request_in_progress && permitted_params[:order][:start_at].present?
         # NOTE(okubo): このメールは正式依頼のみなので、移動はしないで
         OrderRequestMailer.notify(order, order.user).deliver_now
       end
+      return redirect_to admin_order_path(order.id)
     rescue StandardError => e
       super
     end

@@ -17,6 +17,7 @@ ActiveAdmin.register Chat do
       )
       chat.save
 
+      PartnerChatMailer.notify(order, order.user).deliver_now
       redirect_to admin_order_path(order.id)
     end
   end

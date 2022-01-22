@@ -47,7 +47,7 @@ class Order < ApplicationRecord
   has_many :order_memos, dependent: :destroy
   accepts_nested_attributes_for :order_memos, allow_destroy: true
 
-  has_many :order_dates
+  has_many :order_dates, dependent: :destroy
   accepts_nested_attributes_for :order_dates
 
   has_one :report, dependent: :destroy
