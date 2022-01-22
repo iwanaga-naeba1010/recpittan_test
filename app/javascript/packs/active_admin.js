@@ -10,11 +10,5 @@ import 'arctic_admin'
 import '../events/admin/order';
 import * as $ from 'jquery';
 
-$(document).ready(() => {
-  console.log('testes');
-  $('#officialRequestBtn').on('click', () => {
-    console.log('haitta');
-    $('.official_input').css('display', 'block');
-  });
-});
+
 

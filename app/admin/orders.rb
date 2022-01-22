@@ -131,7 +131,7 @@ ActiveAdmin.register Order do
         end
 
         panel 'パートナー支払額', style: 'margin-top: 30px;' do
-          render 'admin/orders/_fee_table', order: order, kind: :partner
+          render 'admin/orders/fee_table', order: order, kind: :partner
         end
       end
 
@@ -142,6 +142,11 @@ ActiveAdmin.register Order do
     f.semantic_errors
     render 'admin/orders/menu'
     f.inputs do
+      f.input :status,
+              as: :select,
+              collection: Order.status.values.map { |i| [i.text, i] },
+              input_html: { disabled: true }
+
       f.input :user,
               as: :select,
               collection: User.includes(:company).customers.map { |i| [i.company&.facility_name, i.id] },
@@ -158,28 +163,26 @@ ActiveAdmin.register Order do
         f.input :number_of_people
         f.input :number_of_facilities
       end
-      # f.input :prefecture
-      # f.input :city
-      # f.input :street
-      # f.input :building
-      # f.input :number_of_people
-      # f.input :number_of_facilities
-      # f.input :status, as: :select, collection: Order.status.values.map { |i| [i.text, i] }
+
       # f.input :is_accepted
       # f.input :start_at, as: :date_time_picker
       # f.input :end_at, as: :date_time_picker
+      div class: 'recreation_input' do
+        f.input :regular_price
+        f.input :instructor_amount
+        f.input :regular_material_price
+        f.input :instructor_material_amount
+        f.input :additional_facility_fee
+      end
 
-      # f.input :regular_price
-      # f.input :instructor_amount
-      # f.input :regular_material_price
-      # f.input :instructor_material_amount
-      # f.input :additional_facility_fee
       # TODO(okubo): 正式依頼が完了したらdisabledに変更する
-      if f.object.id.present?
-        f.input :transportation_expenses
-        f.input :expenses
-        f.input :zoom_price
-        f.input :support_price
+      div class: 'cost_input' do
+        if f.object.id.present?
+          f.input :transportation_expenses
+          f.input :expenses
+          f.input :zoom_price
+          f.input :support_price
+        end
       end
 
       f.input :contract_number, hint: 'スプレッドシート管理のIDを紐づけるための項目です。将来的にシステムに移行しますが、現在は入力のみとなっております。'
