@@ -27,4 +27,8 @@ $(document).ready(() => {
     hideAllForm();
     $('.cost_input').css('display', 'block');
   });
+  $('#evaluationBtn').on('click', () => {
+    hideAllForm();
+    $('.evaluation_input').css('display', 'block');
+  });
 });

@@ -15,7 +15,7 @@ ActiveAdmin.register Order do
   actions :all
 
   filter :user, collection: proc { User.includes(:company).customers.map { |i| [i.company&.facility_name, i.id] } }
-  filter :recreation
+ filter :recreation
   filter :status, collection: proc { Order.status.values.map { |i| [i.text, i.value] } }
 
   csv do
@@ -125,6 +125,13 @@ ActiveAdmin.register Order do
         end
       end
 
+      tab '終了報告' do
+        panel '終了報告', style: 'margin-top: 30px;' do
+          # binding.pry
+          render 'admin/orders/report', report: order&.report
+        end
+      end
+
       tab '請求情報' do
         panel '施設請求額', style: 'margin-top: 30px;' do
           render 'admin/orders/fee_table', order: order, kind: :customer
@@ -189,6 +196,21 @@ ActiveAdmin.register Order do
         end
       end
 
+      div class: 'evaluation_input' do
+        if f.object.status.value >= 70
+          f.inputs I18n.t('activerecord.models.evaluation'), for: [:evaluation, f.object.report.evaluation] do |ff|
+            ff.input :ingenuity
+            ff.input :communication
+            ff.input :smoothness
+            ff.input :price
+            ff.input :want_to_order_agein
+            ff.input :message
+            ff.input :other_message
+
+          end
+        end
+      end
+
       f.input :contract_number, hint: 'スプレッドシート管理のIDを紐づけるための項目です。将来的にシステムに移行しますが、現在は入力のみとなっております。'
     end
 
@@ -237,35 +259,36 @@ EOS
     end
 
     def update
-      # NOTE: finished以降でreportと評価がなければ自動で追加する修正
       order = Order.find(params[:id].to_i)
-      list = ['finished', 'invoice_issued', 'paid', 'canceled', 'travled']
-
-      is_contains = list.map { |l| permitted_params[:order][:status]&.include?(l) }.compact.uniq.delete_if { |v| v==false }
-
-      if is_contains&.first == true
-        if order.report.blank?
-          order.create_report(
-            expenses: order.expenses,
-            number_of_facilities: order.number_of_facilities,
-            number_of_people: order.number_of_people,
-            status: :accepted,
-            transportation_expenses: order.transportation_expenses
-          )
-          order.report.create_evaluation(
-            communication: 0,
-            ingenuity: 0,
-            price: 0,
-            smoothness: 0,
-            want_to_order_agein: 0,
-            message: '管理画面からの自動入力です',
-            other_message: '管理画面からの自動入力です'
-          )
-        end
+      if params[:order][:evaluation].present?
+        # TODO(okubo): 評価更新する
+        evaluation_params = params[:order][:evaluation]
+        order.report.create_evaluation(
+          ingenuity: evaluation_params[:ingenuity],
+          communication: evaluation_params[:communication],
+          smoothness: evaluation_params[:smoothness],
+          price: evaluation_params[:price],
+          want_to_order_agein: evaluation_params[:want_to_order_agein],
+          message: evaluation_params[:message],
+          other_message: evaluation_params[:other_message]
+        )
+        # TODO(okubo): ここでorderも更新しないとstatus変わらないから、updateさせる
+        order.save!
+        binding.pry
+        return redirect_to admin_order_path(order.id)
       end
 
-      order.update(permitted_params[:order])
-      redirect_to admin_order_path(order.id)
+      order.update!(params[:order])
+    rescue StandardError => e
+      super
+      # NOTE: finished以降でreportと評価がなければ自動で追加する修正
+      # order = Order.find(params[:id].to_i)
+      # list = ['finished', 'invoice_issued', 'paid', 'canceled', 'travled']
+      #
+      # is_contains = list.map { |l| permitted_params[:order][:status]&.include?(l) }.compact.uniq.delete_if { |v| v==false }
+
+      # order.update(permitted_params[:order])
+      # redirect_to admin_order_path(order.id)
     end
   end
 end
