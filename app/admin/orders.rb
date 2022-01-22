@@ -247,7 +247,7 @@ ActiveAdmin.register Order do
 
 EOS
 
-      # TODO(okubo): recの金額を元に自動的に金額が反映されるようにする
+      # NOTE(okubo): recの金額を元に自動的に金額が反映されるようにする
       recreation = Recreation.find(params[:order][:recreation_id])
       order = recreation.orders.build(
         user_id: params[:order][:user_id],
@@ -259,6 +259,9 @@ EOS
       )
       order.chats.build(user_id: current_user.id, message: message)
       order.save!
+
+      CustomerChatStartMailer.notify(order, order.user).deliver_now
+      PartnerChatStartMailer.notify(order, order.user).deliver_now
       redirect_to admin_order_path(order.id)
     rescue StandardError => e
       Rails.logger.error e
@@ -268,7 +271,7 @@ EOS
     def update
       order = Order.find(params[:id].to_i)
 
-      if params[:order][:evaluation].present?
+      if order.status.value >= 70 && params[:order][:evaluation].present?
         # TODO(okubo): 評価更新する
         evaluation_params = params[:order][:evaluation]
         attrs = {
@@ -286,10 +289,15 @@ EOS
         # NOTE(okubo): レポートの更新。order.statusにも影響あるので、重要
         order.report.update!(status: params[:order][:report][:status])
         order.update!(status: order.status)
+
         return redirect_to admin_order_path(order.id)
       end
 
       order.update!(params[:order])
+      if order.status == :facility_request_in_progress && params[:order][:start_at].present?
+        # NOTE(okubo): このメールは正式依頼のみなので、移動はしないで
+        OrderRequestMailer.notify(order, order.user).deliver_now
+      end
     rescue StandardError => e
       super
     end
