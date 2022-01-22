@@ -6,20 +6,10 @@ ActiveAdmin.register Order do
   permit_params(
     %i[
       user_id recreation_id zip prefecture city street building number_of_people
-      number_of_facilities status
-      is_accepted
-      start_at
-      end_at
-      regular_price
-      instructor_amount
-      regular_material_price
-      instructor_material_amount
-      additional_facility_fee
-      transportation_expenses
-      support_price
-      expenses
-      zoom_price
-      contract_number
+      number_of_facilities status is_accepted start_at end_at
+      regular_price instructor_amount regular_material_price instructor_material_amount
+      additional_facility_fee transportation_expenses support_price expenses
+      zoom_price contract_number
     ]
   )
   actions :all
@@ -32,7 +22,7 @@ ActiveAdmin.register Order do
     column :id
     column(:status, &:status_text)
     column(:user) { |order| order.user.company.facility_name }
-    column(:recreation) { |order| order.recreation.title }
+    column(:recreation, &:recreation_title)
     column :zip
     column :prefecture
     column :city
@@ -72,8 +62,8 @@ ActiveAdmin.register Order do
       tab '詳細' do
         attributes_table do
           row :id
-          row(:status) {|rec| rec.status_text}
-          row(:user) { |rec| link_to order.user.company.facility_name, admin_company_path(order.user.company.id) }
+          row(:status, &:status_text)
+          row(:user) { |order| link_to order.user.company.facility_name, admin_company_path(order.user.company.id) }
           row :recreation
           row :zip
           row :prefecture
@@ -121,10 +111,10 @@ ActiveAdmin.register Order do
             column(:want_to_order_agein) { |evaluation| evaluation&.want_to_order_agein_text }
             column :message
             column :other_message
-
           end
         end
       end
+
       tab 'メモ' do
         render 'admin/order_memo', order: order
       end
@@ -156,30 +146,30 @@ ActiveAdmin.register Order do
               as: :select,
               collection: User.includes(:company).customers.map { |i| [i.company&.facility_name, i.id] },
               input_html: { class: 'select2' }
-      f.input :recreation,
-              input_html: { class: 'select2' }
-      f.input :zip
-      f.input :prefecture
-      f.input :city
-      f.input :street
-      f.input :building
-      f.input :number_of_people
-      f.input :number_of_facilities
-      f.input :status, as: :select, collection: Order.status.values.map { |i| [i.text, i] }
-      f.input :is_accepted
-      f.input :start_at, as: :date_time_picker
-      f.input :end_at, as: :date_time_picker
+      f.input :recreation, input_html: { class: 'select2' }
+      # NOTE(okubo): createは依頼だけなので必要な項目だけ表示
+      # f.input :zip
+      # f.input :prefecture
+      # f.input :city
+      # f.input :street
+      # f.input :building
+      # f.input :number_of_people
+      # f.input :number_of_facilities
+      # f.input :status, as: :select, collection: Order.status.values.map { |i| [i.text, i] }
+      # f.input :is_accepted
+      # f.input :start_at, as: :date_time_picker
+      # f.input :end_at, as: :date_time_picker
 
-      f.input :regular_price
-      f.input :instructor_amount
-      f.input :regular_material_price
-      f.input :instructor_material_amount
-      f.input :additional_facility_fee
+      # f.input :regular_price
+      # f.input :instructor_amount
+      # f.input :regular_material_price
+      # f.input :instructor_material_amount
+      # f.input :additional_facility_fee
       f.input :support_price
 
-      f.input :transportation_expenses
-      f.input :expenses
-      f.input :zoom_price
+      # f.input :transportation_expenses
+      # f.input :expenses
+      # f.input :zoom_price
       f.input :contract_number, hint: 'スプレッドシート管理のIDを紐づけるための項目です。将来的にシステムに移行しますが、現在は入力のみとなっております。'
     end
 
@@ -211,8 +201,11 @@ EOS
 
       order = Order.new(permitted_params[:order])
       order.chats.build(user_id: current_user.id, message: message)
-      order.save
+      order.save!
       redirect_to admin_order_path(order.id)
+    rescue StandardError => e
+      Rails.logger.error e
+      super
     end
 
     def update
