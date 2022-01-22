@@ -10,12 +10,14 @@ ActiveAdmin.register Order do
       regular_price instructor_amount regular_material_price instructor_material_amount
       additional_facility_fee transportation_expenses support_price expenses
       zoom_price contract_number
-    ]
+    ],
+    report: {},
+    evaluation: {}
   )
   actions :all
 
   filter :user, collection: proc { User.includes(:company).customers.map { |i| [i.company&.facility_name, i.id] } }
- filter :recreation
+  filter :recreation
   filter :status, collection: proc { Order.status.values.map { |i| [i.text, i.value] } }
 
   csv do
@@ -198,12 +200,18 @@ ActiveAdmin.register Order do
 
       div class: 'evaluation_input' do
         if f.object.status.value >= 70
+
+          f.inputs I18n.t('activerecord.models.report'), for: [:report, f.object.report] do |ff|
+            ff.input :status, as: :select, collection: Report.status.values.map { |val| [val.text, val] }
+          end
+
+
           f.inputs I18n.t('activerecord.models.evaluation'), for: [:evaluation, f.object.report.evaluation] do |ff|
-            ff.input :ingenuity
-            ff.input :communication
-            ff.input :smoothness
-            ff.input :price
-            ff.input :want_to_order_agein
+            ff.input :ingenuity, as: :select, collection: Evaluation.ingenuity.values.map { |val| [val.text, val] }
+            ff.input :communication, as: :select, collection: Evaluation.communication.values.map { |val| [val.text, val] }
+            ff.input :smoothness, as: :select, collection: Evaluation.smoothness.values.map { |val| [val.text, val] }
+            ff.input :price, as: :select, collection: Evaluation.price.values.map { |val| [val.text, val] }
+            ff.input :want_to_order_agein, as: :select, collection: Evaluation.want_to_order_agein.values.map { |val| [val.text, val] }
             ff.input :message
             ff.input :other_message
 
@@ -263,7 +271,7 @@ EOS
       if params[:order][:evaluation].present?
         # TODO(okubo): 評価更新する
         evaluation_params = params[:order][:evaluation]
-        order.report.create_evaluation(
+        attrs = {
           ingenuity: evaluation_params[:ingenuity],
           communication: evaluation_params[:communication],
           smoothness: evaluation_params[:smoothness],
@@ -271,24 +279,19 @@ EOS
           want_to_order_agein: evaluation_params[:want_to_order_agein],
           message: evaluation_params[:message],
           other_message: evaluation_params[:other_message]
-        )
-        # TODO(okubo): ここでorderも更新しないとstatus変わらないから、updateさせる
-        order.save!
-        binding.pry
+        }
+
+        # NOTE(okubo): 評価はあれば更新で、なければ作成
+        order.report&.evaluation.present? ? order.report.evaluation.update(attrs) : order.report.create_evaluation(attrs)
+        # NOTE(okubo): レポートの更新。order.statusにも影響あるので、重要
+        order.report.update!(status: params[:order][:report][:status])
+        order.update!(status: order.status)
         return redirect_to admin_order_path(order.id)
       end
 
       order.update!(params[:order])
     rescue StandardError => e
       super
-      # NOTE: finished以降でreportと評価がなければ自動で追加する修正
-      # order = Order.find(params[:id].to_i)
-      # list = ['finished', 'invoice_issued', 'paid', 'canceled', 'travled']
-      #
-      # is_contains = list.map { |l| permitted_params[:order][:status]&.include?(l) }.compact.uniq.delete_if { |v| v==false }
-
-      # order.update(permitted_params[:order])
-      # redirect_to admin_order_path(order.id)
     end
   end
 end

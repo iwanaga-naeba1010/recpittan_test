@@ -115,6 +115,7 @@ ja:
         facility_count: 施設数
         is_accepted: 施設承諾
         body: メッセージ
+        status: ステータス
       evaluation:
         ingenuity: 工夫の満足度
         communication: コミュニケーション力の満足度
