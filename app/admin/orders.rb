@@ -155,33 +155,37 @@ ActiveAdmin.register Order do
 
       # NOTE(okubo): createは依頼だけなので必要な項目だけ表示
       div class: 'official_input' do
-        f.input :zip
-        f.input :prefecture
-        f.input :city
-        f.input :street
-        f.input :building
-        f.input :number_of_people
-        f.input :number_of_facilities
+        f.input :start_at,
+                as: :date_time_picker,
+                input_html: { disabled: f.object.start_at.present? },
+                hint: '時間はformに直接入力してください'
+        f.input :zip, input_html: { disabled: f.object.start_at.present? }
+        f.input :prefecture, input_html: { disabled: f.object.start_at.present? }
+        f.input :city, input_html: { disabled: f.object.start_at.present? }
+        f.input :street, input_html: { disabled: f.object.start_at.present? }
+        f.input :building, input_html: { disabled: f.object.start_at.present? }
+        f.input :number_of_people, input_html: { disabled: f.object.start_at.present? }
+        f.input :number_of_facilities, input_html: { disabled: f.object.start_at.present? }
       end
 
       # f.input :is_accepted
       # f.input :start_at, as: :date_time_picker
       # f.input :end_at, as: :date_time_picker
       div class: 'recreation_input' do
-        f.input :regular_price
-        f.input :instructor_amount
-        f.input :regular_material_price
-        f.input :instructor_material_amount
-        f.input :additional_facility_fee
+        f.input :regular_price, input_html: { disabled: f.object.start_at.present? }
+        f.input :instructor_amount, input_html: { disabled: f.object.start_at.present? }
+        f.input :regular_material_price, input_html: { disabled: f.object.start_at.present? }
+        f.input :instructor_material_amount, input_html: { disabled: f.object.start_at.present? }
+        f.input :additional_facility_fee, input_html: { disabled: f.object.start_at.present? }
       end
 
       # TODO(okubo): 正式依頼が完了したらdisabledに変更する
       div class: 'cost_input' do
         if f.object.id.present?
-          f.input :transportation_expenses
-          f.input :expenses
-          f.input :zoom_price
-          f.input :support_price
+          f.input :transportation_expenses, input_html: { disabled: f.object.start_at.present? }
+          f.input :expenses, input_html: { disabled: f.object.start_at.present? }
+          f.input :zoom_price, input_html: { disabled: f.object.start_at.present? }
+          f.input :support_price, input_html: { disabled: f.object.start_at.present? }
         end
       end
 
