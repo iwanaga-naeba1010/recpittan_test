@@ -116,22 +116,22 @@ ActiveAdmin.register Order do
       end
 
       tab 'メモ' do
-        render 'admin/order_memo', order: order
+        render 'admin/orders/memo', order: order
       end
 
       tab 'チャット' do
         panel 'チャット', style: 'margin-top: 30px;' do
-          render 'admin/chat', order: order
+          render 'admin/orders/chat', order: order
         end
       end
 
       tab '請求情報' do
         panel '施設請求額', style: 'margin-top: 30px;' do
-          render 'admin/order_fee_table', order: order, kind: :customer
+          render 'admin/orders/fee_table', order: order, kind: :customer
         end
 
         panel 'パートナー支払額', style: 'margin-top: 30px;' do
-          render 'admin/order_fee_table', order: order, kind: :partner
+          render 'admin/orders/_fee_table', order: order, kind: :partner
         end
       end
 
@@ -140,15 +140,24 @@ ActiveAdmin.register Order do
 
   form do |f|
     f.semantic_errors
-
+    render 'admin/orders/menu'
     f.inputs do
       f.input :user,
               as: :select,
               collection: User.includes(:company).customers.map { |i| [i.company&.facility_name, i.id] },
-              input_html: { class: 'select2' }
-      f.input :recreation, input_html: { class: 'select2' }
+              input_html: { class: 'select2', disabled: f.object.id.present? }
+      f.input :recreation, input_html: { class: 'select2', disabled: f.object.id.present? }
+
       # NOTE(okubo): createは依頼だけなので必要な項目だけ表示
-      # f.input :zip
+      div class: 'official_input' do
+        f.input :zip
+        f.input :prefecture
+        f.input :city
+        f.input :street
+        f.input :building
+        f.input :number_of_people
+        f.input :number_of_facilities
+      end
       # f.input :prefecture
       # f.input :city
       # f.input :street
@@ -165,11 +174,14 @@ ActiveAdmin.register Order do
       # f.input :regular_material_price
       # f.input :instructor_material_amount
       # f.input :additional_facility_fee
-      f.input :support_price
+      # TODO(okubo): 正式依頼が完了したらdisabledに変更する
+      if f.object.id.present?
+        f.input :transportation_expenses
+        f.input :expenses
+        f.input :zoom_price
+        f.input :support_price
+      end
 
-      # f.input :transportation_expenses
-      # f.input :expenses
-      # f.input :zoom_price
       f.input :contract_number, hint: 'スプレッドシート管理のIDを紐づけるための項目です。将来的にシステムに移行しますが、現在は入力のみとなっております。'
     end
 
@@ -199,7 +211,16 @@ ActiveAdmin.register Order do
 
 EOS
 
-      order = Order.new(permitted_params[:order])
+      # TODO(okubo): recの金額を元に自動的に金額が反映されるようにする
+      recreation = Recreation.find(params[:order][:recreation_id])
+      order = recreation.orders.build(
+        user_id: params[:order][:user_id],
+        regular_price: recreation.regular_price,
+        instructor_amount: recreation.instructor_amount,
+        regular_material_price: recreation.regular_material_price,
+        instructor_material_amount: recreation.instructor_material_amount,
+        additional_facility_fee: recreation.additional_facility_fee,
+      )
       order.chats.build(user_id: current_user.id, message: message)
       order.save!
       redirect_to admin_order_path(order.id)
