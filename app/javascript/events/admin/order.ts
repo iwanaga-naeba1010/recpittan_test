@@ -9,6 +9,7 @@ $(document).ready(() => {
     $('.official_input').css('display', 'none');
     $('.recreation_input').css('display', 'none');
     $('.cost_input').css('display', 'none');
+    $('.evaluation_input').css('display', 'none');
   }
   // NOTE(okubo): 正式依頼のformを表示
   $('#officialRequestBtn').on('click', () => {

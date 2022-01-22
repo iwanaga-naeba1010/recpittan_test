@@ -149,7 +149,9 @@ ActiveAdmin.register Order do
 
   form do |f|
     f.semantic_errors
+    # NOTE(okubo): form切り替えボタン
     render 'admin/orders/menu'
+
     f.inputs do
       f.input :status,
               as: :select,
@@ -200,13 +202,11 @@ ActiveAdmin.register Order do
 
       div class: 'evaluation_input' do
         if f.object.status.value >= 70
-
           f.inputs I18n.t('activerecord.models.report'), for: [:report, f.object.report] do |ff|
             ff.input :status, as: :select, collection: Report.status.values.map { |val| [val.text, val] }
           end
 
-
-          f.inputs I18n.t('activerecord.models.evaluation'), for: [:evaluation, f.object.report.evaluation] do |ff|
+          f.inputs I18n.t('activerecord.models.evaluation'), for: [:evaluation, f.object.report&.evaluation] do |ff|
             ff.input :ingenuity, as: :select, collection: Evaluation.ingenuity.values.map { |val| [val.text, val] }
             ff.input :communication, as: :select, collection: Evaluation.communication.values.map { |val| [val.text, val] }
             ff.input :smoothness, as: :select, collection: Evaluation.smoothness.values.map { |val| [val.text, val] }
@@ -214,7 +214,6 @@ ActiveAdmin.register Order do
             ff.input :want_to_order_agein, as: :select, collection: Evaluation.want_to_order_agein.values.map { |val| [val.text, val] }
             ff.input :message
             ff.input :other_message
-
           end
         end
       end
@@ -268,6 +267,7 @@ EOS
 
     def update
       order = Order.find(params[:id].to_i)
+
       if params[:order][:evaluation].present?
         # TODO(okubo): 評価更新する
         evaluation_params = params[:order][:evaluation]
