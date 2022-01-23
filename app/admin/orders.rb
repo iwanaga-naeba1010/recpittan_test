@@ -129,7 +129,6 @@ ActiveAdmin.register Order do
 
       tab '終了報告' do
         panel '終了報告', style: 'margin-top: 30px;' do
-          # binding.pry
           render 'admin/orders/report', report: order&.report
         end
       end
@@ -173,9 +172,7 @@ ActiveAdmin.register Order do
                 input_html: { disabled: f.object.start_at.present? },
                 hint: '5分単位の時間はformに直接入力してください'
         f.input :zip, input_html: { disabled: f.object.start_at.present? }
-        # f.input :prefecture, as: :select, collection: [[]], input_html: { disabled: f.object.start_at.present? }
         f.input :prefecture, input_html: { disabled: f.object.start_at.present? }
-        # f.input :city, as: :select, collection: [[]], input_html: { disabled: f.object.start_at.present? }
         f.input :city, input_html: { disabled: f.object.start_at.present? }
         f.input :street, input_html: { disabled: f.object.start_at.present? }
         f.input :building, input_html: { disabled: f.object.start_at.present? }
@@ -183,9 +180,6 @@ ActiveAdmin.register Order do
         f.input :number_of_facilities, input_html: { disabled: f.object.start_at.present? }
       end
 
-      # f.input :is_accepted
-      # f.input :start_at, as: :date_time_picker
-      # f.input :end_at, as: :date_time_picker
       div class: 'cost_input' do
         if f.object.id.present?
           f.input :regular_price, input_html: { disabled: f.object.start_at.present? }
@@ -287,7 +281,6 @@ EOS
         # NOTE(okubo): 評価はあれば更新で、なければ作成
         order.report&.evaluation.present? ? order.report.evaluation.update(attrs) : order.report.create_evaluation(attrs)
         # NOTE(okubo): レポートの更新。order.statusにも影響あるので、重要
-        # binding.pry
         order.report.update!(status: permitted_params[:order][:report][:status])
         order.update!(status: order.status)
 
