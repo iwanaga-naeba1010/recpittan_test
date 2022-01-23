@@ -149,8 +149,10 @@ ActiveAdmin.register Order do
 
   form do |f|
     f.semantic_errors
-    # NOTE(okubo): form切り替えボタン
-    render 'admin/orders/menu'
+    # NOTE(okubo): form切り替えボタン, 編集時のみ表示
+    if f.object&.id.present?
+      render 'admin/orders/menu', order: order
+    end
 
     f.inputs do
       f.input :status,
@@ -169,7 +171,7 @@ ActiveAdmin.register Order do
         f.input :start_at,
                 as: :date_time_picker,
                 input_html: { disabled: f.object.start_at.present? },
-                hint: '時間はformに直接入力してください'
+                hint: '5分単位の時間はformに直接入力してください'
         f.input :zip, input_html: { disabled: f.object.start_at.present? }
         f.input :prefecture, input_html: { disabled: f.object.start_at.present? }
         f.input :city, input_html: { disabled: f.object.start_at.present? }
@@ -182,22 +184,16 @@ ActiveAdmin.register Order do
       # f.input :is_accepted
       # f.input :start_at, as: :date_time_picker
       # f.input :end_at, as: :date_time_picker
-      div class: 'recreation_input' do
+      div class: 'cost_input' do
         f.input :regular_price, input_html: { disabled: f.object.start_at.present? }
         f.input :instructor_amount, input_html: { disabled: f.object.start_at.present? }
         f.input :regular_material_price, input_html: { disabled: f.object.start_at.present? }
         f.input :instructor_material_amount, input_html: { disabled: f.object.start_at.present? }
         f.input :additional_facility_fee, input_html: { disabled: f.object.start_at.present? }
-      end
-
-      # TODO(okubo): 正式依頼が完了したらdisabledに変更する
-      div class: 'cost_input' do
-        if f.object.id.present?
-          f.input :transportation_expenses, input_html: { disabled: f.object.start_at.present? }
-          f.input :expenses, input_html: { disabled: f.object.start_at.present? }
-          f.input :zoom_price, input_html: { disabled: f.object.start_at.present? }
-          f.input :support_price, input_html: { disabled: f.object.start_at.present? }
-        end
+        f.input :transportation_expenses, input_html: { disabled: f.object.start_at.present? }
+        f.input :expenses, input_html: { disabled: f.object.start_at.present? }
+        f.input :zoom_price, input_html: { disabled: f.object.start_at.present? }
+        f.input :support_price, input_html: { disabled: f.object.start_at.present? }
       end
 
       div class: 'evaluation_input' do

@@ -11,16 +11,11 @@ $(document).ready(() => {
     $('.cost_input').css('display', 'none');
     $('.evaluation_input').css('display', 'none');
   }
+
   // NOTE(okubo): 正式依頼のformを表示
   $('#officialRequestBtn').on('click', () => {
     hideAllForm();
     $('.official_input').css('display', 'block');
-  });
-
-  // NOTE(okubo): 正式依頼のレク金額formを表示
-  $('#recreationBtn').on('click', () => {
-    hideAllForm();
-    $('.recreation_input').css('display', 'block');
   });
 
   // NOTE(okubo): 正式依頼のcostのform表示
@@ -28,6 +23,7 @@ $(document).ready(() => {
     hideAllForm();
     $('.cost_input').css('display', 'block');
   });
+
   $('#evaluationBtn').on('click', () => {
     hideAllForm();
     $('.evaluation_input').css('display', 'block');

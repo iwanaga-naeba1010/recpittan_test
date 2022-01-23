@@ -1,13 +1,14 @@
-<button id="officialRequestBtn" type="button">
-  正式依頼form表示
+<button id="costBtn" type="button">
+  交通費等コスト&レク金額form
 </button>
 
-<button id="recreationBtn" type="button">
-  レク金額のform表示
+<button id="officialRequestBtn" type="button">
+  正式依頼form
 </button>
-<button id="costBtn" type="button">
-  コストのform表示
-</button>
-<button id="evaluationBtn" type="button">
-  評価のform表示
-</button>
+
+<% if order&.report&.id.present? %>
+  <button id="evaluationBtn" type="button">
+    終了報告評価form
+  </button>
+<% end %>
+
