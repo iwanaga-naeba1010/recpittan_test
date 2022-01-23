@@ -292,8 +292,8 @@ EOS
         order.update!(status: order.status)
 
         # NOTE(okubo): reportのstatusによってメール切り替え
-        ReportDenyMailer.notify(order).deliver_now if order.report.stauts.denied?
-        PartnerCompleteReportMailer.notify(order).deliver_now if order.report.stauts.accepted?
+        ReportDenyMailer.notify(order).deliver_now if order.report.status.denied?
+        PartnerCompleteReportMailer.notify(order).deliver_now if order.report.status.accepted?
         return redirect_to admin_order_path(order.id)
       end
 
@@ -304,7 +304,7 @@ EOS
         # NOTE(okubo): このメールは正式依頼のみなので、移動はしないで
         OrderRequestMailer.notify(order, order.user).deliver_now
       end
-      return redirect_to admin_order_path(order.id)
+      redirect_to admin_order_path(order.id)
     rescue StandardError => e
       super
     end
