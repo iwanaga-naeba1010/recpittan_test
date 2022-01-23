@@ -173,7 +173,9 @@ ActiveAdmin.register Order do
                 input_html: { disabled: f.object.start_at.present? },
                 hint: '5分単位の時間はformに直接入力してください'
         f.input :zip, input_html: { disabled: f.object.start_at.present? }
+        # f.input :prefecture, as: :select, collection: [[]], input_html: { disabled: f.object.start_at.present? }
         f.input :prefecture, input_html: { disabled: f.object.start_at.present? }
+        # f.input :city, as: :select, collection: [[]], input_html: { disabled: f.object.start_at.present? }
         f.input :city, input_html: { disabled: f.object.start_at.present? }
         f.input :street, input_html: { disabled: f.object.start_at.present? }
         f.input :building, input_html: { disabled: f.object.start_at.present? }
@@ -185,31 +187,33 @@ ActiveAdmin.register Order do
       # f.input :start_at, as: :date_time_picker
       # f.input :end_at, as: :date_time_picker
       div class: 'cost_input' do
-        f.input :regular_price, input_html: { disabled: f.object.start_at.present? }
-        f.input :instructor_amount, input_html: { disabled: f.object.start_at.present? }
-        f.input :regular_material_price, input_html: { disabled: f.object.start_at.present? }
-        f.input :instructor_material_amount, input_html: { disabled: f.object.start_at.present? }
-        f.input :additional_facility_fee, input_html: { disabled: f.object.start_at.present? }
-        f.input :transportation_expenses, input_html: { disabled: f.object.start_at.present? }
-        f.input :expenses, input_html: { disabled: f.object.start_at.present? }
-        f.input :zoom_price, input_html: { disabled: f.object.start_at.present? }
-        f.input :support_price, input_html: { disabled: f.object.start_at.present? }
+        if f.object.id.present?
+          f.input :regular_price, input_html: { disabled: f.object.start_at.present? }
+          f.input :instructor_amount, input_html: { disabled: f.object.start_at.present? }
+          f.input :regular_material_price, input_html: { disabled: f.object.start_at.present? }
+          f.input :instructor_material_amount, input_html: { disabled: f.object.start_at.present? }
+          f.input :additional_facility_fee, input_html: { disabled: f.object.start_at.present? }
+          f.input :transportation_expenses, input_html: { disabled: f.object.start_at.present? }
+          f.input :expenses, input_html: { disabled: f.object.start_at.present? }
+          f.input :zoom_price, input_html: { disabled: f.object.start_at.present? }
+          f.input :support_price, input_html: { disabled: f.object.start_at.present? }
+        end
       end
 
       div class: 'evaluation_input' do
         if f.object.status.value >= 70
           f.inputs I18n.t('activerecord.models.report'), for: [:report, f.object.report] do |ff|
-            ff.input :status, as: :select, collection: Report.status.values.map { |val| [val.text, val] }
+            ff.input :status, as: :select, collection: Report.status.values.map { |val| [val.text, val] }, input_html: { disabled: f.object.report&.status.accepted? }
           end
 
           f.inputs I18n.t('activerecord.models.evaluation'), for: [:evaluation, f.object.report&.evaluation] do |ff|
-            ff.input :ingenuity, as: :select, collection: Evaluation.ingenuity.values.map { |val| [val.text, val] }
-            ff.input :communication, as: :select, collection: Evaluation.communication.values.map { |val| [val.text, val] }
-            ff.input :smoothness, as: :select, collection: Evaluation.smoothness.values.map { |val| [val.text, val] }
-            ff.input :price, as: :select, collection: Evaluation.price.values.map { |val| [val.text, val] }
-            ff.input :want_to_order_agein, as: :select, collection: Evaluation.want_to_order_agein.values.map { |val| [val.text, val] }
-            ff.input :message
-            ff.input :other_message
+            ff.input :ingenuity, as: :select, collection: Evaluation.ingenuity.values.map { |val| [val.text, val] }, input_html: { disabled: f.object.report&.status.accepted? }
+            ff.input :communication, as: :select, collection: Evaluation.communication.values.map { |val| [val.text, val] }, input_html: { disabled: f.object.report&.status.accepted? }
+            ff.input :smoothness, as: :select, collection: Evaluation.smoothness.values.map { |val| [val.text, val] }, input_html: { disabled: f.object.report&.status.accepted? }
+            ff.input :price, as: :select, collection: Evaluation.price.values.map { |val| [val.text, val] }, input_html: { disabled: f.object.report&.status.accepted? }
+            ff.input :want_to_order_agein, as: :select, collection: Evaluation.want_to_order_agein.values.map { |val| [val.text, val] }, input_html: { disabled: f.object.report&.status.accepted? }
+            ff.input :message, input_html: { disabled: f.object.report&.status.accepted? }
+            ff.input :other_message, input_html: { disabled: f.object.report&.status.accepted? }
           end
         end
       end
