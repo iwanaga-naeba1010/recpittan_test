@@ -9,14 +9,16 @@ ActiveAdmin.register Chat do
 
   controller do
     def create
-      chat = Chat.new(
-        user_id: params[:chat][:user_id].to_i,
-        order_id: params[:chat][:order_id].to_i,
+      order = Order.find(params[:chat][:order_id])
+      # NOTE(okubo): chatは施設として送るので、特別な実装にしてます
+      chat = order.chats.build(
+        user_id: order.user.id,
         message: params[:chat][:message]
       )
       chat.save
-      # TODO: 動的にid入れる
-      redirect_to admin_order_path(params[:chat][:order_id].to_i)
+
+      PartnerChatMailer.notify(order, order.user).deliver_now
+      redirect_to admin_order_path(order.id)
     end
   end
 end

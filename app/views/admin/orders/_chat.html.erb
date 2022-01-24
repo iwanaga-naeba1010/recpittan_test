@@ -1,5 +1,4 @@
 <main class="chat">
-
   <% order.chats.each_with_index do |chat, i| %>
     <% if i == 0 %>
       <div class="row justify-content-center pt-2">
@@ -10,7 +9,6 @@
         <div class="col-auto date"><%= date chat.created_at %></div>
       </div>
     <% end %>
-
 
     <% if chat.user_role == :partner %>
       <!-- パートナー -->
@@ -27,28 +25,10 @@
           <div class="message"><%= simple_format chat.message %></div>
         </div>
       </div>
-    <% elsif chat.user_role == :admin %>
-      <!-- Admin -->
-      <div class="your-chat">
-        <div class="col-md-auto">
-          <div class="name">Adminから送信</div>
-          <span class="time"><%= time chat.created_at %></span>
-          <div class="message"><%= simple_format chat.message %></div>
-        </div>
-      </div>
-    <% elsif chat.user_role == :cs %>
-      <!-- cs -->
-      <div class="your-chat">
-        <div class="col-md-auto">
-          <div class="name">CSから送信</div>
-          <span class="time"><%= time chat.created_at %></span>
-          <div class="message"><%= simple_format chat.message %></div>
-        </div>
-      </div>
     <% end %>
   <% end %>
+
   <%= simple_form_for Chat.new, url: admin_chats_path do |f| %>
-    <%= f.input :user_id, as: :hidden, input_html: { value: current_user.id } %>
     <%= f.input :order_id, as: :hidden, input_html: { value: order.id } %>
     <%= f.input :message %>
     <%= f.submit '送信' %>

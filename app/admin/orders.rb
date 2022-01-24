@@ -6,21 +6,13 @@ ActiveAdmin.register Order do
   permit_params(
     %i[
       user_id recreation_id zip prefecture city street building number_of_people
-      number_of_facilities status
-      is_accepted
-      start_at
-      end_at
-      regular_price
-      instructor_amount
-      regular_material_price
-      instructor_material_amount
-      additional_facility_fee
-      transportation_expenses
-      support_price
-      expenses
-      zoom_price
-      contract_number
-    ]
+      number_of_facilities status is_accepted start_at end_at
+      regular_price instructor_amount regular_material_price instructor_material_amount
+      additional_facility_fee transportation_expenses support_price expenses
+      zoom_price contract_number
+    ],
+    report: {},
+    evaluation: {}
   )
   actions :all
 
@@ -32,7 +24,7 @@ ActiveAdmin.register Order do
     column :id
     column(:status, &:status_text)
     column(:user) { |order| order.user.company.facility_name }
-    column(:recreation) { |order| order.recreation.title }
+    column(:recreation, &:recreation_title)
     column :zip
     column :prefecture
     column :city
@@ -72,8 +64,8 @@ ActiveAdmin.register Order do
       tab '詳細' do
         attributes_table do
           row :id
-          row(:status) {|rec| rec.status_text}
-          row(:user) { |rec| link_to order.user.company.facility_name, admin_company_path(order.user.company.id) }
+          row(:status, &:status_text)
+          row(:user) { |order| link_to order.user.company.facility_name, admin_company_path(order.user.company.id) }
           row :recreation
           row :zip
           row :prefecture
@@ -121,27 +113,33 @@ ActiveAdmin.register Order do
             column(:want_to_order_agein) { |evaluation| evaluation&.want_to_order_agein_text }
             column :message
             column :other_message
-
           end
         end
       end
+
       tab 'メモ' do
-        render 'admin/order_memo', order: order
+        render 'admin/orders/memo', order: order
       end
 
       tab 'チャット' do
         panel 'チャット', style: 'margin-top: 30px;' do
-          render 'admin/chat', order: order
+          render 'admin/orders/chat', order: order
+        end
+      end
+
+      tab '終了報告' do
+        panel '終了報告', style: 'margin-top: 30px;' do
+          render 'admin/orders/report', report: order&.report
         end
       end
 
       tab '請求情報' do
         panel '施設請求額', style: 'margin-top: 30px;' do
-          render 'admin/order_fee_table', order: order, kind: :customer
+          render 'admin/orders/fee_table', order: order, kind: :customer
         end
 
         panel 'パートナー支払額', style: 'margin-top: 30px;' do
-          render 'admin/order_fee_table', order: order, kind: :partner
+          render 'admin/orders/fee_table', order: order, kind: :partner
         end
       end
 
@@ -150,36 +148,70 @@ ActiveAdmin.register Order do
 
   form do |f|
     f.semantic_errors
+    # NOTE(okubo): form切り替えボタン, 編集時のみ表示
+    if f.object&.id.present?
+      render 'admin/orders/menu', order: order
+    end
 
     f.inputs do
+      f.input :status,
+              as: :select,
+              collection: Order.status.values.map { |i| [i.text, i] },
+              input_html: { disabled: true }
+
       f.input :user,
               as: :select,
               collection: User.includes(:company).customers.map { |i| [i.company&.facility_name, i.id] },
-              input_html: { class: 'select2' }
-      f.input :recreation,
-              input_html: { class: 'select2' }
-      f.input :zip
-      f.input :prefecture
-      f.input :city
-      f.input :street
-      f.input :building
-      f.input :number_of_people
-      f.input :number_of_facilities
-      f.input :status, as: :select, collection: Order.status.values.map { |i| [i.text, i] }
-      f.input :is_accepted
-      f.input :start_at, as: :date_time_picker
-      f.input :end_at, as: :date_time_picker
+              input_html: { class: 'select2', disabled: f.object.id.present? }
+      f.input :recreation, input_html: { class: 'select2', disabled: f.object.id.present? }
 
-      f.input :regular_price
-      f.input :instructor_amount
-      f.input :regular_material_price
-      f.input :instructor_material_amount
-      f.input :additional_facility_fee
-      f.input :support_price
+      # NOTE(okubo): createは依頼だけなので必要な項目だけ表示
+      div class: 'official_input' do
+        f.input :start_at,
+                as: :date_time_picker,
+                input_html: { disabled: f.object.start_at.present? },
+                hint: '5分単位の時間はformに直接入力してください'
+        f.input :zip, input_html: { disabled: f.object.start_at.present? }
+        f.input :prefecture, input_html: { disabled: f.object.start_at.present? }
+        f.input :city, input_html: { disabled: f.object.start_at.present? }
+        f.input :street, input_html: { disabled: f.object.start_at.present? }
+        f.input :building, input_html: { disabled: f.object.start_at.present? }
+        f.input :number_of_people, input_html: { disabled: f.object.start_at.present? }
+        f.input :number_of_facilities, input_html: { disabled: f.object.start_at.present? }
+      end
 
-      f.input :transportation_expenses
-      f.input :expenses
-      f.input :zoom_price
+      div class: 'cost_input' do
+        if f.object.id.present?
+          f.input :regular_price, input_html: { disabled: f.object.start_at.present? }
+          f.input :instructor_amount, input_html: { disabled: f.object.start_at.present? }
+          f.input :regular_material_price, input_html: { disabled: f.object.start_at.present? }
+          f.input :instructor_material_amount, input_html: { disabled: f.object.start_at.present? }
+          f.input :additional_facility_fee, input_html: { disabled: f.object.start_at.present? }
+          f.input :transportation_expenses, input_html: { disabled: f.object.start_at.present? }
+          f.input :expenses, input_html: { disabled: f.object.start_at.present? }
+          f.input :zoom_price, input_html: { disabled: f.object.start_at.present? }
+          f.input :support_price, input_html: { disabled: f.object.start_at.present? }
+        end
+      end
+
+      div class: 'evaluation_input' do
+        if f.object.status.value >= 70
+          f.inputs I18n.t('activerecord.models.report'), for: [:report, f.object.report] do |ff|
+            ff.input :status, as: :select, collection: Report.status.values.map { |val| [val.text, val] }, input_html: { disabled: f.object.report&.status.accepted? }
+          end
+
+          f.inputs I18n.t('activerecord.models.evaluation'), for: [:evaluation, f.object.report&.evaluation] do |ff|
+            ff.input :ingenuity, as: :select, collection: Evaluation.ingenuity.values.map { |val| [val.text, val] }, input_html: { disabled: f.object.report&.status.accepted? }
+            ff.input :communication, as: :select, collection: Evaluation.communication.values.map { |val| [val.text, val] }, input_html: { disabled: f.object.report&.status.accepted? }
+            ff.input :smoothness, as: :select, collection: Evaluation.smoothness.values.map { |val| [val.text, val] }, input_html: { disabled: f.object.report&.status.accepted? }
+            ff.input :price, as: :select, collection: Evaluation.price.values.map { |val| [val.text, val] }, input_html: { disabled: f.object.report&.status.accepted? }
+            ff.input :want_to_order_agein, as: :select, collection: Evaluation.want_to_order_agein.values.map { |val| [val.text, val] }, input_html: { disabled: f.object.report&.status.accepted? }
+            ff.input :message, input_html: { disabled: f.object.report&.status.accepted? }
+            ff.input :other_message, input_html: { disabled: f.object.report&.status.accepted? }
+          end
+        end
+      end
+
       f.input :contract_number, hint: 'スプレッドシート管理のIDを紐づけるための項目です。将来的にシステムに移行しますが、現在は入力のみとなっております。'
     end
 
@@ -209,42 +241,65 @@ ActiveAdmin.register Order do
 
 EOS
 
-      order = Order.new(permitted_params[:order])
+      # NOTE(okubo): recの金額を元に自動的に金額が反映されるようにする
+      recreation = Recreation.find(params[:order][:recreation_id])
+      order = recreation.orders.build(
+        user_id: params[:order][:user_id],
+        regular_price: recreation.regular_price,
+        instructor_amount: recreation.instructor_amount,
+        regular_material_price: recreation.regular_material_price,
+        instructor_material_amount: recreation.instructor_material_amount,
+        additional_facility_fee: recreation.additional_facility_fee,
+      )
       order.chats.build(user_id: current_user.id, message: message)
-      order.save
+      order.save!
+
+      CustomerChatStartMailer.notify(order, order.user).deliver_now
+      PartnerChatStartMailer.notify(order, order.user).deliver_now
       redirect_to admin_order_path(order.id)
+    rescue StandardError => e
+      Rails.logger.error e
+      super
     end
 
     def update
-      # NOTE: finished以降でreportと評価がなければ自動で追加する修正
       order = Order.find(params[:id].to_i)
-      list = ['finished', 'invoice_issued', 'paid', 'canceled', 'travled']
 
-      is_contains = list.map { |l| permitted_params[:order][:status]&.include?(l) }.compact.uniq.delete_if { |v| v==false }
+      if order.status.value >= 70 && permitted_params[:order][:evaluation].present?
+        # TODO(okubo): 評価更新する
+        evaluation_params = permitted_params[:order][:evaluation]
+        attrs = {
+          ingenuity: evaluation_params[:ingenuity],
+          communication: evaluation_params[:communication],
+          smoothness: evaluation_params[:smoothness],
+          price: evaluation_params[:price],
+          want_to_order_agein: evaluation_params[:want_to_order_agein],
+          message: evaluation_params[:message],
+          other_message: evaluation_params[:other_message]
+        }
 
-      if is_contains&.first == true
-        if order.report.blank?
-          order.create_report(
-            expenses: order.expenses,
-            number_of_facilities: order.number_of_facilities,
-            number_of_people: order.number_of_people,
-            status: :accepted,
-            transportation_expenses: order.transportation_expenses
-          )
-          order.report.create_evaluation(
-            communication: 0,
-            ingenuity: 0,
-            price: 0,
-            smoothness: 0,
-            want_to_order_agein: 0,
-            message: '管理画面からの自動入力です',
-            other_message: '管理画面からの自動入力です'
-          )
-        end
+        # NOTE(okubo): 評価はあれば更新で、なければ作成
+        order.report&.evaluation.present? ? order.report.evaluation.update(attrs) : order.report.create_evaluation(attrs)
+        # NOTE(okubo): レポートの更新。order.statusにも影響あるので、重要
+        order.report.update!(status: permitted_params[:order][:report][:status])
+        order.update!(status: order.status)
+
+        # NOTE(okubo): reportのstatusによってメール切り替え
+        ReportDenyMailer.notify(order).deliver_now if order.report.status.denied?
+        PartnerCompleteReportMailer.notify(order).deliver_now if order.report.status.accepted?
+        return redirect_to admin_order_path(order.id)
       end
 
-      order.update(permitted_params[:order])
+      order.update!(permitted_params[:order])
+
+      # NOTE(okubo): 正式依頼のメール発火
+      if order.status == :facility_request_in_progress && permitted_params[:order][:start_at].present?
+        # NOTE(okubo): このメールは正式依頼のみなので、移動はしないで
+        OrderRequestMailer.notify(order, order.user).deliver_now
+      end
       redirect_to admin_order_path(order.id)
+    rescue StandardError => e
+      super
     end
   end
 end

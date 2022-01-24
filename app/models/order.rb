@@ -47,7 +47,7 @@ class Order < ApplicationRecord
   has_many :order_memos, dependent: :destroy
   accepts_nested_attributes_for :order_memos, allow_destroy: true
 
-  has_many :order_dates
+  has_many :order_dates, dependent: :destroy
   accepts_nested_attributes_for :order_dates
 
   has_one :report, dependent: :destroy
@@ -70,7 +70,7 @@ class Order < ApplicationRecord
   attribute :message
   attribute :tags
 
-  before_save :switch_status_befire_save
+  before_save :switch_status_before_save
 
   scope :accepted_by_partner, -> { where(is_accepted: true) }
   scope :not_accepted_by_partner, -> { where(is_accepted: false) }
@@ -79,7 +79,7 @@ class Order < ApplicationRecord
             :instructor_material_amount, :expenses, :transportation_expenses,
             :additional_facility_fee, presence: true
 
-  def switch_status_befire_save
+  def switch_status_before_save
     # NOTE: 終了している案件のstatusを変更しても処理は挟まない
     if self.status.finished? || self.status.invoice_issued? || self.status.paid? || self.status.canceled? || self.status.travled?
       return self
@@ -88,6 +88,11 @@ class Order < ApplicationRecord
     # NOTE: 完了したがレポート書いていないこと
     if self.start_at.present? && self.is_accepted && (Time.current >= self.start_at) && self.report.blank?
       self.status = :unreported_completed
+      # NOTE(okubo): テストで落ちないようにtestのenvであればデータ生成
+      if Rails.env.test?
+        Rails.application.load_tasks
+        Rake::Task['import:email_templates'].invoke
+      end
       PartnerCompleteReportMailer.notify(self).deliver_now
       return self
     end

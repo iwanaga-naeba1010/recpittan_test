@@ -39,6 +39,11 @@ ja:
         paid: 支払済
         canceled: キャンセル
         travled: トラブル(支払か請求有)
+    report:
+      status:
+        denied: 拒否
+        in_progress: 確認中
+        accepted: 許可
     evaluation:
       ingenuity:
         *evaluation_list
