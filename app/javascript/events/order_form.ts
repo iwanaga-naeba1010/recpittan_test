@@ -29,13 +29,13 @@ import { findAddressByZip } from '../packs/zip';
         }));
       });
     });
-    
+
     // 仮リリース版のボタン押下動作の処理
     // 料金記載のレクで依頼をかける場合は、rails formをremote:trueにして、ajaxで通信してOKならmodal発火
     $(document).on('ajax:success', () => {
       $('#priceModalTrigger').trigger('click');
     });
-  
+
     $(document).on('ajax:error', () => {
       console.log('失敗!!!!');
     });

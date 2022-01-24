@@ -6,7 +6,7 @@ RSpec.describe 'Orders', type: :request do
   let(:admin) { create :user, :with_admin }
   let(:customer) { create :user, :with_custoemr }
   let(:partner) { create :user, :with_recreations }
-  let(:order) { create :order, recreation_id: partner.recreations.first.id, user_id: customer.id }
+  let!(:order) { create :order, recreation_id: partner.recreations.first.id, user_id: customer.id }
 
   before do
     sign_in admin
@@ -70,30 +70,30 @@ RSpec.describe 'Orders', type: :request do
         }.to change { Order.find(order.id).number_of_people }.from(order.number_of_people).to(number_of_people)
       end
 
-      it 'creates a report when status is finished or upper' do
-        expect {
-          put admin_order_path(order.id), params: { order: { number_of_people: number_of_people, status: :finished } }
-        }.to change(Report, :count).by(+1)
+      it 'updates costs' do
+        attrs = attributes_for(:order, regular_price: 1000, regular_material_price: 1000, instructor_amount: 1000, instructor_material_amount: 1000)
+        put admin_order_path(order.id), params: { order: attrs }
+        order.reload
+        expect(order.regular_price).to be attrs[:regular_price]
+        expect(order.regular_material_price).to be attrs[:regular_material_price]
+        expect(order.instructor_amount).to be attrs[:instructor_amount]
+        expect(order.instructor_material_amount).to be attrs[:instructor_material_amount]
       end
 
-      it 'creates an evaluation when status is finished or upper' do
-        expect {
-          put admin_order_path(order.id), params: { order: { number_of_people: number_of_people, status: :finished } }
-        }.to change(Evaluation, :count).by(+1)
-      end
+      # TODO(okubo): 理想は全てのpatternを入れたい
     end
   end
 
-  # describe 'DELETE #destroy' do
-  #   context 'success' do
-  #     it 'reduce one record' do
-  #       expect { delete admin_company_path(company.id) }.to change(Company, :count).by(-1)
-  #     end
-  #
-  #     it 'redirects to managers company billboards path' do
-  #       delete admin_company_path(company.id)
-  #       expect(response).to redirect_to admin_companies_path
-  #     end
-  #   end
-  # end
+  describe 'DELETE #destroy' do
+    context 'success' do
+      it 'reduce one record' do
+        expect { delete admin_order_path(order.id) }.to change(Order, :count).by(-1)
+      end
+
+      it 'redirects to orders  path' do
+        delete admin_order_path(order.id)
+        expect(response).to redirect_to admin_orders_path
+      end
+    end
+  end
 end
