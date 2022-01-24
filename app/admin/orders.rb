@@ -173,8 +173,15 @@ ActiveAdmin.register Order do
 
       div class: 'evaluation_input' do
         report_accepted = f.object.report&.status&.accepted?
+        hint = 'パートナーの終了報告の入力値が反映されています'
+        f.input :number_of_facilities, input_html: { disabled: true }, hint: hint
+        f.input :number_of_people, input_html: { disabled: true }, hint: hint
+        f.input :transportation_expenses, input_html: { disabled: true }, hint: hint
+        f.input :expenses, input_html: { disabled: true }, hint: hint
+
         if f.object.status.value >= 70
           f.inputs I18n.t('activerecord.models.report'), for: [:report, f.object.report] do |ff|
+            ff.input :body, input_html: { disabled: true }
             ff.input :status, as: :select, collection: Report.status.values.map { |val| [val.text, val] }, input_html: { disabled: report_accepted }
           end
 
