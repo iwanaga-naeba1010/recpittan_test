@@ -8,6 +8,8 @@ class ReportDenyMailer < ApplicationMailer
     @user_name = @user.username
     @email = @user.email
 
+    @url = edit_partners_order_report_url(order_id: order.id, id: order.report&.id)
+
     mail from: 'info@everyplus.jp', to: @email, subject: @template.title
   end
 end
