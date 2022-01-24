@@ -9,19 +9,8 @@
     </div>
   <% end %>
 
-  <!-- Admin -->
-  <% if chat.user.role.admin? %>
-    <div class="row justify-content-start instructor">
-      <div class="col-md-auto">
-        <div class="name">運営</div>
-        <div class="text card-header"><%= simple_format chat.message %></div>
-      </div>
-      <div class="col-auto align-self-end time"><%= time chat.created_at %></div>
-    </div>
-  <% end %>
-
   <!-- パートナー -->
-  <% if current_user.id == chat.user_id %>
+  <% if chat.user.role.partner? %>
     <div class="row justify-content-end pt-2">
       <div class="col-auto align-self-end time"><%= time chat.created_at %></div>
       <div class="col-md-auto customer-text mychat card-header">
