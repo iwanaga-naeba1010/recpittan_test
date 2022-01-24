@@ -92,29 +92,6 @@ ActiveAdmin.register Order do
           row :updated_at
         end
 
-        panel '終了報告', style: 'margin-top: 30px;' do
-          table_for order.report do
-            column :id
-            column :status
-            column :number_of_facilities
-            column :number_of_people
-            column :expenses
-            column :transportation_expenses
-            column :body
-          end
-        end
-
-        panel '評価', style: 'margin-top: 30px;' do
-          table_for order.report&.evaluation do
-            column(:communication) { |evaluation| evaluation&.communication_text }
-            column(:ingenuity) { |evaluation| evaluation&.ingenuity_text }
-            column(:price) { |evaluation| evaluation&.price_text }
-            column(:smoothness) { |evaluation| evaluation&.smoothness_text }
-            column(:want_to_order_agein) { |evaluation| evaluation&.want_to_order_agein_text }
-            column :message
-            column :other_message
-          end
-        end
       end
 
       tab 'メモ' do
@@ -195,19 +172,20 @@ ActiveAdmin.register Order do
       end
 
       div class: 'evaluation_input' do
+        report_accepted = f.object.report&.status&.accepted?
         if f.object.status.value >= 70
           f.inputs I18n.t('activerecord.models.report'), for: [:report, f.object.report] do |ff|
-            ff.input :status, as: :select, collection: Report.status.values.map { |val| [val.text, val] }, input_html: { disabled: f.object.report&.status.accepted? }
+            ff.input :status, as: :select, collection: Report.status.values.map { |val| [val.text, val] }, input_html: { disabled: report_accepted }
           end
 
           f.inputs I18n.t('activerecord.models.evaluation'), for: [:evaluation, f.object.report&.evaluation] do |ff|
-            ff.input :ingenuity, as: :select, collection: Evaluation.ingenuity.values.map { |val| [val.text, val] }, input_html: { disabled: f.object.report&.status.accepted? }
-            ff.input :communication, as: :select, collection: Evaluation.communication.values.map { |val| [val.text, val] }, input_html: { disabled: f.object.report&.status.accepted? }
-            ff.input :smoothness, as: :select, collection: Evaluation.smoothness.values.map { |val| [val.text, val] }, input_html: { disabled: f.object.report&.status.accepted? }
-            ff.input :price, as: :select, collection: Evaluation.price.values.map { |val| [val.text, val] }, input_html: { disabled: f.object.report&.status.accepted? }
-            ff.input :want_to_order_agein, as: :select, collection: Evaluation.want_to_order_agein.values.map { |val| [val.text, val] }, input_html: { disabled: f.object.report&.status.accepted? }
-            ff.input :message, input_html: { disabled: f.object.report&.status.accepted? }
-            ff.input :other_message, input_html: { disabled: f.object.report&.status.accepted? }
+            ff.input :ingenuity, as: :select, collection: Evaluation.ingenuity.values.map { |val| [val.text, val] }, input_html: { disabled: report_accepted }
+            ff.input :communication, as: :select, collection: Evaluation.communication.values.map { |val| [val.text, val] }, input_html: { disabled: report_accepted }
+            ff.input :smoothness, as: :select, collection: Evaluation.smoothness.values.map { |val| [val.text, val] }, input_html: { disabled: report_accepted }
+            ff.input :price, as: :select, collection: Evaluation.price.values.map { |val| [val.text, val] }, input_html: { disabled: report_accepted }
+            ff.input :want_to_order_agein, as: :select, collection: Evaluation.want_to_order_agein.values.map { |val| [val.text, val] }, input_html: { disabled: report_accepted }
+            ff.input :message, input_html: { disabled: report_accepted }
+            ff.input :other_message, input_html: { disabled: report_accepted }
           end
         end
       end
