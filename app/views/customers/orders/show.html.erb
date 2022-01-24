@@ -99,7 +99,9 @@
             <!--            {{/if}}-->
             <div class="row py-2">
               <div class="col-lg-3 col-4 label">合計費用(税別)</div>
-              <div class="col-auto"><%= number_to_currency @order.total_price_for_customer %></div>
+              <div class="col-auto">¥
+                <%= number_to_currency @order.total_price_for_customer %>
+              </div>
             </div>
             <div class="row py-2">
               <div class="col-lg-3 col-4 label">ステータス</div>
