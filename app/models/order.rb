@@ -88,12 +88,7 @@ class Order < ApplicationRecord
     # NOTE: 完了したがレポート書いていないこと
     if self.start_at.present? && self.is_accepted && (Time.current >= self.start_at) && self.report.blank?
       self.status = :unreported_completed
-      # NOTE(okubo): テストで落ちないようにtestのenvであればデータ生成
-      if Rails.env.test?
-        Rails.application.load_tasks
-        Rake::Task['import:email_templates'].invoke
-      end
-      # PartnerCompleteReportMailer.notify(self).deliver_now
+      # NOTE(okubo): メールはtaskに移動
       return self
     end
 
