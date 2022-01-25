@@ -93,7 +93,7 @@ class Order < ApplicationRecord
         Rails.application.load_tasks
         Rake::Task['import:email_templates'].invoke
       end
-      PartnerCompleteReportMailer.notify(self).deliver_now
+      # PartnerCompleteReportMailer.notify(self).deliver_now
       return self
     end
 
