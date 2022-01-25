@@ -68,6 +68,7 @@ ActiveAdmin.register Partner do
       partner.email = permitted_params[:partner]['email']
       partner.password = password
       partner.confirmation_token = password
+      partner.confirmed_at = Time.current
       partner.role = :partner
       partner.skip_confirmation_notification!
       # TODO: 招待メールを送信
