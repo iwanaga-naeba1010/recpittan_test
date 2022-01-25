@@ -98,6 +98,7 @@ ActiveAdmin.register Company do
       company.user.email = permitted_params[:company].to_h[:user_attributes]['email']
       company.user.password = password
       company.user.confirmation_token = password
+      company.user.confirmed_at = Time.current
       company.user.skip_confirmation_notification!
       # TODO: 招待メールを送信
       # UserMailer.with(user: @user, password: password).invite.deliver_now
