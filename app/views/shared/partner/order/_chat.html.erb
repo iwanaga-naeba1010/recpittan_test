@@ -14,7 +14,7 @@
     <div class="row justify-content-end pt-2">
       <div class="col-auto align-self-end time"><%= time chat.created_at %></div>
       <div class="col-md-auto customer-text mychat card-header">
-        <%= simple_format(chat.message) %>
+        <%= auto_link(simple_format(h(chat.message)), target: :_blank) %>
       </div>
     </div>
   <% end %>
@@ -29,5 +29,3 @@
     </div>
   <% end %>
 <% end %>
-
-

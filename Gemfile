@@ -75,6 +75,7 @@ gem 'kaminari'
 gem 'ransack'
 
 gem 'active_hash'
+gem 'rails_autolink'
 
 # 開発環境でUserを切り替える
 gem 'switch_user'
