@@ -351,6 +351,7 @@ GEM
       actionpack (>= 5.0)
       railties (>= 5.0)
     rexml (3.2.5)
+    rinku (2.0.6)
     rspec (3.10.0)
       rspec-core (~> 3.10.0)
       rspec-expectations (~> 3.10.0)
@@ -536,6 +537,7 @@ DEPENDENCIES
   rails_best_practices
   ransack
   redis
+  rinku
   rspec-parameterized
   rspec-rails
   rspec-request_describer
