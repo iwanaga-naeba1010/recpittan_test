@@ -78,7 +78,7 @@
             <div class="row justify-content-between border-bottom-dotted pb-2">
               <div class="col-auto">開催費</div>
               <div class="col-auto">&yen;
-                <%= price_pipe @order.regular_price %>
+                <%= price_pipe(@order.regular_price, current_user) %>
               </div>
             </div>
             <div class="row justify-content-between border-bottom-dotted py-2">
@@ -130,7 +130,7 @@
             <div class="row justify-content-between border-top py-3">
               <div class="col-auto">合計(税別)</div>
               <div id="totalPriceForSidenav" class="col-auto">&yen;
-                <%= price_pipe(@order.total_price_for_customer) %>
+                <%= price_pipe(@order.total_price_for_customer, current_user) %>
               </div>
             </div>
             <div class="row justify-content-center py-3">
