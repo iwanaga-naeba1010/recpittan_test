@@ -1,7 +1,9 @@
 # frozen_string_literal: true
 
 module RecreationsHelper
-  def price_pipe(price)
+  def price_pipe(price, user)
+    return 'お問い合せください' if user.blank? || user&.role&.partner?
+
     return 'お問い合せください' if price == 0 || price.blank?
 
     number_to_currency(price)

@@ -112,7 +112,9 @@
             <div class="card-body">
               <% if user_signed_in? %>
                 <% if @recreation.is_public_price %>
-                  <h3 class="font-24">¥ <%= price_pipe(@recreation.regular_price) %><span> / 1回あたり</span></h3>
+                  <h3 class="font-24">
+                    ¥ <%= price_pipe(@recreation.regular_price, current_user) %><span> / 1回あたり</span>
+                  </h3>
                 <% else %>
                   <h3 class="title-b font-20">料金はお問い合わせください</h3>
                   <div class="text-muted">レク料金は非公開となっています。<br>知りたい場合はお問い合わせをしてください。</div>
