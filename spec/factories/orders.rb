@@ -46,6 +46,8 @@ FactoryBot.define do
     transportation_expenses { 0 }
     expenses { 0 }
     is_accepted { false }
+    additional_facility_fee { 100 }
+    number_of_facilities { 1 }
   end
 
   trait :with_report do
