@@ -22,7 +22,7 @@ interface Props {
   canEdit: boolean;
 }
 
-const App: React.FC<Props> = ({ orderId, defaultNumberOfFacilities, additionalFee, canEdit }): JSX.Element => {
+const App: React.FC<Props> = ({orderId, defaultNumberOfFacilities, additionalFee, canEdit}): JSX.Element => {
   const [facilities, setFacilities] = useState<number>(defaultNumberOfFacilities);
   const [isSent, setIsSent] = useState<boolean>(false);
 
@@ -39,19 +39,19 @@ const App: React.FC<Props> = ({ orderId, defaultNumberOfFacilities, additionalFe
     const expensesPrice: number = Number($('#expensesPrice').text());
     const transportationExpensesPrice: number = Number($('#transportationExpensesPrice').text());
     const additionalFacilitiesPrice: number = Number($('#additionalFacilitiesPrice').text());
-    const totalPrice: string = '¥' + (regularPrice + regularMaterialPrice + expensesPrice + transportationExpensesPrice + additionalFacilitiesPrice).toLocaleString() + '円';
 
-    console.log(numberOfFacilities);
-    console.log(numberOfFacilities + '施設');
+    const totalPrice: string = '¥' + (
+      regularPrice + regularMaterialPrice + expensesPrice + transportationExpensesPrice + (additionalFee * numberOfFacilities)
+    ).toLocaleString();
 
     // NOTE: サイドバーの合計金額
     $('#totalPriceForSidenav').text(totalPrice);
     // NOTE: 正式依頼の合計金額
-    $('#expensesForOrderForm').text('¥' + expensesPrice.toLocaleString() + '円');
-    $('#transportationExpensesForOrderForm').text('¥' + transportationExpensesPrice.toLocaleString() + '円');
+    $('#expensesForOrderForm').text('¥' + expensesPrice.toLocaleString());
+    $('#transportationExpensesForOrderForm').text('¥' + transportationExpensesPrice.toLocaleString());
     $('#order_number_of_facilities').val(numberOfFacilities); // TODO: たまに動いていないので、こちらの対処必要
     $('#numberOfFacilitiesForOrderFormLabel').text(numberOfFacilities + '施設'); // TODO: たまに動いていないので、こちらの対処必要
-    $('#numberOfFacilitiesForOrderForm').text((numberOfFacilities * additionalFee).toLocaleString() + '円'); // TODO: たまに動いていないので、こちらの対処必要
+    $('#numberOfFacilitiesForOrderForm').text((numberOfFacilities * additionalFee).toLocaleString()); // TODO: たまに動いていないので、こちらの対処必要
     $('#totalPriceForOrderForm').text(totalPrice);
   }
 
@@ -133,10 +133,9 @@ document.addEventListener('turbolinks:load', () => {
   if (numberOfFacilitiesForm) {
     const facilities: number = Number(numberOfFacilitiesForm.getAttribute('numberOfFacilities'));
     const orderId: number = Number(numberOfFacilitiesForm.getAttribute('orderId'));
-    let additionalFee: number = Number(numberOfFacilitiesForm.getAttribute('additionalFee'));
+    const additionalFee: number = Number(numberOfFacilitiesForm.getAttribute('additionalFee'));
     const canEdit: boolean = numberOfFacilitiesForm.getAttribute('canEdit') === 'true';
 
-    additionalFee = additionalFee - 1000; // エブリの取り分1000円引く
     ReactDOM.render(
       <App orderId={orderId} defaultNumberOfFacilities={facilities} additionalFee={additionalFee} canEdit={canEdit} />,
       numberOfFacilitiesForm,
