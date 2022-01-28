@@ -26,7 +26,7 @@ ja:
         request_denied: 相談中
         waiting_for_an_event_to_take_place: 開催待ち
         unreported_completed: 開催済み
-        final_report_admits_not: 終了報告拒否
+        final_report_admits_not: 終了報告送信済み
         finished: 終了報告承認済み
         invoice_issued: ー（終了報告承認済み）
         paid: 支払済み
