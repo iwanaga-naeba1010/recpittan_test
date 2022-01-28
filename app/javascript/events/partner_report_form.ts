@@ -9,7 +9,7 @@ import * as $ from 'jquery';
     $('#report_number_of_facilities').on('change', () => {
       const PRICE_PER_ADDIOTIONAL_FACILITY: number = Number($('#dummyAdditionalFacilityFee').text());
       const numberOfFacilities: number = Number($('#report_number_of_facilities').val());
-      $('#totalNumberOfFacilityPrice').text((numberOfFacilities * PRICE_PER_ADDIOTIONAL_FACILITY).toLocaleString() + '円');
+      $('#totalNumberOfFacilityPrice').text((numberOfFacilities * PRICE_PER_ADDIOTIONAL_FACILITY).toLocaleString());
 
       console.log(PRICE_PER_ADDIOTIONAL_FACILITY * numberOfFacilities);
       $('#dummyTotalFacilityFee').text(PRICE_PER_ADDIOTIONAL_FACILITY * numberOfFacilities);
@@ -22,7 +22,7 @@ import * as $ from 'jquery';
       const PRICE_PER_ADDIOTIONAL_PERSON: number = Number($('#dummyInstructoMaterialAmount').text());
       const numberOfPeople: number = Number($('#report_number_of_people').val());
       // NOTE: 材料費総額
-      $('#totalMaterialPrice').text((numberOfPeople * PRICE_PER_ADDIOTIONAL_PERSON) + '円');
+      $('#totalMaterialPrice').text((numberOfPeople * PRICE_PER_ADDIOTIONAL_PERSON));
       // NOTE: 追加人数
       $('#numberOfPeople').text(numberOfPeople + '人');
 
@@ -35,7 +35,7 @@ import * as $ from 'jquery';
     $('#report_transportation_expenses').on('change', () => {
       const transportationEpenses: number = Number($('#report_transportation_expenses').val());
       // NOTE: 材料費総額
-      $('#transportationEpenses').text(transportationEpenses + '円');
+      $('#transportationEpenses').text(transportationEpenses);
 
       console.log(transportationEpenses);
       $('#dummyTransportationExpenses').text(transportationEpenses);
@@ -47,7 +47,7 @@ import * as $ from 'jquery';
     $('#report_expenses').on('change', () => {
       const expenses: number = Number($('#report_expenses').val()) * 0.9;
       // NOTE: 材料費総額
-      $('#expenses').text(expenses + '円');
+      $('#expenses').text(expenses);
 
       console.log(expenses);
       $('#dummyExpenses').text(expenses);
@@ -63,7 +63,7 @@ import * as $ from 'jquery';
       const dummyZoomPrice: number = Number($('#dummyZoomPrice').text());
 
       const totalPrice: number = dummyInstructorAmount + dummyTotalMaterialPrice + dummyTransportationExpenses + dummyExpenses + dummyTotalFacilityFee - dummyZoomPrice;
-      $('#totalPrice').text(totalPrice.toLocaleString() + '円');
+      $('#totalPrice').text(totalPrice.toLocaleString());
     }
   });
 })();

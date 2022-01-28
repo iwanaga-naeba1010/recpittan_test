@@ -161,10 +161,11 @@
   <div id="regularPrice"><%= @order.regular_price %></div>
   <div id="regularMaterialPrice"><%= @order.regular_material_price %></div>
   <div id="transportationExpensesPrice"><%= @order.transportation_expenses %></div>
+  <div id="additionalFacilitiesPrice"><%= @order.number_of_facilities * @order.additional_facility_fee %></div>
   <!-- TODO: recの金額に合わせる -->
   <div id="additionalFacilitiesPrice">
     <% if @order.number_of_facilities.present? %>
-      <%= @order.number_of_facilities * 2000 %>
+      <%= @order.number_of_facilities * @order.additional_facility_fee %>
     <% else %>
       0
     <% end %>

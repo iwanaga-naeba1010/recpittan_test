@@ -271,7 +271,7 @@ EOS
 
         # NOTE(okubo): reportのstatusによってメール切り替え
         ReportDenyMailer.notify(order).deliver_now if order.report.status.denied?
-        PartnerCompleteReportMailer.notify(order).deliver_now if order.report.status.accepted?
+        ReportAcceptMailer.notify(order).deliver_now if order.report.status.accepted?
         return redirect_to admin_order_path(order.id)
       end
 

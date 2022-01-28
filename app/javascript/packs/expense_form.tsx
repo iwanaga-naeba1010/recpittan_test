@@ -41,12 +41,12 @@ const App: React.FC<Props> = ({ orderId, defaultExpense, target, canEdit }): JSX
     const regularMaterialPrice: number = Number($('#regularMaterialPrice').text());
     const expensesPrice: number = Number($('#expensesPrice').text());
     const transportationExpensesPrice: number = Number($('#transportationExpensesPrice').text());
-    const totalPrice: string = '¥' + (regularPrice + regularMaterialPrice + expensesPrice + transportationExpensesPrice).toLocaleString() + '円';
+    const totalPrice: string = '¥' + (regularPrice + regularMaterialPrice + expensesPrice + transportationExpensesPrice).toLocaleString();
     // NOTE: サイドバーの合計金額
     $('#totalPriceForSidenav').text(totalPrice);
     // NOTE: 正式依頼の合計金額
-    $('#expensesForOrderForm').text('¥' + expensesPrice.toLocaleString() + '円');
-    $('#transportationExpensesForOrderForm').text('¥' + transportationExpensesPrice.toLocaleString() + '円');
+    $('#expensesForOrderForm').text('¥' + expensesPrice.toLocaleString());
+    $('#transportationExpensesForOrderForm').text('¥' + transportationExpensesPrice.toLocaleString());
     $('#totalPriceForOrderForm').text(totalPrice);
   }
 
@@ -89,7 +89,7 @@ const App: React.FC<Props> = ({ orderId, defaultExpense, target, canEdit }): JSX
               {!canEdit && <a className="clink" onClick={() => setIsSent(false)}>編集</a> }
             </div>
             <div className="col-auto">&yen;
-              { expense.toLocaleString() + '円' }
+              { expense.toLocaleString() }
             </div>
           </div>
         )

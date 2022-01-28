@@ -20,7 +20,7 @@ class Customers::ReportsController < Customers::ApplicationController
       end
 
       if order.report&.status&.accepted?
-        PartnerCompleteReportMailer.notify(order).deliver_now
+        ReportAcceptMailer.notify(order).deliver_now
       end
 
       redirect_to customers_order_path(order.id), notice: '終了報告を更新しました'
