@@ -59,17 +59,6 @@ RSpec.describe 'OrdersForceComplete', type: :request do
           put admin_orders_force_complete_path(order.id), params: { order: { number_of_people: number_of_people } }
         }.to change(Evaluation, :count).by(+1)
       end
-      # it 'updates costs' do
-      #   attrs = attributes_for(:order, regular_price: 1000, regular_material_price: 1000, instructor_amount: 1000, instructor_material_amount: 1000)
-      #   put admin_orders_force_complete_path(order.id), params: { order: attrs }
-      #   order.reload
-      #   expect(order.regular_price).to be attrs[:regular_price]
-      #   expect(order.regular_material_price).to be attrs[:regular_material_price]
-      #   expect(order.instructor_amount).to be attrs[:instructor_amount]
-      #   expect(order.instructor_material_amount).to be attrs[:instructor_material_amount]
-      # end
-
-      # TODO(okubo): 理想は全てのpatternを入れたい
     end
   end
 
