@@ -9,6 +9,7 @@ ja:
       recreation_image: レク画像
       order: 案件
       orders/force_complete: 終了報告未 → 完了
+      orders/force_complete_from_in_progress: 相談中 → 完了
       orders/force_waiting_for_an_event_to_take_place: 相談中 → 実地待ち
       report: 終了報告
       evaluation: 評価
