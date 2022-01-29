@@ -134,65 +134,64 @@ ActiveAdmin.register Order do
       f.input :status,
               as: :select,
               collection: Order.status.values.map { |i| [i.text, i] },
-              input_html: { disabled: true }
+              hint: '完了以降は変更可能ですが、それ以外は強制執行モードで対応しています'
 
       f.input :user,
               as: :select,
               collection: User.includes(:company).customers.map { |i| [i.company&.facility_name, i.id] },
-              input_html: { class: 'select2', disabled: f.object.id.present? }
-      f.input :recreation, input_html: { class: 'select2', disabled: f.object.id.present? }
+              input_html: { class: 'select2' }
+      f.input :recreation, input_html: { class: 'select2' }
 
       # NOTE(okubo): createは依頼だけなので必要な項目だけ表示
       div class: 'official_input' do
         f.input :start_at,
                 as: :date_time_picker,
-                input_html: { disabled: f.object.start_at.present? },
                 hint: '5分単位の時間はformに直接入力してください'
-        f.input :zip, input_html: { disabled: f.object.start_at.present? }
-        f.input :prefecture, input_html: { disabled: f.object.start_at.present? }
-        f.input :city, input_html: { disabled: f.object.start_at.present? }
-        f.input :street, input_html: { disabled: f.object.start_at.present? }
-        f.input :building, input_html: { disabled: f.object.start_at.present? }
-        f.input :number_of_people, input_html: { disabled: f.object.start_at.present? }
-        f.input :number_of_facilities, input_html: { disabled: f.object.start_at.present? }
+        f.input :zip
+        f.input :prefecture
+        f.input :city
+        f.input :street
+        f.input :building
+        f.input :number_of_people
+        f.input :number_of_facilities
       end
 
       div class: 'cost_input' do
         if f.object.id.present?
-          f.input :regular_price, input_html: { disabled: f.object.start_at.present? }
-          f.input :instructor_amount, input_html: { disabled: f.object.start_at.present? }
-          f.input :regular_material_price, input_html: { disabled: f.object.start_at.present? }
-          f.input :instructor_material_amount, input_html: { disabled: f.object.start_at.present? }
-          f.input :additional_facility_fee, input_html: { disabled: f.object.start_at.present? }
-          f.input :transportation_expenses, input_html: { disabled: f.object.start_at.present? }
-          f.input :expenses, input_html: { disabled: f.object.start_at.present? }
-          f.input :zoom_price, input_html: { disabled: f.object.start_at.present? }
-          f.input :support_price, input_html: { disabled: f.object.start_at.present? }
+          f.input :regular_price
+          f.input :instructor_amount
+          f.input :regular_material_price
+          f.input :instructor_material_amount
+          f.input :additional_facility_fee
+          f.input :transportation_expenses
+          f.input :expenses
+          f.input :zoom_price
+          f.input :support_price
         end
       end
 
       div class: 'evaluation_input' do
         report_accepted = f.object.report&.status&.accepted?
         hint = 'パートナーの終了報告の入力値が反映されています'
-        f.input :number_of_facilities, input_html: { disabled: true }, hint: hint
-        f.input :number_of_people, input_html: { disabled: true }, hint: hint
-        f.input :transportation_expenses, input_html: { disabled: true }, hint: hint
-        f.input :expenses, input_html: { disabled: true }, hint: hint
+        f.input :number_of_facilities, hint: hint
+        f.input :number_of_people, hint: hint
+        f.input :transportation_expenses, hint: hint
+        f.input :expenses, hint: hint
 
         if f.object.status.value >= 70
           f.inputs I18n.t('activerecord.models.report'), for: [:report, f.object.report] do |ff|
             ff.input :body, input_html: { disabled: true }
-            ff.input :status, as: :select, collection: Report.status.values.map { |val| [val.text, val] }, input_html: { disabled: report_accepted }
+            ff.input :status, as: :select, collection: Report.status.values.map { |val| [val.text, val] }
           end
 
           f.inputs I18n.t('activerecord.models.evaluation'), for: [:evaluation, f.object.report&.evaluation] do |ff|
-            ff.input :ingenuity, as: :select, collection: Evaluation.ingenuity.values.map { |val| [val.text, val] }, input_html: { disabled: report_accepted }
-            ff.input :communication, as: :select, collection: Evaluation.communication.values.map { |val| [val.text, val] }, input_html: { disabled: report_accepted }
-            ff.input :smoothness, as: :select, collection: Evaluation.smoothness.values.map { |val| [val.text, val] }, input_html: { disabled: report_accepted }
-            ff.input :price, as: :select, collection: Evaluation.price.values.map { |val| [val.text, val] }, input_html: { disabled: report_accepted }
-            ff.input :want_to_order_agein, as: :select, collection: Evaluation.want_to_order_agein.values.map { |val| [val.text, val] }, input_html: { disabled: report_accepted }
-            ff.input :message, input_html: { disabled: report_accepted }
-            ff.input :other_message, input_html: { disabled: report_accepted }
+            ff.input :ingenuity, as: :select, collection: Evaluation.ingenuity.values.map { |val| [val.text, val] }
+            ff.input :communication, as: :select, collection: Evaluation.communication.values.map { |val| [val.text, val] }
+            ff.input :smoothness, as: :select, collection: Evaluation.smoothness.values.map { |val| [val.text, val] }
+            ff.input :price, as: :select, collection: Evaluation.price.values.map { |val| [val.text, val] }
+            ff.input :want_to_order_agein, as: :select, collection: Evaluation.want_to_order_agein.values.map { |val| [val.text, val] }
+            ff.input :message
+            ff.input :other_message
           end
         end
       end
@@ -241,6 +240,8 @@ EOS
 
       CustomerChatStartMailer.notify(order, order.user).deliver_now
       PartnerChatStartMailer.notify(order, order.user).deliver_now
+      SlackNotifier.new(channel: '#アクティブチャットスレッド').send('管理画面から案件追加を行いました', "管理画面案件URL：#{admin_order_url(order.id)}")
+
       redirect_to admin_order_path(order.id)
     rescue StandardError => e
       Rails.logger.error e
@@ -267,14 +268,16 @@ EOS
         order.report&.evaluation.present? ? order.report.evaluation.update(attrs) : order.report.create_evaluation(attrs)
         # NOTE(okubo): レポートの更新。order.statusにも影響あるので、重要
         order.report.update!(status: permitted_params[:order][:report][:status])
-        order.update!(status: order.status)
+        order.update!(status: permitted_params[:order][:status])
 
         # NOTE(okubo): reportのstatusによってメール切り替え
         ReportDenyMailer.notify(order).deliver_now if order.report.status.denied?
         ReportAcceptMailer.notify(order).deliver_now if order.report.status.accepted?
+        SlackNotifier.new(channel: '#アクティブチャットスレッド').send('管理画面から終了報告関連の処理を行いました', "管理画面案件URL：#{admin_order_url(order.id)}")
         return redirect_to admin_order_path(order.id)
       end
 
+      SlackNotifier.new(channel: '#アクティブチャットスレッド').send('管理画面から案件の更新を行いました', "管理画面案件URL：#{admin_order_url(order.id)}")
       order.update!(permitted_params[:order])
 
       # NOTE(okubo): 正式依頼のメール発火
