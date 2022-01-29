@@ -242,6 +242,8 @@ EOS
 
       CustomerChatStartMailer.notify(order, order.user).deliver_now
       PartnerChatStartMailer.notify(order, order.user).deliver_now
+      SlackNotifier.new(channel: '#アクティブチャットスレッド').send('管理画面から案件追加を行いました', "管理画面案件URL：#{admin_order_url(order.id)}")
+
       redirect_to admin_order_path(order.id)
     rescue StandardError => e
       Rails.logger.error e
@@ -273,9 +275,11 @@ EOS
         # NOTE(okubo): reportのstatusによってメール切り替え
         ReportDenyMailer.notify(order).deliver_now if order.report.status.denied?
         ReportAcceptMailer.notify(order).deliver_now if order.report.status.accepted?
+        SlackNotifier.new(channel: '#アクティブチャットスレッド').send('管理画面から終了報告関連の処理を行いました', "管理画面案件URL：#{admin_order_url(order.id)}")
         return redirect_to admin_order_path(order.id)
       end
 
+      SlackNotifier.new(channel: '#アクティブチャットスレッド').send('管理画面から案件の更新を行いました', "管理画面案件URL：#{admin_order_url(order.id)}")
       order.update!(permitted_params[:order])
 
       # NOTE(okubo): 正式依頼のメール発火
