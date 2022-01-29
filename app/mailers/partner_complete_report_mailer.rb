@@ -8,7 +8,8 @@ class PartnerCompleteReportMailer < ApplicationMailer
     @user = @recreation.user
     @user_name = @user.username
     @email = @user.email
-    @url = new_partners_order_report_url(order.id)
+
+    @url = "https://recreation.everyplus.jp/partners/orders/#{order.id}/reports/new"
 
     mail from: 'info@everyplus.jp', to: @email, subject: @template.title
   end
