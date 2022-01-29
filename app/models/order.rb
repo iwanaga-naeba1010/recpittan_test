@@ -202,11 +202,11 @@ class Order < ApplicationRecord
   # end
 
   def desired_time
-    return '' if start_at.blank? || end_at.blank?
+    return '' if start_at.blank?
 
     date = start_at.strftime('%Y年%m月%d日')
     start_time = start_at.strftime('%H:%M')
-    end_time = end_at.strftime('%H:%M')
+    end_time = end_at&.strftime('%H:%M')
 
     # TODO: エラーハンドリング入れた方が良いかも
     "#{date} #{start_time} ~ #{end_time}"
