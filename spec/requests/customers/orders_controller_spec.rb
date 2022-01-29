@@ -107,7 +107,7 @@ RSpec.describe Customers::OrdersController, type: :request do
   describe 'PUT /update' do
     context 'when valid parameters' do
       params = {
-        status: :waiting_for_a_reply_from_partner, dates: { '0' => { year: '2030', month: '1', date: '1', start_hour: '09', start_minutes: '00', end_hour: '10', end_minutes: '00' } },
+        status: :waiting_for_a_reply_from_partner, order_dates_attributes: { '0' => { year: '2030', month: '1', date: '1', start_hour: '09', start_minute: '00', end_hour: '10', end_minute: '00' } },
         number_of_people: 11, zip: '4536111', prefecture: '愛知県', city: '名古屋市中村区', street: '平池町グローバルゲート　１１階', building: 'building'
       }
       it 'returns 302 status' do
@@ -116,7 +116,7 @@ RSpec.describe Customers::OrdersController, type: :request do
       end
 
       it 'update start_at' do
-        date = Time.new(2030, 12, 31, 13, 0)
+        date = Time.zone.local(2030, 1, 1, 9, 0)
 
         expect {
           put customers_order_path(order.id), params: { order: params }
