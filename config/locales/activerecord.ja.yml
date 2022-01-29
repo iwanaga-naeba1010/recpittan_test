@@ -8,6 +8,7 @@ ja:
       recreation: レク
       recreation_image: レク画像
       order: 案件
+      orders/force_complete: 終了報告未 → 完了
       report: 終了報告
       evaluation: 評価
       email_template: テンプレート

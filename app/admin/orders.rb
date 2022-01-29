@@ -134,13 +134,14 @@ ActiveAdmin.register Order do
       f.input :status,
               as: :select,
               collection: Order.status.values.map { |i| [i.text, i] },
-              input_html: { disabled: true }
+              input_html: { disabled: true },
+              hint: 'ステータスの変更は強制執行モードでのみ可能です'
 
       f.input :user,
               as: :select,
               collection: User.includes(:company).customers.map { |i| [i.company&.facility_name, i.id] },
-              input_html: { class: 'select2', disabled: f.object.id.present? }
-      f.input :recreation, input_html: { class: 'select2', disabled: f.object.id.present? }
+              input_html: { class: 'select2' }
+      f.input :recreation, input_html: { class: 'select2' }
 
       # NOTE(okubo): createは依頼だけなので必要な項目だけ表示
       div class: 'official_input' do
