@@ -83,9 +83,24 @@ EOS
 
   def update
     ActiveRecord::Base.transaction do
-      order_date = @order.order_dates[0]
-      start_at = Time.new(order_date.year.to_i, order_date.month.to_i, order_date.date.to_i, order_date.start_hour.to_i, order_date.start_minute.to_i)
-      end_at = Time.new(order_date.year.to_i, order_date.month.to_i, order_date.date.to_i, order_date.end_hour.to_i, order_date.end_minute.to_i)
+      date = params_create[:order_dates_attributes].to_h['0']
+
+      start_at = Time.zone.local(
+        date['year'].to_i,
+        date['month'].to_i,
+        date['date'].to_i,
+        date['start_hour'].to_i,
+        date['start_minute'].to_i
+      )
+
+      end_at = Time.zone.local(
+        date['year'].to_i,
+        date['month'].to_i,
+        date['date'].to_i,
+        date['end_hour'].to_i,
+        date['end_minute'].to_i
+      )
+
       # TODO: 若干負債だけど、今は許容する
       @order.update(start_at: start_at, end_at: end_at)
 
