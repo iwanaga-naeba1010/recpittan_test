@@ -18,6 +18,7 @@ ActiveAdmin.register Chat do
       chat.save
 
       PartnerChatMailer.notify(order, order.user).deliver_now
+      SlackNotifier.new(channel: '#アクティブチャットスレッド').send('管理画面からチャット送信を行いました', "管理画面案件URL：#{admin_order_url(order.id)}")
       redirect_to admin_order_path(order.id)
     end
   end
