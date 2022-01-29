@@ -147,6 +147,10 @@ ActiveAdmin.register Order do
         f.input :start_at,
                 as: :date_time_picker,
                 hint: '5分単位の時間はformに直接入力してください'
+
+        f.input :end_at,
+                as: :date_time_picker,
+                hint: '5分単位の時間はformに直接入力してください'
         f.input :zip
         f.input :prefecture
         f.input :city
