@@ -22,7 +22,7 @@ class CustomDevise::SessionsController < Devise::SessionsController
 
   def after_sign_in_path_for(resource)
     if resource.role.admin?
-      return admin_path
+      return admin_dashboard_path
     elsif resource.role.partner?
       return partners_path
     end
