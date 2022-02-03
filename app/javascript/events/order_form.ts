@@ -27,12 +27,13 @@ const App = async () => {
 
   // NOTE(okubo): 新規作成は空stringが入るので、ここで制御
   if (defaultPrefecture !== '') {
-    $(`#order_prefecture option[value=${defaultPrefecture}]`).attr('selected','selected')
+    $(`#order_prefecture option[value=${defaultPrefecture}]`).attr('selected', 'selected');
   }
   // 市区町村を都道府県のevent経由で動的set
   $("#order_prefecture").on("change", async () => {
     const prefCode = prefectures.result.filter((prefecture) => prefecture.prefName === $('#order_prefecture option:selected').text())[0].prefCode;
     if (prefCode === null) {
+
       return;
     }
     const cities = await findCityByPrefectureCode(prefCode);

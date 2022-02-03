@@ -7,7 +7,6 @@ import { findAddressByZip } from '../packs/zip';
 
 const App = async () => {
   const defaultPrefecture: string = $('#user_company_attributes_prefecture').text().replace(/\s/g, '');
-  console.log(defaultPrefecture);
   // NOTE: 都道府県を初期化
   const prefectures = await findAllPrefectures();
   prefectures.result.map((prefecture) => {
@@ -18,7 +17,7 @@ const App = async () => {
   });
 
   if (defaultPrefecture !== '') {
-    $(`#user_company_attributes_prefecture option[value=${defaultPrefecture}]`).attr('selected','selected')
+    $(`#user_company_attributes_prefecture option[value=${defaultPrefecture}]`).attr('selected', 'selected');
   }
   // NOTE: user registration eidtの郵便番号をevent経由で動的set
   $('#searchAddressWithZipInRegistrationEditForm').on('click', async () => {
