@@ -83,7 +83,7 @@
               <div class="row py-2 border-bottom">
                 <div class="col-lg-3 col-4 label">合計費用(税別)</div>
                 <div class="col-auto">
-                  <%= price_mark(@order.total_price_for_customer) %>
+                  <%= number_to_currency(@order.total_price_for_customer) %>
                 </div>
               </div>
             </div>

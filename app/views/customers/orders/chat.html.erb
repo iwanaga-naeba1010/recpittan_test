@@ -85,7 +85,7 @@
               <div class="col-auto">材料費/1人<br><span
                 class="text-muted font-12 color-ba08">※材料費は人数分の費用が発生します</span></div>
               <div class="col-auto">
-                <%= price_mark(@order.regular_material_price) %>
+                <%= number_to_currency(@order.regular_material_price) %>
               </div>
             </div>
 
