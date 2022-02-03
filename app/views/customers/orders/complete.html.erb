@@ -35,7 +35,7 @@
           <div class="card-body">
             <p>「<%= @order.recreation_title %>」を正式依頼いただきありがとうございます！</p>
             <div class="alert alert-danger color-at-re10" role="alert">
-              パートナーが依頼を承諾するとレクが正式に開催されます。承諾されましたらメールにてお知らせいたします。もうしばらくお待ちください。
+              パートナーが依頼を承認するとレクが正式に開催されます。承認されましたらメールにてお知らせいたします。もうしばらくお待ちください。
             </div>
             <div class="container-fluid">
               <div class="row py-2 border-top">
@@ -71,7 +71,7 @@
               <% if @order.recreation.is_online %>
                 <div class="row py-2">
                   <div class="col-lg-3 col-4 label">参加施設数</div>
-                  <div class="col-auto">1施設 （追加施設数 - 軒）</div>
+                  <div class="col-auto">1施設 （追加施設数 - 施設）</div>
                 </div>
               <% end %>
               <div class="row py-2">
