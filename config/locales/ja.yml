@@ -1,6 +1,11 @@
 ja:
   number: # 通過のpipe
     currency:
+      format:
+        unit: "¥"
+        format: "%u%n"
+        negative_format: "-%n%u"
+        precision: 0
   mail:
     title:
       common: 化粧品、健康食品原料データベース「INGREBANK」からのお知らせです
