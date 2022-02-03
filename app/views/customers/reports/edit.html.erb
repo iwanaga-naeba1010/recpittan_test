@@ -70,13 +70,13 @@
               <div class="row justify-content-between border-bottom-dotted py-2 ">
                 <div class="col-lg-3 col-4 label py-2">開催費</div>
                 <div class="col-lg-9 col-8 py-2 text-end ">
-                  <%= price_mark(@report.order.recreation.regular_price) %>
+                  <%= number_to_currency(@report.order.recreation.regular_price) %>
                 </div>
               </div>
               <div class="row justify-content-between border-bottom-dotted py-2 ">
                 <div class="col-lg-3 col-4 label py-2">材料費(合計)</div>
                 <div class="col-lg-9 col-8 py-2 text-end ">
-                  <%= price_mark(@report.order.total_material_price_for_customer) %>
+                  <%= number_to_currency(@report.order.total_material_price_for_customer) %>
                 </div>
               </div>
 
@@ -86,7 +86,7 @@
                   <span class="text-muted font-12 color-ba08">※材料費は人数分の費用が発生します</span>
                 </div>
                 <div class="col-auto">
-                  <%= price_mark(@report.order.regular_material_price) %>
+                  <%= number_to_currency(@report.order.regular_material_price) %>
                 </div>
               </div>
 
@@ -101,20 +101,20 @@
               <div class="row justify-content-between border-bottom-dotted py-2 ">
                 <div class="col-lg-3 col-4 label py-2">交通費</div>
                 <div class="col-lg-9 col-8 py-2 text-end ">
-                  <%= price_mark(@report.order.transportation_expenses) %>
+                  <%= number_to_currency(@report.order.transportation_expenses) %>
                 </div>
               </div>
 
               <div class="row justify-content-between border-bottom-dotted py-2 ">
                 <div class="col-lg-3 col-4 label py-2">諸経費</div>
                 <div class="col-lg-9 col-8 py-2 text-end ">
-                  <%= price_mark(@report.order.expenses) %>
+                  <%= number_to_currency(@report.order.expenses) %>
                 </div>
               </div>
               <div class="row justify-content-between border-bottom-dotted py-2 ">
                 <div class="col-lg-3 col-4 label py-2">調整費用</div>
                 <div class="col-lg-9 col-8 py-2 text-end ">
-                  <%= price_mark(@report.order.support_price) %>
+                  <%= number_to_currency(@report.order.support_price) %>
                 </div>
               </div>
 
@@ -123,7 +123,7 @@
                 <div class="row justify-content-between border-bottom-dotted py-2 ">
                   <div class="col-lg-3 col-4 label py-2">追加施設費用(合計)</div>
                   <div class="col-lg-9 col-8 py-2 text-end ">
-                    <%= price_mark(@report.order.total_facility_price_for_customer) %>
+                    <%= number_to_currency(@report.order.total_facility_price_for_customer) %>
                   </div>
                 </div>
 
@@ -132,7 +132,7 @@
                   <div class="col-auto" id="additionalPrice"><%= @report.number_of_facilities %>施設</div>
                   <div class="col-12">
                     <span class="text-muted font-12 color-ba08">
-                      ※1施設追加する事に<%= price_mark(@report.order.additional_facility_fee) %>が発生します
+                      ※1施設追加する事に<%= number_to_currency(@report.order.additional_facility_fee) %>が発生します
                     </span>
                   </div>
                 </div>
@@ -141,7 +141,7 @@
               <div class="row justify-content-between border-top py-3">
                 <div class="col-auto">合計(税別)</div>
                 <div class="col-auto">
-                  <%= price_mark(@report.order.total_price_for_customer) %>
+                  <%= number_to_currency(@report.order.total_price_for_customer) %>
                 </div>
               </div>
             </div>

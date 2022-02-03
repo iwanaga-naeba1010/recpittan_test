@@ -17,7 +17,7 @@
 
       <div class="flex-grow-1">
         <%= link_to partners_order_path(id: @order.id, is_accepted: @order.is_accepted) do %>
-          <%= price_mark(@order.total_price_for_partner) %>
+          <%= number_to_currency(@order.total_price_for_partner) %>
           <i class="fas fa-chevron-right"></i>
         <% end %>
       </div>
