@@ -113,7 +113,8 @@
                 </div>
               </div>
               <div class="form-group col-6">
-                <%= f.input :prefecture, as: :select, collection: [[]], class: 'form-select p-region' %>
+                <!-- NOTE: default値として設定している。 -->
+                <%= f.input :prefecture, as: :select, collection: [[f.object.prefecture, f.object.prefecture]], class: 'form-select p-region' %>
               </div>
               <div class="form-group col-6">
                 <%= f.input :city, class: 'form-select p-locality' %>
