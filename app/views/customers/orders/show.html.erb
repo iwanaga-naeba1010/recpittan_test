@@ -99,8 +99,8 @@
             <!--            {{/if}}-->
             <div class="row py-2">
               <div class="col-lg-3 col-4 label">合計費用(税別)</div>
-              <div class="col-auto">¥
-                <%= number_to_currency @order.total_price_for_customer %>
+              <div class="col-auto">
+                <%= number_to_currency @order.total_price_for_customer, unit: "￥", precision: 0 %>
               </div>
             </div>
             <div class="row py-2">
@@ -138,33 +138,33 @@
               <div class="card-body py-0">
                 <div class="row justify-content-between border-bottom-dotted py-2">
                   <div class="col-auto">開催費</div>
-                  <div class="col-auto">&yen;
-                    <%= number_to_currency @order.regular_price %>
+                  <div class="col-auto">
+                    <%= number_to_currency @order.regular_price, unit: "￥", precision: 0 %>
                   </div>
                 </div>
                 <div class="row justify-content-between border-bottom-dotted py-2">
                   <div class="col-auto">材料費/1人<br><span
                     class="text-muted font-12 color-ba08">※材料費は人数分の費用が発生します</span></div>
-                  <div class="col-auto">&yen;
-                    <%= number_to_currency @order.regular_material_price %>
+                  <div class="col-auto">
+                    <%= number_to_currency @order.regular_material_price, unit: "￥", precision: 0 %>
                   </div>
                 </div>
                 <div class="row justify-content-between border-bottom-dotted py-2">
                   <div class="col-auto">交通費</div>
-                  <div class="col-auto">&yen;
-                    <%= number_to_currency @order.transportation_expenses %>
+                  <div class="col-auto">
+                    <%= number_to_currency @order.transportation_expenses, unit: "￥", precision: 0 %>
                   </div>
                 </div>
                 <div class="row justify-content-between border-bottom-dotted py-2">
                   <div class="col-auto">諸経費</div>
-                  <div class="col-auto">&yen;
-                    <%= number_to_currency @order.expenses %>
+                  <div class="col-auto">
+                    <%= number_to_currency @order.expenses, unit: "￥", precision: 0 %>
                   </div>
                 </div>
                 <div class="row justify-content-between border-bottom-dotted py-2">
                   <div class="col-auto">サポート費用</div>
-                  <div class="col-auto">&yen;
-                    <%= number_to_currency @order.support_price %>
+                  <div class="col-auto">
+                    <%= number_to_currency @order.support_price, unit: "￥", precision: 0 %>
                   </div>
                 </div>
                 <% if @order.recreation.is_online %>
@@ -172,11 +172,11 @@
                     <div class="col-auto align-self-center">
                       <span id="facilityCount">追加施設費 / <%= @order.number_of_facilities %> 施設</span>
                     </div>
-                    <div class="col-auto" id="additionalPrice">&yen;
+                    <div class="col-auto" id="additionalPrice">
                       <% if @order.number_of_facilities.present? %>
-                        <%= number_to_currency @order.number_of_facilities * @order.additional_facility_fee %>
+                        <%= number_to_currency @order.number_of_facilities * @order.additional_facility_fee, unit: "￥", precision: 0 %>
                       <% else %>
-                        <%= number_to_currency 0 %>
+                        <%= number_to_currency 0, unit: "￥", precision: 0 %>
                       <% end %>
 
                     </div>
@@ -190,8 +190,8 @@
 
                 <div class="row justify-content-between border-top py-3">
                   <div class="col-auto">合計(税別)</div>
-                  <div class="col-auto">&yen;
-                    <%= number_to_currency @order.total_price_for_customer %>
+                  <div class="col-auto">
+                    <%= number_to_currency @order.total_price_for_customer, unit: "￥", precision: 0 %>
                   </div>
                 </div>
               </div>

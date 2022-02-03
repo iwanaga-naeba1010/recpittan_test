@@ -6,7 +6,7 @@ module RecreationsHelper
 
     return 'お問い合せください' if price == 0 || price.blank?
 
-    number_to_currency(price)
+    number_to_currency(price, unit: "￥", precision: 0)
   end
 
   def tags_to_html(tags, limit = true)

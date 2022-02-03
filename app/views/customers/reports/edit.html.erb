@@ -69,11 +69,11 @@
               </div>
               <div class="row justify-content-between border-bottom-dotted py-2 ">
                 <div class="col-lg-3 col-4 label py-2">開催費</div>
-                <div class="col-lg-9 col-8 py-2 text-end ">&yen;<%= number_to_currency @report.order.recreation.regular_price %></div>
+                <div class="col-lg-9 col-8 py-2 text-end "><%= number_to_currency @report.order.recreation.regular_price, unit: "￥", precision: 0 %></div>
               </div>
               <div class="row justify-content-between border-bottom-dotted py-2 ">
                 <div class="col-lg-3 col-4 label py-2">材料費(合計)</div>
-                <div class="col-lg-9 col-8 py-2 text-end ">&yen;<%= number_to_currency @report.order.total_material_price_for_customer %></div>
+                <div class="col-lg-9 col-8 py-2 text-end "><%= number_to_currency @report.order.total_material_price_for_customer, unit: "￥", precision: 0 %></div>
               </div>
 
               <div class="row justify-content-between border-bottom-dotted py-2">
@@ -81,8 +81,8 @@
                   <br>
                   <span class="text-muted font-12 color-ba08">※材料費は人数分の費用が発生します</span>
                 </div>
-                <div class="col-auto">&yen;
-                  <%= number_to_currency @report.order.regular_material_price %>
+                <div class="col-auto">
+                  <%= number_to_currency @report.order.regular_material_price, unit: "￥", precision: 0 %>
                 </div>
               </div>
 
@@ -96,23 +96,23 @@
 
               <div class="row justify-content-between border-bottom-dotted py-2 ">
                 <div class="col-lg-3 col-4 label py-2">交通費</div>
-                <div class="col-lg-9 col-8 py-2 text-end ">&yen;<%= number_to_currency @report.order.transportation_expenses %></div>
+                <div class="col-lg-9 col-8 py-2 text-end "><%= number_to_currency @report.order.transportation_expenses, unit: "￥", precision: 0 %></div>
               </div>
 
               <div class="row justify-content-between border-bottom-dotted py-2 ">
                 <div class="col-lg-3 col-4 label py-2">諸経費</div>
-                <div class="col-lg-9 col-8 py-2 text-end ">&yen;<%= number_to_currency @report.order.expenses %></div>
+                <div class="col-lg-9 col-8 py-2 text-end "><%= number_to_currency @report.order.expenses, unit: "￥", precision: 0 %></div>
               </div>
               <div class="row justify-content-between border-bottom-dotted py-2 ">
                 <div class="col-lg-3 col-4 label py-2">調整費用</div>
-                <div class="col-lg-9 col-8 py-2 text-end ">&yen;<%= number_to_currency @report.order.support_price %></div>
+                <div class="col-lg-9 col-8 py-2 text-end "><%= number_to_currency @report.order.support_price, unit: "￥", precision: 0 %></div>
               </div>
 
 
               <% if @report.order.recreation.is_online %>
                 <div class="row justify-content-between border-bottom-dotted py-2 ">
                   <div class="col-lg-3 col-4 label py-2">追加施設費用(合計)</div>
-                  <div class="col-lg-9 col-8 py-2 text-end ">&yen;<%= number_to_currency @report.order.total_facility_price_for_customer %></div>
+                  <div class="col-lg-9 col-8 py-2 text-end "><%= number_to_currency @report.order.total_facility_price_for_customer, unit: "￥", precision: 0 %></div>
                 </div>
 
                 <div class="row justify-content-between border-top-dotted py-2">
@@ -120,7 +120,7 @@
                   <div class="col-auto" id="additionalPrice"><%= @report.number_of_facilities %>施設</div>
                   <div class="col-12">
                     <span class="text-muted font-12 color-ba08">
-                      ※1施設追加する事に&yen;<%= number_to_currency @report.order.additional_facility_fee %>が発生します
+                      ※1施設追加する事に<%= number_to_currency @report.order.additional_facility_fee, unit: "￥", precision: 0 %>が発生します
                     </span>
                   </div>
                 </div>
@@ -128,7 +128,7 @@
 
               <div class="row justify-content-between border-top py-3">
                 <div class="col-auto">合計(税別)</div>
-                <div class="col-auto">&yen;<%= number_to_currency @report.order.total_price_for_customer %></div>
+                <div class="col-auto"><%= number_to_currency @report.order.total_price_for_customer, unit: "￥", precision: 0 %></div>
               </div>
             </div>
 
