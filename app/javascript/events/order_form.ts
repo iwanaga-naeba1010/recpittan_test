@@ -31,25 +31,11 @@ const App = async () => {
   }
   // 市区町村を都道府県のevent経由で動的set
   $("#order_prefecture").on("change", async () => {
-    await applyPrefectures();
-  });
-
-  const applyPrefectures = async () => {
-    // TODO(okubo): ここでdefaultPrefectureと一致させう
-
     const prefCode = prefectures.result.filter((prefecture) => prefecture.prefName === $('#order_prefecture option:selected').text())[0].prefCode;
-    // const prefCode = prefectures.result.filter(
-    //   (prefecture) =>
-    //     prefecture.prefName === defaultPrefecture
-    // )[0].prefCode;
-    console.log('sentinel1');
-    console.log('hoge', prefCode);
     if (prefCode === null) {
       return;
     }
-    console.log('sentinel2');
     const cities = await findCityByPrefectureCode(prefCode);
-    console.log('sentinel3');
     $("#order_city").empty();
     cities.result.map((city) => {
       $("#order_city").append(
@@ -59,7 +45,7 @@ const App = async () => {
         })
       );
     });
-  };
+  });
 
   // 仮リリース版のボタン押下動作の処理
   // 料金記載のレクで依頼をかける場合は、rails formをremote:trueにして、ajaxで通信してOKならmodal発火
