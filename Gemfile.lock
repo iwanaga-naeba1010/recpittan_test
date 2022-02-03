@@ -429,6 +429,14 @@ GEM
       rexml (~> 3.2, >= 3.2.5)
       rubyzip (>= 1.2.2)
     semantic_range (3.0.0)
+    sentry-rails (5.0.2)
+      railties (>= 5.0)
+      sentry-ruby-core (~> 5.0.2)
+    sentry-ruby (5.0.2)
+      concurrent-ruby (~> 1.0, >= 1.0.2)
+      sentry-ruby-core (= 5.0.2)
+    sentry-ruby-core (5.0.2)
+      concurrent-ruby
     sexp_processor (4.16.0)
     shoulda-matchers (5.0.0)
       activesupport (>= 5.2.0)
@@ -545,6 +553,8 @@ DEPENDENCIES
   scss_lint
   seed-fu
   selenium-webdriver
+  sentry-rails
+  sentry-ruby
   shoulda-matchers
   simple_form
   simplecov
