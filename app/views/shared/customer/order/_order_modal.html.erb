@@ -7,7 +7,7 @@
       </div>
       <div class="modal-body p-2">
         <%= simple_form_for order, url: customers_order_path(order.id), html: { class: 'order h-adr' } do |f| %>
-          <%= f.input :status, as: :hidden, input_html: { value: :order } %>
+          <%= f.input :status, as: :hidden, input_html: { value: :facility_request_in_progress } %>
           <div class="container-fluid">
             <div class="row pb-3">
               <div class="col-auto">
