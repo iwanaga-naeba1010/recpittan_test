@@ -161,7 +161,7 @@
                   <div class="row justify-content-between border-bottom-dotted pb-2">
                     <div class="col-auto">追加施設費 / <span id="numberOfFacilitiesForOrderFormLabel"><%= order.number_of_facilities %> 施設</span></div>
                     <div id="numberOfFacilitiesForOrderForm" class="col-auto">
-                      <%= price_mark(order.total_facility_price_for_customer) %>
+                      <%= number_to_currency(order.total_facility_price_for_customer) %>
                     </div>
                   </div>
                 <% end %>
@@ -169,7 +169,7 @@
                 <div class="row justify-content-between border-top py-3">
                   <div class="col-auto">合計(税別)</div>
                   <div id="totalPriceForOrderForm" class="col-auto">
-                    <%= price_mark(order.total_price_for_customer) %>
+                    <%= number_to_currency(order.total_price_for_customer) %>
                   </div>
                 </div>
               </div>

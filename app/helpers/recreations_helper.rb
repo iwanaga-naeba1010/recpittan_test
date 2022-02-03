@@ -9,10 +9,6 @@ module RecreationsHelper
     number_to_currency(price, unit: "￥", precision: 0)
   end
 
-  def price_mark(price)
-    number_to_currency(price, unit: "￥", precision: 0, format: "%u%n")
-  end
-
   def tags_to_html(tags, limit = true)
     return if tags.blank?
 
