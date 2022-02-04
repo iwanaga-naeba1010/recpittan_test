@@ -6,7 +6,7 @@ RSpec.describe 'Chats', type: :request do
   let(:admin) { create :user, :with_admin }
   let(:partner) { create :user, :with_recreations }
   let(:customer) { create :user, :with_custoemr }
-  let(:order) { create :order, recreation_id: partner.recreations.first.id, user_id: customer.id }
+  let(:order) { create :order, recreation_id: partner.recreations.first.id, user_id: customer.id, status: :in_progress }
 
   before do
     sign_in admin

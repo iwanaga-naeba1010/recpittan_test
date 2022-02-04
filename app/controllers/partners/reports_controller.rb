@@ -35,7 +35,7 @@ class Partners::ReportsController < Partners::ApplicationController
         number_of_people: params_create[:number_of_people],
         transportation_expenses: params_create[:transportation_expenses].to_i,
         expenses: params_create[:expenses].to_i,
-        number_of_facilities: params_create[:number_of_facilities].to_i,
+        number_of_facilities: params_create[:number_of_facilities].to_i
       )
       CustomerCompleteReportMailer.notify(@order).deliver_now
       redirect_to partners_order_path(@order.id), notice: '終了報告を更新しました！'
@@ -46,16 +46,12 @@ class Partners::ReportsController < Partners::ApplicationController
 
   def confirm
     is_confirm = params[:is_confirm]
+    return render 'partners/orders/deny' if is_confirm == 'deny'
 
-    if is_confirm == 'deny'
-      return render 'partners/orders/deny'
-    elsif is_confirm == 'accept'
-      return render 'partners/orders/accept'
-    end
+    render 'partners/orders/accept' if is_confirm == 'accept'
   end
 
-  def complete
-  end
+  def complete; end
 
   private
 
