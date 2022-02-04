@@ -32,10 +32,11 @@ const App = async () => {
   // 市区町村を都道府県のevent経由で動的set
   $("#order_prefecture").on("change", async () => {
     const prefCode = prefectures.result.filter((prefecture) => prefecture.prefName === $('#order_prefecture option:selected').text())[0].prefCode;
-    if (prefCode === null) {
 
+    if (prefCode === null) {
       return;
     }
+
     const cities = await findCityByPrefectureCode(prefCode);
     $("#order_city").empty();
     cities.result.map((city) => {
