@@ -4,7 +4,7 @@ ja:
       format:
         unit: "¥"
         format: "%u%n"
-        negative_format: "-%n%u"
+        negative_format: "-%u%n"
         precision: 0
   mail:
     title:

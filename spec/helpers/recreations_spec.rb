@@ -10,7 +10,7 @@ RSpec.describe RecreationsHelper, type: :helper do
     context 'with valid parameters' do
       it 'renders price when customer user logged in' do
         input_price = 10000
-        output = number_to_currency(input_price, unit: "￥", precision: 0)
+        output = number_to_currency(input_price)
 
         func_result = helper.price_pipe(input_price, customer)
         expect(func_result).to eq(output)
