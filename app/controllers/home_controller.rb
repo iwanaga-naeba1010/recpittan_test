@@ -4,7 +4,7 @@ class HomeController < ApplicationController
   skip_before_action :authenticate_user!
 
   def index
-    @categories = Rails.cache.fetch('home/categories', expires_in: 1.week) do
+    categories = Rails.cache.fetch('home/categories', expires_in: 1.week) do
       sort_categories(Tag.categories).to_a
     end
 
