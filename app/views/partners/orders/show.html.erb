@@ -71,39 +71,40 @@
       <thead>
       <tr class="border-bottom">
         <td class="pt-2 pb-2 text-black w-75">開催費</td>
-        <td class="pt-2 pb-2 text-black text-end">¥
-          <%= number_to_currency @order.instructor_amount %>
+        <td class="pt-2 pb-2 text-black text-end">
+          <%= number_to_currency(@order.instructor_amount) %>
         </td>
       </tr>
       <tr class="border-bottom">
         <td class="pt-2 pb-2 text-black w-75">材料費/1人あたり<br><span class="text-secondary">※材料費は人数分の費用が発生します。</span></td>
-        <td class="pt-2 pb-2 text-black text-end">¥
-          <%= number_to_currency @order.instructor_material_amount %>
+        <td class="pt-2 pb-2 text-black text-end">
+          <%= number_to_currency(@order.instructor_material_amount) %>
         </td>
       </tr>
       <tr class="border-bottom">
         <td class="pt-2 pb-2 text-black w-75">交通費</td>
-        <td class="pt-2 pb-2 text-black text-end">¥
-          <%= number_to_currency @order.transportation_expenses %>
+        <td class="pt-2 pb-2 text-black text-end">
+          <%= number_to_currency(@order.transportation_expenses) %>
         </td>
       </tr>
       <tr class="border-bottom">
         <td class="pt-2 pb-2 text-black w-75">諸経費</td>
-        <td class="pt-2 pb-2 text-black text-end">¥
-          <%= number_to_currency @order.expenses_for_partner %>
+        <td class="pt-2 pb-2 text-black text-end">
+          <%= number_to_currency(@order.expenses_for_partner) %>
         </td>
       </tr>
       <tr class="border-bottom">
         <td class="pt-2 pb-2 text-black w-75">追加施設費/追加施設 <%= @order.number_of_facilities %>施設<br>※1施設追加する事に費用が発生します。
         </td>
-        <td class="pt-2 pb-2 text-black text-end">¥
-            <%= number_to_currency @order.total_facility_price_for_partner %>
+        <td class="pt-2 pb-2 text-black text-end">
+            <%= number_to_currency(@order.total_facility_price_for_partner) %>
         </td>
       </tr>
       <tr class="border-bottom text-black font-weight-bold">
         <td class="pt-2 pb-2">合計(税込)</td>
-        <td class="pt-2 pb-2 text-end">¥
-          <%= number_to_currency @order.total_price_for_partner %></td>
+        <td class="pt-2 pb-2 text-end">
+          <%= number_to_currency(@order.total_price_for_partner) %>
+        </td>
       </tr>
       </tbody>
     </table>

@@ -113,7 +113,7 @@
               <% if user_signed_in? %>
                 <% if @recreation.is_public_price %>
                   <h3 class="font-24">
-                    ¥ <%= price_pipe(@recreation.regular_price, current_user) %><span> / 1回あたり</span>
+                    <%= price_pipe(@recreation.regular_price, current_user) %><span> / 1回あたり</span>
                   </h3>
                 <% else %>
                   <h3 class="title-b font-20">料金はお問い合わせください</h3>

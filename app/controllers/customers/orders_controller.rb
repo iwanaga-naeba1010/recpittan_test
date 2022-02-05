@@ -104,7 +104,7 @@ EOS
       # TODO: 若干負債だけど、今は許容する
       @order.update(start_at: start_at, end_at: end_at)
 
-      @order.update(params_create)
+      @order.update!(params_create)
 
       # TODO: jobで送信したい
       OrderRequestMailer.notify(@order, current_user).deliver_now
