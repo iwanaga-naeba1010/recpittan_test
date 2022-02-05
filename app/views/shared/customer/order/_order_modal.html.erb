@@ -161,29 +161,16 @@
                 <% if order.recreation.is_online %>
                   <div class="row justify-content-between border-bottom-dotted pb-2">
                     <div class="col-auto">追加施設費 / <span id="numberOfFacilitiesForOrderFormLabel"><%= order.number_of_facilities %> 施設</span></div>
-                    <div id="numberOfFacilitiesForOrderForm" class="col-auto">&yen;
-                      <%= number_to_currency order.total_facility_price_for_customer %>
+                    <div id="numberOfFacilitiesForOrderForm" class="col-auto">
+                      <%= number_to_currency(order.total_facility_price_for_customer) %>
                     </div>
                   </div>
                 <% end %>
 
-                <!--                {{#if isOnline}}-->
-                <!--                <div class="row justify-content-between border-top-dotted py-2">-->
-                <!--                  <div class="col-auto align-self-center">-->
-                <!--                    <span id="facilityCountText">追加施設費 / {{total.additionalCount}}施設</span>-->
-                <!--                  </div>-->
-                <!--                  <div class="col-auto" id="additionalPrice">{{total.facilityAdditionalPrice}}</div>-->
-                <!--                  <div class="col-12">-->
-                <!--                    <span class="text-muted font-12 color-ba08">-->
-                <!--                      ※1施設追加する事に&yen;{{numeralorder.facilityAdditionalPrice}}が発生します-->
-                <!--                    </span>-->
-                <!--                  </div>-->
-                <!--                </div>-->
-
                 <div class="row justify-content-between border-top py-3">
                   <div class="col-auto">合計(税別)</div>
-                  <div id="totalPriceForOrderForm" class="col-auto">&yen;
-                    <%= number_to_currency order.total_price_for_customer %>
+                  <div id="totalPriceForOrderForm" class="col-auto">
+                    <%= number_to_currency(order.total_price_for_customer) %>
                   </div>
                 </div>
               </div>
@@ -200,7 +187,7 @@
             </div>
             <div class="row justify-content-center py-3">
               <div class="col-7 mb-3 text-center">
-                <span class="text-muted">※パートナーが承諾をする事で正式に開催が決まります</span>
+                <span class="text-muted">※パートナーが承認をする事で正式に開催が決まります</span>
               </div>
               <div class="col-7 text-center">
                 <%= f.submit 'パートナーにレク開催を正式依頼する', class: 'btn btn-cprimary rounded-pill font-14 py-3 px-4 font-weight-bold text-white' %>

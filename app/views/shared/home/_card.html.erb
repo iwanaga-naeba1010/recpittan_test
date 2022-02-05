@@ -23,7 +23,6 @@
         </div>
         <div class="">
           <% if user_signed_in? %>
-            <i class="price-mark">￥</i>
             <% if rec.is_public_price %>
               <span class="value"><%= price_pipe(rec.regular_price, current_user) %></span>
             <% else %>

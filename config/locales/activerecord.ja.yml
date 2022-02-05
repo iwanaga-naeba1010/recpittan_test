@@ -116,7 +116,7 @@ ja:
         transportation_expenses: 交通費
         expenses: 諸経費
         facility_count: 施設数
-        is_accepted: 施設承諾
+        is_accepted: 施設承認
         body: メッセージ
         status: ステータス
       evaluation:

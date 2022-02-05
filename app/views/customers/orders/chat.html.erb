@@ -77,15 +77,16 @@
           <div class="card-body py-0">
             <div class="row justify-content-between border-bottom-dotted pb-2">
               <div class="col-auto">開催費</div>
-              <div class="col-auto">&yen;
+              <div class="col-auto">
                 <%= price_pipe(@order.regular_price, current_user) %>
               </div>
             </div>
             <div class="row justify-content-between border-bottom-dotted py-2">
               <div class="col-auto">材料費/1人<br><span
                 class="text-muted font-12 color-ba08">※材料費は人数分の費用が発生します</span></div>
-              <div class="col-auto">&yen;
-                <%= number_to_currency @order.regular_material_price %></div>
+              <div class="col-auto">
+                <%= number_to_currency(@order.regular_material_price) %>
+              </div>
             </div>
 
             <div
@@ -129,7 +130,7 @@
 
             <div class="row justify-content-between border-top py-3">
               <div class="col-auto">合計(税別)</div>
-              <div id="totalPriceForSidenav" class="col-auto">&yen;
+              <div id="totalPriceForSidenav" class="col-auto">
                 <%= price_pipe(@order.total_price_for_customer, current_user) %>
               </div>
             </div>
