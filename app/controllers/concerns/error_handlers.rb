@@ -16,18 +16,21 @@ module ErrorHandlers
 
   def rescue403(error)
     @exception = error
+    Sentry.capture_exception(error)
     Rails.logger.error error.to_s
     render 'errors/forbidden', status: :forbidden
   end
 
   def rescue404(error)
     @exception = error
+    Sentry.capture_exception(error)
     Rails.logger.error error.to_s
     render 'errors/not_found', status: :not_found
   end
 
   def rescue500(error)
     @exception = error
+    Sentry.capture_exception(error)
     Rails.logger.error error.to_s
     render 'errors/internal_server_error', status: :internal_server_error
   end
