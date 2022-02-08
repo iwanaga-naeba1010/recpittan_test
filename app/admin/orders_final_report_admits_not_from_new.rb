@@ -8,7 +8,8 @@ ActiveAdmin.register Orders::FinalReportAdmitsNotFromNew do
       regular_price instructor_amount regular_material_price instructor_material_amount
       additional_facility_fee transportation_expenses support_price expenses
       zoom_price contract_number
-    ])
+    ]
+  )
 
   actions :all, except: %i[show edit update destroy]
   menu parent: '強制執行モード'
@@ -49,10 +50,6 @@ ActiveAdmin.register Orders::FinalReportAdmitsNotFromNew do
       f.input :end_at, as: :hidden, input_html: { value: Date.yesterday }
       f.input :is_accepted, as: :hidden, input_html: { value: true }
 
-      # f.input :start_at,
-      #         as: :date_time_picker,
-      #         input_html: { disabled: f.object.start_at.present? },
-      #         hint: '5分単位の時間はformに直接入力してください'
     end
 
     f.actions
@@ -60,9 +57,6 @@ ActiveAdmin.register Orders::FinalReportAdmitsNotFromNew do
 
   controller do
     def create
-      # TODO(okubo): 金額などを追加
-      # TODO(okubo): 時刻は完了したものとするので、昨日の時間とか入れる
-      #
       order = Order.new(permitted_params[:orders_force_waiting_for_an_event_to_take_place_from_new])
       order.save
       redirect_to admin_order_path(order.id)
