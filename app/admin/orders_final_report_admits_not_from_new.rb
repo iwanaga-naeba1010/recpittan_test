@@ -57,7 +57,7 @@ ActiveAdmin.register Orders::FinalReportAdmitsNotFromNew do
 
   controller do
     def create
-      order = Order.new(permitted_params[:orders_force_waiting_for_an_event_to_take_place_from_new])
+      order = Order.new(permitted_params[:orders_final_report_admits_not_from_new])
       order.save
       redirect_to admin_order_path(order.id)
     end
