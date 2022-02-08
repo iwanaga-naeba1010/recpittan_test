@@ -23,9 +23,11 @@ RSpec.describe 'Orders::FinalReportAdmitsNotFromNew', type: :request do
     # TODO(okubo): ここにstart_atなど必要なデータ入れる
     # TODO(okubo): その後にstatusが変わることを検証
     let(:attrs) { attributes_for(
-      :final_report_admits_not_from_new,
+      :order,
       recreation_id: partner.recreations.first.id,
-      user_id: customer.id
+      user_id: customer.id,
+      start_at: Date.yesterday,
+      end_at: Date.yesterday,
     ) }
 
     context 'with valid parameters' do
