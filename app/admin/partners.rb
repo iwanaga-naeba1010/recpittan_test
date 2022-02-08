@@ -25,6 +25,7 @@ ActiveAdmin.register Partner do
       row :id
       row :username
       row :username_kana
+      row :email
 
       row :created_at
       row :updated_at
@@ -47,13 +48,7 @@ ActiveAdmin.register Partner do
     f.inputs do
       f.input :username
       f.input :username_kana
-
-      if f.object&.id.present?
-        f.input :email, hint: 'データの競合を避けるために許可していません。システム管理者にご連絡ください', input_html: { disabled: true }
-      else
-        f.input :email
-      end
-
+      f.input :email
       f.input :role, as: :hidden, input_html: { value: :partner }
     end
 
@@ -82,5 +77,24 @@ ActiveAdmin.register Partner do
         super
       end
     end
+
+    def update
+      partner = Partner.find(params[:id].to_i)
+      if permitted_params[:partner][:password].blank?
+        %w[password password_confirmation].each { |p| permitted_params[:partner].delete(p) }
+      end
+      partner.skip_confirmation_notification!
+      # partner.skip_confirmation!
+      partner.skip_reconfirmation!
+
+      if partner.update_without_password(permitted_params[:partner])
+        redirect_to admin_partner_path(partner.id)
+      else
+        # HACK: superを毎回呼ぶとcompany.createがダブルっぽいので、失敗した時のrenderのためにsuper入れる。
+        # ちなみにrender :newは機能しない
+        super
+      end
+    end
+
   end
 end

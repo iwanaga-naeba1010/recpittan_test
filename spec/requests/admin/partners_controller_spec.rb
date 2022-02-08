@@ -79,6 +79,13 @@ RSpec.describe 'Partners', type: :request do
           put admin_partner_path(partner.id), params: { partner: { username: username } }
         }.to change { User.where(role: :partner).find(partner.id).username }.from(partner.username).to(username)
       end
+
+      it 'update email' do
+        email = 'hogehogehoge@example.com'
+        expect {
+          put admin_partner_path(partner.id), params: { partner: { email: email } }
+        }.to change { User.where(role: :partner).find(partner.id).email }.from(partner.email).to(email)
+      end
     end
   end
 
