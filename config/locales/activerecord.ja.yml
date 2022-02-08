@@ -11,6 +11,8 @@ ja:
       orders/force_complete: 終了報告未 → 完了
       orders/force_complete_from_in_progress: 相談中 → 完了
       orders/force_waiting_for_an_event_to_take_place: 相談中 → 実地待ち
+      orders/final_report_admits_not_from_new: 新規 →終了報告未
+
       report: 終了報告
       evaluation: 評価
       email_template: テンプレート
