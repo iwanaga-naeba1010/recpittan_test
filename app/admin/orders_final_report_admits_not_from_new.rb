@@ -1,0 +1,71 @@
+# frozen_string_literal: true
+
+ActiveAdmin.register Orders::FinalReportAdmitsNotFromNew do
+  permit_params(
+    %i[
+      user_id recreation_id zip prefecture city street building number_of_people
+      number_of_facilities status is_accepted start_at end_at
+      regular_price instructor_amount regular_material_price instructor_material_amount
+      additional_facility_fee transportation_expenses support_price expenses
+      zoom_price contract_number
+    ])
+
+  actions :all, except: %i[show edit update destroy]
+  menu parent: '強制執行モード'
+
+  index do
+    id_column
+    actions
+  end
+
+  form do |f|
+    f.semantic_errors
+
+    f.inputs do
+      f.input :user,
+              as: :select,
+              collection: User.includes(:company).customers.map { |i| [i.company&.facility_name, i.id] },
+              input_html: { class: 'select2' }
+      f.input :recreation, input_html: { class: 'select2' }
+      f.input :zip
+      f.input :prefecture
+      f.input :city
+      f.input :street
+      f.input :building
+      f.input :number_of_people
+      f.input :number_of_facilities
+
+      f.input :regular_price
+      f.input :instructor_amount
+      f.input :regular_material_price
+      f.input :instructor_material_amount
+      f.input :additional_facility_fee
+      f.input :transportation_expenses
+      f.input :expenses
+      f.input :zoom_price
+      f.input :support_price
+
+      f.input :start_at, as: :hidden, input_html: { value: Date.yesterday }
+      f.input :end_at, as: :hidden, input_html: { value: Date.yesterday }
+      f.input :is_accepted, as: :hidden, input_html: { value: true }
+
+      # f.input :start_at,
+      #         as: :date_time_picker,
+      #         input_html: { disabled: f.object.start_at.present? },
+      #         hint: '5分単位の時間はformに直接入力してください'
+    end
+
+    f.actions
+  end
+
+  controller do
+    def create
+      # TODO(okubo): 金額などを追加
+      # TODO(okubo): 時刻は完了したものとするので、昨日の時間とか入れる
+      #
+      order = Order.new(permitted_params[:orders_force_waiting_for_an_event_to_take_place_from_new])
+      order.save
+      redirect_to admin_order_path(order.id)
+    end
+  end
+end
