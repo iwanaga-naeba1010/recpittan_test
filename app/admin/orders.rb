@@ -207,6 +207,10 @@ ActiveAdmin.register Order do
   end
 
   controller do
+    def show
+      @order = Order.order_asc.find(params[:id])
+    end
+
     def create
       # TODO: 人数など必要なカラムも入れる
 

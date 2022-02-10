@@ -122,7 +122,7 @@ EOS
   end
 
   def set_order
-    @order = current_user.orders.find(params[:id])
+    @order = current_user.orders.order_asc.find(params[:id])
   end
 
   def parse_order_date(dates)

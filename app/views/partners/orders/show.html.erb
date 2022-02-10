@@ -126,7 +126,6 @@
       </div
     <!-- 日字指定 && 承認していない || 日時が未来 && 承認した -->
     <% elsif (@order.start_at.blank? && !@order.is_accepted) || (@order.start_at >= Time.current && @order.is_accepted) %>
-      <p>施設から正式依頼が届いた場合、次へ進むことができます。</p>
       <div class="text-center my-3">
         <button class="text-white btn btn-secondary btn-lg btn-block w-75 p-3 disabled">正式依頼の内容を確認する</button>
       </div>

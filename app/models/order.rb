@@ -74,6 +74,7 @@ class Order < ApplicationRecord
 
   scope :accepted_by_partner, -> { where(is_accepted: true) }
   scope :not_accepted_by_partner, -> { where(is_accepted: false) }
+  scope :order_asc, -> { includes(:chats).order('chats.created_at asc') }
 
   validates :regular_price, :regular_material_price, :instructor_amount,
             :instructor_material_amount, :expenses, :transportation_expenses,
