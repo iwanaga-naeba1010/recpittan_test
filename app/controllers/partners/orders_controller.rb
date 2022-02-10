@@ -55,7 +55,7 @@ class Partners::OrdersController < Partners::ApplicationController
 
   def set_order
     @order = current_user.recreations.map do |rec|
-      rec.orders.map { |order| order if order.id == params[:id].to_i }
+      rec.orders.order_asc.map { |order| order if order.id == params[:id].to_i }
     end.flatten.compact.first
   end
 
