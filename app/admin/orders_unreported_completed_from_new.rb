@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-ActiveAdmin.register Orders::FinalReportAdmitsNotFromNew do
+ActiveAdmin.register Orders::UnreportedCompletedFromNew do
   permit_params(
     %i[
       user_id recreation_id zip prefecture city street building number_of_people
@@ -57,7 +57,7 @@ ActiveAdmin.register Orders::FinalReportAdmitsNotFromNew do
 
   controller do
     def create
-      order = Order.new(permitted_params[:orders_force_waiting_for_an_event_to_take_place_from_new])
+      order = Order.new(permitted_params[:orders_unreported_completed_from_new])
       order.save
       redirect_to admin_order_path(order.id)
     end
