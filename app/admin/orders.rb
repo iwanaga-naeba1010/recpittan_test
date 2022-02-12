@@ -11,8 +11,12 @@ ActiveAdmin.register Order do
       additional_facility_fee transportation_expenses support_price expenses
       zoom_price contract_number
     ],
-    report: {},
-    evaluation: {}
+    report_attributes: %i[
+      id body expenses expenses number_of_facilities number_of_people status transportation_expenses
+    ],
+    evaluation_attributes: %i[
+      id communication ingenuity message other_message price smoothness want_to_order_agein
+    ]
   )
   actions :all
 
@@ -259,35 +263,8 @@ EOS
 
     def update
       order = Order.find(params[:id].to_i)
-      # TODO(okubo): 負債化しているので、テストを書いてからリファクタする
       if order.status.value >= 200
-        ps = permitted_params[:order]
-        attrs = {
-          user_id: ps[:user_id],
-          recreation_id: ps[:recreation_id],
-          zip: ps[:zip],
-          prefecture: ps[:prefecture],
-          city: ps[:city],
-          street: ps[:street],
-          building: ps[:building],
-          number_of_people: ps[:number_of_people],
-          number_of_facilities: ps[:number_of_facilities],
-          status: ps[:status],
-          start_at: ps[:start_at],
-          end_at: ps[:end_at],
-          regular_price: ps[:regular_price],
-          regular_material_price: ps[:regular_material_price],
-          instructor_amount: ps[:instructor_amount],
-          instructor_material_amount: ps[:instructor_material_amount],
-          additional_facility_fee: ps[:additional_facility_fee],
-          expenses: ps[:expenses],
-          transportation_expenses: ps[:transportation_expenses],
-          support_price: ps[:support_price],
-          zoom_price: ps[:zoom_price],
-          contract_number: ps[:contract_number],
-        }
-
-        order.update!(attrs)
+        order.update!(permitted_params[:order])
         return redirect_to admin_order_path(order.id)
       end
 
