@@ -40,6 +40,10 @@ FactoryBot.define do
   factory :order do
     user
     recreation
+    regular_price { 20000 }
+    regular_material_price { 100 }
+    instructor_amount { 10000 }
+    instructor_material_amount { 50 }
     number_of_people { 1 }
     message { 'MyText' }
     status { 10 }
@@ -61,4 +65,36 @@ FactoryBot.define do
       create(:order_date, order_id: order.id)
     end
   end
+
+  trait :with_unreported_completed do
+    after(:create) do |order|
+      order.update(
+        start_at: DateTime.yesterday,
+        is_accepted: true
+      )
+    end
+  end
+
+  trait :with_final_report_admits_not do
+    after(:create) do |order|
+      create(:report, order_id: order.id)
+      order.update(
+        start_at: 3.days.ago,
+        is_accepted: true
+      )
+    end
+  end
+
+  trait :with_finished do
+    after(:create) do |order|
+      report = create(:report, order_id: order.id, status: :accepted)
+      create(:evaluation, report_id: report.id)
+
+      order.update(
+        start_at: 3.days.ago,
+        is_accepted: true
+      )
+    end
+  end
+
 end
