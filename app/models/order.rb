@@ -51,6 +51,7 @@ class Order < ApplicationRecord
   accepts_nested_attributes_for :order_dates
 
   has_one :report, dependent: :destroy
+  accepts_nested_attributes_for :report, allow_destroy: true
 
   delegate :title, to: :recreation, prefix: true
   delegate :price, to: :recreation, prefix: true

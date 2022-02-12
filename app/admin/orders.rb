@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# rubocop:disable Metrics/BlockLength, Metrics/AbcSize
 ActiveAdmin.register Order do
   includes :user
 
@@ -11,8 +12,14 @@ ActiveAdmin.register Order do
       additional_facility_fee transportation_expenses support_price expenses
       zoom_price contract_number
     ],
-    report: {},
-    evaluation: {}
+    report_attributes: %i[
+      id body expenses expenses number_of_facilities number_of_people status transportation_expenses
+    ],
+    evaluation: %i[
+      id communication ingenuity message other_message price smoothness want_to_order_agein
+    ]
+    # TODO(okubo): evaluationもattributesで管理したいけど、reportにうまくnestできなかったので
+    # ひとまずevaluationで実装。時間できたら、attributesにしたい
   )
   actions :all
 
@@ -156,7 +163,7 @@ ActiveAdmin.register Order do
         f.input :city
         f.input :street
         f.input :building
-        f.input :number_of_people
+        f.input :number_of_people, as: :number
         f.input :number_of_facilities
       end
 
@@ -167,28 +174,27 @@ ActiveAdmin.register Order do
           f.input :regular_material_price
           f.input :instructor_material_amount
           f.input :additional_facility_fee
-          f.input :transportation_expenses
-          f.input :expenses
+          f.input :transportation_expenses, as: :number
+          f.input :expenses, as: :number
           f.input :zoom_price
           f.input :support_price
         end
       end
 
       div class: 'evaluation_input' do
-        report_accepted = f.object.report&.status&.accepted?
         hint = 'パートナーの終了報告の入力値が反映されています'
-        f.input :number_of_facilities, hint: hint
-        f.input :number_of_people, hint: hint
-        f.input :transportation_expenses, hint: hint
-        f.input :expenses, hint: hint
+        # f.input :number_of_facilities, hint: hint
+        # f.input :number_of_people, hint: hint
+        # f.input :transportation_expenses, hint: hint
+        # f.input :expenses, hint: hint
 
         if f.object.status.value >= 70
           f.inputs I18n.t('activerecord.models.report'), for: [:report, f.object.report] do |ff|
-            ff.input :body, input_html: { disabled: true }
+            ff.input :body
             ff.input :status, as: :select, collection: Report.status.values.map { |val| [val.text, val] }
           end
 
-          f.inputs I18n.t('activerecord.models.evaluation'), for: [:evaluation, f.object.report&.evaluation] do |ff|
+          f.inputs I18n.t('activerecord.models.evaluation'), for: [:evaluation, f.object&.report&.evaluation || Evaluation.new] do |ff|
             ff.input :ingenuity, as: :select, collection: Evaluation.ingenuity.values.map { |val| [val.text, val] }
             ff.input :communication, as: :select, collection: Evaluation.communication.values.map { |val| [val.text, val] }
             ff.input :smoothness, as: :select, collection: Evaluation.smoothness.values.map { |val| [val.text, val] }
@@ -212,26 +218,23 @@ ActiveAdmin.register Order do
     end
 
     def create
-      # TODO: 人数など必要なカラムも入れる
+      message = <<~MESSAGE
+        リクエスト内容
+        相談したい
+        希望日時
+        1.
+        2.
+        3.
 
-      message = <<EOS
-リクエスト内容
-相談したい
-希望日時
-1.
-2.
-3.
+        希望人数
+        -人
 
-希望人数
--人
+        介護度目安
 
-介護度目安
+        住所
 
-住所
-
-相談したい事
-
-EOS
+        相談したい事
+      MESSAGE
 
       # NOTE(okubo): recの金額を元に自動的に金額が反映されるようにする
       recreation = Recreation.find(params[:order][:recreation_id])
@@ -241,9 +244,10 @@ EOS
         instructor_amount: recreation.instructor_amount,
         regular_material_price: recreation.regular_material_price,
         instructor_material_amount: recreation.instructor_material_amount,
-        additional_facility_fee: recreation.additional_facility_fee,
+        additional_facility_fee: recreation.additional_facility_fee
       )
-      order.chats.build(user_id: current_user.id, message: message)
+
+      order.chats.build(user_id: order.user.id, message: message)
       order.save!
 
       CustomerChatStartMailer.notify(order, order.user).deliver_now
@@ -253,80 +257,48 @@ EOS
       redirect_to admin_order_path(order.id)
     rescue StandardError => e
       Rails.logger.error e
-      super
+      Sentry.capture_exception(e)
     end
 
     def update
       order = Order.find(params[:id].to_i)
-      # TODO(okubo): 負債化しているので、テストを書いてからリファクタする
+      # NOTE(okubo): 完了系のstatus. 全てupdateしている
       if order.status.value >= 200
-        ps = permitted_params[:order]
-        attrs = {
-          user_id: ps[:user_id],
-          recreation_id: ps[:recreation_id],
-          zip: ps[:zip],
-          prefecture: ps[:prefecture],
-          city: ps[:city],
-          street: ps[:street],
-          building: ps[:building],
-          number_of_people: ps[:number_of_people],
-          number_of_facilities: ps[:number_of_facilities],
-          status: ps[:status],
-          start_at: ps[:start_at],
-          end_at: ps[:end_at],
-          regular_price: ps[:regular_price],
-          regular_material_price: ps[:regular_material_price],
-          instructor_amount: ps[:instructor_amount],
-          instructor_material_amount: ps[:instructor_material_amount],
-          additional_facility_fee: ps[:additional_facility_fee],
-          expenses: ps[:expenses],
-          transportation_expenses: ps[:transportation_expenses],
-          support_price: ps[:support_price],
-          zoom_price: ps[:zoom_price],
-          contract_number: ps[:contract_number],
-        }
-
-        order.update!(attrs)
-        return redirect_to admin_order_path(order.id)
+        order.report.update(permitted_params[:order][:report_attributes])
+        order.report.evaluation.update(permitted_params[:order][:evaluation])
+        order.update!(permitted_params[:order].except(:evaluation, :report_attributes))
       end
 
-      if order.status.value >= 70 && permitted_params[:order][:evaluation].present?
-        # TODO(okubo): 評価更新する
-        evaluation_params = permitted_params[:order][:evaluation]
-        attrs = {
-          ingenuity: evaluation_params[:ingenuity],
-          communication: evaluation_params[:communication],
-          smoothness: evaluation_params[:smoothness],
-          price: evaluation_params[:price],
-          want_to_order_agein: evaluation_params[:want_to_order_agein],
-          message: evaluation_params[:message],
-          other_message: evaluation_params[:other_message]
-        }
+      # NOTE(okubo): 終了報告系
+      if order&.report&.present? &&
+         (order.status.value >= 70 && order.status.value <= 80) &&
+         permitted_params[:order][:evaluation].present?
+        order.report.update(permitted_params[:order][:report_attributes])
+        order.report.create_evaluation(permitted_params[:order][:evaluation])
 
-        # NOTE(okubo): 評価はあれば更新で、なければ作成
-        order.report&.evaluation.present? ? order.report.evaluation.update(attrs) : order.report.create_evaluation(attrs)
-        # NOTE(okubo): レポートの更新。order.statusにも影響あるので、重要
-        order.report.update!(status: permitted_params[:order][:report][:status])
-        order.update!(status: permitted_params[:order][:status])
+        order.update!(permitted_params[:order].except(:evaluation, :report_attributes))
 
-        # NOTE(okubo): reportのstatusによってメール切り替え
+        # NOTE(okubo): statusに応じてメール変更
         ReportDenyMailer.notify(order).deliver_now if order.report.status.denied?
         ReportAcceptMailer.notify(order).deliver_now if order.report.status.accepted?
-        SlackNotifier.new(channel: '#アクティブチャットスレッド').send('管理画面から終了報告関連の処理を行いました', "管理画面案件URL：#{admin_order_url(order.id)}")
-        return redirect_to admin_order_path(order.id)
       end
 
-      SlackNotifier.new(channel: '#アクティブチャットスレッド').send('管理画面から案件の更新を行いました', "管理画面案件URL：#{admin_order_url(order.id)}")
-      order.update!(permitted_params[:order])
-
-      # NOTE(okubo): 正式依頼のメール発火
-      if order.status == :facility_request_in_progress && permitted_params[:order][:start_at].present?
-        # NOTE(okubo): このメールは正式依頼のみなので、移動はしないで
-        OrderRequestMailer.notify(order, order.user).deliver_now
+      # NOTE(okubo): 相談中
+      if order.status.value >= 10 && order.status.value <= 40
+        order.update!(permitted_params[:order].except(:evaluation, :report_attributes))
+        # NOTE(okubo): 時間の記載がある -> 正式依頼
+        # TODO(okubo): order.start_at.nil? つまり、あだ入力できていない、なら送信
+        OrderRequestMailer.notify(order, order.user).deliver_now if permitted_params[:order][:start_at].present? && order.start_at.nil?
       end
+
+      SlackNotifier
+        .new(channel: '#アクティブチャットスレッド')
+        .send('管理画面から案件の更新を行いました', "管理画面案件URL：#{admin_order_url(order.id)}")
       redirect_to admin_order_path(order.id)
     rescue StandardError => e
-      super
+      Rails.logger.error e
+      Sentry.capture_exception(e)
     end
   end
 end
+# rubocop:enable Metrics/BlockLength, Metrics/AbcSize

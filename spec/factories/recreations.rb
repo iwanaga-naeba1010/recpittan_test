@@ -51,6 +51,10 @@ FactoryBot.define do
     flow_of_day { 'MyString' }
     minutes { 60 }
     price { 20000 }
+    regular_price { 20000 }
+    regular_material_price { 1000 }
+    instructor_amount { 10000 }
+    instructor_material_amount { 500 }
     description { 'MyText' }
     youtube_id { '' }
     instructor_name { 'MyText' }
