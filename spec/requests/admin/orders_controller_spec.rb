@@ -47,6 +47,11 @@ RSpec.describe 'Orders', type: :request do
           post admin_orders_path, params: { order: attrs }
         }.to change(Chat, :count).by(+1)
       end
+
+      it 'can create chat as user' do
+        post admin_orders_path, params: { order: attrs }
+        expect(Chat.last.user.id).to eq order.user.id
+      end
     end
 
     # TODO: 失敗パターンも実装
@@ -85,9 +90,8 @@ RSpec.describe 'Orders', type: :request do
         zoom_price: 500
       }
 
-      number_of_people = 10
       it 'returns 302 status' do
-        put admin_order_path(order.id), params: { order: { number_of_people: number_of_people } }
+        put admin_order_path(order.id), params: { order: attrs }
         expect(response).to have_http_status(:found)
         expect(response).to redirect_to admin_order_path(order.id)
       end
@@ -168,29 +172,6 @@ RSpec.describe 'Orders', type: :request do
         expect(order.support_price).to eq attrs[:support_price]
         expect(order.zoom_price).to eq attrs[:zoom_price]
       end
-
-      # NOTE(okubo): 相談中はステータスが変更しないこと
-      
-
-      # NOTE(okubo): 正式依頼ではattrが変更されること
-
-      it 'update status' do
-        expect {
-          put admin_order_path(order.id), params: { order: { number_of_people: number_of_people } }
-        }.to change { Order.find(order.id).number_of_people }.from(order.number_of_people).to(number_of_people)
-      end
-
-      it 'updates costs' do
-        attrs = attributes_for(:order, regular_price: 1000, regular_material_price: 1000, instructor_amount: 1000, instructor_material_amount: 1000)
-        put admin_order_path(order.id), params: { order: attrs }
-        order.reload
-        expect(order.regular_price).to be attrs[:regular_price]
-        expect(order.regular_material_price).to be attrs[:regular_material_price]
-        expect(order.instructor_amount).to be attrs[:instructor_amount]
-        expect(order.instructor_material_amount).to be attrs[:instructor_material_amount]
-      end
-
-      # TODO(okubo): 理想は全てのpatternを入れたい
     end
   end
 
@@ -206,4 +187,5 @@ RSpec.describe 'Orders', type: :request do
       end
     end
   end
+
 end
