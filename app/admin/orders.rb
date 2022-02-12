@@ -175,7 +175,6 @@ ActiveAdmin.register Order do
       end
 
       div class: 'evaluation_input' do
-        report_accepted = f.object.report&.status&.accepted?
         hint = 'パートナーの終了報告の入力値が反映されています'
         f.input :number_of_facilities, hint: hint
         f.input :number_of_people, hint: hint
@@ -243,6 +242,7 @@ EOS
         instructor_material_amount: recreation.instructor_material_amount,
         additional_facility_fee: recreation.additional_facility_fee,
       )
+
       order.chats.build(user_id: current_user.id, message: message)
       order.save!
 
@@ -253,7 +253,8 @@ EOS
       redirect_to admin_order_path(order.id)
     rescue StandardError => e
       Rails.logger.error e
-      super
+      Sentry.capture_exception(e)
+      # super
     end
 
     def update
@@ -326,6 +327,8 @@ EOS
       end
       redirect_to admin_order_path(order.id)
     rescue StandardError => e
+      Rails.logger.error e
+      Sentry.capture_exception(e)
       super
     end
   end

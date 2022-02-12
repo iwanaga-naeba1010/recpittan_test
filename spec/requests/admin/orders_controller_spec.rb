@@ -36,10 +36,16 @@ RSpec.describe 'Orders', type: :request do
         expect(response).to redirect_to(admin_order_path(Order.last.id))
       end
 
-      it 'can create user_company and increase one record' do
+      it 'can create order and increase one record' do
         expect {
           post admin_orders_path, params: { order: attrs }
         }.to change(Order, :count).by(+1)
+      end
+
+      it 'can create chat and increase one record' do
+        expect {
+          post admin_orders_path, params: { order: attrs }
+        }.to change(Chat, :count).by(+1)
       end
     end
 
