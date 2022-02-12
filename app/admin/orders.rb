@@ -15,9 +15,11 @@ ActiveAdmin.register Order do
     report_attributes: %i[
       id body expenses expenses number_of_facilities number_of_people status transportation_expenses
     ],
-    evaluation_attributes: %i[
+    evaluation: %i[
       id communication ingenuity message other_message price smoothness want_to_order_agein
     ]
+    # TODO(okubo): evaluationもattributesで管理したいけど、reportにうまくnestできなかったので
+    # ひとまずevaluationで実装。時間できたら、attributesにしたい
   )
   actions :all
 
@@ -161,7 +163,7 @@ ActiveAdmin.register Order do
         f.input :city
         f.input :street
         f.input :building
-        f.input :number_of_people
+        f.input :number_of_people, as: :number
         f.input :number_of_facilities
       end
 
@@ -172,8 +174,8 @@ ActiveAdmin.register Order do
           f.input :regular_material_price
           f.input :instructor_material_amount
           f.input :additional_facility_fee
-          f.input :transportation_expenses
-          f.input :expenses
+          f.input :transportation_expenses, as: :number
+          f.input :expenses, as: :number
           f.input :zoom_price
           f.input :support_price
         end
@@ -181,18 +183,18 @@ ActiveAdmin.register Order do
 
       div class: 'evaluation_input' do
         hint = 'パートナーの終了報告の入力値が反映されています'
-        f.input :number_of_facilities, hint: hint
-        f.input :number_of_people, hint: hint
-        f.input :transportation_expenses, hint: hint
-        f.input :expenses, hint: hint
+        # f.input :number_of_facilities, hint: hint
+        # f.input :number_of_people, hint: hint
+        # f.input :transportation_expenses, hint: hint
+        # f.input :expenses, hint: hint
 
         if f.object.status.value >= 70
           f.inputs I18n.t('activerecord.models.report'), for: [:report, f.object.report] do |ff|
-            ff.input :body, input_html: { disabled: true }
+            ff.input :body
             ff.input :status, as: :select, collection: Report.status.values.map { |val| [val.text, val] }
           end
 
-          f.inputs I18n.t('activerecord.models.evaluation'), for: [:evaluation, f.object.report&.evaluation] do |ff|
+          f.inputs I18n.t('activerecord.models.evaluation'), for: [:evaluation, f.object&.report&.evaluation || Evaluation.new] do |ff|
             ff.input :ingenuity, as: :select, collection: Evaluation.ingenuity.values.map { |val| [val.text, val] }
             ff.input :communication, as: :select, collection: Evaluation.communication.values.map { |val| [val.text, val] }
             ff.input :smoothness, as: :select, collection: Evaluation.smoothness.values.map { |val| [val.text, val] }
@@ -263,19 +265,18 @@ ActiveAdmin.register Order do
       # NOTE(okubo): 完了系のstatus. 全てupdateしている
       if order.status.value >= 200
         order.report.update(permitted_params[:order][:report_attributes])
-        order.report.evaluation.update(permitted_params[:order][:evaluation_attributes])
-        order.update!(permitted_params[:order].except(:evaluation_attributes, :report_attributes))
+        order.report.evaluation.update(permitted_params[:order][:evaluation])
+        order.update!(permitted_params[:order].except(:evaluation, :report_attributes))
       end
 
       # NOTE(okubo): 終了報告系
       if order&.report&.present? &&
          (order.status.value >= 70 && order.status.value <= 80) &&
-         permitted_params[:order][:evaluation_attributes].present?
-
+         permitted_params[:order][:evaluation].present?
         order.report.update(permitted_params[:order][:report_attributes])
-        order.report.create_evaluation(permitted_params[:order][:evaluation_attributes])
+        order.report.create_evaluation(permitted_params[:order][:evaluation])
 
-        order.update!(permitted_params[:order].except(:evaluation_attributes, :report_attributes))
+        order.update!(permitted_params[:order].except(:evaluation, :report_attributes))
 
         # NOTE(okubo): statusに応じてメール変更
         ReportDenyMailer.notify(order).deliver_now if order.report.status.denied?
@@ -284,9 +285,10 @@ ActiveAdmin.register Order do
 
       # NOTE(okubo): 相談中
       if order.status.value >= 10 && order.status.value <= 40
-        order.update!(permitted_params[:order].except(:evaluation_attributes, :report_attributes))
+        order.update!(permitted_params[:order].except(:evaluation, :report_attributes))
         # NOTE(okubo): 時間の記載がある -> 正式依頼
-        OrderRequestMailer.notify(order, order.user).deliver_now if permitted_params[:order][:start_at].present?
+        # TODO(okubo): order.start_at.nil? つまり、あだ入力できていない、なら送信
+        OrderRequestMailer.notify(order, order.user).deliver_now if permitted_params[:order][:start_at].present? && order.start_at.nil?
       end
 
       SlackNotifier

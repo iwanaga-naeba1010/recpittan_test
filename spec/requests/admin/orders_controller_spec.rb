@@ -112,7 +112,7 @@ RSpec.describe 'Orders', type: :request do
       it 'updates order when status is more than 200' do
         order = create(:order, :with_finished, recreation_id: partner.recreations.first.id, user_id: customer.id)
         attrs[:report_attributes] = order.report.attributes
-        attrs[:evaluation_attributes] = order.report.evaluation.attributes
+        attrs[:evaluation] = order.report.evaluation.attributes
 
         put admin_order_path(order.id), params: { order: attrs }
         order.reload
@@ -146,9 +146,10 @@ RSpec.describe 'Orders', type: :request do
       # NOTE(okubo): 70以上、かつ、評価が入力されている場合
       it 'updates order when status is more than 70 and evaluation is present' do
         order = create(:order, :with_final_report_admits_not, recreation_id: partner.recreations.first.id, user_id: customer.id)
+        order.report.status = :accepted
         attrs[:report_attributes] = order.report.attributes
         evaluation = attributes_for(:evaluation, report_id: order.report.id)
-        attrs[:evaluation_attributes] = evaluation
+        attrs[:evaluation] = evaluation
 
         put admin_order_path(order.id), params: { order: attrs }
         order.reload
