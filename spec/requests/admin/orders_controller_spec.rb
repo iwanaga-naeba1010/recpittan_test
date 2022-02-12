@@ -72,8 +72,8 @@ RSpec.describe 'Orders', type: :request do
         building: 'グローバルゲート11階',
         number_of_people: 2,
         number_of_facilities: 2,
-        start_at: Time.zone.tomorrow,
-        end_at: Time.zone.tomorrow,
+        # start_at: Time.zone.tomorrow,
+        # end_at: Time.zone.tomorrow,
         regular_price: 50000,
         regular_material_price: 10000,
         instructor_amount: 30000,
@@ -94,6 +94,7 @@ RSpec.describe 'Orders', type: :request do
 
       # NOTE(okubo): 200以上の完了系ステータスが機能すること
       it 'updates order when status is more than 200' do
+        order = create(:order, :with_finished, recreation_id: partner.recreations.first.id, user_id: customer.id)
         attrs[:status] = 200
 
         put admin_order_path(order.id), params: { order: attrs }
@@ -126,8 +127,46 @@ RSpec.describe 'Orders', type: :request do
 
 
       # NOTE(okubo): 70以上、かつ、評価が入力されている場合
+      it 'updates order when status is more than 70 and evaluation is present' do
+        order = create(:order, :with_final_report_admits_not, recreation_id: partner.recreations.first.id, user_id: customer.id)
+        attrs[:report_attributes] = {
+          id: order.report.id,
+          body: order.report.body,
+          expenses: order.report.expenses,
+          transportation_expenses: order.report.transportation_expenses,
+          number_of_facilities: order.report.number_of_facilities,
+          number_of_people: order.report.number_of_people,
+          status: :accepted
+        }
 
-      it 'updates order when status is more tan 70 and evaluation is present' do
+        evaluation = attributes_for(:evaluation, report_id: order.report.id)
+        attrs[:evaluation_attributes] = evaluation
+        put admin_order_path(order.id), params: { order: attrs }
+        order.reload
+
+        expect(response).to have_http_status(:found)
+        expect(response).to redirect_to admin_order_path(order.id)
+        expect(order.status).to eq 'finished'
+        expect(order.zip).to eq attrs[:zip]
+        expect(order.prefecture).to eq attrs[:prefecture]
+        expect(order.city).to eq attrs[:city]
+        expect(order.street).to eq attrs[:street]
+        expect(order.building).to eq attrs[:building]
+        expect(order.number_of_people).to eq attrs[:number_of_people]
+        expect(order.number_of_facilities).to eq attrs[:number_of_facilities]
+        # TODO(okubo): 時間完全一致のテスト修正してください。若干ずれる
+        # expect(order.start_at).to eq attrs[:start_at]
+        # expect(order.end_at).to eq attrs[:end_at]
+
+        expect(order.regular_price).to eq attrs[:regular_price]
+        expect(order.regular_material_price).to eq attrs[:regular_material_price]
+        expect(order.instructor_amount).to eq attrs[:instructor_amount]
+        expect(order.instructor_material_amount).to eq attrs[:instructor_material_amount]
+        expect(order.additional_facility_fee).to eq attrs[:additional_facility_fee]
+        expect(order.expenses).to eq attrs[:expenses]
+        expect(order.transportation_expenses).to eq attrs[:transportation_expenses]
+        expect(order.support_price).to eq attrs[:support_price]
+        expect(order.zoom_price).to eq attrs[:zoom_price]
       end
 
       # NOTE(okubo): 相談中はステータスが変更しないこと

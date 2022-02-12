@@ -268,31 +268,48 @@ EOS
         return redirect_to admin_order_path(order.id)
       end
 
-      if order.status.value >= 70 && permitted_params[:order][:evaluation].present?
-        # TODO(okubo): 評価更新する
-        evaluation_params = permitted_params[:order][:evaluation]
-        attrs = {
-          ingenuity: evaluation_params[:ingenuity],
-          communication: evaluation_params[:communication],
-          smoothness: evaluation_params[:smoothness],
-          price: evaluation_params[:price],
-          want_to_order_agein: evaluation_params[:want_to_order_agein],
-          message: evaluation_params[:message],
-          other_message: evaluation_params[:other_message]
-        }
+      if order&.report&.present? &&
+         (order.status.value >= 70 && order.status.value <= 80) &&
+         permitted_params[:order][:evaluation_attributes].present?
 
-        # NOTE(okubo): 評価はあれば更新で、なければ作成
-        order.report&.evaluation.present? ? order.report.evaluation.update(attrs) : order.report.create_evaluation(attrs)
-        # NOTE(okubo): レポートの更新。order.statusにも影響あるので、重要
-        order.report.update!(status: permitted_params[:order][:report][:status])
-        order.update!(status: permitted_params[:order][:status])
+        order.report.update(permitted_params[:order][:report_attributes])
+        order.report.create_evaluation(permitted_params[:order][:evaluation_attributes])
 
-        # NOTE(okubo): reportのstatusによってメール切り替え
+        # NOTE(okubo): 自動で算出されるので、とりあえず70
+        order.update!(permitted_params[:order].except(:evaluation_attributes, :report_attributes))
+
         ReportDenyMailer.notify(order).deliver_now if order.report.status.denied?
         ReportAcceptMailer.notify(order).deliver_now if order.report.status.accepted?
         SlackNotifier.new(channel: '#アクティブチャットスレッド').send('管理画面から終了報告関連の処理を行いました', "管理画面案件URL：#{admin_order_url(order.id)}")
+        # NOTE(okubo): reportのstatusによってメール切り替え
         return redirect_to admin_order_path(order.id)
       end
+
+      # if order.status.value >= 70 && permitted_params[:order][:evaluation].present?
+      #   # TODO(okubo): 評価更新する
+      #   evaluation_params = permitted_params[:order][:evaluation]
+      #   attrs = {
+      #     ingenuity: evaluation_params[:ingenuity],
+      #     communication: evaluation_params[:communication],
+      #     smoothness: evaluation_params[:smoothness],
+      #     price: evaluation_params[:price],
+      #     want_to_order_agein: evaluation_params[:want_to_order_agein],
+      #     message: evaluation_params[:message],
+      #     other_message: evaluation_params[:other_message]
+      #   }
+      #
+      #   # NOTE(okubo): 評価はあれば更新で、なければ作成
+      #   order.report&.evaluation.present? ? order.report.evaluation.update(attrs) : order.report.create_evaluation(attrs)
+      #   # NOTE(okubo): レポートの更新。order.statusにも影響あるので、重要
+      #   order.report.update!(status: permitted_params[:order][:report][:status])
+      #   order.update!(status: permitted_params[:order][:status])
+      #
+      #   # NOTE(okubo): reportのstatusによってメール切り替え
+      #   ReportDenyMailer.notify(order).deliver_now if order.report.status.denied?
+      #   ReportAcceptMailer.notify(order).deliver_now if order.report.status.accepted?
+      #   SlackNotifier.new(channel: '#アクティブチャットスレッド').send('管理画面から終了報告関連の処理を行いました', "管理画面案件URL：#{admin_order_url(order.id)}")
+      #   return redirect_to admin_order_path(order.id)
+      # end
 
       SlackNotifier.new(channel: '#アクティブチャットスレッド').send('管理画面から案件の更新を行いました', "管理画面案件URL：#{admin_order_url(order.id)}")
       order.update!(permitted_params[:order])

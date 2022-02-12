@@ -65,4 +65,36 @@ FactoryBot.define do
       create(:order_date, order_id: order.id)
     end
   end
+
+  trait :with_unreported_completed do
+    after(:create) do |order|
+      order.update(
+        start_at: DateTime.yesterday,
+        is_accepted: true
+      )
+    end
+  end
+
+  trait :with_final_report_admits_not do
+    after(:create) do |order|
+      create(:report, order_id: order.id)
+      order.update(
+        start_at: 3.days.ago,
+        is_accepted: true
+      )
+    end
+  end
+
+  trait :with_finished do
+    after(:create) do |order|
+      report = create(:report, order_id: order.id, status: :accepted)
+      create(:evaluation, report_id: report.id)
+
+      order.update(
+        start_at: 3.days.ago,
+        is_accepted: true
+      )
+    end
+  end
+
 end
