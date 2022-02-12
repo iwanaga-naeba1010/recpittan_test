@@ -262,7 +262,9 @@ ActiveAdmin.register Order do
       order = Order.find(params[:id].to_i)
       # NOTE(okubo): 完了系のstatus. 全てupdateしている
       if order.status.value >= 200
-        order.update!(permitted_params[:order])
+        order.report.update(permitted_params[:order][:report_attributes])
+        order.report.evaluation.update(permitted_params[:order][:evaluation_attributes])
+        order.update!(permitted_params[:order].except(:evaluation_attributes, :report_attributes))
       end
 
       # NOTE(okubo): 終了報告系

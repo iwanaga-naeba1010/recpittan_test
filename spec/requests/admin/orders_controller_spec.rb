@@ -99,14 +99,15 @@ RSpec.describe 'Orders', type: :request do
       # NOTE(okubo): 200以上の完了系ステータスが機能すること
       it 'updates order when status is more than 200' do
         order = create(:order, :with_finished, recreation_id: partner.recreations.first.id, user_id: customer.id)
-        attrs[:status] = 200
+        attrs[:report_attributes] = order.report.attributes
+        attrs[:evaluation_attributes] = order.report.evaluation.attributes
 
         put admin_order_path(order.id), params: { order: attrs }
         order.reload
 
         expect(response).to have_http_status(:found)
         expect(response).to redirect_to admin_order_path(order.id)
-        expect(order.status).to eq attrs[:status]
+        # expect(order.status).to eq attrs[:status]
         expect(order.zip).to eq attrs[:zip]
         expect(order.prefecture).to eq attrs[:prefecture]
         expect(order.city).to eq attrs[:city]
