@@ -90,10 +90,22 @@ RSpec.describe 'Orders', type: :request do
         zoom_price: 500
       }
 
-      it 'returns 302 status' do
+      it 'updates order when staus is less than 40' do
         put admin_order_path(order.id), params: { order: attrs }
+        order.reload
         expect(response).to have_http_status(:found)
         expect(response).to redirect_to admin_order_path(order.id)
+
+        expect(order.regular_price).to eq attrs[:regular_price]
+        expect(order.regular_material_price).to eq attrs[:regular_material_price]
+        expect(order.instructor_amount).to eq attrs[:instructor_amount]
+        expect(order.instructor_material_amount).to eq attrs[:instructor_material_amount]
+        expect(order.additional_facility_fee).to eq attrs[:additional_facility_fee]
+        expect(order.expenses).to eq attrs[:expenses]
+        expect(order.transportation_expenses).to eq attrs[:transportation_expenses]
+        expect(order.support_price).to eq attrs[:support_price]
+        expect(order.zoom_price).to eq attrs[:zoom_price]
+
       end
 
       # NOTE(okubo): 200以上の完了系ステータスが機能すること
@@ -134,18 +146,10 @@ RSpec.describe 'Orders', type: :request do
       # NOTE(okubo): 70以上、かつ、評価が入力されている場合
       it 'updates order when status is more than 70 and evaluation is present' do
         order = create(:order, :with_final_report_admits_not, recreation_id: partner.recreations.first.id, user_id: customer.id)
-        attrs[:report_attributes] = {
-          id: order.report.id,
-          body: order.report.body,
-          expenses: order.report.expenses,
-          transportation_expenses: order.report.transportation_expenses,
-          number_of_facilities: order.report.number_of_facilities,
-          number_of_people: order.report.number_of_people,
-          status: :accepted
-        }
-
+        attrs[:report_attributes] = order.report.attributes
         evaluation = attributes_for(:evaluation, report_id: order.report.id)
         attrs[:evaluation_attributes] = evaluation
+
         put admin_order_path(order.id), params: { order: attrs }
         order.reload
 
