@@ -117,7 +117,11 @@
     <p class="text-black">一度送信した終了報告は修正ができません。よくご確認の上、送信ボタンを押してください。</p>
   </div>
   <div class="col-md-12 text-center">
-    <%= f.submit '終了報告を送信する', class: 'btn btn-primary btn-lg btn-block w-100 p-3 mb-2' %>
+    <% if @order.status.final_report_admits_not? || @order.report&.status&.denied? %>
+      <%= f.submit '終了報告を送信する', disabled: false, class: 'btn btn-primary btn-lg btn-block w-100 p-3 mb-2' %>
+    <% else %>
+      <%= f.submit '終了報告を送信する', disabled: true, class: 'btn btn-primary btn-lg btn-block w-100 p-3 mb-2' %>
+    <% end %>
   </div>
 <% end %>
 
