@@ -1,3 +1,10 @@
+<% meta_tags_each_page(
+  @recreation.title,
+  @recreation.description,
+  nil,
+  @recreation.recreation_images&.first&.image&.to_s
+)%>
+
 <main class="detail">
   <div class="container pt-2">
     <nav aria-label="breadcrumb">
