@@ -54,6 +54,8 @@ Rails.application.routes.draw do
     resources :orders, only: %i[update]
   end
 
+  get 'sitemap', to: redirect("https://#{ENV['AWS_BUCKET']}.s3-ap-northeast-1.amazonaws.com/sitemaps/sitemap.xml.gz")
+
   mount LetterOpenerWeb::Engine, at: '/letter_opener' if Rails.env.development?
   get '*path' => 'errors#routing_error', via: :all
 end
