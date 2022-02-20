@@ -9,21 +9,21 @@
       </h2>
     </div>
   </div>
-  <div class="sub_header p-3">
-    <div class="d-flex">
-      <div class="flex-grow-1">
-        レクリエーション・料金の確認
-      </div>
+  <%= link_to partners_order_path(id: @order.id, is_accepted: @order.is_accepted) do %>
+    <div class="sub_header p-3">
+      <div class="d-flex">
+        <div class="flex-grow-1">
+          レクリエーション・料金の確認
+        </div>
 
-      <div class="flex-grow-1">
-        <%= link_to partners_order_path(id: @order.id, is_accepted: @order.is_accepted) do %>
+        <div class="flex-grow-1">
           <%= number_to_currency(@order.total_price_for_partner) %>
           <i class="fas fa-chevron-right"></i>
-        <% end %>
+        </div>
+        <%= render 'shared/partner/sidebar_toggle' %>
       </div>
-      <%= render 'shared/partner/sidebar_toggle' %>
     </div>
-  </div>
+  <% end %>
 </div>
 
 <div class="chat card-body">
