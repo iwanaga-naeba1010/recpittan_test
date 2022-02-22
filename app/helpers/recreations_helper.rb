@@ -9,7 +9,7 @@ module RecreationsHelper
     number_to_currency(price)
   end
 
-  def tags_to_html(tags, limit: true)
+  def tags_to_html(tags, limit = true)
     return if tags.blank?
 
     category_tag = tags.map { |tag| tag if tag.kind.category? }.compact.first

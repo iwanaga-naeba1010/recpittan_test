@@ -279,7 +279,7 @@ ActiveAdmin.register Order do
         order.update!(permitted_params[:order].except(:evaluation, :report_attributes))
         # NOTE(okubo): 時間の記載がある -> 正式依頼
         # TODO(okubo): order.start_at.nil? つまり、あだ入力できていない、なら送信
-        OrderRequestMailer.notify(order, order.user).deliver_now if permitted_params[:order][:start_at].present? && order.start_at.nil?
+        OrderRequestMailer.notify(order, order.user).deliver_now if permitted_params[:order][:start_at].present? && order.start_at?
       end
 
       SlackNotifier

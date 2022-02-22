@@ -137,7 +137,7 @@
             <div class="row justify-content-center py-3">
               <div class="col-auto">
                 <!-- NOTE: 正式依頼するタイミングでstart_atが入るので、こちら利用 -->
-                <% if @order.start_at.blank? %>
+                <% if @order.start_at? %>
                   <button id="order-modal" class="btn-cpr" data-bs-toggle="modal" data-bs-target="#orderModal">
                     レクを正式依頼へ進む
                   </button>
