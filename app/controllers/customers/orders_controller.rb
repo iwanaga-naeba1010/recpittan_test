@@ -25,10 +25,12 @@ class Customers::OrdersController < Customers::ApplicationController
     @order = @recreation.orders.build(params_create)
 
     ActiveRecord::Base.transaction do
+      # rubocop:disable Layout/LineLength
       @order.order_dates.map do |d|
         d.destroy if d.year.empty? && d.month.empty? && d.date.empty? && d.start_hour.empty? && d.start_minute.empty? && d.end_hour.empty? && d.end_minute.empty?
       end
       @order.save!
+      # rubocop:enable Layout/LineLength
 
       # TODO: EOS入力にすればタブが入ってしまったようなmessageは解消が可能
       message = <<EOS

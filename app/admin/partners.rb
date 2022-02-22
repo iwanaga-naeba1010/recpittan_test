@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# rubocop:disable Metrics/BlockLength
 ActiveAdmin.register Partner do
   menu priority: 3
   permit_params(
@@ -96,3 +97,4 @@ ActiveAdmin.register Partner do
     end
   end
 end
+# rubocop:enable Metrics/BlockLength

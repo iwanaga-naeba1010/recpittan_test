@@ -81,6 +81,7 @@ class Order < ApplicationRecord
             :instructor_material_amount, :expenses, :transportation_expenses,
             :additional_facility_fee, presence: true
 
+  # rubocop:disable Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
   def switch_status_before_save
     # NOTE: 終了している案件のstatusを変更しても処理は挟まない
     if self.status.finished? || self.status.invoice_issued? || self.status.paid? || self.status.canceled? || self.status.travled?
@@ -129,6 +130,7 @@ class Order < ApplicationRecord
                   end
     self
   end
+  # rubocop:enable Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
 
   # TODO: 残りの住所も入れれるようにする
   def full_address

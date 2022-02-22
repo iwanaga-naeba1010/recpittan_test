@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# rubocop:disable Metrics/BlockLength
 ActiveAdmin.register Orders::UnreportedCompletedFromNew do
   permit_params(
     %i[
@@ -62,3 +63,4 @@ ActiveAdmin.register Orders::UnreportedCompletedFromNew do
     end
   end
 end
+# rubocop:enable Metrics/BlockLength

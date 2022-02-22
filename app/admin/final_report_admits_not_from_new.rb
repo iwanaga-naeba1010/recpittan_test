@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# rubocop:disable Metrics/BlockLength
 ActiveAdmin.register Orders::FinalReportAdmitsNotFromNew do
   permit_params(
     %i[
@@ -69,3 +70,4 @@ ActiveAdmin.register Orders::FinalReportAdmitsNotFromNew do
     end
   end
 end
+# rubocop:enable Metrics/BlockLength
