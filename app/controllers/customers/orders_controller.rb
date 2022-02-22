@@ -17,7 +17,7 @@ class Customers::OrdersController < Customers::ApplicationController
   end
 
   def complete
-    redirect_to chat_customers_order_path(@order.id) if @order.start_at?
+    redirect_to chat_customers_order_path(@order.id) if @order.start_at.blank?
   end
 
   # rubocop:disable Metrics/AbcSize
