@@ -41,6 +41,12 @@ RSpec.describe 'Orders', type: :request do
           post admin_orders_path, params: { order: attrs }
         }.to change(Order, :count).by(+1)
       end
+
+      it 'can create order_date and increase one record' do
+        expect {
+          post admin_orders_path, params: { order: attrs }
+        }.to change(OrderDate, :count).by(+1)
+      end
     end
 
     # TODO: 失敗パターンも実装
