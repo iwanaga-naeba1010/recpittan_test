@@ -24,7 +24,7 @@ Rails.application.configure do
     read_timeout: 0.2,
     write_timeout: 0.2,
     reconnect_attempts: 1,
-    error_handler: -> (method:, returning:, exception:) {
+    error_handler: ->(method:, returning:, exception:) {
       # Raven.capture_exception(exception, level: 'error', tags: { method: method, returning: returning })
     }
   }

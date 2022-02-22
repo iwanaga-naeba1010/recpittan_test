@@ -59,6 +59,7 @@ class User < ApplicationRecord
     # Do something...
     AfterConfirmationMailer.notify(self).deliver_now
   end
+
   # passwordなしで保存できるようにする
   def update_without_current_password(params, *options)
     params.delete(:current_password)

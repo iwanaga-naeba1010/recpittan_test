@@ -75,7 +75,7 @@ ActiveAdmin.register Orders::ForceComplete do
 
       evaluation.create_evaluation(
         message: 'システムの自動投稿',
-        other_message: 'システムの自動投稿',
+        other_message: 'システムの自動投稿'
       )
 
       order.update(status: :finished)

@@ -13,7 +13,6 @@ class CustomDevise::RegistrationsController < Devise::RegistrationsController
   end
 
   # POST /resource
-  # rubocop:disable Lint/UselessMethodDefinition
   def create
     super do
       resource.update(
@@ -24,8 +23,6 @@ class CustomDevise::RegistrationsController < Devise::RegistrationsController
       # resource.username_kana =  params[:user][:company_attributes][:person_in_charge_name_kana]
     end
   end
-  # rubocop:enable Lint/UselessMethodDefinition
-
   # GET /resource/edit
   # def edit
   #   super

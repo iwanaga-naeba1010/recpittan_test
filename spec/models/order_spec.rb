@@ -83,15 +83,15 @@ RSpec.describe Order, type: :model do
 
       it 'changes to unreported_completed after finished recreation but partner did not complete report yet' do
         current_time = Time.current
-        order.update(start_at: current_time.ago(1.days), is_accepted: true)
+        order.update(start_at: current_time.ago(1.day), is_accepted: true)
         expect(order.status).to eq :unreported_completed
       end
 
       it 'changes to final_report_admits_not after finished recreation and partner completed report but customer did not accepted' do
         current_time = Time.current
         # NOTE: reportを事前に作成しないと発火しないので注意が必要
-        order.create_report(attributes_for :report)
-        order.update(start_at: current_time.ago(1.days), is_accepted: true)
+        order.create_report(attributes_for(:report))
+        order.update(start_at: current_time.ago(1.day), is_accepted: true)
         expect(order.status).to eq :final_report_admits_not
       end
 
@@ -99,7 +99,7 @@ RSpec.describe Order, type: :model do
         current_time = Time.current
         # NOTE: reportを事前に作成しないと発火しないので注意が必要
         order.create_report(attributes_for(:report, status: :accepted))
-        order.update(start_at: current_time.ago(1.days), is_accepted: true)
+        order.update(start_at: current_time.ago(1.day), is_accepted: true)
         expect(order.status).to eq :finished
       end
     end

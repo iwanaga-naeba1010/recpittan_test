@@ -120,16 +120,14 @@ class Order < ApplicationRecord
     last_chat = self.chats.last
     return self if last_chat.blank?
 
-    if last_chat.user.role.customer?
-      self.status = :waiting_for_a_reply_from_partner
-      return self
-    elsif last_chat.user.role.partner?
-      self.status = :waiting_for_a_reply_from_facility
-      return self
-    else
-      self.status = :in_progress
-      return self
-    end
+    self.status = if last_chat.user.role.customer?
+                    :waiting_for_a_reply_from_partner
+                  elsif last_chat.user.role.partner?
+                    :waiting_for_a_reply_from_facility
+                  else
+                    :in_progress
+                  end
+    self
   end
 
   # TODO: 残りの住所も入れれるようにする

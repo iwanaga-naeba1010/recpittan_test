@@ -39,7 +39,6 @@ ActiveAdmin.register Partner do
         end
       end
     end
-
   end
 
   form do |f|
@@ -95,6 +94,5 @@ ActiveAdmin.register Partner do
         super
       end
     end
-
   end
 end

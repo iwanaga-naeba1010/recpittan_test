@@ -61,5 +61,4 @@ RSpec.describe 'OrdersForceComplete', type: :request do
       end
     end
   end
-
 end

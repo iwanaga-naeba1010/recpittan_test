@@ -98,7 +98,6 @@ ActiveAdmin.register Order do
           row :created_at
           row :updated_at
         end
-
       end
 
       tab 'メモ' do
@@ -126,7 +125,6 @@ ActiveAdmin.register Order do
           render 'admin/orders/fee_table', order: order, kind: :partner
         end
       end
-
     end
   end
 

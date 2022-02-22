@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 namespace :update_held_order do
   task run: :environment do
     Order.all.each do |order|

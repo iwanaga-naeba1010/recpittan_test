@@ -7,12 +7,12 @@ class Customers::ChatsController < Customers::ApplicationController
     # NOTE: Orderで保存することで、保存時にstatusのチェック機能を発火させる。
     @order.chats.build(params_create)
     if @order.save
-message = <<-EOF
-施設名名： #{current_user.company.facility_name}
-管理画面案件URL： #{admin_order_url(@order.id)}
-内容:
-#{params_create[:message]}
-EOF
+      message = <<~EOF
+        施設名名： #{current_user.company.facility_name}
+        管理画面案件URL： #{admin_order_url(@order.id)}
+        内容:
+        #{params_create[:message]}
+      EOF
       SlackNotifier.new(channel: '#アクティブチャットスレッド').send('施設からチャットが届きました', message)
       # TODO: jobで送信したい
       PartnerChatMailer.notify(@order, current_user).deliver_now

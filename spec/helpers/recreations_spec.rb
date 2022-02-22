@@ -31,7 +31,6 @@ RSpec.describe RecreationsHelper, type: :helper do
         func_result = helper.price_pipe(input_price, nil)
         expect(func_result).to eq(output)
       end
-
     end
   end
 end

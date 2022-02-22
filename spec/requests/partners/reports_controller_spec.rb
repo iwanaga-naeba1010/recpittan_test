@@ -32,7 +32,6 @@ RSpec.describe Partners::ReportsController, type: :request do
         expect(response).to redirect_to(partners_order_path(order.id))
       end
     end
-
   end
 
   describe 'GET /edit' do
@@ -91,7 +90,7 @@ RSpec.describe Partners::ReportsController, type: :request do
         }.to change { Order.find(order.id).number_of_people }.from(order.number_of_people).to(11)
       end
 
-     it 'updates number_of_facilities of order' do
+      it 'updates number_of_facilities of order' do
         expect {
           put partners_order_report_path(order_id: order.id, id: report.id), params: { report: { number_of_facilities: 11 } }
         }.to change { Order.find(order.id).number_of_facilities }.from(order.number_of_facilities).to(11)

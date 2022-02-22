@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: evaluations
@@ -30,7 +32,7 @@ FactoryBot.define do
     smoothness { 1 }
     price { 1 }
     want_to_order_agein { 1 }
-    message { "MyText" }
-    other_message { "MyText" }
+    message { 'MyText' }
+    other_message { 'MyText' }
   end
 end

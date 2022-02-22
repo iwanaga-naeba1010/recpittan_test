@@ -75,7 +75,7 @@ ActiveAdmin.register Orders::ForceCompleteFromInProgress do
 
       evaluation.create_evaluation(
         message: 'システムの自動投稿',
-        other_message: 'システムの自動投稿',
+        other_message: 'システムの自動投稿'
       )
 
       order.update(

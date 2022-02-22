@@ -49,7 +49,6 @@ ActiveAdmin.register Orders::UnreportedCompletedFromNew do
       f.input :start_at, as: :hidden, input_html: { value: Date.yesterday }
       f.input :end_at, as: :hidden, input_html: { value: Date.yesterday }
       f.input :is_accepted, as: :hidden, input_html: { value: true }
-
     end
 
     f.actions
