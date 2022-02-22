@@ -218,24 +218,6 @@ ActiveAdmin.register Order do
     end
 
     def create
-      message = <<~MESSAGE
-        リクエスト内容
-        相談したい
-        希望日時
-        1.
-        2.
-        3.
-
-        希望人数
-        -人
-
-        介護度目安
-
-        住所
-
-        相談したい事
-      MESSAGE
-
       # NOTE(okubo): recの金額を元に自動的に金額が反映されるようにする
       recreation = Recreation.find(params[:order][:recreation_id])
       order = recreation.orders.build(
@@ -247,7 +229,18 @@ ActiveAdmin.register Order do
         additional_facility_fee: recreation.additional_facility_fee
       )
 
-      order.chats.build(user_id: order.user.id, message: message)
+      current_time = Time.zone.now
+      # NOTE(okubo): order_datesを作成しないと正式依頼で日付が表示されない
+      order.order_dates.build(
+        year: current_time.year,
+        month: current_time.month + 1,
+        date: current_time.day,
+        start_hour: '10',
+        start_minute: '00',
+        end_hour: '12',
+        end_minute: '00'
+      )
+
       order.save!
 
       CustomerChatStartMailer.notify(order, order.user).deliver_now
