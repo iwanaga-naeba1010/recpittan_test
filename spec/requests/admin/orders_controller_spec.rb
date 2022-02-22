@@ -41,17 +41,6 @@ RSpec.describe 'Orders', type: :request do
           post admin_orders_path, params: { order: attrs }
         }.to change(Order, :count).by(+1)
       end
-
-      it 'can create chat and increase one record' do
-        expect {
-          post admin_orders_path, params: { order: attrs }
-        }.to change(Chat, :count).by(+1)
-      end
-
-      it 'can create chat as user' do
-        post admin_orders_path, params: { order: attrs }
-        expect(Chat.last.user.id).to eq order.user.id
-      end
     end
 
     # TODO: 失敗パターンも実装
