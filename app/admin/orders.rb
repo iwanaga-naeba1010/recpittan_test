@@ -270,8 +270,8 @@ ActiveAdmin.register Order do
         order.update!(permitted_params[:order].except(:evaluation, :report_attributes))
 
         # NOTE(okubo): statusに応じてメール変更
-        ReportDenyMailer.notify(order).deliver_now if order.report.status.denied?
-        ReportAcceptMailer.notify(order).deliver_now if order.report.status.accepted?
+        ReportDenyMailer.notify(order).deliver_now if order.report_status.denied?
+        ReportAcceptMailer.notify(order).deliver_now if order.report_status.accepted?
       end
 
       # NOTE(okubo): 相談中

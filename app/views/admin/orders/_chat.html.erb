@@ -13,7 +13,7 @@
     <% if chat.user_role.partner? %>
       <!-- パートナー -->
       <div class="mychat">
-        <div class="name"><%= order.recreation.instructor_name %></div>
+        <div class="name"><%= order.recreation_instructor_name %></div>
         <div class="message"><%= simple_format chat.message %></div>
         <span class="time"><%= time chat.created_at %></span>
       </div>

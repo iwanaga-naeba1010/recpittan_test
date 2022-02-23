@@ -1,7 +1,7 @@
 <div class="col-md-7">
   <div class="card chat-container">
     <div class="card-header bg-white">
-      <%= order.recreation.instructor_name %>さんとのチャット
+      <%= order.recreation_instructor_name %>さんとのチャット
     </div>
     <div class="card-body bg-ba02">
 <!--      {{#each orderMessages}}-->
@@ -22,7 +22,7 @@
         <% end %>
 
         <!-- Admin -->
-        <% if chat.user.role.admin? %>
+        <% if chat.user_role.admin? %>
           <div class="row justify-content-start instructor pt-2">
             <div class="col-md-auto">
               <div class="name">運営</div>
@@ -43,7 +43,7 @@
           </div>
         <% end %>
         <!-- パートナー -->
-        <% if chat.user.role.partner? %>
+        <% if chat.user_role.partner? %>
           <div class="row justify-content-start instructor pt-2">
             <div class="col-auto align-self-start image pe-0">
               <img src="{{catalogThumbnailUri userId '128x128' 'jpg'}}">
@@ -102,7 +102,7 @@
 <!--      {{/ifEquals}}-->
 <!--      {{/each}}-->
     </div>
-    <% if order.report.blank? || !order&.report&.status.accepted? %>
+    <% if order.report.blank? || !order&.report_status.accepted? %>
       <div class="card-footer bg-white">
         <%= simple_form_for chat, url: customers_order_chats_path(order_id: @order.id), input: { class: 'chat' } do |f| %>
           <%= f.input :user_id, as: :hidden, input_html: { value: current_user.id } %>

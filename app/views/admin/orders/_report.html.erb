@@ -3,17 +3,17 @@
   <table>
     <tr>
       <td>参加人数</td>
-      <td><%= report&.order&.number_of_people %></td>
+      <td><%= report&.order_number_of_people %></td>
     </tr>
 
     <tr>
       <td>交通費</td>
-      <td><%= number_to_currency report&.order&.transportation_expenses %></td>
+      <td><%= number_to_currency report&.order_transportation_expenses %></td>
     </tr>
 
     <tr>
       <td>諸経費</td>
-      <td><%= number_to_currency report&.order&.expenses %></td>
+      <td><%= number_to_currency report&.order_expenses %></td>
     </tr>
 
     <tr>
@@ -50,12 +50,12 @@
 
     <tr>
       <td> 感想をご記入ください</td>
-      <td><%= report&.evaluation&.message %></td>
+      <td><%= report&.evaluation_message %></td>
     </tr>
 
     <tr>
       <td>その他ご意見をご記入ください。※Webサイトへは公開されません</td>
-      <td><%= report&.evaluation&.other_message %></td>
+      <td><%= report&.evaluation_other_message %></td>
     </tr>
   </table>
 <% end %>

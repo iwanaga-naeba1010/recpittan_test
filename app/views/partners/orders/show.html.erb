@@ -5,7 +5,7 @@
       <%= link_to path do %>
         <i class="fas fa-arrow-left text-white"></i>
       <% end %>
-      <%= @order.recreation.instructor_name %>
+      <%= @order.recreation_instructor_name %>
     </h2>
     <%= render 'shared/partner/sidebar_toggle' %>
   </div>
@@ -41,13 +41,13 @@
       <tr class="border-bottom">
         <td class="pt-2 pb-2 w-25">レク名</td>
         <td class="pt-2 pb-2 text-black text-end">
-          <%= @order.recreation.title %>
+          <%= @order.recreation_title %>
         </td>
       </tr>
       <tr class="border-bottom">
         <td class="pt-2 pb-2 w-25">レク環境</td>
         <td class="pt-2 pb-2 text-black text-end">
-          <%= @order.recreation.is_online ? 'オンライン' : 'オフライン' %>
+          <%= @order.recreation_is_online ? 'オンライン' : 'オフライン' %>
         </td>
       </tr>
       <tr class="border-bottom">
