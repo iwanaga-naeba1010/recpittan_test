@@ -104,7 +104,7 @@
     </div>
     <% if order.report.blank? || !order&.report_status.accepted? %>
       <div class="card-footer bg-white">
-        <%= simple_form_for chat, url: customers_order_chats_path(order_id: @order.id), input: { class: 'chat' } do |f| %>
+        <%= simple_form_for chat, url: customers_order_chats_path(order_id: order.id), input: { class: 'chat' } do |f| %>
           <%= f.input :user_id, as: :hidden, input_html: { value: current_user.id } %>
           <div class="row align-items-center">
             <div class="col-10 pe-0">
