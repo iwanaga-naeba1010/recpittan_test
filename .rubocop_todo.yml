@@ -125,6 +125,7 @@ Style/NegatedIfElseCondition:
 Style/OptionalBooleanParameter:
   Exclude:
     - 'lib/document_utils.rb'
+    - 'app/helpers/recreations_helper.rb'
 
 # Offense count: 1
 # Cop supports --auto-correct.

@@ -95,6 +95,7 @@ class Order < ApplicationRecord
     end
 
     # NOTE: 完了してレポート書いたけど、施設が承認していないこと
+    # rubocop:disable Layout/LineLength
     if self.start_at.present? && self.is_accepted && (Time.current >= self.start_at) && self.report&.present? && !self.report&.status.accepted?
       self.status = :final_report_admits_not
       return self
@@ -105,6 +106,7 @@ class Order < ApplicationRecord
       self.status = :finished
       return self
     end
+    # rubocop:enable Layout/LineLength
 
     if self.start_at.present? && !self.is_accepted
       self.status = :facility_request_in_progress
@@ -178,6 +180,7 @@ class Order < ApplicationRecord
     end
   end
 
+  # rubocop:disable Layout/LineLength
   def total_price_for_customer
     regular_price + total_material_price_for_customer + transportation_expenses + expenses + total_facility_price_for_customer + support_price
   end
@@ -186,6 +189,7 @@ class Order < ApplicationRecord
     # NOTE(okubo): zoom_priceは運営が入力する
     instructor_amount + total_material_price_for_partner + transportation_expenses + expenses_for_partner + total_facility_price_for_partner - zoom_price
   end
+  # rubocop:enable Layout/LineLength
 
   # def total_price(is_partner:)
   #   regular_price = recreation.regular_price || 0

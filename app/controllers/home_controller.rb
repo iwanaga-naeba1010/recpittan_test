@@ -54,7 +54,7 @@ class HomeController < ApplicationController
     end
   end
 
-  # rubocop:disable Metrics/CyclomaticComplexity
+  # rubocop:disable Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity, Metrics/AbcSize
   def sort_categories(categories)
     return [] if categories.blank?
 
@@ -70,5 +70,5 @@ class HomeController < ApplicationController
       categories.map { |c| c if c.name == 'その他' }.compact.first,
     ]
   end
-  # rubocop:enable Metrics/CyclomaticComplexity
+  # rubocop:enable Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity, Metrics/AbcSize
 end

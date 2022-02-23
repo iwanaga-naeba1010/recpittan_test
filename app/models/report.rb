@@ -29,7 +29,8 @@ class Report < ApplicationRecord
   has_one :evaluation, dependent: :destroy
   accepts_nested_attributes_for :evaluation, allow_destroy: true
 
-  delegate :regular_material_price, :number_of_people, :number_of_facilities, :transportation_expenses, :expenses, :support_price, :additional_facility_fee, :start_at, to: :order, prefix: true
+  delegate :regular_material_price, :number_of_people, :number_of_facilities, :transportation_expenses, :expenses, :support_price,
+           :additional_facility_fee, :start_at, to: :order, prefix: true
 
   delegate :message, :other_message, to: :evaluation, prefix: true
 

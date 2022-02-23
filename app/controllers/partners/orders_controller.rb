@@ -8,6 +8,8 @@ class Partners::OrdersController < Partners::ApplicationController
     if is_accepted = (is_accepted == 'true')
       render 'partners/orders/accepted_detail'
     end
+
+    is_accepted
   end
 
   def chat

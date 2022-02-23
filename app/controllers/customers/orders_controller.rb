@@ -127,6 +127,7 @@ EOS
     @order = current_user.orders.order_asc.find(params[:id])
   end
 
+  # rubocop:disable Layout/LineLength
   def parse_order_date(dates)
     return '' if dates.blank?
 
@@ -137,6 +138,7 @@ EOS
 
     str
   end
+  # rubocop:enable Layout/LineLength
 
   def params_create
     params.require(:order).permit(

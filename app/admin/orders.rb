@@ -180,7 +180,7 @@ ActiveAdmin.register Order do
       end
 
       div class: 'evaluation_input' do
-        hint = 'パートナーの終了報告の入力値が反映されています'
+        # hint = 'パートナーの終了報告の入力値が反映されています'
         # f.input :number_of_facilities, hint: hint
         # f.input :number_of_people, hint: hint
         # f.input :transportation_expenses, hint: hint
