@@ -18,6 +18,7 @@ MoveFinderToNamedScopeCheck: { }
 MoveModelLogicIntoModelCheck:
   ignored_files:
     - "app/controllers/customers/orders_controller.rb"
+    - "app/controllers/home_controller.rb"
 NeedlessDeepNestingCheck: { nested_count: 2 }
 NotRescueExceptionCheck: { }
 NotUseDefaultRouteCheck: { }
