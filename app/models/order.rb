@@ -54,7 +54,6 @@ class Order < ApplicationRecord
   accepts_nested_attributes_for :report, allow_destroy: true
 
   delegate :title, :price, :minutes, :instructor_name, :is_online, :capacity, to: :recreation, prefix: true
-  delegate :status, to: :report, prefix: true
 
   validate :reject_empty_date
 
@@ -80,7 +79,7 @@ class Order < ApplicationRecord
             :instructor_material_amount, :expenses, :transportation_expenses,
             :additional_facility_fee, presence: true
 
-  # rubocop:disable Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
+  # rubocop:disable Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity, Metrics/AbcSize
   def switch_status_before_save
     # NOTE: 終了している案件のstatusを変更しても処理は挟まない
     if self.status.finished? || self.status.invoice_issued? || self.status.paid? || self.status.canceled? || self.status.travled?
@@ -131,7 +130,7 @@ class Order < ApplicationRecord
                   end
     self
   end
-  # rubocop:enable Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
+  # rubocop:enable Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity, Metrics/AbcSize
 
   # TODO: 残りの住所も入れれるようにする
   def full_address

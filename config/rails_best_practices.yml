@@ -7,7 +7,9 @@ DryBundlerInCapistranoCheck: { }
 #HashSyntaxCheck: { }
 IsolateSeedDataCheck: { }
 KeepFindersOnTheirOwnModelCheck: { }
-LawOfDemeterCheck: { }
+LawOfDemeterCheck:
+  ignored_files:
+    - "app/views/admin/orders/_report.html.erb"
 #LongLineCheck: { max_line_length: 80 }
 MoveCodeIntoControllerCheck: { }
 MoveCodeIntoHelperCheck: { array_count: 3 }
