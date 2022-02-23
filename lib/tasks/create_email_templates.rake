@@ -3,6 +3,7 @@
 require 'csv'
 
 # rake import:email_templates
+# rubocop:disable Lint/UselessAssignment
 namespace :import do
   task email_templates: :environment do
     puts 'start to create email_templates data'
@@ -22,3 +23,4 @@ namespace :import do
     end
   end
 end
+# rubocop:enable Lint/UselessAssignment

@@ -96,13 +96,13 @@ class Order < ApplicationRecord
 
     # NOTE: 完了してレポート書いたけど、施設が承認していないこと
     # rubocop:disable Layout/LineLength
-    if self.start_at.present? && self.is_accepted && (Time.current >= self.start_at) && self.report&.present? && !self.report&.status.accepted?
+    if self.start_at.present? && self.is_accepted && (Time.current >= self.start_at) && self.report&.present? && !self.report&.status&.accepted?
       self.status = :final_report_admits_not
       return self
     end
 
     # NOTE: 完了してレポート書いて、施設が承認してfinishな状態
-    if self.start_at.present? && self.is_accepted && (Time.current >= self.start_at) && self.report&.present? && self.report&.status.accepted?
+    if self.start_at.present? && self.is_accepted && (Time.current >= self.start_at) && self.report&.present? && self.report&.status&.accepted?
       self.status = :finished
       return self
     end
@@ -217,6 +217,7 @@ class Order < ApplicationRecord
     "#{date} #{start_time} ~ #{end_time}"
   end
 
+  # rubocop:disable Style/CaseEquality
   def reject_empty_date
     empty_date = []
     order_dates.each do |d|
@@ -228,4 +229,5 @@ class Order < ApplicationRecord
     errors.add(:orders, '開催日は1つ以上設定してください。') if empty_date.length === 3
     @dates_validate_error = true if empty_date.length === 3
   end
+  # rubocop:enable Style/CaseEquality
 end

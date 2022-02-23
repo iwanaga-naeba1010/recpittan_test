@@ -21,11 +21,13 @@ class CustomDevise::SessionsController < Devise::SessionsController
   # protected
 
   def after_sign_in_path_for(resource)
-    if resource.role.admin?
-      return admin_dashboard_path
-    elsif resource.role.partner?
-      return partners_path
-    end
+    return admin_dashboard_path if resource.role.admin?
+
+    # if resource.role.admin?
+    #   return admin_dashboard_path
+    # elsif resource.role.partner?
+    #   return partners_path
+    # end
 
     customers_path
   end

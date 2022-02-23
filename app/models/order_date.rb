@@ -31,6 +31,7 @@ class OrderDate < ApplicationRecord
 
   private
 
+  # rubocop:disable Style/CaseEquality, Metrics/AbcSize
   def check_dates
     d = self
     date_ary = [d.year, d.month, d.date, d.start_hour, d.start_minute, d.end_hour, d.end_minute]
@@ -44,4 +45,5 @@ class OrderDate < ApplicationRecord
                  '開催の希望日が無効な日付です。ご確認のうえ、もう一度入力してください。')
     end
   end
+  # rubocop:enable Style/CaseEquality, Metrics/AbcSize
 end
