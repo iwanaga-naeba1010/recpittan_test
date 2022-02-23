@@ -20,7 +20,7 @@ class Customers::OrdersController < Customers::ApplicationController
     redirect_to chat_customers_order_path(@order.id) if @order.start_at.blank?
   end
 
-  # rubocop:disable Metrics/AbcSize
+  # rubocop:disable Metrics/AbcSize, Naming/HeredocDelimiterNaming
   def create
     @order = @recreation.orders.build(params_create)
 
@@ -115,7 +115,7 @@ EOS
   rescue StandardError
     redirect_to chat_customers_order_path(@order.id), alert: '失敗しました。もう一度お試しください'
   end
-  # rubocop:enable Metrics/AbcSize
+  # rubocop:enable Metrics/AbcSize, Naming/HeredocDelimiterNaming
 
   private
 

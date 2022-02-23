@@ -2,6 +2,7 @@
 
 class Api::SlackNotifiersController < Api::ApplicationController
 
+  # rubocop:disable Naming/HeredocDelimiterNaming
   def create
     recreation = Recreation.find(params[:recreation_id].to_i)
     message = <<~EOS
@@ -19,4 +20,5 @@ class Api::SlackNotifiersController < Api::ApplicationController
     logger.error e.message
     render_json({ message: e.message }, status: 422)
   end
+  # rubocop:enable Naming/HeredocDelimiterNaming
 end

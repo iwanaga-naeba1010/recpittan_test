@@ -3,6 +3,7 @@
 class Partners::ChatsController < Partners::ApplicationController
   before_action :set_order
 
+  # rubocop:disable Naming/HeredocDelimiterNaming
   def create
     @order.chats.build(params_create)
 
@@ -21,6 +22,7 @@ class Partners::ChatsController < Partners::ApplicationController
       render 'partners/orders/chat'
     end
   end
+  # rubocop:enable Naming/HeredocDelimiterNaming
 
   private
 
