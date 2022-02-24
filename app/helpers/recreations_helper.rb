@@ -9,6 +9,7 @@ module RecreationsHelper
     number_to_currency(price)
   end
 
+  # rubocop:disable Style/OptionalBooleanParameter
   def tags_to_html(tags, limit = true)
     return if tags.blank?
 
@@ -29,6 +30,7 @@ module RecreationsHelper
       end
     end
   end
+  # rubocop:enable Style/OptionalBooleanParameter
 
   def categoryname_to_color_code(categoryname)
     case categoryname
