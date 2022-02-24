@@ -82,12 +82,6 @@ class CustomDevise::RegistrationsController < Devise::RegistrationsController
     edit_user_registration_path
   end
 
-  # NOTE: deviseの認証が発火した時に動く。
-  def after_confirmation
-    # Do something...
-    AfterConfirmationMailer.notify(self).deliver_now
-  end
-
   # The path used after sign up.
   # def after_sign_up_path_for(resource)
   #   super(resource)
