@@ -20,17 +20,15 @@ class Customers::OrdersController < Customers::ApplicationController
     redirect_to chat_customers_order_path(@order.id) if @order.start_at.blank?
   end
 
-  # rubocop:disable Metrics/AbcSize, Naming/HeredocDelimiterNaming
+  # rubocop:disable Metrics/AbcSize, Layout/LineLength, Naming/HeredocDelimiterNaming, Layout/HeredocIndentation
   def create
     @order = @recreation.orders.build(params_create)
 
     ActiveRecord::Base.transaction do
-      # rubocop:disable Layout/LineLength
       @order.order_dates.map do |d|
         d.destroy if d.year.empty? && d.month.empty? && d.date.empty? && d.start_hour.empty? && d.start_minute.empty? && d.end_hour.empty? && d.end_minute.empty?
       end
       @order.save!
-      # rubocop:enable Layout/LineLength
 
       # TODO: EOS入力にすればタブが入ってしまったようなmessageは解消が可能
       message = <<EOS
@@ -59,17 +57,17 @@ EOS
         message: message,
         is_read: false
       )
-      slack_message = <<~EOS
-        会社名: #{current_user.company.name}
-        管理画面URL: #{admin_company_url(current_user.company.id)}
-        担当者名: #{current_user.company.person_in_charge_name}
-        電話番号: #{current_user.company.tel}
+      slack_message = <<EOS
+会社名: #{current_user.company.name}
+管理画面URL: #{admin_company_url(current_user.company.id)}
+担当者名: #{current_user.company.person_in_charge_name}
+電話番号: #{current_user.company.tel}
 
-        レク名: #{@recreation.title}
-        パートナー名: #{@recreation.instructor_name}
-        ------------------
-        #{message}
-      EOS
+レク名: #{@recreation.title}
+パートナー名: #{@recreation.instructor_name}
+------------------
+#{message}
+EOS
 
       # TODO: jobで回した方が良い
       CustomerChatStartMailer.notify(@order, current_user).deliver_now
@@ -115,7 +113,6 @@ EOS
   rescue StandardError
     redirect_to chat_customers_order_path(@order.id), alert: '失敗しました。もう一度お試しください'
   end
-  # rubocop:enable Metrics/AbcSize, Naming/HeredocDelimiterNaming
 
   private
 
@@ -127,7 +124,6 @@ EOS
     @order = current_user.orders.order_asc.find(params[:id])
   end
 
-  # rubocop:disable Layout/LineLength
   def parse_order_date(dates)
     return '' if dates.blank?
 
@@ -138,7 +134,6 @@ EOS
 
     str
   end
-  # rubocop:enable Layout/LineLength
 
   def params_create
     params.require(:order).permit(
@@ -159,4 +154,5 @@ EOS
       ]
     )
   end
+  # rubocop:enable Metrics/AbcSize, Layout/LineLength, Naming/HeredocDelimiterNaming, Layout/HeredocIndentation
 end
