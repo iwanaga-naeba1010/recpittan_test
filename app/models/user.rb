@@ -54,12 +54,6 @@ class User < ApplicationRecord
 
   scope :customers, -> { where(role: :customer) }
 
-  # NOTE: deviseの認証が発火した時に動く。
-  def after_confirmation
-    # Do something...
-    AfterConfirmationMailer.notify(self).deliver_now
-  end
-
   # passwordなしで保存できるようにする
   def update_without_current_password(params, *options)
     params.delete(:current_password)

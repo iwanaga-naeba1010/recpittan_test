@@ -71,6 +71,7 @@ class CustomDevise::RegistrationsController < Devise::RegistrationsController
         ]
       ]
     )
+    configure_account_update_params
   end
 
   # ユーザー情報更新時にパスワードが変わらないようにする他mのところ
@@ -80,6 +81,12 @@ class CustomDevise::RegistrationsController < Devise::RegistrationsController
 
   def after_update_path_for(_resource)
     edit_user_registration_path
+  end
+
+  # NOTE: deviseの認証が発火した時に動く。
+  def after_confirmation
+    # Do something...
+    AfterConfirmationMailer.notify(self).deliver_now
   end
 
   # The path used after sign up.
