@@ -5,11 +5,9 @@ class Partners::OrdersController < Partners::ApplicationController
 
   def show
     is_accepted = params[:is_accepted]
-    if (is_accepted = (is_accepted == 'true'))
+    if is_accepted == 'true'
       render 'partners/orders/accepted_detail'
     end
-
-    is_accepted
   end
 
   def chat

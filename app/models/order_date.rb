@@ -41,8 +41,7 @@ class OrderDate < ApplicationRecord
     end
     date_ary.reject(&:empty?)
     if (!date_ary.reject(&:empty?).empty? && date_ary.reject(&:empty?).length < 7) || start_at < Time.zone.now || end_at < start_at
-      errors.add(:order_dates,
-                 '開催の希望日が無効な日付です。ご確認のうえ、もう一度入力してください。')
+      errors.add(:order_dates, '開催の希望日が無効な日付です。ご確認のうえ、もう一度入力してください。')
     end
   end
   # rubocop:enable Style/CaseEquality, Metrics/AbcSize

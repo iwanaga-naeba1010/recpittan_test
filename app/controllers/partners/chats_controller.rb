@@ -3,18 +3,18 @@
 class Partners::ChatsController < Partners::ApplicationController
   before_action :set_order
 
-  # rubocop:disable Naming/HeredocDelimiterNaming
+  # rubocop:disable Layout/HeredocIndentation, Layout/ClosingHeredocIndentation, Naming/HeredocDelimiterNaming
   def create
     @order.chats.build(params_create)
 
     # NOTE: Order経由で保存することでbefore_saveを発火させている
     if @order.save
-      message = <<~EOF
-        パートナー名： #{@order.recreation_instructor_name}
-        管理画面案件URL： #{admin_order_url(@order.id)}
-        内容:
-        #{params_create[:message]}
-      EOF
+      message = <<-EOF
+パートナー名： #{@order.recreation_instructor_name}
+管理画面案件URL： #{admin_order_url(@order.id)}
+内容:
+#{params_create[:message]}
+EOF
       SlackNotifier.new(channel: '#アクティブチャットスレッド').send('パートナーからチャットが届きました', message)
       CustomerChatMailer.notify(@order).deliver_now
       redirect_to chat_partners_order_path(@order.id)
@@ -22,7 +22,7 @@ class Partners::ChatsController < Partners::ApplicationController
       render 'partners/orders/chat'
     end
   end
-  # rubocop:enable Naming/HeredocDelimiterNaming
+  # rubocop:enable Layout/HeredocIndentation, Layout/ClosingHeredocIndentation, Naming/HeredocDelimiterNaming
 
   private
 

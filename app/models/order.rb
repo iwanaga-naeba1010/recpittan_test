@@ -53,8 +53,8 @@ class Order < ApplicationRecord
   has_one :report, dependent: :destroy
   accepts_nested_attributes_for :report, allow_destroy: true
 
-  delegate :title, :price, :minutes, :instructor_name, :is_online, :capacity, to: :recreation, prefix: true
-  delegate :status, to: :report, prefix: true
+  delegate :title, :price, :minutes, :instructor_name, :is_online, :capacity, to: :recreation, prefix: true, allow_nil: true
+  delegate :status, to: :report, prefix: true, allow_nil: true
 
   validate :reject_empty_date
 
