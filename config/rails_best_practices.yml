@@ -47,7 +47,8 @@ RemoveUnusedMethodsInControllersCheck: {
     'ApplicationController#authenticate_admin!',
     'CustomDevise::RegistrationsController#update_resource',
     'CustomDevise::RegistrationsController#after_update_path_for',
-    'CustomDevise::RegistrationsController#after_confirmation'
+    'CustomDevise::RegistrationsController#after_confirmation',
+    'CustomDevise::RegistrationsController#configure_account_update_params'
   ]
 }
 RemoveUnusedMethodsInHelpersCheck: { except_methods: [] }

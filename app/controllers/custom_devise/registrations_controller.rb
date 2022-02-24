@@ -71,7 +71,6 @@ class CustomDevise::RegistrationsController < Devise::RegistrationsController
         ]
       ]
     )
-    configure_account_update_params
   end
 
   # ユーザー情報更新時にパスワードが変わらないようにする他mのところ
