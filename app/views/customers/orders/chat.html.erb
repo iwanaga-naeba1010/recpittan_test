@@ -136,8 +136,8 @@
             </div>
             <div class="row justify-content-center py-3">
               <div class="col-auto">
-                <!-- NOTE: 正式依頼するタイミングでstart_atが入るので、こちら利用 -->
-                <% if @order.start_at? %>
+                <!-- NOTE: statusが正式依頼未満の場合だけボタンをactive -->
+                <% if @order.status.value <= 30 %>
                   <button id="order-modal" class="btn-cpr" data-bs-toggle="modal" data-bs-target="#orderModal">
                     レクを正式依頼へ進む
                   </button>
@@ -151,8 +151,7 @@
       </div>
       <%= render 'shared/customer/order/chat', order: @order, chat: @chat %>
     </div>
-    <!-- 正式依頼 フォーム -->
-    <!-- Modal -->
+    <!-- 正式依頼 modalフォーム -->
     <%= render 'shared/customer/order/order_modal', order: @order %>
   </article>
 </main>

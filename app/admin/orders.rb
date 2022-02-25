@@ -180,12 +180,6 @@ ActiveAdmin.register Order do
       end
 
       div class: 'evaluation_input' do
-        # hint = 'パートナーの終了報告の入力値が反映されています'
-        # f.input :number_of_facilities, hint: hint
-        # f.input :number_of_people, hint: hint
-        # f.input :transportation_expenses, hint: hint
-        # f.input :expenses, hint: hint
-
         if f.object.status.value >= 70
           f.inputs I18n.t('activerecord.models.report'), for: [:report, f.object.report] do |ff|
             ff.input :body
