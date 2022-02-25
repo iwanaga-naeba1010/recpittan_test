@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 class Api::OrdersController < Api::ApplicationController
-
   def update
     @order = current_user.orders.find(params[:id])
     @order.update(params_create)

@@ -30,7 +30,6 @@ class Customers::OrdersController < Customers::ApplicationController
       end
       @order.save!
 
-      # TODO: EOS入力にすればタブが入ってしまったようなmessageは解消が可能
       message = <<~MESSAGE
         リクエスト内容
         #{@order.title}

@@ -18,10 +18,9 @@ class CustomDevise::RegistrationsController < Devise::RegistrationsController
         username: params[:user][:company_attributes][:person_in_charge_name],
         username_kana: params[:user][:company_attributes][:person_in_charge_name_kana]
       )
-      # resource.username =  params[:user][:company_attributes][:person_in_charge_name]
-      # resource.username_kana =  params[:user][:company_attributes][:person_in_charge_name_kana]
     end
   end
+
   # GET /resource/edit
   # def edit
   #   super
