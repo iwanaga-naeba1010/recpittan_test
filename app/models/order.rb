@@ -191,21 +191,6 @@ class Order < ApplicationRecord
   end
   # rubocop:enable Layout/LineLength
 
-  # def total_price(is_partner:)
-  #   regular_price = recreation.regular_price || 0
-  #   regular_material_price = recreation.regular_material_price || 0
-  #   order_transportation_expenses = transportation_expenses || 0
-  #   order_expenses = expenses || 0
-  #   # TODO: recから計算する
-  #   fee = is_partner ? recreation.additional_facility_fee - 1000 : recreation.additional_facility_fee
-  #
-  #   # TODO: 0円もしくはnilは0で計算
-  #   additional_facilities_price = number_of_facilities.blank? ? 0 : number_of_facilities
-  #   additional_facilities_price = number_of_facilities * fee if additional_facilities_price != 0
-  #
-  #   regular_price + regular_material_price + order_transportation_expenses + order_expenses + additional_facilities_price
-  # end
-
   def desired_time
     return '' if start_at.blank?
 

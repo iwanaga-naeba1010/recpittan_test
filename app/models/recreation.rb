@@ -26,7 +26,6 @@
 #  is_public_price            :boolean          default(TRUE)
 #  minutes                    :integer
 #  prefectures                :string           default([]), is an Array
-#  price                      :integer          default(0), not null
 #  regular_material_price     :integer
 #  regular_price              :integer
 #  second_title               :string
