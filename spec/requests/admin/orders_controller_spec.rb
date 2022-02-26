@@ -100,7 +100,6 @@ RSpec.describe 'Orders', type: :request do
         expect(order.transportation_expenses).to eq attrs[:transportation_expenses]
         expect(order.support_price).to eq attrs[:support_price]
         expect(order.zoom_price).to eq attrs[:zoom_price]
-
       end
 
       # NOTE(okubo): 200以上の完了系ステータスが機能すること
@@ -136,7 +135,6 @@ RSpec.describe 'Orders', type: :request do
         expect(order.support_price).to eq attrs[:support_price]
         expect(order.zoom_price).to eq attrs[:zoom_price]
       end
-
 
       # NOTE(okubo): 70以上、かつ、評価が入力されている場合
       it 'updates order when status is more than 70 and evaluation is present' do
@@ -188,5 +186,4 @@ RSpec.describe 'Orders', type: :request do
       end
     end
   end
-
 end

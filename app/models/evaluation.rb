@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: evaluations
@@ -30,5 +32,6 @@ class Evaluation < ApplicationRecord
   enumerize :communication, in: { satisfied: 0, somewhat_satisfied: 1, neither: 2, somewhat_dissatisfied: 3, dissatisfied: 4 }, default: 0
   enumerize :smoothness, in: { satisfied: 0, somewhat_satisfied: 1, neither: 2, somewhat_dissatisfied: 3, dissatisfied: 4 }, default: 0
   enumerize :price, in: { satisfied: 0, somewhat_satisfied: 1, neither: 2, somewhat_dissatisfied: 3, dissatisfied: 4 }, default: 0
-  enumerize :want_to_order_agein, in: { satisfied: 0, somewhat_satisfied: 1, neither: 2, somewhat_dissatisfied: 3, dissatisfied: 4 }, default: 0
+  enumerize :want_to_order_agein,
+            in: { satisfied: 0, somewhat_satisfied: 1, neither: 2, somewhat_dissatisfied: 3, dissatisfied: 4 }, default: 0
 end

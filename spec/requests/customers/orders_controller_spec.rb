@@ -39,14 +39,14 @@ RSpec.describe Customers::OrdersController, type: :request do
 
   # TODO: テスト書きたいが、エラー出て時間かかりそうなので一旦スルー
   describe 'POST /create' do
-
     context 'with valid parameters' do
-      let(:order_attrs) { attributes_for(:order, recreation_id: recreation.id, user_id: user.id,
-        order_dates_attributes: [
-          { year: '2030', month: '1', date: '1', start_hour: '13', start_minute: '00', end_hour: '14', end_minute: '30' },
-          { year: '2030', month: '1', date: '2', start_hour: '13', start_minute: '30', end_hour: '14', end_minute: '30' },
-          { year: '2030', month: '1', date: '3', start_hour: '13', start_minute: '30', end_hour: '14', end_minute: '30' }
-        ])
+      let(:order_attrs) {
+        attributes_for(:order, recreation_id: recreation.id, user_id: user.id,
+                               order_dates_attributes: [
+                                 { year: '2030', month: '1', date: '1', start_hour: '13', start_minute: '00', end_hour: '14', end_minute: '30' },
+                                 { year: '2030', month: '1', date: '2', start_hour: '13', start_minute: '30', end_hour: '14', end_minute: '30' },
+                                 { year: '2030', month: '1', date: '3', start_hour: '13', start_minute: '30', end_hour: '14', end_minute: '30' }
+                               ])
       }
 
       it 'return http success when user not logged in' do
@@ -57,12 +57,13 @@ RSpec.describe Customers::OrdersController, type: :request do
     end
 
     context 'with invalid parameters' do
-      let(:order_attrs) { attributes_for(:order, recreation_id: recreation.id, user_id: user.id,
-        order_dates_attributes: [
-          { year: '2022', month: '1', date: '1', start_hour: '13', start_minute: '00', end_hour: '14', end_minute: '30' },
-          { year: '2022', month: '1', date: '2', start_hour: '13', start_minute: '30', end_hour: '14', end_minute: '30' },
-          { year: '2022', month: '1', date: '3', start_hour: '13', start_minute: '30', end_hour: '14', end_minute: '30' }
-        ])
+      let(:order_attrs) {
+        attributes_for(:order, recreation_id: recreation.id, user_id: user.id,
+                               order_dates_attributes: [
+                                 { year: '2022', month: '1', date: '1', start_hour: '13', start_minute: '00', end_hour: '14', end_minute: '30' },
+                                 { year: '2022', month: '1', date: '2', start_hour: '13', start_minute: '30', end_hour: '14', end_minute: '30' },
+                                 { year: '2022', month: '1', date: '3', start_hour: '13', start_minute: '30', end_hour: '14', end_minute: '30' }
+                               ])
       }
 
       it 'return http success when user not logged in' do

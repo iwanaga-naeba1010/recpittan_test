@@ -20,6 +20,7 @@ class CustomDevise::SessionsController < Devise::SessionsController
 
   # protected
 
+  # rubocop:disable Style/GuardClause
   def after_sign_in_path_for(resource)
     if resource.role.admin?
       return admin_dashboard_path
@@ -29,6 +30,7 @@ class CustomDevise::SessionsController < Devise::SessionsController
 
     customers_path
   end
+  # rubocop:enable Style/GuardClause
 
   # If you have extra params to permit, append them to the sanitizer.
   # def configure_sign_in_params

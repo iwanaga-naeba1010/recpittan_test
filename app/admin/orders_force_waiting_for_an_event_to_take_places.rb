@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# rubocop:disable Metrics/BlockLength
 ActiveAdmin.register Orders::ForceWaitingForAnEventToTakePlace do
   permit_params(%i[start_at])
 
@@ -78,3 +79,4 @@ ActiveAdmin.register Orders::ForceWaitingForAnEventToTakePlace do
     end
   end
 end
+# rubocop:enable Metrics/BlockLength

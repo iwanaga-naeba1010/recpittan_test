@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# rubocop:disable Rails/LexicallyScopedActionFilter
 class CustomDevise::RegistrationsController < Devise::RegistrationsController
   before_action :configure_sign_up_params, only: [:create]
   before_action :configure_account_update_params, only: [:update]
@@ -13,18 +14,14 @@ class CustomDevise::RegistrationsController < Devise::RegistrationsController
   end
 
   # POST /resource
-  # rubocop:disable Lint/UselessMethodDefinition
   def create
     super do
       resource.update(
         username: params[:user][:company_attributes][:person_in_charge_name],
         username_kana: params[:user][:company_attributes][:person_in_charge_name_kana]
       )
-      # resource.username =  params[:user][:company_attributes][:person_in_charge_name]
-      # resource.username_kana =  params[:user][:company_attributes][:person_in_charge_name_kana]
     end
   end
-  # rubocop:enable Lint/UselessMethodDefinition
 
   # GET /resource/edit
   # def edit
@@ -96,3 +93,4 @@ class CustomDevise::RegistrationsController < Devise::RegistrationsController
   #   super(resource)
   # end
 end
+# rubocop:enable Rails/LexicallyScopedActionFilter
