@@ -11,7 +11,7 @@ ActiveAdmin.register Recreation do
       is_online is_public prefectures is_public_price additional_facility_fee
     ],
     tag_ids: [],
-    recreation_images_attributes: %i[id recreation_id image _destroy]
+    recreation_files_attributes: %i[id recreation_id source kind _destroy]
   )
   actions :all
 
@@ -58,7 +58,7 @@ ActiveAdmin.register Recreation do
       row :instructor_title
       row :instructor_description
       row :additional_facility_fee
-      # row :instructor_image
+
       row t('activerecord.attributes.recreation.instructor_image') do |rec|
         image_tag rec&.instructor_image&.to_s, width: 50, height: 50
       end
@@ -93,11 +93,12 @@ ActiveAdmin.register Recreation do
       end
     end
 
-    panel t('activerecord.models.recreation_image'), style: 'margin-top: 30px;' do
-      table_for recreation.recreation_images do
-        column t('activerecord.attributes.recreation_image.image') do |rec|
-          image_tag rec&.image&.to_s, width: 50, height: 50
+    panel t('activerecord.models.recreation_file'), style: 'margin-top: 30px;' do
+      table_for recreation.recreation_files do
+        column t('activerecord.attributes.recreation_file.source') do |rec|
+          image_tag rec&.source&.to_s, width: 50, height: 50
         end
+        column(:kind, &:kind_text)
       end
     end
   end
@@ -145,9 +146,11 @@ ActiveAdmin.register Recreation do
     f.input :tags, label: 'タグ', as: :check_boxes, collection: Tag.events.all
     f.input :tags, label: '想定ターゲット', as: :check_boxes, collection: Tag.targets.all
 
-    f.inputs t('activerecord.models.recreation_image') do
-      f.has_many :recreation_images, heading: false, allow_destroy: true, new_record: true do |ff|
-        ff.input :image, as: :file, hint: image_tag(ff.object.image.to_s, width: 100)
+    # TODO(okubo): kindごとに登録できるようにする
+    f.inputs t('enumerize.recreation_file.kind.slider') do
+      f.has_many :recreation_files, heading: false, allow_destroy: true, new_record: true do |ff|
+        ff.input :source, as: :file, hint: image_tag(ff.object.source.to_s, width: 100)
+        ff.input :kind, as: :select, collection: RecreationFile.kind.values.map { |i| [i.text, i] }
       end
     end
 

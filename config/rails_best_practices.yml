@@ -18,7 +18,7 @@ MoveCodeIntoControllerCheck: { }
 MoveCodeIntoHelperCheck: { array_count: 3 }
 MoveCodeIntoModelCheck:
  ignored_files:
-  - "app/views/partners/orders/show.html.erb" 
+  - "app/views/partners/orders/show.html.erb"
 MoveFinderToNamedScopeCheck: { }
 # NOTE: デグレ回避のため一旦エスケープ
 MoveModelLogicIntoModelCheck:
@@ -29,6 +29,7 @@ MoveModelLogicIntoModelCheck:
     - "app/controllers/customers/chats_controller.rb"
     - "app/controllers/partners/reports_controller.rb"
     - "app/controllers/partners/chats_controller.rb"
+    - "app/controllers/customers/recreation_files_controller.rb"
 NeedlessDeepNestingCheck: { nested_count: 2 }
 NotRescueExceptionCheck: { }
 NotUseDefaultRouteCheck: { }
