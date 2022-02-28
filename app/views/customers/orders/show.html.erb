@@ -70,7 +70,7 @@
                   <h2 class="font-14 font-weight-bold line-height-120 color-ba10 py-2">チラシ</h2>
                   <span class="font-14 font-weight-normal line-height-120 color-ba08 py-2">レクのチラシをダウンロードして印刷することができます。</span>
                   <div>
-                    <%= link_to download_customers_recreation_file_path(@order.recreation.flyer.id), class: 'clink' do %>
+                    <%= link_to @order.recreation.flyer.source.url, class: 'clink', target: '_blank', rel: 'noopener' do %>
                       チラシをダウンロード
                       <i class="material-icons ">navigate_next</i>
                     <% end %>
@@ -117,7 +117,7 @@
               <div class="col-auto">
                 <ul>
                   <% @order.recreation.recreation_files.materials.each do |file| %>
-                    <li><%= link_to file.source.file.filename, download_customers_recreation_file_path(file.id), class: 'clink mr-5' %> </li>
+                    <li> <%= link_to file.source.file.filename, file.source.url, class: 'clink mr-5', target: '_blank', rel: 'noopener' %> </li>
                   <% end%>
                 </ul>
               </div>
