@@ -54,4 +54,11 @@ class Recreation < ApplicationRecord
   delegate :name, :title, :description, :image, to: :partner, prefix: true, allow_nil: true
 
   scope :public_recs, -> { where(is_public: true) }
+
+  def flyer
+    files = recreation_files.flyers&.to_a
+    return nil if files.blank?
+
+    files.first
+  end
 end
