@@ -17,10 +17,6 @@ Rails.application.routes.draw do
   namespace :customers do
 
     resources :recreations, only: [:show, :index], shallow: true do
-      member do
-        get '/download' => :download, as: 'download'
-      end
-
       resources :orders, except: [:edit, :destroy, :index] do
         member do
           get :chat
@@ -29,6 +25,12 @@ Rails.application.routes.draw do
 
         resources :chats, only: %i[create]
         resources :reports, only: %i[edit update]
+      end
+    end
+
+    resources :recreation_files, only: %i[] do
+      member do
+        get '/download' => :download, as: 'download'
       end
     end
   end
