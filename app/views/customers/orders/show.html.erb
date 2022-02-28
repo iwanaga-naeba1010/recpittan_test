@@ -106,18 +106,20 @@
                 <%= number_to_currency(@order.total_price_for_customer) %>
               </div>
             </div>
+
             <div class="row py-2">
               <div class="col-lg-3 col-4 label">ステータス</div>
               <div class="col-auto"><%= I18n.t("customer.order.status.#{@order.status}") %></div>
             </div>
+
             <div class="row py-2">
               <div class="col-lg-3 col-4 label">関連ファイル</div>
               <div class="col-auto">
-                <% @order.recreation.recreation_files.materials.each do |file| %>
-                  <span class="mr-5" style="margin-right: 10px">
-                    <%= link_to file.source.file.filename, download_customers_recreation_file_path(file.id), class: 'clink mr-5' %>
-                  </span>
-                <% end%>
+                <ul>
+                  <% @order.recreation.recreation_files.materials.each do |file| %>
+                    <li><%= link_to file.source.file.filename, download_customers_recreation_file_path(file.id), class: 'clink mr-5' %> </li>
+                  <% end%>
+                </ul>
               </div>
             </div>
 
