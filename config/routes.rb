@@ -27,6 +27,12 @@ Rails.application.routes.draw do
         resources :reports, only: %i[edit update]
       end
     end
+
+    resources :recreation_files, only: %i[] do
+      member do
+        get '/download' => :download, as: 'download'
+      end
+    end
   end
 
   resources :partners, only: %i[index]

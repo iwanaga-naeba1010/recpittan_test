@@ -14,9 +14,8 @@
 #
 #  recreation_images_recreation_id_fkey  (recreation_id => recreations.id)
 #
-class RecreationImage < ApplicationRecord
-  belongs_to :recreation
-  mount_uploader :image, ImageUploader
+require 'rails_helper'
 
-  validates :image, presence: true
+RSpec.describe RecreationFile, type: :model do
+  pending "add some examples to (or delete) #{__FILE__}"
 end

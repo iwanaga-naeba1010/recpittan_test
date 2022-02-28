@@ -72,16 +72,16 @@ RSpec.describe 'Recreations', type: :request do
     end
   end
 
-  # describe 'DELETE #destroy' do
-  #   context 'success' do
-  #     it 'reduce one record' do
-  #       expect { delete admin_company_path(company.id) }.to change(Company, :count).by(-1)
-  #     end
-  #
-  #     it 'redirects to managers company billboards path' do
-  #       delete admin_company_path(company.id)
-  #       expect(response).to redirect_to admin_companies_path
-  #     end
-  #   end
-  # end
+  describe 'DELETE #destroy' do
+    context 'success' do
+      it 'reduce one record' do
+        expect { delete admin_recreation_path(recreation.id) }.to change(Recreation, :count).by(-1)
+      end
+
+      it 'redirects to recreations path' do
+        delete admin_recreation_path(recreation.id)
+        expect(response).to redirect_to admin_recreations_path
+      end
+    end
+  end
 end

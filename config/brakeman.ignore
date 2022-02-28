@@ -1,0 +1,26 @@
+{
+  "ignored_warnings": [
+    {
+      "warning_type": "File Access",
+      "warning_code": 16,
+      "fingerprint": "a1fc139b1f34bc2896669d9b42e960baec9f098ca1c738c39a52508527a0387a",
+      "check_name": "SendFile",
+      "message": "Model attribute used in file name",
+      "file": "app/controllers/customers/recreation_files_controller.rb",
+      "line": 12,
+      "link": "https://brakemanscanner.org/docs/warning_types/file_access/",
+      "code": "send_file(RecreationFile.find(params[:id]).source.current_path, :filename => RecreationFile.find(params[:id]).source.identifier, :type => RecreationFile.find(params[:id]).source.content_type, :dispotion => \"attachment\")",
+      "render_path": null,
+      "location": {
+        "type": "method",
+        "class": "Customers::RecreationFilesController",
+        "method": "download"
+      },
+      "user_input": "RecreationFile.find(params[:id]).source.current_path",
+      "confidence": "Medium",
+      "note": ""
+    }
+  ],
+  "updated": "2022-02-28 20:15:14 +0900",
+  "brakeman_version": "5.2.0"
+}

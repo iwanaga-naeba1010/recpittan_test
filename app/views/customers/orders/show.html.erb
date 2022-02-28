@@ -45,7 +45,7 @@
                 <div class="row align-items-center mt-2">
                   <div class="col-md-4">
                     <picture loading="lazy">
-                      <%= image_tag @order.recreation.recreation_images&.first&.image.to_s, class: 'img-fluid' %>
+                      <%= image_tag @order.recreation.recreation_files.sliders&.first&.source.to_s, class: 'img-fluid' %>
                     </picture>
                   </div>
                   <div class="col-md-8 recreation">
@@ -63,18 +63,21 @@
                 </div>
               </div>
             </div>
-
-            <!-- <div class="row py-2"> -->
-            <!--   <div class="col-lg-3 col-4 "></div> -->
-            <!--   <div class="col-auto rounded border p-3"> -->
-            <!--     <h2 class="font-14 font-weight-bold line-height-120 color-ba10 py-2">チラシ</h2> -->
-            <!--     <span class="font-14 font-weight-normal line-height-120 color-ba08 py-2">レクのチラシをダウンロードして印刷することができます。</span> -->
-            <!--     <div class="py-2"> -->
-            <!--       <a href="{{catalogflyerUri taskId}}" class="clink ">チラシをダウンロード -->
-            <!--         <i class="material-icons ">navigate_next</i></a> -->
-            <!--     </div> -->
-            <!--   </div> -->
-            <!-- </div> -->
+            <% if @order.recreation.flyer.present? %>
+              <div class="row py-2">
+                <div class="col-md-3"></div>
+                <div class="col-md-9 rounded border p-3">
+                  <h2 class="font-14 font-weight-bold line-height-120 color-ba10 py-2">チラシ</h2>
+                  <span class="font-14 font-weight-normal line-height-120 color-ba08 py-2">レクのチラシをダウンロードして印刷することができます。</span>
+                  <div>
+                    <%= link_to download_customers_recreation_file_path(@order.recreation.flyer.id), class: 'clink' do %>
+                      チラシをダウンロード
+                      <i class="material-icons ">navigate_next</i>
+                    <% end %>
+                  </div>
+                </div>
+              </div>
+            <% end %>
 
             <div class="row py-2">
               <div class="col-lg-3 col-4 label">開催日時</div>
@@ -103,9 +106,21 @@
                 <%= number_to_currency(@order.total_price_for_customer) %>
               </div>
             </div>
+
             <div class="row py-2">
               <div class="col-lg-3 col-4 label">ステータス</div>
               <div class="col-auto"><%= I18n.t("customer.order.status.#{@order.status}") %></div>
+            </div>
+
+            <div class="row py-2">
+              <div class="col-lg-3 col-4 label">関連ファイル</div>
+              <div class="col-auto">
+                <ul>
+                  <% @order.recreation.recreation_files.materials.each do |file| %>
+                    <li><%= link_to file.source.file.filename, download_customers_recreation_file_path(file.id), class: 'clink mr-5' %> </li>
+                  <% end%>
+                </ul>
+              </div>
             </div>
 
             <div class="row p-3 justify-content-around">
