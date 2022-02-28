@@ -48,8 +48,8 @@
               </div>
 
               <div class="form-check mb-3">
-                <input class="form-check-input {{formPrivacyPolicyClass}}" type="checkbox" name="privacyPolicy" value="true" {{privacyPolicy}} id="privacyPolicy">
-                <label class="form-check-label" for="privacyPolicy">
+                <input type="checkbox" class="form-check-input">
+                <label class="form-check-label">
                   <%= link_to '利用規約', 'https://everyplus.jp/tos/index.html', class: 'clink', target: '_blank' %>
                   に同意します。
                 </label>
@@ -59,6 +59,12 @@
                 <label class="form-check-label" for="privacyPolicy">
                   <%= link_to 'プライバシーポリシー', 'https://everyplus.jp/policy_privacy', class: 'clink', target: '_blank' %>
                   に同意します。
+                </label>
+              </div>
+              <div class="form-check mb-3">
+                <input type="checkbox" class="form-check-input">
+                <label class="form-check-label">
+                  介護施設として登録することに同意します。
                 </label>
               </div>
               <div class="row justify-content-md-center mt-3">
