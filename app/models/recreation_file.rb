@@ -26,10 +26,4 @@ class RecreationFile < ApplicationRecord
   scope :sliders, -> { where(kind: :slider) }
   scope :flyers, -> { where(kind: :flyer) }
   scope :materials, -> { where(kind: :material) }
-
-  # def self.flyer_url
-  #   return if flyers.blank?
-  #
-  #   flyers.first
-  # end
 end
