@@ -4,6 +4,11 @@ ja:
       # no/yesは文字で囲わないと正常に機能しないらしい
       "no": いいえ
       "yes": はい
+    recreation_file:
+      kind:
+        slider: レク画像
+        flyer: チラシ
+        material: 歌詞カード等の当日印刷物など
     evaluation_list: &evaluation_list
       satisfied: 満足
       somewhat_satisfied: やや満足

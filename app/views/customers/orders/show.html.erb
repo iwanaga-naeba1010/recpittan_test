@@ -45,7 +45,7 @@
                 <div class="row align-items-center mt-2">
                   <div class="col-md-4">
                     <picture loading="lazy">
-                      <%= image_tag @order.recreation.recreation_images&.first&.image.to_s, class: 'img-fluid' %>
+                      <%= image_tag @order.recreation.recreation_files.sliders&.first&.image.to_s, class: 'img-fluid' %>
                     </picture>
                   </div>
                   <div class="col-md-8 recreation">
