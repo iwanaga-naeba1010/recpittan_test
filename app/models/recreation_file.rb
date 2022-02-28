@@ -24,4 +24,6 @@ class RecreationFile < ApplicationRecord
   enumerize :kind, in: { slider: 0, flyer: 1, material: 2 }, default: 0
 
   scope :sliders, -> { where(kind: :slider) }
+  # scope :flyers, -> { where(kind: :flyer) }
+  # scope :materials, -> { where(kind: :material) }
 end

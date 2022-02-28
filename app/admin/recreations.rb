@@ -11,7 +11,7 @@ ActiveAdmin.register Recreation do
       is_online is_public prefectures is_public_price additional_facility_fee
     ],
     tag_ids: [],
-    recreation_files_attributes: %i[id recreation_id source _destroy]
+    recreation_files_attributes: %i[id recreation_id source kind _destroy]
   )
   actions :all
 
@@ -98,6 +98,7 @@ ActiveAdmin.register Recreation do
         column t('activerecord.attributes.recreation_file.source') do |rec|
           image_tag rec&.source&.to_s, width: 50, height: 50
         end
+        column(:kind, &:kind_text)
       end
     end
   end
@@ -146,9 +147,10 @@ ActiveAdmin.register Recreation do
     f.input :tags, label: '想定ターゲット', as: :check_boxes, collection: Tag.targets.all
 
     # TODO(okubo): kindごとに登録できるようにする
-    f.inputs t('activerecord.models.recreation_file') do
+    f.inputs t('enumerize.recreation_file.kind.slider') do
       f.has_many :recreation_files, heading: false, allow_destroy: true, new_record: true do |ff|
         ff.input :source, as: :file, hint: image_tag(ff.object.source.to_s, width: 100)
+        ff.input :kind, as: :select, collection: RecreationFile.kind.values.map { |i| [i.text, i] }
       end
     end
 
