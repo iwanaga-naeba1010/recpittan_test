@@ -9,7 +9,7 @@ class Customers::RecreationFilesController < Customers::ApplicationController
     return if file.blank?
 
     send_file(
-      file.source.current_path,
+      file.source.read,
       filename: file.source.identifier,
       type: file.source.content_type,
       dispotion: 'attachment'
