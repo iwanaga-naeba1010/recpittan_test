@@ -21,14 +21,16 @@ RSpec.describe 'Orders::UnreportedCompletedFromNew', type: :request do
 
   # TODO(okubo): postするpathが間違っているっぽいので、後で直す
   describe 'POST #create' do
-    let(:attrs) { attributes_for(
-      :order,
-      recreation_id: partner.recreations.first.id,
-      user_id: customer.id,
-      start_at: Date.yesterday,
-      end_at: Date.yesterday,
-      is_accepted: true
-    ) }
+    let(:attrs) {
+      attributes_for(
+        :order,
+        recreation_id: partner.recreations.first.id,
+        user_id: customer.id,
+        start_at: Date.yesterday,
+        end_at: Date.yesterday,
+        is_accepted: true
+      )
+    }
 
     context 'with valid parameters' do
       it 'creates a order' do
@@ -61,5 +63,4 @@ RSpec.describe 'Orders::UnreportedCompletedFromNew', type: :request do
       expect(response).to have_http_status(:ok)
     end
   end
-
 end

@@ -5,8 +5,8 @@ class Partners::OrdersController < Partners::ApplicationController
 
   def show
     is_accepted = params[:is_accepted]
-    if is_accepted = (is_accepted == 'true')
-      return render 'partners/orders/accepted_detail'
+    if is_accepted == 'true'
+      render 'partners/orders/accepted_detail'
     end
   end
 
@@ -40,16 +40,15 @@ class Partners::OrdersController < Partners::ApplicationController
   def confirm
     is_confirm = params[:is_confirm]
 
-    if is_confirm == 'deny'
-      return render 'partners/orders/deny'
-    elsif is_confirm == 'accept'
-      return render 'partners/orders/accept'
+    case is_confirm
+    when 'deny'
+      render 'partners/orders/deny'
+    when 'accept'
+      render 'partners/orders/accept'
     end
   end
 
-  def complete
-
-  end
+  def complete; end
 
   private
 

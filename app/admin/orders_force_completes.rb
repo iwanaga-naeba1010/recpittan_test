@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# rubocop:disable Metrics/BlockLength
 ActiveAdmin.register Orders::ForceComplete do
   permit_params(%i[kind name])
 
@@ -75,7 +76,7 @@ ActiveAdmin.register Orders::ForceComplete do
 
       evaluation.create_evaluation(
         message: 'システムの自動投稿',
-        other_message: 'システムの自動投稿',
+        other_message: 'システムの自動投稿'
       )
 
       order.update(status: :finished)
@@ -84,3 +85,4 @@ ActiveAdmin.register Orders::ForceComplete do
     end
   end
 end
+# rubocop:enable Metrics/BlockLength

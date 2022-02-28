@@ -121,7 +121,7 @@
                   <div class="action-header pt-3">終了報告</div>
                   <div class="py-3" style="min-height: 5rem;">レクが開催後、パートナーから終了報告の承認依頼が届きます。内容を確認して承認してください。
                   </div>
-                  <% if @order.report.status.accepted? %>
+                  <% if @order.report_status.accepted? %>
                     <span class="btn btn-cprimary font-14 py-2 px-4 font-weight-bold text-white disabled ">終了報告を確認済み</span>
                   <% else %>
                     <%= link_to '終了報告を確認', edit_customers_report_path(@order.report&.id), class: 'btn btn-cprimary font-14 py-2 px-4 font-weight-bold text-white' %>
@@ -167,7 +167,7 @@
                     <%= number_to_currency(@order.support_price) %>
                   </div>
                 </div>
-                <% if @order.recreation.is_online %>
+                <% if @order.recreation_is_online %>
                   <div class="row justify-content-between border-top-dotted py-2">
                     <div class="col-auto align-self-center">
                       <span id="facilityCount">追加施設費 / <%= @order.number_of_facilities %> 施設</span>

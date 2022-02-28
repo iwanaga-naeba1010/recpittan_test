@@ -67,7 +67,7 @@
               <div class="col-auto p-0 flex-v-c">人</div>
             </div>
 
-            <% if order.recreation.is_online %>
+            <% if order.recreation_is_online %>
               <div class="row pt-3">
                 <label class="col-12 title-b pb-3" for="participant">
                   追加で参加する施設がある場合施設数をご記入ください
@@ -158,7 +158,7 @@
                   </div>
                 </div>
 
-                <% if order.recreation.is_online %>
+                <% if order.recreation_is_online %>
                   <div class="row justify-content-between border-bottom-dotted pb-2">
                     <div class="col-auto">追加施設費 / <span id="numberOfFacilitiesForOrderFormLabel"><%= order.number_of_facilities %> 施設</span></div>
                     <div id="numberOfFacilitiesForOrderForm" class="col-auto">

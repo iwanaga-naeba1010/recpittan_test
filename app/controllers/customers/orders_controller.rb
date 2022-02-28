@@ -20,16 +20,17 @@ class Customers::OrdersController < Customers::ApplicationController
     redirect_to chat_customers_order_path(@order.id) if @order.start_at.blank?
   end
 
-  # rubocop:disable Metrics/AbcSize
+  # rubocop:disable Metrics/AbcSize, Layout/LineLength
   def create
     @order = @recreation.orders.build(params_create)
 
     ActiveRecord::Base.transaction do
-      @order.order_dates.map{|d| d.destroy if d.year.empty? && d.month.empty? && d.date.empty? && d.start_hour.empty? && d.start_minute.empty? && d.end_hour.empty? && d.end_minute.empty?}
+      @order.order_dates.map do |d|
+        d.destroy if d.year.empty? && d.month.empty? && d.date.empty? && d.start_hour.empty? && d.start_minute.empty? && d.end_hour.empty? && d.end_minute.empty?
+      end
       @order.save!
 
-      # TODO: EOS入力にすればタブが入ってしまったようなmessageは解消が可能
-      message = <<EOS
+      message = <<~MESSAGE
         リクエスト内容
         #{@order.title}
 
@@ -47,7 +48,7 @@ class Customers::OrdersController < Customers::ApplicationController
 
         相談したい事
         #{params_create[:message]}
-EOS
+      MESSAGE
 
       Chat.create(
         order_id: @order.id,
@@ -55,17 +56,18 @@ EOS
         message: message,
         is_read: false
       )
-      slack_message = <<EOS
-会社名: #{current_user.company.name}
-管理画面URL: #{admin_company_url(current_user.company.id)}
-担当者名: #{current_user.company.person_in_charge_name}
-電話番号: #{current_user.company.tel}
 
-レク名: #{@recreation.title}
-パートナー名: #{@recreation.instructor_name}
-------------------
-#{message}
-EOS
+      slack_message = <<~MESSAGE
+        会社名: #{current_user.company.name}
+        管理画面URL: #{admin_company_url(current_user.company.id)}
+        担当者名: #{current_user.company.person_in_charge_name}
+        電話番号: #{current_user.company.tel}
+
+        レク名: #{@recreation.title}
+        パートナー名: #{@recreation.instructor_name}
+        ------------------
+        #{message}
+      MESSAGE
 
       # TODO: jobで回した方が良い
       CustomerChatStartMailer.notify(@order, current_user).deliver_now
@@ -75,11 +77,9 @@ EOS
       # orderの詳細に飛ばす
       redirect_to chat_customers_order_path(@order.id)
     end
-  # rubocop:disable Lint/UselessAssignment
   rescue StandardError
     render :new
   end
-  # rubocop:enable Lint/UselessAssignment
 
   def update
     ActiveRecord::Base.transaction do
@@ -113,7 +113,6 @@ EOS
   rescue StandardError
     redirect_to chat_customers_order_path(@order.id), alert: '失敗しました。もう一度お試しください'
   end
-  # rubocop:enable Metrics/AbcSize
 
   private
 
@@ -150,9 +149,10 @@ EOS
       :additional_facility_fee,
       :start_at,
       { tags: [] },
-      order_dates_attributes:[
-        :id, :year, :month, :date, :start_hour, :start_minute, :end_hour, :end_minute,
+      order_dates_attributes: %i[
+        id year month date start_hour start_minute end_hour end_minute
       ]
     )
   end
+  # rubocop:enable Metrics/AbcSize, Layout/LineLength
 end

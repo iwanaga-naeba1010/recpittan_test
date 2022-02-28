@@ -53,9 +53,8 @@ class Order < ApplicationRecord
   has_one :report, dependent: :destroy
   accepts_nested_attributes_for :report, allow_destroy: true
 
-  delegate :title, to: :recreation, prefix: true
-  delegate :price, to: :recreation, prefix: true
-  delegate :minutes, to: :recreation, prefix: true
+  delegate :title, :price, :minutes, :instructor_name, :is_online, :capacity, to: :recreation, prefix: true, allow_nil: true
+  delegate :status, to: :report, prefix: true, allow_nil: true
 
   validate :reject_empty_date
 
@@ -81,6 +80,7 @@ class Order < ApplicationRecord
             :instructor_material_amount, :expenses, :transportation_expenses,
             :additional_facility_fee, presence: true
 
+  # rubocop:disable Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity, Metrics/AbcSize
   def switch_status_before_save
     # NOTE: 終了している案件のstatusを変更しても処理は挟まない
     if self.status.finished? || self.status.invoice_issued? || self.status.paid? || self.status.canceled? || self.status.travled?
@@ -95,16 +95,18 @@ class Order < ApplicationRecord
     end
 
     # NOTE: 完了してレポート書いたけど、施設が承認していないこと
-    if self.start_at.present? && self.is_accepted && (Time.current >= self.start_at) && self.report&.present? && !self.report&.status.accepted?
+    # rubocop:disable Layout/LineLength
+    if self.start_at.present? && self.is_accepted && (Time.current >= self.start_at) && self.report&.present? && !self.report&.status&.accepted?
       self.status = :final_report_admits_not
       return self
     end
 
     # NOTE: 完了してレポート書いて、施設が承認してfinishな状態
-    if self.start_at.present? && self.is_accepted && (Time.current >= self.start_at) && self.report&.present? && self.report&.status.accepted?
+    if self.start_at.present? && self.is_accepted && (Time.current >= self.start_at) && self.report&.present? && self.report&.status&.accepted?
       self.status = :finished
       return self
     end
+    # rubocop:enable Layout/LineLength
 
     if self.start_at.present? && !self.is_accepted
       self.status = :facility_request_in_progress
@@ -120,17 +122,16 @@ class Order < ApplicationRecord
     last_chat = self.chats.last
     return self if last_chat.blank?
 
-    if last_chat.user.role.customer?
-      self.status = :waiting_for_a_reply_from_partner
-      return self
-    elsif last_chat.user.role.partner?
-      self.status = :waiting_for_a_reply_from_facility
-      return self
-    else
-      self.status = :in_progress
-      return self
-    end
+    self.status = if last_chat.user.role.customer?
+                    :waiting_for_a_reply_from_partner
+                  elsif last_chat.user.role.partner?
+                    :waiting_for_a_reply_from_facility
+                  else
+                    :in_progress
+                  end
+    self
   end
+  # rubocop:enable Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity, Metrics/AbcSize
 
   # TODO: 残りの住所も入れれるようにする
   def full_address
@@ -179,6 +180,7 @@ class Order < ApplicationRecord
     end
   end
 
+  # rubocop:disable Layout/LineLength
   def total_price_for_customer
     regular_price + total_material_price_for_customer + transportation_expenses + expenses + total_facility_price_for_customer + support_price
   end
@@ -187,21 +189,7 @@ class Order < ApplicationRecord
     # NOTE(okubo): zoom_priceは運営が入力する
     instructor_amount + total_material_price_for_partner + transportation_expenses + expenses_for_partner + total_facility_price_for_partner - zoom_price
   end
-
-  # def total_price(is_partner:)
-  #   regular_price = recreation.regular_price || 0
-  #   regular_material_price = recreation.regular_material_price || 0
-  #   order_transportation_expenses = transportation_expenses || 0
-  #   order_expenses = expenses || 0
-  #   # TODO: recから計算する
-  #   fee = is_partner ? recreation.additional_facility_fee - 1000 : recreation.additional_facility_fee
-  #
-  #   # TODO: 0円もしくはnilは0で計算
-  #   additional_facilities_price = number_of_facilities.blank? ? 0 : number_of_facilities
-  #   additional_facilities_price = number_of_facilities * fee if additional_facilities_price != 0
-  #
-  #   regular_price + regular_material_price + order_transportation_expenses + order_expenses + additional_facilities_price
-  # end
+  # rubocop:enable Layout/LineLength
 
   def desired_time
     return '' if start_at.blank?
@@ -214,6 +202,7 @@ class Order < ApplicationRecord
     "#{date} #{start_time} ~ #{end_time}"
   end
 
+  # rubocop:disable Style/CaseEquality
   def reject_empty_date
     empty_date = []
     order_dates.each do |d|
@@ -225,4 +214,5 @@ class Order < ApplicationRecord
     errors.add(:orders, '開催日は1つ以上設定してください。') if empty_date.length === 3
     @dates_validate_error = true if empty_date.length === 3
   end
+  # rubocop:enable Style/CaseEquality
 end

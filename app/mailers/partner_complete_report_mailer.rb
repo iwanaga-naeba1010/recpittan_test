@@ -4,7 +4,6 @@ class PartnerCompleteReportMailer < ApplicationMailer
   def notify(order)
     @template = EmailTemplate.find_by(kind: 'partner_complete_report')
     @recreation = order.recreation
-    report = order.report
     @user = @recreation.user
     @user_name = @user.username
     @email = @user.email

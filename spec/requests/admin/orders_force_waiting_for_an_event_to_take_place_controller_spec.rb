@@ -56,7 +56,6 @@ RSpec.describe 'OrdersForceWaitingForAnEventToTakePlace', type: :request do
         }.to change { Order.find(order.id).status }.from('in_progress').to('waiting_for_an_event_to_take_place')
       end
 
-
       it 'updates is accepted' do
         expect {
           put admin_orders_force_waiting_for_an_event_to_take_place_path(order.id), params: { orders_force_waiting_for_an_event_to_take_place: { start_at: start_at } }
@@ -64,5 +63,4 @@ RSpec.describe 'OrdersForceWaitingForAnEventToTakePlace', type: :request do
       end
     end
   end
-
 end

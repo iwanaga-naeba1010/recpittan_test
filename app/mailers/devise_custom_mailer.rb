@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class DeviseCustomMailer < Devise::Mailer
   def confirmation_instructions(record, token, opts = {})
     @template = EmailTemplate.find_by(kind: 'customer_email_authenticatin')

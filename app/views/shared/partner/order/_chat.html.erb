@@ -10,7 +10,7 @@
   <% end %>
 
   <!-- パートナー -->
-  <% if chat.user.role.partner? %>
+  <% if chat.user_role.partner? %>
     <div class="row justify-content-end pt-2">
       <div class="col-auto align-self-end time"><%= time chat.created_at %></div>
       <div class="col-md-auto customer-text mychat card-header">
@@ -19,7 +19,7 @@
     </div>
   <% end %>
   <!-- 施設 -->
-  <% if chat.user.role.customer? %>
+  <% if chat.user_role.customer? %>
     <div class="row justify-content-start instructor">
       <div class="col-md-auto">
         <div class="name"><%= chat.user&.company&.name %></div>

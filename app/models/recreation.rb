@@ -26,7 +26,6 @@
 #  is_public_price            :boolean          default(TRUE)
 #  minutes                    :integer
 #  prefectures                :string           default([]), is an Array
-#  price                      :integer          default(0), not null
 #  regular_material_price     :integer
 #  regular_price              :integer
 #  second_title               :string
@@ -52,10 +51,7 @@ class Recreation < ApplicationRecord
 
   belongs_to :user
 
-  delegate :name, to: :partner, prefix: true
-  delegate :title, to: :partner, prefix: true
-  delegate :description, to: :partner, prefix: true
-  delegate :image, to: :partner, prefix: true
+  delegate :name, :title, :description, :image, to: :partner, prefix: true, allow_nil: true
 
   scope :public_recs, -> { where(is_public: true) }
 end

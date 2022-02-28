@@ -16,7 +16,7 @@
           </li>
         <% end %>
         <li class="breadcrumb-item">
-          <span><%= link_to @order.recreation.title, customers_recreation_path(@order.recreation.id) %></span>
+          <span><%= link_to @order.recreation_title, customers_recreation_path(@order.recreation.id) %></span>
         </li>
         <li class="breadcrumb-item active">
           <span class="text-secondary">正式依頼完了</span>
@@ -68,7 +68,7 @@
                 <div class="col-lg-3 col-4 label">参加人数</div>
                 <div class="col-auto"><%= @order.number_of_people %>人</div>
               </div>
-              <% if @order.recreation.is_online %>
+              <% if @order.recreation_is_online %>
                 <div class="row py-2">
                   <div class="col-lg-3 col-4 label">参加施設数</div>
                   <div class="col-auto">1施設 （追加施設数 - 施設）</div>

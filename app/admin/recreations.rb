@@ -139,7 +139,6 @@ ActiveAdmin.register Recreation do
       f.input :is_public_price
       f.input :prefectures
       f.input :additional_facility_fee, hint: 'エブリ・プラス取り分の1000円 + パートナー支払い分の合計を入力してください'
-
     end
 
     f.input :tags, label: 'カテゴリー', as: :select, collection: Tag.categories.all, multiple: false, hint: 'カテゴリーは一つだけ選択してください。色付きのボタンを生成します'
