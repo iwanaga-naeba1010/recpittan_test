@@ -33,8 +33,8 @@
         <div class="row align-items-center mt-2">
           <div class="col-md-4">
             <picture loading="lazy">
-              <% if @recreation.recreation_files.sliders.length >= 1 %>
-                <%= image_tag @recreation.recreation_files.sliders&.first&.source&.to_s, class: 'img-fluid' %>
+              <% if @recreation.recreation_images.sliders.length >= 1 %>
+                <%= image_tag @recreation.recreation_images.sliders&.first&.image&.to_s, class: 'img-fluid' %>
               <% end %>
             </picture>
           </div>

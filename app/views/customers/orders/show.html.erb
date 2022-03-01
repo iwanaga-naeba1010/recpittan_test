@@ -45,7 +45,7 @@
                 <div class="row align-items-center mt-2">
                   <div class="col-md-4">
                     <picture loading="lazy">
-                      <%= image_tag @order.recreation.recreation_files.sliders&.first&.source.to_s, class: 'img-fluid' %>
+                      <%= image_tag @order.recreation.recreation_images.sliders&.first&.image.to_s, class: 'img-fluid' %>
                     </picture>
                   </div>
                   <div class="col-md-8 recreation">
@@ -70,7 +70,7 @@
                   <h2 class="font-14 font-weight-bold line-height-120 color-ba10 py-2">チラシ</h2>
                   <span class="font-14 font-weight-normal line-height-120 color-ba08 py-2">レクのチラシをダウンロードして印刷することができます。</span>
                   <div>
-                    <%= link_to @order.recreation.flyer.source.url, class: 'clink', target: '_blank', rel: 'noopener' do %>
+                    <%= link_to @order.recreation.flyer.image.url, class: 'clink', target: '_blank', rel: 'noopener' do %>
                       チラシをダウンロード
                       <i class="material-icons ">navigate_next</i>
                     <% end %>
@@ -116,8 +116,8 @@
               <div class="col-lg-3 col-4 label">関連ファイル</div>
               <div class="col-auto">
                 <ul>
-                  <% @order.recreation.recreation_files.materials.each do |file| %>
-                    <li> <%= link_to file.source.file.filename, file.source.url, class: 'clink mr-5', target: '_blank', rel: 'noopener' %> </li>
+                  <% @order.recreation.recreation_images.materials.each do |file| %>
+                    <li> <%= link_to file.image.file.filename, file.image.url, class: 'clink mr-5', target: '_blank', rel: 'noopener' %> </li>
                   <% end%>
                 </ul>
               </div>

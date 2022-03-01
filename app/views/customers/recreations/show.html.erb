@@ -2,7 +2,7 @@
   @recreation.title,
   @recreation.description,
   nil,
-  @recreation.recreation_files&.sliders&.first&.source&.to_s
+  @recreation.recreation_images&.sliders&.first&.image&.to_s
 )%>
 
 <main class="detail">
@@ -45,9 +45,9 @@
                   </div>
                 <% end %>
 
-                <% @recreation.recreation_files.sliders.each_with_index do |file, i| %>
+                <% @recreation.recreation_images.sliders.each_with_index do |file, i| %>
                   <div class="carousel-item <%= 'active' if @recreation.youtube_id? && i == 0 %>" data-bs-interval="10000">
-                    <%= image_tag file&.source.to_s, class: 'd-block w-100 custom-height' %>
+                    <%= image_tag file&.image.to_s, class: 'd-block w-100 custom-height' %>
                   </div>
                 <% end %>
               </div>
