@@ -2,7 +2,7 @@
   <div class="card recreation-card h-100 shadow text-decoration-none">
     <%= link_to customers_recreation_path(rec.id), class: "card-img-top zoom" do %>
       <picture loading="lazy">
-        <%= image_tag rec.recreation_files.sliders.first&.source.to_s, class: 'img-fluid', loading: 'lazy' %>
+        <%= image_tag rec.recreation_images.sliders.first&.image.to_s, class: 'img-fluid', loading: 'lazy' %>
       </picture>
     <% end %>
 
