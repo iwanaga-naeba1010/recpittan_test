@@ -17,6 +17,18 @@
         <%= Rinku.auto_link(simple_format(h(chat.message)), :all, 'target="_blank"').html_safe %>
       </div>
     </div>
+    <!-- fileがあれば表示させる -->
+    <% if chat.file.present? %>
+     <div class="row justify-content-end pt-2">
+      <div class="col-auto align-self-end time"><%= time chat.created_at %></div>
+      <div class="col-md-auto customer-text mychat card-header">
+        <i class="fa fa-file" aria-hidden="true"></i>
+        <%= link_to chat.file.url, class: 'text-white', target: '_blank', rel: 'noopener' do %>
+          <%= chat.file.file.filename %>
+        <% end %>
+      </div>
+    </div>
+    <% end %>
   <% end %>
   <!-- 施設 -->
   <% if chat.user_role.customer? %>
