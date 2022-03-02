@@ -32,11 +32,15 @@
 
 <div class="chat_form border-top">
   <%= simple_form_for @chat, url: partners_order_chats_path(@order.id) do |f| %>
-    <div class="m-1 chat-wrapper">
+    <div class="m-1 w-75">
       <%= f.input :user_id, as: :hidden, input_html: { value: current_user.id } %>
-
-      <div class="message d-flex">
-        <%= f.input :message, as: :text, label: false, input_html: { class: "form-control chat-message" } %>
+      <div class="file">
+        <%= f.input :file, as: :file, label: false, input_html: { class: "form-control" } %>
+      </div>
+      <div class="d-flex mt-2">
+        <div class="flex-grow-1">
+          <%= f.input :message, as: :text, label: false, input_html: { class: "form-control" } %>
+        </div>
         <%= f.submit '送信' %>
       </div>
     </div>
