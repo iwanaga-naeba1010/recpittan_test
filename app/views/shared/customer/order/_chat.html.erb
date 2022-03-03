@@ -57,7 +57,7 @@
             <div class="col-auto align-self-end time"><%= time chat.created_at %></div>
           </div>
           <!-- fileがあれば表示させる -->
-          <% if chat.file.present? %>
+          <% if chat.file? %>
             <div class="row justify-content-start instructor pt-2">
               <div class="col-auto align-self-start image pe-0">
                 <img src="{{catalogThumbnailUri userId '128x128' 'jpg'}}">
