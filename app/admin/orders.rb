@@ -93,6 +93,9 @@ ActiveAdmin.register Order do
           row :expenses
           row :support_price
           row('zoom利用料', &:zoom_cost)
+          row('zoomURL') do |order|
+            simple_format order&.zoom_url
+          end
           row :contract_number
           row :created_at
           row :updated_at
