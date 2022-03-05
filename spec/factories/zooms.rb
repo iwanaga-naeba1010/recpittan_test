@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: zooms
@@ -20,9 +22,9 @@
 #
 FactoryBot.define do
   factory :zoom do
-    order { nil }
-    price { 1 }
-    created_by { 1 }
-    url { "MyString" }
+    order
+    price { 300 }
+    created_by { :partner }
+    url { 'MyString' }
   end
 end
