@@ -58,6 +58,7 @@ class Order < ApplicationRecord
 
   delegate :title, :price, :minutes, :instructor_name, :is_online, :capacity, to: :recreation, prefix: true, allow_nil: true
   delegate :status, to: :report, prefix: true, allow_nil: true
+  delegate :url, to: :zoom, prefix: true, allow_nil: true
 
   validate :reject_empty_date
 
