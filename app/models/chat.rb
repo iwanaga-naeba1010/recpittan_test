@@ -5,6 +5,7 @@
 # Table name: chats
 #
 #  id         :bigint           not null, primary key
+#  file       :text
 #  is_read    :boolean
 #  message    :text
 #  created_at :datetime         not null

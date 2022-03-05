@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_03_01_083746) do
+ActiveRecord::Schema.define(version: 2022_03_05_064045) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -33,6 +33,7 @@ ActiveRecord::Schema.define(version: 2022_03_01_083746) do
     t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.text "file"
   end
 
   create_table "companies", force: :cascade do |t|
@@ -227,6 +228,16 @@ ActiveRecord::Schema.define(version: 2022_03_01_083746) do
     t.string "username_kana"
   end
 
+  create_table "zooms", force: :cascade do |t|
+    t.bigint "order_id", null: false
+    t.integer "price", default: 0
+    t.integer "created_by"
+    t.string "url"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["order_id"], name: "index_zooms_on_order_id"
+  end
+
   add_foreign_key "chats", "orders", name: "chats_order_id_fkey"
   add_foreign_key "chats", "users", name: "chats_user_id_fkey"
   add_foreign_key "evaluations", "reports"
@@ -241,4 +252,5 @@ ActiveRecord::Schema.define(version: 2022_03_01_083746) do
   add_foreign_key "recreations", "users", name: "recreations_user_id_fkey"
   add_foreign_key "reports", "orders"
   add_foreign_key "users", "companies", name: "users_company_id_fkey"
+  add_foreign_key "zooms", "orders"
 end

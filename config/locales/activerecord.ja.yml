@@ -8,6 +8,7 @@ ja:
       recreation: レク
       recreation_file: レク関連ファイル
       order: 案件
+      zoom: Zoom情報
       orders/force_complete: 終了報告未 → 完了
       orders/force_complete_from_in_progress: 相談中 → 完了
       orders/force_waiting_for_an_event_to_take_place: 相談中 → 実地待ち
@@ -104,6 +105,10 @@ ja:
         expenses: 諸経費
         zoom_price: Zoom ID発行料
         contract_number: 契約番号
+      zoom:
+        price: 金額
+        url: URL
+        created_by: 発行者
       order_date:
         year: 年
         month: 月
