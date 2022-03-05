@@ -90,11 +90,11 @@
         </tr>
       </tr>
 
-      <% if order.zoom_price > 0 %>
+      <% if order.recreation.is_online %>
         <tr class="border-bottom">
           <td class="pt-2 pb-2 text-black w-75">Zoom ID発行料</td>
           <td id="totalNumberOfFacilityPrice" class="pt-2 pb-2 text-black">
-              -<%= number_to_currency(order.zoom_price) %>
+            <%= number_to_currency(order.zoom_cost) %>
         </td>
       <% end %>
 
