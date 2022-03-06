@@ -25,4 +25,6 @@ class Chat < ApplicationRecord
   delegate :role, to: :user, prefix: true
 
   validates :message, presence: true
+
+  mount_uploader :file, ChatFileUploader
 end

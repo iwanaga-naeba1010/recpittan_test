@@ -56,51 +56,28 @@
             </div>
             <div class="col-auto align-self-end time"><%= time chat.created_at %></div>
           </div>
+          <!-- fileがあれば表示させる -->
+          <% if chat.file? %>
+            <div class="row justify-content-start instructor pt-2">
+              <div class="col-auto align-self-start image pe-0">
+                <img src="{{catalogThumbnailUri userId '128x128' 'jpg'}}">
+              </div>
+              <div class="col-md-auto">
+                <div class="name"><%= chat.order.recreation.instructor_name %></div>
+                <div class=" text">
+                  <%= link_to chat.file.url, class: 'text-black', target: '_blank', rel: 'noopener' do %>
+                    <%= chat.file.file.filename %>
+                  <% end %>
+                </div>
+              </div>
+              <div class="col-auto align-self-end time"><%= time chat.created_at %></div>
+            </div>
+          <% end %>
+
+
         <% end %>
       <% end %>
-<!--      {{/ifEquals}}-->
-<!--      {{#ifEquals type "system"}}-->
-<!--      {{"システム"}}-->
-<!--      <div class="row justify-content-end pt-2">-->
-<!--        <div class="col-auto align-self-end time">{{time}}</div>-->
-<!--        <div class="col-md-auto system">{{nl2br message}}</div>-->
-<!--      </div>-->
-<!--      {{/ifEquals}}-->
-<!--      {{#ifEquals type "customer-text"}}-->
-<!--      {{"カスタマー"}}-->
-<!--      <div class="row justify-content-end pt-2">-->
-<!--        <div class="col-auto align-self-end time">{{time}}</div>-->
-<!--        <div class="col-md-auto customer-text">{{nl2br message}}</div>-->
-<!--      </div>-->
-<!--      {{/ifEquals}}-->
 
-<!--      {{#ifEquals type "instructor-text"}}-->
-<!--      {{"講師"}}-->
-<!--      <div class="row justify-content-start instructor pt-2">-->
-<!--        <div class="col-auto align-self-start image pe-0">-->
-<!--          <img src="{{catalogThumbnailUri userId '128x128' 'jpg'}}">-->
-<!--        </div>-->
-<!--        <div class="col-md-auto">-->
-<!--          <div class="name">{{name}}</div>-->
-<!--          <div class=" text">{{nl2br message}}</div>-->
-<!--        </div>-->
-<!--        <div class="col-auto align-self-end time">{{time}}</div>-->
-<!--      </div>-->
-<!--      {{/ifEquals}}-->
-<!--      {{#ifEquals type "support-text"}}-->
-<!--      {{"CS"}}-->
-<!--      <div class="row justify-content-start support pt-2">-->
-<!--        <div class="col-auto align-self-start image pe-0">-->
-<!--          <img src="{{catalogSupportThumbnailUri userId '128x128' 'jpg'}}">-->
-<!--        </div>-->
-<!--        <div class="col-md-auto">-->
-<!--          <div class="name">{{name}}</div>-->
-<!--          <div class=" text">{{nl2br message}}</div>-->
-<!--        </div>-->
-<!--        <div class="col-auto align-self-end time">{{time}}</div>-->
-<!--      </div>-->
-<!--      {{/ifEquals}}-->
-<!--      {{/each}}-->
     </div>
     <% if order.report.blank? || !order&.report_status.accepted? %>
       <div class="card-footer bg-white">
