@@ -31,6 +31,6 @@ class Partners::ChatsController < Partners::ApplicationController
   end
 
   def params_create
-    params.require(:chat).permit(:message, :user_id)
+    params.require(:chat).permit(:message, :file, :user_id)
   end
 end
