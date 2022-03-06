@@ -5,6 +5,7 @@
 # Table name: chats
 #
 #  id         :bigint           not null, primary key
+#  file       :text
 #  is_read    :boolean
 #  message    :text
 #  created_at :datetime         not null
@@ -24,4 +25,6 @@ class Chat < ApplicationRecord
   delegate :role, to: :user, prefix: true
 
   validates :message, presence: true
+
+  mount_uploader :file, ChatFileUploader
 end

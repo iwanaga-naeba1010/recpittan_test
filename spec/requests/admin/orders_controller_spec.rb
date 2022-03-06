@@ -86,6 +86,7 @@ RSpec.describe 'Orders', type: :request do
       }
 
       it 'updates order when staus is less than 40' do
+        attrs[:zoom_attributes] = attributes_for(:zoom, created_by: :admin, price: 1000)
         put admin_order_path(order.id), params: { order: attrs }
         order.reload
         expect(response).to have_http_status(:found)
@@ -99,7 +100,7 @@ RSpec.describe 'Orders', type: :request do
         expect(order.expenses).to eq attrs[:expenses]
         expect(order.transportation_expenses).to eq attrs[:transportation_expenses]
         expect(order.support_price).to eq attrs[:support_price]
-        expect(order.zoom_price).to eq attrs[:zoom_price]
+        expect(order.zoom_cost).to eq attrs[:zoom_attributes][:price]
       end
 
       # NOTE(okubo): 200以上の完了系ステータスが機能すること
@@ -107,6 +108,8 @@ RSpec.describe 'Orders', type: :request do
         order = create(:order, :with_finished, recreation_id: partner.recreations.first.id, user_id: customer.id)
         attrs[:report_attributes] = order.report.attributes
         attrs[:evaluation] = order.report.evaluation.attributes
+
+        attrs[:zoom_attributes] = attributes_for(:zoom, created_by: :admin, price: 1000)
 
         put admin_order_path(order.id), params: { order: attrs }
         order.reload
@@ -133,7 +136,7 @@ RSpec.describe 'Orders', type: :request do
         expect(order.expenses).to eq attrs[:expenses]
         expect(order.transportation_expenses).to eq attrs[:transportation_expenses]
         expect(order.support_price).to eq attrs[:support_price]
-        expect(order.zoom_price).to eq attrs[:zoom_price]
+        expect(order.zoom_cost).to eq attrs[:zoom_attributes][:price]
       end
 
       # NOTE(okubo): 70以上、かつ、評価が入力されている場合
@@ -144,6 +147,7 @@ RSpec.describe 'Orders', type: :request do
         evaluation = attributes_for(:evaluation, report_id: order.report.id)
         attrs[:evaluation] = evaluation
 
+        attrs[:zoom_attributes] = attributes_for(:zoom, created_by: :admin, price: 1000)
         put admin_order_path(order.id), params: { order: attrs }
         order.reload
 
@@ -169,7 +173,7 @@ RSpec.describe 'Orders', type: :request do
         expect(order.expenses).to eq attrs[:expenses]
         expect(order.transportation_expenses).to eq attrs[:transportation_expenses]
         expect(order.support_price).to eq attrs[:support_price]
-        expect(order.zoom_price).to eq attrs[:zoom_price]
+        expect(order.zoom_cost).to eq attrs[:zoom_attributes][:price]
       end
     end
   end

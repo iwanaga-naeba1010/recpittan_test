@@ -52,7 +52,6 @@ group :test do
 end
 
 group :production do
-  gem 'fog-aws'
   gem 'aws-sdk-s3', require: false
 end
 
@@ -69,6 +68,7 @@ gem 'annotate'
 gem 'simple_form'
 gem 'enumerize'
 
+gem 'fog-aws'
 gem 'carrierwave'
 gem 'seed-fu' # staging/productionでも使いたいから
 

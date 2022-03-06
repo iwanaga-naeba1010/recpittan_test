@@ -2,27 +2,29 @@
 
 # == Schema Information
 #
-# Table name: chats
+# Table name: zooms
 #
 #  id         :bigint           not null, primary key
-#  file       :text
-#  is_read    :boolean
-#  message    :text
+#  created_by :integer
+#  price      :integer          default(0)
+#  url        :string
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #  order_id   :bigint           not null
-#  user_id    :bigint           not null
+#
+# Indexes
+#
+#  index_zooms_on_order_id  (order_id)
 #
 # Foreign Keys
 #
-#  chats_order_id_fkey  (order_id => orders.id)
-#  chats_user_id_fkey   (user_id => users.id)
+#  fk_rails_...  (order_id => orders.id)
 #
 FactoryBot.define do
-  factory :chat do
-    user
+  factory :zoom do
     order
-    message { 'MyText' }
-    is_read { false }
+    price { 300 }
+    created_by { :partner }
+    url { 'MyString' }
   end
 end

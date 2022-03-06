@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_02_28_071541) do
+ActiveRecord::Schema.define(version: 2022_03_05_064045) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -33,6 +33,7 @@ ActiveRecord::Schema.define(version: 2022_02_28_071541) do
     t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.text "file"
   end
 
   create_table "companies", force: :cascade do |t|
@@ -134,9 +135,9 @@ ActiveRecord::Schema.define(version: 2022_02_28_071541) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "recreation_files", force: :cascade do |t|
+  create_table "recreation_images", force: :cascade do |t|
     t.bigint "recreation_id", null: false
-    t.text "source"
+    t.text "image"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "kind", default: 0
@@ -227,6 +228,16 @@ ActiveRecord::Schema.define(version: 2022_02_28_071541) do
     t.string "username_kana"
   end
 
+  create_table "zooms", force: :cascade do |t|
+    t.bigint "order_id", null: false
+    t.integer "price", default: 0
+    t.integer "created_by"
+    t.string "url"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["order_id"], name: "index_zooms_on_order_id"
+  end
+
   add_foreign_key "chats", "orders", name: "chats_order_id_fkey"
   add_foreign_key "chats", "users", name: "chats_user_id_fkey"
   add_foreign_key "evaluations", "reports"
@@ -235,10 +246,11 @@ ActiveRecord::Schema.define(version: 2022_02_28_071541) do
   add_foreign_key "orders", "recreations", name: "orders_recreation_id_fkey"
   add_foreign_key "orders", "users", name: "orders_user_id_fkey"
   add_foreign_key "plans", "companies", name: "plans_company_id_fkey"
-  add_foreign_key "recreation_files", "recreations", name: "recreation_images_recreation_id_fkey"
+  add_foreign_key "recreation_images", "recreations", name: "recreation_images_recreation_id_fkey"
   add_foreign_key "recreation_tags", "recreations", name: "recreation_tags_recreation_id_fkey"
   add_foreign_key "recreation_tags", "tags", name: "recreation_tags_tag_id_fkey"
   add_foreign_key "recreations", "users", name: "recreations_user_id_fkey"
   add_foreign_key "reports", "orders"
   add_foreign_key "users", "companies", name: "users_company_id_fkey"
+  add_foreign_key "zooms", "orders"
 end
