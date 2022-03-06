@@ -10,6 +10,7 @@
     <%= render 'shared/partner/sidebar_toggle' %>
   </div>
 </div>
+
 <div class="body bg-white border p-3 mb-3">
   <h4 class="text-black font-weight-bold">施設情報</h4>
   <table class="w-100">
@@ -34,6 +35,15 @@
     </tr>
     </tbody>
   </table>
+
+  <% if @order&.zoom&.present? %>
+    <div>
+      <h4 class="text-black font-weight-bold pt-3">Zoom情報</h4>
+      <div class="pt-2 pb-2 text-black text-end">
+        <%= Rinku.auto_link(simple_format(h(@order.zoom_url)), :all, 'target="_blank"').html_safe %>
+      </div>
+    </div>
+  <% end %>
   <div>
     <h4 class="text-black font-weight-bold pt-3">レク情報</h4>
     <table class="w-100">

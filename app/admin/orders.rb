@@ -9,9 +9,9 @@ ActiveAdmin.register Order do
       user_id recreation_id zip prefecture city street building number_of_people
       number_of_facilities status is_accepted start_at end_at
       regular_price instructor_amount regular_material_price instructor_material_amount
-      additional_facility_fee transportation_expenses support_price expenses
-      zoom_price contract_number
+      additional_facility_fee transportation_expenses support_price expenses contract_number
     ],
+    zoom_attributes: %i[id url price created_by],
     report_attributes: %i[
       id body expenses expenses number_of_facilities number_of_people status transportation_expenses
     ],
@@ -50,7 +50,7 @@ ActiveAdmin.register Order do
     column :transportation_expenses
     column :expenses
     column :support_price
-    column :zoom_price
+    column('zoom利用料', &:zoom_cost)
     column :contract_number
     column('パートナー支払額', &:total_price_for_partner)
     column('施設請求額', &:total_price_for_customer)
@@ -92,9 +92,11 @@ ActiveAdmin.register Order do
           row :transportation_expenses
           row :expenses
           row :support_price
-          row :zoom_price
+          row('zoom利用料', &:zoom_cost)
+          row('zoomURL') do |order|
+            simple_format order&.zoom_url
+          end
           row :contract_number
-
           row :created_at
           row :updated_at
         end
@@ -174,8 +176,16 @@ ActiveAdmin.register Order do
           f.input :additional_facility_fee
           f.input :transportation_expenses, as: :number
           f.input :expenses, as: :number
-          f.input :zoom_price
           f.input :support_price
+
+          # NOTE(okubo): オンラインレクの場合zoom情報を格納
+          if f.object.recreation.is_online?
+            f.inputs I18n.t('activerecord.models.zoom'), for: [:zoom, f.object.zoom || f.object.build_zoom] do |ff|
+              ff.input :price
+              ff.input :created_by, as: :select, collection: Zoom.created_by.values.map { |val| [val.text, val] }
+              ff.input :url, as: :text
+            end
+          end
         end
       end
 
@@ -283,6 +293,7 @@ ActiveAdmin.register Order do
     rescue StandardError => e
       Rails.logger.error e
       Sentry.capture_exception(e)
+      super
     end
   end
 end
