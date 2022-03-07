@@ -85,6 +85,7 @@ RSpec.describe 'Orders', type: :request do
         zoom_price: 500
       }
 
+      # NOTE(okubo): 依頼確定前の状態
       it 'updates order when staus is less than 40' do
         attrs[:zoom_attributes] = attributes_for(:zoom, created_by: :admin, price: 1000)
         put admin_order_path(order.id), params: { order: attrs }
@@ -101,6 +102,52 @@ RSpec.describe 'Orders', type: :request do
         expect(order.transportation_expenses).to eq attrs[:transportation_expenses]
         expect(order.support_price).to eq attrs[:support_price]
         expect(order.zoom_cost).to eq attrs[:zoom_attributes][:price]
+      end
+
+      # NOTE(okubo): 依頼確定前の状態
+      it 'updates zoom created_by from admin to partner when status is 60' do
+        attrs[:zoom_attributes] = attributes_for(:zoom, created_by: :admin, price: 1000)
+
+        order.update(status: :waiting_for_an_event_to_take_place)
+        put admin_order_path(order.id), params: { order: attrs }
+        order.reload
+
+        expect(response).to have_http_status(:found)
+        expect(response).to redirect_to admin_order_path(order.id)
+
+        expect(order.regular_price).to eq attrs[:regular_price]
+        expect(order.regular_material_price).to eq attrs[:regular_material_price]
+        expect(order.instructor_amount).to eq attrs[:instructor_amount]
+        expect(order.instructor_material_amount).to eq attrs[:instructor_material_amount]
+        expect(order.additional_facility_fee).to eq attrs[:additional_facility_fee]
+        expect(order.expenses).to eq attrs[:expenses]
+        expect(order.transportation_expenses).to eq attrs[:transportation_expenses]
+        expect(order.support_price).to eq attrs[:support_price]
+        expect(order.zoom_cost).to eq attrs[:zoom_attributes][:price]
+        expect(order.zoom.created_by).to eq attrs[:zoom_attributes][:created_by]
+      end
+
+      it 'updates zoom created_by from partner to admin when status is 60' do
+        attrs[:zoom_attributes] = attributes_for(:zoom, created_by: :partner, price: 1000)
+
+        order.update(status: :waiting_for_an_event_to_take_place)
+        put admin_order_path(order.id), params: { order: attrs }
+        order.reload
+
+        expect(response).to have_http_status(:found)
+        expect(response).to redirect_to admin_order_path(order.id)
+
+        expect(order.regular_price).to eq attrs[:regular_price]
+        expect(order.regular_material_price).to eq attrs[:regular_material_price]
+        expect(order.instructor_amount).to eq attrs[:instructor_amount]
+        expect(order.instructor_material_amount).to eq attrs[:instructor_material_amount]
+        expect(order.additional_facility_fee).to eq attrs[:additional_facility_fee]
+        expect(order.expenses).to eq attrs[:expenses]
+        expect(order.transportation_expenses).to eq attrs[:transportation_expenses]
+        expect(order.support_price).to eq attrs[:support_price]
+        # NOTE(okubo): partner追加だと無条件で0円になるから
+        expect(order.zoom_cost).to eq 0
+        expect(order.zoom.created_by).to eq attrs[:zoom_attributes][:created_by]
       end
 
       # NOTE(okubo): 200以上の完了系ステータスが機能すること

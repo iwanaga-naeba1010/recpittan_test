@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# rubocop:disable Metrics/BlockLength, Metrics/AbcSize
+# rubocop:disable Metrics/BlockLength, Metrics/AbcSize, Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
 ActiveAdmin.register Order do
   includes :user
 
@@ -286,6 +286,11 @@ ActiveAdmin.register Order do
         OrderRequestMailer.notify(order, order.user).deliver_now if permitted_params[:order][:start_at].present? && order.start_at.nil?
       end
 
+      # NOTE(okubo): 開催前
+      if order.status.value == 60
+        order.update!(permitted_params[:order].except(:evaluation, :report_attributes))
+      end
+
       SlackNotifier
         .new(channel: '#アクティブチャットスレッド')
         .send('管理画面から案件の更新を行いました', "管理画面案件URL：#{admin_order_url(order.id)}")
@@ -297,4 +302,4 @@ ActiveAdmin.register Order do
     end
   end
 end
-# rubocop:enable Metrics/BlockLength, Metrics/AbcSize
+# rubocop:enable Metrics/BlockLength, Metrics/AbcSize, Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
