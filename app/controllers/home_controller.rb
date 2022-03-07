@@ -35,7 +35,7 @@ class HomeController < ApplicationController
                 ]).to_a
     end
 
-    @music_recs = Rails.cache.fetch('home/music_recs', expires_in: 1.week) do
+    @music_recs = Rails.cache.fetch('home/music_recs', expires_in: 6.hours) do
       Recreation.public_recs
                 .where(title: [
                   '【著作権料負担無！】歌とトークで綴る昭和ヒットパレード',
@@ -43,7 +43,6 @@ class HomeController < ApplicationController
                   '『八丈島から届く音便り』',
                   '『ねがいごとコンサート』',
                   'コントラバスとピアノで楽しむタンゴコンサート',
-                  'あなたの歌づくり〜大切な人へ〜',
                   '八丈島在住のピアニスト・マリンバ奏者の小金沢有希さんによる生演奏会',
                   'クラシック・ギター　オンラインコンサート',
                   '歌とあなただけのメッセージボードで心に残るお誕生日会を',
