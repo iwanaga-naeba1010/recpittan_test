@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# rubocop:disable Metrics/BlockLength, Metrics/AbcSize
+# rubocop:disable Metrics/BlockLength, Metrics/AbcSize, Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
 ActiveAdmin.register Order do
   includes :user
 
@@ -302,4 +302,4 @@ ActiveAdmin.register Order do
     end
   end
 end
-# rubocop:enable Metrics/BlockLength, Metrics/AbcSize
+# rubocop:enable Metrics/BlockLength, Metrics/AbcSize, Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
