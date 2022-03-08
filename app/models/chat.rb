@@ -25,6 +25,13 @@ class Chat < ApplicationRecord
   delegate :role, to: :user, prefix: true
 
   validates :message, presence: true
+  validate :restrict_file_size
 
   mount_uploader :file, ChatFileUploader
+
+  def restrict_file_size
+    if file.size >= 20.megabytes
+      errors.add(:file, '20MB以上のファイルは送信できません')
+    end
+  end
 end
