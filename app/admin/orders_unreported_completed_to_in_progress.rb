@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-ActiveAdmin.register Orders::WaitingForAnEventToTakePlaceToInProgress do
+ActiveAdmin.register Orders::UnreportedCompletedToInProgress do
   actions :all, except: %i[show destroy]
   menu parent: '強制執行モード'
 
@@ -26,7 +26,7 @@ ActiveAdmin.register Orders::WaitingForAnEventToTakePlaceToInProgress do
 
       SlackNotifier
         .new(channel: '#アクティブチャットスレッド')
-        .send('管理画面から「実地待ち→相談中」の強制執行を行いました', "管理画面案件URL：#{admin_order_url(order.id)}")
+        .send('管理画面から「終了報告未→相談中」の強制執行を行いました', "管理画面案件URL：#{admin_order_url(order.id)}")
       redirect_to admin_order_path(order.id)
     end
   end
