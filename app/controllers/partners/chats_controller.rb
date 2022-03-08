@@ -4,8 +4,7 @@ class Partners::ChatsController < Partners::ApplicationController
   before_action :set_order
 
   def create
-    @order.chats.build(params_create)
-
+    @chat = @order.chats.build(params_create)
     # NOTE: Order経由で保存することでbefore_saveを発火させている
     if @order.save
       message = <<~MESSAGE
