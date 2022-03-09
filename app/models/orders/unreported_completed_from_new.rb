@@ -11,10 +11,10 @@
 #  contract_number            :string
 #  end_at                     :datetime
 #  expenses                   :integer          default(0)
+#  final_check_status         :integer
 #  instructor_amount          :integer          default(0)
 #  instructor_material_amount :integer          default(0)
 #  is_accepted                :boolean          default(FALSE)
-#  is_final_checked           :boolean          default(FALSE)
 #  number_of_facilities       :integer
 #  number_of_people           :integer
 #  prefecture                 :string

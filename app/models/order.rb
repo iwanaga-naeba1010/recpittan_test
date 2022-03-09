@@ -11,10 +11,10 @@
 #  contract_number            :string
 #  end_at                     :datetime
 #  expenses                   :integer          default(0)
+#  final_check_status         :integer
 #  instructor_amount          :integer          default(0)
 #  instructor_material_amount :integer          default(0)
 #  is_accepted                :boolean          default(FALSE)
-#  is_final_checked           :boolean          default(FALSE)
 #  number_of_facilities       :integer
 #  number_of_people           :integer
 #  prefecture                 :string
@@ -65,6 +65,10 @@ class Order < ApplicationRecord
     unreported_completed: 70, final_report_admits_not: 80, finished: 200,
     invoice_issued: 210, paid: 220, canceled: 400, travled: 500
   }, default: 10
+
+  enumerize :final_check_status, in: {
+    not_mail_send: 1, mail_send: 2, mail_checked: 3
+  }, default: 1
 
   # controller のparamsに追加するため
   attribute :title # まずは相談したい、のメッセージ部分

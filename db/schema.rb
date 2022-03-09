@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_03_09_153953) do
+ActiveRecord::Schema.define(version: 2022_03_09_164512) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -126,7 +126,7 @@ ActiveRecord::Schema.define(version: 2022_03_09_153953) do
     t.datetime "end_at"
     t.integer "zoom_price", default: 0
     t.string "contract_number"
-    t.boolean "is_final_checked", default: false
+    t.integer "final_check_status"
   end
 
   create_table "plans", force: :cascade do |t|

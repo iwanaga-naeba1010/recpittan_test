@@ -148,6 +148,7 @@ class Customers::OrdersController < Customers::ApplicationController
       :instructor_material_amount,
       :additional_facility_fee,
       :start_at,
+      :final_check_status,
       { tags: [] },
       order_dates_attributes: %i[
         id year month date start_hour start_minute end_hour end_minute
