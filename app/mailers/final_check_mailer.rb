@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class FinalCheckMailer < ApplicationMailer
-  def notify(user)
+  def notify(order)
     @template = EmailTemplate.find_by(kind: 'final_check')
     @recreation = order.recreation
     @user = @recreation.user
