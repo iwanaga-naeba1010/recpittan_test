@@ -50,6 +50,10 @@ class Partners::OrdersController < Partners::ApplicationController
 
   def complete; end
 
+  def final_check; end
+
+  def complete_final_check; end
+
   private
 
   def set_order

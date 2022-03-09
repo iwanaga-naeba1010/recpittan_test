@@ -14,6 +14,7 @@
 #  instructor_amount          :integer          default(0)
 #  instructor_material_amount :integer          default(0)
 #  is_accepted                :boolean          default(FALSE)
+#  is_final_checked           :boolean          default(FALSE)
 #  number_of_facilities       :integer
 #  number_of_people           :integer
 #  prefecture                 :string

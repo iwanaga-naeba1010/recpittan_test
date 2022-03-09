@@ -38,6 +38,8 @@ Rails.application.routes.draw do
         get :chat
         get :confirm
         get :complete
+        get :final_check
+        get :complete_final_check
       end
 
       resources :chats, only: %i[create]
