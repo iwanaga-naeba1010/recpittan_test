@@ -12,6 +12,7 @@ RSpec.describe 'OrdersWaitingForAnEventToTakePlaceToInProgress', type: :request 
       recreation_id: partner.recreations.first.id,
       user_id: customer.id,
       start_at: DateTime.tomorrow,
+      end_at: DateTime.tomorrow,
       is_accepted: true
     )
   end
@@ -46,6 +47,20 @@ RSpec.describe 'OrdersWaitingForAnEventToTakePlaceToInProgress', type: :request 
           put admin_orders_waiting_for_an_event_to_take_place_to_in_progress_path(order.id), params: { orders_waiting_for_an_event_to_take_place_to_in_progress: {} }
           order.reload
         }.to change { Order.find(order.id).status }.from('waiting_for_an_event_to_take_place').to('in_progress')
+      end
+
+      it 'makes start_at nil' do
+        expect {
+          put admin_orders_waiting_for_an_event_to_take_place_to_in_progress_path(order.id), params: { orders_waiting_for_an_event_to_take_place_to_in_progress: {} }
+          order.reload
+        }.to change { Order.find(order.id).start_at }.from(order.start_at).to(nil)
+      end
+
+      it 'makes end_at nil' do
+        expect {
+          put admin_orders_waiting_for_an_event_to_take_place_to_in_progress_path(order.id), params: { orders_waiting_for_an_event_to_take_place_to_in_progress: {} }
+          order.reload
+        }.to change { Order.find(order.id).end_at }.from(order.end_at).to(nil)
       end
 
       it 'updates is accepted' do

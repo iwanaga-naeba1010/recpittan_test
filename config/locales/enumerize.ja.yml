@@ -4,7 +4,7 @@ ja:
       # no/yesは文字で囲わないと正常に機能しないらしい
       "no": いいえ
       "yes": はい
-    recreation_file:
+    recreation_image:
       kind:
         slider: レク画像
         flyer: チラシ
