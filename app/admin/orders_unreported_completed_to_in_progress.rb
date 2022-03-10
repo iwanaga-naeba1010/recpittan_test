@@ -22,7 +22,7 @@ ActiveAdmin.register Orders::UnreportedCompletedToInProgress do
     def update
       order = Order.find(params[:id].to_i)
       # NOTE(okubo): 本来statusは自動で切り替わるが、ここは本当に強制的なので注意してください
-      order.update!(start_at: nil, is_accepted: false, status: :in_progress)
+      order.update!(start_at: nil, end_at: nil, is_accepted: false, status: :in_progress)
 
       SlackNotifier
         .new(channel: '#アクティブチャットスレッド')

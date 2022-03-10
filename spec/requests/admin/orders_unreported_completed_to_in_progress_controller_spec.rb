@@ -12,6 +12,7 @@ RSpec.describe 'OrdersUnreportedCompletedToInProgress', type: :request do
       recreation_id: partner.recreations.first.id,
       user_id: customer.id,
       start_at: DateTime.yesterday,
+      end_at: DateTime.yesterday,
       is_accepted: true
     )
   end
@@ -46,6 +47,20 @@ RSpec.describe 'OrdersUnreportedCompletedToInProgress', type: :request do
           put admin_orders_unreported_completed_to_in_progress_path(order.id), params: { orders_unreported_completed_to_in_progress: {} }
           order.reload
         }.to change { Order.find(order.id).status }.from('unreported_completed').to('in_progress')
+      end
+
+      it 'makes start_at nil' do
+        expect {
+          put admin_orders_unreported_completed_to_in_progress_path(order.id), params: { orders_unreported_completed_to_in_progress: {} }
+          order.reload
+        }.to change { Order.find(order.id).start_at }.from(order.start_at).to(nil)
+      end
+
+      it 'makes end_at nil' do
+        expect {
+          put admin_orders_unreported_completed_to_in_progress_path(order.id), params: { orders_unreported_completed_to_in_progress: {} }
+          order.reload
+        }.to change { Order.find(order.id).end_at }.from(order.end_at).to(nil)
       end
 
       it 'updates is accepted' do
