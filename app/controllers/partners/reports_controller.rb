@@ -2,7 +2,7 @@
 
 class Partners::ReportsController < Partners::ApplicationController
   before_action :set_order
-  before_action :restrict_initialization, except: %i[edit]
+  before_action :restrict_initialization, except: %i[edit update confirm]
 
   def new
     @report = @order.build_report

@@ -20,6 +20,9 @@ RSpec.describe Partners::ReportsController, type: :request do
       get new_partners_order_report_path(order.id)
       expect(response).to have_http_status(:ok)
     end
+
+    it 'returns found when report was' do
+    end
   end
 
   describe 'POST /create' do
