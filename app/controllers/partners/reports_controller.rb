@@ -2,6 +2,7 @@
 
 class Partners::ReportsController < Partners::ApplicationController
   before_action :set_order
+  before_action :restrict_initialization, except: %i[edit]
 
   def new
     @report = @order.build_report
@@ -66,5 +67,9 @@ class Partners::ReportsController < Partners::ApplicationController
       :body, :expenses, :number_of_facilities,
       :number_of_people, :transportation_expenses
     )
+  end
+
+  def restrict_initialization
+    redirect_to edit_partners_order_report_path(id: @order.report, order_id: @order), alert: '終了報告は作成済みです' if @order.report.present?
   end
 end
