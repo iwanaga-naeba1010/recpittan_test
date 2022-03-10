@@ -77,6 +77,7 @@ gem 'ransack'
 
 gem 'active_hash'
 gem 'rinku'
+gem 'whenever'
 
 # 開発環境でUserを切り替える
 gem 'switch_user'
