@@ -6,9 +6,8 @@
  (() => {
    document.addEventListener('turbolinks:load', async () => {
     $('#finalCheckBox').on('click', () => {
-      var elements = document.getElementById("checklink");
-      console.log(elements);
-      elements.classList.remove("disabled");
+      const elements = document.getElementById('checklink');
+      elements.classList.remove('disabled');
     });
    });
  })();
