@@ -34,6 +34,9 @@
   <%= simple_form_for @chat, url: partners_order_chats_path(@order.id) do |f| %>
     <div class="m-1 w-75">
       <%= f.input :user_id, as: :hidden, input_html: { value: current_user.id } %>
+      <div>
+        ※ファイルサイズは20MBが上限で、PDF/PowerPoint/Word/JPEG/jpg/png形式に対応しております
+      </div>
       <div class="file">
         <%= f.input :file, as: :file, label: false, input_html: { class: "form-control" } %>
       </div>

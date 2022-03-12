@@ -12,7 +12,7 @@ class ImageUploader < CarrierWave::Uploader::Base
   end
 
   def extension_whitelist
-    %w[jpg jpeg gif png pdf pptx ppt]
+    %w[jpg jpeg gif png pdf pptx ppt doc docx xls xlsx]
   end
 
   def filename

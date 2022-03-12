@@ -6,14 +6,16 @@ ja:
       plan: プラン
       partner: パートナー
       recreation: レク
-      recreation_file: レク関連ファイル
+      recreation_image: レク関連ファイル
       order: 案件
+      zoom: Zoom情報
       orders/force_complete: 終了報告未 → 完了
       orders/force_complete_from_in_progress: 相談中 → 完了
       orders/force_waiting_for_an_event_to_take_place: 相談中 → 実地待ち
       orders/unreported_completed_from_new: 新規 →終了報告未
       orders/final_report_admits_not_from_new: 新規 →終了報告承認未
-
+      orders/waiting_for_an_event_to_take_place_to_in_progress: 実地待ち →相談中
+      orders/unreported_completed_to_in_progress: 終了報告未 →相談中
       report: 終了報告
       evaluation: 評価
       email_template: テンプレート
@@ -77,8 +79,8 @@ ja:
         prefectures: 都道府県
         is_public_price: 料金を公開
         additional_facility_fee: 施設追加費用
-      recreation_file:
-        source: ファイル
+      recreation_image:
+        image: ファイル
         kind: 種別
       order:
         user: 施設
@@ -104,6 +106,10 @@ ja:
         expenses: 諸経費
         zoom_price: Zoom ID発行料
         contract_number: 契約番号
+      zoom:
+        price: 金額
+        url: URL
+        created_by: 発行者
       order_date:
         year: 年
         month: 月

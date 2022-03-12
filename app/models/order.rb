@@ -54,8 +54,12 @@ class Order < ApplicationRecord
   has_one :report, dependent: :destroy
   accepts_nested_attributes_for :report, allow_destroy: true
 
+  has_one :zoom, dependent: :destroy
+  accepts_nested_attributes_for :zoom, allow_destroy: true
+
   delegate :title, :price, :minutes, :instructor_name, :is_online, :capacity, to: :recreation, prefix: true, allow_nil: true
   delegate :status, to: :report, prefix: true, allow_nil: true
+  delegate :url, to: :zoom, prefix: true, allow_nil: true
 
   validate :reject_empty_date
 
@@ -148,6 +152,12 @@ class Order < ApplicationRecord
     additional_facility_fee - 1000
   end
 
+  def zoom_cost
+    return zoom&.price if zoom&.created_by&.admin?
+
+    0
+  end
+
   def expenses_for_partner
     # NOTE: エブリプラスが10%を運営費用として取得するのでその金額
     expenses * 0.9
@@ -192,7 +202,7 @@ class Order < ApplicationRecord
 
   def total_price_for_partner
     # NOTE(okubo): zoom_priceは運営が入力する
-    instructor_amount + total_material_price_for_partner + transportation_expenses + expenses_for_partner + total_facility_price_for_partner - zoom_price
+    instructor_amount + total_material_price_for_partner + transportation_expenses + expenses_for_partner + total_facility_price_for_partner - zoom_cost
   end
   # rubocop:enable Layout/LineLength
 

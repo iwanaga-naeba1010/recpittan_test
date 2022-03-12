@@ -4,7 +4,7 @@ ja:
       # no/yesは文字で囲わないと正常に機能しないらしい
       "no": いいえ
       "yes": はい
-    recreation_file:
+    recreation_image:
       kind:
         slider: レク画像
         flyer: チラシ
@@ -44,6 +44,10 @@ ja:
         paid: 支払済
         canceled: キャンセル
         travled: トラブル(支払か請求有)
+    zoom:
+      created_by:
+        partner: パートナー
+        admin: エブリ・プラス
     report:
       status:
         denied: 拒否

@@ -229,6 +229,16 @@ ActiveRecord::Schema.define(version: 2022_03_09_164512) do
     t.string "username_kana"
   end
 
+  create_table "zooms", force: :cascade do |t|
+    t.bigint "order_id", null: false
+    t.integer "price", default: 0
+    t.integer "created_by"
+    t.string "url"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["order_id"], name: "index_zooms_on_order_id"
+  end
+
   add_foreign_key "chats", "orders", name: "chats_order_id_fkey"
   add_foreign_key "chats", "users", name: "chats_user_id_fkey"
   add_foreign_key "evaluations", "reports"
@@ -243,4 +253,5 @@ ActiveRecord::Schema.define(version: 2022_03_09_164512) do
   add_foreign_key "recreations", "users", name: "recreations_user_id_fkey"
   add_foreign_key "reports", "orders"
   add_foreign_key "users", "companies", name: "users_company_id_fkey"
+  add_foreign_key "zooms", "orders"
 end

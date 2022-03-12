@@ -44,6 +44,7 @@ Rails.application.routes.draw do
       end
 
       resources :chats, only: %i[create]
+      resources :zooms, only: %i[new create edit update]
       resources :reports, only: %i[new create edit update] do
         member do
           get :complete

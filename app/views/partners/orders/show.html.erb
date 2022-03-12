@@ -10,6 +10,7 @@
     <%= render 'shared/partner/sidebar_toggle' %>
   </div>
 </div>
+
 <div class="body bg-white border p-3 mb-3">
   <h4 class="text-black font-weight-bold">施設情報</h4>
   <table class="w-100">
@@ -34,6 +35,15 @@
     </tr>
     </tbody>
   </table>
+
+  <% if @order&.zoom&.present? %>
+    <div>
+      <h4 class="text-black font-weight-bold pt-3">Zoom情報</h4>
+      <div class="pt-2 pb-2 text-black text-end">
+        <%= Rinku.auto_link(simple_format(h(@order.zoom_url)), :all, 'target="_blank"').html_safe %>
+      </div>
+    </div>
+  <% end %>
   <div>
     <h4 class="text-black font-weight-bold pt-3">レク情報</h4>
     <table class="w-100">
@@ -66,7 +76,7 @@
     </table>
   </div>
   <div class="border m-2 p-2">
-    <h4 class="text-black font-weight-bold">レク費用</h4>
+    <h4 class="text-black font-weight-bold">受取額</h4>
     <table class="w-100">
       <thead>
       <tr class="border-bottom">
@@ -76,9 +86,21 @@
         </td>
       </tr>
       <tr class="border-bottom">
-        <td class="pt-2 pb-2 text-black w-75">材料費/1人あたり<br><span class="text-secondary">※材料費は人数分の費用が発生します。</span></td>
+        <td class="pt-2 pb-2 text-black w-75">材料費(合計)</td>
+        <td class="pt-2 pb-2 text-black text-end">
+          <%= number_to_currency(@order.total_material_price_for_partner) %>
+        </td>
+      </tr>
+      <tr class="border-bottom">
+        <td class="pt-2 pb-2 text-black w-75">材料費/名</td>
         <td class="pt-2 pb-2 text-black text-end">
           <%= number_to_currency(@order.instructor_material_amount) %>
+        </td>
+      </tr>
+      <tr class="border-bottom">
+        <td class="pt-2 pb-2 text-black w-75">参加人数</td>
+        <td class="pt-2 pb-2 text-black text-end">
+          <%= @order.number_of_people %>人
         </td>
       </tr>
       <tr class="border-bottom">
@@ -94,10 +116,27 @@
         </td>
       </tr>
       <tr class="border-bottom">
-        <td class="pt-2 pb-2 text-black w-75">追加施設費/追加施設 <%= @order.number_of_facilities %>施設<br>※1施設追加する事に費用が発生します。
-        </td>
+        <td class="pt-2 pb-2 text-black w-75">施設追加費用(合計)</td>
         <td class="pt-2 pb-2 text-black text-end">
-            <%= number_to_currency(@order.total_facility_price_for_partner) %>
+          <%= number_to_currency(@order.total_facility_price_for_partner) %>
+        </td>
+      </tr>
+      <tr class="border-bottom">
+        <td class="pt-2 pb-2 text-black w-75">施設追加費用/施設</td>
+        <td class="pt-2 pb-2 text-black text-end">
+          <%= number_to_currency(@order.additional_facility_fee_for_partner) %>
+        </td>
+      </tr>
+      <tr class="border-bottom">
+        <td class="pt-2 pb-2 text-black w-75">施設追加数</td>
+        <td class="pt-2 pb-2 text-black text-end">
+          <%= @order.number_of_facilities %>施設
+        </td>
+      </tr>
+      <tr class="border-bottom">
+        <td class="pt-2 pb-2 text-black w-75">Zoom ID発行料</td>
+        <td class="pt-2 pb-2 text-black text-end">
+          -<%= number_to_currency(@order.zoom_cost) %>
         </td>
       </tr>
       <tr class="border-bottom text-black font-weight-bold">
