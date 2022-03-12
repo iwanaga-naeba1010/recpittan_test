@@ -1,9 +1,8 @@
 <div class="body bg-white p-3 mb-3">
   <div class="mt-5 mb-5 text-black">
     <div class="d-inline-flex">
-      <p class="mr-5">開催日時:　</p>
       <p class="pl-5 pr-3">施設名: <%= @order.user.company.name %></p>
-      <p class="pl-5">レク名: <%= @order.recreation.title %></p>
+      <p class="pl-5">レク名: <%= @order.rec_title %></p>
     </div>
     <div>
       <p>施設に特に注意していただきたい項目等がありましたら、確認のご連絡をお願い致します。</p>
@@ -15,7 +14,17 @@
       チェック後、当日までに状態が変化した場合、チャットにて日程変更の相談をお願い致します。
     </p>
   </div>
-  <% if @order.recreation.is_online %>
+  <% if @order.online %>
+    <div class="form-check mb-3 font-weight-bold">
+      zoomリンク内に遅くても、10分前には入室します。
+    </div>
+    <div class="form-check mb-3 font-weight-bold">
+      開始前に、こちらの声が聞こえているか、相手の声が聞こえるかの音量チェックをします。
+    </div>
+    <div class="form-check mb-3 font-weight-bold">
+      利用様の様子をできる限り見ながら開催したい方は、施設の方にカメラの位置の調節を依頼します。
+    </div>
+  <% else %>
     <div class="form-check mb-3 font-weight-bold">
       ３日以内の体温が37.5℃以下です。
     </div>
@@ -42,16 +51,6 @@
     </div>
     <div class="form-check mb-3 font-weight-bold">
       貸出物がある場合は、消毒を行います。
-    </div>
-  <% else %>
-    <div class="form-check mb-3 font-weight-bold">
-      zoomリンク内に遅くても、10分前には入室します。
-    </div>
-    <div class="form-check mb-3 font-weight-bold">
-      開始前に、こちらの声が聞こえているか、相手の声が聞こえるかの音量チェックをします。
-    </div>
-    <div class="form-check mb-3 font-weight-bold">
-      利用様の様子をできる限り見ながら開催したい方は、施設の方にカメラの位置の調節を依頼します。
     </div>
   <% end %>
 

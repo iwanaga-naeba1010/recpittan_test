@@ -217,6 +217,14 @@ class Order < ApplicationRecord
     "#{date} #{start_time} ~ #{end_time}"
   end
 
+  def online
+    recreation.is_online
+  end
+
+  def rec_title
+    recreation.title
+  end
+
   # rubocop:disable Style/CaseEquality
   def reject_empty_date
     empty_date = []
