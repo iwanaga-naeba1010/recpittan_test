@@ -4,10 +4,15 @@
  import * as $ from 'jquery';
 
  (() => {
-   document.addEventListener('turbolinks:load', async () => {
+   document.addEventListener('turbolinks:load', () => {
     $('#finalCheckBox').on('click', () => {
+      const checkBox =  document.getElementById('finalCheckBox') as HTMLInputElement;
       const elements = document.getElementById('checklink');
-      elements.classList.remove('disabled');
+      if (checkBox.checked === true) {
+        return elements.classList.remove('disabled');
+      } else {
+        return elements.classList.add('disabled');
+      }
     });
    });
  })();
