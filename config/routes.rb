@@ -39,7 +39,7 @@ Rails.application.routes.draw do
         get :confirm
         get :complete
         get :final_check
-        patch :done_final_check
+        patch :update_final_check
         get :complete_final_check
       end
 

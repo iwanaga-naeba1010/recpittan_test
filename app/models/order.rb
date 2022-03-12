@@ -71,8 +71,8 @@ class Order < ApplicationRecord
   }, default: 10
 
   enumerize :final_check_status, in: {
-    not_mail_send: 1, mail_send: 2, mail_checked: 3
-  }, default: 1
+    not_send: 0, sent: 1, checked: 2
+  }, default: 0
 
   # controller のparamsに追加するため
   attribute :title # まずは相談したい、のメッセージ部分

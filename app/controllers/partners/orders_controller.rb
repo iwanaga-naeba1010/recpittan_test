@@ -52,8 +52,8 @@ class Partners::OrdersController < Partners::ApplicationController
 
   def final_check; end
 
-  def done_final_check
-    @order.update(final_check_status: :mail_checked)
+  def update_final_check
+    @order.update(final_check_status: :checked)
     message = <<~MESSAGE
       パートナー名： #{@order.recreation_instructor_name}
       管理画面案件URL： #{admin_order_url(@order.id)}
