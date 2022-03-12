@@ -55,9 +55,9 @@ class Partners::OrdersController < Partners::ApplicationController
   def done_final_check
     @order.update(final_check_status: :mail_checked)
     message = <<~MESSAGE
-        パートナー名： #{@order.recreation_instructor_name}
-        管理画面案件URL： #{admin_order_url(@order.id)}
-      MESSAGE
+      パートナー名： #{@order.recreation_instructor_name}
+      管理画面案件URL： #{admin_order_url(@order.id)}
+    MESSAGE
     SlackNotifier.new(channel: '#アクティブチャットスレッド').send('パートナーが最終確認を完了しました', message)
     redirect_to complete_final_check_partners_order_path(@order.id)
   end

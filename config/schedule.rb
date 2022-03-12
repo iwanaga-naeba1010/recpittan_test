@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Use this file to easily define all of your cron jobs.
 #
 # It's helpful, but not entirely necessary to understand cron before proceeding.
@@ -20,8 +22,9 @@
 # Learn more: http://github.com/javan/whenever
 
 require File.expand_path(File.dirname(__FILE__) + '/environment')
-set :output, "#{Rails.root}/log/cron.log"
-set :environment, :production
+set :output, File.expand_path(File.dirname(__FILE__) + '/../log/cron.log')
+# set :environment, Rails.env
+set :environment, :development
 
 job_type :rbenv_rake, 'eval "$(rbenv init -)"; cd :path && :environment_variable=:environment bundle exec rake :task --silent :output'
 
