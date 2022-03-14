@@ -10,7 +10,7 @@
   <div class="mt-5 mb-5 text-black">
     <div class="d-inline-flex">
       <p class="pl-5 pr-3">施設名: <%= @order.user.company.name %></p>
-      <p class="pl-5">レク名: <%= @order.rec_title %></p>
+      <p class="pl-5">レク名: <%= @order.title %></p>
     </div>
     <div>
       <p>施設に特に注意していただきたい項目等がありましたら、確認のご連絡をお願い致します。</p>
@@ -22,7 +22,7 @@
       チェック後、当日までに状態が変化した場合、チャットにて日程変更の相談をお願い致します。
     </p>
   </div>
-  <% if @order.online %>
+  <% if @order.is_online %>
     <div class="form-check mb-3 font-weight-bold">
       zoomリンク内に遅くても、10分前には入室します。
     </div>

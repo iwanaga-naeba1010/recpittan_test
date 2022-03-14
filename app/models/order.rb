@@ -60,6 +60,7 @@ class Order < ApplicationRecord
   delegate :title, :price, :minutes, :instructor_name, :is_online, :capacity, to: :recreation, prefix: true, allow_nil: true
   delegate :status, to: :report, prefix: true, allow_nil: true
   delegate :url, to: :zoom, prefix: true, allow_nil: true
+  delegate :title, :is_online, to: :recreation, allow_nil: true
 
   validate :reject_empty_date
 
@@ -215,14 +216,6 @@ class Order < ApplicationRecord
 
     # TODO: エラーハンドリング入れた方が良いかも
     "#{date} #{start_time} ~ #{end_time}"
-  end
-
-  def online
-    recreation.is_online
-  end
-
-  def rec_title
-    recreation.title
   end
 
   # rubocop:disable Style/CaseEquality
