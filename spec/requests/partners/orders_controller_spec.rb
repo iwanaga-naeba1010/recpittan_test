@@ -191,4 +191,71 @@ RSpec.describe Partners::OrdersController, type: :request do
       end
     end
   end
+
+  describe 'GET /final_check' do
+    context 'with valid user' do
+      it 'returns http success' do
+        get final_check_partners_order_path(order.id)
+        expect(response).to have_http_status(:ok)
+      end
+    end
+
+    context 'with invalid user' do
+      it 'return 302 when customer accessed' do
+        sign_out partner
+        sign_in customer
+        get final_check_partners_order_path(order.id)
+        expect(response).to have_http_status(:found)
+        expect(response).to redirect_to root_path
+      end
+
+      it 'return 302 when user not logged in' do
+        sign_out partner
+        get final_check_partners_order_path(order.id)
+        expect(response).to have_http_status(:found)
+        expect(response).to redirect_to new_user_session_path
+      end
+    end
+  end
+
+  describe 'PATCH /update_final_check' do
+    context 'when valid parameters' do
+      it 'returns 302 status' do
+        patch update_final_check_partners_order_path(order.id), params: { order: { final_check_status: :checked } }
+        expect(response).to redirect_to complete_final_check_partners_order_path(order.id)
+      end
+
+      it 'update status' do
+        expect {
+          patch update_final_check_partners_order_path(order.id), params: { order: { final_check_status: :checked } }
+        }.to change { Order.find(order.id).final_check_status }.from(order.final_check_status).to('checked')
+      end
+    end
+  end
+
+  describe 'GET /complete_final_check' do
+    context 'with valid user' do
+      it 'returns http success' do
+        get complete_final_check_partners_order_path(order.id)
+        expect(response).to have_http_status(:ok)
+      end
+    end
+
+    context 'with invalid user' do
+      it 'return 302 when customer accessed' do
+        sign_out partner
+        sign_in customer
+        get complete_final_check_partners_order_path(order.id)
+        expect(response).to have_http_status(:found)
+        expect(response).to redirect_to root_path
+      end
+
+      it 'return 302 when user not logged in' do
+        sign_out partner
+        get complete_final_check_partners_order_path(order.id)
+        expect(response).to have_http_status(:found)
+        expect(response).to redirect_to new_user_session_path
+      end
+    end
+  end
 end
