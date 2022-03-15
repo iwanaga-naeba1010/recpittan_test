@@ -1,6 +1,8 @@
 # frozen_string_literal: true
+
 require 'csv'
 
+# rubocop:disable Metrics/BlockLength, Metrics/AbcSize, Metrics/MethodLength
 ActiveAdmin.register_page 'Invoices' do
   menu priority: 1, label: proc { '請求書CSV生成' }
 
@@ -45,7 +47,7 @@ ActiveAdmin.register_page 'Invoices' do
         orders.each do |order|
           items = []
           items << {
-            name: "#{order.created_at.strftime('%m/%d')}",
+            name: order.created_at.strftime('%m/%d'),
             price: order.regular_price,
             amount: 1,
             unit: '回'
@@ -133,3 +135,4 @@ ActiveAdmin.register_page 'Invoices' do
     end
   end
 end
+# rubocop:enable Metrics/BlockLength, Metrics/AbcSize, Metrics/MethodLength
