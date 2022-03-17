@@ -16,6 +16,7 @@ ja:
       orders/final_report_admits_not_from_new: 新規 →終了報告承認未
       orders/waiting_for_an_event_to_take_place_to_in_progress: 実地待ち →相談中
       orders/unreported_completed_to_in_progress: 終了報告未 →相談中
+      orders/finished_to_invoice_issued: 終了 →請求書発行済み
       report: 終了報告
       evaluation: 評価
       email_template: テンプレート
