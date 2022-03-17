@@ -7,17 +7,10 @@ ActiveAdmin.register_page 'Invoices' do
   menu priority: 1, label: proc { '請求書CSV生成' }
 
   content title: proc { '請求書CSV生成' } do
-    div class: 'blank_slate_container', id: 'dashboard_default_message' do
-      span class: 'blank_slate' do
-        span I18n.t('active_admin.dashboard_welcome.welcome')
-        small I18n.t('active_admin.dashboard_welcome.call_to_action')
-      end
-    end
-
     columns do
       column do
-        panel 'Info' do
-          button_to 'CSVの生成実行', admin_invoices_path, { data: { confirm: 'CSV生成を行うと完了statusから請求書発行済みに変更となりますがよろしいですか？' } }
+        panel 'CSV生成' do
+          button_to 'CSVの生成実行', admin_invoices_path
         end
       end
     end
@@ -26,7 +19,6 @@ ActiveAdmin.register_page 'Invoices' do
   controller do
     def create
       current_time = Time.zone.now
-      # TODO(okubo): ここで案件を切り替えたりする
       invoices = []
 
       User.customers.all.includes(:company, :orders).each do |customer|
@@ -47,7 +39,7 @@ ActiveAdmin.register_page 'Invoices' do
         orders.each do |order|
           items = []
           items << {
-            name: order.created_at.strftime('%m/%d'),
+            name: "#{order.start_at.strftime('%m/%d')}#{order.recreation_title}",
             price: order.regular_price,
             amount: 1,
             unit: '回'
@@ -114,14 +106,16 @@ ActiveAdmin.register_page 'Invoices' do
           invoice[:facility_name],
           invoice[:tax],
           invoice[:payment_due_date],
-          invoice[:items].map { |item| [item[:name], item[:amount], item[:unit], item[:price]] }.compact.flatten
+          invoice[:items].map do |item|
+            [item[:name], item[:amount], item[:unit], item[:price], invoice[:tax], ''].compact.flatten
+          end
         ].flatten
       end
 
       # NOTE(okubo): まとめて書くためにflattenで処理
       headers = [
         %w[請求日 請求番号 件名 取引先管理コード 施設名 消費税設定 お支払い期限],
-        (1..20).map { |i| ["品目#{i}", "単位#{i}", "単価#{i}", "消費税率#{i}", "非課税フラグ#{i}"] }.flatten
+        (1..20).map { |i| ["品目#{i}", "数量#{i}", "単位#{i}", "単価#{i}", "消費税率#{i}", "非課税フラグ#{i}"] }.flatten
       ].flatten
 
       csv_data = CSV.generate do |csv|
@@ -131,7 +125,7 @@ ActiveAdmin.register_page 'Invoices' do
         end
       end
 
-      send_data csv_data, filename: '請求データ'
+      send_data csv_data, filename: '請求データ.csv'
     end
   end
 end
