@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  namespace :admin do
+    resources :invoices, only: %i[index create]
+    # resources :users, path: 'members', controller: 'members'
+  end
   ActiveAdmin.routes(self)
   # switch userの設定
   get 'switch_user', to: 'switch_user#set_current_user' if Rails.env.development?
