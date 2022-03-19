@@ -13,7 +13,7 @@
   <% if chat.user_role.partner? %>
     <div class="row justify-content-end pt-2">
       <div class="col-auto align-self-end time"><%= time chat.created_at %></div>
-      <div class="col-md-auto customer-text mychat card-header">
+      <div class="col-md-auto text-white mychat card-header">
         <%= Rinku.auto_link(simple_format(h(chat.message)), :all, 'target="_blank"').html_safe %>
       </div>
     </div>

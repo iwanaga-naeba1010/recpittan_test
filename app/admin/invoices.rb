@@ -2,7 +2,7 @@
 
 require 'csv'
 
-# rubocop:disable Metrics/BlockLength, Metrics/AbcSize, Metrics/MethodLength
+# rubocop:disable Metrics/BlockLength, Metrics/AbcSize, Metrics/MethodLength, Style/Next
 ActiveAdmin.register_page 'Invoices' do
   menu priority: 1, label: proc { '請求書CSV生成' }
 
@@ -37,8 +37,7 @@ ActiveAdmin.register_page 'Invoices' do
         }
 
         orders.each do |order|
-          items = []
-          items << {
+          invoice[:items] << {
             name: "#{order.start_at.strftime('%m/%d')}#{order.recreation_title}",
             price: order.regular_price,
             amount: 1,
@@ -46,7 +45,7 @@ ActiveAdmin.register_page 'Invoices' do
           }
 
           if order.regular_material_price?
-            items << {
+            invoice[:items] << {
               name: '材料費',
               price: order.total_material_price_for_customer,
               amount: order.number_of_people,
@@ -55,7 +54,7 @@ ActiveAdmin.register_page 'Invoices' do
           end
 
           if order.number_of_facilities?
-            items << {
+            invoice[:items] << {
               name: '追加施設',
               price: order.total_facility_price_for_customer,
               amount: order.number_of_people,
@@ -64,7 +63,7 @@ ActiveAdmin.register_page 'Invoices' do
           end
 
           if order.support_price?
-            items << {
+            invoice[:items] << {
               name: '調整費',
               price: order.support_price,
               amount: 1,
@@ -73,7 +72,7 @@ ActiveAdmin.register_page 'Invoices' do
           end
 
           if order.expenses?
-            items << {
+            invoice[:items] << {
               name: '諸経費',
               price: order.expenses,
               amount: 1,
@@ -82,15 +81,13 @@ ActiveAdmin.register_page 'Invoices' do
           end
 
           if order.transportation_expenses?
-            items << {
+            invoice[:items] << {
               name: '交通費',
               price: order.transportation_expenses,
               amount: 1,
               unit: '件'
             }
           end
-
-          invoice[:items] = items
         end
 
         invoices << invoice
@@ -129,4 +126,4 @@ ActiveAdmin.register_page 'Invoices' do
     end
   end
 end
-# rubocop:enable Metrics/BlockLength, Metrics/AbcSize, Metrics/MethodLength
+# rubocop:enable Metrics/BlockLength, Metrics/AbcSize, Metrics/MethodLength, Style/Next

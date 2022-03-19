@@ -124,6 +124,11 @@
                   <h3 class="font-24">
                     <%= price_pipe(@recreation.regular_price, current_user) %><span> / 1回あたり</span>
                   </h3>
+                  <% if @recreation.regular_material_price.present? %>
+                    <p>
+                      <%= "材料費 #{price_pipe(@recreation.regular_material_price, current_user)} / 1名あたり" %>
+                    </p>
+                  <% end %>
                 <% else %>
                   <h3 class="title-b font-20">料金はお問い合わせください</h3>
                   <div class="text-muted">レク料金は非公開となっています。<br>知りたい場合はお問い合わせをしてください。</div>
