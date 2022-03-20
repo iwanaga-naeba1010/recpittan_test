@@ -56,7 +56,9 @@ class CustomDevise::RegistrationsController < Devise::RegistrationsController
       :sign_up,
       keys: [
         :role,
-        { company_attributes: %i[name facility_name person_in_charge_name person_in_charge_name_kana] }
+        { company_attributes: %i[
+          name facility_name person_in_charge_name person_in_charge_name_kana genre
+        ] }
       ]
     )
   end

@@ -28,7 +28,13 @@
                   <%= ff.input :name, required: true, input_html: { class: 'form-control ' } %>
                 </div>
                 <div class="mb-3">
+                  <%= ff.input :genre, required: true, input_html: { class: 'form-control ' } %>
+                </div>
+                <div class="mb-3">
                   <%= ff.input :facility_name, required: true, input_html: { class: 'form-control ' } %>
+                </div>
+                <div class="mb-3">
+                  <%= ff.input :tel, required: true, input_html: { class: 'form-control ' } %>
                 </div>
                 <div class="mb-3">
                   <%= ff.input :person_in_charge_name, required: true, input_html: { class: 'form-control ' } %>
@@ -37,6 +43,11 @@
                   <%= ff.input :person_in_charge_name_kana, required: true, input_html: { class: 'form-control ' } %>
                 </div>
               <% end %>
+
+              <div class="mb-3">
+                <%= f.input :title, required: true, input_html: { class: 'form-control ' } %>
+              </div>
+
               <div class="mb-3">
                 <%= f.input :email, required: true, input_html: { class: 'form-control ' } %>
               </div>
