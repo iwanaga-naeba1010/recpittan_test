@@ -5,19 +5,24 @@
 # Table name: companies
 #
 #  id                         :bigint           not null, primary key
-#  address                    :string
 #  building                   :string
+#  capacity                   :integer
 #  city                       :string
 #  facility_name              :string
+#  feature                    :text
+#  genre                      :integer          default(0)
 #  locality                   :string
 #  name                       :string
+#  nursing_care_level         :integer
 #  person_in_charge_name      :string
 #  person_in_charge_name_kana :string
 #  phone                      :string
 #  prefecture                 :string
 #  region                     :string
+#  request                    :text
 #  street                     :string
 #  tel                        :string
+#  url                        :string
 #  zip                        :string
 #  created_at                 :datetime         not null
 #  updated_at                 :datetime         not null

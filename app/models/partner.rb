@@ -21,6 +21,7 @@
 #  reset_password_token   :string
 #  role                   :integer          default("customer"), not null
 #  sign_in_count          :integer          default(0), not null
+#  title                  :string
 #  unconfirmed_email      :string
 #  unlock_token           :string
 #  username               :string

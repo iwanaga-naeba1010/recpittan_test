@@ -16,7 +16,7 @@
 #
 FactoryBot.define do
   factory :plan do
-    company { nil }
+    company
     kind { 1 }
   end
 end

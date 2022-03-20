@@ -33,6 +33,7 @@ ja:
         image: 画像
         username: 名前
         username_kana: 名前(カナ)
+        title: 役職
       company:
         name: 法人名
         facility_name: 施設名
@@ -44,6 +45,12 @@ ja:
         street: 町名/番地
         building: 建物名
         tel: 電話番号
+        feature: 施設の特徴
+        url: HP
+        capacity: 施設定員
+        nursing_care_level: 平均介護度
+        request: レクへの要望
+        genre: 施設ジャンル
       plan:
         kind: 種類
       partner:
