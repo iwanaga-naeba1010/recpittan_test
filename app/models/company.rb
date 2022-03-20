@@ -10,15 +10,12 @@
 #  city                       :string
 #  facility_name              :string
 #  feature                    :text
-#  genre                      :integer          default(0)
-#  locality                   :string
+#  genre                      :integer          default("residential_fee_based_nursing_home")
 #  name                       :string
 #  nursing_care_level         :integer
 #  person_in_charge_name      :string
 #  person_in_charge_name_kana :string
-#  phone                      :string
 #  prefecture                 :string
-#  region                     :string
 #  request                    :text
 #  street                     :string
 #  tel                        :string
@@ -33,11 +30,6 @@ class Company < ApplicationRecord
   has_one :user, dependent: :destroy
   accepts_nested_attributes_for :user, allow_destroy: true
 
-  has_one :plan, dependent: :destroy
-  accepts_nested_attributes_for :plan, allow_destroy: true
-
-  after_create :create_plan
-
   validates :name, :facility_name, presence: true
 
   enumerize :genre, in: {
@@ -47,11 +39,6 @@ class Company < ApplicationRecord
     group_home: 4, intensive_care_old_peoples_home: 5,
     rehabilitation_for_the_aged: 6, short_stay: 7, other: 8
   }, default: 0
-
-  def create_plan
-    build_plan(kind: :free)
-    save
-  end
 
   def full_address
     "#{prefecture}#{city}#{street}#{building}"

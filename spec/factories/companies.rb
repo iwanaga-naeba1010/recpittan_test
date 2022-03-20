@@ -10,15 +10,12 @@
 #  city                       :string
 #  facility_name              :string
 #  feature                    :text
-#  genre                      :integer          default(0)
-#  locality                   :string
+#  genre                      :integer          default("residential_fee_based_nursing_home")
 #  name                       :string
 #  nursing_care_level         :integer
 #  person_in_charge_name      :string
 #  person_in_charge_name_kana :string
-#  phone                      :string
 #  prefecture                 :string
-#  region                     :string
 #  request                    :text
 #  street                     :string
 #  tel                        :string

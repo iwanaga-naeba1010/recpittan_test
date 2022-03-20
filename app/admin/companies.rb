@@ -8,7 +8,6 @@ ActiveAdmin.register Company do
     :name, :facility_name, :person_in_charge_name, :person_in_charge_name_kana,
     :zip, :prefecture, :city, :street, :building, :tel,
     :genre, :url, :feature, :capacity, :nursing_care_level, :request,
-    plan_attributes: %i[id company_id kind _destroy],
     user_attributes: %i[id email]
   )
 
@@ -58,12 +57,6 @@ ActiveAdmin.register Company do
         row :email
       end
     end
-
-    panel I18n.t('activerecord.models.plan'), style: 'margin-top: 30px;' do
-      attributes_table_for company.plan do
-        row :kind_text
-      end
-    end
   end
 
   form do |f|
@@ -86,10 +79,6 @@ ActiveAdmin.register Company do
       f.input :feature
       f.input :capacity
       f.input :nursing_care_level
-
-      f.inputs I18n.t('activerecord.models.plan'), for: [:plan, f.object.plan || Plan.new({ company_id: f.object.id })] do |ff|
-        ff.input :kind, as: :select, collection: Plan.kind.values.map { |i| [i.text, i] }
-      end
 
       f.inputs I18n.t('activerecord.models.user'), for: [:user, f.object.user || User.new({ company_id: f.object.id })] do |ff|
         if ff.object.id.present?
