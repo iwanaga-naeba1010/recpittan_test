@@ -70,7 +70,7 @@ class CustomDevise::RegistrationsController < Devise::RegistrationsController
       keys: [
         company_attributes: %i[
           id name facility_name person_in_charge_name person_in_charge_name_kana
-          zip prefecture city street building tel
+          zip prefecture city street building tel genre url capacity feature nursing_care_level request
         ]
       ]
     )
