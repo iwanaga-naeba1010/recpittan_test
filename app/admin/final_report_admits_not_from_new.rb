@@ -8,7 +8,7 @@ ActiveAdmin.register Orders::FinalReportAdmitsNotFromNew do
       number_of_facilities status is_accepted start_at end_at
       regular_price instructor_amount regular_material_price instructor_material_amount
       additional_facility_fee transportation_expenses support_price expenses
-      zoom_price contract_number
+      contract_number
     ]
   )
 
@@ -44,7 +44,6 @@ ActiveAdmin.register Orders::FinalReportAdmitsNotFromNew do
       f.input :additional_facility_fee
       f.input :transportation_expenses
       f.input :expenses
-      f.input :zoom_price
       f.input :support_price
 
       f.input :start_at, as: :hidden, input_html: { value: Date.yesterday }

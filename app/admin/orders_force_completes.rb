@@ -45,7 +45,6 @@ ActiveAdmin.register Orders::ForceComplete do
       row :transportation_expenses
       row :expenses
       row :support_price
-      row :zoom_price
       row :contract_number
 
       row :created_at

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_03_20_155600) do
+ActiveRecord::Schema.define(version: 2022_03_20_160824) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -124,7 +124,6 @@ ActiveRecord::Schema.define(version: 2022_03_20_155600) do
     t.integer "additional_facility_fee", default: 0
     t.integer "support_price", default: 0
     t.datetime "end_at"
-    t.integer "zoom_price", default: 0
     t.string "contract_number"
   end
 

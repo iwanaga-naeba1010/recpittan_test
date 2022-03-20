@@ -3,7 +3,6 @@ ja:
     models:
       user: ユーザー
       company: 施設
-      plan: プラン
       partner: パートナー
       recreation: レク
       recreation_image: レク関連ファイル
@@ -51,8 +50,6 @@ ja:
         nursing_care_level: 平均介護度
         request: レクへの要望
         genre: 施設ジャンル
-      plan:
-        kind: 種類
       partner:
         name: 名前
         title: 肩書き
@@ -112,7 +109,6 @@ ja:
         additional_facility_fee: 施設追加費用
         transportation_expenses: 交通費
         expenses: 諸経費
-        zoom_price: Zoom ID発行料
         contract_number: 契約番号
       zoom:
         price: 金額
