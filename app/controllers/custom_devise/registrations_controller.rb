@@ -24,15 +24,16 @@ class CustomDevise::RegistrationsController < Devise::RegistrationsController
   end
 
   # GET /resource/edit
-  # def edit
-  #   super
-  # end
+  def edit
+    @tags = Tags::Rental.all
+    super
+  end
 
   # PUT /resource
-  # def update
-  #   super
-  #   # rescue StandardError => e
-  # end
+  def update
+    super
+    # rescue StandardError => e
+  end
 
   # DELETE /resource
   # def destroy
@@ -71,8 +72,9 @@ class CustomDevise::RegistrationsController < Devise::RegistrationsController
         company_attributes: %i[
           id name facility_name person_in_charge_name person_in_charge_name_kana
           zip prefecture city street building tel genre url capacity feature nursing_care_level request
-        ]
-      ]
+        ],
+        tag_ids: []
+      ],
     )
   end
 
