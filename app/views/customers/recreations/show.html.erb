@@ -124,7 +124,7 @@
                   <h3 class="font-24">
                     <%= price_pipe(@recreation.regular_price, current_user) %><span> / 1回あたり</span>
                   </h3>
-                  <% if @recreation.regular_material_price.present? %>
+                  <% if @recreation.regular_material_price.present? && @recreation.regular_material_price != 0 %>
                     <p>
                       <%= "材料費 #{price_pipe(@recreation.regular_material_price, current_user)} / 1名あたり" %>
                     </p>
