@@ -15,7 +15,7 @@ class Tag < ApplicationRecord
   has_many :recreation_tags, dependent: :destroy
   has_many :recreations, through: :recreation_tags
 
-  enumerize :kind, in: { category: 0, tag: 1, target: 2 }, default: 0
+  enumerize :kind, in: { category: 0, tag: 1, target: 2, rental: 3 }, default: 0
 
   scope :categories, -> { where(kind: :category) }
   scope :events, -> { where(kind: :tag) } # TODO: tagsに変更
