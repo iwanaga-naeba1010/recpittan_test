@@ -1,0 +1,75 @@
+<div class="header">
+  <div>
+    <h2 class="text-white font-weight-bold text-center p-2">
+      確認事項
+    </h2>
+    <%= render 'shared/partner/sidebar_toggle' %>
+  </div>
+</div>
+<div class="body bg-white p-3 mb-3">
+  <div class="mt-5 mb-5 text-black">
+    <div class="d-inline-flex">
+      <p class="pl-5 pr-3">施設名: <%= @order.user.company.name %></p>
+      <p class="pl-5">レク名: <%= @order.title %></p>
+    </div>
+    <div>
+      <p>施設に特に注意していただきたい項目等がありましたら、確認のご連絡をお願い致します。</p>
+    </div>
+  <div>
+    <p>
+      下記の感染症対策の項目を確認いただき、よろしければ☑をお願い致します。
+      <br />
+      チェック後、当日までに状態が変化した場合、チャットにて日程変更の相談をお願い致します。
+    </p>
+  </div>
+  <% if @order.is_online %>
+    <div class="form-check mb-3 font-weight-bold">
+      zoomリンク内に遅くても、10分前には入室します。
+    </div>
+    <div class="form-check mb-3 font-weight-bold">
+      開始前に、こちらの声が聞こえているか、相手の声が聞こえるかの音量チェックをします。
+    </div>
+    <div class="form-check mb-3 font-weight-bold">
+      利用様の様子をできる限り見ながら開催したい方は、施設の方にカメラの位置の調節を依頼します。
+    </div>
+  <% else %>
+    <div class="form-check mb-3 font-weight-bold">
+      ３日以内の体温が37.5℃以下です。
+    </div>
+    <div class="form-check mb-3 font-weight-bold">
+      ３日以内の症状として息苦しさはありません。
+    </div>
+    <div class="form-check mb-3 font-weight-bold">
+      ３日以内の症状として倦怠感(だるさ)はありません。
+    </div>
+    <div class="form-check mb-3 font-weight-bold">
+      ３日以内の症状として咳、味覚、嗅覚の変化はありません。
+    </div>
+    <div class="form-check mb-3 font-weight-bold">
+      ２週間以内に家族内感染はありません。
+    </div>
+    <div class="form-check mb-3 font-weight-bold">
+      ２週間以内に、濃厚接触者と接触していません。
+    </div>
+    <div class="form-check mb-3 font-weight-bold">
+      施設内では終始マスクもしくはフェイスシールドの飛沫対策を行います。
+    </div>
+    <div class="form-check mb-3 font-weight-bold">
+      施設入館後は、体温測定や手指消毒、及び会場条件等の施設ルールを守ります。
+    </div>
+    <div class="form-check mb-3 font-weight-bold">
+      貸出物がある場合は、消毒を行います。
+    </div>
+  <% end %>
+
+  <div class="body bg-white p-3 mb-3">
+    <input type="checkbox" class="form-check-input" id="finalCheckBox">
+    <label class="form-check-label">
+      確認しました
+    </label>
+  </div>
+
+  <div class="col-md-12 text-center pt-5">
+    <%= link_to '確認する', update_final_check_partners_order_path(@order.id), method: :patch, class: 'text-white btn btn-primary btn-lg btn-block w-100 p-3 mt-2 mb-2 disabled', id: 'checklink' %>
+  </div>
+</div>
