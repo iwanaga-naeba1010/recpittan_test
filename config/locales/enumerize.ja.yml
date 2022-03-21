@@ -24,6 +24,17 @@ ja:
         partner: パートナー
         admin: 管理者
         cs: カスタマーサクセス
+    company:
+      genre:
+        residential_fee_based_nursing_home: 住宅型有料老人ホーム
+        general_care: 通所介護
+        serviced_senior_housing: サービス付き高齢者向け住宅
+        private_pay_nursing_home_with_nursing_care_services: 介護付き有料老人ホーム
+        group_home: グループホーム
+        intensive_care_old_peoples_home: 特養
+        rehabilitation_for_the_aged: 老健
+        short_stay: ショートステイ
+        other: その他
     tag:
       kind:
         category: カテゴリー
