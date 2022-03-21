@@ -125,6 +125,7 @@ ActiveRecord::Schema.define(version: 2022_03_20_160824) do
     t.integer "support_price", default: 0
     t.datetime "end_at"
     t.string "contract_number"
+    t.integer "final_check_status"
   end
 
   create_table "recreation_images", force: :cascade do |t|

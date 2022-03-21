@@ -11,6 +11,7 @@
 #  contract_number            :string
 #  end_at                     :datetime
 #  expenses                   :integer          default(0)
+#  final_check_status         :integer
 #  instructor_amount          :integer          default(0)
 #  instructor_material_amount :integer          default(0)
 #  is_accepted                :boolean          default(FALSE)
@@ -58,6 +59,7 @@ class Order < ApplicationRecord
   delegate :title, :price, :minutes, :instructor_name, :is_online, :capacity, to: :recreation, prefix: true, allow_nil: true
   delegate :status, to: :report, prefix: true, allow_nil: true
   delegate :url, to: :zoom, prefix: true, allow_nil: true
+  delegate :title, :is_online, to: :recreation, allow_nil: true
 
   validate :reject_empty_date
 
@@ -67,6 +69,10 @@ class Order < ApplicationRecord
     unreported_completed: 70, final_report_admits_not: 80, finished: 200,
     invoice_issued: 210, paid: 220, canceled: 400, travled: 500
   }, default: 10
+
+  enumerize :final_check_status, in: {
+    not_send: 0, sent: 1, checked: 2
+  }, default: 0
 
   # controller のparamsに追加するため
   attribute :title # まずは相談したい、のメッセージ部分
