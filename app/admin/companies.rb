@@ -8,7 +8,8 @@ ActiveAdmin.register Company do
     :name, :facility_name, :person_in_charge_name, :person_in_charge_name_kana,
     :zip, :prefecture, :city, :street, :building, :tel,
     :genre, :url, :feature, :capacity, :nursing_care_level, :request,
-    user_attributes: %i[id email]
+    user_attributes: %i[id email],
+    tag_ids: []
   )
 
   actions :all, except: [:destroy]
@@ -79,6 +80,9 @@ ActiveAdmin.register Company do
       f.input :feature
       f.input :capacity
       f.input :nursing_care_level
+
+
+      f.input :tags, label: '貸出可能品', as: :check_boxes, collection: Tags::Rental.all
 
       f.inputs I18n.t('activerecord.models.user'), for: [:user, f.object.user || User.new({ company_id: f.object.id })] do |ff|
         if ff.object.id.present?
