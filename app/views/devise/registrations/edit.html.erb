@@ -101,6 +101,17 @@
 
                 <div class="row pt-3">
                   <div class="col-auto">
+                    <h3 class="card-title font-weight-bold font-14 color-ba10">貸出可能品</h3>
+                    <%= ff.collection_check_boxes :tag_ids, @tags, :id, :name do |tag| %>
+                      <div>
+                        <%= tag.label { tag.check_box + tag.object.name } %>
+                      </div>
+                    <% end %>
+                  </div>
+                </div>
+
+                <div class="row pt-3">
+                  <div class="col-auto">
                     <h3 class="card-title font-weight-bold font-14 color-ba10">プロフィール</h3>
                   </div>
                 </div>
@@ -123,7 +134,9 @@
                 <label for="facilityName" class="form-label">メールアドレス</label>
                 <div id="facilityName" class="form-control border-0"><%= resource.email %></div>
               </div>
+
               </div>
+
               <div class="row pt-3">
                 <div class="col-auto">
                   <h3 class="card-title font-weight-bold font-14 color-ba10">パスワード</h3>

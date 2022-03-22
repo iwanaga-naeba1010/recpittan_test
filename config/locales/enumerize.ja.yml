@@ -38,8 +38,9 @@ ja:
     tag:
       kind:
         category: カテゴリー
-        event: イベント
+        tag: タグ
         target: 利用者層
+        rental: 貸出可能品
     order:
       status:
         in_progress: 相談中
@@ -75,7 +76,3 @@ ja:
         *evaluation_list
       want_to_order_agein:
         *evaluation_list
-    plan:
-      kind:
-        free: フリー
-        paid: 定期

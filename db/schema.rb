@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_03_20_160824) do
+ActiveRecord::Schema.define(version: 2022_03_21_150534) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -55,6 +55,15 @@ ActiveRecord::Schema.define(version: 2022_03_20_160824) do
     t.integer "capacity"
     t.integer "nursing_care_level"
     t.text "request"
+  end
+
+  create_table "company_tags", force: :cascade do |t|
+    t.bigint "company_id", null: false
+    t.bigint "tag_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["company_id"], name: "index_company_tags_on_company_id"
+    t.index ["tag_id"], name: "index_company_tags_on_tag_id"
   end
 
   create_table "email_templates", force: :cascade do |t|
@@ -232,6 +241,8 @@ ActiveRecord::Schema.define(version: 2022_03_20_160824) do
 
   add_foreign_key "chats", "orders", name: "chats_order_id_fkey"
   add_foreign_key "chats", "users", name: "chats_user_id_fkey"
+  add_foreign_key "company_tags", "companies"
+  add_foreign_key "company_tags", "tags"
   add_foreign_key "evaluations", "reports", name: "evaluations_report_id_fkey"
   add_foreign_key "order_dates", "orders", name: "order_dates_order_id_fkey"
   add_foreign_key "order_memos", "orders", name: "order_memos_order_id_fkey"

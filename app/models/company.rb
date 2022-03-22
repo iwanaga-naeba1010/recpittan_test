@@ -30,6 +30,9 @@ class Company < ApplicationRecord
   has_one :user, dependent: :destroy
   accepts_nested_attributes_for :user, allow_destroy: true
 
+  has_many :company_tags, dependent: :destroy
+  has_many :tags, through: :company_tags
+
   validates :name, :facility_name, presence: true
 
   enumerize :genre, in: {

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-ActiveAdmin.register Tags::Tag do
+ActiveAdmin.register Tags::Target do
   permit_params(%i[name kind])
   actions :all
   menu parent: 'タグ'
@@ -28,7 +28,7 @@ ActiveAdmin.register Tags::Tag do
     f.semantic_errors
 
     f.inputs do
-      f.input :kind, as: :hidden, input_html: { value: :tag }
+      f.input :kind, as: :hidden, input_html: { value: :target }
       f.input :name
     end
 
