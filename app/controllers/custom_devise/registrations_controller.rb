@@ -72,9 +72,9 @@ class CustomDevise::RegistrationsController < Devise::RegistrationsController
         company_attributes: [
           :id, :name, :facility_name, :person_in_charge_name, :person_in_charge_name_kana,
           :zip, :prefecture, :city, :street, :building, :tel, :genre, :url, :capacity, :feature, :nursing_care_level, :request,
-          { tag_ids: [] },
-        ],
-      ],
+          { tag_ids: [] }
+        ]
+      ]
     )
   end
 
