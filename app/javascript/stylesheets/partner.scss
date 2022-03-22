@@ -222,4 +222,8 @@ body {
     position: fixed;
     background-color: white;
   }
+
+  .disabled {
+    pointer-events: none;
+  }
 }

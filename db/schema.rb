@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_03_05_064045) do
+ActiveRecord::Schema.define(version: 2022_03_21_150534) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -49,15 +49,26 @@ ActiveRecord::Schema.define(version: 2022_03_05_064045) do
     t.string "street"
     t.string "building"
     t.string "tel"
-    t.string "address"
-    t.string "phone"
-    t.string "region"
-    t.string "locality"
+    t.integer "genre", default: 0
+    t.text "feature"
+    t.string "url"
+    t.integer "capacity"
+    t.integer "nursing_care_level"
+    t.text "request"
+  end
+
+  create_table "company_tags", force: :cascade do |t|
+    t.bigint "company_id", null: false
+    t.bigint "tag_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["company_id"], name: "index_company_tags_on_company_id"
+    t.index ["tag_id"], name: "index_company_tags_on_tag_id"
   end
 
   create_table "email_templates", force: :cascade do |t|
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.string "explanation"
     t.string "title"
     t.text "body"
@@ -74,9 +85,8 @@ ActiveRecord::Schema.define(version: 2022_03_05_064045) do
     t.integer "want_to_order_agein"
     t.text "message"
     t.text "other_message"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["report_id"], name: "index_evaluations_on_report_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "order_dates", force: :cascade do |t|
@@ -88,9 +98,8 @@ ActiveRecord::Schema.define(version: 2022_03_05_064045) do
     t.string "start_minute"
     t.string "end_hour"
     t.string "end_minute"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["order_id"], name: "index_order_dates_on_order_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "order_memos", force: :cascade do |t|
@@ -124,15 +133,8 @@ ActiveRecord::Schema.define(version: 2022_03_05_064045) do
     t.integer "additional_facility_fee", default: 0
     t.integer "support_price", default: 0
     t.datetime "end_at"
-    t.integer "zoom_price", default: 0
     t.string "contract_number"
-  end
-
-  create_table "plans", force: :cascade do |t|
-    t.bigint "company_id", null: false
-    t.integer "kind"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.integer "final_check_status"
   end
 
   create_table "recreation_images", force: :cascade do |t|
@@ -189,10 +191,9 @@ ActiveRecord::Schema.define(version: 2022_03_05_064045) do
     t.integer "transportation_expenses"
     t.integer "expenses"
     t.text "body"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.integer "status"
-    t.index ["order_id"], name: "index_reports_on_order_id"
   end
 
   create_table "tags", force: :cascade do |t|
@@ -226,6 +227,7 @@ ActiveRecord::Schema.define(version: 2022_03_05_064045) do
     t.bigint "company_id"
     t.string "username"
     t.string "username_kana"
+    t.string "title"
   end
 
   create_table "zooms", force: :cascade do |t|
@@ -233,24 +235,24 @@ ActiveRecord::Schema.define(version: 2022_03_05_064045) do
     t.integer "price", default: 0
     t.integer "created_by"
     t.string "url"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["order_id"], name: "index_zooms_on_order_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   add_foreign_key "chats", "orders", name: "chats_order_id_fkey"
   add_foreign_key "chats", "users", name: "chats_user_id_fkey"
-  add_foreign_key "evaluations", "reports"
-  add_foreign_key "order_dates", "orders"
+  add_foreign_key "company_tags", "companies"
+  add_foreign_key "company_tags", "tags"
+  add_foreign_key "evaluations", "reports", name: "evaluations_report_id_fkey"
+  add_foreign_key "order_dates", "orders", name: "order_dates_order_id_fkey"
   add_foreign_key "order_memos", "orders", name: "order_memos_order_id_fkey"
   add_foreign_key "orders", "recreations", name: "orders_recreation_id_fkey"
   add_foreign_key "orders", "users", name: "orders_user_id_fkey"
-  add_foreign_key "plans", "companies", name: "plans_company_id_fkey"
   add_foreign_key "recreation_images", "recreations", name: "recreation_images_recreation_id_fkey"
   add_foreign_key "recreation_tags", "recreations", name: "recreation_tags_recreation_id_fkey"
   add_foreign_key "recreation_tags", "tags", name: "recreation_tags_tag_id_fkey"
   add_foreign_key "recreations", "users", name: "recreations_user_id_fkey"
-  add_foreign_key "reports", "orders"
+  add_foreign_key "reports", "orders", name: "reports_order_id_fkey"
   add_foreign_key "users", "companies", name: "users_company_id_fkey"
-  add_foreign_key "zooms", "orders"
+  add_foreign_key "zooms", "orders", name: "zooms_order_id_fkey"
 end

@@ -2,7 +2,7 @@
 
 require 'csv'
 
-# rubocop:disable Metrics/BlockLength, Metrics/AbcSize, Metrics/MethodLength, Style/Next
+# rubocop:disable Metrics/BlockLength, Metrics/AbcSize, Metrics/MethodLength, Style/Next, Metrics/PerceivedComplexity, Metrics/CyclomaticComplexity
 ActiveAdmin.register_page 'Invoices' do
   menu priority: 1, label: proc { '請求書CSV生成' }
 
@@ -30,7 +30,7 @@ ActiveAdmin.register_page 'Invoices' do
           title: "#{current_time.month}月分レクリエーション費用",
           code: '',
           facility_name: customer.company.facility_name,
-          tax: 10,
+          tax: '',
           payment_due_date: "#{current_time.year}/#{(current_time + 1.month).month}/25",
           items: [],
           memo: '恐れ入りますが、振込手数料はご負担いただきますようお願い申し上げます。'
@@ -44,20 +44,20 @@ ActiveAdmin.register_page 'Invoices' do
             unit: '回'
           }
 
-          if order.regular_material_price?
+          if order.number_of_people? && order.regular_material_price.present? && order.regular_material_price != 0
             invoice[:items] << {
               name: '材料費',
-              price: order.total_material_price_for_customer,
+              price: order.regular_material_price,
               amount: order.number_of_people,
               unit: '個'
             }
           end
 
-          if order.number_of_facilities?
+          if order.number_of_facilities? && order.additional_facility_fee.present? && order.additional_facility_fee != 0
             invoice[:items] << {
               name: '追加施設',
-              price: order.total_facility_price_for_customer,
-              amount: order.number_of_people,
+              price: order.additional_facility_fee,
+              amount: order.number_of_facilities,
               unit: '件'
             }
           end
@@ -104,7 +104,7 @@ ActiveAdmin.register_page 'Invoices' do
           invoice[:tax],
           invoice[:payment_due_date],
           invoice[:items].map do |item|
-            [item[:name], item[:amount], item[:unit], item[:price], invoice[:tax], ''].compact.flatten
+            [item[:name], item[:amount], item[:unit], item[:price], 10, ''].compact.flatten
           end
         ].flatten
       end
@@ -126,4 +126,4 @@ ActiveAdmin.register_page 'Invoices' do
     end
   end
 end
-# rubocop:enable Metrics/BlockLength, Metrics/AbcSize, Metrics/MethodLength, Style/Next
+# rubocop:enable Metrics/BlockLength, Metrics/AbcSize, Metrics/MethodLength, Style/Next, Metrics/PerceivedComplexity, Metrics/CyclomaticComplexity

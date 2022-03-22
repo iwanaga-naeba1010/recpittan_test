@@ -12,18 +12,45 @@ RSpec.describe 'Registrations', type: :system do
   context 'User' do
     feature 'password correct' do
       scenario 'succeeds' do
-        input_text_boxes('#user_company_attributes_name', 'name')
-        input_text_boxes('#user_company_attributes_facility_name', 'facility_name')
-        input_text_boxes('#user_company_attributes_person_in_charge_name', 'person_in_charge_name')
-        input_text_boxes('#user_company_attributes_person_in_charge_name', 'person_in_charge_name_kana')
-        # input_text_boxes('#user_name', 'name')
-        input_text_boxes('#user_email', 'test@gmail.com')
-        input_text_boxes('#user_password', '11111111')
-        input_text_boxes('#user_password_confirmation', '11111111')
+        input = {
+          user: {
+            email: 'test@gmail.com',
+            password: '11111111'
+          },
+          company: {
+            name: 'name',
+            facility_name: 'facility_name',
+            person_in_charge_name: 'person_in_charge_name',
+            person_in_charge_name_kana: 'person_in_charge_name_kana',
+            genre: 'その他'
+          }
+        }
+
+        input_text_boxes('#user_company_attributes_name', input[:company][:name])
+        input_text_boxes('#user_company_attributes_facility_name', input[:company][:facility_name])
+        input_text_boxes('#user_company_attributes_person_in_charge_name', input[:company][:person_in_charge_name])
+        input_text_boxes('#user_company_attributes_person_in_charge_name_kana', input[:company][:person_in_charge_name_kana])
+        select(input[:company][:genre], from: 'user_company_attributes_genre')
+
+        input_text_boxes('#user_email', input[:user][:email])
+        input_text_boxes('#user_password', input[:user][:password])
+        input_text_boxes('#user_password_confirmation', input[:user][:password])
         click_button '登録'
 
         expect(page).to have_content '本人確認用のメールを送信しました。メール内のリンクからアカウントを有効化させてください。'
+
         expect(page).to have_current_path root_path
+        expect(page).to have_current_path root_path
+
+        sleep 3
+        user = User.last
+        company = user.company
+
+        expect(user.email).to eq input[:user][:email]
+        expect(company.name).to eq input[:company][:name]
+        expect(company.facility_name).to eq input[:company][:facility_name]
+        expect(company.person_in_charge_name).to eq input[:company][:person_in_charge_name]
+        expect(company.person_in_charge_name_kana).to eq input[:company][:person_in_charge_name_kana]
       end
     end
   end

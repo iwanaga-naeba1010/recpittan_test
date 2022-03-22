@@ -1,8 +1,9 @@
 # frozen_string_literal: true
 
-ActiveAdmin.register Tag do
+ActiveAdmin.register Tags::Tag do
   permit_params(%i[name kind])
   actions :all
+  menu parent: 'タグ'
 
   # TODO: filterの設定がなぜかうまういかない
   filter :kind, as: :select, collection: Tag.kind.values.map { |i| [i.text, i] }
@@ -10,7 +11,6 @@ ActiveAdmin.register Tag do
   index do
     id_column
     column :name
-    column :kind_text
 
     actions
   end
@@ -19,7 +19,6 @@ ActiveAdmin.register Tag do
     attributes_table do
       row :id
       row :name
-      row(:kind)
       row :created_at
       row :updated_at
     end
@@ -29,7 +28,7 @@ ActiveAdmin.register Tag do
     f.semantic_errors
 
     f.inputs do
-      f.input :kind, as: :select, collection: Tag.kind.values.map { |i| [i.text, i] }
+      f.input :kind, as: :hidden, input_html: { value: :tag }
       f.input :name
     end
 

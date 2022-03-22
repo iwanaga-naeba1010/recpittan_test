@@ -7,8 +7,9 @@ ActiveAdmin.register Company do
   permit_params(
     :name, :facility_name, :person_in_charge_name, :person_in_charge_name_kana,
     :zip, :prefecture, :city, :street, :building, :tel,
-    plan_attributes: %i[id company_id kind _destroy],
-    user_attributes: %i[id email]
+    :genre, :url, :feature, :capacity, :nursing_care_level, :request,
+    user_attributes: %i[id email],
+    tag_ids: []
   )
 
   actions :all, except: [:destroy]
@@ -42,6 +43,12 @@ ActiveAdmin.register Company do
       row :building
       row :tel
       row :prefecture
+      row(:genre, &:genre_text)
+      row :url
+      row :feature
+      row :capacity
+      row :nursing_care_level
+      row :request
       row :created_at
       row :updated_at
     end
@@ -49,12 +56,6 @@ ActiveAdmin.register Company do
     panel I18n.t('activerecord.models.user'), style: 'margin-top: 30px;' do
       attributes_table_for company.user do
         row :email
-      end
-    end
-
-    panel I18n.t('activerecord.models.plan'), style: 'margin-top: 30px;' do
-      attributes_table_for company.plan do
-        row :kind_text
       end
     end
   end
@@ -74,9 +75,13 @@ ActiveAdmin.register Company do
       f.input :building
       f.input :tel
 
-      f.inputs I18n.t('activerecord.models.plan'), for: [:plan, f.object.plan || Plan.new({ company_id: f.object.id })] do |ff|
-        ff.input :kind, as: :select, collection: Plan.kind.values.map { |i| [i.text, i] }
-      end
+      f.input :genre, as: :select, collection: Company.genre.values.map { |val| [val.text, val] }
+      f.input :url
+      f.input :feature
+      f.input :capacity
+      f.input :nursing_care_level
+
+      f.input :tags, label: '貸出可能品', as: :check_boxes, collection: Tags::Rental.all
 
       f.inputs I18n.t('activerecord.models.user'), for: [:user, f.object.user || User.new({ company_id: f.object.id })] do |ff|
         if ff.object.id.present?

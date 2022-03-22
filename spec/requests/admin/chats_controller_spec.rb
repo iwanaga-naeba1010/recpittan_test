@@ -22,12 +22,6 @@ RSpec.describe 'Chats', type: :request do
         expect(response).to redirect_to(admin_order_path(order.id))
       end
 
-      it 'can create chat and increase one record' do
-        expect {
-          post admin_tags_path, params: { tag: attrs }
-        }.to change(Tag, :count).by(+1)
-      end
-
       it 'creates a chat as customer' do
         post admin_chats_path, params: { chat: attrs }
         expect(Chat.last.user.id).to be customer.id

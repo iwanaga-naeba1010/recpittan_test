@@ -2,21 +2,14 @@
 
 # == Schema Information
 #
-# Table name: plans
+# Table name: tags
 #
 #  id         :bigint           not null, primary key
 #  kind       :integer
+#  name       :string
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
-#  company_id :bigint           not null
 #
-# Foreign Keys
-#
-#  plans_company_id_fkey  (company_id => companies.id)
-#
-FactoryBot.define do
-  factory :plan do
-    company { nil }
-    kind { 1 }
-  end
+class Tags::Tag < Tag
+  default_scope { where(kind: :tag) }
 end

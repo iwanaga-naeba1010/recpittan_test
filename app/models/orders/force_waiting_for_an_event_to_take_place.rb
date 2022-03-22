@@ -11,6 +11,7 @@
 #  contract_number            :string
 #  end_at                     :datetime
 #  expenses                   :integer          default(0)
+#  final_check_status         :integer
 #  instructor_amount          :integer          default(0)
 #  instructor_material_amount :integer          default(0)
 #  is_accepted                :boolean          default(FALSE)
@@ -25,7 +26,6 @@
 #  support_price              :integer          default(0)
 #  transportation_expenses    :integer          default(0)
 #  zip                        :string
-#  zoom_price                 :integer          default(0)
 #  created_at                 :datetime         not null
 #  updated_at                 :datetime         not null
 #  recreation_id              :bigint           not null
