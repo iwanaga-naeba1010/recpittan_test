@@ -99,15 +99,14 @@
                   </div>
                 </div>
 
-
                 <div class="row pt-3">
                   <div class="col-auto">
                     <h3 class="card-title font-weight-bold font-14 color-ba10">貸出可能品</h3>
-
-                    <%= collection_check_boxes 'user[company_attributes]', :tag_ids, @tags, :id, :name do |tag| %>
-                      <%= tag.label { tag.check_box + tag.object.name } %>
+                    <%= ff.collection_check_boxes :tag_ids, @tags, :id, :name do |tag| %>
+                      <div>
+                        <%= tag.label { tag.check_box + tag.object.name } %>
+                      </div>
                     <% end %>
-
                   </div>
                 </div>
 

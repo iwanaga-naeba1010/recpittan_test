@@ -104,7 +104,7 @@ ActiveAdmin.register_page 'Invoices' do
           invoice[:tax],
           invoice[:payment_due_date],
           invoice[:items].map do |item|
-            [item[:name], item[:amount], item[:unit], item[:price], invoice[:tax], ''].compact.flatten
+            [item[:name], item[:amount], item[:unit], item[:price], 10, ''].compact.flatten
           end
         ].flatten
       end
