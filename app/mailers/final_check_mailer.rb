@@ -8,7 +8,8 @@ class FinalCheckMailer < ApplicationMailer
     @user_name = @user.username
     @email = @user.email
 
-    @url = "https://recreation.everyplus.jp/partners/orders/#{order.id}/final_check"
+    @check_url = "https://recreation.everyplus.jp/partners/orders/#{order.id}/final_check"
+    @report_url = "https://recreation.everyplus.jp/partners/orders/#{order.id}/reports/new"
 
     mail from: 'info@everyplus.jp', to: @email, subject: @template.title
   end

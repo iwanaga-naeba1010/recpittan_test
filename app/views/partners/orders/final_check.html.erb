@@ -7,58 +7,84 @@
   </div>
 </div>
 <div class="body bg-white p-3 mb-3">
-  <div class="mt-5 mb-5 text-black">
-    <div class="d-inline-flex">
-      <p class="pl-5 pr-3">施設名: <%= @order.user.company.name %></p>
-      <p class="pl-5">レク名: <%= @order.title %></p>
+  <% if @order.is_online %>
+    <div class="mt-5 mb-5 text-black">
+      <div>
+        <p>開催情報とオンライン開催確認項目の確認とチェックをお願いします。
+           <br />
+           感染症対策項目に該当しない場合、チャットにて報告と開催の相談をお願い致します。
+        </p>
+      </div>
+    <div class="check-info">
+      <p>■レク開催の確認について</p>
+      <div class="d-inline-flex">
+        <p class="rectitle-width">施設名: <%= @order.user.company.name %></p>
+        <p class="pl-5">レク名: <%= @order.title %></p>
+      </div>
+      <div class="d-inline-flex">
+        <p class="rectitle-width">当日の緊急連絡先: <%= @order.user.company&.tel %> </p>
+        <p class="pl-5">えぶりプラス連絡先: 05053067767</p>
+      </div>
     </div>
     <div>
-      <p>施設に特に注意していただきたい項目等がありましたら、確認のご連絡をお願い致します。</p>
-    </div>
-  <div>
-    <p>
-      下記の感染症対策の項目を確認いただき、よろしければ☑をお願い致します。
-      <br />
-      チェック後、当日までに状態が変化した場合、チャットにて日程変更の相談をお願い致します。
-    </p>
-  </div>
-  <% if @order.is_online %>
-    <div class="form-check mb-3 font-weight-bold">
-      zoomリンク内に遅くても、10分前には入室します。
-    </div>
-    <div class="form-check mb-3 font-weight-bold">
-      開始前に、こちらの声が聞こえているか、相手の声が聞こえるかの音量チェックをします。
-    </div>
-    <div class="form-check mb-3 font-weight-bold">
-      利用様の様子をできる限り見ながら開催したい方は、施設の方にカメラの位置の調節を依頼します。
+      <p>■オンライン開催確認項目</p>
+      <div class="form-check mb-3">
+        ・zoomリンクに遅くても10分前には入室します。
+      </div>
+      <div class="form-check mb-3">
+        ・開始前にこちらの声が聞こえているか、施設側の声が聞こえるかの音声チェックをします。
+      </div>
+      <div class="form-check mb-3">
+        ・利用様の様子をできる限り見ながら開催したい方は、施設の方にカメラの位置の調節を依頼します。
+      </div>
     </div>
   <% else %>
-    <div class="form-check mb-3 font-weight-bold">
-      ３日以内の体温が37.5℃以下です。
+    <div class="mt-5 mb-5 text-black">
+      <div>
+        <p>開催情報と感染症対策項目の確認とチェックをお願いします。
+           <br />
+           感染症対策項目に該当しない場合、チャットにて報告と開催の相談をお願い致します。
+           <br />
+           ※キット郵送の方はレク開催情報が問題なければ確認ボタンをお願い致します。
+        </p>
+      </div>
+    <div class="check-info">
+      <p>■レク開催の確認について</p>
+      <div class="d-inline-flex">
+        <p class="rectitle-width">施設名: <%= @order.user.company.name %></p>
+        <p class="pl-5">レク名: <%= @order.title %></p>
+      </div>
+      <div class="d-inline-flex">
+        <p class="rectitle-width">当日の緊急連絡先: <%= @order.user.company&.tel %> </p>
+        <p class="pl-5">えぶりプラス連絡先: 05053067767</p>
+      </div>
     </div>
-    <div class="form-check mb-3 font-weight-bold">
-      ３日以内の症状として息苦しさはありません。
-    </div>
-    <div class="form-check mb-3 font-weight-bold">
-      ３日以内の症状として倦怠感(だるさ)はありません。
-    </div>
-    <div class="form-check mb-3 font-weight-bold">
-      ３日以内の症状として咳、味覚、嗅覚の変化はありません。
-    </div>
-    <div class="form-check mb-3 font-weight-bold">
-      ２週間以内に家族内感染はありません。
-    </div>
-    <div class="form-check mb-3 font-weight-bold">
-      ２週間以内に、濃厚接触者と接触していません。
-    </div>
-    <div class="form-check mb-3 font-weight-bold">
-      施設内では終始マスクもしくはフェイスシールドの飛沫対策を行います。
-    </div>
-    <div class="form-check mb-3 font-weight-bold">
-      施設入館後は、体温測定や手指消毒、及び会場条件等の施設ルールを守ります。
-    </div>
-    <div class="form-check mb-3 font-weight-bold">
-      貸出物がある場合は、消毒を行います。
+    <div>
+      <p>■感染症対策</p>
+      <div class="form-check mb-3">
+        1&ensp;37.5度以上の発熱（または平熱比1度超過）がありません。
+      </div>
+      <div class="form-check mb-3">
+        2&ensp;訪問中、終始マスク着用を徹底します。（施設側と同意の場合はこの限りではありません）
+      </div>
+      <div class="form-check mb-3">
+        3&ensp;施設内では、三密を避ける様心掛け、その工夫を徹底します。
+      </div>
+      <div class="form-check mb-3">
+        4&ensp;施設より、感染対策にて依頼された事について協力します。
+      </div>
+      <div class="form-check mb-3">
+        5&ensp;本チェック項目確認後、当日までに体調が変化した場合はチャットにて報告と開催の相談をします。
+      </div>
+      <div class="form-check mb-3">
+        6&ensp;訪問前、2週間以内に以下症状がありません。
+        <p class="mt-3">・咳・喉の痛みなど風邪症状がない。</p>
+        <p>・倦怠感・呼吸困難がない。</p>
+        <p>・嗅覚・味覚の異常がない。</p>
+        <p>・新型コロナウイルス感染症陽性者と濃厚接触がない。</p>
+        <p>・同居家族や身近な知人に感染が疑われる方がいない。</p>
+        <p>・政府から入国制限、入国後の観察期間を必要とされている国、地域等への渡航又は当該在住者との濃厚接触がない。</p>
+      </div>
     </div>
   <% end %>
 
