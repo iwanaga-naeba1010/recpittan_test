@@ -119,6 +119,10 @@
   <div class="col-md-12 text-center">
     <% if order.status.unreported_completed? || order.status.final_report_admits_not? %>
       <%= f.submit '終了報告を送信する', class: 'btn btn-primary btn-lg btn-block w-100 p-3 mb-2' %>
+    <% elsif order.status.waiting_for_an_event_to_take_place? %>
+      <button type='button' class='text-white btn btn-secondary btn-lg btn-block w-100 p-3 mt-2 mb-2'>
+        開催後に記載が可能です
+      </button>
     <% else %>
       <button type='button' class='text-white btn btn-secondary btn-lg btn-block w-100 p-3 mt-2 mb-2'>
         終了報告送信済み
