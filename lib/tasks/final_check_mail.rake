@@ -9,6 +9,8 @@ namespace :send_final_check_mail do
     ).each do |order|
       order.update(final_check_status: :sent)
       FinalCheckMailer.notify(order).deliver_now
+    rescue StandardError
+      order.update(final_check_status: :not_send)
     end
   end
 end
