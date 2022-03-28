@@ -40,9 +40,9 @@ ja:
         title: 役職
       company:
         name: 法人名
-        facility_name: 施設名
-        person_in_charge_name: ご担当社名
-        person_in_charge_name_kana: ご担当社名(カタカナ)
+        facility_name: 事業所名
+        person_in_charge_name: ご担当者名
+        person_in_charge_name_kana: ご担当者名(カタカナ)
         zip: 郵便番号
         prefecture: 都道府県
         city: 市区町村
@@ -54,7 +54,7 @@ ja:
         capacity: 施設定員
         nursing_care_level: 平均介護度
         request: レクへの要望
-        genre: 施設ジャンル
+        genre: 事業所ジャンル
       partner:
         name: 名前
         title: 肩書き
