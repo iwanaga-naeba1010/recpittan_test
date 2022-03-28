@@ -8,7 +8,7 @@ namespace :send_final_check_mail do
       status: :waiting_for_an_event_to_take_place
     ).each do |order|
       ActiveRecord::Base.transaction do
-        order.update(final_check_status: :sent)
+        order.update!(final_check_status: :sent)
         FinalCheckMailer.notify(order).deliver_now
       end
     rescue StandardError => e
