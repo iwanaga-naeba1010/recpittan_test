@@ -253,6 +253,7 @@ ActiveAdmin.register Order do
     rescue StandardError => e
       Rails.logger.error e
       Sentry.capture_exception(e)
+      super
     end
 
     def update
