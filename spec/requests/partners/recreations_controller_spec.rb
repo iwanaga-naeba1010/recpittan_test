@@ -83,7 +83,6 @@ RSpec.describe Partners::RecreationsController, type: :request do
     end
   end
 
-
   # describe 'GET /show' do
   #   context 'with valid user' do
   #     it 'return http success' do

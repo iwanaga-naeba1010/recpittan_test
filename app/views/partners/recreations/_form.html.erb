@@ -73,7 +73,7 @@
 
   <div>
     <p class="pt-2 pb-2 w-25 border-bottom text-black w-100">カテゴリー</p>
-    <%= f.collection_check_boxes :tag_ids, @categories, :id, :name do |tag| %>
+    <%= f.collection_check_boxes :tag_ids, categories, :id, :name do |tag| %>
       <div>
         <%= tag.label { tag.check_box + tag.object.name } %>
       </div>
@@ -81,7 +81,7 @@
   </div>
   <div>
     <p class="pt-2 pb-2 w-25 border-bottom text-black w-100">イベント種別</p>
-    <%= f.collection_check_boxes :tag_ids, @events, :id, :name do |tag| %>
+    <%= f.collection_check_boxes :tag_ids, events, :id, :name do |tag| %>
       <div>
         <%= tag.label { tag.check_box + tag.object.name } %>
       </div>
@@ -90,7 +90,7 @@
 
   <div>
     <p class="pt-2 pb-2 w-25 border-bottom text-black w-100">想定ターゲット</p>
-    <%= f.collection_check_boxes :tag_ids, @targets, :id, :name do |tag| %>
+    <%= f.collection_check_boxes :tag_ids, targets, :id, :name do |tag| %>
       <div>
         <%= tag.label { tag.check_box + tag.object.name } %>
       </div>
