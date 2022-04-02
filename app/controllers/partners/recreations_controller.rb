@@ -10,11 +10,11 @@ class Partners::RecreationsController < Partners::ApplicationController
   def show; end
 
   def new
-    @recreeation = current_user.recreations.build
+    @recreation = current_user.recreations.build
   end
 
   def create
-    @recreation = Recreation.new(params_create)
+    @recreation = current_user.recreations.build(params_create)
     if @recreation.save
       redirect_to partners_recreation_path(@recreation), notice: 'レクリエーションを追加しました！'
     else

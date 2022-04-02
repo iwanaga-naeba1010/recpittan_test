@@ -37,7 +37,7 @@ Rails.application.routes.draw do
   namespace :partners do
     get :tos
 
-    resources :recreations
+    resources :recreations, except: :destroy
     resources :orders, only: %i[show update] do
       member do
         get :chat
