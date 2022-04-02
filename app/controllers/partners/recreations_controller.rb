@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Partners::RecreationsController < Partners::ApplicationController
-  before_action :set_recreation, only: %i[show edit destroy]
+  before_action :set_recreation, only: %i[show edit update]
 
   def index
     @recreations = current_user.recreations
@@ -30,6 +30,8 @@ class Partners::RecreationsController < Partners::ApplicationController
     end
   end
 
+  def edit; end
+
   def complete_final_check; end
 
   private
@@ -39,6 +41,12 @@ class Partners::RecreationsController < Partners::ApplicationController
   end
 
   def params_create
-    params.require(:order).permit(:status, :is_accepted, :start_at)
+    params.require(:recreation).permit(
+      :title, :second_title, :minutes, :description,
+      :flow_of_day, :borrow_item, :bring_your_own_item, :extra_information, :youtube_id,
+      :capacity, :instructor_amount, :instructor_material_amount,
+      :instructor_name, :instructor_title, :instructor_description, :instructor_image,
+      :is_online, :is_public, :additional_facility_fee
+    )
   end
 end

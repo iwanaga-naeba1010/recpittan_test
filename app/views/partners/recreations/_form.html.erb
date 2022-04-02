@@ -1,0 +1,76 @@
+<%= simple_form_for recreation, url: url do |f| %>
+  <h4 class="text-black font-weight-bold">項目を入力してください</h4>
+  <div>
+    <p class="pt-2 pb-2 w-25 border-bottom text-black w-100"><%= t('activerecord.attributes.recreation.title') %></p>
+    <%= f.input :title, label: false %>
+  </div>
+  <div>
+    <p class="pt-2 pb-2 w-25 border-bottom text-black w-100"><%= t('activerecord.attributes.recreation.second_title') %></p>
+    <%= f.input :second_title, label: false %>
+  </div>
+
+  <div>
+    <p class="pt-2 pb-2 w-25 border-bottom text-black w-100"><%= t('activerecord.attributes.recreation.minutes') %></p>
+    <%= f.input :minutes, label: false %>
+  </div>
+  <div>
+    <p class="pt-2 pb-2 w-25 border-bottom text-black w-100"><%= t('activerecord.attributes.recreation.description') %></p>
+    <%= f.input :description, label: false %>
+  </div>
+  <div>
+    <p class="pt-2 pb-2 w-25 border-bottom text-black w-100"><%= t('activerecord.attributes.recreation.flow_of_day') %></p>
+    <%= f.input :flow_of_day, label: false %>
+  </div>
+  <div>
+    <p class="pt-2 pb-2 w-25 border-bottom text-black w-100"><%= t('activerecord.attributes.recreation.borrow_item') %></p>
+    <%= f.input :borrow_item, label: false %>
+  </div>
+  <div>
+    <p class="pt-2 pb-2 w-25 border-bottom text-black w-100"><%= t('activerecord.attributes.recreation.bring_your_own_item') %></p>
+    <%= f.input :bring_your_own_item, label: false %>
+  </div>
+  <div>
+    <p class="pt-2 pb-2 w-25 border-bottom text-black w-100"><%= t('activerecord.attributes.recreation.extra_information') %></p>
+    <%= f.input :extra_information, label: false %>
+  </div>
+  <div>
+    <p class="pt-2 pb-2 w-25 border-bottom text-black w-100"><%= t('activerecord.attributes.recreation.youtube_id') %></p>
+    <%= f.input :youtube_id, label: false %>
+  </div>
+  <div>
+    <p class="pt-2 pb-2 w-25 border-bottom text-black w-100"><%= t('activerecord.attributes.recreation.capacity') %></p>
+    <%= f.input :capacity, label: false %>
+  </div>
+
+  <div>
+    <p class="pt-2 pb-2 w-25 border-bottom text-black w-100"><%= t('activerecord.attributes.recreation.instructor_amount') %></p>
+    <%= f.input :instructor_amount, label: false %>
+  </div>
+  <div>
+    <p class="pt-2 pb-2 w-25 border-bottom text-black w-100"><%= t('activerecord.attributes.recreation.instructor_material_amount') %></p>
+    <%= f.input :instructor_material_amount, label: false %>
+  </div>
+  <div>
+    <p class="pt-2 pb-2 w-25 border-bottom text-black w-100"><%= t('activerecord.attributes.recreation.instructor_name') %></p>
+    <%= f.input :instructor_name, label: false %>
+  </div>
+  <div>
+    <p class="pt-2 pb-2 w-25 border-bottom text-black w-100"><%= t('activerecord.attributes.recreation.instructor_title') %></p>
+    <%= f.input :instructor_title, label: false %>
+  </div>
+  <div>
+    <p class="pt-2 pb-2 w-25 border-bottom text-black w-100"><%= t('activerecord.attributes.recreation.instructor_description') %></p>
+    <%= f.input :instructor_description, label: false %>
+  </div>
+  <div>
+    <p class="pt-2 pb-2 w-25 border-bottom text-black w-100"><%= t('activerecord.attributes.recreation.is_online') %></p>
+    <%= f.input :is_online, label: false %>
+  </div>
+  <div>
+    <p class="pt-2 pb-2 w-25 border-bottom text-black w-100"><%= t('activerecord.attributes.recreation.additional_facility_fee') %></p>
+    <%= f.input :additional_facility_fee, label: false %>
+  </div>
+  <div class="mt-5">
+    <%= f.submit '編集する', class: 'btn btn-primary btn-lg btn-block w-100 p-3 mb-2' %>
+  </div>
+<% end %>
