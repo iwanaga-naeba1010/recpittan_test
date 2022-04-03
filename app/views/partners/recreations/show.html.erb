@@ -13,12 +13,6 @@
     <table class="w-100">
       <thead>
       <tr class="border-bottom">
-        <td class="pt-2 pb-2 w-25">レク名</td>
-        <td class="pt-2 pb-2 text-black text-end">
-          <%= @recreation.title %>
-        </td>
-      </tr>
-      <tr class="border-bottom">
         <td class="pt-2 pb-2 w-25"><%= t('activerecord.attributes.recreation.title') %></td>
         <td class="pt-2 pb-2 text-black text-end"><%= @recreation.title  %></td>
       </tr>
@@ -103,7 +97,11 @@
       </tr>
       <tr class="border-bottom">
         <td class="pt-2 pb-2 w-25">登録画像</td>
-        <td class="pt-2 pb-2 text-black text-end">後で入れる</td>
+        <td class="pt-2 pb-2 text-black text-end">
+          <% @recreation.recreation_images.each do |image| %>
+            <%= image_tag image.image.to_s, width: 100 %>
+          <% end %>
+        </td>
       </tr>
       </tbody>
     </table>

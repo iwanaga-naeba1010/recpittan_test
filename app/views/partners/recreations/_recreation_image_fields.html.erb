@@ -1,6 +1,6 @@
 <div class="nested-fields row">
   <% if f.object.image.to_s.present? %>
-    <%= image_tag f.object.image.to_s %>
+    <%= image_tag f.object.image.to_s, width: 100 %>
   <% else %>
     <%= f.input :image, as: :file %>
   <% end %>
