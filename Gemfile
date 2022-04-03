@@ -93,6 +93,8 @@ gem 'redis'
 gem 'sentry-ruby'
 gem 'sentry-rails'
 
+gem 'cocoon'
+
 # seo
 gem 'meta-tags'
 gem 'sitemap_generator'
