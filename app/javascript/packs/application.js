@@ -13,6 +13,8 @@ Turbolinks.start()
 ActiveStorage.start()
 
 require('jquery');
+require('cocoon');
+
 // require('popper.js');
 import 'bootstrap';
 import '../stylesheets/application.scss';
