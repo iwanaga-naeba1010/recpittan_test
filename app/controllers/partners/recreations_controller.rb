@@ -55,7 +55,8 @@ class Partners::RecreationsController < Partners::ApplicationController
       :capacity, :instructor_amount, :instructor_material_amount,
       :instructor_name, :instructor_title, :instructor_description, :instructor_image,
       :is_online, :is_public, :additional_facility_fee,
-      { tag_ids: [] }
+      { tag_ids: [] },
+      recreation_images_attributes: %i[id image _destroy]
     )
   end
 end

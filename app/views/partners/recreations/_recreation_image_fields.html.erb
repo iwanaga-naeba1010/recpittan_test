@@ -1,0 +1,13 @@
+<div class="nested-fields row">
+  <% if f.object.image.to_s.present? %>
+    <%= image_tag f.object.image.to_s %>
+  <% else %>
+    <%= f.input :image, as: :file %>
+  <% end %>
+  <div class="cocoon">
+    <% remove_button = capture do %>
+      削除
+    <% end %>
+    <%= link_to_remove_association remove_button, f %>
+  </div>
+</div>

@@ -97,6 +97,25 @@
     <% end %>
   </div>
 
+  <div>
+    <p class="pt-2 pb-2 w-25 border-bottom text-black w-100">画像</p>
+    <div class="nested_items">
+      <%= f.simple_fields_for :recreation_images do |ff| %>
+        <div>
+          <%= render 'partners/recreations/recreation_image_fields', f: ff %>
+        </div>
+      <% end %>
+    </div>
+    <% add_button = capture do %>
+      追加
+    <% end %>
+    <%= link_to_add_association add_button,
+      f,
+      :recreation_images,
+      partial: 'partners/recreations/recreation_image_fields',
+      data: { association_insertion_node: '.nested_items', association_insertion_method: 'append' } %>
+  </div>
+
   <div class="mt-5">
     <%= f.submit '編集する', class: 'btn btn-primary btn-lg btn-block w-100 p-3 mb-2' %>
   </div>
