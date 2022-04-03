@@ -79,7 +79,27 @@
               <h3>当日の流れとタイムスケジュール</h3>
               <p><%= simple_format @recreation.flow_of_day %></p>
             </div>
-            <div class="border-top py-3"></div>
+              <div class="border-top py-3 partner-prof">
+                <h3>このレクリエーションの講師</h3>
+                <% if current_user.nil? %>
+                  <%= link_to new_user_session_path do %>
+                    <div class="row align-items-center partner-info">
+                      <div class="col-md-4 text-center">
+                        <%= image_tag @recreation&.instructor_image&.to_s, class: "align-self-center rounded-circle", width: 90 %>
+                        <h4><%= @recreation.instructor_name %></h4>
+                      </div>
+                      <div class="col-md-8">
+                        <h4 class="instructor-position h5"><%= @recreation.instructor_title %></h4>
+                        <p class="instructor-content"><%= simple_format @recreation.instructor_description %></p>
+                      </div>
+                    </div>
+                    <div class="link-login-text text-center mt-5">
+                      <p>講師の情報を確認するにはログインが必要です</p>
+                      <button class="btn-cpr">ログインする</button>
+                    </div>
+                  <% end %>
+                <% end %>
+              </div>
 
             <% if user_signed_in? %>
               <div class="r-t-a">
