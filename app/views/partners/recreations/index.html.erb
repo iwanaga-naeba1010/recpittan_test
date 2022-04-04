@@ -5,6 +5,10 @@
     <%= render 'shared/partner/sidebar_toggle' %>
 </div>
 
+<div class="my-3">
+  <%= link_to '追加', new_partners_recreation_path, class: 'btn btn-primary btn-lg btn-block w-100 p-3 mb-2 text-white' %>
+</div>
+
 <% @recreations.each do |recreation| %>
   <%= link_to partners_recreation_path(recreation.id) do %>
     <div class="order-wrapper my-2 border-bottom p-3">
