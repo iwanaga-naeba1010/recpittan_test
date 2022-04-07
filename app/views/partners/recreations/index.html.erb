@@ -1,0 +1,28 @@
+<div class="header">
+    <h2 class="text-white font-weight-bold p-2">
+      レクリエーション一覧
+    </h2>
+    <%= render 'shared/partner/sidebar_toggle' %>
+</div>
+
+<div class="my-3">
+  <%= link_to '追加', new_partners_recreation_path, class: 'btn btn-primary btn-lg btn-block w-100 p-3 mb-2 text-white' %>
+</div>
+
+<% @recreations.each do |recreation| %>
+  <%= link_to partners_recreation_path(recreation.id) do %>
+    <div class="order-wrapper my-2 border-bottom p-3">
+      <div class="company_name">
+        <h3>
+          <%= "#{recreation.title} #{recreation.second_title}".truncate(100) %>
+        </h3>
+      </div>
+      <div class="partner_name">
+        <%= recreation.description.truncate(50) %>
+      </div>
+      <div class="date">
+        更新日：<%= dotted_datetime recreation.created_at %>
+      </div>
+    </div>
+  <% end %>
+<% end %>

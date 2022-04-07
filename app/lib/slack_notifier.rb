@@ -20,6 +20,8 @@ class SlackNotifier
   end
 
   def send(title, message)
+    return if Rails.env.test?
+
     payload = {
       fallback: 'Application raise error',
       text: message,
