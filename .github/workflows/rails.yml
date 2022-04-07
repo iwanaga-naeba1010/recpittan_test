@@ -6,8 +6,7 @@ env:
   POSTGRES_PASSWORD: postgres
   POSTGRES_DB: ep_matching_test
   MAIL_SENDER_FROM: no-reply@ep.net
-#  SLACK_WEBHOOK_URL: https://hooks.slack.com/services/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
-  SLACK_WEBHOOK: https://hooks.slack.com/services/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
+  SLACK_WEBHOOK: https://hooks.slack.com/services/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
   SLACK_USERNAME: github_actions_bot
   SLACK_CHANNEL: github-actions
 
