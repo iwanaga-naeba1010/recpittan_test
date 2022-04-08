@@ -20,6 +20,11 @@ class CustomDevise::RegistrationsController < Devise::RegistrationsController
         username: params[:user][:company_attributes][:person_in_charge_name],
         username_kana: params[:user][:company_attributes][:person_in_charge_name_kana]
       )
+      message = <<~MESSAGE
+        事業所名： #{resource.company.facility_name}
+        管理画面案件URL： #{admin_company_url(resource.company.id)}
+      MESSAGE
+      SlackNotifier.new(channel: '#アクティブチャットスレッド').send('新規登録がありました', message)
     end
   end
 
