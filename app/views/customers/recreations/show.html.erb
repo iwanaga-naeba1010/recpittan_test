@@ -79,11 +79,11 @@
               <h3>当日の流れとタイムスケジュール</h3>
               <p><%= simple_format @recreation.flow_of_day %></p>
             </div>
-            <% if current_user.nil? %>
+            <% unless user_signed_in? %>
               <div class="border-top py-3">
                 <h3>このレクリエーションの講師</h3>
                 <%= link_to new_user_session_path do %>
-                  <%= image_tag 'partner-info.png' %>
+                  <%= image_pack_tag 'partner-info.png', class: 'w-100' %>
                 <% end %>
               </div>
             <% end %>
