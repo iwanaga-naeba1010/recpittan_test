@@ -22,9 +22,9 @@ Rails.application.configure do
     config.action_controller.enable_fragment_cache_logging = true
 
     # config.cache_store = :memory_store
-    config.public_file_server.headers = {
-      'Cache-Control' => "public, max-age=#{2.days.to_i}"
-    }
+    # config.public_file_server.headers = {
+    #   'Cache-Control' => "public, max-age=#{2.days.to_i}"
+    # }
     config.cache_store = :redis_cache_store, {
       url: ENV['REDIS_URL'],
       connect_timeout: 30,
