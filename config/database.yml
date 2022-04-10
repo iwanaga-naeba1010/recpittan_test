@@ -23,6 +23,7 @@ default: &default
   host: <%= ENV.fetch("DATABASE_HOST") { "" } %>
   username: <%= ENV.fetch("DATABASE_USER") { "" } %>
   password: <%= ENV.fetch("DATABASE_PASSWORD") { "" } %>
+
 development:
   <<: *default
   database: maching_system_development
