@@ -57,7 +57,8 @@ development:
   # Reference: https://webpack.js.org/configuration/dev-server/
   dev_server:
     https: false
-    host: localhost
+    # host: localhost # localで開発する場合はこちらを記述
+    host: webpacker
     port: 3035
     public: localhost:3035
     hmr: false

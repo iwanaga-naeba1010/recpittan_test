@@ -10,16 +10,13 @@
 ```
 # 最初のセットアップ
 docker-compose build
-docker-compose run --rm web bin/setup
 
-# seedデータの投入
-docker-compose run --rm web bin/rails db:seed_fu
+# logありの起動(db/rails/webpacker同時起動)
+docker-compose up
 
-# サーバー起動
-docker-compose run --rm --service-ports web
+# logなし(db/rails/webpacker同時起動)
+docker-compose up -d
 
-# workerの起動
-docker-compose run --rm --service-ports worker
 
 # rspecの実行
 docker-compose run --rm web bundle exec rspec
@@ -31,17 +28,12 @@ docker-compose run --rm web bin/rails db:migrate RAILS_ENV=test
 # rubocopの実行
 docker-compose run --rm web bundle exec rubocop
 
-# html hamlの実行
-docker-compose run --rm web bundle exec haml-lint app/views/
-
 # brakemanの実行
 docker-compose run --rm web bundle exec brakeman
 
 # best practicesの実行
 docker-compose run --rm web bundle exec rails_best_practices -e node_modules
 
-# webpackerの起動
-bin/webpack-dev-server
 ```
 
 ### gitのブランチの命名規則
