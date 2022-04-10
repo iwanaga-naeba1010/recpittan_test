@@ -108,10 +108,11 @@ class Customers::OrdersController < Customers::ApplicationController
 
       # TODO: jobで送信したい
       OrderRequestMailer.notify(@order, current_user).deliver_now
-      redirect_to complete_customers_order_path(@order.id), notice: '正式に依頼しました'
+
+      redirect_to complete_customers_order_path(@order.id), notice: '正式に依頼しました' # rubocop:disable Rails/I18nLocaleTexts
     end
   rescue StandardError
-    redirect_to chat_customers_order_path(@order.id), alert: '失敗しました。もう一度お試しください'
+    redirect_to chat_customers_order_path(@order.id), alert: t('action_messages.failed')
   end
 
   private

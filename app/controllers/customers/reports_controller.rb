@@ -23,7 +23,7 @@ class Customers::ReportsController < Customers::ApplicationController
         ReportAcceptMailer.notify(order).deliver_now
       end
 
-      redirect_to customers_order_path(order.id), notice: '終了報告を更新しました'
+      redirect_to customers_order_path(order.id), notice: t('action_messages.created', model_name: Report.model_name.human)
     else
       render :edit
     end

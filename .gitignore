@@ -44,3 +44,4 @@ coverage
 .env
 erd.pdf
 .tags
+.solargraph.yml

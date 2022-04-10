@@ -17,7 +17,7 @@ class Partners::RecreationsController < Partners::ApplicationController
   def create
     @recreation = current_user.recreations.build(params_create)
     if @recreation.save
-      redirect_to partners_recreation_path(@recreation), notice: 'レクリエーションを追加しました！'
+      redirect_to partners_recreation_path(@recreation), notice: t('action_messages.created', model_name: Recreation.model_name.human)
     else
       render :new
     end
@@ -25,7 +25,7 @@ class Partners::RecreationsController < Partners::ApplicationController
 
   def update
     if @recreation.update(params_create)
-      redirect_to partners_recreation_path(@recreation), notice: 'レクリエーションを更新しました！'
+      redirect_to partners_recreation_path(@recreation), notice: t('action_messages.updated', model_name: Recreation.model_name.human)
     else
       render :edit
     end
