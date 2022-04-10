@@ -18,7 +18,7 @@ class Customers::ChatsController < Customers::ApplicationController
       PartnerChatMailer.notify(@order, current_user).deliver_now # TODO: jobで送信したい
       redirect_to chat_customers_order_path(@order.id)
     else
-      redirect_to chat_customers_order_path(@order.id), alert: '送信に失敗しました'
+      redirect_to chat_customers_order_path(@order.id), alert: t('action_messages.failed')
     end
   end
 

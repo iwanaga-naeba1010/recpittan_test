@@ -19,7 +19,7 @@ class Partners::ReportsController < Partners::ApplicationController
 
     if @order.save
       CustomerCompleteReportMailer.notify(@order).deliver_now
-      redirect_to partners_order_path(@order.id), notice: '終了報告を投稿しました！'
+      redirect_to partners_order_path(@order.id), notice: t('action_messages.created', model_name: Report.model_name.human)
     else
       render :new
     end
@@ -39,7 +39,7 @@ class Partners::ReportsController < Partners::ApplicationController
         number_of_facilities: params_create[:number_of_facilities].to_i
       )
       CustomerCompleteReportMailer.notify(@order).deliver_now
-      redirect_to partners_order_path(@order.id), notice: '終了報告を更新しました！'
+      redirect_to partners_order_path(@order.id), notice: t('action_messages.updated', model_name: Report.model_name.human)
     else
       render :edit
     end
@@ -70,6 +70,6 @@ class Partners::ReportsController < Partners::ApplicationController
   end
 
   def restrict_initialization
-    redirect_to edit_partners_order_report_path(id: @order.report, order_id: @order), alert: '終了報告は作成済みです' if @order.report.present?
+    redirect_to edit_partners_order_report_path(id: @order.report, order_id: @order), alert: '終了報告は作成済みです' if @order.report.present? # rubocop:disable Rails/I18nLocaleTexts
   end
 end

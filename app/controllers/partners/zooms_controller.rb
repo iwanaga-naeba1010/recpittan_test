@@ -14,7 +14,7 @@ class Partners::ZoomsController < Partners::ApplicationController
       SlackNotifier
         .new(channel: '#アクティブチャットスレッド')
         .send('パートナーがZoomを更新しました', "管理画面案件URL：#{admin_order_url(@order.id)}")
-      redirect_to partners_order_path(@order.id), notice: 'Zoom情報を追加しました'
+      redirect_to partners_order_path(@order.id), notice: t('action_messages.created', model_name: Zoom.model_name.human)
     else
       render :new
     end
@@ -29,7 +29,7 @@ class Partners::ZoomsController < Partners::ApplicationController
       SlackNotifier
         .new(channel: '#アクティブチャットスレッド')
         .send('パートナーがZoomを更新しました', "管理画面案件URL：#{admin_order_url(@order.id)}")
-      redirect_to partners_order_path(@order.id), notice: 'Zoom情報を変更しました'
+      redirect_to partners_order_path(@order.id), notice: t('action_messages.updated', model_name: Zoom.model_name.human)
     else
       render :edit
     end
@@ -52,7 +52,7 @@ class Partners::ZoomsController < Partners::ApplicationController
     return if zoom.nil?
 
     if zoom.created_by.admin?
-      redirect_to partners_order_path(@order.id), alert: '管理者が登録したZoom情報は変更できません'
+      redirect_to partners_order_path(@order.id), alert: t('action_messages.unauthorized')
     end
   end
 end
