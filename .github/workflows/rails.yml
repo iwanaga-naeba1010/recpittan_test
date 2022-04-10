@@ -9,6 +9,10 @@ env:
   SLACK_WEBHOOK: https://hooks.slack.com/services/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
   SLACK_USERNAME: github_actions_bot
   SLACK_CHANNEL: github-actions
+  AWS_ACCESS_KEY_ID: AKIASN7APX6NOANAVIJ2
+  AWS_BUCKET: matching-system-staging
+  AWS_REGION: ap-northeast-1
+  AWS_SECRET_ACCESS_KEY: 0Mf2Hjc4SUuOZ5dfAxPZI/Q4GrByML5hEA30Yl+p
 
 name: Lint check
 on: [push]
@@ -124,7 +128,6 @@ jobs:
       - name: Run rspec
         run: |
             bundle exec rspec
-
 
       #-- Slack通知 --#
       # 成功
