@@ -17,6 +17,8 @@ docker-compose up
 # logなし(db/rails/webpacker同時起動)
 docker-compose up -d
 
+# 個別実行
+docker-compose run --rm --service-ports web
 
 # rspecの実行
 docker-compose run --rm web bundle exec rspec
