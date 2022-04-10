@@ -113,7 +113,7 @@ jobs:
           POSTGRES_PASSWORD: ${{ env.POSTGRES_PASSWORD }}
         run: |
           cp ./config/database.yml.ci ./config/database.yml
-          bundle exec rake db:create RAILS_ENV=test
+          # bundle exec rake db:create RAILS_ENV=test
           bundle exec rails db:create RAILS_ENV=test
           bundle exec rails db:migrate RAILS_ENV=test
 
