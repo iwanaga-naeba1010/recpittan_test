@@ -40,7 +40,7 @@ RSpec.describe Partners::ReportsController, type: :request do
 
       get edit_partners_order_zoom_path(order_id: order.id, id: zoom.id)
       expect(response).to redirect_to partners_order_path(order.id)
-      expect(flash[:alert]).to match(/管理者が登録したZoom情報は変更できません/)
+      expect(flash[:alert]).to match(/権限がありません/)
     end
 
     it 'returns http success' do
@@ -57,7 +57,7 @@ RSpec.describe Partners::ReportsController, type: :request do
 
         get edit_partners_order_zoom_path(order_id: order.id, id: zoom.id)
         expect(response).to redirect_to partners_order_path(order.id)
-        expect(flash[:alert]).to match(/管理者が登録したZoom情報は変更できません/)
+        expect(flash[:alert]).to match(/権限がありません/)
       end
 
       it 'returns 302 status' do

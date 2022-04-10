@@ -6,7 +6,7 @@ class Partners::ApplicationController < ApplicationController
 
   # rubocop:disable Lint/SafeNavigationChain
   def require_partner
-    redirect_to root_path, alert: '権限がありません' unless current_user&.role.partner?
+    redirect_to root_path, alert: t('action_messages.unauthorized') unless current_user&.role.partner?
   end
   # rubocop:enable Lint/SafeNavigationChain
 end

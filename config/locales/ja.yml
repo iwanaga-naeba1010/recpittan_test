@@ -11,15 +11,6 @@ ja:
         format: "%u%n"
         negative_format: "-%u%n"
         precision: 0
-  mail:
-    title:
-      common: 化粧品、健康食品原料データベース「INGREBANK」からのお知らせです
-      application_of_user_company: 【INGREBANK】閲覧申請が届いております
-      accepted_application_of_user_company: 【INGREBANK】閲覧申請が承認されました
-    separator: ===================================================
-    publisher: 【発行元】
-    about: 化粧品、健康食品原料データベース「INGREBANK」
-    form: お問合せフォーム
   common:
     errors_handler:
       title: "%{status_code} Error Page"
@@ -51,16 +42,8 @@ ja:
     created: "%{model_name}を追加しました！"
     updated: "%{model_name}を修正しました！"
     deleted: "%{model_name}を削除しました！"
+    failed: "失敗しました。もう一度お試しください。"
     unauthorized: "権限がありません"
-  wicked:
-    product_steps:
-      base: 原料基礎情報
-      jsln_ingredient_info: 化粧品表示名称情報
-      safety_evaluation_test_info: 安全性評価試験情報
-      treaty_info: 各種条約
-      animal_origin_raw_material_info: 反芻動物由来原料情報
-      regulatory_compliance_informations_info: 化粧品に関する規制への適合情報　ポジティブリスト、ネガティブリスト、ナノ情報
-      regulations_governing_ingredients_info: 使用可能な成分を規定する規制情報
   time:
     formats:
       default: "%Y年%m月%d日 (%a) %H:%M"
