@@ -1,1 +1,2 @@
-<%= simple_format(render(template: "#{controller.controller_path}/#{controller.action_name}.text")) %>
+<%= simple_format ERB.new(@template.body).result(binding) %>
+<%= simple_format @template.signature %>
