@@ -28,8 +28,7 @@ namespace :copy_category do
     recreations = Recreation.all
 
     recreations.each do |rec|
-      puts rec.tags.categories.first.name
-      category = str_to_num(rec.tags.categories.first.name)
+      category = str_to_num(rec.tags.categories&.first&.name)
       next if category.blank?
 
       rec.update(category: category)
