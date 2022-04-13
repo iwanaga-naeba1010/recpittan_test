@@ -4,7 +4,7 @@
 ActiveAdmin.register Recreation do
   permit_params(
     %i[
-      user_id title second_title minutes description
+      user_id title second_title minutes description category
       flow_of_day borrow_item bring_your_own_item extra_information youtube_id
       base_code capacity flyer_color regular_price instructor_amount instructor_material_amount
       regular_material_price instructor_name instructor_title instructor_description instructor_image
@@ -26,6 +26,7 @@ ActiveAdmin.register Recreation do
     column :user
     column :title
     column :second_title
+    column(:category, &:category_text)
     column :minutes
     column :regular_price
     column :is_public_price
@@ -39,6 +40,7 @@ ActiveAdmin.register Recreation do
       row :user
       row :title
       row :second_title
+      row(:category, &:category_text)
       row :minutes
       row :description
       row :flow_of_day
@@ -142,7 +144,7 @@ ActiveAdmin.register Recreation do
       f.input :additional_facility_fee, hint: 'エブリ・プラス取り分の1000円 + パートナー支払い分の合計を入力してください'
     end
 
-    f.input :tags, label: 'カテゴリー', as: :select, collection: Tag.categories.all, multiple: false, hint: 'カテゴリーは一つだけ選択してください。色付きのボタンを生成します'
+    f.input :category, as: :select, collection: Recreation.category.values.map { |val| [val.text, val] }
     f.input :tags, label: 'タグ', as: :check_boxes, collection: Tag.events.all
     f.input :tags, label: '想定ターゲット', as: :check_boxes, collection: Tag.targets.all
 
