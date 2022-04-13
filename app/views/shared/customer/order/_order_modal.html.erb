@@ -79,24 +79,7 @@
                 <div class="col-auto p-0 flex-v-c">施設</div>
               </div>
             <% end %>
-            <!--            {{#if isOnline}}-->
-            <!--            {{'オンラインレク'}}-->
-            <!--            <div class="row pt-3">-->
-            <!--              <label class="col-12 title-b pb-3"-->
-            <!--                     for="facilityCount">追加で参加する施設がある場合施設数をご記入ください</label>-->
-            <!--              <div class="form-group col-3">-->
-            <!--                <input class="form-control {{facilityCountFormClass}}" id="facilityCount"-->
-            <!--                       name="facilityCount" type="tel" placeholder="施設数を入力"-->
-            <!--                       value="{{facilityCount}}">-->
-            <!--              </div>-->
-            <!--              <div class="col-auto p-0 flex-v-c">施設</div>-->
-            <!--              {{#if hasError}}-->
-            <!--              <div class="invalid-feedback d-block">-->
-            <!--                <span>{{facilityCountError}}</span>-->
-            <!--              </div>-->
-            <!--              {{/if}}-->
-            <!--            </div>-->
-            <!--            {{else}}-->
+
             <div class="row pt-3">
               <span class="p-country-name" style="display:none;">Japan</span>
               <label class="col-12 title-b pb-3" for="participant">
@@ -128,6 +111,7 @@
             </div>
 
             <div class="card mt-3">
+              <div id="OrderForm"></div>
               <div class="card-body">
                 <h5 class="card-title title-b">レク 費用</h5>
                 <div class="row justify-content-between border-bottom-dotted pb-2">
@@ -175,6 +159,7 @@
                 </div>
               </div>
             </div>
+
             <div class="card mt-4">
               <div class="card-body">
                 <h5 class="card-title title-b">注意事項</h5>
@@ -191,16 +176,10 @@
               </div>
               <div class="col-7 text-center">
                 <%= f.submit 'パートナーにレク開催を正式依頼する', class: 'btn btn-cprimary rounded-pill font-14 py-3 px-4 font-weight-bold text-white' %>
-                <!--                <input type="hidden" name="_csrf" value="{{csrfToken}}">-->
-                <!--                <button id="submit-button" type="submit" name="action" value="preview"-->
-                <!--                        class="btn btn-cprimary rounded-pill font-14 py-3 px-4 font-weight-bold text-white"-->
-                <!--                        {{submitDisabled}}>-->
-                <!--                  <span class="">パートナーにレク開催を正式依頼する</span></button>-->
               </div>
             </div>
           </div>
         <% end %>
-        <!--        </form>-->
       </div>
     </div>
   </div>

@@ -1,9 +1,15 @@
+# frozen_string_literal: true
+
 class OrderSerializer
   def serialize_list(orders:)
     orders.map { |order| serialize(order: order) }
   end
 
   def serialize(order:)
+    recreation = RecreationSerializer.new.serialize(recreation: order.recreation)
+    puts '----------------------'
+    puts recreation
+    puts '----------------------'
     {
       id: order.id,
       expenses: order.expenses,
@@ -13,7 +19,10 @@ class OrderSerializer
       number_of_facilities: order.number_of_facilities,
       price: order.price,
       material_price: order.material_price,
-      total_price_for_customer: order.total_price_for_customer
+      total_facility_price_for_customer: order.total_facility_price_for_customer,
+      total_price_for_customer: order.total_price_for_customer,
+      total_material_price_for_customer: order.total_material_price_for_customer,
+      recreation: recreation
     }
   end
 end
