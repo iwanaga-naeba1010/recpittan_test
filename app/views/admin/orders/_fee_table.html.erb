@@ -2,7 +2,7 @@
   <table>
     <tr>
       <td>開催費</td>
-      <td><%= number_to_currency order.regular_price %></td>
+      <td><%= number_to_currency order.price %></td>
     </tr>
 
     <tr>
@@ -12,7 +12,7 @@
 
     <tr>
       <td>材料費/名</td>
-      <td><%= number_to_currency order.regular_material_price %></td>
+      <td><%= number_to_currency order.material_price %></td>
     </tr>
 
     <tr>
@@ -61,7 +61,7 @@
   <table>
     <tr>
       <td>謝礼</td>
-      <td><%= number_to_currency order.instructor_amount %></td>
+      <td><%= number_to_currency order.amount %></td>
     </tr>
 
     <tr>
@@ -71,7 +71,7 @@
 
     <tr>
       <td>材料費/名</td>
-      <td><%= number_to_currency order.instructor_material_amount %></td>
+      <td><%= number_to_currency order.material_amount %></td>
     </tr>
 
     <tr>

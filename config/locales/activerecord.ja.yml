@@ -75,10 +75,9 @@ ja:
         base_code: base_code
         capacity: キャパシティ
         flyer_color: チラシ色
-        regular_price: 価格
-        instructor_amount: パートナー謝礼
-        instructor_material_amount: パートナー材料費
-        regular_material_price: 施設請求材料費
+        amount: パートナー謝礼
+        material_amount: パートナー材料費
+        material_price: 施設請求材料費
         instructor_name: パートナー名
 #        instructor_position: フライヤーカラー
         instructor_title: パートナータイトル
@@ -106,10 +105,10 @@ ja:
         is_accepted: パートナーが承認したかどうか
         start_at: 開催日時
         end_at: 終了日時
-        regular_price: 価格
-        instructor_amount: パートナー謝礼
-        instructor_material_amount: パートナー材料費
-        regular_material_price: 施設請求材料費
+        price: 価格
+        amount: パートナー謝礼
+        material_amount: パートナー材料費
+        material_price: 施設請求材料費
         support_price: 調整費用
         additional_facility_fee: 施設追加費用
         transportation_expenses: 交通費

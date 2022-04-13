@@ -85,8 +85,8 @@ class Order < ApplicationRecord
   scope :not_accepted_by_partner, -> { where(is_accepted: false) }
   scope :order_asc, -> { includes(:chats).order('chats.created_at asc') }
 
-  validates :regular_price, :regular_material_price, :instructor_amount,
-            :instructor_material_amount, :expenses, :transportation_expenses,
+  validates :price, :material_price, :amount,
+            :material_amount, :expenses, :transportation_expenses,
             :additional_facility_fee, presence: true
 
   # rubocop:disable Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity, Metrics/AbcSize
@@ -181,7 +181,7 @@ class Order < ApplicationRecord
 
   def total_material_price_for_customer
     if number_of_people.present?
-      number_of_people * regular_material_price
+      number_of_people * material_price
     else
       0
     end
@@ -189,22 +189,21 @@ class Order < ApplicationRecord
 
   def total_material_price_for_partner
     if number_of_people.present?
-      number_of_people * instructor_material_amount
+      number_of_people * material_amount
     else
       0
     end
   end
 
-  # rubocop:disable Layout/LineLength
   def total_price_for_customer
-    regular_price + total_material_price_for_customer + transportation_expenses + expenses + total_facility_price_for_customer + support_price
+    price + total_material_price_for_customer + transportation_expenses + expenses + total_facility_price_for_customer + support_price
   end
 
   def total_price_for_partner
     # NOTE(okubo): zoom_priceは運営が入力する
-    instructor_amount + total_material_price_for_partner + transportation_expenses + expenses_for_partner + total_facility_price_for_partner - zoom_cost
+    amount + total_material_price_for_partner + transportation_expenses + expenses_for_partner +
+      total_facility_price_for_partner - zoom_cost
   end
-  # rubocop:enable Layout/LineLength
 
   def desired_time
     return '' if start_at.blank?
@@ -217,17 +216,15 @@ class Order < ApplicationRecord
     "#{date} #{start_time} ~ #{end_time}"
   end
 
-  # rubocop:disable Style/CaseEquality
   def reject_empty_date
     empty_date = []
     order_dates.each do |d|
       date_ary = [d.year, d.month, d.date, d.start_hour, d.start_minute, d.end_hour, d.end_minute]
       date_ary.reject(&:empty?)
-      empty_date << d if date_ary.reject(&:empty?).length === 0
+      empty_date << d if date_ary.reject(&:empty?).empty?
     end
 
-    errors.add(:orders, '開催日は1つ以上設定してください。') if empty_date.length === 3
-    @dates_validate_error = true if empty_date.length === 3
+    errors.add(:orders, '開催日は1つ以上設定してください。') if empty_date.length == 3
+    @dates_validate_error = true if empty_date.length == 3
   end
-  # rubocop:enable Style/CaseEquality
 end

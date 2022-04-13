@@ -18,7 +18,7 @@ import * as $ from 'jquery';
 
     // NOTE 参加人数に関するイベント
     $('#report_number_of_people').on('change', () => {
-      const PRICE_PER_ADDIOTIONAL_PERSON: number = Number($('#dummyInstructoMaterialAmount').text());
+      const PRICE_PER_ADDIOTIONAL_PERSON: number = Number($('#dummyMaterialAmount').text());
       const numberOfPeople: number = Number($('#report_number_of_people').val());
       // NOTE: 材料費総額
       $('#totalMaterialPrice').text((numberOfPeople * PRICE_PER_ADDIOTIONAL_PERSON).toLocaleString('ja-JP', { style: 'currency', currency: 'JPY' }));
@@ -51,14 +51,14 @@ import * as $ from 'jquery';
     });
 
     const updateTotalPrice = () => {
-      const dummyInstructorAmount: number = Number($('#dummyInstructorAmount').text());
+      const dummyAmount: number = Number($('#dummyAmount').text());
       const dummyTotalMaterialPrice: number = Number($('#dummyTotalMaterialPrice').text());
       const dummyTransportationExpenses: number = Number($('#dummyTransportationExpenses').text());
       const dummyExpenses: number = Number($('#dummyExpenses').text());
       const dummyTotalFacilityFee: number = Number($('#dummyTotalFacilityFee').text());
       const dummyZoomPrice: number = Number($('#dummyZoomPrice').text());
 
-      const totalPrice: number = dummyInstructorAmount + dummyTotalMaterialPrice + dummyTransportationExpenses + dummyExpenses + dummyTotalFacilityFee - dummyZoomPrice;
+      const totalPrice: number = dummyAmount + dummyTotalMaterialPrice + dummyTransportationExpenses + dummyExpenses + dummyTotalFacilityFee - dummyZoomPrice;
       $('#totalPrice').text(totalPrice.toLocaleString('ja-JP', { style: 'currency', currency: 'JPY' }));
     }
   });

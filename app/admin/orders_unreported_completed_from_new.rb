@@ -6,7 +6,7 @@ ActiveAdmin.register Orders::UnreportedCompletedFromNew do
     %i[
       user_id recreation_id zip prefecture city street building number_of_people
       number_of_facilities status is_accepted start_at end_at
-      regular_price instructor_amount regular_material_price instructor_material_amount
+      price amount material_price material_amount
       additional_facility_fee transportation_expenses support_price expenses
       contract_number
     ]
@@ -37,10 +37,10 @@ ActiveAdmin.register Orders::UnreportedCompletedFromNew do
       f.input :number_of_people
       f.input :number_of_facilities
 
-      f.input :regular_price
-      f.input :instructor_amount
-      f.input :regular_material_price
-      f.input :instructor_material_amount
+      f.input :price
+      f.input :amount
+      f.input :material_price
+      f.input :material_amount
       f.input :additional_facility_fee
       f.input :transportation_expenses
       f.input :expenses

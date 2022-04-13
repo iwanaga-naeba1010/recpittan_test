@@ -39,7 +39,7 @@
       <tr class="border-bottom">
         <td class="pt-2 pb-2 text-black w-75">謝礼</td>
         <td class="pt-2 pb-2 text-black">
-          <%= number_to_currency(order.instructor_amount) %>
+          <%= number_to_currency(order.amount) %>
         </td>
       </tr>
       <tr class="border-bottom">
@@ -53,7 +53,7 @@
           材料費/名
           <br><span class="text-secondary">※材料費は人数分の費用が発生します。</span></td>
         <td class="pt-2 pb-2 text-black">
-          <%= number_to_currency(order.instructor_material_amount) %>
+          <%= number_to_currency(order.material_amount) %>
         </td>
       </tr>
 
@@ -133,12 +133,12 @@
 
 <!-- dummyの数字、eventで使うため -->
 <div class="d-none">
-  <div id="dummyInstructorAmount"><%= order.instructor_amount %></div>
+  <div id="dummyAmount"><%= order.amount %></div>
   <div id="dummyTotalMaterialPrice"><%= order.total_material_price_for_partner %></div>
   <div id="dummyTransportationExpenses"><%= order.transportation_expenses %></div>
   <div id="dummyExpenses"><%= order.expenses %></div>
   <div id="dummyAdditionalFacilityFee"><%= order.additional_facility_fee_for_partner %></div>
-  <div id="dummyInstructoMaterialAmount"><%= order.instructor_material_amount %></div>
+  <div id="dummyMaterialAmount"><%= order.material_amount %></div>
   <div id="dummyNumberOfPeople"><%= order.number_of_people %></div>
   <div id="dummyNumberOfFacilities"><%= order.number_of_facilities %></div>
   <div id="dummyZoomPrice"><%= order.zoom_cost %></div>

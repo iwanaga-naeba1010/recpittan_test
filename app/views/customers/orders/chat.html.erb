@@ -78,14 +78,14 @@
             <div class="row justify-content-between border-bottom-dotted pb-2">
               <div class="col-auto">開催費</div>
               <div class="col-auto">
-                <%= price_pipe(@order.regular_price, current_user) %>
+                <%= price_pipe(@order.price, current_user) %>
               </div>
             </div>
             <div class="row justify-content-between border-bottom-dotted py-2">
               <div class="col-auto">材料費/1人<br><span
                 class="text-muted font-12 color-ba08">※材料費は人数分の費用が発生します</span></div>
               <div class="col-auto">
-                <%= number_to_currency(@order.regular_material_price) %>
+                <%= number_to_currency(@order.material_price) %>
               </div>
             </div>
 
@@ -158,8 +158,8 @@
 
 <!-- NOTE: Reactで動的に料金を制御するための値table的な箇所. 絶対に消しちゃだめ!!!! -->
 <div class="invisible">
-  <div id="regularPrice"><%= @order.regular_price %></div>
-  <div id="regularMaterialPrice"><%= @order.regular_material_price %></div>
+  <div id="price"><%= @order.price %></div>
+  <div id="materialPrice"><%= @order.material_price %></div>
   <div id="transportationExpensesPrice"><%= @order.transportation_expenses %></div>
   <!-- TODO: recの金額に合わせる -->
   <div id="additionalFacilitiesPrice">

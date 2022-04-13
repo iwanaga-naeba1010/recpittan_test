@@ -64,13 +64,13 @@
           <tr class="border-bottom">
             <td class="pt-2 pb-2 text-black w-75">謝礼</td>
             <td class="pt-2 pb-2 text-black">
-              <%= number_to_currency(@order.instructor_amount) %>
+              <%= number_to_currency(@order.amount) %>
             </td>
           </tr>
           <tr class="border-bottom">
             <td class="pt-2 pb-2 text-black w-75">材料費(1人あたり)<br>※材料費は人数分の費用が発生します。</td>
             <td class="pt-2 pb-2 text-black">
-              <%= number_to_currency(@order.instructor_material_amount) %>
+              <%= number_to_currency(@order.material_amount) %>
             </td>
           </tr>
           <tr class="border-bottom">
