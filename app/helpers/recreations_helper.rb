@@ -18,16 +18,17 @@ module RecreationsHelper
     category = recreation.category_text
     content_tag :div do
       if category.present?
-        concat link_to category,
-          customers_recreations_path(q: { category_eq: recreation.category.value }),
-          class: 'category-label event',
-          style: "margin-right: 4px; background-color: #{categoryname_to_color_code(category)}"
+        concat link_to category, customers_recreations_path(
+          q: { category_eq: recreation.category.value }
+        ), class: 'category-label event', style: "margin-right: 4px; background-color: #{categoryname_to_color_code(category)}"
       end
       if limit
         tags = tags.first(2)
       end
       tags.collect do |tag|
-        concat(link_to("##{tag.name}", customers_recreations_path(q: { tags_id_eq: tag.id }), class: 'tag-label', style: 'margin-right: 4px;'))
+        concat(
+          link_to("##{tag.name}", customers_recreations_path(q: { tags_id_eq: tag.id }), class: 'tag-label', style: 'margin-right: 4px;')
+        )
       end
     end
   end
