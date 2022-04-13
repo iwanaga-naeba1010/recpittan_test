@@ -4,7 +4,7 @@ class Api::OrdersController < Api::ApplicationController
   before_action :set_order, only: %i[show update]
 
   def show
-    render_json({ order: @order })
+    render_json OrderSerializer.new.serialize(order: @order)
   rescue StandardError => e
     logger.error e.message
     render_json({ message: e.message }, status: 422)
@@ -12,7 +12,7 @@ class Api::OrdersController < Api::ApplicationController
 
   def update
     @order.update(params_create)
-    render_json({ order: @order })
+    render_json OrderSerializer.new.serialize(order: @order)
   rescue StandardError => e
     logger.error e.message
     render_json({ message: e.message }, status: 422)
