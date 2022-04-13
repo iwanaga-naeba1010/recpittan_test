@@ -34,14 +34,14 @@ const App: React.FC<Props> = ({orderId, defaultNumberOfFacilities, additionalFee
 
   // NOTE: それぞれの箇所でid指定だとかなり大変なので、chat.html.erbの画面下部にdummyのHTMLを用意し、そこから取得
   const applyExpenses = (numberOfFacilities: number) => {
-    const regularPrice: number = Number($('#regularPrice').text());
-    const regularMaterialPrice: number = Number($('#regularMaterialPrice').text());
+    const price: number = Number($('#price').text());
+    const materialPrice: number = Number($('#materialPrice').text());
     const expensesPrice: number = Number($('#expensesPrice').text());
     const transportationExpensesPrice: number = Number($('#transportationExpensesPrice').text());
     const additionalFacilitiesPrice: number = Number($('#additionalFacilitiesPrice').text());
 
     const totalPrice: string = '¥' + (
-      regularPrice + regularMaterialPrice + expensesPrice + transportationExpensesPrice + (additionalFee * numberOfFacilities)
+      price + materialPrice + expensesPrice + transportationExpensesPrice + (additionalFee * numberOfFacilities)
     ).toLocaleString();
 
     // NOTE: サイドバーの合計金額

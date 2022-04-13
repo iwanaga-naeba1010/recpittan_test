@@ -19,7 +19,7 @@ import 'bootstrap';
 import '../stylesheets/application.scss';
 import '../stylesheets/partner.scss';
 import './consult_recreation'; // recreationで料金相談するボタン
-import './expense_form';
+import '../reactSrc/index.ts';
 import './facility_count_form';
 import './prefectures';
 import '../events/index';

@@ -1,8 +1,8 @@
 Rails.application.routes.draw do
   namespace :admin do
     resources :invoices, only: %i[index create]
-    # resources :users, path: 'members', controller: 'members'
   end
+
   ActiveAdmin.routes(self)
   # switch userの設定
   get 'switch_user', to: 'switch_user#set_current_user' if Rails.env.development?
@@ -60,7 +60,7 @@ Rails.application.routes.draw do
 
   namespace :api do
     resources :slack_notifiers, only: %i[create]
-    resources :orders, only: %i[update]
+    resources :orders, only: %i[show update]
   end
 
   get 'sitemap', to: redirect("https://#{ENV['AWS_BUCKET']}.s3-ap-northeast-1.amazonaws.com/sitemaps/sitemap.xml.gz")
