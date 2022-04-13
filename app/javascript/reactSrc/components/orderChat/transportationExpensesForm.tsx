@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Order } from "../../../types";
-import { useForm, UseFormSetValue } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import { put } from "../../../utils/requests/base";
-import { Response } from './orderChat'
 
 type Props = {
   order: Order;
@@ -19,8 +18,6 @@ export const TranspotationExpensesForm: React.FC<Props> = (props): JSX.Element =
     register,
     handleSubmit,
     setValue,
-    watch,
-    formState: { isValid, errors, isDirty }
   } = useForm<TranspotationExpensesFormValues>({
     mode: 'onChange',
     defaultValues: {
@@ -42,9 +39,9 @@ export const TranspotationExpensesForm: React.FC<Props> = (props): JSX.Element =
 
     try {
       const token = document.querySelector('[name=csrf-token]').getAttribute('content');
-      const response = await put<Response>( `/api/orders/${order.id}`, requestBody, { 'X-CSRF-TOKEN': token });
+      const response = await put<Order>( `/api/orders/${order.id}`, requestBody, { 'X-CSRF-TOKEN': token });
       console.log(response);
-      setTranspotationExpenses(response.order.transportation_expenses);
+      setTranspotationExpenses(response.transportation_expenses);
       setCanEdit(false);
     } catch (e) {
       setCanEdit(true);

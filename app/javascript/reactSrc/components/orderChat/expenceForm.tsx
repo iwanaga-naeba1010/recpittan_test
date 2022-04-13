@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Order } from "../../../types";
-import { useForm, UseFormSetValue } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import { put } from "../../../utils/requests/base";
 
 type Props = {

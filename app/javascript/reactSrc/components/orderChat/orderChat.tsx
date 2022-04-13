@@ -5,6 +5,7 @@ import * as $ from 'jquery';
 import { Order } from '../../../types';
 import { ExpenseForm } from './expenceForm';
 import { TranspotationExpensesForm } from './transportationExpensesForm'
+import { NumberOfFacilitiesForm } from './numberOfFacilitiesForm';
 
 export const App: React.FC = (): JSX.Element => {
   const [order, setOrder] = useState<Order>({} as Order);
@@ -21,6 +22,7 @@ export const App: React.FC = (): JSX.Element => {
     <>
       <ExpenseForm order={order} />
       <TranspotationExpensesForm order={order} />
+      <NumberOfFacilitiesForm order={order} />
     </>
   );
 }
