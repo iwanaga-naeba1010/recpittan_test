@@ -14,15 +14,16 @@ export const App: React.FC = (): JSX.Element => {
     (async() => {
       const arr = window.location.pathname.split('/');
       const response = await get<Order>(`/api/orders/${arr[3]}`);
+      console.log({ response });
       setOrder(response);
     })()
   }, []);
 
   return (
     <>
-      <ExpenseForm order={order} />
-      <TranspotationExpensesForm order={order} />
-      <NumberOfFacilitiesForm order={order} />
+      <ExpenseForm order={order} setOrder={setOrder} />
+      <TranspotationExpensesForm order={order} setOrder={setOrder} />
+      <NumberOfFacilitiesForm order={order} setOrder={setOrder} />
     </>
   );
 }

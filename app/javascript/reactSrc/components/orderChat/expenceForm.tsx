@@ -1,17 +1,17 @@
-import React, { useEffect, useState } from "react";
+import React, { Dispatch, useEffect, useState } from "react";
 import { Order } from "../../../types";
 import { useForm } from 'react-hook-form';
 import { put } from "../../../utils/requests/base";
 
 type Props = {
   order: Order;
+  setOrder: Dispatch<React.SetStateAction<Order>>;
 }
 
 export type ExpenseFormValues = Pick<Order, 'expenses'>;
 
 export const ExpenseForm: React.FC<Props> = (props): JSX.Element => {
-  const { order } = props;
-  const [expenses, setExpenses] = useState<number>();
+  const { order, setOrder } = props;
   const [canEdit, setCanEdit] = useState<boolean>(false);
 
   const {
@@ -26,7 +26,6 @@ export const ExpenseForm: React.FC<Props> = (props): JSX.Element => {
   });
 
   useEffect(() => {
-    setExpenses(order.expenses);
     setValue('expenses', order.expenses);
   }, [order]);
 
@@ -40,8 +39,7 @@ export const ExpenseForm: React.FC<Props> = (props): JSX.Element => {
     try {
       const token = document.querySelector('[name=csrf-token]').getAttribute('content');
       const response = await put<Order>( `/api/orders/${order.id}`, requestBody, { 'X-CSRF-TOKEN': token });
-      console.log(response);
-      setExpenses(response.expenses);
+      setOrder({ ...order, expenses: response.expenses });
       setCanEdit(false);
     } catch (e) {
       setCanEdit(true);
@@ -74,7 +72,7 @@ export const ExpenseForm: React.FC<Props> = (props): JSX.Element => {
               </div>
             </>
           )
-          : ( <div className="col-auto">&yen;{ expenses?.toLocaleString() }</div>)
+          : ( <div className="col-auto">&yen;{ order.expenses?.toLocaleString() }</div>)
         }
       </div>
     </form>

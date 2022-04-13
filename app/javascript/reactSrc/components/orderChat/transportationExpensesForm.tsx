@@ -1,17 +1,17 @@
-import React, { useEffect, useState } from "react";
+import React, { Dispatch, useEffect, useState } from "react";
 import { Order } from "../../../types";
 import { useForm } from 'react-hook-form';
 import { put } from "../../../utils/requests/base";
 
 type Props = {
   order: Order;
+  setOrder: Dispatch<React.SetStateAction<Order>>;
 }
 
 type TranspotationExpensesFormValues = Pick<Order, 'transportation_expenses'>;
 
 export const TranspotationExpensesForm: React.FC<Props> = (props): JSX.Element => {
-  const { order } = props;
-  const [transportationExpenses, setTranspotationExpenses] = useState<number>();
+  const { order, setOrder } = props;
   const [canEdit, setCanEdit] = useState<boolean>(false);
 
   const {
@@ -26,7 +26,6 @@ export const TranspotationExpensesForm: React.FC<Props> = (props): JSX.Element =
   });
 
   useEffect(() => {
-    setTranspotationExpenses(order.transportation_expenses);
     setValue('transportation_expenses', order.transportation_expenses);
   }, [order]);
 
@@ -40,8 +39,7 @@ export const TranspotationExpensesForm: React.FC<Props> = (props): JSX.Element =
     try {
       const token = document.querySelector('[name=csrf-token]').getAttribute('content');
       const response = await put<Order>( `/api/orders/${order.id}`, requestBody, { 'X-CSRF-TOKEN': token });
-      console.log(response);
-      setTranspotationExpenses(response.transportation_expenses);
+      setOrder({ ...order, transportation_expenses: response.transportation_expenses });
       setCanEdit(false);
     } catch (e) {
       setCanEdit(true);
@@ -74,7 +72,7 @@ export const TranspotationExpensesForm: React.FC<Props> = (props): JSX.Element =
               </div>
             </>
           )
-          : ( <div className="col-auto">&yen;{ transportationExpenses?.toLocaleString() }</div>)
+          : ( <div className="col-auto">&yen;{ order.transportation_expenses?.toLocaleString() }</div>)
         }
       </div>
     </form>

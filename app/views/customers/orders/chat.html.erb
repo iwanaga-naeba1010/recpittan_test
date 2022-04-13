@@ -89,15 +89,8 @@
               </div>
             </div>
 
+            <!-- NOTE(okubo): React component呼び出し部分 -->
             <div id="OrderChat"></div>
-
-            <div
-              id="NumberOfFacilitiesForm"
-              numberOfFacilities="<%= @order.number_of_facilities %>"
-              additionalFee="<%= @order.additional_facility_fee %>"
-              orderId="<%= @order.id %>"
-              canEdit="<%= @order.start_at.present? %>">
-            </div>
 
             <!--            {{else}}-->
             <!--            {{#if isOnline}}-->
