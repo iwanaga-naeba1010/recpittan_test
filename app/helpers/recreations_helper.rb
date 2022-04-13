@@ -10,23 +10,24 @@ module RecreationsHelper
   end
 
   # rubocop:disable Style/OptionalBooleanParameter
-  def tags_to_html(tags, limit = true)
-    return if tags.blank?
+  def tag_to_html(recreation, limit = true)
+    return if recreation.blank?
 
-    category_tag = tags.map { |tag| tag if tag.kind.category? }.compact.first
+    tags = recreation.tags
+
+    category = recreation.category_text
     content_tag :div do
-      if category_tag.present?
-        tags -= [category_tag]
-        concat link_to category_tag&.name, customers_recreations_path(q: { tags_id_eq: category_tag.id }),
-                       class: 'category-label event',
-                       style: "margin-right: 4px; background-color: #{categoryname_to_color_code(category_tag&.name)}"
+      if category.present?
+        concat link_to category,
+          customers_recreations_path(q: { category_eq: recreation.category.value }),
+          class: 'category-label event',
+          style: "margin-right: 4px; background-color: #{categoryname_to_color_code(category)}"
       end
       if limit
         tags = tags.first(2)
       end
       tags.collect do |tag|
-        concat(link_to("##{tag.name}", customers_recreations_path(q: { tags_id_eq: tag.id }), class: 'tag-label',
-                                                                                              style: 'margin-right: 4px;'))
+        concat(link_to("##{tag.name}", customers_recreations_path(q: { tags_id_eq: tag.id }), class: 'tag-label', style: 'margin-right: 4px;'))
       end
     end
   end
