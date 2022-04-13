@@ -21,7 +21,6 @@ ja:
       email_template: テンプレート
       tag: タグ
       tags/tag: タグ
-      tags/category: カテゴリー
       tags/target: 利用者層
       tags/event: イベント
       tags/rental: 貸出可能品
@@ -64,6 +63,7 @@ ja:
         partner: パートナー
         title: タイトル
         second_title: サブタイトル
+        category: カテゴリー
         minutes: 所要時間
         description: このようなことをやります
         flow_of_day: 当日の流れとタイムスケジュール
