@@ -1,13 +1,10 @@
-/**
- * recreationのorderの交通費・諸経費のform
- */
-
 import React, { useEffect, useState } from 'react';
 import ReactDOM from 'react-dom'
 import { get, put } from '../../../utils/requests/base';
 import * as $ from 'jquery';
 import { Order } from '../../../types';
-import {ExpenseForm, ExpenseFormValues} from './expenceForm';
+import {ExpenseForm} from './expenceForm';
+import { TranspotationExpensesForm } from './transportationExpensesForm'
 
 export interface Response {
   order: Order;
@@ -26,36 +23,10 @@ export const App: React.FC = (): JSX.Element => {
     })()
   }, []);
 
-  // NOTE: それぞれの箇所でid指定だとかなり大変なので、chat.html.erbの画面下部にdummyのHTMLを用意し、そこから取得
-  // const applyExpenses = () => {
-  //   const regularPrice: number = Number($('#regularPrice').text());
-  //   const regularMaterialPrice: number = Number($('#regularMaterialPrice').text());
-  //   const expensesPrice: number = Number($('#expensesPrice').text());
-  //   const transportationExpensesPrice: number = Number($('#transportationExpensesPrice').text());
-  //   const totalPrice: string = '¥' + (regularPrice + regularMaterialPrice + expensesPrice + transportationExpensesPrice).toLocaleString();
-  //   // NOTE: サイドバーの合計金額
-  //   $('#totalPriceForSidenav').text(totalPrice);
-  //   // NOTE: 正式依頼の合計金額
-  //   $('#expensesForOrderForm').text('¥' + expensesPrice.toLocaleString());
-  //   $('#transportationExpensesForOrderForm').text('¥' + transportationExpensesPrice.toLocaleString());
-  //   $('#totalPriceForOrderForm').text(totalPrice);
-  // }
-  //
-  // const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-  //   setExpense(Number(e.target.value));
-  //   if (target === 'expenses') {
-  //     $('#expensesPrice').text(Number(e.target.value));
-  //   } else {
-  //     $('#transportationExpensesPrice').text(Number(e.target.value));
-  //   }
-  //   applyExpenses();
-  // }
-
   return (
     <>
-      aaa
       <ExpenseForm order={order} />
-      aaa
+      <TranspotationExpensesForm order={order} />
     </>
   );
 }
