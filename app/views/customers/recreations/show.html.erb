@@ -19,7 +19,7 @@
         <% if category_tag.present? %>
           <li class="breadcrumb-item">
             <!-- TODO: Tag.categories.firstを表示 + ransack入れる -->
-            <%= link_to category_tag.name, customers_recreations_path(q: { tags_id_eq: category_tag.id }) %>
+            <%= link_to @recreation.category_text, customers_recreations_path(q: { category_eq: @recreation.category.value }) %>
           </li>
         <% end %>
         <li class="breadcrumb-item active">
@@ -69,7 +69,7 @@
               <h2 class="card-subtitle"><%= @recreation.second_title %></h2>
             </div>
             <div class="category-tags pb-2">
-              <%= tags_to_html(@recreation.tags, false) %>
+              <%= tag_to_html(@recreation, false) %>
             </div>
             <div class="description border-top py-3">
               <h3>このようなことをやります</h3>
