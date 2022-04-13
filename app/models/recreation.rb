@@ -40,6 +40,8 @@
 #  recreations_user_id_fkey  (user_id => users.id)
 #
 class Recreation < ApplicationRecord
+  extend Enumerize
+
   mount_uploader :instructor_image, ImageUploader
   has_many :recreation_tags, dependent: :destroy
   has_many :tags, through: :recreation_tags
@@ -54,6 +56,8 @@ class Recreation < ApplicationRecord
   delegate :name, :title, :description, :image, to: :partner, prefix: true, allow_nil: true
 
   scope :public_recs, -> { where(is_public: true) }
+
+  enumerize :category, in: { event: 0, work: 1, music: 2, health: 3, travel: 4, hobby: 5, food: 6, other: 7 }, default: 0
 
   def flyer
     files = recreation_images.flyers&.to_a
