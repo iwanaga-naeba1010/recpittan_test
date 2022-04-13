@@ -5,4 +5,5 @@ export interface Order {
   additional_facility_fee: number;
   number_of_people: number;
   number_of_facilities: number;
+  total_price_for_customer: number;
 }

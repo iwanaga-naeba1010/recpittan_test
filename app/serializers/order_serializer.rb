@@ -13,6 +13,7 @@ class OrderSerializer
       number_of_facilities: order.number_of_facilities,
       price: order.price,
       material_price: order.material_price,
+      total_price_for_customer: order.total_price_for_customer
     }
   end
 end

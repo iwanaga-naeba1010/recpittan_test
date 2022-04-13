@@ -24,6 +24,12 @@ export const App: React.FC = (): JSX.Element => {
       <ExpenseForm order={order} setOrder={setOrder} />
       <TranspotationExpensesForm order={order} setOrder={setOrder} />
       <NumberOfFacilitiesForm order={order} setOrder={setOrder} />
+      <div className="row justify-content-between border-top py-3">
+        <div className="col-auto">合計(税別)</div>
+        <div id="totalPriceForSidenav" className="col-auto">&yen;
+          { order.total_price_for_customer?.toLocaleString() }
+        </div>
+      </div>
     </>
   );
 }

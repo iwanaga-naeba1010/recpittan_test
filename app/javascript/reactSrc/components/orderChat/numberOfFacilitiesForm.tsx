@@ -39,7 +39,11 @@ export const NumberOfFacilitiesForm: React.FC<Props> = (props): JSX.Element => {
     try {
       const token = document.querySelector('[name=csrf-token]').getAttribute('content');
       const response = await put<Order>(`/api/orders/${order.id}`, requestBody, {'X-CSRF-TOKEN': token});
-      setOrder({ ...order, number_of_facilities: response.number_of_facilities });
+      setOrder({
+        ...order,
+        number_of_facilities: response.number_of_facilities,
+        total_price_for_customer: response.total_price_for_customer
+      });
       setCanEdit(false);
     } catch (e) {
       setCanEdit(true);
