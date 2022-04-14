@@ -7,6 +7,7 @@ import { ExpenseForm } from './expenceForm';
 import { TranspotationExpensesForm } from './transportationExpensesForm'
 import { NumberOfFacilitiesForm } from './numberOfFacilitiesForm';
 import {Category, Tag} from '../shared/form/parts';
+import {ChatList} from './chatList';
 
 export const App: React.FC = (): JSX.Element => {
   const [order, setOrder] = useState<Order>({} as Order);
@@ -28,11 +29,12 @@ export const App: React.FC = (): JSX.Element => {
 
   return (
     <>
+      <ChatList orderId={order.id} />
       <article className="container py-4 px-0">
         <div className="row">
           <div className="col-md-4">
           <a href={`/customers/orders/${order.id}`} className="clink">
-              <i className="material-icons ">navigate_before</i> 戻る
+            <i className="material-icons ">navigate_before</i> 戻る
           </a>
             <div className="row align-items-center mt-2">
               <div className="col-md-4">
@@ -42,7 +44,6 @@ export const App: React.FC = (): JSX.Element => {
               </div>
               <div className="col-md-7 recreation">
                 <h1 className="title-b line-height-140">{order.recreation?.title}</h1>
-
                 <div className="category-tags">
                   <Category id={order.recreation?.category_id} name={order.recreation?.category}/>
                   {order.recreation?.tags.map((tag) => <Tag id={tag.id} name={tag.name} />)}
@@ -128,21 +129,6 @@ export const App: React.FC = (): JSX.Element => {
          </div>
         {/*<%= render 'shared/customer/order/order_modal', order: @order %>*/}
       </article>
-
-
-
-
-
-
-      <ExpenseForm order={order} setOrder={setOrder} />
-      <TranspotationExpensesForm order={order} setOrder={setOrder} />
-      <NumberOfFacilitiesForm order={order} setOrder={setOrder} />
-      <div className="row justify-content-between border-top py-3">
-        <div className="col-auto">合計(税別)</div>
-        <div id="totalPriceForSidenav" className="col-auto">&yen;
-          { order.total_price_for_customer?.toLocaleString() }
-        </div>
-      </div>
     </>
   );
 }

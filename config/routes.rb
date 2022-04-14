@@ -60,7 +60,10 @@ Rails.application.routes.draw do
 
   namespace :api do
     resources :slack_notifiers, only: %i[create]
-    resources :orders, only: %i[show update]
+    resources :orders, only: %i[show update] do
+      resources :chats, only: %i[index create], module: :orders
+      # resources :work_results, only: %i[], module: :maintenance_categories do
+    end
   end
 
   get 'sitemap', to: redirect("https://#{ENV['AWS_BUCKET']}.s3-ap-northeast-1.amazonaws.com/sitemaps/sitemap.xml.gz")
