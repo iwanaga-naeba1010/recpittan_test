@@ -12,6 +12,7 @@ export const OrderForm: React.FC = (): JSX.Element => {
       const arr = window.location.pathname.split('/');
       const response = await get<Order>(`/api/orders/${arr[3]}`);
       setOrder(response);
+      return () => console.log('finished');
     })()
   }, []);
 

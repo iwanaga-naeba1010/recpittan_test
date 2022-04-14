@@ -7,11 +7,9 @@ class OrderSerializer
 
   def serialize(order:)
     recreation = RecreationSerializer.new.serialize(recreation: order.recreation)
-    puts '----------------------'
-    puts recreation
-    puts '----------------------'
     {
       id: order.id,
+      status: order.status.value,
       expenses: order.expenses,
       transportation_expenses: order.transportation_expenses,
       additional_facility_fee: order.additional_facility_fee,

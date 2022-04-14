@@ -20,7 +20,7 @@ import '../stylesheets/application.scss';
 import '../stylesheets/partner.scss';
 import './consult_recreation'; // recreationで料金相談するボタン
 import './prefectures';
-import '../reactSrc/index.ts';
+import '../reactSrc/index';
 import '../events/index';
 
 import "@fortawesome/fontawesome-free/js/all"

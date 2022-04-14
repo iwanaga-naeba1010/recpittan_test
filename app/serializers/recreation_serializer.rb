@@ -6,9 +6,20 @@ class RecreationSerializer
   end
 
   def serialize(recreation:)
+    tags = TagSerializer.new.serialize_list(tags: recreation.tags)
+    targets = TagSerializer.new.serialize_list(tags: recreation.tags.targets)
     {
       id: recreation.id,
-      is_online: recreation.is_online
+      title: recreation.title,
+      second_title: recreation.second_title,
+      minutes: recreation.minutes,
+      is_online: recreation.is_online,
+      capacity: recreation.capacity,
+      image_url: recreation.recreation_images.sliders&.first&.image.to_s,
+      category: recreation.category,
+      category_id: recreation.category.value,
+      tags: tags,
+      targets: targets
     }
   end
 end
