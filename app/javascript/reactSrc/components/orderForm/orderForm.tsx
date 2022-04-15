@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import ReactDOM from 'react-dom'
 import { get } from '../../../utils/requests/base';
 import * as $ from 'jquery';
-import { Order } from '../../../types';
+import { Order } from '../../types';
 
 export const OrderForm: React.FC = (): JSX.Element => {
   const [order, setOrder] = useState<Order>({} as Order);
@@ -33,13 +33,13 @@ export const OrderForm: React.FC = (): JSX.Element => {
             <span className="text-muted font-12 color-ba08">※材料費は人数分の費用が発生します</span>
           </div>
           <div id="materialPrice" className="col-auto">&yen;
-            { order.material_price?.toLocaleString() }
+            { order.materialPrice?.toLocaleString() }
           </div>
         </div>
         <div className="row justify-content-between border-bottom-dotted pb-2">
           <div className="col-auto">交通費</div>
           <div id="transportationExpensesForOrderForm" className="col-auto">&yen;
-            { order.transportation_expenses?.toLocaleString() }
+            { order.transportationExpenses?.toLocaleString() }
           </div>
         </div>
         <div className="row justify-content-between border-bottom-dotted pb-2">
@@ -49,11 +49,11 @@ export const OrderForm: React.FC = (): JSX.Element => {
           </div>
         </div>
 
-        { order?.recreation?.is_online &&
+        { order?.recreation?.isOnline &&
           <div className="row justify-content-between border-bottom-dotted pb-2">
-            <div className="col-auto">追加施設費 / <span id="numberOfFacilitiesForOrderFormLabel">{order.number_of_facilities}施設</span></div>
+            <div className="col-auto">追加施設費 / <span id="numberOfFacilitiesForOrderFormLabel">{order.numberOfFacilities}施設</span></div>
             <div id="numberOfFacilitiesForOrderForm" className="col-auto">&yen;
-              { order.total_facility_price_for_customer?.toLocaleString() }
+              { order.totalFacilityPriceForCustomer?.toLocaleString() }
             </div>
           </div>
         }
@@ -61,7 +61,7 @@ export const OrderForm: React.FC = (): JSX.Element => {
         <div className="row justify-content-between border-top py-3">
           <div className="col-auto">合計(税別)</div>
           <div id="totalPriceForOrderForm" className="col-auto">&yen;
-            { order.total_price_for_customer?.toLocaleString() }
+            { order.totalPriceForCustomer?.toLocaleString() }
           </div>
         </div>
       </div>

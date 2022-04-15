@@ -1,5 +1,5 @@
 import React, { Dispatch, useEffect, useState } from "react";
-import { Order } from "../../../types";
+import { Order } from "../../types";
 import { useForm } from 'react-hook-form';
 import { put } from "../../../utils/requests/base";
 
@@ -8,7 +8,7 @@ type Props = {
   setOrder: Dispatch<React.SetStateAction<Order>>;
 }
 
-type TranspotationExpensesFormValues = Pick<Order, 'transportation_expenses'>;
+type TranspotationExpensesFormValues = Pick<Order, 'transportationExpenses'>;
 
 export const TranspotationExpensesForm: React.FC<Props> = (props): JSX.Element => {
   const { order, setOrder } = props;
@@ -21,18 +21,18 @@ export const TranspotationExpensesForm: React.FC<Props> = (props): JSX.Element =
   } = useForm<TranspotationExpensesFormValues>({
     mode: 'onChange',
     defaultValues: {
-      transportation_expenses: order.transportation_expenses
+      transportationExpenses: order.transportationExpenses
     }
   });
 
   useEffect(() => {
-    setValue('transportation_expenses', order.transportation_expenses);
+    setValue('transportationExpenses', order.transportationExpenses);
   }, [order]);
 
   const onSubmit = async (values: TranspotationExpensesFormValues): Promise<void> => {
     const requestBody: Record<string, unknown> = {
       order: {
-        transportation_expenses: values.transportation_expenses,
+        transportationExpenses: values.transportationExpenses,
       }
     };
 
@@ -41,8 +41,8 @@ export const TranspotationExpensesForm: React.FC<Props> = (props): JSX.Element =
       const response = await put<Order>( `/api/orders/${order.id}`, requestBody, { 'X-CSRF-TOKEN': token });
       setOrder({
         ...order,
-        transportation_expenses: response.transportation_expenses,
-        total_price_for_customer: response.total_price_for_customer
+        transportationExpenses: response.transportationExpenses,
+        totalPriceForCustomer: response.totalPriceForCustomer
       });
       setCanEdit(false);
     } catch (e) {
@@ -65,7 +65,7 @@ export const TranspotationExpensesForm: React.FC<Props> = (props): JSX.Element =
                 <input
                   className="form-control text-end"
                   type="number"
-                  {...register('transportation_expenses')}
+                  {...register('transportationExpenses')}
                 />
               </div>
 
@@ -76,7 +76,7 @@ export const TranspotationExpensesForm: React.FC<Props> = (props): JSX.Element =
               </div>
             </>
           )
-          : ( <div className="col-auto">&yen;{ order.transportation_expenses?.toLocaleString() }</div>)
+          : ( <div className="col-auto">&yen;{ order.transportationExpenses?.toLocaleString() }</div>)
         }
       </div>
     </form>

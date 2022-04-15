@@ -1,6 +1,7 @@
 // import * as Sentry from '@sentry/react';
 import axios from 'axios';
 import { ApiType } from '../types';
+import snakecaseKeys from 'snakecase-keys';
 
 export class Api {
   static async get(
@@ -11,7 +12,7 @@ export class Api {
     isSendErrorMessage = true
   ): Promise<any> {
     try {
-      return await axios.get(`${apiDomain(type)}/${path}`, { params, headers: headers(token) });
+      return await axios.get(`${apiDomain(type)}/${path}`, { params: snakecaseKeys(params), headers: headers(token) });
     } catch (e) {
       if (isSendErrorMessage) {
         // Sentry.captureException(e);
@@ -22,7 +23,7 @@ export class Api {
 
   static async post(path: string, type: ApiType, data: Record<string, unknown>, token?: string): Promise<any> {
     try {
-      return await axios.post(`${apiDomain(type)}/${path}`, data, { headers: headers(token) });
+      return await axios.post(`${apiDomain(type)}/${path}`, snakecaseKeys(data), { headers: headers(token) });
     } catch (e) {
       // Sentry.captureException(e);
       throw e;
@@ -31,7 +32,7 @@ export class Api {
 
   static async patch(path: string, type: ApiType, data: Record<string, unknown>, token?: string): Promise<any> {
     try {
-      return await axios.patch(`${apiDomain(type)}/${path}`, data, { headers: headers(token) });
+      return await axios.patch(`${apiDomain(type)}/${path}`, snakecaseKeys(data), { headers: headers(token) });
     } catch (e) {
       // Sentry.captureException(e);
       throw e;
@@ -40,7 +41,7 @@ export class Api {
 
   static async delete(path: string, type: ApiType, data: Record<string, unknown>, token?: string): Promise<any> {
     try {
-      return await axios.delete(`${apiDomain(type)}/${path}`, { data, headers: headers(token) });
+      return await axios.delete(`${apiDomain(type)}/${path}`, { data: snakecaseKeys(data), headers: headers(token) });
     } catch (e) {
       // Sentry.captureException(e);
       throw e;

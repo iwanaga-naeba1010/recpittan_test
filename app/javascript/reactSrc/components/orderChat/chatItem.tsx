@@ -1,7 +1,5 @@
 import React, { Dispatch, useEffect, useState } from "react";
 import { Order, Recreation, ResponseChat, User } from "../../types";
-import { useForm } from 'react-hook-form';
-import { get, put } from "../../../utils/requests/base";
 import {Chat} from "../../types";
 import { prettyDate } from '../../utils'
 
@@ -13,7 +11,7 @@ const FacilityChat: React.FC<FacilityChatProps> = (props) => {
   const {chat} = props;
   return (
     <div className="row justify-content-end pt-2">
-      <div className="col-auto align-self-end time">{prettyDate(chat.created_at)}</div>
+      <div className="col-auto align-self-end time">{prettyDate(chat.createdAt)}</div>
       {/* TODO(okubo): linkあればlink化する */}
       <div className="col-md-auto customer-text">
         {chat.message.split('\n').map((char) => <>{char}<br/></>)}
@@ -35,14 +33,14 @@ const FileItem: React.FC<FileProps> = (props) => {
         <img src="{{catalogThumbnailUri userId '128x128' 'jpg'}}" />
       </div>
       <div className="col-md-auto">
-        <div className="name">{recreation.instructor_name}</div>
+        <div className="name">{recreation.instructorName}</div>
         <div className=" text">
-          <a href={chat.file_url} className='text-black' target="_blank" rel='noopener'>
+          <a href={chat.fileUrl} className='text-black' target="_blank" rel='noopener'>
             {chat.filename}
           </a>
         </div>
       </div>
-      <div className="col-auto align-self-end time">{prettyDate(chat.created_at)}</div>
+      <div className="col-auto align-self-end time">{prettyDate(chat.createdAt)}</div>
     </div>
   )
 }
@@ -60,19 +58,18 @@ const PartnerChat: React.FC<PartnerChatProps> = (props) => {
           <img src="{{catalogThumbnailUri userId '128x128' 'jpg'}}" />
         </div>
         <div className="col-md-auto">
-          <div className="name">{recreation.instructor_name}</div>
+          <div className="name">{recreation.instructorName}</div>
           <div className=" text">
             {/* TODO(okubo): linkあればlink化する */}
             {chat.message.split('\n').map((char) => <>{char}<br/></>)}
           </div>
         </div>
-        <div className="col-auto align-self-end time">{prettyDate(chat.created_at)}</div>
+        <div className="col-auto align-self-end time">{prettyDate(chat.createdAt)}</div>
       </div>
       <FileItem chat={chat} recreation={recreation} />
     </>
   )
 }
-
 
 type Props = {
   recreation: Recreation;
@@ -92,8 +89,8 @@ export const ChatItem: React.FC<Props> = (props): JSX.Element => {
       </div>
       {chats?.map((chat) => (
         <>
-          {currentUser.id === chat.user_id && <FacilityChat chat={chat} />}
-          {currentUser.id !== chat.user_id && <PartnerChat recreation={recreation} chat={chat} />}
+          {currentUser.id === chat.userId && <FacilityChat key={chat.id} chat={chat} />}
+          {currentUser.id !== chat.userId && <PartnerChat key={chat.id} recreation={recreation} chat={chat} />}
         </>
       ))}
     </>

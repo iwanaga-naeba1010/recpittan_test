@@ -8,6 +8,7 @@ import { TranspotationExpensesForm } from './transportationExpensesForm'
 import { NumberOfFacilitiesForm } from './numberOfFacilitiesForm';
 import {Category, Tag} from '../shared/form/parts';
 import {ChatList} from './chatList';
+import camelcaseKeys from 'camelcase-keys';
 
 export const App: React.FC = (): JSX.Element => {
   const [order, setOrder] = useState<Order>({} as Order);
@@ -18,9 +19,8 @@ export const App: React.FC = (): JSX.Element => {
     (async() => {
       const arr = window.location.pathname.split('/');
       const orderResponse = await get<Order>(`/api/orders/${arr[3]}`);
-      setOrder(orderResponse);
+      setOrder(camelcaseKeys(orderResponse, { deep: true }) as Order);
       const userResponse = await get<User>(`/api/users/self`);
-      console.log('user response is ,', userResponse);
       setUser(userResponse);
       setIsLoading(false);
     })()
@@ -41,13 +41,13 @@ export const App: React.FC = (): JSX.Element => {
             <div className="row align-items-center mt-2">
               <div className="col-md-4">
                 <picture>
-                  <img src={order.recreation?.image_url} alt="" className='img-fluid' />
+                  <img src={order.recreation?.imageUrl} alt="" className='img-fluid' />
                 </picture>
               </div>
               <div className="col-md-7 recreation">
                 <h1 className="title-b line-height-140">{order.recreation?.title}</h1>
                 <div className="category-tags">
-                  <Category id={order.recreation?.category_id} name={order.recreation?.category}/>
+                  <Category id={order.recreation?.categoryId} name={order.recreation?.category}/>
                   {order.recreation?.tags.map((tag) => <Tag id={tag.id} name={tag.name} />)}
                 </div>
               </div>
@@ -96,7 +96,7 @@ export const App: React.FC = (): JSX.Element => {
                     </span>
                   </div>
                   <div className="col-auto">&yen;
-                    {order.material_price?.toLocaleString()}
+                    {order.materialPrice?.toLocaleString()}
                   </div>
                 </div>
                 <ExpenseForm order={order} setOrder={setOrder} />
@@ -105,7 +105,7 @@ export const App: React.FC = (): JSX.Element => {
                 <div className="row justify-content-between border-top py-3">
                   <div className="col-auto">合計(税別)</div>
                   <div id="totalPriceForSidenav" className="col-auto">&yen;
-                    { order.total_price_for_customer?.toLocaleString() }
+                    { order.totalPriceForCustomer?.toLocaleString() }
                   </div>
                 </div>
 

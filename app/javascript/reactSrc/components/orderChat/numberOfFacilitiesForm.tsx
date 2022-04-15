@@ -1,5 +1,5 @@
 import React, { Dispatch, useEffect, useState } from "react";
-import { Order } from "../../../types";
+import { Order } from "../../types";
 import { useForm } from 'react-hook-form';
 import { put } from "../../../utils/requests/base";
 
@@ -8,7 +8,7 @@ type Props = {
   setOrder: Dispatch<React.SetStateAction<Order>>;
 }
 
-type NumberOfCacilitiesFormValues = Pick<Order, 'number_of_facilities'>;
+type NumberOfCacilitiesFormValues = Pick<Order, 'numberOfFacilities'>;
 
 export const NumberOfFacilitiesForm: React.FC<Props> = (props): JSX.Element => {
   const { order, setOrder } = props;
@@ -21,18 +21,18 @@ export const NumberOfFacilitiesForm: React.FC<Props> = (props): JSX.Element => {
   } = useForm<NumberOfCacilitiesFormValues>({
     mode: 'onChange',
     defaultValues: {
-      number_of_facilities: order.number_of_facilities
+      numberOfFacilities: order.numberOfFacilities
     }
   });
 
   useEffect(() => {
-    setValue('number_of_facilities', order.number_of_facilities);
+    setValue('numberOfFacilities', order.numberOfFacilities);
   }, [order]);
 
   const onSubmit = async (values: NumberOfCacilitiesFormValues): Promise<void> => {
     const requestBody: Record<string, unknown> = {
       order: {
-        number_of_facilities: values.number_of_facilities,
+        number_of_facilities: values.numberOfFacilities,
       }
     };
 
@@ -41,8 +41,8 @@ export const NumberOfFacilitiesForm: React.FC<Props> = (props): JSX.Element => {
       const response = await put<Order>(`/api/orders/${order.id}`, requestBody, {'X-CSRF-TOKEN': token});
       setOrder({
         ...order,
-        number_of_facilities: response.number_of_facilities,
-        total_price_for_customer: response.total_price_for_customer
+        numberOfFacilities: response.numberOfFacilities,
+        totalPriceForCustomer: response.totalPriceForCustomer
       });
       setCanEdit(false);
     } catch (e) {
@@ -56,12 +56,12 @@ export const NumberOfFacilitiesForm: React.FC<Props> = (props): JSX.Element => {
         ? (
           <div className="row justify-content-between border-bottom-dotted py-2">
             <div className="col-auto align-self-center">
-              追加施設費 / 追加施設数 {order.number_of_facilities}施設
+              追加施設費 / 追加施設数 {order.numberOfFacilities}施設
               <br />
               {!canEdit && <a className="clink" onClick={() => setCanEdit(true)}>編集</a>}
             </div>
             <div className="col-auto">&yen;
-              {(order.number_of_facilities * order.additional_facility_fee)?.toLocaleString()}
+              {(order.numberOfFacilities * order.additionalFacilityFee)?.toLocaleString()}
             </div>
           </div>
         )
@@ -76,7 +76,7 @@ export const NumberOfFacilitiesForm: React.FC<Props> = (props): JSX.Element => {
                   id="number_of_facilities"
                   className="form-control text-end"
                   type="number"
-                  {...register('number_of_facilities')}
+                  {...register('numberOfFacilities')}
                 />
               </div>
               <div className="col-2 py-0">

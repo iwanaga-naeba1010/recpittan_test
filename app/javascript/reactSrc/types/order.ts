@@ -4,17 +4,17 @@ export interface Order {
   id: number;
   status: number;
   expenses: number;
-  transportation_expenses: number;
-  additional_facility_fee: number;
-  number_of_people: number;
-  number_of_facilities: number;
+  transportationExpenses: number;
+  additionalFacilityFee: number;
+  numberOfPeople: number;
+  numberOfFacilities: number;
   price: number;
-  material_price: number;
-  total_price_for_customer: number;
-  total_facility_price_for_customer: number;
-  total_material_price_for_customer: number;
+  materialPrice: number;
+  totalPriceForCustomer: number;
+  totalFacilityPriceForCustomer: number;
+  totalMaterialPriceForCustomer: number;
   recreation: Recreation;
 }
 
 
-export type OrderRequest = Omit<Order, 'id' | 'total_price_for_customer' | 'total_facility_price_for_customer' | 'total_material_price_for_customer' | 'recreation'>;
+export type OrderRequest = Omit<Order, 'id' | 'totalPriceForCustomer' | 'totalFacilityPriceForCustomer' | 'totalMaterialPriceForCustomer' | 'recreation'>;

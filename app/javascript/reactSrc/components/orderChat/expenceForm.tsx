@@ -1,5 +1,5 @@
 import React, { Dispatch, useEffect, useState } from "react";
-import { Order } from "../../../types";
+import { Order } from "../../types";
 import { useForm } from 'react-hook-form';
 import { put } from "../../../utils/requests/base";
 
@@ -42,7 +42,7 @@ export const ExpenseForm: React.FC<Props> = (props): JSX.Element => {
       setOrder({
         ...order,
         expenses: response.expenses,
-        total_price_for_customer: response.total_price_for_customer
+        totalPriceForCustomer: response.totalPriceForCustomer
       });
       setCanEdit(false);
     } catch (e) {

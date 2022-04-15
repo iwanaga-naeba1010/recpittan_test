@@ -1,20 +1,21 @@
+import { Base } from './base';
 import { Tag } from './tag';
 
-export interface Recreation {
+export interface Recreation extends Base {
   id: number;
   title: string;
-  second_title: string;
+  secondTitle: string;
   minutes: number;
-  is_online: boolean;
+  isOnline: boolean;
   capacity: number;
-  image_url: string;
+  imageUrl: string;
   category: string;
-  category_id: number;
-  instructor_description: string;
-  instructor_image: string;
-  instructor_name: string;
-  instructor_position: string;
-  instructor_title: string;
+  categoryId: number;
+  instructorDescription: string;
+  instructorImage: string;
+  instructorName: string;
+  instructorPosition: string;
+  instructorTitle: string;
   tags: Tag[];
   targets: Tag[];
 }
