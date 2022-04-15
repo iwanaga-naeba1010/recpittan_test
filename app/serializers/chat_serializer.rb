@@ -10,6 +10,7 @@ class ChatSerializer
   def serialize(chat:)
     {
       id: chat.id,
+      user_id: chat.user_id,
       order_id: chat.order_id,
       message: chat.message,
       filename: chat.file.present? ? chat.file.file.filename : '',

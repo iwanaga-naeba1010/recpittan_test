@@ -3,8 +3,7 @@ import { Order, Recreation, ResponseChat, User } from "../../types";
 import { useForm } from 'react-hook-form';
 import { get, put } from "../../../utils/requests/base";
 import {Chat} from "../../types";
-
-
+import { prettyDate } from '../../utils'
 
 type FacilityChatProps = {
   chat: Chat;
@@ -14,15 +13,14 @@ const FacilityChat: React.FC<FacilityChatProps> = (props) => {
   const {chat} = props;
   return (
     <div className="row justify-content-end pt-2">
-      <div className="col-auto align-self-end time">{chat.created_at}</div>
+      <div className="col-auto align-self-end time">{prettyDate(chat.created_at)}</div>
+      {/* TODO(okubo): linkあればlink化する */}
       <div className="col-md-auto customer-text">
-        {/* TODO(okubo): linkあればlink化する */}
-        <div dangerouslySetInnerHTML={{__html: chat.message}} />;
+        {chat.message.split('\n').map((char) => <>{char}<br/></>)}
       </div>
     </div>
   )
 }
-
 
 type FileProps = {
   chat: Chat;
@@ -44,7 +42,7 @@ const FileItem: React.FC<FileProps> = (props) => {
           </a>
         </div>
       </div>
-      <div className="col-auto align-self-end time">{chat.created_at}</div>
+      <div className="col-auto align-self-end time">{prettyDate(chat.created_at)}</div>
     </div>
   )
 }
@@ -65,10 +63,10 @@ const PartnerChat: React.FC<PartnerChatProps> = (props) => {
           <div className="name">{recreation.instructor_name}</div>
           <div className=" text">
             {/* TODO(okubo): linkあればlink化する */}
-            <div dangerouslySetInnerHTML={{__html: chat.message}} />;
+            {chat.message.split('\n').map((char) => <>{char}<br/></>)}
           </div>
         </div>
-        <div className="col-auto align-self-end time">{chat.created_at}</div>
+        <div className="col-auto align-self-end time">{prettyDate(chat.created_at)}</div>
       </div>
       <FileItem chat={chat} recreation={recreation} />
     </>
@@ -85,6 +83,7 @@ type Props = {
 
 export const ChatItem: React.FC<Props> = (props): JSX.Element => {
   const { recreation, chats, date, currentUser } = props;
+  console.log({ currentUser, chats });
 
   return (
     <>
