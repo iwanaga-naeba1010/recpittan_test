@@ -127,6 +127,9 @@ export const App: React.FC = (): JSX.Element => {
             </div>
           </div>
 
+
+
+
           <ChatList user={user} order={order} />
           {/*<%= render 'shared/customer/order/chat', order: @order, chat: @chat %> */}
          </div>

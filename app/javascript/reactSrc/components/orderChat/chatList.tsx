@@ -3,6 +3,7 @@ import { Order, ResponseChat, User } from "../../types";
 import { get, put } from "../../../utils/requests/base";
 import {ChatItem} from "./chatItem";
 import camelcaseKeys from "camelcase-keys";
+import {ChatForm} from "./chatForm";
 
 type Props = {
   user: User;
@@ -13,12 +14,14 @@ export const ChatList: React.FC<Props> = (props): JSX.Element => {
   const { user, order } = props;
   const [chats, setChats] = useState<ResponseChat>();
 
+  const handleLoadChats = async (): Promise<void> => {
+    const response = await get<ResponseChat>(`/api/orders/${order.id}/chats`);
+    setChats(camelcaseKeys(response, { deep: true }));
+  }
+
   useEffect(() => {
     if (order === undefined) return;
-    (async() => {
-      const response = await get<ResponseChat>(`/api/orders/${order.id}/chats`);
-      setChats(camelcaseKeys(response, { deep: true }));
-    })()
+    (async() => await handleLoadChats())()
   }, [order]);
 
   return (
@@ -38,7 +41,8 @@ export const ChatList: React.FC<Props> = (props): JSX.Element => {
             }
             {/* {chats?.map((chat) => <ChatItem currentUser={user} recreation={order?.recreation} responseChat={chat}  />)} */}
           </div>
-        </div>
+          <ChatForm order={order} loadChats={handleLoadChats}/>
+       </div>
       </div>
     </>
   )

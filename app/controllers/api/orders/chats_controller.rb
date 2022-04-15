@@ -13,7 +13,7 @@ class Api::Orders::ChatsController < Api::ApplicationController
   def create
     chat = current_user.chats.build(params_create)
     chat.order_id = params[:order_id]
-    chat.create!
+    chat.save!
     render_json OrderSerializer.new.serialize(order: @order)
   rescue StandardError => e
     logger.error e.message
