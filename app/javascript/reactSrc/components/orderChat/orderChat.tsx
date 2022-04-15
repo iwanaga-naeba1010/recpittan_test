@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import ReactDOM from 'react-dom'
 import { get } from '../../../utils/requests/base';
 import * as $ from 'jquery';
-import { Order } from '../../types';
+import { Order, User } from '../../types';
 import { ExpenseForm } from './expenceForm';
 import { TranspotationExpensesForm } from './transportationExpensesForm'
 import { NumberOfFacilitiesForm } from './numberOfFacilitiesForm';
@@ -11,15 +11,18 @@ import {ChatList} from './chatList';
 
 export const App: React.FC = (): JSX.Element => {
   const [order, setOrder] = useState<Order>({} as Order);
+  const [user, setUser] = useState<User>({} as User);
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
   useEffect(() => {
     (async() => {
       const arr = window.location.pathname.split('/');
-      const response = await get<Order>(`/api/orders/${arr[3]}`);
+      const orderResponse = await get<Order>(`/api/orders/${arr[3]}`);
+      setOrder(orderResponse);
+      const userResponse = await get<User>(`/api/users/self`);
+      console.log('user response is ,', userResponse);
+      setUser(userResponse);
       setIsLoading(false);
-      console.log({ response });
-      setOrder(response);
     })()
   }, []);
 
@@ -29,7 +32,6 @@ export const App: React.FC = (): JSX.Element => {
 
   return (
     <>
-      <ChatList orderId={order.id} />
       <article className="container py-4 px-0">
         <div className="row">
           <div className="col-md-4">
@@ -125,6 +127,7 @@ export const App: React.FC = (): JSX.Element => {
             </div>
           </div>
 
+          <ChatList user={user} order={order} />
           {/*<%= render 'shared/customer/order/chat', order: @order, chat: @chat %> */}
          </div>
         {/*<%= render 'shared/customer/order/order_modal', order: @order %>*/}

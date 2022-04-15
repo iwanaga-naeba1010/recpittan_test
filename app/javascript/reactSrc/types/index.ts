@@ -5,3 +5,4 @@ export * from './recreation';
 export * from './order';
 export * from './api';
 export * from './chat';
+export * from './user';

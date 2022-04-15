@@ -1,24 +1,23 @@
 ### 概要
-化粧品・健康食品のデータベースを管理するためのWebアプリケーションです。
+マッチングシステムです
 
 ## 環境
-- Ruby 2.7.x
-- Rails 6.0.x
-- PostgreSQL 10.5
+- Ruby 3.0.3
+- Rails 7.0.x
+- PostgreSQL 12.5
 
 ## dockerのセットアップ
 ```
 # 最初のセットアップ
 docker-compose build
 
-# logありの起動(db/rails/webpacker同時起動)
-docker-compose up
-
-# logなし(db/rails/webpacker同時起動)
 docker-compose up -d
 
-# 個別実行
-docker-compose run --rm --service-ports web
+# プロセス一覧
+docker ps
+
+# pryなどを実行する方法
+docker attach matching_system_web_1
 
 # rspecの実行
 docker-compose run --rm web bundle exec rspec
@@ -35,7 +34,6 @@ docker-compose run --rm web bundle exec brakeman
 
 # best practicesの実行
 docker-compose run --rm web bundle exec rails_best_practices -e node_modules
-
 ```
 
 ### gitのブランチの命名規則
