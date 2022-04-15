@@ -1,7 +1,7 @@
 import React, { Dispatch, useEffect, useState } from "react";
-import { Order } from "../../types";
+import { Order } from "../../../../types";
 import { useForm } from 'react-hook-form';
-import { put } from "../../../utils/requests/base";
+import {Api} from "../../../../infrastructure";
 
 type Props = {
   order: Order;
@@ -37,12 +37,11 @@ export const ExpenseForm: React.FC<Props> = (props): JSX.Element => {
     };
 
     try {
-      const token = document.querySelector('[name=csrf-token]').getAttribute('content');
-      const response = await put<Order>( `/api/orders/${order.id}`, requestBody, { 'X-CSRF-TOKEN': token });
+      const response = await Api.patch(`/orders/${order.id}`, 'common', requestBody);
       setOrder({
         ...order,
-        expenses: response.expenses,
-        totalPriceForCustomer: response.totalPriceForCustomer
+        expenses: response.data.expenses,
+        totalPriceForCustomer: response.data.totalPriceForCustomer
       });
       setCanEdit(false);
     } catch (e) {

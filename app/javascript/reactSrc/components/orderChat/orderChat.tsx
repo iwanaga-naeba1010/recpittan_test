@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import ReactDOM from "react-dom";
-import { get } from "../../../utils/requests/base";
 import * as $ from "jquery";
 import { Order, User } from "../../types";
 import { ExpenseForm } from "../shared/form/orderChat/expenceForm";
@@ -9,22 +8,24 @@ import { NumberOfFacilitiesForm } from "../shared/form/orderChat/numberOfFacilit
 import { Category, Tag } from "../shared/form/parts";
 import { ChatList } from "./chatList";
 import camelcaseKeys from "camelcase-keys";
+import {Api} from "../../infrastructure";
 
 export const App: React.FC = (): JSX.Element => {
   const [order, setOrder] = useState<Order>({} as Order);
   const [user, setUser] = useState<User>({} as User);
   const [isLoading, setIsLoading] = useState<boolean>(true);
+  const id = window.location.pathname.split("/")[3];
 
   useEffect(() => {
     (async () => {
-      const arr = window.location.pathname.split("/");
-      const orderResponse = await get<Order>(`/api/orders/${arr[3]}`);
-      setOrder(camelcaseKeys(orderResponse, { deep: true }) as Order);
-      const userResponse = await get<User>(`/api/users/self`);
-      setUser(userResponse);
+      if (id === undefined) return;
+      const orderResponse = await Api.get(`/orders/${id}`, 'common');
+      setOrder(orderResponse.data);
+      const userResponse = await Api.get(`/users/self`, 'common');
+      setUser(userResponse.data);
       setIsLoading(false);
     })();
-  }, []);
+  }, [id]);
 
   if (isLoading) {
     return <>Loading....</>;

@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Order, ResponseChat, User } from "../../types";
-import { get, put } from "../../../utils/requests/base";
 import { ChatItem } from "./chatItem";
-import camelcaseKeys from "camelcase-keys";
 import { ChatForm } from "../shared/form";
+import { Api } from "../../infrastructure";
 
 type Props = {
   user: User;
@@ -15,8 +14,8 @@ export const ChatList: React.FC<Props> = (props): JSX.Element => {
   const [chats, setChats] = useState<ResponseChat>();
 
   const handleLoadChats = async (): Promise<void> => {
-    const response = await get<ResponseChat>(`/api/orders/${order.id}/chats`);
-    setChats(camelcaseKeys(response, { deep: true }));
+    const response = await Api.get(`/orders/${order.id}/chats`, "common");
+    setChats(response.data);
   };
 
   useEffect(() => {

@@ -1,7 +1,7 @@
 import React from "react";
 import { Recreation, User } from "../../types";
 import { Chat } from "../../types";
-import { prettyDate } from "../../utils";
+import { prettyHM } from "../../utils";
 
 type FacilityChatProps = {
   chat: Chat;
@@ -12,7 +12,7 @@ const FacilityChat: React.FC<FacilityChatProps> = (props) => {
   return (
     <div className="row justify-content-end pt-2">
       <div className="col-auto align-self-end time">
-        {prettyDate(chat.createdAt)}
+        {prettyHM(chat.createdAt)}
       </div>
       {/* TODO(okubo): linkあればlink化する */}
       <div className="col-md-auto customer-text">
@@ -53,7 +53,7 @@ const FileItem: React.FC<FileProps> = (props) => {
         </div>
       </div>
       <div className="col-auto align-self-end time">
-        {prettyDate(chat.createdAt)}
+        {prettyHM(chat.createdAt)}
       </div>
     </div>
   );
@@ -84,7 +84,7 @@ const PartnerChat: React.FC<PartnerChatProps> = (props) => {
           </div>
         </div>
         <div className="col-auto align-self-end time">
-          {prettyDate(chat.createdAt)}
+          {prettyHM(chat.createdAt)}
         </div>
       </div>
       <FileItem chat={chat} recreation={recreation} />
