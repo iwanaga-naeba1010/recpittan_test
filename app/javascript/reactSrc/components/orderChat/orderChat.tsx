@@ -1,14 +1,14 @@
-import React, { useEffect, useState } from 'react';
-import ReactDOM from 'react-dom'
-import { get } from '../../../utils/requests/base';
-import * as $ from 'jquery';
-import { Order, User } from '../../types';
-import { ExpenseForm } from './expenceForm';
-import { TranspotationExpensesForm } from './transportationExpensesForm'
-import { NumberOfFacilitiesForm } from './numberOfFacilitiesForm';
-import {Category, Tag} from '../shared/form/parts';
-import {ChatList} from './chatList';
-import camelcaseKeys from 'camelcase-keys';
+import React, { useEffect, useState } from "react";
+import ReactDOM from "react-dom";
+import { get } from "../../../utils/requests/base";
+import * as $ from "jquery";
+import { Order, User } from "../../types";
+import { ExpenseForm } from "../shared/form/orderChat/expenceForm";
+import { TranspotationExpensesForm } from "../shared/form/orderChat/transportationExpensesForm";
+import { NumberOfFacilitiesForm } from "../shared/form/orderChat/numberOfFacilitiesForm";
+import { Category, Tag } from "../shared/form/parts";
+import { ChatList } from "./chatList";
+import camelcaseKeys from "camelcase-keys";
 
 export const App: React.FC = (): JSX.Element => {
   const [order, setOrder] = useState<Order>({} as Order);
@@ -16,14 +16,14 @@ export const App: React.FC = (): JSX.Element => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
   useEffect(() => {
-    (async() => {
-      const arr = window.location.pathname.split('/');
+    (async () => {
+      const arr = window.location.pathname.split("/");
       const orderResponse = await get<Order>(`/api/orders/${arr[3]}`);
       setOrder(camelcaseKeys(orderResponse, { deep: true }) as Order);
       const userResponse = await get<User>(`/api/users/self`);
       setUser(userResponse);
       setIsLoading(false);
-    })()
+    })();
   }, []);
 
   if (isLoading) {
@@ -35,26 +35,37 @@ export const App: React.FC = (): JSX.Element => {
       <article className="container py-4 px-0">
         <div className="row">
           <div className="col-md-4">
-          <a href={`/customers/orders/${order.id}`} className="clink">
-            <i className="material-icons ">navigate_before</i> 戻る
-          </a>
+            <a href={`/customers/orders/${order.id}`} className="clink">
+              <i className="material-icons ">navigate_before</i> 戻る
+            </a>
             <div className="row align-items-center mt-2">
               <div className="col-md-4">
                 <picture>
-                  <img src={order.recreation?.imageUrl} alt="" className='img-fluid' />
+                  <img
+                    src={order.recreation?.imageUrl}
+                    alt=""
+                    className="img-fluid"
+                  />
                 </picture>
               </div>
               <div className="col-md-7 recreation">
-                <h1 className="title-b line-height-140">{order.recreation?.title}</h1>
+                <h1 className="title-b line-height-140">
+                  {order.recreation?.title}
+                </h1>
                 <div className="category-tags">
-                  <Category id={order.recreation?.categoryId} name={order.recreation?.category}/>
-                  {order.recreation?.tags.map((tag) => <Tag id={tag.id} name={tag.name} />)}
+                  <Category
+                    id={order.recreation?.categoryId}
+                    name={order.recreation?.category}
+                  />
+                  {order.recreation?.tags.map((tag) => (
+                    <Tag id={tag.id} name={tag.name} />
+                  ))}
                 </div>
               </div>
             </div>
             <div className="card mt-3">
               <div className="card-body p-0">
-                {order.recreation?.category &&
+                {order.recreation?.category && (
                   <div className="border-bottom p-2">
                     <h4 className="title">
                       参加人数制限
@@ -62,17 +73,27 @@ export const App: React.FC = (): JSX.Element => {
                       人まで
                     </h4>
                   </div>
-                }
+                )}
                 <div className="border-bottom p-2">
-                  <h4 className="title">所要時間 {order.recreation?.minutes}分</h4>
+                  <h4 className="title">
+                    所要時間 {order.recreation?.minutes}分
+                  </h4>
                 </div>
                 <div className="p-2">
                   <h4 className="title">対象者目安</h4>
-                  {order.recreation?.targets.map((target) => <div className="text-muted">・{target.name}</div>)}
+                  {order.recreation?.targets.map((target) => (
+                    <div className="text-muted">・{target.name}</div>
+                  ))}
                 </div>
                 <div className="p-2">
-                  <a href={`/customers/recreations/${order.recreation?.id}`} target="_blank" className='clink'>
-                    <span className="material-icons-text">レクの詳細を見る</span>
+                  <a
+                    href={`/customers/recreations/${order.recreation?.id}`}
+                    target="_blank"
+                    className="clink"
+                  >
+                    <span className="material-icons-text">
+                      レクの詳細を見る
+                    </span>
                     <i className="material-icons ">navigate_next</i>
                   </a>
                 </div>
@@ -84,18 +105,22 @@ export const App: React.FC = (): JSX.Element => {
               <div className="card-body py-0">
                 <div className="row justify-content-between border-bottom-dotted pb-2">
                   <div className="col-auto">開催費</div>
-                  <div className="col-auto">&yen;
+                  <div className="col-auto">
+                    &yen;
                     {order.price?.toLocaleString()}
                   </div>
                 </div>
 
                 <div className="row justify-content-between border-bottom-dotted py-2">
-                  <div className="col-auto">材料費/1人<br/>
-                    <span
-                      className="text-muted font-12 color-ba08">※材料費は人数分の費用が発生します
+                  <div className="col-auto">
+                    材料費/1人
+                    <br />
+                    <span className="text-muted font-12 color-ba08">
+                      ※材料費は人数分の費用が発生します
                     </span>
                   </div>
-                  <div className="col-auto">&yen;
+                  <div className="col-auto">
+                    &yen;
                     {order.materialPrice?.toLocaleString()}
                   </div>
                 </div>
@@ -104,53 +129,54 @@ export const App: React.FC = (): JSX.Element => {
                 <NumberOfFacilitiesForm order={order} setOrder={setOrder} />
                 <div className="row justify-content-between border-top py-3">
                   <div className="col-auto">合計(税別)</div>
-                  <div id="totalPriceForSidenav" className="col-auto">&yen;
-                    { order.totalPriceForCustomer?.toLocaleString() }
+                  <div id="totalPriceForSidenav" className="col-auto">
+                    &yen;
+                    {order.totalPriceForCustomer?.toLocaleString()}
                   </div>
                 </div>
 
                 <div className="row justify-content-center py-3">
                   <div className="col-auto">
-                    {order.status <= 30
-                      ? (
-                        <button id="order-modal" className="btn-cpr" data-bs-toggle="modal" data-bs-target="#orderModal">
-                          レクを正式依頼へ進む
-                        </button>
-                        )
-                      : (
-                        <button className="btn-cpr disabled">正式依頼済みです</button>
-                      )
-                    }
+                    {order.status <= 30 ? (
+                      <button
+                        id="order-modal"
+                        className="btn-cpr"
+                        data-bs-toggle="modal"
+                        data-bs-target="#orderModal"
+                      >
+                        レクを正式依頼へ進む
+                      </button>
+                    ) : (
+                      <button className="btn-cpr disabled">
+                        正式依頼済みです
+                      </button>
+                    )}
                   </div>
                 </div>
               </div>
             </div>
           </div>
 
-
-
-
           <ChatList user={user} order={order} />
-          {/*<%= render 'shared/customer/order/chat', order: @order, chat: @chat %> */}
-         </div>
+        </div>
         {/*<%= render 'shared/customer/order/order_modal', order: @order %>*/}
       </article>
     </>
   );
-}
+};
 
 // NOTE: 画面遷移した時用
 document.addEventListener("turbolinks:load", () => {
-  const elm = document.querySelector('#OrderChat');
+  const elm = document.querySelector("#OrderChat");
   if (elm) {
-    ReactDOM.render( <App  />, elm)
+    ReactDOM.render(<App />, elm);
   }
 });
 
 // NOTE: リフレッシュした時用
 $(document).ready(() => {
-  const elm = document.querySelector('#OrderChat');
+  const elm = document.querySelector("#OrderChat");
   if (elm) {
-    ReactDOM.render( <App  />, elm)
+    ReactDOM.render(<App />, elm);
   }
 });
