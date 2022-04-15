@@ -19,9 +19,9 @@ export const App: React.FC = (): JSX.Element => {
   useEffect(() => {
     (async () => {
       if (id === undefined) return;
-      const orderResponse = await Api.get(`/orders/${id}`, 'common');
+      const orderResponse = await Api.get<Order>(`/orders/${id}`, 'common');
       setOrder(orderResponse.data);
-      const userResponse = await Api.get(`/users/self`, 'common');
+      const userResponse = await Api.get<User>(`/users/self`, 'common');
       setUser(userResponse.data);
       setIsLoading(false);
     })();

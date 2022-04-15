@@ -1,7 +1,6 @@
 import { Base } from './base';
 
 export interface Chat extends Base {
-  id: number;
   orderId: number;
   userId: number;
   message: string;
@@ -10,5 +9,5 @@ export interface Chat extends Base {
 }
 
 export interface ResponseChat {
-  [key: string]: Chat[];
+  [key: string]: Array<Chat>;
 }

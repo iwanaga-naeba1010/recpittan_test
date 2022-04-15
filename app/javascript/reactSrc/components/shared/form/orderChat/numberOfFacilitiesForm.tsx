@@ -1,51 +1,46 @@
 import React, { Dispatch, useEffect, useState } from "react";
 import { Order } from "../../../../types";
-import { useForm } from 'react-hook-form';
-import { put } from "../../../../../utils/requests/base";
-import camelcaseKeys from "camelcase-keys";
-import {Api} from "../../../../infrastructure";
+import { useForm } from "react-hook-form";
+import { Api } from "../../../../infrastructure";
 
 type Props = {
   order: Order;
   setOrder: Dispatch<React.SetStateAction<Order>>;
-}
+};
 
-type NumberOfCacilitiesFormValues = Pick<Order, 'numberOfFacilities'>;
+type NumberOfCacilitiesFormValues = Pick<Order, "numberOfFacilities">;
 
 export const NumberOfFacilitiesForm: React.FC<Props> = (props): JSX.Element => {
   const { order, setOrder } = props;
   const [canEdit, setCanEdit] = useState<boolean>(false);
 
-  const {
-    register,
-    handleSubmit,
-    setValue,
-  } = useForm<NumberOfCacilitiesFormValues>({
-    mode: 'onChange',
-    defaultValues: {
-      numberOfFacilities: order.numberOfFacilities
-    }
-  });
+  const { register, handleSubmit, setValue } =
+    useForm<NumberOfCacilitiesFormValues>({
+      mode: "onChange",
+      defaultValues: {
+        numberOfFacilities: order.numberOfFacilities,
+      },
+    });
 
   useEffect(() => {
-    setValue('numberOfFacilities', order.numberOfFacilities);
+    setValue("numberOfFacilities", order.numberOfFacilities);
   }, [order]);
 
-  const onSubmit = async (values: NumberOfCacilitiesFormValues): Promise<void> => {
-    const requestBody: Record<string, unknown> = {
+  const onSubmit = async (
+    values: NumberOfCacilitiesFormValues
+  ): Promise<void> => {
+    const requestBody: { [key: string]: NumberOfCacilitiesFormValues }= {
       order: {
-        number_of_facilities: values.numberOfFacilities,
-      }
+        numberOfFacilities: values.numberOfFacilities,
+      },
     };
 
     try {
-      // const token = document.querySelector('[name=csrf-token]').getAttribute('content');
-      // const response = await put<Order>(`/api/orders/${order.id}`, requestBody, {'X-CSRF-TOKEN': token});
-      const response = await Api.patch(`/orders/${order.id}`, 'common', requestBody);
+      const response = await Api.patch<Order>(`/orders/${order.id}`, "common", requestBody);
       setOrder({
         ...order,
         numberOfFacilities: response.data.numberOfFacilities,
-        totalPriceForCustomer: response.data.totalPriceForCustomer
+        totalPriceForCustomer: response.data.totalPriceForCustomer,
       });
       setCanEdit(false);
     } catch (e) {
@@ -55,43 +50,49 @@ export const NumberOfFacilitiesForm: React.FC<Props> = (props): JSX.Element => {
 
   return (
     <>
-      {!canEdit
-        ? (
+      {!canEdit ? (
+        <div className="row justify-content-between border-bottom-dotted py-2">
+          <div className="col-auto align-self-center">
+            追加施設費 / 追加施設数 {order.numberOfFacilities}施設
+            <br />
+            {!canEdit && (
+              <a className="clink" onClick={() => setCanEdit(true)}>
+                編集
+              </a>
+            )}
+          </div>
+          <div className="col-auto">
+            &yen;
+            {(
+              order.numberOfFacilities * order.additionalFacilityFee
+            )?.toLocaleString()}
+          </div>
+        </div>
+      ) : (
+        <form className="consult" onSubmit={handleSubmit(onSubmit)}>
           <div className="row justify-content-between border-bottom-dotted py-2">
-            <div className="col-auto align-self-center">
-              追加施設費 / 追加施設数 {order.numberOfFacilities}施設
-              <br />
-              {!canEdit && <a className="clink" onClick={() => setCanEdit(true)}>編集</a>}
+            <div className="col-3 align-self-center">追加施設数</div>
+            <div className="col-7">
+              <input
+                id="number_of_facilities"
+                className="form-control text-end"
+                type="number"
+                {...register("numberOfFacilities")}
+              />
             </div>
-            <div className="col-auto">&yen;
-              {(order.numberOfFacilities * order.additionalFacilityFee)?.toLocaleString()}
+            <div className="col-2 py-0">
+              <button
+                type="submit"
+                name="action"
+                value="transport_upadte"
+                className="btn btn-inline-edit"
+              >
+                <i className="material-icons color-pr10">done</i>
+              </button>
             </div>
           </div>
-        )
-        : (
-          <form className="consult" onSubmit={handleSubmit(onSubmit)}>
-            <div className="row justify-content-between border-bottom-dotted py-2">
-              <div className="col-3 align-self-center">
-                追加施設数
-              </div>
-              <div className="col-7">
-                <input
-                  id="number_of_facilities"
-                  className="form-control text-end"
-                  type="number"
-                  {...register('numberOfFacilities')}
-                />
-              </div>
-              <div className="col-2 py-0">
-                <button type="submit" name="action" value="transport_upadte" className="btn btn-inline-edit">
-                  <i className="material-icons color-pr10">done</i>
-                </button>
-              </div>
-            </div>
-          </form>
-        )
-      }
+        </form>
+      )}
     </>
-  )
-}
-
+  );
+};

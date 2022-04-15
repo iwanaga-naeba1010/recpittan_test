@@ -95,7 +95,7 @@ const PartnerChat: React.FC<PartnerChatProps> = (props) => {
 type Props = {
   recreation: Recreation;
   date: string;
-  chats: Chat[];
+  chats: Array<Chat>;
   currentUser: User;
 };
 

@@ -30,14 +30,14 @@ export const ExpenseForm: React.FC<Props> = (props): JSX.Element => {
   }, [order]);
 
   const onSubmit = async (values: ExpenseFormValues): Promise<void> => {
-    const requestBody: Record<string, unknown> = {
+    const requestBody: { [key: string]: ExpenseFormValues } = {
       order: {
         expenses: values.expenses,
       }
     };
 
     try {
-      const response = await Api.patch(`/orders/${order.id}`, 'common', requestBody);
+      const response = await Api.patch<Order>(`/orders/${order.id}`, 'common', requestBody);
       setOrder({
         ...order,
         expenses: response.data.expenses,

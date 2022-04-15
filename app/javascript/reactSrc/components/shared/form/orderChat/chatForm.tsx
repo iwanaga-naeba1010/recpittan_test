@@ -12,13 +12,10 @@ export type ChatFormValues = Pick<Chat, "message">;
 
 export const ChatForm: React.FC<Props> = (props): JSX.Element => {
   const { order, loadChats } = props;
-
-  const { register, handleSubmit, setValue } = useForm<ChatFormValues>({
-    mode: "onChange",
-  });
+  const { register, handleSubmit, setValue } = useForm<ChatFormValues>({ mode: "onChange" });
 
   const onSubmit = async (values: ChatFormValues): Promise<void> => {
-    const requestBody: Record<string, unknown> = {
+    const requestBody: {[key: string]: ChatFormValues} = {
       chat: {
         message: values.message,
       },

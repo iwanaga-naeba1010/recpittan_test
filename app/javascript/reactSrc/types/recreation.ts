@@ -2,7 +2,6 @@ import { Base } from './base';
 import { Tag } from './tag';
 
 export interface Recreation extends Base {
-  id: number;
   title: string;
   secondTitle: string;
   minutes: number;
@@ -16,6 +15,6 @@ export interface Recreation extends Base {
   instructorName: string;
   instructorPosition: string;
   instructorTitle: string;
-  tags: Tag[];
-  targets: Tag[];
+  tags: Array<Tag>;
+  targets: Array<Tag>;
 }

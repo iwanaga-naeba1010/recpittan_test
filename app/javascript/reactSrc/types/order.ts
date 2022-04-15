@@ -1,7 +1,7 @@
+import { Base } from "./base";
 import { Recreation } from "./recreation";
 
-export interface Order {
-  id: number;
+export interface Order extends Base {
   status: number;
   expenses: number;
   transportationExpenses: number;
@@ -16,5 +16,11 @@ export interface Order {
   recreation: Recreation;
 }
 
-
-export type OrderRequest = Omit<Order, 'id' | 'totalPriceForCustomer' | 'totalFacilityPriceForCustomer' | 'totalMaterialPriceForCustomer' | 'recreation'>;
+export type OrderRequest = Omit<
+  Order,
+  | "id"
+  | "totalPriceForCustomer"
+  | "totalFacilityPriceForCustomer"
+  | "totalMaterialPriceForCustomer"
+  | "recreation"
+>;
