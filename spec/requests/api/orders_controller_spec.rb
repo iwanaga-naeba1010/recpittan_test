@@ -16,14 +16,12 @@ RSpec.describe Api::OrdersController, type: :request do
     context 'with valid parameters' do
       it 'return http success' do
         get api_order_path(order)
-        json = JSON.parse(response.body)
+        # json = JSON.parse(response.body)
         expect(response.status).to eq(200)
         # expect(json['data']['title']).to eq(post.title)
       end
     end
   end
-
-
 
   describe 'PUT /update' do
     context 'with valid parameters' do

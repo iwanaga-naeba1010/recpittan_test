@@ -6,6 +6,6 @@ class Api::UsersController < Api::ApplicationController
     render_json UserSerializer.new.serialize(user: current_user)
   rescue StandardError => e
     logger.error e.message
-    render_json({ message: e.message }, status: 422)
+    render_json([e.message], status: 401)
   end
 end
