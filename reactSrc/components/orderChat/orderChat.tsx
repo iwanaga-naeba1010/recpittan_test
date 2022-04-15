@@ -89,7 +89,7 @@ export const OrderChat: React.FC = () => {
                   <a
                     href={`/customers/recreations/${order.recreation?.id}`}
                     target="_blank"
-                    className="clink"
+                    className="clink" rel="noreferrer"
                   >
                     <span className="material-icons-text">
                       レクの詳細を見る

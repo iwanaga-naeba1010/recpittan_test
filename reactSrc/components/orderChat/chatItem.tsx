@@ -45,7 +45,7 @@ const FileItem: React.FC<FileProps> = (props) => {
             href={chat.fileUrl}
             className="text-black"
             target="_blank"
-            rel="noopener"
+            rel="noopener noreferrer"
           >
             {chat.filename}
           </a>

@@ -34,6 +34,9 @@ docker-compose run --rm web bundle exec brakeman
 
 # best practicesの実行
 docker-compose run --rm web bundle exec rails_best_practices -e node_modules
+
+# ts/jsのlint実行
+docker-compose run web yarn lint:fix
 ```
 
 ### gitのブランチの命名規則
