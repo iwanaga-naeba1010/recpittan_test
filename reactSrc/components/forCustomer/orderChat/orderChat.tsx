@@ -8,6 +8,7 @@ import { TranspotationExpensesForm } from "@/components/shared/form/forCustomer/
 import { NumberOfFacilitiesForm } from "@/components/shared/form/forCustomer/orderChat/numberOfFacilitiesForm";
 import { Category, Tag } from "@/components/shared/form/parts";
 import { ChatList } from "./chatList";
+import {Modal} from "./modal";
 
 export const OrderChat: React.FC = () => {
   const [order, setOrder] = useState<Order>(undefined);
@@ -159,8 +160,9 @@ export const OrderChat: React.FC = () => {
 
           <ChatList user={user} order={order} />
         </div>
-        {/*<%= render 'shared/customer/order/order_modal', order: @order %>*/}
       </article>
+      {/* NOTE(okubo): html経由で読んでる */}
+      <Modal recreation={order.recreation} order={order} />
     </>
   );
 };
