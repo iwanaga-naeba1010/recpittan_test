@@ -18,6 +18,17 @@ class ApiCustomer::OrdersController < Api::ApplicationController
     render_json({ message: e.message }, status: 422)
   end
 
+  def preferred_date
+    years = Year.all.map(&:value)
+    months = Month.all.map(&:value)
+    days = Day.all.map(&:value)
+    hours = Hour.all.map(&:value)
+    minutes = Minute.all.map(&:value)
+    render_json OrderConfigSerializer.new.serialize(
+      years: years, months: months, days: days, hours: hours, minutes: minutes
+    )
+  end
+
   private
 
   def set_order

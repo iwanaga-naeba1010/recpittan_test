@@ -7,6 +7,9 @@ namespace :api_customer do
     end
   end
   resources :orders, only: %i[show update] do
+    collection do
+      get :preferred_date
+    end
     resources :chats, only: %i[index create], module: :orders
   end
 end

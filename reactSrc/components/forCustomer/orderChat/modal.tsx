@@ -1,6 +1,6 @@
 import {Api} from '@/infrastructure';
-import {Order, Recreation} from '@/types';
-import React from 'react';
+import {Order, PreferredDate, Recreation} from '@/types';
+import React, {useEffect, useState} from 'react';
 import {useForm} from 'react-hook-form';
 
 type Props = {
@@ -12,6 +12,7 @@ export type OrderFormValues = Pick<Order, 'status' | 'numberOfPeople' | 'numberO
 
 export const Modal: React.FC<Props> = (props) => {
   const {order, recreation} = props;
+  const [preferredDate, setPreferredDate] = useState<PreferredDate>(undefined);
 
   const {
     register,
@@ -24,6 +25,14 @@ export const Modal: React.FC<Props> = (props) => {
       numberOfPeople: order.numberOfPeople
     }
   });
+
+  useEffect(() => {
+    (async() => {
+      const response = await Api.get<PreferredDate>('/orders/preferred_date', 'customer');
+      setPreferredDate(response.data);
+      console.log(response.data);
+    })()
+  }, []);
 
 
   const onSubmit = async (values: OrderFormValues): Promise<void> => {
@@ -74,19 +83,19 @@ export const Modal: React.FC<Props> = (props) => {
                     <div className="col-12">希望日</div>
                     <div className="form-group col-3">
                       <select className='form-control'>
-                        <option value="1">1</option>
+                        {preferredDate?.years.map((year) => <option value={year}>{year}</option>)}
                       </select>
                     </div>
                     <div className="col-auto p-0 flex-v-c">年</div>
                     <div className="form-group col-3">
                       <select className='form-control'>
-                        <option value="1">1</option>
+                        {preferredDate?.months.map((month) => <option value={month}>{month}</option>)}
                       </select>
                     </div>
                     <div className="col-auto p-0 flex-v-c">月</div>
                     <div className="form-group col-3">
                       <select className='form-control'>
-                        <option value="1">1</option>
+                        {preferredDate?.days.map((day) => <option value={day}>{day}</option>)}
                       </select>
                     </div>
                     <div className="col-auto p-0 flex-v-c">日</div>
@@ -95,25 +104,25 @@ export const Modal: React.FC<Props> = (props) => {
                     <div className="col-12">希望時間</div>
                     <div className="form-group col-2 pe-0">
                       <select className='form-control'>
-                        <option value="1">1</option>
+                        {preferredDate?.hours.map((hour) => <option value={hour}>{hour}</option>)}
                       </select>
                     </div>
                     <div className="col-auto p-0 flex-v-c">:</div>
                     <div className="form-group col-2 pe-0">
                       <select className='form-control'>
-                        <option value="1">1</option>
+                        {preferredDate?.minutes.map((minute) => <option value={minute}>{minute}</option>)}
                       </select>
                     </div>
                     <div className="col-auto p-0 flex-v-c">~</div>
                     <div className="form-group col-2 pe-0">
                       <select className='form-control'>
-                        <option value="1">1</option>
+                        {preferredDate?.hours.map((hour) => <option value={hour}>{hour}</option>)}
                       </select>
                     </div>
                     <div className="col-auto p-0 flex-v-c">:</div>
                     <div className="form-group col-2 pe-0">
                       <select className='form-control'>
-                        <option value="1">1</option>
+                        {preferredDate?.minutes.map((minute) => <option value={minute}>{minute}</option>)}
                       </select>
                     </div>
                   </div>

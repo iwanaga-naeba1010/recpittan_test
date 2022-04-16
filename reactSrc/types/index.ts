@@ -6,3 +6,4 @@ export * from './api';
 export * from './chat';
 export * from './user';
 export * from './tag';
+export * from './preferredDate';
