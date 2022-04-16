@@ -14,7 +14,7 @@ export const ChatList: React.FC<Props> = (props): JSX.Element => {
   const [chats, setChats] = useState<ResponseChat>();
 
   const handleLoadChats = async (): Promise<void> => {
-    const response = await Api.get<ResponseChat>(`/orders/${order.id}/chats`, "common");
+    const response = await Api.get<ResponseChat>(`/orders/${order.id}/chats`, "customer");
     setChats(response.data);
   };
 

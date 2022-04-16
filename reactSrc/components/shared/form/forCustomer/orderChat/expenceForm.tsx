@@ -37,7 +37,7 @@ export const ExpenseForm: React.FC<Props> = (props): JSX.Element => {
     };
 
     try {
-      const response = await Api.patch<Order>(`/orders/${order.id}`, 'common', requestBody);
+      const response = await Api.patch<Order>(`/orders/${order.id}`, 'customer', requestBody);
       setOrder({
         ...order,
         expenses: response.data.expenses,
@@ -50,7 +50,7 @@ export const ExpenseForm: React.FC<Props> = (props): JSX.Element => {
   };
 
   return (
-    <form className="consult" onSubmit={() => handleSubmit(onSubmit)}>
+    <form className="consult" onSubmit={handleSubmit(onSubmit)}>
       <div className="row justify-content-between border-bottom-dotted py-2">
         <div className="col-3 align-self-center">
           諸経費

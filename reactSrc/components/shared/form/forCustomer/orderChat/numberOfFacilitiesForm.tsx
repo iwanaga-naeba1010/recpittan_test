@@ -36,7 +36,7 @@ export const NumberOfFacilitiesForm: React.FC<Props> = (props): JSX.Element => {
     };
 
     try {
-      const response = await Api.patch<Order>(`/orders/${order.id}`, "common", requestBody);
+      const response = await Api.patch<Order>(`/orders/${order.id}`, "customer", requestBody);
       setOrder({
         ...order,
         numberOfFacilities: response.data.numberOfFacilities,
@@ -69,7 +69,7 @@ export const NumberOfFacilitiesForm: React.FC<Props> = (props): JSX.Element => {
           </div>
         </div>
       ) : (
-        <form className="consult" onSubmit={() => handleSubmit(onSubmit)}>
+        <form className="consult" onSubmit={handleSubmit(onSubmit)}>
           <div className="row justify-content-between border-bottom-dotted py-2">
             <div className="col-3 align-self-center">追加施設数</div>
             <div className="col-7">

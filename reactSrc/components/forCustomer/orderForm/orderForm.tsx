@@ -10,7 +10,7 @@ export const OrderForm: React.FC = (): JSX.Element => {
   useEffect(() => {
     (async () => {
       const arr = window.location.pathname.split("/");
-      const response = await Api.get<Order>(`/orders/${arr[3]}`, 'common');
+      const response = await Api.get<Order>(`/orders/${arr[3]}`, 'customer');
       setOrder(response.data);
     })();
   }, []);

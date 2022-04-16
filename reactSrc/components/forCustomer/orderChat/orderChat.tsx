@@ -18,9 +18,9 @@ export const OrderChat: React.FC = () => {
   useEffect(() => {
     (async () => {
       if (id === undefined) return;
-      const orderResponse = await Api.get<Order>(`/orders/${id}`, "common");
+      const orderResponse = await Api.get<Order>(`/orders/${id}`, "customer");
       setOrder(orderResponse.data);
-      const userResponse = await Api.get<User>(`/users/self`, "common");
+      const userResponse = await Api.get<User>(`/users/self`, "customer");
       setUser(userResponse.data);
       setIsLoading(false);
     })();

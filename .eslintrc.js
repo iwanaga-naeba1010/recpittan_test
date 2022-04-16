@@ -28,6 +28,7 @@ rules: {
   '@typescript-eslint/no-unsafe-member-access': 1,
   '@typescript-eslint/no-unsafe-return': 1,
   '@typescript-eslint/no-unused-vars': ['error', { argsIgnorePattern: '^_' }],
-  '@typescript-eslint/no-floating-promises': 0
+  '@typescript-eslint/no-floating-promises': 0,
+  '@typescript-eslint/no-misused-promises': 0
 }
 };
