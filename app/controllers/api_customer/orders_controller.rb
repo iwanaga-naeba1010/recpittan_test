@@ -36,6 +36,11 @@ class ApiCustomer::OrdersController < Api::ApplicationController
   end
 
   def params_create
-    params.require(:order).permit(:transportation_expenses, :expenses, :number_of_facilities)
+    params.require(:order).permit(
+      :transportation_expenses, :expenses, :number_of_facilities,
+      :zip, :prefecture, :city, :street, :building, :status,
+      :number_of_people, :number_of_facilities,
+      :start_at,
+    )
   end
 end

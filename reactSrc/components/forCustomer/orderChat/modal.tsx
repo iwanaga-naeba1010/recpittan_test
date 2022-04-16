@@ -11,7 +11,7 @@ type Props = {
 
 export type OrderFormValues = Pick<
   Order,
-  'zip' | 'prefecture' | 'city' | 'street' | 'building' | 'status' | 'numberOfPeople' | 'numberOfFacilities'
+  'zip' | 'prefecture' | 'city' | 'street' | 'building' | 'status' | 'numberOfPeople'
 >;
 
 export const Modal: React.FC<Props> = (props) => {
@@ -65,6 +65,27 @@ export const Modal: React.FC<Props> = (props) => {
     setCities(response.data.result);
   }
 
+  const onSubmit = async (values: OrderFormValues): Promise<void> => {
+    const requestBody: {[key: string]: OrderFormValues} = {
+      order: {
+        zip: values.zip,
+        prefecture: values.prefecture,
+        city: values.city,
+        street: values.street,
+        building: values.building,
+        status: 20,
+        numberOfPeople: values.numberOfPeople,
+      },
+    };
+
+    try {
+      await Api.patch<Order>(`/orders/${order.id}`, "customer", requestBody);
+      window.location.href = `/customers/orders/${order.id}/complete`
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
   return (
     <div className='modal' id='orderModal' tabIndex={-1} aria-labelledby='orderModalLabel' aria-hidden='true'>
       <div className='modal-dialog modal-lg'>
@@ -75,7 +96,7 @@ export const Modal: React.FC<Props> = (props) => {
             </h5>
           </div>
           <div className='modal-body p-2'>
-            <form className='order h-adr'>
+            <form className='order h-adr' onSubmit={handleSubmit(onSubmit)}>
               <input {...register('status')} value={30} type='hidden' />
               <div className='container-fluid'>
                 <div className='row pb-3'>
