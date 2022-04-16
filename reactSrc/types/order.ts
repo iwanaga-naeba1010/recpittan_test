@@ -2,6 +2,12 @@ import { Base } from "./base";
 import { Recreation } from "./recreation";
 
 export interface Order extends Base {
+  zip: string;
+  prefecture: string;
+  city: string;
+  street: string;
+  building: string;
+  startAt: Date;
   status: number;
   expenses: number;
   transportationExpenses: number;
