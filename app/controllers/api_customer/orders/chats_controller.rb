@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Api::Orders::ChatsController < Api::ApplicationController
+class ApiCustomer::Orders::ChatsController < Api::ApplicationController
   before_action :set_order, only: %i[index create]
 
   def index

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Api::OrdersController < Api::ApplicationController
+class ApiCustomer::OrdersController < Api::ApplicationController
   before_action :set_order, only: %i[show update]
 
   def show

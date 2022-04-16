@@ -59,15 +59,17 @@ Rails.application.routes.draw do
   end
 
   namespace :api do
+    resources :slack_notifiers, only: %i[create]
+  end
+
+  namespace :api_customer do
     resources :users, only: %i[] do
       collection do
         get :self
       end
     end
-    resources :slack_notifiers, only: %i[create]
     resources :orders, only: %i[show update] do
       resources :chats, only: %i[index create], module: :orders
-      # resources :work_results, only: %i[], module: :maintenance_categories do
     end
   end
 
