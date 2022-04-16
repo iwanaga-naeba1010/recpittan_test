@@ -8,6 +8,7 @@ export interface Order extends Base {
   street: string;
   building: string;
   startAt: Date;
+  endAt: Date;
   status: number;
   expenses: number;
   transportationExpenses: number;

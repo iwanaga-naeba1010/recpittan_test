@@ -40,7 +40,7 @@ class ApiCustomer::OrdersController < Api::ApplicationController
       :transportation_expenses, :expenses, :number_of_facilities,
       :zip, :prefecture, :city, :street, :building, :status,
       :number_of_people, :number_of_facilities,
-      :start_at,
+      :start_at, :end_at
     )
   end
 end
