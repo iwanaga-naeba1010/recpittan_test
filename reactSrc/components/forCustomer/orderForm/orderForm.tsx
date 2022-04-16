@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import ReactDOM from "react-dom";
-import { get } from "../../../app/javascript/utils/requests/base";
 import * as $ from "jquery";
-import { Order } from "../../types";
+import { Order } from "@/types";
+import { Api } from "@/infrastructure";
 
 export const OrderForm: React.FC = (): JSX.Element => {
   const [order, setOrder] = useState<Order>({} as Order);
@@ -10,9 +10,8 @@ export const OrderForm: React.FC = (): JSX.Element => {
   useEffect(() => {
     (async () => {
       const arr = window.location.pathname.split("/");
-      const response = await get<Order>(`/api/orders/${arr[3]}`);
-      setOrder(response);
-      return () => console.log("finished");
+      const response = await Api.get<Order>(`/orders/${arr[3]}`, 'common');
+      setOrder(response.data);
     })();
   }, []);
 

@@ -36,11 +36,11 @@ const App: React.FC<Props> = ({ recreationId }): JSX.Element => {
 
 document.addEventListener('turbolinks:load', () => {
   const elm = document.querySelector('#ConsultRecreation');
-  const recreationId = JSON.parse(elm.getAttribute('data-recreationId'));
+  const recreationId = JSON.parse(elm?.getAttribute('data-recreationId'));
 
-  if (elm) {
+  if (elm && recreationId) {
     ReactDOM.render(
-      <App recreationId={recreationId} />,
+      <App recreationId={Number(recreationId)} />,
       elm,
     )
   }

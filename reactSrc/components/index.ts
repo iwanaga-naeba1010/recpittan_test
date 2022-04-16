@@ -1,2 +1,1 @@
-export * from './orderChat/orderChat';
-export * from './orderForm/orderForm';
+export * from './forCustomer';

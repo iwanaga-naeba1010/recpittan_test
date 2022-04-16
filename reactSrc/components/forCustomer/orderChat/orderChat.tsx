@@ -3,9 +3,9 @@ import ReactDOM from "react-dom";
 import * as $ from "jquery";
 import { Api } from "@/infrastructure";
 import { Order, User } from "@/types";
-import { ExpenseForm } from "@/components/shared/form/orderChat/expenceForm";
-import { TranspotationExpensesForm } from "@/components/shared/form/orderChat/transportationExpensesForm";
-import { NumberOfFacilitiesForm } from "@/components/shared/form/orderChat/numberOfFacilitiesForm";
+import { ExpenseForm } from "@/components/shared/form/forCustomer/orderChat/expenceForm";
+import { TranspotationExpensesForm } from "@/components/shared/form/forCustomer/orderChat/transportationExpensesForm";
+import { NumberOfFacilitiesForm } from "@/components/shared/form/forCustomer/orderChat/numberOfFacilitiesForm";
 import { Category, Tag } from "@/components/shared/form/parts";
 import { ChatList } from "./chatList";
 
@@ -58,7 +58,7 @@ export const OrderChat: React.FC = () => {
                     name={order.recreation?.category}
                   />
                   {order.recreation?.tags.map((tag) => (
-                    <Tag id={tag.id} name={tag.name} />
+                    <Tag key={tag.id} id={tag.id} name={tag.name} />
                   ))}
                 </div>
               </div>
@@ -82,7 +82,7 @@ export const OrderChat: React.FC = () => {
                 <div className="p-2">
                   <h4 className="title">対象者目安</h4>
                   {order.recreation?.targets.map((target) => (
-                    <div className="text-muted">・{target.name}</div>
+                    <div key={target.id} className="text-muted">・{target.name}</div>
                   ))}
                 </div>
                 <div className="p-2">

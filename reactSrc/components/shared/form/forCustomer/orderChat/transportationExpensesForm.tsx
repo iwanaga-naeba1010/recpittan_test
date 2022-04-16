@@ -51,7 +51,7 @@ export const TranspotationExpensesForm: React.FC<Props> = (
   };
 
   return (
-    <form className="consult" onSubmit={handleSubmit(onSubmit)}>
+    <form className="consult" onSubmit={() => handleSubmit(onSubmit)}>
       <div className="row justify-content-between border-bottom-dotted py-2">
         <div className="col-3 align-self-center">
           交通費

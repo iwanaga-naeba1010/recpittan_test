@@ -25,12 +25,14 @@ export const ChatForm: React.FC<Props> = (props): JSX.Element => {
       await Api.post(`/orders/${order.id}/chats`, "common", requestBody);
       await loadChats();
       setValue("message", "");
-    } catch (e) {}
+    } catch (e) {
+      console.log(e);
+    }
   };
 
   return (
     <div className="card-footer bg-white">
-      <form className="chat" onSubmit={handleSubmit(onSubmit)}>
+      <form className="chat" onSubmit={() => handleSubmit(onSubmit)}>
         <div className="row align-items-center">
           <div className="col-10 pe-0">
             <textarea

@@ -6,6 +6,8 @@ type FacilityChatProps = {
   chat: Chat;
 };
 
+const replaceNewLineWithBr = (text: string): Array<JSX.Element> => text.split('\n').map((line, i) => <div key={i}>{line}<br/></div>);
+
 const FacilityChat: React.FC<FacilityChatProps> = (props) => {
   const { chat } = props;
   return (
@@ -15,12 +17,7 @@ const FacilityChat: React.FC<FacilityChatProps> = (props) => {
       </div>
       {/* TODO(okubo): linkあればlink化する */}
       <div className="col-md-auto customer-text">
-        {chat.message.split("\n").map((char) => (
-          <>
-            {char}
-            <br />
-          </>
-        ))}
+        {replaceNewLineWithBr(chat.message)}
       </div>
     </div>
   );
@@ -74,19 +71,14 @@ const PartnerChat: React.FC<PartnerChatProps> = (props) => {
           <div className="name">{recreation.instructorName}</div>
           <div className=" text">
             {/* TODO(okubo): linkあればlink化する */}
-            {chat.message.split("\n").map((char) => (
-              <>
-                {char}
-                <br />
-              </>
-            ))}
+            {replaceNewLineWithBr(chat.message)}
           </div>
         </div>
         <div className="col-auto align-self-end time">
           {prettyHM(chat.createdAt)}
         </div>
       </div>
-      <FileItem chat={chat} recreation={recreation} />
+      <FileItem key={chat.id} chat={chat} recreation={recreation} />
     </>
   );
 };
@@ -100,22 +92,17 @@ type Props = {
 
 export const ChatItem: React.FC<Props> = (props) => {
   const { recreation, chats, date, currentUser } = props;
-  console.log({ currentUser, chats });
 
   return (
     <>
       <div className="row justify-content-center pt-2">
         <div className="col-auto date">{date}</div>
       </div>
-      {chats?.map((chat) => (
-        <>
-          {currentUser.id === chat.userId && (
-            <FacilityChat key={chat.id} chat={chat} />
-          )}
-          {currentUser.id !== chat.userId && (
-            <PartnerChat key={chat.id} recreation={recreation} chat={chat} />
-          )}
-        </>
+      {chats?.map((chat, i) => (
+        <div key={i}>
+          {currentUser.id === chat.userId && <FacilityChat chat={chat} />}
+          {currentUser.id !== chat.userId && <PartnerChat recreation={recreation} chat={chat} />}
+        </div>
       ))}
     </>
   );
