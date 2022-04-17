@@ -10,6 +10,6 @@ class PartnerCompleteReportMailer < ApplicationMailer
 
     @url = "https://recreation.everyplus.jp/partners/orders/#{order.id}/reports/new"
 
-    mail from: 'info@everyplus.jp', to: @email, subject: @template.title
+    mail from: 'info@everyplus.jp', to: @email, subject: @template.title, template_path: 'template_mailer'
   end
 end

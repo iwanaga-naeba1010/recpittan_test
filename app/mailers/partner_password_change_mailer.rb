@@ -7,6 +7,6 @@ class PartnerPasswordChangeMailer < ApplicationMailer
     @email = user.email
     @url = edit_user_password_url
 
-    mail from: 'info@everyplus.jp', to: @email, subject: @template.title
+    mail from: 'info@everyplus.jp', to: @email, subject: @template.title, template_path: 'template_mailer'
   end
 end

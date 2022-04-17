@@ -10,6 +10,6 @@ class OrderRequestMailer < ApplicationMailer
     @facility_name = customer_user.company.name
     @url = confirm_partners_order_url(order.id)
 
-    mail from: 'info@everyplus.jp', to: @email, subject: @template.title
+    mail from: 'info@everyplus.jp', to: @email, subject: @template.title, template_path: 'template_mailer'
   end
 end

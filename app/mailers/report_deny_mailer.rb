@@ -12,6 +12,6 @@ class ReportDenyMailer < ApplicationMailer
     # NOTE(okubo): なぜかサブドメインが認識されないので、ベタがきで対応
     @url = "https://recreation.everyplus.jp/partners/orders/#{order.id}/reports/#{order.report&.id}/edit"
 
-    mail from: 'info@everyplus.jp', to: @email, subject: @template.title
+    mail from: 'info@everyplus.jp', to: @email, subject: @template.title, template_path: 'template_mailer'
   end
 end
