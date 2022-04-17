@@ -13,13 +13,24 @@ type StartAndEndAt = {
   year: string;
   month: string;
   day: string;
-  hour: string;
-  minute: string;
+  startHour: string;
+  startMinute: string;
+  endHour: string;
+  endMinute: string;
 };
 
 export type OrderFormValues = Pick<
   Order,
-  'zip' | 'prefecture' | 'city' | 'street' | 'building' | 'status' | 'numberOfPeople' | 'startAt' | 'endAt'
+  | 'zip'
+  | 'prefecture'
+  | 'city'
+  | 'street'
+  | 'building'
+  | 'status'
+  | 'numberOfPeople'
+  | 'numberOfFacilities'
+  | 'startAt'
+  | 'endAt'
 > &
   StartAndEndAt;
 
@@ -29,11 +40,25 @@ export const Modal: React.FC<Props> = (props) => {
   const [prefectures, setPrefectures] = useState<Array<Prefecture>>([]);
   const [cities, setCities] = useState<Array<City>>([]);
 
-  const { register, handleSubmit, setValue, getValues } = useForm<OrderFormValues>({
+  const {
+    register,
+    handleSubmit,
+    setValue,
+    getValues,
+    formState: { isValid, errors, isDirty }
+  } = useForm<OrderFormValues>({
     mode: 'onChange',
     defaultValues: {
       status: order.status,
+      year: '',
+      month: '',
+      day: '',
+      startHour: '',
+      startMinute: '',
+      endHour: '',
+      endMinute: '',
       numberOfPeople: order.numberOfPeople,
+      numberOfFacilities: order.numberOfFacilities,
       zip: order.zip,
       prefecture: order.prefecture,
       city: order.city,
@@ -74,31 +99,49 @@ export const Modal: React.FC<Props> = (props) => {
     setCities(response.data.result);
   };
 
+  console.log('isValid', isValid);
+
   const onSubmit = async (values: OrderFormValues): Promise<void> => {
-    console.log(`${getValues('year')}-${getValues('month')}-${getValues('day')} ${getValues('hour')}:${getValues('minute')}`);
-    console.log(
-      new Date(
-          Number(getValues('year')),
-          Number(getValues('month')),
-          Number(getValues('day')),
-          Number(getValues('hour')),
-          Number(getValues('minute'))
-        )
+    // console.log(
+    //   `${getValues('year')}-${getValues('month')}-${getValues('day')} ${getValues('hour')}:${getValues('minute')}`
+    // );
+    // console.log(
+    //   new Date(
+    //     Number(getValues('year')),
+    //     Number(getValues('month')),
+    //     Number(getValues('day')),
+    //     Number(getValues('hour')),
+    //     Number(getValues('minute'))
+    //   )
+    // );
+
+    const startAt: Date = new Date(
+      `${getValues('year')}-${getValues('month')}-${getValues('day')} ${getValues('startHour')}:${getValues(
+        'startMinute'
+      )}`
     );
 
-    const date: Date = new Date(`${getValues('year')}-${getValues('month')}-${getValues('day')} ${getValues('hour')}:${getValues('minute')}`);
+    const endAt: Date = new Date(
+      `${getValues('year')}-${getValues('month')}-${getValues('day')} ${getValues('endHour')}:${getValues('endMinute')}`
+    );
 
-    const requestBody: { [key: string]: Omit<OrderFormValues, 'year' | 'month' | 'day' | 'hour' | 'minute'> } = {
+    const requestBody: {
+      [key: string]: Omit<
+        OrderFormValues,
+        'year' | 'month' | 'day' | 'startHour' | 'startMinute' | 'endHour' | 'endMinute'
+      >;
+    } = {
       order: {
         zip: values.zip,
         prefecture: values.prefecture,
         city: values.city,
         street: values.street,
         building: values.building,
-        status: 20,
+        status: 40,
         numberOfPeople: values.numberOfPeople,
-        startAt: date,
-        endAt: date
+        numberOfFacilities: values.numberOfFacilities,
+        startAt,
+        endAt
       }
     };
 
@@ -138,7 +181,8 @@ export const Modal: React.FC<Props> = (props) => {
                   <div className='row'>
                     <div className='col-12'>希望日</div>
                     <div className='form-group col-3'>
-                      <select {...register('year')} className='form-control'>
+                      <select {...register('year', { required: true })} className='form-control'>
+                        <option value=''></option>
                         {preferredDate?.years.map((year) => (
                           <option value={year}>{year}</option>
                         ))}
@@ -146,7 +190,8 @@ export const Modal: React.FC<Props> = (props) => {
                     </div>
                     <div className='col-auto p-0 flex-v-c'>年</div>
                     <div className='form-group col-3'>
-                      <select {...register('month')} className='form-control'>
+                      <select {...register('month', { required: true })} className='form-control'>
+                        <option value=''></option>
                         {preferredDate?.months.map((month) => (
                           <option value={month}>{month}</option>
                         ))}
@@ -154,7 +199,8 @@ export const Modal: React.FC<Props> = (props) => {
                     </div>
                     <div className='col-auto p-0 flex-v-c'>月</div>
                     <div className='form-group col-3'>
-                      <select {...register('day')} className='form-control'>
+                      <select {...register('day', { required: true })} className='form-control'>
+                        <option value=''></option>
                         {preferredDate?.days.map((day) => (
                           <option value={day}>{day}</option>
                         ))}
@@ -165,7 +211,8 @@ export const Modal: React.FC<Props> = (props) => {
                   <div className='row'>
                     <div className='col-12'>希望時間</div>
                     <div className='form-group col-2 pe-0'>
-                      <select {...register('hour')} className='form-control'>
+                      <select {...register('startHour', { required: true })} className='form-control'>
+                        <option value=''></option>
                         {preferredDate?.hours.map((hour) => (
                           <option value={hour}>{hour}</option>
                         ))}
@@ -173,7 +220,8 @@ export const Modal: React.FC<Props> = (props) => {
                     </div>
                     <div className='col-auto p-0 flex-v-c'>:</div>
                     <div className='form-group col-2 pe-0'>
-                      <select {...register('minute')} className='form-control'>
+                      <select {...register('startMinute', { required: true })} className='form-control'>
+                        <option value=''></option>
                         {preferredDate?.minutes.map((minute) => (
                           <option value={minute}>{minute}</option>
                         ))}
@@ -181,7 +229,8 @@ export const Modal: React.FC<Props> = (props) => {
                     </div>
                     <div className='col-auto p-0 flex-v-c'>~</div>
                     <div className='form-group col-2 pe-0'>
-                      <select className='form-control'>
+                      <select {...register('endHour', { required: true })} className='form-control'>
+                        <option value=''></option>
                         {preferredDate?.hours.map((hour) => (
                           <option value={hour}>{hour}</option>
                         ))}
@@ -189,7 +238,8 @@ export const Modal: React.FC<Props> = (props) => {
                     </div>
                     <div className='col-auto p-0 flex-v-c'>:</div>
                     <div className='form-group col-2 pe-0'>
-                      <select className='form-control'>
+                      <select {...register('endMinute', { required: true })} className='form-control'>
+                        <option value=''></option>
                         {preferredDate?.minutes.map((minute) => (
                           <option value={minute}>{minute}</option>
                         ))}
@@ -203,7 +253,7 @@ export const Modal: React.FC<Props> = (props) => {
                     <span className='label required'>必須</span>
                   </label>
                   <div className='form-group col-3'>
-                    <input {...register('numberOfPeople')} className='form-control text-right' />
+                    <input {...register('numberOfPeople', { required: true })} className='form-control text-right' />
                   </div>
                   <div className='col-auto p-0 flex-v-c'>人</div>
                 </div>
@@ -215,7 +265,7 @@ export const Modal: React.FC<Props> = (props) => {
                       <span className='label required'>必須</span>
                     </label>
                     <div className='form-group col-3'>
-                      <input {...register('numberOfFacilities')} className='form-control text-right' />
+                      <input {...register('numberOfFacilities', { required: true })} className='form-control text-right' />
                     </div>
                     <div className='col-auto p-0 flex-v-c'>施設</div>
                   </div>
@@ -233,7 +283,7 @@ export const Modal: React.FC<Props> = (props) => {
                     <label htmlFor='postalCode'>郵便番号</label>
                     <div className='input-group mb-3'>
                       <input
-                        {...register('zip')}
+                        {...register('zip', { required: true })}
                         className='form-control p-postal-control'
                         placeholder='郵便番号を入力'
                       />
@@ -250,7 +300,7 @@ export const Modal: React.FC<Props> = (props) => {
                   <div className='form-group col-6'>
                     <label htmlFor='postalCode'>都道府県</label>
                     <select
-                      {...register('prefecture')}
+                      {...register('prefecture', { required: true })}
                       className='form-control p-region'
                       onChange={(e) => handleCityChange(filterCurrentPrefecture(e.target.value).prefCode)}
                     >
@@ -261,7 +311,7 @@ export const Modal: React.FC<Props> = (props) => {
                   </div>
                   <div className='form-group col-6'>
                     <label htmlFor='postalCode'>市区町村</label>
-                    <select {...register('city')} className='form-control p-region'>
+                    <select {...register('city', { required: true })} className='form-control p-region'>
                       {cities.map((city) => (
                         <option value={city.cityName}>{city.cityName}</option>
                       ))}
@@ -269,7 +319,7 @@ export const Modal: React.FC<Props> = (props) => {
                   </div>
                   <div className='form-group col-6'>
                     <label htmlFor='postalCode'>町名/番地</label>
-                    <input {...register('street')} className='form-control p-postal-control' />
+                    <input {...register('street', { required: true })} className='form-control p-postal-control' />
                   </div>
                   <div className='form-group col-12'>
                     <label htmlFor='postalCode'>建物名</label>
@@ -357,7 +407,8 @@ export const Modal: React.FC<Props> = (props) => {
                   <div className='col-7 text-center'>
                     <button
                       type='submit'
-                      className='btn btn-cprimary rounded-pill font-14 py-3 px-4 font-weight-bold text-white'
+                      className={isValid ? 'btn btn-cprimary rounded-pill font-14 py-3 px-4 font-weight-bold text-white' : `btn-cpr disabled`}
+                      disabled={!isValid}
                     >
                       パートナーにレク開催を正式依頼する
                     </button>

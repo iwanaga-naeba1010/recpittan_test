@@ -61,8 +61,6 @@ class Order < ApplicationRecord
   delegate :url, to: :zoom, prefix: true, allow_nil: true
   delegate :title, :is_online, to: :recreation, allow_nil: true
 
-  validate :reject_empty_date
-
   enumerize :status, in: {
     in_progress: 10, waiting_for_a_reply_from_partner: 20, waiting_for_a_reply_from_facility: 30,
     facility_request_in_progress: 40, request_denied: 50, waiting_for_an_event_to_take_place: 60,
@@ -88,6 +86,11 @@ class Order < ApplicationRecord
   validates :price, :material_price, :amount,
             :material_amount, :expenses, :transportation_expenses,
             :additional_facility_fee, presence: true
+
+  # validates :start_at, :end_at, presence: true, if: -> { status != :in_progress }
+
+  validate :reject_empty_date # TODO(okubo): React化が完了したら削除する
+  validate :restrict_start_at, if: -> { status == :facility_request_in_progress }
 
   # rubocop:disable Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity, Metrics/AbcSize
   def switch_status_before_save
@@ -226,5 +229,15 @@ class Order < ApplicationRecord
 
     errors.add(:orders, '開催日は1つ以上設定してください。') if empty_date.length == 3
     @dates_validate_error = true if empty_date.length == 3
+  end
+
+  def restrict_start_at
+    if start_at.nil?
+      errors.add(:orders, '希望日は必須です')
+    end
+
+    if start_at < Date.new
+      errors.add(:orders, '希望日は明日以降で設定してください')
+    end
   end
 end

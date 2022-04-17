@@ -15,7 +15,7 @@ class ApiCustomer::OrdersController < Api::ApplicationController
     render_json OrderSerializer.new.serialize(order: @order)
   rescue StandardError => e
     logger.error e.message
-    render_json({ message: e.message }, status: 422)
+    render_json([e.message], status: 422)
   end
 
   def preferred_date
