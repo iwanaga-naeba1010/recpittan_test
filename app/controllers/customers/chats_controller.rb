@@ -3,6 +3,7 @@
 class Customers::ChatsController < Customers::ApplicationController
   before_action :set_order
 
+  # TODO(okubo): React移行したのでこちら削除
   def create
     # NOTE: Orderで保存することで、保存時にstatusのチェック機能を発火させる。
     @order.chats.build(params_create)

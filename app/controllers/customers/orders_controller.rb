@@ -12,9 +12,7 @@ class Customers::OrdersController < Customers::ApplicationController
 
   def show; end
 
-  def chat
-    @chat = current_user.chats.build(order_id: @order.id)
-  end
+  def chat; end
 
   def complete
     redirect_to chat_customers_order_path(@order.id) if @order.start_at.blank?
@@ -81,6 +79,7 @@ class Customers::OrdersController < Customers::ApplicationController
     render :new
   end
 
+  # TODO(okubo): React issueでAPI作成したのでこちらは削除
   def update
     ActiveRecord::Base.transaction do
       date = params_create[:order_dates_attributes].to_h['0']

@@ -1,4 +1,4 @@
-import {ModalForm} from '@/components/shared';
+import { ModalForm } from '@/components/shared';
 import { ExpenseForm } from '@/components/shared/form/forCustomer/orderChat/expenceForm';
 import { NumberOfFacilitiesForm } from '@/components/shared/form/forCustomer/orderChat/numberOfFacilitiesForm';
 import { TranspotationExpensesForm } from '@/components/shared/form/forCustomer/orderChat/transportationExpensesForm';

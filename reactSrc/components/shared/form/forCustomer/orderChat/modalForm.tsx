@@ -102,7 +102,6 @@ export const ModalForm: React.FC<Props> = (props) => {
   console.log('isValid', isValid);
 
   const onSubmit = async (values: ModalForlValues): Promise<void> => {
-
     const startAt: Date = new Date(
       `${getValues('year')}-${getValues('month')}-${getValues('day')} ${getValues('startHour')}:${getValues(
         'startMinute'
