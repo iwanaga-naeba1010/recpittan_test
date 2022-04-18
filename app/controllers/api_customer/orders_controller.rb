@@ -12,6 +12,10 @@ class ApiCustomer::OrdersController < Api::ApplicationController
 
   def update
     @order.update(params_create)
+    # NOTE(okubo): 正式依頼のみメール送信
+    if @order.status == :facility_request_in_progress
+      OrderRequestMailer.notify(@order, current_user).deliver_now
+    end
     render_json OrderSerializer.new.serialize(order: @order)
   rescue StandardError => e
     logger.error e.message
