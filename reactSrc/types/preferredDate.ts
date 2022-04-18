@@ -1,4 +1,4 @@
-export interface PreferredDate  {
+export interface PreferredDate {
   years: Array<string>;
   months: Array<string>;
   days: Array<string>;

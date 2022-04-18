@@ -1,5 +1,5 @@
-import { Base } from "./base";
-import { Recreation } from "./recreation";
+import { Base } from './base';
+import { Recreation } from './recreation';
 
 export interface Order extends Base {
   zip: string;
@@ -25,9 +25,5 @@ export interface Order extends Base {
 
 export type OrderRequest = Omit<
   Order,
-  | "id"
-  | "totalPriceForCustomer"
-  | "totalFacilityPriceForCustomer"
-  | "totalMaterialPriceForCustomer"
-  | "recreation"
+  'id' | 'totalPriceForCustomer' | 'totalFacilityPriceForCustomer' | 'totalMaterialPriceForCustomer' | 'recreation'
 >;

@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from "react";
-import { Order, ResponseChat, User } from "@/types";
-import { ChatItem } from "./chatItem";
-import { ChatForm } from "@/components/shared/form";
-import { Api } from "@/infrastructure";
+import { ChatForm } from '@/components/shared/form';
+import { Api } from '@/infrastructure';
+import { Order, ResponseChat, User } from '@/types';
+import React, { useEffect, useState } from 'react';
+import { ChatItem } from './chatItem';
 
 type Props = {
   user: User;
@@ -14,7 +14,7 @@ export const ChatList: React.FC<Props> = (props): JSX.Element => {
   const [chats, setChats] = useState<ResponseChat>();
 
   const handleLoadChats = async (): Promise<void> => {
-    const response = await Api.get<ResponseChat>(`/orders/${order.id}/chats`, "customer");
+    const response = await Api.get<ResponseChat>(`/orders/${order.id}/chats`, 'customer');
     setChats(response.data);
   };
 
@@ -25,22 +25,14 @@ export const ChatList: React.FC<Props> = (props): JSX.Element => {
 
   return (
     <>
-      <div className="col-md-7">
-        <div className="card chat-container">
-          <div className="card-header bg-white">
-            {order?.recreation?.instructorName} さんとのチャット
-          </div>
-          <div className="card-body bg-ba02">
+      <div className='col-md-7'>
+        <div className='card chat-container'>
+          <div className='card-header bg-white'>{order?.recreation?.instructorName} さんとのチャット</div>
+          <div className='card-body bg-ba02'>
             {chats !== undefined && (
               <>
                 {Object?.entries(chats).map(([key, chats]) => (
-                  <ChatItem
-                    key={key}
-                    currentUser={user}
-                    recreation={order?.recreation}
-                    date={key}
-                    chats={chats}
-                  />
+                  <ChatItem key={key} currentUser={user} recreation={order?.recreation} date={key} chats={chats} />
                 ))}
               </>
             )}

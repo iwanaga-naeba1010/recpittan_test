@@ -1,3 +1,4 @@
+export * from './admin/order';
 export * from './customer_report_form';
 export * from './edit_user_profile_form';
 export * from './final_check';
@@ -5,5 +6,3 @@ export * from './order_form';
 export * from './partner_report_form';
 export * from './recreations';
 export * from './toggle_event_for_sidebar';
-export * from './admin/order';
-

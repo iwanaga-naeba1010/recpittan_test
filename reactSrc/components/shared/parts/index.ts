@@ -1,3 +1,3 @@
 export * from './category';
-export * from './tag';
 export * from './error';
+export * from './tag';

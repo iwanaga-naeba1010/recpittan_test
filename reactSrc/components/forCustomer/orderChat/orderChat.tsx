@@ -1,27 +1,27 @@
-import React, { useEffect, useState } from "react";
-import ReactDOM from "react-dom";
-import * as $ from "jquery";
-import { Api } from "@/infrastructure";
-import { Order, User } from "@/types";
-import { ExpenseForm } from "@/components/shared/form/forCustomer/orderChat/expenceForm";
-import { TranspotationExpensesForm } from "@/components/shared/form/forCustomer/orderChat/transportationExpensesForm";
-import { NumberOfFacilitiesForm } from "@/components/shared/form/forCustomer/orderChat/numberOfFacilitiesForm";
-import { Category, Tag } from "@/components/shared/parts";
-import { ChatList } from "./chatList";
-import {Modal} from "./modal";
+import { ExpenseForm } from '@/components/shared/form/forCustomer/orderChat/expenceForm';
+import { NumberOfFacilitiesForm } from '@/components/shared/form/forCustomer/orderChat/numberOfFacilitiesForm';
+import { TranspotationExpensesForm } from '@/components/shared/form/forCustomer/orderChat/transportationExpensesForm';
+import { Category, Tag } from '@/components/shared/parts';
+import { Api } from '@/infrastructure';
+import { Order, User } from '@/types';
+import * as $ from 'jquery';
+import React, { useEffect, useState } from 'react';
+import ReactDOM from 'react-dom';
+import { ChatList } from './chatList';
+import { Modal } from './modal';
 
 export const OrderChat: React.FC = () => {
   const [order, setOrder] = useState<Order>(undefined);
   const [user, setUser] = useState<User>(undefined);
   const [isLoading, setIsLoading] = useState<boolean>(true);
-  const id = window.location.pathname.split("/")[3];
+  const id = window.location.pathname.split('/')[3];
 
   useEffect(() => {
     (async () => {
       if (id === undefined) return;
-      const orderResponse = await Api.get<Order>(`/orders/${id}`, "customer");
+      const orderResponse = await Api.get<Order>(`/orders/${id}`, 'customer');
       setOrder(orderResponse.data);
-      const userResponse = await Api.get<User>(`/users/self`, "customer");
+      const userResponse = await Api.get<User>(`/users/self`, 'customer');
       setUser(userResponse.data);
       setIsLoading(false);
     })();
@@ -33,94 +33,82 @@ export const OrderChat: React.FC = () => {
 
   return (
     <>
-      <article className="container py-4 px-0">
-        <div className="row">
-          <div className="col-md-4">
-            <a href={`/customers/orders/${order.id}`} className="clink">
-              <i className="material-icons ">navigate_before</i> 戻る
+      <article className='container py-4 px-0'>
+        <div className='row'>
+          <div className='col-md-4'>
+            <a href={`/customers/orders/${order.id}`} className='clink'>
+              <i className='material-icons '>navigate_before</i> 戻る
             </a>
-            <div className="row align-items-center mt-2">
-              <div className="col-md-4">
+            <div className='row align-items-center mt-2'>
+              <div className='col-md-4'>
                 <picture>
-                  <img
-                    src={order.recreation?.imageUrl}
-                    alt=""
-                    className="img-fluid"
-                  />
+                  <img src={order.recreation?.imageUrl} alt='' className='img-fluid' />
                 </picture>
               </div>
-              <div className="col-md-7 recreation">
-                <h1 className="title-b line-height-140">
-                  {order.recreation?.title}
-                </h1>
-                <div className="category-tags">
-                  <Category
-                    id={order.recreation?.categoryId}
-                    name={order.recreation?.category}
-                  />
+              <div className='col-md-7 recreation'>
+                <h1 className='title-b line-height-140'>{order.recreation?.title}</h1>
+                <div className='category-tags'>
+                  <Category id={order.recreation?.categoryId} name={order.recreation?.category} />
                   {order.recreation?.tags.map((tag) => (
                     <Tag key={tag.id} id={tag.id} name={tag.name} />
                   ))}
                 </div>
               </div>
             </div>
-            <div className="card mt-3">
-              <div className="card-body p-0">
+            <div className='card mt-3'>
+              <div className='card-body p-0'>
                 {order.recreation?.category && (
-                  <div className="border-bottom p-2">
-                    <h4 className="title">
+                  <div className='border-bottom p-2'>
+                    <h4 className='title'>
                       参加人数制限
                       {order.recreation?.capacity}
                       人まで
                     </h4>
                   </div>
                 )}
-                <div className="border-bottom p-2">
-                  <h4 className="title">
-                    所要時間 {order.recreation?.minutes}分
-                  </h4>
+                <div className='border-bottom p-2'>
+                  <h4 className='title'>所要時間 {order.recreation?.minutes}分</h4>
                 </div>
-                <div className="p-2">
-                  <h4 className="title">対象者目安</h4>
+                <div className='p-2'>
+                  <h4 className='title'>対象者目安</h4>
                   {order.recreation?.targets.map((target) => (
-                    <div key={target.id} className="text-muted">・{target.name}</div>
+                    <div key={target.id} className='text-muted'>
+                      ・{target.name}
+                    </div>
                   ))}
                 </div>
-                <div className="p-2">
+                <div className='p-2'>
                   <a
                     href={`/customers/recreations/${order.recreation?.id}`}
-                    target="_blank"
-                    className="clink" rel="noreferrer"
+                    target='_blank'
+                    className='clink'
+                    rel='noreferrer'
                   >
-                    <span className="material-icons-text">
-                      レクの詳細を見る
-                    </span>
-                    <i className="material-icons ">navigate_next</i>
+                    <span className='material-icons-text'>レクの詳細を見る</span>
+                    <i className='material-icons '>navigate_next</i>
                   </a>
                 </div>
               </div>
             </div>
 
-            <div className="card mt-3">
-              <h3 className="title-b p-3">レク費用</h3>
-              <div className="card-body py-0">
-                <div className="row justify-content-between border-bottom-dotted pb-2">
-                  <div className="col-auto">開催費</div>
-                  <div className="col-auto">
+            <div className='card mt-3'>
+              <h3 className='title-b p-3'>レク費用</h3>
+              <div className='card-body py-0'>
+                <div className='row justify-content-between border-bottom-dotted pb-2'>
+                  <div className='col-auto'>開催費</div>
+                  <div className='col-auto'>
                     &yen;
                     {order.price?.toLocaleString()}
                   </div>
                 </div>
 
-                <div className="row justify-content-between border-bottom-dotted py-2">
-                  <div className="col-auto">
+                <div className='row justify-content-between border-bottom-dotted py-2'>
+                  <div className='col-auto'>
                     材料費/1人
                     <br />
-                    <span className="text-muted font-12 color-ba08">
-                      ※材料費は人数分の費用が発生します
-                    </span>
+                    <span className='text-muted font-12 color-ba08'>※材料費は人数分の費用が発生します</span>
                   </div>
-                  <div className="col-auto">
+                  <div className='col-auto'>
                     &yen;
                     {order.materialPrice?.toLocaleString()}
                   </div>
@@ -128,29 +116,22 @@ export const OrderChat: React.FC = () => {
                 <ExpenseForm order={order} setOrder={setOrder} />
                 <TranspotationExpensesForm order={order} setOrder={setOrder} />
                 <NumberOfFacilitiesForm order={order} setOrder={setOrder} />
-                <div className="row justify-content-between border-top py-3">
-                  <div className="col-auto">合計(税別)</div>
-                  <div id="totalPriceForSidenav" className="col-auto">
+                <div className='row justify-content-between border-top py-3'>
+                  <div className='col-auto'>合計(税別)</div>
+                  <div id='totalPriceForSidenav' className='col-auto'>
                     &yen;
                     {order.totalPriceForCustomer?.toLocaleString()}
                   </div>
                 </div>
 
-                <div className="row justify-content-center py-3">
-                  <div className="col-auto">
+                <div className='row justify-content-center py-3'>
+                  <div className='col-auto'>
                     {order.status <= 30 ? (
-                      <button
-                        id="order-modal"
-                        className="btn-cpr"
-                        data-bs-toggle="modal"
-                        data-bs-target="#orderModal"
-                      >
+                      <button id='order-modal' className='btn-cpr' data-bs-toggle='modal' data-bs-target='#orderModal'>
                         レクを正式依頼へ進む
                       </button>
                     ) : (
-                      <button className="btn-cpr disabled">
-                        正式依頼済みです
-                      </button>
+                      <button className='btn-cpr disabled'>正式依頼済みです</button>
                     )}
                   </div>
                 </div>
@@ -168,8 +149,8 @@ export const OrderChat: React.FC = () => {
 };
 
 // NOTE: 画面遷移した時用
-document.addEventListener("turbolinks:load", () => {
-  const elm = document.querySelector("#OrderChat");
+document.addEventListener('turbolinks:load', () => {
+  const elm = document.querySelector('#OrderChat');
   if (elm) {
     ReactDOM.render(<OrderChat />, elm);
   }
@@ -177,7 +158,7 @@ document.addEventListener("turbolinks:load", () => {
 
 // NOTE: リフレッシュした時用
 $(document).ready(() => {
-  const elm = document.querySelector("#OrderChat");
+  const elm = document.querySelector('#OrderChat');
   if (elm) {
     ReactDOM.render(<OrderChat />, elm);
   }

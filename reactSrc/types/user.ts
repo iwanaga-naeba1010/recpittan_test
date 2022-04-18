@@ -1,3 +1,3 @@
-import { Base } from "./base";
+import { Base } from './base';
 
-export type User = Base
+export type User = Base;

@@ -1,56 +1,34 @@
-// import * as Sentry from '@sentry/react';
-import axios, {AxiosResponse} from 'axios';
 import { ApiType } from '@/types';
-import snakecaseKeys from 'snakecase-keys';
+import axios, { AxiosResponse } from 'axios';
 import camelcaseKeys from 'camelcase-keys';
+import snakecaseKeys from 'snakecase-keys';
 
 export class Api {
-  static async get<T>(
-    path: string,
-    type: ApiType,
-    params: Record<string, unknown> = {},
-    isSendErrorMessage = true
-  ): Promise<AxiosResponse<T>> {
-    try {
-      const response = await axios.get<T>(`${apiDomain(type)}/${path}`, {params: snakecaseKeys(params), headers: headers()});
-      return {...response, data: camelcaseKeys(response.data, {deep: true})} as AxiosResponse<T>;
-    } catch (e) {
-      if (isSendErrorMessage) {
-        // Sentry.captureException(e);
-      }
-      throw e;
-    }
+  static async get<T>(path: string, type: ApiType, params: Record<string, unknown> = {}): Promise<AxiosResponse<T>> {
+    const response = await axios.get<T>(`${apiDomain(type)}/${path}`, {
+      params: snakecaseKeys(params),
+      headers: headers()
+    });
+    return { ...response, data: camelcaseKeys(response.data, { deep: true }) } as AxiosResponse<T>;
   }
 
   // TODO(okubo): Promise<any>をaxios returnでgenericsに変更
   static async post<T>(path: string, type: ApiType, data: Record<string, unknown>): Promise<AxiosResponse<T>> {
-    try {
-      const response = await axios.post<T>(`${apiDomain(type)}/${path}`, snakecaseKeys(data), { headers: headers() });
-      return {...response, data: camelcaseKeys(response.data, {deep: true})} as AxiosResponse<T>;
-    } catch (e) {
-      // Sentry.captureException(e);
-      throw e;
-    }
+    const response = await axios.post<T>(`${apiDomain(type)}/${path}`, snakecaseKeys(data), { headers: headers() });
+    return { ...response, data: camelcaseKeys(response.data, { deep: true }) } as AxiosResponse<T>;
   }
 
   static async patch<T>(path: string, type: ApiType, data: Record<string, unknown>): Promise<AxiosResponse<T>> {
-    try {
-      const response = await axios.patch(`${apiDomain(type)}/${path}`, snakecaseKeys(data), { headers: headers() });
-      return {...response, data: camelcaseKeys(response.data, {deep: true})} as AxiosResponse<T>;
-    } catch (e) {
-      // Sentry.captureException(e);
-      throw e;
-    }
+    const response = await axios.patch(`${apiDomain(type)}/${path}`, snakecaseKeys(data), { headers: headers() });
+    return { ...response, data: camelcaseKeys(response.data, { deep: true }) } as AxiosResponse<T>;
   }
 
   static async delete<T>(path: string, type: ApiType, data: Record<string, unknown>): Promise<AxiosResponse<T>> {
-    try {
-      const response = await axios.delete(`${apiDomain(type)}/${path}`, { data: snakecaseKeys(data), headers: headers() });
-      return {...response, data: camelcaseKeys(response.data, {deep: true})} as AxiosResponse<T>;
-    } catch (e) {
-      // Sentry.captureException(e);
-      throw e;
-    }
+    const response = await axios.delete(`${apiDomain(type)}/${path}`, {
+      data: snakecaseKeys(data),
+      headers: headers()
+    });
+    return { ...response, data: camelcaseKeys(response.data, { deep: true }) } as AxiosResponse<T>;
   }
 }
 
@@ -59,9 +37,7 @@ const headers = () => {
   const headers = {
     'Content-Type': 'application/json'
   };
-  const token = document
-        .querySelector("[name=csrf-token]")
-        .getAttribute("content");
+  const token = document.querySelector('[name=csrf-token]').getAttribute('content');
 
   return {
     ...headers,
@@ -110,7 +86,6 @@ const PARTNER_API_DOMAIN: string = (() => {
   // }
 })();
 
-
 // const APP_API_DOMAIN: string = (() => {
 //   if (process.env.ENVIRONMENT === 'development' || process.env.STAGING) {
 //     return 'http://localhost:3000';
@@ -118,5 +93,3 @@ const PARTNER_API_DOMAIN: string = (() => {
 //     return 'https://recreation.everyplus.jp';
 //   }
 // })();
-
-

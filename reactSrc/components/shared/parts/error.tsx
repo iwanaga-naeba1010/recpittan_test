@@ -9,7 +9,7 @@ export const Error: React.FC<Props> = (props) => {
   return (
     <div className='alert alert-danger' role='alert'>
       <ul>
-        {errors.map((error,i) => (
+        {errors.map((error, i) => (
           <li key={i}>{error}</li>
         ))}
       </ul>

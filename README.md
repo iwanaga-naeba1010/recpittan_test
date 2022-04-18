@@ -36,6 +36,9 @@ docker-compose run --rm web bundle exec brakeman
 docker-compose run --rm web bundle exec rails_best_practices -e node_modules
 
 # ts/jsのlint実行
+docker-compose run web yarn lint
+
+# ts/jsのlint fix実行
 docker-compose run web yarn lint:fix
 ```
 

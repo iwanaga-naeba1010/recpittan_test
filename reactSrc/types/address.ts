@@ -35,4 +35,3 @@ export interface CityResponse {
   message: string;
   result: Array<City>;
 }
-
