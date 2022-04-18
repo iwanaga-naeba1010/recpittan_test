@@ -13,7 +13,7 @@ class ChatSerializer
       user_id: chat.user_id,
       order_id: chat.order_id,
       message: chat.message,
-      filename: chat.file.present? ? chat.file.file.filename : '',
+      filename: chat.file? ? chat.file.file.filename : '',
       file_url: chat.file.url,
       created_at: chat.created_at,
       updated_at: chat.updated_at

@@ -3,4 +3,3 @@
 namespace :api do
   resources :slack_notifiers, only: %i[create]
 end
-

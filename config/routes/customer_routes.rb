@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 resources :customers, only: %i[index]
-namespace :customers do
 
+namespace :customers do
   resources :recreations, only: [:show, :index], shallow: true do
     resources :orders, except: [:edit, :destroy, :index] do
       member do
