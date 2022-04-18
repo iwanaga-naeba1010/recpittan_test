@@ -11,13 +11,22 @@ class ApiCustomer::Orders::ChatsController < Api::ApplicationController
   end
 
   def create
-    chat = current_user.chats.build(params_create)
-    chat.order_id = params[:order_id]
-    chat.save!
+    @order.chats.build(params_create.merge(user: current_user))
+    @order.save!
+
+    message = <<~MESSAGE
+      施設名名： #{current_user.company.facility_name}
+      管理画面案件URL： #{admin_order_url(@order.id)}
+      内容:
+      #{params_create[:message]}
+    MESSAGE
+
+    SlackNotifier.new(channel: '#アクティブチャットスレッド').send('施設からチャットが届きました', message)
+    PartnerChatMailer.notify(@order, current_user).deliver_now # TODO: jobで送信したい
     render_json OrderSerializer.new.serialize(order: @order)
   rescue StandardError => e
     logger.error e.message
-    render_json({ message: e.message }, status: 422)
+    render_json([e.message], status: 422)
   end
 
   private

@@ -6,7 +6,7 @@ import { Order, User } from "@/types";
 import { ExpenseForm } from "@/components/shared/form/forCustomer/orderChat/expenceForm";
 import { TranspotationExpensesForm } from "@/components/shared/form/forCustomer/orderChat/transportationExpensesForm";
 import { NumberOfFacilitiesForm } from "@/components/shared/form/forCustomer/orderChat/numberOfFacilitiesForm";
-import { Category, Tag } from "@/components/shared/form/parts";
+import { Category, Tag } from "@/components/shared/parts";
 import { ChatList } from "./chatList";
 import {Modal} from "./modal";
 

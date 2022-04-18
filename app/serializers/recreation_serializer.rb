@@ -16,7 +16,7 @@ class RecreationSerializer
       is_online: recreation.is_online,
       capacity: recreation.capacity,
       image_url: recreation.recreation_images.sliders&.first&.image.to_s,
-      category: recreation.category,
+      category: recreation.category_text,
       category_id: recreation.category.value,
       instructor_description: recreation.instructor_description,
       instructor_image: recreation.instructor_image.to_s,

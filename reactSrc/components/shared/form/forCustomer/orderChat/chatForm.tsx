@@ -1,7 +1,10 @@
-import React from "react";
+import React, {useState} from "react";
 import { Chat, Order } from "@/types";
 import { useForm } from "react-hook-form";
 import { Api } from "@/infrastructure";
+import {Error} from "@/components/shared/parts";
+import {isEmpty} from "@/utils";
+import axios, {AxiosError} from "axios";
 
 type Props = {
   order: Order;
@@ -13,8 +16,10 @@ export type ChatFormValues = Pick<Chat, "message">;
 export const ChatForm: React.FC<Props> = (props): JSX.Element => {
   const { order, loadChats } = props;
   const { register, handleSubmit, setValue } = useForm<ChatFormValues>({ mode: "onChange" });
+  const [errors, setErrors] = useState<Array<string>>([]);
 
   const onSubmit = async (values: ChatFormValues): Promise<void> => {
+    setErrors([]);
     const requestBody: {[key: string]: ChatFormValues} = {
       chat: {
         message: values.message,
@@ -26,12 +31,16 @@ export const ChatForm: React.FC<Props> = (props): JSX.Element => {
       await loadChats();
       setValue("message", "");
     } catch (e) {
-      console.log(e);
+      if (axios.isAxiosError(e)) {
+        setErrors((e as AxiosError<Array<string>>).response.data);
+        console.log(e.response.data);
+      }
     }
   };
 
   return (
     <div className="card-footer bg-white">
+      { !isEmpty(errors) &&  <Error errors={errors} /> }
       <form className="chat" onSubmit={handleSubmit(onSubmit)}>
         <div className="row align-items-center">
           <div className="col-10 pe-0">
