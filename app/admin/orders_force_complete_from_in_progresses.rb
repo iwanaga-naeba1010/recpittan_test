@@ -37,10 +37,10 @@ ActiveAdmin.register Orders::ForceCompleteFromInProgress do
       row :is_accepted
       row :start_at
       row :end_at
-      row :regular_price
-      row :instructor_amount
-      row :regular_material_price
-      row :instructor_material_amount
+      row :price
+      row :amount
+      row :material_price
+      row :material_amount
       row :additional_facility_fee
       row :transportation_expenses
       row :expenses

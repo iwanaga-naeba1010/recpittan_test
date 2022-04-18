@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe 'Orders', type: :request do
+RSpec.describe 'Invoices', type: :request do
   let(:admin) { create :user, :with_admin }
   let(:customer) { create :user, :with_custoemr }
   let(:partner) { create :user, :with_recreations }
@@ -74,10 +74,10 @@ RSpec.describe 'Orders', type: :request do
         number_of_facilities: 2,
         # start_at: Time.zone.tomorrow,
         # end_at: Time.zone.tomorrow,
-        regular_price: 50000,
-        regular_material_price: 10000,
-        instructor_amount: 30000,
-        instructor_material_amount: 5000,
+        price: 50000,
+        material_price: 10000,
+        amount: 30000,
+        material_amount: 5000,
         additional_facility_fee: 5000,
         expenses: 10000,
         transportation_expenses: 10000,
@@ -93,10 +93,10 @@ RSpec.describe 'Orders', type: :request do
         expect(response).to have_http_status(:found)
         expect(response).to redirect_to admin_order_path(order.id)
 
-        expect(order.regular_price).to eq attrs[:regular_price]
-        expect(order.regular_material_price).to eq attrs[:regular_material_price]
-        expect(order.instructor_amount).to eq attrs[:instructor_amount]
-        expect(order.instructor_material_amount).to eq attrs[:instructor_material_amount]
+        expect(order.price).to eq attrs[:price]
+        expect(order.material_price).to eq attrs[:material_price]
+        expect(order.amount).to eq attrs[:amount]
+        expect(order.material_amount).to eq attrs[:material_amount]
         expect(order.additional_facility_fee).to eq attrs[:additional_facility_fee]
         expect(order.expenses).to eq attrs[:expenses]
         expect(order.transportation_expenses).to eq attrs[:transportation_expenses]
@@ -115,10 +115,10 @@ RSpec.describe 'Orders', type: :request do
         expect(response).to have_http_status(:found)
         expect(response).to redirect_to admin_order_path(order.id)
 
-        expect(order.regular_price).to eq attrs[:regular_price]
-        expect(order.regular_material_price).to eq attrs[:regular_material_price]
-        expect(order.instructor_amount).to eq attrs[:instructor_amount]
-        expect(order.instructor_material_amount).to eq attrs[:instructor_material_amount]
+        expect(order.price).to eq attrs[:price]
+        expect(order.material_price).to eq attrs[:material_price]
+        expect(order.amount).to eq attrs[:amount]
+        expect(order.material_amount).to eq attrs[:material_amount]
         expect(order.additional_facility_fee).to eq attrs[:additional_facility_fee]
         expect(order.expenses).to eq attrs[:expenses]
         expect(order.transportation_expenses).to eq attrs[:transportation_expenses]
@@ -137,10 +137,10 @@ RSpec.describe 'Orders', type: :request do
         expect(response).to have_http_status(:found)
         expect(response).to redirect_to admin_order_path(order.id)
 
-        expect(order.regular_price).to eq attrs[:regular_price]
-        expect(order.regular_material_price).to eq attrs[:regular_material_price]
-        expect(order.instructor_amount).to eq attrs[:instructor_amount]
-        expect(order.instructor_material_amount).to eq attrs[:instructor_material_amount]
+        expect(order.price).to eq attrs[:price]
+        expect(order.material_price).to eq attrs[:material_price]
+        expect(order.amount).to eq attrs[:amount]
+        expect(order.material_amount).to eq attrs[:material_amount]
         expect(order.additional_facility_fee).to eq attrs[:additional_facility_fee]
         expect(order.expenses).to eq attrs[:expenses]
         expect(order.transportation_expenses).to eq attrs[:transportation_expenses]
@@ -175,10 +175,10 @@ RSpec.describe 'Orders', type: :request do
         # expect(order.start_at).to eq attrs[:start_at]
         # expect(order.end_at).to eq attrs[:end_at]
 
-        expect(order.regular_price).to eq attrs[:regular_price]
-        expect(order.regular_material_price).to eq attrs[:regular_material_price]
-        expect(order.instructor_amount).to eq attrs[:instructor_amount]
-        expect(order.instructor_material_amount).to eq attrs[:instructor_material_amount]
+        expect(order.price).to eq attrs[:price]
+        expect(order.material_price).to eq attrs[:material_price]
+        expect(order.amount).to eq attrs[:amount]
+        expect(order.material_amount).to eq attrs[:material_amount]
         expect(order.additional_facility_fee).to eq attrs[:additional_facility_fee]
         expect(order.expenses).to eq attrs[:expenses]
         expect(order.transportation_expenses).to eq attrs[:transportation_expenses]
@@ -212,10 +212,10 @@ RSpec.describe 'Orders', type: :request do
         # expect(order.start_at).to eq attrs[:start_at]
         # expect(order.end_at).to eq attrs[:end_at]
 
-        expect(order.regular_price).to eq attrs[:regular_price]
-        expect(order.regular_material_price).to eq attrs[:regular_material_price]
-        expect(order.instructor_amount).to eq attrs[:instructor_amount]
-        expect(order.instructor_material_amount).to eq attrs[:instructor_material_amount]
+        expect(order.price).to eq attrs[:price]
+        expect(order.material_price).to eq attrs[:material_price]
+        expect(order.amount).to eq attrs[:amount]
+        expect(order.material_amount).to eq attrs[:material_amount]
         expect(order.additional_facility_fee).to eq attrs[:additional_facility_fee]
         expect(order.expenses).to eq attrs[:expenses]
         expect(order.transportation_expenses).to eq attrs[:transportation_expenses]

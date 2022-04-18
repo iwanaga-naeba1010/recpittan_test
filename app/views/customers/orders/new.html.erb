@@ -92,10 +92,10 @@
             <%= render 'layouts/error_messages', model: f.object %>
             <%= f.input :user_id, as: :hidden, input_html: { value: current_user.id } %>
 
-            <%= f.input :regular_price, as: :hidden, input_html: { value: @recreation.regular_price } %>
-            <%= f.input :instructor_amount, as: :hidden, input_html: { value: @recreation.instructor_amount } %>
-            <%= f.input :regular_material_price, as: :hidden, input_html: { value: @recreation.regular_material_price } %>
-            <%= f.input :instructor_material_amount, as: :hidden, input_html: { value: @recreation.instructor_material_amount } %>
+            <%= f.input :price, as: :hidden, input_html: { value: @recreation.price } %>
+            <%= f.input :amount, as: :hidden, input_html: { value: @recreation.amount } %>
+            <%= f.input :material_price, as: :hidden, input_html: { value: @recreation.material_price } %>
+            <%= f.input :material_amount, as: :hidden, input_html: { value: @recreation.material_amount } %>
             <%= f.input :additional_facility_fee, as: :hidden, input_html: { value: @recreation.additional_facility_fee } %>
 
             <div class="card-body">

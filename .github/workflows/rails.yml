@@ -51,6 +51,9 @@ jobs:
       - name: Run rails best practices
         run: bundle exec rails_best_practices -e node_modules
 
+      - name: Run eslint
+        run: yarn lint
+
       #-- Slack通知 --#
       # 成功
       - name: Slack Notification on Success

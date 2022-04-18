@@ -117,7 +117,7 @@ RSpec.describe Partners::OrdersController, type: :request do
   describe 'PUT /update' do
     context 'when valid parameters' do
       it 'returns 302 status' do
-        put partners_order_path(order.id), params: { order: { status: :facility_request_in_progress } }
+        put partners_order_path(order.id), params: { order: { status: :facility_request_in_progress, start_at: DateTime.current } }
         expect(response).to have_http_status(:found)
       end
 
@@ -133,7 +133,7 @@ RSpec.describe Partners::OrdersController, type: :request do
 
       it 'update status' do
         expect {
-          put partners_order_path(order.id), params: { order: { status: :facility_request_in_progress } }
+          put partners_order_path(order.id), params: { order: { status: :facility_request_in_progress, start_at: DateTime.current } }
         }.to change { Order.find(order.id).status }.from(order.status).to('facility_request_in_progress')
       end
 

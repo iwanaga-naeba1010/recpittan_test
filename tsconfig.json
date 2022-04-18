@@ -9,7 +9,10 @@
     "sourceMap": true,
     "target": "es5",
     "jsx": "react",
-    "allowSyntheticDefaultImports": true
+    "allowSyntheticDefaultImports": true,
+    "paths": {
+      "@/*": ["./reactSrc/*"]
+    }
   },
   "exclude": [
     "**/*.spec.ts",

@@ -1,5 +1,5 @@
-import { Prefecture } from './prefectures';
 import { City } from './cities';
+import { Prefecture } from './prefectures';
 
 export interface PrefectureResponse {
   message: string;

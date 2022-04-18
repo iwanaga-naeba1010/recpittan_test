@@ -8,7 +8,7 @@ ActiveAdmin.register Order do
     %i[
       user_id recreation_id zip prefecture city street building number_of_people
       number_of_facilities status is_accepted start_at end_at
-      regular_price instructor_amount regular_material_price instructor_material_amount
+      price amount material_price material_amount
       additional_facility_fee transportation_expenses support_price expenses contract_number
     ],
     zoom_attributes: %i[id url price created_by],
@@ -42,10 +42,10 @@ ActiveAdmin.register Order do
     column :is_accepted
     column :start_at
     column :end_at
-    column :regular_price
-    column :instructor_amount
-    column :regular_material_price
-    column :instructor_material_amount
+    column :price
+    column :amount
+    column :material_price
+    column :material_amount
     column :additional_facility_fee
     column :transportation_expenses
     column :expenses
@@ -84,10 +84,10 @@ ActiveAdmin.register Order do
           row :is_accepted
           row :start_at
           row :end_at
-          row :regular_price
-          row :instructor_amount
-          row :regular_material_price
-          row :instructor_material_amount
+          row :price
+          row :amount
+          row :material_price
+          row :material_amount
           row :additional_facility_fee
           row :transportation_expenses
           row :expenses
@@ -169,10 +169,10 @@ ActiveAdmin.register Order do
 
       div class: 'cost_input' do
         if f.object.id.present?
-          f.input :regular_price
-          f.input :instructor_amount
-          f.input :regular_material_price
-          f.input :instructor_material_amount
+          f.input :price
+          f.input :amount
+          f.input :material_price
+          f.input :material_amount
           f.input :additional_facility_fee
           f.input :transportation_expenses, as: :number
           f.input :expenses, as: :number
@@ -224,10 +224,10 @@ ActiveAdmin.register Order do
       recreation = Recreation.find(params[:order][:recreation_id])
       order = recreation.orders.build(
         user_id: params[:order][:user_id],
-        regular_price: recreation.regular_price,
-        instructor_amount: recreation.instructor_amount,
-        regular_material_price: recreation.regular_material_price,
-        instructor_material_amount: recreation.instructor_material_amount,
+        price: recreation.price,
+        amount: recreation.amount,
+        material_price: recreation.material_price,
+        material_amount: recreation.material_amount,
         additional_facility_fee: recreation.additional_facility_fee
       )
 

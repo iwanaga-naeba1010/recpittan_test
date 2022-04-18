@@ -2,17 +2,16 @@
  * admin/orderの正式依頼formです
  */
 import * as $ from 'jquery';
-import { findAllPrefectures, findCityByPrefectureCode } from '../../packs/prefectures';
 import { findAddressByZip } from '../../packs/zip';
 
-$(document).ready(async () => {
+$(document).ready(() => {
   // NOTE(okubo): 一応念の為全てのformをdisplay noneに変更する
   const hideAllForm = () => {
     $('.official_input').css('display', 'none');
     $('.recreation_input').css('display', 'none');
     $('.cost_input').css('display', 'none');
     $('.evaluation_input').css('display', 'none');
-  }
+  };
 
   // NOTE(okubo): 正式依頼のformを表示
   $('#officialRequestBtn').on('click', () => {

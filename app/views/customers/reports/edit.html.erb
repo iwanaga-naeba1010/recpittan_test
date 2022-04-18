@@ -70,7 +70,7 @@
               <div class="row justify-content-between border-bottom-dotted py-2 ">
                 <div class="col-lg-3 col-4 label py-2">開催費</div>
                 <div class="col-lg-9 col-8 py-2 text-end ">
-                  <%= number_to_currency(@report.order.recreation.regular_price) %>
+                  <%= number_to_currency(@report.order.recreation.price) %>
                 </div>
               </div>
               <div class="row justify-content-between border-bottom-dotted py-2 ">
@@ -86,12 +86,9 @@
                   <span class="text-muted font-12 color-ba08">※材料費は人数分の費用が発生します</span>
                 </div>
                 <div class="col-auto">
-                  <%= number_to_currency(@report.order_regular_material_price) %>
+                  <%= number_to_currency(@report.order_material_price) %>
                 </div>
               </div>
-
-
-
 
               <div class="row justify-content-between border-bottom-dotted py-2 ">
                 <div class="col-lg-3 col-4 label py-2">参加人数</div>

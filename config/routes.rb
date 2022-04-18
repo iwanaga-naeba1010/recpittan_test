@@ -1,9 +1,9 @@
+def draw(routes_name)
+  instance_eval(File.read(Rails.root.join("config/routes/#{routes_name}_routes.rb")))
+end
+
 Rails.application.routes.draw do
-  namespace :admin do
-    resources :invoices, only: %i[index create]
-    # resources :users, path: 'members', controller: 'members'
-  end
-  ActiveAdmin.routes(self)
+  draw :admin_routes
   # switch userの設定
   get 'switch_user', to: 'switch_user#set_current_user' if Rails.env.development?
   get 'switch_user/remember_user', to: 'switch_user#remember_user' if Rails.env.development?
@@ -17,51 +17,10 @@ Rails.application.routes.draw do
     passwords: 'custom_devise/passwords'
   }
 
-  resources :customers, only: %i[index]
-  namespace :customers do
-
-    resources :recreations, only: [:show, :index], shallow: true do
-      resources :orders, except: [:edit, :destroy, :index] do
-        member do
-          get :chat
-          get :complete
-        end
-
-        resources :chats, only: %i[create]
-        resources :reports, only: %i[edit update]
-      end
-    end
-  end
-
-  resources :partners, only: %i[index]
-  namespace :partners do
-    get :tos
-
-    resources :recreations, except: :destroy
-    resources :orders, only: %i[show update] do
-      member do
-        get :chat
-        get :confirm
-        get :complete
-        get :final_check
-        patch :update_final_check
-        get :complete_final_check
-      end
-
-      resources :chats, only: %i[create]
-      resources :zooms, only: %i[new create edit update]
-      resources :reports, only: %i[new create edit update] do
-        member do
-          get :complete
-        end
-      end
-    end
-  end
-
-  namespace :api do
-    resources :slack_notifiers, only: %i[create]
-    resources :orders, only: %i[update]
-  end
+  draw :customer_routes
+  draw :partner_routes
+  draw :api_routes
+  draw :api_customer_routes
 
   get 'sitemap', to: redirect("https://#{ENV['AWS_BUCKET']}.s3-ap-northeast-1.amazonaws.com/sitemaps/sitemap.xml.gz")
 
