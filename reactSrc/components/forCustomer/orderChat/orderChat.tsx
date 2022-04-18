@@ -1,3 +1,4 @@
+import {ModalForm} from '@/components/shared';
 import { ExpenseForm } from '@/components/shared/form/forCustomer/orderChat/expenceForm';
 import { NumberOfFacilitiesForm } from '@/components/shared/form/forCustomer/orderChat/numberOfFacilitiesForm';
 import { TranspotationExpensesForm } from '@/components/shared/form/forCustomer/orderChat/transportationExpensesForm';
@@ -8,7 +9,6 @@ import * as $ from 'jquery';
 import React, { useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
 import { ChatList } from './chatList';
-import { Modal } from './modal';
 
 export const OrderChat: React.FC = () => {
   const [order, setOrder] = useState<Order>(undefined);
@@ -143,7 +143,7 @@ export const OrderChat: React.FC = () => {
         </div>
       </article>
       {/* NOTE(okubo): html経由で読んでる */}
-      <Modal recreation={order.recreation} order={order} />
+      <ModalForm recreation={order.recreation} order={order} />
     </>
   );
 };

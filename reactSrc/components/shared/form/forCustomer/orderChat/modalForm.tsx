@@ -19,7 +19,7 @@ type StartAndEndAt = {
   endMinute: string;
 };
 
-export type OrderFormValues = Pick<
+export type ModalForlValues = Pick<
   Order,
   | 'zip'
   | 'prefecture'
@@ -34,7 +34,7 @@ export type OrderFormValues = Pick<
 > &
   StartAndEndAt;
 
-export const Modal: React.FC<Props> = (props) => {
+export const ModalForm: React.FC<Props> = (props) => {
   const { order, recreation } = props;
   const [preferredDate, setPreferredDate] = useState<PreferredDate>(undefined);
   const [prefectures, setPrefectures] = useState<Array<Prefecture>>([]);
@@ -46,7 +46,7 @@ export const Modal: React.FC<Props> = (props) => {
     setValue,
     getValues,
     formState: { isValid }
-  } = useForm<OrderFormValues>({
+  } = useForm<ModalForlValues>({
     mode: 'onChange',
     defaultValues: {
       status: order.status,
@@ -101,19 +101,7 @@ export const Modal: React.FC<Props> = (props) => {
 
   console.log('isValid', isValid);
 
-  const onSubmit = async (values: OrderFormValues): Promise<void> => {
-    // console.log(
-    //   `${getValues('year')}-${getValues('month')}-${getValues('day')} ${getValues('hour')}:${getValues('minute')}`
-    // );
-    // console.log(
-    //   new Date(
-    //     Number(getValues('year')),
-    //     Number(getValues('month')),
-    //     Number(getValues('day')),
-    //     Number(getValues('hour')),
-    //     Number(getValues('minute'))
-    //   )
-    // );
+  const onSubmit = async (values: ModalForlValues): Promise<void> => {
 
     const startAt: Date = new Date(
       `${getValues('year')}-${getValues('month')}-${getValues('day')} ${getValues('startHour')}:${getValues(
@@ -127,7 +115,7 @@ export const Modal: React.FC<Props> = (props) => {
 
     const requestBody: {
       [key: string]: Omit<
-        OrderFormValues,
+        ModalForlValues,
         'year' | 'month' | 'day' | 'startHour' | 'startMinute' | 'endHour' | 'endMinute'
       >;
     } = {
