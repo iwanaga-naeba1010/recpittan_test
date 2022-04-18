@@ -12,3 +12,13 @@ environment.plugins.prepend(
 )
 environment.plugins.prepend('jquery', jquery)
 module.exports = environment
+
+// path aliasを使うための設定
+const { resolve } = require('path');
+environment.config.merge({
+  resolve: {
+    alias: {
+      '@': resolve('reactSrc'),
+    },
+  },
+})

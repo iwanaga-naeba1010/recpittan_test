@@ -39,15 +39,15 @@ ActiveAdmin.register_page 'Invoices' do
         orders.each do |order|
           invoice[:items] << {
             name: "#{order.start_at.strftime('%m/%d')}#{order.recreation_title}",
-            price: order.regular_price,
+            price: order.price,
             amount: 1,
             unit: '回'
           }
 
-          if order.number_of_people? && order.regular_material_price.present? && order.regular_material_price != 0
+          if order.number_of_people? && order.material_price.present? && order.material_price != 0
             invoice[:items] << {
               name: '材料費',
-              price: order.regular_material_price,
+              price: order.material_price,
               amount: order.number_of_people,
               unit: '個'
             }

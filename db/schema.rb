@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_04_13_061753) do
+ActiveRecord::Schema.define(version: 2022_04_13_105654) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -124,10 +124,10 @@ ActiveRecord::Schema.define(version: 2022_04_13_061753) do
     t.string "street"
     t.string "building"
     t.integer "number_of_facilities"
-    t.integer "regular_price", default: 0
-    t.integer "instructor_amount", default: 0
-    t.integer "regular_material_price", default: 0
-    t.integer "instructor_material_amount", default: 0
+    t.integer "price", default: 0
+    t.integer "amount", default: 0
+    t.integer "material_price", default: 0
+    t.integer "material_amount", default: 0
     t.integer "additional_facility_fee", default: 0
     t.integer "support_price", default: 0
     t.datetime "end_at"
@@ -164,11 +164,11 @@ ActiveRecord::Schema.define(version: 2022_04_13_061753) do
     t.string "youtube_id"
     t.string "flyer_color"
     t.string "prefectures", default: [], array: true
-    t.integer "regular_price"
-    t.integer "regular_material_price"
-    t.integer "instructor_material_amount"
+    t.integer "price"
+    t.integer "material_price"
+    t.integer "material_amount"
     t.integer "capacity"
-    t.integer "instructor_amount"
+    t.integer "amount"
     t.string "instructor_position"
     t.boolean "is_public"
     t.string "base_code"

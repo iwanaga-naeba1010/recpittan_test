@@ -40,10 +40,10 @@ FactoryBot.define do
   factory :order do
     user
     recreation
-    regular_price { 20000 }
-    regular_material_price { 100 }
-    instructor_amount { 10000 }
-    instructor_material_amount { 50 }
+    price { 20000 }
+    material_price { 100 }
+    amount { 10000 }
+    material_amount { 50 }
     number_of_people { 1 }
     message { 'MyText' }
     status { 10 }

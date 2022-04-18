@@ -167,14 +167,14 @@
                 <div class="row justify-content-between border-bottom-dotted py-2">
                   <div class="col-auto">開催費</div>
                   <div class="col-auto">
-                    <%= number_to_currency(@order.regular_price) %>
+                    <%= number_to_currency(@order.price) %>
                   </div>
                 </div>
                 <div class="row justify-content-between border-bottom-dotted py-2">
                   <div class="col-auto">材料費/1人<br><span
                     class="text-muted font-12 color-ba08">※材料費は人数分の費用が発生します</span></div>
                   <div class="col-auto">
-                    <%= number_to_currency(@order.regular_material_price) %>
+                    <%= number_to_currency(@order.material_price) %>
                   </div>
                 </div>
                 <div class="row justify-content-between border-bottom-dotted py-2">
@@ -206,7 +206,6 @@
                       <% else %>
                         <%= number_to_currency(0) %>
                       <% end %>
-
                     </div>
                     <div class="col-12">
                       <span class="text-muted font-12 color-ba08">

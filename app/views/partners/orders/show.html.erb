@@ -82,7 +82,7 @@
       <tr class="border-bottom">
         <td class="pt-2 pb-2 text-black w-75">開催費</td>
         <td class="pt-2 pb-2 text-black text-end">
-          <%= number_to_currency(@order.instructor_amount) %>
+          <%= number_to_currency(@order.amount) %>
         </td>
       </tr>
       <tr class="border-bottom">
@@ -94,7 +94,7 @@
       <tr class="border-bottom">
         <td class="pt-2 pb-2 text-black w-75">材料費/名</td>
         <td class="pt-2 pb-2 text-black text-end">
-          <%= number_to_currency(@order.instructor_material_amount) %>
+          <%= number_to_currency(@order.material_amount) %>
         </td>
       </tr>
       <tr class="border-bottom">

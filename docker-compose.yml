@@ -57,8 +57,10 @@ services:
     command: "bin/webpack-dev-server"
     ports:
       - '3035:3035'
-    tty: false
-    stdin_open: false
+    stdin_open: true
+    tty: true
+    # tty: false
+    # stdin_open: false
     depends_on:
       - web
 

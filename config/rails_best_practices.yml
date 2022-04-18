@@ -37,6 +37,7 @@ NotUseTimeAgoInWordsCheck: { }
 OveruseRouteCustomizationsCheck:
   ignored_files:
     - "config/routes.rb"
+    - "config/routes/*"
 ProtectMassAssignmentCheck: { }
 RemoveEmptyHelpersCheck:
   ignored_files:

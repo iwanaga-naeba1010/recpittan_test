@@ -3,7 +3,7 @@
  */
 
 import React from 'react';
-import ReactDOM from 'react-dom'
+import ReactDOM from 'react-dom';
 import { post } from '../utils/requests/base';
 
 interface Props {
@@ -19,29 +19,21 @@ const App: React.FC<Props> = ({ recreationId }): JSX.Element => {
     } catch (e) {
       console.log(e);
     }
-  }
+  };
   return (
     <>
-      <button
-        type="button"
-        role="button"
-        className="btn-cpr"
-        onClick={handleSend}
-      >
+      <button type='button' role='button' className='btn-cpr' onClick={handleSend}>
         相談・依頼する
       </button>
     </>
   );
-}
+};
 
 document.addEventListener('turbolinks:load', () => {
   const elm = document.querySelector('#ConsultRecreation');
-  const recreationId = JSON.parse(elm.getAttribute('data-recreationId'));
+  const recreationId = JSON.parse(elm?.getAttribute('data-recreationId'));
 
-  if (elm) {
-    ReactDOM.render(
-      <App recreationId={recreationId} />,
-      elm,
-    )
+  if (elm && recreationId) {
+    ReactDOM.render(<App recreationId={Number(recreationId)} />, elm);
   }
-})
+});

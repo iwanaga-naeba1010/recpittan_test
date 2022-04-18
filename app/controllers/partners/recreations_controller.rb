@@ -52,7 +52,8 @@ class Partners::RecreationsController < Partners::ApplicationController
     params.require(:recreation).permit(
       :title, :second_title, :minutes, :description,
       :flow_of_day, :borrow_item, :bring_your_own_item, :extra_information, :youtube_id,
-      :capacity, :instructor_amount, :instructor_material_amount,
+      :capacity,
+      :amount, :material_amount,
       :instructor_name, :instructor_title, :instructor_description, :instructor_image,
       :is_online, :is_public, :additional_facility_fee,
       { tag_ids: [] },

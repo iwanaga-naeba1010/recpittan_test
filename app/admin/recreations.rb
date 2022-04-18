@@ -6,8 +6,9 @@ ActiveAdmin.register Recreation do
     %i[
       user_id title second_title minutes description category
       flow_of_day borrow_item bring_your_own_item extra_information youtube_id
-      base_code capacity flyer_color regular_price instructor_amount instructor_material_amount
-      regular_material_price instructor_name instructor_title instructor_description instructor_image
+      base_code capacity flyer_color
+      price material_price amount material_amount
+      instructor_name instructor_title instructor_description instructor_image
       is_online is_public prefectures is_public_price additional_facility_fee
     ],
     tag_ids: [],
@@ -18,7 +19,7 @@ ActiveAdmin.register Recreation do
   filter :title
   filter :second_title
   filter :minutes
-  filter :regular_price
+  filter :price
   filter :is_public
 
   index do
@@ -28,7 +29,7 @@ ActiveAdmin.register Recreation do
     column :second_title
     column(:category, &:category_text)
     column :minutes
-    column :regular_price
+    column :price
     column :is_public_price
 
     actions
@@ -52,10 +53,10 @@ ActiveAdmin.register Recreation do
       row :base_code
       row :capacity
       row :flyer_color
-      row :regular_price
-      row :instructor_amount
-      row :instructor_material_amount
-      row :regular_material_price
+      row :price
+      row :material_price
+      row :amount
+      row :material_amount
       row :instructor_name
       row :instructor_title
       row :instructor_description
@@ -124,15 +125,14 @@ ActiveAdmin.register Recreation do
       f.input :bring_your_own_item
       f.input :extra_information
       f.input :youtube_id
-      # f.input :price
 
       f.input :base_code
       f.input :capacity
       f.input :flyer_color, as: :string
-      f.input :regular_price
-      f.input :instructor_amount
-      f.input :instructor_material_amount
-      f.input :regular_material_price
+      f.input :price
+      f.input :material_price
+      f.input :amount
+      f.input :material_amount
       f.input :instructor_name
       f.input :instructor_title
       f.input :instructor_description
