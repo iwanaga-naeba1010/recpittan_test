@@ -1,10 +1,10 @@
+import { Error } from '@/components/shared';
 import { Api } from '@/infrastructure';
 import { City, Order, Prefecture, PreferredDate, Recreation } from '@/types';
 import { findAddressByZip, findAllPrefectures, findCityByPrefectureCode, isEmpty, toSnakecase } from '@/utils';
-import axios, {AxiosError} from 'axios';
+import axios, { AxiosError } from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { Error } from '@/components/shared'
 
 type Props = {
   order: Order;
@@ -127,7 +127,7 @@ export const ModalForm: React.FC<Props> = (props) => {
     const requestBody: {
       [key: string]: Omit<
         ModalForlValues,
-        'status'|'year' | 'month' | 'day' | 'startHour' | 'startMinute' | 'endHour' | 'endMinute'
+        'status' | 'year' | 'month' | 'day' | 'startHour' | 'startMinute' | 'endHour' | 'endMinute'
       > & { status: string };
     } = {
       order: {
@@ -149,9 +149,9 @@ export const ModalForm: React.FC<Props> = (props) => {
       window.location.href = `/customers/orders/${order.id}/complete`;
     } catch (e) {
       if (axios.isAxiosError(e)) {
-          setErrors((e as AxiosError<Array<string>>).response.data);
-          console.log(e.response.data);
-        }
+        setErrors((e as AxiosError<Array<string>>).response.data);
+        console.log(e.response.data);
+      }
       console.log(e);
     }
   };
