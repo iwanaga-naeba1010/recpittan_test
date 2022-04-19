@@ -9,6 +9,6 @@ class CustomerChatMailer < ApplicationMailer
     @user_name = user.username
     @url = chat_customers_order_url(order.id)
 
-    mail from: 'info@everyplus.jp', to: @email, subject: @template.title, template_path: 'template_mailer'
+    mail from: 'info@everyplus.jp', to: @email, subject: @template.title, template_path: 'common_mailer_template'
   end
 end
