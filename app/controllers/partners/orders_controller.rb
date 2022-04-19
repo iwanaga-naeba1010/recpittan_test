@@ -25,6 +25,7 @@ class Partners::OrdersController < Partners::ApplicationController
     if params[:message]
       message = params[:message]
     end
+
     @order.update(params_create)
 
     if params_create[:is_accepted] == 'true'

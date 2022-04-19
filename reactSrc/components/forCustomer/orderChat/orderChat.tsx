@@ -4,7 +4,8 @@ import { NumberOfFacilitiesForm } from '@/components/shared/form/forCustomer/ord
 import { TranspotationExpensesForm } from '@/components/shared/form/forCustomer/orderChat/transportationExpensesForm';
 import { Category, Tag } from '@/components/shared/parts';
 import { Api } from '@/infrastructure';
-import { Order, User } from '@/types';
+import { Order, OrderStatusEnum, User } from '@/types';
+import { toCamelcase } from '@/utils';
 import * as $ from 'jquery';
 import React, { useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
@@ -20,12 +21,15 @@ export const OrderChat: React.FC = () => {
     (async () => {
       if (id === undefined) return;
       const orderResponse = await Api.get<Order>(`/orders/${id}`, 'customer');
-      setOrder(orderResponse.data);
+      orderResponse.data.status;
+      // NOTE(okubo): Objestのkeyは自動変換しているが、valueはできていないので個別対応
+      setOrder({ ...orderResponse.data, status: toCamelcase(orderResponse.data.status) as OrderStatusEnum });
       const userResponse = await Api.get<User>(`/users/self`, 'customer');
       setUser(userResponse.data);
       setIsLoading(false);
     })();
   }, [id]);
+  console.log('order is ', order);
 
   if (isLoading) {
     return <>Loading....</>;
@@ -126,7 +130,9 @@ export const OrderChat: React.FC = () => {
 
                 <div className='row justify-content-center py-3'>
                   <div className='col-auto'>
-                    {order.status <= 30 ? (
+                    {order.status === 'inProgress' ||
+                    order.status === 'waitingForAReplyFromPartner' ||
+                    order.status === 'WaitingForAReolyFromFacility' ? (
                       <button id='order-modal' className='btn-cpr' data-bs-toggle='modal' data-bs-target='#orderModal'>
                         レクを正式依頼へ進む
                       </button>

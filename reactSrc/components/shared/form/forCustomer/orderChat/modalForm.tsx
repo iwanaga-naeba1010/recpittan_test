@@ -1,8 +1,10 @@
 import { Api } from '@/infrastructure';
 import { City, Order, Prefecture, PreferredDate, Recreation } from '@/types';
-import { findAddressByZip, findAllPrefectures, findCityByPrefectureCode } from '@/utils';
+import { findAddressByZip, findAllPrefectures, findCityByPrefectureCode, isEmpty, toSnakecase } from '@/utils';
+import axios, {AxiosError} from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { Error } from '@/components/shared'
 
 type Props = {
   order: Order;
@@ -39,6 +41,7 @@ export const ModalForm: React.FC<Props> = (props) => {
   const [preferredDate, setPreferredDate] = useState<PreferredDate>(undefined);
   const [prefectures, setPrefectures] = useState<Array<Prefecture>>([]);
   const [cities, setCities] = useState<Array<City>>([]);
+  const [errors, setErrors] = useState<Array<string>>([]);
 
   const {
     register,
@@ -72,12 +75,20 @@ export const ModalForm: React.FC<Props> = (props) => {
 
   useEffect(() => {
     (async () => {
-      const response = await Api.get<PreferredDate>('/orders/preferred_date', 'customer');
-      setPreferredDate(response.data);
-      console.log(response.data);
+      try {
+        setErrors([]);
+        const response = await Api.get<PreferredDate>('/orders/preferred_date', 'customer');
+        setPreferredDate(response.data);
+        console.log(response.data);
 
-      const { data } = await findAllPrefectures();
-      setPrefectures(data.result);
+        const { data } = await findAllPrefectures();
+        setPrefectures(data.result);
+      } catch (e) {
+        if (axios.isAxiosError(e)) {
+          setErrors((e as AxiosError<Array<string>>).response.data);
+          console.log(e.response.data);
+        }
+      }
     })();
   }, []);
 
@@ -102,6 +113,7 @@ export const ModalForm: React.FC<Props> = (props) => {
   console.log('isValid', isValid);
 
   const onSubmit = async (values: ModalForlValues): Promise<void> => {
+    setErrors([]);
     const startAt: Date = new Date(
       `${getValues('year')}-${getValues('month')}-${getValues('day')} ${getValues('startHour')}:${getValues(
         'startMinute'
@@ -115,8 +127,8 @@ export const ModalForm: React.FC<Props> = (props) => {
     const requestBody: {
       [key: string]: Omit<
         ModalForlValues,
-        'year' | 'month' | 'day' | 'startHour' | 'startMinute' | 'endHour' | 'endMinute'
-      >;
+        'status'|'year' | 'month' | 'day' | 'startHour' | 'startMinute' | 'endHour' | 'endMinute'
+      > & { status: string };
     } = {
       order: {
         zip: values.zip,
@@ -124,7 +136,7 @@ export const ModalForm: React.FC<Props> = (props) => {
         city: values.city,
         street: values.street,
         building: values.building,
-        status: 40,
+        status: toSnakecase('facilityRequestInProgress'),
         numberOfPeople: values.numberOfPeople,
         numberOfFacilities: values.numberOfFacilities,
         startAt,
@@ -136,6 +148,10 @@ export const ModalForm: React.FC<Props> = (props) => {
       await Api.patch<Order>(`/orders/${order.id}`, 'customer', requestBody);
       window.location.href = `/customers/orders/${order.id}/complete`;
     } catch (e) {
+      if (axios.isAxiosError(e)) {
+          setErrors((e as AxiosError<Array<string>>).response.data);
+          console.log(e.response.data);
+        }
       console.log(e);
     }
   };
@@ -150,8 +166,9 @@ export const ModalForm: React.FC<Props> = (props) => {
             </h5>
           </div>
           <div className='modal-body p-2'>
+            {!isEmpty(errors) && <Error errors={errors} />}
             <form className='order h-adr' onSubmit={handleSubmit(onSubmit)}>
-              <input {...register('status')} value={30} type='hidden' />
+              <input {...register('status')} value={'facilityRequestInProgress'} type='hidden' />
               <div className='container-fluid'>
                 <div className='row pb-3'>
                   <div className='col-auto'>

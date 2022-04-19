@@ -89,17 +89,10 @@
               <div class="col-lg-3 col-4 label">参加人数</div>
               <div class="col-auto"><%= @order.number_of_people %>人</div>
             </div>
-            <!--            {{#if isOnline}}-->
-            <!--            <div class="row py-2">-->
-            <!--              <div class="col-lg-3 col-4 label">参加施設数</div>-->
-            <!--              <div class="col-auto">{{additionalCount}}</div>-->
-            <!--            </div>-->
-            <!--            {{else}}-->
             <div class="row py-2">
               <div class="col-lg-3 col-4 label">施設住所</div>
               <div class="col-auto"><%= @order.full_address %></div>
             </div>
-            <!--            {{/if}}-->
             <div class="row py-2">
               <div class="col-lg-3 col-4 label">合計費用(税別)</div>
               <div class="col-auto">

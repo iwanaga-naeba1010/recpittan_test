@@ -9,7 +9,7 @@ class OrderSerializer
     recreation = RecreationSerializer.new.serialize(recreation: order.recreation)
     {
       id: order.id,
-      status: order.status.value,
+      status: order.status,
       expenses: order.expenses,
       transportation_expenses: order.transportation_expenses,
       additional_facility_fee: order.additional_facility_fee,
