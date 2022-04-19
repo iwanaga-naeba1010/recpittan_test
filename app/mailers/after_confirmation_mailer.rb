@@ -6,6 +6,6 @@ class AfterConfirmationMailer < ApplicationMailer
     @user_name = user.username
     @url = customers_recreations_url
 
-    mail from: 'info@everyplus.jp', to: user.email, subject: @template.title
+    mail from: 'info@everyplus.jp', to: user.email, subject: @template.title, template_path: 'common_mailer_template'
   end
 end
