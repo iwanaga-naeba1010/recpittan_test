@@ -1,6 +1,17 @@
 import { Base } from './base';
 import { Recreation } from './recreation';
 
+export type OrderStatusEnum =
+  | 'inProgress'
+  | 'waitingForAReplyFromPartner'
+  | 'WaitingForAReolyFromFacility'
+  | 'facilityRequestInProgress'
+  | 'requestDenied'
+  | 'waitingForAnEventToTakePlace'
+  | 'unreportedCompleted'
+  | 'finalReportAdmitsNot'
+  | 'finished';
+
 export interface Order extends Base {
   zip: string;
   prefecture: string;
@@ -9,7 +20,7 @@ export interface Order extends Base {
   building: string;
   startAt: Date;
   endAt: Date;
-  status: number;
+  status: OrderStatusEnum;
   expenses: number;
   transportationExpenses: number;
   additionalFacilityFee: number;

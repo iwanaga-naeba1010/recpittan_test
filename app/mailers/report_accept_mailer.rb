@@ -8,6 +8,6 @@ class ReportAcceptMailer < ApplicationMailer
     @user_name = @user.username
     @email = @user.email
 
-    mail from: 'info@everyplus.jp', to: @email, subject: @template.title
+    mail from: 'info@everyplus.jp', to: @email, subject: @template.title, template_path: 'common_mailer_template'
   end
 end
