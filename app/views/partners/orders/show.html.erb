@@ -148,14 +148,6 @@
       </tbody>
     </table>
   </div>
-  <div>
-    <p class="text-black font-weight-bold pt-2">注意事項</p>
-    <ul>
-      <li>材料費が発生するなど人数確認が必要なレクの場合、期日までに参加人数の確認の依頼をお願い致します。</li>
-      <li>施設から期日までに連絡がない場合は、施設に確認のご連絡をお願い致します。</li>
-      <li>交通費、諸経費が発生する場合はあらかじめ施設側に伝えましょう。正式依頼承認後に初めて伝えた時、支払われない場合があります。当日までわからない時は目安を伝えましょう。</li>
-    </ul>
-  </div>
 
   <div class="col-md-12">
     <% if @order.start_at? && !@order.is_accepted %>
@@ -170,21 +162,11 @@
       </div>
     <!--開始時間が過ぎている && レポートがない -->
     <% elsif @order.start_at <= Time.current && @order.report.blank? %>
-      <p>開催が終了した後、レクの終了報告を行いますと受取額が明確になります。</p>
       <% path = @order.report.blank? ? new_partners_order_report_path(@order.id) : edit_partners_order_report_path(id: @order.report.id, order_id: @order.id) %>
       <div class="text-center my-3">
         <%= link_to '終了報告をする', path, class: 'mx-auto text-white btn btn-primary btn-lg btn-block w-75 p-3' %>
       </div>
-      <p>
-        日程を変更したい場合は以下の点をご確認の上
-        <%= link_to 'お問い合わせください。', 'https://form.run/@info-1638765255', target: '_blank', class: 'text-info' %>
-      </p>
-      <ul>
-        <li>原則レクの正式依頼が承認された場合キャンセルはできません。</li>
-        <li>正式依頼承認後、日程を変更したい場合は施設とチャットで変更時間を調整していただき、決まった日時をエブリプラスにご連絡ください。</li>
-      </ul>
     <% elsif @order.start_at <= Time.current && @order.report.present? %>
-      <p>開催が終了した後、レクの終了報告を行いますと受取額が明確になります。</p>
       <div class="text-center my-3">
         <button class="text-white btn btn-secondary btn-lg btn-block w-75 p-3 disabled">終了報告済みです</button>
       </div>
@@ -192,14 +174,6 @@
         <p>※振込について</p>
         振込は翌々月末に行われます。土日祝日の場合次の営業日となります。
       </div>
-      <p>
-        日程を変更したい場合は以下の点をご確認の上
-        <%= link_to 'お問い合わせください。', 'https://form.run/@info-1638765255', target: '_blank', class: 'text-info' %>
-      </p>
-      <ul>
-        <li>原則レクの正式依頼が承認された場合キャンセルはできません。</li>
-        <li>正式依頼承認後、日程を変更したい場合は施設とチャットで変更時間を調整していただき、決まった日時をエブリプラスにご連絡ください。</li>
-      </ul>
     <% else %>
       <div class="text-center my-3">
         <button class="text-white btn btn-secondary btn-lg btn-block w-75 p-3 disabled">正式依頼の内容を確認する</button>
