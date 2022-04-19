@@ -11,7 +11,6 @@ class ApiCustomer::OrdersController < Api::ApplicationController
   end
 
   def update
-    binding.pry
     @order.update(params_create)
     # NOTE(okubo): 正式依頼のみメール送信
     if @order.status == :facility_request_in_progress
