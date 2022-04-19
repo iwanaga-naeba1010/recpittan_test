@@ -51,11 +51,14 @@ export const TranspotationExpensesForm: React.FC<Props> = (props): JSX.Element =
         <div className='col-3 align-self-center'>
           交通費
           <br />
-          {!canEdit && (
-            <a className='clink' onClick={() => setCanEdit(true)}>
-              編集
-            </a>
-          )}
+          {!canEdit &&
+            (order.status === 'inProgress' ||
+              order.status === 'waitingForAReplyFromPartner' ||
+              order.status === 'WaitingForAReolyFromFacility') && (
+              <a className='clink' onClick={() => setCanEdit(true)}>
+                編集
+              </a>
+            )}
         </div>
         {canEdit ? (
           <>

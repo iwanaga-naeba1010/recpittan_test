@@ -3,7 +3,9 @@
   <div>
     <p class="pt-2 pb-2 w-25 border-bottom text-black w-100">追加で参加した施設数</p>
     <%= f.input :number_of_facilities, label: false, input_html: { value: report.order_number_of_facilities } %>
-    <span class="pt-2 pb-2 w-25">オンラインの場合、2施設目から追加で参加した施設数を数字で記入してください。追加1施設あたり+<%= report.order_additional_facility_fee - 1000 %>が謝礼に追加されます。</span>
+    <span class="pt-2 pb-2 w-25">
+      オンラインの場合、2施設目から追加で参加した施設数を数字で記入してください。基本追加1施設あたり+1,000円が謝礼に追加されます。
+    </span>
   </div>
 
   <div>
