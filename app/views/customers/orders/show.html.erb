@@ -142,7 +142,11 @@
                   チャット
                 </div>
                 <div class="py-3">終了報告が完了するまでパートナーとチャットができます。</div>
-                <%= link_to 'チャットへ進む', chat_customers_order_path(@order.id), class: 'btn btn-cprimary  font-14 py-2 px-4 font-weight-bold text-white' %>
+                <% if @order.report_status&.accepted? %>
+                    <span class="btn btn-cprimary font-14 py-2 px-4 font-weight-bold text-white disabled ">チャットへ進む</span>
+                <% else %>
+                  <%= link_to 'チャットへ進む', chat_customers_order_path(@order.id), class: 'btn btn-cprimary  font-14 py-2 px-4 font-weight-bold text-white' %>
+                <% end %>
               </div>
               <% if @order&.report&.id.present? %>
                 <div class="col action pb-3">

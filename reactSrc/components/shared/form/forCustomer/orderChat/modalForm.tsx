@@ -89,9 +89,9 @@ export const ModalForm: React.FC<Props> = (props) => {
     const pref = filterCurrentPrefecture(address1);
     await handleCityChange(pref.prefCode);
 
-    setValue('prefecture', address1);
-    setValue('city', address2);
-    setValue('street', address3);
+    setValue('prefecture', address1, { shouldValidate: true });
+    setValue('city', address2, { shouldValidate: true });
+    setValue('street', address3, { shouldValidate: true });
   };
 
   const handleCityChange = async (prefCode: number): Promise<void> => {
