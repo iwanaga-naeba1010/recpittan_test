@@ -35,6 +35,8 @@ class Company < ApplicationRecord
 
   validates :name, :facility_name, presence: true
 
+  delegate :email, to: :user, prefix: true, allow_nil: true
+
   enumerize :genre, in: {
     residential_fee_based_nursing_home: 0,
     general_care: 1, serviced_senior_housing: 2,
