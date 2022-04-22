@@ -8,7 +8,7 @@ env:
   MAIL_SENDER_FROM: no-reply@ep.net
   SLACK_WEBHOOK: https://hooks.slack.com/services/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
   SLACK_USERNAME: github_actions_bot
-  SLACK_CHANNEL: github-actions
+  SLACK_CHANNEL: product_matching_system
   AWS_ACCESS_KEY_ID: AKIASN7APX6NOANAVIJ2
   AWS_BUCKET: matching-system-staging
   AWS_REGION: ap-northeast-1
