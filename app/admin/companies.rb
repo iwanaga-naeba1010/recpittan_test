@@ -21,6 +21,26 @@ ActiveAdmin.register Company do
   filter :zip
   filter :prefecture
 
+  csv do
+    column :id
+    column :name
+    column('email', &:user_email)
+    column :facility_name
+    column :person_in_charge_name
+    column :person_in_charge_name_kana
+    column :zip
+    column :city
+    column :street
+    column :building
+    column :tel
+    column(:genre, &:genre_text)
+    column :url
+    column :feature
+    column :capacity
+    column :nursing_care_level
+    column :request
+  end
+
   index do
     id_column
     column :name
