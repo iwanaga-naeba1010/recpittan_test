@@ -10,7 +10,7 @@ RSpec.configure do |config|
     browser_options.args << '--no-sandbox'
     browser_options.args << '--disable-dev-shm-usage'
     browser_options.args << '--disable-gpu' if Gem.win_platform?
-    Capybara::Selenium::Driver.new(app, browser: :chrome, options: browser_options)
+    Capybara::Selenium::Driver.new(app, browser: :chrome, capabilities: browser_options)
   end
 
   config.before(:each) do |example|

@@ -25,7 +25,7 @@ RSpec.describe 'Orders', type: :system do
         sleep 0.5
         click_labels '#submitExpenses'
         sleep 0.5
-        expect('#resultExpenses').to have_content '¥10,000'
+        expect(find_by_id('resultExpenses')).to have_content '¥10,000'
       end
     end
 
@@ -37,7 +37,7 @@ RSpec.describe 'Orders', type: :system do
         sleep 0.5
         click_labels '#submitTransportationExpenses'
         sleep 0.5
-        expect('#resultExpenses').to have_content '¥5,000'
+        expect(find_by_id('resultTransportationExpenses')).to have_content '¥5,000'
       end
     end
 
@@ -49,7 +49,7 @@ RSpec.describe 'Orders', type: :system do
         sleep 0.5
         click_labels '#submitTransportationExpenses'
         sleep 0.5
-        expect('#resultExpenses').to have_content '¥6,000'
+        expect(find_by_id('resultExpenses')).to have_content '¥6,000'
       end
     end
 
@@ -60,5 +60,14 @@ RSpec.describe 'Orders', type: :system do
         expect(find_by_id('orderModal')).to have_text('正式依頼フォーム')
       end
     end
+
+    feature 'open order modal' do
+      scenario 'succeeds' do
+        click_labels '#order-modal'
+        sleep 0.5
+        expect(find_by_id('orderModal')).to have_text('正式依頼フォーム')
+      end
+    end
+
   end
 end
