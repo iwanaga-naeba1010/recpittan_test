@@ -68,6 +68,5 @@ RSpec.describe 'Orders', type: :system do
         expect(find_by_id('orderModal')).to have_text('正式依頼フォーム')
       end
     end
-
   end
 end
