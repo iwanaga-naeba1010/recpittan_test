@@ -12,6 +12,11 @@ ActiveAdmin.register Recreation do
       is_online is_public prefectures is_public_price additional_facility_fee
     ],
     tag_ids: [],
+    # profile: %i[id],
+    profile_attribute: %i[
+      id
+      name
+    ],
     recreation_images_attributes: %i[id recreation_id image kind _destroy]
   )
   actions :all
@@ -133,6 +138,16 @@ ActiveAdmin.register Recreation do
       f.input :material_price
       f.input :amount
       f.input :material_amount
+      # binding.pry
+
+      f.inputs 'profile', for: [:profile] do |p|
+        p.input :name
+      end
+
+      # f.inputs t('activerecord.models.hope'), for: [:hope, f.object.hope || hope.new({ user_id: f.object.id })] do |hope|
+      # end
+      #
+
       f.input :instructor_name
       f.input :instructor_title
       f.input :instructor_description
