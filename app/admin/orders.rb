@@ -61,6 +61,7 @@ ActiveAdmin.register Order do
     column(:user) { |order| link_to order.user.company.facility_name, admin_company_path(order.user.company.id) }
     column :recreation
     column :start_at
+    column :contract_number
     column(:status, &:status_text)
 
     actions
