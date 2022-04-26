@@ -64,11 +64,7 @@ ActiveAdmin.register Recreation do
           column :name
           column :title
           column :position
-          column(:image) do |profile|
-            if profile.image?
-              image_tag profile.image_tag.to_s, width: 50, height: 50
-            end
-          end
+          column('URL') { |profile| link_to 'URL', admin_profile_path(profile) }
         end
       end
 
