@@ -13,12 +13,11 @@ namespace :separate_profile do
           p.title = rec.instructor_title
           p.description = rec.instructor_description
           if rec.instructor_image.present?
-
-            # TODO(okubo): 画像を保存してから参照、であれば問題ないが残ってしまうので完了したら削除する
-            image = File.binwrite(Rails.root.join("public/#{rec.instructor_image.file.filename}"), rec.instructor_image.file.read)
-            p.image = File.open(Rails.root.join("public/#{rec.instructor_image.file.filename}"))
+            path = Rails.root.join("public/#{rec.instructor_image.file.filename}")
+            File.binwrite(path, rec.instructor_image.file.read)
+            p.image = File.open(path)
+            File.delete(path)
           end
-
         end
 
         rec.build_recreation_profile(profile: profile)

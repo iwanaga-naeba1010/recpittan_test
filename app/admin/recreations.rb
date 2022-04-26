@@ -8,7 +8,6 @@ ActiveAdmin.register Recreation do
       flow_of_day borrow_item bring_your_own_item extra_information youtube_id
       base_code capacity flyer_color
       price material_price amount material_amount
-      instructor_name instructor_title instructor_description instructor_image
       is_online is_public prefectures is_public_price additional_facility_fee
     ],
     tag_ids: [],
@@ -50,7 +49,6 @@ ActiveAdmin.register Recreation do
       row :bring_your_own_item
       row :extra_information
       row :youtube_id
-      # row :price
       row :base_code
       row :capacity
       row :flyer_color
@@ -58,14 +56,7 @@ ActiveAdmin.register Recreation do
       row :material_price
       row :amount
       row :material_amount
-      row :instructor_name
-      row :instructor_title
-      row :instructor_description
       row :additional_facility_fee
-
-      row t('activerecord.attributes.recreation.instructor_image') do |rec|
-        image_tag rec&.instructor_image&.to_s, width: 50, height: 50
-      end
 
       panel t('activerecord.models.profile'), style: 'margin-top: 30px;' do
         table_for recreation.profile do
@@ -74,7 +65,7 @@ ActiveAdmin.register Recreation do
           column :title
           column :position
           column(:image) do |profile|
-            if profile.image.present?
+            if profile.image?
               image_tag profile.image_tag.to_s, width: 50, height: 50
             end
           end
@@ -140,7 +131,6 @@ ActiveAdmin.register Recreation do
       f.input :bring_your_own_item
       f.input :extra_information
       f.input :youtube_id
-
       f.input :base_code
       f.input :capacity
       f.input :flyer_color, as: :string
@@ -148,11 +138,6 @@ ActiveAdmin.register Recreation do
       f.input :material_price
       f.input :amount
       f.input :material_amount
-
-      f.input :instructor_name
-      f.input :instructor_title
-      f.input :instructor_description
-      f.input :instructor_image, hint: image_tag(f.object.instructor_image.to_s, width: 100)
       f.input :is_online
       f.input :is_public
       f.input :is_public_price
@@ -161,7 +146,12 @@ ActiveAdmin.register Recreation do
     end
 
     f.inputs '', for: [:recreation_profile, f.object.recreation_profile || recreation.build_recreation_profile] do |p|
-      p.input :profile_id, as: :select, collection: recreation.user.profiles.map { |profile| [profile.name, profile.id] }
+      # TODO(okubo): userに紐づくprofileのみに変更したい
+      if f.object.id.nil?
+        p.input :profile_id, as: :select, collection: Profile.all.map { |profile| [profile.name, profile.id] }
+      else
+        p.input :profile_id, as: :select, collection: recreation.user.profiles.map { |profile| [profile.name, profile.id] }
+      end
       p.input :recreation_id, as: :hidden, input_html: { value: recreation.id }
     end
 
