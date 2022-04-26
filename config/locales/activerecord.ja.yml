@@ -4,6 +4,7 @@ ja:
       user: ユーザー
       company: 施設
       partner: パートナー
+      profile: プロフィール
       recreation: レク
       recreation_image: レク関連ファイル
       order: 案件
@@ -59,6 +60,13 @@ ja:
         title: 肩書き
         description: 詳細
         image: 画像
+      profile:
+        user: パートナー
+        name: 名前
+        title: 肩書き
+        position: ポジション
+        description: プロフィール説明
+        image: 画像
       recreation:
         partner: パートナー
         title: タイトル
@@ -91,6 +99,8 @@ ja:
       recreation_image:
         image: ファイル
         kind: 種別
+      recreation_profile:
+        profile_id: プロフィール
       order:
         user: 施設
         recreation: レク
