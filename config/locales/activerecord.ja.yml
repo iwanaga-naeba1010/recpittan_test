@@ -124,6 +124,7 @@ ja:
         transportation_expenses: 交通費
         expenses: 諸経費
         contract_number: 契約番号
+        memo: メモ
       zoom:
         price: 金額
         url: URL
