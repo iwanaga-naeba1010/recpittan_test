@@ -135,15 +135,6 @@ ActiveAdmin.register Recreation do
       f.input :amount
       f.input :material_amount
 
-      # f.has_many :profiles, allow_destroy: true do |a|
-      #   a.input :name
-      # end
-      
-      #
-      # f.inputs t('activerecord.models.hope'), for: [:hope, f.object.hope || hope.new({ user_id: f.object.id })] do |hope|
-      # end
-      #
-
       f.input :instructor_name
       f.input :instructor_title
       f.input :instructor_description
@@ -155,20 +146,11 @@ ActiveAdmin.register Recreation do
       f.input :additional_facility_fee, hint: 'エブリ・プラス取り分の1000円 + パートナー支払い分の合計を入力してください'
     end
 
-
-    # div do
-    #   input(name: 'recreation_profile_id')
-    # end
-
-    # f.inputs t('activerecord.models.hope'), for: [:hope, f.object.hope || Hope.new({ user_id: f.object.id })] do |hope|
-    f.inputs 'profile', for: [:recreation_profile, f.object.recreation_profile || recreation.build_recreation_profile] do |p|
+    f.inputs '', for: [:recreation_profile, f.object.recreation_profile || recreation.build_recreation_profile] do |p|
       p.input :profile_id, as: :select, collection: recreation.user.profiles.map { |profile| [profile.name, profile.id] }
       p.input :recreation_id, as: :hidden, input_html: { value: recreation.id }
     end
 
-    # f.input 'recreation_profile_id', as: :select, collection: recreation.user.profiles.map { |profile| [profile.name, profile.id] }
-    # f.input :profile, as: :select, collection: recreation.user.profiles.map { |p| [p.name, p.id] }
-    # f.input :profiles, as: :select, collection: [[]]
     f.input :category, as: :select, collection: Recreation.category.values.map { |val| [val.text, val] }
     f.input :tags, label: 'タグ', as: :check_boxes, collection: Tag.events.all
     f.input :tags, label: '想定ターゲット', as: :check_boxes, collection: Tag.targets.all

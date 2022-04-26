@@ -99,6 +99,8 @@ ja:
       recreation_image:
         image: ファイル
         kind: 種別
+      recreation_profile:
+        profile_id: プロフィール
       order:
         user: 施設
         recreation: レク
