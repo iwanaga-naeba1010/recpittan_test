@@ -62,7 +62,7 @@ class Customers::OrdersController < Customers::ApplicationController
         電話番号: #{current_user.company.tel}
 
         レク名: #{@recreation.title}
-        パートナー名: #{@recreation.instructor_name}
+        パートナー名: #{@recreation.profile_name}
         ------------------
         #{message}
       MESSAGE

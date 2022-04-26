@@ -28,8 +28,13 @@ FactoryBot.define do
     name { 'MyString' }
     title { 'MyString' }
     description { 'MyText' }
-    # TODO(okubo): 画像をテンプする
-    image { 'MyText' }
     position { 'MyString' }
+    image do
+      ActionDispatch::Http::UploadedFile.new(
+        filename: 'test.png',
+        type: 'image/png',
+        tempfile: File.open(Rails.root.join('spec/files/test.png'))
+      )
+    end
   end
 end

@@ -9,8 +9,8 @@ class Api::SlackNotifiersController < Api::ApplicationController
       担当者名: #{current_user&.company&.person_in_charge_name}
       電話番号: #{current_user&.company&.tel}
 
-      レク名: #{recreation&.title}
-      パートナー名: #{recreation&.instructor_name}
+      レク名: #{recreation.title}
+      パートナー名: #{recreation.profile_name}
     MESSAGE
 
     SlackNotifier.new(channel: '#料金お問い合わせ').send('新規お問い合わせ', message)
