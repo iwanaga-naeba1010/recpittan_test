@@ -41,8 +41,10 @@
 #
 class Recreation < ApplicationRecord
   extend Enumerize
-
   mount_uploader :instructor_image, ImageUploader
+
+  belongs_to :user
+
   has_many :recreation_tags, dependent: :destroy
   has_many :tags, through: :recreation_tags
 
@@ -51,11 +53,10 @@ class Recreation < ApplicationRecord
 
   has_many :orders, dependent: :destroy
 
-  belongs_to :user
+  has_many :recreation_profiles, dependent: :destroy
+  has_many :profiles, through: :recreation_profiles
+  # accepts_nested_attributes_for :profile, allow_destroy: true
 
-  has_one :user_recreation, dependent: :destroy
-  has_one :profile, through: :user_recreation
-  accepts_nested_attributes_for :profile, allow_destroy: true
   delegate :name, :title, :description, :image, to: :partner, prefix: true, allow_nil: true
 
   scope :public_recs, -> { where(is_public: true) }

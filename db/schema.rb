@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_04_23_080713) do
+ActiveRecord::Schema.define(version: 2022_04_26_063552) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -155,6 +155,15 @@ ActiveRecord::Schema.define(version: 2022_04_23_080713) do
     t.integer "kind", default: 0
   end
 
+  create_table "recreation_profiles", force: :cascade do |t|
+    t.bigint "recreation_id", null: false
+    t.bigint "profile_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["profile_id"], name: "index_recreation_profiles_on_profile_id"
+    t.index ["recreation_id"], name: "index_recreation_profiles_on_recreation_id"
+  end
+
   create_table "recreation_tags", force: :cascade do |t|
     t.bigint "recreation_id", null: false
     t.bigint "tag_id", null: false
@@ -270,6 +279,8 @@ ActiveRecord::Schema.define(version: 2022_04_23_080713) do
   add_foreign_key "orders", "users", name: "orders_user_id_fkey"
   add_foreign_key "profiles", "users"
   add_foreign_key "recreation_images", "recreations", name: "recreation_images_recreation_id_fkey"
+  add_foreign_key "recreation_profiles", "profiles"
+  add_foreign_key "recreation_profiles", "recreations"
   add_foreign_key "recreation_tags", "recreations", name: "recreation_tags_recreation_id_fkey"
   add_foreign_key "recreation_tags", "tags", name: "recreation_tags_tag_id_fkey"
   add_foreign_key "recreations", "users", name: "recreations_user_id_fkey"
