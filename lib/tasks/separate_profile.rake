@@ -1,5 +1,4 @@
 # frozen_string_literal: true
-require 'tempfile'
 
 namespace :separate_profile do
   task run: :environment do
