@@ -67,6 +67,20 @@ ActiveAdmin.register Recreation do
         image_tag rec&.instructor_image&.to_s, width: 50, height: 50
       end
 
+      panel t('activerecord.models.profile'), style: 'margin-top: 30px;' do
+        table_for recreation.profile do
+          column :id
+          column :name
+          column :title
+          column :position
+          column(:image) do |profile|
+            if profile.image.present?
+              image_tag profile.image_tag.to_s, width: 50, height: 50
+            end
+          end
+        end
+      end
+
       row :is_online
       row :is_public
       row :prefectures

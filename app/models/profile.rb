@@ -29,5 +29,7 @@ class Profile < ApplicationRecord
   has_one :recreation_profile, dependent: :destroy
   has_one :recreation, through: :recreation_profile
 
-  validates :name, :description, presence: true
+  # TODO(okubo): 一時的にdescriptionのvalidationを外してバッチの不具合を回避
+  # validates :name, :description, presence: true
+  validates :name, presence: true
 end
