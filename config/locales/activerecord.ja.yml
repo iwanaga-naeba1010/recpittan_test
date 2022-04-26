@@ -86,11 +86,6 @@ ja:
         amount: パートナー謝礼
         material_amount: パートナー材料費
         material_price: 施設請求材料費
-        instructor_name: パートナー名
-#        instructor_position: フライヤーカラー
-        instructor_title: パートナータイトル
-        instructor_description: パートナー詳細
-        instructor_image: パートナー画像
         is_online: オンライン
         is_public: 公開
         prefectures: 都道府県
@@ -124,6 +119,7 @@ ja:
         transportation_expenses: 交通費
         expenses: 諸経費
         contract_number: 契約番号
+        memo: メモ
       zoom:
         price: 金額
         url: URL

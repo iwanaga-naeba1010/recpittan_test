@@ -40,22 +40,21 @@
 #
 #  recreations_user_id_fkey  (user_id => users.id)
 #
-FactoryBot.define do
-  factory :recreation do
-    user
-    title { 'MyString' }
-    second_title { 'MyString' }
-    borrow_item { 'MyString' }
-    bring_your_own_item { 'MyString' }
-    extra_information { 'MyString' }
-    flow_of_day { 'MyString' }
-    minutes { 60 }
-    price { 20000 }
-    material_price { 1000 }
-    amount { 10000 }
-    material_amount { 500 }
-    description { 'MyText' }
-    youtube_id { '' }
-    is_public { true }
+class ProfileSerializer
+  def serialize_list(profiles:)
+    profiles.map { |profile| serialize(profile: profile) }
+  end
+
+  def serialize(profile:)
+    {
+      id: profile.id,
+      name: profile.name,
+      title: profile.title,
+      position: profile.position,
+      description: profile.description,
+      image: profile.image&.to_s,
+      created_at: profile.created_at,
+      updated_at: profile.updated_at
+    }
   end
 end

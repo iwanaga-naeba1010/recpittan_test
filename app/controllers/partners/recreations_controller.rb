@@ -54,7 +54,6 @@ class Partners::RecreationsController < Partners::ApplicationController
       :flow_of_day, :borrow_item, :bring_your_own_item, :extra_information, :youtube_id,
       :capacity,
       :amount, :material_amount,
-      :instructor_name, :instructor_title, :instructor_description, :instructor_image,
       :is_online, :is_public, :additional_facility_fee,
       { tag_ids: [] },
       recreation_images_attributes: %i[id image _destroy]

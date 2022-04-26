@@ -10,6 +10,7 @@ ActiveAdmin.register Order do
       number_of_facilities status is_accepted start_at end_at
       price amount material_price material_amount
       additional_facility_fee transportation_expenses support_price expenses contract_number
+      memo
     ],
     zoom_attributes: %i[id url price created_by],
     report_attributes: %i[
@@ -61,7 +62,9 @@ ActiveAdmin.register Order do
     column(:user) { |order| link_to order.user.company.facility_name, admin_company_path(order.user.company.id) }
     column :recreation
     column :start_at
+    column :contract_number
     column(:status, &:status_text)
+    column(:memo)
 
     actions
   end
@@ -148,6 +151,7 @@ ActiveAdmin.register Order do
               collection: User.includes(:company).customers.map { |i| [i.company&.facility_name, i.id] },
               input_html: { class: 'select2' }
       f.input :recreation, input_html: { class: 'select2' }
+      f.input :memo
 
       # NOTE(okubo): createは依頼だけなので必要な項目だけ表示
       div class: 'official_input' do

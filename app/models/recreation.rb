@@ -59,6 +59,7 @@ class Recreation < ApplicationRecord
   accepts_nested_attributes_for :recreation_profile, allow_destroy: true
 
   delegate :name, :title, :description, :image, to: :partner, prefix: true, allow_nil: true
+  delegate :name, :title, :description, :image, to: :profile, prefix: true, allow_nil: true
 
   scope :public_recs, -> { where(is_public: true) }
 
