@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 FactoryBot.define do
   factory :recreation_profile do
-    refreation { nil }
-    profile { nil }
+    recreation
+    profile
   end
 end

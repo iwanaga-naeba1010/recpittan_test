@@ -12,7 +12,7 @@ ActiveAdmin.register Recreation do
       is_online is_public prefectures is_public_price additional_facility_fee
     ],
     tag_ids: [],
-    profile_ids: [],
+    recreation_profile_attributes: %i[profile_id recreation_id],
     recreation_images_attributes: %i[id recreation_id image kind _destroy]
   )
   actions :all
@@ -135,14 +135,10 @@ ActiveAdmin.register Recreation do
       f.input :amount
       f.input :material_amount
 
-      # binding.pry
-
       # f.has_many :profiles, allow_destroy: true do |a|
       #   a.input :name
       # end
-      # f.inputs 'profile', for: [:profile] do |p|
-      #   p.input :name
-      # end
+      
       #
       # f.inputs t('activerecord.models.hope'), for: [:hope, f.object.hope || hope.new({ user_id: f.object.id })] do |hope|
       # end
@@ -159,13 +155,24 @@ ActiveAdmin.register Recreation do
       f.input :additional_facility_fee, hint: 'エブリ・プラス取り分の1000円 + パートナー支払い分の合計を入力してください'
     end
 
-    f.input :profiles, as: :select, collection: recreation.user.profiles.map { |p| [p.name, p.id] }
+
+    # div do
+    #   input(name: 'recreation_profile_id')
+    # end
+
+    # f.inputs t('activerecord.models.hope'), for: [:hope, f.object.hope || Hope.new({ user_id: f.object.id })] do |hope|
+    f.inputs 'profile', for: [:recreation_profile, f.object.recreation_profile || recreation.build_recreation_profile] do |p|
+      p.input :profile_id, as: :select, collection: recreation.user.profiles.map { |profile| [profile.name, profile.id] }
+      p.input :recreation_id, as: :hidden, input_html: { value: recreation.id }
+    end
+
+    # f.input 'recreation_profile_id', as: :select, collection: recreation.user.profiles.map { |profile| [profile.name, profile.id] }
+    # f.input :profile, as: :select, collection: recreation.user.profiles.map { |p| [p.name, p.id] }
     # f.input :profiles, as: :select, collection: [[]]
     f.input :category, as: :select, collection: Recreation.category.values.map { |val| [val.text, val] }
     f.input :tags, label: 'タグ', as: :check_boxes, collection: Tag.events.all
     f.input :tags, label: '想定ターゲット', as: :check_boxes, collection: Tag.targets.all
 
-    # TODO(okubo): kindごとに登録できるようにする
     f.inputs t('enumerize.recreation_image.kind.slider') do
       f.has_many :recreation_images, heading: false, allow_destroy: true, new_record: true do |ff|
         ff.input :image, as: :file, hint: image_tag(ff.object.image.to_s, width: 100)

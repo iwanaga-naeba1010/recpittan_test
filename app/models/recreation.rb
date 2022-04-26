@@ -4,36 +4,37 @@
 #
 # Table name: recreations
 #
-#  id                         :bigint           not null, primary key
-#  additional_facility_fee    :integer          default(2000)
-#  base_code                  :string
-#  borrow_item                :text
-#  bring_your_own_item        :text
-#  capacity                   :integer
-#  description                :text
-#  extra_information          :text
-#  flow_of_day                :text
-#  flyer_color                :string
-#  instructor_amount          :integer
-#  instructor_description     :text
-#  instructor_image           :text
-#  instructor_material_amount :integer
-#  instructor_name            :string
-#  instructor_position        :string
-#  instructor_title           :string
-#  is_online                  :boolean          default(FALSE)
-#  is_public                  :boolean
-#  is_public_price            :boolean          default(TRUE)
-#  minutes                    :integer
-#  prefectures                :string           default([]), is an Array
-#  regular_material_price     :integer
-#  regular_price              :integer
-#  second_title               :string
-#  title                      :string
-#  created_at                 :datetime         not null
-#  updated_at                 :datetime         not null
-#  user_id                    :bigint           not null
-#  youtube_id                 :string
+#  id                      :bigint           not null, primary key
+#  additional_facility_fee :integer          default(2000)
+#  amount                  :integer
+#  base_code               :string
+#  borrow_item             :text
+#  bring_your_own_item     :text
+#  capacity                :integer
+#  category                :integer          default("event"), not null
+#  description             :text
+#  extra_information       :text
+#  flow_of_day             :text
+#  flyer_color             :string
+#  instructor_description  :text
+#  instructor_image        :text
+#  instructor_name         :string
+#  instructor_position     :string
+#  instructor_title        :string
+#  is_online               :boolean          default(FALSE)
+#  is_public               :boolean
+#  is_public_price         :boolean          default(TRUE)
+#  material_amount         :integer
+#  material_price          :integer
+#  minutes                 :integer
+#  prefectures             :string           default([]), is an Array
+#  price                   :integer
+#  second_title            :string
+#  title                   :string
+#  created_at              :datetime         not null
+#  updated_at              :datetime         not null
+#  user_id                 :bigint           not null
+#  youtube_id              :string
 #
 # Foreign Keys
 #
@@ -53,9 +54,9 @@ class Recreation < ApplicationRecord
 
   has_many :orders, dependent: :destroy
 
-  has_many :recreation_profiles, dependent: :destroy
-  has_many :profiles, through: :recreation_profiles
-  # accepts_nested_attributes_for :profile, allow_destroy: true
+  has_one :recreation_profile, dependent: :destroy
+  has_one :profile, through: :recreation_profile
+  accepts_nested_attributes_for :recreation_profile, allow_destroy: true
 
   delegate :name, :title, :description, :image, to: :partner, prefix: true, allow_nil: true
 
