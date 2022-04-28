@@ -12,14 +12,13 @@ RSpec.describe 'Orders', type: :system do
     sign_in user
   end
 
-  context 'customers_orders_chat', js: true do
+  context 'customers_orders_chat' do
     before do
       visit chat_customers_order_path(order)
     end
 
     feature 'include Expenses value to orders' do
-      scenario 'succeeds' do
-        sleep 5
+      scenario 'succeeds', js: true do
         page.find_by_id('OrderChat')
         click_labels '#editExpenses'
         sleep 0.5

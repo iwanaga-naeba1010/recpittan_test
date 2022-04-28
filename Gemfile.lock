@@ -397,6 +397,8 @@ GEM
       rspec-mocks (~> 3.10)
       rspec-support (~> 3.10)
     rspec-request_describer (0.3.2)
+    rspec-retry (0.6.2)
+      rspec-core (> 3.3)
     rspec-support (3.11.0)
     rspec-validator_spec_helper (1.0.0)
       activemodel
@@ -571,6 +573,7 @@ DEPENDENCIES
   rspec-parameterized
   rspec-rails
   rspec-request_describer
+  rspec-retry
   rspec-validator_spec_helper
   rubocop
   rubocop-rails

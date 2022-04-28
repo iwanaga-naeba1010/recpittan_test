@@ -30,10 +30,18 @@ const App: React.FC<Props> = ({ recreationId }): JSX.Element => {
 };
 
 document.addEventListener('turbolinks:load', () => {
-  const elm = document.querySelector('#ConsultRecreation');
-  const recreationId = JSON.parse(elm?.getAttribute('data-recreationId'));
+  console.log('hogehogehoge!!!!!');
+  // console.log('window is', window.location.pathname.match(/\/customers\/recreations\/[0-9]/));
+  const isRecreationShowPage = /\/customers\/recreations\/[0-9]/.exec(window.location.pathname)
+  console.log('isRecreationShowPage is ', isRecreationShowPage);
+  if (isRecreationShowPage !== null) {
+    const elm = document.querySelector('#ConsultRecreation');
+    const recreationId = window.location.pathname.split('/')[3];
+    console.log(window.location.pathname.split('/')[3]);
+    // const recreationId = JSON.parse(elm?.getAttribute('data-recreationId'));
 
-  if (elm && recreationId) {
-    ReactDOM.render(<App recreationId={Number(recreationId)} />, elm);
+    if (elm && recreationId) {
+      ReactDOM.render(<App recreationId={Number(recreationId)} />, elm);
+    }
   }
 });
