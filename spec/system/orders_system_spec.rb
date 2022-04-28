@@ -28,13 +28,13 @@ RSpec.describe 'Orders', type: :system do
         puts '================'
         puts page.driver.browser.manage.logs.get(:browser)
         puts '================'
-        page.find_by_id('OrderChat', wait: 10)
-        click_labels '#editExpenses'
-        sleep 0.5
+        page.find_by_id('OrderChat')
+        page.find_by_id('editExpenses')
+        find('#editExpenses').click
         input_text_boxes('#expenses', 10000)
-        sleep 0.5
-        click_labels '#submitExpenses'
-        sleep 0.5
+        # sleep 1
+        find('#submitExpenses').click
+        sleep 5
         expect(find_by_id('resultExpenses')).to have_content '¥10,000'
       end
     end

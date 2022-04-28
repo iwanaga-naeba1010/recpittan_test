@@ -55,7 +55,7 @@ export const ExpenseForm: React.FC<Props> = (props): JSX.Element => {
             (order.status === 'inProgress' ||
               order.status === 'waitingForAReplyFromPartner' ||
               order.status === 'WaitingForAReolyFromFacility') && (
-              <a className='clink' data-testid="editExpenses" onClick={() => setCanEdit(true)}>
+              <a className='clink' id="editExpenses" onClick={() => setCanEdit(true)}>
                 編集
               </a>
             )}
@@ -63,11 +63,11 @@ export const ExpenseForm: React.FC<Props> = (props): JSX.Element => {
         {canEdit ? (
           <>
             <div className='col-7'>
-              <input className='form-control text-end' type='number' {...register('expenses')} />
+              <input id="expenses" className='form-control text-end' type='number' {...register('expenses')} />
             </div>
 
             <div className='col-2 py-0'>
-              <button type='submit' name='action' value='transport_upadte' className='btn btn-inline-edit' data-testid='submitExpenses'>
+              <button type='submit' name='action' value='transport_upadte' className='btn btn-inline-edit' id='submitExpenses'>
                 <i className='material-icons color-pr10'>done</i>
               </button>
             </div>

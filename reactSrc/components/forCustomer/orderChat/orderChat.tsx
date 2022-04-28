@@ -171,22 +171,16 @@ export const OrderChat: React.FC = () => {
 
 // NOTE: 画面遷移した時用
 document.addEventListener('turbolinks:load', () => {
-  console.warn('sentinel1');
   const elm = document.querySelector('#OrderChat');
-  console.warn('sentinel2');
   if (elm) {
-  console.warn('sentinel3');
     ReactDOM.render(<OrderChat />, elm);
   }
 });
 
 // NOTE: リフレッシュした時用
 $(document).ready(() => {
-  console.warn('sentinel4');
   const elm = document.querySelector('#OrderChat');
-  console.warn('sentinel5');
   if (elm) {
-  console.warn('sentinel5');
     ReactDOM.render(<OrderChat />, elm);
   }
 });

@@ -62,6 +62,12 @@ const apiDomain = (apiType: ApiType): string => {
 };
 
 const COMMON_API_DOMAIN: string = (() => {
+  if (process.env.RAILS_ENV === 'test') {
+    return 'http://172.30.0.6:3000/api';
+  } else if (process.env.RAILS_ENV === 'development') {
+    return 'http://localhost:3000/api';
+  }
+  console.warn('env is ', process.env.RAILS_ENV);
   // TODO(okubo): testではここをIPにする、もしくは普遍の値にする必要あり
   return 'http://172.30.0.6:3000/api';
   // if (process.env.ENVIRONMENT === 'development' || process.env.STAGING) {
@@ -72,7 +78,12 @@ const COMMON_API_DOMAIN: string = (() => {
 })();
 
 const CUSTOMER_API_DOMAIN: string = (() => {
-  return 'http://172.30.0.6:3000/api_customer';
+  if (process.env.RAILS_ENV === 'test') {
+    return 'http://172.30.0.6:3000/api_customer';
+  } else if (process.env.RAILS_ENV === 'development') {
+    return 'http://localhost:3000/api_customer';
+  }
+  // return 'http://172.30.0.6:3000/api_customer';
   // if (process.env.ENVIRONMENT === 'development' || process.env.STAGING) {
   //   return 'http://localhost:3000/api_customer';
   // } else {
