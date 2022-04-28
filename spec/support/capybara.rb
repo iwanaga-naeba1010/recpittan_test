@@ -8,11 +8,11 @@ Capybara.register_driver :remote_chrome do |app|
         'no-sandbox',
         'headless',
         'disable-gpu',
-        'window-size=1680,1050'
+        'window-size=1680,1050',
       ]
     }
   )
-  Capybara::Selenium::Driver.new(app, browser: :remote, url: url, desired_capabilities: caps)
+  Capybara::Selenium::Driver.new(app, browser: :remote, url: url, capabilities: caps)
 end
 
 # Capybara.register_driver :selenium_chrome_headless do |app|
@@ -36,6 +36,17 @@ RSpec.configure do |config|
     if %i[system feature].include?(example.metadata[:type])
       if example.metadata[:js]
         Capybara.server_host = IPSocket.getaddress(Socket.gethostname)
+        # Capybara.app_host = "http://web:3000"
+        # Capybara.server_host = "web"
+        Capybara.server_port = "3000"
+        # Capybara.app_host = "http://#{Capybara.server_host}"
+        # TODO(okubo): IP固定したいが、chrome driverもしないといけないぽい
+        puts '=================='
+        puts Capybara.server_port
+        puts Capybara.server_host
+        puts Capybara.app_host
+        puts '=================='
+        # Capybara.app_host = "http://#{Capybara.server_host}"
         Capybara.app_host = "http://#{Capybara.server_host}"
         driven_by :remote_chrome
         # driven_by :selenium_chrome_headless

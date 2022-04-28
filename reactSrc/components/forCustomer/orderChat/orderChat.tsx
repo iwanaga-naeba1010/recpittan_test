@@ -22,6 +22,8 @@ export const OrderChat: React.FC = () => {
     (async () => {
       if (id === undefined) return;
       try {
+        console.warn('aaaaa');
+        // alert(await Api.get<Order>(`/orders/${id}`, 'customer'));
         const orderResponse = await Api.get<Order>(`/orders/${id}`, 'customer');
         // NOTE(okubo): Objestのkeyは自動変換しているが、valueはできていないので個別対応
         setOrder({ ...orderResponse.data, status: toCamelcase(orderResponse.data.status) as OrderStatusEnum });
@@ -29,7 +31,7 @@ export const OrderChat: React.FC = () => {
         setUser(userResponse.data);
         setIsLoading(false);
       } catch (e) {
-        console.log('error is', e);
+        console.warn('error is', e);
       }
     })();
   }, [id]);
@@ -169,22 +171,22 @@ export const OrderChat: React.FC = () => {
 
 // NOTE: 画面遷移した時用
 document.addEventListener('turbolinks:load', () => {
-  console.log('sentinel1');
+  console.warn('sentinel1');
   const elm = document.querySelector('#OrderChat');
-  console.log('sentinel2');
+  console.warn('sentinel2');
   if (elm) {
-  console.log('sentinel3');
+  console.warn('sentinel3');
     ReactDOM.render(<OrderChat />, elm);
   }
 });
 
 // NOTE: リフレッシュした時用
 $(document).ready(() => {
-  console.log('sentinel4');
+  console.warn('sentinel4');
   const elm = document.querySelector('#OrderChat');
-  console.log('sentinel5');
+  console.warn('sentinel5');
   if (elm) {
-  console.log('sentinel5');
+  console.warn('sentinel5');
     ReactDOM.render(<OrderChat />, elm);
   }
 });

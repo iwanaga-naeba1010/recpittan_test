@@ -48,7 +48,6 @@ group :test do
   gem 'rspec-validator_spec_helper'
   gem 'rspec-request_describer'
   gem 'rspec-parameterized'
-  gem 'rspec-retry'
   gem 'shoulda-matchers'
 end
 
@@ -95,7 +94,7 @@ gem 'sentry-ruby'
 gem 'sentry-rails'
 
 gem 'cocoon'
-
+gem 'rack-cors'
 # seo
 gem 'meta-tags'
 gem 'sitemap_generator'
