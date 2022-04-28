@@ -41,6 +41,7 @@ services:
       DATABASE_HOST: 'db'
       DATABASE_USER: 'postgres'
       DATABASE_PASSWORD: 'postgres'
+      SELENIUM_DRIVER_URL: http://chrome:4444/wd/hub
       # REDIS_URL: "redis://redis:6379/"
       RAILS_MASTER_KEY:
     depends_on:
@@ -69,6 +70,10 @@ services:
   #   command: ["bin/rails", "jobs:work"]
   #   expose: []
   #   ports: []
+  chrome:
+    image: seleniarm/standalone-chromium
+    ports:
+      - '4444:4444'
 
 volumes:
   postgres:

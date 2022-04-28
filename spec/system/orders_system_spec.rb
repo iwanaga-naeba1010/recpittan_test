@@ -21,13 +21,13 @@ RSpec.describe 'Orders', type: :system do
       scenario 'succeeds' do
         sleep 5
         page.find_by_id('OrderChat')
-        # click_labels '#editExpenses'
-        # sleep 0.5
-        # input_text_boxes('#expenses', 10000)
-        # sleep 0.5
-        # click_labels '#submitExpenses'
-        # sleep 0.5
-        # expect(find_by_id('resultExpenses')).to have_content '¥10,000'
+        click_labels '#editExpenses'
+        sleep 0.5
+        input_text_boxes('#expenses', 10000)
+        sleep 0.5
+        click_labels '#submitExpenses'
+        sleep 0.5
+        expect(find_by_id('resultExpenses')).to have_content '¥10,000'
       end
     end
 
