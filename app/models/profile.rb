@@ -31,5 +31,5 @@ class Profile < ApplicationRecord
 
   # TODO(okubo): 一時的にdescriptionのvalidationを外してバッチの不具合を回避
   # validates :name, :description, presence: true
-  validates :name, presence: true
+  validates :name, :description, :image, presence: true
 end

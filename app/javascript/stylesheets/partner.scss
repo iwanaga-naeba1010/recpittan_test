@@ -1,5 +1,9 @@
 @import "~@fortawesome/fontawesome-free/scss/fontawesome";
 // Extra small devices (portrait phones, less than 576px)
+.prev-image {
+  width: 100px;
+  height: 100px;
+}
 @media (max-width: 575.98px) {
   //display: none;
   .chat_form{
