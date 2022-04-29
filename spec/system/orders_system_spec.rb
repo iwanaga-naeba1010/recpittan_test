@@ -18,12 +18,13 @@ RSpec.describe 'Orders', type: :system do
     before do
       ActionController::Base.allow_forgery_protection = true
       visit chat_customers_order_path(order)
-      sleep 10
+      # sleep 10
     end
     after do
       ActionController::Base.allow_forgery_protection = false
     end
 
+    # TODO(okubo): reactのloadが完了していないことが問題ぽい。どこが問題かを調べる必要あり
     feature 'Recreation informatino' do
       scenario 'succeeds', js: true do
         # NOTE(okubo): 開催費

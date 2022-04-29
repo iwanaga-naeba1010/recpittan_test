@@ -66,6 +66,8 @@ const COMMON_API_DOMAIN: string = (() => {
     return 'http://172.30.0.6:3000/api';
   } else if (process.env.RAILS_ENV === 'development') {
     return 'http://localhost:3000/api';
+  } else if (process.env.RAILS_ENV === 'production') {
+    return 'https://recreation.everyplus.jp/api_partner/api';
   }
   console.warn('env is ', process.env.RAILS_ENV);
   // TODO(okubo): testではここをIPにする、もしくは普遍の値にする必要あり
@@ -82,6 +84,8 @@ const CUSTOMER_API_DOMAIN: string = (() => {
     return 'http://172.30.0.6:3000/api_customer';
   } else if (process.env.RAILS_ENV === 'development') {
     return 'http://localhost:3000/api_customer';
+  } else if (process.env.RAILS_ENV === 'production') {
+    return 'https://recreation.everyplus.jp/api_customer';
   }
   // return 'http://172.30.0.6:3000/api_customer';
   // if (process.env.ENVIRONMENT === 'development' || process.env.STAGING) {
