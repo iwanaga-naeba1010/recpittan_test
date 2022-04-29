@@ -38,7 +38,7 @@ RSpec.configure do |config|
         Capybara.server_host = IPSocket.getaddress(Socket.gethostname)
         # Capybara.app_host = "http://web:3000"
         # Capybara.server_host = "web"
-        Capybara.server_port = "3000"
+        Capybara.server_port = '3000'
         # Capybara.app_host = "http://#{Capybara.server_host}"
         # TODO(okubo): IP固定したいが、chrome driverもしないといけないぽい
         puts '=================='

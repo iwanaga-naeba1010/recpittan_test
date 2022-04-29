@@ -51,8 +51,6 @@ RSpec.configure do |config|
   #   ex.run_with_retry retry: 2
   # end
 
-
-
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
 
