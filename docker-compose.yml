@@ -57,6 +57,7 @@ services:
       DATABASE_USER: 'postgres'
       DATABASE_PASSWORD: 'postgres'
       SELENIUM_DRIVER_URL: http://chrome:4444/wd/hub
+      LOCAL: 'true'
       # REDIS_URL: "redis://redis:6379/"
       RAILS_MASTER_KEY:
     depends_on:
