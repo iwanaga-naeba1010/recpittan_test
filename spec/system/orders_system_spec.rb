@@ -18,6 +18,7 @@ RSpec.describe 'Orders', type: :system do
     before do
       ActionController::Base.allow_forgery_protection = true
       visit chat_customers_order_path(order)
+      sleep 10
     end
     after do
       ActionController::Base.allow_forgery_protection = false
