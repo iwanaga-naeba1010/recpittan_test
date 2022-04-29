@@ -10,6 +10,7 @@ import * as $ from 'jquery';
 import React, { useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
 import { ChatList } from './chatList';
+console.log('adadsadasd');
 
 export const OrderChat: React.FC = () => {
   const [order, setOrder] = useState<Order>(undefined);
@@ -20,19 +21,33 @@ export const OrderChat: React.FC = () => {
   useEffect(() => {
     (async () => {
       if (id === undefined) return;
-      const orderResponse = await Api.get<Order>(`/orders/${id}`, 'customer');
-      orderResponse.data.status;
-      // NOTE(okubo): Objestのkeyは自動変換しているが、valueはできていないので個別対応
-      setOrder({ ...orderResponse.data, status: toCamelcase(orderResponse.data.status) as OrderStatusEnum });
-      const userResponse = await Api.get<User>(`/users/self`, 'customer');
-      setUser(userResponse.data);
-      setIsLoading(false);
+      try {
+        console.warn('aaaaa');
+        // alert(await Api.get<Order>(`/orders/${id}`, 'customer'));
+        const orderResponse = await Api.get<Order>(`/orders/${id}`, 'customer');
+        // NOTE(okubo): Objestのkeyは自動変換しているが、valueはできていないので個別対応
+        setOrder({ ...orderResponse.data, status: toCamelcase(orderResponse.data.status) as OrderStatusEnum });
+        const userResponse = await Api.get<User>(`/users/self`, 'customer');
+        setUser(userResponse.data);
+        setIsLoading(false);
+      } catch (e) {
+        console.warn('error is', e);
+      }
     })();
   }, [id]);
-  console.log('order is ', order);
 
   if (isLoading) {
-    return <>Loading....</>;
+    return (
+      <>
+        読み込み中....
+        { id }
+        ---
+        { JSON.stringify(user) }
+        ---
+        { JSON.stringify(order) }
+        ---
+      </>
+    );
   }
 
   return (

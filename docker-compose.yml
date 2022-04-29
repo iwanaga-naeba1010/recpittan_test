@@ -1,4 +1,15 @@
 version: "3.8"
+
+
+
+networks:
+  test:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.30.0.0/16
+
 services:
   db:
     image: postgres:12-alpine
@@ -13,6 +24,10 @@ services:
       POSTGRES_INITDB_ARGS: "--encoding=UTF-8"
       TZ: "Asia/Tokyo"
       POSTGRES_HOST_AUTH_METHOD: trust
+    networks:
+      test:
+        ipv4_address: 172.30.0.5
+
   # redis:
   #   image: redis:5-alpine
   #   volumes:
@@ -41,6 +56,8 @@ services:
       DATABASE_HOST: 'db'
       DATABASE_USER: 'postgres'
       DATABASE_PASSWORD: 'postgres'
+      SELENIUM_DRIVER_URL: http://chrome:4444/wd/hub
+      LOCAL: 'true'
       # REDIS_URL: "redis://redis:6379/"
       RAILS_MASTER_KEY:
     depends_on:
@@ -51,6 +68,10 @@ services:
     ports: ["3000:3000"]
     user: root
     working_dir: /app
+    networks:
+      test:
+        ipv4_address: 172.30.0.6
+
 
   webpacker:
     <<: *web
@@ -63,12 +84,24 @@ services:
     # stdin_open: false
     depends_on:
       - web
+    networks:
+      test:
+        ipv4_address: 172.30.0.7
+
 
   # worker:
   #   <<: *web
   #   command: ["bin/rails", "jobs:work"]
   #   expose: []
   #   ports: []
+  chrome:
+    image: seleniarm/standalone-chromium
+    ports:
+      - '4444:4444'
+    networks:
+      test:
+        ipv4_address: 172.30.0.8
+
 
 volumes:
   postgres:

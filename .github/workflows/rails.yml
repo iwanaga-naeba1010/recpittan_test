@@ -56,20 +56,20 @@ jobs:
 
       #-- Slack通知 --#
       # 成功
-      - name: Slack Notification on Success
-        if: ${{ success() }}
-        uses: rtCamp/action-slack-notify@v2
-        env:
-          SLACK_TITLE: Deploy Success
-          SLACK_COLOR: good
-
-      # 失敗
-      - name: Slack Notification on Failure
-        if: ${{ failure() }}
-        uses: rtCamp/action-slack-notify@v2
-        env:
-          SLACK_TITLE: Deploy Failure
-          SLACK_COLOR: danger
+      # - name: Slack Notification on Success
+      #   if: ${{ success() }}
+      #   uses: rtCamp/action-slack-notify@v2
+      #   env:
+      #     SLACK_TITLE: Deploy Success
+      #     SLACK_COLOR: good
+      #
+      # # 失敗
+      # - name: Slack Notification on Failure
+      #   if: ${{ failure() }}
+      #   uses: rtCamp/action-slack-notify@v2
+      #   env:
+      #     SLACK_TITLE: Deploy Failure
+      #     SLACK_COLOR: danger
 
   rspec:
     runs-on: ubuntu-latest
@@ -134,17 +134,17 @@ jobs:
 
       #-- Slack通知 --#
       # 成功
-      - name: Slack Notification on Success
-        if: ${{ success() }}
-        uses: rtCamp/action-slack-notify@v2
-        env:
-          SLACK_TITLE: Deploy Success
-          SLACK_COLOR: good
-
-      # 失敗
-      - name: Slack Notification on Failure
-        if: ${{ failure() }}
-        uses: rtCamp/action-slack-notify@v2
-        env:
-          SLACK_TITLE: Deploy Failure
-          SLACK_COLOR: danger
+      # - name: Slack Notification on Success
+      #   if: ${{ success() }}
+      #   uses: rtCamp/action-slack-notify@v2
+      #   env:
+      #     SLACK_TITLE: Deploy Success
+      #     SLACK_COLOR: good
+      #
+      # # 失敗
+      # - name: Slack Notification on Failure
+      #   if: ${{ failure() }}
+      #   uses: rtCamp/action-slack-notify@v2
+      #   env:
+      #     SLACK_TITLE: Deploy Failure
+      #     SLACK_COLOR: danger
