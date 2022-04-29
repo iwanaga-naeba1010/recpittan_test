@@ -11,10 +11,10 @@ type Props = {
 type NumberOfCacilitiesFormValues = Pick<Order, 'numberOfFacilities'>;
 
 export const NumberOfFacilitiesForm: React.FC<Props> = (props): JSX.Element => {
-  const { order, setOrder } = props;
+  const {order, setOrder} = props;
   const [canEdit, setCanEdit] = useState<boolean>(false);
 
-  const { register, handleSubmit, setValue } = useForm<NumberOfCacilitiesFormValues>({
+  const {register, handleSubmit, setValue} = useForm<NumberOfCacilitiesFormValues>({
     mode: 'onChange',
     defaultValues: {
       numberOfFacilities: order.numberOfFacilities
@@ -26,7 +26,7 @@ export const NumberOfFacilitiesForm: React.FC<Props> = (props): JSX.Element => {
   }, [order]);
 
   const onSubmit = async (values: NumberOfCacilitiesFormValues): Promise<void> => {
-    const requestBody: { [key: string]: NumberOfCacilitiesFormValues } = {
+    const requestBody: {[key: string]: NumberOfCacilitiesFormValues} = {
       order: {
         numberOfFacilities: values.numberOfFacilities
       }
@@ -56,12 +56,12 @@ export const NumberOfFacilitiesForm: React.FC<Props> = (props): JSX.Element => {
               (order.status === 'inProgress' ||
                 order.status === 'waitingForAReplyFromPartner' ||
                 order.status === 'WaitingForAReolyFromFacility') && (
-                <a className='clink' onClick={() => setCanEdit(true)}>
+                <a id='numberOfFacilitiesEditButton' className='clink' onClick={() => setCanEdit(true)}>
                   編集
                 </a>
               )}
           </div>
-          <div className='col-auto'>
+          <div id='numberOfFacilities' className='col-auto'>
             &yen;
             {(order.numberOfFacilities * order.additionalFacilityFee)?.toLocaleString()}
           </div>
@@ -72,14 +72,14 @@ export const NumberOfFacilitiesForm: React.FC<Props> = (props): JSX.Element => {
             <div className='col-3 align-self-center'>追加施設数</div>
             <div className='col-7'>
               <input
-                id='number_of_facilities'
+                id='numberOfFacilitiesInput'
                 className='form-control text-end'
                 type='number'
                 {...register('numberOfFacilities')}
               />
             </div>
             <div className='col-2 py-0'>
-              <button type='submit' name='action' value='transport_upadte' className='btn btn-inline-edit'>
+              <button id='numberOfFacilitiesSubmitButton' type='submit' name='action' value='transport_upadte' className='btn btn-inline-edit'>
                 <i className='material-icons color-pr10'>done</i>
               </button>
             </div>
@@ -88,4 +88,4 @@ export const NumberOfFacilitiesForm: React.FC<Props> = (props): JSX.Element => {
       )}
     </>
   );
-};
+}

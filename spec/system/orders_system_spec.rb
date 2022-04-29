@@ -23,30 +23,41 @@ RSpec.describe 'Orders', type: :system do
       ActionController::Base.allow_forgery_protection = false
     end
 
+    feature 'Recreation informatino' do
+      scenario 'succeeds', js: true do
+        # NOTE(okubo): 開催費
+        expect(page).to have_content "¥#{order.price.to_s(:delimited)}"
+        # NOTE(okubo): 材料費
+        expect(page).to have_content "¥#{order.material_price.to_s(:delimited)}"
+        # NOTE(okubo): 合計金額が表示されるか
+        expect(page).to have_content "¥#{order.total_price_for_customer.to_s(:delimited)}"
+      end
+    end
+
     feature 'Expenses form' do
       scenario 'succeeds', js: true do
         page.find_by_id('OrderChat')
         find('#expensesEditButton').click
         input_text_boxes('#expensesInput', 10000)
         find('#expensesSubmitButton').click
-        sleep 5
+        sleep 3
 
+        order.reload
         expect(find_by_id('expenses')).to have_content '¥10,000'
+        expect(page).to have_content "¥#{order.total_price_for_customer.to_s(:delimited)}"
       end
     end
 
     feature 'TranspotationExpenses form' do
       scenario 'succeeds', js: true do
-        puts '================'
-        puts page.driver.browser.manage.logs.get(:browser)
-        puts '================'
-        page.find_by_id('OrderChat')
-
         find('#transportationExpensesEditButton').click
         input_text_boxes('#transportationExpensesInput', 10000)
         find('#transportationExpensesSubmitButton').click
-        sleep 5
+        sleep 3
+
+        order.reload
         expect(find_by_id('transportationExpenses')).to have_content '¥10,000'
+        expect(page).to have_content "¥#{order.total_price_for_customer.to_s(:delimited)}"
       end
     end
 
@@ -57,40 +68,18 @@ RSpec.describe 'Orders', type: :system do
         puts '================'
         page.find_by_id('OrderChat')
 
-        find('#transportationExpensesEditButton').click
-        input_text_boxes('#transportationExpensesInput', 10000)
-        find('#transportationExpensesSubmitButton').click
-        sleep 5
-        expect(find_by_id('transportationExpenses')).to have_content '¥10,000'
+        find('#numberOfFacilitiesEditButton').click
+        input_text_boxes('#numberOfFacilitiesInput', 5)
+        find('#numberOfFacilitiesSubmitButton').click
+        sleep 3
+
+        order.reload
+        expect(find_by_id('numberOfFacilities')).to have_content "¥#{order.additional_facility_fee * 5}"
+        expect(page).to have_content "¥#{order.total_price_for_customer.to_s(:delimited)}"
       end
     end
-#
-#    feature 'include NumberOfCacilities value to orders' do
-#      scenario 'succeeds' do
-#        click_labels '#editNumberOfCacilities'
-#        sleep 0.5
-#        input_text_boxes('#numberOfFacilities', 3)
-#        sleep 0.5
-#        click_labels '#submitTransportationExpenses'
-#        sleep 0.5
-#        expect(find_by_id('resultExpenses')).to have_content '¥6,000'
-#      end
-#    end
-#
-#    feature 'open order modal' do
-#      scenario 'succeeds' do
-#        click_labels '#order-modal'
-#        sleep 0.5
-#        expect(find_by_id('orderModal')).to have_text('正式依頼フォーム')
-#      end
-#    end
-#
-#    feature 'open order modal' do
-#      scenario 'succeeds' do
-#        click_labels '#order-modal'
-#        sleep 0.5
-#        expect(find_by_id('orderModal')).to have_text('正式依頼フォーム')
-#      end
-#    end
+
+    # TODO(okubo): chat送信のテスト追加
+    # TODO(okubo): 正式依頼のテスト追加
   end
 end
