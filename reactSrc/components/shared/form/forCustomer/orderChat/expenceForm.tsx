@@ -55,7 +55,7 @@ export const ExpenseForm: React.FC<Props> = (props): JSX.Element => {
             (order.status === 'inProgress' ||
               order.status === 'waitingForAReplyFromPartner' ||
               order.status === 'WaitingForAReolyFromFacility') && (
-              <a className='clink' id="editExpenses" onClick={() => setCanEdit(true)}>
+              <a id="expensesEditButton" className='clink' onClick={() => setCanEdit(true)}>
                 編集
               </a>
             )}
@@ -63,17 +63,17 @@ export const ExpenseForm: React.FC<Props> = (props): JSX.Element => {
         {canEdit ? (
           <>
             <div className='col-7'>
-              <input id="expenses" className='form-control text-end' type='number' {...register('expenses')} />
+              <input id="expensesInput" className='form-control text-end' type='number' {...register('expenses')} />
             </div>
 
             <div className='col-2 py-0'>
-              <button type='submit' name='action' value='transport_upadte' className='btn btn-inline-edit' id='submitExpenses'>
+              <button id='expensesSubmitButton' type='submit' name='action' value='transport_upadte' className='btn btn-inline-edit'>
                 <i className='material-icons color-pr10'>done</i>
               </button>
             </div>
           </>
         ) : (
-          <div className='col-auto' id="resultExpenses">&yen;{order.expenses?.toLocaleString()}</div>
+          <div id="expenses" className='col-auto'>&yen;{order.expenses?.toLocaleString()}</div>
         )}
       </div>
     </form>
