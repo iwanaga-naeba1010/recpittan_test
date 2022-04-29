@@ -40,6 +40,10 @@ docker-compose run web yarn lint
 
 # ts/jsのlint fix実行
 docker-compose run web yarn lint:fix
+
+
+# Error response from daemon: Address already in useが出る場合
+docker rm -f $(docker ps -aq)
 ```
 
 ### gitのブランチの命名規則
