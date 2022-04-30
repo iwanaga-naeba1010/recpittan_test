@@ -21,20 +21,7 @@ if ENV['LOCAL'].present? && ENV['LOCAL'] == 'true'
       if %i[system feature].include?(example.metadata[:type])
         if example.metadata[:js]
           Capybara.server_host = IPSocket.getaddress(Socket.gethostname)
-          # Capybara.app_host = "http://web:3000"
-          # Capybara.server_host = "web"
-          Capybara.server_port = '3000'
-          # Capybara.app_host = "http://#{Capybara.server_host}"
-          # TODO(okubo): IP固定したいが、chrome driverもしないといけないぽい
-          puts '=================='
-          puts Capybara.server_port
-          puts Capybara.server_host
-          puts Capybara.app_host
-          puts '=================='
-          # Capybara.app_host = "http://#{Capybara.server_host}"
-          Capybara.app_host = "http://#{Capybara.server_host}"
           driven_by :remote_chrome
-          # driven_by :selenium_chrome_headless
         else
           driven_by :rack_test
         end
