@@ -56,6 +56,6 @@ FactoryBot.define do
     material_amount { 500 }
     description { 'MyText' }
     youtube_id { '' }
-    is_public { true }
+    status { :published }
   end
 end
