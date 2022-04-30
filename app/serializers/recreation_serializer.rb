@@ -27,9 +27,9 @@
 #  material_amount         :integer
 #  material_price          :integer
 #  minutes                 :integer
-#  prefectures             :string           default([]), is an Array
 #  price                   :integer
 #  second_title            :string
+#  status                  :integer          default("unapplied"), not null
 #  title                   :string
 #  created_at              :datetime         not null
 #  updated_at              :datetime         not null
