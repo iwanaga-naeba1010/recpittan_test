@@ -5,10 +5,12 @@ import snakecaseKeys from 'snakecase-keys';
 
 export class Api {
   static async get<T>(path: string, type: ApiType, params: Record<string, unknown> = {}): Promise<AxiosResponse<T>> {
+    console.warn('haitta1');
     const response = await axios.get<T>(`${apiDomain(type)}/${path}`, {
       params: snakecaseKeys(params),
       headers: headers()
     });
+    console.warn('haitta2');
     return { ...response, data: camelcaseKeys(response.data, { deep: true }) } as AxiosResponse<T>;
   }
 
@@ -61,9 +63,17 @@ const apiDomain = (apiType: ApiType): string => {
   }
 };
 
+const testDomain = (): string => {
+  if (process.env.LOCAL === 'true') {
+    return 'http://172.30.0.6:3000';
+  } else {
+    return 'http://localhost:3000';
+  }
+}
+
 const COMMON_API_DOMAIN: string = (() => {
   if (process.env.RAILS_ENV === 'test') {
-    return 'http://172.30.0.6:3000/api';
+    return testDomain() + '/api';
   } else if (process.env.RAILS_ENV === 'development') {
     return 'http://localhost:3000/api';
   } else if (process.env.RAILS_ENV === 'production') {
@@ -81,7 +91,7 @@ const COMMON_API_DOMAIN: string = (() => {
 
 const CUSTOMER_API_DOMAIN: string = (() => {
   if (process.env.RAILS_ENV === 'test') {
-    return 'http://172.30.0.6:3000/api_customer';
+    return testDomain() + '/api_customer';
   } else if (process.env.RAILS_ENV === 'development') {
     return 'http://localhost:3000/api_customer';
   } else if (process.env.RAILS_ENV === 'production') {
