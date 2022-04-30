@@ -13,7 +13,8 @@ ActiveAdmin.register Recreation do
     ],
     tag_ids: [],
     recreation_profile_attributes: %i[profile_id recreation_id],
-    recreation_images_attributes: %i[id recreation_id image kind _destroy]
+    recreation_images_attributes: %i[id recreation_id image kind _destroy],
+    recreation_prefectures_attributes: %i[id recreation_id name _destroy]
   )
   actions :all
 
@@ -107,6 +108,12 @@ ActiveAdmin.register Recreation do
         column(:kind, &:kind_text)
       end
     end
+
+    panel t('activerecord.models.recreation_prefecture'), style: 'margin-top: 30px;' do
+      table_for recreation.recreation_prefectures do
+        column(:name)
+      end
+    end
   end
 
   form do |f|
@@ -159,6 +166,11 @@ ActiveAdmin.register Recreation do
       f.has_many :recreation_images, heading: false, allow_destroy: true, new_record: true do |ff|
         ff.input :image, as: :file, hint: image_tag(ff.object.image.to_s, width: 100)
         ff.input :kind, as: :select, collection: RecreationImage.kind.values.map { |i| [i.text, i] }
+      end
+    end
+    f.inputs t('activerecord.models.recreation_prefecture') do
+      f.has_many :recreation_prefectures, heading: false, allow_destroy: true, new_record: true do |ff|
+        ff.input :name, as: :select, collection: RecreationPrefecture.names
       end
     end
 
