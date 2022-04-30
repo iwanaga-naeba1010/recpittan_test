@@ -81,7 +81,7 @@ RSpec.describe 'Orders', type: :system do
       end
     end
 
-  #   # TODO(okubo): chat送信のテスト追加
-  #   # TODO(okubo): 正式依頼のテスト追加
+    # TODO(okubo): chat送信のテスト追加
+    # TODO(okubo): 正式依頼のテスト追加
   end
 end
