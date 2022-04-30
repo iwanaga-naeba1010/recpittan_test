@@ -8,7 +8,7 @@ ActiveAdmin.register Recreation do
       flow_of_day borrow_item bring_your_own_item extra_information youtube_id
       base_code capacity flyer_color
       price material_price amount material_amount
-      is_online is_public prefectures is_public_price additional_facility_fee
+      is_online is_public is_public_price additional_facility_fee
     ],
     tag_ids: [],
     recreation_profile_attributes: %i[profile_id recreation_id],
@@ -70,7 +70,6 @@ ActiveAdmin.register Recreation do
 
       row :is_online
       row :is_public
-      row :prefectures
       row :is_public_price
 
       row :created_at
@@ -137,7 +136,6 @@ ActiveAdmin.register Recreation do
       f.input :is_online
       f.input :is_public
       f.input :is_public_price
-      f.input :prefectures
       f.input :additional_facility_fee, hint: 'エブリ・プラス取り分の1000円 + パートナー支払い分の合計を入力してください'
     end
 
