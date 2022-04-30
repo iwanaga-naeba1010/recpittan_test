@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_04_30_101303) do
+ActiveRecord::Schema.define(version: 2022_04_30_105107) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -182,7 +182,6 @@ ActiveRecord::Schema.define(version: 2022_04_30_101303) do
     t.datetime "updated_at", null: false
     t.string "youtube_id"
     t.string "flyer_color"
-    t.string "prefectures", default: [], array: true
     t.integer "price"
     t.integer "material_price"
     t.integer "material_amount"
