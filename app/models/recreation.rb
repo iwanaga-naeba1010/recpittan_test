@@ -63,6 +63,7 @@ class Recreation < ApplicationRecord
 
   scope :public_recs, -> { where(is_public: true) }
 
+  enumerize :status, in: { unapplied: 0, in_progress: 1, published: 2 }, default: 0
   enumerize :category, in: { event: 0, work: 1, music: 2, health: 3, travel: 4, hobby: 5, food: 6, other: 7 }, default: 0
 
   def flyer
