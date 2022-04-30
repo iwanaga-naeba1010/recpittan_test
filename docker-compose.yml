@@ -1,15 +1,5 @@
 version: "3.8"
 
-
-
-networks:
-  test:
-    driver: bridge
-    ipam:
-      driver: default
-      config:
-        - subnet: 172.30.0.0/16
-
 services:
   db:
     image: postgres:12-alpine
@@ -24,9 +14,6 @@ services:
       POSTGRES_INITDB_ARGS: "--encoding=UTF-8"
       TZ: "Asia/Tokyo"
       POSTGRES_HOST_AUTH_METHOD: trust
-    networks:
-      test:
-        ipv4_address: 172.30.0.5
 
   # redis:
   #   image: redis:5-alpine
@@ -63,15 +50,11 @@ services:
     depends_on:
       - db
       # - redis
-    command: ["bin/rails", "server", "-b", "0.0.0.0"]
+    command: /bin/sh -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
     expose: ["3000"]
     ports: ["3000:3000"]
     user: root
     working_dir: /app
-    networks:
-      test:
-        ipv4_address: 172.30.0.6
-
 
   webpacker:
     <<: *web
@@ -84,10 +67,6 @@ services:
     # stdin_open: false
     depends_on:
       - web
-    networks:
-      test:
-        ipv4_address: 172.30.0.7
-
 
   # worker:
   #   <<: *web
@@ -98,10 +77,6 @@ services:
     image: seleniarm/standalone-chromium
     ports:
       - '4444:4444'
-    networks:
-      test:
-        ipv4_address: 172.30.0.8
-
 
 volumes:
   postgres:
