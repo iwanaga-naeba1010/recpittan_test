@@ -8,7 +8,8 @@ ActiveAdmin.register Recreation do
       flow_of_day borrow_item bring_your_own_item extra_information youtube_id
       base_code capacity flyer_color
       price material_price amount material_amount
-      is_online is_public is_public_price additional_facility_fee
+      status
+      is_online is_public_price additional_facility_fee
     ],
     tag_ids: [],
     recreation_profile_attributes: %i[profile_id recreation_id],
@@ -20,7 +21,7 @@ ActiveAdmin.register Recreation do
   filter :second_title
   filter :minutes
   filter :price
-  filter :is_public
+  filter :status
 
   index do
     id_column
@@ -28,6 +29,7 @@ ActiveAdmin.register Recreation do
     column :title
     column :second_title
     column(:category, &:category_text)
+    column(:status, &:status_text)
     column :minutes
     column :price
     column :is_public_price
@@ -42,6 +44,7 @@ ActiveAdmin.register Recreation do
       row :title
       row :second_title
       row(:category, &:category_text)
+      row(:status, &:status_text)
       row :minutes
       row :description
       row :flow_of_day
@@ -69,7 +72,6 @@ ActiveAdmin.register Recreation do
       end
 
       row :is_online
-      row :is_public
       row :is_public_price
 
       row :created_at
@@ -134,7 +136,6 @@ ActiveAdmin.register Recreation do
       f.input :amount
       f.input :material_amount
       f.input :is_online
-      f.input :is_public
       f.input :is_public_price
       f.input :additional_facility_fee, hint: 'エブリ・プラス取り分の1000円 + パートナー支払い分の合計を入力してください'
     end
@@ -150,6 +151,7 @@ ActiveAdmin.register Recreation do
     end
 
     f.input :category, as: :select, collection: Recreation.category.values.map { |val| [val.text, val] }
+    f.input :status, as: :select, collection: Recreation.status.values.map { |val| [val.text, val] }
     f.input :tags, label: 'タグ', as: :check_boxes, collection: Tag.events.all
     f.input :tags, label: '想定ターゲット', as: :check_boxes, collection: Tag.targets.all
 

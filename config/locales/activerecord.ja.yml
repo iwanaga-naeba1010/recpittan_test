@@ -72,6 +72,7 @@ ja:
         title: タイトル
         second_title: サブタイトル
         category: カテゴリー
+        status: ステータス
         minutes: 所要時間
         description: このようなことをやります
         flow_of_day: 当日の流れとタイムスケジュール

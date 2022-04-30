@@ -61,7 +61,8 @@ class Recreation < ApplicationRecord
   delegate :name, :title, :description, :image, to: :partner, prefix: true, allow_nil: true
   delegate :name, :title, :description, :image, to: :profile, prefix: true, allow_nil: true
 
-  scope :public_recs, -> { where(is_public: true) }
+  # NOTE(okubo): publicは予約後なので下記で定義
+  scope :public_recs, -> { where(status: :published) }
 
   enumerize :status, in: { unapplied: 0, in_progress: 1, published: 2 }, default: 0
   enumerize :category, in: { event: 0, work: 1, music: 2, health: 3, travel: 4, hobby: 5, food: 6, other: 7 }, default: 0
