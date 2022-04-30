@@ -5,12 +5,10 @@ import snakecaseKeys from 'snakecase-keys';
 
 export class Api {
   static async get<T>(path: string, type: ApiType, params: Record<string, unknown> = {}): Promise<AxiosResponse<T>> {
-    console.warn('haitta1');
     const response = await axios.get<T>(`${apiDomain(type)}/${path}`, {
       params: snakecaseKeys(params),
       headers: headers()
     });
-    console.warn('haitta2');
     return { ...response, data: camelcaseKeys(response.data, { deep: true }) } as AxiosResponse<T>;
   }
 
@@ -39,8 +37,6 @@ const headers = () => {
   const headers = {
     'Content-Type': 'application/json'
   };
-  console.warn('before attribute');
-  console.warn(document.querySelector('[name=csrf-token]'));
   const token = document.querySelector('[name=csrf-token]').getAttribute('content');
 
   return {
@@ -63,46 +59,26 @@ const apiDomain = (apiType: ApiType): string => {
   }
 };
 
-const testDomain = (): string => {
-  if (process.env.LOCAL === 'true') {
-    return 'http://172.30.0.6:3000';
-  } else {
-    return 'http://localhost:3000';
-  }
-}
-
 const COMMON_API_DOMAIN: string = (() => {
   if (process.env.RAILS_ENV === 'test') {
-    return testDomain() + '/api';
+    return `http://${window.location.host}/api_customer`;
   } else if (process.env.RAILS_ENV === 'development') {
     return 'http://localhost:3000/api';
   } else if (process.env.RAILS_ENV === 'production') {
     return 'https://recreation.everyplus.jp/api_partner/api';
   }
-  console.warn('env is ', process.env.RAILS_ENV);
   // TODO(okubo): testではここをIPにする、もしくは普遍の値にする必要あり
-  return 'http://172.30.0.6:3000/api';
-  // if (process.env.ENVIRONMENT === 'development' || process.env.STAGING) {
-  //   return 'http://localhost:3000/api';
-  // } else {
-  //   return 'https://recreation.everyplus.jp/api_partner/api';
-  // }
 })();
 
 const CUSTOMER_API_DOMAIN: string = (() => {
+  console.warn('window is', `http://${window.location.host}/api_customer`);
   if (process.env.RAILS_ENV === 'test') {
-    return testDomain() + '/api_customer';
+    return `http://${window.location.host}/api_customer`;
   } else if (process.env.RAILS_ENV === 'development') {
     return 'http://localhost:3000/api_customer';
   } else if (process.env.RAILS_ENV === 'production') {
     return 'https://recreation.everyplus.jp/api_customer';
   }
-  // return 'http://172.30.0.6:3000/api_customer';
-  // if (process.env.ENVIRONMENT === 'development' || process.env.STAGING) {
-  //   return 'http://localhost:3000/api_customer';
-  // } else {
-  //   return 'https://recreation.everyplus.jp/api_customer';
-  // }
 })();
 
 const PARTNER_API_DOMAIN: string = (() => {

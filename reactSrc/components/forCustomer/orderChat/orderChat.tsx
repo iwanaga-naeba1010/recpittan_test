@@ -10,7 +10,6 @@ import * as $ from 'jquery';
 import React, { useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
 import { ChatList } from './chatList';
-console.log('adadsadasd');
 
 export const OrderChat: React.FC = () => {
   const [order, setOrder] = useState<Order>(undefined);
@@ -22,7 +21,6 @@ export const OrderChat: React.FC = () => {
     (async () => {
       if (id === undefined) return;
       try {
-        console.warn('window is', window.location);
         console.warn('sentinel1');
         const orderResponse = await Api.get<Order>(`/orders/${id}`, 'customer');
         console.warn('sentinel2');
