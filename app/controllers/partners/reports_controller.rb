@@ -54,22 +54,20 @@ class Partners::ReportsController < Partners::ApplicationController
 
   def complete; end
 
-  private
-
-  def set_order
+  private def set_order
     @order = current_user.recreations.map do |rec|
       rec.orders.map { |order| order if order.id == params[:order_id].to_i }
     end.flatten.compact.first
   end
 
-  def params_create
+  private def params_create
     params.require(:report).permit(
       :body, :expenses, :number_of_facilities,
       :number_of_people, :transportation_expenses
     )
   end
 
-  def restrict_initialization
+  private def restrict_initialization
     redirect_to edit_partners_order_report_path(id: @order.report, order_id: @order), alert: '終了報告は作成済みです' if @order.report.present? # rubocop:disable Rails/I18nLocaleTexts
   end
 end

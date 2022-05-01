@@ -114,17 +114,15 @@ class Customers::OrdersController < Customers::ApplicationController
     redirect_to chat_customers_order_path(@order.id), alert: t('action_messages.failed')
   end
 
-  private
-
-  def set_recreation
+  private def set_recreation
     @recreation = Recreation.find(params[:recreation_id])
   end
 
-  def set_order
+  private def set_order
     @order = current_user.orders.order_asc.find(params[:id])
   end
 
-  def parse_order_date(dates)
+  private def parse_order_date(dates)
     return '' if dates.blank?
 
     str = ''
@@ -135,7 +133,7 @@ class Customers::OrdersController < Customers::ApplicationController
     str
   end
 
-  def params_create
+  private def params_create
     params.require(:order).permit(
       :title, :zip, :prefecture, :city, :street, :building, :status,
       :number_of_people, :number_of_facilities,

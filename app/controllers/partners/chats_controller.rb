@@ -21,15 +21,13 @@ class Partners::ChatsController < Partners::ApplicationController
     end
   end
 
-  private
-
-  def set_order
+  private def set_order
     @order = current_user.recreations.map do |rec|
       rec.orders.map { |order| order if order.id == params[:order_id].to_i }
     end.flatten.compact.first
   end
 
-  def params_create
+  private def params_create
     params.require(:chat).permit(:message, :file, :user_id)
   end
 end

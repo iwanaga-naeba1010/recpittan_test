@@ -35,20 +35,18 @@ class Partners::RecreationsController < Partners::ApplicationController
 
   def complete_final_check; end
 
-  private
-
-  def set_recreation
+  private def set_recreation
     @recreation = current_user.recreations.find(params[:id])
   end
 
-  def set_tags
+  private def set_tags
     tags = Tag.all.to_a
     @events = tags.map { |tag| tag if tag.kind == :tag }.compact
     @categories = tags.map { |tag| tag if tag.kind == :category }.compact
     @targets = tags.map { |tag| tag if tag.kind == :target }.compact
   end
 
-  def params_create
+  private def params_create
     params.require(:recreation).permit(
       :title, :second_title, :minutes, :description,
       :flow_of_day, :borrow_item, :bring_your_own_item, :extra_information, :youtube_id,
