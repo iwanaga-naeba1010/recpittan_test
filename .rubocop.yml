@@ -241,6 +241,9 @@ Lint/DeprecatedOpenSSLConstant:
 Style/SlicingWithRange:
   Enabled: true
 
+Style/AccessModifierDeclarations:
+  Enabled: false
+
 Lint/AmbiguousBlockAssociation:
   Exclude:
     - "spec/**/*"

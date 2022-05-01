@@ -23,13 +23,11 @@ class Customers::ChatsController < Customers::ApplicationController
     end
   end
 
-  private
-
-  def set_order
+  private def set_order
     @order = current_user.orders.find(params[:order_id])
   end
 
-  def params_create
+  private def params_create
     params.require(:chat).permit(:message, :user_id)
   end
 end
