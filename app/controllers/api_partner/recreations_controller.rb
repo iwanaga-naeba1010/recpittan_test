@@ -8,14 +8,14 @@ module ApiPartner
       render_json RecreationSerializer.new.serialize(recreation: @recreation)
     rescue StandardError => e
       logger.error e.message
-      render_json([e.message], status: 422)
+      render_json([e.message], status: 401)
     end
 
     def create
       recreation = Resources::Recreations::Create.run!(
         recreation_params: params_create.to_h,
         current_user: current_user,
-        profile_id: params_create[:recreation_profile_attributes][:profile_id]
+        profile_id: params_create.dig(:recreation_profile_attributes, :profile_id)
       )
       render_json RecreationSerializer.new.serialize(recreation: recreation)
     rescue StandardError => e

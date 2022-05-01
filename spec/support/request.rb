@@ -17,64 +17,24 @@ SUPPORTED_METHODS = %w[
 RSpec.shared_context 'with authenticated customer' do
   let!(:current_user) { create(:user, role: :customer) }
 
-  # let(:authentication_token) { 'token' }
-
   before do
     sign_in current_user
-    # allow_any_instance_of(ActionController::Base).to receive(:session) { { user_id: current_user.id } }
-    # allow(User).to receive(:by_uid) { current_user }
-    # allow(JsonWebTokenVerifier).to receive(:verify_token) { { 'sub' => 'uid', 'email' => current_user.email } }
   end
 end
 
 RSpec.shared_context 'with authenticated partner' do
   let!(:current_user) { create(:user, role: :partner) }
 
-  # let(:authentication_token) { 'token' }
-
   before do
     sign_in current_user
-    # allow_any_instance_of(ActionController::Base).to receive(:session) { { user_id: current_user.id } }
-    # allow(User).to receive(:by_uid) { current_user }
-    # allow(JsonWebTokenVerifier).to receive(:verify_token) { { 'sub' => 'uid', 'email' => current_user.email } }
   end
 end
 
-# shared_context 'with authenticated paypay user' do
-#   let(:authentication_token) { 'token' }
-#
-#   before do
-#     allow(JsonWebTokenVerifier).to receive(:verify_token).with(token: 'token') do
-#       {
-#         'iss' => 'https://user-module.paypay.co.jp',
-#         'exp' => 9616426495,
-#         'aud' => 'sample_audience',
-#         'iat' => 1616425595,
-#         'payload' => '{"resultInfo":{"code":"SUCCESS","message":"Success","codeId":"08400001"},"data":{"userAuthorizationId":"uid","responseValidTill":1616426495},"responseValidTill":1616426495}' # rubocop:disable Layout/LineLength
-#       }
-#     end
-#   end
-# end
-
-# shared_context 'with authenticated mechanic' do
-#   let!(:current_mechanic) { create(:mechanic) }
-#   let!(:current_user) { current_mechanic.user }
-#   let(:authentication_token) { 'token' }
-#
-#   before do
-#     allow_any_instance_of(ActionController::Base).to receive(:session) { { user_id: current_user.id } }
-#     allow(User).to receive(:by_uid) { current_user }
-#     allow(JsonWebTokenVerifier).to receive(:verify_token) { { 'sub' => 'uid' } }
-#   end
-# end
-
 RSpec.shared_context 'with authenticated admin' do
-  # let!(:current_admin_permission) { create(:admin_permission, user: current_user) }
   let!(:current_user) { create(:user, role: :admin) }
 
   before do
     sign_in current_user
-    # allow_any_instance_of(ActionController::Base).to receive(:session) { { user_id: current_user.id } }
   end
 end
 

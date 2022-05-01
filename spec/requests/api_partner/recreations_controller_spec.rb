@@ -2,89 +2,70 @@
 
 require 'rails_helper'
 
-RSpec.describe ApiPartner::RecreationsController, type: :request do
-  let(:partner) { create :user, :with_recreations }
-  let(:profile) { create :profile, user: partner }
-  let(:recreation) { partner.recreations.first }
+RSpec.describe ApiPartner::ProfilesController, type: :request do
+  include_context 'with authenticated partner'
 
-  before do
-    sign_in partner
+  describe 'GET /api_partner/recreations/config_data' do
+    let(:expected) { { categories: Recreation.category.values.map(&:text) } }
+    it_behaves_like 'an endpoint returns', :expected
   end
 
-  describe 'GET /config_data' do
-    context 'with valid parameters' do
-      it 'return http success' do
-        get config_data_api_partner_recreations_path
-        json = JSON.parse(response.body)['categories']
-        expect(response.status).to eq(200)
-        expect(json).to eq %w[イベント 創作 音楽 健康 旅行 趣味 食べ物 その他]
-      end
-    end
+  describe 'GET /api_partner/recreations/:id' do
+    let!(:profile) { create(:profile, user: current_user) }
+    let!(:recreation) { create(:recreation, user: current_user) }
+    let!(:relation) { create(:recreation_profile, recreation: recreation, profile: profile) }
+    let(:id) { recreation.id }
+    let(:expected) { RecreationSerializer.new.serialize(recreation: recreation) }
+
+    it_behaves_like 'an endpoint returns', :expected
   end
 
-  describe 'GET /:id' do
-    context 'with valid parameters' do
-      it 'return http success' do
-        get api_partner_recreation_path(recreation)
-        expect(response.status).to eq(200)
-      end
-    end
-  end
-
-  describe 'POST /create' do
-    context 'with valid parameters' do
-      let(:attrs) do
-        attributes_for(
+  describe 'POST /api_partner/recreations' do
+    let!(:profile) { create(:profile, user: current_user) }
+    let!(:recreation) { create(:recreation, user: current_user) }
+    let!(:relation) { create(:recreation_profile, recreation: recreation, profile: profile) }
+    let(:id) { recreation.id }
+    let(:params) do
+      {
+        recreation: attributes_for(
           :recreation,
-          user: partner,
+          user: current_user,
           recreation_profile_attributes: { profile_id: profile.id }
         )
-      end
+      }
+    end
+    let(:expected) { RecreationSerializer.new.serialize(recreation: Recreation.last) }
 
-      it 'returns http success with valid params' do
-        post api_partner_recreations_path, params: { recreation: attrs }
-        expect(response.status).to eq 200
-      end
+    it_behaves_like 'an endpoint returns 2xx status', :expected
 
-      # it 'saves unapplied status when create method' do
-      #   post api_partner_recreations_path, params: { recreation: attrs }
-      #   expect(Recreation.last.status).to eq 'unapplied'
-      # end
-      #
-      # it 'creates recreation record' do
-      #   post api_partner_recreations_path, params: { recreation: attrs }
-      #   expect {
-      #     post api_partner_recreations_path, params: { recreation: attrs }
-      #   }.to change(Recreation, :count).by(+1)
-      # end
-      #
-      # it 'creates recreation_profile record' do
-      #   post api_partner_recreations_path, params: { recreation: attrs }
-      #   expect {
-      #     post api_partner_recreations_path, params: { recreation: attrs }
-      #   }.to change(RecreationProfile, :count).by(+1)
-      # end
+    context 'with valid params' do
+      it_behaves_like 'an endpoint returns', :expected
     end
 
-    # context 'with invalid parameters' do
-    #   it 'returns 422 status when recreation_profile is blank' do
-    #     post api_partner_recreations_path, params: { recreation: attributes_for(:recreation, user: partner) }
-    #     expect(response.status).to eq 422
-    #   end
-    # end
+    context 'with invalid params' do
+      let(:params) { { recreation: attributes_for(:recreation) } }
+      it_behaves_like 'an endpoint returns 4xx status'
+    end
   end
 
-  describe 'PUT /update' do
-    context 'with valid parameters' do
-      it 'return http success when user not logged in' do
-        put api_partner_recreation_path(recreation),
-            params: { recreation: { title: 'title' } }
-        expect(response.status).to eq 200
-      end
+  describe 'PATCH /api_partner/recreations/:id' do
+    let!(:profile) { create(:profile, user: current_user) }
+    let!(:recreation) { create(:recreation, user: current_user) }
+    let!(:relation) { create(:recreation_profile, recreation: recreation, profile: profile) }
+    let(:id) { recreation.id }
+    let!(:params) { { recreation: attributes_for(:recreation, user: current_user) } }
+    let(:expected) { RecreationSerializer.new.serialize(recreation: recreation) }
+
+    it_behaves_like 'an endpoint returns', :expected
+
+    context 'with valid params' do
+      it_behaves_like 'an endpoint returns 2xx status'
     end
 
-    # TODO: 失敗パターンも実装
-    context 'with invalid parameters' do
+    context 'with invalid params' do
+      let!(:params) { { recreation: { recreation_profile_attributes: { profile_id: 0 } } } }
+      it_behaves_like 'an endpoint returns 4xx status', :expected
     end
   end
 end
+
