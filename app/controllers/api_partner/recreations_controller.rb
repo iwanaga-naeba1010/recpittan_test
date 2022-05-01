@@ -11,8 +11,11 @@ class ApiPartner::RecreationsController < ApiPartner::ApplicationController
   end
 
   def create
-    recreation = current_user.recreations.build(params_create)
-    recreation.save!
+    recreation = Resources::Recreations::Create.run!(
+      recreation_params: params_create.to_h,
+      current_user: current_user,
+      profile_id: params_create[:recreation_profile_attributes][:profile_id]
+    )
     render_json RecreationSerializer.new.serialize(recreation: recreation)
   rescue StandardError => e
     logger.error e.message
@@ -43,7 +46,11 @@ class ApiPartner::RecreationsController < ApiPartner::ApplicationController
 
   def params_create
     params.require(:recreation).permit(
-      %i[title second_title minutes is_online capacity category],
+      %i[
+        title second_title price amount material_price material_amount
+        minutes description flow_of_day borrow_item bring_your_own_item extra_information
+        youtube_id capacity category status is_online
+      ],
       recreation_profile_attributes: %i[profile_id] # NOTE(okubo): profileの中間テーブル作成
     )
   end
