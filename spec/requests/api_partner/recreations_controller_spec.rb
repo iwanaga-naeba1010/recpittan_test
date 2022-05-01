@@ -68,4 +68,3 @@ RSpec.describe ApiPartner::ProfilesController, type: :request do
     end
   end
 end
-

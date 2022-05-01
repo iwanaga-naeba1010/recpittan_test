@@ -205,4 +205,3 @@ RSpec.configure do |config|
   config.after(:each, type: :request) { DatabaseCleaner.clean }
   config.include_context 'with requesting', type: :request
 end
-
