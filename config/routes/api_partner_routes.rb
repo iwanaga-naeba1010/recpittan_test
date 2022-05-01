@@ -3,7 +3,7 @@
 namespace :api_partner do
   resources :recreations, only: %i[show create update] do
     collection do
-      get :preferred_date
+      get :config_data
     end
   end
 end

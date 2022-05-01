@@ -27,16 +27,12 @@ class ApiPartner::RecreationsController < ApiPartner::ApplicationController
     render_json([e.message], status: 422)
   end
 
-  # TODO(okubo): config値をここで吐き出す
-  def preferred_date
-    years = Year.all.map(&:value)
-    months = Month.all.map(&:value)
-    days = Day.all.map(&:value)
-    hours = Hour.all.map(&:value)
-    minutes = Minute.all.map(&:value)
-    render_json OrderConfigSerializer.new.serialize(
-      years: years, months: months, days: days, hours: hours, minutes: minutes
-    )
+  # NOTE(okubo): configは予約後で使えない
+  def config_data
+    config = {
+      categories: Recreation.category.values.map(&:text)
+    }
+    render_json config
   end
 
   private

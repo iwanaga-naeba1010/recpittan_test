@@ -11,6 +11,17 @@ RSpec.describe ApiPartner::RecreationsController, type: :request do
     sign_in partner
   end
 
+  describe 'GET /config_data' do
+    context 'with valid parameters' do
+      it 'return http success' do
+        get config_data_api_partner_recreations_path
+        json = JSON.parse(response.body)['categories']
+        expect(response.status).to eq(200)
+        expect(json).to eq %w[イベント 創作 音楽 健康 旅行 趣味 食べ物 その他]
+      end
+    end
+  end
+
   describe 'GET /:id' do
     context 'with valid parameters' do
       it 'return http success' do
