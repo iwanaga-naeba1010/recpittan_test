@@ -3,19 +3,12 @@
 require 'rails_helper'
 
 RSpec.describe ApiPartner::ProfilesController, type: :request do
-  let(:partner) { create :user, :with_recreations }
-  let(:profile) { create :profile, user: partner }
+  include_context 'with authenticated partner'
 
-  before do
-    sign_in partner
-  end
+  describe 'GET /api_partner/profiles' do
+    let!(:profiles) { create_list(:profile, 5, user: current_user) }
+    let(:expected) { ProfileSerializer.new.serialize_list(profiles: profiles) }
 
-  describe 'GET /index' do
-    context 'with valid parameters' do
-      it 'return http success' do
-        get api_partner_profiles_path
-        expect(response.status).to eq(200)
-      end
-    end
+    it_behaves_like 'an endpoint returns', :expected
   end
 end
