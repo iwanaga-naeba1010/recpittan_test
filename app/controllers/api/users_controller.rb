@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class ApiCustomer::UsersController < ApiCustomer::ApplicationController
+class Api::UsersController < Api::ApplicationController
 
   def self
     render_json UserSerializer.new.serialize(user: current_user)

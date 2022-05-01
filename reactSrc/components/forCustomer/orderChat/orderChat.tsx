@@ -26,7 +26,7 @@ export const OrderChat: React.FC = () => {
         console.warn('sentinel2');
         // NOTE(okubo): Objestのkeyは自動変換しているが、valueはできていないので個別対応
         setOrder({ ...orderResponse.data, status: toCamelcase(orderResponse.data.status) as OrderStatusEnum });
-        const userResponse = await Api.get<User>(`/users/self`, 'customer');
+        const userResponse = await Api.get<User>(`/users/self`, 'common');
         console.warn('sentinel3');
         // NOTE(okubo): Objestのkeyは自動変換しているが、valueはできていないので個別対応
         setUser(userResponse.data);
@@ -41,12 +41,6 @@ export const OrderChat: React.FC = () => {
     return (
       <>
         読み込み中....
-        { id }
-        ---
-        { JSON.stringify(user) }
-        ---
-        { JSON.stringify(order) }
-        ---
       </>
     );
   }
