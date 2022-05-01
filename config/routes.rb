@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 def draw(routes_name)
   instance_eval(File.read(Rails.root.join("config/routes/#{routes_name}_routes.rb")))
 end
@@ -21,6 +23,7 @@ Rails.application.routes.draw do
   draw :partner_routes
   draw :api_routes
   draw :api_customer_routes
+  draw :api_partner_routes
 
   get 'sitemap', to: redirect("https://#{ENV['AWS_BUCKET']}.s3-ap-northeast-1.amazonaws.com/sitemaps/sitemap.xml.gz")
 
