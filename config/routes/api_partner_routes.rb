@@ -6,4 +6,6 @@ namespace :api_partner do
       get :config_data
     end
   end
+
+  resources :profiles, only: %i[index]
 end
