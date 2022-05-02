@@ -4,7 +4,7 @@ require 'rails_helper'
 
 RSpec.describe 'Companies', type: :request do
   let(:admin) { create :user, :with_admin }
-  let!(:customer) { create :user, :with_custoemr }
+  let!(:customer) { create :user, :with_customer }
   let!(:company) { customer.company }
 
   before do
