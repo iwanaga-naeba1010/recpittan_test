@@ -47,11 +47,4 @@ RSpec.describe 'Companies', type: :request do
 
     it_behaves_like 'an endpoint redirects match'
   end
-
-  # NOTE(okubo): deleteないのでコメントアウト
-  # describe 'DELETE /admin/companies/:id' do
-  #   let(:id) { company.id }
-  #   let(:expected_redirect_to) { admin_companies_path }
-  #   it_behaves_like 'an endpoint returns 3xx status'
-  # end
 end

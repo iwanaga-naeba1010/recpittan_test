@@ -1,7 +1,8 @@
 # frozen_string_literal: true
 
 ActiveAdmin.register Profile do
-  permit_params(%i[user_id name title position description image])
+  permit_params { Profile.attribute_names.map(&:to_sym) }
+  # permit_params(%i[user_id name title position description image])
   actions :all
 
   index do
@@ -47,4 +48,10 @@ ActiveAdmin.register Profile do
 
     f.actions
   end
+  controller do
+    def create
+      super
+    end
+  end
+
 end
