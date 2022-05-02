@@ -49,7 +49,18 @@ FactoryBot.define do
     end
   end
 
+  # TODO(okubo): 後々削除
   trait :with_recreations do
+    after(:create) do |user|
+      user.update(role: :partner)
+      rec = create(:recreation, user: user, status: 'published')
+      profile = create(:profile, user: user)
+      create(:recreation_profile, recreation: rec, profile: profile)
+    end
+  end
+
+
+  trait :with_partner do
     after(:create) do |user|
       user.update(role: :partner)
       rec = create(:recreation, user: user, status: 'published')
