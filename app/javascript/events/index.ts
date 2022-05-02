@@ -6,3 +6,4 @@ export * from './order_form';
 export * from './partner_report_form';
 export * from './recreations';
 export * from './toggle_event_for_sidebar';
+export * from './preview_profile_image';

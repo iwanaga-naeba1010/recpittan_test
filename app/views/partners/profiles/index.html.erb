@@ -18,7 +18,7 @@
           <h5 class="text-dark">
             <%= profile.name %>
           </h5>
-          <%= "肩書き/資格/実績情報 #{profile.position}" %>
+          <%= "#{t('activerecord.attributes.profile.title')} #{profile.title}" %>
           <br>
           <%= profile.description.truncate(20) %>
         </div>
