@@ -7,6 +7,7 @@ ja:
       profile: プロフィール
       recreation: レク
       recreation_image: レク関連ファイル
+      recreation_prefecture: 開催可能都道府県
       order: 案件
       zoom: Zoom情報
       orders/force_complete: 終了報告未 → 完了
@@ -72,6 +73,7 @@ ja:
         title: タイトル
         second_title: サブタイトル
         category: カテゴリー
+        status: ステータス
         minutes: 所要時間
         description: このようなことをやります
         flow_of_day: 当日の流れとタイムスケジュール
@@ -94,6 +96,8 @@ ja:
       recreation_image:
         image: ファイル
         kind: 種別
+      recreation_prefecture:
+        name: 都道府県
       recreation_profile:
         profile_id: プロフィール
       order:

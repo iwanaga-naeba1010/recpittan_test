@@ -29,15 +29,13 @@ class Customers::ReportsController < Customers::ApplicationController
     end
   end
 
-  private
-
-  def set_report
+  private def set_report
     @report = current_user.orders.map do |order|
       order.report if order&.report&.id == params[:id].to_i
     end.compact&.first
   end
 
-  def params_create
+  private def params_create
     params.require(:report).permit(
       :status,
       evaluation_attributes: %i[

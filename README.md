@@ -22,10 +22,6 @@ docker attach matching_system_web_1
 # rspecの実行
 docker-compose run --rm web bundle exec rspec
 
-# もしtestDBがない場合は
-docker-compose run --rm web bin/rails db:create RAILS_ENV=test
-docker-compose run --rm web bin/rails db:migrate RAILS_ENV=test
-
 # rubocopの実行
 docker-compose run --rm web bundle exec rubocop
 
@@ -40,10 +36,6 @@ docker-compose run web yarn lint
 
 # ts/jsのlint fix実行
 docker-compose run web yarn lint:fix
-
-
-# Error response from daemon: Address already in useが出る場合
-docker rm -f $(docker ps -aq)
 ```
 
 ### gitのブランチの命名規則
@@ -55,18 +47,3 @@ issue-{githubのissue番号}で作業ごとにブランチを作成してもら�
 機能や新規リリースのためのブランチの場合もあるので、issueに記載がない場合は遠慮せずに効いてください。
 githubのissue番号を
 ```
-
-### 開発時間について
-開発にかける時間はストーリーポイントとして管理しており、
-Githubのissueの先頭にPMがポイントを記載しておきます。
-
-ポイントには開発時間とコードレビューの時間も含まれますので、
-8割程度の時間で開発を終える、ぐらいの計算でお願いします。
-
-PT  | 工数
---- | ---
-1pt | 半日
-3pt | 1日
-5pt | 2~3日
-8pt | 4~5日
-13pt | 7~9日

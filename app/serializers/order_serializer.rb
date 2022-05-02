@@ -16,6 +16,7 @@
 #  is_accepted             :boolean          default(FALSE)
 #  material_amount         :integer          default(0)
 #  material_price          :integer          default(0)
+#  memo                    :string
 #  number_of_facilities    :integer
 #  number_of_people        :integer
 #  prefecture              :string

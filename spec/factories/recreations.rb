@@ -27,9 +27,9 @@
 #  material_amount         :integer
 #  material_price          :integer
 #  minutes                 :integer
-#  prefectures             :string           default([]), is an Array
 #  price                   :integer
 #  second_title            :string
+#  status                  :integer          default("unapplied"), not null
 #  title                   :string
 #  created_at              :datetime         not null
 #  updated_at              :datetime         not null
@@ -45,17 +45,20 @@ FactoryBot.define do
     user
     title { 'MyString' }
     second_title { 'MyString' }
+    price { 20000 }
+    amount { 10000 }
+    material_price { 1000 }
+    material_amount { 500 }
+    minutes { 60 }
+    description { 'MyText' }
+    flow_of_day { 'MyString' }
     borrow_item { 'MyString' }
     bring_your_own_item { 'MyString' }
     extra_information { 'MyString' }
-    flow_of_day { 'MyString' }
-    minutes { 60 }
-    price { 20000 }
-    material_price { 1000 }
-    amount { 10000 }
-    material_amount { 500 }
-    description { 'MyText' }
     youtube_id { '' }
-    is_public { true }
+    capacity { 5 }
+    status { 'unapplied' }
+    category { 'event' }
+    is_online { false }
   end
 end

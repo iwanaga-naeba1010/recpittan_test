@@ -45,14 +45,14 @@ FactoryBot.define do
   trait :with_custoemr do
     after(:create) do |user|
       company = create(:company)
-      user.update(role: :customer, company_id: company.id)
+      user.update(role: :customer, company: company)
     end
   end
 
   trait :with_recreations do
     after(:create) do |user|
       user.update(role: :partner)
-      rec = create(:recreation, user_id: user.id)
+      rec = create(:recreation, user: user, status: 'published')
       profile = create(:profile, user: user)
       create(:recreation_profile, recreation: rec, profile: profile)
     end

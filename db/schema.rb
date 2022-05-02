@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_04_26_145659) do
+ActiveRecord::Schema.define(version: 2022_04_30_131358) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -155,6 +155,14 @@ ActiveRecord::Schema.define(version: 2022_04_26_145659) do
     t.integer "kind", default: 0
   end
 
+  create_table "recreation_prefectures", force: :cascade do |t|
+    t.bigint "recreation_id", null: false
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["recreation_id"], name: "index_recreation_prefectures_on_recreation_id"
+  end
+
   create_table "recreation_profiles", force: :cascade do |t|
     t.bigint "recreation_id", null: false
     t.bigint "profile_id", null: false
@@ -182,7 +190,6 @@ ActiveRecord::Schema.define(version: 2022_04_26_145659) do
     t.datetime "updated_at", null: false
     t.string "youtube_id"
     t.string "flyer_color"
-    t.string "prefectures", default: [], array: true
     t.integer "price"
     t.integer "material_price"
     t.integer "material_amount"
@@ -200,6 +207,7 @@ ActiveRecord::Schema.define(version: 2022_04_26_145659) do
     t.boolean "is_public_price", default: true
     t.integer "additional_facility_fee", default: 2000
     t.integer "category", default: 0, null: false
+    t.integer "status", default: 0, null: false
   end
 
   create_table "reports", force: :cascade do |t|
@@ -268,6 +276,7 @@ ActiveRecord::Schema.define(version: 2022_04_26_145659) do
   add_foreign_key "orders", "users", name: "orders_user_id_fkey"
   add_foreign_key "profiles", "users", name: "profiles_user_id_fkey"
   add_foreign_key "recreation_images", "recreations", name: "recreation_images_recreation_id_fkey"
+  add_foreign_key "recreation_prefectures", "recreations"
   add_foreign_key "recreation_profiles", "profiles", name: "recreation_profiles_profile_id_fkey"
   add_foreign_key "recreation_profiles", "recreations", name: "recreation_profiles_recreation_id_fkey"
   add_foreign_key "recreation_tags", "recreations", name: "recreation_tags_recreation_id_fkey"
