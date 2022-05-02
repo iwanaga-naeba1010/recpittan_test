@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 RSpec.describe Api::UsersController, type: :request do
-  let(:customer) { create :user, :with_custoemr }
+  let(:customer) { create :user, :with_customer }
   let(:partner) { create :user, :with_recreations }
 
   before do

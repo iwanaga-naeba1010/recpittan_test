@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 RSpec.describe 'Orders', type: :system do
-  let(:user) { create :user, :with_custoemr }
+  let(:user) { create :user, :with_customer }
   let(:partner) { create :user, :with_recreations }
   let(:recreation) { partner.recreations.first }
   let(:order) { create :order, :with_order_dates, recreation_id: recreation.id, user_id: user.id }
