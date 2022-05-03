@@ -30,22 +30,6 @@ RSpec.describe Partners::RecreationsController, type: :request do
     end
   end
 
-  describe 'GET /show' do
-    context 'with valid right' do
-      it 'returns http success' do
-        get partners_recreation_path(recreation.id)
-        expect(response).to have_http_status(:ok)
-      end
-    end
-
-    # context 'with invalid right' do
-    #   it 'redirects to root path' do
-    #     get partners_recreation_path(recreation.id)
-    #     expect(response).to have_http_status(:found)
-    #   end
-    # end
-  end
-
   describe 'GET /new' do
     context 'with valid right' do
       it 'returns http success' do
