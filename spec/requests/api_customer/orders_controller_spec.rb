@@ -3,48 +3,34 @@
 require 'rails_helper'
 
 RSpec.describe ApiCustomer::OrdersController, type: :request do
-  let(:partner) { create :user, :with_recreations }
-  let(:customer) { create :user, :with_custoemr }
-  let(:recreation) { partner.recreations.first }
-  let(:order) { create :order, recreation_id: recreation.id, user_id: customer.id }
+  include_context 'with authenticated customer'
+  let!(:partner) { create(:user, :with_partner) }
 
-  before do
-    sign_in customer
+  describe 'GET /api_customer/orders/:id' do
+    let!(:order) { create(:order, user: current_user, recreation: partner.recreations.first) }
+    let(:id) { order.id }
+    let(:expected) { OrderSerializer.new.serialize(order: order) }
+
+    it_behaves_like 'an endpoint returns', :expected
   end
 
-  describe 'GET /' do
-    context 'with valid parameters' do
-      it 'return http success' do
-        get api_customer_order_path(order)
-        # json = JSON.parse(response.body)
-        expect(response.status).to eq(200)
-        # expect(json['data']['title']).to eq(post.title)
-      end
-    end
-  end
+  describe 'PATCH /api_customer/orders/:id' do
+    let!(:order) { create(:order, user: current_user, recreation: partner.recreations.first) }
+    let(:id) { order.id }
+    let(:expected) { OrderSerializer.new.serialize(order: order) }
 
-  describe 'PUT /update' do
-    context 'with valid parameters' do
-      it 'return http success when user not logged in' do
-        put api_customer_order_path(order), params: { order: { transportation_expenses: 1000 } }
-        expect(response.status).to eq 200
-      end
+    let!(:params) { { order: attributes_for(:order, user: current_user) } }
+    let(:expected) { OrderSerializer.new.serialize(order: order) }
 
-      it 'update transportation_expenses' do
-        expect {
-          put api_customer_order_path(order), params: { order: { transportation_expenses: 1000 } }
-        }.to change { Order.find(order.id).transportation_expenses }.from(order.transportation_expenses).to(1000)
-      end
+    it_behaves_like 'an endpoint returns', :expected
 
-      it 'update expenses' do
-        expect {
-          put api_customer_order_path(order), params: { order: { expenses: 1000 } }
-        }.to change { Order.find(order.id).expenses }.from(order.expenses).to(1000)
-      end
+    context 'with valid params' do
+      it_behaves_like 'an endpoint returns 2xx status'
     end
 
-    # TODO: 失敗パターンも実装
-    context 'with invalid parameters' do
+    context 'with invalid params' do
+      let!(:params) { { recreation: { user_id: 0 } } }
+      it_behaves_like 'an endpoint returns 4xx status', :expected
     end
   end
 end

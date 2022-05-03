@@ -5,7 +5,7 @@ require 'rails_helper'
 
 RSpec.describe PartnerPasswordChangeMailer, type: :mailer do
   let!(:template) { create :email_template, kind: 'partner_password_change' }
-  let(:customer) { create :user, :with_custoemr }
+  let(:customer) { create :user, :with_customer }
 
   before :all do
     Rails.application.load_tasks

@@ -244,6 +244,9 @@ Style/SlicingWithRange:
 Style/AccessModifierDeclarations:
   Enabled: false
 
+Style/PercentLiteralDelimiters:
+  Enabled: false
+
 Lint/AmbiguousBlockAssociation:
   Exclude:
     - "spec/**/*"

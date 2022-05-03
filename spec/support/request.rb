@@ -16,6 +16,7 @@ SUPPORTED_METHODS = %w[
 
 RSpec.shared_context 'with authenticated customer' do
   let!(:current_user) { create(:user, role: :customer) }
+  let!(:company) { create(:company, user: current_user) }
 
   before do
     sign_in current_user

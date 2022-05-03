@@ -25,6 +25,14 @@ FactoryBot.define do
     title { 'MyString' }
     description { 'MyText' }
     position { 'MyString' }
-    image { Rack::Test::UploadedFile.new(Rails.root.join('spec/files/test.png')) }
+    image { Rack::Test::UploadedFile.new('spec/files/test.png', 'image/png') }
+
+    # image do
+    #   ActionDispatch::Http::UploadedFile.new(
+    #     filename: 'test.png',
+    #     type: 'image/png',
+    #     tempfile: File.open(Rails.root.join('spec/files/test.png'))
+    #   )
+    # end
   end
 end

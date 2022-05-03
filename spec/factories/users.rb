@@ -42,14 +42,24 @@ FactoryBot.define do
     confirmed_at { Time.now.utc }
   end
 
-  trait :with_custoemr do
+  trait :with_customer do
     after(:create) do |user|
       company = create(:company)
       user.update(role: :customer, company: company)
     end
   end
 
+  # TODO(okubo): 後々削除
   trait :with_recreations do
+    after(:create) do |user|
+      user.update(role: :partner)
+      rec = create(:recreation, user: user, status: 'published')
+      profile = create(:profile, user: user)
+      create(:recreation_profile, recreation: rec, profile: profile)
+    end
+  end
+
+  trait :with_partner do
     after(:create) do |user|
       user.update(role: :partner)
       rec = create(:recreation, user: user, status: 'published')

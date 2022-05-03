@@ -41,7 +41,7 @@ require 'rails_helper'
 
 RSpec.describe Order, type: :model do
   let(:partner) { create :user, :with_recreations }
-  let(:customer) { create :user, :with_custoemr }
+  let(:customer) { create :user, :with_customer }
   let(:order) { create :order, recreation_id: partner.recreations.first.id, user_id: customer.id }
   describe 'before_save::switch_status_befire_save' do
     context 'with valid parameters' do

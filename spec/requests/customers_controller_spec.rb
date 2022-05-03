@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 RSpec.describe CustomersController, type: :request do
-  let(:user) { create :user, :with_custoemr }
+  let(:user) { create :user, :with_customer }
   let(:partner) { create :user, :with_recreations }
 
   before do

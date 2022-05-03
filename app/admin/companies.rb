@@ -128,13 +128,13 @@ ActiveAdmin.register Company do
       # TODO: 招待メールを送信
       # UserMailer.with(user: @user, password: password).invite.deliver_now
 
-      if company.save
-        redirect_to admin_company_path(company.id)
-      else
-        # HACK: superを毎回呼ぶとcompany.createがダブルっぽいので、失敗した時のrenderのためにsuper入れる。
-        # ちなみにrender :newは機能しない
-        super
-      end
+      company.save!
+      redirect_to admin_company_path(company.id)
+
+      # NOTE(okubo): hashを検索するときにエラー出るので、cache入れてる
+    rescue StandardError => e
+      logger.error e.message
+      super
     end
   end
 end

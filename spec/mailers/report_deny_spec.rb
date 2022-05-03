@@ -6,7 +6,7 @@ require 'rails_helper'
 RSpec.describe ReportDenyMailer, type: :mailer do
   let!(:template) { create :email_template, kind: 'report_deny' }
   let(:partner) { create :user, :with_recreations }
-  let(:customer) { create :user, :with_custoemr }
+  let(:customer) { create :user, :with_customer }
   # NOTE(okubo): メール送信前に用意することでnilエラーを回避
   let!(:order) { create :order, recreation_id: partner.recreations.first.id, user_id: customer.id }
   let!(:report) { create :report, order_id: order.id }
