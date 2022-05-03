@@ -1,0 +1,53 @@
+<%= simple_form_for profile, url: url do |f| %>
+  <div>
+    <div class="pt-3 w-100 d-flex">
+      <p class="font-weight-bold text-black me-2"><%= t('activerecord.attributes.profile.name') %></p>
+      <p class="text-danger">必須</p>
+    </div>
+    <p class="text-secondary small mt-0">例:hogehoge</p>
+    <%= f.input :name, label: false %>
+  </div>
+  <div>
+    <div class="pt-3 w-100">
+      <p class="font-weight-bold text-black me-2"><%= t('activerecord.attributes.profile.title') %></p>
+    </div>
+    <p class="text-secondary small mt-0">例:hogehoge</p>
+    <%= f.input :title, label: false %>
+  </div>
+  <div>
+    <div class="pt-3 w-100 d-flex">
+      <p class="font-weight-bold text-black me-2"><%= t('activerecord.attributes.profile.description') %></p>
+      <p class="text-danger">必須</p>
+    </div>
+    <p class="text-secondary small mt-0">例:hogehoge</p>
+    <%= f.input :description, label: false %>
+  </div>
+  <div>
+    <div class="pt-3 w-100 d-flex">
+      <p class="font-weight-bold text-black me-2"><%= t('activerecord.attributes.profile.image') %></p>
+      <p class="text-danger">必須</p>
+    </div>
+    <p class="text-secondary small mt-0">例:hogehoge</p>
+    <div class="form-group">
+      <div class="image_form">
+        <div class="image_form_contents">
+          <%= f.label :image, class: 'image_label' do %>
+            <div class="prev-contents">
+              <% if profile.image? %>
+                <div class="prev-content">
+                  <%= image_tag profile.image.url, alt: 'preview', class: 'prev-image' %>
+                </div>
+              <% else %>
+                <%= f.label :image, '+', class: 'select-photo text-primary border p-5' %>
+              <% end %>
+            </div>
+            <%= f.file_field :image, class: 'image_form_contents_field hidden_file d-none' %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="my-2">
+    <%= f.submit profile.id? ? '保存する' : '登録する', class: 'btn btn-primary btn-lg btn-block w-100 p-3 mb-2' %>
+  </div>
+<% end %>
