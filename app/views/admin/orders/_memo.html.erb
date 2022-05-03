@@ -7,7 +7,7 @@
   <% end %>
 
   <div class="form">
-    <%= simple_form_for OrderMemo.new, url: admin_order_memos_path do |f| %>
+    <%= simple_form_for OrderMemo.new, url: admin_order_order_memos_path(order) do |f| %>
       <%= f.input :order_id, as: :hidden, input_html: { value: order.id } %>
       <%= f.input :body, label: false %>
       <%= f.submit '送信' %>

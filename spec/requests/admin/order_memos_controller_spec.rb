@@ -3,34 +3,17 @@
 require 'rails_helper'
 
 RSpec.describe 'OrderMemos', type: :request do
-  let(:admin) { create :user, :with_admin }
-  let(:partner) { create :user, :with_recreations }
-  let(:customer) { create :user, :with_custoemr }
-  let(:order) { create :order, recreation_id: partner.recreations.first.id, user_id: customer.id }
+  include_context 'with authenticated admin'
 
-  before do
-    sign_in admin
-  end
+  describe 'POST /admin/orders/:order_id/order_memos' do
+    let!(:partner) { create(:user, :with_partner) }
+    let!(:customer) { create(:user, :with_customer) }
+    let!(:order) { create(:order, user: customer, recreation: partner.recreations.first) }
+    let(:params) { { chat: attributes_for(:chat, user: current_user, order: order) } }
+    let(:order_id) { order.id }
+    let(:expected_redirect_to) { %r{/admin/orders/[0-9]+} }
+    let(:params) { { order_memo: attributes_for(:order_memo, order: order) } }
 
-  describe 'POST #create' do
-    let(:attrs) { attributes_for(:order_memo, order_id: order.id) }
-
-    context 'with valid parameters' do
-      it 'return http success when user not logged in' do
-        post admin_order_memos_path, params: { order_memo: attrs }
-        expect(response).to have_http_status(:found)
-        expect(response).to redirect_to(admin_order_path(order.id))
-      end
-
-      it 'can create order memo and increase one record' do
-        expect {
-          post admin_order_memos_path, params: { order_memo: attrs }
-        }.to change(OrderMemo, :count).by(+1)
-      end
-    end
-
-    # TODO: 失敗パターンも実装
-    context 'with invalid parameters' do
-    end
+    it_behaves_like 'an endpoint redirects match'
   end
 end

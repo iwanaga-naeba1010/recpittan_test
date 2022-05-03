@@ -6,7 +6,7 @@ require 'rails_helper'
 RSpec.describe PartnerChatStartMailer, type: :mailer do
   let!(:template) { create :email_template, kind: 'partner_chat_start' }
   let(:partner) { create :user, :with_recreations }
-  let(:customer) { create :user, :with_custoemr }
+  let(:customer) { create :user, :with_customer }
   let(:order) { create :order, recreation_id: partner.recreations.first.id, user_id: customer.id }
 
   before :all do

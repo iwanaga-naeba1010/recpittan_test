@@ -5,7 +5,7 @@ require 'rake'
 
 RSpec.describe Partners::RecreationsController, type: :request do
   let(:partner) { create :user, :with_recreations }
-  let(:customer) { create :user, :with_custoemr }
+  let(:customer) { create :user, :with_customer }
   let!(:recreation) { partner.recreations.first }
 
   before do

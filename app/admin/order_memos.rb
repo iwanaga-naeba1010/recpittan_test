@@ -3,6 +3,7 @@
 ActiveAdmin.register OrderMemo do
   menu false # NOTE: サイドバーに表示しない設定
   actions :create
+  belongs_to :order
   permit_params(
     %i[order_id body]
   )
