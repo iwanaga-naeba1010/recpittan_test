@@ -79,14 +79,12 @@ export const ModalForm: React.FC<Props> = (props) => {
         setErrors([]);
         const response = await Api.get<PreferredDate>('/orders/preferred_date', 'customer');
         setPreferredDate(response.data);
-        console.log(response.data);
 
         const { data } = await findAllPrefectures();
         setPrefectures(data.result);
       } catch (e) {
         if (axios.isAxiosError(e)) {
           setErrors((e as AxiosError<Array<string>>).response.data);
-          console.log(e.response.data);
         }
       }
     })();
@@ -96,7 +94,6 @@ export const ModalForm: React.FC<Props> = (props) => {
     const { data } = await findAddressByZip(getValues('zip'));
     const { address1, address2, address3 } = data.results[0];
 
-    console.log('hogehgoe', data);
     const pref = filterCurrentPrefecture(address1);
     await handleCityChange(pref.prefCode);
 
@@ -106,11 +103,15 @@ export const ModalForm: React.FC<Props> = (props) => {
   };
 
   const handleCityChange = async (prefCode: number): Promise<void> => {
-    const response = await findCityByPrefectureCode(prefCode);
-    setCities(response.data.result);
+    try {
+      const response = await findCityByPrefectureCode(prefCode);
+      setCities(response.data.result);
+    } catch (e) {
+      if (axios.isAxiosError(e)) {
+        console.warn('error is', e);
+      }
+    }
   };
-
-  console.log('isValid', isValid);
 
   const onSubmit = async (values: ModalForlValues): Promise<void> => {
     setErrors([]);
