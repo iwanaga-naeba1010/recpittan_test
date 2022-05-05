@@ -24,6 +24,7 @@
 #  is_online               :boolean          default(FALSE)
 #  is_public               :boolean
 #  is_public_price         :boolean          default(TRUE)
+#  kind                    :integer          default(0), not null
 #  material_amount         :integer
 #  material_price          :integer
 #  minutes                 :integer

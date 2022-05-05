@@ -24,6 +24,7 @@
 #  is_online               :boolean          default(FALSE)
 #  is_public               :boolean
 #  is_public_price         :boolean          default(TRUE)
+#  kind                    :integer          default(0), not null
 #  material_amount         :integer
 #  material_price          :integer
 #  minutes                 :integer
@@ -44,6 +45,7 @@ class Recreation < ApplicationRecord
   extend Enumerize
   mount_uploader :instructor_image, ImageUploader
 
+  enumerize :kind, in: { visit: 0, online: 1, mailing: 2 }, default: 0
   enumerize :status, in: { unapplied: 0, in_progress: 1, published: 2 }, default: 0
   enumerize :category, in: { event: 0, work: 1, music: 2, health: 3, travel: 4, hobby: 5, food: 6, other: 7 }, default: 0
 
