@@ -138,7 +138,7 @@ class Customers::OrdersController < Customers::ApplicationController
       :title, :zip, :prefecture, :city, :street, :building, :status,
       :number_of_people, :number_of_facilities,
       :user_id, :message,
-      :is_online, :is_accepted,
+      :kind, :is_accepted,
       :price,
       :amount,
       :material_price,

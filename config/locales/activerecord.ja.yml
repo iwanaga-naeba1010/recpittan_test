@@ -69,6 +69,7 @@ ja:
         description: プロフィール説明
         image: パートナー画像
       recreation:
+        kind: 種類
         partner: パートナー
         title: タイトル
         second_title: サブタイトル
@@ -88,7 +89,6 @@ ja:
         amount: パートナー謝礼
         material_amount: パートナー材料費
         material_price: 施設請求材料費
-        is_online: オンライン
         is_public: 公開
         prefectures: 都道府県
         is_public_price: 料金を公開

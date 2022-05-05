@@ -60,6 +60,6 @@ FactoryBot.define do
     capacity { 5 }
     status { 'unapplied' }
     category { 'event' }
-    is_online { false }
+    kind { 'online' }
   end
 end

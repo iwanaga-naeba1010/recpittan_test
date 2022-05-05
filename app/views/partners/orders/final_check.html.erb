@@ -7,7 +7,7 @@
   </div>
 </div>
 <div class="body bg-white p-3 mb-3">
-  <% if @order.is_online %>
+  <% if @order.recreation.kind.online? %>
     <div class="mt-5 mb-5 text-black">
       <div>
         <p>開催情報とオンライン開催確認項目の確認とチェックをお願いします。

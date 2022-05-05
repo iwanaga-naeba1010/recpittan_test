@@ -48,7 +48,7 @@ module ApiPartner
         %i[
           title second_title price amount material_price material_amount
           minutes description flow_of_day borrow_item bring_your_own_item extra_information
-          youtube_id capacity category status is_online
+          youtube_id capacity category status kind
         ],
         recreation_profile_attributes: %i[profile_id] # NOTE(okubo): profileの中間テーブル作成
       )

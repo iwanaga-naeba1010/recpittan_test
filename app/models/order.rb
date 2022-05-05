@@ -57,10 +57,9 @@ class Order < ApplicationRecord
   has_one :zoom, dependent: :destroy
   accepts_nested_attributes_for :zoom, allow_destroy: true
 
-  delegate :title, :price, :minutes, :instructor_name, :is_online, :capacity, to: :recreation, prefix: true, allow_nil: true
+  delegate :title, :price, :minutes, :instructor_name, :capacity, to: :recreation, prefix: true, allow_nil: true
   delegate :status, to: :report, prefix: true, allow_nil: true
   delegate :url, to: :zoom, prefix: true, allow_nil: true
-  delegate :title, :is_online, to: :recreation, allow_nil: true
 
   enumerize :status, in: {
     in_progress: 10, waiting_for_a_reply_from_partner: 20, waiting_for_a_reply_from_facility: 30,
