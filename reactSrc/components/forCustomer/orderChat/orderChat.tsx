@@ -21,13 +21,10 @@ export const OrderChat: React.FC = () => {
     (async () => {
       if (id === undefined) return;
       try {
-        console.warn('sentinel1');
         const orderResponse = await Api.get<Order>(`/orders/${id}`, 'customer');
-        console.warn('sentinel2');
         // NOTE(okubo): Objestのkeyは自動変換しているが、valueはできていないので個別対応
         setOrder({ ...orderResponse.data, status: toCamelcase(orderResponse.data.status) as OrderStatusEnum });
         const userResponse = await Api.get<User>(`/users/self`, 'common');
-        console.warn('sentinel3');
         // NOTE(okubo): Objestのkeyは自動変換しているが、valueはできていないので個別対応
         setUser(userResponse.data);
         setIsLoading(false);

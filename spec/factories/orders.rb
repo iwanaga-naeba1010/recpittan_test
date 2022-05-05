@@ -42,16 +42,16 @@ FactoryBot.define do
     user
     recreation
     price { 20000 }
-    material_price { 100 }
     amount { 10000 }
-    material_amount { 50 }
+    material_price { 1000 }
+    material_amount { 500 }
     number_of_people { 1 }
     message { 'MyText' }
     status { 10 }
     transportation_expenses { 0 }
     expenses { 0 }
     is_accepted { false }
-    additional_facility_fee { 100 }
+    additional_facility_fee { 1500 }
     number_of_facilities { 1 }
   end
 
