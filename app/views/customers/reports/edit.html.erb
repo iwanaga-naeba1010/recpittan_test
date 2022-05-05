@@ -116,7 +116,7 @@
               </div>
 
 
-              <% if @report.order.recreation.is_online %>
+              <% if @report.order.recreation.kind.online? %>
                 <div class="row justify-content-between border-bottom-dotted py-2 ">
                   <div class="col-lg-3 col-4 label py-2">追加施設費用(合計)</div>
                   <div class="col-lg-9 col-8 py-2 text-end ">

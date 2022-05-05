@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_04_30_131358) do
+ActiveRecord::Schema.define(version: 2022_05_05_053958) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -208,6 +208,7 @@ ActiveRecord::Schema.define(version: 2022_04_30_131358) do
     t.integer "additional_facility_fee", default: 2000
     t.integer "category", default: 0, null: false
     t.integer "status", default: 0, null: false
+    t.integer "kind", default: 0, null: false
   end
 
   create_table "reports", force: :cascade do |t|

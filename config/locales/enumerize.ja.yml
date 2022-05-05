@@ -5,6 +5,10 @@ ja:
       "no": いいえ
       "yes": はい
     recreation:
+      kind:
+        visit: 訪問
+        online: オンライン
+        mailing: 郵送
       category:
         event: イベント
         work: 創作

@@ -21,7 +21,7 @@ module Resources
         integer :capacity
         string :category
         string :status
-        boolean :is_online
+        string :kind
       end
 
       object :current_user, class: User
