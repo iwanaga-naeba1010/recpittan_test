@@ -27,12 +27,20 @@ RSpec.describe 'Orders', type: :system do
     # TODO(okubo): reactのloadが完了していないことが問題ぽい。どこが問題かを調べる必要あり
     feature 'Recreation informatino' do
       scenario 'succeeds', js: true do
+        # NOTE(okubo): 数字が同じだとエラー出るのでダブらない数字
+        order.update(expenses: 555, transportation_expenses: 666)
+        click_button('レクを正式依頼へ進む')
+        sleep 3
         # NOTE(okubo): 開催費
-        expect(page).to have_content "¥#{order.price.to_s(:delimited)}"
+        expect(page).to have_content("¥#{order.price.to_s(:delimited)}", count: 2)
+        # NOTE(okubo): 交通費
+        expect(page).to have_content("¥#{order.expenses.to_s(:delimited)}", count: 2)
+        # NOTE(okubo): 諸経費
+        expect(page).to have_content("¥#{order.transportation_expenses.to_s(:delimited)}", count: 2)
         # NOTE(okubo): 材料費
-        expect(page).to have_content "¥#{order.material_price.to_s(:delimited)}"
+        expect(page).to have_content("¥#{order.material_price.to_s(:delimited)}", count: 2)
         # NOTE(okubo): 合計金額が表示されるか
-        expect(page).to have_content "¥#{order.total_price_for_customer.to_s(:delimited)}"
+        expect(page).to have_content("¥#{order.total_price_for_customer.to_s(:delimited)}", count: 2)
       end
     end
 
@@ -76,7 +84,7 @@ RSpec.describe 'Orders', type: :system do
         sleep 3
 
         order.reload
-        expect(find_by_id('numberOfFacilities')).to have_content "¥#{order.additional_facility_fee * 5}"
+        expect(find_by_id('numberOfFacilities')).to have_content "¥#{(order.additional_facility_fee * 5).to_s(:delimited)}"
         expect(page).to have_content "¥#{order.total_price_for_customer.to_s(:delimited)}"
       end
     end
@@ -107,5 +115,38 @@ RSpec.describe 'Orders', type: :system do
       end
     end
     # TODO(okubo): 正式依頼のテスト追加
+    # feature 'Order form' do
+    #   scenario 'succeeds', js: true do
+    #     # NOTE(okubo): 金額を追加
+    #     find('#expensesEditButton').click
+    #     input_text_boxes('#expensesInput', 10000)
+    #     find('#expensesSubmitButton').click
+    #
+    #     find('#transportationExpensesEditButton').click
+    #     input_text_boxes('#transportationExpensesInput', 10000)
+    #     find('#transportationExpensesSubmitButton').click
+    #
+    #     find('#numberOfFacilitiesEditButton').click
+    #     input_text_boxes('#numberOfFacilitiesInput', 5)
+    #     find('#numberOfFacilitiesSubmitButton').click
+    #
+    #     click_button('レクを正式依頼へ進む')
+    #     sleep 3
+    #
+    #     # NOTE(okubo): 開催費
+    #     # expect(page).to have_content("¥#{order.price.to_s(:delimited)}", count: 2)
+    #     # NOTE(okubo): 材料費
+    #     # expect(page).to have_content("¥#{order.material_price.to_s(:delimited)}", count: 2)
+    #     # NOTE(okubo): 合計金額が表示されるか
+    #     # expect(page).to have_content("¥#{order.total_price_for_customer.to_s(:delimited)}", count: 2)
+    #
+    #
+    #     # find('#chatSubmit').click
+    #     # sleep 3
+    #     #
+    #     # order.reload
+    #     # expect(page).to have_content text
+    #   end
+    # end
   end
 end

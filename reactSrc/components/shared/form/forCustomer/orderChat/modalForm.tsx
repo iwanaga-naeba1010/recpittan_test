@@ -404,6 +404,7 @@ export const ModalForm: React.FC<Props> = (props) => {
                     <div className='row justify-content-between border-top py-3'>
                       <div className='col-auto'>合計(税別)</div>
                       <div id='totalPriceForOrderForm' className='col-auto'>
+                        &yen;
                         {order?.totalPriceForCustomer?.toLocaleString()}
                       </div>
                     </div>
