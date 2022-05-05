@@ -4,7 +4,7 @@ require 'rails_helper'
 
 RSpec.describe PartnersController, type: :request do
   let(:partner) { create :user, :with_recreations }
-  let(:custoemr) { create :user, :with_custoemr }
+  let(:custoemr) { create :user, :with_customer }
 
   before do
     sign_in partner

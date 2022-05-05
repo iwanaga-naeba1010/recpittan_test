@@ -3,36 +3,41 @@
 require 'rails_helper'
 
 RSpec.describe ApiCustomer::Orders::ChatsController, type: :request do
-  let(:customer) { create :user, :with_custoemr }
-  let(:partner) { create :user, :with_recreations }
-  let(:order) { create :order, user: customer, recreation: partner.recreations.first }
-  let(:chat) { create :chat, user: customer, order: order }
+  include_context 'with authenticated customer'
+  let!(:partner) { create(:user, :with_partner) }
+  let!(:order) { create(:order, user: current_user, recreation: partner.recreations.first) }
 
-  before do
-    sign_in customer
+  describe 'GET /api_customer/orders/:order_id/chats' do
+    let!(:chats) { create_list(:chat, 5, user: current_user, order: order) }
+    let(:order_id) { order.id }
+    let(:expected) { ChatSerializer.new.serialize_list(chats: chats) }
+
+    it_behaves_like 'an endpoint returns', :expected
   end
 
-  describe 'GET /' do
-    context 'with valid user' do
-      it 'return http success' do
-        get api_customer_order_chats_path(order)
-        expect(response.status).to eq(200)
-      end
+  describe 'POST /api_customer/orders/:order_id/chats' do
+    let!(:chat) { create(:chat, user: current_user, order: order) }
+    let(:order_id) { order.id }
+    let(:params) do
+      {
+        chat: attributes_for(
+          :chat,
+          user: current_user,
+          order: order
+        )
+      }
     end
-  end
+    let(:expected) { ChatSerializer.new.serialize(chat: Chat.last) }
 
-  describe 'POST /create' do
-    let(:attrs) { attributes_for(:chat, order_id: order.id, user: customer) }
+    it_behaves_like 'an endpoint returns 2xx status', :expected
 
-    context 'with valid parameters' do
-      it 'return http success when user not logged in' do
-        post api_customer_order_chats_path(order), params: { chat: attrs }
-        expect(response.status).to eq 200
-      end
+    context 'with valid params' do
+      it_behaves_like 'an endpoint returns', :expected
     end
 
-    # TODO: 失敗パターンも実装
-    context 'with invalid parameters' do
+    context 'with invalid params' do
+      let(:params) { { chat: { message: '' } } }
+      it_behaves_like 'an endpoint returns 4xx status'
     end
   end
 end

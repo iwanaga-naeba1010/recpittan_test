@@ -63,12 +63,13 @@ ja:
         image: 画像
       profile:
         user: パートナー
-        name: 名前
-        title: 肩書き
+        name: パートナー名
+        title: 肩書き/資格/実績情報
         position: ポジション
         description: プロフィール説明
-        image: 画像
+        image: パートナー画像
       recreation:
+        kind: 種類
         partner: パートナー
         title: タイトル
         second_title: サブタイトル
@@ -88,7 +89,6 @@ ja:
         amount: パートナー謝礼
         material_amount: パートナー材料費
         material_price: 施設請求材料費
-        is_online: オンライン
         is_public: 公開
         prefectures: 都道府県
         is_public_price: 料金を公開

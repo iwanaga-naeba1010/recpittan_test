@@ -24,6 +24,7 @@
 #  is_online               :boolean          default(FALSE)
 #  is_public               :boolean
 #  is_public_price         :boolean          default(TRUE)
+#  kind                    :integer          default(0), not null
 #  material_amount         :integer
 #  material_price          :integer
 #  minutes                 :integer
@@ -45,17 +46,20 @@ FactoryBot.define do
     user
     title { 'MyString' }
     second_title { 'MyString' }
+    price { 20000 }
+    amount { 10000 }
+    material_price { 1000 }
+    material_amount { 500 }
+    minutes { 60 }
+    description { 'MyText' }
+    flow_of_day { 'MyString' }
     borrow_item { 'MyString' }
     bring_your_own_item { 'MyString' }
     extra_information { 'MyString' }
-    flow_of_day { 'MyString' }
-    minutes { 60 }
-    price { 20000 }
-    material_price { 1000 }
-    amount { 10000 }
-    material_amount { 500 }
-    description { 'MyText' }
     youtube_id { '' }
-    status { :published }
+    capacity { 5 }
+    status { 'unapplied' }
+    category { 'event' }
+    kind { 'online' }
   end
 end

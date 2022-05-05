@@ -165,7 +165,7 @@
                 </div>
                 <div class="col-auto p-0 flex-v-c">人</div>
               </div>
-              <% if @recreation.is_online %>
+              <% if @recreation.kind.online? %>
                 <div class="row pt-3">
                   <label class="col-12 title-b pb-3" for="participant">追加で参加する施設がある場合施設数をご記入ください</label>
                   <div class="form-group col-3">
@@ -206,7 +206,7 @@
                   <%= f.input :message, label: false, as: :text, input_html: { class: "form-control", rows: "7" } %>
                 </div>
               </div>
-              <% if @recreation.is_online %>
+              <% if @recreation.kind.online? %>
                 <div class="row pt-3">
                   <label class="col-12 title-b pt-2">※このレクはオンライン環境が必要です</label>
                   <div class="col-12">

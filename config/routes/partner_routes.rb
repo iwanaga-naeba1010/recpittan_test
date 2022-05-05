@@ -5,6 +5,7 @@ namespace :partners do
   get :tos
 
   resources :recreations, except: :destroy
+  resources :profiles, except: :show
   resources :orders, only: %i[show update] do
     member do
       get :chat

@@ -5,7 +5,7 @@ require 'rails_helper'
 RSpec.describe 'Dashboard', type: :request do
   let(:admin) { create :user, :with_admin }
   let(:cs) { create :user, :with_cs }
-  let(:customer) { create :user, :with_custoemr }
+  let(:customer) { create :user, :with_customer }
   let(:partner) { create :user, :with_recreations }
 
   before do

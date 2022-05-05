@@ -28,7 +28,7 @@
     <% end %>
   <% end %>
 
-  <%= simple_form_for Chat.new, url: admin_chats_path do |f| %>
+  <%= simple_form_for Chat.new, url: admin_order_chats_path(order) do |f| %>
     <%= f.input :order_id, as: :hidden, input_html: { value: order.id } %>
     <%= f.input :message %>
     <%= f.submit '送信' %>

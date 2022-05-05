@@ -24,6 +24,7 @@
 #  is_online               :boolean          default(FALSE)
 #  is_public               :boolean
 #  is_public_price         :boolean          default(TRUE)
+#  kind                    :integer          default(0), not null
 #  material_amount         :integer
 #  material_price          :integer
 #  minutes                 :integer
@@ -54,7 +55,7 @@ class RecreationSerializer
       title: recreation.title,
       second_title: recreation.second_title,
       minutes: recreation.minutes,
-      is_online: recreation.is_online,
+      kind: recreation.kind_text,
       capacity: recreation.capacity,
       image_url: recreation.recreation_images.sliders&.first&.image.to_s,
       category: recreation.category_text,

@@ -18,9 +18,7 @@ class Customers::RecreationsController < Customers::ApplicationController
 
   def show; end
 
-  private
-
-  def set_recreation
+  private def set_recreation
     @recreation = Recreation.public_recs.find(params[:id])
   end
 end

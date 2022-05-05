@@ -23,7 +23,8 @@ class ApiCustomer::Orders::ChatsController < Api::ApplicationController
 
     SlackNotifier.new(channel: '#アクティブチャットスレッド').send('施設からチャットが届きました', message)
     PartnerChatMailer.notify(@order, current_user).deliver_now # TODO: jobで送信したい
-    render_json OrderSerializer.new.serialize(order: @order)
+    # TODO(okubo): chats.lastではなく綺麗に渡したい
+    render_json ChatSerializer.new.serialize(chat: @order.chats.last)
   rescue StandardError => e
     logger.error e.message
     render_json([e.message], status: 422)
