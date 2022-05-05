@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-namespace :restore_tags do
+namespace :migrate_is_online_to_kind do
   task run: :environment do
     ActiveRecord::Base.transaction do
       recreations = Recreation.all
