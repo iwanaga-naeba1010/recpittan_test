@@ -44,10 +44,10 @@ export const ChatForm: React.FC<Props> = (props): JSX.Element => {
       <form className='chat' onSubmit={handleSubmit(onSubmit)}>
         <div className='row align-items-center'>
           <div className='col-10 pe-0'>
-            <textarea {...register('message')} className='form-control chat-message' />
+            <textarea id='chatInput' {...register('message')} className='form-control chat-message' />
           </div>
           <div className='col-2 text-center px-1'>
-            <button type='submit' className='btn btn-send'>
+            <button id='chatSubmit' type='submit' className='btn btn-send'>
               送信
             </button>
           </div>

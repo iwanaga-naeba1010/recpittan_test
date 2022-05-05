@@ -82,6 +82,30 @@ RSpec.describe 'Orders', type: :system do
     end
 
     # TODO(okubo): chat送信のテスト追加
+    feature 'Chat form' do
+      scenario 'succeeds', js: true do
+        text = '送信テキスト'
+
+        find('#numberOfFacilitiesEditButton').click
+        input_text_boxes('#chatInput', text)
+        find('#chatSubmit').click
+        sleep 3
+
+        order.reload
+        expect(page).to have_content text
+      end
+
+      scenario 'failures', js: true do
+        text = ''
+        find('#numberOfFacilitiesEditButton').click
+        input_text_boxes('#chatInput', text)
+        find('#chatSubmit').click
+        sleep 3
+
+        order.reload
+        expect(page).to have_content 'バリデーションに失敗しました: Chatsは不正な値です'
+      end
+    end
     # TODO(okubo): 正式依頼のテスト追加
   end
 end
