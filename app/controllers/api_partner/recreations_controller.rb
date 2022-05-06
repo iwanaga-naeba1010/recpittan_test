@@ -12,6 +12,7 @@ module ApiPartner
     end
 
     def create
+      # TODO(okubo): statusやkindが文字列で送られてくるが、それをAPIで保存できるか心配
       recreation = Resources::Recreations::Create.run!(
         recreation_params: params_create.to_h,
         current_user: current_user,
@@ -34,7 +35,10 @@ module ApiPartner
     # NOTE(okubo): configは予約後で使えない
     def config_data
       config = {
-        categories: Recreation.category.values.map(&:text)
+        categories: Recreation.category.values.map(&:text),
+        minutes: [5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55], # TODO(okubo): 後々綺麗にする
+        prefectures: RecreationPrefecture.names,
+        kind: Recreation.kind.values.map(&:text)
       }
       render_json config
     end

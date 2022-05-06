@@ -104,7 +104,7 @@ export const FourthStep: React.FC<Props> = (props) => {
       </div>
 
       <button type='button' className="mt-2 py-2 w-100 rounded text-primary font-weight-bold bg-white border border-primary">編集する</button>
-      <button type='button' className="mt-2 py-2 w-100 rounded text-white font-weight-bold bg-primary border border-primary">申請する</button>
+      <button type='button' type='submit' className="mt-2 py-2 w-100 rounded text-white font-weight-bold bg-primary border border-primary">申請する</button>
       <button type='button' className="mt-2 w-100 rounded text-primary font-weight-bold bg-white border border-white" onClick={handlePrev}>＜戻る</button>
     </div>
   );

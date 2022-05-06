@@ -1,3 +1,4 @@
+import { EnumType } from 'typescript';
 import { Base } from './base';
 import { Tag } from './tag';
 
@@ -5,16 +6,23 @@ export interface Recreation extends Base {
   title: string;
   secondTitle: string;
   minutes: number;
-  isOnline: boolean;
+  price: number;
+  description: string;
+  kind: EnumType;
+  flowOfDay: string;
   capacity: number;
+  materialAmount: number;
+  materialPrice: number;
+  extraInformation: string;
+  youtubeId: string;
+  additionalFacilityFee: number;
+  borrowItem: string;
   imageUrl: string;
   category: string;
+  prefectures: Array<string>;
   categoryId: number;
-  instructorDescription: string;
-  instructorImage: string;
-  instructorName: string;
-  instructorPosition: string;
-  instructorTitle: string;
+  profile: Array<string>;
+  userId: number;
   tags: Array<Tag>;
   targets: Array<Tag>;
 }

@@ -1,22 +1,59 @@
+import { RecreationFormValues, RecreationNewForm } from '@/components/shared/form';
+import { Error } from '@/components/shared/parts';
+import { Api } from '@/infrastructure';
+import { isEmpty } from '@/utils';
+import axios, { AxiosError } from 'axios';
 import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
-import { FirstStep } from './firstStep';
-import { SecondStep } from './secondStep';
-import { ThirdStep } from './thirdStep';
-import { FourthStep } from './fourthStep';
 
 const RecreationNew: React.FC = () => {
-  const [currentStep, setCurrentStep] = useState<number>(0);
+  const [errors, setErrors] = useState<Array<string>>([]);
 
-  const handleNext = () => setCurrentStep(currentStep + 1);
-  const handlePrev = () => setCurrentStep(currentStep - 1);
+  const onSubmit = async (values: RecreationFormValues): Promise<void> => {
+    setErrors([]);
+    const requestBody: { [key: string]: RecreationFormValues } = {
+      recreation: {
+        title: values.title,
+        secondTitle: values.secondTitle,
+        minutes: values.minutes,
+        description: values.description,
+        price: values.price,
+        kind: values.kind,
+        flowOfDay: values.flowOfDay,
+        capacity: values.capacity,
+        materialAmount: values.materialAmount,
+        materialPrice: values.materialPrice,
+        extraInformation: values.extraInformation,
+        youtubeId: values.youtubeId,
+        borrowItem: values.borrowItem,
+        additionalFacilityFee: values.additionalFacilityFee,
+        imageUrl: values.imageUrl,
+        prefectures: values.prefectures,
+        category: values.category,
+        categoryId: values.categoryId,
+        profile: values.profile,
+        userId: values.userId,
+        tags: values.tags,
+        targets: values.targets
+      }
+    };
+
+    try {
+      await Api.post(`recreations`, 'partner', requestBody);
+      // TODO(okubo): redirectによる画面遷移
+      //
+    } catch (e) {
+      if (axios.isAxiosError(e)) {
+        setErrors((e as AxiosError<Array<string>>).response.data);
+        console.log(e.response.data);
+      }
+    }
+  };
 
   return (
     <div>
-      {currentStep === 0 && <FirstStep handleNext={handleNext} />}
-      {currentStep === 1 && <SecondStep handleNext={handleNext} handlePrev={handlePrev} />}
-      {currentStep === 2 && <ThirdStep handleNext={handleNext} handlePrev={handlePrev} />}
-      {currentStep === 3 && <FourthStep handleNext={handleNext} handlePrev={handlePrev} />}
+      {!isEmpty(errors) && <Error errors={errors} />}
+      <RecreationNewForm onSubmit={onSubmit} />
     </div>
   );
 };
