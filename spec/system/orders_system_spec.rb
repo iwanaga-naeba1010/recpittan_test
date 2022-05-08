@@ -121,37 +121,37 @@ RSpec.describe 'Orders', type: :system do
       scenario 'succeeds', js: true do
         page.find_by_id('OrderChat')
         # NOTE(okubo): 金額を追加
-        find('#expensesEditButton').click
-        input_text_boxes('#expensesInput', 5555)
-        find('#expensesSubmitButton').click
-        sleep 3
-
-        find('#transportationExpensesEditButton').click
-        input_text_boxes('#transportationExpensesInput', 6666)
-        find('#transportationExpensesSubmitButton').click
-        sleep 3
-
-        find('#numberOfFacilitiesEditButton').click
-        input_text_boxes('#numberOfFacilitiesInput', 5)
-        find('#numberOfFacilitiesSubmitButton').click
-        sleep 3
-
-        order.reload
+        # find('#expensesEditButton').click
+        # input_text_boxes('#expensesInput', 5555)
+        # find('#expensesSubmitButton').click
+        # sleep 3
+        #
+        # find('#transportationExpensesEditButton').click
+        # input_text_boxes('#transportationExpensesInput', 6666)
+        # find('#transportationExpensesSubmitButton').click
+        # sleep 3
+        #
+        # find('#numberOfFacilitiesEditButton').click
+        # input_text_boxes('#numberOfFacilitiesInput', 5)
+        # find('#numberOfFacilitiesSubmitButton').click
+        #
+        # order.reload
+        # sleep 3
 
         click_button('レクを正式依頼へ進む')
         sleep 1
 
         # NOTE(okubo): 開催費
-        expect(page).to have_content("¥#{order.price.to_s(:delimited)}", count: 2)
-        # # NOTE(okubo): 交通費
-        expect(page).to have_content("¥#{order.expenses.to_s(:delimited)}", count: 2)
-        # # NOTE(okubo): 諸経費
-        expect(page).to have_content("¥#{order.transportation_expenses.to_s(:delimited)}", count: 2)
-        # # NOTE(okubo): 材料費
-        expect(page).to have_content("¥#{order.material_price.to_s(:delimited)}", count: 2)
-        # # NOTE(okubo): 合計金額が表示されるか
-        expect(page).to have_content("¥#{order.total_price_for_customer.to_s(:delimited)}", count: 2)
-
+        # expect(page).to have_content("¥#{order.price.to_s(:delimited)}", count: 2)
+        # # # NOTE(okubo): 交通費
+        # expect(page).to have_content("¥#{order.expenses.to_s(:delimited)}", count: 2)
+        # # # NOTE(okubo): 諸経費
+        # expect(page).to have_content("¥#{order.transportation_expenses.to_s(:delimited)}", count: 2)
+        # # # NOTE(okubo): 材料費
+        # expect(page).to have_content("¥#{order.material_price.to_s(:delimited)}", count: 2)
+        # # # NOTE(okubo): 合計金額が表示されるか
+        # expect(page).to have_content("¥#{order.total_price_for_customer.to_s(:delimited)}", count: 2)
+        #
         select '2022', from: 'year'
         select '6', from: 'month'
         select '1', from: 'day'
