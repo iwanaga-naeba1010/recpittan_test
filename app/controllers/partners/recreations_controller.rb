@@ -1,14 +1,12 @@
 # frozen_string_literal: true
 
 class Partners::RecreationsController < Partners::ApplicationController
-  before_action :set_recreation, only: %i[show edit update]
+  before_action :set_recreation, only: %i[edit update]
   before_action :set_tags, only: %i[new edit]
 
   def index
     @recreations = current_user.recreations
   end
-
-  def show; end
 
   def new
     @recreation = current_user.recreations.build

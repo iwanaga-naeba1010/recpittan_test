@@ -41,6 +41,12 @@ class Partners::OrdersController < Partners::ApplicationController
   def confirm
     is_confirm = params[:is_confirm]
 
+    @path = if @order.is_online
+              new_partners_order_zoom_path(@order)
+            else
+              partners_order_path(@order)
+            end
+
     case is_confirm
     when 'deny'
       render 'partners/orders/deny'
