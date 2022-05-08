@@ -24,7 +24,7 @@
 
       <%= simple_form_for @order, url: partners_order_path(
         id: @order,
-        redirect_path: partners_order_path(@order),
+        redirect_path: @path,
         message: '承認しました'
       ) do |f| %>
         <%= f.input :is_accepted, as: :hidden, input_html: { value: true } %>
