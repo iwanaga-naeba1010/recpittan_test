@@ -24,9 +24,13 @@ RSpec.describe 'Orders', type: :system do
     end
 
     feature 'Recreation informatino' do
-      scenario 'succeeds', js: true do
+      before do
         # NOTE(okubo): 数字が同じだとエラー出るのでダブらない数字
         order.update(expenses: 555, transportation_expenses: 666)
+        order.reload
+        visit chat_customers_order_path(order)
+      end
+      scenario 'succeeds', js: true do
         click_button('レクを正式依頼へ進む')
         sleep 3
 
