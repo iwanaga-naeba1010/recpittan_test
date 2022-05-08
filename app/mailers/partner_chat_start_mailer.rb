@@ -2,6 +2,8 @@
 
 class PartnerChatStartMailer < ApplicationMailer
   def notify(order, customer_user)
+    return if order.blank? || customer_user.blank?
+
     @template = EmailTemplate.find_by(kind: 'partner_chat_start')
     @recreation = order.recreation
     @user = @recreation.user
@@ -12,4 +14,6 @@ class PartnerChatStartMailer < ApplicationMailer
 
     mail from: 'info@everyplus.jp', to: @email, subject: @template.title, template_path: 'common_mailer_template'
   end
+rescue StandardError => e
+  Rails.logger.error e
 end
