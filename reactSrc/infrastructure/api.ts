@@ -84,16 +84,16 @@ const apiDomain = (apiType: ApiType): string => {
 
 // NOTE(okubo): process.env.RAILS_ENVで分けてたけど、不要なので一旦変更で
 const COMMON_API_DOMAIN: string = (() => {
-  return `http://${window.location.host}/api`;
+  return `${window.location.origin}/api`;
 })();
 
 // NOTE(okubo): process.env.RAILS_ENVで分けてたけど、不要なので一旦変更で
 const CUSTOMER_API_DOMAIN: string = (() => {
-  return `http://${window.location.host}/api_customer`;
+  return `${window.location.origin}/api_customer`;
 })();
 
 const PARTNER_API_DOMAIN: string = (() => {
-  return `http://${window.location.host}/api_partner`;
+  return `${window.location.origin}/api_partner`;
 })();
 
 // const APP_API_DOMAIN: string = (() => {
