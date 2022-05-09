@@ -12,7 +12,8 @@ class Customers::RecreationsController < Customers::ApplicationController
     value = @q.base.conditions&.first&.values&.first&.value
     is_tag_class = @q.base.conditions&.first&.attributes&.first&.klass == Tag
     if value && is_tag_class
-      @tag = Tag.find(value.to_i)
+      # NOTE(okubo): 吉本のみ文字で検索しているので三項演算子で対応
+      @tag = value.is_a?(Integer) ? Tag.find(value.to_i) : Tag.find_by(name: value)
     end
   end
 

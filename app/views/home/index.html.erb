@@ -14,7 +14,7 @@
         <!-- TODO: リリースのタイミングで有効化する -->
         <!-- TODO: Yoshimotoのタグができたらこちらに追加する -->
         <% cache('home/yoshimoto_section') do %>
-          <%= link_to customers_recreations_path(q: { tags_id_eq: @yoshimoto&.id }), class: 'nav-link' do %>
+          <%= link_to customers_recreations_path(q: { tags_name_eq: '吉本興業' }), class: 'nav-link' do %>
             <%= image_pack_tag 'yoshimoto.png', class: 'img-fluid', alt: '吉本レク画像', loading: 'lazy' %>
           <% end %>
         <% end %>
