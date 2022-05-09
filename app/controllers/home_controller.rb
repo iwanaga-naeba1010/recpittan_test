@@ -4,10 +4,6 @@ class HomeController < ApplicationController
   skip_before_action :authenticate_user!
 
   def index
-    @categories = Rails.cache.fetch('home/categories', expires_in: 1.week) do
-      sort_categories(Tag.categories).to_a
-    end
-
     @yoshimoto = Rails.cache.fetch('home/yoshimoto_tag', expires_in: 1.week) do
       Tag.find_by(name: '吉本')
     end
@@ -52,22 +48,4 @@ class HomeController < ApplicationController
                 ]).to_a
     end
   end
-
-  # rubocop:disable Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity, Metrics/AbcSize
-  def sort_categories(categories)
-    return [] if categories.blank?
-
-    categories = categories.to_a
-    [
-      categories.map { |c| c if c.name == '音楽' }.compact.first,
-      categories.map { |c| c if c.name == '健康' }.compact.first,
-      categories.map { |c| c if c.name == '趣味' }.compact.first,
-      categories.map { |c| c if c.name == '創作' }.compact.first,
-      categories.map { |c| c if c.name == '旅行' }.compact.first,
-      categories.map { |c| c if c.name == '飲食' }.compact.first,
-      categories.map { |c| c if c.name == 'イベント' }.compact.first,
-      categories.map { |c| c if c.name == 'その他' }.compact.first,
-    ]
-  end
-  # rubocop:enable Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity, Metrics/AbcSize
 end
