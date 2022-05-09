@@ -119,6 +119,16 @@ RSpec.describe 'Orders', type: :system do
 
     feature 'Order form' do
       scenario 'succeeds', js: true do
+        # TODO(okubo): ここで諸経費とかをupdateかけて、modalだけに特化させる、ならエラー限られるかも
+        #
+        #
+        #
+        #
+        #
+        #
+        #
+        #
+        #
         page.find_by_id('OrderChat')
         # NOTE(okubo): 金額を追加
         # find('#expensesEditButton').click
