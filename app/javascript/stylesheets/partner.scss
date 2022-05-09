@@ -121,6 +121,7 @@ body {
 
   .main_contents {
     width: 100%;
+    height: 100%;
     a {
       text-decoration: none;
       color: #6C757D;
@@ -191,13 +192,16 @@ body {
     }
   }
 
-  /* chat list */
+  // chat list
   .chat {
-    width: 90%;
+    margin: 0 30px;
+    // width: 100%;
     padding-top: 150px;
     padding-bottom: 150px;
     overflow-y: scroll;
-    height: 900px;
+    // TODO(okubo): 本来はcalcで計算すべきだが、急ぎなので下記で対応
+    height: 1000px;
+
     .mychat {
       background-color: #3880ff;
       color: white;
@@ -207,6 +211,7 @@ body {
         color: white;
       }
     }
+
     .text {
       background-color: #eee;
       color: black;
@@ -214,7 +219,7 @@ body {
     }
   }
 
-  /* 画面下部のchat */
+  // 画面下部のchat
   .chat_form {
     height: 200px;
     bottom: 0;
