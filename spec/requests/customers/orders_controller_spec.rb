@@ -13,11 +13,6 @@ RSpec.describe Customers::OrdersController, type: :request do
     sign_in user
   end
 
-  before :all do
-    Rails.application.load_tasks
-    Rake::Task['import:email_templates'].invoke
-  end
-
   # NOTE: 事前にEmailTemplateを用意する必要あるため、設定
   describe 'GET /new' do
     context 'with valid user' do

@@ -51,6 +51,14 @@ RSpec.configure do |config|
   #   ex.run_with_retry retry: 2
   # end
 
+  config.before(:suite) do
+    Rails.application.load_tasks
+    Rake::Task['import:email_templates'].invoke
+    puts '==============='
+    puts 'loaded tasks'
+    puts '==============='
+  end
+
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
 

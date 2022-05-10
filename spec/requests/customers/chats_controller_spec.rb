@@ -11,8 +11,6 @@ RSpec.describe Customers::ChatsController, type: :request do
 
   before do
     sign_in user
-    Rails.application.load_tasks
-    Rake::Task['import:email_templates'].invoke
   end
 
   describe 'POST /create' do
