@@ -118,6 +118,10 @@ RSpec.describe 'Orders', type: :system do
     end
 
     feature 'Order form' do
+      before do
+        order.update(expenses: 5555, transportation_expenses: 6666, number_of_facilities: 2, number_of_people: 5)
+        order.reload
+      end
       scenario 'succeeds', js: true do
         # TODO(okubo): ここで諸経費とかをupdateかけて、modalだけに特化させる、ならエラー限られるかも
         #
