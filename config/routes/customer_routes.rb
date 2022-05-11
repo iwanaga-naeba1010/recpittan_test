@@ -4,7 +4,7 @@ resources :customers, only: %i[index]
 
 namespace :customers do
   resources :recreations, only: [:show, :index], shallow: true do
-    resources :orders, except: [:edit, :destroy, :index] do
+    resources :orders, only: [:show, :new, :create] do
       member do
         get :chat
         get :complete
