@@ -124,15 +124,6 @@ RSpec.describe 'Orders', type: :system do
       end
       scenario 'succeeds', js: true do
         # TODO(okubo): ここで諸経費とかをupdateかけて、modalだけに特化させる、ならエラー限られるかも
-        #
-        #
-        #
-        #
-        #
-        #
-        #
-        #
-        #
         page.find_by_id('OrderChat')
         # NOTE(okubo): 金額を追加
         # find('#expensesEditButton').click
@@ -153,7 +144,7 @@ RSpec.describe 'Orders', type: :system do
         # sleep 3
 
         click_button('レクを正式依頼へ進む')
-        sleep 1
+        sleep 5
 
         # NOTE(okubo): 開催費
         # expect(page).to have_content("¥#{order.price.to_s(:delimited)}", count: 2)
@@ -175,12 +166,11 @@ RSpec.describe 'Orders', type: :system do
         select '00', from: 'endMinute'
 
         fill_in 'zip', with: '4536111'
+        sleep 5
         # NOTE(okubo): 検索ボタンは2つあるのでid指定
         find('#searchAddressWithZipForOrder').click
         click_button('パートナーにレク開催を正式依頼する')
-        sleep 5
-
-        sleep 3
+        # sleep 3
 
         expect(page).to have_current_path(complete_customers_order_path(order))
       end
