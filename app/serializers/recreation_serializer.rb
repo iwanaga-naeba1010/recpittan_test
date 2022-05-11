@@ -16,15 +16,8 @@
 #  extra_information       :text
 #  flow_of_day             :text
 #  flyer_color             :string
-#  instructor_description  :text
-#  instructor_image        :text
-#  instructor_name         :string
-#  instructor_position     :string
-#  instructor_title        :string
-#  is_online               :boolean          default(FALSE)
-#  is_public               :boolean
 #  is_public_price         :boolean          default(TRUE)
-#  kind                    :integer          default(0), not null
+#  kind                    :integer          default("visit"), not null
 #  material_amount         :integer
 #  material_price          :integer
 #  minutes                 :integer
