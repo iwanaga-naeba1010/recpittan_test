@@ -2,7 +2,6 @@
 
 require 'rails_helper'
 
-# require_relative '' '../../lib/slack_notifier'
 require 'slack_notifier'
 
 RSpec.describe SlackNotifier do
