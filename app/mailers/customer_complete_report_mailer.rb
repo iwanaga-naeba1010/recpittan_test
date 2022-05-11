@@ -2,8 +2,6 @@
 
 class CustomerCompleteReportMailer < ApplicationMailer
   def notify(order)
-    return if order.blank?
-
     @template = EmailTemplate.find_by(kind: 'customer_complete_report')
     @recreation = order.recreation
     report = order.report
@@ -14,6 +12,4 @@ class CustomerCompleteReportMailer < ApplicationMailer
 
     mail from: 'info@everyplus.jp', to: @email, subject: @template.title, template_path: 'common_mailer_template'
   end
-rescue StandardError => e
-  Rails.logger.error e
 end

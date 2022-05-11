@@ -2,8 +2,6 @@
 
 class PartnerPasswordChangeMailer < ApplicationMailer
   def notify(user)
-    return if user.blank?
-
     @template = EmailTemplate.find_by(kind: 'partner_password_change')
     @user_name = user.username
     @email = user.email
@@ -11,6 +9,4 @@ class PartnerPasswordChangeMailer < ApplicationMailer
 
     mail from: 'info@everyplus.jp', to: @email, subject: @template.title, template_path: 'common_mailer_template'
   end
-rescue StandardError => e
-  Rails.logger.error e
 end

@@ -51,11 +51,12 @@ RSpec.configure do |config|
   #   ex.run_with_retry retry: 2
   # end
 
+  # NOTE(okubo): email_templatesの読み込み実行
   config.before(:suite) do
     Rails.application.load_tasks
     Rake::Task['import:email_templates'].invoke
     puts '==============='
-    puts 'loaded tasks'
+    puts 'loaded email templates!'
     puts '==============='
   end
 

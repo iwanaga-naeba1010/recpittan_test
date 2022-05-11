@@ -2,8 +2,6 @@
 
 class FinalCheckMailer < ApplicationMailer
   def notify(order)
-    return if order.blank?
-
     @template = EmailTemplate.find_by(kind: 'final_check')
     @recreation = order.recreation
     @user = @recreation.user
@@ -15,6 +13,4 @@ class FinalCheckMailer < ApplicationMailer
 
     mail from: 'info@everyplus.jp', to: @email, subject: @template.title, template_path: 'common_mailer_template'
   end
-rescue StandardError => e
-  Rails.logger.error e
 end

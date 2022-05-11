@@ -23,8 +23,6 @@ class Partners::ReportsController < Partners::ApplicationController
     else
       render :new
     end
-  rescue StandardError => e
-    Rails.logger.error e
   end
 
   def edit
@@ -45,8 +43,6 @@ class Partners::ReportsController < Partners::ApplicationController
     else
       render :edit
     end
-  rescue StandardError => e
-    Rails.logger.error e
   end
 
   def confirm
