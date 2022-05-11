@@ -183,7 +183,7 @@ ActiveAdmin.register Order do
           f.input :support_price
 
           # NOTE(okubo): オンラインレクの場合zoom情報を格納
-          if f.object.recreation.is_online?
+          if f.object.recreation.kind.online?
             f.inputs I18n.t('activerecord.models.zoom'), for: [:zoom, f.object.zoom || f.object.build_zoom] do |ff|
               ff.input :price
               ff.input :created_by, as: :select, collection: Zoom.created_by.values.map { |val| [val.text, val] }
