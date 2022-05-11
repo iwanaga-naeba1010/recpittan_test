@@ -157,10 +157,11 @@ RSpec.describe 'Orders', type: :system do
         select '00', from: 'endMinute'
 
         fill_in 'zip', with: '4536111'
-        # NOTE(okubo): 検索ボタンは2つあるのでid指定
+        # NOTE(okubo): 通信が遅れる可能性が高いのであえて長めの時間を設定
         find('#searchAddressWithZipForOrder').click
+        sleep 10
+
         click_button('パートナーにレク開催を正式依頼する')
-        sleep 5
 
         sleep 3
 
