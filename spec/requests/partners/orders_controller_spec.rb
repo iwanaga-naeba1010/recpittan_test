@@ -153,7 +153,7 @@ RSpec.describe Partners::OrdersController, type: :request do
       end
 
       it 'redirects to online_rec' do
-        order.recreation.update(is_online: true)
+        order.recreation.update(kind: :online)
         put partners_order_path(id: order.id, redirect_path: new_partners_order_zoom_path(order.id), message: '承認しました'), params: { order: { is_accepted: true } }
         expect(response).to redirect_to new_partners_order_zoom_path(order.id)
         expect(flash[:notice]).to eq '承認しました'
