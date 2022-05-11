@@ -14,11 +14,6 @@ RSpec.describe Customers::ReportsController, type: :request do
     sign_in user
   end
 
-  before :all do
-    Rails.application.load_tasks
-    Rake::Task['import:email_templates'].invoke
-  end
-
   describe 'GET /edit' do
     context 'with valid user' do
       it 'return http success' do

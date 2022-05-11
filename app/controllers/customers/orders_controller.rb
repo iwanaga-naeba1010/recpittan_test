@@ -2,7 +2,7 @@
 
 class Customers::OrdersController < Customers::ApplicationController
   before_action :set_recreation, only: %i[new create]
-  before_action :set_order, only: %i[show chat update complete]
+  before_action :set_order, only: %i[show chat complete]
 
   def new
     @recreation = Recreation.find(params[:recreation_id])
@@ -77,41 +77,6 @@ class Customers::OrdersController < Customers::ApplicationController
     end
   rescue StandardError
     render :new
-  end
-
-  # TODO(okubo): React issueでAPI作成したのでこちらは削除
-  def update
-    ActiveRecord::Base.transaction do
-      date = params_create[:order_dates_attributes].to_h['0']
-
-      start_at = Time.zone.local(
-        date['year'].to_i,
-        date['month'].to_i,
-        date['date'].to_i,
-        date['start_hour'].to_i,
-        date['start_minute'].to_i
-      )
-
-      end_at = Time.zone.local(
-        date['year'].to_i,
-        date['month'].to_i,
-        date['date'].to_i,
-        date['end_hour'].to_i,
-        date['end_minute'].to_i
-      )
-
-      # TODO: 若干負債だけど、今は許容する
-      @order.update(start_at: start_at, end_at: end_at)
-
-      @order.update!(params_create)
-
-      # TODO: jobで送信したい
-      OrderRequestMailer.notify(@order, current_user).deliver_now
-
-      redirect_to complete_customers_order_path(@order.id), notice: '正式に依頼しました' # rubocop:disable Rails/I18nLocaleTexts
-    end
-  rescue StandardError
-    redirect_to chat_customers_order_path(@order.id), alert: t('action_messages.failed')
   end
 
   private def set_recreation
