@@ -6,7 +6,14 @@ RSpec.describe ApiPartner::ProfilesController, type: :request do
   include_context 'with authenticated partner'
 
   describe 'GET /api_partner/recreations/config_data' do
-    let(:expected) { { categories: Recreation.category.values.map(&:text) } }
+    let(:expected) do
+      {
+        categories: Recreation.category.values.map { |category| { name: category.text, enum_key: category } },
+        minutes: [5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55], # TODO(okubo): 後々綺麗にする
+        prefectures: RecreationPrefecture.names,
+        kind: Recreation.kind.values.map { |kind| { name: kind.text, enum_key: kind } }
+      }
+    end
     it_behaves_like 'an endpoint returns', :expected
   end
 
@@ -27,11 +34,27 @@ RSpec.describe ApiPartner::ProfilesController, type: :request do
     let(:id) { recreation.id }
     let(:params) do
       {
-        recreation: attributes_for(
-          :recreation,
-          user: current_user,
-          recreation_profile_attributes: { profile_id: profile.id }
-        )
+        recreation: {
+          title: 'title',
+          second_title: 'second_title',
+          price: 5000,
+          material_price: 1000,
+          minutes: 30,
+          description: 'description',
+          flow_of_day: '',
+          borrow_item: '',
+          bring_your_own_item: '',
+          extra_information: '',
+          youtube_id: '',
+          capacity: 1,
+          additional_facility_fee: 0,
+          category: 1,
+          status: 'in_progress',
+          kind: 'online',
+          recreation_profile_attributes: {
+            profile_id: profile.id
+          }
+        }
       }
     end
     let(:expected) { RecreationSerializer.new.serialize(recreation: Recreation.last) }

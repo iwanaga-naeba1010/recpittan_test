@@ -32,7 +32,7 @@ const App: React.FC<Props> = ({ recreationId }): JSX.Element => {
 document.addEventListener('turbolinks:load', () => {
   console.log('hogehogehoge!!!!!');
   // console.log('window is', window.location.pathname.match(/\/customers\/recreations\/[0-9]/));
-  const isRecreationShowPage = /\/customers\/recreations\/[0-9]/.exec(window.location.pathname)
+  const isRecreationShowPage = /\/customers\/recreations\/[0-9]/.exec(window.location.pathname);
   console.log('isRecreationShowPage is ', isRecreationShowPage);
   if (isRecreationShowPage !== null) {
     const elm = document.querySelector('#ConsultRecreation');

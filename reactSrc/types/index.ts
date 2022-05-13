@@ -5,6 +5,7 @@ export * from './cities';
 export * from './order';
 export * from './prefectures';
 export * from './preferredDate';
+export * from './profile';
 export * from './recreation';
 export * from './tag';
 export * from './user';
