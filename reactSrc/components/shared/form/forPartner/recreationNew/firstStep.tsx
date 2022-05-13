@@ -1,16 +1,8 @@
 import { Essential } from '@/components/shared/parts/essential';
 import { Api } from '@/infrastructure';
 import React, { useEffect, useState } from 'react';
-import { useForm, useFieldArray } from 'react-hook-form';
+import { UseFormGetValues, UseFormRegister } from 'react-hook-form';
 import { RecreationFormValues } from './recreationNewForm';
-
-type Props = {
-  handleNext: () => void;
-  register: any;
-  control: any;
-  prefecturesIndex: number;
-  removePrefecture: (index: number) => void;
-};
 
 type Config = {
   categories: Array<string>;
@@ -19,12 +11,56 @@ type Config = {
   kind: Array<string>;
 };
 
+const PrefectureItem = ({
+  register,
+  index,
+  config
+}: {
+  register: UseFormRegister<RecreationFormValues>;
+  index: number;
+  config: Config;
+}) => {
+  return (
+    <div>
+      <label>
+        <p>エリア</p>
+        <select
+          className='p-2 w-100 rounded border border-secondary'
+          placeholder='選択してください'
+          {...register(`prefectures.${index}`, {
+            required: true
+          })}
+        >
+          {config?.prefectures.map((prefecture: string) => (
+            <option key={prefecture} value={prefecture}>
+              {prefecture}
+            </option>
+          ))}
+        </select>
+      </label>
+      <button
+        className='text-primary font-weight-bold border border-white bg-white'
+        type='button'
+        style={{ marginLeft: '16px' }}
+      >
+        削除
+      </button>
+    </div>
+  );
+};
+
+type Props = {
+  handleNext: () => void;
+  register: UseFormRegister<RecreationFormValues>;
+  getValues: UseFormGetValues<RecreationFormValues>;
+};
+
 export const FirstStep: React.FC<Props> = (props) => {
-  const { handleNext } = props;
-  const { register, control } = useForm<RecreationFormValues>({ mode: 'onChange' });
+  const { handleNext, register, getValues } = props;
   const [config, setConfig] = useState<Config>(undefined);
   const [show, setShow] = useState(false);
   const [count, setCount] = React.useState(0);
+  const [prefectures, setPrefectures] = useState<Array<string>>(getValues('prefectures'));
 
   useEffect(() => {
     (async () => {
@@ -38,44 +74,7 @@ export const FirstStep: React.FC<Props> = (props) => {
     })();
   }, []);
 
-  const PrefectureItem = ({ register, prefecturesIndex, removePrefecture }: Props) => {
-    return (
-      <div>
-        <label>
-          <p>エリア {prefecturesIndex + 1}</p>
-          <select
-            className='p-2 w-100 rounded border border-secondary'
-            placeholder='選択してください'
-            {...register(`prefectures.${prefecturesIndex}.prefectureText` as const, {
-              required: true
-            })}
-          >
-            {config?.prefectures.map((prefecture: string) => (
-              <option key={prefecture} value={prefecture}>
-                {prefecture}
-              </option>
-            ))}
-          </select>
-        </label>
-        <button className='text-primary font-weight-bold border border-white bg-white' type={"button"} onClick={() => removePrefecture(prefecturesIndex)} style={{ marginLeft: "16px" }}>
-          削除
-        </button>
-      </div>
-    )
-  }
-
-  const { fields, append, remove } = useFieldArray({
-    control,
-    name: 'prefectures',
-  });
-
-  const addPrefecture = () => {
-    append({ questionText: "" })
-  }
-
-  const removePrefecture = (index: number) => {
-    remove(index);
-  }
+  console.log('getValues is ', getValues('prefectures'));
 
   return (
     <div>
@@ -105,12 +104,12 @@ export const FirstStep: React.FC<Props> = (props) => {
         <p className='small my-0'>
           登録するレクの形式を選択してください。 郵送レクは材料を渡して当日は施設の方々だけで実施する形式です
         </p>
-          {config?.kind.map((k: string, i) => (
-            <div key={i}>
-              <input type='radio' id='offline' name='format_restriction' {...register('kind')} />
-              <label htmlFor='offline'>{k}でレクを実施</label>
-            </div>
-          ))}
+        {config?.kind.map((k: string, i) => (
+          <div key={i}>
+            <input type='radio' id='offline' name='format_restriction' {...register('kind')} />
+            <label htmlFor='offline'>{k}でレクを実施</label>
+          </div>
+        ))}
       </div>
 
       <div className='title'>
@@ -123,7 +122,7 @@ export const FirstStep: React.FC<Props> = (props) => {
           type='text'
           className='p-2 w-100 rounded border border-secondary'
           placeholder='タイトルを入力'
-          onChange={e => setCount(e.target.value.length)}
+          onChange={(e) => setCount(e.target.value.length)}
           maxLength={50}
           {...register('title', {
             required: true,
@@ -229,19 +228,12 @@ export const FirstStep: React.FC<Props> = (props) => {
           <Essential />
         </div>
         <p className='small my-0'>レクの受付可能エリア（都道府県）を選択してください</p>
-        {/* TODO(okubo): arrayで保存できるようにreact hook formを参照する*/}
-        {fields.map((field, index) => (
-          <PrefectureItem
-            key={field.id}
-            register={register}
-            prefecturesIndex={index}
-            removePrefecture={removePrefecture}
-            handleNext={handleNext}
-            control={control}
-          />
+        {/* TODO(okubo): arrayで保存できるようにreact hook formを参照する */}
+        {prefectures.map((prefecture, index) => (
+          <PrefectureItem key={prefecture} register={register} index={index} config={config} />
         ))}
-        <div className={"question-add-action-wrapper"}>
-          <p className='text-primary font-weight-bold my-1' onClick={addPrefecture} type={"button"}>
+        <div className={'question-add-action-wrapper'}>
+          <p className='text-primary font-weight-bold my-1' onClick={() => setPrefectures([...prefectures, '北海道'])}>
             ＋複数エリアを追加
           </p>
         </div>
@@ -253,12 +245,21 @@ export const FirstStep: React.FC<Props> = (props) => {
           <Essential />
         </div>
         <p className='small my-0'>レクのに参加できる人数に制限を設定することができます</p>
-        <input type='radio' id='true' name='number_restriction' onClick={() => setShow(true)}/>
-        <label htmlFor='true' onClick={() => setShow(true)}>あり</label>
+        <input type='radio' id='true' name='number_restriction' onClick={() => setShow(true)} />
+        <label htmlFor='true' onClick={() => setShow(true)}>
+          あり
+        </label>
         <br />
-        <input type='radio' id='false' name='number_restriction' onClick={() => setShow(false)}/>
-        <label htmlFor='false' onClick={() => setShow(false)}>なし</label>
-        { show ? <><p className='small my-0'>何人まで参加できますか？</p><input type='text' className='p-2 w-100 rounded border border-secondary' {...register('capacity')}/></> : null}
+        <input type='radio' id='false' name='number_restriction' onClick={() => setShow(false)} />
+        <label htmlFor='false' onClick={() => setShow(false)}>
+          なし
+        </label>
+        {show ? (
+          <>
+            <p className='small my-0'>何人まで参加できますか？</p>
+            <input type='text' className='p-2 w-100 rounded border border-secondary' {...register('capacity')} />
+          </>
+        ) : null}
       </div>
 
       <br />

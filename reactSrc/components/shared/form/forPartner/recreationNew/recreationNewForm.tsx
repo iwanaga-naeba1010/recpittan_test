@@ -34,7 +34,7 @@ export type RecreationFormValues = Pick<
   | 'categoryId'
   | 'profile'
   | 'userId'
-> & { kind: string, tags: Array<string>, targets: Array<string> };
+> & { kind: string; tags: Array<string>; targets: Array<string> };
 
 export const RecreationNewForm: React.FC<Props> = (props) => {
   const { onSubmit } = props;
@@ -42,14 +42,17 @@ export const RecreationNewForm: React.FC<Props> = (props) => {
   const [currentStep, setCurrentStep] = useState<number>(0);
   const handleNext = () => setCurrentStep(currentStep + 1);
   const handlePrev = () => setCurrentStep(currentStep - 1);
-  const { register, handleSubmit, control } = useForm<RecreationFormValues>({ mode: 'onChange' });
+  const { register, handleSubmit, getValues } = useForm<RecreationFormValues>({
+    mode: 'onChange',
+    defaultValues: { prefectures: [] }
+  });
   const [errors, setErrors] = useState<Array<string>>([]);
 
   return (
     <div>
       {!isEmpty(errors) && <Error errors={errors} />}
       <form className='recreation' onSubmit={handleSubmit(onSubmit)}>
-        {currentStep === 0 && <FirstStep handleNext={handleNext} register={register} control={control} />}
+        {currentStep === 0 && <FirstStep handleNext={handleNext} register={register} getValues={getValues} />}
         {currentStep === 1 && <SecondStep handleNext={handleNext} handlePrev={handlePrev} register={register} />}
         {currentStep === 2 && <ThirdStep handleNext={handleNext} handlePrev={handlePrev} register={register} />}
         {currentStep === 3 && <FourthStep handleNext={handleNext} handlePrev={handlePrev} />}

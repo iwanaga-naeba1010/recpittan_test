@@ -10,6 +10,7 @@ const RecreationNew: React.FC = () => {
   const [errors, setErrors] = useState<Array<string>>([]);
 
   const onSubmit = async (values: RecreationFormValues): Promise<void> => {
+    console.log('values', values);
     setErrors([]);
     const requestBody: { [key: string]: RecreationFormValues } = {
       recreation: {
