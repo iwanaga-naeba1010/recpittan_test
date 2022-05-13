@@ -5,10 +5,10 @@ import { UseFormGetValues, UseFormRegister } from 'react-hook-form';
 import { RecreationFormValues } from './recreationNewForm';
 
 type Config = {
-  categories: Array<{ name: string; id: number }>;
+  categories: Array<{ name: string; enumKey: string }>;
   minutes: Array<number>;
   prefectures: Array<string>;
-  kind: Array<{ name: string; id: number }>;
+  kind: Array<{ name: string; enumKey: string }>;
 };
 
 const PrefectureItem = ({
@@ -106,8 +106,8 @@ export const FirstStep: React.FC<Props> = (props) => {
         </p>
         {config?.kind.map((kind) => (
           <div key={kind.name}>
-            <input type='radio' id={`kind${kind.id}`} value={kind.id} name='format_restriction' {...register('kind')} />
-            <label htmlFor={`kind${kind.id}`}>{kind.name}でレクを実施</label>
+            <input type='radio' id={`kind${kind.enumKey}`} value={kind.enumKey} name='format_restriction' {...register('kind')} />
+            <label htmlFor={`kind${kind.enumKey}`}>{kind.name}でレクを実施</label>
           </div>
         ))}
       </div>
@@ -210,12 +210,12 @@ export const FirstStep: React.FC<Props> = (props) => {
         <select
           className='p-2 w-100 rounded border border-secondary'
           placeholder='選択してください'
-          {...register('categoryId', {
+          {...register('category', {
             required: true
           })}
         >
           {config?.categories.map((category) => (
-            <option key={category.name} value={category.id}>
+            <option key={category.name} value={category.enumKey}>
               {category.name}
             </option>
           ))}

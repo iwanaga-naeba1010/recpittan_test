@@ -30,7 +30,7 @@ const RecreationNew: React.FC = () => {
         additionalFacilityFee: values.additionalFacilityFee,
         imageUrl: values.imageUrl,
         // prefectures: values.prefectures,
-        category: values.categoryId, // NOTE(okubo): idじゃないと保存できない
+        category: values.category, // NOTE(okubo): idじゃないと保存できない
         // categoryId: values.categoryId,
         userId: values.userId,
         status: 'in_progress',

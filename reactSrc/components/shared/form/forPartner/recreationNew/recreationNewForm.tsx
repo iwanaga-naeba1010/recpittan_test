@@ -28,8 +28,7 @@ export type RecreationFormValues = Pick<
   | 'additionalFacilityFee'
   | 'imageUrl'
   | 'prefectures'
-  // | 'category'
-  | 'categoryId'
+  | 'category'
   // | 'profile'
   | 'userId'
 > & { kind: string; tags: Array<string>; targets: Array<string>; profileId: number };
