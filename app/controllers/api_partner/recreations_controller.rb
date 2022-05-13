@@ -16,7 +16,8 @@ module ApiPartner
       recreation = Resources::Recreations::Create.run!(
         recreation_params: params_create.to_h,
         current_user: current_user,
-        profile_id: params_create.dig(:recreation_profile_attributes, :profile_id)
+        profile_id: params_create.dig(:recreation_profile_attributes, :profile_id),
+        prefectures: params_create[:recreation_prefectures_attributes].pluck(:name)
       )
       render_json RecreationSerializer.new.serialize(recreation: recreation)
     rescue StandardError => e
@@ -54,7 +55,8 @@ module ApiPartner
           minutes description flow_of_day borrow_item bring_your_own_item extra_information
           youtube_id capacity category status kind additional_facility_fee
         ],
-        recreation_profile_attributes: %i[profile_id] # NOTE(okubo): profileの中間テーブル作成
+        recreation_profile_attributes: %i[profile_id], # NOTE(okubo): profileの中間テーブル作成
+        recreation_prefectures_attributes: %i[name]
       )
     end
   end

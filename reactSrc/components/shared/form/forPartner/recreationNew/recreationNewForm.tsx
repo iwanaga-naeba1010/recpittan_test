@@ -40,7 +40,6 @@ export const RecreationNewForm: React.FC<Props> = (props) => {
     register,
     handleSubmit,
     getValues,
-    watch,
     formState: { errors }
   } = useForm<RecreationFormValues>({
     mode: 'onChange',

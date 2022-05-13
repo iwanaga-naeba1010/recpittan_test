@@ -36,7 +36,8 @@ const RecreationNew: React.FC = () => {
         status: 'in_progress',
         // tags: values.tags,
         // targets: values.targets
-        recreationProfileAttributes: { profileId: values.profileId }
+        recreationProfileAttributes: { profileId: values.profileId },
+        recreationPrefecturesAttributes: values.prefectures.map((p) => ({ name: p }))
       }
     };
 
