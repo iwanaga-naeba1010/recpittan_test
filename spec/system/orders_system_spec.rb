@@ -24,9 +24,13 @@ RSpec.describe 'Orders', type: :system do
     end
 
     feature 'Recreation informatino' do
-      scenario 'succeeds', js: true do
+      before do
         # NOTE(okubo): 数字が同じだとエラー出るのでダブらない数字
         order.update(expenses: 555, transportation_expenses: 666)
+        order.reload
+        visit chat_customers_order_path(order)
+      end
+      scenario 'succeeds', js: true do
         click_button('レクを正式依頼へ進む')
         sleep 3
 
@@ -114,39 +118,15 @@ RSpec.describe 'Orders', type: :system do
     end
 
     feature 'Order form' do
+      before do
+        order.update(expenses: 5555, transportation_expenses: 6666, number_of_facilities: 2, number_of_people: 5)
+        order.reload
+      end
       scenario 'succeeds', js: true do
         page.find_by_id('OrderChat')
-        # NOTE(okubo): 金額を追加
-        find('#expensesEditButton').click
-        input_text_boxes('#expensesInput', 5555)
-        find('#expensesSubmitButton').click
-        sleep 3
-
-        find('#transportationExpensesEditButton').click
-        input_text_boxes('#transportationExpensesInput', 6666)
-        find('#transportationExpensesSubmitButton').click
-        sleep 3
-
-        find('#numberOfFacilitiesEditButton').click
-        input_text_boxes('#numberOfFacilitiesInput', 5)
-        find('#numberOfFacilitiesSubmitButton').click
-        sleep 3
-
-        order.reload
 
         click_button('レクを正式依頼へ進む')
-        sleep 1
-
-        # NOTE(okubo): 開催費
-        expect(page).to have_content("¥#{order.price.to_s(:delimited)}", count: 2)
-        # # NOTE(okubo): 交通費
-        expect(page).to have_content("¥#{order.expenses.to_s(:delimited)}", count: 2)
-        # # NOTE(okubo): 諸経費
-        expect(page).to have_content("¥#{order.transportation_expenses.to_s(:delimited)}", count: 2)
-        # # NOTE(okubo): 材料費
-        expect(page).to have_content("¥#{order.material_price.to_s(:delimited)}", count: 2)
-        # # NOTE(okubo): 合計金額が表示されるか
-        expect(page).to have_content("¥#{order.total_price_for_customer.to_s(:delimited)}", count: 2)
+        sleep 5
 
         select '2022', from: 'year'
         select '6', from: 'month'
@@ -157,13 +137,14 @@ RSpec.describe 'Orders', type: :system do
         select '00', from: 'endMinute'
 
         fill_in 'zip', with: '4536111'
-        # NOTE(okubo): 検索ボタンは2つあるのでid指定
+
+        # NOTE(okubo): 通信が遅れる可能性が高いのであえて長めの時間を設定
         find('#searchAddressWithZipForOrder').click
+        sleep 10
+
         click_button('パートナーにレク開催を正式依頼する')
-        sleep 5
 
         sleep 3
-
         expect(page).to have_current_path(complete_customers_order_path(order))
       end
     end

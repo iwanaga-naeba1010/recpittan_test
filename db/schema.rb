@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_05_05_053958) do
+ActiveRecord::Schema.define(version: 2022_05_11_092437) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -195,15 +195,8 @@ ActiveRecord::Schema.define(version: 2022_05_05_053958) do
     t.integer "material_amount"
     t.integer "capacity"
     t.integer "amount"
-    t.string "instructor_position"
-    t.boolean "is_public"
     t.string "base_code"
-    t.boolean "is_online", default: false
     t.bigint "user_id", null: false
-    t.string "instructor_name"
-    t.string "instructor_title"
-    t.text "instructor_description"
-    t.text "instructor_image"
     t.boolean "is_public_price", default: true
     t.integer "additional_facility_fee", default: 2000
     t.integer "category", default: 0, null: false

@@ -10,8 +10,6 @@ RSpec.describe Partners::OrdersController, type: :request do
 
   before do
     sign_in partner
-    Rails.application.load_tasks
-    Rake::Task['import:email_templates'].invoke
   end
 
   describe 'GET /show' do
@@ -152,6 +150,19 @@ RSpec.describe Partners::OrdersController, type: :request do
         put partners_order_path(id: order.id, message: '修正'), params: { order: { start_at: '' } }
         expect(flash[:notice]).to eq '修正'
         # expect(response.body).should include('修正')
+      end
+
+      it 'redirects to online_rec' do
+        order.recreation.update(kind: :online)
+        put partners_order_path(id: order.id, redirect_path: new_partners_order_zoom_path(order.id), message: '承認しました'), params: { order: { is_accepted: true } }
+        expect(response).to redirect_to new_partners_order_zoom_path(order.id)
+        expect(flash[:notice]).to eq '承認しました'
+      end
+
+      it 'redirects to ofline_rec' do
+        put partners_order_path(id: order.id, redirect_path: partners_order_path(order.id), message: '承認しました'), params: { order: { is_accepted: true } }
+        expect(response).to redirect_to partners_order_path(order.id)
+        expect(flash[:notice]).to eq '承認しました'
       end
     end
 
