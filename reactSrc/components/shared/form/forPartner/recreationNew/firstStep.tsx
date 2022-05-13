@@ -1,7 +1,8 @@
+import {ValidationErrorMessage} from '@/components/shared/parts';
 import { Essential } from '@/components/shared/parts/essential';
 import { Api } from '@/infrastructure';
 import React, { useEffect, useState } from 'react';
-import { UseFormGetValues, UseFormRegister } from 'react-hook-form';
+import { FieldErrors, UseFormGetValues, UseFormRegister } from 'react-hook-form';
 import { RecreationFormValues } from './recreationNewForm';
 
 type Config = {
@@ -53,13 +54,13 @@ type Props = {
   handleNext: () => void;
   register: UseFormRegister<RecreationFormValues>;
   getValues: UseFormGetValues<RecreationFormValues>;
+  errors: FieldErrors<RecreationFormValues>;
 };
 
 export const FirstStep: React.FC<Props> = (props) => {
-  const { handleNext, register, getValues } = props;
+  const { handleNext, register, getValues, errors } = props;
   const [config, setConfig] = useState<Config>(undefined);
   const [show, setShow] = useState(false);
-  const [count, setCount] = React.useState(0);
   const [prefectures, setPrefectures] = useState<Array<string>>(getValues('prefectures'));
 
   useEffect(() => {
@@ -75,6 +76,14 @@ export const FirstStep: React.FC<Props> = (props) => {
   }, []);
 
   console.log('getValues is ', getValues('prefectures'));
+  console.log('errors is ', errors);
+
+  const disabled =
+    errors?.kind !== undefined ||
+    errors?.title !== undefined ||
+    errors?.secondTitle !== undefined;
+
+  console.log('disabled is ', disabled);
 
   return (
     <div>
@@ -106,30 +115,32 @@ export const FirstStep: React.FC<Props> = (props) => {
         </p>
         {config?.kind.map((kind) => (
           <div key={kind.name}>
-            <input type='radio' id={`kind${kind.enumKey}`} value={kind.enumKey} name='format_restriction' {...register('kind')} />
+            <input
+              type='radio'
+              id={`kind${kind.enumKey}`}
+              value={kind.enumKey}
+              name='format_restriction'
+              {...register('kind')}
+            />
             <label htmlFor={`kind${kind.enumKey}`}>{kind.name}でレクを実施</label>
           </div>
         ))}
       </div>
 
-      <div className='title'>
+      <div>
         <div className='d-flex mt-4'>
           <h5 className='text-black font-weight-bold'>タイトルを入力</h5>
           <Essential />
         </div>
         <p className='small my-0'>レクの分かりやすいタイトルを入力してください</p>
         <input
-          type='text'
           className='p-2 w-100 rounded border border-secondary'
           placeholder='タイトルを入力'
-          onChange={(e) => setCount(e.target.value.length)}
           maxLength={50}
-          {...register('title', {
-            required: true,
-            maxLength: 50
-          })}
+          {...register('title', { required: 'タイトルは必須です', maxLength: 50 })}
         />
-        <p className='small my-0'>{count}/50文字まで</p>
+        {errors && <ValidationErrorMessage message={errors?.title?.message} />}
+        <p className='small my-0'>{getValues('title').length}/50文字まで</p>
       </div>
 
       <div className='title'>
@@ -139,14 +150,14 @@ export const FirstStep: React.FC<Props> = (props) => {
         </div>
         <p className='small my-0'>レクのサブタイトルを入力してください</p>
         <input
-          type='text'
           className='p-2 w-100 rounded border border-secondary'
           placeholder='サブタイトルを入力'
           {...register('secondTitle', {
-            required: true,
+            required: 'サブタイトルは必須です',
             maxLength: 50
           })}
         />
+        {errors && <ValidationErrorMessage message={errors?.secondTitle?.message} />}
         <p className='small my-0'>0/50文字まで</p>
       </div>
 
@@ -159,15 +170,17 @@ export const FirstStep: React.FC<Props> = (props) => {
         <select
           className='p-2 w-100 rounded border border-secondary'
           {...register('minutes', {
-            required: true
+            required: '所要時間は必須です'
           })}
         >
+          <option></option>
           {config?.minutes.map((minute: number) => (
-            <option key={minute} value={minute}>
+            <option key={minute} value={minute} selected={getValues('minutes') === minute}>
               {minute}分
             </option>
           ))}
         </select>
+        {errors && <ValidationErrorMessage message={errors?.minutes?.message} />}
       </div>
 
       <div className='flowOfDay'>
@@ -180,9 +193,10 @@ export const FirstStep: React.FC<Props> = (props) => {
           rows={15}
           className='p-1 w-100 rounded border border-secondary'
           {...register('flowOfDay', {
-            required: true
+            required: 'タイムスケジュールは必須です'
           })}
         />
+        {errors && <ValidationErrorMessage message={errors?.flowOfDay?.message} />}
       </div>
 
       <div className='description'>
@@ -194,9 +208,7 @@ export const FirstStep: React.FC<Props> = (props) => {
           rows={15}
           className='p-1 w-100 rounded border border-secondary'
           placeholder='説明を入力'
-          {...register('description', {
-            maxLength: 500
-          })}
+          {...register('description', { maxLength: 500 })}
         />
         <p className='small my-0'>0/500文字まで</p>
       </div>
@@ -210,16 +222,16 @@ export const FirstStep: React.FC<Props> = (props) => {
         <select
           className='p-2 w-100 rounded border border-secondary'
           placeholder='選択してください'
-          {...register('category', {
-            required: true
-          })}
+          {...register('category', { required: 'カテゴリーは必須です' })}
         >
+          <option></option>
           {config?.categories.map((category) => (
-            <option key={category.name} value={category.enumKey}>
+            <option key={category.name} value={category.enumKey} selected={getValues('category') === category.enumKey}>
               {category.name}
             </option>
           ))}
         </select>
+        {errors && <ValidationErrorMessage message={errors?.category?.message} />}
       </div>
 
       <div className='area'>
@@ -257,13 +269,15 @@ export const FirstStep: React.FC<Props> = (props) => {
         {show ? (
           <>
             <p className='small my-0'>何人まで参加できますか？</p>
-            <input type='text' className='p-2 w-100 rounded border border-secondary' {...register('capacity')} />
+            <input type='text' className='p-2 w-100 rounded border border-secondary' {...register('capacity', { required: '参加人数制限は必須です' })} />
           </>
         ) : null}
+        {errors && <ValidationErrorMessage message={errors?.capacity?.message} />}
       </div>
 
       <br />
       <button
+        disabled={disabled}
         type='button'
         className='my-3 py-2 w-100 rounded text-white font-weight-bold bg-primary border border-primary'
         onClick={handleNext}

@@ -17,11 +17,10 @@ export type RecreationFormValues = Pick<
   | 'secondTitle'
   | 'minutes'
   | 'price'
+  | 'materialPrice'
   | 'description'
   | 'flowOfDay'
   | 'capacity'
-  | 'materialPrice'
-  | 'materialAmount'
   | 'extraInformation'
   | 'youtubeId'
   | 'borrowItem'
@@ -37,10 +36,33 @@ export const RecreationNewForm: React.FC<Props> = (props) => {
   const { onSubmit } = props;
 
   const [currentStep, setCurrentStep] = useState<number>(0);
-  const { register, handleSubmit, getValues } = useForm<RecreationFormValues>({
+  const {
+    register,
+    handleSubmit,
+    getValues,
+    watch,
+    formState: { errors }
+  } = useForm<RecreationFormValues>({
     mode: 'onChange',
-    defaultValues: { prefectures: [] }
+    defaultValues: {
+      title: '',
+      secondTitle: '',
+      minutes: 30,
+      price: 5000,
+      materialPrice: 0,
+      description: '',
+      flowOfDay: '',
+      capacity: 0,
+      extraInformation: '',
+      youtubeId: '',
+      borrowItem: '',
+      additionalFacilityFee: 0,
+      category: 'event',
+      prefectures: [],
+      kind: 'online'
+    }
   });
+
   const handleNext = () => {
     const arr = [
       'title',
@@ -58,8 +80,7 @@ export const RecreationNewForm: React.FC<Props> = (props) => {
       'additionalFacilityFee',
       'imageUrl',
       'prefectures',
-      // 'category',
-      'categoryId',
+      'category',
       'profile',
       'userId'
     ];
@@ -71,7 +92,7 @@ export const RecreationNewForm: React.FC<Props> = (props) => {
   return (
     <div>
       <form className='recreation' onSubmit={handleSubmit(onSubmit)}>
-        {currentStep === 0 && <FirstStep handleNext={handleNext} register={register} getValues={getValues} />}
+        {currentStep === 0 && <FirstStep handleNext={handleNext} register={register} getValues={getValues} errors={errors} />}
         {currentStep === 1 && <SecondStep handleNext={handleNext} handlePrev={handlePrev} register={register} />}
         {currentStep === 2 && <ThirdStep handleNext={handleNext} handlePrev={handlePrev} register={register} />}
         {currentStep === 3 && <FourthStep handleNext={handleNext} handlePrev={handlePrev} />}
