@@ -17,7 +17,7 @@ module ApiPartner
         recreation_params: params_create.to_h,
         current_user: current_user,
         profile_id: params_create.dig(:recreation_profile_attributes, :profile_id),
-        prefectures: params_create[:recreation_prefectures_attributes].pluck(:name)
+        prefectures: params_create[:recreation_prefectures_attributes]&.pluck(:name)
       )
       render_json RecreationSerializer.new.serialize(recreation: recreation)
     rescue StandardError => e

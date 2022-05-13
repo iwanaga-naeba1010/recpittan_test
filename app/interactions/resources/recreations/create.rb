@@ -54,6 +54,8 @@ module Resources
       end
 
       private def create_prefectures(recreation_id:)
+        return if prefectures.blank?
+
         RecreationPrefecture.create!(
           prefectures.map { |p| { name: p, recreation_id: recreation_id } }
         )

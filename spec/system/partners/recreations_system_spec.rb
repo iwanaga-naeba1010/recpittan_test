@@ -44,7 +44,6 @@ RSpec.describe '/partners/recreations', type: :system do
         click_button('次へ')
         expect(page).to have_content('入力内容を確認')
 
-
         click_button('申請する')
         sleep 5
 

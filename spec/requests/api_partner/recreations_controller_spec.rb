@@ -59,7 +59,7 @@ RSpec.describe ApiPartner::ProfilesController, type: :request do
     end
     let(:expected) { RecreationSerializer.new.serialize(recreation: Recreation.last) }
 
-    it_behaves_like 'an endpoint returns 2xx status', :expected, :pry
+    it_behaves_like 'an endpoint returns 2xx status', :expected
 
     context 'with valid params' do
       it_behaves_like 'an endpoint returns', :expected
