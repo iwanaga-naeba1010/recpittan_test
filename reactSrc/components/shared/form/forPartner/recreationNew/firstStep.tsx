@@ -257,13 +257,13 @@ export const FirstStep: React.FC<Props> = (props) => {
           <Essential />
         </div>
         <p className='small my-0'>レクのに参加できる人数に制限を設定することができます</p>
-        <input type='radio' id='true' name='number_restriction' onClick={() => setShow(true)} />
-        <label htmlFor='true' onClick={() => setShow(true)}>
+        <input type='radio' id='numberOfFacilitiesTrue' name='numberOfFacilitiesTrue' onClick={() => setShow(true)} />
+        <label htmlFor='numberOfFacilitiesTrue' onClick={() => setShow(true)}>
           あり
         </label>
         <br />
-        <input type='radio' id='false' name='number_restriction' onClick={() => setShow(false)} />
-        <label htmlFor='false' onClick={() => setShow(false)}>
+        <input type='radio' id='numberOfFacilitiesFalse' name='numberOfFacilitiesFalse' onClick={() => setShow(false)} />
+        <label htmlFor='numberOfFacilitiesFalse' onClick={() => setShow(false)}>
           なし
         </label>
         {show ? (

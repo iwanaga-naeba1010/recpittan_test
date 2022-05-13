@@ -61,8 +61,8 @@ export const ThirdStep: React.FC<Props> = (props) => {
       </p>
       {profiles.map((profile: Profile, i) => (
         <div key={i}>
-          <input type='radio' id='true' {...register('profileId')} value={profile.id} />
-          <label htmlFor='true'>{profile.name}</label>
+          <input type='radio' id={`profileId${i}`} {...register('profileId')} value={profile.id} />
+          <label htmlFor={`profileId${i}`}>{profile.name}</label>
         </div>
       ))}
       <br />
