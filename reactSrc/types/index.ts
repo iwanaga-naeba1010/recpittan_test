@@ -8,3 +8,4 @@ export * from './preferredDate';
 export * from './recreation';
 export * from './tag';
 export * from './user';
+export * from './profile';

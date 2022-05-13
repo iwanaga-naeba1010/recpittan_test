@@ -1,4 +1,5 @@
 import { Api } from '@/infrastructure';
+import { Profile } from '@/types';
 import React, { useEffect, useState } from 'react';
 import { UseFormRegister } from 'react-hook-form';
 import { RecreationFormValues } from './recreationNewForm';
@@ -10,7 +11,6 @@ type Props = {
 };
 
 // TODO(okubo): Profile作成したらこちら削除
-type Profile = Record<string, unknown>;
 
 export const ThirdStep: React.FC<Props> = (props) => {
   const { handleNext, handlePrev, register } = props;
@@ -53,16 +53,16 @@ export const ThirdStep: React.FC<Props> = (props) => {
       <p className='small my-0'>
         プロフィールを登録していない場合は
         <span>
-          <a className='text-primary' href="/partners/profiles/new">新規プロフィール</a>
+          <a className='text-primary' href='/partners/profiles/new'>
+            新規プロフィール
+          </a>
         </span>
         を登録してください。
       </p>
       {profiles.map((profile: Profile, i) => (
         <div key={i}>
-          <input type='radio' id='true' {...register('profile')} />
-          <label htmlFor='true'>
-            {profile.name}
-          </label>
+          <input type='radio' id='true' {...register('profileId')} value={profile.id} />
+          <label htmlFor='true'>{profile.name}</label>
         </div>
       ))}
       <br />

@@ -5,10 +5,10 @@ import { UseFormGetValues, UseFormRegister } from 'react-hook-form';
 import { RecreationFormValues } from './recreationNewForm';
 
 type Config = {
-  categories: Array<string>;
+  categories: Array<{name: string, id: number}>;
   minutes: Array<number>;
   prefectures: Array<string>;
-  kind: Array<string>;
+  kind: Array<{name: string, id: number}>;
 };
 
 const PrefectureItem = ({
@@ -104,10 +104,10 @@ export const FirstStep: React.FC<Props> = (props) => {
         <p className='small my-0'>
           登録するレクの形式を選択してください。 郵送レクは材料を渡して当日は施設の方々だけで実施する形式です
         </p>
-        {config?.kind.map((k: string, i) => (
-          <div key={i}>
-            <input type='radio' id='offline' name='format_restriction' {...register('kind')} />
-            <label htmlFor='offline'>{k}でレクを実施</label>
+        {config?.kind.map((kind) => (
+          <div key={kind.name}>
+            <input type='radio' id={`kind${kind.id}`} value={kind.id} name='format_restriction' {...register('kind')} />
+            <label htmlFor={`kind${kind.id}`}>{kind.name}でレクを実施</label>
           </div>
         ))}
       </div>
@@ -210,13 +210,13 @@ export const FirstStep: React.FC<Props> = (props) => {
         <select
           className='p-2 w-100 rounded border border-secondary'
           placeholder='選択してください'
-          {...register('category', {
+          {...register('categoryId', {
             required: true
           })}
         >
-          {config?.categories.map((category: string) => (
-            <option key={category} value={category}>
-              {category}
+          {config?.categories.map((category) => (
+            <option key={category.name} value={category.id}>
+              {category.name}
             </option>
           ))}
         </select>

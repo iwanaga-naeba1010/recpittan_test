@@ -22,7 +22,7 @@ export class Api {
   // TODO(okubo): Promise<any>をaxios returnでgenericsに変更
   static async post<T>(path: string, type: ApiType, data: Record<string, unknown>): Promise<AxiosResponse<T>> {
     try {
-      const response = await axios.post<T>(`${apiDomain(type)}/${path}`, snakecaseKeys(data), { headers: headers() });
+      const response = await axios.post<T>(`${apiDomain(type)}/${path}`, snakecaseKeys(data, { deep: true }), { headers: headers() });
       return { ...response, data: camelcaseKeys(response.data, { deep: true }) } as AxiosResponse<T>;
     } catch (e) {
       console.log('haitta!', e);

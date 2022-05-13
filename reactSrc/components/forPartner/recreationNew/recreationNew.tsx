@@ -12,7 +12,7 @@ const RecreationNew: React.FC = () => {
   const onSubmit = async (values: RecreationFormValues): Promise<void> => {
     console.log('values', values);
     setErrors([]);
-    const requestBody: { [key: string]: RecreationFormValues } = {
+    const requestBody: { [key: string]: any } = {
       recreation: {
         title: values.title,
         secondTitle: values.secondTitle,
@@ -21,26 +21,29 @@ const RecreationNew: React.FC = () => {
         price: values.price,
         kind: values.kind,
         flowOfDay: values.flowOfDay,
-        capacity: values.capacity,
-        materialAmount: values.materialAmount,
+        capacity: values.capacity || 0,
         materialPrice: values.materialPrice,
         extraInformation: values.extraInformation,
         youtubeId: values.youtubeId,
         borrowItem: values.borrowItem,
+        bringYourOwnItem: '', // TODO(okubo): 追加が必要
         additionalFacilityFee: values.additionalFacilityFee,
         imageUrl: values.imageUrl,
-        prefectures: values.prefectures,
-        category: values.category,
-        categoryId: values.categoryId,
-        profile: values.profile,
+        // prefectures: values.prefectures,
+        category: values.categoryId, // NOTE(okubo): idじゃないと保存できない
+        // categoryId: values.categoryId,
         userId: values.userId,
-        tags: values.tags,
-        targets: values.targets
-      }
+        status: 'in_progress',
+        // tags: values.tags,
+        // targets: values.targets
+        recreationProfileAttributes:  { profileId: values.profileId, }
+      },
+
     };
 
     try {
       await Api.post(`recreations`, 'partner', requestBody);
+      window.location.href = '/partners/recreations';
       // TODO(okubo): redirectによる画面遷移
       //
     } catch (e) {

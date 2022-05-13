@@ -8,9 +8,9 @@ module Resources
         string :title
         string :second_title
         integer :price
-        integer :amount
+        # integer :amount
         integer :material_price
-        integer :material_amount
+        # integer :material_amount
         integer :minutes
         string :description
         string :flow_of_day
@@ -19,6 +19,7 @@ module Resources
         string :extra_information
         string :youtube_id
         integer :capacity
+        integer :additional_facility_fee
         string :category
         string :status
         string :kind
@@ -32,7 +33,7 @@ module Resources
       # validates :second_title, presence: true
       # validates :price, presence: true
       # validates :material_pricee, presence: true
-      validates :profile_id, presence: true
+      # validates :profile_id, presence: true
 
       def execute
         ActiveRecord::Base.transaction do

@@ -30,22 +30,46 @@ export type RecreationFormValues = Pick<
   | 'additionalFacilityFee'
   | 'imageUrl'
   | 'prefectures'
-  | 'category'
+  // | 'category'
   | 'categoryId'
-  | 'profile'
+  // | 'profile'
   | 'userId'
-> & { kind: string; tags: Array<string>; targets: Array<string> };
+> & { kind: string; tags: Array<string>; targets: Array<string>, profileId: number };
 
 export const RecreationNewForm: React.FC<Props> = (props) => {
   const { onSubmit } = props;
 
   const [currentStep, setCurrentStep] = useState<number>(0);
-  const handleNext = () => setCurrentStep(currentStep + 1);
-  const handlePrev = () => setCurrentStep(currentStep - 1);
   const { register, handleSubmit, getValues } = useForm<RecreationFormValues>({
     mode: 'onChange',
     defaultValues: { prefectures: [] }
   });
+  const handleNext = () => {
+    const arr = [
+      'title',
+      'secondTitle',
+      'minutes',
+      'price',
+      'description',
+      'flowOfDay',
+      'capacity',
+      'materialPrice',
+      'materialAmount',
+      'extraInformation',
+      'youtubeId',
+      'borrowItem',
+      'additionalFacilityFee',
+      'imageUrl',
+      'prefectures',
+      // 'category',
+      'categoryId',
+      'profile',
+      'userId'
+    ];
+    arr.map((str) => console.log(`${str} is`, getValues(str as any)));
+    setCurrentStep(currentStep + 1);
+  };
+  const handlePrev = () => setCurrentStep(currentStep - 1);
   const [errors, setErrors] = useState<Array<string>>([]);
 
   return (

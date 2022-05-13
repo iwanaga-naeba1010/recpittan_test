@@ -1,6 +1,6 @@
 import { Essential } from '@/components/shared/parts/essential';
 import React from 'react';
-import { useForm, UseFormRegister } from 'react-hook-form';
+import {UseFormRegister } from 'react-hook-form';
 import { RecreationFormValues } from './recreationNewForm';
 
 type Props = {
@@ -10,8 +10,8 @@ type Props = {
 };
 
 export const SecondStep: React.FC<Props> = (props) => {
-  const { handleNext, handlePrev } = props;
-  const { register } = useForm<RecreationFormValues>({ mode: 'onChange' });
+  const { handleNext, handlePrev, register } = props;
+
   return (
     <div>
       <div className='d-flex'>

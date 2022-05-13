@@ -35,10 +35,10 @@ module ApiPartner
     # NOTE(okubo): configは予約後で使えない
     def config_data
       config = {
-        categories: Recreation.category.values.map(&:text),
+        categories: Recreation.category.values.map { |category| { name: category.text, id: category.value } },
         minutes: [5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55], # TODO(okubo): 後々綺麗にする
         prefectures: RecreationPrefecture.names,
-        kind: Recreation.kind.values.map(&:text)
+        kind: Recreation.kind.values.map { |kind| { name: kind.text, id: kind.value } }
       }
       render_json config
     end
@@ -50,9 +50,9 @@ module ApiPartner
     private def params_create
       params.require(:recreation).permit(
         %i[
-          title second_title price amount material_price material_amount
+          title second_title price material_price
           minutes description flow_of_day borrow_item bring_your_own_item extra_information
-          youtube_id capacity category status kind
+          youtube_id capacity category status kind additional_facility_fee
         ],
         recreation_profile_attributes: %i[profile_id] # NOTE(okubo): profileの中間テーブル作成
       )
