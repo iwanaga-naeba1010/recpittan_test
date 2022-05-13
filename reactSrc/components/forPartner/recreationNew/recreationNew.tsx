@@ -12,7 +12,7 @@ const RecreationNew: React.FC = () => {
   const onSubmit = async (values: RecreationFormValues): Promise<void> => {
     console.log('values', values);
     setErrors([]);
-    const requestBody: { [key: string]: any } = {
+    const requestBody: { [key: string]: Record<string, unknown> } = {
       recreation: {
         title: values.title,
         secondTitle: values.secondTitle,
@@ -36,9 +36,8 @@ const RecreationNew: React.FC = () => {
         status: 'in_progress',
         // tags: values.tags,
         // targets: values.targets
-        recreationProfileAttributes:  { profileId: values.profileId, }
-      },
-
+        recreationProfileAttributes: { profileId: values.profileId }
+      }
     };
 
     try {

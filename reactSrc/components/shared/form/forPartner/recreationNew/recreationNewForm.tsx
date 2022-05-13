@@ -1,6 +1,4 @@
-import { Error } from '@/components/shared/parts';
 import { Recreation } from '@/types';
-import { isEmpty } from '@/utils';
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { FirstStep } from './firstStep';
@@ -34,7 +32,7 @@ export type RecreationFormValues = Pick<
   | 'categoryId'
   // | 'profile'
   | 'userId'
-> & { kind: string; tags: Array<string>; targets: Array<string>, profileId: number };
+> & { kind: string; tags: Array<string>; targets: Array<string>; profileId: number };
 
 export const RecreationNewForm: React.FC<Props> = (props) => {
   const { onSubmit } = props;
@@ -70,11 +68,9 @@ export const RecreationNewForm: React.FC<Props> = (props) => {
     setCurrentStep(currentStep + 1);
   };
   const handlePrev = () => setCurrentStep(currentStep - 1);
-  const [errors, setErrors] = useState<Array<string>>([]);
 
   return (
     <div>
-      {!isEmpty(errors) && <Error errors={errors} />}
       <form className='recreation' onSubmit={handleSubmit(onSubmit)}>
         {currentStep === 0 && <FirstStep handleNext={handleNext} register={register} getValues={getValues} />}
         {currentStep === 1 && <SecondStep handleNext={handleNext} handlePrev={handlePrev} register={register} />}

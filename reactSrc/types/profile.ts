@@ -7,4 +7,3 @@ export interface Profile extends Base {
   title: string;
   userId: number;
 }
-

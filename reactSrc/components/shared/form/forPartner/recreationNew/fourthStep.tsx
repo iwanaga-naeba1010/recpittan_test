@@ -11,15 +11,21 @@ export const FourthStep: React.FC<Props> = (props) => {
     <div>
       <div className='d-flex'>
         <p className='px-1 small text-secondary font-weight-bold border border-2 border-secondary rounded-circle'>✔︎</p>
-        <p className='ms-1 px-1 small text-secondary font-weight-bold border border-2 border-secondary rounded-circle'>✔︎</p>
-        <p className='ms-1 px-1 small text-secondary font-weight-bold border border-2 border-secondary rounded-circle'>✔︎</p>
-        <p className='ms-1 px-1 small text-black font-weight-bold border border-2 border-dark rounded-pill'>ステップ4</p>
+        <p className='ms-1 px-1 small text-secondary font-weight-bold border border-2 border-secondary rounded-circle'>
+          ✔︎
+        </p>
+        <p className='ms-1 px-1 small text-secondary font-weight-bold border border-2 border-secondary rounded-circle'>
+          ✔︎
+        </p>
+        <p className='ms-1 px-1 small text-black font-weight-bold border border-2 border-dark rounded-pill'>
+          ステップ4
+        </p>
       </div>
 
       <div className='d-flex'>
         <h5 className='text-black font-weight-bold'>入力内容を確認</h5>
       </div>
-      <hr className='my-2'/>
+      <hr className='my-2' />
 
       <div className='mt-4'>
         <h5 className='text-black font-weight-bold'>レクの形式</h5>
@@ -53,14 +59,16 @@ export const FourthStep: React.FC<Props> = (props) => {
 
       <div className='mt-4'>
         <h5 className='text-black font-weight-bold'>レクの内容</h5>
-        <p>例：hogehogheohgoehgeogheogレクの内容例：hogehogheohgoehgeogheogレクの内容レクの内容レクの内容レクの内容レクの内容レクの内容レクの内容レクの内容レクの内容レクの内容レクの内容レクの内容レクの内容レクの内容レクの内容レクの内容レクの内容レクの内容レクの内容レクの内容レクの内容レクの内容レクの内容レクの内容レクの内容レクの内容レクの内容レクの内容レクの内容レクの内容レクの内容レクの内容レクの内容レクの内容レクの内容レクの内容レクの内容</p>
+        <p>
+          例：hogehogheohgoehgeogheogレクの内容例：hogehogheohgoehgeogheogレクの内容レクの内容レクの内容レクの内容レクの内容レクの内容レクの内容レクの内容レクの内容レクの内容レクの内容レクの内容レクの内容レクの内容レクの内容レクの内容レクの内容レクの内容レクの内容レクの内容レクの内容レクの内容レクの内容レクの内容レクの内容レクの内容レクの内容レクの内容レクの内容レクの内容レクの内容レクの内容レクの内容レクの内容レクの内容レクの内容レクの内容
+        </p>
       </div>
 
       <div className='mt-4'>
         <h5 className='text-black font-weight-bold'>受付可能エリアを選択</h5>
         <p>東京</p>
-     </div>
- 
+      </div>
+
       <div className='mt-4'>
         <h5 className='text-black font-weight-bold'>参加人数制限を設定</h5>
         <p>あり、10人</p>
@@ -93,7 +101,9 @@ export const FourthStep: React.FC<Props> = (props) => {
 
       <div className='mt-4'>
         <h5 className='text-black font-weight-bold'>その他を入力</h5>
-        <p>例：その他その他その他その他その他その他その他その他その他その他その他その他その他その他その他その他その他その他その他その他その他その他その他その他その他その他その他その他その他その他その他その他その他その他その他その他その他その他その他その他その他その他その他その他その他その他その他その他その他その他その他その他その他その他その他その他その他その他その他その他その他その他その他その他その他その他その他</p>
+        <p>
+          例：その他その他その他その他その他その他その他その他その他その他その他その他その他その他その他その他その他その他その他その他その他その他その他その他その他その他その他その他その他その他その他その他その他その他その他その他その他その他その他その他その他その他その他その他その他その他その他その他その他その他その他その他その他その他その他その他その他その他その他その他その他その他その他その他その他その他その他
+        </p>
       </div>
 
       <div className='mt-4'>
@@ -103,9 +113,25 @@ export const FourthStep: React.FC<Props> = (props) => {
         </ol>
       </div>
 
-      <button type='button' className="mt-2 py-2 w-100 rounded text-primary font-weight-bold bg-white border border-primary">編集する</button>
-      <button type='button' type='submit' className="mt-2 py-2 w-100 rounded text-white font-weight-bold bg-primary border border-primary">申請する</button>
-      <button type='button' className="mt-2 w-100 rounded text-primary font-weight-bold bg-white border border-white" onClick={handlePrev}>＜戻る</button>
+      <button
+        type='button'
+        className='mt-2 py-2 w-100 rounded text-primary font-weight-bold bg-white border border-primary'
+      >
+        編集する
+      </button>
+      <button
+        type='submit'
+        className='mt-2 py-2 w-100 rounded text-white font-weight-bold bg-primary border border-primary'
+      >
+        申請する
+      </button>
+      <button
+        type='button'
+        className='mt-2 w-100 rounded text-primary font-weight-bold bg-white border border-white'
+        onClick={handlePrev}
+      >
+        ＜戻る
+      </button>
     </div>
   );
 };

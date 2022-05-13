@@ -5,10 +5,10 @@ import { UseFormGetValues, UseFormRegister } from 'react-hook-form';
 import { RecreationFormValues } from './recreationNewForm';
 
 type Config = {
-  categories: Array<{name: string, id: number}>;
+  categories: Array<{ name: string; id: number }>;
   minutes: Array<number>;
   prefectures: Array<string>;
-  kind: Array<{name: string, id: number}>;
+  kind: Array<{ name: string; id: number }>;
 };
 
 const PrefectureItem = ({
