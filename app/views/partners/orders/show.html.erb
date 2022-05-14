@@ -22,6 +22,62 @@
       </td>
     </tr>
     <tr class="border-bottom">
+      <td class="pt-2 pb-2 w-25">法人名</td>
+      <td class="pt-2 pb-2 text-black text-end">
+        <%= @order.user.company.name %>
+      </td>
+    </tr>
+    <tr class="border-bottom">
+      <td class="pt-2 pb-2 w-25">施設ジャンル</td>
+      <td class="pt-2 pb-2 text-black text-end">
+        <%= @order.user.company.genre_text %>
+      </td>
+    </tr>
+    <tr class="border-bottom">
+      <td class="pt-2 pb-2 w-25">電話番号</td>
+      <td class="pt-2 pb-2 text-black text-end">
+        <%= @order.user.company.tel %>
+      </td>
+    </tr>
+    <tr class="border-bottom">
+      <td class="pt-2 pb-2 w-25">施設の特徴</td>
+      <td class="pt-2 pb-2 text-black text-end">
+        <%= @order.user.company.feature %>
+      </td>
+    </tr>
+    <tr class="border-bottom">
+      <td class="pt-2 pb-2 w-25">HP</td>
+      <td class="pt-2 pb-2 text-black text-end">
+        <%= @order.user.company.url %>
+        <%= link_to @order.user.company.url, @order.user.company.url, target: '_blank'%>
+      </td>
+    </tr>
+    <tr class="border-bottom">
+      <td class="pt-2 pb-2 w-25">施設定員</td>
+      <td class="pt-2 pb-2 text-black text-end">
+        <%= @order.user.company.capacity %>
+        人
+      </td>
+    </tr>
+    <tr class="border-bottom">
+      <td class="pt-2 pb-2 w-25">平均介護度</td>
+      <td class="pt-2 pb-2 text-black text-end">
+        <%= @order.user.company.nursing_care_level %>
+      </td>
+    </tr>
+    <tr class="border-bottom">
+      <td class="pt-2 pb-2 w-25">レクへの要望</td>
+      <td class="pt-2 pb-2 text-black text-end">
+        <%= @order.user.company.request %>
+      </td>
+    </tr>
+    <tr class="border-bottom">
+      <td class="pt-2 pb-2 w-25">貸出可能品</td>
+      <td class="pt-2 pb-2 text-black text-end">
+        <%= @order.user.company.tags.map(&:name).join(', ') %>
+      </td>
+    </tr>
+    <tr class="border-bottom">
       <td class="pt-2 pb-2 w-25">担当者</td>
       <td class="pt-2 pb-2 text-black text-end">
         <%= @order.user.company.person_in_charge_name %>
