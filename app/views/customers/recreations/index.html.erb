@@ -2,6 +2,43 @@
   '300種類を超える業界No1の介護レクリーションマッチングサイト',
   'エブリ・プラスは300種類以上の介護レクリエーションを提供しているマッチングサイトです。複数条件から簡単にレクリエーションを簡単検索・発注することが可能です',
   nil, nil) %>
+<%= search_form_for Recreation.ransack(params[:q]), url: customers_recreations_path, class: "d-flex search border-top" do |f| %>
+  <div  class="d-inline-flex w-100 px-5 mt-4">
+    <div class="nav-item px-2 w-25">
+      <p class="font-weight-bold">レクのカテゴリ</p>
+      <%= f.select :category_eq, options_for_select(Recreation.category.values.map { |v| [v.text, v.value] }, selected: Recreation.ransack(params[:q]).category_eq), { include_blank: 'すべて' }, class: 'form-select'%>
+    </div>
+    <div class="nav-item px-2 w-25">
+      <p class="font-weight-bold">レクの形式</p>
+      <%= f.select :kind_eq, options_for_select(Recreation.kind.values.map { |v| [v.text, v.value] }, selected: Recreation.ransack(params[:q]).kind_eq), { include_blank: 'すべて' }, class: 'form-select'%>
+    </div>
+    <div class="nav-item px-2 w-50">
+      <p class="font-weight-bold">レクの金額</p>
+      <div class="d-inline-flex w-100">
+        <li class="list-unstyled w-50">
+          <div class="input-group mr-sm-2">
+            <span class="input-group-text border-end-0 bg-light">
+              <i class="material-icons every">¥</i>
+            </span>
+            <%= f.text_field :price_gteq, class: 'form-control border-start-0', min: 0%>
+          </div>
+        </li>
+        <span class="text-black-50 mx-4"> - </span>
+        <li class="list-unstyled w-50">
+          <div class="input-group mr-sm-2">
+            <span class="input-group-text border-end-0 bg-light">
+              <i class="material-icons every">¥</i>
+            </span>
+            <%= f.text_field :price_lteq, class: 'form-control border-start-0', min: 0%>
+          </div>
+        </li>
+      </div>
+    </div>
+    <div>
+      <%= f.submit '検索', class: 'btn btn-cprimary text-white' %>
+    </div>
+  </div>
+<% end %>
 
 <main class="list">
   <div class="container pt-2">
