@@ -11,13 +11,23 @@
 </div>
 
 <div class="p-3">
-  <div class="p-4 text-black">
-    <p>
-     ご自身でZoomを発行する場合は発行したZoom URLを下記フォームに貼り付けて保存してください。
-    </p>
-  </div>
+  <div class="body bg-white p-3 mb-3">
+    <h4 class="text-black font-weight-bold">Zoomご自身で発行しない方</h4>
+    <%= link_to 'zoom発行代行を依頼する',
+      'https://docs.google.com/forms/d/e/1FAIpQLSecpvrfGxwEsvIFqHsA7ymTise48AMnrzf5y3VSAYyzhUDq5g/viewform',
+      target: '_blank',
+      class: 'text-primary'%>
 
-  <div class="body bg-white border p-3 mb-3">
+    <p>
+      ※300円/回が支払額より引かれます
+    </p>
+
+    <h4 class="text-black font-weight-bold">Zoomご自身で発行される方</h4>
+    <p>
+      ※必ずzoom有料アカウントをご利用ください。
+      ※下記スペースにリンクを貼り付け(コピペ)をお願いいたします。
+    </p>
+
     <%= render 'partners/zooms/form', zoom: @zoom, order: @zoom, url: partners_order_zooms_path(@order.id) %>
   </div>
 </div>

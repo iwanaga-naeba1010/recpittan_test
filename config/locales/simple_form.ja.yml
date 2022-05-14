@@ -19,7 +19,14 @@ ja:
         number_of_people: 人数を入力
         number_of_facilities: 施設数を入力
         message: "例）●●様、はじめまして。クリスマスイベントとして開催を検討しております\nクリスマスに合わせた内容で開催したいのですが、ご相談できますでしょうか？"
+      zoom:
+        url: |
+          例)
+          Zoomミーティングに参加する
+          https://us06web.zoom.us/j/everyplus?pwd=everyplus
 
+          ミーティングID: 123 4567 7890
+          パスコード: 123456
     error_notification:
       default_message: "エラーが発生しました。"
     # Examples
