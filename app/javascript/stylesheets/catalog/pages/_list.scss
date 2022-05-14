@@ -47,3 +47,28 @@
   }
 }
 
+@media screen and (min-width: 600px) {
+  .list-search-form {
+    .serach-forms {
+      display: inline-flex;
+    }
+  }
+}
+
+.list-search-form {
+  .label-size {
+    font-size: 13px;
+  }
+  .search-select {
+    width: 220px;
+  }
+  .price-list {
+    width: 45%;
+  }
+  .search-bottum {
+    float: right;
+  }
+  .price-range {
+    font-size: 25px;
+  }
+}

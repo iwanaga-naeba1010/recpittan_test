@@ -1,5 +1,8 @@
 <%= simple_form_for zoom, url: url do |f| %>
-  <h4 class="text-black font-weight-bold">Zoom情報を適用するために項目を入力してください</h4>
+  <h4 class="text-black font-weight-bold">当日のzoomリンク</h4>
+  <p>
+    入力されたリンクは施設側でも確認が可能です。
+  </p>
   <div>
     <%= f.input :url, as: :text, input_html: { rows: 10 } %>
     <%= f.input :price, as: :hidden, input_html: { value: 0 } %>
