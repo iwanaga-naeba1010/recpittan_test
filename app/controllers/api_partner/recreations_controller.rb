@@ -12,10 +12,12 @@ module ApiPartner
     end
 
     def create
+      # TODO(okubo): statusやkindが文字列で送られてくるが、それをAPIで保存できるか心配
       recreation = Resources::Recreations::Create.run!(
         recreation_params: params_create.to_h,
         current_user: current_user,
-        profile_id: params_create.dig(:recreation_profile_attributes, :profile_id)
+        profile_id: params_create.dig(:recreation_profile_attributes, :profile_id),
+        prefectures: params_create[:recreation_prefectures_attributes]&.pluck(:name)
       )
       render_json RecreationSerializer.new.serialize(recreation: recreation)
     rescue StandardError => e
@@ -34,7 +36,10 @@ module ApiPartner
     # NOTE(okubo): configは予約後で使えない
     def config_data
       config = {
-        categories: Recreation.category.values.map(&:text)
+        categories: Recreation.category.values.map { |category| { name: category.text, enum_key: category } },
+        minutes: [5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55], # TODO(okubo): 後々綺麗にする
+        prefectures: RecreationPrefecture.names,
+        kind: Recreation.kind.values.map { |kind| { name: kind.text, enum_key: kind } }
       }
       render_json config
     end
@@ -46,11 +51,12 @@ module ApiPartner
     private def params_create
       params.require(:recreation).permit(
         %i[
-          title second_title price amount material_price material_amount
+          title second_title price material_price
           minutes description flow_of_day borrow_item bring_your_own_item extra_information
-          youtube_id capacity category status kind
+          youtube_id capacity category status kind additional_facility_fee
         ],
-        recreation_profile_attributes: %i[profile_id] # NOTE(okubo): profileの中間テーブル作成
+        recreation_profile_attributes: %i[profile_id], # NOTE(okubo): profileの中間テーブル作成
+        recreation_prefectures_attributes: %i[name]
       )
     end
   end
