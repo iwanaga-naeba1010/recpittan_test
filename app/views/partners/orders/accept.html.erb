@@ -20,12 +20,12 @@
 
   <div>
       <p class="text-black pt-2">承諾後〜開催までの流れ</p>
-    <% if @order.recreation.kind.visit? %>
+    <% if @order.recreation_kind.visit? %>
       <ul class='list-unstyled'>
         <li>①お礼のメッセージをチャットで送りましょう!</li>
         <li>②開催３日前の午前中に開催確認と終了報告記載のための確認メールが届きますのでご確認ください。</li>
       </ul>
-    <% elsif @order.recreation.kind.online? %>
+    <% elsif @order.recreation_kind.online? %>
       <ul class='list-unstyled'>
         <li>①次ページでzoomリンクの発行手続きを行います。</li>
         <li>②お礼のメッセージをチャットで送りましょう!</li>
