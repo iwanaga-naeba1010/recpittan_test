@@ -21,7 +21,7 @@
               <span class="input-group-text border-end-0 bg-light">
                 <i class="material-icons every">¥</i>
               </span>
-              <%= f.text_field :price_gteq, class: 'form-control border-start-0', min: 0%>
+              <%= f.text_field :price_gteq, class: 'form-control border-start-0', min: 0, placeholder: '0' %>
             </div>
           </li>
           <span class="text-black-50 mx-2 price-range"> - </span>
@@ -30,7 +30,7 @@
               <span class="input-group-text border-end-0 bg-light">
                 <i class="material-icons every">¥</i>
               </span>
-              <%= f.text_field :price_lteq, class: 'form-control border-start-0', min: 0%>
+              <%= f.text_field :price_lteq, class: 'form-control border-start-0', min: 0, placeholder: '100000' %>
             </div>
           </li>
         </div>
