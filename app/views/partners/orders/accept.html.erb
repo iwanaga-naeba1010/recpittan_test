@@ -18,6 +18,23 @@
     </p>
   </div>
 
+  <div>
+      <p class="text-black pt-2">承諾後〜開催までの流れ</p>
+    <% if @order.recreation.kind.visit? %>
+      <ul class='list-unstyled'>
+        <li>①お礼のメッセージをチャットで送りましょう!</li>
+        <li>②開催３日前の午前中に開催確認と終了報告記載のための確認メールが届きますのでご確認ください。</li>
+      </ul>
+    <% elsif @order.recreation.kind.online? %>
+      <ul class='list-unstyled'>
+        <li>①次ページでzoomリンクの発行手続きを行います。</li>
+        <li>②お礼のメッセージをチャットで送りましょう!</li>
+        <li>③開催３日前に開催確認と終了報告記載のための確認メールが届きますのでご確認ください。</li>
+        <li>※ご自身でzoomリンク発行する場合、開催7日前までを目安にリンクを指定場所に貼り付けしていただければ大丈夫です。</li>
+      </ul>
+    <% end %>
+  </div>
+
   <div class="body bg-white p-3 mb-3">
     <div class="col-md-12 text-center pt-5">
       <%= link_to 'キャンセル', confirm_partners_order_path, class: 'text-white btn btn-secondary btn-lg btn-block w-100 p-3 mt-2 mb-2' %>
