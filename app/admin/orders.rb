@@ -285,10 +285,14 @@ ActiveAdmin.register Order do
 
       # NOTE(okubo): 相談中
       if order.status.value >= 10 && order.status.value <= 40
+        # NOTE(okubo): paramsにstart_atが存在する && order.start_atが空 === 正式依頼ならメール
+        is_send_mail = permitted_params[:order][:start_at].present? && order.start_at.nil?
+
         order.update!(permitted_params[:order].except(:evaluation, :report_attributes))
+
         # NOTE(okubo): 時間の記載がある -> 正式依頼
         # TODO(okubo): order.start_at.nil? つまり、あだ入力できていない、なら送信
-        OrderRequestMailer.notify(order, order.user).deliver_now if permitted_params[:order][:start_at].present? && order.start_at.nil?
+        OrderRequestMailer.notify(order, order.user).deliver_now if is_send_mail
       end
 
       # NOTE(okubo): 開催前

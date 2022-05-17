@@ -1,5 +1,7 @@
 //@import '~bootstrap/scss/bootstrap';
 
 @import 'catalog/default';
-/* 各ページ */
-//@import "top";
+
+@import 'partner';
+@import 'partners/profile';
+@import 'partners/order-item';

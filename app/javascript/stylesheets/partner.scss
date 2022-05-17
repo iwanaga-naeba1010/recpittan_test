@@ -1,12 +1,12 @@
-@import "~@fortawesome/fontawesome-free/scss/fontawesome";
+@import '~@fortawesome/fontawesome-free/scss/fontawesome';
 // Extra small devices (portrait phones, less than 576px)
 @media (max-width: 575.98px) {
-  //display: none;
   .chat_form{
     .chat-message{
       width: 300px !important;
     }
   }
+
   .partner-site {
     .sidebar {
       width: 60% !important;
@@ -17,9 +17,11 @@
       background: #ffffff;
       transition: .7s;
     }
+
     .fade-in {
       transform: translateX(100%);
     }
+
     .fadein-btn {
       display: block;
       position: absolute;
@@ -30,6 +32,7 @@
       cursor: pointer;
       transition: 1s;
     }
+
     .inner_line {
       display: block;
       position: absolute;
@@ -40,25 +43,32 @@
       transition: 1s;
       border-radius: 4px;
     }
+
     .line_first {
       top: 0;
     }
+
     .line_second {
       top: 10px;
     }
+
     .line_third {
-      bottom: 0px;
+      bottom: 0;
     }
+
     .line_top,.line_middle,.line_bottom{
       background: white;
     }
+
     .line_top {
       transform: translateY(10px) rotate(-45deg);
       top: 0;
     }
+
     .line_middle {
       opacity: 0;
     }
+
     .line_bottom {
       transform: translateY(-10px) rotate(45deg);
       bottom: 0;
@@ -143,52 +153,6 @@ body {
     .sub_header {
       background-color: white;
       box-shadow: rgba(100, 100, 111, 0.2) 0 0 10px 0;
-    }
-
-    .order-wrapper {
-      border-bottom: #bbbbbb 1px;
-      display: grid;
-      grid-auto-rows: 40px 55px 40px 1fr;
-      grid-template-columns: 1fr;
-
-      @media (max-width: 767.98px) {
-        grid-auto-rows: 60px 55px 40px 1fr;
-        grid-template-columns: 1fr;
-
-        .company_name {
-          h3 {
-            font-size: 18px;
-          }
-        }
-      }
-
-      .company_name {
-        grid-row: 1;
-        grid-column: 1;
-      }
-
-      .partner_name {
-        grid-row: 2;
-        grid-column: 1;
-      }
-
-      .date {
-        grid-row: 3;
-        grid-column: 1;
-      }
-
-      .status {
-        grid-row: 4;
-        grid-column: 1;
-      }
-
-      .status {
-        &__cunsult {
-          border: #3dc2ff 1px solid;
-          color: #3dc2ff;
-          border-radius: 5px;
-        }
-      }
     }
   }
 
