@@ -1,0 +1,19 @@
+.order-item {
+  border-bottom: #bbbbbb 1px;
+
+  @media (max-width: 767.98px) {
+    .company_name {
+      h3 {
+        font-size: 18px;
+      }
+    }
+  }
+
+  .status {
+    &__cunsult {
+      border: #3dc2ff 1px solid;
+      color: #3dc2ff;
+      border-radius: 5px;
+    }
+  }
+}
