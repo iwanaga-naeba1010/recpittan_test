@@ -17,6 +17,18 @@
         <div class="message"><%= simple_format chat.message %></div>
         <span class="time"><%= time chat.created_at %></span>
       </div>
+
+      <% if chat.file? %>
+        <div class="mychat">
+          <div class="message">
+            <%= link_to chat.file.url, target: '_blank', rel: 'noopener' do %>
+              <%= chat.file.file.filename %>
+            <% end %>
+          </div>
+          <div class="time"><%= time chat.created_at %></div>
+        </div>
+      <% end %>
+
     <% elsif chat.user_role.customer? %>
       <!-- 施設 -->
       <div class="your-chat">
