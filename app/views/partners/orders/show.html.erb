@@ -28,7 +28,7 @@
       </td>
     </tr>
     <tr class="border-bottom">
-      <td class="pt-2 pb-2 w-25">施設ジャンル</td>
+      <td class="pt-2 pb-2 w-25">事業所種別</td>
       <td class="pt-2 pb-2 text-black text-end">
         <%= @order.user.company.genre_text %>
       </td>
@@ -48,7 +48,6 @@
     <tr class="border-bottom">
       <td class="pt-2 pb-2 w-25">HP</td>
       <td class="pt-2 pb-2 text-black text-end">
-        <%= @order.user.company.url %>
         <%= link_to @order.user.company.url, @order.user.company.url, target: '_blank'%>
       </td>
     </tr>
