@@ -298,7 +298,7 @@ export const ModalForm: React.FC<Props> = (props) => {
                     Japan
                   </span>
                   <label className='col-12 title-b pb-3' htmlFor='participant'>
-                    <span>住所を入力してください</span>
+                    <span>今回の開催する施設の住所を入力してください</span>
                     <span className='label required'>必須</span>
                   </label>
                   <div className='form-group col-6'>
