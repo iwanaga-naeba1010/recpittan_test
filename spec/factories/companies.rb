@@ -12,7 +12,7 @@
 #  feature                    :text
 #  genre                      :integer          default("residential_fee_based_nursing_home")
 #  name                       :string
-#  nursing_care_level         :integer
+#  nursing_care_level         :string
 #  person_in_charge_name      :string
 #  person_in_charge_name_kana :string
 #  prefecture                 :string
@@ -35,6 +35,6 @@ FactoryBot.define do
     url { 'https://google.com' }
     feature { 'mystirng' }
     capacity { 20 }
-    nursing_care_level { 3 }
+    nursing_care_level { '介護レベル１' }
   end
 end
