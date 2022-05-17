@@ -12,7 +12,7 @@
 #  feature                    :text
 #  genre                      :integer          default("residential_fee_based_nursing_home")
 #  name                       :string
-#  nursing_care_level         :integer
+#  nursing_care_level         :string
 #  person_in_charge_name      :string
 #  person_in_charge_name_kana :string
 #  prefecture                 :string
