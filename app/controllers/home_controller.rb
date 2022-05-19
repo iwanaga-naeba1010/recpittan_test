@@ -47,5 +47,7 @@ class HomeController < ApplicationController
                   '【オンライン】ジュークのほのぼのウクレレコンサート',
                 ]).to_a
     end
+
+    @tags = Tag.where(kind: :tag).to_a
   end
 end
