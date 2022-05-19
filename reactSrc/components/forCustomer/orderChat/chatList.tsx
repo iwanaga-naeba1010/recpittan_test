@@ -27,7 +27,7 @@ export const ChatList: React.FC<Props> = (props): JSX.Element => {
     <>
       <div className='col-md-7'>
         <div className='card chat-container'>
-          <div className='card-header bg-white'>{order?.recreation?.instructorName} さんとのチャット</div>
+          <div className='card-header bg-white'>{order?.recreation?.profile?.name} さんとのチャット</div>
           <div className='card-body bg-ba02'>
             {chats !== undefined && (
               <>
