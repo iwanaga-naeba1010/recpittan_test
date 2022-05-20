@@ -2,52 +2,32 @@
   <% cache('home/top_section') do %>
     <div class="jumbotron jumbotron-top">
       <div class="container top">
-        <h1 class="">利用者さんのやりたいを叶えるレクがここに</h1>
+        <h1 class="rounded">利用者さんのやりたいを<br>叶えるレクがここに</h1>
         <h2 class="d-none">300種類以上のレクから検索</h2>
       </div>
+    </div>
+    <div class="container my-2 px-0">
+      <div class="row">
+        <div class="col-md">
+          <%= link_to "https://everyplus.jp/new_user", target: '_blank', rel: 'noopener' do%>
+            <%= image_pack_tag 'new_user.png', class: 'w-100', alt: '初めての方へ', loading: 'lazy' %>
+          <% end %>
+        </div>
+        <div class="col-md">
+          <%= link_to "https://everyplus.jp/plan", target: '_blank', rel: 'noopener' do%>
+            <%= image_pack_tag 'plan.png', class: 'w-100', alt: 'ご利用施設の活用例', loading: 'lazy' %>
+          <% end %>
+        </div>
+      </div>
       <%= render 'shared/home/categories' %>
+      <%= render 'shared/home/tags', tags: @tags %>
     </div>
   <% end %>
-  <article class="container top pt-4 px-0">
-    <div class="row py-2">
-      <div class="col-12">
-        <!-- TODO: リリースのタイミングで有効化する -->
-        <!-- TODO: Yoshimotoのタグができたらこちらに追加する -->
-        <% cache('home/yoshimoto_section') do %>
-          <%= link_to customers_recreations_path(q: { tags_name_eq: '吉本興業' }), class: 'nav-link' do %>
-            <%= image_pack_tag 'yoshimoto.png', class: 'img-fluid', alt: '吉本レク画像', loading: 'lazy' %>
-          <% end %>
-        <% end %>
-      </div>
-    </div>
-    <div class="row py-2">
-      <div class="col-12">
-        <h1 class="sub-title">よしもとの人気レク</h1>
-      </div>
-    </div>
-    <div class="row">
-      <% @yoshimoto_recs.each do |rec| %>
-        <%= render 'shared/home/card', rec: rec %>
-      <% end %>
-    </div>
-  </article>
-  <article class="container pt-4 px-0">
-    <div class="row py-3">
-      <div class="col-12">
-        <h1 class="sub-title">オンライン旅行の人気レク</h1>
-      </div>
-    </div>
-    <div class="row">
-      <% @travel_recs.each do |rec| %>
-        <%= render 'shared/home/card', rec: rec %>
-      <% end %>
-    </div>
-  </article>
 
   <article class="container pt-4 px-0">
     <div class="row py-3">
       <div class="col-12">
-        <h1 class="sub-title">オンライン音楽の人気レク</h1>
+        <h5 class="mt-5 font-weight-bold text-black">人気のオンラインレク</h5>
       </div>
     </div>
     <div class="row">
@@ -56,4 +36,31 @@
       <% end %>
     </div>
   </article>
+
+  <article class="container pt-4 px-0">
+    <div class="row py-2">
+      <div class="col-12">
+        <h5 class="mt-5 font-weight-bold text-black">よしもとのオンラインレク</h5>
+      </div>
+    </div>
+    <div class="row">
+      <% @yoshimoto_recs.each do |rec| %>
+        <%= render 'shared/home/card', rec: rec %>
+      <% end %>
+    </div>
+  </article>
+
+  <article class="container pt-4 px-0">
+    <div class="row py-2">
+      <div class="col-12">
+        <h5 class="mt-5 font-weight-bold text-black">旅行のオンラインレク</h5>
+      </div>
+    </div>
+    <div class="row">
+      <% @travel_recs.each do |rec| %>
+        <%= render 'shared/home/card', rec: rec %>
+      <% end %>
+    </div>
+  </article>
 </main>
+

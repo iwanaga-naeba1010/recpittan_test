@@ -13,29 +13,35 @@
     background-image: url("../images/top/top_sm.jpg");
 
     @include media-breakpoint-only(sm) {
+      padding-top: calc(100vw / 16 * 4);
       background-image: url("../images/top/top_sm.jpg");
     }
 
     @include media-breakpoint-only(md) {
+      padding-top: calc(100vw / 16 * 4);
       padding-bottom: 8rem;
       background-image: url("../images/top/top_md.jpg");
     }
 
     @include media-breakpoint-only(lg) {
-
-      background-image: url("../images/top/top_lg.jpg");
+      padding-top: calc(100vw / 16 * 4);
+      background-image: url("../images/top/top_lg.png");
+      background-position: top;
     }
 
     @include media-breakpoint-up(xl) {
       padding-top: calc(100vw / 16 * 4);
-      padding-bottom: calc(100vw / 16 * 5);
-      background-image: url("../images/top/top_xl.jpg");
+      padding-bottom: 0;
+      background-image: url("../images/top/top_lg.png");
+      background-position: top;
     }
 
     @include media-breakpoint-up(xxl) {
       padding-top: calc(100vw / 16 * 4);
-      padding-bottom: calc(100vw / 16 * 5);
-      background-image: url("../images/top/top_xl.jpg");
+      padding-bottom: calc(100vw / 30 * 3);
+      background-image: url("../images/top/top_lg.png");
+      background-position: top;
+      background-size: contain;
     }
 
     // @include media-breakpoint-donw(md) {
@@ -49,15 +55,15 @@
       }
 
       &.categorys {
-        // background-color: red !important;
-        position: absolute;
-        bottom: -8rem;
+        bottom: 17rem;
         left: 0;
         right: 0;
       }
 
       h1 {
         display: inline-block;
+        position: absolute;
+        top: 40%;
         font-family: $jpFontFamilyBold;
         font-size: 1rem;
         opacity: 0.75;
@@ -72,7 +78,6 @@
 
         font-weight: bold;
         padding: 0.5rem 0.5rem;
-        // width: 66%;
         background-color: white;
         color: black;
         filter: drop-shadow(0px 2px 4px rgba(40, 40, 40, 0.15));
@@ -123,10 +128,19 @@
         @include media-breakpoint-only(xxl) {
           margin-top: rem(180);
         }
-
       }
+    }
+  }
 
+  .tag-label {
+    color: #92949C;
+    text-decoration: none;
+    border: 1px solid #92949C;
+    border-radius: rem(4);
+    font-size: rem(12);
+    line-height: rem(27);
+    &:hover {
+      color: #92949C;
     }
   }
 }
-
