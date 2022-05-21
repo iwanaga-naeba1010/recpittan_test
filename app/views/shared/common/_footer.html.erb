@@ -2,25 +2,28 @@
 <% cache('footer') do %>
   <footer class="container-fluid px-0">
     <div class="container">
-      <div class="row align-items-center justify-content-md-center">
-        <div class="col-10 mt-2 d-none d-lg-block">
-          <ul class="list-group list-group-horizontal">
+      <div class="row">
+        <div class="mt-2 d-none d-lg-block">
+          <ul class="list-group list-group-horizontal align-items-center justify-content-md-center">
             <li class="list-group-item border-0">
-              <a href="https://everyplus.jp/" class="link-href">エブリ・プラス公式HP</a>
+              <%= link_to 'エブリ・プラス公式HP', 'https://everyplus.jp', class: 'link-href', target: '_blank' %>
             </li>
             <li class="list-group-item border-0">
               <%= link_to 'レク一覧', customers_recreations_path, class: 'link-href' %>
             </li>
             <li class="list-group-item border-0">
+              <%= link_to 'レクを提供したい方はこちら', 'https://everyplus.jp/partner', class: 'link-href', target: '_blank' %>
+            </li>
+            <li class="list-group-item border-0">
               <%= link_to '導入事例', 'https://everyplus.jp/content', class: 'link-href', target: '_blank' %>
             </li>
-            <li class="list-group-item border-0 d-none">
+            <li class="list-group-item border-0">
               <%= link_to 'よくある質問', 'https://tayori.com/faq/5c0acac6bcdec23e3eac9bdf17d9e7f727d1c3cb', class: 'link-href', target: '_blank' %>
             </li>
             <li class="list-group-item border-0">
               <%= link_to 'お問い合わせ', 'https://everyplus.jp/contact', class: 'link-href', target: '_blank' %>
             </li>
-            <li class="list-group-item border-0">
+            <li class="rist-group-item border-0">
               <%= link_to '会社概要', 'https://everyplus.jp/company', class: 'link-href', target: '_blank' %>
             </li>
           </ul>
