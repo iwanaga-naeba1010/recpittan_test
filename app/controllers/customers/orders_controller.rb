@@ -39,7 +39,7 @@ class Customers::OrdersController < Customers::ApplicationController
         #{@order.number_of_people}人
 
         介護度目安
-        #{params_create[:tags]&.join('\n')}
+        #{params_create[:tags]&.join("\n")}
 
         住所
         #{@order.prefecture}#{@order.city}
