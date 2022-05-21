@@ -61,9 +61,9 @@ class CustomDevise::RegistrationsController < Devise::RegistrationsController
     devise_parameter_sanitizer.permit(
       :sign_up,
       keys: [
-        :role,
+        :role, :title,
         { company_attributes: %i[
-          name facility_name person_in_charge_name person_in_charge_name_kana genre
+          name facility_name person_in_charge_name person_in_charge_name_kana genre tel
         ] }
       ]
     )
