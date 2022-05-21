@@ -184,7 +184,7 @@ body {
               padding-bottom: rem(12);
               padding-left: rem(16);
               padding-right: rem(16);
-              border-radius: rem(60);
+              border-radius: rem(10);
             }
           }
         }
@@ -440,14 +440,10 @@ body {
         text-decoration: none;
         border: 1px solid #92949C;
         border-radius: rem(4);
-        font-weight: bold;
         font-size: rem(12);
-        // line-height: 120%;
-        line-height: rem(27);
-        padding-top: rem(4);
-        padding-bottom: rem(4);
-        padding-left: rem(6);
-        padding-right: rem(6);
+        &:hover {
+          color: #92949C;
+        }
       }
     }
 
@@ -491,14 +487,7 @@ body {
       text-decoration: none;
       border: 1px solid #92949C;
       border-radius: rem(4);
-      font-weight: bold;
       font-size: rem(12);
-      // line-height: 120%;
-      line-height: rem(27);
-      padding-top: rem(4);
-      padding-bottom: rem(4);
-      padding-left: rem(6);
-      padding-right: rem(6);
     }
   }
 }

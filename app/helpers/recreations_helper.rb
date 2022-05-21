@@ -27,7 +27,8 @@ module RecreationsHelper
       end
       tags.collect do |tag|
         concat(
-          link_to("##{tag.name}", customers_recreations_path(q: { tags_id_eq: tag.id }), class: 'tag-label', style: 'margin-right: 4px;')
+          link_to("##{tag.name}", customers_recreations_path(q: { tags_id_eq: tag.id }),
+                  class: 'tag-label px-1 my-1 font-weight-bold d-inline-block', style: 'margin-right: 4px;')
         )
       end
     end

@@ -35,10 +35,10 @@ const FileItem: React.FC<FileProps> = (props) => {
   return (
     <div className='row justify-content-start instructor pt-2'>
       <div className='col-auto align-self-start image pe-0'>
-        <img src="{{catalogThumbnailUri userId '128x128' 'jpg'}}" />
+        <img src={recreation.profile?.image} />
       </div>
       <div className='col-md-auto'>
-        <div className='name'>{recreation.instructorName}</div>
+        <div className='name'>{recreation.profile?.name}</div>
         <div className=' text'>
           <a href={chat.fileUrl} className='text-black' target='_blank' rel='noopener noreferrer'>
             {chat.filename}
@@ -60,10 +60,10 @@ const PartnerChat: React.FC<PartnerChatProps> = (props) => {
     <>
       <div className='row justify-content-start instructor pt-2'>
         <div className='col-auto align-self-start image pe-0'>
-          <img src="{{catalogThumbnailUri userId '128x128' 'jpg'}}" />
+          <img src={recreation.profile?.image} />
         </div>
         <div className='col-md-auto'>
-          <div className='name'>{recreation.instructorName}</div>
+          <div className='name'>{recreation.profile?.name}</div>
           <div className=' text'>
             {/* TODO(okubo): linkあればlink化する */}
             {replaceNewLineWithBr(chat.message)}
@@ -71,7 +71,7 @@ const PartnerChat: React.FC<PartnerChatProps> = (props) => {
         </div>
         <div className='col-auto align-self-end time'>{prettyHM(chat.createdAt)}</div>
       </div>
-      <FileItem key={chat.id} chat={chat} recreation={recreation} />
+      {chat.fileUrl !== null && <FileItem key={chat.id} chat={chat} recreation={recreation} />}
     </>
   );
 };
