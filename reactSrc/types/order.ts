@@ -4,7 +4,7 @@ import { Recreation } from './recreation';
 export type OrderStatusEnum =
   | 'inProgress'
   | 'waitingForAReplyFromPartner'
-  | 'WaitingForAReolyFromFacility'
+  | 'waitingForAReplyFromFacility'
   | 'facilityRequestInProgress'
   | 'requestDenied'
   | 'waitingForAnEventToTakePlace'
