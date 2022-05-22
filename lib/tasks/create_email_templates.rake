@@ -13,7 +13,6 @@ namespace :import do
           et.explanation = row['explanation']
           et.body =  row['body']
           et.title = row['title']
-          et.signature = row['signature']
           et.kind = row['kind']
         end
       end

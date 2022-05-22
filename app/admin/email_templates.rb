@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 ActiveAdmin.register EmailTemplate do
-  permit_params(%i[explanation title body signature])
+  permit_params(%i[explanation title body])
   actions :all
 
   index do
@@ -18,7 +18,6 @@ ActiveAdmin.register EmailTemplate do
       f.input :explanation
       f.input :title
       f.input :body
-      f.input :signature
     end
 
     f.actions
