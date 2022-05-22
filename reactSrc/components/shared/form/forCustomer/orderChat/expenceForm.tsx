@@ -54,7 +54,7 @@ export const ExpenseForm: React.FC<Props> = (props): JSX.Element => {
           {!canEdit &&
             (order.status === 'inProgress' ||
               order.status === 'waitingForAReplyFromPartner' ||
-              order.status === 'WaitingForAReolyFromFacility') && (
+              order.status === 'waitingForAReplyFromFacility') && (
               <a id='expensesEditButton' className='clink' onClick={() => setCanEdit(true)}>
                 編集
               </a>
