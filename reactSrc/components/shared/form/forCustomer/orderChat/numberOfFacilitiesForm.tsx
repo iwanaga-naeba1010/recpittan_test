@@ -55,7 +55,7 @@ export const NumberOfFacilitiesForm: React.FC<Props> = (props): JSX.Element => {
             {!canEdit &&
               (order.status === 'inProgress' ||
                 order.status === 'waitingForAReplyFromPartner' ||
-                order.status === 'WaitingForAReolyFromFacility') && (
+                order.status === 'waitingForAReplyFromFacility') && (
                 <a id='numberOfFacilitiesEditButton' className='clink' onClick={() => setCanEdit(true)}>
                   編集
                 </a>
