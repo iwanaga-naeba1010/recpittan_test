@@ -7,6 +7,9 @@
       </div>
     </div>
     <div class="container my-2 px-0">
+      <%= link_to "http://everyplus-1.hubspotpagebuilder.com/?hs_preview=WFhXaFlH-73956016388", target: '_blank', rel: 'noopener' do%>
+        <%= image_pack_tag 'trial_online_rec.png', class: 'w-100 mb-5', alt: '初めての方へ', loading: 'lazy' %>
+      <% end %>
       <div class="row">
         <div class="col-md">
           <%= link_to "https://everyplus.jp/new_user", target: '_blank', rel: 'noopener' do%>
@@ -38,6 +41,11 @@
   </article>
 
   <article class="container pt-4 px-0">
+    <% cache('home/yoshimoto_section') do %>
+      <%= link_to customers_recreations_path(q: { tags_name_eq: '吉本興業' }) do %>
+        <%= image_pack_tag 'yoshimoto.png', class: 'w-100', alt: '吉本レク画像', loading: 'lazy' %>
+      <% end %>
+    <% end %>
     <div class="row py-2">
       <div class="col-12">
         <h5 class="mt-5 font-weight-bold text-black">よしもとのオンラインレク</h5>
