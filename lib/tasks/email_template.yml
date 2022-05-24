@@ -65,7 +65,7 @@
     開催日を楽しみに待ちましょう
 
     レク詳細ページのリンクはこちら
-    <%= link_to customers_url, customers_url %>
+    <%= link_to customers_order_url(@order.id), customers_order_url(@order.id) %>
 
     注意事項
     ・承認後、レクをキャンセルする事はできません。
@@ -92,7 +92,7 @@
     <%= @order.user.username %> 様
 
     えぶりプラスをご利用いただきありがとうございます。
-    開催した<%= @order.recreation.title %>についてパートナーから終了報告のご確認依頼が届きました。
+    <%= @order.start_at&.strftime('%Y.%m.%d %H:%M') %> <%= @order.user.company.facility_name %> <%= @order.recreation.title %> についてパートナーから終了報告のご確認依頼が届きました。
 
     終了報告とは、パートナー様と施設様レクが開催された事や金額を確認し、請求書を発行するために行っております。
     内容ご確認の上、承認をお願い致します。
@@ -137,7 +137,7 @@
     <%= @order.recreation.user.username %> 様
 
     えぶりプラスをご利用いただきありがとうございます。
-    <%= @order.user.company.name %>から<%= @order.recreation.title %>のレクに相談・依頼が届きました。
+    <%= @order.user.company.facility_name %>から<%= @order.recreation.title %>のレクに相談・依頼が届きました。
 
     下記リンクから内容をご確認ください。
     ※ページにアクセスするにはログインが必要です。
@@ -185,7 +185,7 @@
 
     えぶりプラスをご利用いただきありがとうございます。
 
-    <%= @order.recreation.title %>の終了報告が施設様よりお断りされました。
+    <%= @order.start_at&.strftime('%Y.%m.%d %H:%M') %> <%= @order.user.company.facility_name %> <%= @order.recreation.title %> の終了報告が施設様よりお断りされました。
     施設様にお断りされた理由をチャットで伺いましょう。
     施設様とメッセージ後、再度終了報告をお願い致します。
 
@@ -200,7 +200,7 @@
     <%= @order.recreation.user.username %> 様
 
     えぶりプラスをご利用いただきありがとうございます。
-    <%= @order.recreation.title %> の終了報告が施設様より承認されました。
+    <%= @order.start_at&.strftime('%Y.%m.%d %H:%M') %> <%= @order.user.company.facility_name %> <%= @order.recreation.title %> の終了報告が施設様より承認されました。
     この案件は以上となります。お疲れ様でした！
     次の案件をお待ちください。
 
@@ -265,16 +265,18 @@
   explanation: PT:3日前確認
   kind: final_check # 16
   body: |
-    えぶりプラスをいつもご利用ご協力をいただき、誠にありがとうございます。
+    えぶりプラスです。
+    いつもご協力をいただき、誠にありがとうございます。
+
+    開催日時　施設名　<%= @order.recreation.title %> （レク名）の
     開催日が近づいて参りましたので、事前確認のご協力をお願い致します。
     楽しい時間を皆様を現場の皆様心待ちにしています！
-
     ----------------------------------------
+
     ■開催情報と事前確認確認
     <%= link_to "https://recreation.everyplus.jp/partners/orders/#{@order.id}/final_check", "https://recreation.everyplus.jp/partners/orders/#{@order.id}/final_check" %>
 
     ----------------------------------------
-
     ■終了報告について
     開催後、現場を離れる前に報酬を受け取るために終了報告記入をお願い致します。
     内容を施設様が内容を確認します。
@@ -283,5 +285,4 @@
     ■終了報告
     <%= link_to "https://recreation.everyplus.jp/partners/orders/#{@order.id}/reports/new",  "https://recreation.everyplus.jp/partners/orders/#{@order.id}/reports/new" %>
     ----------------------------------------
-
     ※このメールアドレスは送信専用です。返信をいただいてもご回答できませんのでご了承ください。
