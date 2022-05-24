@@ -16,16 +16,20 @@ class CustomDevise::RegistrationsController < Devise::RegistrationsController
   # POST /resource
   def create
     super do
+      # TODO(okubo): SQL2回発行していることになっているので、解消したい
       resource.update(
         username: params[:user][:company_attributes][:person_in_charge_name],
         username_kana: params[:user][:company_attributes][:person_in_charge_name_kana]
       )
-      message = <<~MESSAGE
-        事業所名： #{resource.company.facility_name}
-        管理画面案件URL： #{admin_company_url(resource.company.id)}
-      MESSAGE
-      SlackNotifier.new(channel: '#アクティブチャットスレッド').send('新規登録がありました', message)
     end
+
+    return if resource.id.blank?
+
+    message = <<~MESSAGE
+      事業所名： #{resource.company.facility_name}
+      管理画面案件URL： #{admin_company_url(resource.company.id)}
+    MESSAGE
+    SlackNotifier.new(channel: '#アクティブチャットスレッド').send('新規登録がありました', message)
   end
 
   # GET /resource/edit
@@ -61,9 +65,9 @@ class CustomDevise::RegistrationsController < Devise::RegistrationsController
     devise_parameter_sanitizer.permit(
       :sign_up,
       keys: [
-        :role,
+        :role, :title,
         { company_attributes: %i[
-          name facility_name person_in_charge_name person_in_charge_name_kana genre
+          name facility_name person_in_charge_name person_in_charge_name_kana genre tel
         ] }
       ]
     )
