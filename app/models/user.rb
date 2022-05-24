@@ -60,7 +60,7 @@ class User < ApplicationRecord
   # NOTE: deviseの認証が発火した時に動く。
   def after_confirmation
     # Do something...
-    AfterConfirmationMailer.notify(self).deliver_now
+    AfterConfirmationMailer.notify(user: self).deliver_now
   end
 
   # passwordなしで保存できるようにする

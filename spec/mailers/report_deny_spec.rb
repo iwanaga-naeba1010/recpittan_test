@@ -4,25 +4,26 @@ require 'rake'
 require 'rails_helper'
 
 RSpec.describe ReportDenyMailer, type: :mailer do
-  let!(:template) { create :email_template, kind: 'report_deny' }
+  # let!(:template) { create :email_template, kind: 'report_deny' }
+  let!(:template) { EmailTemplate.find_by(kind: 'report_deny') }
   let(:partner) { create :user, :with_recreations }
   let(:customer) { create :user, :with_customer }
   # NOTE(okubo): メール送信前に用意することでnilエラーを回避
   let!(:order) { create :order, recreation_id: partner.recreations.first.id, user_id: customer.id }
   let!(:report) { create :report, order_id: order.id }
 
-  before :all do
-    Rails.application.load_tasks
-    Rake::Task['load_email_templates:run'].invoke
-  end
+  # before :all do
+  #   Rails.application.load_tasks
+  #   Rake::Task['load_email_templates:run'].invoke
+  # end
 
   describe 'chat_start' do
-    let(:mail) { ReportDenyMailer.notify(order) }
+    let(:mail) { ReportDenyMailer.notify(order: order) }
 
     # NOTE: 管理画面で変更するためテスト不要
-    # it 'renders the subject' do
-    #   expect(mail.subject).to eq(template.title)
-    # end
+    it 'renders the subject' do
+      expect(mail.subject).to eq(template.title)
+    end
 
     it 'renders the reciever email' do
       expect(mail.to).to eq([partner.email])

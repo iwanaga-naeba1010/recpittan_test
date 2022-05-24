@@ -14,58 +14,58 @@
   explanation: 顧客:パスワード再発行
   kind: customer_password_change # 1
   body: |
-    <%= @user_name %> 様
+    <%= @user.username %> 様
 
     えぶりプラスをご利用いただきありがとうございます。
 
     パスワード再設定用のリンクを送付いたします。
     下記のリンクより、変更をお願いいたします。
     再発行リンク
-    <%= link_to @url, @url %>
+    <%= link_to edit_user_password_url, edit_user_password_url %>
 
     ※このメールアドレスは送信専用です。返信をいただいてもご回答できませんのでご了承ください。
 - title: 相談・依頼が開始されました
   explanation: 顧客:相談開始
   kind: customer_chat_start # 2
   body: |
-    <%= @user_name %>  様
+    <%= @order.user.username %>  様
 
     えぶりプラスをご利用いただきありがとうございます。
-    <%= @recreation.title %> の相談・依頼が開始されました。
+    <%= @order.recreation.title %> の相談・依頼が開始されました。
 
     下記のリンクからパートナーとチャットができます。
     ご要望をパートナーに伝えましょう。
     ※チャットページにアクセスするにはログインが必要です。
-    <%= link_to @url, @url %>
+    <%= link_to chat_customers_order_url(@order.id), chat_customers_order_url(@order.id) %>
 
     ※このメールアドレスは送信専用です。返信をいただいてもご回答できませんのでご了承ください。
 - title: 新着メッセージが届きました
   explanation: 顧客:新規メッセージ
   kind: customer_chat # 3
   body: |
-    <%= @user_name %>  様
+    <%= @order.user.username %>  様
 
     えぶりプラスをご利用いただきありがとうございます。
-    ご相談中のレク<%= @recreation.title %>のパートナーからメッセージが届いています。
+    ご相談中のレク<%= @order.recreation.title %>のパートナーからメッセージが届いています。
 
     下記のリンクからメッセージをご確認ください。
     ※チャットページにアクセスするにはログインが必要です。
-    <%= link_to @url, @url %>
+    <%= link_to chat_customers_order_url(@order.id), chat_customers_order_url(@order.id) %>
 
     ※このメールアドレスは送信専用です。返信をいただいてもご回答できませんのでご了承ください。
 - title: パートナー様が正式依頼を承認されました
   explanation: 顧客:正式依頼_PTが承認
   kind: order_accept # 4
   body: |
-    <%= @user_name %> 様
+    <%= @order.user.username %> 様
 
     えぶりプラスをご利用いただきありがとうございます。
-    正式依頼した<%= @recreation.title %>がパートナー様より承認されました。
+    正式依頼した<%= @order.recreation.title %>がパートナー様より承認されました。
     承認されたためレクの開催が決まりました。
     開催日を楽しみに待ちましょう
 
     レク詳細ページのリンクはこちら
-    <%= link_to @url, @url %>
+    <%= link_to customers_url, customers_url %>
 
     注意事項
     ・承認後、レクをキャンセルする事はできません。
@@ -75,31 +75,31 @@
   explanation: 顧客:正式依頼_PTが拒否
   kind: order_deny # 5
   body: |
-    <%= @user_name %>様
+    <%= @order.user.username %>様
 
     えぶりプラスをご利用いただきありがとうございます。
-    正式依頼した<%= @recreation.title %>がパートナー様よりお断りされました。
+    正式依頼した<%= @order.recreation.title %>がパートナー様よりお断りされました。
     お断りされた理由をパートナー様に伺ってみましょう。
 
     チャットページのリンクはこちら
-    <%= link_to @url, @url %>
+    <%= link_to chat_customers_order_url(@order.id), chat_customers_order_url(@order.id) %>
 
     ※このメールアドレスは送信専用です。返信をいただいてもご回答できませんのでご了承ください。
 - title: パートナー様から終了報告のご確認依頼が届きました
   explanation: 顧客:終了報告投稿
   kind: customer_complete_report # 6
   body: |
-    <%= @user_name %> 様
+    <%= @order.user.username %> 様
 
     えぶりプラスをご利用いただきありがとうございます。
-    開催した<%= @recreation.title %>についてパートナーから終了報告のご確認依頼が届きました。
+    開催した<%= @order.recreation.title %>についてパートナーから終了報告のご確認依頼が届きました。
 
     終了報告とは、パートナー様と施設様レクが開催された事や金額を確認し、請求書を発行するために行っております。
     内容ご確認の上、承認をお願い致します。
     承認後、確認いただいた内容の請求書を翌月５日までに発行致します。
 
     終了報告確認ページへのリンクはこちら
-    <%= link_to @url, @url %>
+    <%= link_to edit_customers_report_url(@order.report.id), edit_customers_report_url(@order.report.id) %>
 
     注意事項
     ・終了報告を「お断り」する場合パートナー様がなぜお断りされたのか理解するために、なぜお断りをするのかその理由をチャットでお伝えください。
@@ -127,49 +127,49 @@
     下記のリンクより、変更をお願いいたします。
 
     再発行URL
-    <%= link_to @url, @url %>
+    <%= link_to edit_user_password_url, edit_user_password_url %>
 
     ※このメールアドレスは送信専用です。返信をいただいてもご回答できませんのでご了承ください。
 - title: 施設から相談・依頼が届きました
   explanation: PT:相談開始
   kind: partner_chat_start # 9
   body: |
-    <%= @user_name %> 様
+    <%= @order.recreation.user.username %> 様
 
     えぶりプラスをご利用いただきありがとうございます。
-    <%= @facility_name %>から<%= @recreation.title %>のレクに相談・依頼が届きました。
+    <%= @order.user.company.name %>から<%= @order.recreation.title %>のレクに相談・依頼が届きました。
 
     下記リンクから内容をご確認ください。
     ※ページにアクセスするにはログインが必要です。
-    <%= link_to @url, @url %>
+    <%= link_to chat_partners_order_url(@order.id), chat_partners_order_url(@order.id) %>
 
     ※このメールアドレスは送信専用です。返信をいただいてもご回答できませんのでご了承ください。
 - title: 施設から新着メッセージが届きました
   explanation: PT:新規メッセージ
   kind: partner_chat # 10
   body: |
-    <%= @user_name %> 様
+    <%= @order.recreation.user.username %> 様
 
     えぶりプラスをご利用いただきありがとうございます。
-    <%= @facility_name %>からメッセージが届いています。
+    <%= @order.user.company.name %>からメッセージが届いています。
 
     下記のリンクからメッセージをご確認ください。
     ※ページにアクセスするにはログインが必要です。
-    <%= link_to @url, @url %>
+    <%= link_to chat_partners_order_url(@order.id), chat_partners_order_url(@order.id) %>
 
     ※このメールアドレスは送信専用です。返信をいただいてもご回答できませんのでご了承ください。
 - title: 施設から正式依頼が届きました
   explanation: PT:正式依頼
   kind: order_request # 11
   body: |
-    <%= @user_name %> 様
+    <%= @order.recreation.user.username %> 様
 
     えぶりプラスをご利用いただきありがとうございます。
 
-    <%= @facility_name %>から正式依頼が届いています。
+    <%= @order.user.company.name %>から正式依頼が届いています。
     下記のリンクから内容をご確認ください。
     ※ページにアクセスするにはログインが必要です。
-    <%= link_to @url, @url %>
+    <%= link_to confirm_partners_order_url(@order.id), confirm_partners_order_url(@order.id) %>
 
     注意事項
     ・正式依頼は一度承認するとキャンセルができないためよくご確認いただきますようお願いいたします。
@@ -181,11 +181,11 @@
   explanation: PT:終了報告拒否
   kind: report_deny # 12
   body: |
-    <%= @user_name %> 様
+    <%= @order.recreation.user.username %> 様
 
     えぶりプラスをご利用いただきありがとうございます。
 
-    <%= @recreation.title %>の終了報告が施設様よりお断りされました。
+    <%= @order.recreation.title %>の終了報告が施設様よりお断りされました。
     施設様にお断りされた理由をチャットで伺いましょう。
     施設様とメッセージ後、再度終了報告をお願い致します。
 
@@ -197,10 +197,10 @@
   explanation: PT:終了報告承認
   kind: report_accept # 13
   body: |
-    <%= @user_name %> 様
+    <%= @order.recreation.user.username %> 様
 
     えぶりプラスをご利用いただきありがとうございます。
-    <%= @recreation.title %> の終了報告が施設様より承認されました。
+    <%= @order.recreation.title %> の終了報告が施設様より承認されました。
     この案件は以上となります。お疲れ様でした！
     次の案件をお待ちください。
 
@@ -212,10 +212,10 @@
   explanation: PT:終了報告投稿依頼
   kind: partner_complete_report # 14
   body: |
-    <%= @user_name %> 様
+    <%= @order.recreation.user.username %> 様
 
     えぶりプラスをご利用いただきありがとうございます。
-    <%= @recreation.title %> の開催お疲れ様でした。
+    <%= @order.recreation.title %> の開催お疲れ様でした。
     パートナー様と施設様にとって素敵な時間となりましたら幸いです。
 
     レクの開催が終了しましたので、
@@ -225,7 +225,7 @@
 
     下記のリンクから内容をご確認ください。
     ※ページにアクセスするにはログインが必要です。
-    <%= link_to @url, @url %>
+    <%= link_to "https://recreation.everyplus.jp/partners/orders/#{@order.id}/reports/new", "https://recreation.everyplus.jp/partners/orders/#{@order.id}/reports/new" %>
 
     注意事項
     ・終了報告がお断りされた場合、チャットでその理由を質問して相互理解をお願い致します。
@@ -236,7 +236,7 @@
   explanation: 顧客:登録サンクス
   kind: after_confirmation # 15
   body: |
-    <%= @user_name %>  様
+    <%= @user.username %>  様
 
     えぶりプラスにご登録いただきありがとうございます。
     会員登録が完了いたしました。
@@ -249,7 +249,7 @@
     1. 興味があるレクを選択しましょう
     以下URLのえぶりプラスにアクセスして気になるレクを探しましょう。
     レクの詳細ページから相談・依頼ができます。
-    <%= link_to @url, @url %>
+    <%= link_to customers_recreations_url, customers_recreations_url %>
 
     2. 相談・依頼をしましょう
     レクの気になる点の質問や希望日時、人数などを「相談・依頼の専用フォーム」に記載してパートナーに相談・依頼を行います。
@@ -271,7 +271,7 @@
 
     ----------------------------------------
     ■開催情報と事前確認確認
-    <%= link_to @check_url, @check_url %>
+    <%= link_to "https://recreation.everyplus.jp/partners/orders/#{@order.id}/final_check", "https://recreation.everyplus.jp/partners/orders/#{@order.id}/final_check" %>
 
     ----------------------------------------
 
@@ -281,7 +281,7 @@
     施設様が内容を確認し承認すると、開催月の翌々月末に指定の口座に報酬が入金されます。
     ----------------------------------------
     ■終了報告
-    <%= link_to @report_url, @report_url %>
+    <%= link_to "https://recreation.everyplus.jp/partners/orders/#{@order.id}/reports/new",  "https://recreation.everyplus.jp/partners/orders/#{@order.id}/reports/new" %>
     ----------------------------------------
 
     ※このメールアドレスは送信専用です。返信をいただいてもご回答できませんのでご了承ください。

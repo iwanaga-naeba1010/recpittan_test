@@ -29,11 +29,11 @@ class Partners::OrdersController < Partners::ApplicationController
     @order.update(params_create)
 
     if params_create[:is_accepted] == 'true'
-      OrderAcceptMailer.notify(@order).deliver_now
+      OrderAcceptMailer.notify(order: @order).deliver_now
     end
 
     if params_create[:is_accepted] == 'false'
-      OrderDenyMailer.notify(@order).deliver_now
+      OrderDenyMailer.notify(order: @order).deliver_now
     end
     redirect_to redirect_path, notice: message
   end

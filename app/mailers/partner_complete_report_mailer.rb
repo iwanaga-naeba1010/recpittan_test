@@ -1,15 +1,21 @@
 # frozen_string_literal: true
 
 class PartnerCompleteReportMailer < ApplicationMailer
-  def notify(order)
+  def notify(order:)
     @template = EmailTemplate.find_by(kind: 'partner_complete_report')
-    @recreation = order.recreation
-    @user = @recreation.user
-    @user_name = @user.username
-    @email = @user.email
+    @order = order
+    # @recreation = order.recreation
+    # @user = @recreation.user
+    # @user_name = @user.username
+    # @email = @user.email
+    #
+    # @url = "https://recreation.everyplus.jp/partners/orders/#{order.id}/reports/new"
 
-    @url = "https://recreation.everyplus.jp/partners/orders/#{order.id}/reports/new"
-
-    mail from: 'info@everyplus.jp', to: @email, subject: @template.title, template_path: 'common_mailer_template'
+    mail(
+      from: 'info@everyplus.jp',
+      to: @order.recreation.user.email,
+      subject: @template.title,
+      template_path: 'common_mailer_template'
+    )
   end
 end
