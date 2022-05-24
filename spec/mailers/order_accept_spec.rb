@@ -11,7 +11,7 @@ RSpec.describe OrderAcceptMailer, type: :mailer do
 
   before :all do
     Rails.application.load_tasks
-    Rake::Task['import:email_templates'].invoke
+    Rake::Task['load_email_templates:run'].invoke
   end
 
   describe 'order_accept' do
