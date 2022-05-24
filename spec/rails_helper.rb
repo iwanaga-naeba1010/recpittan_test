@@ -54,7 +54,7 @@ RSpec.configure do |config|
   # NOTE(okubo): email_templatesの読み込み実行
   config.before(:suite) do
     Rails.application.load_tasks
-    Rake::Task['import:email_templates'].invoke
+    Rake::Task['load_email_templates:run'].invoke
     puts '==============='
     puts 'loaded email templates!'
     puts '==============='

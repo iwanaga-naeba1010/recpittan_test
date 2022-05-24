@@ -1,12 +1,15 @@
 # frozen_string_literal: true
 
 class CustomerPasswordChangeMailer < ApplicationMailer
-  def notify(user)
+  def notify(user:)
     @template = EmailTemplate.find_by(kind: 'customer_password_change')
-    @user_name = user.username
-    @email = user.email
-    @url = edit_user_password_url
+    @user = user
 
-    mail from: 'info@everyplus.jp', to: @email, subject: @template.title, template_path: 'common_mailer_template'
+    mail(
+      from: 'info@everyplus.jp',
+      to: @user.email,
+      subject: @template.title,
+      template_path: 'common_mailer_template'
+    )
   end
 end

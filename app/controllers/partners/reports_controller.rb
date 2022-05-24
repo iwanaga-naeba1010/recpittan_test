@@ -18,7 +18,7 @@ class Partners::ReportsController < Partners::ApplicationController
     @order.number_of_facilities = params_create[:number_of_facilities]
 
     if @order.save
-      CustomerCompleteReportMailer.notify(@order).deliver_now
+      CustomerCompleteReportMailer.notify(order: @order).deliver_now
       redirect_to partners_order_path(@order.id), notice: t('action_messages.created', model_name: Report.model_name.human)
     else
       render :new
@@ -38,7 +38,7 @@ class Partners::ReportsController < Partners::ApplicationController
         expenses: params_create[:expenses].to_i,
         number_of_facilities: params_create[:number_of_facilities].to_i
       )
-      CustomerCompleteReportMailer.notify(@order).deliver_now
+      CustomerCompleteReportMailer.notify(order: @order).deliver_now
       redirect_to partners_order_path(@order.id), notice: t('action_messages.updated', model_name: Report.model_name.human)
     else
       render :edit
