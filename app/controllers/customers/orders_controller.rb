@@ -68,8 +68,8 @@ class Customers::OrdersController < Customers::ApplicationController
       MESSAGE
 
       # TODO: jobで回した方が良い
-      CustomerChatStartMailer.notify(@order, current_user).deliver_now
-      PartnerChatStartMailer.notify(@order, current_user).deliver_now
+      CustomerChatStartMailer.notify(order: @order).deliver_now
+      PartnerChatStartMailer.notify(order: @order).deliver_now
 
       SlackNotifier.new(channel: '#料金お問い合わせ').send('新規お問い合わせ', slack_message)
       # orderの詳細に飛ばす

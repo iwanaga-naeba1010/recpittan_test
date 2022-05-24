@@ -17,7 +17,7 @@ RSpec.describe 'update_held_order' do
 
     # NOTE(okubo): taskでmailも送信するので追加
     Rails.application.load_tasks
-    Rake::Task['import:email_templates'].invoke
+    Rake::Task['load_email_templates:run'].invoke
   end
 
   before(:each) do

@@ -249,8 +249,8 @@ ActiveAdmin.register Order do
 
       order.save!
 
-      CustomerChatStartMailer.notify(order, order.user).deliver_now
-      PartnerChatStartMailer.notify(order, order.user).deliver_now
+      CustomerChatStartMailer.notify(order: order).deliver_now
+      PartnerChatStartMailer.notify(order: order).deliver_now
       SlackNotifier.new(channel: '#アクティブチャットスレッド').send('管理画面から案件追加を行いました', "管理画面案件URL：#{admin_order_url(order.id)}")
 
       redirect_to admin_order_path(order.id)
@@ -280,7 +280,7 @@ ActiveAdmin.register Order do
 
         # NOTE(okubo): statusに応じてメール変更
         ReportDenyMailer.notify(order).deliver_now if order.report_status.denied?
-        ReportAcceptMailer.notify(order).deliver_now if order.report_status.accepted?
+        ReportAcceptMailer.notify(order: order).deliver_now if order.report_status.accepted?
       end
 
       # NOTE(okubo): 相談中
@@ -292,7 +292,7 @@ ActiveAdmin.register Order do
 
         # NOTE(okubo): 時間の記載がある -> 正式依頼
         # TODO(okubo): order.start_at.nil? つまり、あだ入力できていない、なら送信
-        OrderRequestMailer.notify(order, order.user).deliver_now if is_send_mail
+        OrderRequestMailer.notify(order: order).deliver_now if is_send_mail
       end
 
       # NOTE(okubo): 開催前

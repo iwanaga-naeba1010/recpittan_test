@@ -4,20 +4,21 @@ require 'rake'
 require 'rails_helper'
 
 RSpec.describe PartnerPasswordChangeMailer, type: :mailer do
-  let!(:template) { create :email_template, kind: 'partner_password_change' }
+  let!(:template) { EmailTemplate.find_by(kind: 'partner_password_change') }
+  # let!(:template) { create :email_template, kind: 'partner_password_change' }
   let(:customer) { create :user, :with_customer }
 
-  before :all do
-    Rails.application.load_tasks
-    Rake::Task['import:email_templates'].invoke
-  end
+  # before :all do
+  #   Rails.application.load_tasks
+  #   Rake::Task['load_email_templates:run'].invoke
+  # end
 
   describe 'chat_start' do
-    let(:mail) { PartnerPasswordChangeMailer.notify(customer) }
+    let(:mail) { PartnerPasswordChangeMailer.notify(user: customer) }
 
-    # it 'renders the subject' do
-    #   expect(mail.subject).to eq(template.title)
-    # end
+    it 'renders the subject' do
+      expect(mail.subject).to eq(template.title)
+    end
 
     it 'renders the reciever email' do
       expect(mail.to).to eq([customer.email])
