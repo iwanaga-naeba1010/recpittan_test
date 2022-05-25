@@ -8,46 +8,6 @@
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
-    padding-top: calc(100vw / 16 * 4);
-    padding-bottom: calc(100vw / 16 * 5);
-    background-image: url("../images/top/top_sm.jpg");
-
-    @include media-breakpoint-only(sm) {
-      padding-top: calc(100vw / 16 * 4);
-      background-image: url("../images/top/top_sm.jpg");
-    }
-
-    @include media-breakpoint-only(md) {
-      padding-top: calc(100vw / 16 * 4);
-      padding-bottom: 8rem;
-      background-image: url("../images/top/top_md.jpg");
-    }
-
-    @include media-breakpoint-only(lg) {
-      padding-top: calc(100vw / 16 * 4);
-      background-image: url("../images/top/top_lg.png");
-      background-position: top;
-    }
-
-    @include media-breakpoint-up(xl) {
-      padding-top: calc(100vw / 16 * 4);
-      padding-bottom: 0;
-      background-image: url("../images/top/top_lg.png");
-      background-position: top;
-    }
-
-    @include media-breakpoint-up(xxl) {
-      padding-top: calc(100vw / 16 * 4);
-      padding-bottom: calc(100vw / 30 * 3);
-      background-image: url("../images/top/top_lg.png");
-      background-position: top;
-      background-size: contain;
-    }
-
-    // @include media-breakpoint-donw(md) {
-    //     padding-top: 15rem;
-    //     padding-bottom: 9rem;
-    // }
 
     .container {
       &.top {
