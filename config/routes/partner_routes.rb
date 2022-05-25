@@ -18,6 +18,7 @@ namespace :partners do
 
     resources :chats, only: %i[create]
     resources :zooms, only: %i[new create edit update]
+    resources :evaluations, only: %i[show]
     resources :reports, only: %i[new create edit update] do
       member do
         get :complete

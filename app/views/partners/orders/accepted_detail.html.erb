@@ -42,5 +42,11 @@
         <div class="py-2 flex-shrink-1 bd-highlight"><i class="fas fa-chevron-right"></i></div>
       </div>
     <% end %>
+    <%= link_to partners_order_evaluation_path(id: @order.report.evaluation.id, order_id: @order.id) do %>
+      <div class="d-flex bd-highlight border-bottom">
+        <div class="py-2 w-100 bd-highlight">評価を確認する</div>
+        <div class="py-2 flex-shrink-1 bd-highlight"><i class="fas fa-chevron-right"></i></div>
+      </div>
+    <% end %>
   </div>
 </div>
