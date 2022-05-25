@@ -76,6 +76,7 @@ class Customers::OrdersController < Customers::ApplicationController
       redirect_to chat_customers_order_path(@order.id)
     end
   rescue StandardError
+    logger.error e.message
     render :new
   end
 
