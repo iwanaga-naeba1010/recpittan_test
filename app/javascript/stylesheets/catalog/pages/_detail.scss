@@ -56,6 +56,16 @@
     }
   }
 
+  .carousel-control-prev, .carousel-control-next {
+    width: 5%;
+    height: 90%;
+  }
+
+  .carousel-control-prev-icon, .carousel-control-next-icon {
+    position: absolute;
+    top: 50%;
+  }
+
   /* 共通 */
   .title-b {
     font-family: "Roboto";
