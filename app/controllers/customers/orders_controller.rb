@@ -25,7 +25,7 @@ class Customers::OrdersController < Customers::ApplicationController
     ActiveRecord::Base.transaction do
       @order.order_dates.map do |d|
         d.destroy if d.year.empty? && d.month.empty? && d.date.empty? && d.start_hour.empty? && d.start_minute.empty? && d.end_hour.empty? && d.end_minute.empty?
-      end
+      end.compact
       @order.save!
 
       message = <<~MESSAGE
