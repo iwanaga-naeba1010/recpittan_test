@@ -51,6 +51,8 @@ module RecreationsHelper
       '#F3B30C;'
     when 'イベント'
       '#FD7E14;'
+    when '食べ物'
+      '#800000;'
     when 'その他'
       '#339999;'
     else
