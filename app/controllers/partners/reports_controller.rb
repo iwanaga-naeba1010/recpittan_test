@@ -14,7 +14,7 @@ class Partners::ReportsController < Partners::ApplicationController
     @order.status = :final_report_admits_not
     @order.number_of_people = params_create[:number_of_people]
     @order.transportation_expenses = params_create[:transportation_expenses]
-    @order.expenses = params_create[:transportation_expenses]
+    @order.expenses = params_create[:expenses]
     @order.number_of_facilities = params_create[:number_of_facilities]
 
     if @order.save
