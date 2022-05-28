@@ -75,7 +75,8 @@ class Customers::OrdersController < Customers::ApplicationController
       # orderの詳細に飛ばす
       redirect_to chat_customers_order_path(@order.id)
     end
-  rescue StandardError
+  rescue StandardError => e
+    logger.error e.message
     render :new
   end
 
