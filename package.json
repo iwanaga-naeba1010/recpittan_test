@@ -7,7 +7,7 @@
     "lint:fix": "eslint --fix './{app/javascript,reactSrc,reactTest}/**/*.{ts,tsx}' && prettier --write './{app/javascript,reactSrc,reactTest}/**/*.{ts,tsx}'"
   },
   "dependencies": {
-    "@activeadmin/activeadmin": "^2.9.0",
+    "@activeadmin/activeadmin": "^2.13.1",
     "@babel/preset-react": "^7.16.0",
     "@babel/preset-typescript": "^7.16.0",
     "@fortawesome/fontawesome-free": "^5.15.4",
