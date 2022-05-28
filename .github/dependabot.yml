@@ -3,19 +3,21 @@ updates:
 - package-ecosystem: npm
   directory: "/"
   schedule:
-    interval: monthly
+    interval: daily
     time: "11:00"
     timezone: Asia/Tokyo
   open-pull-requests-limit: 20
+  target-branch: develop
   reviewers:
   - masahiro04
 - package-ecosystem: bundler
   directory: "/"
   schedule:
-    interval: monthly
+    interval: daily
     time: "11:00"
     timezone: Asia/Tokyo
   open-pull-requests-limit: 20
+  target-branch: develop
   reviewers:
   - masahiro04
   allow:
