@@ -33,7 +33,7 @@
     "react": "^18.1.0",
     "react-dom": "^18.1.0",
     "react-hook-form": "^7.27.1",
-    "snakecase-keys": "^5.4.1",
+    "snakecase-keys": "^5.4.2",
     "turbolinks": "^5.2.0",
     "typescript": "^4.4.4",
     "webpack": "^4.46.0",
