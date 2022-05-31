@@ -94,3 +94,6 @@ ja:
         *evaluation_list
       want_to_order_agein:
         *evaluation_list
+      is_public:
+        public: 公開にする
+        private: 非公開にする

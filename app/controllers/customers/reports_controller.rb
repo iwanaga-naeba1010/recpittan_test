@@ -40,7 +40,7 @@ class Customers::ReportsController < Customers::ApplicationController
       :status,
       evaluation_attributes: %i[
         id report_id ingenuity communication smoothness want_to_order_agein
-        message other_message price _destroy
+        message other_message price is_public _destroy
       ]
     )
   end
