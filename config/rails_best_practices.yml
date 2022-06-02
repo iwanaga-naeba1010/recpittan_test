@@ -30,6 +30,7 @@ MoveModelLogicIntoModelCheck:
     - "app/controllers/partners/reports_controller.rb"
     - "app/controllers/partners/chats_controller.rb"
     - "app/controllers/customers/recreation_files_controller.rb"
+    - "app/controllers/application_controller.rb"
 NeedlessDeepNestingCheck: { nested_count: 2 }
 NotRescueExceptionCheck: { }
 NotUseDefaultRouteCheck: { }
