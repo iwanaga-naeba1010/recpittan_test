@@ -10,13 +10,9 @@
 #  updated_at    :datetime         not null
 #  recreation_id :bigint           not null
 #
-# Indexes
-#
-#  index_recreation_prefectures_on_recreation_id  (recreation_id)
-#
 # Foreign Keys
 #
-#  fk_rails_...  (recreation_id => recreations.id)
+#  recreation_prefectures_recreation_id_fkey  (recreation_id => recreations.id)
 #
 FactoryBot.define do
   factory :recreation_prefecture do
