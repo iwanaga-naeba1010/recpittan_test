@@ -2,13 +2,13 @@
 
 class PartnerChatMailer < ApplicationMailer
   def notify(order:)
-    @template = EmailTemplate.find_by(kind: 'partner_chat')
+    @template = templates.find { |t| t['kind'] == 'partner_chat' }
     @order = order
 
     mail(
       from: 'info@everyplus.jp',
       to: @order.recreation.user.email,
-      subject: @template.title,
+      subject: @template['title'],
       template_path: 'common_mailer_template'
     )
   end

@@ -2,13 +2,13 @@
 
 class AfterConfirmationMailer < ApplicationMailer
   def notify(user:)
-    @template = EmailTemplate.find_by(kind: 'after_confirmation')
+    @template = templates.find { |t| t['kind'] == 'after_confirmation' }
     @user = user
 
     mail(
       from: 'info@everyplus.jp',
       to: @user.email,
-      subject: @template.title,
+      subject: @template['title'],
       template_path: 'common_mailer_template'
     )
   end

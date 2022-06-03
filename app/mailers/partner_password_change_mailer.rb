@@ -2,13 +2,13 @@
 
 class PartnerPasswordChangeMailer < ApplicationMailer
   def notify(user:)
-    @template = EmailTemplate.find_by(kind: 'partner_password_change')
+    @template = templates.find { |t| t['kind'] == 'partner_password_change' }
     @user = user
 
     mail(
       from: 'info@everyplus.jp',
       to: @user.email,
-      subject: @template.title,
+      subject: @template['title'],
       template_path: 'common_mailer_template'
     )
   end

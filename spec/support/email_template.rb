@@ -1,10 +1,7 @@
 # frozen_string_literal: true
 
-class ApplicationMailer < ActionMailer::Base
-  default from: 'from@example.com'
-  layout 'mailer'
-
-  private def templates
+RSpec.shared_context 'with email templates' do
+  let!(:templates) do
     path = Rails.root.join('lib/tasks/email_template.yml')
     YAML.load_file(path)
   end
