@@ -4,21 +4,17 @@ require 'rails_helper'
 require 'rake'
 
 RSpec.describe AfterConfirmationMailer, type: :mailer do
-  let!(:template) { EmailTemplate.find_by(kind: 'after_confirmation') }
+  include_context 'with email templates'
+  let!(:template) { templates.find { |t| t['kind'] == 'after_confirmation' } }
   let(:partner) { create :user, :with_recreations }
   let(:customer) { create :user, :with_customer }
   let(:order) { create :order, recreation_id: partner.recreations.first.id, user_id: customer.id }
-
-  # before :all do
-  #   Rails.application.load_tasks
-  #   Rake::Task['load_email_templates:run'].invoke
-  # end
 
   describe 'chat_start' do
     let(:mail) { AfterConfirmationMailer.notify(user: customer) }
 
     it 'renders the subject' do
-      expect(mail.subject).to eq(template.title)
+      expect(mail.subject).to eq(template['title'])
     end
 
     it 'renders the reciever email' do

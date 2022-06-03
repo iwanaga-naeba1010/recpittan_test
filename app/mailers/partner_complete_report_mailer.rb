@@ -2,13 +2,13 @@
 
 class PartnerCompleteReportMailer < ApplicationMailer
   def notify(order:)
-    @template = EmailTemplate.find_by(kind: 'partner_complete_report')
+    @template = template_by_kind(kind: 'partner_complete_report')
     @order = order
 
     mail(
       from: 'info@everyplus.jp',
       to: @order.recreation.user.email,
-      subject: @template.title,
+      subject: @template['title'],
       template_path: 'common_mailer_template'
     )
   end
