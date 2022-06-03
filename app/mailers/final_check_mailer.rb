@@ -2,7 +2,7 @@
 
 class FinalCheckMailer < ApplicationMailer
   def notify(order:)
-    @template = templates.find { |t| t['kind'] == 'final_check' }
+    @template = template_by_kind(kind: 'final_check')
     @order = order
 
     mail(

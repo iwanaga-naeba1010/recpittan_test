@@ -2,7 +2,7 @@
 
 class PartnerCompleteReportMailer < ApplicationMailer
   def notify(order:)
-    @template = templates.find { |t| t['kind'] == 'partner_complete_report' }
+    @template = template_by_kind(kind: 'partner_complete_report')
     @order = order
 
     mail(

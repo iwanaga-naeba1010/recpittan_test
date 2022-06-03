@@ -2,7 +2,7 @@
 
 class DeviseCustomMailer < Devise::Mailer
   def confirmation_instructions(record, token, opts = {})
-    @template = templates.find { |t| t['kind'] == 'customer_email_authenticatin' }
+    @template = template_by_kind(kind: 'customer_email_authenticatin')
 
     super(record, token, opts.merge(
       subject: @template['title']

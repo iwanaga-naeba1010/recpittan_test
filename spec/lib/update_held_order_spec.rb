@@ -14,10 +14,6 @@ RSpec.describe 'update_held_order' do
     Rake.application = @rake
     Rake.application.rake_require 'tasks/update_held_order'
     Rake::Task.define_task(:environment)
-
-    # NOTE(okubo): taskでmailも送信するので追加
-    Rails.application.load_tasks
-    Rake::Task['load_email_templates:run'].invoke
   end
 
   before(:each) do

@@ -2,7 +2,7 @@
 
 class CustomerPasswordChangeMailer < ApplicationMailer
   def notify(user:)
-    @template = templates.find { |t| t['kind'] == 'customer_password_change' }
+    @template = template_by_kind(kind: 'customer_password_change')
     @user = user
 
     mail(

@@ -2,7 +2,7 @@
 
 class PartnerChatMailer < ApplicationMailer
   def notify(order:)
-    @template = templates.find { |t| t['kind'] == 'partner_chat' }
+    @template = template_by_kind(kind: 'partner_chat')
     @order = order
 
     mail(

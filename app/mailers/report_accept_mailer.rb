@@ -2,7 +2,7 @@
 
 class ReportAcceptMailer < ApplicationMailer
   def notify(order:)
-    @template = templates.find { |t| t['kind'] == 'report_accept' }
+    @template = template_by_kind(kind: 'report_accept')
     @order = order
 
     mail(
