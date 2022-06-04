@@ -79,7 +79,7 @@ export const OrderChat: React.FC = () => {
                 </div>
                 <div className='p-2'>
                   <h4 className='title'>対象者目安</h4>
-                  {order.recreation?.targets.map((target) => (
+                  {[...order.recreation?.targets].sort((a, b) => a.id - b.id).map((target) => (
                     <div key={target.id} className='text-muted'>
                       ・{target.name}
                     </div>
