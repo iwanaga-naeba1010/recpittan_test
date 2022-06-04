@@ -1,6 +1,6 @@
 - title: メールアドレス認証のご確認の連絡
   explanation: 顧客:メールアドレス認証
-  kind: customer_email_authenticatin # 0
+  kind: customer_email_authentication # 0
   body: |
     えぶりプラスにご登録いただきありがとうございます。
 

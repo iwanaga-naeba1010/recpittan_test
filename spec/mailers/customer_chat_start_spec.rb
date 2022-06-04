@@ -4,21 +4,17 @@ require 'rake'
 require 'rails_helper'
 
 RSpec.describe CustomerChatStartMailer, type: :mailer do
-  let!(:template) { EmailTemplate.find_by(kind: 'customer_chat_start') }
+  include_context 'with email templates'
+  let!(:template) { templates.find { |t| t['kind'] == 'customer_chat_start' } }
   let(:partner) { create :user, :with_recreations }
   let(:customer) { create :user, :with_customer }
   let(:order) { create :order, recreation_id: partner.recreations.first.id, user_id: customer.id }
-
-  # before :all do
-  #   Rails.application.load_tasks
-  #   Rake::Task['load_email_templates:run'].invoke
-  # end
 
   describe 'chat_start' do
     let(:mail) { CustomerChatStartMailer.notify(order: order) }
 
     it 'renders the subject' do
-      expect(mail.subject).to eq(template.title)
+      expect(mail.subject).to eq(template['title'])
     end
 
     it 'renders the reciever email' do

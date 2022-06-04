@@ -2,13 +2,13 @@
 
 class ReportAcceptMailer < ApplicationMailer
   def notify(order:)
-    @template = EmailTemplate.find_by(kind: 'report_accept')
+    @template = template_by_kind(kind: 'report_accept')
     @order = order
 
     mail(
       from: 'info@everyplus.jp',
       to: @order.recreation.user.email,
-      subject: @template.title,
+      subject: @template['title'],
       template_path: 'common_mailer_template'
     )
   end
