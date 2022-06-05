@@ -14,9 +14,13 @@
 #  updated_at  :datetime         not null
 #  user_id     :bigint           not null
 #
+# Indexes
+#
+#  index_profiles_on_user_id  (user_id)
+#
 # Foreign Keys
 #
-#  profiles_user_id_fkey  (user_id => users.id)
+#  fk_rails_...  (user_id => users.id)
 #
 class Profile < ApplicationRecord
   mount_uploader :image, ImageUploader

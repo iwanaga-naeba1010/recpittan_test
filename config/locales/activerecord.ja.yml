@@ -147,6 +147,7 @@ ja:
         body: メッセージ
         status: ステータス
       evaluation:
+        is_public: 公開の可否
         ingenuity: 工夫の満足度
         communication: コミュニケーション力の満足度
         smoothness: スムーズさの満足度

@@ -72,8 +72,9 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_03_095951) do
     t.integer "want_to_order_agein"
     t.text "message"
     t.text "other_message"
-    t.datetime "created_at", precision: nil, null: false
-    t.datetime "updated_at", precision: nil, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.boolean "is_public", default: true
   end
 
   create_table "order_dates", force: :cascade do |t|
@@ -256,7 +257,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_03_095951) do
   add_foreign_key "order_memos", "orders", name: "order_memos_order_id_fkey"
   add_foreign_key "orders", "recreations", name: "orders_recreation_id_fkey"
   add_foreign_key "orders", "users", name: "orders_user_id_fkey"
-  add_foreign_key "profiles", "users", name: "profiles_user_id_fkey"
+  add_foreign_key "profiles", "users"
   add_foreign_key "recreation_images", "recreations", name: "recreation_images_recreation_id_fkey"
   add_foreign_key "recreation_prefectures", "recreations", name: "recreation_prefectures_recreation_id_fkey"
   add_foreign_key "recreation_profiles", "profiles", name: "recreation_profiles_profile_id_fkey"
