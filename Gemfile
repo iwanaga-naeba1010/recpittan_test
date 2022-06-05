@@ -70,7 +70,6 @@ gem 'enumerize'
 
 gem 'fog-aws'
 gem 'carrierwave'
-gem 'seed-fu' # staging/productionでも使いたいから
 
 gem 'kaminari'
 gem 'ransack'
