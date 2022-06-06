@@ -69,8 +69,7 @@ export const OrderChat: React.FC = () => {
                   <div className='border-bottom p-2'>
                     <h4 className='title'>
                       参加人数制限
-                      {order.recreation?.capacity}
-                      人まで
+                      {order.recreation?.capacity === 0 ? 'なし' : `${order.recreation?.capacity}人まで`}
                     </h4>
                   </div>
                 )}
