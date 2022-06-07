@@ -22,6 +22,11 @@
 
     gtag('config', 'UA-126571542-2');
   </script>
+  <% if request.url == 'https://ep-matching-system-staging.herokuapp.com/' %>
+    <script>
+      (function(t,a,y,o,r,i){r=a.createElement(y),i=a.getElementsByTagName(y)[0];r.type='text/javascript';r.async=1;r.src='//tayori.com/chat/5c6c6a4999e9f68aeae8575a67452cd2ccef4484/tag.js';r.id='tayori-chat-tag';i.parentNode.insertBefore(r,i)})(window,document,'script');
+    </script>
+  <% end %>
 </head>
 
 <body>
