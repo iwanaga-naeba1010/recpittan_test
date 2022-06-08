@@ -23,15 +23,7 @@ type StartAndEndAt = {
 
 export type ModalForlValues = Pick<
   Order,
-  | 'zip'
-  | 'prefecture'
-  | 'city'
-  | 'street'
-  | 'building'
-  | 'numberOfPeople'
-  | 'numberOfFacilities'
-  | 'startAt'
-  | 'endAt'
+  'zip' | 'prefecture' | 'city' | 'street' | 'building' | 'numberOfPeople' | 'numberOfFacilities' | 'startAt' | 'endAt'
 > &
   StartAndEndAt;
 

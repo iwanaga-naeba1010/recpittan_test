@@ -5,7 +5,6 @@ import { TranspotationExpensesForm } from '@/components/shared/form/forCustomer/
 import { Category, Tag } from '@/components/shared/parts';
 import { Api } from '@/infrastructure';
 import { Order, User } from '@/types';
-import { toCamelcase } from '@/utils';
 import * as Sentry from '@sentry/react';
 import * as $ from 'jquery';
 import React, { useEffect, useState } from 'react';
@@ -27,7 +26,6 @@ export const OrderChat: React.FC = () => {
         const userResponse = await Api.get<User>(`/users/self`, 'common');
         // NOTE(okubo): Objestのkeyは自動変換しているが、valueはできていないので個別対応
         setUser(userResponse.data);
-        console.log(orderResponse.data);
         setIsLoading(false);
       } catch (e) {
         console.warn('error is', e);
@@ -78,11 +76,13 @@ export const OrderChat: React.FC = () => {
                 </div>
                 <div className='p-2'>
                   <h4 className='title'>対象者目安</h4>
-                  {[...order.recreation?.targets].sort((a, b) => a.id - b.id).map((target) => (
-                    <div key={target.id} className='text-muted'>
-                      ・{target.name}
-                    </div>
-                  ))}
+                  {[...order.recreation?.targets]
+                    .sort((a, b) => a.id - b.id)
+                    .map((target) => (
+                      <div key={target.id} className='text-muted'>
+                        ・{target.name}
+                      </div>
+                    ))}
                 </div>
                 <div className='p-2'>
                   <a

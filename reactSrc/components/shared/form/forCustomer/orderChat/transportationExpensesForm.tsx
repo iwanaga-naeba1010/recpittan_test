@@ -51,11 +51,11 @@ export const TranspotationExpensesForm: React.FC<Props> = (props): JSX.Element =
         <div className='col-3 align-self-center'>
           交通費
           <br />
-          {(!canEdit && order.isEditable) && (
-              <a id='transportationExpensesEditButton' className='clink' onClick={() => setCanEdit(true)}>
-                編集
-              </a>
-            )}
+          {!canEdit && order.isEditable && (
+            <a id='transportationExpensesEditButton' className='clink' onClick={() => setCanEdit(true)}>
+              編集
+            </a>
+          )}
         </div>
         {canEdit ? (
           <>

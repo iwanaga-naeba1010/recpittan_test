@@ -1,7 +1,7 @@
 import { Base } from './base';
 import { Tag } from './tag';
 
-type KindEnum = |'visit' | 'online' | 'mailing';
+type KindEnum = 'visit' | 'online' | 'mailing';
 
 export interface Recreation extends Base {
   title: string;
