@@ -200,7 +200,7 @@
     <%= @order.recreation.user.username %> 様
 
     えぶりプラスをご利用いただきありがとうございます。
-    <%= @order.start_at&.strftime('%Y.%m.%d %H:%M') %> <%= @order.user.company.facility_name %> <%= @order.recreation.title %> の終了報告が施設様より承認されました。
+    <%= @order.start_at&.strftime('%Y.%m.%d %H:%M') %>の<%= @order.user.company.facility_name %>施設の <%= @order.recreation.title %> の終了報告が施設様より承認されました。
     この案件は以上となります。お疲れ様でした！
     次の案件をお待ちください。
 
@@ -268,14 +268,12 @@
     えぶりプラスです。
     いつもご協力をいただき、誠にありがとうございます。
 
-    開催日時　施設名　<%= @order.recreation.title %> （レク名）の
+    <%= @order.start_at&.strftime('%Y.%m.%d %H:%M') %>　<%= @order.recreation.title %>　<%= @order.recreation.title %> の
     開催日が近づいて参りましたので、事前確認のご協力をお願い致します。
     楽しい時間を皆様を現場の皆様心待ちにしています！
     ----------------------------------------
-
     ■開催情報と事前確認確認
     <%= link_to "https://recreation.everyplus.jp/partners/orders/#{@order.id}/final_check", "https://recreation.everyplus.jp/partners/orders/#{@order.id}/final_check" %>
-
     ----------------------------------------
     ■終了報告について
     開催後、現場を離れる前に報酬を受け取るために終了報告記入をお願い致します。
