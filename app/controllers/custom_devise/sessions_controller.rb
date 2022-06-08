@@ -20,17 +20,12 @@ class CustomDevise::SessionsController < Devise::SessionsController
 
   # protected
 
-  # rubocop:disable Style/GuardClause
   def after_sign_in_path_for(resource)
-    if resource.role.admin?
-      return admin_dashboard_path
-    elsif resource.role.partner?
-      return partners_path
-    end
+    return admin_dashboard_path if resource.role.admin?
+    return partners_path if resource.role.partner?
 
-    customers_path
+    session[:redirect_url] || customers_path
   end
-  # rubocop:enable Style/GuardClause
 
   # If you have extra params to permit, append them to the sanitizer.
   # def configure_sign_in_params

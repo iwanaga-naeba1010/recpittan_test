@@ -4,6 +4,7 @@ class ApplicationController < ActionController::Base
   include ErrorHandlers
   before_action :set_default_url_options
   before_action :authenticate_user!
+  after_action  :store_redirect_url
 
   def set_default_url_options
     Rails.application.routes.default_url_options[:host] = request.host_with_port
@@ -21,5 +22,16 @@ class ApplicationController < ActionController::Base
     end
 
     redirect_to new_user_session_path unless current_user.role.admin? || current_user.role.cs?
+  end
+
+  # NOTE: ログイン後に直前のページへリダイレクトさせるために必要
+  def store_redirect_url
+    if request.fullpath != '/users/sign_in' &&
+       request.fullpath != '/users/sign_up' &&
+       request.fullpath !~ Regexp.new('\\A/users/password.*\\z') &&
+       !request.xhr?
+
+      session[:redirect_url] = request.fullpath
+    end
   end
 end
