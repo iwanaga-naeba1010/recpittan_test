@@ -1,16 +1,16 @@
 import { Base } from './base';
 import { Recreation } from './recreation';
 
-export type OrderStatusEnum =
-  | 'inProgress'
-  | 'waitingForAReplyFromPartner'
-  | 'waitingForAReplyFromFacility'
-  | 'facilityRequestInProgress'
-  | 'requestDenied'
-  | 'waitingForAnEventToTakePlace'
-  | 'unreportedCompleted'
-  | 'finalReportAdmitsNot'
-  | 'finished';
+// export type OrderStatusEnum =
+//   | 'inProgress'
+//   | 'waitingForAReplyFromPartner'
+//   | 'waitingForAReplyFromFacility'
+//   | 'facilityRequestInProgress'
+//   | 'requestDenied'
+//   | 'waitingForAnEventToTakePlace'
+//   | 'unreportedCompleted'
+//   | 'finalReportAdmitsNot'
+//   | 'finished';
 
 export interface Order extends Base {
   zip: string;
@@ -20,7 +20,8 @@ export interface Order extends Base {
   building: string;
   startAt: Date;
   endAt: Date;
-  status: OrderStatusEnum;
+  // status: OrderStatusEnum;
+  isEditable: boolean;
   expenses: number;
   transportationExpenses: number;
   additionalFacilityFee: number;

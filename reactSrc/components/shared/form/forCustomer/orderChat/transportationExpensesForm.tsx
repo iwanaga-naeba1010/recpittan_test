@@ -51,10 +51,7 @@ export const TranspotationExpensesForm: React.FC<Props> = (props): JSX.Element =
         <div className='col-3 align-self-center'>
           交通費
           <br />
-          {!canEdit &&
-            (order.status === 'inProgress' ||
-              order.status === 'waitingForAReplyFromPartner' ||
-              order.status === 'waitingForAReplyFromFacility') && (
+          {(!canEdit && order.isEditable) && (
               <a id='transportationExpensesEditButton' className='clink' onClick={() => setCanEdit(true)}>
                 編集
               </a>

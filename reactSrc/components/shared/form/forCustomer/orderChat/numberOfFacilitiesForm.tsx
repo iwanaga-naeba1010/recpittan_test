@@ -52,10 +52,7 @@ export const NumberOfFacilitiesForm: React.FC<Props> = (props): JSX.Element => {
           <div className='col-auto align-self-center'>
             追加施設費 / 追加施設数 {order.numberOfFacilities}施設
             <br />
-            {!canEdit &&
-              (order.status === 'inProgress' ||
-                order.status === 'waitingForAReplyFromPartner' ||
-                order.status === 'waitingForAReplyFromFacility') && (
+            {(!canEdit && order.isEditable) && (
                 <a id='numberOfFacilitiesEditButton' className='clink' onClick={() => setCanEdit(true)}>
                   編集
                 </a>

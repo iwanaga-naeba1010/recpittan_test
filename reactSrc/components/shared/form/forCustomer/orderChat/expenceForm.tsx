@@ -51,10 +51,7 @@ export const ExpenseForm: React.FC<Props> = (props): JSX.Element => {
         <div className='col-3 align-self-center'>
           諸経費
           <br />
-          {!canEdit &&
-            (order.status === 'inProgress' ||
-              order.status === 'waitingForAReplyFromPartner' ||
-              order.status === 'waitingForAReplyFromFacility') && (
+          {(!canEdit && order.isEditable) && (
               <a id='expensesEditButton' className='clink' onClick={() => setCanEdit(true)}>
                 編集
               </a>
