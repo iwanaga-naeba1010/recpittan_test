@@ -10,6 +10,7 @@
 #  building                :string
 #  city                    :string
 #  contract_number         :string
+#  coupon_code             :string
 #  end_at                  :datetime
 #  expenses                :integer          default(0)
 #  final_check_status      :integer

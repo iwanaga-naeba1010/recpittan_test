@@ -23,7 +23,7 @@ type StartAndEndAt = {
 
 export type ModalForlValues = Pick<
   Order,
-  'zip' | 'prefecture' | 'city' | 'street' | 'building' | 'numberOfPeople' | 'numberOfFacilities' | 'startAt' | 'endAt'
+  'zip' | 'prefecture' | 'city' | 'street' | 'building' | 'numberOfPeople' | 'numberOfFacilities' | 'couponCode' | 'startAt' | 'endAt'
 > &
   StartAndEndAt;
 
@@ -56,7 +56,8 @@ export const ModalForm: React.FC<Props> = (props) => {
       prefecture: order.prefecture,
       city: order.city,
       street: order.street,
-      building: order.building
+      building: order.building,
+      couponCode: order.couponCode
     }
   });
 
@@ -129,6 +130,7 @@ export const ModalForm: React.FC<Props> = (props) => {
         building: values.building,
         numberOfPeople: values.numberOfPeople,
         numberOfFacilities: values.numberOfFacilities,
+        couponCode: values.couponCode,
         startAt,
         endAt
       }
@@ -145,6 +147,13 @@ export const ModalForm: React.FC<Props> = (props) => {
       console.log(e);
     }
   };
+
+  if(order.couponCode === null){
+    console.log('クーポンコードはnull')
+  }else{
+    console.log(order.couponCode)
+  }
+
 
   return (
     <div className='modal' id='orderModal' tabIndex={-1} aria-labelledby='orderModalLabel' aria-hidden='true'>
@@ -339,6 +348,21 @@ export const ModalForm: React.FC<Props> = (props) => {
                     <label htmlFor='postalCode'>建物名</label>
                     <input {...register('building')} className='form-control p-postal-control' />
                   </div>
+                </div>
+
+                <div className='input-group w-50'>
+                  <label className='col-12 title-b py-3' htmlFor='participant'>
+                    <span>クーポンコードをお持ちの方</span>
+                  </label>
+                  <input {...register('couponCode', { required: true })} className='form-control text-right' />
+                  <button
+                    // id='searchAddressWithZipForOrder'
+                    onClick={() => handleZipChange()}
+                    className='btn btn-csecondar ms-2 px-3 rounded border-0 text-white font-weight-bold'
+                    type='button'
+                  >
+                    適用
+                  </button>
                 </div>
 
                 <div className='card mt-3'>

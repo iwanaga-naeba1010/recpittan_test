@@ -95,6 +95,7 @@ ActiveAdmin.register Order do
           row :transportation_expenses
           row :expenses
           row :support_price
+          row :coupon_code
           row('zoom利用料', &:zoom_cost)
           row('zoomURL') do |order|
             simple_format order&.zoom_url
@@ -181,6 +182,7 @@ ActiveAdmin.register Order do
           f.input :transportation_expenses, as: :number
           f.input :expenses, as: :number
           f.input :support_price
+          f.input :coupon_code
 
           # NOTE(okubo): オンラインレクの場合zoom情報を格納
           if f.object.recreation.kind.online?

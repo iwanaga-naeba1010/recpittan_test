@@ -124,6 +124,7 @@ ja:
         expenses: 諸経費
         contract_number: 契約番号
         memo: メモ
+        coupon_code: クーポンコード
       zoom:
         price: 金額
         url: URL

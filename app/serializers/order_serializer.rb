@@ -10,6 +10,7 @@
 #  building                :string
 #  city                    :string
 #  contract_number         :string
+#  coupon_code             :string
 #  end_at                  :datetime
 #  expenses                :integer          default(0)
 #  final_check_status      :integer
@@ -32,10 +33,15 @@
 #  recreation_id           :bigint           not null
 #  user_id                 :bigint           not null
 #
+# Indexes
+#
+#  index_orders_on_recreation_id  (recreation_id)
+#  index_orders_on_user_id        (user_id)
+#
 # Foreign Keys
 #
-#  orders_recreation_id_fkey  (recreation_id => recreations.id)
-#  orders_user_id_fkey        (user_id => users.id)
+#  fk_rails_...  (recreation_id => recreations.id)
+#  fk_rails_...  (user_id => users.id)
 #
 class OrderSerializer
   def serialize_list(orders:)
@@ -58,6 +64,7 @@ class OrderSerializer
       number_of_people: order.number_of_people,
       number_of_facilities: order.number_of_facilities,
       price: order.price,
+      coupon_code: order.coupon_code,
       material_price: order.material_price,
       total_facility_price_for_customer: order.total_facility_price_for_customer,
       total_price_for_customer: order.total_price_for_customer,
