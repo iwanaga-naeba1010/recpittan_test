@@ -134,8 +134,8 @@ export const OrderChat: React.FC = () => {
                 <div className='row justify-content-center py-3'>
                   <div className='col-auto'>
                     {order.status === 'inProgress' ||
-                    order.status === 'waitingForAReplyFromPartner' ||
-                    order.status === 'waitingForAReplyFromFacility' ? (
+                      order.status === 'waitingForAReplyFromPartner' ||
+                      order.status === 'waitingForAReplyFromFacility' ? (
                       <button id='order-modal' className='btn-cpr' data-bs-toggle='modal' data-bs-target='#orderModal'>
                         レクを正式依頼へ進む
                       </button>
