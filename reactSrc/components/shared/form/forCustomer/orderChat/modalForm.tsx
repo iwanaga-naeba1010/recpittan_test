@@ -1,7 +1,7 @@
 import { Error } from '@/components/shared';
 import { Api } from '@/infrastructure';
 import { City, Order, Prefecture, PreferredDate, Recreation } from '@/types';
-import { findAddressByZip, findAllPrefectures, findCityByPrefectureCode, isEmpty, toSnakecase } from '@/utils';
+import { findAddressByZip, findAllPrefectures, findCityByPrefectureCode, isEmpty } from '@/utils';
 import axios, { AxiosError } from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
@@ -23,16 +23,7 @@ type StartAndEndAt = {
 
 export type ModalForlValues = Pick<
   Order,
-  | 'zip'
-  | 'prefecture'
-  | 'city'
-  | 'street'
-  | 'building'
-  | 'status'
-  | 'numberOfPeople'
-  | 'numberOfFacilities'
-  | 'startAt'
-  | 'endAt'
+  'zip' | 'prefecture' | 'city' | 'street' | 'building' | 'numberOfPeople' | 'numberOfFacilities' | 'startAt' | 'endAt'
 > &
   StartAndEndAt;
 
@@ -52,7 +43,6 @@ export const ModalForm: React.FC<Props> = (props) => {
   } = useForm<ModalForlValues>({
     mode: 'onChange',
     defaultValues: {
-      status: order.status,
       year: '',
       month: '',
       day: '',
@@ -128,8 +118,8 @@ export const ModalForm: React.FC<Props> = (props) => {
     const requestBody: {
       [key: string]: Omit<
         ModalForlValues,
-        'status' | 'year' | 'month' | 'day' | 'startHour' | 'startMinute' | 'endHour' | 'endMinute'
-      > & { status: string };
+        'year' | 'month' | 'day' | 'startHour' | 'startMinute' | 'endHour' | 'endMinute'
+      >;
     } = {
       order: {
         zip: values.zip,
@@ -137,7 +127,6 @@ export const ModalForm: React.FC<Props> = (props) => {
         city: values.city,
         street: values.street,
         building: values.building,
-        status: toSnakecase('facilityRequestInProgress'),
         numberOfPeople: values.numberOfPeople,
         numberOfFacilities: values.numberOfFacilities,
         startAt,
@@ -169,7 +158,6 @@ export const ModalForm: React.FC<Props> = (props) => {
           <div className='modal-body p-2'>
             {!isEmpty(errors) && <Error errors={errors} />}
             <form className='order h-adr' onSubmit={handleSubmit(onSubmit)}>
-              <input {...register('status')} value={'facilityRequestInProgress'} type='hidden' />
               <div className='container-fluid'>
                 <div className='row pb-3'>
                   <div className='col-auto'>
@@ -277,7 +265,7 @@ export const ModalForm: React.FC<Props> = (props) => {
                   <div className='col-auto p-0 flex-v-c'>人</div>
                 </div>
 
-                {recreation.isOnline && (
+                {recreation.kind === 'online' && (
                   <div className='row pt-3'>
                     <label className='col-12 title-b pb-3' htmlFor='participant'>
                       追加で参加する施設がある場合施設数をご記入ください
@@ -390,7 +378,7 @@ export const ModalForm: React.FC<Props> = (props) => {
                       </div>
                     </div>
 
-                    {recreation.isOnline && (
+                    {recreation.kind === 'online' && (
                       <div className='row justify-content-between border-bottom-dotted pb-2'>
                         <div className='col-auto'>
                           追加施設費 /
