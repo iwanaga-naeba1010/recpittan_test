@@ -10,9 +10,9 @@
 </div>
 
 <div class="my-3 mx-2">
-<%= link_to 'ID順', partners_path(order: :id, is_accepted: @is_accepted), class: ' text-white btn btn-primary  p-3' %>
-<%= link_to '開催日順', partners_path(order: :start_at, is_accepted: @is_accepted), class: ' text-white btn btn-primary  p-3' %>
-<%= link_to 'ステータス順', partners_path(order: :start_at, is_accepted: @is_accepted), class: ' text-white btn btn-primary  p-3' %>
+  <%= link_to 'ID順', partners_path(order: :id, is_accepted: @is_accepted), class: ' text-white btn btn-primary  p-3' %>
+  <%= link_to '開催日順', partners_path(order: :start_at, is_accepted: @is_accepted), class: ' text-white btn btn-primary  p-3' %>
+  <%= link_to 'ステータス順', partners_path(order: :start_at, is_accepted: @is_accepted), class: ' text-white btn btn-primary  p-3' %>
 </div>
 
 <% @orders.each do |order| %>

@@ -19,8 +19,6 @@ class PartnersController < Partners::ApplicationController
 
   # NOTE(okubo): ascで並ぶようにしてある
   private def sort_by(orders:, key:)
-    orders.sort do |a, b|
-      a[key] <=> b[key]
-    end
+    orders.sort { |a, b| a[key] <=> b[key] }
   end
 end
