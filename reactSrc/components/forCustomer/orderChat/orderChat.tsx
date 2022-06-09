@@ -4,8 +4,7 @@ import { NumberOfFacilitiesForm } from '@/components/shared/form/forCustomer/ord
 import { TranspotationExpensesForm } from '@/components/shared/form/forCustomer/orderChat/transportationExpensesForm';
 import { Category, Tag } from '@/components/shared/parts';
 import { Api } from '@/infrastructure';
-import { Order, OrderStatusEnum, User } from '@/types';
-import { toCamelcase } from '@/utils';
+import { Order, User } from '@/types';
 import * as Sentry from '@sentry/react';
 import * as $ from 'jquery';
 import React, { useEffect, useState } from 'react';
@@ -23,8 +22,7 @@ export const OrderChat: React.FC = () => {
       if (id === undefined) return;
       try {
         const orderResponse = await Api.get<Order>(`/orders/${id}`, 'customer');
-        // NOTE(okubo): Objestのkeyは自動変換しているが、valueはできていないので個別対応
-        setOrder({ ...orderResponse.data, status: toCamelcase(orderResponse.data.status) as OrderStatusEnum });
+        setOrder({ ...orderResponse.data });
         const userResponse = await Api.get<User>(`/users/self`, 'common');
         // NOTE(okubo): Objestのkeyは自動変換しているが、valueはできていないので個別対応
         setUser(userResponse.data);
@@ -78,11 +76,13 @@ export const OrderChat: React.FC = () => {
                 </div>
                 <div className='p-2'>
                   <h4 className='title'>対象者目安</h4>
-                  {[...order.recreation?.targets].sort((a, b) => a.id - b.id).map((target) => (
-                    <div key={target.id} className='text-muted'>
-                      ・{target.name}
-                    </div>
-                  ))}
+                  {[...order.recreation?.targets]
+                    .sort((a, b) => a.id - b.id)
+                    .map((target) => (
+                      <div key={target.id} className='text-muted'>
+                        ・{target.name}
+                      </div>
+                    ))}
                 </div>
                 <div className='p-2'>
                   <a
@@ -133,9 +133,7 @@ export const OrderChat: React.FC = () => {
 
                 <div className='row justify-content-center py-3'>
                   <div className='col-auto'>
-                    {order.status === 'inProgress' ||
-                    order.status === 'waitingForAReplyFromPartner' ||
-                    order.status === 'waitingForAReplyFromFacility' ? (
+                    {order.isEditable ? (
                       <button id='order-modal' className='btn-cpr' data-bs-toggle='modal' data-bs-target='#orderModal'>
                         レクを正式依頼へ進む
                       </button>
