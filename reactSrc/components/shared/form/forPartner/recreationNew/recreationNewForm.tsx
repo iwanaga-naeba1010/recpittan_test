@@ -91,7 +91,9 @@ export const RecreationNewForm: React.FC<Props> = (props) => {
   return (
     <div>
       <form className='recreation' onSubmit={handleSubmit(onSubmit)}>
-        {currentStep === 0 && <FirstStep handleNext={handleNext} register={register} getValues={getValues} errors={errors} />}
+        {currentStep === 0 && (
+          <FirstStep handleNext={handleNext} register={register} getValues={getValues} errors={errors} />
+        )}
         {currentStep === 1 && <SecondStep handleNext={handleNext} handlePrev={handlePrev} register={register} />}
         {currentStep === 2 && <ThirdStep handleNext={handleNext} handlePrev={handlePrev} register={register} />}
         {currentStep === 3 && <FourthStep handleNext={handleNext} handlePrev={handlePrev} />}

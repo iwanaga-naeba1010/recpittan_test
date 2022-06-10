@@ -2,9 +2,9 @@
 
 class PartnersController < Partners::ApplicationController
   def index
-    is_accepted = params[:is_accepted]&.to_s&.downcase == 'true'
+    @is_accepted = params[:is_accepted]&.to_s&.downcase == 'true' || false
 
-    @orders = if is_accepted
+    @orders = if @is_accepted
                 current_user.recreations.map { |rec| rec.orders.accepted_by_partner }.flatten.uniq
               else
                 current_user.recreations.map do |rec|
@@ -12,9 +12,13 @@ class PartnersController < Partners::ApplicationController
                 end.flatten.uniq
               end
 
-    # NOTE(okubo): updated_atでsort
-    @orders = @orders.to_a.sort do |a, b|
-      b[:updated_at] <=> a[:updated_at]
+    if params[:order].present?
+      @orders = sort_by(orders: @orders, key: params[:order])
     end
+  end
+
+  # NOTE(okubo): ascで並ぶようにしてある
+  private def sort_by(orders:, key:)
+    orders.sort { |a, b| a[key] <=> b[key] }
   end
 end

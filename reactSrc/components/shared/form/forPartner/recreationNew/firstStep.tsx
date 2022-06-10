@@ -1,4 +1,4 @@
-import {ValidationErrorMessage} from '@/components/shared/parts';
+import { ValidationErrorMessage } from '@/components/shared/parts';
 import { Essential } from '@/components/shared/parts/essential';
 import { Api } from '@/infrastructure';
 import React, { useEffect, useState } from 'react';
@@ -78,10 +78,7 @@ export const FirstStep: React.FC<Props> = (props) => {
   console.log('getValues is ', getValues('prefectures'));
   console.log('errors is ', errors);
 
-  const disabled =
-    errors?.kind !== undefined ||
-    errors?.title !== undefined ||
-    errors?.secondTitle !== undefined;
+  const disabled = errors?.kind !== undefined || errors?.title !== undefined || errors?.secondTitle !== undefined;
 
   console.log('disabled is ', disabled);
 
@@ -262,14 +259,23 @@ export const FirstStep: React.FC<Props> = (props) => {
           あり
         </label>
         <br />
-        <input type='radio' id='numberOfFacilitiesFalse' name='numberOfFacilitiesFalse' onClick={() => setShow(false)} />
+        <input
+          type='radio'
+          id='numberOfFacilitiesFalse'
+          name='numberOfFacilitiesFalse'
+          onClick={() => setShow(false)}
+        />
         <label htmlFor='numberOfFacilitiesFalse' onClick={() => setShow(false)}>
           なし
         </label>
         {show ? (
           <>
             <p className='small my-0'>何人まで参加できますか？</p>
-            <input type='text' className='p-2 w-100 rounded border border-secondary' {...register('capacity', { required: '参加人数制限は必須です' })} />
+            <input
+              type='text'
+              className='p-2 w-100 rounded border border-secondary'
+              {...register('capacity', { required: '参加人数制限は必須です' })}
+            />
           </>
         ) : null}
         {errors && <ValidationErrorMessage message={errors?.capacity?.message} />}

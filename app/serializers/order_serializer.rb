@@ -43,10 +43,15 @@ class OrderSerializer
   end
 
   def serialize(order:)
+    is_editable = order.status.in_progress? ||
+      order.status.waiting_for_a_reply_from_facility? ||
+      order.status.waiting_for_a_reply_from_partner?
     recreation = RecreationSerializer.new.serialize(recreation: order.recreation)
+
     {
       id: order.id,
       status: order.status,
+      is_editable: is_editable,
       expenses: order.expenses,
       transportation_expenses: order.transportation_expenses,
       additional_facility_fee: order.additional_facility_fee,

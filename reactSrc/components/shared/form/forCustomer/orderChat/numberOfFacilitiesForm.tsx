@@ -47,21 +47,18 @@ export const NumberOfFacilitiesForm: React.FC<Props> = (props): JSX.Element => {
 
   return (
     <>
-      {order.recreation.kind === 'オンライン' && (
+      {order.recreation.kind === 'online' && (
         <>
           {!canEdit ? (
             <div className='row justify-content-between border-bottom-dotted py-2'>
               <div className='col-auto align-self-center'>
                 追加施設費 / 追加施設数 {order.numberOfFacilities}施設
                 <br />
-                {!canEdit &&
-                  (order.status === 'inProgress' ||
-                    order.status === 'waitingForAReplyFromPartner' ||
-                    order.status === 'waitingForAReplyFromFacility') && (
-                    <a id='numberOfFacilitiesEditButton' className='clink' onClick={() => setCanEdit(true)}>
-                      編集
-                    </a>
-                  )}
+                {!canEdit && order.isEditable && (
+                  <a id='numberOfFacilitiesEditButton' className='clink' onClick={() => setCanEdit(true)}>
+                    編集
+                  </a>
+                )}
               </div>
               <div id='numberOfFacilities' className='col-auto'>
                 &yen;
@@ -92,7 +89,7 @@ export const NumberOfFacilitiesForm: React.FC<Props> = (props): JSX.Element => {
                   </button>
                 </div>
               </div>
-            </form>
+              </form>
           )}
         </>
       )}

@@ -1,8 +1,7 @@
 import { Base } from './base';
 import { Tag } from './tag';
 
-//TODO: 多言語対応したい
-export type KindEnum = '訪問' | 'オンライン' | '郵送';
+type KindEnum = 'visit' | 'online' | 'mailing';
 
 export interface Recreation extends Base {
   title: string;
