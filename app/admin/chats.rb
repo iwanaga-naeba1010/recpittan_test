@@ -6,7 +6,7 @@ ActiveAdmin.register Chat do
 
   index do
     id_column
-    column :order
+    column :order_id
     column :user
     column :message do |text|
       text.message.truncate(20)
@@ -19,7 +19,7 @@ ActiveAdmin.register Chat do
   show do
     attributes_table do
       row :id
-      row :order
+      row :order_id
       row :user
       row :message
       row :is_read
