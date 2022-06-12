@@ -1,11 +1,35 @@
 # frozen_string_literal: true
 
 ActiveAdmin.register Chat do
-  menu false # NOTE: サイドバーに表示しない設定
-  actions :create
-  belongs_to :order
-
   permit_params { Chat.attribute_names.map(&:to_sym) }
+  actions :all, except: %i[edit update]
+
+  index do
+    id_column
+    column :order
+    column :user
+    column :message do |text|
+      text.message.truncate(20)
+    end
+    column :is_read
+
+    actions
+  end
+
+  show do
+    attributes_table do
+      row :id
+      row :order
+      row :user
+      row :message
+      row :is_read
+      row(:file) do |chat|
+        image_tag chat&.file&.to_s, width: 50, height: 50
+      end
+      row :created_at
+      row :updated_at
+    end
+  end
 
   controller do
     def create
