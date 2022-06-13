@@ -149,7 +149,7 @@ export const ModalForm: React.FC<Props> = (props) => {
         building: values.building,
         numberOfPeople: values.numberOfPeople,
         numberOfFacilities: values.numberOfFacilities,
-        couponCode: values.couponCode,
+        couponCode: isCouponApplied ? values.couponCode : '',
         startAt,
         endAt
       }
