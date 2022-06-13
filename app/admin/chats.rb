@@ -19,7 +19,7 @@ ActiveAdmin.register Chat do
   show do
     attributes_table do
       row :id
-      row :order_id
+      row(:order_id) { |chat| link_to chat.order.id, admin_order_path(chat.order.id) }
       row :user
       row :message
       row :is_read
