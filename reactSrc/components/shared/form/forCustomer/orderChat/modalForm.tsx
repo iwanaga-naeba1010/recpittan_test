@@ -432,8 +432,7 @@ export const ModalForm: React.FC<Props> = (props) => {
                     </div>
                     {isCouponApplied && (
                       <div className='alert alert-success' role='alert'>
-                        &yen; 5,000円割引適用
-                        ※&yen;5,000円を上限に割引を適用します
+                        &yen; 5,000円割引適用 ※&yen;5,000円を上限に割引を適用します
                       </div>
                     )}
                     {isCouponApplied === false && (
