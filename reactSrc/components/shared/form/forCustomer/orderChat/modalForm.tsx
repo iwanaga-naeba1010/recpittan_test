@@ -23,7 +23,16 @@ type StartAndEndAt = {
 
 export type ModalForlValues = Pick<
   Order,
-  'zip' | 'prefecture' | 'city' | 'street' | 'building' | 'numberOfPeople' | 'numberOfFacilities' | 'startAt' | 'endAt'
+  | 'zip'
+  | 'prefecture'
+  | 'city'
+  | 'street'
+  | 'building'
+  | 'numberOfPeople'
+  | 'numberOfFacilities'
+  | 'couponCode'
+  | 'startAt'
+  | 'endAt'
 > &
   StartAndEndAt;
 
@@ -33,6 +42,7 @@ export const ModalForm: React.FC<Props> = (props) => {
   const [prefectures, setPrefectures] = useState<Array<Prefecture>>([]);
   const [cities, setCities] = useState<Array<City>>([]);
   const [errors, setErrors] = useState<Array<string>>([]);
+  const [isCouponApplied, setIsCouponApplied] = useState<boolean>(undefined);
 
   const {
     register,
@@ -56,7 +66,8 @@ export const ModalForm: React.FC<Props> = (props) => {
       prefecture: order.prefecture,
       city: order.city,
       street: order.street,
-      building: order.building
+      building: order.building,
+      couponCode: order.couponCode
     }
   });
 
@@ -103,6 +114,15 @@ export const ModalForm: React.FC<Props> = (props) => {
     }
   };
 
+  const handleApplyCouponCode = (input: string) => {
+    if (input === 'えぶりぷらす') {
+      setIsCouponApplied(true);
+      setValue('couponCode', input);
+      return;
+    }
+    setIsCouponApplied(false);
+  };
+
   const onSubmit = async (values: ModalForlValues): Promise<void> => {
     setErrors([]);
     const startAt: Date = new Date(
@@ -129,6 +149,7 @@ export const ModalForm: React.FC<Props> = (props) => {
         building: values.building,
         numberOfPeople: values.numberOfPeople,
         numberOfFacilities: values.numberOfFacilities,
+        couponCode: isCouponApplied ? values.couponCode : '',
         startAt,
         endAt
       }
@@ -341,6 +362,20 @@ export const ModalForm: React.FC<Props> = (props) => {
                   </div>
                 </div>
 
+                <div className='input-group w-50'>
+                  <label className='col-12 title-b py-3' htmlFor='participant'>
+                    <span>クーポンコードをお持ちの方</span>
+                  </label>
+                  <input {...register('couponCode')} className='form-control text-right' />
+                  <button
+                    onClick={() => handleApplyCouponCode(getValues('couponCode'))}
+                    className='btn btn-csecondar ms-2 px-3 rounded border-0 text-white font-weight-bold'
+                    type='button'
+                  >
+                    適用
+                  </button>
+                </div>
+
                 <div className='card mt-3'>
                   <div id='OrderForm'></div>
                   <div className='card-body'>
@@ -377,7 +412,6 @@ export const ModalForm: React.FC<Props> = (props) => {
                         {order?.expenses?.toLocaleString()}
                       </div>
                     </div>
-
                     {recreation.kind === 'online' && (
                       <div className='row justify-content-between border-bottom-dotted pb-2'>
                         <div className='col-auto'>
@@ -389,7 +423,6 @@ export const ModalForm: React.FC<Props> = (props) => {
                         </div>
                       </div>
                     )}
-
                     <div className='row justify-content-between border-top py-3'>
                       <div className='col-auto'>合計(税別)</div>
                       <div id='totalPriceForOrderForm' className='col-auto'>
@@ -397,6 +430,16 @@ export const ModalForm: React.FC<Props> = (props) => {
                         {order?.totalPriceForCustomer?.toLocaleString()}
                       </div>
                     </div>
+                    {isCouponApplied && (
+                      <div className='alert alert-success' role='alert'>
+                        &yen; 5,000円割引適用 ※&yen;5,000円を上限に割引を適用します
+                      </div>
+                    )}
+                    {isCouponApplied === false && (
+                      <div className='alert alert-danger' role='alert'>
+                        このクーポンは存在していません
+                      </div>
+                    )}
                   </div>
                 </div>
 
