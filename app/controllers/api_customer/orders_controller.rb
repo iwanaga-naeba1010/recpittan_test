@@ -42,7 +42,7 @@ module ApiCustomer
       params.require(:order).permit(
         :transportation_expenses, :expenses, :number_of_facilities,
         :zip, :prefecture, :city, :street, :building, :status,
-        :number_of_people, :number_of_facilities,
+        :number_of_people, :number_of_facilities, :coupon_code,
         :start_at, :end_at
       )
     end

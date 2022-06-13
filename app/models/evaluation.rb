@@ -7,7 +7,7 @@
 #  id                  :bigint           not null, primary key
 #  communication       :integer
 #  ingenuity           :integer
-#  is_public           :boolean          default(TRUE)
+#  is_public           :boolean          default("public")
 #  message             :text
 #  other_message       :text
 #  price               :integer
