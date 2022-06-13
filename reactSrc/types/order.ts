@@ -16,6 +16,7 @@ export interface Order extends Base {
   numberOfPeople: number;
   numberOfFacilities: number;
   price: number;
+  couponCode: string;
   materialPrice: number;
   totalPriceForCustomer: number;
   totalFacilityPriceForCustomer: number;

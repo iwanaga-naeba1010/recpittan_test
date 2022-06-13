@@ -47,47 +47,51 @@ export const NumberOfFacilitiesForm: React.FC<Props> = (props): JSX.Element => {
 
   return (
     <>
-      {!canEdit ? (
-        <div className='row justify-content-between border-bottom-dotted py-2'>
-          <div className='col-auto align-self-center'>
-            追加施設費 / 追加施設数 {order.numberOfFacilities}施設
-            <br />
-            {!canEdit && order.isEditable && (
-              <a id='numberOfFacilitiesEditButton' className='clink' onClick={() => setCanEdit(true)}>
-                編集
-              </a>
-            )}
-          </div>
-          <div id='numberOfFacilities' className='col-auto'>
-            &yen;
-            {(order.numberOfFacilities * order.additionalFacilityFee)?.toLocaleString()}
-          </div>
-        </div>
-      ) : (
-        <form className='consult' onSubmit={handleSubmit(onSubmit)}>
-          <div className='row justify-content-between border-bottom-dotted py-2'>
-            <div className='col-3 align-self-center'>追加施設数</div>
-            <div className='col-7'>
-              <input
-                id='numberOfFacilitiesInput'
-                className='form-control text-end'
-                type='number'
-                {...register('numberOfFacilities')}
-              />
+      {order.recreation.kind === 'online' && (
+        <>
+          {!canEdit ? (
+            <div className='row justify-content-between border-bottom-dotted py-2'>
+              <div className='col-auto align-self-center'>
+                追加施設費 / 追加施設数 {order.numberOfFacilities}施設
+                <br />
+                {!canEdit && order.isEditable && (
+                  <a id='numberOfFacilitiesEditButton' className='clink' onClick={() => setCanEdit(true)}>
+                    編集
+                  </a>
+                )}
+              </div>
+              <div id='numberOfFacilities' className='col-auto'>
+                &yen;
+                {(order.numberOfFacilities * order.additionalFacilityFee)?.toLocaleString()}
+              </div>
             </div>
-            <div className='col-2 py-0'>
-              <button
-                id='numberOfFacilitiesSubmitButton'
-                type='submit'
-                name='action'
-                value='transport_upadte'
-                className='btn btn-inline-edit'
-              >
-                <i className='material-icons color-pr10'>done</i>
-              </button>
-            </div>
-          </div>
-        </form>
+          ) : (
+            <form className='consult' onSubmit={handleSubmit(onSubmit)}>
+              <div className='row justify-content-between border-bottom-dotted py-2'>
+                <div className='col-3 align-self-center'>追加施設数</div>
+                <div className='col-7'>
+                  <input
+                    id='numberOfFacilitiesInput'
+                    className='form-control text-end'
+                    type='number'
+                    {...register('numberOfFacilities')}
+                  />
+                </div>
+                <div className='col-2 py-0'>
+                  <button
+                    id='numberOfFacilitiesSubmitButton'
+                    type='submit'
+                    name='action'
+                    value='transport_upadte'
+                    className='btn btn-inline-edit'
+                  >
+                    <i className='material-icons color-pr10'>done</i>
+                  </button>
+                </div>
+              </div>
+              </form>
+          )}
+        </>
       )}
     </>
   );

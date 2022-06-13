@@ -10,6 +10,7 @@
 #  building                :string
 #  city                    :string
 #  contract_number         :string
+#  coupon_code             :string
 #  end_at                  :datetime
 #  expenses                :integer          default(0)
 #  final_check_status      :integer
@@ -58,6 +59,7 @@ class OrderSerializer
       number_of_people: order.number_of_people,
       number_of_facilities: order.number_of_facilities,
       price: order.price,
+      coupon_code: order.coupon_code,
       material_price: order.material_price,
       total_facility_price_for_customer: order.total_facility_price_for_customer,
       total_price_for_customer: order.total_price_for_customer,
