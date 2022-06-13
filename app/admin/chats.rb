@@ -6,7 +6,7 @@ ActiveAdmin.register Chat do
 
   index do
     id_column
-    column :order_id
+    column(:order) { |chat| link_to chat.order.id, admin_order_path(chat.order.id) }
     column :user
     column :message do |text|
       text.message.truncate(20)
