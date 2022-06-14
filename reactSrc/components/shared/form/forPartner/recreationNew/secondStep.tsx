@@ -1,17 +1,18 @@
 import { Essential } from '@/components/shared/parts/essential';
-import React from 'react';
-import { UseFormRegister } from 'react-hook-form';
+import React, { useState } from 'react';
+import { UseFormGetValues, UseFormRegister } from 'react-hook-form';
 import { RecreationFormValues } from './recreationNewForm';
 
 type Props = {
   handleNext: () => void;
   handlePrev: () => void;
+  getValues: UseFormGetValues<RecreationFormValues>;
   register: UseFormRegister<RecreationFormValues>;
 };
 
 export const SecondStep: React.FC<Props> = (props) => {
-  const { handleNext, handlePrev, register } = props;
-
+  const { handleNext, handlePrev, getValues, register } = props;
+  const [extraInformation, setExtraInformation] = useState<string>(getValues('extraInformation'));
   return (
     <div>
       <div className='d-flex'>
@@ -139,8 +140,10 @@ export const SecondStep: React.FC<Props> = (props) => {
         {...register('extraInformation', {
           maxLength: 500
         })}
+        onChange={(e) => setExtraInformation(e.target.value)}
+        maxLength={500}
       />
-      <p className='small my-0'>0/500文字まで</p>
+      <p className='small my-0'>{extraInformation.length}/500文字まで</p>
 
       <br />
       <button

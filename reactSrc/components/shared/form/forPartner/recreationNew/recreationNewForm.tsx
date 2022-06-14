@@ -99,7 +99,10 @@ export const RecreationNewForm: React.FC<Props> = (props) => {
             errors={errors}
           />
         )}
-        {currentStep === 1 && <SecondStep handleNext={handleNext} handlePrev={handlePrev} register={register} />}
+        {currentStep === 1 && <SecondStep handleNext={handleNext} handlePrev={handlePrev}
+
+            getValues={getValues}
+          register={register} />}
         {currentStep === 2 && <ThirdStep handleNext={handleNext} handlePrev={handlePrev} register={register} />}
         {currentStep === 3 && <FourthStep handleNext={handleNext} handlePrev={handlePrev} />}
       </form>
