@@ -75,12 +75,7 @@ export const FirstStep: React.FC<Props> = (props) => {
     })();
   }, []);
 
-  console.log('getValues is ', getValues('prefectures'));
-  console.log('errors is ', errors);
-
   const disabled = errors?.kind !== undefined || errors?.title !== undefined || errors?.secondTitle !== undefined;
-
-  console.log('disabled is ', disabled);
 
   return (
     <div>
@@ -254,17 +249,12 @@ export const FirstStep: React.FC<Props> = (props) => {
           <Essential />
         </div>
         <p className='small my-0'>レクのに参加できる人数に制限を設定することができます</p>
-        <input type='radio' id='numberOfFacilitiesTrue' name='numberOfFacilitiesTrue' onClick={() => setShow(true)} />
+        <input type='radio' id='numberOfFacilitiesTrue' name='number_of_facilities' onClick={() => setShow(true)} />
         <label htmlFor='numberOfFacilitiesTrue' onClick={() => setShow(true)}>
           あり
         </label>
         <br />
-        <input
-          type='radio'
-          id='numberOfFacilitiesFalse'
-          name='numberOfFacilitiesFalse'
-          onClick={() => setShow(false)}
-        />
+        <input type='radio' id='numberOfFacilitiesFalse' name='number_of_facilities' onClick={() => setShow(false)} />
         <label htmlFor='numberOfFacilitiesFalse' onClick={() => setShow(false)}>
           なし
         </label>
