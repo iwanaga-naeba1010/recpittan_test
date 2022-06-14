@@ -37,7 +37,6 @@
     "turbolinks": "^5.2.0",
     "typescript": "^4.7.3",
     "webpack": "^4.46.0",
-    // NOTE(okubo): webpack-cliのバージョン変えるとhot reload壊れるので絶対に修正しないでください
     "webpack-cli": "^3.3.12"
   },
   "version": "0.1.0",
@@ -57,7 +56,6 @@
     "eslint-webpack-plugin": "^3.1.1",
     "prettier": "^2.6.2",
     "prettier-plugin-organize-imports": "^2.3.4",
-    // NOTE(okubo): webpacker-dev-serverのバージョン変えるとhot reload壊れるので絶対に修正しないでください
     "webpack-dev-server": "^3.11.2"
   }
 }

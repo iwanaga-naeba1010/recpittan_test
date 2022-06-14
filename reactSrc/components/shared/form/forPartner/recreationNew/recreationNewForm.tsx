@@ -10,7 +10,6 @@ type Props = {
   onSubmit: (values: RecreationFormValues) => Promise<void>;
 };
 
-// TODO(okubo): どれかの値が原因でonsubmitがエラーになる可能性あり
 export type RecreationFormValues = Pick<
   Recreation,
   | 'title'
@@ -28,7 +27,6 @@ export type RecreationFormValues = Pick<
   | 'imageUrl'
   | 'prefectures'
   | 'category'
-  // | 'profile'
   | 'userId'
 > & { kind: string; tags: Array<string>; targets: Array<string>; profileId: number };
 
@@ -40,6 +38,7 @@ export const RecreationNewForm: React.FC<Props> = (props) => {
     register,
     handleSubmit,
     getValues,
+    setValue,
     formState: { errors }
   } = useForm<RecreationFormValues>({
     mode: 'onChange',
@@ -92,7 +91,13 @@ export const RecreationNewForm: React.FC<Props> = (props) => {
     <div>
       <form className='recreation' onSubmit={handleSubmit(onSubmit)}>
         {currentStep === 0 && (
-          <FirstStep handleNext={handleNext} register={register} getValues={getValues} errors={errors} />
+          <FirstStep
+            handleNext={handleNext}
+            register={register}
+            getValues={getValues}
+            setValue={setValue}
+            errors={errors}
+          />
         )}
         {currentStep === 1 && <SecondStep handleNext={handleNext} handlePrev={handlePrev} register={register} />}
         {currentStep === 2 && <ThirdStep handleNext={handleNext} handlePrev={handlePrev} register={register} />}

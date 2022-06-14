@@ -2,7 +2,8 @@ import { ValidationErrorMessage } from '@/components/shared/parts';
 import { Essential } from '@/components/shared/parts/essential';
 import { Api } from '@/infrastructure';
 import React, { useEffect, useState } from 'react';
-import { FieldErrors, UseFormGetValues, UseFormRegister } from 'react-hook-form';
+import { FieldErrors, UseFormGetValues, UseFormRegister, UseFormSetValue } from 'react-hook-form';
+import {PrefectureItem} from './prefectureItem';
 import { RecreationFormValues } from './recreationNewForm';
 
 type Config = {
@@ -12,53 +13,16 @@ type Config = {
   kind: Array<{ name: string; enumKey: string }>;
 };
 
-const PrefectureItem = ({
-  register,
-  index,
-  config
-}: {
-  register: UseFormRegister<RecreationFormValues>;
-  index: number;
-  config: Config;
-}) => {
-  return (
-    <div>
-      <label>
-        <p>エリア</p>
-        <select
-          className='p-2 w-100 rounded border border-secondary'
-          placeholder='選択してください'
-          {...register(`prefectures.${index}`, {
-            required: true
-          })}
-        >
-          {config?.prefectures.map((prefecture: string) => (
-            <option key={prefecture} value={prefecture}>
-              {prefecture}
-            </option>
-          ))}
-        </select>
-      </label>
-      <button
-        className='text-primary font-weight-bold border border-white bg-white'
-        type='button'
-        style={{ marginLeft: '16px' }}
-      >
-        削除
-      </button>
-    </div>
-  );
-};
-
 type Props = {
   handleNext: () => void;
   register: UseFormRegister<RecreationFormValues>;
+  setValue: UseFormSetValue<RecreationFormValues>;
   getValues: UseFormGetValues<RecreationFormValues>;
   errors: FieldErrors<RecreationFormValues>;
 };
 
 export const FirstStep: React.FC<Props> = (props) => {
-  const { handleNext, register, getValues, errors } = props;
+  const { handleNext, register, getValues, setValue, errors } = props;
   const [config, setConfig] = useState<Config>(undefined);
   const [show, setShow] = useState(false);
   const [prefectures, setPrefectures] = useState<Array<string>>(getValues('prefectures'));
@@ -67,13 +31,18 @@ export const FirstStep: React.FC<Props> = (props) => {
     (async () => {
       try {
         const recreationConfig = await Api.get<Config>(`/recreations/config_data`, 'partner');
-        console.log('recreationConfig', recreationConfig.data);
         setConfig(recreationConfig.data);
       } catch (e) {
         console.warn('error is', e);
       }
     })();
   }, []);
+
+  const handleRemove = (index: number): void => {
+    const selectedPrefectures: Array<string> = getValues('prefectures');
+    setPrefectures([...selectedPrefectures.filter((_, i) => i !== index)]);
+    setValue('prefectures', prefectures);
+  };
 
   const disabled = errors?.kind !== undefined || errors?.title !== undefined || errors?.secondTitle !== undefined;
 
@@ -232,9 +201,14 @@ export const FirstStep: React.FC<Props> = (props) => {
           <Essential />
         </div>
         <p className='small my-0'>レクの受付可能エリア（都道府県）を選択してください</p>
-        {/* TODO(okubo): arrayで保存できるようにreact hook formを参照する */}
         {prefectures.map((prefecture, index) => (
-          <PrefectureItem key={prefecture} register={register} index={index} config={config} />
+          <PrefectureItem
+            key={prefecture}
+            register={register}
+            index={index}
+            handleRemove={handleRemove}
+            prefectures={config?.prefectures}
+          />
         ))}
         <div className={'question-add-action-wrapper'}>
           <p className='text-primary font-weight-bold my-1' onClick={() => setPrefectures([...prefectures, '北海道'])}>
@@ -254,7 +228,13 @@ export const FirstStep: React.FC<Props> = (props) => {
           あり
         </label>
         <br />
-        <input type='radio' id='numberOfFacilitiesFalse' name='number_of_facilities' onClick={() => setShow(false)} />
+        <input
+          type='radio'
+          id='numberOfFacilitiesFalse'
+          name='number_of_facilities'
+          onClick={() => setShow(false)}
+          checked
+        />
         <label htmlFor='numberOfFacilitiesFalse' onClick={() => setShow(false)}>
           なし
         </label>
