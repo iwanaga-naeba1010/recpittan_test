@@ -145,7 +145,6 @@ export const OrderChat: React.FC = () => {
               </div>
             </div>
           </div>
-
           <ChatList user={user} order={order} />
         </div>
       </article>
