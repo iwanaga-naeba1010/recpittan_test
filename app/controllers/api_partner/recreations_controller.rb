@@ -12,13 +12,20 @@ module ApiPartner
     end
 
     def create
-      # TODO(okubo): statusやkindが文字列で送られてくるが、それをAPIで保存できるか心配
       recreation = Resources::Recreations::Create.run!(
         recreation_params: params_create.to_h,
         current_user: current_user,
         profile_id: params_create.dig(:recreation_profile_attributes, :profile_id),
         prefectures: params_create[:recreation_prefectures_attributes]&.pluck(:name)
       )
+      message = <<~MESSAGE
+        管理画面案件URL：#{admin_recreation_url(recreation.id)}
+        新規レク登録依頼を確認して、承認作業を行ってください。
+      MESSAGE
+
+      SlackNotifier
+        .new(channel: '#アクティブチャットスレッド')
+        .send('新規レク登録依頼', message)
       render_json RecreationSerializer.new.serialize(recreation: recreation)
     rescue StandardError => e
       logger.error e.message
