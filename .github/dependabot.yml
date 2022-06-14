@@ -86,3 +86,5 @@ updates:
   - dependency-name: rails
     versions:
     - 6.1.0
+  - dependency-name: webpack-cli
+  - dependency-name: webpack-dev-server
