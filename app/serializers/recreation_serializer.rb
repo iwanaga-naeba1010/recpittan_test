@@ -49,6 +49,7 @@ class RecreationSerializer
       second_title: recreation.second_title,
       minutes: recreation.minutes,
       kind: recreation.kind,
+      status: recreation.status_text,
       capacity: recreation.capacity,
       image_url: recreation.recreation_images.sliders&.first&.image.to_s,
       category: recreation.category_text,

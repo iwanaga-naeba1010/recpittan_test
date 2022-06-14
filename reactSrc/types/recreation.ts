@@ -10,6 +10,7 @@ export interface Recreation extends Base {
   price: number;
   description: string;
   kind: KindEnum;
+  status: string;
   flowOfDay: string;
   capacity: number;
   materialAmount: number;

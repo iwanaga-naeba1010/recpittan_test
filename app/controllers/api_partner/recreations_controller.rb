@@ -4,6 +4,14 @@ module ApiPartner
   class RecreationsController < ApplicationController
     before_action :set_recreation, only: %i[show update]
 
+    def index
+      recreations = current_user.recreations
+      render_json RecreationSerializer.new.serialize_list(recreations: recreations)
+    rescue StandardError => e
+      logger.error e.message
+      render_json([e.message], status: 401)
+    end
+
     def show
       render_json RecreationSerializer.new.serialize(recreation: @recreation)
     rescue StandardError => e
