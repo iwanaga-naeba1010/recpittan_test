@@ -27,4 +27,3 @@ export const RecreationItem: React.FC<Props> = (props) => {
     </a>
   );
 };
-

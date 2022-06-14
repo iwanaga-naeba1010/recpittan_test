@@ -3,7 +3,7 @@ import { Essential } from '@/components/shared/parts/essential';
 import { Api } from '@/infrastructure';
 import React, { useEffect, useState } from 'react';
 import { FieldErrors, UseFormGetValues, UseFormRegister, UseFormSetValue } from 'react-hook-form';
-import {PrefectureItem} from './prefectureItem';
+import { PrefectureItem } from './prefectureItem';
 import { RecreationFormValues } from './recreationNewForm';
 
 type Config = {

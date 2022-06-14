@@ -6,7 +6,7 @@ import { RecreationItem } from './recreationItem';
 
 const RecreationIndex: React.FC = () => {
   const [recreations, setRecreations] = useState<Array<Recreation>>([]);
-  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
   useEffect(() => {
     (async () => {

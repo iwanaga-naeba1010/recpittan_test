@@ -89,7 +89,7 @@ export const NumberOfFacilitiesForm: React.FC<Props> = (props): JSX.Element => {
                   </button>
                 </div>
               </div>
-              </form>
+            </form>
           )}
         </>
       )}

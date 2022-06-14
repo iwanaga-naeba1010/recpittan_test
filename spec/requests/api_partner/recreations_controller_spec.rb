@@ -17,6 +17,16 @@ RSpec.describe ApiPartner::ProfilesController, type: :request do
     it_behaves_like 'an endpoint returns', :expected
   end
 
+  describe 'GET /api_partner/recreations' do
+    let!(:profile) { create(:profile, user: current_user) }
+    let!(:recreation) { create(:recreation, user: current_user) }
+    let!(:relation) { create(:recreation_profile, recreation: recreation, profile: profile) }
+    let(:id) { recreation.id }
+    let(:expected) { RecreationSerializer.new.serialize_list(recreations: [recreation]) }
+
+    it_behaves_like 'an endpoint returns', :expected
+  end
+
   describe 'GET /api_partner/recreations/:id' do
     let!(:profile) { create(:profile, user: current_user) }
     let!(:recreation) { create(:recreation, user: current_user) }
