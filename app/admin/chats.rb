@@ -6,8 +6,10 @@ ActiveAdmin.register Chat do
 
   index do
     id_column
-    column(:order) { |chat| link_to chat.order.id, admin_order_path(chat.order.id) }
-    column :user
+    column(:order_id) { |chat| link_to chat.order.id, admin_order_path(chat.order.id) }
+    column(:user) do |chat|
+      link_to chat.user.company&.facility_name, admin_company_path(chat.order.user.company.id)
+    end
     column :message do |text|
       text.message.truncate(20)
     end
@@ -32,12 +34,13 @@ ActiveAdmin.register Chat do
   end
 
   controller do
+    # NOTE(okubo): chatは管理者が施設として送信しています
+    # なのでメール送信等特殊な実装となっているので修正は控えてください
     def create
-      order = Order.find(params[:order_id])
-      # NOTE(okubo): chatは施設として送るので、特別な実装にしてます
+      order = Order.find(permitted_params[:chat][:order_id])
       chat = order.chats.build(
         user_id: order.user.id,
-        message: params[:chat][:message]
+        message: permitted_params[:chat][:message]
       )
       chat.save
 
