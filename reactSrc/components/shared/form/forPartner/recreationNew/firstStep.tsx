@@ -26,6 +26,9 @@ export const FirstStep: React.FC<Props> = (props) => {
   const [config, setConfig] = useState<Config>(undefined);
   const [show, setShow] = useState(false);
   const [prefectures, setPrefectures] = useState<Array<string>>(getValues('prefectures'));
+  console.log('-------------');
+  console.log(getValues('id'));
+  console.log('-------------');
 
   useEffect(() => {
     (async () => {
@@ -252,14 +255,16 @@ export const FirstStep: React.FC<Props> = (props) => {
       </div>
 
       <br />
-      <button
-        disabled={disabled}
-        type='button'
-        className='my-3 py-2 w-100 rounded text-white font-weight-bold bg-primary border border-primary'
-        onClick={handleNext}
-      >
-        次へ
-      </button>
+      {(getValues('id') === undefined || getValues('id') === null) && (
+        <button
+          disabled={disabled}
+          type='button'
+          className='my-3 py-2 w-100 rounded text-white font-weight-bold bg-primary border border-primary'
+          onClick={handleNext}
+        >
+          次へ
+        </button>
+      )}
     </div>
   );
 };

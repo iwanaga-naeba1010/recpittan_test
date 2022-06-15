@@ -1,5 +1,5 @@
-import { Base } from './base';
+import { BaseRecord } from './baseRecord';
 
-export interface Tag extends Base {
+export interface Tag extends BaseRecord {
   name: string;
 }

@@ -28,9 +28,21 @@ const RecreationShow: React.FC = () => {
   return (
     <div className='body bg-white p-3 mb-3'>
       {/* 修正リンクに変更する */}
-      <RecreationItem title='レクの基本情報' content={recreation.title} url='/partners/recreations/new' />
-      <RecreationItem title='金額・メディア・その他の情報' content={recreation.title} url='/partners/recreations/new' />
-      <RecreationItem title='レクに表示するプロフィール' content={recreation.title} url='/partners/recreations/new' />
+      <RecreationItem
+        title='レクの基本情報'
+        content={recreation.title}
+        url={`/partners/recreations/${id}/edit?formKind=title`}
+      />
+      <RecreationItem
+        title='金額・メディア・その他の情報'
+        content={recreation.title}
+        url={`/partners/recreations/${id}/edit?formKind=price`}
+      />
+      <RecreationItem
+        title='レクに表示するプロフィール'
+        content={recreation.title}
+        url={`/partners/recreations/${id}/edit?formKind=profile`}
+      />
     </div>
   );
 };

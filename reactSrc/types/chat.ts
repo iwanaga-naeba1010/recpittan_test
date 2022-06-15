@@ -1,6 +1,6 @@
-import { Base } from './base';
+import { BaseRecord } from './baseRecord';
 
-export interface Chat extends Base {
+export interface Chat extends BaseRecord {
   orderId: number;
   userId: number;
   message: string;

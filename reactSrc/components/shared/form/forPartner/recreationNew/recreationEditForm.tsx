@@ -2,43 +2,20 @@ import { Recreation } from '@/types';
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { FirstStep } from './firstStep';
-import { FourthStep } from './fourthStep';
+import { RecreationFormValues } from './recreationNewForm';
 import { SecondStep } from './secondStep';
 import { ThirdStep } from './thirdStep';
 
+export type FormKind = 'title' | 'price' | 'profile';
+
 type Props = {
+  kind: FormKind;
   onSubmit: (values: RecreationFormValues) => Promise<void>;
+  recreation: Recreation;
 };
 
-export type RecreationFormValues = Pick<
-  Recreation,
-  | 'id'
-  | 'title'
-  | 'secondTitle'
-  | 'minutes'
-  | 'price'
-  | 'materialPrice'
-  | 'description'
-  | 'flowOfDay'
-  | 'capacity'
-  | 'extraInformation'
-  | 'youtubeId'
-  | 'borrowItem'
-  | 'additionalFacilityFee'
-  | 'imageUrl'
-  | 'prefectures'
-  // | 'category'
-  | 'userId'
-> & {
-  kind: string;
-  category: string;
-  tags: Array<string>;
-  targets: Array<string>;
-  profileId: number;
-};
-
-export const RecreationNewForm: React.FC<Props> = (props) => {
-  const { onSubmit } = props;
+export const RecreationEditForm: React.FC<Props> = (props) => {
+  const { kind, onSubmit, recreation } = props;
 
   const [currentStep, setCurrentStep] = useState<number>(0);
   const {
@@ -50,21 +27,23 @@ export const RecreationNewForm: React.FC<Props> = (props) => {
   } = useForm<RecreationFormValues>({
     mode: 'onChange',
     defaultValues: {
-      title: '',
-      secondTitle: '',
-      minutes: 30,
-      price: 5000,
-      materialPrice: 0,
-      description: '',
-      flowOfDay: '',
-      capacity: 0,
-      extraInformation: '',
-      youtubeId: '',
-      borrowItem: '',
-      additionalFacilityFee: 0,
-      category: 'event',
+      id: recreation.id,
+      title: recreation.title,
+      secondTitle: recreation.secondTitle,
+      minutes: recreation.minutes,
+      price: recreation.price,
+      materialPrice: recreation.materialPrice,
+      description: recreation.description,
+      flowOfDay: recreation.flowOfDay,
+      capacity: recreation.capacity,
+      extraInformation: recreation.extraInformation,
+      youtubeId: recreation.youtubeId,
+      borrowItem: recreation.borrowItem,
+      additionalFacilityFee: recreation.additionalFacilityFee,
+      category: recreation.category.key,
       prefectures: [],
-      kind: 'online'
+      kind: recreation.kind.key,
+      profileId: recreation.profile.id
     }
   });
 
@@ -92,25 +71,31 @@ export const RecreationNewForm: React.FC<Props> = (props) => {
     arr.map((str) => console.log(`${str} is`, getValues(str as any)));
     setCurrentStep(currentStep + 1);
   };
-  const handlePrev = () => setCurrentStep(currentStep - 1);
 
   return (
     <div>
       <form className='recreation' onSubmit={handleSubmit(onSubmit)}>
-        {currentStep === 0 && (
+        {kind === 'title' && (
           <FirstStep
-            handleNext={handleNext}
+            handleNext={() => null}
             register={register}
             getValues={getValues}
             setValue={setValue}
             errors={errors}
           />
         )}
-        {currentStep === 1 && (
-          <SecondStep handleNext={handleNext} handlePrev={handlePrev} getValues={getValues} register={register} />
+        {kind === 'price' && (
+          <SecondStep handleNext={handleNext} handlePrev={() => null} getValues={getValues} register={register} />
         )}
-        {currentStep === 2 && <ThirdStep handleNext={handleNext} handlePrev={handlePrev} register={register} />}
-        {currentStep === 3 && <FourthStep handleNext={handleNext} handlePrev={handlePrev} />}
+
+        {kind === 'price' && <ThirdStep handleNext={handleNext} handlePrev={() => null} register={register} />}
+
+        <button
+          type='submit'
+          className='my-3 py-2 w-100 rounded text-white font-weight-bold bg-primary border border-primary'
+        >
+          保存する
+        </button>
       </form>
     </div>
   );
