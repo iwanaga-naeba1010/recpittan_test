@@ -3,7 +3,7 @@
 class SlackNotifier
   attr_reader :client, :channel
 
-  WEBHOOK_URL = ENV['SLACK_WEBHOOK'] # 環境SLACK_WEBHOOK_URLにwebhook urlを格納
+  WEBHOOK_URL = ENV.fetch('SLACK_WEBHOOK') # 環境SLACK_WEBHOOK_URLにwebhook urlを格納
   USER_NAME = 'system bot'
 
   def initialize(channel:)
