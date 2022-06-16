@@ -5,14 +5,12 @@ import { UseFormGetValues, UseFormRegister } from 'react-hook-form';
 import { RecreationFormValues } from './recreationNewForm';
 
 type Props = {
-  handleNext: () => void;
-  handlePrev: () => void;
   getValues: UseFormGetValues<RecreationFormValues>;
   register: UseFormRegister<RecreationFormValues>;
 };
 
 export const ThirdStep: React.FC<Props> = (props) => {
-  const { handleNext, handlePrev, getValues, register } = props;
+  const { getValues, register } = props;
   // TODO(okubo): Profileの型も追加しておく
   const [profiles, setProfiles] = useState<Array<Profile>>([]);
   useEffect(() => {
@@ -57,26 +55,6 @@ export const ThirdStep: React.FC<Props> = (props) => {
           <label htmlFor={`profileId${i}`}>{profile.name}</label>
         </div>
       ))}
-      <br />
-
-      {(getValues('id') === undefined || getValues('id') === null) && (
-        <>
-          <button
-            type='button'
-            className='my-3 py-2 w-100 rounded text-white font-weight-bold bg-primary border border-primary'
-            onClick={handleNext}
-          >
-            次へ
-          </button>
-          <button
-            type='button'
-            className='w-100 rounded text-primary font-weight-bold bg-white border border-white'
-            onClick={handlePrev}
-          >
-            ＜戻る
-          </button>
-        </>
-      )}
     </div>
   );
 };

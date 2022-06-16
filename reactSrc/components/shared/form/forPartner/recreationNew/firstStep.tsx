@@ -14,7 +14,6 @@ type Config = {
 };
 
 type Props = {
-  handleNext: () => void;
   register: UseFormRegister<RecreationFormValues>;
   setValue: UseFormSetValue<RecreationFormValues>;
   getValues: UseFormGetValues<RecreationFormValues>;
@@ -22,7 +21,7 @@ type Props = {
 };
 
 export const FirstStep: React.FC<Props> = (props) => {
-  const { handleNext, register, getValues, setValue, errors } = props;
+  const { register, getValues, setValue, errors } = props;
   const [config, setConfig] = useState<Config>(undefined);
   const [show, setShow] = useState(false);
   const [prefectures, setPrefectures] = useState<Array<string>>(getValues('prefectures'));
@@ -44,7 +43,7 @@ export const FirstStep: React.FC<Props> = (props) => {
     setValue('prefectures', prefectures);
   };
 
-  const disabled = errors?.kind !== undefined || errors?.title !== undefined || errors?.secondTitle !== undefined;
+  // const disabled = errors?.kind !== undefined || errors?.title !== undefined || errors?.secondTitle !== undefined;
 
   return (
     <div>
@@ -237,18 +236,6 @@ export const FirstStep: React.FC<Props> = (props) => {
         ) : null}
         {errors && <ValidationErrorMessage message={errors?.capacity?.message} />}
       </div>
-
-      <br />
-      {(getValues('id') === undefined || getValues('id') === null) && (
-        <button
-          disabled={disabled}
-          type='button'
-          className='my-3 py-2 w-100 rounded text-white font-weight-bold bg-primary border border-primary'
-          onClick={handleNext}
-        >
-          次へ
-        </button>
-      )}
     </div>
   );
 };

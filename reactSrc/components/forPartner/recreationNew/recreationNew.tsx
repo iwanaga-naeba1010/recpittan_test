@@ -1,6 +1,7 @@
 import { RecreationFormValues, RecreationNewForm } from '@/components/shared/form';
 import { Error } from '@/components/shared/parts';
 import { Api } from '@/infrastructure';
+import {Recreation} from '@/types';
 import { isEmpty } from '@/utils';
 import axios, { AxiosError } from 'axios';
 import React, { useState } from 'react';
@@ -41,11 +42,9 @@ const RecreationNew: React.FC = () => {
     };
 
     try {
-      await Api.post(`recreations`, 'partner', requestBody);
+      const createdRecreation = await Api.post<Recreation>(`recreations`, 'partner', requestBody);
       const noticeText = 'レクを追加しました！';
-      window.location.href = `/partners/recreations?notice=${noticeText}`;
-      // TODO(okubo): redirectによる画面遷移
-      //
+      window.location.href = `/partners/recreations/${createdRecreation.data.id}?notice=${noticeText}`;
     } catch (e) {
       if (axios.isAxiosError(e)) {
         setErrors((e as AxiosError<Array<string>>).response.data);

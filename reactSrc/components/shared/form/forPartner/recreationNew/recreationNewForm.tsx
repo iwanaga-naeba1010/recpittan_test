@@ -100,7 +100,6 @@ export const RecreationNewForm: React.FC<Props> = (props) => {
         <Step totalCounts={4} activeStep={currentStep} />
         {currentStep === 0 && (
           <FirstStep
-            handleNext={handleNext}
             register={register}
             getValues={getValues}
             setValue={setValue}
@@ -108,12 +107,39 @@ export const RecreationNewForm: React.FC<Props> = (props) => {
           />
         )}
         {currentStep === 1 && (
-          <SecondStep handleNext={handleNext} handlePrev={handlePrev} getValues={getValues} register={register} />
+          <SecondStep getValues={getValues} register={register} />
         )}
         {currentStep === 2 && (
-          <ThirdStep handleNext={handleNext} handlePrev={handlePrev} register={register} getValues={getValues} />
+          <ThirdStep register={register} getValues={getValues} />
         )}
-        {currentStep === 3 && <FourthStep handleNext={handleNext} handlePrev={handlePrev} />}
+        {currentStep === 3 && <FourthStep />}
+
+        {currentStep !== 3 && (
+          <button
+            type='button'
+            className='my-3 py-2 w-100 rounded text-white font-weight-bold bg-primary border border-primary'
+            onClick={handleNext}
+          >
+            次へ
+          </button>
+        )}
+        {currentStep === 3 && (
+          <button
+            type='submit'
+            className='mt-2 py-2 w-100 rounded text-white font-weight-bold bg-primary border border-primary'
+          >
+            申請する
+          </button>
+        )}
+        {currentStep !== 0 && (
+          <button
+            type='button'
+            className='w-100 rounded text-primary font-weight-bold bg-white border border-white'
+            onClick={handlePrev}
+          >
+            ＜戻る
+          </button>
+        )}
       </form>
     </div>
   );
