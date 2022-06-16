@@ -32,32 +32,30 @@ const RecreationEdit: React.FC = () => {
     setErrors([]);
     const requestBody: { [key: string]: Record<string, unknown> } = {
       recreation: {
-        title: values.title,
-        secondTitle: values.secondTitle,
-        minutes: values.minutes,
-        description: values.description,
-        price: values.price,
-        kind: values.kind,
-        flowOfDay: values.flowOfDay,
-        capacity: values.capacity || 0,
-        materialPrice: values.materialPrice,
-        extraInformation: values.extraInformation,
-        youtubeId: values.youtubeId,
-        borrowItem: values.borrowItem,
+        title: values.title || recreation.title,
+        secondTitle: values.secondTitle || recreation.secondTitle,
+        minutes: values.minutes || recreation.minutes,
+        description: values.description || recreation.description,
+        price: values.price || recreation.price,
+        kind: values.kind || recreation.kind,
+        flowOfDay: values.flowOfDay || recreation.flowOfDay,
+        capacity: values.capacity || recreation.capacity,
+        materialPrice: values.materialPrice || recreation.materialPrice,
+        extraInformation: values.extraInformation || recreation.extraInformation,
+        youtubeId: values.youtubeId || recreation.youtubeId,
+        borrowItem: values.borrowItem || recreation.borrowItem,
         bringYourOwnItem: '', // TODO(okubo): 追加が必要
-        additionalFacilityFee: values.additionalFacilityFee,
+        additionalFacilityFee: values.additionalFacilityFee||recreation.additionalFacilityFee,
         imageUrl: values.imageUrl,
-        // prefectures: values.prefectures,
-        category: values.category, // NOTE(okubo): idじゃないと保存できない
-        // categoryId: values.categoryId,
-        userId: values.userId,
+        category: values.category || recreation.category.key, // NOTE(okubo): idじゃないと保存できない
+        userId: recreation.userId,
         status: 'in_progress',
-        // tags: values.tags,
-        // targets: values.targets
         recreationProfileAttributes: { profileId: values.profileId },
         recreationPrefecturesAttributes: values.prefectures.map((p) => ({ name: p }))
       }
     };
+
+    console.log(requestBody);
 
     try {
       await Api.patch(`recreations/${id}`, 'partner', requestBody);
