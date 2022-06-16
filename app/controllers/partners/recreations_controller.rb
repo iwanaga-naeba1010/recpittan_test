@@ -39,9 +39,9 @@ class Partners::RecreationsController < Partners::ApplicationController
 
   private def set_tags
     tags = Tag.all.to_a
-    @events = tags.map { |tag| tag if tag.kind == :tag }.compact
-    @categories = tags.map { |tag| tag if tag.kind == :category }.compact
-    @targets = tags.map { |tag| tag if tag.kind == :target }.compact
+    @events = tags.select { |tag| tag.kind == :tag }
+    @categories = tags.select { |tag| tag.kind == :category }
+    @targets = tags.select { |tag| tag.kind == :target }
   end
 
   private def params_create

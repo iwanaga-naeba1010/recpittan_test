@@ -6,14 +6,14 @@ require 'aws-sdk-s3'
 SitemapGenerator::Sitemap.default_host = 'https://recreation.everyplus.jp'
 if Rails.env.production?
   SitemapGenerator::Sitemap.default_host = 'https://recreation.everyplus.jp'
-  SitemapGenerator::Sitemap.sitemaps_host = "https://s3-ap-northeast-1.amazonaws.com/#{ENV['AWS_BUCKET']}"
+  SitemapGenerator::Sitemap.sitemaps_host = "https://s3-ap-northeast-1.amazonaws.com/#{ENV.fetch('AWS_BUCKET')}"
   SitemapGenerator::Sitemap.sitemaps_path = 'sitemaps/'
 
   SitemapGenerator::Sitemap.adapter = SitemapGenerator::AwsSdkAdapter.new(
-    ENV['AWS_BUCKET'],
-    aws_access_key_id: ENV['AWS_ACCESS_KEY_ID'],
-    aws_secret_access_key: ENV['AWS_SECRET_ACCESS_KEY'],
-    aws_region: ENV['AWS_REGION']
+    ENV.fetch('AWS_BUCKET'),
+    aws_access_key_id: ENV.fetch('AWS_ACCESS_KEY_ID'),
+    aws_secret_access_key: ENV.fetch('AWS_SECRET_ACCESS_KEY'),
+    aws_region: ENV.fetch('AWS_REGION')
   )
 
   SitemapGenerator::Sitemap.create do
