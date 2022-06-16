@@ -143,7 +143,7 @@ export const SecondStep: React.FC<Props> = (props) => {
         onChange={(e) => setExtraInformation(e.target.value)}
         maxLength={500}
       />
-      <p className='small my-0'>{extraInformation.length}/500文字まで</p>
+      <p className='small my-0'>{extraInformation?.length}/500文字まで</p>
 
       <br />
 
