@@ -39,7 +39,7 @@ class RecreationSerializer
     recreations.map { |recreation| serialize(recreation: recreation) }
   end
 
-  def serialize(recreation:)
+  def serialize(recreation:) # rubocop:disable Metrics/AbcSize
     tags = TagSerializer.new.serialize_list(tags: recreation.tags)
     targets = TagSerializer.new.serialize_list(tags: recreation.tags.targets)
     profile = ProfileSerializer.new.serialize(profile: recreation.profile)
@@ -48,12 +48,22 @@ class RecreationSerializer
       title: recreation.title,
       second_title: recreation.second_title,
       minutes: recreation.minutes,
-      kind: recreation.kind,
+      description: recreation.description,
+      price: recreation.price,
+      kind: { id: recreation.kind.value, key: recreation.kind, text: recreation.kind_text },
+      status: { id: recreation.status.value, key: recreation.status, text: recreation.status_text },
+      category: { id: recreation.category.value, key: recreation.category, text: recreation.category_text },
+      flow_of_day: recreation.flow_of_day,
       capacity: recreation.capacity,
+      material_price: recreation.material_price,
+      extra_information: recreation.extra_information,
+      youtube_id: recreation.youtube_id,
+      borrow_item: recreation.borrow_item,
+      bring_your_own_item: recreation.bring_your_own_item,
+      additional_facility_fee: recreation.additional_facility_fee,
       image_url: recreation.recreation_images.sliders&.first&.image.to_s,
-      category: recreation.category_text,
-      category_id: recreation.category.value,
       profile: profile,
+      user_id: recreation.user_id,
       tags: tags,
       targets: targets
     }

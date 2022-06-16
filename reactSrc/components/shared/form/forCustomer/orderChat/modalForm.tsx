@@ -286,7 +286,7 @@ export const ModalForm: React.FC<Props> = (props) => {
                   <div className='col-auto p-0 flex-v-c'>人</div>
                 </div>
 
-                {recreation.kind === 'online' && (
+                {recreation.kind.key === 'online' && (
                   <div className='row pt-3'>
                     <label className='col-12 title-b pb-3' htmlFor='participant'>
                       追加で参加する施設がある場合施設数をご記入ください
@@ -412,7 +412,7 @@ export const ModalForm: React.FC<Props> = (props) => {
                         {order?.expenses?.toLocaleString()}
                       </div>
                     </div>
-                    {recreation.kind === 'online' && (
+                    {recreation.kind.key === 'online' && (
                       <div className='row justify-content-between border-bottom-dotted pb-2'>
                         <div className='col-auto'>
                           追加施設費 /

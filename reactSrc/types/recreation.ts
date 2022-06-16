@@ -1,15 +1,16 @@
-import { Base } from './base';
+import { BaseEnum } from './baseEnum';
+import { Profile } from './profile';
 import { Tag } from './tag';
 
-type KindEnum = 'visit' | 'online' | 'mailing';
-
-export interface Recreation extends Base {
+export interface Recreation extends BaseEnum {
   title: string;
   secondTitle: string;
   minutes: number;
   price: number;
   description: string;
-  kind: KindEnum;
+  kind: BaseEnum;
+  status: BaseEnum;
+  category: BaseEnum;
   flowOfDay: string;
   capacity: number;
   materialAmount: number;
@@ -19,10 +20,8 @@ export interface Recreation extends Base {
   additionalFacilityFee: number;
   borrowItem: string;
   imageUrl: string;
-  category: string;
   prefectures: Array<string>;
-  categoryId: number;
-  profile: Array<string>;
+  profile: Profile;
   userId: number;
   tags: Array<Tag>;
   targets: Array<Tag>;

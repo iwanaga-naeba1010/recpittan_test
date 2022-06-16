@@ -1,6 +1,7 @@
 import { RecreationFormValues, RecreationNewForm } from '@/components/shared/form';
 import { Error } from '@/components/shared/parts';
 import { Api } from '@/infrastructure';
+import { Recreation } from '@/types';
 import { isEmpty } from '@/utils';
 import axios, { AxiosError } from 'axios';
 import React, { useState } from 'react';
@@ -10,7 +11,6 @@ const RecreationNew: React.FC = () => {
   const [errors, setErrors] = useState<Array<string>>([]);
 
   const onSubmit = async (values: RecreationFormValues): Promise<void> => {
-    console.log('values', values);
     setErrors([]);
     const requestBody: { [key: string]: Record<string, unknown> } = {
       recreation: {
@@ -42,10 +42,9 @@ const RecreationNew: React.FC = () => {
     };
 
     try {
-      await Api.post(`recreations`, 'partner', requestBody);
-      window.location.href = '/partners/recreations';
-      // TODO(okubo): redirectによる画面遷移
-      //
+      const createdRecreation = await Api.post<Recreation>(`recreations`, 'partner', requestBody);
+      const noticeText = 'レクを追加しました！';
+      window.location.href = `/partners/recreations/${createdRecreation.data.id}?notice=${noticeText}`;
     } catch (e) {
       if (axios.isAxiosError(e)) {
         setErrors((e as AxiosError<Array<string>>).response.data);

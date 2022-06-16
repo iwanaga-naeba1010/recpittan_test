@@ -1,27 +1,8 @@
 import React from 'react';
 
-type Props = {
-  handleNext: () => void;
-  handlePrev: () => void;
-};
-
-export const FourthStep: React.FC<Props> = (props) => {
-  const { handlePrev } = props;
+export const FourthStep: React.FC = () => {
   return (
     <div>
-      <div className='d-flex'>
-        <p className='px-1 small text-secondary font-weight-bold border border-2 border-secondary rounded-circle'>✔︎</p>
-        <p className='ms-1 px-1 small text-secondary font-weight-bold border border-2 border-secondary rounded-circle'>
-          ✔︎
-        </p>
-        <p className='ms-1 px-1 small text-secondary font-weight-bold border border-2 border-secondary rounded-circle'>
-          ✔︎
-        </p>
-        <p className='ms-1 px-1 small text-black font-weight-bold border border-2 border-dark rounded-pill'>
-          ステップ4
-        </p>
-      </div>
-
       <div className='d-flex'>
         <h5 className='text-black font-weight-bold'>入力内容を確認</h5>
       </div>
@@ -112,26 +93,6 @@ export const FourthStep: React.FC<Props> = (props) => {
           <li>注意事項注意事項注意事項注意事項注意事項注意事項注意事項注意事項注意事項注意事項</li>
         </ol>
       </div>
-
-      <button
-        type='button'
-        className='mt-2 py-2 w-100 rounded text-primary font-weight-bold bg-white border border-primary'
-      >
-        編集する
-      </button>
-      <button
-        type='submit'
-        className='mt-2 py-2 w-100 rounded text-white font-weight-bold bg-primary border border-primary'
-      >
-        申請する
-      </button>
-      <button
-        type='button'
-        className='mt-2 w-100 rounded text-primary font-weight-bold bg-white border border-white'
-        onClick={handlePrev}
-      >
-        ＜戻る
-      </button>
     </div>
   );
 };

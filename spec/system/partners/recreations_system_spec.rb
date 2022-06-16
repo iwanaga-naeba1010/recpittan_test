@@ -47,7 +47,7 @@ RSpec.describe '/partners/recreations', type: :system do
         click_button('申請する')
         sleep 5
 
-        expect(page).to have_current_path(partners_recreations_path)
+        expect(page).to have_current_path(partners_recreation_path(Recreation.last.id), ignore_query: true)
 
         partner.reload
 

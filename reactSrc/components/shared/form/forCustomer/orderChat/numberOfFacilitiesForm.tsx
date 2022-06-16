@@ -47,7 +47,7 @@ export const NumberOfFacilitiesForm: React.FC<Props> = (props): JSX.Element => {
 
   return (
     <>
-      {order.recreation.kind === 'online' && (
+      {order.recreation.kind.key === 'online' && (
         <>
           {!canEdit ? (
             <div className='row justify-content-between border-bottom-dotted py-2'>
@@ -89,7 +89,7 @@ export const NumberOfFacilitiesForm: React.FC<Props> = (props): JSX.Element => {
                   </button>
                 </div>
               </div>
-              </form>
+            </form>
           )}
         </>
       )}

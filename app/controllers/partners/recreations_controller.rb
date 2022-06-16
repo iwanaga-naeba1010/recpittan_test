@@ -4,13 +4,11 @@ class Partners::RecreationsController < Partners::ApplicationController
   before_action :set_recreation, only: %i[edit update]
   before_action :set_tags, only: %i[new edit]
 
-  def index
-    @recreations = current_user.recreations
-  end
+  def index; end
 
-  def new
-    @recreation = current_user.recreations.build
-  end
+  def show; end
+
+  def new; end
 
   def create
     @recreation = current_user.recreations.build(params_create)

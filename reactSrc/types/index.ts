@@ -1,9 +1,9 @@
 export * from './address';
 export * from './api';
 export * from './chat';
-export * from './cities';
+// export * from './cities';
 export * from './order';
-export * from './prefectures';
+// export * from './prefectures';
 export * from './preferredDate';
 export * from './profile';
 export * from './recreation';
