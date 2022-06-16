@@ -4,6 +4,7 @@ class ApplicationController < ActionController::Base
   include ErrorHandlers
   before_action :set_default_url_options
   before_action :authenticate_user!
+  before_action :set_query_flash
   after_action  :store_redirect_url
 
   def set_default_url_options
@@ -33,5 +34,11 @@ class ApplicationController < ActionController::Base
 
       session[:redirect_url] = request.fullpath
     end
+  end
+
+  # NOTE(okubo): 主にreactからflashを与えるための目的で設置
+  private def set_query_flash
+    flash[:notice] = params[:notice] if params[:notice]
+    flash[:alert] = params[:alert] if params[:alert]
   end
 end
