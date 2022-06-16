@@ -84,10 +84,13 @@ export const FirstStep: React.FC<Props> = (props) => {
           className='p-2 w-100 rounded border border-secondary'
           placeholder='タイトルを入力'
           maxLength={50}
-          {...register('title', { required: 'タイトルは必須です', maxLength: 50 })}
+          {...register('title', {
+            required: 'タイトルは必須です',
+            maxLength: 50
+          })}
         />
         {errors && <ValidationErrorMessage message={errors?.title?.message} />}
-        <p className='small my-0'>{getValues('title').length}/50文字まで</p>
+        <p className='small my-0'>{getValues('title')?.length}/50文字まで</p>
       </div>
 
       <div className='title'>

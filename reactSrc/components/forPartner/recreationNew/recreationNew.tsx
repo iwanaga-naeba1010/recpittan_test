@@ -1,7 +1,7 @@
 import { RecreationFormValues, RecreationNewForm } from '@/components/shared/form';
 import { Error } from '@/components/shared/parts';
 import { Api } from '@/infrastructure';
-import {Recreation} from '@/types';
+import { Recreation } from '@/types';
 import { isEmpty } from '@/utils';
 import axios, { AxiosError } from 'axios';
 import React, { useState } from 'react';
