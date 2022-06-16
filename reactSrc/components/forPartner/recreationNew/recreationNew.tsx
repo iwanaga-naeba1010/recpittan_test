@@ -42,7 +42,8 @@ const RecreationNew: React.FC = () => {
 
     try {
       await Api.post(`recreations`, 'partner', requestBody);
-      window.location.href = '/partners/recreations';
+      const noticeText = 'レクを追加しました！';
+      window.location.href = `/partners/recreations?notice=${noticeText}`;
       // TODO(okubo): redirectによる画面遷移
       //
     } catch (e) {

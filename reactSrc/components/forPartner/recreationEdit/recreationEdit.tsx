@@ -60,7 +60,7 @@ const RecreationEdit: React.FC = () => {
     try {
       await Api.patch(`recreations/${id}`, 'partner', requestBody);
       const noticeText = 'レクを更新しました！';
-      window.location.href = `/partners/recreations?notice=${noticeText}`;
+      window.location.href = `/partners/recreations/${id}?notice=${noticeText}`;
       // TODO(okubo): redirectによる画面遷移
       //
     } catch (e) {

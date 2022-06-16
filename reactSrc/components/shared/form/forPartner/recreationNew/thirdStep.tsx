@@ -65,7 +65,7 @@ export const ThirdStep: React.FC<Props> = (props) => {
             id={`profileId${i}`}
             value={profile.id}
             {...register('profileId')}
-            checked={profile.id === getValues('profileId')}
+            defaultChecked={profile.id === getValues('profileId')}
           />
           <label htmlFor={`profileId${i}`}>{profile.name}</label>
         </div>

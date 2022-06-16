@@ -37,7 +37,7 @@ module Resources
         ActiveRecord::Base.transaction do
           @recreation = current_user.recreations.find(id)
           @recreation.update!(recreation_params)
-          update_profile_relation(profile_id: profile_id, recreation_id: @recreation.id)
+          update_profile_relation(profile_id: profile_id)
           update_prefectures(recreation_id: @recreation.id)
         end
 
@@ -50,9 +50,8 @@ module Resources
         Recreation.update!(recreation_params)
       end
 
-      private def update_profile_relation(profile_id:, recreation_id:)
-        recreation_profile = RecreationProfile.find_by(profile_id: profile_id, recreation_id: recreation_id)
-        recreation_profile.update!(profile_id: profile_id, recreation_id: recreation_id)
+      private def update_profile_relation(profile_id:)
+        @recreation.recreation_profile.update!(profile_id: profile_id)
       end
 
       # NOTE(okubo):ここは未対応
