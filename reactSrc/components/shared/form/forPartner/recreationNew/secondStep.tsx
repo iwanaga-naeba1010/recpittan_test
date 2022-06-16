@@ -16,21 +16,6 @@ export const SecondStep: React.FC<Props> = (props) => {
   return (
     <div>
       <div className='d-flex'>
-        <p className='ms-1 px-1 small text-secondary font-weight-bold border border-2 border-black rounded-circle'>
-          ✔︎
-        </p>
-        <p className='ms-1 px-1 small text-black font-weight-bold border border-2 border-dark rounded-pill'>
-          ステップ2
-        </p>
-        <p className='ms-1 px-1 small text-secondary font-weight-bold border border-2 border-secondary rounded-circle'>
-          3
-        </p>
-        <p className='ms-1 px-1 small text-secondary font-weight-bold border border-2 border-secondary rounded-circle'>
-          4
-        </p>
-      </div>
-
-      <div className='d-flex'>
         <h5 className='text-black font-weight-bold'>金額・メディア・その他の情報を入力</h5>
       </div>
       <hr className='my-2' />

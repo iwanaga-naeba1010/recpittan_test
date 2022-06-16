@@ -4,6 +4,7 @@ import { useForm } from 'react-hook-form';
 import { FirstStep } from './firstStep';
 import { FourthStep } from './fourthStep';
 import { SecondStep } from './secondStep';
+import { Step } from './step';
 import { ThirdStep } from './thirdStep';
 
 type Props = {
@@ -27,7 +28,6 @@ export type RecreationFormValues = Pick<
   | 'additionalFacilityFee'
   | 'imageUrl'
   | 'prefectures'
-  // | 'category'
   | 'userId'
 > & {
   kind: string;
@@ -97,6 +97,7 @@ export const RecreationNewForm: React.FC<Props> = (props) => {
   return (
     <div>
       <form className='recreation' onSubmit={handleSubmit(onSubmit)}>
+        <Step totalCounts={4} activeStep={currentStep} />
         {currentStep === 0 && (
           <FirstStep
             handleNext={handleNext}
@@ -109,7 +110,9 @@ export const RecreationNewForm: React.FC<Props> = (props) => {
         {currentStep === 1 && (
           <SecondStep handleNext={handleNext} handlePrev={handlePrev} getValues={getValues} register={register} />
         )}
-        {currentStep === 2 && <ThirdStep handleNext={handleNext} handlePrev={handlePrev} register={register} />}
+        {currentStep === 2 && (
+          <ThirdStep handleNext={handleNext} handlePrev={handlePrev} register={register} getValues={getValues} />
+        )}
         {currentStep === 3 && <FourthStep handleNext={handleNext} handlePrev={handlePrev} />}
       </form>
     </div>

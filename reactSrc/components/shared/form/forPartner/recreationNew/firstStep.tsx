@@ -26,9 +26,6 @@ export const FirstStep: React.FC<Props> = (props) => {
   const [config, setConfig] = useState<Config>(undefined);
   const [show, setShow] = useState(false);
   const [prefectures, setPrefectures] = useState<Array<string>>(getValues('prefectures'));
-  console.log('-------------');
-  console.log(getValues('id'));
-  console.log('-------------');
 
   useEffect(() => {
     (async () => {
@@ -51,19 +48,6 @@ export const FirstStep: React.FC<Props> = (props) => {
 
   return (
     <div>
-      <div className='d-flex'>
-        <p className='px-1 small text-black font-weight-bold border border-2 border-dark rounded-pill'>ステップ１</p>
-        <p className='ms-1 px-1 small text-secondary font-weight-bold border border-2 border-secondary rounded-circle'>
-          2
-        </p>
-        <p className='ms-1 px-1 small text-secondary font-weight-bold border border-2 border-secondary rounded-circle'>
-          3
-        </p>
-        <p className='ms-1 px-1 small text-secondary font-weight-bold border border-2 border-secondary rounded-circle'>
-          4
-        </p>
-      </div>
-
       <div className='d-flex'>
         <h5 className='text-black font-weight-bold'>レクの基本情報を入力</h5>
       </div>
