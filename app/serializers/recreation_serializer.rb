@@ -39,7 +39,7 @@ class RecreationSerializer
     recreations.map { |recreation| serialize(recreation: recreation) }
   end
 
-  def serialize(recreation:)
+  def serialize(recreation:) # rubocop:disable Metrics/AbcSize
     tags = TagSerializer.new.serialize_list(tags: recreation.tags)
     targets = TagSerializer.new.serialize_list(tags: recreation.tags.targets)
     profile = ProfileSerializer.new.serialize(profile: recreation.profile)

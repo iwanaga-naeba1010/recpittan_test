@@ -45,7 +45,7 @@ const RecreationEdit: React.FC = () => {
         youtubeId: values.youtubeId || recreation.youtubeId,
         borrowItem: values.borrowItem || recreation.borrowItem,
         bringYourOwnItem: '', // TODO(okubo): 追加が必要
-        additionalFacilityFee: values.additionalFacilityFee||recreation.additionalFacilityFee,
+        additionalFacilityFee: values.additionalFacilityFee || recreation.additionalFacilityFee,
         imageUrl: values.imageUrl,
         category: values.category || recreation.category.key, // NOTE(okubo): idじゃないと保存できない
         userId: recreation.userId,
