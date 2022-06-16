@@ -17,7 +17,7 @@ module Resources
         string :borrow_item
         string :bring_your_own_item
         string :extra_information, default: nil
-        string :youtube_id
+        string :youtube_id, default: nil
         integer :capacity
         integer :additional_facility_fee
         string :category

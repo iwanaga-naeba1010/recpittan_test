@@ -1,19 +1,18 @@
 import { Api } from '@/infrastructure';
 import { Profile } from '@/types';
 import React, { useEffect, useState } from 'react';
-import { UseFormRegister } from 'react-hook-form';
+import { UseFormGetValues, UseFormRegister } from 'react-hook-form';
 import { RecreationFormValues } from './recreationNewForm';
 
 type Props = {
   handleNext: () => void;
   handlePrev: () => void;
+  getValues: UseFormGetValues<RecreationFormValues>;
   register: UseFormRegister<RecreationFormValues>;
 };
 
-// TODO(okubo): Profile作成したらこちら削除
-
 export const ThirdStep: React.FC<Props> = (props) => {
-  const { handleNext, handlePrev, register } = props;
+  const { handleNext, handlePrev, getValues, register } = props;
   // TODO(okubo): Profileの型も追加しておく
   const [profiles, setProfiles] = useState<Array<Profile>>([]);
   useEffect(() => {
@@ -61,26 +60,36 @@ export const ThirdStep: React.FC<Props> = (props) => {
       </p>
       {profiles.map((profile: Profile, i) => (
         <div key={i}>
-          <input type='radio' id={`profileId${i}`} {...register('profileId')} value={profile.id} />
+          <input
+            type='radio'
+            id={`profileId${i}`}
+            value={profile.id}
+            {...register('profileId')}
+            checked={profile.id === getValues('profileId')}
+          />
           <label htmlFor={`profileId${i}`}>{profile.name}</label>
         </div>
       ))}
       <br />
 
-      <button
-        type='button'
-        className='my-3 py-2 w-100 rounded text-white font-weight-bold bg-primary border border-primary'
-        onClick={handleNext}
-      >
-        次へ
-      </button>
-      <button
-        type='button'
-        className='w-100 rounded text-primary font-weight-bold bg-white border border-white'
-        onClick={handlePrev}
-      >
-        ＜戻る
-      </button>
+      {(getValues('id') === undefined || getValues('id') === null) && (
+        <>
+          <button
+            type='button'
+            className='my-3 py-2 w-100 rounded text-white font-weight-bold bg-primary border border-primary'
+            onClick={handleNext}
+          >
+            次へ
+          </button>
+          <button
+            type='button'
+            className='w-100 rounded text-primary font-weight-bold bg-white border border-white'
+            onClick={handlePrev}
+          >
+            ＜戻る
+          </button>
+        </>
+      )}
     </div>
   );
 };

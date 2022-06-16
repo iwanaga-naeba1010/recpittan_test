@@ -1,5 +1,5 @@
 import { Recreation } from '@/types';
-import React, { useState } from 'react';
+import React from 'react';
 import { useForm } from 'react-hook-form';
 import { FirstStep } from './firstStep';
 import { RecreationFormValues } from './recreationNewForm';
@@ -17,7 +17,6 @@ type Props = {
 export const RecreationEditForm: React.FC<Props> = (props) => {
   const { kind, onSubmit, recreation } = props;
 
-  const [currentStep, setCurrentStep] = useState<number>(0);
   const {
     register,
     handleSubmit,
@@ -47,31 +46,6 @@ export const RecreationEditForm: React.FC<Props> = (props) => {
     }
   });
 
-  const handleNext = () => {
-    const arr = [
-      'title',
-      'secondTitle',
-      'minutes',
-      'price',
-      'description',
-      'flowOfDay',
-      'capacity',
-      'materialPrice',
-      'materialAmount',
-      'extraInformation',
-      'youtubeId',
-      'borrowItem',
-      'additionalFacilityFee',
-      'imageUrl',
-      'prefectures',
-      'category',
-      'profile',
-      'userId'
-    ];
-    arr.map((str) => console.log(`${str} is`, getValues(str as any)));
-    setCurrentStep(currentStep + 1);
-  };
-
   return (
     <div>
       <form className='recreation' onSubmit={handleSubmit(onSubmit)}>
@@ -85,11 +59,11 @@ export const RecreationEditForm: React.FC<Props> = (props) => {
           />
         )}
         {kind === 'price' && (
-          <SecondStep handleNext={handleNext} handlePrev={() => null} getValues={getValues} register={register} />
+          <SecondStep handleNext={() => null} handlePrev={() => null} getValues={getValues} register={register} />
         )}
-
-        {kind === 'price' && <ThirdStep handleNext={handleNext} handlePrev={() => null} register={register} />}
-
+        {kind === 'profile' && (
+          <ThirdStep handleNext={() => null} handlePrev={() => null} register={register} getValues={getValues} />
+        )}
         <button
           type='submit'
           className='my-3 py-2 w-100 rounded text-white font-weight-bold bg-primary border border-primary'
