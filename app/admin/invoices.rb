@@ -22,7 +22,7 @@ ActiveAdmin.register_page 'Invoices' do
       invoices = []
 
       User.customers.all.includes(:company, :orders).each do |customer|
-        orders = customer.orders.to_a.map { |order| order if order.status.finished? }.compact
+        orders = customer.orders.to_a.select { |order| order.status.finished? }
         next if orders.blank?
 
         invoice = {

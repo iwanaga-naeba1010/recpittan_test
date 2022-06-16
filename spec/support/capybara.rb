@@ -2,7 +2,7 @@
 
 if ENV['LOCAL'].present? && ENV['LOCAL'] == 'true'
   Capybara.register_driver :remote_chrome do |app|
-    url = ENV['SELENIUM_DRIVER_URL']
+    url = ENV.fetch('SELENIUM_DRIVER_URL')
     caps = ::Selenium::WebDriver::Remote::Capabilities.chrome(
       'goog:chromeOptions' => {
         'args' => [
