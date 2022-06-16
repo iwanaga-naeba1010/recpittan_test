@@ -86,18 +86,39 @@ RSpec.describe ApiPartner::ProfilesController, type: :request do
     let!(:recreation) { create(:recreation, user: current_user) }
     let!(:relation) { create(:recreation_profile, recreation: recreation, profile: profile) }
     let(:id) { recreation.id }
-    let!(:params) { { recreation: attributes_for(:recreation, user: current_user) } }
-    let(:expected) { RecreationSerializer.new.serialize(recreation: recreation) }
+    let(:params) do
+      {
+        recreation: {
+          title: 'title',
+          second_title: 'second_title',
+          price: 5000,
+          material_price: 1000,
+          minutes: 30,
+          description: 'description',
+          flow_of_day: '',
+          borrow_item: '',
+          bring_your_own_item: '',
+          extra_information: '',
+          youtube_id: '',
+          capacity: 1,
+          additional_facility_fee: 0,
+          category: 1,
+          status: 'in_progress',
+          kind: 'online',
+          recreation_profile_attributes: {
+            profile_id: profile.id
+          }
+        }
+      }
+    end
+    let(:expected) { RecreationSerializer.new.serialize(recreation: recreation.reload) }
 
     it_behaves_like 'an endpoint returns', :expected
 
     context 'with valid params' do
-      it_behaves_like 'an endpoint returns 2xx status'
-    end
+      let(:params) { { recreation: { title: '' } } }
 
-    context 'with invalid params' do
-      let!(:params) { { recreation: { recreation_profile_attributes: { profile_id: 0 } } } }
-      it_behaves_like 'an endpoint returns 4xx status', :expected
+      it_behaves_like 'an endpoint returns 4xx status'
     end
   end
 end
