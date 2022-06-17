@@ -3,7 +3,9 @@
 require 'rails_helper'
 
 RSpec.describe '/partners/recreations', type: :system do
-  let(:partner) { create :user, :with_partner }
+  let(:partner) { create :user, :with_partner, :with_recreations }
+  let(:recreations) { partner.recreations }
+  let(:recreation) { partner.recreations.first }
 
   before do
     sign_in partner
@@ -51,7 +53,77 @@ RSpec.describe '/partners/recreations', type: :system do
 
         partner.reload
 
-        expect(partner.recreations.length).to eq 2
+        expect(partner.recreations.length).to eq 3
+      end
+    end
+  end
+
+  context 'Show Page' do
+    before do
+      ActionController::Base.allow_forgery_protection = true
+      visit partners_recreations_path
+    end
+    after do
+      ActionController::Base.allow_forgery_protection = false
+    end
+
+    feature 'Recreation show' do
+      scenario 'succeeds', js: true do
+        expect(page).to have_content('レクリエーション一覧')
+        expect(page).to have_content(recreation.title)
+        click_on(recreation.title, match: :first)
+        expect(page).to have_current_path(partners_recreation_path(recreation))
+      end
+    end
+  end
+
+  context 'Edit Form' do
+    before do
+      ActionController::Base.allow_forgery_protection = true
+      visit partners_recreation_path(recreation.id)
+    end
+    after do
+      ActionController::Base.allow_forgery_protection = false
+    end
+
+    feature 'Recreation edit' do
+      changed_title = 'changed title'
+      changed_price = 10000
+
+      scenario 'title form', js: true do
+        expect(page).to have_content('レクリエーション詳細')
+        expect(page).to have_content(recreation.title)
+        click_on('レクの基本情報')
+        expect(page).to have_current_path(edit_partners_recreation_path(recreation), ignore_query: true)
+        expect(page).to have_content('レクの基本情報を入力')
+        fill_in 'title', with: changed_title
+        click_button('保存する')
+        expect(page).to have_content 'レクを更新しました！'
+        expect(page).to have_content(changed_title)
+        expect(partner.recreations.first.title).to eq changed_title
+      end
+
+      scenario 'price form', js: true do
+        expect(page).to have_content('レクリエーション詳細')
+        expect(page).to have_content(recreation.title)
+        click_on('金額・メディア・その他の情報')
+        expect(page).to have_current_path(edit_partners_recreation_path(recreation), ignore_query: true)
+        expect(page).to have_content('金額・メディア・その他の情報を入力')
+        fill_in 'price', with: changed_price
+        click_button('保存する')
+        expect(page).to have_content 'レクを更新しました！'
+        expect(partner.recreations.first.price).to eq changed_price
+      end
+
+      scenario 'profile form', js: true do
+        expect(page).to have_content('レクリエーション詳細')
+        expect(page).to have_content(recreation.title)
+        click_on('レクに表示するプロフィール')
+        expect(page).to have_current_path(edit_partners_recreation_path(recreation), ignore_query: true)
+        expect(page).to have_content('プロフィールを選択')
+        find("label[for='profileId0']").click
+        click_button('保存する')
+        expect(page).to have_content 'レクを更新しました！'
       end
     end
   end
