@@ -1,7 +1,7 @@
-import { Base } from './base';
+import { BaseRecord } from './baseRecord';
 import { Recreation } from './recreation';
 
-export interface Order extends Base {
+export interface Order extends BaseRecord {
   zip: string;
   prefecture: string;
   city: string;

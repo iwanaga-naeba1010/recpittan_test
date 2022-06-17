@@ -4,6 +4,14 @@ module ApiPartner
   class RecreationsController < ApplicationController
     before_action :set_recreation, only: %i[show update]
 
+    def index
+      recreations = current_user.recreations
+      render_json RecreationSerializer.new.serialize_list(recreations: recreations)
+    rescue StandardError => e
+      logger.error e.message
+      render_json([e.message], status: 401)
+    end
+
     def show
       render_json RecreationSerializer.new.serialize(recreation: @recreation)
     rescue StandardError => e
@@ -12,13 +20,20 @@ module ApiPartner
     end
 
     def create
-      # TODO(okubo): statusやkindが文字列で送られてくるが、それをAPIで保存できるか心配
       recreation = Resources::Recreations::Create.run!(
         recreation_params: params_create.to_h,
         current_user: current_user,
         profile_id: params_create.dig(:recreation_profile_attributes, :profile_id),
         prefectures: params_create[:recreation_prefectures_attributes]&.pluck(:name)
       )
+      message = <<~MESSAGE
+        管理画面案件URL：#{admin_recreation_url(recreation.id)}
+        新規レク登録依頼を確認して、承認作業を行ってください。
+      MESSAGE
+
+      SlackNotifier
+        .new(channel: '#アクティブチャットスレッド')
+        .send('新規レク登録依頼', message)
       render_json RecreationSerializer.new.serialize(recreation: recreation)
     rescue StandardError => e
       logger.error e.message
@@ -26,8 +41,15 @@ module ApiPartner
     end
 
     def update
-      @recreation.update!(params_create)
-      render_json RecreationSerializer.new.serialize(recreation: @recreation)
+      recreation = Resources::Recreations::Update.run!(
+        id: params[:id].to_i,
+        recreation_params: params_create.to_h,
+        current_user: current_user,
+        profile_id: params_create.dig(:recreation_profile_attributes, :profile_id),
+        prefectures: params_create[:recreation_prefectures_attributes]&.pluck(:name)
+      )
+
+      render_json RecreationSerializer.new.serialize(recreation: recreation)
     rescue StandardError => e
       logger.error e.message
       render_json([e.message], status: 422)

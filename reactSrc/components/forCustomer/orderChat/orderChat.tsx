@@ -54,7 +54,7 @@ export const OrderChat: React.FC = () => {
               <div className='col-md-7 recreation'>
                 <h1 className='title-b line-height-140'>{order.recreation?.title}</h1>
                 <div className='category-tags'>
-                  <Category id={order.recreation?.categoryId} name={order.recreation?.category} />
+                  <Category id={order.recreation?.category.id} name={order.recreation?.category.text} />
                   {order.recreation?.tags.map((tag) => (
                     <Tag key={tag.id} id={tag.id} name={tag.name} />
                   ))}

@@ -1,3 +1,3 @@
-import { Base } from './base';
+import { BaseRecord } from './baseRecord';
 
-export type User = Base;
+export type User = BaseRecord;
