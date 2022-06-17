@@ -1,3 +1,4 @@
+import {LoadingContainer} from '@/components/shared';
 import { Api } from '@/infrastructure';
 import { Recreation } from '@/types';
 import React, { useEffect, useState } from 'react';
@@ -20,9 +21,11 @@ const RecreationIndex: React.FC = () => {
     })();
   }, []);
 
+
   if (isLoading) {
-    return <>読み込み中....</>;
+    return <LoadingContainer />;
   }
+
   return (
     <div>
       {recreations?.length > 0 ? (

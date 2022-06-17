@@ -1,5 +1,5 @@
 import { FormKind, RecreationEditForm, RecreationFormValues } from '@/components/shared/form';
-import { Error } from '@/components/shared/parts';
+import { Error, LoadingContainer } from '@/components/shared/parts';
 import { Api } from '@/infrastructure';
 import { Recreation } from '@/types';
 import { getQeuryStringValueByKey, isEmpty } from '@/utils';
@@ -71,8 +71,9 @@ const RecreationEdit: React.FC = () => {
     }
   };
 
+
   if (isLoading) {
-    return <>読み込み中....</>;
+    return <LoadingContainer />;
   }
 
   return (

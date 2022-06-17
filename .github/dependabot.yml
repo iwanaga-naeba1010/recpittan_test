@@ -88,3 +88,4 @@ updates:
     - 6.1.0
   - dependency-name: webpack-cli
   - dependency-name: webpack-dev-server
+  - dependency-name: '@fortawesome/fontawesome-free'

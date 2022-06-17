@@ -2,7 +2,7 @@ import { ModalForm } from '@/components/shared';
 import { ExpenseForm } from '@/components/shared/form/forCustomer/orderChat/expenceForm';
 import { NumberOfFacilitiesForm } from '@/components/shared/form/forCustomer/orderChat/numberOfFacilitiesForm';
 import { TranspotationExpensesForm } from '@/components/shared/form/forCustomer/orderChat/transportationExpensesForm';
-import { Category, Tag } from '@/components/shared/parts';
+import { Category, LoadingIndicator, Tag } from '@/components/shared/parts';
 import { Api } from '@/infrastructure';
 import { Order, User } from '@/types';
 import * as Sentry from '@sentry/react';
@@ -26,7 +26,7 @@ export const OrderChat: React.FC = () => {
         const userResponse = await Api.get<User>(`/users/self`, 'common');
         // NOTE(okubo): Objestのkeyは自動変換しているが、valueはできていないので個別対応
         setUser(userResponse.data);
-        setIsLoading(false);
+          setIsLoading(false);
       } catch (e) {
         console.warn('error is', e);
       }
@@ -34,7 +34,13 @@ export const OrderChat: React.FC = () => {
   }, [id]);
 
   if (isLoading) {
-    return <>読み込み中....</>;
+    return (
+      <div className='container'>
+        <div className="d-flex justify-content-center">
+          <LoadingIndicator />
+        </div>
+      </div>
+    );
   }
 
   return (
