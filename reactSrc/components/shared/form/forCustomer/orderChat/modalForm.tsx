@@ -431,8 +431,9 @@ export const ModalForm: React.FC<Props> = (props) => {
                       </div>
                     </div>
                     {isCouponApplied && (
-                      <div className='alert alert-success' role='alert'>
-                        &yen; 5,000円割引適用 ※&yen;5,000円を上限に割引を適用します
+                      <div className='alert alert-warning' role='alert'>
+                        <div className='font-weight-boild'>クーポン適用中のため合計金額は「&yen; 0」となります</div>
+                        <div>合計金額が表示されていても請求は&yen; 0となります。ご安心ください。</div>
                       </div>
                     )}
                     {isCouponApplied === false && (

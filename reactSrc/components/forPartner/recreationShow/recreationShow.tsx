@@ -1,3 +1,4 @@
+import {LoadingContainer} from '@/components/shared';
 import { Api } from '@/infrastructure';
 import { Recreation } from '@/types';
 import React, { useEffect, useState } from 'react';
@@ -23,8 +24,9 @@ const RecreationShow: React.FC = () => {
   }, []);
 
   if (isLoading) {
-    return <>読み込み中....</>;
+    return <LoadingContainer />;
   }
+
   return (
     <div className='body bg-white p-3 mb-3'>
       {/* 修正リンクに変更する */}
