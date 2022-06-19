@@ -12,6 +12,15 @@ ActiveAdmin.register Evaluation do
   index do
     id_column
     column :report
+    column('レク名') do |evaluation|
+      evaluation.report.order.recreation.title
+    end
+    column('PT名') do |evaluation|
+      evaluation.report.order.recreation.user.username
+    end
+    column('施設名') do |evaluation|
+      evaluation.report.order.user.company.name
+    end
     column(:ingenuity, &:ingenuity_text)
     column(:communication, &:communication_text)
     column(:smoothness, &:smoothness_text)
