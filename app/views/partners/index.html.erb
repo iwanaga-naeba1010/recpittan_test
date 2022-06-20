@@ -39,16 +39,14 @@
           <%= I18n.t("partner.order.status.#{order.status}") %>
         </span>
       </div>
-      <div class="d-inline-flex remark">
-        <small class="order-number">
-          依頼番号:
-          <%= order.id %>
-        </small>
-        <small>
-          更新日:
-          <%= dotted_datetime order.updated_at %>
-        </small>
-      </div>
+      <small>
+        依頼番号:
+        <%= order.id %>
+      </small>
+      <small>
+        更新日:
+        <%= dotted_datetime order.updated_at %>
+      </small>
     </div>
   <% end %>
 <% end %>
