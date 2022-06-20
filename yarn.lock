@@ -1224,28 +1224,10 @@
     "@sentry/utils" "7.2.0"
     tslib "^1.9.3"
 
-"@sentry/hub@7.1.1":
-  version "7.1.1"
-  resolved "https://registry.yarnpkg.com/@sentry/hub/-/hub-7.1.1.tgz#d6aa54e7bd20a71cebd602701dd29d5d581d391a"
-  integrity sha512-ASsRVjYDIii6ZTf36JnIYKHWBQBk0P42Tgq324MpyPgaeVDg3saBcyXO5iAtWvY6Vmdi2H4JCVDoir2Zz3Me1w==
-  dependencies:
-    "@sentry/types" "7.1.1"
-    "@sentry/utils" "7.1.1"
-    tslib "^1.9.3"
-
 "@sentry/hub@7.2.0":
   version "7.2.0"
   resolved "https://registry.yarnpkg.com/@sentry/hub/-/hub-7.2.0.tgz#c19ce0394c7c87647be284fca304d6fa1821ad75"
   integrity sha512-uzd+GzD++Z4QopRh3AyRc4jz4AzomMnrXTOmdXgud1BH/Du9AYutVlBc5ZYwqCuJH7QPuAW3ySU3P+16UCinIg==
-  dependencies:
-    "@sentry/types" "7.2.0"
-    "@sentry/utils" "7.2.0"
-    tslib "^1.9.3"
-
-"@sentry/react@^7.1.1":
-  version "7.1.1"
-  resolved "https://registry.yarnpkg.com/@sentry/react/-/react-7.1.1.tgz#13d63384d1a8c916b96ea79b74fc419ba967fb6a"
-  integrity sha512-Z7cZvXHIWxg7OhOSy4InhrRgQPRNtHsyOkIAHkgwW32JYOGTg1HdqQ5mFUxQLejhU/YqsxVjTK4CI58FATykLw==
   dependencies:
     "@sentry/types" "7.2.0"
     "@sentry/utils" "7.2.0"
@@ -1272,23 +1254,10 @@
     "@sentry/utils" "7.2.0"
     tslib "^1.9.3"
 
-"@sentry/types@7.1.1":
-  version "7.1.1"
-  resolved "https://registry.yarnpkg.com/@sentry/types/-/types-7.1.1.tgz#63aa68e7be36d63cc305d01af9119a4cdb186ae3"
-  integrity sha512-5N1UMd2SqvUXprcIUMyDEju3H9lJY2oWfWQBGo0lG6Amn/lGAPAYlchg+4vQCLutDQMyd8K9zPwcbKn4u6gHdw==
-
 "@sentry/types@7.2.0":
   version "7.2.0"
   resolved "https://registry.yarnpkg.com/@sentry/types/-/types-7.2.0.tgz#0c20073956bb46bdea3288683aeba2d5c350deb8"
   integrity sha512-e6w62C2AmE5ULr9w/BuVaKTRpKUMGWyw4PhcBlSdDRoS47QgURGgDFIvr3VlaDwkUfCbASwSv49fDhKRX3aoew==
-
-"@sentry/utils@7.1.1":
-  version "7.1.1"
-  resolved "https://registry.yarnpkg.com/@sentry/utils/-/utils-7.1.1.tgz#7174a1439f8970510207fa7587385119397e1718"
-  integrity sha512-DPRHDf3InfyVgmxToE4Z+AATAR4OVm+wsXDLFGGyncR91CE1x4wLQKOcAJJwX3F0Hz1VHENfmx1DvyYTHOrC/A==
-  dependencies:
-    "@sentry/types" "7.1.1"
-    tslib "^1.9.3"
 
 "@sentry/utils@7.2.0":
   version "7.2.0"
@@ -8085,10 +8054,10 @@ typedarray@^0.0.6:
   resolved "https://registry.yarnpkg.com/typedarray/-/typedarray-0.0.6.tgz#867ac74e3864187b1d3d47d996a78ec5c8830777"
   integrity sha512-/aCDEGatGvZ2BIk+HmLf4ifCJFwvKFNb9/JeZPMulfgFracn9QFcAf5GO8B/mweUjSoblS5In0cWhqpfs/5PQA==
 
-typescript@^4.7.3:
-  version "4.7.3"
-  resolved "https://registry.yarnpkg.com/typescript/-/typescript-4.7.3.tgz#8364b502d5257b540f9de4c40be84c98e23a129d"
-  integrity sha512-WOkT3XYvrpXx4vMMqlD+8R8R37fZkjyLGlxavMc4iB8lrl8L0DeTcHbYgw/v0N/z9wAFsgBhcsF0ruoySS22mA==
+typescript@^4.7.4:
+  version "4.7.4"
+  resolved "https://registry.yarnpkg.com/typescript/-/typescript-4.7.4.tgz#1a88596d1cf47d59507a1bcdfb5b9dfe4d488235"
+  integrity sha512-C0WQT0gezHuw6AdY1M2jxUO83Rjf0HP7Sk1DtXj6j1EwkQNZrHAg2XPWlq62oqEhYvONq5pkC2Y9oPljWToLmQ==
 
 unbox-primitive@^1.0.2:
   version "1.0.2"
