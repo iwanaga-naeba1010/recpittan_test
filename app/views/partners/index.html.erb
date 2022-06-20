@@ -34,18 +34,18 @@
         開催希望日:
         <%= dotted_datetime order.start_at %>
       </div>
-      <div class="mb-2">
-        最終更新日:
-        <%= dotted_datetime order.updated_at %>
-      </div>
       <div class="status mb-2">
         <span class="status__cunsult p-1">
           <%= I18n.t("partner.order.status.#{order.status}") %>
         </span>
       </div>
-      <small>
+      <small class="mr-3">
         依頼番号:
         <%= order.id %>
+      </small>
+      <small>
+        更新日:
+        <%= dotted_datetime order.updated_at %>
       </small>
     </div>
   <% end %>
