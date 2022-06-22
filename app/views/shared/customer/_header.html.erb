@@ -19,6 +19,25 @@
           <%= link_to 'アカウント', edit_user_registration_path, class: "clink" %>
         <% end %>
       </div>
+
+      <% if current_user.invoice_information.blank? %>
+        <div class="col-auto">
+          <% if active_link?('invoice_informations') %>
+            請求情報
+          <% else %>
+            <%= link_to '請求情報', new_customers_invoice_information_path, class: "clink" %>
+          <% end %>
+        </div>
+      <% else %>
+        <div class="col-auto">
+          <% if active_link?('invoice_informations') %>
+            請求情報編集
+          <% else %>
+            <%= link_to '請求情報編集', edit_customers_invoice_information_path(current_user.invoice_information.id), class: "clink" %>
+          <% end %>
+        </div>
+      <% end %>
+
     </div>
   </div>
 </div>
