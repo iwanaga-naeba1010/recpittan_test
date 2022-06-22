@@ -2,6 +2,7 @@
 
 namespace :api_partner do
   resources :recreations, only: %i[index show create update] do
+    resources :recreation_images
     collection do
       get :config_data
     end

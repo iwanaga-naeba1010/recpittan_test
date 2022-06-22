@@ -78,7 +78,6 @@ const RecreationEdit: React.FC = () => {
 
   return (
     <div>
-      ugoita!
       {!isEmpty(errors) && <Error errors={errors} />}
       <RecreationEditForm kind={formKind} recreation={recreation} onSubmit={onSubmit} />
     </div>

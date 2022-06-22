@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe ApiPartner::ProfilesController, type: :request do
+RSpec.describe ApiPartner::RecreationsController, type: :request do
   include_context 'with authenticated partner'
 
   describe 'GET /api_partner/recreations/config_data' do
