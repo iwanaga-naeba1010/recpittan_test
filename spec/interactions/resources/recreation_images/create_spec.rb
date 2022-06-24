@@ -9,7 +9,7 @@ RSpec.describe Resources::RecreationImages::Create, type: :interaction do
     let!(:profile) { create(:profile, user: partner) }
     let!(:recreation) { create(:recreation, user: partner, profile: profile) }
 
-    let(:image) do 
+    let(:image) do
       base64_image = Base64.decode64(File.open(Rails.root.join('spec/files/test.png'), 'rb').read)
       "data:image/png;base64,#{base64_image}"
     end

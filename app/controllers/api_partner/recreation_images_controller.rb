@@ -13,6 +13,16 @@ module ApiPartner
       render_json([e.message], status: 422)
     end
 
+    def destroy
+      Resources::RecreationImages::Destroy.run!(
+        recreation_image_id: params[:id]
+      )
+      render_json true
+    rescue StandardError => e
+      logger.error e.message
+      render_json([e.message], status: 422)
+    end
+
     private def params_create
       params.require(:recreation_image).permit(:image, :kind)
     end
