@@ -14,7 +14,6 @@ module Resources
 
       def execute
         ActiveRecord::Base.transaction do
-          binding.pry
           image = RecreationImage.new(
             recreation_id: recreation_id,
             image: base64_conversion(params[:image])

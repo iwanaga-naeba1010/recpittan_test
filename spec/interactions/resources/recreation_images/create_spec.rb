@@ -11,20 +11,9 @@ RSpec.describe Resources::RecreationImages::Create, type: :interaction do
 
     let(:image) do 
       base64_image = Base64.decode64(File.open(Rails.root.join('spec/files/test.png'), 'rb').read)
-      # image = ActionDispatch::Http::UploadedFile.new(
-      #   filename: 'test.png',
-      #   type: 'image/png',
-      #   tempfile: File.open(Rails.root.join('spec/files/test.png'))
-      # )
       "data:image/png;base64,#{base64_image}"
     end
     let(:params) do
-      # image = ActionDispatch::Http::UploadedFile.new(
-      #   filename: 'test.png',
-      #   type: 'image/png',
-      #   tempfile: File.open(Rails.root.join('spec/files/test.png'))
-      # )
-
       {
         image: image
       }
