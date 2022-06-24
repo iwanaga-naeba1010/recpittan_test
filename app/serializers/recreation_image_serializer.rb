@@ -36,14 +36,14 @@
 #
 class RecreationImageSerializer
   def serialize_list(recreation_images:)
-    recreation_images.map { |image| serialize(image: image) }
+    recreation_images.map { |image| serialize(recreation_image: image) }
   end
 
-  def serialize(image:)
+  def serialize(recreation_image:)
     {
-      id: image.id,
-      image: image.image.to_s,
-      kind: image.kind,
+      id: recreation_image.id,
+      image_url: recreation_image.image.to_s,
+      kind: recreation_image.kind,
     }
   end
 end

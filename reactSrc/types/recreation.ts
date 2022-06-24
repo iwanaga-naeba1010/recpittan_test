@@ -1,5 +1,6 @@
 import { BaseEnum } from './baseEnum';
 import { Profile } from './profile';
+import { RecreationImage } from './recreationImage';
 import { Tag } from './tag';
 
 export interface Recreation extends BaseEnum {
@@ -20,6 +21,7 @@ export interface Recreation extends BaseEnum {
   additionalFacilityFee: number;
   borrowItem: string;
   imageUrl: string;
+  images: Array<RecreationImage>;
   prefectures: Array<string>;
   profile: Profile;
   userId: number;

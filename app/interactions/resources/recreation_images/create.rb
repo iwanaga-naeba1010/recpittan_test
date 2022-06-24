@@ -1,0 +1,58 @@
+# frozen_string_literal: true
+
+module Resources
+  module RecreationImages
+    class Create < ActiveInteraction::Base
+
+      hash :params do
+        string :image
+      end
+
+      integer :recreation_id
+
+      validates :recreation_id, presence: true
+
+      def execute
+        ActiveRecord::Base.transaction do
+          image = RecreationImage.new(
+            recreation_id: recreation_id,
+            image: base64_conversion(params[:image])
+          )
+          image.save!
+          image
+        end
+      rescue ActiveRecord::RecordInvalid => e
+        errors.merge!(e.record.errors)
+      end
+
+      private def base64_conversion(uri_str, filename = 'base64')
+        image_data = split_base64(uri_str)
+        image_data_string = image_data[:data]
+        image_data_binary = Base64.decode64(image_data_string)
+
+        temp_img_file = Tempfile.new(filename)
+        temp_img_file.binmode
+        temp_img_file << image_data_binary
+        temp_img_file.rewind
+
+        img_params = {
+          filename: "#{filename}.#{image_data[:extension]}",
+          type: image_data[:type],
+          tempfile: temp_img_file
+        }
+        ActionDispatch::Http::UploadedFile.new(img_params)
+      end
+
+      private def split_base64(uri_str)
+        return nil unless uri_str.match(%r{data:(.*?);(.*?),(.*)$})
+
+        uri = Hash.new
+        uri[:type] = $1
+        uri[:encoder] = $2
+        uri[:data] = $3
+        uri[:extension] = $1.split('/')[1]
+        return uri
+      end
+    end
+  end
+end

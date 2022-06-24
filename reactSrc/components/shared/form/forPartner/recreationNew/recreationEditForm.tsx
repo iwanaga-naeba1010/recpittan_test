@@ -50,20 +50,12 @@ export const RecreationEditForm: React.FC<Props> = (props) => {
     <div>
       <form className='recreation' onSubmit={handleSubmit(onSubmit)}>
         {kind === 'title' && (
-          <FirstStep
-            handleNext={() => null}
-            register={register}
-            getValues={getValues}
-            setValue={setValue}
-            errors={errors}
-          />
+          <FirstStep register={register} getValues={getValues} setValue={setValue} errors={errors} />
         )}
         {kind === 'price' && (
-          <SecondStep handleNext={() => null} handlePrev={() => null} getValues={getValues} register={register} />
+          <SecondStep getValues={getValues} register={register} recreation={recreation} />
         )}
-        {kind === 'profile' && (
-          <ThirdStep handleNext={() => null} handlePrev={() => null} register={register} getValues={getValues} />
-        )}
+        {kind === 'profile' && <ThirdStep register={register} getValues={getValues} />}
         <button
           type='submit'
           className='my-3 py-2 w-100 rounded text-white font-weight-bold bg-primary border border-primary'
