@@ -71,7 +71,6 @@ const RecreationEdit: React.FC = () => {
     }
   };
 
-
   if (isLoading) {
     return <LoadingContainer />;
   }

@@ -25,7 +25,6 @@ export const SecondStep: React.FC<Props> = (props) => {
     inputRef.current.click();
   };
 
-
   console.log('00000000000000000000recreation');
   console.log(recreation);
   console.log('00000000000000000000recreation');

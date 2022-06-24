@@ -26,7 +26,7 @@ export const OrderChat: React.FC = () => {
         const userResponse = await Api.get<User>(`/users/self`, 'common');
         // NOTE(okubo): Objestのkeyは自動変換しているが、valueはできていないので個別対応
         setUser(userResponse.data);
-          setIsLoading(false);
+        setIsLoading(false);
       } catch (e) {
         console.warn('error is', e);
       }
@@ -36,7 +36,7 @@ export const OrderChat: React.FC = () => {
   if (isLoading) {
     return (
       <div className='container'>
-        <div className="d-flex justify-content-center">
+        <div className='d-flex justify-content-center'>
           <LoadingIndicator />
         </div>
       </div>

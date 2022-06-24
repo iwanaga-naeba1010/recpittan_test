@@ -12,7 +12,9 @@ export const RecreationImage: React.FC<Props> = (props) => {
     <div className='col-4'>
       <p className='py-5 text-center text-primary font-weight-bold border'>
         <img src={image.imageUrl} height={100} width={100} />
-        <button type='button' onClick={() => handleDelete(image.id)}>削除</button>
+        <button type='button' onClick={() => handleDelete(image.id)}>
+          削除
+        </button>
       </p>
     </div>
   );
