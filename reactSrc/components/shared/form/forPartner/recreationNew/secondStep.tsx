@@ -101,9 +101,11 @@ export const SecondStep: React.FC<Props> = (props) => {
       <p className='small my-0'>追加施設費＋サービス手数料が上乗せされます</p>
       <p className='small my-0'>￥0</p>
 
-      {recreation.images.map((image, i) => (
-        <ImageComponent key={i} />
-      ))}
+      <h5 className='text-black font-weight-bold'>レク画像を追加</h5>
+
+      <div className="row">
+        {recreation.images.map((image, i) => ( <ImageComponent key={i} imageUrl={image.imageUrl} />))}
+      </div>
 
       <input
         type='file'

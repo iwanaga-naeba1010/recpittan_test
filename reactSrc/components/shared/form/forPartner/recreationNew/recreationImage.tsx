@@ -8,12 +8,15 @@ type Props = {
 export const RecreationImage: React.FC<Props> = (props) => {
   const { imageUrl } = props;
   return (
-    <div>
+    <div className='col-4'>
       {imageUrl ? (
-        <div>削除</div>
+        <p className='py-5 text-center text-primary font-weight-bold border'>
+          <img src={imageUrl} height={100} width={100} />
+          削除
+        </p>
       ) : (
         <div className='d-flex mt-4'>
-          <h5 className='text-black font-weight-bold'>レク画像を追加</h5>
+          <p className='w-25 py-5 100 text-center text-primary font-weight-bold border'>+</p>
           <Essential />
         </div>
       )}
