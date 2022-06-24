@@ -1,6 +1,7 @@
 import { Essential } from '@/components/shared/parts/essential';
-import {Api} from '@/infrastructure';
-import {Recreation} from '@/types';
+import { Api } from '@/infrastructure';
+import { Recreation } from '@/types';
+import { RecreationImage } from '@/types/recreationImage';
 import React, { useState } from 'react';
 import { UseFormGetValues, UseFormRegister } from 'react-hook-form';
 import { RecreationImage as ImageComponent } from './recreationImage';
@@ -10,37 +11,30 @@ type Props = {
   getValues: UseFormGetValues<RecreationFormValues>;
   register: UseFormRegister<RecreationFormValues>;
   recreation: Recreation;
+  setRecreation: React.Dispatch<React.SetStateAction<Recreation>>;
 };
 
 export const SecondStep: React.FC<Props> = (props) => {
-  const { getValues, register, recreation } = props;
+  const { getValues, register, recreation, setRecreation } = props;
   const [extraInformation, setExtraInformation] = useState<string>(getValues('extraInformation'));
 
-  const handleFileChanged = (files: FileList | null)  => {
+  const handleFileChanged = (files: FileList | null) => {
     if (!files || files.length <= 0) return;
     const file = files[0];
     const reader = new FileReader();
-    console.log('-----------------');
-    console.log(file);
-    // TODO(okubo): ここで画像送信
     reader.onload = async (event) => {
-      console.log(event.target?.result);
-      console.log('-----------------');
       if (event.target?.result && typeof event.target?.result === 'string') {
-        console.log(event.target?.result);
-
         const requestBody: { [key: string]: Record<string, unknown> } = {
           recreationImage: {
-            image: event.target?.result,
-          },
+            image: event.target?.result
+          }
         };
-
-      const createdImage = await Api.post(`recreations/${recreation.id}/recreation_images`, 'partner', requestBody);
-      console.log('--------------------');
-      console.log(createdImage);
-      console.log('--------------------');
-        // setImage(event.target?.result);
-        // setValue('uploadImageUrl', event.target?.result);
+        const createdImage = await Api.post<RecreationImage>(
+          `recreations/${recreation.id}/recreation_images`,
+          'partner',
+          requestBody
+        );
+        setRecreation({ ...recreation, images: [...recreation.images, createdImage.data] });
       }
     };
     reader.readAsDataURL(file);
@@ -103,8 +97,10 @@ export const SecondStep: React.FC<Props> = (props) => {
 
       <h5 className='text-black font-weight-bold'>レク画像を追加</h5>
 
-      <div className="row">
-        {recreation.images.map((image, i) => ( <ImageComponent key={i} imageUrl={image.imageUrl} />))}
+      <div className='row'>
+        {recreation.images.map((image, i) => (
+          <ImageComponent key={i} imageUrl={image.imageUrl} />
+        ))}
       </div>
 
       <input

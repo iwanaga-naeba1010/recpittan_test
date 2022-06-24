@@ -79,7 +79,7 @@ const RecreationEdit: React.FC = () => {
   return (
     <div>
       {!isEmpty(errors) && <Error errors={errors} />}
-      <RecreationEditForm kind={formKind} recreation={recreation} onSubmit={onSubmit} />
+      <RecreationEditForm kind={formKind} recreation={recreation} setRecreation={setRecreation} onSubmit={onSubmit} />
     </div>
   );
 };

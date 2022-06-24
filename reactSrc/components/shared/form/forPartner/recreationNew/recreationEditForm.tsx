@@ -12,10 +12,11 @@ type Props = {
   kind: FormKind;
   onSubmit: (values: RecreationFormValues) => Promise<void>;
   recreation: Recreation;
+  setRecreation: React.Dispatch<React.SetStateAction<Recreation>>;
 };
 
 export const RecreationEditForm: React.FC<Props> = (props) => {
-  const { kind, onSubmit, recreation } = props;
+  const { kind, onSubmit, recreation, setRecreation } = props;
 
   const {
     register,
@@ -53,7 +54,7 @@ export const RecreationEditForm: React.FC<Props> = (props) => {
           <FirstStep register={register} getValues={getValues} setValue={setValue} errors={errors} />
         )}
         {kind === 'price' && (
-          <SecondStep getValues={getValues} register={register} recreation={recreation} />
+          <SecondStep getValues={getValues} register={register} recreation={recreation} setRecreation={setRecreation} />
         )}
         {kind === 'profile' && <ThirdStep register={register} getValues={getValues} />}
         <button
