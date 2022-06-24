@@ -1,25 +1,19 @@
-import { Essential } from '@/components/shared/parts/essential';
+import { RecreationImage as Image } from '@/types/recreationImage';
 import React from 'react';
 
 type Props = {
-  imageUrl?: string;
+  image: Image;
+  handleDelete: (id: number) => void;
 };
 
 export const RecreationImage: React.FC<Props> = (props) => {
-  const { imageUrl } = props;
+  const { image, handleDelete } = props;
   return (
     <div className='col-4'>
-      {imageUrl ? (
-        <p className='py-5 text-center text-primary font-weight-bold border'>
-          <img src={imageUrl} height={100} width={100} />
-          削除
-        </p>
-      ) : (
-        <div className='d-flex mt-4'>
-          <p className='w-25 py-5 100 text-center text-primary font-weight-bold border'>+</p>
-          <Essential />
-        </div>
-      )}
+      <p className='py-5 text-center text-primary font-weight-bold border'>
+        <img src={image.imageUrl} height={100} width={100} />
+        <button type='button' onClick={() => handleDelete(image.id)}>削除</button>
+      </p>
     </div>
   );
 };
