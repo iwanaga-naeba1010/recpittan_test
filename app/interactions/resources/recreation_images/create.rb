@@ -44,14 +44,14 @@ module Resources
       end
 
       private def split_base64(uri_str)
-        return nil unless uri_str.match(%r{data:(.*?);(.*?),(.*)$})
+        return nil unless uri_str.match(/data:(.*?);(.*?),(.*)$/)
 
-        uri = Hash.new
-        uri[:type] = $1
-        uri[:encoder] = $2
-        uri[:data] = $3
-        uri[:extension] = $1.split('/')[1]
-        return uri
+        uri = {}
+        uri[:type] = Regexp.last_match(1)
+        uri[:encoder] = Regexp.last_match(2)
+        uri[:data] = Regexp.last_match(3)
+        uri[:extension] = Regexp.last_match(1).split('/')[1]
+        uri
       end
     end
   end

@@ -13,7 +13,7 @@ RSpec.describe ApiPartner::RecreationImagesController, type: :request do
     let(:recreation_id) { recreation.id }
     let(:image) do
       # NOTE(okubo): こちら直したいが、多分shiftJSが問題。interactionは通るので、req送るタイミングの問題なはず
-      base64_image = Base64.decode64(File.open(Rails.root.join('spec/files/test.png'), 'rb').read)
+      base64_image = Base64.decode64(File.binread(Rails.root.join('spec/files/test.png')))
       "data:image/png;base64,#{base64_image}"
     end
     let(:params) do
