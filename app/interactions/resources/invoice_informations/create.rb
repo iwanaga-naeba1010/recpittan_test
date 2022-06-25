@@ -20,7 +20,11 @@ module Resources
         invoice_information = current_user.build_invoice_information(params)
         invoice_information.save!
       rescue ActiveRecord::RecordInvalid => e
-        errors.merge!(e.record.errors)
+        # TODO(okubo): e.record.errors.errorsのattributeで判断つきそうだけど、なぜかbaseになる
+        e.record.errors.errors.each do |error|
+          errors.add(error.attribute, error.message)
+        end
+        # errors.merge!(e.record.errors.errors)
       end
     end
   end

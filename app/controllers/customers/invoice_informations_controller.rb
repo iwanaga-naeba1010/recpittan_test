@@ -10,10 +10,20 @@ class Customers::InvoiceInformationsController < Customers::ApplicationControlle
   end
 
   def create
-    @invoice_information = current_user.build_invoice_information(params_create)
-    if @invoice_information.save
-      redirect_to customers_path, notice: t('action_messages.created', model_name: InvoiceInformation.model_name.human)
+    outcome = Resources::InvoiceInformations::Create.run(
+      params: params_create,
+      current_user: current_user
+    )
+    if outcome.valid?
+      @invoice_information = outcome.result
+      redirect_to customers_path,
+                  notice: t('action_messages.created', model_name: InvoiceInformation.model_name.human)
     else
+      # TODO(okubo): 綺麗にしたいが、interactionを使っているので、これ以外なさそう
+      @invoice_information = current_user.build_invoice_information(outcome.params)
+      outcome.errors.errors.each do |e|
+        @invoice_information.errors.add(e.attribute, e.message)
+      end
       render :new
     end
   end
