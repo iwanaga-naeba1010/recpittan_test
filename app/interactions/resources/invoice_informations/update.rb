@@ -4,35 +4,26 @@ module Resources
   module InvoiceInformations
     class Update < ActiveInteraction::Base
 
-      hash :invoice_information_params do
+      hash :params do
         string :name
-        string :code
-        string :memo
         string :zip
-        string :prefectures
+        string :prefecture
         string :city
         string :street
-        string :building
+        string :building, default: nil
+        string :code, default: nil
+        string :memo, default: nil
       end
 
       integer :id
       object :current_user, class: User
-
       validates :current_user, presence: true
 
       def execute
-        ActiveRecord::Base.transaction do
-          @invoice_information = current_user.invoice_information.id
-          @invoice_information.update!(invoice_information_params)
-        end
-
-        @invoice_information
+        invoice_information = InvoiceInformation.find_by(id: id, user_id: current_user.id)
+        invoice_information.update!(params)
       rescue ActiveRecord::RecordInvalid => e
         errors.merge!(e.record.errors)
-      end
-
-      private def update_invoice_information
-        InvoiceInformation.update!(invoice_information_params)
       end
     end
   end
