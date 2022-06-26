@@ -10,12 +10,12 @@ RSpec.describe Resources::InvoiceInformations::Update, type: :interaction do
       {
         name: 'テスト会社',
         zip: '450-6001',
-        prefecture: '愛知県',
-        city: '名古屋市',
-        street: '中村区名駅ＪＲセントラルタワーズ',
-        building: 'test',
-        code: 'test',
-        memo: 'memo'
+        prefecture: '愛知県2',
+        city: '名古屋市2',
+        street: '中村区名駅ＪＲセントラルタワーズ2',
+        building: 'test2',
+        code: 'test2',
+        memo: 'memo2'
       }
     end
 
