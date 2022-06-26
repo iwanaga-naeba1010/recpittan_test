@@ -47,9 +47,11 @@ ActiveAdmin.register InvoiceInformation do
     f.inputs do
       # pertnerのみ表示
       f.input :user_id,
-              label: 'カスタマー',
+              label: 'ユーザー/施設名',
               as: :select,
-              collection: User.where(role: :customer).map { |customer| [customer.username, customer.id] },
+              collection: User.where(
+                role: :customer
+              ).map { |customer| ["#{customer.username}/#{customer.company.facility_name}", customer.id] },
               input_html: { class: 'select2' }
       f.input :name
       f.input :code
@@ -64,4 +66,3 @@ ActiveAdmin.register InvoiceInformation do
     f.actions
   end
 end
-# rubocop:enable Metrics/BlockLength

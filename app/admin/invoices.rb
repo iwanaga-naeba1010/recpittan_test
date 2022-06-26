@@ -25,10 +25,12 @@ ActiveAdmin.register_page 'Invoices' do
         orders = customer.orders.to_a.select { |order| order.status.finished? }
         next if orders.blank?
 
+        invoice_information = customer.invoice_information
+
         invoice = {
           invoice_at: current_time.strftime('%Y/%m/%d'),
           title: "#{current_time.month}月分レクリエーション費用",
-          code: '',
+          code: invoice_information.present? ? invoice_information.code : '',
           facility_name: customer.company.facility_name,
           tax: '',
           payment_due_date: "#{current_time.year}/#{(current_time + 1.month).month}/25",
