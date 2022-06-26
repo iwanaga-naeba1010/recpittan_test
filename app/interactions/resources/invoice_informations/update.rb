@@ -23,7 +23,9 @@ module Resources
         invoice_information = InvoiceInformation.find_by(id: id, user_id: current_user.id)
         invoice_information.update!(params)
       rescue ActiveRecord::RecordInvalid => e
-        errors.merge!(e.record.errors)
+        e.record.errors.errors.each do |error|
+          errors.add(error.attribute, error.message)
+        end
       end
     end
   end

@@ -24,7 +24,6 @@ module Resources
         e.record.errors.errors.each do |error|
           errors.add(error.attribute, error.message)
         end
-        # errors.merge!(e.record.errors.errors)
       end
     end
   end
