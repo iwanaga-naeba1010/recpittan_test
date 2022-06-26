@@ -133,10 +133,11 @@ export const SecondStep: React.FC<Props> = (props) => {
             className='d-none'
             ref={inputRef}
             onChange={(event) => handleFileChanged(event.target.files)}
+            name='recreationImage'
           />
-          <p className='w-25 py-5 100 text-center text-primary font-weight-bold border' onClick={handleClickFileInput}>
+          <button type='button' className='w-25 py-5 100 text-center text-primary font-weight-bold border bg-white' onClick={handleClickFileInput}>
             {isSending ? <LoadingIndicator /> : <>+画像を追加</>}
-          </p>
+          </button>
         </>
       )}
 

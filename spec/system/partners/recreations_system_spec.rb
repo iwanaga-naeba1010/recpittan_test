@@ -53,7 +53,7 @@ RSpec.describe '/partners/recreations', type: :system do
 
         partner.reload
 
-        expect(partner.recreations.length).to eq 3
+        expect(partner.recreations.length).to eq 2
       end
     end
   end
@@ -113,6 +113,17 @@ RSpec.describe '/partners/recreations', type: :system do
         click_button('保存する')
         expect(page).to have_content 'レクを更新しました！'
         expect(partner.recreations.first.price).to eq changed_price
+      end
+
+      scenario 'crate recreation_image', js: true do
+        expect(page).to have_content('レクリエーション詳細')
+        expect(page).to have_content(recreation.title)
+        click_on('金額・メディア・その他の情報')
+        expect(page).to have_current_path(edit_partners_recreation_path(recreation), ignore_query: true)
+        expect(recreation.recreation_images.size).to eq 1
+        attach_file 'recreationImage', Rails.root.join('spec/files/test.png'), make_visible: true
+        sleep 5
+        expect(recreation.recreation_images.size).to eq 2
       end
 
       scenario 'delete recreation_image', js: true do
