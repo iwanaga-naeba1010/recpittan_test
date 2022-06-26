@@ -22,6 +22,7 @@ MoveCodeIntoModelCheck:
 MoveFinderToNamedScopeCheck: { }
 # NOTE: デグレ回避のため一旦エスケープ
 MoveModelLogicIntoModelCheck:
+  use_count: 6
   ignored_files:
     - "app/controllers/customers/orders_controller.rb"
     - "app/controllers/home_controller.rb"

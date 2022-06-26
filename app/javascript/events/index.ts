@@ -7,3 +7,4 @@ export * from './partner_report_form';
 export * from './preview_profile_image';
 export * from './recreations';
 export * from './toggle_event_for_sidebar';
+export * from './customer_invoice_information_form';
