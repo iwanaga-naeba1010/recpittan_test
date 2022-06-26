@@ -66,3 +66,4 @@ ActiveAdmin.register InvoiceInformation do
     f.actions
   end
 end
+# rubocop:enable Metrics/BlockLength
