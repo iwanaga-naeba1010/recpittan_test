@@ -14,4 +14,5 @@ namespace :customers do
       resources :reports, only: %i[edit update]
     end
   end
+  resources :invoice_informations, only: %i[new create edit update]
 end
