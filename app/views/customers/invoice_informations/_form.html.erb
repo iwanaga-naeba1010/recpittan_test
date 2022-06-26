@@ -1,12 +1,8 @@
 <%= simple_form_for invoice_information, as: 'invoice_information', url: url do |f| %>
   <div class="row">
-    <div class="col-md-6">
+    <div class="col-md-12">
       <label>氏名</label>
       <%= f.input :name, label: false %>
-    </div>
-    <div class="col-md-6">
-      <label>請求コード</label>
-      <%= f.input :code, label: false %>
     </div>
   </div>
 
