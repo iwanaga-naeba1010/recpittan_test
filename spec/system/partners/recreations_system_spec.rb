@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 RSpec.describe '/partners/recreations', type: :system do
-  let(:partner) { create :user, :with_partner, :with_recreations }
+  let(:partner) { create :user, :with_partner }
   let(:recreations) { partner.recreations }
   let(:recreation) { partner.recreations.first }
 
@@ -113,6 +113,17 @@ RSpec.describe '/partners/recreations', type: :system do
         click_button('保存する')
         expect(page).to have_content 'レクを更新しました！'
         expect(partner.recreations.first.price).to eq changed_price
+      end
+
+      scenario 'delete recreation_image', js: true do
+        expect(page).to have_content('レクリエーション詳細')
+        expect(page).to have_content(recreation.title)
+        click_on('金額・メディア・その他の情報')
+        expect(page).to have_current_path(edit_partners_recreation_path(recreation), ignore_query: true)
+        expect(recreation.recreation_images.size).to eq 1
+        click_button('削除')
+        sleep 5
+        expect(recreation.recreation_images.size).to eq 0
       end
 
       scenario 'profile form', js: true do
