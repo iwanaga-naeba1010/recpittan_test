@@ -19,6 +19,7 @@ module Resources
       def execute
         invoice_information = current_user.build_invoice_information(params)
         invoice_information.save!
+        invoice_information
       rescue ActiveRecord::RecordInvalid => e
         # TODO(okubo): e.record.errors.errorsのattributeで判断つきそうだけど、なぜかbaseになる
         e.record.errors.errors.each do |error|

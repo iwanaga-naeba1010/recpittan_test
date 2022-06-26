@@ -17,7 +17,7 @@ class Customers::InvoiceInformationsController < Customers::ApplicationControlle
     )
     if outcome.valid?
       @invoice_information = outcome.result
-      redirect_to edit_customers_invoice_information_path(@invoice_information),
+      redirect_to edit_customers_invoice_information_path(@invoice_information.id),
                   notice: t('action_messages.created', model_name: InvoiceInformation.model_name.human)
     else
       @invoice_information = handle_interaction_errors(

@@ -27,13 +27,14 @@
 #
 FactoryBot.define do
   factory :invoice_information do
-    name { 'MyString' }
-    code { 'MyString' }
-    zip { 'MyString' }
-    prefecture { 'MyString' }
-    city { 'MyString' }
-    street { 'MyString' }
-    building { 'MyString' }
-    memo { 'MyString' }
+    user
+    name { 'エブリプラス' }
+    code { '123456' }
+    zip { '4536111' }
+    prefecture { '愛知県' }
+    city { '名古屋市' }
+    street { '中村区名駅ＪＲセントラルタワーズ' }
+    building { '' }
+    memo { '' }
   end
 end

@@ -4,75 +4,49 @@ require 'rails_helper'
 require 'rake'
 
 RSpec.describe Customers::InvoiceInformationsController, type: :request do
-  let(:user) { create :user, :with_customer }
-  let(:invoice_information) { create :invoice_information, user_id: user.id }
+  include_context 'with authenticated customer'
 
-  before do
-    sign_in user
+  let(:customer) { current_user }
+
+  describe 'GET /customers/invoice_informations/new' do
+    it_behaves_like 'an endpoint returns 2xx status'
   end
 
-  describe 'GET /new' do
-    context 'with valid user' do
-      it 'return http success' do
-        get new_customers_invoice_information_path
-        expect(response).to have_http_status(:ok)
-      end
-    end
-
-    context 'with invalid user' do
-      it 'return http success when user not logged in' do
-        sign_out user
-        get new_customers_invoice_information_path
-        expect(response).to have_http_status(:found)
-        expect(response).to redirect_to new_user_session_path
-      end
-    end
+  describe 'GET /customers/invoice_informations/:id/edit' do
+    let!(:invoice_information) { create(:invoice_information, user_id: customer.id) }
+    let!(:id) { invoice_information.id }
+    it_behaves_like 'an endpoint returns 2xx status'
   end
 
-  describe 'POST /create' do
-    let(:invoice_information_attrs) { attributes_for(:invoice_information) }
+  describe 'POST /customers/invoice_informations' do
+    let(:params) do
+      { invoice_information: attributes_for(:invoice_information, user_id: customer.id) }
+    end
+    let(:expected_redirect_to) { %r{/customers/invoice_informations/[0-9]+/edit} }
 
-    context 'with valid parameters' do
-      it 'return http success when user not logged in' do
-        post customers_invoice_informations_path, params: { invoice_information: invoice_information_attrs }
-        expect(response).to have_http_status(:found)
-        expect(response).to redirect_to(customers_path)
-      end
+    it_behaves_like 'an endpoint redirects match'
+
+    context 'with invalid params' do
+      let(:params) { { invoice_information: { name: '' } } }
+
+      it_behaves_like 'an endpoint returns 2xx status'
     end
   end
 
-  describe 'GET /edit' do
-    context 'with valid user' do
-      it 'return http success' do
-        get edit_customers_invoice_information_path(invoice_information)
-        expect(response).to have_http_status(:ok)
-      end
+  describe 'PATCH /customers/invoice_informations/:id' do
+    let!(:invoice_information) { create(:invoice_information, user_id: customer.id) }
+    let!(:id) { invoice_information.id }
+    let(:params) do
+      { invoice_information: attributes_for(:invoice_information, user_id: customer.id) }
     end
+    let(:expected_redirect_to) { %r{/customers/invoice_informations/[0-9]+/edit} }
 
-    context 'with invalid user' do
-      it 'return http success when user not logged in' do
-        sign_out user
-        get edit_customers_invoice_information_path(invoice_information)
-        expect(response).to have_http_status(:found)
-        expect(response).to redirect_to new_user_session_path
-      end
-    end
-  end
+    it_behaves_like 'an endpoint redirects match'
 
-  describe 'PUT /update' do
-    context 'when valid parameters' do
-      let(:attr) { attributes_for :invoice_information }
+    context 'with invalid params' do
+      let(:params) { { invoice_information: { name: '' } } }
 
-      it 'returns 302 status' do
-        put customers_invoice_information_path(invoice_information), params: { invoice_information: attr }
-        expect(response).to have_http_status(:found)
-      end
-
-      it 'update name' do
-        expect {
-          put customers_invoice_information_path(invoice_information), params: { invoice_information: { name: 'changed_name' } }
-        }.to change { InvoiceInformation.find(invoice_information.id).name }.from(invoice_information.name).to('changed_name')
-      end
+      it_behaves_like 'an endpoint returns 2xx status'
     end
   end
 end
