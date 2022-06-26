@@ -54,8 +54,5 @@ FactoryBot.define do
     status { 'unapplied' }
     category { 'event' }
     kind { 'online' }
-    after(:create) do |recreation|
-      recreation.recreation_images << build(:recreation_image)
-    end
   end
 end

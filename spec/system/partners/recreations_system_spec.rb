@@ -6,6 +6,7 @@ RSpec.describe '/partners/recreations', type: :system do
   let(:partner) { create :user, :with_partner }
   let(:recreations) { partner.recreations }
   let(:recreation) { partner.recreations.first }
+  let!(:recreation_image) { create(:recreation_image, recreation: recreation) }
 
   before do
     sign_in partner
