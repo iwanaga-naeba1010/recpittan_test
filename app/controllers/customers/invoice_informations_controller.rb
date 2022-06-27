@@ -56,6 +56,8 @@ class Customers::InvoiceInformationsController < Customers::ApplicationControlle
   end
 
   private def params_create
-    params.require(:invoice_information).permit(:name, :zip, :prefecture, :city, :street, :building, :memo)
+    params.require(:invoice_information).permit(
+      :company_name, :name, :email, :zip, :prefecture, :city, :street, :building, :memo
+    )
   end
 end

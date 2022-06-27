@@ -31,7 +31,7 @@
       <% else %>
         <div class="col-auto">
           <% if active_link?('invoice_informations') %>
-            請求情報編集
+            <%= t('activerecord.models.invoice_information') %>
           <% else %>
             <%= link_to '請求情報編集', edit_customers_invoice_information_path(current_user.invoice_information.id), class: "clink" %>
           <% end %>

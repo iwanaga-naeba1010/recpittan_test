@@ -11,6 +11,7 @@ ActiveAdmin.register InvoiceInformation do
   index do
     id_column
     column :user_id
+    column :company_name
     column :name
     column :code
     column :zip
@@ -27,6 +28,8 @@ ActiveAdmin.register InvoiceInformation do
     attributes_table do
       row :id
       row :user
+      row :company_name
+      row :email
       row :name
       row :code
       row :zip
@@ -53,7 +56,9 @@ ActiveAdmin.register InvoiceInformation do
                 role: :customer
               ).map { |customer| ["#{customer.username}/#{customer.company.facility_name}", customer.id] },
               input_html: { class: 'select2' }
+      f.input :company_name
       f.input :name
+      f.input :email
       f.input :code
       f.input :zip
       f.input :prefecture
