@@ -4,22 +4,12 @@ class PartnersController < Partners::ApplicationController
   def index
     column = params[:column].presence || :start_at
     @is_accepted = params[:is_accepted]&.to_s&.downcase == 'true' || false
+    rec_ids = current_user.recreations.pluck(:id)
 
-    @orders = if @is_accepted
-                current_user.recreations.map { |rec| rec.orders.accepted_by_partner }.flatten.uniq
-              else
-                current_user.recreations.map do |rec|
-                  rec.orders.not_accepted_by_partner
-                end.flatten.uniq
-              end
-
-    if params[:order].present?
-      @orders = sort_by(orders: @orders, column: column)
-    end
-  end
-
-  # NOTE(okubo): ascで並ぶようにしてある
-  private def sort_by(orders:, key:)
-    orders.sort { |a, b| a[key] <=> b[key] }
+    # TODO(okubo): model等に移行したい
+    @orders = Order.where(
+      recreation_id: rec_ids,
+      is_accepted: @is_accepted
+    ).order("#{column} asc NULLS LAST")
   end
 end
