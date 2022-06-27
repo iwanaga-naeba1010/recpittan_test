@@ -30,7 +30,9 @@
 FactoryBot.define do
   factory :invoice_information do
     user
-    name { 'エブリプラス' }
+    company_name { 'エブリプラス' }
+    name { 'エブリプラス太郎' }
+    email { 'hogehogehoge@example.com' }
     code { '123456' }
     zip { '4536111' }
     prefecture { '愛知県' }
