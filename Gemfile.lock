@@ -406,7 +406,7 @@ GEM
     rspec-mocks (3.11.1)
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.11.0)
-    rspec-parameterized (0.5.1)
+    rspec-parameterized (0.5.2)
       binding_ninja (>= 0.2.3)
       parser
       proc_to_ast
