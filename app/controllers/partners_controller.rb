@@ -2,6 +2,7 @@
 
 class PartnersController < Partners::ApplicationController
   def index
+    column = params[:column].presence || :start_at
     @is_accepted = params[:is_accepted]&.to_s&.downcase == 'true' || false
 
     @orders = if @is_accepted
@@ -13,7 +14,7 @@ class PartnersController < Partners::ApplicationController
               end
 
     if params[:order].present?
-      @orders = sort_by(orders: @orders, key: params[:order])
+      @orders = sort_by(orders: @orders, column: column)
     end
   end
 
