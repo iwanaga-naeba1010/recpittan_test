@@ -7,16 +7,9 @@ class CustomDevise::PasswordsController < Devise::PasswordsController
   # end
 
   # POST /resource/password
-  def create
-    user = User.where(email: params[:user][:email])
-    logger.info '---------------------'
-    if user.present?
-      logger.info user.first
-      logger.info user.first.email
-    end
-    logger.info '---------------------'
-    super
-  end
+  # def create
+  #   super
+  # end
 
   # GET /resource/password/edit?reset_password_token=abcdef
   # def edit

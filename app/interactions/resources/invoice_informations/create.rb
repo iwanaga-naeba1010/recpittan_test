@@ -4,7 +4,9 @@ module Resources
   module InvoiceInformations
     class Create < ActiveInteraction::Base
       hash :params do
+        string :company_name
         string :name
+        string :email
         string :zip
         string :prefecture
         string :city
