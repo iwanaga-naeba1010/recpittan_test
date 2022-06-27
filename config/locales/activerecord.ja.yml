@@ -28,7 +28,7 @@ ja:
       tags/rental: 貸出可能品
       target: 利用者層
       chat: チャット
-      invoice_information: 請求情報
+      invoice_information: 請求書発行先情報
     attributes:
       email:
         title: タイトル
@@ -174,7 +174,9 @@ ja:
         signature: 署名
       invoice_information:
         user: ユーザー
-        name: 氏名
+        company_name: 請求書の宛先
+        name: ご担当者様
+        email: 請求書データ送付先メールアドレス
         zip: 郵便番号
         prefecture: 都道府県
         city: 市区町村

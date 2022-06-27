@@ -7,7 +7,9 @@ RSpec.describe Resources::InvoiceInformations::Create, type: :interaction do
     let!(:customer) { create(:user) }
     let(:params) do
       {
-        name: 'テスト会社',
+        company_name: 'テスト会社',
+        name: '大久保',
+        email: 'hogehoge@example.com',
         zip: '450-6001',
         prefecture: '愛知県',
         city: '名古屋市',
