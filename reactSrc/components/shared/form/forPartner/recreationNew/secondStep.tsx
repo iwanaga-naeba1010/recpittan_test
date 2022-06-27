@@ -1,16 +1,67 @@
+import { LoadingIndicator } from '@/components/shared/parts';
 import { Essential } from '@/components/shared/parts/essential';
-import React, { useState } from 'react';
+import { Api } from '@/infrastructure';
+import { Recreation } from '@/types';
+import { RecreationImage } from '@/types/recreationImage';
+import React, { useRef, useState } from 'react';
 import { UseFormGetValues, UseFormRegister } from 'react-hook-form';
+import { RecreationImage as ImageComponent } from './recreationImage';
 import { RecreationFormValues } from './recreationNewForm';
 
 type Props = {
   getValues: UseFormGetValues<RecreationFormValues>;
   register: UseFormRegister<RecreationFormValues>;
+  recreation: Recreation;
+  setRecreation: React.Dispatch<React.SetStateAction<Recreation>>;
 };
 
 export const SecondStep: React.FC<Props> = (props) => {
-  const { getValues, register } = props;
+  const { getValues, register, recreation, setRecreation } = props;
   const [extraInformation, setExtraInformation] = useState<string>(getValues('extraInformation'));
+  const inputRef = useRef(null);
+  const [isSending, setIsSending] = useState<boolean>(false);
+
+  const handleClickFileInput = (): void => {
+    inputRef.current.click();
+  };
+
+  console.log('00000000000000000000recreation');
+  console.log(recreation);
+  console.log('00000000000000000000recreation');
+
+  const handleFileChanged = (files: FileList | null) => {
+    if (!files || files.length <= 0) return;
+    const file = files[0];
+    const reader = new FileReader();
+    reader.onload = async (event) => {
+      if (event.target?.result && typeof event.target?.result === 'string') {
+        const requestBody: { [key: string]: Record<string, unknown> } = {
+          recreationImage: {
+            image: event.target?.result
+          }
+        };
+        setIsSending(true);
+        const createdImage = await Api.post<RecreationImage>(
+          `recreations/${recreation.id}/recreation_images`,
+          'partner',
+          requestBody
+        );
+        setRecreation({ ...recreation, images: [...recreation.images, createdImage.data] });
+        setIsSending(false);
+      }
+    };
+    reader.readAsDataURL(file);
+  };
+
+  const handleDelete = async (id: number): Promise<void> => {
+    try {
+      await Api.delete(`recreations/${recreation.id}/recreation_images/${id}`, 'partner', {});
+      setRecreation({ ...recreation, images: recreation.images.filter((recreation) => recreation.id !== id) });
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
   return (
     <div>
       <div className='d-flex'>
@@ -66,14 +117,29 @@ export const SecondStep: React.FC<Props> = (props) => {
       <p className='small my-0'>追加施設費＋サービス手数料が上乗せされます</p>
       <p className='small my-0'>￥0</p>
 
-      <div className='d-flex mt-4'>
-        <h5 className='text-black font-weight-bold'>レク画像を追加</h5>
-        <Essential />
-      </div>
-      <p className='w-25 py-5 100 text-center text-primary font-weight-bold border'>+</p>
-      <p className='small my-0'>レク1人あたりに必要な材料費を入力してください</p>
+      {/* 修正のタイミングで利用可能に */}
+      {recreation !== undefined && (
+        <>
+          <h5 className='text-black font-weight-bold'>レク画像を追加</h5>
+          <div className='row'>
+            {recreation.images.map((image, i) => (
+              <ImageComponent key={i} image={image} handleDelete={handleDelete} />
+            ))}
+          </div>
 
-      <p className='text-primary font-weight-bold my-1'>＋画像を追加</p>
+          <input
+            type='file'
+            accept='image/*'
+            className='d-none'
+            ref={inputRef}
+            onChange={(event) => handleFileChanged(event.target.files)}
+            name='recreationImage'
+          />
+          <button type='button' className='w-25 py-5 100 text-center text-primary font-weight-bold border bg-white' onClick={handleClickFileInput}>
+            {isSending ? <LoadingIndicator /> : <>+画像を追加</>}
+          </button>
+        </>
+      )}
 
       <div className='d-flex mt-4'>
         <h5 className='text-black font-weight-bold'>動画を共有</h5>
