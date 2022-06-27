@@ -81,8 +81,6 @@ class Order < ApplicationRecord
 
   before_save :switch_status_before_save
 
-  scope :accepted_by_partner, -> { where(is_accepted: true) }
-  scope :not_accepted_by_partner, -> { where(is_accepted: false) }
   scope :order_asc, -> { includes(:chats).order('chats.created_at asc') }
 
   validates :price, :material_price, :amount,

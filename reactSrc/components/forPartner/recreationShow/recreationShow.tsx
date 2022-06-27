@@ -1,4 +1,4 @@
-import {LoadingContainer} from '@/components/shared';
+import { LoadingContainer } from '@/components/shared';
 import { Api } from '@/infrastructure';
 import { Recreation } from '@/types';
 import React, { useEffect, useState } from 'react';

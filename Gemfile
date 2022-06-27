@@ -49,6 +49,7 @@ group :test do
   gem 'rspec-request_describer'
   gem 'rspec-parameterized'
   gem 'shoulda-matchers'
+  gem 'utf8-cleaner'
 end
 
 group :production do

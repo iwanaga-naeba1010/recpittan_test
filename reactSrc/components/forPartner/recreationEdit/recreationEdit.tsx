@@ -71,16 +71,14 @@ const RecreationEdit: React.FC = () => {
     }
   };
 
-
   if (isLoading) {
     return <LoadingContainer />;
   }
 
   return (
     <div>
-      ugoita!
       {!isEmpty(errors) && <Error errors={errors} />}
-      <RecreationEditForm kind={formKind} recreation={recreation} onSubmit={onSubmit} />
+      <RecreationEditForm kind={formKind} recreation={recreation} setRecreation={setRecreation} onSubmit={onSubmit} />
     </div>
   );
 };

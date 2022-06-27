@@ -43,6 +43,7 @@ class RecreationSerializer
     tags = TagSerializer.new.serialize_list(tags: recreation.tags)
     targets = TagSerializer.new.serialize_list(tags: recreation.tags.targets)
     profile = ProfileSerializer.new.serialize(profile: recreation.profile)
+    images = RecreationImageSerializer.new.serialize_list(recreation_images: recreation.recreation_images)
     {
       id: recreation.id,
       title: recreation.title,
@@ -61,7 +62,7 @@ class RecreationSerializer
       borrow_item: recreation.borrow_item,
       bring_your_own_item: recreation.bring_your_own_item,
       additional_facility_fee: recreation.additional_facility_fee,
-      image_url: recreation.recreation_images.sliders&.first&.image.to_s,
+      images: images,
       profile: profile,
       user_id: recreation.user_id,
       tags: tags,
