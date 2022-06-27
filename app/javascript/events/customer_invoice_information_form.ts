@@ -1,14 +1,14 @@
 /**
- * registration editのzip/prefectureを動的に扱うformです
+ * invoice informationのzip/prefectureを動的に扱うformです
  */
  import * as $ from 'jquery';
  import { InputValue, AddressForm } from '../components/address_form';
 
   const inputValue: InputValue = {
-  inputZip: 'user_company_attributes_zip',
-  inputPrefecture: 'user_company_attributes_prefecture',
-  inputCity: 'user_company_attributes_city',
-  inputStreet: 'user_company_attributes_street'
+  inputZip: 'invoice_information_zip',
+  inputPrefecture: 'invoice_information_prefecture',
+  inputCity: 'invoice_information_city',
+  inputStreet: 'invoice_information_street'
  }
 
  { AddressForm }
@@ -22,4 +22,3 @@
  $(document).ready(() => {
    AddressForm(inputValue);
  });
-

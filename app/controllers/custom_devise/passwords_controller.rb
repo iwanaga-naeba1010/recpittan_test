@@ -7,11 +7,9 @@ class CustomDevise::PasswordsController < Devise::PasswordsController
   # end
 
   # POST /resource/password
-  # rubocop:disable Lint/UselessMethodDefinition
-  def create
-    super
-  end
-  # rubocop:enable Lint/UselessMethodDefinition
+  # def create
+  #   super
+  # end
 
   # GET /resource/password/edit?reset_password_token=abcdef
   # def edit

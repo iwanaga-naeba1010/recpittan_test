@@ -2,7 +2,7 @@
 
 class CustomersController < Customers::ApplicationController
   def index
-    order_by = params[:order].presence || :start_at
-    @orders = current_user.orders.order("#{order_by} asc")
+    column = params[:column].presence || :start_at
+    @orders = current_user.orders.order("#{column} asc NULLS LAST")
   end
 end

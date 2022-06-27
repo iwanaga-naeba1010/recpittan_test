@@ -10,9 +10,8 @@
 </div>
 
 <div class="my-3 mx-2">
-  <%= link_to 'ID順', partners_path(order: :id, is_accepted: @is_accepted), class: ' text-white btn btn-primary  p-3' %>
-  <%= link_to '開催日順', partners_path(order: :start_at, is_accepted: @is_accepted), class: ' text-white btn btn-primary  p-3' %>
-  <%= link_to 'ステータス順', partners_path(order: :start_at, is_accepted: @is_accepted), class: ' text-white btn btn-primary  p-3' %>
+  <%= link_to '開催日順 新→旧', partners_path(column: :start_at, is_accepted: @is_accepted), class: ' text-white btn btn-primary  p-3' %>
+  <%= link_to 'ステータス順', partners_path(column: :status, is_accepted: @is_accepted), class: ' text-white btn btn-primary  p-3' %>
 </div>
 
 <% @orders.each do |order| %>
@@ -34,19 +33,19 @@
         開催希望日:
         <%= dotted_datetime order.start_at %>
       </div>
-      <div class="mb-2">
-        最終更新日:
+      <small class="mb-2 mr-3">
+        依頼番号:
+        <%= order.id %>
+      </small>
+      <small class="mb-2 mr-3">
+        更新日:
         <%= dotted_datetime order.updated_at %>
-      </div>
+      </small>
       <div class="status mb-2">
         <span class="status__cunsult p-1">
           <%= I18n.t("partner.order.status.#{order.status}") %>
         </span>
       </div>
-      <small>
-        依頼番号:
-        <%= order.id %>
-      </small>
     </div>
   <% end %>
 <% end %>

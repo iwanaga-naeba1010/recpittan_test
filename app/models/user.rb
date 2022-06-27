@@ -47,6 +47,8 @@ class User < ApplicationRecord
   belongs_to :company, optional: true
   accepts_nested_attributes_for :company, allow_destroy: true
 
+  has_one :invoice_information, dependent: :destroy
+
   has_many :recreations, dependent: :destroy
 
   has_many :orders, dependent: :destroy

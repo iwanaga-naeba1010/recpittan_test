@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_06_09_192056) do
+ActiveRecord::Schema[7.0].define(version: 2022_06_27_084359) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -72,9 +72,26 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_09_192056) do
     t.integer "want_to_order_agein"
     t.text "message"
     t.text "other_message"
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
+    t.boolean "is_public", default: true
+  end
+
+  create_table "invoice_informations", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.string "name", null: false
+    t.string "code"
+    t.string "zip", null: false
+    t.string "prefecture", null: false
+    t.string "city", null: false
+    t.string "street", null: false
+    t.string "building"
+    t.string "memo"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.boolean "is_public", default: true
+    t.string "company_name", null: false
+    t.string "email", null: false
+    t.index ["user_id"], name: "index_invoice_informations_on_user_id"
   end
 
   create_table "order_dates", force: :cascade do |t|
@@ -254,11 +271,12 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_09_192056) do
   add_foreign_key "company_tags", "companies", name: "company_tags_company_id_fkey"
   add_foreign_key "company_tags", "tags", name: "company_tags_tag_id_fkey"
   add_foreign_key "evaluations", "reports", name: "evaluations_report_id_fkey"
+  add_foreign_key "invoice_informations", "users"
   add_foreign_key "order_dates", "orders", name: "order_dates_order_id_fkey"
   add_foreign_key "order_memos", "orders", name: "order_memos_order_id_fkey"
   add_foreign_key "orders", "recreations", name: "orders_recreation_id_fkey"
   add_foreign_key "orders", "users", name: "orders_user_id_fkey"
-  add_foreign_key "profiles", "users"
+  add_foreign_key "profiles", "users", name: "profiles_user_id_fkey"
   add_foreign_key "recreation_images", "recreations", name: "recreation_images_recreation_id_fkey"
   add_foreign_key "recreation_prefectures", "recreations", name: "recreation_prefectures_recreation_id_fkey"
   add_foreign_key "recreation_profiles", "profiles", name: "recreation_profiles_profile_id_fkey"
