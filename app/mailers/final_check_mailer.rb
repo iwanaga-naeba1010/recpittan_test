@@ -4,6 +4,7 @@ class FinalCheckMailer < ApplicationMailer
   def notify(order:)
     @template = template_by_kind(kind: 'final_check')
     @order = order
+    @path = ENV.fetch('APP_PATH')
 
     mail(
       from: 'info@everyplus.jp',

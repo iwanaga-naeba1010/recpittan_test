@@ -257,7 +257,7 @@
     楽しい時間を皆様を現場の皆様心待ちにしています！
     ----------------------------------------
     ■開催情報と事前確認確認
-    <%= link_to "https://recreation.everyplus.jp/partners/orders/#{@order.id}/final_check", "https://recreation.everyplus.jp/partners/orders/#{@order.id}/final_check" %>
+    <%= link_to "#{@path}/partners/orders/#{@order.id}/final_check", "https://recreation.everyplus.jp/partners/orders/#{@order.id}/final_check" %>
     ----------------------------------------
     ■終了報告について
     開催後、現場を離れる前に報酬を受け取るために終了報告記入をお願い致します。
