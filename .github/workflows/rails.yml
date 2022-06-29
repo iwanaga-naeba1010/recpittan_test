@@ -13,7 +13,6 @@ env:
   AWS_BUCKET: matching-system-staging
   AWS_REGION: ap-northeast-1
   AWS_SECRET_ACCESS_KEY: 0Mf2Hjc4SUuOZ5dfAxPZI/Q4GrByML5hEA30Yl+p
-  APP_PATH: http://localhost:3000
 
 name: Lint check
 on: [push]
@@ -80,7 +79,6 @@ jobs:
           POSTGRES_USER: ${{ env.POSTGRES_USER }}
           POSTGRES_PASSWORD: ${{ env.POSTGRES_PASSWORD }}
           POSTGRES_DB: ${{ env.POSTGRES_DB }}
-          APP_PATH: ${{ env.APP_PATH }}
         options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
     steps:
       - uses: actions/checkout@v2.3.4

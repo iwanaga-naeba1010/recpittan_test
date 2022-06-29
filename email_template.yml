@@ -257,7 +257,7 @@
     楽しい時間を皆様を現場の皆様心待ちにしています！
     ----------------------------------------
     ■開催情報と事前確認確認
-    <%= link_to "#{@path}/partners/orders/#{@order.id}/final_check", "#{@path}/partners/orders/#{@order.id}/final_check" %>
+    <%= link_to final_check_partners_order_url(@order.id), final_check_partners_order_url(@order.id) %>
     ----------------------------------------
     ■終了報告について
     開催後、現場を離れる前に報酬を受け取るために終了報告記入をお願い致します。
@@ -265,6 +265,6 @@
     施設様が内容を確認し承認すると、開催月の翌々月末に指定の口座に報酬が入金されます。
     ----------------------------------------
     ■終了報告
-    <%= link_to "#{@path}/partners/orders/#{@order.id}/reports/new",  "#{@path}/partners/orders/#{@order.id}/reports/new" %>
+    <%= link_to new_partners_order_report_url(@order.id),  new_partners_order_report_url(@order.id) %>
     ----------------------------------------
     ※このメールアドレスは送信専用です。返信をいただいてもご回答できませんのでご了承ください。
