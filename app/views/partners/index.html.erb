@@ -1,12 +1,20 @@
 <div class="header">
   <h2 class="text-white font-weight-bold p-2">
     <% if params[:is_accepted] == 'true' %>
-      開催決定済みのレク一覧
+      開催決定済の案件
     <% else %>
-        チャット一覧
+      開催のご相談
     <% end %>
   </h2>
   <%= render 'shared/partner/sidebar_toggle' %>
+</div>
+
+<div class="my-3 mx-2">
+  <% if params[:is_accepted] == 'true' %>
+    正式依頼が承認され開催が決定した案件の一覧です。
+  <% else %>
+    正式依頼確認中の案件は、早めのご回答をお願いいたします。
+  <% end %>
 </div>
 
 <div class="my-3 mx-2">
