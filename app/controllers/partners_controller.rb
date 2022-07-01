@@ -3,6 +3,7 @@
 class PartnersController < Partners::ApplicationController
   def index
     column = params[:column].presence || :start_at
+    order = params[:order].presence || :desc
     @is_accepted = params[:is_accepted]&.to_s&.downcase == 'true' || false
     rec_ids = current_user.recreations.pluck(:id)
 
@@ -10,6 +11,6 @@ class PartnersController < Partners::ApplicationController
     @orders = Order.where(
       recreation_id: rec_ids,
       is_accepted: @is_accepted
-    ).order("#{column} asc NULLS LAST")
+    ).order("#{column} #{order} NULLS LAST")
   end
 end
