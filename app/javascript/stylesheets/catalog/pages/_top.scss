@@ -9,6 +9,113 @@
     background-position: center;
     background-size: cover;
 
+    .hero_header {
+      p {
+        color: #E83E8C;
+      }
+
+      h3 {
+        color: #343A40;
+        line-height: 2rem;
+      }
+
+      img {
+        border-radius: 10px !important;
+      }
+
+      .first_section {
+        .image {
+          object-fit: cover;
+        }
+
+        .images {
+          @include media-breakpoint-up(lg) {
+            display: initial;
+          }
+
+          @include media-breakpoint-up(xs) {
+            display: none;
+          }
+        }
+        .row {
+          .image {
+            @include media-breakpoint-up(xs) {
+              height: 120px;
+              width: 110px;
+            }
+          }
+        }
+      }
+
+      .second_section {
+        @include media-breakpoint-up(lg) {
+          padding-top: 60px;
+        }
+      }
+
+      .third_section {
+        .image {
+          object-fit: cover;
+        }
+
+        @include media-breakpoint-up(lg) {
+          display: initial;
+        }
+
+        @include media-breakpoint-up(xs) {
+          display: none;
+        }
+
+      }
+
+      .fourth_section {
+        .image {
+          @include media-breakpoint-up(md) {
+            height: auto;
+            width: 100%;
+          }
+
+          @include media-breakpoint-up(xs) {
+            height: 120px;
+            width: 110px;
+          }
+        }
+        .responsive_img {
+          @include media-breakpoint-up(lg) {
+            display: initial;
+          }
+
+          @include media-breakpoint-up(xs) {
+            display: none;
+          }
+        }
+      }
+
+      .feature {
+        border: 3px solid #DDB754;
+        border-radius: 70px;
+
+        .title {
+          font-size: 14px;
+        }
+
+        .content {
+          font-size: 24px;
+        }
+
+        p {
+          color: #DDB754;
+        }
+      }
+
+      .btn {
+        background-color: #E83E8C;
+        @include media-breakpoint-up(xs) {
+          width: 100%;
+        }
+      }
+    }
+
     .container {
       &.top {
         background-color: transparent !important;

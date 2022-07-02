@@ -1,32 +1,88 @@
 <main class="top">
   <% cache('home/top_section') do %>
     <div class="jumbotron jumbotron-top">
-    </div>
-    <div class="container my-2 px-0">
-      <%= link_to "https://everyplus-1.hubspotpagebuilder.com/0526", target: '_blank', rel: 'noopener' do%>
-        <%= image_pack_tag 'top_trial_online_rec.png', class: 'w-100 my-3', alt: '初めての方へ', loading: 'lazy' %>
-      <% end %>
-      <div class="row">
-        <div class="col-md">
-          <%= link_to "https://everyplus.jp/new_user", target: '_blank', rel: 'noopener' do%>
-            <%= image_pack_tag 'new_user.png', class: 'w-100', alt: '初めての方へ', loading: 'lazy' %>
-          <% end %>
-        </div>
-        <div class="col-md">
-          <%= link_to "https://everyplus.jp/plan", target: '_blank', rel: 'noopener' do%>
-            <%= image_pack_tag 'plan.png', class: 'w-100', alt: 'ご利用施設の活用例', loading: 'lazy' %>
-          <% end %>
+      <div class="px-lg-4 hero_header">
+        <div class="row">
+          <div class="col-lg-1 first_section">
+            <div class="images">
+            <%= image_pack_tag 'top_image/top_image1.jpeg', class: 'image py-1 w-100 h-50 d-sm-initial d-xs-none', alt: '吉本レク画像', loading: 'lazy' %>
+            <%= image_pack_tag 'top_image/top_image2.jpeg', class: 'image py-1 w-100 h-50 d-sm-initial d-xs-none', alt: '吉本レク画像', loading: 'lazy' %>
+            </div>
+            <div class="row h-100 d-lg-none">
+              <div class="col-4">
+                <%= image_pack_tag 'top_image/top_image1.jpeg', class: 'image py-1 w-100', alt: '吉本レク画像', loading: 'lazy' %>
+              </div>
+              <div class="col-4">
+                <%= image_pack_tag 'top_image/top_image2.jpeg', class: 'image py-1 w-100', alt: '吉本レク画像', loading: 'lazy' %>
+              </div>
+              <div class="col-4">
+                <%= image_pack_tag 'top_image/top_image4.jpeg', class: 'image py-1 w-100', alt: '吉本レク画像', loading: 'lazy' %>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-5 second_section">
+            <div class="w-75 m-auto">
+              <p class="my-3 text-lg-center">日本最大級の介護レクリエーションマッチングサービス</p>
+              <h3 class="my-3 fw-bold text-black">利用者さんのやりたい介護レクやイベントの依頼先が見つかる</h3>
+              <div class='row my-3'>
+                <div class='col-4'>
+                  <div class="feature py-2 w-100 text-center d-inline-block">
+                    <p class='title my-0 fw-light'>レク・郵送キット</p>
+                    <p class='content my-0 fw-bold'>約300種類</p>
+                  </div>
+                </div>
+                <div class='col-4'>
+                  <div class="feature py-2 w-100 text-center d-inline-block">
+                    <p class='title my-0 fw-light'>登録介護施設数</p>
+                    <p class='content my-0 fw-bold'>2000種類</p>
+                  </div>
+                </div>
+                <div class='col-4'>
+                  <div class="feature py-2 w-100 text-center d-inline-block">
+                    <p class='title my-0 fw-light'>実施回数</p>
+                    <p class='content my-0 fw-bold'>7000回</p>
+                  </div>
+                </div>
+              </div>
+              <div class='text-center'>
+                <a fref="#" class="btn my-4 py-3 px-4 text-white fw-bold rounded-3">レクを一覧から探す</a>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4 third_section">
+            <%= image_pack_tag 'top_image/top_image3.jpeg', class: 'image py-1 h-100 w-100', alt: '吉本レク画像', loading: 'lazy' %>
+          </div>
+          <div class="fourth_section col-lg-2">
+            <%= image_pack_tag 'top_image/top_image4.jpeg', class: 'image py-1 w-100 responsive_img', alt: '吉本レク画像', loading: 'lazy' %>
+            <%= image_pack_tag 'top_image/top_image5.jpeg', class: 'image py-1 w-100', alt: '吉本レク画像', loading: 'lazy' %>
+            <%= image_pack_tag 'top_image/top_image3.jpeg', class: 'image py-1 w-100 d-lg-none', alt: '吉本レク画像', loading: 'lazy' %>
+            <%= image_pack_tag 'top_image/top_image6.jpeg', class: 'image py-1 w-100', alt: '吉本レク画像', loading: 'lazy' %>
+          </div>
         </div>
       </div>
-      <%= render 'shared/home/categories' %>
-      <%= render 'shared/home/tags', tags: @tags %>
+      <div class="container px-0 my-2">
+        <div class="row">
+          <div class="col-md">
+            <%= link_to "https://everyplus.jp/new_user", target: '_blank', rel: 'noopener' do%>
+              <%= image_pack_tag 'new_user.png', class: 'w-100', alt: '初めての方へ', loading: 'lazy' %>
+            <% end %>
+          </div>
+          <div class="col-md">
+            <%= link_to "https://everyplus.jp/plan", target: '_blank', rel: 'noopener' do%>
+              <%= image_pack_tag 'plan.png', class: 'w-100', alt: 'ご利用施設の活用例', loading: 'lazy' %>
+            <% end %>
+          </div>
+        </div>
+        <%= render 'shared/home/categories' %>
+        <%= render 'shared/home/tags', tags: @tags %>
+      </div>
     </div>
   <% end %>
 
-  <article class="container pt-4 px-0">
-    <div class="row py-3">
+  <article class="container px-0 pt-4">
+    <div class="py-3 row">
       <div class="col-12">
-        <h5 class="mt-5 font-weight-bold text-black">タダカヨ様イベント参加施設様　キャンペーン対象無料レク</h5>
+        <h5 class="mt-5 text-black font-weight-bold">タダカヨ様イベント参加施設様　キャンペーン対象無料レク</h5>
       </div>
     </div>
     <div class="row">
@@ -36,15 +92,15 @@
     </div>
   </article>
 
-  <article class="container pt-4 px-0">
+  <article class="container px-0 pt-4">
     <% cache('home/yoshimoto_section') do %>
       <%= link_to customers_recreations_path(q: { tags_name_eq: '吉本興業' }) do %>
         <%= image_pack_tag 'yoshimoto.png', class: 'w-100', alt: '吉本レク画像', loading: 'lazy' %>
       <% end %>
     <% end %>
-    <div class="row py-2">
+    <div class="py-2 row">
       <div class="col-12">
-        <h5 class="mt-5 font-weight-bold text-black">よしもとのオンラインレク</h5>
+        <h5 class="mt-5 text-black font-weight-bold">よしもとのオンラインレク</h5>
       </div>
     </div>
     <div class="row">
@@ -54,13 +110,10 @@
     </div>
   </article>
 
-  <article class="container pt-4 px-0">
-    <%= link_to "https://everyplus-1.hubspotpagebuilder.com/0526", target: '_blank', rel: 'noopener' do%>
-      <%= image_pack_tag 'bottom_top_trial_online_rec.png', class: 'w-100 my-3', alt: '初めての方へ', loading: 'lazy' %>
-    <% end %>
-    <div class="row py-2">
+  <article class="container px-0 pt-4">
+    <div class="py-2 row">
       <div class="col-12">
-        <h5 class="mt-5 font-weight-bold text-black">10,000円以下×オンライン</h5>
+        <h5 class="mt-5 text-black font-weight-bold">10,000円以下×オンライン</h5>
       </div>
     </div>
     <div class="row">
