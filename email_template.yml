@@ -126,7 +126,7 @@
     <%= @order.recreation.user.username %> 様
 
     えぶりプラスをご利用いただきありがとうございます。
-    <%= @order.user.company.name %>からメッセージが届いています。
+    <%= @order.user.company.facility_name %>からメッセージが届いています。
 
     下記のリンクからメッセージをご確認ください。
     ※ページにアクセスするにはログインが必要です。
@@ -141,7 +141,7 @@
 
     えぶりプラスをご利用いただきありがとうございます。
 
-    <%= @order.user.company.name %>から正式依頼が届いています。
+    <%= @order.user.company.facility_name %>から正式依頼が届いています。
     下記のリンクから内容をご確認ください。
     ※ページにアクセスするにはログインが必要です。
     <%= link_to confirm_partners_order_url(@order.id), confirm_partners_order_url(@order.id) %>
