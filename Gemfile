@@ -33,6 +33,7 @@ group :development do
   gem 'rack-mini-profiler'
   gem 'listen'
   gem 'spring'
+  gem 'bullet'
 end
 
 group :test do
