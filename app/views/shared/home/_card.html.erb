@@ -2,7 +2,8 @@
   <div class="card recreation-card h-100 shadow text-decoration-none">
     <%= link_to customers_recreation_path(rec.id), class: "card-img-top zoom" do %>
       <picture loading="lazy">
-        <%= image_tag rec.recreation_images.sliders.first&.image.to_s, class: 'img-fluid', loading: 'lazy' %>
+        <%= image_tag rec.recreation_images.sliders.first&.image.to_s, class: 'img-fluid position-relative', loading: 'lazy' %>
+        <p class="position-absolute bg-white text-black top-0 end-0 m-2 px-1 border border-dark rounded"><%= t("enumerize.recreation.kind.#{rec.kind}")%></p>
       </picture>
     <% end %>
 
