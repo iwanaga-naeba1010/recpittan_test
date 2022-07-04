@@ -37,8 +37,7 @@ RSpec.describe 'Registrations', type: :system do
 
         expect(page).to have_content '本人確認用のメールを送信しました。メール内のリンクからアカウントを有効化させてください。'
 
-        expect(page).to have_current_path root_path
-        expect(page).to have_current_path root_path
+        expect(page).to have_current_path registration_thanks_path
 
         sleep 3
         user = User.last

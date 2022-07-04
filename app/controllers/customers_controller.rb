@@ -3,6 +3,7 @@
 class CustomersController < Customers::ApplicationController
   def index
     column = params[:column].presence || :start_at
-    @orders = current_user.orders.order("#{column} asc NULLS LAST")
+    order = params[:order].presence || :desc
+    @orders = current_user.orders.order("#{column} #{order} NULLS LAST")
   end
 end

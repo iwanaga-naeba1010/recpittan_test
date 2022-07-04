@@ -19,6 +19,8 @@ Rails.application.routes.draw do
     passwords: 'custom_devise/passwords'
   }
 
+  resources :registration_thanks, only: %i[index]
+
   draw :customer_routes
   draw :partner_routes
   draw :api_routes
