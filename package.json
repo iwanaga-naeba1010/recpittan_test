@@ -9,7 +9,7 @@
   "dependencies": {
     "@activeadmin/activeadmin": "^2.9.0",
     "@babel/preset-react": "^7.18.6",
-    "@babel/preset-typescript": "^7.17.12",
+    "@babel/preset-typescript": "^7.18.6",
     "@fortawesome/fontawesome-free": "^5.15.4",
     "@popperjs/core": "^2.10.2",
     "@rails/actioncable": "^7.0.3",
