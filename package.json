@@ -18,7 +18,7 @@
     "@rails/webpacker": "5.4.3",
     "@sentry/tracing": "^7.1.1",
     "@sentry/react": "^7.3.0",
-    "@sentry/tracing": "^7.3.0",
+    "@sentry/tracing": "^7.4.1",
     "@types/prettier": "^2.6.3",
     "activeadmin_addons": "^1.0.0",
     "arctic_admin": "^4.0.1",
