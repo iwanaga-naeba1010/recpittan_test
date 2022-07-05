@@ -200,7 +200,7 @@
 
     下記のリンクから内容をご確認ください。
     ※ページにアクセスするにはログインが必要です。
-    <%= link_to "https://recreation.everyplus.jp/partners/orders/#{@order.id}/reports/new", "https://recreation.everyplus.jp/partners/orders/#{@order.id}/reports/new" %>
+    <%= link_to new_partners_order_report_url(@order.id),  new_partners_order_report_url(@order.id) %>
 
     注意事項
     ・終了報告がお断りされた場合、チャットでその理由を質問して相互理解をお願い致します。
@@ -215,7 +215,7 @@
     施設名 <%= @user.company.facility_name %> 担当者 <%= @user.username %> 様
 
     えぶりプラスにご登録いただきありがとうございます。会員登録が完了いたしました。
-    レクサイト <%= link_to "https://recreation.everyplus.jp", "https://recreation.everyplus.jp" %>
+    レクサイト <%= link_to root_url,  root_url %>
 
     介護施設向けに7,000回以上開催いただき、現場の声を聞きながら全国から約300種類のレクやイベント提供者に登録いただいております。
 
@@ -226,7 +226,7 @@
     ■ご利用の流れ
     1. レクの検索
     「カテゴリー、金額、タグ」よりお好みのレクリエーションを選択
-    <%= link_to "https://recreation.everyplus.jp", "https://recreation.everyplus.jp" %>
+    <%= link_to root_url,  root_url %>
 
     2. 相談＆依頼まずは、レク提供者にチャットで相談が可能です。
     いいなと思ったら、正式に依頼をしてください。
