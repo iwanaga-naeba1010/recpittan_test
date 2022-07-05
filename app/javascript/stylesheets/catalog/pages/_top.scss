@@ -9,6 +9,136 @@
     background-position: center;
     background-size: cover;
 
+    .hero-header {
+      .first-section {
+        .images {
+          .image {
+            border-radius: 10px !important;
+            object-fit: cover;
+            object-position: 45%;
+          }
+          @include media-breakpoint-up(lg) {
+            display: initial;
+          }
+
+          @include media-breakpoint-up(xs) {
+            display: none;
+          }
+        }
+        .responsive-images {
+          .image {
+            border-radius: 10px !important;
+            object-fit: cover;
+            @include media-breakpoint-up(xs) {
+              height: 120px;
+              width: 110px;
+            }
+          }
+        }
+      }
+
+      .second-section {
+        h3 {
+          color: #343A40;
+          line-height: 2rem;
+        }
+
+        .contents {
+          @include media-breakpoint-up(lg) {
+            padding-top: 70px;
+          }
+
+          @include media-breakpoint-up(md) {
+            width: 85%;
+          }
+        }
+
+        .feature_space {
+          @include media-breakpoint-up(lg) {
+            display: flex;
+          }
+
+          @include media-breakpoint-up(xs) {
+            display: none;
+          }
+        }
+
+        .feature {
+          color: #DDB754;
+          border: 3px solid #DDB754;
+          border-radius: 70px;
+
+          .title {
+            @include media-breakpoint-up(xl) {
+              font-size: 14px;
+            }
+
+            @include media-breakpoint-up(xs) {
+              font-size: 5px;
+            }
+          }
+
+          .content {
+            @include media-breakpoint-up(xl) {
+              font-size: 24px;
+            }
+          }
+        }
+      }
+
+      .third-section {
+        .image {
+          border-radius: 10px !important;
+          object-fit: cover;
+        }
+
+        @include media-breakpoint-up(lg) {
+          display: initial;
+        }
+
+        @include media-breakpoint-up(xs) {
+          display: none;
+        }
+
+      }
+
+      .fourth-section {
+        .image {
+          border-radius: 10px !important;
+          object-fit: cover;
+
+          @include media-breakpoint-up(md) {
+            height: auto;
+            width: 100%;
+          }
+
+          @include media-breakpoint-up(xs) {
+            height: 120px;
+            width: 110px;
+          }
+        }
+        .responsive-hidden-img {
+          @include media-breakpoint-up(lg) {
+            display: initial;
+          }
+
+          @include media-breakpoint-up(xs) {
+            display: none;
+          }
+        }
+      }
+
+      .link-to-rec {
+        @include media-breakpoint-up(lg) {
+          width: 60%;
+        }
+
+        @include media-breakpoint-up(xs) {
+          width: 100%;
+        }
+      }
+    }
+
     .container {
       &.top {
         background-color: transparent !important;
