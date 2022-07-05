@@ -9,26 +9,14 @@
     background-position: center;
     background-size: cover;
 
-    .hero_header {
-      p {
-        color: #E83E8C;
-      }
-
-      h3 {
-        color: #343A40;
-        line-height: 2rem;
-      }
-
-      img {
-        border-radius: 10px !important;
-      }
-
-      .first_section {
-        .image {
-          object-fit: cover;
-        }
-
+    .hero-header {
+      .first-section {
         .images {
+          .image {
+            border-radius: 10px !important;
+            object-fit: cover;
+            object-position: 45%;
+          }
           @include media-breakpoint-up(lg) {
             display: initial;
           }
@@ -37,8 +25,10 @@
             display: none;
           }
         }
-        .row {
+        .responsive-images {
           .image {
+            border-radius: 10px !important;
+            object-fit: cover;
             @include media-breakpoint-up(xs) {
               height: 120px;
               width: 110px;
@@ -47,14 +37,19 @@
         }
       }
 
-      .second_section {
+      .second-section {
+        h3 {
+          color: #343A40;
+          line-height: 2rem;
+        }
+
         .contents {
           @include media-breakpoint-up(lg) {
             padding-top: 70px;
           }
 
           @include media-breakpoint-up(md) {
-            width: 75%;
+            width: 85%;
           }
         }
 
@@ -69,6 +64,7 @@
         }
 
         .feature {
+          color: #DDB754;
           border: 3px solid #DDB754;
           border-radius: 70px;
 
@@ -80,7 +76,6 @@
             @include media-breakpoint-up(xs) {
               font-size: 5px;
             }
-
           }
 
           .content {
@@ -88,15 +83,12 @@
               font-size: 24px;
             }
           }
-
-          p {
-            color: #DDB754;
-          }
         }
       }
 
-      .third_section {
+      .third-section {
         .image {
+          border-radius: 10px !important;
           object-fit: cover;
         }
 
@@ -110,8 +102,9 @@
 
       }
 
-      .fourth_section {
+      .fourth-section {
         .image {
+          border-radius: 10px !important;
           object-fit: cover;
 
           @include media-breakpoint-up(md) {
@@ -124,7 +117,7 @@
             width: 110px;
           }
         }
-        .responsive_img {
+        .responsive-hidden-img {
           @include media-breakpoint-up(lg) {
             display: initial;
           }
@@ -135,9 +128,7 @@
         }
       }
 
-      .btn {
-        background-color: #E83E8C;
-
+      .link-to-rec {
         @include media-breakpoint-up(lg) {
           width: 60%;
         }
