@@ -5,6 +5,7 @@
 # Table name: recreation_images
 #
 #  id            :bigint           not null, primary key
+#  filename      :string
 #  image         :text
 #  kind          :integer          default("slider")
 #  created_at    :datetime         not null

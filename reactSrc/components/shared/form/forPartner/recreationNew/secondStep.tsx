@@ -18,14 +18,19 @@ type Props = {
 export const SecondStep: React.FC<Props> = (props) => {
   const { getValues, register, recreation, setRecreation } = props;
   const [extraInformation, setExtraInformation] = useState<string>(getValues('extraInformation'));
-  const inputRef = useRef(null);
+  const sliderRef = useRef(null);
+  const materialRef = useRef(null);
   const [isSending, setIsSending] = useState<boolean>(false);
 
-  const handleClickFileInput = (): void => {
-    inputRef.current.click();
+  const handleSliderRefClickFileInput = (): void => {
+    sliderRef.current.click();
   };
 
-  const handleFileChanged = (files: FileList | null) => {
+  const handleMaterialRefClickFileInput = (): void => {
+    materialRef.current.click();
+  };
+
+  const handleFileChanged = (files: FileList | null, kind = 'slider') => {
     if (!files || files.length <= 0) return;
     const file = files[0];
     const reader = new FileReader();
@@ -33,7 +38,9 @@ export const SecondStep: React.FC<Props> = (props) => {
       if (event.target?.result && typeof event.target?.result === 'string') {
         const requestBody: { [key: string]: Record<string, unknown> } = {
           recreationImage: {
-            image: event.target?.result
+            image: event.target?.result,
+            filename: file.name,
+            kind: kind
           }
         };
         setIsSending(true);
@@ -118,23 +125,25 @@ export const SecondStep: React.FC<Props> = (props) => {
         <>
           <h5 className='text-black font-weight-bold'>レク画像を追加</h5>
           <div className='row'>
-            {recreation.images.map((image, i) => (
-              <ImageComponent key={i} image={image} handleDelete={handleDelete} />
-            ))}
+            {recreation.images
+              .filter((image) => image.kind === 'slider')
+              .map((image, i) => (
+                <ImageComponent key={i} image={image} handleDelete={handleDelete} />
+              ))}
           </div>
 
           <input
             type='file'
             accept='image/*'
             className='d-none'
-            ref={inputRef}
+            ref={sliderRef}
             onChange={(event) => handleFileChanged(event.target.files)}
             name='recreationImage'
           />
           <button
             type='button'
             className='w-25 py-5 100 text-center text-primary font-weight-bold border bg-white'
-            onClick={handleClickFileInput}
+            onClick={handleSliderRefClickFileInput}
           >
             {isSending ? <LoadingIndicator /> : <>+画像を追加</>}
           </button>
@@ -171,12 +180,37 @@ export const SecondStep: React.FC<Props> = (props) => {
       <p className='small my-0'>レクに必要なものを自前で施設に持ち込むものを入力してください</p>
       <input type='text' className='p-2 w-100 rounded border border-secondary' />
 
-      <div className='mt-4'>
-        <h5 className='text-black font-weight-bold'>施設に渡したいファイル</h5>
-      </div>
-      <p className='small my-0'>オンラインのみ。歌詞カードやパンフレットなど</p>
+      {recreation !== undefined && (
+        <>
+          <div className='mt-4'>
+            <h5 className='text-black font-weight-bold'>施設に渡したいファイル</h5>
+          </div>
+          <p className='small my-0'>オンラインのみ。歌詞カードやパンフレットなど</p>
 
-      <p className='text-primary font-weight-bold my-1'>＋ファイルを追加</p>
+          <input
+            type='file'
+            className='d-none'
+            ref={materialRef}
+            onChange={(event) => handleFileChanged(event.target.files, 'material')}
+            name='recreationImage'
+          />
+
+          <div className='row'>
+            {recreation.images
+              .filter((image) => image.kind === 'material')
+              .map((image, i) => (
+                <ImageComponent key={i} image={image} handleDelete={handleDelete} />
+              ))}
+          </div>
+          {isSending ? (
+            <LoadingIndicator />
+          ) : (
+            <p className='text-primary font-weight-bold my-1' onClick={handleMaterialRefClickFileInput}>
+              ＋ファイルを追加
+            </p>
+          )}
+        </>
+      )}
 
       <div className='mt-4'>
         <h5 className='text-black font-weight-bold'>その他を入力</h5>

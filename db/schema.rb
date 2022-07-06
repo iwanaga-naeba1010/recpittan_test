@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_06_27_084359) do
+ActiveRecord::Schema[7.0].define(version: 2022_07_06_155512) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -161,6 +161,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_27_084359) do
     t.datetime "created_at", precision: nil, null: false
     t.datetime "updated_at", precision: nil, null: false
     t.integer "kind", default: 0
+    t.string "filename"
   end
 
   create_table "recreation_prefectures", force: :cascade do |t|
