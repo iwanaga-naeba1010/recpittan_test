@@ -1,4 +1,4 @@
-import {RecreationPrefecture} from '@/types';
+import { RecreationPrefecture } from '@/types';
 import React from 'react';
 
 type Props = {
