@@ -13,6 +13,18 @@ module ApiPartner
       render_json([e.message], status: 422)
     end
 
+    def update
+      prefecture = Resources::RecreationPrefectures::Update.run!(
+        id: params[:id],
+        params: params_create,
+        recreation_id: params[:recreation_id]
+      )
+      render_json RecreationPrefectureSerializer.new.serialize(recreation_prefecture: prefecture)
+    rescue StandardError => e
+      logger.error e.message
+      render_json([e.message], status: 422)
+    end
+
     def destroy
       Resources::RecreationPrefectures::Destroy.run!(
         recreation_prefecture_id: params[:id]

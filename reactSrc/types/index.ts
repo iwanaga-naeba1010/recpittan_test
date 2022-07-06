@@ -5,6 +5,7 @@ export * from './chat';
 export * from './order';
 // export * from './prefectures';
 export * from './preferredDate';
+export * from './recreationPrefecture';
 export * from './profile';
 export * from './recreation';
 export * from './tag';

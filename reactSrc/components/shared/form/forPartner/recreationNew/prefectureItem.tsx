@@ -1,16 +1,15 @@
+import {RecreationPrefecture} from '@/types';
 import React from 'react';
-import { UseFormRegister } from 'react-hook-form';
-import { RecreationFormValues } from './recreationNewForm';
 
 type Props = {
-  register: UseFormRegister<RecreationFormValues>;
+  handleUpdate: (id: number, prefectureName: string) => void;
   handleRemove: (index: number) => void;
-  index: number;
+  prefecture: RecreationPrefecture;
   prefectures: Array<string>;
 };
 
 export const PrefectureItem: React.FC<Props> = (props) => {
-  const { register, handleRemove, index, prefectures } = props;
+  const { handleUpdate, handleRemove, prefecture, prefectures } = props;
   return (
     <div>
       <label>
@@ -18,13 +17,11 @@ export const PrefectureItem: React.FC<Props> = (props) => {
         <select
           className='p-2 w-100 rounded border border-secondary'
           placeholder='選択してください'
-          {...register(`prefectures.${index}`, {
-            required: true
-          })}
+          onChange={(e) => handleUpdate(prefecture.id, e.target.value)}
         >
-          {prefectures.map((prefecture: string) => (
-            <option key={prefecture} value={prefecture}>
-              {prefecture}
+          {prefectures?.map((p: string) => (
+            <option key={p} value={p} selected={p == prefecture.name}>
+              {p}
             </option>
           ))}
         </select>
@@ -33,7 +30,7 @@ export const PrefectureItem: React.FC<Props> = (props) => {
         className='text-primary font-weight-bold border border-white bg-white'
         type='button'
         style={{ marginLeft: '16px' }}
-        onClick={() => handleRemove(index)}
+        onClick={() => handleRemove(prefecture.id)}
       >
         削除
       </button>
