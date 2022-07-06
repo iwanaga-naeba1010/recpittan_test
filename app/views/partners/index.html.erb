@@ -19,7 +19,7 @@
 
 <div class="my-3 mx-2">
   <%= link_to '開催日順 新→古', partners_path(column: :start_at, order: :desc, is_accepted: @is_accepted), class: ' text-white btn btn-primary  p-3' %>
-  <%= link_to params[:is_accepted] == 'true' ? '開催済み -> 終了報告承認済み' : '相談中 -> 正式依頼確認中',
+  <%= link_to params[:is_accepted] == 'true' ? '開催済み → 終了報告承認済み' : '相談中 → 正式依頼確認中',
       partners_path(column: :status, order: :asc, is_accepted: @is_accepted), class: ' text-white btn btn-primary  p-3' %>
 </div>
 

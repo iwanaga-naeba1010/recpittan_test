@@ -108,14 +108,13 @@ export const SecondStep: React.FC<Props> = (props) => {
       <input
         type='text'
         className='p-2 w-100 rounded border border-secondary'
-        placeholder='サブタイトルを入力'
+        placeholder='追加施設費を入力'
         {...register('additionalFacilityFee', {
           required: true
         })}
       />
-      <p className='small my-0'>施設に表示される金額</p>
-      <p className='small my-0'>追加施設費＋サービス手数料が上乗せされます</p>
-      <p className='small my-0'>￥0</p>
+      <p className='small my-0'>基本は追加施設1施設あたり1,000円です。</p>
+      <p className='small my-0'>※1,000円での開催が難しい場合は金額をご入力ください</p>
 
       {/* 修正のタイミングで利用可能に */}
       {recreation !== undefined && (
