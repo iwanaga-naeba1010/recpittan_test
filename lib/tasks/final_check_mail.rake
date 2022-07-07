@@ -2,6 +2,8 @@
 
 namespace :send_final_check_mail do
   task run: :environment do
+    set_default_url_options
+
     Order.where(
       final_check_status: [:not_send, nil],
       start_at: Time.current..3.days.since.end_of_day,
@@ -14,5 +16,13 @@ namespace :send_final_check_mail do
     rescue StandardError => e
       logger.error e.message
     end
+  end
+
+  def set_default_url_options
+    domain = ENV.fetch('DOMAIN')
+    return if domain.blank?
+
+    Rails.application.routes.default_url_options[:host] = domain
+    ActionMailer::Base.default_url_options[:host] = domain
   end
 end
