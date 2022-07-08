@@ -38,16 +38,7 @@
       }
 
       .second-section {
-        color: #E83E8C;
 
-        h3 {
-          color: #343A40;
-          line-height: 2rem;
-        }
-
-        .link-top-recs {
-          background-color: #E83E8C;
-        }
 
         .contents {
           @include media-breakpoint-up(lg) {
@@ -56,6 +47,17 @@
 
           @include media-breakpoint-up(md) {
             width: 85%;
+          }
+
+          color: #E83E8C;
+
+          h3 {
+            color: #343A40;
+            line-height: 2rem;
+          }
+
+          .link-to-recs {
+            background-color: #E83E8C !important;
           }
         }
 

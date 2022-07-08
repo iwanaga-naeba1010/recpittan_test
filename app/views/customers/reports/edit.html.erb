@@ -141,6 +141,15 @@
                   <%= number_to_currency(@report.order.total_price_for_customer) %>
                 </div>
               </div>
+
+              <% if @report.order_coupon_code.present? %>
+                <div class="row justify-content-between border-top py-3">
+                  <div class='alert alert-warning' role='alert'>
+                    <div class='font-weight-boild'>クーポン適用中のため合計金額は「&yen; 0」となります</div>
+                    <div>合計金額が表示されていても請求は&yen; 0となります。ご安心ください。</div>
+                  </div>
+                </div>
+              <% end %>
             </div>
 
             <div class="row border-top mt-5 pt-3">
