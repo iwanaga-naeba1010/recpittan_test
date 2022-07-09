@@ -142,7 +142,7 @@
                 </div>
               </div>
 
-              <% if @report.order_coupon_code.present? %>
+              <% if @report.order_coupon_code.present? && @report.order_coupon_code == "えぶりぷらす" %>
                 <div class="row justify-content-between border-top py-3">
                   <div class='alert alert-warning' role='alert'>
                     <div class='font-weight-boild'>クーポン適用中のため合計金額は「&yen; 0」となります</div>
