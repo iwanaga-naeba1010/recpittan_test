@@ -45,7 +45,6 @@ export const RecreationNewForm: React.FC<Props> = (props) => {
     register,
     handleSubmit,
     getValues,
-    setValue,
     formState: { errors }
   } = useForm<RecreationFormValues>({
     mode: 'onChange',
@@ -111,7 +110,7 @@ export const RecreationNewForm: React.FC<Props> = (props) => {
       <form className='recreation' onSubmit={handleSubmit(onSubmit)}>
         <Step totalCounts={4} activeStep={currentStep} />
         {currentStep === 0 && (
-          <FirstStep register={register} getValues={getValues} setValue={setValue} errors={errors} />
+          <FirstStep register={register} getValues={getValues} errors={errors} />
         )}
         {currentStep === 1 && <SecondStep getValues={getValues} register={register} />}
         {currentStep === 2 && <ThirdStep register={register} getValues={getValues} />}

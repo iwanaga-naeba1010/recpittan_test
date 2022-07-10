@@ -219,31 +219,37 @@ export const FirstStep: React.FC<Props> = (props) => {
         {errors && <ValidationErrorMessage message={errors?.category?.message} />}
       </div>
 
-      <div className='area'>
-        <div className='d-flex mt-4'>
-          <h5 className='text-black font-weight-bold'>受付可能エリアを選択</h5>
-          <Essential />
+      {recreation !== undefined && (
+        <div className='area'>
+          <div className='d-flex mt-4'>
+            <h5 className='text-black font-weight-bold'>受付可能エリアを選択</h5>
+            <Essential />
+          </div>
+
+          <p className='small my-0'>レクの受付可能エリア（都道府県）を選択してください</p>
+          {recreation?.prefectures?.map((prefecture) => (
+            <PrefectureItem
+              key={prefecture.id}
+              prefecture={prefecture}
+              handleUpdate={handleUpdatePrefecture}
+              handleRemove={handleRemove}
+              prefectures={config?.prefectures}
+            />
+          ))}
+          <div className={'question-add-action-wrapper'}>
+            {isSending ? (
+              <LoadingIndicator />
+            ) : (
+              <button
+                type='button'
+                className='text-primary bg-white border-0 font-weight-bold my-1'
+                onClick={() => handleAddPrefecture('北海道')}>
+                ＋複数エリアを追加
+              </button>
+            )}
+          </div>
         </div>
-        <p className='small my-0'>レクの受付可能エリア（都道府県）を選択してください</p>
-        {recreation.prefectures?.map((prefecture) => (
-          <PrefectureItem
-            key={prefecture.id}
-            prefecture={prefecture}
-            handleUpdate={handleUpdatePrefecture}
-            handleRemove={handleRemove}
-            prefectures={config?.prefectures}
-          />
-        ))}
-        <div className={'question-add-action-wrapper'}>
-          {isSending ? (
-            <LoadingIndicator />
-          ) : (
-            <p className='text-primary font-weight-bold my-1' onClick={() => handleAddPrefecture('北海道')}>
-              ＋複数エリアを追加
-            </p>
-          )}
-        </div>
-      </div>
+      )}
 
       <div className='limit_on_the_number_of_people'>
         <div className='d-flex mt-4'>

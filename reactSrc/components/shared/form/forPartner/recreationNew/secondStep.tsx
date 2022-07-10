@@ -192,7 +192,7 @@ export const SecondStep: React.FC<Props> = (props) => {
             className='d-none'
             ref={materialRef}
             onChange={(event) => handleFileChanged(event.target.files, 'material')}
-            name='recreationImage'
+            name='recreationProfile'
           />
 
           <div className='row'>
@@ -205,9 +205,12 @@ export const SecondStep: React.FC<Props> = (props) => {
           {isSending ? (
             <LoadingIndicator />
           ) : (
-            <p className='text-primary font-weight-bold my-1' onClick={handleMaterialRefClickFileInput}>
+            <button
+              type='button'
+              className='text-primary bg-white border-0 font-weight-bold my-1'
+              onClick={handleMaterialRefClickFileInput}>
               ＋ファイルを追加
-            </p>
+            </button>
           )}
         </>
       )}
