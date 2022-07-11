@@ -7,5 +7,6 @@ export * from './order';
 export * from './preferredDate';
 export * from './profile';
 export * from './recreation';
+export * from './recreationPrefecture';
 export * from './tag';
 export * from './user';

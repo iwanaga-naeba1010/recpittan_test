@@ -3,20 +3,24 @@
 module Resources
   module RecreationImages
     class Create < ActiveInteraction::Base
-
       hash :params do
         string :image
+        string :filename
+        symbol :kind
       end
 
       integer :recreation_id
 
       validates :recreation_id, presence: true
+      validate :validate_params
 
       def execute
         ActiveRecord::Base.transaction do
           image = RecreationImage.new(
             recreation_id: recreation_id,
-            image: base64_conversion(params[:image])
+            image: base64_conversion(params[:image]),
+            filename: params[:filename],
+            kind: params[:kind]
           )
           image.save!
           image
@@ -52,6 +56,16 @@ module Resources
         uri[:data] = Regexp.last_match(3)
         uri[:extension] = Regexp.last_match(1).split('/')[1]
         uri
+      end
+
+      private def validate_params
+        if params[:filename].blank?
+          errors.add(:filename, 'ファイル名は必須です')
+        end
+
+        if params[:kind].blank?
+          errors.add(:kind, 'KINDは必須です')
+        end
       end
     end
   end

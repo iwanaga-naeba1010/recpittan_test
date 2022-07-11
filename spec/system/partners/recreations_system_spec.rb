@@ -7,6 +7,8 @@ RSpec.describe '/partners/recreations', type: :system do
   let(:recreations) { partner.recreations }
   let(:recreation) { partner.recreations.first }
   let!(:recreation_image) { create(:recreation_image, recreation: recreation) }
+  let!(:recreation_prefecture) { create(:recreation_prefecture, recreation: recreation) }
+  let!(:recreation_profile) { create(:recreation_profile, recreation: recreation) }
 
   before do
     sign_in partner
@@ -104,6 +106,28 @@ RSpec.describe '/partners/recreations', type: :system do
         expect(partner.recreations.first.title).to eq changed_title
       end
 
+      scenario 'crate recreation_prefectures', js: true do
+        expect(page).to have_content('レクリエーション詳細')
+        expect(page).to have_content(recreation.title)
+        click_on('レクの基本情報')
+        expect(page).to have_current_path(edit_partners_recreation_path(recreation), ignore_query: true)
+        click_on('＋複数エリアを追加')
+        expect(recreation.recreation_prefectures.size).to eq 1
+        sleep 5
+        expect(recreation.recreation_prefectures.size).to eq 2
+      end
+
+      scenario 'delete recreation_prefectures', js: true do
+        expect(page).to have_content('レクリエーション詳細')
+        expect(page).to have_content(recreation.title)
+        click_on('レクの基本情報')
+        expect(page).to have_current_path(edit_partners_recreation_path(recreation), ignore_query: true)
+        expect(recreation.recreation_prefectures.size).to eq 1
+        click_button('削除')
+        sleep 5
+        expect(recreation.recreation_prefectures.size).to eq 0
+      end
+
       scenario 'price form', js: true do
         expect(page).to have_content('レクリエーション詳細')
         expect(page).to have_content(recreation.title)
@@ -136,6 +160,28 @@ RSpec.describe '/partners/recreations', type: :system do
         click_button('削除')
         sleep 5
         expect(recreation.recreation_images.size).to eq 0
+      end
+
+      scenario 'crate recreation_profile', js: true do
+        expect(page).to have_content('レクリエーション詳細')
+        expect(page).to have_content(recreation.title)
+        click_on('金額・メディア・その他の情報')
+        expect(page).to have_current_path(edit_partners_recreation_path(recreation), ignore_query: true)
+        expect(recreation.recreation_profile.blank?)
+        attach_file 'recreationProfile', Rails.root.join('spec/files/test.png'), make_visible: true
+        sleep 5
+        expect(recreation.recreation_profile.present?)
+      end
+
+      scenario 'delete recreation_profile', js: true do
+        expect(page).to have_content('レクリエーション詳細')
+        expect(page).to have_content(recreation.title)
+        click_on('金額・メディア・その他の情報')
+        expect(page).to have_current_path(edit_partners_recreation_path(recreation), ignore_query: true)
+        expect(recreation.recreation_profile.present?)
+        click_button('削除')
+        sleep 5
+        expect(recreation.recreation_profile.blank?)
       end
 
       scenario 'profile form', js: true do

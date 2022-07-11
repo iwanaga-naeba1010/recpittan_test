@@ -22,7 +22,6 @@ export const RecreationEditForm: React.FC<Props> = (props) => {
     register,
     handleSubmit,
     getValues,
-    setValue,
     formState: { errors }
   } = useForm<RecreationFormValues>({
     mode: 'onChange',
@@ -51,7 +50,13 @@ export const RecreationEditForm: React.FC<Props> = (props) => {
     <div>
       <form className='recreation' onSubmit={handleSubmit(onSubmit)}>
         {kind === 'title' && (
-          <FirstStep register={register} getValues={getValues} setValue={setValue} errors={errors} />
+          <FirstStep
+            register={register}
+            getValues={getValues}
+            recreation={recreation}
+            setRecreation={setRecreation}
+            errors={errors}
+          />
         )}
         {kind === 'price' && (
           <SecondStep getValues={getValues} register={register} recreation={recreation} setRecreation={setRecreation} />
