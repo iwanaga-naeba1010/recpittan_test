@@ -5,6 +5,7 @@
 # Table name: recreation_images
 #
 #  id            :bigint           not null, primary key
+#  filename      :string
 #  image         :text
 #  kind          :integer          default("slider")
 #  created_at    :datetime         not null
@@ -19,6 +20,7 @@ FactoryBot.define do
   factory :recreation_image do
     recreation
     kind { 0 }
+    filename { 'filename' }
     image do
       ActionDispatch::Http::UploadedFile.new(
         filename: 'test.png',

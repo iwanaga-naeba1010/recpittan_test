@@ -24,7 +24,7 @@ module ApiPartner
     end
 
     private def params_create
-      params.require(:recreation_image).permit(:image, :kind)
+      params.require(:recreation_image).permit(:image, :filename, :kind)
     end
   end
 end

@@ -2,37 +2,19 @@
 
 # == Schema Information
 #
-# Table name: recreations
+# Table name: recreation_images
 #
-#  id                      :bigint           not null, primary key
-#  additional_facility_fee :integer          default(2000)
-#  amount                  :integer
-#  base_code               :string
-#  borrow_item             :text
-#  bring_your_own_item     :text
-#  capacity                :integer
-#  category                :integer          default("event"), not null
-#  description             :text
-#  extra_information       :text
-#  flow_of_day             :text
-#  flyer_color             :string
-#  is_public_price         :boolean          default(TRUE)
-#  kind                    :integer          default("visit"), not null
-#  material_amount         :integer
-#  material_price          :integer
-#  minutes                 :integer
-#  price                   :integer
-#  second_title            :string
-#  status                  :integer          default("unapplied"), not null
-#  title                   :string
-#  created_at              :datetime         not null
-#  updated_at              :datetime         not null
-#  user_id                 :bigint           not null
-#  youtube_id              :string
+#  id            :bigint           not null, primary key
+#  filename      :string
+#  image         :text
+#  kind          :integer          default("slider")
+#  created_at    :datetime         not null
+#  updated_at    :datetime         not null
+#  recreation_id :bigint           not null
 #
 # Foreign Keys
 #
-#  recreations_user_id_fkey  (user_id => users.id)
+#  recreation_images_recreation_id_fkey  (recreation_id => recreations.id)
 #
 class RecreationImageSerializer
   def serialize_list(recreation_images:)
@@ -43,6 +25,7 @@ class RecreationImageSerializer
     {
       id: recreation_image.id,
       image_url: recreation_image.image.to_s,
+      filename: recreation_image.filename,
       kind: recreation_image.kind,
     }
   end

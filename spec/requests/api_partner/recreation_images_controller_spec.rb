@@ -19,7 +19,9 @@ RSpec.describe ApiPartner::RecreationImagesController, type: :request do
     let(:params) do
       {
         recreation_image: {
-          image: image
+          image: image,
+          filename: 'filename',
+          kind: :slider
         }
       }
     end
