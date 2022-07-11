@@ -15,7 +15,9 @@ RSpec.describe Resources::RecreationImages::Create, type: :interaction do
     end
     let(:params) do
       {
-        image: image
+        image: image,
+        filename: 'filename',
+        kind: :slider
       }
     end
 
