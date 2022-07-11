@@ -44,6 +44,9 @@ class RecreationSerializer
     targets = TagSerializer.new.serialize_list(tags: recreation.tags.targets)
     profile = ProfileSerializer.new.serialize(profile: recreation.profile)
     images = RecreationImageSerializer.new.serialize_list(recreation_images: recreation.recreation_images)
+    prefectures = RecreationPrefectureSerializer.new.serialize_list(
+      recreation_prefectures: recreation.recreation_prefectures
+    )
     {
       id: recreation.id,
       title: recreation.title,
@@ -63,6 +66,7 @@ class RecreationSerializer
       bring_your_own_item: recreation.bring_your_own_item,
       additional_facility_fee: recreation.additional_facility_fee,
       images: images,
+      prefectures: prefectures,
       profile: profile,
       user_id: recreation.user_id,
       tags: tags,
