@@ -18,18 +18,19 @@ type Props = {
 export const SecondStep: React.FC<Props> = (props) => {
   const { getValues, register, recreation, setRecreation } = props;
   const [extraInformation, setExtraInformation] = useState<string>(getValues('extraInformation'));
-  const inputRef = useRef(null);
+  const sliderRef = useRef(null);
+  const materialRef = useRef(null);
   const [isSending, setIsSending] = useState<boolean>(false);
 
-  const handleClickFileInput = (): void => {
-    inputRef.current.click();
+  const handleSliderRefClickFileInput = (): void => {
+    sliderRef.current.click();
   };
 
-  console.log('00000000000000000000recreation');
-  console.log(recreation);
-  console.log('00000000000000000000recreation');
+  const handleMaterialRefClickFileInput = (): void => {
+    materialRef.current.click();
+  };
 
-  const handleFileChanged = (files: FileList | null) => {
+  const handleFileChanged = (files: FileList | null, kind = 'slider') => {
     if (!files || files.length <= 0) return;
     const file = files[0];
     const reader = new FileReader();
@@ -37,7 +38,9 @@ export const SecondStep: React.FC<Props> = (props) => {
       if (event.target?.result && typeof event.target?.result === 'string') {
         const requestBody: { [key: string]: Record<string, unknown> } = {
           recreationImage: {
-            image: event.target?.result
+            image: event.target?.result,
+            filename: file.name,
+            kind: kind
           }
         };
         setIsSending(true);
@@ -108,34 +111,39 @@ export const SecondStep: React.FC<Props> = (props) => {
       <input
         type='text'
         className='p-2 w-100 rounded border border-secondary'
-        placeholder='サブタイトルを入力'
+        placeholder='追加施設費を入力'
         {...register('additionalFacilityFee', {
           required: true
         })}
       />
-      <p className='small my-0'>施設に表示される金額</p>
-      <p className='small my-0'>追加施設費＋サービス手数料が上乗せされます</p>
-      <p className='small my-0'>￥0</p>
+      <p className='small my-0'>基本は追加施設1施設あたり1,000円です。</p>
+      <p className='small my-0'>※1,000円での開催が難しい場合は金額をご入力ください</p>
 
       {/* 修正のタイミングで利用可能に */}
       {recreation !== undefined && (
         <>
           <h5 className='text-black font-weight-bold'>レク画像を追加</h5>
           <div className='row'>
-            {recreation.images.map((image, i) => (
-              <ImageComponent key={i} image={image} handleDelete={handleDelete} />
-            ))}
+            {recreation.images
+              .filter((image) => image.kind === 'slider')
+              .map((image, i) => (
+                <ImageComponent key={i} image={image} handleDelete={handleDelete} />
+              ))}
           </div>
 
           <input
             type='file'
             accept='image/*'
             className='d-none'
-            ref={inputRef}
+            ref={sliderRef}
             onChange={(event) => handleFileChanged(event.target.files)}
             name='recreationImage'
           />
-          <button type='button' className='w-25 py-5 100 text-center text-primary font-weight-bold border bg-white' onClick={handleClickFileInput}>
+          <button
+            type='button'
+            className='w-25 py-5 100 text-center text-primary font-weight-bold border bg-white'
+            onClick={handleSliderRefClickFileInput}
+          >
             {isSending ? <LoadingIndicator /> : <>+画像を追加</>}
           </button>
         </>
@@ -171,12 +179,40 @@ export const SecondStep: React.FC<Props> = (props) => {
       <p className='small my-0'>レクに必要なものを自前で施設に持ち込むものを入力してください</p>
       <input type='text' className='p-2 w-100 rounded border border-secondary' />
 
-      <div className='mt-4'>
-        <h5 className='text-black font-weight-bold'>施設に渡したいファイル</h5>
-      </div>
-      <p className='small my-0'>オンラインのみ。歌詞カードやパンフレットなど</p>
+      {recreation !== undefined && (
+        <>
+          <div className='mt-4'>
+            <h5 className='text-black font-weight-bold'>施設に渡したいファイル</h5>
+          </div>
+          <p className='small my-0'>オンラインのみ。歌詞カードやパンフレットなど</p>
 
-      <p className='text-primary font-weight-bold my-1'>＋ファイルを追加</p>
+          <input
+            type='file'
+            className='d-none'
+            ref={materialRef}
+            onChange={(event) => handleFileChanged(event.target.files, 'material')}
+            name='recreationProfile'
+          />
+
+          <div className='row'>
+            {recreation.images
+              .filter((image) => image.kind === 'material')
+              .map((image, i) => (
+                <ImageComponent key={i} image={image} handleDelete={handleDelete} />
+              ))}
+          </div>
+          {isSending ? (
+            <LoadingIndicator />
+          ) : (
+            <button
+              type='button'
+              className='text-primary bg-white border-0 font-weight-bold my-1'
+              onClick={handleMaterialRefClickFileInput}>
+              ＋ファイルを追加
+            </button>
+          )}
+        </>
+      )}
 
       <div className='mt-4'>
         <h5 className='text-black font-weight-bold'>その他を入力</h5>
