@@ -18,7 +18,7 @@
     "@rails/webpacker": "5.4.3",
     "@sentry/tracing": "^7.1.1",
     "@sentry/react": "^7.6.0",
-    "@sentry/tracing": "^7.4.1",
+    "@sentry/tracing": "^7.6.0",
     "@types/prettier": "^2.6.3",
     "activeadmin_addons": "^1.0.0",
     "arctic_admin": "^4.0.1",
@@ -45,7 +45,7 @@
   "devDependencies": {
     "@types/jquery": "^3.5.5",
     "@types/react": "^18.0.15",
-    "@types/react-dom": "^18.0.5",
+    "@types/react-dom": "^18.0.6",
     "@typescript-eslint/eslint-plugin": "^4.33.0",
     "@typescript-eslint/parser": "^4.33.0",
     "eslint": "^7.32.0",
