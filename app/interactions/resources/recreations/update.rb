@@ -3,25 +3,24 @@
 module Resources
   module Recreations
     class Update < ActiveInteraction::Base
-
+      # NOTE(okubo): default:nilしている箇所は既存のrecreationでデータ不備がある場合を回避するため
       hash :recreation_params do
         string :title
         string :second_title
         integer :price
         # integer :amount
-        integer :material_price
+        integer :material_price, default: 0
         # integer :material_amount
         integer :minutes
-        string :description
-        string :flow_of_day
-        string :borrow_item
-        string :bring_your_own_item
+        string :description, default: nil
+        string :flow_of_day, default: nil
+        string :borrow_item, default: nil
+        string :bring_your_own_item, default: nil
         string :extra_information, default: nil
         string :youtube_id, default: nil
-        integer :capacity
-        integer :additional_facility_fee
+        integer :capacity, default: 0
+        integer :additional_facility_fee, default: 0
         string :category
-        string :status
         string :kind
       end
 
