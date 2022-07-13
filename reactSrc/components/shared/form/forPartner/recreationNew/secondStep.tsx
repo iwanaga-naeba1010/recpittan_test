@@ -7,6 +7,7 @@ import React, { useRef, useState } from 'react';
 import { UseFormGetValues, UseFormRegister } from 'react-hook-form';
 import { RecreationImage as ImageComponent } from './recreationImage';
 import { RecreationFormValues } from './recreationNewForm';
+import { RecreationAdditionalFacilityFee } from './recreationAdditionalFacilityFee'
 
 type Props = {
   getValues: UseFormGetValues<RecreationFormValues>;
@@ -103,21 +104,11 @@ export const SecondStep: React.FC<Props> = (props) => {
       <p className='small my-0'>材料費＋サービス手数料が上乗せされます</p>
       <p className='small my-0'>￥0</p>
 
-      <div className='d-flex mt-4'>
-        <h5 className='text-black font-weight-bold'>追加施設費</h5>
-        <Essential />
-      </div>
-      <p className='small my-0'>オンライン開催のみ。１回のレクで新たに施設が追加される</p>
-      <input
-        type='text'
-        className='p-2 w-100 rounded border border-secondary'
-        placeholder='追加施設費を入力'
-        {...register('additionalFacilityFee', {
-          required: true
-        })}
-      />
-      <p className='small my-0'>基本は追加施設1施設あたり1,000円です。</p>
-      <p className='small my-0'>※1,000円での開催が難しい場合は金額をご入力ください</p>
+      {(recreation === undefined || recreation?.kind.key === 'online') && (
+        <RecreationAdditionalFacilityFee
+          register={register}
+        />
+      )}
 
       {/* 修正のタイミングで利用可能に */}
       {recreation !== undefined && (
