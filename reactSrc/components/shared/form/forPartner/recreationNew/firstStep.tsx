@@ -27,6 +27,9 @@ export const FirstStep: React.FC<Props> = (props) => {
   const [config, setConfig] = useState<Config>(undefined);
   const [show, setShow] = useState(false);
   const [isSending, setIsSending] = useState<boolean>(false);
+  const [title, setTitle] = useState<string>(getValues('title'));
+  const [secondTitle, setSecondTitle] = useState<string>(getValues('secondTitle'));
+  const [description, setDescription] = useState<string>(getValues('description'));
 
   useEffect(() => {
     (async () => {
@@ -123,9 +126,10 @@ export const FirstStep: React.FC<Props> = (props) => {
             required: 'タイトルは必須です',
             maxLength: 50
           })}
+          onChange={(e) => setTitle(e.target.value)}
         />
         {errors && <ValidationErrorMessage message={errors?.title?.message} />}
-        <p className='small my-0'>{getValues('title')?.length}/50文字まで</p>
+        <p className='small my-0'>{title.length}/50文字まで</p>
       </div>
 
       <div className='title'>
@@ -141,9 +145,10 @@ export const FirstStep: React.FC<Props> = (props) => {
             required: 'サブタイトルは必須です',
             maxLength: 50
           })}
+          onChange={(e) => setSecondTitle(e.target.value)}
         />
         {errors && <ValidationErrorMessage message={errors?.secondTitle?.message} />}
-        <p className='small my-0'>0/50文字まで</p>
+        <p className='small my-0'>{secondTitle.length}/50文字まで</p>
       </div>
 
       <div className='minutes'>
@@ -194,8 +199,9 @@ export const FirstStep: React.FC<Props> = (props) => {
           className='p-1 w-100 rounded border border-secondary'
           placeholder='説明を入力'
           {...register('description', { maxLength: 500 })}
+          onChange={(e) => setDescription(e.target.value)}
         />
-        <p className='small my-0'>0/500文字まで</p>
+        <p className='small my-0'>{description.length}/500文字まで</p>
       </div>
 
       <div className='category'>
