@@ -267,7 +267,6 @@ export const FirstStep: React.FC<Props> = (props) => {
           id='numberOfFacilitiesFalse'
           name='number_of_facilities'
           onClick={() => setShow(false)}
-          checked
         />
         <label htmlFor='numberOfFacilitiesFalse' onClick={() => setShow(false)}>
           なし
