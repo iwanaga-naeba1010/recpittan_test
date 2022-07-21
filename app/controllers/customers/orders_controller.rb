@@ -73,7 +73,7 @@ class Customers::OrdersController < Customers::ApplicationController
 
       SlackNotifier.new(channel: '#料金お問い合わせ').send('新規お問い合わせ', slack_message)
       # orderの詳細に飛ばす
-      redirect_to chat_customers_order_path(@order.id)
+      redirect_to chat_customers_order_path(@order.id, isShowFlash: true)
     end
   rescue StandardError => e
     logger.error e.message

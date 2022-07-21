@@ -4,6 +4,7 @@ type Props = {
   errors: Array<string>;
 };
 
+// TODO(okubo): ErrorFlashなどに変えたい
 export const Error: React.FC<Props> = (props) => {
   const { errors } = props;
   return (

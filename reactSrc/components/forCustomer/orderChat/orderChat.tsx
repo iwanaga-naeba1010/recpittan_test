@@ -2,9 +2,10 @@ import { ModalForm } from '@/components/shared';
 import { ExpenseForm } from '@/components/shared/form/forCustomer/orderChat/expenceForm';
 import { NumberOfFacilitiesForm } from '@/components/shared/form/forCustomer/orderChat/numberOfFacilitiesForm';
 import { TranspotationExpensesForm } from '@/components/shared/form/forCustomer/orderChat/transportationExpensesForm';
-import { Category, LoadingIndicator, Tag } from '@/components/shared/parts';
+import { Category, LoadingIndicator, SuccessFlash, Tag } from '@/components/shared/parts';
 import { Api } from '@/infrastructure';
 import { Order, User } from '@/types';
+import { getQeuryStringValueByKey, removeQueryStringsByKey, strToBool } from '@/utils';
 import * as Sentry from '@sentry/react';
 import * as $ from 'jquery';
 import React, { useEffect, useState } from 'react';
@@ -14,10 +15,13 @@ import { ChatList } from './chatList';
 export const OrderChat: React.FC = () => {
   const [order, setOrder] = useState<Order>(undefined);
   const [user, setUser] = useState<User>(undefined);
+  const [isShowFlash, setIsShowFlash] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const id = window.location.pathname.split('/')[3];
 
   useEffect(() => {
+    setIsShowFlash(strToBool(getQeuryStringValueByKey('isShowFlash')));
+    removeQueryStringsByKey();
     (async () => {
       if (id === undefined) return;
       try {
@@ -73,7 +77,7 @@ export const OrderChat: React.FC = () => {
                   <div className='border-bottom p-2'>
                     <h4 className='title'>
                       参加人数制限
-                      {order.recreation?.capacity === 0 ? 'なし' : order.recreation?.capacity === null ? 'なし' : `${order.recreation?.capacity}人まで`}
+                      {(order.recreation?.capacity === 0 || order.recreation?.capacity === null) ? 'なし' : `${order.recreation?.capacity}人まで`}
                     </h4>
                   </div>
                 )}
@@ -151,7 +155,10 @@ export const OrderChat: React.FC = () => {
               </div>
             </div>
           </div>
-          <ChatList user={user} order={order} />
+          <div className='col-md-7'>
+            {isShowFlash && <SuccessFlash message='相談を開始しました。チャットが返信されるまでお待ちください。' />}
+            <ChatList user={user} order={order} />
+          </div>
         </div>
       </article>
       {/* NOTE(okubo): html経由で読んでる */}
