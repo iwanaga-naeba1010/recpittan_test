@@ -47,7 +47,7 @@ RSpec.describe Customers::OrdersController, type: :request do
       it 'return http success when user not logged in' do
         post customers_recreation_orders_path(recreation), params: { order: order_attrs }
         expect(response).to have_http_status(:found)
-        expect(response).to redirect_to(chat_customers_order_path(Order.last.id))
+        expect(response).to redirect_to(chat_customers_order_path(Order.last.id, isShowFlash: true))
       end
     end
 
