@@ -17,7 +17,10 @@ class Customers::RecreationsController < Customers::ApplicationController
     end
   end
 
-  def show; end
+  def show
+    @evaluations = Evaluation.where.not(message: '').where(is_public: :public).
+                   joins(report: :order).merge(Order.where(recreation_id: set_recreation)).limit(3).order(id: :desc)
+  end
 
   private def set_recreation
     @recreation = Recreation.public_recs.find(params[:id])
