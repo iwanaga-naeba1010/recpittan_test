@@ -175,7 +175,7 @@ export const SecondStep: React.FC<Props> = (props) => {
           <div className='mt-4'>
             <h5 className='text-black font-weight-bold'>施設に渡したいファイル</h5>
           </div>
-          <p className='small my-0'>オンラインのみ。歌詞カードやパンフレットなど</p>
+          <p className='small my-0'>歌詞カードやパンフレットなど</p>
 
           <input
             type='file'

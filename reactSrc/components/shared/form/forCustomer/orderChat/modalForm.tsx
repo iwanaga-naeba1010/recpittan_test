@@ -290,11 +290,10 @@ export const ModalForm: React.FC<Props> = (props) => {
                   <div className='row pt-3'>
                     <label className='col-12 title-b pb-3' htmlFor='participant'>
                       追加で参加する施設がある場合施設数をご記入ください
-                      <span className='label required'>必須</span>
                     </label>
                     <div className='form-group col-3'>
                       <input
-                        {...register('numberOfFacilities', { required: true })}
+                        {...register('numberOfFacilities')}
                         className='form-control text-right'
                       />
                     </div>
@@ -317,6 +316,7 @@ export const ModalForm: React.FC<Props> = (props) => {
                         {...register('zip', { required: true })}
                         className='form-control p-postal-control'
                         placeholder='郵便番号を入力'
+                        autoComplete='off'
                       />
                       <button
                         id='searchAddressWithZipForOrder'
@@ -334,6 +334,7 @@ export const ModalForm: React.FC<Props> = (props) => {
                       {...register('prefecture', { required: true })}
                       className='form-control p-region'
                       onChange={(e) => handleCityChange(filterCurrentPrefecture(e.target.value).prefCode)}
+                      autoComplete='off'
                     >
                       {prefectures.map((prefecture) => (
                         <option key={prefecture.prefName} value={prefecture.prefName}>
@@ -344,7 +345,7 @@ export const ModalForm: React.FC<Props> = (props) => {
                   </div>
                   <div className='form-group col-6'>
                     <label htmlFor='postalCode'>市区町村</label>
-                    <select {...register('city', { required: true })} className='form-control p-region'>
+                    <select {...register('city', { required: true })} className='form-control p-region' autoComplete='off'>
                       {cities.map((city) => (
                         <option key={city.cityName} value={city.cityName}>
                           {city.cityName}
@@ -354,11 +355,11 @@ export const ModalForm: React.FC<Props> = (props) => {
                   </div>
                   <div className='form-group col-6'>
                     <label htmlFor='postalCode'>町名/番地</label>
-                    <input {...register('street', { required: true })} className='form-control p-postal-control' />
+                    <input {...register('street', { required: true })} className='form-control p-postal-control' autoComplete='off' />
                   </div>
                   <div className='form-group col-12'>
                     <label htmlFor='postalCode'>建物名</label>
-                    <input {...register('building')} className='form-control p-postal-control' />
+                    <input {...register('building')} className='form-control p-postal-control' autoComplete='off' />
                   </div>
                 </div>
 
