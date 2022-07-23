@@ -317,6 +317,7 @@ export const ModalForm: React.FC<Props> = (props) => {
                         {...register('zip', { required: true })}
                         className='form-control p-postal-control'
                         placeholder='郵便番号を入力'
+                        autoComplete='off'
                       />
                       <button
                         id='searchAddressWithZipForOrder'
@@ -334,6 +335,7 @@ export const ModalForm: React.FC<Props> = (props) => {
                       {...register('prefecture', { required: true })}
                       className='form-control p-region'
                       onChange={(e) => handleCityChange(filterCurrentPrefecture(e.target.value).prefCode)}
+                      autoComplete='off'
                     >
                       {prefectures.map((prefecture) => (
                         <option key={prefecture.prefName} value={prefecture.prefName}>
@@ -344,7 +346,7 @@ export const ModalForm: React.FC<Props> = (props) => {
                   </div>
                   <div className='form-group col-6'>
                     <label htmlFor='postalCode'>市区町村</label>
-                    <select {...register('city', { required: true })} className='form-control p-region'>
+                    <select {...register('city', { required: true })} className='form-control p-region' autoComplete='off'>
                       {cities.map((city) => (
                         <option key={city.cityName} value={city.cityName}>
                           {city.cityName}
@@ -354,11 +356,11 @@ export const ModalForm: React.FC<Props> = (props) => {
                   </div>
                   <div className='form-group col-6'>
                     <label htmlFor='postalCode'>町名/番地</label>
-                    <input {...register('street', { required: true })} className='form-control p-postal-control' />
+                    <input {...register('street', { required: true })} className='form-control p-postal-control' autoComplete='off' />
                   </div>
                   <div className='form-group col-12'>
                     <label htmlFor='postalCode'>建物名</label>
-                    <input {...register('building')} className='form-control p-postal-control' />
+                    <input {...register('building')} className='form-control p-postal-control' autoComplete='off' />
                   </div>
                 </div>
 
