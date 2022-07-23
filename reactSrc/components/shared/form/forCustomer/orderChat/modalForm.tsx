@@ -290,11 +290,10 @@ export const ModalForm: React.FC<Props> = (props) => {
                   <div className='row pt-3'>
                     <label className='col-12 title-b pb-3' htmlFor='participant'>
                       追加で参加する施設がある場合施設数をご記入ください
-                      <span className='label required'>必須</span>
                     </label>
                     <div className='form-group col-3'>
                       <input
-                        {...register('numberOfFacilities', { required: true })}
+                        {...register('numberOfFacilities')}
                         className='form-control text-right'
                       />
                     </div>
