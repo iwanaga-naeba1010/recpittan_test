@@ -252,7 +252,7 @@
     えぶりプラスです。
     いつもご協力をいただき、誠にありがとうございます。
 
-    <%= @order.start_at&.strftime('%Y.%m.%d %H:%M') %>　<%= @order.recreation.title %>　<%= @order.recreation.title %> の
+    <%= @order.start_at&.strftime('%Y.%m.%d %H:%M') %> <%= @order.user.company.facility_name %> <%= @order.recreation.title %> の
     開催日が近づいて参りましたので、事前確認のご協力をお願い致します。
     楽しい時間を皆様を現場の皆様心待ちにしています！
     ----------------------------------------
