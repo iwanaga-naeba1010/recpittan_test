@@ -17,10 +17,28 @@ type Config = {
 type Props = {
   register: UseFormRegister<RecreationFormValues>;
   getValues: UseFormGetValues<RecreationFormValues>;
-  recreation: Recreation;
-  setRecreation: React.Dispatch<React.SetStateAction<Recreation>>;
+  recreation?: Recreation;
+  setRecreation?: React.Dispatch<React.SetStateAction<Recreation>>;
   errors: FieldErrors<RecreationFormValues>;
 };
+
+// TODO(okubo): 命名は変更する
+const schedule  = ` 5分 挨拶
+10分 ピアノ演奏
+10分 リクエストコーナー
+(皆さんとトークをしながらリクエストにお応えします)
+15分 ピアノ弾き語り
+10分 合唱
+(日本の名曲を皆様ご一緒に)
+`;
+
+const contentPlaceholderText = `
+しっとりと大人な時間を堪能できるコンサート。ジャズ、ポップス、クラシックなど日本・世界各国の名曲を演奏します。
+幅広いレパートリーから皆様のリクエストにもお応えします！
+画面越しでも生演奏の美しい音色をお届けできるよう、様々な機材を駆使しています。
+演奏だけでなく曲に関するトークやクイズ、質問など皆様とコミュニケーションを取りながら進める参加型コンサートです。
+`;
+
 
 export const FirstStep: React.FC<Props> = (props) => {
   const { register, getValues, recreation, setRecreation, errors } = props;
@@ -117,7 +135,7 @@ export const FirstStep: React.FC<Props> = (props) => {
         <p className='small my-0'>レクの分かりやすいタイトルを入力してください</p>
         <input
           className='p-2 w-100 rounded border border-secondary'
-          placeholder='タイトルを入力'
+          placeholder='ピアノと歌のジャズコンサート'
           maxLength={50}
           {...register('title', {
             required: 'タイトルは必須です',
@@ -136,7 +154,7 @@ export const FirstStep: React.FC<Props> = (props) => {
         <p className='small my-0'>レクのサブタイトルを入力してください</p>
         <input
           className='p-2 w-100 rounded border border-secondary'
-          placeholder='サブタイトルを入力'
+          placeholder='世界の名曲とともに、しっとり大人な時間'
           {...register('secondTitle', {
             required: 'サブタイトルは必須です',
             maxLength: 50
@@ -176,6 +194,7 @@ export const FirstStep: React.FC<Props> = (props) => {
         <p className='small my-0'>レクのタイムスケジュールを入力してください</p>
         <textarea
           rows={15}
+          placeholder={schedule}
           className='p-1 w-100 rounded border border-secondary'
           {...register('flowOfDay', {
             required: 'タイムスケジュールは必須です'
@@ -191,8 +210,8 @@ export const FirstStep: React.FC<Props> = (props) => {
         <p className='small my-0'>どんな内容で、どんな体験ができるのか分かりやすく入力してください</p>
         <textarea
           rows={15}
+          placeholder={contentPlaceholderText}
           className='p-1 w-100 rounded border border-secondary'
-          placeholder='説明を入力'
           {...register('description', { maxLength: 500 })}
         />
         <p className='small my-0'>0/500文字まで</p>
