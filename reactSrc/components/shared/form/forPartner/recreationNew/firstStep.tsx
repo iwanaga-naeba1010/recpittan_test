@@ -23,7 +23,7 @@ type Props = {
 };
 
 // TODO(okubo): 命名は変更する
-const schedule  = ` 5分 挨拶
+const flowOfDayPlaceholderText = `5分 挨拶
 10分 ピアノ演奏
 10分 リクエストコーナー
 (皆さんとトークをしながらリクエストにお応えします)
@@ -32,13 +32,11 @@ const schedule  = ` 5分 挨拶
 (日本の名曲を皆様ご一緒に)
 `;
 
-const contentPlaceholderText = `
-しっとりと大人な時間を堪能できるコンサート。ジャズ、ポップス、クラシックなど日本・世界各国の名曲を演奏します。
+const descriptionPlaceholderText = `しっとりと大人な時間を堪能できるコンサート。ジャズ、ポップス、クラシックなど日本・世界各国の名曲を演奏します。
 幅広いレパートリーから皆様のリクエストにもお応えします！
 画面越しでも生演奏の美しい音色をお届けできるよう、様々な機材を駆使しています。
 演奏だけでなく曲に関するトークやクイズ、質問など皆様とコミュニケーションを取りながら進める参加型コンサートです。
 `;
-
 
 export const FirstStep: React.FC<Props> = (props) => {
   const { register, getValues, recreation, setRecreation, errors } = props;
@@ -132,14 +130,14 @@ export const FirstStep: React.FC<Props> = (props) => {
           <h5 className='text-black font-weight-bold'>タイトルを入力</h5>
           <Essential />
         </div>
-        <p className='small my-0'>レクの分かりやすいタイトルを入力してください</p>
+        <p className='small my-0'>レクの分かりやすいタイトルを入力してください(オンラインの記載は必要ありません)</p>
         <input
           className='p-2 w-100 rounded border border-secondary'
           placeholder='ピアノと歌のジャズコンサート'
-          maxLength={50}
+          maxLength={42}
           {...register('title', {
             required: 'タイトルは必須です',
-            maxLength: 50
+            maxLength: 42
           })}
         />
         {errors && <ValidationErrorMessage message={errors?.title?.message} />}
@@ -157,11 +155,11 @@ export const FirstStep: React.FC<Props> = (props) => {
           placeholder='世界の名曲とともに、しっとり大人な時間'
           {...register('secondTitle', {
             required: 'サブタイトルは必須です',
-            maxLength: 50
+            maxLength: 35
           })}
         />
         {errors && <ValidationErrorMessage message={errors?.secondTitle?.message} />}
-        <p className='small my-0'>0/50文字まで</p>
+        <p className='small my-0'>0/35文字まで</p>
       </div>
 
       <div className='minutes'>
@@ -194,7 +192,7 @@ export const FirstStep: React.FC<Props> = (props) => {
         <p className='small my-0'>レクのタイムスケジュールを入力してください</p>
         <textarea
           rows={15}
-          placeholder={schedule}
+          placeholder={flowOfDayPlaceholderText}
           className='p-1 w-100 rounded border border-secondary'
           {...register('flowOfDay', {
             required: 'タイムスケジュールは必須です'
@@ -210,7 +208,7 @@ export const FirstStep: React.FC<Props> = (props) => {
         <p className='small my-0'>どんな内容で、どんな体験ができるのか分かりやすく入力してください</p>
         <textarea
           rows={15}
-          placeholder={contentPlaceholderText}
+          placeholder={descriptionPlaceholderText}
           className='p-1 w-100 rounded border border-secondary'
           {...register('description', { maxLength: 500 })}
         />
@@ -222,7 +220,7 @@ export const FirstStep: React.FC<Props> = (props) => {
           <h5 className='text-black font-weight-bold'>レクのカテゴリーを選択</h5>
           <Essential />
         </div>
-        <p className='small my-0'>レクのタイムスケジュールを入力してください</p>
+        <p className='small my-0'>プログラムに合うカテゴリーを選んでください</p>
         <select
           className='p-2 w-100 rounded border border-secondary'
           placeholder='選択してください'
@@ -262,7 +260,8 @@ export const FirstStep: React.FC<Props> = (props) => {
               <button
                 type='button'
                 className='text-primary bg-white border-0 font-weight-bold my-1'
-                onClick={() => handleAddPrefecture('北海道')}>
+                onClick={() => handleAddPrefecture('北海道')}
+              >
                 ＋複数エリアを追加
               </button>
             )}
@@ -275,18 +274,13 @@ export const FirstStep: React.FC<Props> = (props) => {
           <h5 className='text-black font-weight-bold'>参加人数制限を設定</h5>
           <Essential />
         </div>
-        <p className='small my-0'>レクのに参加できる人数に制限を設定することができます</p>
+        <p className='small my-0'>レクに参加できる人数制限を設定することができます</p>
         <input type='radio' id='numberOfFacilitiesTrue' name='number_of_facilities' onClick={() => setShow(true)} />
         <label htmlFor='numberOfFacilitiesTrue' onClick={() => setShow(true)}>
           あり
         </label>
         <br />
-        <input
-          type='radio'
-          id='numberOfFacilitiesFalse'
-          name='number_of_facilities'
-          onClick={() => setShow(false)}
-        />
+        <input type='radio' id='numberOfFacilitiesFalse' name='number_of_facilities' onClick={() => setShow(false)} />
         <label htmlFor='numberOfFacilitiesFalse' onClick={() => setShow(false)}>
           なし
         </label>

@@ -43,6 +43,7 @@ export const ThirdStep: React.FC<Props> = (props) => {
         </span>
         を登録してください。
       </p>
+      <p>戻るボタンを使うと記入内容が消える場合がありますのでご注意ください。</p>
       {profiles.map((profile: Profile, i) => (
         <div key={i}>
           <input
