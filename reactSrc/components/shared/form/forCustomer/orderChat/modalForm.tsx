@@ -292,10 +292,7 @@ export const ModalForm: React.FC<Props> = (props) => {
                       追加で参加する施設がある場合施設数をご記入ください
                     </label>
                     <div className='form-group col-3'>
-                      <input
-                        {...register('numberOfFacilities')}
-                        className='form-control text-right'
-                      />
+                      <input {...register('numberOfFacilities')} className='form-control text-right' />
                     </div>
                     <div className='col-auto p-0 flex-v-c'>施設</div>
                   </div>
@@ -345,7 +342,11 @@ export const ModalForm: React.FC<Props> = (props) => {
                   </div>
                   <div className='form-group col-6'>
                     <label htmlFor='postalCode'>市区町村</label>
-                    <select {...register('city', { required: true })} className='form-control p-region' autoComplete='off'>
+                    <select
+                      {...register('city', { required: true })}
+                      className='form-control p-region'
+                      autoComplete='off'
+                    >
                       {cities.map((city) => (
                         <option key={city.cityName} value={city.cityName}>
                           {city.cityName}
@@ -355,7 +356,11 @@ export const ModalForm: React.FC<Props> = (props) => {
                   </div>
                   <div className='form-group col-6'>
                     <label htmlFor='postalCode'>町名/番地</label>
-                    <input {...register('street', { required: true })} className='form-control p-postal-control' autoComplete='off' />
+                    <input
+                      {...register('street', { required: true })}
+                      className='form-control p-postal-control'
+                      autoComplete='off'
+                    />
                   </div>
                   <div className='form-group col-12'>
                     <label htmlFor='postalCode'>建物名</label>
