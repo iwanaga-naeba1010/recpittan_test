@@ -32,7 +32,7 @@ module ApiPartner
       MESSAGE
 
       SlackNotifier
-        .new(channel: '#アクティブチャットスレッド')
+        .new(channel: '#product_confirmation_of_recreation')
         .send('新規レク登録依頼', message)
       render_json RecreationSerializer.new.serialize(recreation: recreation)
     rescue StandardError => e
@@ -48,7 +48,12 @@ module ApiPartner
         profile_id: params_create.dig(:recreation_profile_attributes, :profile_id),
         prefectures: params_create[:recreation_prefectures_attributes]&.pluck(:name)
       )
+      message = <<~MESSAGE
+        管理画面案件URL：#{admin_recreation_url(recreation.id)}
+        レクが更新されました。
+      MESSAGE
 
+      SlackNotifier.new(channel: '#product_confirmation_of_recreation').send('レク更新連絡', message)
       render_json RecreationSerializer.new.serialize(recreation: recreation)
     rescue StandardError => e
       logger.error e.message
