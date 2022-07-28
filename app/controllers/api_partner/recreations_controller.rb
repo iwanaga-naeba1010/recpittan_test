@@ -32,7 +32,7 @@ module ApiPartner
       MESSAGE
 
       SlackNotifier
-        .new(channel: '#アクティブチャットスレッド')
+        .new(channel: '#product_confirmation_of_recreation')
         .send('新規レク登録依頼', message)
       render_json RecreationSerializer.new.serialize(recreation: recreation)
     rescue StandardError => e
@@ -53,7 +53,7 @@ module ApiPartner
         レクが更新されました。
       MESSAGE
 
-      SlackNotifier.new(channel: '#アクティブチャットスレッド').send('レク更新連絡', message)
+      SlackNotifier.new(channel: '#product_confirmation_of_recreation').send('レク更新連絡', message)
       render_json RecreationSerializer.new.serialize(recreation: recreation)
     rescue StandardError => e
       logger.error e.message
