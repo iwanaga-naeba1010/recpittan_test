@@ -61,7 +61,7 @@ class HomeController < ApplicationController
       end.compact.flatten
     end
 
-    @evaluations = Evaluation.where.not(message: '').where(is_public: :public).limit(10).order(id: :desc)
+    @evaluations = Evaluation.publics.recent(10)
     @tags = Tag.where(kind: :tag).to_a
   end
 

@@ -18,8 +18,7 @@ class Customers::RecreationsController < Customers::ApplicationController
   end
 
   def show
-    @evaluations = Evaluation.where.not(message: '').where(is_public: :public).
-                   joins(report: :order).merge(Order.where(recreation_id: set_recreation)).limit(3).order(id: :desc)
+    @evaluations = Evaluation.publics.with_order(set_recreation).recent(3)
   end
 
   private def set_recreation
