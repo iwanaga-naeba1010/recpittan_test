@@ -61,7 +61,7 @@ export const RecreationNewForm: React.FC<Props> = (props) => {
       extraInformation: '',
       youtubeId: '',
       borrowItem: '',
-      additionalFacilityFee: 0,
+      additionalFacilityFee: 1000,
       category: 'event',
       prefectures: [],
       kind: 'online'
@@ -109,9 +109,7 @@ export const RecreationNewForm: React.FC<Props> = (props) => {
     <div>
       <form className='recreation' onSubmit={handleSubmit(onSubmit)}>
         <Step totalCounts={4} activeStep={currentStep} />
-        {currentStep === 0 && (
-          <FirstStep register={register} getValues={getValues} errors={errors} />
-        )}
+        {currentStep === 0 && <FirstStep register={register} getValues={getValues} errors={errors} />}
         {currentStep === 1 && <SecondStep getValues={getValues} register={register} />}
         {currentStep === 2 && <ThirdStep register={register} getValues={getValues} />}
         {currentStep === 3 && <FourthStep />}

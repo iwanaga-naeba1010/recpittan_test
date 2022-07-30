@@ -5,9 +5,9 @@ import { Recreation } from '@/types';
 import { RecreationImage } from '@/types/recreationImage';
 import React, { useRef, useState } from 'react';
 import { UseFormGetValues, UseFormRegister } from 'react-hook-form';
+import { RecreationAdditionalFacilityFee } from './recreationAdditionalFacilityFee';
 import { RecreationImage as ImageComponent } from './recreationImage';
 import { RecreationFormValues } from './recreationNewForm';
-import { RecreationAdditionalFacilityFee } from './recreationAdditionalFacilityFee'
 
 type Props = {
   getValues: UseFormGetValues<RecreationFormValues>;
@@ -86,9 +86,7 @@ export const SecondStep: React.FC<Props> = (props) => {
         })}
       />
       <p className='small my-0'>施設に表示される金額</p>
-      <p className='small my-0'>謝礼＋サービス手数料が上乗せされます</p>
-      <p className='small my-0'>￥13500</p>
-
+      <p className='small my-0'>謝礼＋サービス手数料(35%)が上乗せされます</p>
       <div className='d-flex mt-4'>
         <h5 className='text-black font-weight-bold'>材料費</h5>
         <Essential />
@@ -101,13 +99,9 @@ export const SecondStep: React.FC<Props> = (props) => {
         {...register('materialPrice')}
       />
       <p className='small my-0'>施設に表示される金額</p>
-      <p className='small my-0'>材料費＋サービス手数料が上乗せされます</p>
-      <p className='small my-0'>￥0</p>
-
+      <p className='small my-0'>材料費＋サービス手数料(15%)が上乗せされます</p>
       {(recreation === undefined || recreation?.kind.key === 'online') && (
-        <RecreationAdditionalFacilityFee
-          register={register}
-        />
+        <RecreationAdditionalFacilityFee register={register} />
       )}
 
       {/* 修正のタイミングで利用可能に */}
@@ -161,13 +155,13 @@ export const SecondStep: React.FC<Props> = (props) => {
       <div className='mt-4'>
         <h5 className='text-black font-weight-bold'>お借りしたいものを入力</h5>
       </div>
-      <p className='small my-0'>レクに必要なものを施設から借りたいものを入力してください</p>
+      <p className='small my-0'>レクに必要なものを施設から借りたい場合は入力してください</p>
       <input type='text' className='p-2 w-100 rounded border border-secondary' {...register('borrowItem')} />
 
       <div className='mt-4'>
         <h5 className='text-black font-weight-bold'>持ち込むものを入力</h5>
       </div>
-      <p className='small my-0'>レクに必要なものを自前で施設に持ち込むものを入力してください</p>
+      <p className='small my-0'>レクに必要なものを自前で施設に持ち込む場合は入力してください</p>
       <input type='text' className='p-2 w-100 rounded border border-secondary' />
 
       {recreation !== undefined && (
@@ -198,7 +192,8 @@ export const SecondStep: React.FC<Props> = (props) => {
             <button
               type='button'
               className='text-primary bg-white border-0 font-weight-bold my-1'
-              onClick={handleMaterialRefClickFileInput}>
+              onClick={handleMaterialRefClickFileInput}
+            >
               ＋ファイルを追加
             </button>
           )}
