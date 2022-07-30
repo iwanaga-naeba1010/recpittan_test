@@ -57,8 +57,12 @@
 .detail {
   .evaluation-card {
     min-height: 240px;
-    .evaluation-date {
-      font-size: 12px;
-    }
+  }
+  .return-link {
+    color: $catalog-link;
+    text-decoration: none !important;
+  }
+  .evaluation-date {
+    font-size: 12px;
   }
 }

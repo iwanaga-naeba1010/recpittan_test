@@ -177,7 +177,7 @@
     <div class="md-row">
       <div class="col-md-11">
         <div class="row">
-        <h5 class="mt-3 mb-0"><%= @evaluations.size %>件のレビュー</h5>
+        <h5 class="title-b font-18 mt-3 mb-0"><%= @evaluations.size %>件のレビュー</h5>
           <% @evaluations.each do |evaluation| %>
             <div class="col-md-4 position-relative">
               <div class="evaluation-card col-11 border rounded shadow mt-4 px-2 w-100">
@@ -195,6 +195,9 @@
             </div>
           <% end %>
         </div>
+      </div>
+      <div class="my-3 p-2 d-inline-block rounded text-dark" style="background-color: #f5f2f0;">
+        <%= link_to '全てのレビューを見る', customers_recreation_evaluations_path(@recreation.id), class: "fw-bold", style: "color: #343a40; text-decoration: none;" %>
       </div>
     </div>
   </article>
