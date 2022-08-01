@@ -4,6 +4,7 @@ resources :customers, only: %i[index]
 
 namespace :customers do
   resources :recreations, only: [:show, :index], shallow: true do
+    resources :evaluations, only: [:index]
     resources :orders, only: [:show, :new, :create] do
       member do
         get :chat

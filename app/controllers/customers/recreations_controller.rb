@@ -3,7 +3,6 @@
 class Customers::RecreationsController < Customers::ApplicationController
   skip_before_action :authenticate_user!
   skip_before_action :require_customer
-  before_action :set_recreation, only: %i[show]
 
   def index
     @q = Recreation.public_recs.ransack(params[:q])
@@ -17,9 +16,8 @@ class Customers::RecreationsController < Customers::ApplicationController
     end
   end
 
-  def show; end
-
-  private def set_recreation
+  def show
     @recreation = Recreation.public_recs.find(params[:id])
+    @evaluations = Evaluation.public_and_not_null_message.with_recreation(@recreation).latest(3)
   end
 end

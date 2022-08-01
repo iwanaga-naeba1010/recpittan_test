@@ -61,6 +61,7 @@ class HomeController < ApplicationController
       end.compact.flatten
     end
 
+    @evaluations = Evaluation.public_and_not_null_message.latest(10)
     @tags = Tag.where(kind: :tag).to_a
   end
 
