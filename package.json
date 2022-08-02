@@ -16,7 +16,7 @@
     "@rails/activestorage": "^7.0.3",
     "@rails/ujs": "^7.0.3",
     "@rails/webpacker": "5.4.3",
-    "@sentry/react": "^7.7.0",
+    "@sentry/react": "^7.8.0",
     "@sentry/tracing": "^7.8.0",
     "@types/prettier": "^2.6.4",
     "activeadmin_addons": "^1.0.0",
