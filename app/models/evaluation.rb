@@ -25,6 +25,10 @@ class Evaluation < ApplicationRecord
   extend Enumerize
   belongs_to :report
 
+  scope :with_recreation, ->(recreation_id) { joins(report: :order).where(order: { recreation_id: recreation_id }) }
+  scope :public_and_not_null_message, -> { where(is_public: true).where.not(message: '').where.not(message: 'システムの自動投稿') }
+  scope :latest, ->(count) { order(id: :desc).limit(count) }
+
   enumerize :ingenuity, in: { satisfied: 0, somewhat_satisfied: 1, neither: 2, somewhat_dissatisfied: 3, dissatisfied: 4 }, default: 0
   enumerize :communication, in: { satisfied: 0, somewhat_satisfied: 1, neither: 2, somewhat_dissatisfied: 3, dissatisfied: 4 }, default: 0
   enumerize :smoothness, in: { satisfied: 0, somewhat_satisfied: 1, neither: 2, somewhat_dissatisfied: 3, dissatisfied: 4 }, default: 0
