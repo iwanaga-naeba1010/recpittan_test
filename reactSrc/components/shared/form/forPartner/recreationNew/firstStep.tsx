@@ -157,6 +157,7 @@ export const FirstStep: React.FC<Props> = (props) => {
         <input
           className='p-2 w-100 rounded border border-secondary'
           placeholder='世界の名曲とともに、しっとり大人な時間'
+          maxLength={35}
           {...register('secondTitle', {
             required: 'サブタイトルは必須です',
             maxLength: 35
@@ -165,7 +166,6 @@ export const FirstStep: React.FC<Props> = (props) => {
         />
         {errors && <ValidationErrorMessage message={errors?.secondTitle?.message} />}
         <p className='small my-0'>{secondTitle.length}/35文字まで</p>
-        <p className='small my-0'>0/35文字まで</p>
       </div>
 
       <div className='minutes'>
@@ -208,14 +208,16 @@ export const FirstStep: React.FC<Props> = (props) => {
       </div>
 
       <div className='description'>
-        <div className='mt-4'>
+        <div className='d-flex mt-4'>
           <h5 className='text-black font-weight-bold'>レクの内容を入力</h5>
+          <Essential />
         </div>
         <p className='small my-0'>どんな内容で、どんな体験ができるのか分かりやすく入力してください</p>
         <textarea
           rows={15}
           placeholder={descriptionPlaceholderText}
           className='p-1 w-100 rounded border border-secondary'
+          maxLength={500}
           {...register('description', { maxLength: 500 })}
           onChange={(e) => setDescription(e.target.value)}
         />
