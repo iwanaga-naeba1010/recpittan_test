@@ -24,22 +24,18 @@ export const ChatList: React.FC<Props> = (props): JSX.Element => {
   }, [order]);
 
   return (
-    <>
-      <div className='col-md-7'>
-        <div className='card chat-container'>
-          <div className='card-header bg-white'>{order?.recreation?.profile?.name} さんとのチャット</div>
-          <div className='card-body bg-ba02'>
-            {chats !== undefined && (
-              <>
-                {Object?.entries(chats).map(([key, chats]) => (
-                  <ChatItem key={key} currentUser={user} recreation={order?.recreation} date={key} chats={chats} />
-                ))}
-              </>
-            )}
-          </div>
-          <ChatForm order={order} loadChats={handleLoadChats} />
-        </div>
+    <div className='card chat-container'>
+      <div className='card-header bg-white'>{order?.recreation?.profile?.name} さんとのチャット</div>
+      <div className='card-body bg-ba02'>
+        {chats !== undefined && (
+          <>
+            {Object?.entries(chats).map(([key, chats]) => (
+              <ChatItem key={key} currentUser={user} recreation={order?.recreation} date={key} chats={chats} />
+            ))}
+          </>
+        )}
       </div>
-    </>
+      <ChatForm order={order} loadChats={handleLoadChats} />
+    </div>
   );
 };

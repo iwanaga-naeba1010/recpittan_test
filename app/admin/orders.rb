@@ -65,6 +65,7 @@ ActiveAdmin.register Order do
     column :contract_number
     column(:status, &:status_text)
     column(:memo)
+    column(:coupon_code)
 
     actions
   end

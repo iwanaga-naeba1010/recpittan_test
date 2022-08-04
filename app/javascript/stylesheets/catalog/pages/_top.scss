@@ -38,8 +38,6 @@
       }
 
       .second-section {
-
-
         .contents {
           @include media-breakpoint-up(lg) {
             padding-top: 70px;
@@ -49,7 +47,7 @@
             width: 85%;
           }
 
-          color: #E83E8C;
+          color: $catalog-primary;
 
           h3 {
             color: #343A40;
@@ -57,7 +55,7 @@
           }
 
           .link-to-recs {
-            background-color: #E83E8C !important;
+            background-color: $catalog-primary !important;
           }
         }
 
@@ -201,6 +199,10 @@
         background-color: white;
         color: black;
         filter: drop-shadow(0px 2px 4px rgba(40, 40, 40, 0.15));
+      }
+
+      .hibari-image {
+        border-radius: 10px;
       }
     }
   }

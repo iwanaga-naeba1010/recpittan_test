@@ -9,6 +9,26 @@ ActiveAdmin.register Evaluation do
   )
   actions :all, except: [:destroy]
 
+  csv do
+    column :id
+    column('レク名') do |evaluation|
+      evaluation.report.order.recreation.title
+    end
+    column('PT名') do |evaluation|
+      evaluation.report.order.recreation.user.username
+    end
+    column('施設名') do |evaluation|
+      evaluation.report.order.user.company.name
+    end
+    column(:ingenuity, &:ingenuity_text)
+    column(:communication, &:communication_text)
+    column(:smoothness, &:smoothness_text)
+    column(:price, &:price_text)
+    column(:want_to_order_agein, &:want_to_order_agein_text)
+    column :message
+    column(:is_public, &:is_public_text)
+  end
+
   index do
     id_column
     column :report
