@@ -43,6 +43,9 @@ export const FirstStep: React.FC<Props> = (props) => {
   const [config, setConfig] = useState<Config>(undefined);
   const [show, setShow] = useState(false);
   const [isSending, setIsSending] = useState<boolean>(false);
+  const [title, setTitle] = useState<string>(getValues('title'));
+  const [secondTitle, setSecondTitle] = useState<string>(getValues('secondTitle'));
+  const [description, setDescription] = useState<string>(getValues('description'));
 
   useEffect(() => {
     (async () => {
@@ -139,9 +142,10 @@ export const FirstStep: React.FC<Props> = (props) => {
             required: 'タイトルは必須です',
             maxLength: 42
           })}
+          onChange={(e) => setTitle(e.target.value)}
         />
         {errors && <ValidationErrorMessage message={errors?.title?.message} />}
-        <p className='small my-0'>{getValues('title')?.length}/50文字まで</p>
+        <p className='small my-0'>{title.length}/42文字まで</p>
       </div>
 
       <div className='title'>
@@ -153,13 +157,15 @@ export const FirstStep: React.FC<Props> = (props) => {
         <input
           className='p-2 w-100 rounded border border-secondary'
           placeholder='世界の名曲とともに、しっとり大人な時間'
+          maxLength={35}
           {...register('secondTitle', {
             required: 'サブタイトルは必須です',
             maxLength: 35
           })}
+          onChange={(e) => setSecondTitle(e.target.value)}
         />
         {errors && <ValidationErrorMessage message={errors?.secondTitle?.message} />}
-        <p className='small my-0'>0/35文字まで</p>
+        <p className='small my-0'>{secondTitle.length}/35文字まで</p>
       </div>
 
       <div className='minutes'>
@@ -202,17 +208,20 @@ export const FirstStep: React.FC<Props> = (props) => {
       </div>
 
       <div className='description'>
-        <div className='mt-4'>
+        <div className='d-flex mt-4'>
           <h5 className='text-black font-weight-bold'>レクの内容を入力</h5>
+          <Essential />
         </div>
         <p className='small my-0'>どんな内容で、どんな体験ができるのか分かりやすく入力してください</p>
         <textarea
           rows={15}
           placeholder={descriptionPlaceholderText}
           className='p-1 w-100 rounded border border-secondary'
+          maxLength={500}
           {...register('description', { maxLength: 500 })}
+          onChange={(e) => setDescription(e.target.value)}
         />
-        <p className='small my-0'>0/500文字まで</p>
+        <p className='small my-0'>{description.length}/500文字まで</p>
       </div>
 
       <div className='category'>
