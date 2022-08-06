@@ -269,7 +269,7 @@ export const FirstStep: React.FC<Props> = (props) => {
         </div>
       )}
 
-      <div className='limit_on_the_number_of_people'>
+      <div className='limit_on_the_number_of_people position-relative'>
         <div className='d-flex mt-4'>
           <h5 className='text-black font-weight-bold'>参加人数制限を設定</h5>
           <Essential />
@@ -293,7 +293,11 @@ export const FirstStep: React.FC<Props> = (props) => {
               {...register('capacity', { required: '参加人数制限は必須です' })}
             />
           </>
-        ) : null}
+        ) : (
+          <>
+            <p className='not-limited ms-3 p-1 text-primary border border-2 border-primary d-inline-block position-absolute'>参加人数制限なしと表示されます<br/>補足がある場合はその他にご記入ください</p>
+          </>
+        )}
         {errors && <ValidationErrorMessage message={errors?.capacity?.message} />}
       </div>
     </div>

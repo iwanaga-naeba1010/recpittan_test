@@ -118,7 +118,7 @@ export const RecreationNewForm: React.FC<Props> = (props) => {
           <button
             type='button'
             disabled={disabled}
-            className='my-3 py-2 w-100 rounded text-white font-weight-bold bg-primary border border-primary'
+            className='my-4 py-2 w-100 rounded text-white font-weight-bold bg-primary border border-primary'
             onClick={handleNext}
           >
             次へ
