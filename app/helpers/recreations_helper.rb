@@ -35,6 +35,12 @@ module RecreationsHelper
   end
   # rubocop:enable Style/OptionalBooleanParameter
 
+  def recreation_capacity(capacity)
+    return '制限なし' if [0, nil].include?(capacity)
+
+    "#{capacity}人"
+  end
+
   def categoryname_to_color_code(categoryname)
     case categoryname
     when '音楽'

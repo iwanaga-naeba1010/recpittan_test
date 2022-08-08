@@ -48,12 +48,10 @@
         <h3 class="title-b">レク情報</h3>
         <div class="card ">
           <div class="card-body p-0">
-            <!--{{#if item.showCapacity}}-->
-            <!--<div class="border-bottom p-2">-->
-            <!--<h4 class="title">参加人数制限 {{item.capacity}}人</h4>-->
-            <!--<div class="text-muted">※目安30名様に1名のスタッフ様のサポートをお願い致します。</div>-->
-            <!--</div>-->
-            <!--{{/if}}-->
+            <div class="border-bottom p-2">
+            <h4 class="title">参加人数制限 <%= recreation_capacity(@recreation.capacity) %></h4>
+            <div class="text-muted">※目安30名様に1名のスタッフ様のサポートをお願い致します。</div>
+            </div>
             <div class="border-bottom p-2">
               <h4 class="title">所要時間 <%= @recreation.minutes %>分</h4>
               <div class="text-muted">※ご要望に合わせてご相談が可能です。基本時間のため、ご要望にあわせて調節が可能です。</div>
