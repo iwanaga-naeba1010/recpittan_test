@@ -108,11 +108,11 @@
             <div class="row py-2">
               <div class="col-lg-3 col-4 label">関連ファイル</div>
               <div class="col-auto">
-                <ul>
-                  <% @order.recreation.recreation_images.materials.each do |file| %>
-                    <li> <%= link_to file.image.file.filename, file.image.url, class: 'clink mr-5', target: '_blank', rel: 'noopener' %> </li>
-                  <% end%>
-                </ul>
+                <% @order.recreation.recreation_images.materials.each do |file| %>
+                  <div>
+                    <%= link_to file.image.file.filename, file.image.url, class: 'clink mr-5', target: '_blank', rel: 'noopener' %>
+                  </div>
+                <% end%>
               </div>
             </div>
 
