@@ -61,7 +61,7 @@ class HomeController < ApplicationController
       end.compact.flatten
     end
 
-    @evaluations = Evaluation.where(is_public: :public).where.not(message: '').where.not(message: 'システムの自動投稿').latest(10)
+    @evaluations = Evaluation.where(is_public: :private).where.not(message: '').where.not(message: 'システムの自動投稿').latest(10)
     @tags = Tag.where(kind: :tag).to_a
   end
 
