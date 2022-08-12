@@ -4,6 +4,13 @@
   background-color: $ba02;
 }
 
+.link-text {
+  color: $body-color;
+  &:hover {
+    color: $body-color;
+  }
+}
+
 .order-container {
   font-family: "Roboto";
   font-style: normal;
