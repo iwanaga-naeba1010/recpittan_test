@@ -62,7 +62,7 @@ FactoryBot.define do
   trait :with_partner do
     after(:create) do |user|
       user.update(role: :partner)
-      rec = create(:recreation, user: user, status: 'published')
+      rec = create(:recreation, user: user, status: 'published', kind: 'visit')
       profile = create(:profile, user: user)
       create(:recreation_profile, recreation: rec, profile: profile)
     end
