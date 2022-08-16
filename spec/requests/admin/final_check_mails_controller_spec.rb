@@ -11,7 +11,7 @@ RSpec.describe 'FinalCheckMails', type: :request do
 
   describe 'POST /admin/final_check_mails' do
     let(:params) do
-      {  }
+      {}
     end
     let(:expected_redirect_to) { %r{/admin/final_check_mails} }
 

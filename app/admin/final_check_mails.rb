@@ -19,7 +19,7 @@ ActiveAdmin.register_page 'final_check_mails' do
     def create
       Rails.application.load_tasks
       Rake::Task['send_final_check_mail:run'].invoke
-      redirect_to admin_final_check_mails_path, notice: 'メール送信しました！'
+      redirect_to admin_final_check_mails_path, notice: t('action_messages.send_email')
     end
   end
 end
