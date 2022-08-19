@@ -133,8 +133,8 @@ export const OrderChat: React.FC = () => {
                   </div>
                 </div>
                 <ExpenseForm order={order} setOrder={setOrder} />
-                <TranspotationExpensesForm order={order} setOrder={setOrder} />
-                <NumberOfFacilitiesForm order={order} setOrder={setOrder} />
+                { order.recreation.kind.key === 'visit' && <TranspotationExpensesForm order={order} setOrder={setOrder} /> }
+                { order.recreation.kind.key === 'online' && <NumberOfFacilitiesForm order={order} setOrder={setOrder} /> }
                 <div className='row justify-content-between border-top py-3'>
                   <div className='col-auto'>合計(税別)</div>
                   <div id='totalPriceForSidenav' className='col-auto'>
