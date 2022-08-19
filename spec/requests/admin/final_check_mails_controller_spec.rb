@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'rails_helper'
+require 'rake'
 
 RSpec.describe 'FinalCheckMails', type: :request do
   include_context 'with authenticated admin'
