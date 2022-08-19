@@ -44,6 +44,8 @@ ja:
     deleted: "%{model_name}を削除しました！"
     failed: "失敗しました。もう一度お試しください。"
     unauthorized: "権限がありません"
+    send_email: "メール送信しました！"
+    cache_clear: "キャッシュをクリアしました!"
   time:
     formats:
       default: "%Y年%m月%d日 (%a) %H:%M"
