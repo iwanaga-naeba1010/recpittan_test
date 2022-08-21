@@ -1,7 +1,7 @@
 <h5 class="my-3 font-weight-bold text-black text-center">ご利用した施設の声</h5>
 <div class="evaluation-box swiper pb-5">
   <div class="swiper-wrapper">
-    <% evaluations.each do |evaluation| %>
+    <% Evaluation.where(is_public: :public).latest(10).each do |evaluation| %>
       <div class="card evaluation-card swiper-slide rounded border shadow">
         <div class="card-body position-relative">
           <h6 class="text-black">
