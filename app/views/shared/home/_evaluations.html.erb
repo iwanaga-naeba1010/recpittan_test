@@ -1,7 +1,8 @@
 <h5 class="my-3 font-weight-bold text-black text-center">ご利用した施設の声</h5>
 <div class="evaluation-box swiper pb-5">
+  <div class="swiper-wrapper">
     <% evaluations.each do |evaluation| %>
-      <div class="card evaluation-card rounded border shadow">
+      <div class="card evaluation-card swiper-slide rounded border shadow">
         <div class="card-body position-relative">
           <h6 class="text-black">
           <span>
@@ -24,4 +25,14 @@
         </div>
       </div>
     <% end %>
+  </div>
+  <div class="swiper-button-prev">
+    <p class="swiper-button p-3 rounded-circle text-white"><i class="fa-solid fa-arrow-left"></i></p>
+  </div>
+  <div class="swiper-button-next">
+    <p class="swiper-button p-3 rounded-circle text-white"><i class="fa-solid fa-arrow-right"></i></p>
+  </div>
+  <div class="pagination pb-4">
+    <div class="swiper-pagination"></div>
+  </div>
 </div>
