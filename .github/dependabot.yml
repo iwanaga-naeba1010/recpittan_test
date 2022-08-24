@@ -35,4 +35,6 @@ updates:
   - dependency-name: webpack-dev-server
     versions: ["4.x"]
   - dependency-name: '@fortawesome/fontawesome-free'
+    versions: ["6.x"]
   - dependency-name: webpack-cli
+    versions: ["4.x"]
