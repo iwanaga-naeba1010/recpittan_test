@@ -38,9 +38,11 @@
             <div class="prev-contents">
               <% if profile.image? %>
                 <div class="prev-content">
+                  <p class="small mt-0 text-dark">0/2000文字まで</p>
                   <%= image_tag profile.image.url, alt: 'preview', class: 'prev-image' %>
                 </div>
               <% else %>
+                <p class="small mt-0 text-dark">添付可能ファイルは50MB以下で、形式はjpg、jpeg、gif、png、 pptx pptです</p>
                 <%= f.label :image, '+', class: 'select-photo text-primary border p-5' %>
               <% end %>
             </div>
