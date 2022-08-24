@@ -4,30 +4,33 @@
       <p class="font-weight-bold text-black me-2"><%= t('activerecord.attributes.profile.name') %></p>
       <p class="text-danger">必須</p>
     </div>
-    <p class="text-secondary small mt-0">例:hogehoge</p>
+    <p class="text-secondary small mt-0">ニックネームや開催時に呼んでほしい名前をご記入ください</p>
     <%= f.input :name, label: false %>
+    <p class="small mt-0 text-dark">0/13文字まで</p>
   </div>
   <div>
     <div class="pt-3 w-100">
       <p class="font-weight-bold text-black me-2"><%= t('activerecord.attributes.profile.title') %></p>
     </div>
-    <p class="text-secondary small mt-0">例:hogehoge</p>
-    <%= f.input :title, label: false %>
+    <%= f.input :title, label: false, placeholder: '介護福祉士、動物介在福祉士、介護講師' %>
+    <p class="small mt-0 text-dark">0/40文字まで</p>
   </div>
   <div>
     <div class="pt-3 w-100 d-flex">
       <p class="font-weight-bold text-black me-2"><%= t('activerecord.attributes.profile.description') %></p>
       <p class="text-danger">必須</p>
     </div>
-    <p class="text-secondary small mt-0">例:hogehoge</p>
-    <%= f.input :description, label: false %>
+    <%= f.input :description, label: false, placeholder: '東海3県の病院・施設などでの動物介在介護事業を展開して15年。
+介護職・介護講師業と並行して、訓練済みセラピー犬とともに年間200回ほど現場を訪問。
+現場の皆様と共にその現場専用のプログラムを作成・実践します。
+1日の中で人が喜ぶ権利を大切にしたいという信念のもと活動中！' %>
+    <p class="small mt-0 text-dark">0/2000文字まで</p>
   </div>
   <div>
     <div class="pt-3 w-100 d-flex">
       <p class="font-weight-bold text-black me-2"><%= t('activerecord.attributes.profile.image') %></p>
       <p class="text-danger">必須</p>
     </div>
-    <p class="text-secondary small mt-0">例:hogehoge</p>
     <div class="form-group">
       <div class="image_form">
         <div class="image_form_contents">
