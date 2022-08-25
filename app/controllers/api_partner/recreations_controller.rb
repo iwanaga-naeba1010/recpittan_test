@@ -64,7 +64,7 @@ module ApiPartner
     def config_data
       config = {
         categories: Recreation.category.values.map { |category| { name: category.text, enum_key: category } },
-        minutes: [5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55], # TODO(okubo): 後々綺麗にする
+        minutes: [5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60], # TODO(okubo): 後々綺麗にする
         prefectures: RecreationPrefecture.names,
         kind: Recreation.kind.values.map { |kind| { name: kind.text, enum_key: kind } }
       }
