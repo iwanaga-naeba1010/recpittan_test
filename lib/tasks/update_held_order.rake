@@ -2,6 +2,8 @@
 
 namespace :update_held_order do
   task run: :environment do
+    set_default_url_options
+
     Order.all.each do |order|
       next if order&.start_at.blank?
 
@@ -10,5 +12,13 @@ namespace :update_held_order do
         PartnerCompleteReportMailer.notify(order: order).deliver_now
       end
     end
+  end
+
+  def set_default_url_options
+    domain = ENV.fetch('DOMAIN')
+    return if domain.blank?
+
+    Rails.application.routes.default_url_options[:host] = domain
+    ActionMailer::Base.default_url_options[:host] = domain
   end
 end
