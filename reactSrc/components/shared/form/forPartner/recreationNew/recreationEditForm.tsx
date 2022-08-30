@@ -1,3 +1,4 @@
+import { UseFile } from '@/components/forPartner';
 import { Recreation } from '@/types';
 import React from 'react';
 import { useForm } from 'react-hook-form';
@@ -13,10 +14,11 @@ type Props = {
   onSubmit: (values: RecreationFormValues) => Promise<void>;
   recreation: Recreation;
   setRecreation: React.Dispatch<React.SetStateAction<Recreation>>;
+  useFile: UseFile;
 };
 
 export const RecreationEditForm: React.FC<Props> = (props) => {
-  const { kind, onSubmit, recreation, setRecreation } = props;
+  const { kind, onSubmit, recreation, setRecreation, useFile } = props;
 
   const {
     register,
@@ -59,7 +61,7 @@ export const RecreationEditForm: React.FC<Props> = (props) => {
           />
         )}
         {kind === 'price' && (
-          <SecondStep getValues={getValues} register={register} recreation={recreation} setRecreation={setRecreation} />
+          <SecondStep getValues={getValues} register={register} recreation={recreation} useFile={useFile} />
         )}
         {kind === 'profile' && <ThirdStep register={register} getValues={getValues} />}
         <button
