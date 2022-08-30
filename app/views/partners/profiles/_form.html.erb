@@ -12,7 +12,7 @@
     <div class="pt-3 w-100">
       <p class="font-weight-bold text-black me-2"><%= t('activerecord.attributes.profile.title') %></p>
     </div>
-    <%= f.input :title, label: false, placeholder: '介護福祉士、動物介在福祉士、介護講師' %>
+    <%= f.input :title, label: false %>
     <p class="small mt-0 text-dark">0/40文字まで</p>
   </div>
   <div>
@@ -20,10 +20,7 @@
       <p class="font-weight-bold text-black me-2"><%= t('activerecord.attributes.profile.description') %></p>
       <p class="text-danger">必須</p>
     </div>
-    <%= f.input :description, label: false, placeholder: '東海3県の病院・施設などでの動物介在介護事業を展開して15年。
-介護職・介護講師業と並行して、訓練済みセラピー犬とともに年間200回ほど現場を訪問。
-現場の皆様と共にその現場専用のプログラムを作成・実践します。
-1日の中で人が喜ぶ権利を大切にしたいという信念のもと活動中！' %>
+    <%= f.input :description, label: false %>
     <p class="small mt-0 text-dark">0/2000文字まで</p>
   </div>
   <div>
