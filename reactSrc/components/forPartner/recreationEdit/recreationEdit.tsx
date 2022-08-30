@@ -2,15 +2,23 @@ import { FormKind, RecreationEditForm, RecreationFormValues } from '@/components
 import { Error, LoadingContainer } from '@/components/shared/parts';
 import { Api } from '@/infrastructure';
 import { Recreation } from '@/types';
+import { RecreationImage } from '@/types/recreationImage';
 import { getQeuryStringValueByKey, isEmpty } from '@/utils';
 import axios, { AxiosError } from 'axios';
 import React, { useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
 
+export type UseFile = {
+  handleFileAdd: (files: FileList | null, kind: string) => void;
+  handleFileDelete: (id: number) => Promise<void>;
+  isLoading: boolean;
+};
+
 const RecreationEdit: React.FC = () => {
   const [errors, setErrors] = useState<Array<string>>([]);
   const [recreation, setRecreation] = useState<Recreation>(undefined);
   const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [isFileLoading, setIsFileLoading] = useState<boolean>(false);
   const id = window.location.pathname.split('/')[3];
   const formKind = getQeuryStringValueByKey('formKind') as FormKind;
 
@@ -27,6 +35,41 @@ const RecreationEdit: React.FC = () => {
       }
     })();
   }, [id]);
+
+  const handleFileAdd = (files: FileList | null, kind = 'slider') => {
+    if (!files || files.length <= 0) return;
+    const file = files[0];
+    const reader = new FileReader();
+    reader.onload = async (event) => {
+      if (event.target?.result && typeof event.target?.result === 'string') {
+        const requestBody: { [key: string]: Record<string, unknown> } = {
+          recreationImage: {
+            image: event.target?.result,
+            filename: file.name,
+            kind: kind
+          }
+        };
+        setIsFileLoading(true);
+        const createdImage = await Api.post<RecreationImage>(
+          `recreations/${recreation.id}/recreation_images`,
+          'partner',
+          requestBody
+        );
+        setRecreation({ ...recreation, images: [...recreation.images, createdImage.data] });
+        setIsFileLoading(false);
+      }
+    };
+    reader.readAsDataURL(file);
+  };
+
+  const handleFileDelete = async (id: number): Promise<void> => {
+    try {
+      await Api.delete(`recreations/${recreation.id}/recreation_images/${id}`, 'partner', {});
+      setRecreation({ ...recreation, images: recreation.images.filter((recreation) => recreation.id !== id) });
+    } catch (e) {
+      console.log(e);
+    }
+  };
 
   const onSubmit = async (values: RecreationFormValues): Promise<void> => {
     setErrors([]);
@@ -78,7 +121,13 @@ const RecreationEdit: React.FC = () => {
   return (
     <div>
       {!isEmpty(errors) && <Error errors={errors} />}
-      <RecreationEditForm kind={formKind} recreation={recreation} setRecreation={setRecreation} onSubmit={onSubmit} />
+      <RecreationEditForm
+        kind={formKind}
+        recreation={recreation}
+        setRecreation={setRecreation}
+        onSubmit={onSubmit}
+        useFile={{ handleFileAdd, handleFileDelete, isLoading: isFileLoading }}
+      />
     </div>
   );
 };
