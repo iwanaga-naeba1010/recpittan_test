@@ -18,7 +18,7 @@ class Customers::RecreationsController < Customers::ApplicationController
 
   def show
     @recreation = Recreation.public_recs.find(params[:id])
-    @evaluations = Evaluation.public_and_not_null_message.with_recreation(@recreation).latest(3)
+    @evaluations = Evaluation.public_and_not_null_message.with_recreation(@recreation)
     @order_size = @recreation.orders.where(status: %i[unreported_completed final_report_admits_not finished invoice_issued paid]).size
   end
 end

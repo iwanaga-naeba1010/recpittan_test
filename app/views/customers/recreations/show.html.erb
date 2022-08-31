@@ -192,7 +192,7 @@
       <div class="col-md-11">
         <div class="row">
         <h5 class="title-b font-18 mt-3 mb-0"><%= @evaluations.size %>件のレビュー</h5>
-          <% @evaluations.each do |evaluation| %>
+          <% @evaluations.latest(3).each do |evaluation| %>
             <div class="col-md-4 position-relative">
               <div class="evaluation-card col-11 border rounded shadow mt-4 px-2 w-100">
                 <div class="p-3">
