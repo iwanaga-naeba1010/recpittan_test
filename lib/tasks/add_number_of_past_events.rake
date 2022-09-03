@@ -9,7 +9,7 @@ namespace :add_number_of_past_events do
 
     begin
       CSV.parse(File.read(path), headers: true).map do |row|
-        recreation = Recreation.find(row[0].to_i)
+        recreation = Recreation.find_by(id: row[0].to_i)
         next if recreation.blank?
 
         recreation.update!(number_of_past_events: row[1].to_i)
