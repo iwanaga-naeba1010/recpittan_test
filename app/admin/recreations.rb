@@ -11,6 +11,7 @@ ActiveAdmin.register Recreation do
       kind
       status
       kind
+      number_of_past_events
       is_public_price additional_facility_fee
     ],
     tag_ids: [],
@@ -36,6 +37,7 @@ ActiveAdmin.register Recreation do
     column(:status, &:status_text)
     column :minutes
     column :price
+    column :number_of_past_events
     column :is_public_price
 
     actions
@@ -61,6 +63,7 @@ ActiveAdmin.register Recreation do
       row :capacity
       row :flyer_color
       row :price
+      row :number_of_past_events
       row :material_price
       row :amount
       row :material_amount
@@ -142,6 +145,7 @@ ActiveAdmin.register Recreation do
       f.input :capacity
       f.input :flyer_color, as: :string
       f.input :price
+      f.input :number_of_past_events
       f.input :material_price
       f.input :amount
       f.input :material_amount
