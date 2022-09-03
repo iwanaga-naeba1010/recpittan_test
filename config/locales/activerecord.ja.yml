@@ -84,6 +84,7 @@ ja:
         extra_information: その他
         youtube_id: YouTubeID
         price: 価格
+        number_of_past_events: 過去の開催回数
         base_code: base_code
         capacity: キャパシティ
         flyer_color: チラシ色
