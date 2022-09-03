@@ -21,6 +21,7 @@
 #  material_amount         :integer
 #  material_price          :integer
 #  minutes                 :integer
+#  number_of_past_events   :integer          default(0), not null
 #  price                   :integer
 #  second_title            :string
 #  status                  :integer          default("unapplied"), not null
