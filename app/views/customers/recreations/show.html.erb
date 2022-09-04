@@ -158,6 +158,10 @@
                 <div class="text-muted">料金をご覧になるには会員登録が必要です。<br>ログインすると表示されます。</div>
               <% end %>
               <div class="border border-bottom-0 p-3">
+                <h4 class="title">参加人数制限 <%= recreation_capacity(@recreation.capacity) %></h4>
+                <div class="text-muted">※目安30名様に1名のスタッフ様のサポートをお願い致します。</div>
+              </div>
+              <div class="border border-bottom-0 p-3">
                 <h4 class="title">所要時間 <%= @recreation.minutes %>分</h4>
                 <div class="text-muted">※ご要望に合わせてご相談が可能です。基本時間のため、ご要望にあわせて調節が可能です。</div>
               </div>
