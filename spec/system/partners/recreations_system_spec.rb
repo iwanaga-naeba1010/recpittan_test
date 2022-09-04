@@ -14,6 +14,25 @@ RSpec.describe '/partners/recreations', type: :system do
     sign_in partner
   end
 
+  context 'Index Form' do
+    # https://qiita.com/kazutosato/items/b60fc9905e1adb83d9a4
+    before do
+      ActionController::Base.allow_forgery_protection = true
+      visit partners_recreations_path
+    end
+    after do
+      ActionController::Base.allow_forgery_protection = false
+    end
+
+    feature 'Recreation index' do
+      scenario 'succeeds', js: true do
+        expect(page).to have_content('レクリエーション一覧')
+
+        expect(partner.recreations.length).to eq 1
+      end
+    end
+  end
+
   context 'New Form' do
     # NOTE(okubo): csrf-tokenがtestでなくなるので、下記で対応
     # https://qiita.com/kazutosato/items/b60fc9905e1adb83d9a4
