@@ -51,19 +51,25 @@ export const SecondStep: React.FC<Props> = (props) => {
       />
       <p className='small my-0'>施設に表示される金額</p>
       <p className='small my-0'>謝礼＋サービス手数料(35%)が上乗せされます</p>
-      <div className='d-flex mt-4'>
-        <h5 className='text-black font-weight-bold'>材料費</h5>
-        <Essential />
-      </div>
-      <p className='small my-0'>レク1人あたりに必要な材料費を入力してください</p>
-      <input
-        type='text'
-        className='p-2 w-100 rounded border border-secondary'
-        placeholder='タイトルを入力'
-        {...register('materialPrice')}
-      />
-      <p className='small my-0'>施設に表示される金額</p>
-      <p className='small my-0'>材料費＋サービス手数料(15%)が上乗せされます</p>
+
+      {(recreation === undefined || recreation?.kind.key === 'mailing') && (
+        <>
+          <div className='d-flex mt-4'>
+            <h5 className='text-black font-weight-bold'>材料費</h5>
+            <Essential />
+          </div>
+          <p className='small my-0'>レク1人あたりに必要な材料費を入力してください</p>
+          <input
+            type='text'
+            className='p-2 w-100 rounded border border-secondary'
+            placeholder='タイトルを入力'
+            {...register('materialPrice')}
+          />
+          <p className='small my-0'>施設に表示される金額</p>
+          <p className='small my-0'>材料費＋サービス手数料(15%)が上乗せされます</p>
+        </>
+      )}
+
       {(recreation === undefined || recreation?.kind.key === 'online') && (
         <RecreationAdditionalFacilityFee register={register} />
       )}
