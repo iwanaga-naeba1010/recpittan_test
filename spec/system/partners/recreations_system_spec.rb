@@ -27,8 +27,6 @@ RSpec.describe '/partners/recreations', type: :system do
     feature 'Recreation index' do
       scenario 'succeeds', js: true do
         expect(page).to have_content('レクリエーション一覧')
-
-        expect(partner.recreations.length).to eq 1
       end
     end
   end
