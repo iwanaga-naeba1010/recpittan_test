@@ -71,7 +71,10 @@ export const SecondStep: React.FC<Props> = (props) => {
       {/* 修正のタイミングで利用可能に */}
       {recreation !== undefined && (
         <>
-          <h5 className='text-black font-weight-bold'>レク画像を追加</h5>
+          <div className='d-flex mt-4'>
+            <h5 className='text-black font-weight-bold'>レク画像を追加</h5>
+            <p className='small mt-1 ms-3'>※添付可能ファイルは20MB以下で、形式はJPEG、PNGです</p>
+          </div>
           <div className='row'>
             {recreation.images
               .filter((image) => image.kind === 'slider')
@@ -130,8 +133,9 @@ export const SecondStep: React.FC<Props> = (props) => {
 
       {recreation !== undefined && (
         <>
-          <div className='mt-4'>
+          <div className='d-flex mt-4'>
             <h5 className='text-black font-weight-bold'>施設に渡したいファイル</h5>
+            <p className='small mt-1 ms-3'>※添付可能ファイルは20MB以下で、形式はPDF、JPEG、PNGです</p>
           </div>
           <p className='small my-0'>歌詞カードやパンフレットなど</p>
 
