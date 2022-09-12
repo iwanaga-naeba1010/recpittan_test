@@ -35,13 +35,13 @@ RSpec.describe 'Orders', type: :system do
         sleep 3
 
         # NOTE(okubo): 開催費
-        expect(page).to have_content("¥#{order.price.to_s(:delimited)}", count: 2)
+        expect(page).to have_content("¥#{order.price.to_fs(:delimited)}", count: 2)
         # NOTE(okubo): 諸経費
-        expect(page).to have_content("¥#{order.expenses.to_s(:delimited)}", count: 2)
+        expect(page).to have_content("¥#{order.expenses.to_fs(:delimited)}", count: 2)
         # NOTE(okubo): 材料費
-        expect(page).to have_content("¥#{order.material_price.to_s(:delimited)}", count: 2)
+        expect(page).to have_content("¥#{order.material_price.to_fs(:delimited)}", count: 2)
         # NOTE(okubo): 合計金額が表示されるか
-        expect(page).to have_content("¥#{order.total_price_for_customer.to_s(:delimited)}", count: 2)
+        expect(page).to have_content("¥#{order.total_price_for_customer.to_fs(:delimited)}", count: 2)
       end
     end
 
@@ -55,7 +55,7 @@ RSpec.describe 'Orders', type: :system do
 
         order.reload
         expect(find_by_id('expenses')).to have_content '¥10,000'
-        expect(page).to have_content "¥#{order.total_price_for_customer.to_s(:delimited)}"
+        expect(page).to have_content "¥#{order.total_price_for_customer.to_fs(:delimited)}"
       end
     end
 
@@ -72,8 +72,8 @@ RSpec.describe 'Orders', type: :system do
         sleep 3
 
         order.reload
-        expect(find_by_id('numberOfFacilities')).to have_content "¥#{(order.additional_facility_fee * 5).to_s(:delimited)}"
-        expect(page).to have_content "¥#{order.total_price_for_customer.to_s(:delimited)}"
+        expect(find_by_id('numberOfFacilities')).to have_content "¥#{(order.additional_facility_fee * 5).to_fs(:delimited)}"
+        expect(page).to have_content "¥#{order.total_price_for_customer.to_fs(:delimited)}"
       end
     end
 
@@ -163,15 +163,15 @@ RSpec.describe 'Orders', type: :system do
         sleep 3
 
         # NOTE(okubo): 開催費
-        expect(page).to have_content("¥#{order.price.to_s(:delimited)}", count: 2)
+        expect(page).to have_content("¥#{order.price.to_fs(:delimited)}", count: 2)
         # NOTE(okubo): 交通費
-        expect(page).to have_content("¥#{order.transportation_expenses.to_s(:delimited)}", count: 2)
+        expect(page).to have_content("¥#{order.transportation_expenses.to_fs(:delimited)}", count: 2)
         # NOTE(okubo): 諸経費
-        expect(page).to have_content("¥#{order.expenses.to_s(:delimited)}", count: 2)
+        expect(page).to have_content("¥#{order.expenses.to_fs(:delimited)}", count: 2)
         # NOTE(okubo): 材料費
-        expect(page).to have_content("¥#{order.material_price.to_s(:delimited)}", count: 2)
+        expect(page).to have_content("¥#{order.material_price.to_fs(:delimited)}", count: 2)
         # NOTE(okubo): 合計金額が表示されるか
-        expect(page).to have_content("¥#{order.total_price_for_customer.to_s(:delimited)}", count: 2)
+        expect(page).to have_content("¥#{order.total_price_for_customer.to_fs(:delimited)}", count: 2)
       end
     end
 
@@ -185,7 +185,7 @@ RSpec.describe 'Orders', type: :system do
 
         order.reload
         expect(find_by_id('expenses')).to have_content '¥10,000'
-        expect(page).to have_content "¥#{order.total_price_for_customer.to_s(:delimited)}"
+        expect(page).to have_content "¥#{order.total_price_for_customer.to_fs(:delimited)}"
       end
     end
 
@@ -198,7 +198,7 @@ RSpec.describe 'Orders', type: :system do
 
         order.reload
         expect(find_by_id('transportationExpenses')).to have_content '¥10,000'
-        expect(page).to have_content "¥#{order.total_price_for_customer.to_s(:delimited)}"
+        expect(page).to have_content "¥#{order.total_price_for_customer.to_fs(:delimited)}"
       end
     end
 
@@ -212,7 +212,7 @@ RSpec.describe 'Orders', type: :system do
 
         order.reload
         # expect(find_by_id('numberOfFacilities')).to have_content "¥#{(order.additional_facility_fee * 5).to_s(:delimited)}"
-        expect(page).to have_content "¥#{order.total_price_for_customer.to_s(:delimited)}"
+        expect(page).to have_content "¥#{order.total_price_for_customer.to_fs(:delimited)}"
       end
     end
 
