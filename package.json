@@ -14,7 +14,7 @@
     "@popperjs/core": "^2.11.6",
     "@rails/actioncable": "^7.0.4",
     "@rails/activestorage": "^7.0.4",
-    "@rails/ujs": "^7.0.3",
+    "@rails/ujs": "^7.0.4",
     "@rails/webpacker": "5.4.3",
     "@sentry/react": "^7.12.1",
     "@sentry/tracing": "^7.12.1",
