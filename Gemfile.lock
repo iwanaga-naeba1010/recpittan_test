@@ -407,7 +407,7 @@ GEM
       rspec-mocks (~> 3.11.0)
     rspec-core (3.11.0)
       rspec-support (~> 3.11.0)
-    rspec-expectations (3.11.0)
+    rspec-expectations (3.11.1)
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.11.0)
     rspec-mocks (3.11.1)
@@ -428,7 +428,7 @@ GEM
       rspec-mocks (~> 3.10)
       rspec-support (~> 3.10)
     rspec-request_describer (0.3.2)
-    rspec-support (3.11.0)
+    rspec-support (3.11.1)
     rspec-validator_spec_helper (1.0.0)
       activemodel
       activesupport
