@@ -43,7 +43,7 @@ class RecreationSerializer
   def serialize(recreation:) # rubocop:disable Metrics/AbcSize
     tags = TagSerializer.new.serialize_list(tags: recreation.tags)
     targets = TagSerializer.new.serialize_list(tags: recreation.tags.targets)
-    profile = ProfileSerializer.new.serialize(profile: recreation.profile)
+    profile = ProfileSerializer.new.serialize(profile: recreation.profile) if recreation.profile.present?
     images = RecreationImageSerializer.new.serialize_list(recreation_images: recreation.recreation_images)
     prefectures = RecreationPrefectureSerializer.new.serialize_list(
       recreation_prefectures: recreation.recreation_prefectures

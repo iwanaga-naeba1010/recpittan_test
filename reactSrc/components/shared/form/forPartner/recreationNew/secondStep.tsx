@@ -51,19 +51,25 @@ export const SecondStep: React.FC<Props> = (props) => {
       />
       <p className='small my-0'>施設に表示される金額</p>
       <p className='small my-0'>謝礼＋サービス手数料(35%)が上乗せされます</p>
-      <div className='d-flex mt-4'>
-        <h5 className='text-black font-weight-bold'>材料費</h5>
-        <Essential />
-      </div>
-      <p className='small my-0'>レク1人あたりに必要な材料費を入力してください</p>
-      <input
-        type='text'
-        className='p-2 w-100 rounded border border-secondary'
-        placeholder='タイトルを入力'
-        {...register('materialPrice')}
-      />
-      <p className='small my-0'>施設に表示される金額</p>
-      <p className='small my-0'>材料費＋サービス手数料(15%)が上乗せされます</p>
+
+      {(recreation === undefined || recreation?.kind.key === 'mailing') && (
+        <>
+          <div className='d-flex mt-4'>
+            <h5 className='text-black font-weight-bold'>材料費</h5>
+            <Essential />
+          </div>
+          <p className='small my-0'>レク1人あたりに必要な材料費を入力してください</p>
+          <input
+            type='text'
+            className='p-2 w-100 rounded border border-secondary'
+            placeholder='タイトルを入力'
+            {...register('materialPrice')}
+          />
+          <p className='small my-0'>施設に表示される金額</p>
+          <p className='small my-0'>材料費＋サービス手数料(15%)が上乗せされます</p>
+        </>
+      )}
+
       {(recreation === undefined || recreation?.kind.key === 'online') && (
         <RecreationAdditionalFacilityFee register={register} />
       )}
@@ -71,7 +77,10 @@ export const SecondStep: React.FC<Props> = (props) => {
       {/* 修正のタイミングで利用可能に */}
       {recreation !== undefined && (
         <>
-          <h5 className='text-black font-weight-bold'>レク画像を追加</h5>
+          <div className='d-flex mt-4'>
+            <h5 className='text-black font-weight-bold'>レク画像を追加</h5>
+            <p className='small mt-1 ms-3'>※添付可能ファイルは20MB以下で、形式はJPEG、PNGです</p>
+          </div>
           <div className='row'>
             {recreation.images
               .filter((image) => image.kind === 'slider')
@@ -130,8 +139,9 @@ export const SecondStep: React.FC<Props> = (props) => {
 
       {recreation !== undefined && (
         <>
-          <div className='mt-4'>
+          <div className='d-flex mt-4'>
             <h5 className='text-black font-weight-bold'>施設に渡したいファイル</h5>
+            <p className='small mt-1 ms-3'>※添付可能ファイルは20MB以下で、形式はPDF、JPEG、PNGです</p>
           </div>
           <p className='small my-0'>歌詞カードやパンフレットなど</p>
 

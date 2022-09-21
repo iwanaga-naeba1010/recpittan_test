@@ -245,7 +245,7 @@ export const FirstStep: React.FC<Props> = (props) => {
         {errors && <ValidationErrorMessage message={errors?.category?.message} />}
       </div>
 
-      {recreation !== undefined && (
+      {(recreation !== undefined && recreation?.kind.key === 'visit') && (
         <div className='area'>
           <div className='d-flex mt-4'>
             <h5 className='text-black font-weight-bold'>受付可能エリアを選択</h5>

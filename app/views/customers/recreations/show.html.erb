@@ -66,7 +66,7 @@
           <div class="card-body recreation">
             <div class="d-flex flex-column-reverse">
               <h1 class="card-title"><%= @recreation.title %></h1>
-              <h2 class="card-subtitle"><%= @recreation.second_title %></h2>
+              <p class="card-subtitle"><%= @recreation.second_title %></p>
             </div>
             <div class="d-flex">
               <%= link_to customers_recreation_evaluations_path(@recreation.id), class: "link-text d-flex me-3" do %>
