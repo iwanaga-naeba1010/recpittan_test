@@ -4,7 +4,7 @@ class Partners::ProfilesController < Partners::ApplicationController
   before_action :set_profile, only: %i[edit update destroy]
 
   def index
-    @profiles = current_user.profiles
+    @profiles = current_user.profiles.load_async
   end
 
   def new

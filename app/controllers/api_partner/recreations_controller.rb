@@ -5,7 +5,7 @@ module ApiPartner
     before_action :set_recreation, only: %i[show update]
 
     def index
-      recreations = current_user.recreations
+      recreations = current_user.recreations.load_async
       render_json RecreationSerializer.new.serialize_list(recreations: recreations)
     rescue StandardError => e
       logger.error e.message
