@@ -209,11 +209,12 @@ GEM
     formtastic_i18n (0.7.0)
     globalid (1.0.0)
       activesupport (>= 5.0)
-    haml (5.2.2)
-      temple (>= 0.8.0)
+    haml (6.0.0)
+      temple (>= 0.8.2)
+      thor
       tilt
-    haml_lint (0.40.1)
-      haml (>= 4.0, < 5.3)
+    haml_lint (0.41.0)
+      haml (>= 4.0, < 6.1)
       parallel (~> 1.10)
       rainbow
       rubocop (>= 0.50.0)
@@ -517,7 +518,7 @@ GEM
     turbolinks-source (5.2.0)
     tzinfo (2.0.5)
       concurrent-ruby (~> 1.0)
-    unicode-display_width (2.2.0)
+    unicode-display_width (2.3.0)
     uniform_notifier (1.16.0)
     unparser (0.6.5)
       diff-lcs (~> 1.3)
