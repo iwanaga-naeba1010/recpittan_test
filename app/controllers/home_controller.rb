@@ -64,6 +64,7 @@ class HomeController < ApplicationController
     @evaluations = Evaluation.public_and_not_null_message.latest(10).load_async
     @tags = Tag.where(kind: :tag).load_async.to_a
   end
+
   private
 
   def pick_recreation_by_id(recreations:, id:)
