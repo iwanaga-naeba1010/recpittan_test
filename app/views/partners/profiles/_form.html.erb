@@ -5,14 +5,14 @@
       <p class="text-danger">必須</p>
     </div>
     <p class="text-secondary small mt-0">ニックネームや開催時に呼んでほしい名前をご記入ください</p>
-    <%= f.input :name, label: false %>
+    <%= f.input :name, label: false, maxlength: 13 %>
     <p class="small mt-0 text-dark">0/13文字まで</p>
   </div>
   <div>
     <div class="pt-3 w-100">
       <p class="font-weight-bold text-black me-2"><%= t('activerecord.attributes.profile.title') %></p>
     </div>
-    <%= f.input :title, label: false %>
+    <%= f.input :title, label: false, maxlength: 40 %>
     <p class="small mt-0 text-dark">0/40文字まで</p>
   </div>
   <div>
@@ -20,8 +20,8 @@
       <p class="font-weight-bold text-black me-2"><%= t('activerecord.attributes.profile.description') %></p>
       <p class="text-danger">必須</p>
     </div>
-    <%= f.input :description, label: false %>
-    <p class="small mt-0 text-dark">0/2000文字まで</p>
+    <%= f.input :description, label: false, maxlength: 200 %>
+    <p class="small mt-0 text-dark">0/200文字まで</p>
   </div>
   <div>
     <div class="pt-3 w-100 d-flex">
@@ -35,11 +35,10 @@
             <div class="prev-contents">
               <% if profile.image? %>
                 <div class="prev-content">
-                  <p class="small mt-0 text-dark">0/2000文字まで</p>
                   <%= image_tag profile.image.url, alt: 'preview', class: 'prev-image' %>
                 </div>
               <% else %>
-                <p class="small mt-0 text-dark">添付可能ファイルは50MB以下で、形式はjpg、jpeg、gif、png、 pptx pptです</p>
+                <p class="small mt-0 text-dark">添付可能ファイルは50MB以下で、形式はjpg、jpeg、gif、png、pptx、pptです</p>
                 <%= f.label :image, '+', class: 'select-photo text-primary border p-5' %>
               <% end %>
             </div>
