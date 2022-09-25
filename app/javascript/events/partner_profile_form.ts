@@ -8,7 +8,7 @@ const App = (inputSelector: string, displaySelector: string) => {
     const currentValue = $(`#${inputSelector}`).val().toString().length;
     $(`#${displaySelector}`).text(currentValue);
   });
-}
+};
 
 // NOTE: 画面遷移した時用
 document.addEventListener('turbolinks:load', () => {

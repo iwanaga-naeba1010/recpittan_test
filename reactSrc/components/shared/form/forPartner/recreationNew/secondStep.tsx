@@ -21,13 +21,15 @@ export const SecondStep: React.FC<Props> = (props) => {
   const [extraInformation, setExtraInformation] = useState<string>(getValues('extraInformation'));
   const sliderRef = useRef(null);
   const materialRef = useRef(null);
+  const handleSliderRefClickFileInput = (): void => sliderRef.current.click();
+  const handleMaterialRefClickFileInput = (): void => materialRef.current.click();
 
-  const handleSliderRefClickFileInput = (): void => {
-    sliderRef.current.click();
-  };
-
-  const handleMaterialRefClickFileInput = (): void => {
-    materialRef.current.click();
+  const isShowAdditionalFacilityFee = (): boolean => {
+    if (recreation === undefined) {
+      const kind = getValues('kind');
+      return kind === 'online';
+    }
+    return recreation?.kind.key === 'online';
   };
 
   return (
@@ -69,11 +71,7 @@ export const SecondStep: React.FC<Props> = (props) => {
           <p className='small my-0'>材料費＋サービス手数料(15%)が上乗せされます</p>
         </>
       )}
-
-      {(recreation === undefined || recreation?.kind.key === 'online') && (
-        <RecreationAdditionalFacilityFee register={register} />
-      )}
-
+      {isShowAdditionalFacilityFee() && <RecreationAdditionalFacilityFee register={register} />}
       {/* 修正のタイミングで利用可能に */}
       {recreation !== undefined && (
         <>
