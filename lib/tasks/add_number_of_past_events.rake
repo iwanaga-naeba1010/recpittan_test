@@ -12,6 +12,7 @@ namespace :add_number_of_past_events do
         recreation = Recreation.find_by(id: row[0].to_i)
         next if recreation.blank?
 
+        logger.debug("updated with :#{row[1]}")
         recreation.update!(number_of_past_events: row[1].to_i)
       end
     rescue StandardError => e
