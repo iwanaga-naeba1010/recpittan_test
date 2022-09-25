@@ -4,7 +4,7 @@ class ApiCustomer::Orders::ChatsController < Api::ApplicationController
   before_action :set_order, only: %i[index create]
 
   def index
-    @chat = @order.chats.order(updated_at: 'asc')
+    @chat = @order.chats.order(updated_at: 'asc').load_async
     render_json ChatSerializer.new.serialize_list(chats: @chat)
   rescue StandardError => e
     logger.error e.message

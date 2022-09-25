@@ -45,24 +45,24 @@ class HomeController < ApplicationController
     end
 
     @summer_recommendation_recs = Rails.cache.fetch('home/trial_recs', expires_in: 6.hours) do
-      queried_recreations = Recreation.public_recs.where(id: SUMMER_RECOMMENDATION_IDS).to_a
+      queried_recreations = Recreation.public_recs.where(id: SUMMER_RECOMMENDATION_IDS).load_async.to_a
       SUMMER_RECOMMENDATION_IDS.map { |id| pick_recreation_by_id(recreations: queried_recreations, id: id) }.compact.flatten
     end
 
     @yoshimoto_recs = Rails.cache.fetch('home/yoshimoto_recs', expires_in: 6.hours) do
-      queried_recreations = Recreation.public_recs.where(id: YOSHIMOTO_IDS).to_a
+      queried_recreations = Recreation.public_recs.where(id: YOSHIMOTO_IDS).load_async.to_a
       YOSHIMOTO_IDS.map { |id| pick_recreation_by_id(recreations: queried_recreations, id: id) }.compact.flatten
     end
 
     @less_than_ten_thousand_yen_recs = Rails.cache.fetch('home/under_ten_thou_recs', expires_in: 6.hours) do
-      queried_recreations = Recreation.public_recs.where(id: LESS_THAN_TEN_THOUSANT_YEN_IDS).to_a
+      queried_recreations = Recreation.public_recs.where(id: LESS_THAN_TEN_THOUSANT_YEN_IDS).load_async.to_a
       LESS_THAN_TEN_THOUSANT_YEN_IDS.map do |id|
         pick_recreation_by_id(recreations: queried_recreations, id: id)
       end.compact.flatten
     end
 
-    @evaluations = Evaluation.public_and_not_null_message.latest(10)
-    @tags = Tag.where(kind: :tag).to_a
+    @evaluations = Evaluation.public_and_not_null_message.latest(10).load_async
+    @tags = Tag.where(kind: :tag).load_async.to_a
   end
 
   private
