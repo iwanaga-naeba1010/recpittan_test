@@ -88,9 +88,6 @@ gem 'slack-notifier'
 # API
 gem 'oj'
 
-# cache
-gem 'redis'
-
 gem 'sentry-ruby'
 gem 'sentry-rails'
 
