@@ -56,7 +56,7 @@ class Customers::OrdersController < Customers::ApplicationController
       )
 
       slack_message = <<~MESSAGE
-        会社名: #{current_user.company.name}
+        会社名: #{current_user.company.name + current_user.company.facility_name}
         管理画面URL: #{admin_company_url(current_user.company.id)}
         担当者名: #{current_user.company.person_in_charge_name}
         電話番号: #{current_user.company.tel}
