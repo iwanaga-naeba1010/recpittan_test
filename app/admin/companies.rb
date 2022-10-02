@@ -104,7 +104,6 @@ ActiveAdmin.register Company do
       f.input :tags, label: '貸出可能品', as: :check_boxes, collection: Tags::Rental.all
 
       f.input :user_company_id, as: :select, collection: User.customers.where(company_id: nil).map { |i| [i.username, i.id] }
-
     end
 
     f.actions
@@ -112,7 +111,6 @@ ActiveAdmin.register Company do
 
   controller do
     def create
-
       company = Company.new(permitted_params[:company])
       user = User.find(company.user_company_id.to_i)
 
