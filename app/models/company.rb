@@ -37,6 +37,8 @@ class Company < ApplicationRecord
 
   delegate :email, to: :user, prefix: true, allow_nil: true
 
+  attribute :user_company_id
+
   enumerize :genre, in: {
     residential_fee_based_nursing_home: 0,
     general_care: 1, serviced_senior_housing: 2,
