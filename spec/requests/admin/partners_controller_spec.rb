@@ -6,7 +6,6 @@ RSpec.describe 'Partners', type: :request do
   let(:admin) { create :user, :with_admin }
   let(:customer) { create :user, :with_customer }
   let!(:partner) { create :user, :with_recreations }
-  # let(:order) { create :order, recreation_id: partner.recreations.first.id, user_id: customer.id }
 
   before do
     sign_in admin
@@ -41,12 +40,6 @@ RSpec.describe 'Partners', type: :request do
           post admin_partners_path, params: { partner: attrs }
         }.to change(User, :count).by(+1)
       end
-
-      # it 'can create partner and increase one user record' do
-      #   expect {
-      #     post admin_partners_path, params: { partner: attrs }
-      #   }.to change(User, :count).by(+1)
-      # end
 
       it 'can create user with partner role' do
         post admin_partners_path, params: { partner: attrs }

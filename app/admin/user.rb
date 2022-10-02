@@ -75,16 +75,16 @@ ActiveAdmin.register User do
     end
 
     def update
-      partner = Partner.find(params[:id].to_i)
-      if permitted_params[:partner][:password].blank?
-        %w[password password_confirmation].each { |p| permitted_params[:partner].delete(p) }
+      user = User.find(params[:id].to_i)
+      if permitted_params[:user][:password].blank?
+        %w[password password_confirmation].each { |p| permitted_params[:user].delete(p) }
       end
-      partner.skip_confirmation_notification!
+      user.skip_confirmation_notification!
       # partner.skip_confirmation!
-      partner.skip_reconfirmation!
+      user.skip_reconfirmation!
 
-      if partner.update_without_password(permitted_params[:partner])
-        redirect_to admin_partner_path(partner.id)
+      if user.update_without_password(permitted_params[:user])
+        redirect_to admin_user_path(user.id)
       else
         # HACK: superを毎回呼ぶとcompany.createがダブルっぽいので、失敗した時のrenderのためにsuper入れる。
         # ちなみにrender :newは機能しない
