@@ -3,8 +3,6 @@
 # NOTE: 日本語にするとバグる
 # rubocop:disable Metrics/BlockLength
 ActiveAdmin.register Company do
-  includes :user
-
   menu priority: 2
   permit_params(
     :name, :facility_name, :person_in_charge_name, :person_in_charge_name_kana,
