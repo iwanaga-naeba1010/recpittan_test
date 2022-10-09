@@ -2,7 +2,7 @@
 マッチングシステムです
 
 ## 環境
-- Ruby 3.0.3
+- Ruby 3.1.1
 - Rails 7.0.x
 - PostgreSQL 12.5
 
