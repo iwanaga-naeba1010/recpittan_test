@@ -25,7 +25,7 @@ FactoryBot.define do
       ActionDispatch::Http::UploadedFile.new(
         filename: 'test.png',
         type: 'image/png',
-        tempfile: File.open(Rails.root.join('spec/files/test.png'))
+        tempfile: Rails.root.join('spec/files/test.png').open
       )
     end
   end

@@ -37,7 +37,12 @@
     <div class="row">
       <div class="col-md-7">
         <%= link_to customers_recreation_path(@recreation.id), class: "return-link" do %>
-          <p><i class="fa-solid fa-chevron-left"></i> 戻る</p>
+          <p>
+            <svg width="15" height="20" viewBox="0 0 8 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M7.18436 13.7285L7.80308 13.1098C7.94952 12.9634 7.94952 12.726 7.80308 12.5795L2.15623 6.9192L7.80308 1.25889C7.94952 1.11245 7.94952 0.875016 7.80308 0.728547L7.18436 0.109828C7.03792 -0.0366094 6.80049 -0.0366094 6.65402 0.109828L0.109828 6.65405C-0.0366094 6.80048 -0.0366094 7.03792 0.109828 7.18439L6.65402 13.7286C6.80049 13.875 7.03792 13.875 7.18436 13.7285Z" fill="#32B2E0"/>
+            </svg>
+            戻る
+          </p>
         <% end %>
         <h3 class="title-b font-18 my-1"><%= @evaluations.size %>件のレビュー</h3>
         <hr>
@@ -51,7 +56,7 @@
               </svg>
               </span><%= evaluation.report.order.user.company.facility_name %></h6>
               <p class="my-2 text-black"><%= evaluation.message %></p>
-              <p class="evaluation-date mb-0"><%= evaluation.created_at.strftime('%y/%m/%d') %></p>
+              <p class="evaluation-date mb-0"><%= evaluation.created_at.strftime('%Y/%m/%d') %></p>
             </div>
           </div>
         <% end %>

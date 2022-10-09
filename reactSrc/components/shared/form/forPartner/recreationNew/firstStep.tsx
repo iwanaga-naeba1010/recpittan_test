@@ -245,7 +245,7 @@ export const FirstStep: React.FC<Props> = (props) => {
         {errors && <ValidationErrorMessage message={errors?.category?.message} />}
       </div>
 
-      {recreation !== undefined && (
+      {recreation !== undefined && recreation?.kind.key === 'visit' && (
         <div className='area'>
           <div className='d-flex mt-4'>
             <h5 className='text-black font-weight-bold'>受付可能エリアを選択</h5>
@@ -293,7 +293,7 @@ export const FirstStep: React.FC<Props> = (props) => {
         <label htmlFor='numberOfFacilitiesFalse' onClick={() => setShow(false)}>
           なし
         </label>
-        {show ? (
+        {show && (
           <>
             <p className='small my-0'>何人まで参加できますか？</p>
             <input
@@ -301,10 +301,6 @@ export const FirstStep: React.FC<Props> = (props) => {
               className='p-2 w-100 rounded border border-secondary'
               {...register('capacity', { required: '参加人数制限は必須です' })}
             />
-          </>
-        ) : (
-          <>
-            <p className='not-limited ms-3 p-1 text-primary border border-2 border-primary d-inline-block position-absolute'>参加人数制限なしと表示されます<br/>補足がある場合はその他にご記入ください</p>
           </>
         )}
         {errors && <ValidationErrorMessage message={errors?.capacity?.message} />}

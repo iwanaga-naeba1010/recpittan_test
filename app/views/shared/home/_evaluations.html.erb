@@ -19,7 +19,7 @@
               <%= image_tag evaluation.report.order.recreation.recreation_images.sliders.first&.image.to_s, width: '70', height: '50', class: 'rounded', loading: 'lazy' %>
             </div>
             <div class="ps-0">
-              <%= link_to evaluation.report.order.recreation.title ,customers_recreation_path(evaluation.report.order.recreation.id), class: 'evaluation-title mb-0 ms-2 text-decoration-none' %>
+              <%= link_to evaluation.report.order.recreation.title, customers_recreation_path(evaluation.report.order.recreation.id), class: 'evaluation-title mb-0 ms-2 text-decoration-none' %>
             </div>
           </div>
         </div>
@@ -27,10 +27,18 @@
     <% end %>
   </div>
   <div class="swiper-button-prev">
-    <p class="swiper-button p-3 rounded-circle text-white"><i class="fa-solid fa-arrow-left"></i></p>
+    <p class="swiper-button p-3 rounded-circle text-white">
+    <svg width="21" height="25" viewBox="0 0 21 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M8.45584 1.13379L1.25242 8.3372C0.689789 8.89979 0.689789 9.81201 1.25242 10.3746L8.45584 17.5781C9.01847 18.1406 9.93065 18.1406 10.4933 17.5781C11.0559 17.0155 11.0559 16.1033 10.4933 15.5406L5.74924 10.7966L19.5593 10.7966C20.355 10.7966 21 10.1516 21 9.3559C21 8.56024 20.355 7.91522 19.5593 7.91522L5.74924 7.91522L10.4933 3.17118C10.7746 2.88989 10.9152 2.52116 10.9152 2.15248C10.9152 1.78381 10.7746 1.41508 10.4933 1.13379C9.93065 0.571156 9.01847 0.571156 8.45584 1.13379Z" fill="white"/>
+    </svg>
+    </p>
   </div>
   <div class="swiper-button-next">
-    <p class="swiper-button p-3 rounded-circle text-white"><i class="fa-solid fa-arrow-right"></i></p>
+    <p class="swiper-button p-3 rounded-circle text-white">
+    <svg width="21" height="25" viewBox="0 0 21 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M12.5442 16.8662L19.7476 9.6628C20.3102 9.10021 20.3102 8.18799 19.7476 7.62536L12.5442 0.42194C11.9815 -0.140647 11.0694 -0.140647 10.5067 0.42194C9.94409 0.984527 9.94409 1.89675 10.5067 2.45938L15.2508 7.20342H1.44068C0.645021 7.20342 0 7.84844 0 8.6441C0 9.43976 0.645021 10.0848 1.44068 10.0848H15.2508L10.5067 14.8288C10.2254 15.1101 10.0848 15.4788 10.0848 15.8475C10.0848 16.2162 10.2254 16.5849 10.5067 16.8662C11.0694 17.4288 11.9815 17.4288 12.5442 16.8662Z" fill="white"/>
+    </svg>
+    </p>
   </div>
   <div class="pagination pb-4">
     <div class="swiper-pagination"></div>

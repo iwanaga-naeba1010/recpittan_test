@@ -1,8 +1,7 @@
+import { UseFile } from '@/components/forPartner';
 import { LoadingIndicator } from '@/components/shared/parts';
 import { Essential } from '@/components/shared/parts/essential';
-import { Api } from '@/infrastructure';
 import { Recreation } from '@/types';
-import { RecreationImage } from '@/types/recreationImage';
 import React, { useRef, useState } from 'react';
 import { UseFormGetValues, UseFormRegister } from 'react-hook-form';
 import { RecreationAdditionalFacilityFee } from './recreationAdditionalFacilityFee';
@@ -12,58 +11,25 @@ import { RecreationFormValues } from './recreationNewForm';
 type Props = {
   getValues: UseFormGetValues<RecreationFormValues>;
   register: UseFormRegister<RecreationFormValues>;
-  recreation: Recreation;
-  setRecreation: React.Dispatch<React.SetStateAction<Recreation>>;
+  // NOTE(okubo): 下記2点はeditの時のみ有効
+  recreation?: Recreation;
+  useFile?: UseFile;
 };
 
 export const SecondStep: React.FC<Props> = (props) => {
-  const { getValues, register, recreation, setRecreation } = props;
+  const { getValues, register, recreation, useFile } = props;
   const [extraInformation, setExtraInformation] = useState<string>(getValues('extraInformation'));
   const sliderRef = useRef(null);
   const materialRef = useRef(null);
-  const [isSending, setIsSending] = useState<boolean>(false);
+  const handleSliderRefClickFileInput = (): void => sliderRef.current.click();
+  const handleMaterialRefClickFileInput = (): void => materialRef.current.click();
 
-  const handleSliderRefClickFileInput = (): void => {
-    sliderRef.current.click();
-  };
-
-  const handleMaterialRefClickFileInput = (): void => {
-    materialRef.current.click();
-  };
-
-  const handleFileChanged = (files: FileList | null, kind = 'slider') => {
-    if (!files || files.length <= 0) return;
-    const file = files[0];
-    const reader = new FileReader();
-    reader.onload = async (event) => {
-      if (event.target?.result && typeof event.target?.result === 'string') {
-        const requestBody: { [key: string]: Record<string, unknown> } = {
-          recreationImage: {
-            image: event.target?.result,
-            filename: file.name,
-            kind: kind
-          }
-        };
-        setIsSending(true);
-        const createdImage = await Api.post<RecreationImage>(
-          `recreations/${recreation.id}/recreation_images`,
-          'partner',
-          requestBody
-        );
-        setRecreation({ ...recreation, images: [...recreation.images, createdImage.data] });
-        setIsSending(false);
-      }
-    };
-    reader.readAsDataURL(file);
-  };
-
-  const handleDelete = async (id: number): Promise<void> => {
-    try {
-      await Api.delete(`recreations/${recreation.id}/recreation_images/${id}`, 'partner', {});
-      setRecreation({ ...recreation, images: recreation.images.filter((recreation) => recreation.id !== id) });
-    } catch (e) {
-      console.log(e);
+  const isShowAdditionalFacilityFee = (): boolean => {
+    if (recreation === undefined) {
+      const kind = getValues('kind');
+      return kind === 'online';
     }
+    return recreation?.kind.key === 'online';
   };
 
   return (
@@ -87,32 +53,37 @@ export const SecondStep: React.FC<Props> = (props) => {
       />
       <p className='small my-0'>施設に表示される金額</p>
       <p className='small my-0'>謝礼＋サービス手数料(35%)が上乗せされます</p>
-      <div className='d-flex mt-4'>
-        <h5 className='text-black font-weight-bold'>材料費</h5>
-        <Essential />
-      </div>
-      <p className='small my-0'>レク1人あたりに必要な材料費を入力してください</p>
-      <input
-        type='text'
-        className='p-2 w-100 rounded border border-secondary'
-        placeholder='タイトルを入力'
-        {...register('materialPrice')}
-      />
-      <p className='small my-0'>施設に表示される金額</p>
-      <p className='small my-0'>材料費＋サービス手数料(15%)が上乗せされます</p>
-      {(recreation === undefined || recreation?.kind.key === 'online') && (
-        <RecreationAdditionalFacilityFee register={register} />
-      )}
 
+      {(recreation === undefined || recreation?.kind.key === 'mailing') && (
+        <>
+          <div className='d-flex mt-4'>
+            <h5 className='text-black font-weight-bold'>材料費</h5>
+            <Essential />
+          </div>
+          <p className='small my-0'>レク1人あたりに必要な材料費を入力してください</p>
+          <input
+            type='text'
+            className='p-2 w-100 rounded border border-secondary'
+            placeholder='タイトルを入力'
+            {...register('materialPrice')}
+          />
+          <p className='small my-0'>施設に表示される金額</p>
+          <p className='small my-0'>材料費＋サービス手数料(15%)が上乗せされます</p>
+        </>
+      )}
+      {isShowAdditionalFacilityFee() && <RecreationAdditionalFacilityFee register={register} />}
       {/* 修正のタイミングで利用可能に */}
       {recreation !== undefined && (
         <>
-          <h5 className='text-black font-weight-bold'>レク画像を追加</h5>
+          <div className='d-flex mt-4'>
+            <h5 className='text-black font-weight-bold'>レク画像を追加</h5>
+            <p className='small mt-1 ms-3'>※添付可能ファイルは20MB以下で、形式はJPEG、PNGです</p>
+          </div>
           <div className='row'>
             {recreation.images
               .filter((image) => image.kind === 'slider')
               .map((image, i) => (
-                <ImageComponent key={i} image={image} handleDelete={handleDelete} />
+                <ImageComponent key={i} image={image} handleDelete={useFile.handleFileDelete} />
               ))}
           </div>
 
@@ -121,7 +92,7 @@ export const SecondStep: React.FC<Props> = (props) => {
             accept='image/*'
             className='d-none'
             ref={sliderRef}
-            onChange={(event) => handleFileChanged(event.target.files)}
+            onChange={(event) => useFile.handleFileAdd(event.target.files, 'slider')}
             name='recreationImage'
           />
           <button
@@ -129,7 +100,7 @@ export const SecondStep: React.FC<Props> = (props) => {
             className='w-25 py-5 100 text-center text-primary font-weight-bold border bg-white'
             onClick={handleSliderRefClickFileInput}
           >
-            {isSending ? <LoadingIndicator /> : <>+画像を追加</>}
+            {useFile.isLoading ? <LoadingIndicator /> : <>+画像を追加</>}
           </button>
         </>
       )}
@@ -166,8 +137,9 @@ export const SecondStep: React.FC<Props> = (props) => {
 
       {recreation !== undefined && (
         <>
-          <div className='mt-4'>
+          <div className='d-flex mt-4'>
             <h5 className='text-black font-weight-bold'>施設に渡したいファイル</h5>
+            <p className='small mt-1 ms-3'>※添付可能ファイルは20MB以下で、形式はPDF、JPEG、PNGです</p>
           </div>
           <p className='small my-0'>歌詞カードやパンフレットなど</p>
 
@@ -175,7 +147,7 @@ export const SecondStep: React.FC<Props> = (props) => {
             type='file'
             className='d-none'
             ref={materialRef}
-            onChange={(event) => handleFileChanged(event.target.files, 'material')}
+            onChange={(event) => useFile.handleFileAdd(event.target.files, 'material')}
             name='recreationProfile'
           />
 
@@ -183,10 +155,10 @@ export const SecondStep: React.FC<Props> = (props) => {
             {recreation.images
               .filter((image) => image.kind === 'material')
               .map((image, i) => (
-                <ImageComponent key={i} image={image} handleDelete={handleDelete} />
+                <ImageComponent key={i} image={image} handleDelete={useFile.handleFileDelete} />
               ))}
           </div>
-          {isSending ? (
+          {useFile.isLoading ? (
             <LoadingIndicator />
           ) : (
             <button

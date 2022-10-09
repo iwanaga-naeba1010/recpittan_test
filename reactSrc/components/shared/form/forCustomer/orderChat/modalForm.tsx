@@ -404,13 +404,15 @@ export const ModalForm: React.FC<Props> = (props) => {
                         {order?.materialPrice?.toLocaleString()}
                       </div>
                     </div>
-                    <div className='row justify-content-between border-bottom-dotted pb-2'>
-                      <div className='col-auto'>交通費</div>
-                      <div id='transportationExpensesForOrderForm' className='col-auto'>
-                        &yen;
-                        {order?.transportationExpenses?.toLocaleString()}
+                    {recreation.kind.key === 'visit' && (
+                      <div className='row justify-content-between border-bottom-dotted pb-2'>
+                        <div className='col-auto'>交通費</div>
+                        <div id='transportationExpensesForOrderForm' className='col-auto'>
+                          &yen;
+                          {order?.transportationExpenses?.toLocaleString()}
+                        </div>
                       </div>
-                    </div>
+                    )}
                     <div className='row justify-content-between border-bottom-dotted pb-2'>
                       <div className='col-auto'>諸経費</div>
                       <div id='expensesForOrderForm' className='col-auto'>

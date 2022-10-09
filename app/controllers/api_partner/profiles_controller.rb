@@ -3,7 +3,7 @@
 module ApiPartner
   class ProfilesController < ApplicationController
     def index
-      profiles = current_user.profiles
+      profiles = current_user.profiles.load_async
       render_json ProfileSerializer.new.serialize_list(profiles: profiles)
     rescue StandardError => e
       logger.error e.message

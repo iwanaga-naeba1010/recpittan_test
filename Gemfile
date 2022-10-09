@@ -3,9 +3,9 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '3.0.3'
+ruby '3.1.1'
 
-gem 'rails', '7.0.3.1'
+gem 'rails', '7.0.4'
 gem 'pg'
 gem 'puma'
 gem 'sass-rails'
@@ -87,9 +87,6 @@ gem 'slack-notifier'
 
 # API
 gem 'oj'
-
-# cache
-gem 'redis'
 
 gem 'sentry-ruby'
 gem 'sentry-rails'

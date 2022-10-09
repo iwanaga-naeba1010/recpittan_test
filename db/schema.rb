@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_07_06_155512) do
+ActiveRecord::Schema[7.0].define(version: 2022_09_03_045519) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -210,6 +210,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_06_155512) do
     t.integer "category", default: 0, null: false
     t.integer "status", default: 0, null: false
     t.integer "kind", default: 0, null: false
+    t.integer "number_of_past_events", default: 0, null: false
   end
 
   create_table "reports", force: :cascade do |t|

@@ -15,11 +15,6 @@ services:
       TZ: "Asia/Tokyo"
       POSTGRES_HOST_AUTH_METHOD: trust
 
-  # redis:
-  #   image: redis:5-alpine
-  #   volumes:
-  #     - redis:/data
-
   web: &web
     build: .
     image: app:1.0.0
@@ -45,11 +40,9 @@ services:
       DATABASE_PASSWORD: 'postgres'
       SELENIUM_DRIVER_URL: http://chrome:4444/wd/hub
       LOCAL: 'true'
-      # REDIS_URL: "redis://redis:6379/"
       RAILS_MASTER_KEY:
     depends_on:
       - db
-      # - redis
     command: /bin/sh -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
     expose: ["3000"]
     ports: ["3000:3000"]
@@ -80,7 +73,6 @@ services:
 
 volumes:
   postgres:
-  # redis:
   bundle:
   node_modules:
   rails_cache:

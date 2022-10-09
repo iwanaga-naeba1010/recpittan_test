@@ -7,6 +7,11 @@
 .detail {
   background-color: #ffffff;
 
+  .sticky-md-top {
+    top: 170px;
+    z-index: 10;
+  }
+
   main.detail {
 
     // min-height: 50vh;

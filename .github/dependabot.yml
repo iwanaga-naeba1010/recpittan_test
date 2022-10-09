@@ -7,7 +7,7 @@ updates:
     time: "11:00"
     timezone: Asia/Tokyo
   open-pull-requests-limit: 30
-  target-branch: develop
+  target-branch: main
   reviewers:
   - masahiro04
   ignore:
@@ -15,6 +15,10 @@ updates:
     versions: ["4.x", "5.x"]
   - dependency-name: webpack-cli
     versions: ["4.x", "5.x"]
+  - dependency-name: webpack-dev-server
+    versions: ["4.x"]
+  - dependency-name: '@fortawesome/fontawesome-free'
+    versions: ["6.x"]
 - package-ecosystem: bundler
   directory: "/"
   schedule:
@@ -22,7 +26,7 @@ updates:
     time: "11:00"
     timezone: Asia/Tokyo
   open-pull-requests-limit: 30
-  target-branch: develop
+  target-branch: main
   reviewers:
   - masahiro04
   allow:
@@ -32,7 +36,3 @@ updates:
   - dependency-name: autoprefixer-rails
     versions:
     - 10.2.4.0
-  - dependency-name: webpack-dev-server
-    versions: ["4.x"]
-  - dependency-name: '@fortawesome/fontawesome-free'
-  - dependency-name: webpack-cli
