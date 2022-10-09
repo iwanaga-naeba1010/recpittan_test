@@ -18,7 +18,7 @@
     "@rails/webpacker": "5.4.3",
     "@sentry/react": "^7.14.2",
     "@sentry/tracing": "^7.14.0",
-    "@types/prettier": "^2.7.0",
+    "@types/prettier": "^2.7.1",
     "activeadmin_addons": "^1.0.0",
     "arctic_admin": "^4.0.1",
     "axios": "^0.27.2",
