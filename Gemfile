@@ -88,9 +88,6 @@ gem 'slack-notifier'
 # API
 gem 'oj'
 
-gem 'sentry-ruby'
-gem 'sentry-rails'
-
 gem 'cocoon'
 # seo
 gem 'meta-tags'

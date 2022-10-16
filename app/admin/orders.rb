@@ -259,7 +259,6 @@ ActiveAdmin.register Order do
       redirect_to admin_order_path(order.id)
     rescue StandardError => e
       Rails.logger.error e
-      Sentry.capture_exception(e)
       super
     end
 
@@ -309,7 +308,6 @@ ActiveAdmin.register Order do
       redirect_to admin_order_path(order.id)
     rescue StandardError => e
       Rails.logger.error e
-      Sentry.capture_exception(e)
       super
     end
   end
