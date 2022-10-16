@@ -1,5 +1,4 @@
 import { ApiType } from '@/types';
-import * as Sentry from '@sentry/react';
 import axios, { AxiosResponse } from 'axios';
 import camelcaseKeys from 'camelcase-keys';
 import snakecaseKeys from 'snakecase-keys';
@@ -14,7 +13,6 @@ export class Api {
       return { ...response, data: camelcaseKeys(response.data, { deep: true }) } as AxiosResponse<T>;
     } catch (e) {
       console.log('haitta!', e);
-      Sentry.captureException(e);
       throw e;
     }
   }
@@ -28,7 +26,6 @@ export class Api {
       return { ...response, data: camelcaseKeys(response.data, { deep: true }) } as AxiosResponse<T>;
     } catch (e) {
       console.log('haitta!', e);
-      Sentry.captureException(e);
       throw e;
     }
   }
@@ -38,7 +35,7 @@ export class Api {
       const response = await axios.patch(`${apiDomain(type)}/${path}`, snakecaseKeys(data), { headers: headers() });
       return { ...response, data: camelcaseKeys(response.data, { deep: true }) } as AxiosResponse<T>;
     } catch (e) {
-      Sentry.captureException(e);
+      console.log('haitta!', e);
       throw e;
     }
   }
@@ -51,7 +48,7 @@ export class Api {
       });
       return { ...response, data: camelcaseKeys(response.data, { deep: true }) } as AxiosResponse<T>;
     } catch (e) {
-      Sentry.captureException(e);
+      console.log('haitta!', e);
       throw e;
     }
   }
@@ -97,11 +94,3 @@ const CUSTOMER_API_DOMAIN: string = (() => {
 const PARTNER_API_DOMAIN: string = (() => {
   return `${window.location.origin}/api_partner`;
 })();
-
-// const APP_API_DOMAIN: string = (() => {
-//   if (process.env.ENVIRONMENT === 'development' || process.env.STAGING) {
-//     return 'http://localhost:3000';
-//   } else {
-//     return 'https://recreation.everyplus.jp';
-//   }
-// })();
