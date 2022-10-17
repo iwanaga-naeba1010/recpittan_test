@@ -95,6 +95,7 @@ ja:
         prefectures: 都道府県
         is_public_price: 料金を公開
         additional_facility_fee: 施設追加費用
+        memo: メモ
       recreation_image:
         image: ファイル
         kind: 種別

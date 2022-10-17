@@ -20,6 +20,7 @@
 #  kind                    :integer          default("visit"), not null
 #  material_amount         :integer
 #  material_price          :integer
+#  memo                    :string
 #  minutes                 :integer
 #  number_of_past_events   :integer          default(0), not null
 #  price                   :integer

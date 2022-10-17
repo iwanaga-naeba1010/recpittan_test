@@ -80,6 +80,7 @@ ActiveAdmin.register Recreation do
       end
 
       row :is_public_price
+      row :memo
 
       row :created_at
       row :updated_at
@@ -180,6 +181,8 @@ ActiveAdmin.register Recreation do
         ff.input :name, as: :select, collection: RecreationPrefecture.names
       end
     end
+
+    f.input :memo
 
     f.actions
   end
