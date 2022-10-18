@@ -408,7 +408,7 @@ GEM
       proc_to_ast
       rspec (>= 2.13, < 4)
       unparser
-    rspec-rails (6.0.0)
+    rspec-rails (6.0.1)
       actionpack (>= 6.1)
       activesupport (>= 6.1)
       railties (>= 6.1)
