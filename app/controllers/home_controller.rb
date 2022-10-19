@@ -4,15 +4,19 @@
 class HomeController < ApplicationController
   skip_before_action :authenticate_user!
 
-  SUMMER_RECOMMENDATION_IDS = [
-    262,
-    106,
-    64,
-    37,
-    73,
-    116,
+  WINTER_RECOMMENDATION_IDS = [
     258,
     103,
+    42,
+    128,
+    127,
+    9,
+    20,
+    72,
+    108,
+    250,
+    12,
+    298,
   ].freeze
 
   YOSHIMOTO_IDS = [
@@ -44,9 +48,9 @@ class HomeController < ApplicationController
       Tag.find_by(name: '吉本')
     end
 
-    @summer_recommendation_recs = Rails.cache.fetch('home/trial_recs', expires_in: 6.hours) do
-      queried_recreations = Recreation.public_recs.where(id: SUMMER_RECOMMENDATION_IDS).load_async.to_a
-      SUMMER_RECOMMENDATION_IDS.map { |id| pick_recreation_by_id(recreations: queried_recreations, id: id) }.compact.flatten
+    @winter_recommendation_recs = Rails.cache.fetch('home/trial_recs', expires_in: 6.hours) do
+      queried_recreations = Recreation.public_recs.where(id: WINTER_RECOMMENDATION_IDS).load_async.to_a
+      WINTER_RECOMMENDATION_IDS.map { |id| pick_recreation_by_id(recreations: queried_recreations, id: id) }.compact.flatten
     end
 
     @yoshimoto_recs = Rails.cache.fetch('home/yoshimoto_recs', expires_in: 6.hours) do
