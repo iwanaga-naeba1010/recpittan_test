@@ -8,6 +8,10 @@ class Partners::ReportsController < Partners::ApplicationController
     @report = @order.build_report
   end
 
+  def edit
+    @report = @order.report
+  end
+
   def create
     @order.build_report(params_create)
     # NOTE: 冗長だけど、更新のために必要
@@ -23,10 +27,6 @@ class Partners::ReportsController < Partners::ApplicationController
     else
       render :new
     end
-  end
-
-  def edit
-    @report = @order.report
   end
 
   def update

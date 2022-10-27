@@ -8,6 +8,10 @@ class Partners::ZoomsController < Partners::ApplicationController
     @zoom = @order.build_zoom
   end
 
+  def edit
+    @zoom = @order.zoom
+  end
+
   def create
     @order.build_zoom(params_create)
     if @order.save
@@ -18,10 +22,6 @@ class Partners::ZoomsController < Partners::ApplicationController
     else
       render :new
     end
-  end
-
-  def edit
-    @zoom = @order.zoom
   end
 
   def update
