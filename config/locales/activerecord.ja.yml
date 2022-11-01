@@ -57,6 +57,7 @@ ja:
         nursing_care_level: 平均介護度
         request: レクへの要望
         genre: 事業所種別
+        user_company_id: ユーザー一覧
       partner:
         name: 名前
         title: 肩書き

@@ -7,8 +7,7 @@ ActiveAdmin.register Company do
   permit_params(
     :name, :facility_name, :person_in_charge_name, :person_in_charge_name_kana,
     :zip, :prefecture, :city, :street, :building, :tel,
-    :genre, :url, :feature, :capacity, :nursing_care_level, :request,
-    user_attributes: %i[id email],
+    :genre, :url, :feature, :capacity, :nursing_care_level, :request, :user_company_id,
     tag_ids: []
   )
 
@@ -20,6 +19,7 @@ ActiveAdmin.register Company do
   filter :person_in_charge_name
   filter :zip
   filter :prefecture
+  filter :user, collection: proc { User.customers.map { |i| [i.username, i.id] } }
 
   csv do
     column :id
@@ -103,13 +103,7 @@ ActiveAdmin.register Company do
 
       f.input :tags, label: '貸出可能品', as: :check_boxes, collection: Tags::Rental.all
 
-      f.inputs I18n.t('activerecord.models.user'), for: [:user, f.object.user || User.new({ company_id: f.object.id })] do |ff|
-        if ff.object.id.present?
-          ff.input :email, input_html: { disabled: true }, hint: 'ユーザーのEmail保護の観点から管理画面からは操作できません。システム責任者にご連絡ください。'
-        else
-          ff.input :email
-        end
-      end
+      f.input :user_company_id, as: :select, collection: User.customers.where(company_id: nil).map { |i| [i.username, i.id] }
     end
 
     f.actions
@@ -117,18 +111,12 @@ ActiveAdmin.register Company do
 
   controller do
     def create
-      password = [*'A'..'Z', *'a'..'z', *0..9].sample(16).join
-
       company = Company.new(permitted_params[:company])
-      company.user.email = permitted_params[:company].to_h[:user_attributes]['email']
-      company.user.password = password
-      company.user.confirmation_token = password
-      company.user.confirmed_at = Time.current
-      company.user.skip_confirmation_notification!
-      # TODO: 招待メールを送信
-      # UserMailer.with(user: @user, password: password).invite.deliver_now
+      user = User.find(company.user_company_id.to_i)
 
       company.save!
+      user.company_id = company.id
+      user.save!
       redirect_to admin_company_path(company.id)
 
       # NOTE(okubo): hashを検索するときにエラー出るので、cache入れてる
