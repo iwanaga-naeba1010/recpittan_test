@@ -4,7 +4,7 @@
 ActiveAdmin.register User do
   menu priority: 3
   permit_params(
-    %i[username username_kana role email]
+    %i[username username_kana role email memo]
   )
   actions :all
 
@@ -19,6 +19,7 @@ ActiveAdmin.register User do
     column :username_kana
     column :email
     column(:role, &:role_text)
+    column :memo
 
     actions
   end
@@ -30,6 +31,7 @@ ActiveAdmin.register User do
       row :username_kana
       row :email
       row(:role, &:role_text)
+      row :memo
 
       row :created_at
       row :updated_at
@@ -46,6 +48,7 @@ ActiveAdmin.register User do
       f.inputs do
         f.input :role, as: :select, collection: User.role.values.map { |i| [i.text, i] }
       end
+      f.input :memo
     end
 
     f.actions

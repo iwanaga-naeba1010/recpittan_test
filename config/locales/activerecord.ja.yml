@@ -40,6 +40,7 @@ ja:
         username: 名前
         username_kana: 名前(カナ)
         title: 役職
+        memo: メモ
       company:
         name: 法人名
         facility_name: 事業所名
@@ -58,6 +59,7 @@ ja:
         request: レクへの要望
         genre: 事業所種別
         user_company_id: ユーザー一覧
+        memo: メモ
       partner:
         name: 名前
         title: 肩書き
