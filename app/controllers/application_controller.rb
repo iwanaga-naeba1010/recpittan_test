@@ -39,6 +39,6 @@ class ApplicationController < ActionController::Base
   # NOTE(okubo): 主にreactからflashを与えるための目的で設置
   private def set_query_flash
     flash[:notice] = params[:notice] if params[:notice]
-    flash[:alert] = params[:alert] if params[:alert]
+    flash.now[:alert] = params[:alert] if params[:alert]
   end
 end

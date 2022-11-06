@@ -14,6 +14,12 @@ class CustomDevise::RegistrationsController < Devise::RegistrationsController
   end
 
   # POST /resource
+  def edit
+    @tags = Tags::Rental.all
+    super
+  end
+
+  # GET /resource/edit
   def create
     super do
       # TODO(okubo): SQL2回発行していることになっているので、解消したい
@@ -30,12 +36,6 @@ class CustomDevise::RegistrationsController < Devise::RegistrationsController
       管理画面案件URL： #{admin_company_url(resource.company.id)}
     MESSAGE
     SlackNotifier.new(channel: '#アクティブチャットスレッド').send('新規登録がありました', message)
-  end
-
-  # GET /resource/edit
-  def edit
-    @tags = Tags::Rental.all
-    super
   end
 
   # PUT /resource
