@@ -75,9 +75,16 @@ export const SecondStep: React.FC<Props> = (props) => {
       {/* 修正のタイミングで利用可能に */}
       {recreation !== undefined && (
         <>
-          <div className='d-flex mt-4'>
+          <div className='mt-4'>
             <h5 className='text-black font-weight-bold'>レク画像を追加</h5>
-            <p className='small mt-1 ms-3'>※添付可能ファイルは20MB以下で、形式はJPEG、PNGです</p>
+            <ul className='small my-0 ps-3'>
+              <li>レクの魅力を最大限伝えるためにも、こだわった素材をご活用ください</li>
+              <li>全体のイメージと作品等がある場合は合わせて最低2枚以上を添付してください</li>
+              <li>施設に配布するチラシの素材としても利用します</li>
+              <li>後ほど画像を追加/変更することも可能です</li>
+              <li>目安サイズ 16×9（iPhoneで横向きで撮影した写真の大きさでも可）</li>
+              <li>添付可能ファイルは20MB以下で、形式はJPEG、PNGです</li>
+            </ul>
           </div>
           <div className='row'>
             {recreation.images
