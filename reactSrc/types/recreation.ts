@@ -9,6 +9,7 @@ export interface Recreation extends BaseEnum {
   secondTitle: string;
   minutes: number;
   price: number;
+  amount: number;
   description: string;
   kind: BaseEnum;
   status: BaseEnum;
