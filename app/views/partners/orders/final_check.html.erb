@@ -9,7 +9,7 @@
 <div class="body bg-white p-3 mb-3">
   <% if @order.recreation_kind.online? %>
     <div class="mt-5 mb-5 text-black">
-      <h3 class="text-white font-weight-bold text-center p-2">
+      <h3 class="font-weight-bold text-center p-2">
         オンライン開催時チェック項目
       </h3>
       <div>
@@ -18,13 +18,16 @@
     </div>
     <div class="check-info">
       <p>■レク開催の確認について</p>
-      <div class="d-inline-flex">
+      <div class="d-md-inline-flex">
         <p class="rectitle-width">開催日時: <%= dotted_datetime @order.start_at %></p>
         <p class="rectitle-width">法人名: <%= @order.user.company.name %></p>
         <p class="rectitle-width">施設名: <%= @order.user.company.facility_name %></p>
-        <p class="pl-5">レク名: <%= @order.title %></p>
+        <p class="pl-5">レク名: <%= @order.recreation.title %></p>
       </div>
-      <div class="d-inline-flex">
+      <div>
+        <p class="pl-5">施設住所: <%= @order.full_address %></p>
+      </div>
+      <div class="d-md-inline-flex">
         <p class="rectitle-width">緊急連絡先1.施設: <%= @order.user.company&.tel %> </p>
         <p class="pl-5">緊急連絡先2.エブリ・プラス: 05053067767</p>
       </div>
@@ -39,7 +42,7 @@
       </div>
       <div class="form-check mb-3">
         ・zoomリンクをパートナー様ご自身で発行している場合は、録画をお願いいたします。録画した映像は、当社がお願いした際には提出をお願いいたします。トラブル時の対応とサービス品質担保が目的です。個人情報が含まれる為取り扱いには注意し、他の用途への利用や外部への共有は絶対に行わないようお願いいたします（録画方法と詳細:
-        <%= link_to "https://tayori.com/q/everyplus-partner/detail/371046/", "https://tayori.com/q/everyplus-partner/detail/371046/", target: '_blank', rel: 'noopener' %>
+        <%= link_to "https://tayori.com/q/everyplus-partner/detail/371046", "https://tayori.com/q/everyplus-partner/detail/371046", class: 'text-primary', target: '_blank', rel: 'noopener' %>
         ）
       </div>
       <div class="form-check mb-3">
@@ -49,12 +52,12 @@
         ・利用様の様子をできる限り見ながら開催したい場合、施設の方にカメラの位置の調節を依頼します
       </div>
       <div class="form-check mb-3">
-        ・時間に間に合わないや、その他トラブルが発生した場合はエブリ・プラスまで迅速に連絡をします
+        ・トラブルが発生した場合は、エブリ・プラスまで迅速に連絡をします
       </div>
     </div>
   <% elsif @order.recreation_kind.visit? %>
     <div class="mt-5 mb-5 text-black">
-      <h3 class="text-white font-weight-bold text-center p-2">
+      <h3 class="font-weight-bold text-center p-2">
         訪問時チェック項目
       </h3>
       <div>
@@ -68,7 +71,7 @@
         <p class="rectitle-width">開催日時: <%= dotted_datetime @order.start_at %></p>
         <p class="rectitle-width">法人名: <%= @order.user.company.name %></p>
         <p class="rectitle-width">施設名: <%= @order.user.company.facility_name %></p>
-        <p class="pl-5">レク名: <%= @order.title %></p>
+        <p class="pl-5">レク名: <%= @order.recreation.title %></p>
       </div>
       <div>
         <p class="pl-5">施設住所: <%= @order.full_address %></p>
@@ -84,7 +87,7 @@
         ・時間にどうしても間に合わないことがわかった場合、施設に電話をかけて報告をします
       </div>
       <div class="form-check mb-3">
-        ・時間に間に合わないや、その他トラブルが発生した場合はエブリ・プラスまで迅速に連絡をします
+        ・トラブルが発生した場合は、エブリ・プラスまで迅速に連絡をします
       </div>
 
       <p>■感染症対策</p>
@@ -121,7 +124,7 @@
     </div>
   <% else %>
     <div class="mt-5 mb-5 text-black">
-      <h3 class="text-white font-weight-bold text-center p-2">
+      <h3 class="font-weight-bold text-center p-2">
         郵送レクチェック項目
       </h3>
       <div>
@@ -134,7 +137,7 @@
         <p class="rectitle-width">開催日時: <%= dotted_datetime @order.start_at %></p>
         <p class="rectitle-width">法人名: <%= @order.user.company.name %></p>
         <p class="rectitle-width">施設名: <%= @order.user.company.facility_name %></p>
-        <p class="pl-5">レク名: <%= @order.title %></p>
+        <p class="pl-5">レク名: <%= @order.recreation.title %></p>
       </div>
       <div class="d-inline-flex">
         <p class="rectitle-width">緊急連絡先1.施設: <%= @order.user.company&.tel %> </p>
