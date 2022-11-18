@@ -152,9 +152,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_17_021004) do
     t.text "description"
     t.text "image"
     t.string "position"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_profiles_on_user_id"
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
   end
 
   create_table "recreation_images", force: :cascade do |t|
@@ -169,18 +168,15 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_17_021004) do
   create_table "recreation_prefectures", force: :cascade do |t|
     t.bigint "recreation_id", null: false
     t.string "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["recreation_id"], name: "index_recreation_prefectures_on_recreation_id"
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
   end
 
   create_table "recreation_profiles", force: :cascade do |t|
     t.bigint "recreation_id", null: false
     t.bigint "profile_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["profile_id"], name: "index_recreation_profiles_on_profile_id"
-    t.index ["recreation_id"], name: "index_recreation_profiles_on_recreation_id"
+    t.datetime "created_at", precision: nil, null: false
+    t.datetime "updated_at", precision: nil, null: false
   end
 
   create_table "recreation_tags", force: :cascade do |t|
@@ -285,11 +281,11 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_17_021004) do
   add_foreign_key "order_memos", "orders", name: "order_memos_order_id_fkey"
   add_foreign_key "orders", "recreations", name: "orders_recreation_id_fkey"
   add_foreign_key "orders", "users", name: "orders_user_id_fkey"
-  add_foreign_key "profiles", "users"
+  add_foreign_key "profiles", "users", name: "profiles_user_id_fkey"
   add_foreign_key "recreation_images", "recreations", name: "recreation_images_recreation_id_fkey"
-  add_foreign_key "recreation_prefectures", "recreations"
-  add_foreign_key "recreation_profiles", "profiles"
-  add_foreign_key "recreation_profiles", "recreations"
+  add_foreign_key "recreation_prefectures", "recreations", name: "recreation_prefectures_recreation_id_fkey"
+  add_foreign_key "recreation_profiles", "profiles", name: "recreation_profiles_profile_id_fkey"
+  add_foreign_key "recreation_profiles", "recreations", name: "recreation_profiles_recreation_id_fkey"
   add_foreign_key "recreation_tags", "recreations", name: "recreation_tags_recreation_id_fkey"
   add_foreign_key "recreation_tags", "tags", name: "recreation_tags_tag_id_fkey"
   add_foreign_key "recreations", "users", name: "recreations_user_id_fkey"
