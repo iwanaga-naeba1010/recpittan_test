@@ -11,6 +11,7 @@
 #  facility_name              :string
 #  feature                    :text
 #  genre                      :integer          default("residential_fee_based_nursing_home")
+#  memo                       :string
 #  name                       :string
 #  nursing_care_level         :string
 #  person_in_charge_name      :string

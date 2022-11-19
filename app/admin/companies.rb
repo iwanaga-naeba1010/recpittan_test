@@ -7,7 +7,7 @@ ActiveAdmin.register Company do
   permit_params(
     :name, :facility_name, :person_in_charge_name, :person_in_charge_name_kana,
     :zip, :prefecture, :city, :street, :building, :tel,
-    :genre, :url, :feature, :capacity, :nursing_care_level, :request, :user_company_id,
+    :genre, :url, :feature, :capacity, :nursing_care_level, :request, :user_company_id, :memo,
     tag_ids: []
   )
 
@@ -39,6 +39,7 @@ ActiveAdmin.register Company do
     column :capacity
     column :nursing_care_level
     column :request
+    column :memo
   end
 
   index do
@@ -69,6 +70,7 @@ ActiveAdmin.register Company do
       row :capacity
       row :nursing_care_level
       row :request
+      row :memo
       row :created_at
       row :updated_at
     end
@@ -104,6 +106,7 @@ ActiveAdmin.register Company do
       f.input :tags, label: '貸出可能品', as: :check_boxes, collection: Tags::Rental.all
 
       f.input :user_company_id, as: :select, collection: User.customers.where(company_id: nil).map { |i| [i.username, i.id] }
+      f.input :memo
     end
 
     f.actions

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_09_03_045519) do
+ActiveRecord::Schema[7.0].define(version: 2022_10_17_021004) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -54,6 +54,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_03_045519) do
     t.integer "capacity"
     t.string "nursing_care_level"
     t.text "request"
+    t.string "memo"
   end
 
   create_table "company_tags", force: :cascade do |t|
@@ -211,6 +212,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_03_045519) do
     t.integer "status", default: 0, null: false
     t.integer "kind", default: 0, null: false
     t.integer "number_of_past_events", default: 0, null: false
+    t.string "memo"
   end
 
   create_table "reports", force: :cascade do |t|
@@ -257,6 +259,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_03_045519) do
     t.string "username"
     t.string "username_kana"
     t.string "title"
+    t.string "memo"
   end
 
   create_table "zooms", force: :cascade do |t|
