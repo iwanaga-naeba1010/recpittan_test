@@ -91,7 +91,6 @@ RSpec.describe '/partners/recreations', type: :system do
 
     feature 'Recreation edit' do
       changed_title = 'changed title'
-      changed_price = 10000
 
       scenario 'title form', js: true do
         expect(page).to have_content('レクリエーション詳細')
@@ -126,18 +125,6 @@ RSpec.describe '/partners/recreations', type: :system do
         click_button('削除')
         sleep 5
         expect(recreation.recreation_prefectures.size).to eq 0
-      end
-
-      scenario 'price form', js: true do
-        expect(page).to have_content('レクリエーション詳細')
-        expect(page).to have_content(recreation.title)
-        click_on('金額・メディア・その他の情報')
-        expect(page).to have_current_path(edit_partners_recreation_path(recreation), ignore_query: true)
-        expect(page).to have_content('金額・メディア・その他の情報を入力')
-        fill_in 'price', with: changed_price
-        click_button('保存する')
-        expect(page).to have_content 'レクを更新しました！'
-        expect(partner.recreations.first.price).to eq changed_price
       end
 
       scenario 'crate recreation_image', js: true do

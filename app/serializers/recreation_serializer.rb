@@ -56,6 +56,7 @@ class RecreationSerializer
       minutes: recreation.minutes,
       description: recreation.description,
       price: recreation.price,
+      amount: recreation.amount,
       kind: { id: recreation.kind.value, key: recreation.kind, text: recreation.kind_text },
       status: { id: recreation.status.value, key: recreation.status, text: recreation.status_text },
       category: { id: recreation.category.value, key: recreation.category, text: recreation.category_text },
