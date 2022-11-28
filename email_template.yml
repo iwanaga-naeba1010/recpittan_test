@@ -163,15 +163,20 @@
 
     えぶりプラスをご利用いただきありがとうございます。
 
-    <%= @order.user.company.facility_name %>から正式依頼が届いています。
+    <%= @order.user.company.facility_name %>様から<%= @order.recreation.title %>のレクに正式依頼が届いています。
     下記のリンクから内容をご確認ください。
     ※ページにアクセスするにはログインが必要です。
     <%= link_to confirm_partners_order_url(@order.id), confirm_partners_order_url(@order.id) %>
 
+    よくある質問:【正式依頼について】
+    https://tayori.com/q/everyplus-partner/detail/312341/
+
     注意事項
-    ・正式依頼は一度承認するとキャンセルができないためよくご確認いただきますようお願いいたします。
+    ・正式依頼は一度承認するとキャンセルができないため、よくご確認いただきますようお願いいたします。
     ・正式依頼をお断りする場合、施設はなぜお断りをされたのか分からないため、その理由を施設にチャットで伝えるようにしましょう。
     ・材料費が発生するなど人数確認が必要なレクの場合、期日までに参加人数の確認の依頼をお願いいたします。
+    ・よくある質問:キャンセルについて
+    https://tayori.com/q/everyplus-partner/detail/279679/
 
     ※このメールアドレスは送信専用です。返信をいただいてもご回答できませんのでご了承ください。
 - title: 終了報告がお断りされました
