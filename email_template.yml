@@ -129,11 +129,16 @@
     <%= @order.recreation.user.username %> 様
 
     えぶりプラスをご利用いただきありがとうございます。
-    <%= @order.user.company.facility_name %>から<%= @order.recreation.title %>のレクに相談・依頼が届きました。
+    <%= @order.user.company.facility_name %>様から<%= @order.recreation.title %>のレクに相談・依頼が届きました。
 
     下記リンクから内容をご確認ください。
     ※ページにアクセスするにはログインが必要です。
     <%= link_to chat_partners_order_url(@order.id), chat_partners_order_url(@order.id) %>
+
+    ※注意事項
+    施設からお返事が来ない場合、通常は2、3日中にお返事をいただけると思いますが、施設からの返事がない場合は運営までお問い合わせください。
+    よくある質問:【1.施設から「依頼相談メール」が届く】
+    https://tayori.com/q/everyplus-partner/detail/312340/
 
     ※このメールアドレスは送信専用です。返信をいただいてもご回答できませんのでご了承ください。
 - title: 施設から新着メッセージが届きました
