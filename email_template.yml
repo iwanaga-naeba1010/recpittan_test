@@ -148,7 +148,7 @@
     <%= @order.recreation.user.username %> 様
 
     えぶりプラスをご利用いただきありがとうございます。
-    <%= @order.user.company.facility_name %>からメッセージが届いています。
+    <%= @order.user.company.facility_name %>様から<%= @order.recreation.title %>のレクにメッセージが届いています。
 
     下記のリンクからメッセージをご確認ください。
     ※ページにアクセスするにはログインが必要です。
