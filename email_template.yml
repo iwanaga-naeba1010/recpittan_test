@@ -68,10 +68,9 @@
   body: |
     <%= @order.user.username %> 様
 
-    えぶりプラスをご利用いただきありがとうございます。
-    正式依頼した<%= @order.recreation.title %>がパートナー様より承認されました。
-    承認されたためレクの開催が決まりました。
-    開催日を楽しみに待ちましょう
+    「えぶりプラス」をご利用いただきありがとうございます。
+    正式依頼したレク<%= @order.recreation.title %>がパートナー様より承認されました。
+    レクの開催が確定しましたので開催日を楽しみにお待ちくください。
 
     レク詳細ページのリンクはこちら
     <%= link_to customers_order_url(@order.id), customers_order_url(@order.id) %>
