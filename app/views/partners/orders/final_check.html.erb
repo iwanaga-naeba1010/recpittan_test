@@ -67,7 +67,7 @@
     </div>
     <div class="check-info">
       <p>■レク開催の確認について</p>
-      <div class="d-inline-flex">
+      <div class="d-md-inline-flex">
         <p class="rectitle-width">開催日時: <%= dotted_datetime @order.start_at %></p>
         <p class="rectitle-width">法人名: <%= @order.user.company.name %></p>
         <p class="rectitle-width">施設名: <%= @order.user.company.facility_name %></p>
@@ -133,13 +133,13 @@
     </div>
     <div class="check-info">
       <p>■レク開催の確認について</p>
-      <div class="d-inline-flex">
+      <div class="d-md-inline-flex">
         <p class="rectitle-width">開催日時: <%= dotted_datetime @order.start_at %></p>
         <p class="rectitle-width">法人名: <%= @order.user.company.name %></p>
         <p class="rectitle-width">施設名: <%= @order.user.company.facility_name %></p>
         <p class="pl-5">レク名: <%= @order.recreation_title %></p>
       </div>
-      <div class="d-inline-flex">
+      <div class="d-md-inline-flex">
         <p class="rectitle-width">緊急連絡先1.施設: <%= @order.user.company&.tel %> </p>
         <p class="pl-5">緊急連絡先2.エブリ・プラス: 05053067767</p>
       </div>
