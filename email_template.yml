@@ -187,7 +187,8 @@
 
     えぶりプラスをご利用いただきありがとうございます。
 
-    <%= @order.start_at&.strftime('%Y.%m.%d %H:%M') %> <%= @order.user.company.facility_name %> <%= @order.recreation.title %> の終了報告が施設様よりお断りされました。
+    <%= @order.start_at&.strftime('%Y.%m.%d %H:%M') %> の<%= @order.user.company.facility_name %> 様の
+    <%= @order.recreation.title %> の終了報告が施設様よりお断りされました。
     施設様にお断りされた理由をチャットで伺いましょう。
     施設様とメッセージ後、再度終了報告をお願い致します。
 
