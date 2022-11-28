@@ -282,26 +282,25 @@
     メール:info@everyplus.jp
     ーーーーーーーーーー
 
-- title: 3日前確認
+- title: <%= @order.start_at&.strftime('%Y.%m.%d %H:%M') %> <%= @order.user.company.facility_name %> 様での開催の3日前確認のお願い
   explanation: PT:3日前確認
   kind: final_check # 16
   body: |
     えぶりプラスです。
     いつもご協力をいただき、誠にありがとうございます。
 
-    <%= @order.start_at&.strftime('%Y.%m.%d %H:%M') %> <%= @order.user.company.facility_name %> <%= @order.recreation.title %> の
-    開催日が近づいて参りましたので、事前確認のご協力をお願い致します。
-    楽しい時間を皆様を現場の皆様心待ちにしています！
-    ----------------------------------------
-    ■開催情報と事前確認確認
+    <%= @order.start_at&.strftime('%Y.%m.%d %H:%M') %> <%= @order.user.company.facility_name %> 様での<%= @order.recreation.title %> の
+    開催日が近づいて参りました。
+    必ず 下記リンクより、開催確認情報に間違いないかのご確認と、注意点のチェックをお願い致します。
+    ↓↓クリックして開催情報に間違いがないか確認し必ずチェックしてください↓↓
     <%= link_to final_check_partners_order_url(@order.id), final_check_partners_order_url(@order.id) %>
     ----------------------------------------
     ■終了報告について
-    開催後、現場を離れる前に報酬を受け取るために終了報告記入をお願い致します。
-    内容を施設様が内容を確認します。
+    ・開催後、現場を離れる前に報酬を受け取るために終了報告記入をお願い致します。内容を施設様が内容を確認します。
     施設様が内容を確認し承認すると、開催月の翌々月末に指定の口座に報酬が入金されます。
-    ----------------------------------------
-    ■終了報告
+
+    ↓↓終了報告リンク↓↓
     <%= link_to new_partners_order_report_url(@order.id),  new_partners_order_report_url(@order.id) %>
     ----------------------------------------
+    楽しい時間を現場の皆様が心待ちにしています。
     ※このメールアドレスは送信専用です。返信をいただいてもご回答できませんのでご了承ください。
