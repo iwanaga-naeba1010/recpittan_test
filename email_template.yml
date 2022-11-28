@@ -204,11 +204,15 @@
 
     えぶりプラスをご利用いただきありがとうございます。
     <%= @order.start_at&.strftime('%Y.%m.%d %H:%M') %>の<%= @order.user.company.facility_name %>施設の <%= @order.recreation.title %> の終了報告が施設様より承認されました。
-    この案件は以上となります。お疲れ様でした！
-    次の案件をお待ちください。
+
+    施設からのアンケート評価は下記の方法で確認いただけます。
+    https://tayori.com/q/everyplus-partner/detail/372857/
 
     振り込みについて
     ・報酬の受け取りは施設様が終了報告を承認してから翌々月末に行われます。土日祝日の場合次の営業日となります。
+
+    よくある質問:【7.開催報酬の入金】
+    https://tayori.com/q/everyplus-partner/detail/312346/
 
     ※このメールアドレスは送信専用です。返信をいただいてもご回答できませんのでご了承ください。
 - title: 終了報告の投稿依頼のお知らせ
