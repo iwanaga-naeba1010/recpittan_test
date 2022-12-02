@@ -239,10 +239,12 @@ ActiveAdmin.register Order do
       )
 
       current_time = Time.zone.now
+      register_year = current_time.month == 12 ? current_time.year + 1 : current_time.year
+      register_month = current_time.month == 12 ? 1 : current_time.month + 1
       # NOTE(okubo): order_datesを作成しないと正式依頼で日付が表示されない
       order.order_dates.build(
-        year: current_time.year,
-        month: current_time.month + 1,
+        year: register_year,
+        month: register_month,
         date: current_time.day,
         start_hour: '10',
         start_minute: '00',
