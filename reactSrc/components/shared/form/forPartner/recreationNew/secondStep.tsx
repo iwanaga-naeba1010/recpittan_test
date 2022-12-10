@@ -27,14 +27,6 @@ export const SecondStep: React.FC<Props> = (props) => {
   const materialRef = useRef(null);
   const handleSliderRefClickFileInput = (): void => sliderRef.current.click();
   const handleMaterialRefClickFileInput = (): void => materialRef.current.click();
-  const isShowMaterialPrice = (): boolean => {
-    if (recreation === undefined) {
-      const kind = getValues('kind');
-      return kind === 'mailing';
-    }
-    return recreation?.kind.key === 'mailing';
-  };
-
   const isShowAdditionalFacilityFee = (): boolean => {
     if (recreation === undefined) {
       const kind = getValues('kind');
@@ -49,8 +41,8 @@ export const SecondStep: React.FC<Props> = (props) => {
       {recreation === undefined && <RecreationPrice register={register} />}
       {recreation !== undefined && <RecreationEditPrice recreation={recreation} />}
 
-      {(recreation === undefined && isShowMaterialPrice()) && <RecreationMaterialPrice register={register} />}
-      {(recreation !== undefined && isShowMaterialPrice()) && <RecreationEditMaterialPrice recreation={recreation} />}
+      {recreation === undefined && <RecreationMaterialPrice register={register} />}
+      {recreation !== undefined && <RecreationEditMaterialPrice recreation={recreation} />}
 
       {(recreation === undefined && isShowAdditionalFacilityFee()) && <RecreationAdditionalFacilityFee register={register} />}
       {(recreation !== undefined && isShowAdditionalFacilityFee()) && <RecreationEditAdditionalFacilityFee recreation={recreation} />}
