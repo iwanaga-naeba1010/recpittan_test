@@ -58,6 +58,8 @@ class User < ApplicationRecord
 
   has_many :profiles, dependent: :destroy
 
+  has_many :user_memos, dependent: :destroy
+
   scope :customers, -> { where(role: :customer) }
 
   # NOTE: deviseの認証が発火した時に動く。

@@ -25,16 +25,23 @@ ActiveAdmin.register User do
   end
 
   show do
-    attributes_table do
-      row :id
-      row :username
-      row :username_kana
-      row :email
-      row(:role, &:role_text)
-      row :memo
+    tabs do
+      tab '詳細' do
+        attributes_table do
+          row :id
+          row :username
+          row :username_kana
+          row :email
+          row(:role, &:role_text)
+          row :memo
 
-      row :created_at
-      row :updated_at
+          row :created_at
+          row :updated_at
+        end
+      end
+      tab 'メモ' do
+        render 'admin/users/memo', user: user
+      end
     end
   end
 
