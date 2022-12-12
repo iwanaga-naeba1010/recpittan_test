@@ -20,5 +20,7 @@
 #
 FactoryBot.define do
   factory :user_memo do
+    user
+    body { 'MyText' }
   end
 end

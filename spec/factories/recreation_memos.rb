@@ -20,5 +20,7 @@
 #
 FactoryBot.define do
   factory :recreation_memo do
+    recreation
+    body { 'MyText' }
   end
 end

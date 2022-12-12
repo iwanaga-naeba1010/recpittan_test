@@ -20,5 +20,7 @@
 #
 FactoryBot.define do
   factory :company_memo do
+    company
+    body { 'MyText' }
   end
 end
