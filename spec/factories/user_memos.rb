@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: user_memos
@@ -18,6 +20,5 @@
 #
 FactoryBot.define do
   factory :user_memo do
-    
   end
 end

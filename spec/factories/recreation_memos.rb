@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: recreation_memos
@@ -18,6 +20,5 @@
 #
 FactoryBot.define do
   factory :recreation_memo do
-    
   end
 end
