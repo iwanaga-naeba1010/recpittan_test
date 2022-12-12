@@ -1,6 +1,6 @@
 # == Schema Information
 #
-# Table name: user_recreations
+# Table name: recreation_memos
 #
 #  id            :bigint           not null, primary key
 #  body          :text
@@ -10,11 +10,14 @@
 #
 # Indexes
 #
-#  index_user_recreations_on_recreation_id  (recreation_id)
+#  index_recreation_memos_on_recreation_id  (recreation_id)
 #
 # Foreign Keys
 #
 #  fk_rails_...  (recreation_id => recreations.id)
 #
-class UserRecreation < ApplicationRecord
+require 'rails_helper'
+
+RSpec.describe RecreationMemo, type: :model do
+  pending "add some examples to (or delete) #{__FILE__}"
 end

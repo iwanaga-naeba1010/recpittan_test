@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_12_11_135038) do
+ActiveRecord::Schema[7.0].define(version: 2022_12_12_010441) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -55,6 +55,14 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_11_135038) do
     t.string "nursing_care_level"
     t.text "request"
     t.string "memo"
+  end
+
+  create_table "company_memos", force: :cascade do |t|
+    t.bigint "company_id", null: false
+    t.text "body"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["company_id"], name: "index_company_memos_on_company_id"
   end
 
   create_table "company_tags", force: :cascade do |t|
@@ -166,6 +174,14 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_11_135038) do
     t.string "filename"
   end
 
+  create_table "recreation_memos", force: :cascade do |t|
+    t.bigint "recreation_id", null: false
+    t.text "body"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["recreation_id"], name: "index_recreation_memos_on_recreation_id"
+  end
+
   create_table "recreation_prefectures", force: :cascade do |t|
     t.bigint "recreation_id", null: false
     t.string "name"
@@ -246,14 +262,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_11_135038) do
     t.index ["user_id"], name: "index_user_memos_on_user_id"
   end
 
-  create_table "user_recreations", force: :cascade do |t|
-    t.bigint "recreation_id", null: false
-    t.text "body"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["recreation_id"], name: "index_user_recreations_on_recreation_id"
-  end
-
   create_table "users", force: :cascade do |t|
     t.integer "role", default: 0, null: false
     t.string "email", default: "", null: false
@@ -293,6 +301,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_11_135038) do
 
   add_foreign_key "chats", "orders", name: "chats_order_id_fkey"
   add_foreign_key "chats", "users", name: "chats_user_id_fkey"
+  add_foreign_key "company_memos", "companies"
   add_foreign_key "company_tags", "companies", name: "company_tags_company_id_fkey"
   add_foreign_key "company_tags", "tags", name: "company_tags_tag_id_fkey"
   add_foreign_key "evaluations", "reports", name: "evaluations_report_id_fkey"
@@ -303,6 +312,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_11_135038) do
   add_foreign_key "orders", "users", name: "orders_user_id_fkey"
   add_foreign_key "profiles", "users"
   add_foreign_key "recreation_images", "recreations", name: "recreation_images_recreation_id_fkey"
+  add_foreign_key "recreation_memos", "recreations"
   add_foreign_key "recreation_prefectures", "recreations"
   add_foreign_key "recreation_profiles", "profiles"
   add_foreign_key "recreation_profiles", "recreations"
@@ -311,7 +321,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_11_135038) do
   add_foreign_key "recreations", "users", name: "recreations_user_id_fkey"
   add_foreign_key "reports", "orders", name: "reports_order_id_fkey"
   add_foreign_key "user_memos", "users"
-  add_foreign_key "user_recreations", "recreations"
   add_foreign_key "users", "companies", name: "users_company_id_fkey"
   add_foreign_key "zooms", "orders", name: "zooms_order_id_fkey"
 end

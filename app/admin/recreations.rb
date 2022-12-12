@@ -44,81 +44,89 @@ ActiveAdmin.register Recreation do
   end
 
   show do
-    attributes_table do
-      row :id
-      row :user
-      row :title
-      row :second_title
-      row(:kind, &:kind_text)
-      row(:category, &:category_text)
-      row(:status, &:status_text)
-      row :minutes
-      row :description
-      row :flow_of_day
-      row :borrow_item
-      row :bring_your_own_item
-      row :extra_information
-      row :youtube_id
-      row :base_code
-      row :capacity
-      row :flyer_color
-      row :price
-      row :number_of_past_events
-      row :material_price
-      row :amount
-      row :material_amount
-      row :additional_facility_fee
+    tabs do
+      tab '詳細' do
+        attributes_table do
+          row :id
+          row :user
+          row :title
+          row :second_title
+          row(:kind, &:kind_text)
+          row(:category, &:category_text)
+          row(:status, &:status_text)
+          row :minutes
+          row :description
+          row :flow_of_day
+          row :borrow_item
+          row :bring_your_own_item
+          row :extra_information
+          row :youtube_id
+          row :base_code
+          row :capacity
+          row :flyer_color
+          row :price
+          row :number_of_past_events
+          row :material_price
+          row :amount
+          row :material_amount
+          row :additional_facility_fee
 
-      panel t('activerecord.models.profile'), style: 'margin-top: 30px;' do
-        table_for recreation.profile do
-          column :id
-          column :name
-          column :title
-          column :position
-          column('URL') { |profile| link_to 'URL', admin_profile_path(profile) }
+          panel t('activerecord.models.profile'), style: 'margin-top: 30px;' do
+            table_for recreation.profile do
+              column :id
+              column :name
+              column :title
+              column :position
+              column('URL') { |profile| link_to 'URL', admin_profile_path(profile) }
+            end
+          end
+
+          row :is_public_price
+          row :memo
+
+          row :created_at
+          row :updated_at
+        end
+
+        panel 'イベント種別', style: 'margin-top: 30px;' do
+          table_for recreation.tags.events do
+            column :id
+            column :name
+          end
+        end
+
+        panel 'カテゴリー', style: 'margin-top: 30px;' do
+          table_for recreation.tags.categories do
+            column :id
+            column :name
+          end
+        end
+
+        panel '想定ターゲット', style: 'margin-top: 30px;' do
+          table_for recreation.tags.targets do
+            column :id
+            column :name
+          end
+        end
+
+        panel t('activerecord.models.recreation_image'), style: 'margin-top: 30px;' do
+          table_for recreation.recreation_images do
+            column t('activerecord.attributes.recreation_image.image') do |rec|
+              image_tag rec&.image&.to_s, width: 50, height: 50
+            end
+            column(:kind, &:kind_text)
+          end
+        end
+
+        panel t('activerecord.models.recreation_prefecture'), style: 'margin-top: 30px;' do
+          table_for recreation.recreation_prefectures do
+            column(:name)
+          end
         end
       end
 
-      row :is_public_price
-      row :memo
-
-      row :created_at
-      row :updated_at
-    end
-
-    panel 'イベント種別', style: 'margin-top: 30px;' do
-      table_for recreation.tags.events do
-        column :id
-        column :name
-      end
-    end
-
-    panel 'カテゴリー', style: 'margin-top: 30px;' do
-      table_for recreation.tags.categories do
-        column :id
-        column :name
-      end
-    end
-
-    panel '想定ターゲット', style: 'margin-top: 30px;' do
-      table_for recreation.tags.targets do
-        column :id
-        column :name
-      end
-    end
-
-    panel t('activerecord.models.recreation_image'), style: 'margin-top: 30px;' do
-      table_for recreation.recreation_images do
-        column t('activerecord.attributes.recreation_image.image') do |rec|
-          image_tag rec&.image&.to_s, width: 50, height: 50
-        end
-        column(:kind, &:kind_text)
-      end
-    end
-
-    panel t('activerecord.models.recreation_prefecture'), style: 'margin-top: 30px;' do
-      table_for recreation.recreation_prefectures do
-        column(:name)
+      tab 'メモ' do
+        render 'admin/recreations/memo', recreation: recreation
       end
     end
   end

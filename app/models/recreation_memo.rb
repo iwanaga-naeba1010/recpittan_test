@@ -1,6 +1,6 @@
 # == Schema Information
 #
-# Table name: user_recreations
+# Table name: recreation_memos
 #
 #  id            :bigint           not null, primary key
 #  body          :text
@@ -10,14 +10,12 @@
 #
 # Indexes
 #
-#  index_user_recreations_on_recreation_id  (recreation_id)
+#  index_recreation_memos_on_recreation_id  (recreation_id)
 #
 # Foreign Keys
 #
 #  fk_rails_...  (recreation_id => recreations.id)
 #
-FactoryBot.define do
-  factory :user_recreation do
-    
-  end
+class RecreationMemo < ApplicationRecord
+  belongs_to :recreation
 end
