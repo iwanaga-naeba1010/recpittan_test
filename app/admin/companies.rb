@@ -40,6 +40,8 @@ ActiveAdmin.register Company do
     column :nursing_care_level
     column :request
     column :memo
+    column :created_at
+    column :updated_at
   end
 
   index do
