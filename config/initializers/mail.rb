@@ -11,7 +11,7 @@ if Rails.env.production?
     user_name: ENV['MAIL_USER_NAME'],
     password: ENV['MAIL_PASSWORD'],
     authentication: 'plain',
-    enable_starttls_auto: false
+    enable_starttls_auto: true
   }
 elsif Rails.env.development?
   ActionMailer::Base.perform_caching = false
