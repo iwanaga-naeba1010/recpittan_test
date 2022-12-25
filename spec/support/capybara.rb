@@ -3,7 +3,7 @@
 if ENV['LOCAL'].present? && ENV['LOCAL'] == 'true'
   Capybara.register_driver :remote_chrome do |app|
     url = ENV.fetch('SELENIUM_DRIVER_URL')
-    caps = ::Selenium::WebDriver::Remote::Capabilities.chrome(
+    caps = Selenium::WebDriver::Remote::Capabilities.chrome(
       'goog:chromeOptions' => {
         'args' => [
           'no-sandbox',
@@ -32,7 +32,7 @@ else
   RSpec.configure do |config|
     Capybara.register_driver :selenium_chrome_headless do |app|
       Capybara::Selenium::Driver.load_selenium
-      browser_options = ::Selenium::WebDriver::Chrome::Options.new
+      browser_options = Selenium::WebDriver::Chrome::Options.new
       browser_options.args << '--window-size=1400,2000'
       browser_options.args << '--headless'
       browser_options.args << '--lang=ja-JP'
