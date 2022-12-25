@@ -174,8 +174,8 @@
               <% if @recreation.kind.visit? && @recreation.recreation_prefectures.exists? %>
                 <div class="border p-3">
                   <h4 class="title">対象エリア</h4>
-                  <% @recreation.recreation_prefectures.each do |prefecture| %>
-                    <div class="text-muted">・<%= prefecture.name %></div>
+                  <% @recreation.recreation_prefectures.pluck(:name).uniq.each do |prefecture_name| %>
+                    <div class="text-muted">・<%= prefecture_name %></div>
                   <% end %>
                 </div>
               <% end %>

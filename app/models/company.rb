@@ -33,6 +33,7 @@ class Company < ApplicationRecord
 
   has_many :company_tags, dependent: :destroy
   has_many :tags, through: :company_tags
+  has_many :company_memos, dependent: :destroy
 
   validates :name, :facility_name, presence: true
 

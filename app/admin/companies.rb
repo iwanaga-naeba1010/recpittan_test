@@ -40,6 +40,8 @@ ActiveAdmin.register Company do
     column :nursing_care_level
     column :request
     column :memo
+    column :created_at
+    column :updated_at
   end
 
   index do
@@ -52,32 +54,40 @@ ActiveAdmin.register Company do
   end
 
   show do
-    attributes_table do
-      row :id
-      row :name
-      row :facility_name
-      row :person_in_charge_name
-      row :person_in_charge_name_kana
-      row :zip
-      row :city
-      row :street
-      row :building
-      row :tel
-      row :prefecture
-      row(:genre, &:genre_text)
-      row :url
-      row :feature
-      row :capacity
-      row :nursing_care_level
-      row :request
-      row :memo
-      row :created_at
-      row :updated_at
-    end
+    tabs do
+      tab '詳細' do
+        attributes_table do
+          row :id
+          row :name
+          row :facility_name
+          row :person_in_charge_name
+          row :person_in_charge_name_kana
+          row :zip
+          row :city
+          row :street
+          row :building
+          row :tel
+          row :prefecture
+          row(:genre, &:genre_text)
+          row :url
+          row :feature
+          row :capacity
+          row :nursing_care_level
+          row :request
+          row :memo
+          row :created_at
+          row :updated_at
+        end
 
-    panel I18n.t('activerecord.models.user'), style: 'margin-top: 30px;' do
-      attributes_table_for company.user do
-        row :email
+        panel I18n.t('activerecord.models.user'), style: 'margin-top: 30px;' do
+          attributes_table_for company.user do
+            row :email
+          end
+        end
+      end
+
+      tab 'メモ' do
+        render 'admin/companies/memo', company: company
       end
     end
   end
