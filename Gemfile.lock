@@ -209,12 +209,12 @@ GEM
     formtastic_i18n (0.7.0)
     globalid (1.0.0)
       activesupport (>= 5.0)
-    haml (6.0.12)
+    haml (6.1.1)
       temple (>= 0.8.2)
       thor
       tilt
-    haml_lint (0.42.0)
-      haml (>= 4.0, < 6.1)
+    haml_lint (0.43.0)
+      haml (>= 4.0, < 6.2)
       parallel (~> 1.10)
       rainbow
       rubocop (>= 0.50.0)
