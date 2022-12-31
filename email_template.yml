@@ -14,7 +14,7 @@
   explanation: 顧客:パスワード再発行
   kind: customer_password_change # 1
   body: |
-    「えぶりプラス」をご利用いただきありがとうございます。
+    えぶりプラスをご利用いただきありがとうございます。
 
     パスワード再設定用のリンクを送付いたします。
     下記のリンクより、変更をお願いいたします。
@@ -36,8 +36,7 @@
     ※チャットページにアクセスするにはログインが必要です。
     <%= link_to chat_customers_order_url(@order.id), chat_customers_order_url(@order.id) %>
 
-    ※よくある質問:【開催の相談〜開催の決定の流れについて】
-
+    ※よくある質問：【開催の相談〜開催の決定の流れについて】
     https://tayori.com/faq/5c0acac6bcdec23e3eac9bdf17d9e7f727d1c3cb/detail/b7161937404a65dd83b8fc4963d88ccb108f0d52/
 
     パートナーからお返事が来ない場合、通常は2、3日中にお返事をいただけると思いますが、パートナーからの返事がない場合は運営までお問い合わせください。
@@ -56,7 +55,7 @@
     ※チャットページにアクセスするにはログインが必要です。
     <%= link_to chat_customers_order_url(@order.id), chat_customers_order_url(@order.id) %>
 
-    ※よくある質問:【交通費や諸経費、追加施設数や人数の変更について】
+    ※よくある質問：【交通費や諸経費、追加施設数や人数の変更について】
     https://tayori.com/faq/5c0acac6bcdec23e3eac9bdf17d9e7f727d1c3cb/detail/ccb75e3ef452336ca8b02fb5cdd442776155da8c/
 
     パートナーからお返事が来ない場合、通常は2、3日中にお返事をいただけると思いますが、パートナーからの返事がない場合は運営までお問い合わせください。
@@ -77,6 +76,7 @@
 
     注意事項
     ・承認後、レクをキャンセルする事はできません。
+
 
     ※このメールアドレスは送信専用です。返信をいただいてもご回答できませんのでご了承ください。
 - title: パートナー様が正式依頼をお断りされました
@@ -104,9 +104,9 @@
 
     終了報告とは、パートナー様と施設様レクが開催された事や金額を確認し、請求書を発行するために行っております。
     内容ご確認の上、承認をお願い致します。
-    承認後、確認いただいた内容の請求書を
-    ・メール添付:月末〜翌2日ごろ
-    ・郵送版:翌3日〜8日ごろ
+    承認後、確認いただいた内容の請求書を　
+    ・メール添付：月末〜翌2日ごろ
+    ・郵送版：翌3日〜8日ごろ
     までに発行致します。
 
     終了報告確認ページへのリンクはこちら
@@ -115,10 +115,9 @@
     ※開催終了時に必ず請求情報のご記入をお願いいたします。
     https://tayori.com/faq/5c0acac6bcdec23e3eac9bdf17d9e7f727d1c3cb/detail/980033420901f41fcfce0edd6d8f9aefdee5c576/
 
-
     注意事項
     ・終了報告を「お断り」する場合パートナー様がなぜお断りされたのか理解するために、なぜお断りをするのかその理由をチャットでお伝えください。
-    よくある質問:【開催後の手続き「終了報告の確認」について】
+    よくある質問：【開催後の手続き「終了報告の確認」について】
     https://tayori.com/faq/5c0acac6bcdec23e3eac9bdf17d9e7f727d1c3cb/detail/fdb32bc779f19ead2842333957a3b60ff549d968/
 
     ※このメールアドレスは送信専用です。返信をいただいてもご回答できませんのでご了承ください。
@@ -137,7 +136,7 @@
 
     ※注意事項
     施設からお返事が来ない場合、通常は2、3日中にお返事をいただけると思いますが、施設からの返事がない場合は運営までお問い合わせください。
-    よくある質問:【1.施設から「依頼相談メール」が届く】
+    よくある質問：【1.施設から「依頼相談メール」が届く】
     https://tayori.com/q/everyplus-partner/detail/312340/
 
     ※このメールアドレスは送信専用です。返信をいただいてもご回答できませんのでご了承ください。
@@ -168,14 +167,14 @@
     ※ページにアクセスするにはログインが必要です。
     <%= link_to confirm_partners_order_url(@order.id), confirm_partners_order_url(@order.id) %>
 
-    よくある質問:【正式依頼について】
+    よくある質問：【正式依頼について】
     https://tayori.com/q/everyplus-partner/detail/312341/
 
     注意事項
     ・正式依頼は一度承認するとキャンセルができないため、よくご確認いただきますようお願いいたします。
     ・正式依頼をお断りする場合、施設はなぜお断りをされたのか分からないため、その理由を施設にチャットで伝えるようにしましょう。
     ・材料費が発生するなど人数確認が必要なレクの場合、期日までに参加人数の確認の依頼をお願いいたします。
-    ・よくある質問:キャンセルについて
+    ・よくある質問：キャンセルについて
     https://tayori.com/q/everyplus-partner/detail/279679/
 
     ※このメールアドレスは送信専用です。返信をいただいてもご回答できませんのでご了承ください。
@@ -187,8 +186,7 @@
 
     えぶりプラスをご利用いただきありがとうございます。
 
-    <%= @order.start_at&.strftime('%Y.%m.%d %H:%M') %> の<%= @order.user.company.facility_name %> 様の
-    <%= @order.recreation.title %> の終了報告が施設様よりお断りされました。
+    <%= @order.start_at&.strftime('%Y.%m.%d %H:%M') %> の<%= @order.user.company.facility_name %> 様での<%= @order.recreation.title %> の終了報告が施設様よりお断りされました。
     施設様にお断りされた理由をチャットで伺いましょう。
     施設様とメッセージ後、再度終了報告をお願い致します。
 
@@ -203,15 +201,14 @@
     <%= @order.recreation.user.username %> 様
 
     えぶりプラスをご利用いただきありがとうございます。
-    <%= @order.start_at&.strftime('%Y.%m.%d %H:%M') %>の<%= @order.user.company.facility_name %>施設の <%= @order.recreation.title %> の終了報告が施設様より承認されました。
+    <%= @order.start_at&.strftime('%Y.%m.%d %H:%M') %>の<%= @order.user.company.facility_name %>様での <%= @order.recreation.title %> の終了報告が施設様より承認されました。
 
     施設からのアンケート評価は下記の方法で確認いただけます。
     https://tayori.com/q/everyplus-partner/detail/372857/
 
     振り込みについて
     ・報酬の受け取りは施設様が終了報告を承認してから翌々月末に行われます。土日祝日の場合次の営業日となります。
-
-    よくある質問:【7.開催報酬の入金】
+    よくある質問：【7.開催報酬の入金】
     https://tayori.com/q/everyplus-partner/detail/312346/
 
     ※このメールアドレスは送信専用です。返信をいただいてもご回答できませんのでご了承ください。
@@ -224,7 +221,6 @@
     えぶりプラスをご利用いただきありがとうございます。
     <%= @order.start_at&.strftime('%Y.%m.%d %H:%M') %>の<%= @order.user.company.facility_name %>様での <%= @order.recreation.title %> の開催お疲れ様でした。
 
-    レクの開催が終了しましたので、
     報酬を受け取るために終了報告をお願い致します。
     終了報告内容を、施設が確認し、承認をすると報酬金額が確定します。
     施設は、終了報告の承認時にアンケート記入ができますので、記入の協力をお願いしてください。
@@ -237,17 +233,15 @@
     ・終了報告がお断りされた場合、チャットでその理由を質問して相互理解をお願い致します。
     ・報酬の受け取りは施設様が終了報告を承認してから翌々月末に行われます。土日祝日の場合次の営業日となります。
 
-    よくある質問:【6. 終了報告の送信】
+    よくある質問：【6. 終了報告の送信】
     https://tayori.com/q/everyplus-partner/detail/368315/
 
     ※このメールアドレスは送信専用です。返信をいただいてもご回答できませんのでご了承ください。
-
 - title: 登録完了のお知らせ
   explanation: えぶりプラス　登録完了
   kind: after_confirmation # 15
   body: |
-    施設名 <%= @user.company.facility_name %>
-
+    施設名 <%= @user.company.facility_name %> 
     担当者 <%= @user.username %> 様
 
     介護レク・イベントが選べるサイト「えぶりプラス」にご登録いただきありがとうございます。
@@ -274,15 +268,15 @@
     4.お支払い
     月末に開催月分の請求書をえぶりプラスよりまとめて発行致します。
 
-    詳しい利用方法→　<%= link_to "https://everyplus.jp/new_use", "https://everyplus.jp/new_use" %>
+    詳しい利用方法→　<%= link_to "https://everyplus.jp/new_user", "https://everyplus.jp/new_user" %>
+
 
     ーーーーーーーーー
     相談、お問い合わせ
     TLE:050-5306-7767
     メール:info@everyplus.jp
     ーーーーーーーーーー
-
-- title: <%= @order.start_at&.strftime('%Y.%m.%d %H:%M') %> <%= @order.user.company.facility_name %> 様での開催の3日前確認のお願い
+- title: <%= @order.start_at&.strftime('%Y.%m.%d %H:%M') %>  <%= @order.user.company.facility_name %> 様での開催の3日前確認のお願い
   explanation: PT:3日前確認
   kind: final_check # 16
   body: |
@@ -292,15 +286,18 @@
     <%= @order.start_at&.strftime('%Y.%m.%d %H:%M') %> <%= @order.user.company.facility_name %> 様での<%= @order.recreation.title %> の
     開催日が近づいて参りました。
     必ず 下記リンクより、開催確認情報に間違いないかのご確認と、注意点のチェックをお願い致します。
+
     ↓↓クリックして開催情報に間違いがないか確認し必ずチェックしてください↓↓
     <%= link_to final_check_partners_order_url(@order.id), final_check_partners_order_url(@order.id) %>
+
     ----------------------------------------
-    ■終了報告について
+    終了報告について
     ・開催後、現場を離れる前に報酬を受け取るために終了報告記入をお願い致します。内容を施設様が内容を確認します。
     施設様が内容を確認し承認すると、開催月の翌々月末に指定の口座に報酬が入金されます。
-
+    
     ↓↓終了報告リンク↓↓
     <%= link_to new_partners_order_report_url(@order.id),  new_partners_order_report_url(@order.id) %>
     ----------------------------------------
+
     楽しい時間を現場の皆様が心待ちにしています。
     ※このメールアドレスは送信専用です。返信をいただいてもご回答できませんのでご了承ください。
