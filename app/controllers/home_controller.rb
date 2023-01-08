@@ -45,6 +45,7 @@ class HomeController < ApplicationController
   ].freeze
 
   def index
+    raise StandardError
     @yoshimoto = Rails.cache.fetch('home/yoshimoto_tag', expires_in: 1.week) do
       Tag.find_by(name: '吉本')
     end
