@@ -3,7 +3,7 @@
 require_relative 'boot'
 
 require 'rails/all'
-# note: sentryで読み込まれる前にrequire
+# NOTE: sentryで読み込まれる前にrequire
 require 'active_support/parameter_filter'
 
 # Require the gems listed in Gemfile, including any gems
