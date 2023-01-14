@@ -4,19 +4,19 @@
 class HomeController < ApplicationController
   skip_before_action :authenticate_user!
 
-  WINTER_RECOMMENDATION_IDS = [
-    258,
-    103,
-    42,
-    128,
-    127,
-    9,
+  RECOMMENDATION_IDS = [
+    64,
+    293,
+    332,
+    292,
     20,
-    72,
-    108,
-    250,
-    12,
-    298,
+    225,
+    9,
+    266,
+    118,
+    208,
+    191,
+    128,
   ].freeze
 
   YOSHIMOTO_IDS = [
@@ -30,17 +30,18 @@ class HomeController < ApplicationController
   ]
 
   LESS_THAN_TEN_THOUSANT_YEN_IDS = [
-    146,
-    23,
+    223,
+    12,
     89,
-    217,
+    333,
     270,
-    136,
+    246,
     10,
-    263,
+    227,
     219,
     109,
-    108,
+    230,
+    204
   ].freeze
 
   def index
@@ -48,9 +49,9 @@ class HomeController < ApplicationController
       Tag.find_by(name: '吉本')
     end
 
-    @winter_recommendation_recs = Rails.cache.fetch('home/trial_recs', expires_in: 6.hours) do
-      queried_recreations = Recreation.public_recs.where(id: WINTER_RECOMMENDATION_IDS).load_async.to_a
-      WINTER_RECOMMENDATION_IDS.map { |id| pick_recreation_by_id(recreations: queried_recreations, id: id) }.compact.flatten
+    @recommendation_recs = Rails.cache.fetch('home/trial_recs', expires_in: 6.hours) do
+      queried_recreations = Recreation.public_recs.where(id: RECOMMENDATION_IDS).load_async.to_a
+      RECOMMENDATION_IDS.map { |id| pick_recreation_by_id(recreations: queried_recreations, id: id) }.compact.flatten
     end
 
     @yoshimoto_recs = Rails.cache.fetch('home/yoshimoto_recs', expires_in: 6.hours) do

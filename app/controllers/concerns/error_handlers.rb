@@ -28,7 +28,10 @@ module ErrorHandlers
 
   def rescue500(error)
     @exception = error
-    Rails.logger.error error.to_s
+    Rails.logger.error error
+    Rails.logger.error error.backtrace.join("\n")
+    Sentry.capture_exception(error)
+
     render 'errors/internal_server_error', status: :internal_server_error
   end
 end

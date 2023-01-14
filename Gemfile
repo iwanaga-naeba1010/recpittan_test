@@ -95,5 +95,8 @@ gem 'sitemap_generator'
 
 gem 'active_interaction'
 
+gem 'sentry-ruby'
+gem 'sentry-rails'
+
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
