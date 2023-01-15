@@ -8,7 +8,7 @@
         <% if active_link?('mypage') || active_link?('orders') %>
           依頼履歴
         <% else %>
-          <%= link_to '依頼履歴', partners_path, class: "clink" %>
+          <%= link_to '依頼履歴', partners_path(is_public: true), class: "clink" %>
         <% end %>
       </div>
 
