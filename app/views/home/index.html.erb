@@ -1,6 +1,10 @@
 <main class="top">
   <div class="jumbotron jumbotron-top">
-    <%= render 'shared/home/hero_header' %>
+    <%# 現在のバナーの期間が過ぎたら戻すので、コメントアウト %>
+    <%#= render 'shared/home/hero_header' %>
+    <%= link_to "https://everyplus.hp.peraichi.com/syowa", target: '_blank', rel: 'noopener' do%>
+      <%= image_pack_tag 'event_banner_20230213.png', class: 'w-100 h-auto', alt: 'ヒーローヘッダー画像', loading: 'lazy' %>
+    <% end %>
     <div class="container px-0 my-2">
       <div class="row">
         <div class="col-md">
