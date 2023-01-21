@@ -22,7 +22,7 @@ class CustomDevise::SessionsController < Devise::SessionsController
 
   def after_sign_in_path_for(resource)
     return admin_dashboard_path if resource.role.admin?
-    return partners_path(is_public: true) if resource.role.partner?
+    return partners_path(is_open: true) if resource.role.partner?
 
     session[:redirect_url] || customers_path
   end

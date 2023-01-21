@@ -5,12 +5,21 @@
     </h2>
   </div>
   <div class="p-2">
-    <%= link_to partners_path(is_public: true) do %>
+    <%= link_to partners_path(is_open: true) do %>
       <div class="sidebar-wrapper my-2 border-bottom">
         <div class="lect_item">
           <i class="fas fa-home fa-lg"></i>
         </div>
         <div class="right_item">開催のご相談</div>
+      </div>
+    <% end %>
+
+    <%= link_to partners_path(is_open: false) do %>
+      <div class="sidebar-wrapper my-2 border-bottom">
+        <div class="lect_item">
+          <i class="fas fa-home fa-lg"></i>
+        </div>
+        <div class="right_item">closeした開催のご相談</div>
       </div>
     <% end %>
 

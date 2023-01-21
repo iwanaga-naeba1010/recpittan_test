@@ -22,7 +22,7 @@ class Partners::OrdersController < Partners::ApplicationController
 
     redirect_path = params[:redirect_path] if params[:redirect_path]
     message = params[:message] if params[:message]
-    redirect_path = partners_path(is_public: true) if params[:order][:is_public] == 'false'
+    redirect_path = partners_path(is_open: true) if params[:order][:is_open]
 
     @order.update(params_create)
 
@@ -75,6 +75,6 @@ class Partners::OrdersController < Partners::ApplicationController
   end
 
   private def params_create
-    params.require(:order).permit(:status, :is_accepted, :start_at, :is_public)
+    params.require(:order).permit(:status, :is_accepted, :start_at, :is_open)
   end
 end

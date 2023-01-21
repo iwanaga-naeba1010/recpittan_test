@@ -233,10 +233,18 @@
     <% end %>
   </div>
 
-  <% if @order.status.in_progress? && @order.is_public? %>
+  <% if @order.status.in_progress? && @order.is_open? %>
     <div class="col-md-12">
       <div class="text-center my-3">
-        <%= button_to '非公開にする', partners_order_path(@order), params: { order: { is_public: false } }, method: :put, data: { confirm: "この相談を一覧から非表示にしますか？" }, class: 'text-white btn btn-danger btn-lg btn-block w-75 p-3' %>
+        <%= button_to '非公開にする', partners_order_path(@order), params: { order: { is_open: false } }, method: :put, data: { confirm: "この相談を一覧から非表示にしますか？" }, class: 'text-white btn btn-danger btn-lg btn-block w-75 p-3' %>
+      </div>
+    </div>
+  <% end %>
+
+  <% if !@order.is_open? %>
+    <div class="col-md-12">
+      <div class="text-center my-3">
+        <%= button_to '公開にする', partners_order_path(@order), params: { order: { is_open: true } }, method: :put, data: { confirm: "この相談を一覧から表示に戻しますか？" }, class: 'text-white btn btn-primary btn-lg btn-block w-75 p-3' %>
       </div>
     </div>
   <% end %>
