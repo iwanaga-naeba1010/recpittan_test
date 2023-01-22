@@ -2,7 +2,7 @@
 
 module RecreationsHelper
   def price_pipe(price, user)
-    return 'お問い合せください' if user.blank? || user&.role&.partner?
+    return 'お問い合せください' if user&.role&.partner?
 
     return 'お問い合せください' if price == 0 || price.blank?
 

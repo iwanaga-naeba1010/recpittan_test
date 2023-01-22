@@ -23,15 +23,10 @@
           <span class="value"><%= rec.minutes %></span>
         </div>
         <div class="">
-          <% if user_signed_in? %>
-            <% if rec.is_public_price %>
-              <span class="value"><%= price_pipe(rec&.price, current_user) %></span>
-            <% else %>
-              <span class="value">お問い合わせ下さい</span>
-            <% end %>
+          <% if rec.is_public_price %>
+            <span class="value"><%= price_pipe(rec&.price, current_user) %></span>
           <% else %>
-            <i class="price-mark">￥</i>
-            <span class="value">会員のみ</span>
+            <span class="value">お問い合わせ下さい</span>
           <% end %>
         </div>
       </div>
