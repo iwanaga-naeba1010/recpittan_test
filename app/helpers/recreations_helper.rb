@@ -2,9 +2,9 @@
 
 module RecreationsHelper
   def price_pipe(price, user)
-    return 'お問い合せください' if user&.role&.partner?
+    return 'お問い合わせください' if user&.role&.partner?
 
-    return 'お問い合せください' if price == 0 || price.blank?
+    return 'お問い合わせください' if price == 0 || price.blank?
 
     number_to_currency(price)
   end
