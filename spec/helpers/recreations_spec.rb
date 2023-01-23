@@ -16,9 +16,9 @@ RSpec.describe RecreationsHelper, type: :helper do
         expect(func_result).to eq(output)
       end
 
-      it 'does not renders price when user not logged in' do
+      it 'renders price when user not logged in' do
         input_price = 10000
-        output = 'お問い合せください'
+        output = number_to_currency(input_price)
 
         func_result = helper.price_pipe(input_price, nil)
         expect(func_result).to eq(output)
@@ -26,9 +26,9 @@ RSpec.describe RecreationsHelper, type: :helper do
 
       it 'does not renders price when partner user not logged in' do
         input_price = 10000
-        output = 'お問い合せください'
+        output = 'お問い合わせください'
 
-        func_result = helper.price_pipe(input_price, nil)
+        func_result = helper.price_pipe(input_price, partner)
         expect(func_result).to eq(output)
       end
     end
