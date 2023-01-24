@@ -45,6 +45,8 @@ class HomeController < ApplicationController
   ].freeze
 
   def index
+    today = Time.zone.now.to_date
+    @top_banner = TopBanner.find_by('start_date <= ? AND end_date >= ?', today, today)
     @yoshimoto = Rails.cache.fetch('home/yoshimoto_tag', expires_in: 1.week) do
       Tag.find_by(name: '吉本')
     end
