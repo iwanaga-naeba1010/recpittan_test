@@ -42,6 +42,9 @@ ja:
         partner: パートナー
         admin: 管理者
         cs: カスタマーサクセス
+      approval_status:
+        unapproved: 未承認
+        approved: 承認
     company:
       genre:
         residential_fee_based_nursing_home: 住宅型有料老人ホーム

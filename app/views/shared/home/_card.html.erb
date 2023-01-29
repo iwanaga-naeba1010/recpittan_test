@@ -17,12 +17,18 @@
       <%= tag_to_html(rec) %>
     </div>
     <div class="card-body card-body-info px-2 py-1">
-      <div class="d-md-flex mb-2 align-items-center justify-content-between">
+      <div class="d-md-flex mb-2 align-items-center">
         <div class="">
           <i class="material-icons every">query_builder</i>
           <span class="value"><%= rec.minutes %></span>
         </div>
-        <div class="">
+        <% if rec.user.approval_status.approved? %>
+          <div class="mx-md-2">
+            <i class="fas fa-solid fa-check"></i>
+            <span class="value">面談済</span>
+          </div>
+        <% end %>
+        <div class="ms-md-auto">
           <% if rec.is_public_price %>
             <span class="value"><%= price_pipe(rec&.price, current_user) %></span>
           <% else %>
