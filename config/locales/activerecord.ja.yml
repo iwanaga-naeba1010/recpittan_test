@@ -42,6 +42,7 @@ ja:
         username_kana: 名前(カナ)
         title: 役職
         memo: メモ
+        approval_status: 運営認証
       company:
         name: 法人名
         facility_name: 事業所名
