@@ -21,8 +21,9 @@ class TopBanner < ApplicationRecord
   private
 
   def validate_display_date_no_overlap
-    top_banners = TopBanner.where(start_date: start_date..end_date).or(TopBanner.where(end_date: start_date..end_date))
-    top_banners = top_banners.where.not(id: id) if id.present?
+    display_period = start_date..end_date
+    top_banners = TopBanner.where(start_date: display_period).or(TopBanner.where(end_date: display_period))
+    top_banners = top_banners.where.not(id: id) if id
     if top_banners.exists?
       errors.add(:base, '表示日が他のレコードと重複しています')
     end
