@@ -472,7 +472,7 @@ GEM
       sprockets (> 3.0)
       sprockets-rails
       tilt
-    scss_lint (0.59.0)
+    scss_lint (0.60.0)
       sass (~> 3.5, >= 3.5.5)
     selenium-webdriver (4.2.1)
       childprocess (>= 0.5, < 5.0)
