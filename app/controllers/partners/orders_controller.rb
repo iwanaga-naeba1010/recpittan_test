@@ -30,6 +30,8 @@ class Partners::OrdersController < Partners::ApplicationController
     OrderDenyMailer.notify(order: @order).deliver_now if params_create[:is_accepted] == 'false'
 
     redirect_to redirect_path, notice: message
+  rescue StandardError => e
+    logger.error e.message
   end
 
   def confirm
