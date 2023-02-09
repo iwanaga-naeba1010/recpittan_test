@@ -1,6 +1,10 @@
 <main class="top">
   <div class="jumbotron jumbotron-top">
-    <%= render 'shared/home/hero_header' %>
+    <%# 現在のバナーの期間が過ぎたら戻すので、コメントアウト %>
+    <%#= render 'shared/home/hero_header' %>
+    <%= link_to "https://everyplus.hp.peraichi.com/syowa", target: '_blank', rel: 'noopener' do%>
+      <%= image_pack_tag 'event_banner_20230213.png', class: 'w-100 h-auto', alt: 'ヒーローヘッダー画像', loading: 'lazy' %>
+    <% end %>
     <div class="container px-0 my-2">
       <div class="row">
         <div class="col-md">
@@ -24,11 +28,24 @@
   <article class="container px-0 pt-4">
     <div class="row py-3">
       <div class="col-12">
-        <h5 class="mt-5 text-black font-weight-bold">運営おすすめ！開催施設・面談担当の満足度◎</h5>
+        <h5 class="mt-5 text-black font-weight-bold">訪問レク部門　開催数人気ランキング</h5>
       </div>
     </div>
     <div class="row">
-      <% @recommendation_recs.each do |rec| %>
+      <% @visit_recreations.each do |rec| %>
+        <%= render 'shared/home/card', rec: rec %>
+      <% end %>
+    </div>
+  </article>
+
+  <article class="container px-0 pt-4">
+    <div class="row py-2">
+      <div class="col-12">
+        <h5 class="mt-5 text-black font-weight-bold">オンラインレク部門　開催数人気ランキング</h5>
+      </div>
+    </div>
+    <div class="row">
+      <% @online_recreations.each do |rec| %>
         <%= render 'shared/home/card', rec: rec %>
       <% end %>
     </div>
@@ -51,18 +68,4 @@
       <% end %>
     </div>
   </article>
-
-  <article class="container px-0 pt-4">
-    <div class="row py-2">
-      <div class="col-12">
-        <h5 class="mt-5 text-black font-weight-bold">10,000円以下×オンライン・郵送</h5>
-      </div>
-    </div>
-    <div class="row">
-      <% @less_than_ten_thousand_yen_recs.each do |rec| %>
-        <%= render 'shared/home/card', rec: rec %>
-      <% end %>
-    </div>
-  </article>
 </main>
-
