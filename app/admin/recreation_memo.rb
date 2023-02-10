@@ -10,13 +10,21 @@ ActiveAdmin.register RecreationMemo do
 
   controller do
     def create
+      recreation_id = params[:recreation_memo][:recreation_id].to_i
+      body = params[:recreation_memo][:body]
       memo = RecreationMemo.new(
-        recreation_id: params[:recreation_memo][:recreation_id].to_i,
-        body: params[:recreation_memo][:body]
+        recreation_id:,
+        body:
       )
       memo.save
-      # TODO: 動的にid入れる
-      redirect_to admin_recreation_path(params[:recreation_memo][:recreation_id].to_i)
+      recreation = Recreation.find(recreation_id)
+      message = <<~MESSAGE
+        レクリエーション名： #{recreation.title}
+        管理画面レクリエーションURL： #{admin_recreation_url(recreation_id)}
+        内容: #{body}
+      MESSAGE
+      SlackNotifier.new(channel: '#-メモ投稿履').send('管理画面からレクリエーションに関するメモを記録しました', message)
+      redirect_to admin_recreation_path(recreation_id)
     end
   end
 end
