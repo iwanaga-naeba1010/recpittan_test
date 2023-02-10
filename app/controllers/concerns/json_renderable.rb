@@ -5,7 +5,7 @@ module JsonRenderable
 
   included do
     def render_json(object, status: :ok)
-      render json: Oj.dump(object, mode: :compat), status: status
+      render json: Oj.dump(object, mode: :compat), status:
     end
   end
 end

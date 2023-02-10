@@ -39,7 +39,7 @@ RSpec.describe 'OrdersForceWaitingForAnEventToTakePlace', type: :request do
       start_at = Date.tomorrow
 
       it 'returns 302 status' do
-        put admin_orders_force_waiting_for_an_event_to_take_place_path(order.id), params: { orders_force_waiting_for_an_event_to_take_place: { start_at: start_at } }
+        put admin_orders_force_waiting_for_an_event_to_take_place_path(order.id), params: { orders_force_waiting_for_an_event_to_take_place: { start_at: } }
         expect(response).to have_http_status(:found)
       end
 
@@ -52,13 +52,13 @@ RSpec.describe 'OrdersForceWaitingForAnEventToTakePlace', type: :request do
 
       it 'updates in_progress to waiting_for_an_event_to_take_place' do
         expect {
-          put admin_orders_force_waiting_for_an_event_to_take_place_path(order.id), params: { orders_force_waiting_for_an_event_to_take_place: { start_at: start_at } }
+          put admin_orders_force_waiting_for_an_event_to_take_place_path(order.id), params: { orders_force_waiting_for_an_event_to_take_place: { start_at: } }
         }.to change { Order.find(order.id).status }.from('in_progress').to('waiting_for_an_event_to_take_place')
       end
 
       it 'updates is accepted' do
         expect {
-          put admin_orders_force_waiting_for_an_event_to_take_place_path(order.id), params: { orders_force_waiting_for_an_event_to_take_place: { start_at: start_at } }
+          put admin_orders_force_waiting_for_an_event_to_take_place_path(order.id), params: { orders_force_waiting_for_an_event_to_take_place: { start_at: } }
         }.to change { Order.find(order.id).is_accepted }.from(false).to(true)
       end
     end

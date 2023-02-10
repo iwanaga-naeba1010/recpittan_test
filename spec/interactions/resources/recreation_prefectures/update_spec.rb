@@ -6,8 +6,8 @@ RSpec.describe Resources::RecreationPrefectures::Update, type: :interaction do
   describe '#execute' do
     let!(:partner) { create(:user, role: :partner) }
     let!(:profile) { create(:profile, user: partner) }
-    let!(:recreation) { create(:recreation, user: partner, profile: profile) }
-    let!(:recreation_prefecture) { create(:recreation_prefecture, recreation: recreation) }
+    let!(:recreation) { create(:recreation, user: partner, profile:) }
+    let!(:recreation_prefecture) { create(:recreation_prefecture, recreation:) }
 
     let(:params) do
       {
@@ -17,7 +17,7 @@ RSpec.describe Resources::RecreationPrefectures::Update, type: :interaction do
 
     subject do
       Resources::RecreationPrefectures::Update.run!(
-        params: params,
+        params:,
         id: recreation_prefecture.id,
         recreation_id: recreation.id
       )

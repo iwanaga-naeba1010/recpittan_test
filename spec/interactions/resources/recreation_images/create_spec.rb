@@ -7,7 +7,7 @@ RSpec.describe Resources::RecreationImages::Create, type: :interaction do
   describe '#execute' do
     let!(:partner) { create(:user, role: :partner) }
     let!(:profile) { create(:profile, user: partner) }
-    let!(:recreation) { create(:recreation, user: partner, profile: profile) }
+    let!(:recreation) { create(:recreation, user: partner, profile:) }
 
     let(:image) do
       base64_image = Base64.decode64(Rails.root.join('spec/files/test.png').binread)
@@ -15,7 +15,7 @@ RSpec.describe Resources::RecreationImages::Create, type: :interaction do
     end
     let(:params) do
       {
-        image: image,
+        image:,
         filename: 'filename',
         kind: :slider
       }
@@ -23,7 +23,7 @@ RSpec.describe Resources::RecreationImages::Create, type: :interaction do
 
     subject do
       Resources::RecreationImages::Create.run!(
-        params: params,
+        params:,
         recreation_id: recreation.id
       )
     end

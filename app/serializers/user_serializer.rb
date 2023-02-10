@@ -38,7 +38,7 @@
 #
 class UserSerializer
   def serialize_list(users:)
-    users.map { |user| serialize(user: user) }
+    users.map { |user| serialize(user:) }
   end
 
   def serialize(user:)

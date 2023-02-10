@@ -40,7 +40,7 @@
 #
 class OrderSerializer
   def serialize_list(orders:)
-    orders.map { |order| serialize(order: order) }
+    orders.map { |order| serialize(order:) }
   end
 
   def serialize(order:)
@@ -52,7 +52,7 @@ class OrderSerializer
     {
       id: order.id,
       status: order.status,
-      is_editable: is_editable,
+      is_editable:,
       expenses: order.expenses,
       transportation_expenses: order.transportation_expenses,
       additional_facility_fee: order.additional_facility_fee,
@@ -64,7 +64,7 @@ class OrderSerializer
       total_facility_price_for_customer: order.total_facility_price_for_customer,
       total_price_for_customer: order.total_price_for_customer,
       total_material_price_for_customer: order.total_material_price_for_customer,
-      recreation: recreation
+      recreation:
     }
   end
 end

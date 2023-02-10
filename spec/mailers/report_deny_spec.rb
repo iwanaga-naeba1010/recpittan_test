@@ -13,7 +13,7 @@ RSpec.describe ReportDenyMailer, type: :mailer do
   let!(:report) { create :report, order_id: order.id }
 
   describe 'chat_start' do
-    let(:mail) { ReportDenyMailer.notify(order: order) }
+    let(:mail) { ReportDenyMailer.notify(order:) }
 
     # NOTE: 管理画面で変更するためテスト不要
     it 'renders the subject' do
