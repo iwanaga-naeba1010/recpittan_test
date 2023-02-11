@@ -108,12 +108,12 @@ ActiveAdmin.register Order do
       end
 
       tab 'メモ' do
-        render 'admin/orders/memo', order: order
+        render 'admin/orders/memo', order:
       end
 
       tab 'チャット' do
         panel 'チャット', style: 'margin-top: 30px;' do
-          render 'admin/orders/chat', order: order
+          render 'admin/orders/chat', order:
         end
       end
 
@@ -125,11 +125,11 @@ ActiveAdmin.register Order do
 
       tab '請求情報' do
         panel '施設請求額', style: 'margin-top: 30px;' do
-          render 'admin/orders/fee_table', order: order, kind: :customer
+          render 'admin/orders/fee_table', order:, kind: :customer
         end
 
         panel 'パートナー支払額', style: 'margin-top: 30px;' do
-          render 'admin/orders/fee_table', order: order, kind: :partner
+          render 'admin/orders/fee_table', order:, kind: :partner
         end
       end
     end
@@ -139,7 +139,7 @@ ActiveAdmin.register Order do
     f.semantic_errors
     # NOTE(okubo): form切り替えボタン, 編集時のみ表示
     if f.object&.id.present?
-      render 'admin/orders/menu', order: order
+      render 'admin/orders/menu', order:
     end
 
     f.inputs do
@@ -243,8 +243,8 @@ ActiveAdmin.register Order do
       month = current_time.month == 12 ? 1 : current_time.month + 1
       # NOTE(okubo): order_datesを作成しないと正式依頼で日付が表示されない
       order.order_dates.build(
-        year: year,
-        month: month,
+        year:,
+        month:,
         date: current_time.day,
         start_hour: '10',
         start_minute: '00',
@@ -254,8 +254,8 @@ ActiveAdmin.register Order do
 
       order.save!
 
-      CustomerChatStartMailer.notify(order: order).deliver_now
-      PartnerChatStartMailer.notify(order: order).deliver_now
+      CustomerChatStartMailer.notify(order:).deliver_now
+      PartnerChatStartMailer.notify(order:).deliver_now
       SlackNotifier.new(channel: '#アクティブチャットスレッド').send('管理画面から案件追加を行いました', "管理画面案件URL：#{admin_order_url(order.id)}")
 
       redirect_to admin_order_path(order.id)
@@ -284,7 +284,7 @@ ActiveAdmin.register Order do
 
         # NOTE(okubo): statusに応じてメール変更
         ReportDenyMailer.notify(order).deliver_now if order.report_status.denied?
-        ReportAcceptMailer.notify(order: order).deliver_now if order.report_status.accepted?
+        ReportAcceptMailer.notify(order:).deliver_now if order.report_status.accepted?
       end
 
       # NOTE(okubo): 相談中
@@ -296,7 +296,7 @@ ActiveAdmin.register Order do
 
         # NOTE(okubo): 時間の記載がある -> 正式依頼
         # TODO(okubo): order.start_at.nil? つまり、あだ入力できていない、なら送信
-        OrderRequestMailer.notify(order: order).deliver_now if is_send_mail
+        OrderRequestMailer.notify(order:).deliver_now if is_send_mail
       end
 
       # NOTE(okubo): 開催前

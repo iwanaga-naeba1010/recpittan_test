@@ -66,14 +66,14 @@ RSpec.describe Partners::ReportsController, type: :request do
       it 'updates url' do
         url = 'https://testtesttest.com'
         expect {
-          put partners_order_zoom_path(order_id: order.id, id: zoom.id), params: { zoom: { url: url } }
+          put partners_order_zoom_path(order_id: order.id, id: zoom.id), params: { zoom: { url: } }
         }.to change { Zoom.find(zoom.id).url }.from(zoom.url).to(url)
       end
 
       it 'updates price' do
         price = 0
         expect {
-          put partners_order_zoom_path(order_id: order.id, id: zoom.id), params: { zoom: { price: price } }
+          put partners_order_zoom_path(order_id: order.id, id: zoom.id), params: { zoom: { price: } }
         }.to change { Zoom.find(zoom.id).price }.from(zoom.price).to(price)
       end
     end

@@ -20,7 +20,7 @@ RSpec.describe Resources::InvoiceInformations::Create, type: :interaction do
 
     subject do
       Resources::InvoiceInformations::Create.run!(
-        params: params,
+        params:,
         current_user: customer
       )
     end

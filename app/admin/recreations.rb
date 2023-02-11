@@ -126,7 +126,7 @@ ActiveAdmin.register Recreation do
       end
 
       tab 'メモ' do
-        render 'admin/recreations/memo', recreation: recreation
+        render 'admin/recreations/memo', recreation:
       end
     end
   end

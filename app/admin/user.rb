@@ -42,7 +42,7 @@ ActiveAdmin.register User do
         end
       end
       tab 'メモ' do
-        render 'admin/users/memo', user: user
+        render 'admin/users/memo', user:
       end
     end
   end

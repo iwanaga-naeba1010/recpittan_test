@@ -9,7 +9,7 @@ RSpec.describe ApiPartner::RecreationPrefecturesController, type: :request do
   describe 'POST /api_partner/recreations/:recreation_id/recreation_prefectures' do
     let!(:profile) { create(:profile, user: current_user) }
     let!(:recreation) { create(:recreation, user: current_user) }
-    let!(:relation) { create(:recreation_profile, recreation: recreation, profile: profile) }
+    let!(:relation) { create(:recreation_profile, recreation:, profile:) }
     let(:recreation_id) { recreation.id }
     let(:params) do
       {
@@ -32,7 +32,7 @@ RSpec.describe ApiPartner::RecreationPrefecturesController, type: :request do
   describe 'PATCH /api_partner/recreations/:recreation_id/recreation_prefectures/:id' do
     let!(:profile) { create(:profile, user: current_user) }
     let!(:recreation) { create(:recreation, user: current_user) }
-    let!(:relation) { create(:recreation_profile, recreation: recreation, profile: profile) }
+    let!(:relation) { create(:recreation_profile, recreation:, profile:) }
     let!(:recreation_prefecture) { create(:recreation_prefecture, recreation_id: recreation.id) }
     let(:recreation_id) { recreation.id }
     let(:id) { recreation_prefecture.id }
@@ -64,8 +64,8 @@ RSpec.describe ApiPartner::RecreationPrefecturesController, type: :request do
   describe 'DELETE /api_partner/recreations/:recreation_id/recreation_prefectures/:id' do
     let!(:profile) { create(:profile, user: current_user) }
     let!(:recreation) { create(:recreation, user: current_user) }
-    let!(:relation) { create(:recreation_profile, recreation: recreation, profile: profile) }
-    let!(:recreation_prefecture) { create(:recreation_prefecture, recreation: recreation) }
+    let!(:relation) { create(:recreation_profile, recreation:, profile:) }
+    let!(:recreation_prefecture) { create(:recreation_prefecture, recreation:) }
     let(:recreation_id) { recreation.id }
     let(:id) { recreation_prefecture.id }
     let(:expected) { true }
