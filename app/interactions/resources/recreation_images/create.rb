@@ -17,7 +17,7 @@ module Resources
       def execute
         ActiveRecord::Base.transaction do
           image = RecreationImage.new(
-            recreation_id: recreation_id,
+            recreation_id:,
             image: base64_conversion(params[:image]),
             filename: params[:filename],
             kind: params[:kind]

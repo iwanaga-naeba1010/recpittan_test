@@ -38,25 +38,25 @@ RSpec.describe 'OrdersForceComplete', type: :request do
     context 'when valid parameters' do
       number_of_people = 10
       it 'returns 302 status' do
-        put admin_orders_force_complete_path(order.id), params: { order: { number_of_people: number_of_people } }
+        put admin_orders_force_complete_path(order.id), params: { order: { number_of_people: } }
         expect(response).to have_http_status(:found)
       end
 
       it 'updates unreported_completed to finished' do
         expect {
-          put admin_orders_force_complete_path(order.id), params: { order: { number_of_people: number_of_people } }
+          put admin_orders_force_complete_path(order.id), params: { order: { number_of_people: } }
         }.to change { Order.find(order.id).status }.from('unreported_completed').to('finished')
       end
 
       it 'increases a report' do
         expect {
-          put admin_orders_force_complete_path(order.id), params: { order: { number_of_people: number_of_people } }
+          put admin_orders_force_complete_path(order.id), params: { order: { number_of_people: } }
         }.to change(Report, :count).by(+1)
       end
 
       it 'increases a evaluation' do
         expect {
-          put admin_orders_force_complete_path(order.id), params: { order: { number_of_people: number_of_people } }
+          put admin_orders_force_complete_path(order.id), params: { order: { number_of_people: } }
         }.to change(Evaluation, :count).by(+1)
       end
     end

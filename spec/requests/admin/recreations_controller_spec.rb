@@ -60,13 +60,13 @@ RSpec.describe 'Recreations', type: :request do
     context 'when valid parameters' do
       title = '修正後のrec'
       it 'returns 302 status' do
-        put admin_recreation_path(recreation.id), params: { recreation: { title: title } }
+        put admin_recreation_path(recreation.id), params: { recreation: { title: } }
         expect(response).to have_http_status(:found)
       end
 
       it 'update status' do
         expect {
-          put admin_recreation_path(recreation.id), params: { recreation: { title: title } }
+          put admin_recreation_path(recreation.id), params: { recreation: { title: } }
         }.to change { Recreation.find(recreation.id).title }.from(recreation.title).to(title)
       end
     end

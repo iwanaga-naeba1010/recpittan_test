@@ -20,7 +20,7 @@
 #
 class ChatSerializer
   def serialize_list(chats:)
-    serialized_list = chats.map { |chat| serialize(chat: chat) }
+    serialized_list = chats.map { |chat| serialize(chat:) }
     # NOTE(okubo): 日付ごとにdataまとめている
     serialized_list.group_by { |p| p[:created_at].strftime('%Y年-%m月-%d日') }
   end

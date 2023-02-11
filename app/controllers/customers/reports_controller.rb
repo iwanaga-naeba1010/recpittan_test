@@ -16,11 +16,11 @@ class Customers::ReportsController < Customers::ApplicationController
       order.update(status: :final_report_admits_not)
 
       if order.report_status&.denied?
-        ReportDenyMailer.notify(order: order).deliver_now
+        ReportDenyMailer.notify(order:).deliver_now
       end
 
       if order.report_status&.accepted?
-        ReportAcceptMailer.notify(order: order).deliver_now
+        ReportAcceptMailer.notify(order:).deliver_now
       end
 
       redirect_to customers_order_path(order.id), notice: t('action_messages.created', model_name: Report.model_name.human)

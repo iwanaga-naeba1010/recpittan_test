@@ -30,7 +30,7 @@ module ApiCustomer
       hours = Hour.all.map(&:value)
       minutes = Minute.all.map(&:value)
       render_json OrderConfigSerializer.new.serialize(
-        years: years, months: months, days: days, hours: hours, minutes: minutes
+        years:, months:, days:, hours:, minutes:
       )
     end
 

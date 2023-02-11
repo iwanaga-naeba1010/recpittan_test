@@ -25,7 +25,7 @@ class Evaluation < ApplicationRecord
   extend Enumerize
   belongs_to :report
 
-  scope :with_recreation, ->(recreation_id) { joins(report: :order).where(order: { recreation_id: recreation_id }) }
+  scope :with_recreation, ->(recreation_id) { joins(report: :order).where(order: { recreation_id: }) }
   scope :public_and_not_null_message, -> { where(is_public: :public).where.not(message: '').where.not(message: 'システムの自動投稿') }
   scope :latest, ->(count) { order(id: :desc).limit(count) }
 

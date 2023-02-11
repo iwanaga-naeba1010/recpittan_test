@@ -24,7 +24,7 @@ RSpec.describe Resources::InvoiceInformations::Update, type: :interaction do
     subject do
       Resources::InvoiceInformations::Update.run!(
         id: invoice_information.id,
-        params: params,
+        params:,
         current_user: customer
       )
     end

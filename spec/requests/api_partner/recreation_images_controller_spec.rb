@@ -9,7 +9,7 @@ RSpec.describe ApiPartner::RecreationImagesController, type: :request do
   describe 'POST /api_partner/recreations/:recreation_id/recreation_images' do
     let!(:profile) { create(:profile, user: current_user) }
     let!(:recreation) { create(:recreation, user: current_user) }
-    let!(:relation) { create(:recreation_profile, recreation: recreation, profile: profile) }
+    let!(:relation) { create(:recreation_profile, recreation:, profile:) }
     let(:recreation_id) { recreation.id }
     let(:image) do
       # NOTE(okubo): こちら直したいが、多分shiftJSが問題。interactionは通るので、req送るタイミングの問題なはず
@@ -19,7 +19,7 @@ RSpec.describe ApiPartner::RecreationImagesController, type: :request do
     let(:params) do
       {
         recreation_image: {
-          image: image,
+          image:,
           filename: 'filename',
           kind: :slider
         }
@@ -39,8 +39,8 @@ RSpec.describe ApiPartner::RecreationImagesController, type: :request do
   describe 'DELETE /api_partner/recreations/:recreation_id/recreation_images/:id' do
     let!(:profile) { create(:profile, user: current_user) }
     let!(:recreation) { create(:recreation, user: current_user) }
-    let!(:relation) { create(:recreation_profile, recreation: recreation, profile: profile) }
-    let!(:recreation_image) { create(:recreation_image, recreation: recreation) }
+    let!(:relation) { create(:recreation_profile, recreation:, profile:) }
+    let!(:recreation_image) { create(:recreation_image, recreation:) }
     let(:recreation_id) { recreation.id }
     let(:id) { recreation_image.id }
     let(:expected) { true }

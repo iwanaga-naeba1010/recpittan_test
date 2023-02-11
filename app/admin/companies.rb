@@ -87,7 +87,7 @@ ActiveAdmin.register Company do
       end
 
       tab 'メモ' do
-        render 'admin/companies/memo', company: company
+        render 'admin/companies/memo', company:
       end
     end
   end
