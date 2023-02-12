@@ -17,9 +17,8 @@ ActiveAdmin.register OrderMemo do
         body:
       )
       memo.save
-      order = Order.find(order_id)
       message = <<~MESSAGE
-        案件： #{order.id}
+        案件ID： #{order_id}
         管理画面案件URL： #{admin_order_url(order_id)}
         内容: #{body}
       MESSAGE
