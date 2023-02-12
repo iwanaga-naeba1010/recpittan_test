@@ -10,13 +10,21 @@ ActiveAdmin.register CompanyMemo do
 
   controller do
     def create
+      company_id = params[:company_memo][:company_id].to_i
+      body = params[:company_memo][:body]
       memo = CompanyMemo.new(
-        company_id: params[:company_memo][:company_id].to_i,
-        body: params[:company_memo][:body]
+        company_id:,
+        body:
       )
       memo.save
-      # TODO: 動的にid入れる
-      redirect_to admin_company_path(params[:company_memo][:company_id].to_i)
+      company = Company.find(company_id)
+      message = <<~MESSAGE
+        施設名： #{company.facility_name}
+        管理画面施設URL： #{admin_company_url(company_id)}
+        内容: #{body}
+      MESSAGE
+      SlackNotifier.new(channel: '#-メモ投稿履').send('管理画面から施設に関するメモを記録しました', message)
+      redirect_to admin_company_path(company_id)
     end
   end
 end
