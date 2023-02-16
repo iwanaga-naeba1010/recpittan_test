@@ -85,10 +85,12 @@ RSpec.shared_examples 'an endpoint returns' do |sym, debug_option|
 
     binding.pry if debug_option == :pry # rubocop:disable Lint/Debugger
     if debug_option == :pp
+      # rubocop:disable Lint/Debugger
       puts 'Expected:'
       pp instance_eval(sym.to_s)
       puts 'Got:'
       pp JSON.parse(response.body)
+      # rubocop:enable Lint/Debugger
     end
 
     if debug_option == :diff
