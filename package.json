@@ -18,7 +18,7 @@
     "@rails/actioncable": "^7.0.4",
     "@rails/activestorage": "^7.0.4",
     "@rails/ujs": "^7.0.4",
-    "@rails/webpacker": "5.4.3",
+    "@rails/webpacker": "5.4.4",
     "@types/prettier": "^2.7.2",
     "activeadmin_addons": "^1.0.0",
     "arctic_admin": "^4.0.1",
