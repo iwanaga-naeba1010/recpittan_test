@@ -31,7 +31,7 @@ class Partners::OrdersController < Partners::ApplicationController
 
     redirect_to redirect_path, notice: message
   rescue StandardError => e
-    logger.error e.message
+    redirect_to partners_path(is_open: true), alert: e.message
   end
 
   def confirm
