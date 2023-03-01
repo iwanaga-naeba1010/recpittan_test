@@ -20,7 +20,7 @@ module Resources
       validates :current_user, presence: true
 
       def execute
-        invoice_information = InvoiceInformation.find_by(id: id, user_id: current_user.id)
+        invoice_information = InvoiceInformation.find_by(id:, user_id: current_user.id)
         invoice_information.update!(params)
         invoice_information
       rescue ActiveRecord::RecordInvalid => e

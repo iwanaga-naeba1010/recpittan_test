@@ -11,7 +11,7 @@ RSpec.describe PartnerChatMailer, type: :mailer do
   let(:order) { create :order, recreation_id: partner.recreations.first.id, user_id: customer.id }
 
   describe 'chat_start' do
-    let(:mail) { PartnerChatMailer.notify(order: order) }
+    let(:mail) { PartnerChatMailer.notify(order:) }
 
     it 'renders the subject' do
       expect(mail.subject).to eq(template['title'])

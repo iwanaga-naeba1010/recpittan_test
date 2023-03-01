@@ -20,7 +20,7 @@
 #
 class ProfileSerializer
   def serialize_list(profiles:)
-    profiles.map { |profile| serialize(profile: profile) }
+    profiles.map { |profile| serialize(profile:) }
   end
 
   def serialize(profile:)

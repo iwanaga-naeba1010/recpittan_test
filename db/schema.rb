@@ -251,6 +251,15 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_26_131050) do
     t.integer "kind"
   end
 
+  create_table "top_banners", force: :cascade do |t|
+    t.string "image", null: false
+    t.string "url"
+    t.date "start_date", null: false
+    t.date "end_date", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "user_memos", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.text "body"

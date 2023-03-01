@@ -12,7 +12,7 @@ module Resources
       def execute
         ActiveRecord::Base.transaction do
           prefecture = RecreationPrefecture.new(
-            recreation_id: recreation_id,
+            recreation_id:,
             name: params[:name]
           )
           prefecture.save!

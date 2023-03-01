@@ -38,7 +38,7 @@
 #
 class RecreationSerializer
   def serialize_list(recreations:)
-    recreations.map { |recreation| serialize(recreation: recreation) }
+    recreations.map { |recreation| serialize(recreation:) }
   end
 
   def serialize(recreation:) # rubocop:disable Metrics/AbcSize
@@ -68,12 +68,12 @@ class RecreationSerializer
       borrow_item: recreation.borrow_item,
       bring_your_own_item: recreation.bring_your_own_item,
       additional_facility_fee: recreation.additional_facility_fee,
-      images: images,
-      prefectures: prefectures,
-      profile: profile,
+      images:,
+      prefectures:,
+      profile:,
       user_id: recreation.user_id,
-      tags: tags,
-      targets: targets
+      tags:,
+      targets:
     }
   end
 end

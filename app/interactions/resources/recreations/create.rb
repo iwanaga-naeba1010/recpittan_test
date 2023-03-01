@@ -50,14 +50,14 @@ module Resources
       end
 
       private def create_profile_relation(recreation_id:)
-        RecreationProfile.create!(recreation_id: recreation_id, profile_id: profile_id)
+        RecreationProfile.create!(recreation_id:, profile_id:)
       end
 
       private def create_prefectures(recreation_id:)
         return if prefectures.blank?
 
         RecreationPrefecture.create!(
-          prefectures.map { |p| { name: p, recreation_id: recreation_id } }
+          prefectures.map { |p| { name: p, recreation_id: } }
         )
       end
     end

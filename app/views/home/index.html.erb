@@ -1,9 +1,11 @@
 <main class="top">
   <div class="jumbotron jumbotron-top">
-    <%# 現在のバナーの期間が過ぎたら戻すので、コメントアウト %>
-    <%#= render 'shared/home/hero_header' %>
-    <%= link_to "https://everyplus.hp.peraichi.com/syowa", target: '_blank', rel: 'noopener' do%>
-      <%= image_pack_tag 'event_banner_20230213.png', class: 'w-100 h-auto', alt: 'ヒーローヘッダー画像', loading: 'lazy' %>
+    <% if @top_banner.present? %>
+      <%= link_to @top_banner.url, target: '_blank', rel: 'noopener' do%>
+        <%= image_tag @top_banner&.image.to_s, class: 'w-100 h-auto', alt: 'ヒーローヘッダー画像', loading: 'lazy' %>
+      <% end %>
+    <% else %>
+      <%= render 'shared/home/hero_header' %>
     <% end %>
     <div class="container px-0 my-2">
       <div class="row">

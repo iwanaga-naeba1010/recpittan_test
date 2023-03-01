@@ -6,8 +6,8 @@ RSpec.describe Resources::RecreationPrefectures::Destroy, type: :interaction do
   describe '#execute' do
     let!(:partner) { create(:user, role: :partner) }
     let!(:profile) { create(:profile, user: partner) }
-    let!(:recreation) { create(:recreation, user: partner, profile: profile) }
-    let!(:recreation_prefecture) { create(:recreation_prefecture, recreation: recreation) }
+    let!(:recreation) { create(:recreation, user: partner, profile:) }
+    let!(:recreation_prefecture) { create(:recreation_prefecture, recreation:) }
 
     let(:params) do
       {

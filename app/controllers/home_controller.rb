@@ -45,6 +45,10 @@ class HomeController < ApplicationController
   ]
 
   def index
+    today = Time.zone.today
+    @top_banner = Rails.cache.fetch('home/top_banner', expires_in: 15.minutes) do
+      TopBanner.find_by('start_date <= ? AND end_date >= ?', today, today)
+    end
     @yoshimoto = Rails.cache.fetch('home/yoshimoto_tag', expires_in: 1.week) do
       Tag.find_by(name: '吉本')
     end
@@ -52,18 +56,18 @@ class HomeController < ApplicationController
     @visit_recreations = Rails.cache.fetch('home/visit_recs', expires_in: 6.hours) do
       queried_recreations = Recreation.public_recs.where(id: VISIT_REC_IDS).load_async.to_a
       VISIT_REC_IDS.map do |id|
-        pick_recreation_by_id(recreations: queried_recreations, id: id)
+        pick_recreation_by_id(recreations: queried_recreations, id:)
       end.compact.flatten
     end
 
     @online_recreations = Rails.cache.fetch('home/online_recs', expires_in: 6.hours) do
       queried_recreations = Recreation.public_recs.where(id: ONLINE_REC_IDS).load_async.to_a
-      ONLINE_REC_IDS.map { |id| pick_recreation_by_id(recreations: queried_recreations, id: id) }.compact.flatten
+      ONLINE_REC_IDS.map { |id| pick_recreation_by_id(recreations: queried_recreations, id:) }.compact.flatten
     end
 
     @yoshimoto_recs = Rails.cache.fetch('home/yoshimoto_recs', expires_in: 6.hours) do
       queried_recreations = Recreation.public_recs.where(id: YOSHIMOTO_IDS).load_async.to_a
-      YOSHIMOTO_IDS.map { |id| pick_recreation_by_id(recreations: queried_recreations, id: id) }.compact.flatten
+      YOSHIMOTO_IDS.map { |id| pick_recreation_by_id(recreations: queried_recreations, id:) }.compact.flatten
     end
 
     @evaluations = Evaluation.public_and_not_null_message.latest(10).load_async
