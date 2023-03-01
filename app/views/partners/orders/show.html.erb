@@ -232,4 +232,20 @@
       </div>
     <% end %>
   </div>
+
+  <% if @order.is_open? %>
+    <div class="col-md-12">
+      <div class="text-center my-3">
+        <%= button_to 'この相談を終了する', partners_order_path(@order), params: { order: { is_open: false } }, method: :put, data: { confirm: "この相談を終了しますか？終了すると、開催の相談一覧では非表示となります" }, class: 'text-white btn btn-danger btn-lg btn-block w-75 p-3' %>
+      </div>
+    </div>
+  <% end %>
+
+  <% if !@order.is_open? %>
+    <div class="col-md-12">
+      <div class="text-center my-3">
+        <%= button_to 'この相談を再開する', partners_order_path(@order), params: { order: { is_open: true } }, method: :put, data: { confirm: "この相談を再開しますか？" }, class: 'text-white btn btn-primary btn-lg btn-block w-75 p-3' %>
+      </div>
+    </div>
+  <% end %>
 </div>

@@ -19,23 +19,19 @@ class Partners::OrdersController < Partners::ApplicationController
     # TODO: 拒否した場合は、start_atをnilにする
     redirect_path = partners_order_path(@order)
     message = '更新しました！'
-    if params[:redirect_path]
-      redirect_path = params[:redirect_path]
-    end
-    if params[:message]
-      message = params[:message]
-    end
+
+    redirect_path = params[:redirect_path] if params[:redirect_path]
+    message = params[:message] if params[:message]
+    redirect_path = partners_path(is_open: true) if params[:order][:is_open]
 
     @order.update(params_create)
 
-    if params_create[:is_accepted] == 'true'
-      OrderAcceptMailer.notify(order: @order).deliver_now
-    end
+    OrderAcceptMailer.notify(order: @order).deliver_now if params_create[:is_accepted] == 'true'
+    OrderDenyMailer.notify(order: @order).deliver_now if params_create[:is_accepted] == 'false'
 
-    if params_create[:is_accepted] == 'false'
-      OrderDenyMailer.notify(order: @order).deliver_now
-    end
     redirect_to redirect_path, notice: message
+  rescue StandardError => e
+    redirect_to partners_path(is_open: true), alert: e.message
   end
 
   def confirm
@@ -81,6 +77,6 @@ class Partners::OrdersController < Partners::ApplicationController
   end
 
   private def params_create
-    params.require(:order).permit(:status, :is_accepted, :start_at)
+    params.require(:order).permit(:status, :is_accepted, :start_at, :is_open)
   end
 end

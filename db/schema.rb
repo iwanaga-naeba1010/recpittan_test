@@ -151,6 +151,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_26_131050) do
     t.integer "final_check_status"
     t.string "memo"
     t.string "coupon_code"
+    t.boolean "is_open", default: true, null: false
   end
 
   create_table "profiles", force: :cascade do |t|
