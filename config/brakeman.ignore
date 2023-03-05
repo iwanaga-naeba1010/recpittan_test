@@ -14,6 +14,55 @@
       "location": null,
       "user_input": null,
       "confidence": "High",
+      "cwe_id": [
+        200
+      ],
+      "note": ""
+    },
+    {
+      "warning_type": "Redirect",
+      "warning_code": 18,
+      "fingerprint": "4e6e86acd1100d9eff895a0ed1e0458d93e947aad29afd30c1eb9e61eb2e0506",
+      "check_name": "Redirect",
+      "message": "Possible unprotected redirect",
+      "file": "app/controllers/partners/orders_controller.rb",
+      "line": 32,
+      "link": "https://brakemanscanner.org/docs/warning_types/redirect/",
+      "code": "redirect_to(((partners_order_path(current_user.recreations.map do\n rec.orders.order_asc.map do\n order if (order.id == params[:id].to_i)\n end\n end.flatten.compact.first) or params[:redirect_path]) or partners_path(:is_open => true)), :notice => ((\"\\u66F4\\u65B0\\u3057\\u307E\\u3057\\u305F\\uFF01\" or params[:message])))",
+      "render_path": null,
+      "location": {
+        "type": "method",
+        "class": "Partners::OrdersController",
+        "method": "update"
+      },
+      "user_input": "params[:redirect_path]",
+      "confidence": "High",
+      "cwe_id": [
+        601
+      ],
+      "note": ""
+    },
+    {
+      "warning_type": "Redirect",
+      "warning_code": 18,
+      "fingerprint": "728bf1f939f3a62d8285c15c5f601ec5a01b798c6a6e2239501fdfb5ceb38422",
+      "check_name": "Redirect",
+      "message": "Possible unprotected redirect",
+      "file": "app/controllers/partners/orders_controller.rb",
+      "line": 38,
+      "link": "https://brakemanscanner.org/docs/warning_types/redirect/",
+      "code": "redirect_to((partners_order_path(current_user.recreations.map do\n rec.orders.order_asc.map do\n order if (order.id == params[:id].to_i)\n end\n end.flatten.compact.first) or params[:redirect_path]), :notice => ((\"\\u66F4\\u65B0\\u3057\\u307E\\u3057\\u305F\\uFF01\" or params[:message])))",
+      "render_path": null,
+      "location": {
+        "type": "method",
+        "class": "Partners::OrdersController",
+        "method": "update"
+      },
+      "user_input": "params[:redirect_path]",
+      "confidence": "High",
+      "cwe_id": [
+        601
+      ],
       "note": ""
     },
     {
@@ -37,6 +86,6 @@
       "note": ""
     }
   ],
-  "updated": "2022-02-28 23:52:19 +0900",
-  "brakeman_version": "5.2.0"
+  "updated": "2023-03-01 23:32:45 +0900",
+  "brakeman_version": "5.4.1"
 }

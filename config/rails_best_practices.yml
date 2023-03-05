@@ -54,7 +54,11 @@ RemoveUnusedMethodsInControllersCheck: {
     'CustomDevise::RegistrationsController#after_update_path_for',
     'CustomDevise::RegistrationsController#configure_account_update_params',
     'CustomDevise::RegistrationsController#after_inactive_sign_up_path_for',
-    'CustomDevise::SessionsController#after_sign_in_path_for'
+    'CustomDevise::SessionsController#after_sign_in_path_for',
+    'CustomDevise::RegistrationsController#configure_sign_up_params',
+    'HomeController#pick_recreation_by_id',
+    'Partners::ProfilesController#set_profile',
+    'Partners::ProfilesController#params_create'
   ]
 }
 RemoveUnusedMethodsInHelpersCheck: { except_methods: [] }

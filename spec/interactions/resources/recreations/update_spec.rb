@@ -6,7 +6,7 @@ RSpec.describe Resources::Recreations::Update, type: :interaction do
   describe '#execute' do
     let!(:partner) { create(:user, role: :partner) }
     let!(:profile) { create(:profile, user: partner) }
-    let!(:recreation) { create(:recreation, user: partner, profile: profile) }
+    let!(:recreation) { create(:recreation, user: partner, profile:) }
     let(:params) do
       {
         title: 'title',

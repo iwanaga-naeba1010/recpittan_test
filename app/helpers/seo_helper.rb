@@ -39,7 +39,7 @@ module SeoHelper
     keywords ||= SITE_KEYWORDS if keywords.blank?
     image_src ||= "#{root_url}/about.png" if image_src.blank?
     set_meta_tags(
-      title: title, description: description, keywords: keywords, image_src: image_src,
+      title:, description:, keywords:, image_src:,
       og: { image: image_src }, twitter: { image: image_src }
     )
   end

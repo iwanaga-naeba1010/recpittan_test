@@ -29,6 +29,7 @@ ja:
       target: 利用者層
       chat: チャット
       invoice_information: 請求書発行先情報
+      top_banner: トップバナー
     attributes:
       email:
         title: タイトル
@@ -41,6 +42,7 @@ ja:
         username_kana: 名前(カナ)
         title: 役職
         memo: メモ
+        approval_status: 運営認証
       company:
         name: 法人名
         facility_name: 事業所名
@@ -189,6 +191,11 @@ ja:
         building: 建物名
         code: 請求コード
         memo: メモ
+      top_banner:
+        image: 画像
+        url: url
+        start_date: 開始日
+        end_date: 終了日
     errors:
       messages:
         duration_over: が上限を越えています

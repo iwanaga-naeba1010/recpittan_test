@@ -9,7 +9,7 @@ RSpec.describe ApiCustomer::OrdersController, type: :request do
   describe 'GET /api_customer/orders/:id' do
     let!(:order) { create(:order, user: current_user, recreation: partner.recreations.first) }
     let(:id) { order.id }
-    let(:expected) { OrderSerializer.new.serialize(order: order) }
+    let(:expected) { OrderSerializer.new.serialize(order:) }
 
     it_behaves_like 'an endpoint returns', :expected
   end
@@ -17,10 +17,10 @@ RSpec.describe ApiCustomer::OrdersController, type: :request do
   describe 'PATCH /api_customer/orders/:id' do
     let!(:order) { create(:order, user: current_user, recreation: partner.recreations.first) }
     let(:id) { order.id }
-    let(:expected) { OrderSerializer.new.serialize(order: order) }
+    let(:expected) { OrderSerializer.new.serialize(order:) }
 
     let!(:params) { { order: attributes_for(:order, user: current_user) } }
-    let(:expected) { OrderSerializer.new.serialize(order: order) }
+    let(:expected) { OrderSerializer.new.serialize(order:) }
 
     it_behaves_like 'an endpoint returns', :expected
 

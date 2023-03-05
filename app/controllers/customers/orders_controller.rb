@@ -51,7 +51,7 @@ class Customers::OrdersController < Customers::ApplicationController
       Chat.create(
         order_id: @order.id,
         user_id: current_user.id,
-        message: message,
+        message:,
         is_read: false
       )
 

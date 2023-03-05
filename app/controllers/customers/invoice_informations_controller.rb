@@ -15,7 +15,7 @@ class Customers::InvoiceInformationsController < Customers::ApplicationControlle
   def create
     outcome = Resources::InvoiceInformations::Create.run(
       params: params_create,
-      current_user: current_user
+      current_user:
     )
     if outcome.valid?
       @invoice_information = outcome.result
@@ -35,7 +35,7 @@ class Customers::InvoiceInformationsController < Customers::ApplicationControlle
     outcome = Resources::InvoiceInformations::Update.run(
       id: current_user.invoice_information.id,
       params: params_create,
-      current_user: current_user
+      current_user:
     )
     if outcome.valid?
       @invoice_information = outcome.result

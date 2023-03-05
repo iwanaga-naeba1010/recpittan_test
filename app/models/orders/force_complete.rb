@@ -15,6 +15,7 @@
 #  expenses                :integer          default(0)
 #  final_check_status      :integer
 #  is_accepted             :boolean          default(FALSE)
+#  is_open                 :boolean          default(TRUE), not null
 #  material_amount         :integer          default(0)
 #  material_price          :integer          default(0)
 #  memo                    :string

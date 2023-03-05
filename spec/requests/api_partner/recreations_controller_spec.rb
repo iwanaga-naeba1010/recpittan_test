@@ -20,7 +20,7 @@ RSpec.describe ApiPartner::RecreationsController, type: :request do
   describe 'GET /api_partner/recreations' do
     let!(:profile) { create(:profile, user: current_user) }
     let!(:recreation) { create(:recreation, user: current_user) }
-    let!(:relation) { create(:recreation_profile, recreation: recreation, profile: profile) }
+    let!(:relation) { create(:recreation_profile, recreation:, profile:) }
     let(:id) { recreation.id }
     let(:expected) { RecreationSerializer.new.serialize_list(recreations: [recreation]) }
 
@@ -30,9 +30,9 @@ RSpec.describe ApiPartner::RecreationsController, type: :request do
   describe 'GET /api_partner/recreations/:id' do
     let!(:profile) { create(:profile, user: current_user) }
     let!(:recreation) { create(:recreation, user: current_user) }
-    let!(:relation) { create(:recreation_profile, recreation: recreation, profile: profile) }
+    let!(:relation) { create(:recreation_profile, recreation:, profile:) }
     let(:id) { recreation.id }
-    let(:expected) { RecreationSerializer.new.serialize(recreation: recreation) }
+    let(:expected) { RecreationSerializer.new.serialize(recreation:) }
 
     it_behaves_like 'an endpoint returns', :expected
   end
@@ -40,7 +40,7 @@ RSpec.describe ApiPartner::RecreationsController, type: :request do
   describe 'POST /api_partner/recreations' do
     let!(:profile) { create(:profile, user: current_user) }
     let!(:recreation) { create(:recreation, user: current_user) }
-    let!(:relation) { create(:recreation_profile, recreation: recreation, profile: profile) }
+    let!(:relation) { create(:recreation_profile, recreation:, profile:) }
     let(:id) { recreation.id }
     let(:params) do
       {
@@ -84,7 +84,7 @@ RSpec.describe ApiPartner::RecreationsController, type: :request do
   describe 'PATCH /api_partner/recreations/:id' do
     let!(:profile) { create(:profile, user: current_user) }
     let!(:recreation) { create(:recreation, user: current_user) }
-    let!(:relation) { create(:recreation_profile, recreation: recreation, profile: profile) }
+    let!(:relation) { create(:recreation_profile, recreation:, profile:) }
     let(:id) { recreation.id }
     let(:params) do
       {

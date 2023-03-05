@@ -63,20 +63,20 @@ RSpec.describe 'Users', type: :request do
     context 'when valid parameters' do
       username = 'test'
       it 'returns 302 status' do
-        put admin_user_path(partner.id), params: { user: { username: username } }
+        put admin_user_path(partner.id), params: { user: { username: } }
         expect(response).to have_http_status(:found)
       end
 
       it 'update status' do
         expect {
-          put admin_user_path(partner.id), params: { user: { username: username } }
+          put admin_user_path(partner.id), params: { user: { username: } }
         }.to change { User.where(role: :partner).find(partner.id).username }.from(partner.username).to(username)
       end
 
       it 'update email' do
         email = 'hogehogehoge@example.com'
         expect {
-          put admin_user_path(partner.id), params: { user: { email: email } }
+          put admin_user_path(partner.id), params: { user: { email: } }
         }.to change { User.where(role: :partner).find(partner.id).email }.from(partner.email).to(email)
       end
     end

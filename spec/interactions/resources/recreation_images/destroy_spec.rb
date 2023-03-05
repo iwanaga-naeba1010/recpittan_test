@@ -7,8 +7,8 @@ RSpec.describe Resources::RecreationImages::Destroy, type: :interaction do
   describe '#execute' do
     let!(:partner) { create(:user, role: :partner) }
     let!(:profile) { create(:profile, user: partner) }
-    let!(:recreation) { create(:recreation, user: partner, profile: profile) }
-    let!(:recreation_image) { create(:recreation_image, recreation: recreation) }
+    let!(:recreation) { create(:recreation, user: partner, profile:) }
+    let!(:recreation_image) { create(:recreation_image, recreation:) }
 
     let(:params) do
       {
