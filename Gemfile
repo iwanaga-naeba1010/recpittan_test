@@ -5,7 +5,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '3.1.1'
 
-gem 'rails', '7.0.4'
+gem 'rails', '7.0.4.2'
 gem 'pg'
 gem 'puma'
 gem 'sass-rails'
@@ -88,15 +88,15 @@ gem 'slack-notifier'
 # API
 gem 'oj'
 
-gem 'sentry-ruby'
-gem 'sentry-rails'
-
 gem 'cocoon'
 # seo
 gem 'meta-tags'
 gem 'sitemap_generator'
 
 gem 'active_interaction'
+
+gem 'sentry-ruby'
+gem 'sentry-rails'
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]

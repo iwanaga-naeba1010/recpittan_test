@@ -18,6 +18,7 @@ export type RecreationFormValues = Pick<
   | 'secondTitle'
   | 'minutes'
   | 'price'
+  | 'amount'
   | 'materialPrice'
   | 'description'
   | 'flowOfDay'
@@ -54,6 +55,7 @@ export const RecreationNewForm: React.FC<Props> = (props) => {
       secondTitle: '',
       minutes: 30,
       price: 5000,
+      amount: 0,
       materialPrice: 0,
       description: '',
       flowOfDay: '',

@@ -6,7 +6,7 @@ module ApiPartner
 
     def index
       recreations = current_user.recreations.load_async
-      render_json RecreationSerializer.new.serialize_list(recreations: recreations)
+      render_json RecreationSerializer.new.serialize_list(recreations:)
     rescue StandardError => e
       logger.error e.message
       render_json([e.message], status: 401)
@@ -22,7 +22,7 @@ module ApiPartner
     def create
       recreation = Resources::Recreations::Create.run!(
         recreation_params: params_create.to_h,
-        current_user: current_user,
+        current_user:,
         profile_id: params_create.dig(:recreation_profile_attributes, :profile_id),
         prefectures: params_create[:recreation_prefectures_attributes]&.pluck(:name)
       )
@@ -34,7 +34,7 @@ module ApiPartner
       SlackNotifier
         .new(channel: '#product_confirmation_of_recreation')
         .send('新規レク登録依頼', message)
-      render_json RecreationSerializer.new.serialize(recreation: recreation)
+      render_json RecreationSerializer.new.serialize(recreation:)
     rescue StandardError => e
       logger.error e.message
       render_json([e.message], status: 422)
@@ -44,7 +44,7 @@ module ApiPartner
       recreation = Resources::Recreations::Update.run!(
         id: params[:id].to_i,
         recreation_params: params_create.to_h,
-        current_user: current_user,
+        current_user:,
         profile_id: params_create.dig(:recreation_profile_attributes, :profile_id),
         prefectures: params_create[:recreation_prefectures_attributes]&.pluck(:name)
       )
@@ -54,7 +54,7 @@ module ApiPartner
       MESSAGE
 
       SlackNotifier.new(channel: '#product_confirmation_of_recreation').send('レク更新連絡', message)
-      render_json RecreationSerializer.new.serialize(recreation: recreation)
+      render_json RecreationSerializer.new.serialize(recreation:)
     rescue StandardError => e
       logger.error e.message
       render_json([e.message], status: 422)

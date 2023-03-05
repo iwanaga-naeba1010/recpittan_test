@@ -11,6 +11,8 @@ class Partners::ProfilesController < Partners::ApplicationController
     @profile = current_user.profiles.build
   end
 
+  def edit; end
+
   def create
     @profile = current_user.profiles.build(params_create)
     if @profile.save
@@ -19,8 +21,6 @@ class Partners::ProfilesController < Partners::ApplicationController
       render :new
     end
   end
-
-  def edit; end
 
   def update
     if @profile.update(params_create)

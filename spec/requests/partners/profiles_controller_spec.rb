@@ -60,13 +60,13 @@ RSpec.describe Partners::ProfilesController, type: :request do
     context 'when valid parameters' do
       name = 'update profile name'
       it 'returns 302 status' do
-        put partners_profile_path(profile.id), params: { profile: { name: name } }
+        put partners_profile_path(profile.id), params: { profile: { name: } }
         expect(response).to have_http_status(:found)
       end
 
       it 'update status' do
         expect {
-          put partners_profile_path(profile.id), params: { profile: { name: name } }
+          put partners_profile_path(profile.id), params: { profile: { name: } }
         }.to change { Profile.find(profile.id).name }.from(profile.name).to(name)
       end
     end

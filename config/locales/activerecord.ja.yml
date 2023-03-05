@@ -29,6 +29,7 @@ ja:
       target: 利用者層
       chat: チャット
       invoice_information: 請求書発行先情報
+      top_banner: トップバナー
     attributes:
       email:
         title: タイトル
@@ -40,6 +41,8 @@ ja:
         username: 名前
         username_kana: 名前(カナ)
         title: 役職
+        memo: メモ
+        approval_status: 運営認証
       company:
         name: 法人名
         facility_name: 事業所名
@@ -57,6 +60,8 @@ ja:
         nursing_care_level: 平均介護度
         request: レクへの要望
         genre: 事業所種別
+        user_company_id: ユーザー一覧
+        memo: メモ
       partner:
         name: 名前
         title: 肩書き
@@ -95,6 +100,7 @@ ja:
         prefectures: 都道府県
         is_public_price: 料金を公開
         additional_facility_fee: 施設追加費用
+        memo: メモ
       recreation_image:
         image: ファイル
         kind: 種別
@@ -185,6 +191,11 @@ ja:
         building: 建物名
         code: 請求コード
         memo: メモ
+      top_banner:
+        image: 画像
+        url: url
+        start_date: 開始日
+        end_date: 終了日
     errors:
       messages:
         duration_over: が上限を越えています

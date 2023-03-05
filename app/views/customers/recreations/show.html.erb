@@ -171,6 +171,14 @@
                   <div class="text-muted">・<%= target.name %></div>
                 <% end %>
               </div>
+              <% if @recreation.kind.visit? && @recreation.recreation_prefectures.exists? %>
+                <div class="border p-3">
+                  <h4 class="title">対象エリア</h4>
+                  <% @recreation.recreation_prefectures.pluck(:name).uniq.each do |prefecture_name| %>
+                    <div class="text-muted">・<%= prefecture_name %></div>
+                  <% end %>
+                </div>
+              <% end %>
 
               <div class="action-area">
                 <% if user_signed_in? %>

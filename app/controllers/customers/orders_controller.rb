@@ -4,13 +4,13 @@ class Customers::OrdersController < Customers::ApplicationController
   before_action :set_recreation, only: %i[new create]
   before_action :set_order, only: %i[show chat complete]
 
+  def show; end
+
   def new
     @recreation = Recreation.find(params[:recreation_id])
     @order = @recreation.orders.build
     3.times { @order.order_dates.build }
   end
-
-  def show; end
 
   def chat; end
 
@@ -51,7 +51,7 @@ class Customers::OrdersController < Customers::ApplicationController
       Chat.create(
         order_id: @order.id,
         user_id: current_user.id,
-        message: message,
+        message:,
         is_read: false
       )
 

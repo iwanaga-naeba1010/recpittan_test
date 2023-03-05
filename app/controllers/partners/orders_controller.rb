@@ -19,23 +19,19 @@ class Partners::OrdersController < Partners::ApplicationController
     # TODO: 拒否した場合は、start_atをnilにする
     redirect_path = partners_order_path(@order)
     message = '更新しました！'
-    if params[:redirect_path]
-      redirect_path = params[:redirect_path]
-    end
-    if params[:message]
-      message = params[:message]
-    end
+
+    redirect_path = params[:redirect_path] if params[:redirect_path]
+    message = params[:message] if params[:message]
+    redirect_path = partners_path(is_open: true) if params[:order][:is_open]
 
     @order.update(params_create)
 
-    if params_create[:is_accepted] == 'true'
-      OrderAcceptMailer.notify(order: @order).deliver_now
-    end
+    OrderAcceptMailer.notify(order: @order).deliver_now if params_create[:is_accepted] == 'true'
+    OrderDenyMailer.notify(order: @order).deliver_now if params_create[:is_accepted] == 'false'
 
-    if params_create[:is_accepted] == 'false'
-      OrderDenyMailer.notify(order: @order).deliver_now
-    end
     redirect_to redirect_path, notice: message
+  rescue StandardError => e
+    redirect_to partners_path(is_open: true), alert: e.message
   end
 
   def confirm
@@ -62,8 +58,11 @@ class Partners::OrdersController < Partners::ApplicationController
   def update_final_check
     @order.update(final_check_status: :checked)
     message = <<~MESSAGE
+      開催日： #{@order.start_at}
       パートナー名： #{@order.recreation.profile_name}
-      管理画面案件URL： #{admin_order_url(@order.id)}
+      レク名： #{@order.recreation_title}
+      施設名： #{@order.user.company.facility_name}
+      管理画面案件URL #{admin_order_url(@order.id)}
     MESSAGE
     SlackNotifier.new(channel: '#アクティブチャットスレッド').send('パートナーが最終確認を完了しました', message)
     redirect_to complete_final_check_partners_order_path(@order.id)
@@ -78,6 +77,6 @@ class Partners::OrdersController < Partners::ApplicationController
   end
 
   private def params_create
-    params.require(:order).permit(:status, :is_accepted, :start_at)
+    params.require(:order).permit(:status, :is_accepted, :start_at, :is_open)
   end
 end

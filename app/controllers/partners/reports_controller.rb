@@ -8,6 +8,11 @@ class Partners::ReportsController < Partners::ApplicationController
     @report = @order.build_report
   end
 
+  def edit
+    @report = @order.report
+  end
+
+  # rubocop:disable Metrics/AbcSize
   def create
     @order.build_report(params_create)
     # NOTE: 冗長だけど、更新のために必要
@@ -19,15 +24,20 @@ class Partners::ReportsController < Partners::ApplicationController
 
     if @order.save
       CustomerCompleteReportMailer.notify(order: @order).deliver_now
+      message = <<~MESSAGE
+        開催日： #{@order.start_at}
+        パートナー名： #{@order.recreation.profile_name}
+        レク名： #{@order.recreation_title}
+        施設名： #{@order.user.company.facility_name}
+        管理画面案件URL #{admin_order_url(@order.id)}
+      MESSAGE
+      SlackNotifier.new(channel: '#アクティブチャットスレッド').send('パートナーが終了報告をしました', message)
       redirect_to partners_order_path(@order.id), notice: t('action_messages.created', model_name: Report.model_name.human)
     else
       render :new
     end
   end
-
-  def edit
-    @report = @order.report
-  end
+  # rubocop:enable Metrics/AbcSize
 
   def update
     if @order.report.update(params_create)

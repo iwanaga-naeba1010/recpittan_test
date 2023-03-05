@@ -113,7 +113,7 @@ RSpec.describe 'Orders', type: :system do
         click_button('レクを正式依頼へ進む')
         sleep 5
 
-        select '2022', from: 'year'
+        select '2023', from: 'year'
         select '6', from: 'month'
         select '1', from: 'day'
         select '10', from: 'startHour'
@@ -227,7 +227,7 @@ RSpec.describe 'Orders', type: :system do
         click_button('レクを正式依頼へ進む')
         sleep 5
 
-        select '2022', from: 'year'
+        select '2023', from: 'year'
         select '6', from: 'month'
         select '1', from: 'day'
         select '10', from: 'startHour'

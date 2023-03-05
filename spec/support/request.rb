@@ -71,8 +71,8 @@ RSpec.shared_context 'with requesting' do
   end
 
   let(:endpoint_segments) do
-    current_example = ::RSpec.respond_to?(:current_example) ? ::RSpec.current_example : example
-    current_example.full_description.match(/(#{::Regexp.union(SUPPORTED_METHODS)}) (\S+)/).to_a
+    current_example = RSpec.respond_to?(:current_example) ? RSpec.current_example : example
+    current_example.full_description.match(/(#{Regexp.union(SUPPORTED_METHODS)}) (\S+)/).to_a
   end
 
   let(:http_method) { endpoint_segments[1].downcase }

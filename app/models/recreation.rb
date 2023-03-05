@@ -20,6 +20,7 @@
 #  kind                    :integer          default("visit"), not null
 #  material_amount         :integer
 #  material_price          :integer
+#  memo                    :string
 #  minutes                 :integer
 #  number_of_past_events   :integer          default(0), not null
 #  price                   :integer
@@ -51,6 +52,7 @@ class Recreation < ApplicationRecord
   has_one :recreation_profile, dependent: :destroy
   has_one :profile, through: :recreation_profile
   has_many :recreation_prefectures, dependent: :destroy
+  has_many :recreation_memos, dependent: :destroy
 
   accepts_nested_attributes_for :recreation_images, allow_destroy: true
   accepts_nested_attributes_for :recreation_profile, allow_destroy: true

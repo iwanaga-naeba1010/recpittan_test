@@ -6,7 +6,6 @@ import { Category, LoadingIndicator, SuccessFlash, Tag } from '@/components/shar
 import { Api } from '@/infrastructure';
 import { Order, User } from '@/types';
 import { getQeuryStringValueByKey, removeQueryStringsByKey, strToBool } from '@/utils';
-import * as Sentry from '@sentry/react';
 import * as $ from 'jquery';
 import React, { useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
@@ -175,12 +174,7 @@ export const OrderChat: React.FC = () => {
 document.addEventListener('turbolinks:load', () => {
   const elm = document.querySelector('#OrderChat');
   if (elm) {
-    ReactDOM.render(
-      <Sentry.ErrorBoundary>
-        <OrderChat />
-      </Sentry.ErrorBoundary>,
-      elm
-    );
+    ReactDOM.render(<OrderChat />, elm);
   }
 });
 
@@ -188,11 +182,6 @@ document.addEventListener('turbolinks:load', () => {
 $(document).ready(() => {
   const elm = document.querySelector('#OrderChat');
   if (elm) {
-    ReactDOM.render(
-      <Sentry.ErrorBoundary>
-        <OrderChat />
-      </Sentry.ErrorBoundary>,
-      elm
-    );
+    ReactDOM.render(<OrderChat />, elm);
   }
 });

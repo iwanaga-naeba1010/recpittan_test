@@ -33,6 +33,7 @@ export const RecreationEditForm: React.FC<Props> = (props) => {
       secondTitle: recreation.secondTitle,
       minutes: recreation.minutes,
       price: recreation.price,
+      amount: recreation.amount,
       materialPrice: recreation.materialPrice,
       description: recreation.description,
       flowOfDay: recreation.flowOfDay,

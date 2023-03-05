@@ -47,7 +47,12 @@
                   <%= image_tag profile.image.url, alt: 'preview', class: 'prev-image' %>
                 </div>
               <% else %>
-                <p class="small mt-0 text-dark">添付可能ファイルは50MB以下で、形式はjpg、jpeg、gif、png、pptx、pptです</p>
+                <ul class="small mt-0 ps-3">
+                  <li>信頼される講師のイメージのためにも、プロフィール画像はとても重要です</li>
+                  <li>施設に配布するチラシの素材としても利用します</li>
+                  <li>正方形の画像が、綺麗に表示されます</li>
+                  <li>添付可能ファイルは50MB以下で、形式はJPEG、PNGです</li>
+                </ul>
                 <%= f.label :image, '+', class: 'select-photo text-primary border p-5' %>
               <% end %>
             </div>

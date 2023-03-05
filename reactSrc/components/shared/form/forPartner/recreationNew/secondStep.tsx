@@ -1,12 +1,16 @@
 import { UseFile } from '@/components/forPartner';
 import { LoadingIndicator } from '@/components/shared/parts';
-import { Essential } from '@/components/shared/parts/essential';
 import { Recreation } from '@/types';
 import React, { useRef, useState } from 'react';
 import { UseFormGetValues, UseFormRegister } from 'react-hook-form';
 import { RecreationAdditionalFacilityFee } from './recreationAdditionalFacilityFee';
+import { RecreationEditAdditionalFacilityFee } from './recreationEditAdditionalFacilityFee';
+import { RecreationEditMaterialPrice } from './recreationEditMaterialPrice';
+import { RecreationEditPrice } from './recreationEditPrice';
 import { RecreationImage as ImageComponent } from './recreationImage';
+import { RecreationMaterialPrice } from './recreationMaterialPrice';
 import { RecreationFormValues } from './recreationNewForm';
+import { RecreationPrice } from './recreationPrice';
 
 type Props = {
   getValues: UseFormGetValues<RecreationFormValues>;
@@ -23,7 +27,6 @@ export const SecondStep: React.FC<Props> = (props) => {
   const materialRef = useRef(null);
   const handleSliderRefClickFileInput = (): void => sliderRef.current.click();
   const handleMaterialRefClickFileInput = (): void => materialRef.current.click();
-
   const isShowAdditionalFacilityFee = (): boolean => {
     if (recreation === undefined) {
       const kind = getValues('kind');
@@ -32,52 +35,31 @@ export const SecondStep: React.FC<Props> = (props) => {
     return recreation?.kind.key === 'online';
   };
 
+
   return (
     <div>
-      <div className='d-flex'>
-        <h5 className='text-black font-weight-bold'>金額・メディア・その他の情報を入力</h5>
-      </div>
-      <hr className='my-2' />
+      {recreation === undefined && <RecreationPrice register={register} />}
+      {recreation !== undefined && <RecreationEditPrice recreation={recreation} />}
 
-      <div className='d-flex mt-4'>
-        <h5 className='text-black font-weight-bold'>謝礼</h5>
-        <Essential />
-      </div>
-      <p className='small my-0'>レクの料金を入力してください</p>
-      <input
-        type='text'
-        className='p-2 w-100 rounded border border-secondary'
-        {...register('price', {
-          required: true
-        })}
-      />
-      <p className='small my-0'>施設に表示される金額</p>
-      <p className='small my-0'>謝礼＋サービス手数料(35%)が上乗せされます</p>
+      {recreation === undefined && <RecreationMaterialPrice register={register} />}
+      {recreation !== undefined && <RecreationEditMaterialPrice recreation={recreation} />}
 
-      {(recreation === undefined || recreation?.kind.key === 'mailing') && (
-        <>
-          <div className='d-flex mt-4'>
-            <h5 className='text-black font-weight-bold'>材料費</h5>
-            <Essential />
-          </div>
-          <p className='small my-0'>レク1人あたりに必要な材料費を入力してください</p>
-          <input
-            type='text'
-            className='p-2 w-100 rounded border border-secondary'
-            placeholder='タイトルを入力'
-            {...register('materialPrice')}
-          />
-          <p className='small my-0'>施設に表示される金額</p>
-          <p className='small my-0'>材料費＋サービス手数料(15%)が上乗せされます</p>
-        </>
-      )}
-      {isShowAdditionalFacilityFee() && <RecreationAdditionalFacilityFee register={register} />}
+      {(recreation === undefined && isShowAdditionalFacilityFee()) && <RecreationAdditionalFacilityFee register={register} />}
+      {(recreation !== undefined && isShowAdditionalFacilityFee()) && <RecreationEditAdditionalFacilityFee recreation={recreation} />}
       {/* 修正のタイミングで利用可能に */}
       {recreation !== undefined && (
         <>
-          <div className='d-flex mt-4'>
+          <div className='mt-4'>
             <h5 className='text-black font-weight-bold'>レク画像を追加</h5>
-            <p className='small mt-1 ms-3'>※添付可能ファイルは20MB以下で、形式はJPEG、PNGです</p>
+            <ul className='small my-0 ps-3'>
+              <li>レクの魅力を最大限伝えるためにも、こだわった素材をご活用ください</li>
+              <li>全体のイメージと作品等がある場合は合わせて最低2枚以上を添付してください</li>
+              <li>施設に配布するチラシの素材としても利用します</li>
+              <li>後ほど画像を追加/変更することも可能です</li>
+              <li>目安サイズ 16×9（iPhoneで横向きで撮影した写真の大きさでも可）</li>
+              <li>添付可能ファイルは20MB以下で、形式はJPEG、PNGです</li>
+              <li>削除した画像は元に戻せません。必要に応じて事前にレクページからダウンロードをお願いします</li>
+            </ul>
           </div>
           <div className='row'>
             {recreation.images
@@ -105,23 +87,27 @@ export const SecondStep: React.FC<Props> = (props) => {
         </>
       )}
 
-      <div className='d-flex mt-4'>
-        <h5 className='text-black font-weight-bold'>動画を共有</h5>
-      </div>
-      <ol>
-        <li>
-          無料大容量 ファイル転送サービス GigaFile(ギガファイル)便
-          <span>
-            <a href='https://gigafile.nu/' target='_blank' rel='noreferrer' className='text-primary'>
-              FileGiga
-            </a>
-          </span>
-          にアクセス
-        </li>
-        <li>次にファイルをアップロードして、ダウンロード専用URLをコピーします</li>
-        <li>最後に専用URLを以下のフォームに入力してください</li>
-      </ol>
-      <input type='text' className='p-2 w-100 rounded border border-secondary' {...register('youtubeId')} />
+      {(recreation === undefined) && (
+        <>
+          <div className='d-flex mt-4'>
+            <h5 className='text-black font-weight-bold'>動画を共有</h5>
+          </div>
+          <ol>
+            <li>
+              無料大容量 ファイル転送サービス GigaFile(ギガファイル)便
+              <span>
+                <a href='https://gigafile.nu/' target='_blank' rel='noreferrer' className='text-primary'>
+                  FileGiga
+                </a>
+              </span>
+              にアクセス
+            </li>
+            <li>次にファイルをアップロードして、ダウンロード専用URLをコピーします</li>
+            <li>最後に専用URLを以下のフォームに入力してください</li>
+          </ol>
+          <input type='text' className='p-2 w-100 rounded border border-secondary' {...register('youtubeId')} />
+        </>
+      )}
 
       <div className='mt-4'>
         <h5 className='text-black font-weight-bold'>お借りしたいものを入力</h5>

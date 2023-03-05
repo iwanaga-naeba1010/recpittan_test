@@ -5,6 +5,7 @@
 # Table name: users
 #
 #  id                     :bigint           not null, primary key
+#  approval_status        :integer          default("unapproved")
 #  confirmation_sent_at   :datetime
 #  confirmation_token     :string
 #  confirmed_at           :datetime
@@ -16,6 +17,7 @@
 #  last_sign_in_at        :datetime
 #  last_sign_in_ip        :string
 #  locked_at              :datetime
+#  memo                   :string
 #  remember_created_at    :datetime
 #  reset_password_sent_at :datetime
 #  reset_password_token   :string
@@ -45,7 +47,7 @@ FactoryBot.define do
   trait :with_customer do
     after(:create) do |user|
       company = create(:company)
-      user.update(role: :customer, company: company)
+      user.update(role: :customer, company:)
     end
   end
 
@@ -53,18 +55,18 @@ FactoryBot.define do
   trait :with_recreations do
     after(:create) do |user|
       user.update(role: :partner)
-      rec = create(:recreation, user: user, status: 'published')
-      profile = create(:profile, user: user)
-      create(:recreation_profile, recreation: rec, profile: profile)
+      rec = create(:recreation, user:, status: 'published')
+      profile = create(:profile, user:)
+      create(:recreation_profile, recreation: rec, profile:)
     end
   end
 
   trait :with_partner do
     after(:create) do |user|
       user.update(role: :partner)
-      rec = create(:recreation, user: user, status: 'published', kind: 'visit')
-      profile = create(:profile, user: user)
-      create(:recreation_profile, recreation: rec, profile: profile)
+      rec = create(:recreation, user:, status: 'published', kind: 'visit')
+      profile = create(:profile, user:)
+      create(:recreation_profile, recreation: rec, profile:)
     end
   end
 

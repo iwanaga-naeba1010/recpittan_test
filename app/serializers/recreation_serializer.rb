@@ -20,6 +20,7 @@
 #  kind                    :integer          default("visit"), not null
 #  material_amount         :integer
 #  material_price          :integer
+#  memo                    :string
 #  minutes                 :integer
 #  number_of_past_events   :integer          default(0), not null
 #  price                   :integer
@@ -37,7 +38,7 @@
 #
 class RecreationSerializer
   def serialize_list(recreations:)
-    recreations.map { |recreation| serialize(recreation: recreation) }
+    recreations.map { |recreation| serialize(recreation:) }
   end
 
   def serialize(recreation:) # rubocop:disable Metrics/AbcSize
@@ -55,6 +56,7 @@ class RecreationSerializer
       minutes: recreation.minutes,
       description: recreation.description,
       price: recreation.price,
+      amount: recreation.amount,
       kind: { id: recreation.kind.value, key: recreation.kind, text: recreation.kind_text },
       status: { id: recreation.status.value, key: recreation.status, text: recreation.status_text },
       category: { id: recreation.category.value, key: recreation.category, text: recreation.category_text },
@@ -66,12 +68,12 @@ class RecreationSerializer
       borrow_item: recreation.borrow_item,
       bring_your_own_item: recreation.bring_your_own_item,
       additional_facility_fee: recreation.additional_facility_fee,
-      images: images,
-      prefectures: prefectures,
-      profile: profile,
+      images:,
+      prefectures:,
+      profile:,
       user_id: recreation.user_id,
-      tags: tags,
-      targets: targets
+      tags:,
+      targets:
     }
   end
 end

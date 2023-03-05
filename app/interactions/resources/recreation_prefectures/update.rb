@@ -15,8 +15,8 @@ module Resources
 
       def execute
         prefecture = RecreationPrefecture.find_by(
-          id: id,
-          recreation_id: recreation_id
+          id:,
+          recreation_id:
         )
         ActiveRecord::Base.transaction do
           prefecture.update!(name: params[:name])

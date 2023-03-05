@@ -3,11 +3,11 @@
 class OrderConfigSerializer
   def serialize(years:, months:, days:, hours:, minutes:)
     {
-      years: years,
-      months: months,
-      days: days,
-      hours: hours,
-      minutes: minutes
+      years:,
+      months:,
+      days:,
+      hours:,
+      minutes:
     }
   end
 end

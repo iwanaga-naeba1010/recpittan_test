@@ -11,7 +11,7 @@ RSpec.describe OrderAcceptMailer, type: :mailer do
   let(:order) { create :order, recreation_id: partner.recreations.first.id, user_id: customer.id }
 
   describe 'order_accept' do
-    let(:mail) { OrderAcceptMailer.notify(order: order) }
+    let(:mail) { OrderAcceptMailer.notify(order:) }
 
     it 'renders the subject' do
       expect(mail.subject).to eq(template['title'])

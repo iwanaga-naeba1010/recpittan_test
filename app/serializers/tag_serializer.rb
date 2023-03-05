@@ -12,7 +12,7 @@
 #
 class TagSerializer
   def serialize_list(tags:)
-    tags.map { |tag| serialize(tag: tag) }
+    tags.map { |tag| serialize(tag:) }
   end
 
   def serialize(tag:)

@@ -11,6 +11,7 @@
 #  facility_name              :string
 #  feature                    :text
 #  genre                      :integer          default("residential_fee_based_nursing_home")
+#  memo                       :string
 #  name                       :string
 #  nursing_care_level         :string
 #  person_in_charge_name      :string
@@ -32,10 +33,13 @@ class Company < ApplicationRecord
 
   has_many :company_tags, dependent: :destroy
   has_many :tags, through: :company_tags
+  has_many :company_memos, dependent: :destroy
 
   validates :name, :facility_name, presence: true
 
   delegate :email, to: :user, prefix: true, allow_nil: true
+
+  attribute :user_company_id
 
   enumerize :genre, in: {
     residential_fee_based_nursing_home: 0,

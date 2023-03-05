@@ -5,6 +5,7 @@
 # Table name: users
 #
 #  id                     :bigint           not null, primary key
+#  approval_status        :integer          default("unapproved")
 #  confirmation_sent_at   :datetime
 #  confirmation_token     :string
 #  confirmed_at           :datetime
@@ -16,6 +17,7 @@
 #  last_sign_in_at        :datetime
 #  last_sign_in_ip        :string
 #  locked_at              :datetime
+#  memo                   :string
 #  remember_created_at    :datetime
 #  reset_password_sent_at :datetime
 #  reset_password_token   :string
@@ -42,6 +44,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   enumerize :role, in: { customer: 0, partner: 1, admin: 2, cs: 3 }, default: 0
+  enumerize :approval_status, in: { unapproved: 0, approved: 1 }, default: 0
 
   # TODO: role == userの場合、の条件加えたい
   belongs_to :company, optional: true
@@ -56,6 +59,8 @@ class User < ApplicationRecord
   has_many :chats, dependent: :destroy
 
   has_many :profiles, dependent: :destroy
+
+  has_many :user_memos, dependent: :destroy
 
   scope :customers, -> { where(role: :customer) }
 

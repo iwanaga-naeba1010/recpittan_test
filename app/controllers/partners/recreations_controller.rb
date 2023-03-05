@@ -10,6 +10,8 @@ class Partners::RecreationsController < Partners::ApplicationController
 
   def new; end
 
+  def edit; end
+
   def create
     @recreation = current_user.recreations.build(params_create)
     if @recreation.save
@@ -26,8 +28,6 @@ class Partners::RecreationsController < Partners::ApplicationController
       render :edit
     end
   end
-
-  def edit; end
 
   def complete_final_check; end
 

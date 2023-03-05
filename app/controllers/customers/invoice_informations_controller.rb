@@ -10,10 +10,12 @@ class Customers::InvoiceInformationsController < Customers::ApplicationControlle
     @invoice_information = current_user.build_invoice_information
   end
 
+  def edit; end
+
   def create
     outcome = Resources::InvoiceInformations::Create.run(
       params: params_create,
-      current_user: current_user
+      current_user:
     )
     if outcome.valid?
       @invoice_information = outcome.result
@@ -29,13 +31,11 @@ class Customers::InvoiceInformationsController < Customers::ApplicationControlle
     end
   end
 
-  def edit; end
-
   def update
     outcome = Resources::InvoiceInformations::Update.run(
       id: current_user.invoice_information.id,
       params: params_create,
-      current_user: current_user
+      current_user:
     )
     if outcome.valid?
       @invoice_information = outcome.result
