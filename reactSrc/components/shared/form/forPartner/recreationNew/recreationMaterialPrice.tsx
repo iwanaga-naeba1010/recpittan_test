@@ -1,8 +1,8 @@
 import { Essential } from '@/components/shared/parts/essential';
+import { Recreation } from '@/types';
 import React from 'react';
 import { UseFormRegister } from 'react-hook-form';
 import { RecreationFormValues } from './recreationNewForm';
-import { Recreation } from '@/types';
 
 type Props = {
   register: UseFormRegister<RecreationFormValues>;

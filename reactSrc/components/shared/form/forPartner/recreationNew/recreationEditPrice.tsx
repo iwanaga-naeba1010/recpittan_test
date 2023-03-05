@@ -1,6 +1,6 @@
 import { Essential } from '@/components/shared/parts/essential';
-import React from 'react';
 import { Recreation } from '@/types';
+import React from 'react';
 
 type Props = {
   recreation?: Recreation;
