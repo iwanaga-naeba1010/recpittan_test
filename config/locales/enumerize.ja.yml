@@ -86,6 +86,12 @@ ja:
         denied: 拒否
         in_progress: 確認中
         accepted: 許可
+    channel_plan_subscriber:
+      kind:
+        online_channel: オンラインチャンネルプラン
+      status:
+        active: 有効
+        inactive: 無効
     evaluation:
       ingenuity:
         *evaluation_list
@@ -100,3 +106,7 @@ ja:
       is_public:
         public: 公開にする
         private: 非公開にする
+    online_rec_channel:
+     status:
+       public: 公開にする
+       private: 非公開にする

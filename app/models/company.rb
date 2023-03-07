@@ -31,6 +31,9 @@ class Company < ApplicationRecord
   has_one :user, dependent: :destroy
   accepts_nested_attributes_for :user, allow_destroy: true
 
+  has_one :channel_plan_subscriber, dependent: :destroy
+  accepts_nested_attributes_for :channel_plan_subscriber, allow_destroy: true
+
   has_many :company_tags, dependent: :destroy
   has_many :tags, through: :company_tags
   has_many :company_memos, dependent: :destroy
