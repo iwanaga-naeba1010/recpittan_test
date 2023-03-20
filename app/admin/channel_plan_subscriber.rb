@@ -41,9 +41,8 @@ ActiveAdmin.register ChannelPlanSubscriber do
     f.semantic_errors
 
     f.inputs do
-      f.input :company, as: :select, collection: Company.includes(:channel_plan_subscriber).
-        where(channel_plan_subscribers: { id: nil }).
-        map { |c| ["#{c.facility_name} (#{c.id})", c.id] }
+      companies = Company.without_channel_subscribe.map { |c| ["#{c.facility_name} (#{c.id})", c.id] }
+      f.input :company, as: :select, collection: companies
       f.input :kind, as: :select, collection: ChannelPlanSubscriber.kind.values.map { |val| [val.text, val] }
       f.input :status, as: :select, collection: ChannelPlanSubscriber.status.values.map { |val| [val.text, val] }
     end

@@ -120,25 +120,25 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_19_122150) do
     t.index ["user_id"], name: "index_invoice_informations_on_user_id"
   end
 
-  create_table "online_rec_channel_recreations", force: :cascade do |t|
-    t.bigint "online_rec_channel_id", null: false
-    t.string "recreation_title", null: false
-    t.text "recreation_link", null: false
-    t.text "recreation_memo"
+  create_table "online_recreation_channel_recreations", force: :cascade do |t|
+    t.bigint "online_recreation_channel_id", null: false
+    t.string "title", null: false
+    t.text "link", null: false
+    t.text "memo"
     t.date "date", null: false
     t.text "zoom_link"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["online_rec_channel_id", "date"], name: "index_online_rec_channel_recs_on_online_rec_channel_date", unique: true
-    t.index ["online_rec_channel_id"], name: "index_online_rec_channel_recreations_on_online_rec_channel_id"
+    t.index ["online_recreation_channel_id", "date"], name: "index_channel_recreations_on_channel_date", unique: true
+    t.index ["online_recreation_channel_id"], name: "index_channel_recreations_on_channel_id"
   end
 
-  create_table "online_rec_channels", force: :cascade do |t|
+  create_table "online_recreation_channels", force: :cascade do |t|
     t.text "image"
     t.integer "status", null: false
     t.date "period", null: false
-    t.text "calendar_field_memo"
-    t.text "zoom_field_memo"
+    t.text "calendar_memo"
+    t.text "zoom_memo"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -355,7 +355,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_19_122150) do
   add_foreign_key "company_tags", "tags", name: "company_tags_tag_id_fkey"
   add_foreign_key "evaluations", "reports", name: "evaluations_report_id_fkey"
   add_foreign_key "invoice_informations", "users"
-  add_foreign_key "online_rec_channel_recreations", "online_rec_channels"
+  add_foreign_key "online_recreation_channel_recreations", "online_recreation_channels"
   add_foreign_key "order_dates", "orders", name: "order_dates_order_id_fkey"
   add_foreign_key "order_memos", "orders", name: "order_memos_order_id_fkey"
   add_foreign_key "orders", "recreations", name: "orders_recreation_id_fkey"

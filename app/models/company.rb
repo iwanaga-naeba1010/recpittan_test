@@ -44,6 +44,8 @@ class Company < ApplicationRecord
 
   attribute :user_company_id
 
+  scope :without_channel_subscribe, -> { includes(:channel_plan_subscriber).where(channel_plan_subscriber: { id: nil }) }
+
   enumerize :genre, in: {
     residential_fee_based_nursing_home: 0,
     general_care: 1, serviced_senior_housing: 2,

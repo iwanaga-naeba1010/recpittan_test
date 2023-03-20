@@ -50,7 +50,7 @@
           </li>
           <li class="nav-item">
               <% if current_user&.company&.channel_plan_subscriber %>
-                <%= link_to customers_online_rec_channel_path(channel_id), class: 'nav-link font-weight-bold', target: :_blank do %>
+                <%= link_to customers_online_recreation_channel_path(channel_id), class: 'nav-link font-weight-bold', target: :_blank do %>
                   オンラインレク<br>チャンネル
               <% end %>
             <% else %>

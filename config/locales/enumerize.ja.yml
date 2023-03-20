@@ -106,7 +106,7 @@ ja:
       is_public:
         public: 公開にする
         private: 非公開にする
-    online_rec_channel:
+    online_recreation_channel:
      status:
        public: 公開にする
        private: 非公開にする

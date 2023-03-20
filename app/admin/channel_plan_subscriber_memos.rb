@@ -11,11 +11,7 @@ ActiveAdmin.register ChannelPlanSubscriberMemo do
   controller do
     def create
       channel_plan_subscriber_id = params[:channel_plan_subscriber_memo][:channel_plan_subscriber_id].to_i
-      body = params[:channel_plan_subscriber_memo][:body]
-      memo = ChannelPlanSubscriberMemo.new(
-        channel_plan_subscriber_id:,
-        body:
-      )
+      memo = ChannelPlanSubscriberMemo.new(permitted_params[:channel_plan_subscriber_memo])
       memo.save
       message = <<~MESSAGE
         案件ID： #{channel_plan_subscriber_id}

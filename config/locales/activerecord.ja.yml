@@ -31,8 +31,8 @@ ja:
       invoice_information: 請求書発行先情報
       top_banner: トップバナー
       channel_plan_subscriber: チャンネル登録施設
-      online_rec_channel: オンラインレクチャンネル
-      online_rec_channel_recreation: 開催レク
+      online_recreation_channel: オンラインレクチャンネル
+      online_recreation_channel_recreation: 開催レク
     attributes:
       email:
         title: タイトル
@@ -206,19 +206,19 @@ ja:
       channel_plan_subscribers:
         channel_plan_subscribers: 登録者
         body: 本文
-      online_rec_channel:
+      online_recreation_channel:
         image: カレンダー画像
         period: 期間
         status: 公開/非公開
-        calendar_field_memo: カレンダー下に表示の備考
-        zoom_field_memo: ZOOM見出し下に表示の備考
-      online_rec_channel_recreation:
+        calendar_memo: カレンダー下に表示の備考
+        zoom_memo: ZOOM見出し下に表示の備考
+      online_recreation_channel_recreation:
         recreation: レク
         date: 開催日
         zoom_link: zoomリンク
-        recreation_title: レクタイトル
-        recreation_link: レク詳細リンク
-        recreation_memo: レクに関する備考
+        title: レクタイトル
+        link: レク詳細リンク
+        memo: レクに関する備考
     errors:
       messages:
         duration_over: が上限を越えています
