@@ -6,6 +6,10 @@
 #
 #  id            :bigint           not null, primary key
 #  calendar_memo :text
+#  calendar_pdf  :text
+#  calendar_ppt  :text
+#  flyer_pdf     :text
+#  flyer_ppt     :text
 #  image         :text
 #  period        :date             not null
 #  status        :integer          not null

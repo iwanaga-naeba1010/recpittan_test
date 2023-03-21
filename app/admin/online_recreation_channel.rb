@@ -3,7 +3,7 @@
 # rubocop:disable Metrics/BlockLength
 ActiveAdmin.register OnlineRecreationChannel do
   permit_params(
-    :image, :period, :status, :calendar_memo, :zoom_memo,
+    :image, :period, :status, :calendar_memo, :calendar_pdf, :calendar_ppt, :flyer_pdf, :flyer_ppt, :zoom_memo,
     online_recreation_channel_recreations_attributes: %i[
       id date title link memo zoom_link online_recreation_channel_id _destroy
     ]
@@ -37,6 +37,10 @@ ActiveAdmin.register OnlineRecreationChannel do
       row :zoom_memo
       row :created_at
       row :updated_at
+      row :calendar_pdf
+      row :calendar_ppt
+      row :flyer_pdf
+      row :flyer_ppt
     end
 
     panel '開催レク', style: 'margin-top: 30px;' do
@@ -62,6 +66,10 @@ ActiveAdmin.register OnlineRecreationChannel do
       f.input :status, as: :select, collection: OnlineRecreationChannel.status.values.map { |val| [val.text, val] }
       f.input :calendar_memo
       f.input :zoom_memo
+      f.input :calendar_pdf, as: :string
+      f.input :calendar_ppt, as: :string
+      f.input :flyer_pdf, as: :string
+      f.input :flyer_ppt, as: :string
     end
     # NOTE: レクの表示順を任意のものに設定できるようにするために、RecreationTopRecommendRecreationのフォームを設置
     f.inputs t('activerecord.models.online_recreation_channel_recreation') do

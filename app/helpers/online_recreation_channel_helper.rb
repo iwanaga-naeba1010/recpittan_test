@@ -14,8 +14,17 @@ module OnlineRecreationChannelHelper
     "#{date.strftime('%-d日')}(#{WeekDay.all[date.wday]})"
   end
 
+  # TODO: リファクタリング
   def sanitize_link(link)
     sanitize(link.gsub(%r{(https?://\S+)}, '<a href="\1" target="_blank">レクの詳細・チラシはこちら</a>'))
+  end
+
+  def sanitize_pdf_link(link)
+    sanitize(link.gsub(%r{(https?://\S+)}, '<a href="\1" target="_blank">PDF</a>'))
+  end
+
+  def sanitize_ppt_link(link)
+    sanitize(link.gsub(%r{(https?://\S+)}, '<a href="\1" target="_blank">パワポ</a>'))
   end
 
   def sanitize_text_link(link)
