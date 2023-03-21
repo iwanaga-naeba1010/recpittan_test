@@ -13,6 +13,10 @@ ActiveAdmin.register ChannelPlanSubscriber do
     column :company_facility_name do |resource|
       resource.company.facility_name
     end
+    column :company_facility_name_kana do |resource|
+      resource.company.facility_name_kana
+    end
+    column(:kind, &:kind_text)
     column(:kind, &:kind_text)
     column(:status, &:status)
   end

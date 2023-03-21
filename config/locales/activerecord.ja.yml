@@ -49,6 +49,7 @@ ja:
       company:
         name: 法人名
         facility_name: 事業所名
+        facility_name_kana: 事業所名(カタカナ)
         person_in_charge_name: ご担当者名
         person_in_charge_name_kana: ご担当者名(カタカナ)
         zip: 郵便番号

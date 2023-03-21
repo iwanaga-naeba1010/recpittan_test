@@ -9,6 +9,7 @@
 #  capacity                   :integer
 #  city                       :string
 #  facility_name              :string
+#  facility_name_kana         :string
 #  feature                    :text
 #  genre                      :integer          default("residential_fee_based_nursing_home")
 #  memo                       :string

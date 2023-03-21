@@ -5,7 +5,7 @@
 ActiveAdmin.register Company do
   menu priority: 2
   permit_params(
-    :name, :facility_name, :person_in_charge_name, :person_in_charge_name_kana,
+    :name, :facility_name, :facility_name_kana, :person_in_charge_name, :person_in_charge_name_kana,
     :zip, :prefecture, :city, :street, :building, :tel,
     :genre, :url, :feature, :capacity, :nursing_care_level, :request, :user_company_id, :memo,
     tag_ids: []
@@ -26,6 +26,7 @@ ActiveAdmin.register Company do
     column :name
     column('email', &:user_email)
     column :facility_name
+    column :facility_name_kana
     column :person_in_charge_name
     column :person_in_charge_name_kana
     column :zip
@@ -48,6 +49,7 @@ ActiveAdmin.register Company do
     id_column
     column :name
     column :facility_name
+    column :facility_name_kana
     column :person_in_charge_name
     column :person_in_charge_name_kana
     actions
@@ -60,6 +62,7 @@ ActiveAdmin.register Company do
           row :id
           row :name
           row :facility_name
+          row :facility_name_kana
           row :person_in_charge_name
           row :person_in_charge_name_kana
           row :zip
@@ -98,6 +101,7 @@ ActiveAdmin.register Company do
     f.inputs do
       f.input :name
       f.input :facility_name
+      f.input :facility_name_kana
       f.input :person_in_charge_name
       f.input :person_in_charge_name_kana
       f.input :zip
