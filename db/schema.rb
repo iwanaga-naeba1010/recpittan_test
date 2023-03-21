@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_01_26_131050) do
+ActiveRecord::Schema[7.0].define(version: 2023_03_19_122150) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -23,6 +23,23 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_26_131050) do
     t.bigint "author_id"
     t.datetime "created_at", precision: nil, null: false
     t.datetime "updated_at", precision: nil, null: false
+  end
+
+  create_table "channel_plan_subscriber_memos", force: :cascade do |t|
+    t.bigint "channel_plan_subscriber_id", null: false
+    t.text "body"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["channel_plan_subscriber_id"], name: "index_subscriber_memos_on__subscriber_id"
+  end
+
+  create_table "channel_plan_subscribers", force: :cascade do |t|
+    t.integer "kind"
+    t.integer "status", default: 0
+    t.bigint "company_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["company_id"], name: "index_channel_plan_subscribers_on_company_id", unique: true
   end
 
   create_table "chats", force: :cascade do |t|
@@ -101,6 +118,29 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_26_131050) do
     t.string "company_name", null: false
     t.string "email", null: false
     t.index ["user_id"], name: "index_invoice_informations_on_user_id"
+  end
+
+  create_table "online_recreation_channel_recreations", force: :cascade do |t|
+    t.bigint "online_recreation_channel_id", null: false
+    t.string "title", null: false
+    t.text "link", null: false
+    t.text "memo"
+    t.date "date", null: false
+    t.text "zoom_link"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["online_recreation_channel_id", "date"], name: "index_channel_recreations_on_channel_date", unique: true
+    t.index ["online_recreation_channel_id"], name: "index_channel_recreations_on_channel_id"
+  end
+
+  create_table "online_recreation_channels", force: :cascade do |t|
+    t.text "image"
+    t.integer "status", null: false
+    t.date "period", null: false
+    t.text "calendar_memo"
+    t.text "zoom_memo"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "order_dates", force: :cascade do |t|
@@ -306,6 +346,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_26_131050) do
     t.datetime "updated_at", precision: nil, null: false
   end
 
+  add_foreign_key "channel_plan_subscriber_memos", "channel_plan_subscribers"
+  add_foreign_key "channel_plan_subscribers", "companies"
   add_foreign_key "chats", "orders", name: "chats_order_id_fkey"
   add_foreign_key "chats", "users", name: "chats_user_id_fkey"
   add_foreign_key "company_memos", "companies"
@@ -313,6 +355,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_26_131050) do
   add_foreign_key "company_tags", "tags", name: "company_tags_tag_id_fkey"
   add_foreign_key "evaluations", "reports", name: "evaluations_report_id_fkey"
   add_foreign_key "invoice_informations", "users"
+  add_foreign_key "online_recreation_channel_recreations", "online_recreation_channels"
   add_foreign_key "order_dates", "orders", name: "order_dates_order_id_fkey"
   add_foreign_key "order_memos", "orders", name: "order_memos_order_id_fkey"
   add_foreign_key "orders", "recreations", name: "orders_recreation_id_fkey"
