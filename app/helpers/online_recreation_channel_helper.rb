@@ -2,8 +2,8 @@
 
 module OnlineRecreationChannelHelper
   def channel_id
-    channels = OnlineRecreationChannel.public_channels.current_month
-    channels.exists? ? channels.first.id : OnlineRecreationChannel.last&.id || nil
+    channels = OnlineRecreationChannel.public_channels
+    channels.exists? ? channels.current_month.first.id : channels.last&.id || nil
   end
 
   def formatted_period(period)
