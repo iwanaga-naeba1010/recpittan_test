@@ -1,11 +1,21 @@
 # frozen_string_literal: true
 
+# rubocop:disable Metrics/BlockLength
 ActiveAdmin.register ChannelPlanSubscriber do
   permit_params(
     :kind, :company_id
   )
 
   filter :company
+
+  csv do
+    column :id
+    column :company_facility_name do |resource|
+      resource.company.facility_name
+    end
+    column(:kind, &:kind_text)
+    column(:status, &:status)
+  end
 
   index do
     id_column
@@ -14,6 +24,7 @@ ActiveAdmin.register ChannelPlanSubscriber do
       resource.company.facility_name
     end
     column(:kind, &:kind_text)
+    column(:status, &:status)
     actions
   end
 
@@ -27,6 +38,7 @@ ActiveAdmin.register ChannelPlanSubscriber do
             resource.company.facility_name
           end
           row(:kind, &:kind_text)
+          row(:status, &:status)
           row :created_at
           row :updated_at
         end
@@ -50,3 +62,4 @@ ActiveAdmin.register ChannelPlanSubscriber do
     f.actions
   end
 end
+# rubocop:enable Metrics/BlockLength

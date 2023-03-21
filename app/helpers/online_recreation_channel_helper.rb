@@ -15,6 +15,10 @@ module OnlineRecreationChannelHelper
   end
 
   def sanitize_link(link)
+    sanitize(link.gsub(%r{(https?://\S+)}, '<a href="\1" target="_blank">レクの詳細・チラシはこちら</a>'))
+  end
+
+  def sanitize_text_link(link)
     sanitize(link.gsub(%r{(https?://\S+)}, '<a href="\1" target="_blank">\1</a>'))
   end
 end

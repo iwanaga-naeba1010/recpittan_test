@@ -60,8 +60,8 @@ ActiveAdmin.register OnlineRecreationChannel do
       f.input :image
       f.input :period
       f.input :status, as: :select, collection: OnlineRecreationChannel.status.values.map { |val| [val.text, val] }
-      f.input :calendar_memo, as: :string
-      f.input :zoom_memo, as: :string
+      f.input :calendar_memo
+      f.input :zoom_memo
     end
     # NOTE: レクの表示順を任意のものに設定できるようにするために、RecreationTopRecommendRecreationのフォームを設置
     f.inputs t('activerecord.models.online_recreation_channel_recreation') do
@@ -70,7 +70,7 @@ ActiveAdmin.register OnlineRecreationChannel do
         ff.input :title
         ff.input :link, as: :string
         ff.input :memo, as: :string
-        ff.input :zoom_link, as: :string
+        ff.input :zoom_link
       end
     end
 
