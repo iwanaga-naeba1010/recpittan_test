@@ -4,7 +4,7 @@
 ActiveAdmin.register User do
   menu priority: 3
   permit_params(
-    %i[username username_kana role email memo approval_status]
+    %i[username username_kana role email password password_confirmation memo approval_status]
   )
   actions :all
 
@@ -54,6 +54,8 @@ ActiveAdmin.register User do
       f.input :username
       f.input :username_kana
       f.input :email
+      f.input :password if f.object.new_record?
+      f.input :password_confirmation if f.object.new_record?
       f.inputs do
         f.input :role, as: :select, collection: User.role.values.map { |i| [i.text, i] }
       end
@@ -70,12 +72,12 @@ ActiveAdmin.register User do
 
   controller do
     def create
-      password = [*'A'..'Z', *'a'..'z', *0..9].sample(16).join
+      # password = [*'A'..'Z', *'a'..'z', *0..9].sample(16).join
 
       user = User.new(permitted_params[:user])
       user.email = permitted_params[:user]['email']
-      user.password = password
-      user.confirmation_token = password
+      # user.password = password
+      # user.confirmation_token = password
       user.confirmed_at = Time.current
       user.role = permitted_params[:user]['role']
       user.skip_confirmation_notification!
