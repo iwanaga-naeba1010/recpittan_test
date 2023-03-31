@@ -4,7 +4,7 @@ class Customers::OnlineRecreationChannelsController < Customers::ApplicationCont
   before_action :require_online_channel_subscribers
 
   def show
-    @online_recreation_channel = OnlineRecreationChannel.find(params[:id])
+    @online_recreation_channel = OnlineRecreationChannel.includes(:online_recreation_channel_recreations).find(params[:id])
   end
 
   private def require_online_channel_subscribers

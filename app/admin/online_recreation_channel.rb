@@ -44,7 +44,7 @@ ActiveAdmin.register OnlineRecreationChannel do
     end
 
     panel '開催レク', style: 'margin-top: 30px;' do
-      table_for online_recreation_channel.online_recreation_channel_recreations do
+      table_for online_recreation_channel.online_recreation_channel_recreations.order(date: :asc) do
         column :id
         column :date
         column :title
