@@ -132,13 +132,25 @@ ActiveAdmin.register Company do
       user = User.find(company.user_company_id.to_i)
 
       company.save!
-      user.company_id = company.id
-      user.save!
+      user.update!(company_id: company.id)
       redirect_to admin_company_path(company.id)
 
       # NOTE(okubo): hashを検索するときにエラー出るので、cache入れてる
     rescue StandardError => e
       logger.error e.message
+      super
+    end
+  end
+
+  controller do
+    def update
+      company = Company.find(params[:id])
+  
+      company.update!(permitted_params[:company])
+      if permitted_params[:company][:user_company_id].present?
+        user = User.find(permitted_params[:company][:user_company_id])
+        user.update!(company_id: company.id)
+      end
       super
     end
   end
