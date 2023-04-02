@@ -2,11 +2,11 @@
   <p class="introduce_channel fw-bold w-50 mx-auto">一斉配信チャンネルの紹介サイトは<a href="https://channel.everyplus.jp/" target="_blank">こちら</a></p>
   <h4 class="main_header mt-5 fw-bold pb-2"><%= formatted_period(@online_recreation_channel.period) %>のカレンダー</h4>
 
-  <% if @online_recreation_channel.calendar_pdf? || @online_recreation_channel.calendar_ppt? %>
+  <% if @online_recreation_channel.calendar_pdf? || @online_recreation_channel.calendar_image? %>
     <div class="d-flex  justify-content-center">
       <p class="p-2">カレンダーダウンロード</p>
-      <p class="p-2"><%= sanitize_pdf_link(@online_recreation_channel.calendar_pdf) %></p>
-      <p class="p-2"><%= sanitize_ppt_link(@online_recreation_channel.calendar_ppt) %></p>
+      <p class="p-2"><%= link_to "PDF", @online_recreation_channel.calendar_pdf.url, target: :_blank %></p>
+      <p class="p-2"><%= link_to "PNG", @online_recreation_channel.calendar_image.url, target: :_blank %></p>
     </div>
   <% end %>
 
@@ -16,16 +16,16 @@
     </div>
   <% end %>
   <div>
-    <%= image_tag @online_recreation_channel.image.to_s, width: 700, height: 700, class: "img-fluid mt-5" %>
+    <%= image_tag @online_recreation_channel.top_image.to_s, width: 700, height: 700, class: "img-fluid mt-5" %>
   </div>
 
 <h4 class="main_header mt-5 fw-bold pb-2"><%= formatted_period(@online_recreation_channel.period) %>の配信スケジュール</h4>
 
-  <% if @online_recreation_channel.flyer_pdf? || @online_recreation_channel.flyer_ppt? %>
+  <% if @online_recreation_channel.flyer_pdf? || @online_recreation_channel.flyer_image? %>
     <div class="d-flex  justify-content-center">
       <p class="p-2">チラシダウンロード</p>
-      <p class="p-2"><%= sanitize_pdf_link(@online_recreation_channel.flyer_pdf) %></p>
-      <p class="p-2"><%= sanitize_ppt_link(@online_recreation_channel.flyer_ppt) %></p>
+      <p class="p-2"><%= link_to "PDF", @online_recreation_channel.flyer_pdf.url, target: :_blank %></p>
+      <p class="p-2"><%= link_to "PNG", @online_recreation_channel.flyer_image.url, target: :_blank %></p>
     </div>
   <% end %>
 

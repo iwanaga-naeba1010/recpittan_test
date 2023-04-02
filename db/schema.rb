@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_03_21_152136) do
+ActiveRecord::Schema[7.0].define(version: 2023_04_02_125038) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -135,7 +135,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_21_152136) do
   end
 
   create_table "online_recreation_channels", force: :cascade do |t|
-    t.text "image"
+    t.text "top_image"
     t.integer "status", null: false
     t.date "period", null: false
     t.text "calendar_memo"
@@ -143,9 +143,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_21_152136) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.text "calendar_pdf"
-    t.text "calendar_ppt"
+    t.text "calendar_image"
     t.text "flyer_pdf"
-    t.text "flyer_ppt"
+    t.text "flyer_image"
   end
 
   create_table "order_dates", force: :cascade do |t|

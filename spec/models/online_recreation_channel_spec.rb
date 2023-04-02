@@ -4,18 +4,18 @@
 #
 # Table name: online_recreation_channels
 #
-#  id            :bigint           not null, primary key
-#  calendar_memo :text
-#  calendar_pdf  :text
-#  calendar_ppt  :text
-#  flyer_pdf     :text
-#  flyer_ppt     :text
-#  image         :text
-#  period        :date             not null
-#  status        :integer          not null
-#  zoom_memo     :text
-#  created_at    :datetime         not null
-#  updated_at    :datetime         not null
+#  id             :bigint           not null, primary key
+#  calendar_image :text
+#  calendar_memo  :text
+#  calendar_pdf   :text
+#  flyer_image    :text
+#  flyer_pdf      :text
+#  period         :date             not null
+#  status         :integer          not null
+#  top_image      :text
+#  zoom_memo      :text
+#  created_at     :datetime         not null
+#  updated_at     :datetime         not null
 #
 require 'rails_helper'
 

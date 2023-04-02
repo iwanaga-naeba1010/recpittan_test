@@ -19,13 +19,13 @@ module OnlineRecreationChannelHelper
     sanitize(link.gsub(%r{(https?://\S+)}, '<a href="\1" target="_blank">レク詳細はこちら</a>'))
   end
 
-  def sanitize_pdf_link(link)
-    sanitize(link.gsub(%r{(https?://\S+)}, '<a href="\1" target="_blank">PDF</a>'))
-  end
+  # def sanitize_pdf_link(link)
+  #   sanitize(link.gsub(%r{(https?://\S+)}, '<a href="\1" target="_blank">PDF</a>'))
+  # end
 
-  def sanitize_ppt_link(link)
-    sanitize(link.gsub(%r{(https?://\S+)}, '<a href="\1" target="_blank">PNG</a>'))
-  end
+  # def sanitize_ppt_link(link)
+  #   sanitize(link.gsub(%r{(https?://\S+)}, '<a href="\1" target="_blank">PNG</a>'))
+  # end
 
   def sanitize_text_link(link)
     sanitize(link.gsub(%r{(https?://\S+)}, '<a href="\1" target="_blank">\1</a>'))
