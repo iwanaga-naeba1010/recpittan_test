@@ -12,6 +12,11 @@ ActiveAdmin.register User do
   filter :username
   filter :email
   filter :role
+  filter :company, label: 'Company', as: :select, collection: -> {
+                                                                Company.pluck(:name, :id).map do |company|
+                                                                  ["#{company[0]} (ID: #{company[1]})", company[1]]
+                                                                end
+                                                              }
 
   index do
     id_column
@@ -29,12 +34,12 @@ ActiveAdmin.register User do
     tabs do
       tab '詳細' do
         attributes_table do
-          row :id
           row :username
           row :username_kana
           row :email
           row(:role, &:role_text)
           row(:approval_status, &:approval_status_text) if user.role == 'partner'
+          row :company if user.role == 'customer'
           row :memo
 
           row :created_at
