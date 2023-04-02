@@ -5,7 +5,7 @@ class Customers::RecreationsController < Customers::ApplicationController
   skip_before_action :require_customer
 
   def index
-    @q = Recreation.public_recs.ransack(params[:q])
+    @q = Recreation.includes(:recreation_images).public_recs.ransack(params[:q])
     @categories = Tag.categories
     @recs = @q.result(distinct: true).page(params[:page]).per(30)
     value = @q.base.conditions&.first&.values&.first&.value
@@ -17,7 +17,7 @@ class Customers::RecreationsController < Customers::ApplicationController
   end
 
   def show
-    @recreation = Recreation.public_recs.find(params[:id])
+    @recreation = Recreation.public_recs.includes(:orders).find(params[:id])
     @evaluations = Evaluation.public_and_not_null_message.with_recreation(@recreation)
     @order_size = @recreation.orders.where(status: %i[unreported_completed final_report_admits_not finished invoice_issued paid]).size
   end
