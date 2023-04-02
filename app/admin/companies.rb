@@ -118,8 +118,8 @@ ActiveAdmin.register Company do
       f.input :nursing_care_level
 
       f.input :tags, label: '貸出可能品', as: :check_boxes, collection: Tags::Rental.all
-
       f.input :user_company_id, as: :select, collection: User.customers.where(company_id: nil).map { |i| [i.username, i.id] }
+
       f.input :memo
     end
 
@@ -145,11 +145,11 @@ ActiveAdmin.register Company do
   controller do
     def update
       company = Company.find(params[:id])
-  
       company.update!(permitted_params[:company])
       if permitted_params[:company][:user_company_id].present?
         user = User.find(permitted_params[:company][:user_company_id])
         user.update!(company_id: company.id)
+        User.where(company_id: company.id).where.not(id: user.id).update(company_id: nil)
       end
       super
     end
