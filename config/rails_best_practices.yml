@@ -65,7 +65,8 @@ RemoveUnusedMethodsInHelpersCheck: { except_methods: [] }
 # NOTE: デグレ回避のため一旦エスケープ
 RemoveUnusedMethodsInModelsCheck: {
   except_methods: [
-    'User#after_confirmation'
+    'User#after_confirmation',
+    'Company#without_channel_subscribe'
   ]
 }
 # NOTE: デグレ回避のため一旦エスケープ

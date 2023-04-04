@@ -5,7 +5,7 @@
 ActiveAdmin.register Company do
   menu priority: 2
   permit_params(
-    :name, :facility_name, :person_in_charge_name, :person_in_charge_name_kana,
+    :name, :facility_name, :facility_name_kana, :person_in_charge_name, :person_in_charge_name_kana,
     :zip, :prefecture, :city, :street, :building, :tel,
     :genre, :url, :feature, :capacity, :nursing_care_level, :request, :user_company_id, :memo,
     tag_ids: []
@@ -26,6 +26,7 @@ ActiveAdmin.register Company do
     column :name
     column('email', &:user_email)
     column :facility_name
+    column :facility_name_kana
     column :person_in_charge_name
     column :person_in_charge_name_kana
     column :zip
@@ -48,6 +49,7 @@ ActiveAdmin.register Company do
     id_column
     column :name
     column :facility_name
+    column :facility_name_kana
     column :person_in_charge_name
     column :person_in_charge_name_kana
     actions
@@ -60,6 +62,7 @@ ActiveAdmin.register Company do
           row :id
           row :name
           row :facility_name
+          row :facility_name_kana
           row :person_in_charge_name
           row :person_in_charge_name_kana
           row :zip
@@ -98,6 +101,7 @@ ActiveAdmin.register Company do
     f.inputs do
       f.input :name
       f.input :facility_name
+      f.input :facility_name_kana
       f.input :person_in_charge_name
       f.input :person_in_charge_name_kana
       f.input :zip
@@ -114,8 +118,8 @@ ActiveAdmin.register Company do
       f.input :nursing_care_level
 
       f.input :tags, label: '貸出可能品', as: :check_boxes, collection: Tags::Rental.all
-
       f.input :user_company_id, as: :select, collection: User.customers.where(company_id: nil).map { |i| [i.username, i.id] }
+
       f.input :memo
     end
 
@@ -128,13 +132,25 @@ ActiveAdmin.register Company do
       user = User.find(company.user_company_id.to_i)
 
       company.save!
-      user.company_id = company.id
-      user.save!
+      user.update!(company_id: company.id)
       redirect_to admin_company_path(company.id)
 
       # NOTE(okubo): hashを検索するときにエラー出るので、cache入れてる
     rescue StandardError => e
       logger.error e.message
+      super
+    end
+  end
+
+  controller do
+    def update
+      company = Company.find(params[:id])
+      company.update!(permitted_params[:company])
+      if permitted_params[:company][:user_company_id].present?
+        user = User.find(permitted_params[:company][:user_company_id])
+        user.update!(company_id: company.id)
+        User.where(company_id: company.id).where.not(id: user.id).update(company_id: nil)
+      end
       super
     end
   end

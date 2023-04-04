@@ -30,6 +30,9 @@ ja:
       chat: チャット
       invoice_information: 請求書発行先情報
       top_banner: トップバナー
+      channel_plan_subscriber: チャンネル登録施設
+      online_recreation_channel: オンラインレクチャンネル
+      online_recreation_channel_recreation: 開催レク
     attributes:
       email:
         title: タイトル
@@ -46,6 +49,7 @@ ja:
       company:
         name: 法人名
         facility_name: 事業所名
+        facility_name_kana: 事業所名(カタカナ)
         person_in_charge_name: ご担当者名
         person_in_charge_name_kana: ご担当者名(カタカナ)
         zip: 郵便番号
@@ -196,6 +200,30 @@ ja:
         url: url
         start_date: 開始日
         end_date: 終了日
+      channel_plan_subscriber:
+        company: 施設
+        kind: 種類
+        status: ステータス
+      channel_plan_subscribers:
+        channel_plan_subscribers: 登録者
+        body: 本文
+      online_recreation_channel:
+        image: カレンダー画像
+        period: 期間
+        status: 公開/非公開
+        calendar_memo: カレンダー下に表示の備考
+        zoom_memo: ZOOM見出し下に表示の備考
+        calendar_pdf: カレンダーPDF
+        calendar_ppt: カレンダーパワーポイント
+        flyer_pdf: チラシPDF
+        flyer_ppt: チラシパワーポイント
+      online_recreation_channel_recreation:
+        recreation: レク
+        date: 開催日
+        zoom_link: zoomリンク
+        title: レクタイトル
+        link: レク詳細リンク
+        memo: レクに関する備考
     errors:
       messages:
         duration_over: が上限を越えています

@@ -35,7 +35,6 @@ export const SecondStep: React.FC<Props> = (props) => {
     return recreation?.kind.key === 'online';
   };
 
-
   return (
     <div>
       {recreation === undefined && <RecreationPrice register={register} />}
@@ -44,8 +43,12 @@ export const SecondStep: React.FC<Props> = (props) => {
       {recreation === undefined && <RecreationMaterialPrice register={register} />}
       {recreation !== undefined && <RecreationEditMaterialPrice recreation={recreation} />}
 
-      {(recreation === undefined && isShowAdditionalFacilityFee()) && <RecreationAdditionalFacilityFee register={register} />}
-      {(recreation !== undefined && isShowAdditionalFacilityFee()) && <RecreationEditAdditionalFacilityFee recreation={recreation} />}
+      {recreation === undefined && isShowAdditionalFacilityFee() && (
+        <RecreationAdditionalFacilityFee register={register} />
+      )}
+      {recreation !== undefined && isShowAdditionalFacilityFee() && (
+        <RecreationEditAdditionalFacilityFee recreation={recreation} />
+      )}
       {/* 修正のタイミングで利用可能に */}
       {recreation !== undefined && (
         <>
@@ -87,7 +90,7 @@ export const SecondStep: React.FC<Props> = (props) => {
         </>
       )}
 
-      {(recreation === undefined) && (
+      {recreation === undefined && (
         <>
           <div className='d-flex mt-4'>
             <h5 className='text-black font-weight-bold'>動画を共有</h5>

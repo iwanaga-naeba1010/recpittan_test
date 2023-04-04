@@ -42,7 +42,9 @@ RSpec.describe 'Companies', type: :request do
 
   describe 'PATCH /admin/companies/:id' do
     let!(:id) { company.id }
-    let(:params) { attributes_for(:company) }
+    let(:params) do
+      { company: attributes_for(:company).merge({ user_attributes: attributes_for(:user) }) }
+    end
     let(:expected_redirect_to) { %r{/admin/companies/[0-9]+} }
 
     it_behaves_like 'an endpoint redirects match'

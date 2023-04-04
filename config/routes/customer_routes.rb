@@ -16,4 +16,5 @@ namespace :customers do
     end
   end
   resources :invoice_informations, only: %i[new create edit update]
+  resources :online_recreation_channels, only: [:show]
 end
