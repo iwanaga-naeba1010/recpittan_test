@@ -1,6 +1,9 @@
 <div class="online_recreation_channels p-5 text-center">
   <p class="introduce_channel fw-bold w-50 mx-auto">一斉配信チャンネルの紹介サイトは<a href="https://channel.everyplus.jp/" target="_blank">こちら</a></p>
   <h4 class="main_header mt-5 fw-bold pb-2"><%= formatted_period(@online_recreation_channel.period) %>のカレンダー</h4>
+  <% if @next_month_online_recreation_channel %>
+    <p><%= link_to "来月のカレンダーはこちら", customers_online_recreation_channel_path(@next_month_online_recreation_channel) %></p>
+  <% end %>
 
   <% if @online_recreation_channel.calendar_pdf? || @online_recreation_channel.calendar_ppt? %>
     <div class="d-flex  justify-content-center">

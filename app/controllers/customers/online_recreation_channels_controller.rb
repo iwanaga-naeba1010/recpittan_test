@@ -5,6 +5,10 @@ class Customers::OnlineRecreationChannelsController < Customers::ApplicationCont
 
   def show
     @online_recreation_channel = OnlineRecreationChannel.includes(:online_recreation_channel_recreations).find(params[:id])
+    @next_month_online_recreation_channel = OnlineRecreationChannel
+                                            .public_channels
+                                            .where(period: @online_recreation_channel.period.next_month)
+                                            .first
   end
 
   private def require_online_channel_subscribers
