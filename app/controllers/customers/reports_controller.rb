@@ -20,6 +20,7 @@ class Customers::ReportsController < Customers::ApplicationController
         パートナー名： #{order.recreation.profile_name}
         レク名： #{order.recreation_title}
         施設名： #{order.user.company.facility_name}
+        レポート本文： #{@report.body}
         管理画面案件URL #{admin_order_url(order.id)}
       MESSAGE
       SlackNotifier.new(channel: '#アクティブチャットスレッド').send('施設が終了報告をしました', message)
