@@ -70,7 +70,12 @@ class HomeController < ApplicationController
       YOSHIMOTO_IDS.map { |id| pick_recreation_by_id(recreations: queried_recreations, id:) }.compact.flatten
     end
 
-    @evaluations = Evaluation.public_and_not_null_message.latest(10).load_async
+    @evaluations = Evaluation
+                   .public_and_not_null_message
+                   .includes(report: { order: { recreation: :recreation_images } })
+                   .includes(report: { order: { user: :company } })
+                   .latest(10)
+                   .load_async
     @tags = Tag.where(kind: :tag).load_async.to_a
   end
 

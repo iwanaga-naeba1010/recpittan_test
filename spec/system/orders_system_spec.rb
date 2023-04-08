@@ -62,7 +62,7 @@ RSpec.describe 'Orders', type: :system do
     feature 'NumberOfCacilities form' do
       scenario 'succeeds', js: true do
         puts '================'
-        puts page.driver.browser.manage.logs.get(:browser)
+        puts page.driver.browser.logs.get(:browser)
         puts '================'
         page.find_by_id('OrderChat')
 
@@ -205,7 +205,7 @@ RSpec.describe 'Orders', type: :system do
     feature 'NumberOfCacilities form' do
       scenario 'succeeds', js: true do
         puts '================'
-        puts page.driver.browser.manage.logs.get(:browser)
+        puts page.driver.browser.logs.get(:browser)
         puts '================'
         page.find_by_id('OrderChat')
         sleep 3
