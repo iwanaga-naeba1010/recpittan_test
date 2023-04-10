@@ -29,6 +29,7 @@ class Partners::ReportsController < Partners::ApplicationController
         パートナー名： #{@order.recreation.profile_name}
         レク名： #{@order.recreation_title}
         施設名： #{@order.user.company.facility_name}
+        レポート本文： #{@order.report_body}
         管理画面案件URL #{admin_order_url(@order.id)}
       MESSAGE
       SlackNotifier.new(channel: '#アクティブチャットスレッド').send('パートナーが終了報告をしました', message)

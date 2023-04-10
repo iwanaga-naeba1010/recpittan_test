@@ -60,7 +60,7 @@ class Order < ApplicationRecord
   accepts_nested_attributes_for :zoom, allow_destroy: true
 
   delegate :title, :price, :minutes, :instructor_name, :capacity, :kind, to: :recreation, prefix: true, allow_nil: true
-  delegate :status, to: :report, prefix: true, allow_nil: true
+  delegate :status, :body, to: :report, prefix: true, allow_nil: true
   delegate :url, to: :zoom, prefix: true, allow_nil: true
   delegate :kind, to: :recreation, prefix: true, allow_nil: true
 
