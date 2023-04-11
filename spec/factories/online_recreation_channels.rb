@@ -30,5 +30,19 @@ FactoryBot.define do
     period { '2023-03-13' }
     calendar_memo { 'MyText' }
     zoom_memo { 'MyText' }
+    calendar_image do
+      ActionDispatch::Http::UploadedFile.new(
+        filename: 'test.png',
+        type: 'image/png',
+        tempfile: Rails.root.join('spec/files/test.png').open
+      )
+    end
+    calendar_pdf do
+      ActionDispatch::Http::UploadedFile.new(
+        filename: 'test.pdf',
+        type: 'image/pdf',
+        tempfile: Rails.root.join('spec/files/test.pdf').open
+      )
+    end
   end
 end

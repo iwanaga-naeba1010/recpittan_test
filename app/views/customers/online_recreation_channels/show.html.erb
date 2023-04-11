@@ -8,8 +8,11 @@
   <% if @online_recreation_channel.calendar_pdf? || @online_recreation_channel.calendar_image? %>
     <div class="d-flex  justify-content-center">
       <p class="p-2">カレンダーダウンロード</p>
-      <p class="p-2"><%= link_to "PDF", @online_recreation_channel.calendar_pdf.url, target: :_blank %></p>
-      <p class="p-2"><%= link_to "PNG", @online_recreation_channel.calendar_image.url, target: :_blank %></p>
+      <p class="p-2">
+        <%= link_to "PDF", "#{@download_path}?image_name=calendar_pdf", data: @data_options %>
+        |
+        <%= link_to "PNG", "#{@download_path}?image_name=calendar_image", data: @data_options %>
+      </p>
     </div>
   <% end %>
 
@@ -27,8 +30,11 @@
   <% if @online_recreation_channel.flyer_pdf? || @online_recreation_channel.flyer_image? %>
     <div class="d-flex  justify-content-center">
       <p class="p-2">チラシダウンロード</p>
-      <p class="p-2"><%= link_to "PDF", @online_recreation_channel.flyer_pdf.url, target: :_blank %></p>
-      <p class="p-2"><%= link_to "PNG", @online_recreation_channel.flyer_image.url, target: :_blank %></p>
+      <p class="p-2">
+        <%= link_to "PDF", "#{@download_path}?image_name=flyer_pdf", data: @data_options %>
+        |
+        <%= link_to "PNG", "#{@download_path}?image_name=flyer_image", data: @data_options %>
+      </p>
     </div>
   <% end %>
 
