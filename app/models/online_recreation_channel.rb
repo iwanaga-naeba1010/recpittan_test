@@ -4,22 +4,26 @@
 #
 # Table name: online_recreation_channels
 #
-#  id            :bigint           not null, primary key
-#  calendar_memo :text
-#  calendar_pdf  :text
-#  calendar_ppt  :text
-#  flyer_pdf     :text
-#  flyer_ppt     :text
-#  image         :text
-#  period        :date             not null
-#  status        :integer          not null
-#  zoom_memo     :text
-#  created_at    :datetime         not null
-#  updated_at    :datetime         not null
+#  id             :bigint           not null, primary key
+#  calendar_image :text
+#  calendar_memo  :text
+#  calendar_pdf   :text
+#  flyer_image    :text
+#  flyer_pdf      :text
+#  period         :date             not null
+#  status         :integer          not null
+#  top_image      :text
+#  zoom_memo      :text
+#  created_at     :datetime         not null
+#  updated_at     :datetime         not null
 #
 class OnlineRecreationChannel < ApplicationRecord
   extend Enumerize
-  mount_uploader :image, ImageUploader
+  mount_uploader :top_image, ImageUploader
+  mount_uploader :calendar_image, ImageUploader
+  mount_uploader :calendar_pdf, ImageUploader
+  mount_uploader :flyer_pdf, ImageUploader
+  mount_uploader :flyer_image, ImageUploader
 
   has_many :online_recreation_channel_recreations, dependent: :destroy
   accepts_nested_attributes_for :online_recreation_channel_recreations, allow_destroy: true

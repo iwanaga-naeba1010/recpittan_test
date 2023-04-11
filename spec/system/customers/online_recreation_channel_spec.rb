@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe 'Customers::OnlineRecreation', type: :system do
+RSpec.describe 'Customers::OnlineRecreationChannel', type: :system do
   let!(:customer) { create :user, :with_customer }
   let!(:online_recreation_channel) { create :online_recreation_channel, status: :public, period: Time.zone.today }
   let!(:channel_plan_subscriber) { create :channel_plan_subscriber, company: customer.company, status: :active }

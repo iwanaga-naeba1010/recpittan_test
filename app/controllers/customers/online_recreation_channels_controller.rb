@@ -9,6 +9,29 @@ class Customers::OnlineRecreationChannelsController < Customers::ApplicationCont
                                             .public_channels
                                             .where(period: @online_recreation_channel.period.next_month)
                                             .first
+    @data_options = { turbolinks: 'false', confirm: 'ダウンロードしますか?' }
+    @download_path = download_customers_online_recreation_channel_path(@online_recreation_channel)
+  end
+
+  def download
+    online_recreation_channel = OnlineRecreationChannel.find(params[:id])
+    image_name = params[:image_name]
+    image = case image_name
+            when 'calendar_pdf'
+              online_recreation_channel.calendar_pdf
+            when 'calendar_image'
+              online_recreation_channel.calendar_image
+            when 'flyer_pdf'
+              online_recreation_channel.flyer_pdf
+            when 'flyer_image'
+              online_recreation_channel.flyer_image
+            end
+
+    if image.nil?
+      redirect_to customers_online_recreation_channel_path(online_recreation_channel.id), alert: t('action_messages.file_not_found')
+    else
+      send_data(image.read, filename: "download_#{image_name}")
+    end
   end
 
   private def require_online_channel_subscribers
