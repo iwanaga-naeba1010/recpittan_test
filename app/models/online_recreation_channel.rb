@@ -4,29 +4,23 @@
 #
 # Table name: online_recreation_channels
 #
-#  id             :bigint           not null, primary key
-#  calendar_image :text
-#  calendar_memo  :text
-#  calendar_pdf   :text
-#  flyer_image    :text
-#  flyer_pdf      :text
-#  period         :date             not null
-#  status         :integer          not null
-#  top_image      :text
-#  zoom_memo      :text
-#  created_at     :datetime         not null
-#  updated_at     :datetime         not null
+#  id            :bigint           not null, primary key
+#  calendar_memo :text
+#  period        :date             not null
+#  status        :integer          not null
+#  top_image     :text
+#  zoom_memo     :text
+#  created_at    :datetime         not null
+#  updated_at    :datetime         not null
 #
 class OnlineRecreationChannel < ApplicationRecord
   extend Enumerize
   mount_uploader :top_image, ImageUploader
-  mount_uploader :calendar_image, ImageUploader
-  mount_uploader :calendar_pdf, ImageUploader
-  mount_uploader :flyer_pdf, ImageUploader
-  mount_uploader :flyer_image, ImageUploader
 
   has_many :online_recreation_channel_recreations, dependent: :destroy
   accepts_nested_attributes_for :online_recreation_channel_recreations, allow_destroy: true
+  has_many :online_recreation_channel_download_images, dependent: :destroy
+  accepts_nested_attributes_for :online_recreation_channel_download_images, allow_destroy: true
 
   enumerize :status, in: { public: 0, private: 1 }, default: 0
 
@@ -34,6 +28,8 @@ class OnlineRecreationChannel < ApplicationRecord
 
   scope :public_channels, -> { where(status: :public) }
   scope :current_month, -> { where("to_char(period, 'YYYY-MM') = ?", Time.zone.today.strftime('%Y-%m')) }
+
+  delegate :image, :kind, to: :online_recreation_channel_download_images, prefix: true, allow_nil: true
 
   private def unique_period_status_combination
     if OnlineRecreationChannel.where(period: period.all_month, status: :public).where.not(id:).exists?

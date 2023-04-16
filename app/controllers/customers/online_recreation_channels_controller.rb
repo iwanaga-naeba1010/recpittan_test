@@ -4,33 +4,33 @@ class Customers::OnlineRecreationChannelsController < Customers::ApplicationCont
   before_action :require_online_channel_subscribers
 
   def show
-    @online_recreation_channel = OnlineRecreationChannel.includes(:online_recreation_channel_recreations).find(params[:id])
+    @online_recreation_channel = OnlineRecreationChannel
+                                 .includes(:online_recreation_channel_recreations, :online_recreation_channel_download_images)
+                                 .find(params[:id])
     @next_month_online_recreation_channel = OnlineRecreationChannel
                                             .public_channels
                                             .where(period: @online_recreation_channel.period.next_month)
                                             .first
     @data_options = { turbolinks: 'false', confirm: 'ダウンロードしますか?' }
     @download_path = download_customers_online_recreation_channel_path(@online_recreation_channel)
+
+    @calendar_download_image = @online_recreation_channel
+                               .online_recreation_channel_download_images
+                               .where(kind: %w[calendar_image calendar_pdf])
+    @flyer_dw_image = @online_recreation_channel
+                      .online_recreation_channel_download_images
+                      .where(kind: %w[flyer_image flyer_pdf])
   end
 
   def download
-    online_recreation_channel = OnlineRecreationChannel.find(params[:id])
+    online_recreation_channel = OnlineRecreationChannel.includes(:online_recreation_channel_download_images).find(params[:id])
     image_name = params[:image_name]
-    image = case image_name
-            when 'calendar_pdf'
-              online_recreation_channel.calendar_pdf
-            when 'calendar_image'
-              online_recreation_channel.calendar_image
-            when 'flyer_pdf'
-              online_recreation_channel.flyer_pdf
-            when 'flyer_image'
-              online_recreation_channel.flyer_image
-            end
-
+    image = online_recreation_channel.online_recreation_channel_download_images.find_by(kind: image_name)&.image
     if image.nil?
       redirect_to customers_online_recreation_channel_path(online_recreation_channel.id), alert: t('action_messages.file_not_found')
     else
-      send_data(image.read, filename: "download_#{image_name}")
+      extension = { 'calendar_pdf' => 'pdf', 'flyer_pdf' => 'pdf', 'calendar_image' => 'png', 'flyer_image' => 'png' }[image_name]
+      send_data(image.read, filename: "download_#{image_name}.#{extension}")
     end
   end
 

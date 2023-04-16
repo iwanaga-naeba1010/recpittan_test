@@ -8,6 +8,10 @@ RSpec.describe Customers::OnlineRecreationChannelsController, type: :request do
   let!(:customer2) { create :user, :with_customer }
   let!(:online_recreation_channel) { create :online_recreation_channel }
   let!(:channel_plan_subscriber) { create :channel_plan_subscriber, company: customer.company, status: :active }
+  let!(:download_calendar_image) { create :online_recreation_channel_download_image, :calendar_image, online_recreation_channel: }
+  let!(:download_calendar_pdf) { create :online_recreation_channel_download_image, :calendar_pdf, online_recreation_channel: }
+  let!(:download_flyer_image) { create :online_recreation_channel_download_image, :flyer_image, online_recreation_channel: }
+  let!(:download_flyer_pdf) { create :online_recreation_channel_download_image, :flyer_pdf, online_recreation_channel: }
 
   before do
     sign_in customer
@@ -50,27 +54,59 @@ RSpec.describe Customers::OnlineRecreationChannelsController, type: :request do
     end
 
     context 'download calendar_image' do
-      it_behaves_like 'downloadable file', 'calendar_image'
+      context 'when download calendar_image is exists' do
+        it_behaves_like 'downloadable file', 'calendar_image'
+      end
+
+      context 'when download calendar_image is not exists' do
+        before do
+          download_calendar_image.destroy
+        end
+
+        it_behaves_like 'not downloadable file', 'calendar_image'
+      end
     end
 
     context 'download calendar_pdf' do
-      it_behaves_like 'downloadable file', 'calendar_pdf'
-    end
+      context 'when download calendar_pdf is exists' do
+        it_behaves_like 'downloadable file', 'calendar_pdf'
+      end
 
-    context 'download flyer_pdf' do
-      it_behaves_like 'downloadable file', 'flyer_pdf'
+      context 'when download calendar_pdf is not exists' do
+        before do
+          download_calendar_pdf.destroy
+        end
+
+        it_behaves_like 'not downloadable file', 'calendar_pdf'
+      end
     end
 
     context 'download flyer_image' do
-      it_behaves_like 'downloadable file', 'flyer_image'
+      context 'when download flyer_image is exists' do
+        it_behaves_like 'downloadable file', 'flyer_image'
+      end
+
+      context 'when download flyer_image is not exists' do
+        before do
+          download_flyer_image.destroy
+        end
+
+        it_behaves_like 'not downloadable file', 'flyer_image'
+      end
     end
 
-    context 'download invalid_image' do
-      it_behaves_like 'not downloadable file', 'invalid_image'
-    end
+    context 'download flyer_pdf' do
+      context 'when download flyer_pdf is exists' do
+        it_behaves_like 'downloadable file', 'flyer_pdf'
+      end
 
-    context 'download invalid_pdf' do
-      it_behaves_like 'not downloadable file', 'invalid_pdf'
+      context 'when download flyer_pdf is not exists' do
+        before do
+          download_flyer_pdf.destroy
+        end
+
+        it_behaves_like 'not downloadable file', 'flyer_pdf'
+      end
     end
 
     context 'when params is nil' do

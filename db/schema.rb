@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_04_02_125038) do
+ActiveRecord::Schema[7.0].define(version: 2023_04_16_135757) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -121,6 +121,16 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_02_125038) do
     t.index ["user_id"], name: "index_invoice_informations_on_user_id"
   end
 
+  create_table "online_recreation_channel_download_images", force: :cascade do |t|
+    t.text "image", null: false
+    t.integer "kind", null: false
+    t.bigint "online_recreation_channel_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["online_recreation_channel_id", "kind"], name: "index_channel_dw_images_on_channel_id_and_kind", unique: true
+    t.index ["online_recreation_channel_id"], name: "index_online_recreation_channel_dw_images_on_channel_id"
+  end
+
   create_table "online_recreation_channel_recreations", force: :cascade do |t|
     t.bigint "online_recreation_channel_id", null: false
     t.string "title", null: false
@@ -142,10 +152,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_02_125038) do
     t.text "zoom_memo"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.text "calendar_pdf"
-    t.text "calendar_image"
-    t.text "flyer_pdf"
-    t.text "flyer_image"
   end
 
   create_table "order_dates", force: :cascade do |t|
@@ -360,6 +366,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_02_125038) do
   add_foreign_key "company_tags", "tags", name: "company_tags_tag_id_fkey"
   add_foreign_key "evaluations", "reports", name: "evaluations_report_id_fkey"
   add_foreign_key "invoice_informations", "users"
+  add_foreign_key "online_recreation_channel_download_images", "online_recreation_channels"
   add_foreign_key "online_recreation_channel_recreations", "online_recreation_channels"
   add_foreign_key "order_dates", "orders", name: "order_dates_order_id_fkey"
   add_foreign_key "order_memos", "orders", name: "order_memos_order_id_fkey"
