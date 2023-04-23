@@ -27,6 +27,7 @@ class Report < ApplicationRecord
 
   delegate :material_price, :number_of_people, :number_of_facilities, :transportation_expenses, :expenses, :support_price,
            :additional_facility_fee, :coupon_code, :start_at, to: :order, prefix: true, allow_nil: true
+  delegate :message, to: :evaluation, prefix: true, allow_nil: true
 
   enumerize :status, in: { in_progress: 0, denied: 1, accepted: 2 }, default: 0
 end
