@@ -42,7 +42,7 @@ ActiveAdmin.register OnlineRecreationChannel do
       row :updated_at
     end
 
-    panel t('activerecord.models.online_recreation_channel_download_image').to_s, style: 'margin-top: 30px;' do
+    panel t('activerecord.models.online_recreation_channel_download_image'), style: 'margin-top: 30px;' do
       table_for online_recreation_channel.online_recreation_channel_download_images do
         column :id
         column(:kind, &:kind_text)
@@ -56,7 +56,7 @@ ActiveAdmin.register OnlineRecreationChannel do
       end
     end
 
-    panel t('activerecord.models.online_recreation_channel_recreation').to_s, style: 'margin-top: 30px;' do
+    panel t('activerecord.models.online_recreation_channel_recreation'), style: 'margin-top: 30px;' do
       table_for online_recreation_channel.online_recreation_channel_recreations.order(date: :asc) do
         column :id
         column :date

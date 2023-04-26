@@ -5,16 +5,12 @@
     <p><%= link_to "来月のカレンダーはこちら", customers_online_recreation_channel_path(@next_month_online_recreation_channel) %></p>
   <% end %>
 
-  <% if @calendar_download_image.exists? %>
+  <% if @calendar_download_image %>
     <div class="d-flex  justify-content-center">
       <p class="p-2">カレンダーダウンロード</p>
       <p class="p-2">
-        <% if @online_recreation_channel.online_recreation_channel_download_images.find_by(kind: :calendar_pdf) %>
-          <%= link_to "PDF", "#{@download_path}?image_name=calendar_pdf", data: @data_options %>
-        <% end %>
-        <% if @online_recreation_channel.online_recreation_channel_download_images.find_by(kind: :calendar_image) %>
-          <%= link_to "PNG", "#{@download_path}?image_name=calendar_image", data: @data_options %>
-        <% end %>
+        <%= link_to "PDF", "#{@download_path}?image_name=calendar_pdf", data: @data_options if @download_image.calendar_pdf %>
+        <%= link_to "PNG", "#{@download_path}?image_name=calendar_image", data: @data_options if @download_image.calendar_image %>
       </p>
     </div>
   <% end %>
@@ -30,16 +26,12 @@
 
 <h4 class="main_header mt-5 fw-bold pb-2"><%= formatted_period(@online_recreation_channel.period) %>の配信スケジュール</h4>
 
-  <% if @flyer_dw_image.exists? %>
+  <% if @flyer_dw_image %>
     <div class="d-flex  justify-content-center">
       <p class="p-2">チラシダウンロード</p>
       <p class="p-2">
-        <% if @online_recreation_channel.online_recreation_channel_download_images.find_by(kind: :flyer_pdf) %>
-          <%= link_to "PDF", "#{@download_path}?image_name=flyer_pdf", data: @data_options %>
-        <% end %>
-        <% if @online_recreation_channel.online_recreation_channel_download_images.find_by(kind: :flyer_image) %>
-          <%= link_to "PNG", "#{@download_path}?image_name=flyer_image", data: @data_options %>
-        <% end %>
+        <%= link_to "PDF", "#{@download_path}?image_name=flyer_pdf", data: @data_options if @download_image.flyer_pdf %>
+        <%= link_to "PNG", "#{@download_path}?image_name=flyer_image", data: @data_options if @download_image.flyer_image %>
       </p>
     </div>
   <% end %>

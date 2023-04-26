@@ -7,6 +7,7 @@ class Customers::OnlineRecreationChannelsController < Customers::ApplicationCont
     @online_recreation_channel = OnlineRecreationChannel
                                  .includes(:online_recreation_channel_recreations, :online_recreation_channel_download_images)
                                  .find(params[:id])
+    @download_image = @online_recreation_channel.online_recreation_channel_download_images
     @next_month_online_recreation_channel = OnlineRecreationChannel
                                             .public_channels
                                             .where(period: @online_recreation_channel.period.next_month)
