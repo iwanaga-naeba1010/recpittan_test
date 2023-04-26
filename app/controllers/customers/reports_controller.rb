@@ -26,7 +26,7 @@ class Customers::ReportsController < Customers::ApplicationController
         コミュニケーションの満足度: #{evaluation.communication_text}
         スムーズさの満足度: #{evaluation.smoothness_text}
         料金の満足度: #{evaluation.price_text}
-
+        レポート本文： #{evaluation.message}
         管理画面案件URL #{admin_order_url(order.id)}
       MESSAGE
       SlackNotifier.new(channel: '#アクティブチャットスレッド').send('施設が終了報告をしました', message)
