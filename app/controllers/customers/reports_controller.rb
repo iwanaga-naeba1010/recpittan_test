@@ -15,7 +15,7 @@ class Customers::ReportsController < Customers::ApplicationController
     if order.report.update(params_create)
       # NOTE: statusを更新する必要は一切ないが、更新しないとstatusが動的に変更しないためHACK的な感じで実装
       order.update(status: :final_report_admits_not)
-      evaluation = order.report.evaluation
+      evaluation = @report.evaluation
       message = <<~MESSAGE
         開催日： #{order.start_at}
         パートナー名： #{order.recreation.profile_name}
