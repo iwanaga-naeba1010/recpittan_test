@@ -20,6 +20,10 @@
 class OnlineRecreationChannel < ApplicationRecord
   extend Enumerize
   mount_uploader :top_image, ImageUploader
+  mount_uploader :calendar_image, ImageUploader
+  mount_uploader :calendar_pdf, ImageUploader
+  mount_uploader :flyer_pdf, ImageUploader
+  mount_uploader :flyer_image, ImageUploader
 
   has_many :online_recreation_channel_recreations, dependent: :destroy
   accepts_nested_attributes_for :online_recreation_channel_recreations, allow_destroy: true
