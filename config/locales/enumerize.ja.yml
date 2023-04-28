@@ -110,3 +110,9 @@ ja:
      status:
        public: 公開にする
        private: 非公開にする
+    online_recreation_channel_download_image:
+      kind:
+        calendar_pdf: カレンダーPDF
+        calendar_image: カレンダー画像
+        flyer_pdf: チラシPDF
+        flyer_image: チラシ画像

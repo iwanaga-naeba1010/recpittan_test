@@ -27,6 +27,8 @@ class OnlineRecreationChannel < ApplicationRecord
 
   has_many :online_recreation_channel_recreations, dependent: :destroy
   accepts_nested_attributes_for :online_recreation_channel_recreations, allow_destroy: true
+  has_many :online_recreation_channel_download_images, dependent: :destroy
+  accepts_nested_attributes_for :online_recreation_channel_download_images, allow_destroy: true
 
   enumerize :status, in: { public: 0, private: 1 }, default: 0
 
@@ -34,6 +36,8 @@ class OnlineRecreationChannel < ApplicationRecord
 
   scope :public_channels, -> { where(status: :public) }
   scope :current_month, -> { where("to_char(period, 'YYYY-MM') = ?", Time.zone.today.strftime('%Y-%m')) }
+
+  delegate :image, :kind, to: :online_recreation_channel_download_images, prefix: true
 
   private def unique_period_status_combination
     if OnlineRecreationChannel.where(period: period.all_month, status: :public).where.not(id:).exists?
