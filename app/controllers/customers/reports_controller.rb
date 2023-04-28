@@ -15,12 +15,18 @@ class Customers::ReportsController < Customers::ApplicationController
     if order.report.update(params_create)
       # NOTE: statusを更新する必要は一切ないが、更新しないとstatusが動的に変更しないためHACK的な感じで実装
       order.update(status: :final_report_admits_not)
+      evaluation = @report.evaluation
       message = <<~MESSAGE
         開催日： #{order.start_at}
         パートナー名： #{order.recreation.profile_name}
         レク名： #{order.recreation_title}
         施設名： #{order.user.company.facility_name}
-        レポート本文： #{@report.evaluation_message}
+        レポート本文： #{@report.body}
+        工夫の満足度: #{evaluation.ingenuity_text}
+        コミュニケーションの満足度: #{evaluation.communication_text}
+        スムーズさの満足度: #{evaluation.smoothness_text}
+        料金の満足度: #{evaluation.price_text}
+        レポート本文： #{evaluation.message}
         管理画面案件URL #{admin_order_url(order.id)}
       MESSAGE
       SlackNotifier.new(channel: '#アクティブチャットスレッド').send('施設が終了報告をしました', message)
