@@ -27,10 +27,5 @@ class OnlineRecreationChannelDownloadImage < ApplicationRecord
 
   enumerize :kind, in: { calendar_image: 0, calendar_pdf: 1, flyer_image: 2, flyer_pdf: 3 }
 
-  scope :calendar_image, -> { find_by(kind: :calendar_image) }
-  scope :calendar_pdf, -> { find_by(kind: :calendar_pdf) }
-  scope :flyer_image, -> { find_by(kind: :flyer_image) }
-  scope :flyer_pdf, -> { find_by(kind: :flyer_pdf) }
-
   validates :online_recreation_channel_id, uniqueness: { scope: :kind }
 end
