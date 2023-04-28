@@ -4,18 +4,14 @@
 #
 # Table name: online_recreation_channels
 #
-#  id             :bigint           not null, primary key
-#  calendar_image :text
-#  calendar_memo  :text
-#  calendar_pdf   :text
-#  flyer_image    :text
-#  flyer_pdf      :text
-#  period         :date             not null
-#  status         :integer          not null
-#  top_image      :text
-#  zoom_memo      :text
-#  created_at     :datetime         not null
-#  updated_at     :datetime         not null
+#  id            :bigint           not null, primary key
+#  calendar_memo :text
+#  period        :date             not null
+#  status        :integer          not null
+#  top_image     :text
+#  zoom_memo     :text
+#  created_at    :datetime         not null
+#  updated_at    :datetime         not null
 #
 FactoryBot.define do
   factory :online_recreation_channel do
