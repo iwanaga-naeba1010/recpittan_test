@@ -18,9 +18,9 @@ class Customers::OnlineRecreationChannelsController < Customers::ApplicationCont
     @calendar_download_image = @online_recreation_channel
                                .online_recreation_channel_download_images
                                .where(kind: %w[calendar_image calendar_pdf])
-    @flyer_dw_image = @online_recreation_channel
-                      .online_recreation_channel_download_images
-                      .where(kind: %w[flyer_image flyer_pdf])
+    @flyer_download_image = @online_recreation_channel
+                            .online_recreation_channel_download_images
+                            .where(kind: %w[flyer_image flyer_pdf])
   end
 
   def download
