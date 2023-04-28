@@ -152,6 +152,10 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_16_135757) do
     t.text "zoom_memo"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.text "calendar_pdf"
+    t.text "calendar_image"
+    t.text "flyer_pdf"
+    t.text "flyer_image"
   end
 
   create_table "order_dates", force: :cascade do |t|
