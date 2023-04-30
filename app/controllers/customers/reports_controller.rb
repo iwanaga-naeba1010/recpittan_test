@@ -21,7 +21,7 @@ class Customers::ReportsController < Customers::ApplicationController
         パートナー名： #{order.recreation.profile_name}
         レク名： #{order.recreation_title}
         施設名： #{order.user.company.facility_name}
-        レポート本文： #{@report.body}
+        施設の評価本文： #{evaluation.message}
         工夫の満足度: #{evaluation.ingenuity_text}
         コミュニケーションの満足度: #{evaluation.communication_text}
         スムーズさの満足度: #{evaluation.smoothness_text}
