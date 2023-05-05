@@ -16,7 +16,7 @@ export type UseFile = {
 
 const RecreationEdit: React.FC = () => {
   const [errors, setErrors] = useState<Array<string>>([]);
-  const [recreation, setRecreation] = useState<Recreation>(undefined);
+  const [recreation, setRecreation] = useState<Recreation>();
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [isFileLoading, setIsFileLoading] = useState<boolean>(false);
   const id = window.location.pathname.split('/')[3];

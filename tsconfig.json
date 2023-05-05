@@ -13,7 +13,7 @@
     "paths": {
       "@/*": ["./reactSrc/*"]
     },
-    "strict": true,
+    "strict": true
   },
   "exclude": [
     "**/*.spec.ts",

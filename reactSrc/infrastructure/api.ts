@@ -10,7 +10,8 @@ export class Api {
         params: snakecaseKeys(params),
         headers: headers()
       });
-      return { ...response, data: camelcaseKeys(response.data, { deep: true }) } as AxiosResponse<T>;
+      const data = response.data as unknown as Record<string, unknown>;
+      return { ...response, data: camelcaseKeys(data, { deep: true }) } as AxiosResponse<T>;
     } catch (e) {
       console.log('haitta!', e);
       throw e;
@@ -23,7 +24,8 @@ export class Api {
       const response = await axios.post<T>(`${apiDomain(type)}/${path}`, snakecaseKeys(data, { deep: true }), {
         headers: headers()
       });
-      return { ...response, data: camelcaseKeys(response.data, { deep: true }) } as AxiosResponse<T>;
+      const data = response.data as unknown as Record<string, unknown>;
+      return { ...response, data: camelcaseKeys(data, { deep: true }) } as AxiosResponse<T>;
     } catch (e) {
       console.log('haitta!', e);
       throw e;
@@ -46,7 +48,8 @@ export class Api {
         data: snakecaseKeys(data),
         headers: headers()
       });
-      return { ...response, data: camelcaseKeys(response.data, { deep: true }) } as AxiosResponse<T>;
+      const responseData = response.data as unknown as Record<string, unknown>;
+      return { ...response, data: camelcaseKeys(responseData, { deep: true }) } as AxiosResponse<T>;
     } catch (e) {
       console.log('haitta!', e);
       throw e;
@@ -56,15 +59,17 @@ export class Api {
 
 // const headers = (token?: string) => {
 const headers = () => {
-  const headers = {
-    'Content-Type': 'application/json'
-  };
-  const token = document.querySelector('[name=csrf-token]').getAttribute('content');
+  let token = '';
+  // const headers = { 'Content-Type': 'application/json' };
+  const csrfTokenElem = document.querySelector('[name=csrf-token]');
+
+  if (csrfTokenElem) {
+    token = csrfTokenElem.getAttribute('content') ?? '';
+  }
 
   return {
-    ...headers,
+    'Content-Type': 'application/json',
     'X-CSRF-TOKEN': token
-    // Authorization: `Bearer ${token}`
   };
 };
 
