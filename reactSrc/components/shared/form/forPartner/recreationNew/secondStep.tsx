@@ -23,10 +23,18 @@ type Props = {
 export const SecondStep: React.FC<Props> = (props) => {
   const { getValues, register, recreation, useFile } = props;
   const [extraInformation, setExtraInformation] = useState<string>(getValues('extraInformation'));
-  const sliderRef = useRef(null);
-  const materialRef = useRef(null);
-  const handleSliderRefClickFileInput = (): void => sliderRef.current.click();
-  const handleMaterialRefClickFileInput = (): void => materialRef.current.click();
+  const sliderRef = useRef<HTMLInputElement>(null);
+  const materialRef = useRef<HTMLInputElement>(null);
+  const handleSliderRefClickFileInput = (): void => {
+    if (sliderRef.current) {
+      sliderRef.current.click();
+    }
+  };
+  const handleMaterialRefClickFileInput = (): void => {
+    if (materialRef.current) {
+      materialRef.current.click();
+    }
+  };
   const isShowAdditionalFacilityFee = (): boolean => {
     if (recreation === undefined) {
       const kind = getValues('kind');
@@ -50,7 +58,7 @@ export const SecondStep: React.FC<Props> = (props) => {
         <RecreationEditAdditionalFacilityFee recreation={recreation} />
       )}
       {/* 修正のタイミングで利用可能に */}
-      {recreation !== undefined && (
+      {recreation !== undefined && useFile && (
         <>
           <div className='mt-4'>
             <h5 className='text-black font-weight-bold'>レク画像を追加</h5>
@@ -69,6 +77,7 @@ export const SecondStep: React.FC<Props> = (props) => {
               .filter((image) => image.kind === 'slider')
               .map((image, i) => (
                 <ImageComponent key={i} image={image} handleDelete={useFile.handleFileDelete} />
+                
               ))}
           </div>
 
@@ -124,7 +133,7 @@ export const SecondStep: React.FC<Props> = (props) => {
       <p className='small my-0'>レクに必要なものを自前で施設に持ち込む場合は入力してください</p>
       <input type='text' className='p-2 w-100 rounded border border-secondary' />
 
-      {recreation !== undefined && (
+      {recreation !== undefined && useFile && (
         <>
           <div className='d-flex mt-4'>
             <h5 className='text-black font-weight-bold'>施設に渡したいファイル</h5>

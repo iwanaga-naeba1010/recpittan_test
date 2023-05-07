@@ -5,7 +5,7 @@ import { useForm } from 'react-hook-form';
 
 type Props = {
   order: Order;
-  setOrder: Dispatch<React.SetStateAction<Order | undefined>>;
+  setOrder: Dispatch<React.SetStateAction<Order>>;
 };
 
 export type ExpenseFormValues = Pick<Order, 'expenses'>;

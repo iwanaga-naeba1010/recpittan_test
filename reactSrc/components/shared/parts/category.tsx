@@ -26,6 +26,8 @@ export const Category: React.FC<Props> = (props) => {
         return '#FD7E14';
       case 'その他':
         return '#339999';
+      default:
+        return '#000000';
     }
   };
 

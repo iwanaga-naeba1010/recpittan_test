@@ -6,7 +6,7 @@ import ReactDOM from 'react-dom';
 import { RecreationItem } from './recreationItem';
 
 const RecreationShow: React.FC = () => {
-  const [recreation, setRecreation] = useState<Recreation>(undefined);
+  const [recreation, setRecreation] = useState<Recreation>({} as Recreation);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const id = window.location.pathname.split('/')[3];
 

@@ -16,7 +16,7 @@ export type UseFile = {
 
 const RecreationEdit: React.FC = () => {
   const [errors, setErrors] = useState<Array<string>>([]);
-  const [recreation, setRecreation] = useState<Recreation>();
+  const [recreation, setRecreation] = useState<Recreation>({} as Recreation);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [isFileLoading, setIsFileLoading] = useState<boolean>(false);
   const id = window.location.pathname.split('/')[3];
@@ -108,8 +108,11 @@ const RecreationEdit: React.FC = () => {
       //
     } catch (e) {
       if (axios.isAxiosError(e)) {
-        setErrors((e as AxiosError<Array<string>>).response.data);
-        console.log(e.response.data);
+        const axiosError = e as AxiosError<Array<string>>;
+        if (axiosError.response) {
+          setErrors(axiosError.response.data);
+          console.log(axiosError.response.data);
+        }
       }
     }
   };

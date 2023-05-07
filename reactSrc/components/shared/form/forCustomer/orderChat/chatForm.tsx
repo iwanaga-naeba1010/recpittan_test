@@ -32,8 +32,11 @@ export const ChatForm: React.FC<Props> = (props): JSX.Element => {
       setValue('message', '');
     } catch (e) {
       if (axios.isAxiosError(e)) {
-        setErrors((e as AxiosError<Array<string>>).response.data);
-        console.log(e.response.data);
+        const axiosError = e as AxiosError<Array<string>>;
+        if (axiosError.response) {
+          setErrors(axiosError.response.data);
+          console.log(axiosError.response.data);
+        }
       }
     }
   };

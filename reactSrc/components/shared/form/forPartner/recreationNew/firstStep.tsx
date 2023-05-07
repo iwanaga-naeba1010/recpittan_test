@@ -40,7 +40,7 @@ const descriptionPlaceholderText = `しっとりと大人な時間を堪能で�
 
 export const FirstStep: React.FC<Props> = (props) => {
   const { register, getValues, recreation, setRecreation, errors } = props;
-  const [config, setConfig] = useState<Config>(undefined);
+  const [config, setConfig] = useState<Config>({} as Config);
   const [show, setShow] = useState(false);
   const [isSending, setIsSending] = useState<boolean>(false);
   const [title, setTitle] = useState<string>(getValues('title'));
@@ -59,42 +59,48 @@ export const FirstStep: React.FC<Props> = (props) => {
   }, []);
 
   const handleAddPrefecture = async (prefecture: string) => {
-    try {
-      const createdPrefecture = await Api.post<RecreationPrefecture>(
-        `recreations/${recreation.id}/recreation_prefectures`,
-        'partner',
-        { recreationPrefecture: { name: prefecture } }
-      );
-      setRecreation({ ...recreation, prefectures: [...recreation.prefectures, createdPrefecture.data] });
-      setIsSending(false);
-    } catch (e) {
-      console.log(e);
+    if (recreation && setRecreation) {
+      try {
+        const createdPrefecture = await Api.post<RecreationPrefecture>(
+          `recreations/${recreation.id}/recreation_prefectures`,
+          'partner',
+          { recreationPrefecture: { name: prefecture } }
+        );
+        setRecreation({ ...recreation, prefectures: [...recreation.prefectures, createdPrefecture.data] });
+        setIsSending(false);
+      } catch (e) {
+        console.log(e);
+      }
     }
   };
 
   const handleUpdatePrefecture = async (id: number, prefectureName: string): Promise<void> => {
-    try {
-      const updatedPrefecture = await Api.patch<RecreationPrefecture>(
-        `recreations/${recreation.id}/recreation_prefectures/${id}`,
-        'partner',
-        { recreationPrefecture: { name: prefectureName } }
-      );
-      const oldPrefectures = [...recreation.prefectures];
-      const index = oldPrefectures.indexOf(oldPrefectures.filter((p) => p.id == id)[0]);
-      const newPrefectures = oldPrefectures;
-      newPrefectures[index] = updatedPrefecture.data;
-      setRecreation({ ...recreation, prefectures: newPrefectures });
-    } catch (e) {
-      console.log(e);
+    if (recreation && setRecreation) {
+      try {
+        const updatedPrefecture = await Api.patch<RecreationPrefecture>(
+          `recreations/${recreation.id}/recreation_prefectures/${id}`,
+          'partner',
+          { recreationPrefecture: { name: prefectureName } }
+        );
+        const oldPrefectures = [...recreation.prefectures];
+        const index = oldPrefectures.indexOf(oldPrefectures.filter((p) => p.id == id)[0]);
+        const newPrefectures = oldPrefectures;
+        newPrefectures[index] = updatedPrefecture.data;
+        setRecreation({ ...recreation, prefectures: newPrefectures });
+      } catch (e) {
+        console.log(e);
+      }
     }
   };
 
   const handleRemove = async (id: number): Promise<void> => {
-    try {
-      await Api.delete(`recreations/${recreation.id}/recreation_prefectures/${id}`, 'partner', {});
-      setRecreation({ ...recreation, prefectures: recreation.prefectures.filter((p) => p.id !== id) });
-    } catch (e) {
-      console.log(e);
+    if (recreation && setRecreation) {
+      try {
+        await Api.delete(`recreations/${recreation.id}/recreation_prefectures/${id}`, 'partner', {});
+        setRecreation({ ...recreation, prefectures: recreation.prefectures.filter((p) => p.id !== id) });
+      } catch (e) {
+        console.log(e);
+      }
     }
   };
   // const disabled = errors?.kind !== undefined || errors?.title !== undefined || errors?.secondTitle !== undefined;
@@ -120,7 +126,6 @@ export const FirstStep: React.FC<Props> = (props) => {
               type='radio'
               id={`kind${kind.enumKey}`}
               value={kind.enumKey}
-              name='format_restriction'
               {...register('kind')}
             />
             <label htmlFor={`kind${kind.enumKey}`}>{kind.name}でレクを実施</label>
@@ -144,7 +149,7 @@ export const FirstStep: React.FC<Props> = (props) => {
           })}
           onChange={(e) => setTitle(e.target.value)}
         />
-        {errors && <ValidationErrorMessage message={errors?.title?.message} />}
+        {errors.title && errors.title.message && <ValidationErrorMessage message={errors.title.message} />}
         <p className='small my-0'>{title.length}/42文字まで</p>
       </div>
 
@@ -164,7 +169,7 @@ export const FirstStep: React.FC<Props> = (props) => {
           })}
           onChange={(e) => setSecondTitle(e.target.value)}
         />
-        {errors && <ValidationErrorMessage message={errors?.secondTitle?.message} />}
+        {errors.secondTitle && errors.secondTitle.message && <ValidationErrorMessage message={errors?.secondTitle?.message} />}
         <p className='small my-0'>{secondTitle.length}/35文字まで</p>
       </div>
 
@@ -187,7 +192,7 @@ export const FirstStep: React.FC<Props> = (props) => {
             </option>
           ))}
         </select>
-        {errors && <ValidationErrorMessage message={errors?.minutes?.message} />}
+        {errors.title && errors.title.message && <ValidationErrorMessage message={errors.title.message} />}
       </div>
 
       <div className='flowOfDay'>
@@ -204,7 +209,7 @@ export const FirstStep: React.FC<Props> = (props) => {
             required: 'タイムスケジュールは必須です'
           })}
         />
-        {errors && <ValidationErrorMessage message={errors?.flowOfDay?.message} />}
+        {errors.flowOfDay && errors.flowOfDay.message && <ValidationErrorMessage message={errors?.flowOfDay?.message} />}
       </div>
 
       <div className='description'>
@@ -242,7 +247,7 @@ export const FirstStep: React.FC<Props> = (props) => {
             </option>
           ))}
         </select>
-        {errors && <ValidationErrorMessage message={errors?.category?.message} />}
+        {errors.category?.message && <ValidationErrorMessage message={errors?.category?.message} />}
       </div>
 
       {recreation !== undefined && recreation?.kind.key === 'visit' && (
@@ -303,7 +308,7 @@ export const FirstStep: React.FC<Props> = (props) => {
             />
           </>
         )}
-        {errors && <ValidationErrorMessage message={errors?.capacity?.message} />}
+        {errors.capacity && errors.capacity.message && <ValidationErrorMessage message={errors?.capacity?.message} />}
       </div>
     </div>
   );

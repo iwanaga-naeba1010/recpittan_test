@@ -1,7 +1,7 @@
 import { ModalForm } from '@/components/shared';
 import { ExpenseForm } from '@/components/shared/form/forCustomer/orderChat/expenceForm';
 import { NumberOfFacilitiesForm } from '@/components/shared/form/forCustomer/orderChat/numberOfFacilitiesForm';
-import { TranspotationExpensesForm } from '@/components/shared/form/forCustomer/orderChat/transportationExpensesForm';
+import { TransportationExpensesForm } from '@/components/shared/form/forCustomer/orderChat/transportationExpensesForm';
 import { Category, LoadingIndicator, SuccessFlash, Tag } from '@/components/shared/parts';
 import { Api } from '@/infrastructure';
 import { Order, User } from '@/types';
@@ -12,8 +12,8 @@ import ReactDOM from 'react-dom';
 import { ChatList } from './chatList';
 
 export const OrderChat: React.FC = () => {
-  const [order, setOrder] = useState<Order>();
-  const [user, setUser] = useState<User>();
+  const [order, setOrder] = useState<Order>({} as Order);
+  const [user, setUser] = useState<User>({} as User);
   const [isShowFlash, setIsShowFlash] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const id = window.location.pathname.split('/')[3];
@@ -44,10 +44,6 @@ export const OrderChat: React.FC = () => {
         </div>
       </div>
     );
-  }
-
-  if (!order || !user) {
-    return <></>;
   }
 
   return (
@@ -137,7 +133,7 @@ export const OrderChat: React.FC = () => {
                 </div>
                 <ExpenseForm order={order} setOrder={setOrder} />
                 {order.recreation.kind.key === 'visit' && (
-                  <TranspotationExpensesForm order={order} setOrder={setOrder} />
+                  <TransportationExpensesForm order={order} setOrder={setOrder} />
                 )}
                 {order.recreation.kind.key === 'online' && <NumberOfFacilitiesForm order={order} setOrder={setOrder} />}
                 <div className='row justify-content-between border-top py-3'>

@@ -24,8 +24,8 @@ export class Api {
       const response = await axios.post<T>(`${apiDomain(type)}/${path}`, snakecaseKeys(data, { deep: true }), {
         headers: headers()
       });
-      const data = response.data as unknown as Record<string, unknown>;
-      return { ...response, data: camelcaseKeys(data, { deep: true }) } as AxiosResponse<T>;
+      const responseData = response.data as unknown as Record<string, unknown>;
+      return { ...response, data: camelcaseKeys(responseData, { deep: true }) } as AxiosResponse<T>;
     } catch (e) {
       console.log('haitta!', e);
       throw e;
