@@ -38,7 +38,7 @@ export type ModalForlValues = Pick<
 
 export const ModalForm: React.FC<Props> = (props) => {
   const { order, recreation } = props;
-  const [preferredDate, setPreferredDate] = useState<PreferredDate>({} as PreferredDate);
+  const [preferredDate, setPreferredDate] = useState<PreferredDate>();
   const [prefectures, setPrefectures] = useState<Array<Prefecture>>([]);
   const [cities, setCities] = useState<Array<City>>([]);
   const [errors, setErrors] = useState<Array<string>>([]);
