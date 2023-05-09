@@ -47,8 +47,11 @@ const RecreationNew: React.FC = () => {
       window.location.href = `/partners/recreations/${createdRecreation.data.id}?notice=${noticeText}`;
     } catch (e) {
       if (axios.isAxiosError(e)) {
-        setErrors((e as AxiosError<Array<string>>).response.data);
-        console.log(e.response.data);
+        const axiosError = e as AxiosError<Array<string>>;
+        if (axiosError.response) {
+          setErrors(axiosError.response.data);
+          console.log(axiosError.response.data);
+        }
       }
     }
   };
