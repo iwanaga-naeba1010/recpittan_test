@@ -19,7 +19,8 @@ export const OrderChat: React.FC = () => {
   const id = window.location.pathname.split('/')[3];
 
   useEffect(() => {
-    setIsShowFlash(strToBool(getQeuryStringValueByKey('isShowFlash')));
+    const isShowFlashParam = getQeuryStringValueByKey('isShowFlash');
+    setIsShowFlash(isShowFlashParam ? strToBool(isShowFlashParam) : false);
     removeQueryStringsByKey();
     (async () => {
       if (id === undefined) return;
