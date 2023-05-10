@@ -42,7 +42,7 @@ export const ModalForm: React.FC<Props> = (props) => {
   const [prefectures, setPrefectures] = useState<Array<Prefecture>>([]);
   const [cities, setCities] = useState<Array<City>>([]);
   const [errors, setErrors] = useState<Array<string>>([]);
-  const [isCouponApplied, setIsCouponApplied] = useState<boolean>({} as boolean);
+  const [isCouponApplied, setIsCouponApplied] = useState<boolean>();
 
   const {
     register,
