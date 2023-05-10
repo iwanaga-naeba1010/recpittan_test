@@ -40,7 +40,7 @@ const descriptionPlaceholderText = `しっとりと大人な時間を堪能で�
 
 export const FirstStep: React.FC<Props> = (props) => {
   const { register, getValues, recreation, setRecreation, errors } = props;
-  const [config, setConfig] = useState<Config>({} as Config);
+  const [config, setConfig] = useState<Config>();
   const [show, setShow] = useState(false);
   const [isSending, setIsSending] = useState<boolean>(false);
   const [title, setTitle] = useState<string>(getValues('title'));
@@ -264,7 +264,7 @@ export const FirstStep: React.FC<Props> = (props) => {
               prefecture={prefecture}
               handleUpdate={handleUpdatePrefecture}
               handleRemove={handleRemove}
-              prefectures={config?.prefectures}
+              prefectures={config?.prefectures ?? []}
             />
           ))}
           <div className={'question-add-action-wrapper'}>
