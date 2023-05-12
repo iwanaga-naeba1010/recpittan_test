@@ -3,7 +3,7 @@
 # rubocop:disable Metrics/BlockLength
 ActiveAdmin.register ChannelPlanSubscriber do
   permit_params(
-    :kind, :company_id
+    :kind, :status, :company_id
   )
 
   filter :company
@@ -58,7 +58,11 @@ ActiveAdmin.register ChannelPlanSubscriber do
 
     f.inputs do
       companies = Company.without_channel_subscribe.map { |c| ["#{c.facility_name} (#{c.id})", c.id] }
-      f.input :company, as: :select, collection: companies
+      if f.object.new_record?
+        f.input :company, as: :select, collection: companies
+      else
+        f.input :company, as: :select, input_html: { disabled: true }
+      end
       f.input :kind, as: :select, collection: ChannelPlanSubscriber.kind.values.map { |val| [val.text, val] }
       f.input :status, as: :select, collection: ChannelPlanSubscriber.status.values.map { |val| [val.text, val] }
     end
