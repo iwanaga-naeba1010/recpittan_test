@@ -122,7 +122,7 @@ export const SecondStep: React.FC<Props> = (props) => {
         <h5 className='text-black font-weight-bold'>持ち込むものを入力</h5>
       </div>
       <p className='small my-0'>レクに必要なものを自前で施設に持ち込む場合は入力してください</p>
-      <input type='text' className='p-2 w-100 rounded border border-secondary' />
+      <input type='text' className='p-2 w-100 rounded border border-secondary' {...register('bringYourOwnItem')} />
 
       {recreation !== undefined && (
         <>
