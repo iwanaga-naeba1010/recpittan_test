@@ -25,6 +25,22 @@ const categoryName = (category: string): string => {
 }
 
 export const FourthStep: React.FC<Props> = ({ getValues }) => {
+  const { 
+    kind, 
+    title, 
+    secondTitle, 
+    minutes, 
+    flowOfDay, 
+    category, 
+    description, 
+    capacity, 
+    price, 
+    materialPrice, 
+    additionalFacilityFee, 
+    youtubeId, 
+    bringYourOwnItem, 
+    extraInformation 
+  } = getValues();
 
   return (
     <div>
@@ -35,77 +51,72 @@ export const FourthStep: React.FC<Props> = ({ getValues }) => {
 
       <div className='mt-4'>
         <h5 className='text-black font-weight-bold'>レクの形式</h5>
-        <p>{getRecreationKind(getValues().kind)}</p>
+        <p>{getRecreationKind(kind)}</p>
       </div>
 
       <div className='mt-4'>
         <h5 className='text-black font-weight-bold'>タイトル</h5>
-        <p>{getValues().title}</p>
+        <p>{title}</p>
       </div>
 
       <div className='mt-4'>
         <h5 className='text-black font-weight-bold'>サブタイトル</h5>
-        <p>{getValues().secondTitle}</p>
+        <p>{secondTitle}</p>
       </div>
 
       <div className='mt-4'>
         <h5 className='text-black font-weight-bold'>所要時間</h5>
-        <p>{getValues().minutes}</p>
+        <p>{minutes}</p>
       </div>
 
       <div className='mt-4'>
         <h5 className='text-black font-weight-bold'>当日のタイムスケジュール</h5>
-        <p>{getValues().flowOfDay}</p>
+        <p>{flowOfDay}</p>
       </div>
 
       <div className='mt-4'>
         <h5 className='text-black font-weight-bold'>レクのカテゴリー</h5>
-          <p>{categoryName(getValues().category)}</p>
+        <p>{categoryName(category)}</p>
       </div>
 
       <div className='mt-4'>
         <h5 className='text-black font-weight-bold'>レクの内容</h5>
-        <p>{getValues().description}</p>
+        <p>{description}</p>
       </div>
 
       <div className='mt-4'>
         <h5 className='text-black font-weight-bold'>参加人数制限を設定</h5>
-        <p>{getValues().capacity === 0 ? 'なし' : getValues().capacity}</p>
+        <p>{capacity === 0 ? 'なし' : capacity}</p>
       </div>
 
       <div className='mt-4'>
         <h5 className='text-black font-weight-bold'>謝礼</h5>
-        <p>{getValues().price}</p>
+        <p>{price}</p>
       </div>
 
       <div className='mt-4'>
         <h5 className='text-black font-weight-bold'>材料費</h5>
-        <p>{getValues().materialPrice}</p>
+        <p>{materialPrice}</p>
       </div>
 
       <div className='mt-4'>
         <h5 className='text-black font-weight-bold'>追加施設費</h5>
-        <p>{getValues().additionalFacilityFee}</p>
-      </div>
-
-      <div className='mt-4'>
-        <h5 className='text-black font-weight-bold'>レク画像</h5>
-        <p></p>
+        <p>{additionalFacilityFee}</p>
       </div>
 
       <div className='mt-4'>
         <h5 className='text-black font-weight-bold'>動画URL</h5>
-        <p>{getValues().youtubeId}</p>
+        <p>{youtubeId}</p>
       </div>
 
       <div className='mt-4'>
         <h5 className='text-black font-weight-bold'>持ち込むものを入力</h5>
-        <p>{getValues().bringYourOwnItem}</p>
+        <p>{bringYourOwnItem}</p>
       </div>
 
       <div className='mt-4'>
         <h5 className='text-black font-weight-bold'>その他を入力</h5>
-        <p>{getValues().extraInformation}</p>
+        <p>{extraInformation}</p>
       </div>
     </div>
   );
