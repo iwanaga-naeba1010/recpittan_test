@@ -26,6 +26,7 @@ export type RecreationFormValues = Pick<
   | 'extraInformation'
   | 'youtubeId'
   | 'borrowItem'
+  | 'bringYourOwnItem'
   | 'additionalFacilityFee'
   | 'imageUrl'
   | 'prefectures'
@@ -40,7 +41,6 @@ export type RecreationFormValues = Pick<
 
 export const RecreationNewForm: React.FC<Props> = (props) => {
   const { onSubmit } = props;
-
   const [currentStep, setCurrentStep] = useState<number>(0);
   const {
     register,
@@ -63,6 +63,7 @@ export const RecreationNewForm: React.FC<Props> = (props) => {
       extraInformation: '',
       youtubeId: '',
       borrowItem: '',
+      bringYourOwnItem: '',
       additionalFacilityFee: 1000,
       category: 'event',
       prefectures: [],
@@ -84,6 +85,7 @@ export const RecreationNewForm: React.FC<Props> = (props) => {
       'extraInformation',
       'youtubeId',
       'borrowItem',
+      'bringYourOwnItem',
       'additionalFacilityFee',
       'imageUrl',
       'prefectures',
@@ -114,7 +116,7 @@ export const RecreationNewForm: React.FC<Props> = (props) => {
         {currentStep === 0 && <FirstStep register={register} getValues={getValues} errors={errors} />}
         {currentStep === 1 && <SecondStep getValues={getValues} register={register} />}
         {currentStep === 2 && <ThirdStep register={register} getValues={getValues} />}
-        {currentStep === 3 && <FourthStep />}
+        {currentStep === 3 && <FourthStep getValues={getValues} />}
 
         {currentStep !== 3 && (
           <button

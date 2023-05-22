@@ -22,6 +22,7 @@ export interface Recreation extends BaseEnum {
   youtubeId: string;
   additionalFacilityFee: number;
   borrowItem: string;
+  bringYourOwnItem: string;
   imageUrl: string;
   images: Array<RecreationImage>;
   prefectures: Array<RecreationPrefecture>;
