@@ -9,7 +9,7 @@ type Props = {
 export const RecreationEditAdditionalFacilityFee: React.FC<Props> = (props) => {
   const { recreation } = props;
   if (!recreation) {
-    return null;
+    return <></>;
   }
 
   return (

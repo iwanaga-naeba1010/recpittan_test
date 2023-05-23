@@ -18,7 +18,7 @@ type Props = {
   register: UseFormRegister<RecreationFormValues>;
   getValues: UseFormGetValues<RecreationFormValues>;
   recreation?: Recreation;
-  setRecreation?: React.Dispatch<React.SetStateAction<Recreation>>;
+  setRecreation: React.Dispatch<React.SetStateAction<Recreation | undefined>>;
   errors: FieldErrors<RecreationFormValues>;
 };
 
@@ -58,38 +58,36 @@ export const FirstStep: React.FC<Props> = (props) => {
     })();
   }, []);
 
-  const handleAddPrefecture = async (prefecture: string) => {
-    if (recreation && setRecreation) {
-      try {
-        const createdPrefecture = await Api.post<RecreationPrefecture>(
-          `recreations/${recreation.id}/recreation_prefectures`,
-          'partner',
-          { recreationPrefecture: { name: prefecture } }
-        );
-        setRecreation({ ...recreation, prefectures: [...recreation.prefectures, createdPrefecture.data] });
-        setIsSending(false);
-      } catch (e) {
-        console.log(e);
-      }
+  const handleAddPrefecture = async (prefecture: string): Promise<void> => {
+    if (!recreation || !setRecreation)  return;
+    try {
+      const createdPrefecture = await Api.post<RecreationPrefecture>(
+        `recreations/${recreation.id}/recreation_prefectures`,
+        'partner',
+        { recreationPrefecture: { name: prefecture } }
+      );
+      setRecreation({ ...recreation, prefectures: [...recreation.prefectures, createdPrefecture.data] });
+      setIsSending(false);
+    } catch (e) {
+      console.log(e);
     }
   };
 
   const handleUpdatePrefecture = async (id: number, prefectureName: string): Promise<void> => {
-    if (recreation && setRecreation) {
-      try {
-        const updatedPrefecture = await Api.patch<RecreationPrefecture>(
-          `recreations/${recreation.id}/recreation_prefectures/${id}`,
-          'partner',
-          { recreationPrefecture: { name: prefectureName } }
-        );
-        const oldPrefectures = [...recreation.prefectures];
-        const index = oldPrefectures.indexOf(oldPrefectures.filter((p) => p.id == id)[0]);
-        const newPrefectures = oldPrefectures;
-        newPrefectures[index] = updatedPrefecture.data;
-        setRecreation({ ...recreation, prefectures: newPrefectures });
-      } catch (e) {
-        console.log(e);
-      }
+    if (!recreation || !setRecreation)  return;
+    try {
+      const updatedPrefecture = await Api.patch<RecreationPrefecture>(
+        `recreations/${recreation.id}/recreation_prefectures/${id}`,
+        'partner',
+        { recreationPrefecture: { name: prefectureName } }
+      );
+      const oldPrefectures = [...recreation.prefectures];
+      const index = oldPrefectures.indexOf(oldPrefectures.filter((p) => p.id == id)[0]);
+      const newPrefectures = oldPrefectures;
+      newPrefectures[index] = updatedPrefecture.data;
+      setRecreation({ ...recreation, prefectures: newPrefectures });
+    } catch (e) {
+      console.log(e);
     }
   };
 
@@ -104,6 +102,9 @@ export const FirstStep: React.FC<Props> = (props) => {
     }
   };
   // const disabled = errors?.kind !== undefined || errors?.title !== undefined || errors?.secondTitle !== undefined;
+  if (!config) {
+    return <></>;
+  }
 
   return (
     <div>
@@ -120,7 +121,7 @@ export const FirstStep: React.FC<Props> = (props) => {
         <p className='small my-0'>
           登録するレクの形式を選択してください。 郵送レクは材料を渡して当日は施設の方々だけで実施する形式です
         </p>
-        {config?.kind.map((kind) => (
+        {config.kind.map((kind) => (
           <div key={kind.name}>
             <input
               type='radio'
@@ -169,7 +170,7 @@ export const FirstStep: React.FC<Props> = (props) => {
           })}
           onChange={(e) => setSecondTitle(e.target.value)}
         />
-        {errors.secondTitle && errors.secondTitle.message && <ValidationErrorMessage message={errors?.secondTitle?.message} />}
+        {errors.secondTitle && errors.secondTitle.message && <ValidationErrorMessage message={errors.secondTitle.message} />}
         <p className='small my-0'>{secondTitle.length}/35文字まで</p>
       </div>
 
@@ -186,7 +187,7 @@ export const FirstStep: React.FC<Props> = (props) => {
           })}
         >
           <option></option>
-          {config?.minutes.map((minute: number) => (
+          {config.minutes.map((minute: number) => (
             <option key={minute} value={minute} selected={getValues('minutes') === minute}>
               {minute}分
             </option>
@@ -241,7 +242,7 @@ export const FirstStep: React.FC<Props> = (props) => {
           {...register('category', { required: 'カテゴリーは必須です' })}
         >
           <option></option>
-          {config?.categories.map((category) => (
+          {config.categories.map((category) => (
             <option key={category.name} value={category.enumKey} selected={getValues('category') === category.enumKey}>
               {category.name}
             </option>
@@ -264,7 +265,7 @@ export const FirstStep: React.FC<Props> = (props) => {
               prefecture={prefecture}
               handleUpdate={handleUpdatePrefecture}
               handleRemove={handleRemove}
-              prefectures={config?.prefectures ?? []}
+              prefectures={config.prefectures ?? []}
             />
           ))}
           <div className={'question-add-action-wrapper'}>

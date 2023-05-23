@@ -8,13 +8,8 @@ const App = () => {
     const checkBox = document.getElementById('finalCheckBox') as HTMLInputElement;
     const elements = document.getElementById('checklink');
 
-    if (elements) {
-      if (checkBox.checked === true) {
-        return elements.classList.remove('disabled');
-      } else {
-        return elements.classList.add('disabled');
-      }
-    }
+    if (!elements) return;
+    return checkBox.checked ? elements.classList.remove('disabled') : elements.classList.add('disabled');
   });
 };
 

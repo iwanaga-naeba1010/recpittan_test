@@ -8,7 +8,7 @@ import * as $ from 'jquery';
     // NOTE: youtubeのiframeの大きさから画像のheightを動的に生成
     const youtubeSection = $('#youtubeSection');
     const height = youtubeSection.height();
-    if (height !== undefined) {
+    if (height) {
       $('.custom-height').css('height', height);
     }
   });

@@ -31,7 +31,6 @@ const App: React.FC<Props> = ({ recreationId }): JSX.Element => {
 };
 
 document.addEventListener('turbolinks:load', () => {
-  console.log('hogehogehoge!!!!!');
   const isRecreationShowPage = /\/customers\/recreations\/[0-9]/.exec(window.location.pathname);
   console.log('isRecreationShowPage is ', isRecreationShowPage);
   if (isRecreationShowPage !== null) {

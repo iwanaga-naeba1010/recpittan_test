@@ -16,7 +16,7 @@ export type UseFile = {
 
 const RecreationEdit: React.FC = () => {
   const [errors, setErrors] = useState<Array<string>>([]);
-  const [recreation, setRecreation] = useState<Recreation>({} as Recreation);
+  const [recreation, setRecreation] = useState<Recreation>();
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [isFileLoading, setIsFileLoading] = useState<boolean>(false);
   const id = window.location.pathname.split('/')[3];
@@ -38,6 +38,7 @@ const RecreationEdit: React.FC = () => {
 
   const handleFileAdd = (files: FileList | null, kind = 'slider') => {
     if (!files || files.length <= 0) return;
+    if (!recreation) return;
     const file = files[0];
     const reader = new FileReader();
     reader.onload = async (event) => {
@@ -63,6 +64,7 @@ const RecreationEdit: React.FC = () => {
   };
 
   const handleFileDelete = async (id: number): Promise<void> => {
+    if (!recreation) return;
     try {
       await Api.delete(`recreations/${recreation.id}/recreation_images/${id}`, 'partner', {});
       setRecreation({ ...recreation, images: recreation.images.filter((recreation) => recreation.id !== id) });
@@ -73,6 +75,7 @@ const RecreationEdit: React.FC = () => {
 
   const onSubmit = async (values: RecreationFormValues): Promise<void> => {
     setErrors([]);
+    if (!recreation) return;
     const requestBody: { [key: string]: Record<string, unknown> } = {
       recreation: {
         title: values.title || recreation.title,
@@ -120,7 +123,9 @@ const RecreationEdit: React.FC = () => {
   if (isLoading) {
     return <LoadingContainer />;
   }
-
+  if (!recreation) {
+    return <></>;
+  }
   return (
     <div>
       {!isEmpty(errors) && <Error errors={errors} />}

@@ -57,10 +57,8 @@ export class Api {
   }
 }
 
-// const headers = (token?: string) => {
 const headers = () => {
   let token = '';
-  // const headers = { 'Content-Type': 'application/json' };
   const csrfTokenElem = document.querySelector('[name=csrf-token]');
 
   if (csrfTokenElem) {

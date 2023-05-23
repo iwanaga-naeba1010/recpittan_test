@@ -1,21 +1,23 @@
 import * as $ from 'jquery';
 
 const App = (e: JQueryEventObject) => {
-  const buildHTML = (image: string) => {
+  const buildHTML = (imageSrc: string):string => {
     return `
     <div class='prev-content'>
-      <img src='${image}', alt='preview' class='prev-image'>
+      <img src='${imageSrc}', alt='preview' class='prev-image'>
     </div> `;
   };
 
   const target = e.target as HTMLInputElement;
   if (!target.files) return;
+  if (!target.files.length) return;
 
   const file: Blob = target.files[0];
   const reader = new FileReader();
   reader.readAsDataURL(file);
   reader.onload = (onClickEvent: ProgressEvent<FileReader>) => {
-    const targetResult = onClickEvent.target?.result;
+    const targetResult = onClickEvent.target;
+    if (!target) return;
     if (typeof targetResult === 'string') {
       const image = targetResult;
       if ($('.prev-content').length === 0) {

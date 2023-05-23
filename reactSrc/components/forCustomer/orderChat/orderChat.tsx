@@ -12,8 +12,8 @@ import ReactDOM from 'react-dom';
 import { ChatList } from './chatList';
 
 export const OrderChat: React.FC = () => {
-  const [order, setOrder] = useState<Order>({} as Order);
-  const [user, setUser] = useState<User>({} as User);
+  const [order, setOrder] = useState<Order>();
+  const [user, setUser] = useState<User>();
   const [isShowFlash, setIsShowFlash] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const id = window.location.pathname.split('/')[3];
@@ -45,6 +45,10 @@ export const OrderChat: React.FC = () => {
         </div>
       </div>
     );
+  }
+
+  if (!order || !user) {
+    return <></>;
   }
 
   return (

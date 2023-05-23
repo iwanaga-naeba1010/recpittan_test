@@ -26,22 +26,23 @@ export const SecondStep: React.FC<Props> = (props) => {
   const sliderRef = useRef<HTMLInputElement>(null);
   const materialRef = useRef<HTMLInputElement>(null);
   const handleSliderRefClickFileInput = (): void => {
-    if (sliderRef.current) {
-      sliderRef.current.click();
-    }
+    if (!sliderRef.current) return;
+    sliderRef.current.click();
   };
+
   const handleMaterialRefClickFileInput = (): void => {
-    if (materialRef.current) {
-      materialRef.current.click();
-    }
+    if (!materialRef.current) return;
+    materialRef.current.click();
   };
   const isShowAdditionalFacilityFee = (): boolean => {
     if (recreation === undefined) {
       const kind = getValues('kind');
       return kind === 'online';
     }
-    return recreation?.kind.key === 'online';
+
+    return recreation.kind?.key === 'online' || false;
   };
+
 
   return (
     <div>
@@ -77,7 +78,6 @@ export const SecondStep: React.FC<Props> = (props) => {
               .filter((image) => image.kind === 'slider')
               .map((image, i) => (
                 <ImageComponent key={i} image={image} handleDelete={useFile.handleFileDelete} />
-                
               ))}
           </div>
 
