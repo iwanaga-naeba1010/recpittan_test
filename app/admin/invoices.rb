@@ -114,7 +114,7 @@ ActiveAdmin.register_page 'Invoices' do
       # NOTE(okubo): まとめて書くためにflattenで処理
       headers = [
         %w[請求日 請求番号 件名 取引先管理コード 施設名 消費税設定 お支払い期限],
-        (1..20).map { |i| ["品目#{i}", "数量#{i}", "単位#{i}", "単価#{i}", "消費税率#{i}", "非課税フラグ#{i}"] }.flatten
+        (1..40).map { |i| ["品目#{i}", "数量#{i}", "単位#{i}", "単価#{i}", "消費税率#{i}", "非課税フラグ#{i}"] }.flatten
       ].flatten
 
       csv_data = CSV.generate do |csv|
