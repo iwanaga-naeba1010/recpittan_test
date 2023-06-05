@@ -19,7 +19,7 @@
     "@rails/activestorage": "^7.0.5",
     "@rails/ujs": "^7.0.5",
     "@rails/webpacker": "5.4.4",
-    "@types/prettier": "^2.7.2",
+    "@types/prettier": "^2.7.3",
     "activeadmin_addons": "^1.0.0",
     "arctic_admin": "^4.2.2",
     "axios": "^1.4.0",
