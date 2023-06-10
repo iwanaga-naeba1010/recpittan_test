@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# rubocop:disable Metrics/BlockLength, Metrics/AbcSize, Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
+# rubocop:disable Metrics/BlockLength, Metrics/AbcSize
 ActiveAdmin.register Order do
   includes :user
 
@@ -274,7 +274,7 @@ ActiveAdmin.register Order do
       end
 
       # NOTE(okubo): 終了報告系
-      if order&.report&.present? &&
+      if order&.report.present? &&
          (order.status.value >= 70 && order.status.value <= 80) &&
          permitted_params[:order][:evaluation].present?
         order.report.update(permitted_params[:order][:report_attributes])
@@ -314,4 +314,4 @@ ActiveAdmin.register Order do
     end
   end
 end
-# rubocop:enable Metrics/BlockLength, Metrics/AbcSize, Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
+# rubocop:enable Metrics/BlockLength, Metrics/AbcSize
