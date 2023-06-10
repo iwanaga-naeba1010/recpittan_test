@@ -308,8 +308,9 @@ GEM
     oj (3.15.0)
     orm_adapter (0.5.0)
     parallel (1.23.0)
-    parser (3.2.2.1)
+    parser (3.2.2.3)
       ast (~> 2.4.1)
+      racc
     pg (1.5.3)
     proc_to_ast (0.1.0)
       coderay
@@ -391,7 +392,7 @@ GEM
     rb-inotify (0.10.1)
       ffi (~> 1.0)
     redcarpet (3.6.0)
-    regexp_parser (2.8.0)
+    regexp_parser (2.8.1)
     require_all (3.0.0)
     responders (3.1.0)
       actionpack (>= 5.2)
@@ -435,7 +436,7 @@ GEM
       activemodel
       activesupport
       rspec (~> 3.0)
-    rubocop (1.51.0)
+    rubocop (1.52.0)
       json (~> 2.3)
       parallel (~> 1.10)
       parser (>= 3.2.0.0)
