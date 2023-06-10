@@ -14,6 +14,12 @@ RSpec.describe Partners::OrdersController, type: :request do
     sign_in partner
   end
 
+  describe 'GET /partners/recreations/:id/evaluations' do
+    let!(:recreation) { create(:recreation, user: partner) }
+    let(:id) { recreation.id }
+    it_behaves_like 'an endpoint returns 2xx status'
+  end
+
   describe 'GET /show' do
     context 'with valid user' do
       it 'return http success' do

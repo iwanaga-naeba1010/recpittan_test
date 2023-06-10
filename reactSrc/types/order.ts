@@ -1,5 +1,6 @@
 import { BaseRecord } from './baseRecord';
 import { Recreation } from './recreation';
+import { User } from './user';
 
 export interface Order extends BaseRecord {
   zip: string;
@@ -22,6 +23,7 @@ export interface Order extends BaseRecord {
   totalFacilityPriceForCustomer: number;
   totalMaterialPriceForCustomer: number;
   recreation: Recreation;
+  user: User;
 }
 
 export type OrderRequest = Omit<

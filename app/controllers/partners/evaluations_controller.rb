@@ -1,7 +1,11 @@
 # frozen_string_literal: true
 
 class Partners::EvaluationsController < Partners::ApplicationController
-  before_action :set_order
+  before_action :set_order, only: %i[show]
+
+  def index
+    @recreation = current_user.recreations.find(params[:recreation_id])
+  end
 
   def show; end
 

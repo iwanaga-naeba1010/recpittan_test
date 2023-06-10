@@ -49,6 +49,7 @@ class OrderSerializer
       order.status.waiting_for_a_reply_from_facility? ||
       order.status.waiting_for_a_reply_from_partner?
     recreation = RecreationSerializer.new.serialize(recreation: order.recreation)
+    user = UserSerializer.new.serialize(user: order.user)
 
     {
       id: order.id,
@@ -65,7 +66,8 @@ class OrderSerializer
       total_facility_price_for_customer: order.total_facility_price_for_customer,
       total_price_for_customer: order.total_price_for_customer,
       total_material_price_for_customer: order.total_material_price_for_customer,
-      recreation:
+      recreation:,
+      user:
     }
   end
 end

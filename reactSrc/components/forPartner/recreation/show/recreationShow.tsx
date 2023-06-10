@@ -45,6 +45,11 @@ const RecreationShow: React.FC = () => {
         content={recreation.title}
         url={`/partners/recreations/${id}/edit?formKind=profile`}
       />
+      <RecreationItem
+        title='このレクの口コミ一覧'
+        content={recreation.title}
+        url={`/partners/recreations/${id}/evaluations`}
+      />
     </div>
   );
 };
