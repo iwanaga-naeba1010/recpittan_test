@@ -13,7 +13,7 @@ type Props = {
   kind: FormKind;
   onSubmit: (values: RecreationFormValues) => Promise<void>;
   recreation: Recreation;
-  setRecreation: React.Dispatch<React.SetStateAction<Recreation>>;
+  setRecreation: React.Dispatch<React.SetStateAction<Recreation | undefined>>;
   useFile: UseFile;
 };
 

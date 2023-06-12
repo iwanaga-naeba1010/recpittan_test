@@ -8,6 +8,10 @@ type Props = {
 
 export const RecreationEditPrice: React.FC<Props> = (props) => {
   const { recreation } = props;
+  if (!recreation) {
+    return <></>;
+  }
+
   return (
     <>
       <div className='d-flex'>

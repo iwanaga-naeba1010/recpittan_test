@@ -5,16 +5,16 @@ import { useForm } from 'react-hook-form';
 
 type Props = {
   order: Order;
-  setOrder: Dispatch<React.SetStateAction<Order>>;
+  setOrder: Dispatch<React.SetStateAction<Order | undefined>>;
 };
 
-type TranspotationExpensesFormValues = Pick<Order, 'transportationExpenses'>;
+type TransportationExpensesFormValues = Pick<Order, 'transportationExpenses'>;
 
-export const TranspotationExpensesForm: React.FC<Props> = (props): JSX.Element => {
+export const TransportationExpensesForm: React.FC<Props> = (props): JSX.Element => {
   const { order, setOrder } = props;
   const [canEdit, setCanEdit] = useState<boolean>(false);
 
-  const { register, handleSubmit, setValue } = useForm<TranspotationExpensesFormValues>({
+  const { register, handleSubmit, setValue } = useForm<TransportationExpensesFormValues>({
     mode: 'onChange',
     defaultValues: {
       transportationExpenses: order.transportationExpenses
@@ -25,8 +25,8 @@ export const TranspotationExpensesForm: React.FC<Props> = (props): JSX.Element =
     setValue('transportationExpenses', order.transportationExpenses);
   }, [order]);
 
-  const onSubmit = async (values: TranspotationExpensesFormValues): Promise<void> => {
-    const requestBody: { [key: string]: TranspotationExpensesFormValues } = {
+  const onSubmit = async (values: TransportationExpensesFormValues): Promise<void> => {
+    const requestBody: { [key: string]: TransportationExpensesFormValues } = {
       order: {
         transportationExpenses: values.transportationExpenses
       }
