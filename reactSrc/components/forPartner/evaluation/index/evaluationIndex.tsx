@@ -12,7 +12,7 @@ const EvaluationIndex: React.FC = () => {
 
   useEffect(() => {
     (async () => {
-      if (id === undefined) return;
+      if (!id) return;
       try {
         const evaluationResponse = await Api.get<{ [key: string]: Evaluation }>(`recreations/${id}/evaluations`, 'partner');
         const evaluationArray = Object.values(evaluationResponse.data);

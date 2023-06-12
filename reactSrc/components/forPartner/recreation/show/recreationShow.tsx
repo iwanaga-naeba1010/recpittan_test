@@ -12,7 +12,7 @@ const RecreationShow: React.FC = () => {
 
   useEffect(() => {
     (async () => {
-      if (id === undefined) return;
+      if (!id) return;
       try {
         const recreationResponse = await Api.get<Recreation>(`recreations/${id}`, 'partner');
         setRecreation({ ...recreationResponse.data });
