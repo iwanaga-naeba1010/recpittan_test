@@ -5,7 +5,6 @@ export const getQeuryStringValueByKey = (key: string): string | undefined => {
   return value !== null ? value : undefined;
 };
 
-
 export const removeQueryStringsByKey = (): void => {
   const url = window.location.href;
   const splitedUrl = url.split('?')[0];
