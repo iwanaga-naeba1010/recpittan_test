@@ -109,13 +109,13 @@ class Order < ApplicationRecord
 
     # NOTE: 完了してレポート書いたけど、施設が承認していないこと
     # rubocop:disable Layout/LineLength
-    if self.start_at.present? && self.is_accepted && (Time.current >= self.start_at) && self.report&.present? && !self.report&.status&.accepted?
+    if self.start_at.present? && self.is_accepted && (Time.current >= self.start_at) && self.report.present? && !self.report&.status&.accepted?
       self.status = :final_report_admits_not
       return self
     end
 
     # NOTE: 完了してレポート書いて、施設が承認してfinishな状態
-    if self.start_at.present? && self.is_accepted && (Time.current >= self.start_at) && self.report&.present? && self.report&.status&.accepted?
+    if self.start_at.present? && self.is_accepted && (Time.current >= self.start_at) && self.report.present? && self.report&.status&.accepted?
       self.status = :finished
       return self
     end

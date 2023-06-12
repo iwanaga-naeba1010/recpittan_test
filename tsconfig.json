@@ -12,7 +12,8 @@
     "allowSyntheticDefaultImports": true,
     "paths": {
       "@/*": ["./reactSrc/*"]
-    }
+    },
+    "strict": true
   },
   "exclude": [
     "**/*.spec.ts",

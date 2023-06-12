@@ -38,11 +38,11 @@ export type ModalForlValues = Pick<
 
 export const ModalForm: React.FC<Props> = (props) => {
   const { order, recreation } = props;
-  const [preferredDate, setPreferredDate] = useState<PreferredDate>(undefined);
+  const [preferredDate, setPreferredDate] = useState<PreferredDate>();
   const [prefectures, setPrefectures] = useState<Array<Prefecture>>([]);
   const [cities, setCities] = useState<Array<City>>([]);
   const [errors, setErrors] = useState<Array<string>>([]);
-  const [isCouponApplied, setIsCouponApplied] = useState<boolean>(undefined);
+  const [isCouponApplied, setIsCouponApplied] = useState<boolean>();
 
   const {
     register,
@@ -85,7 +85,11 @@ export const ModalForm: React.FC<Props> = (props) => {
         setPrefectures(data.result);
       } catch (e) {
         if (axios.isAxiosError(e)) {
-          setErrors((e as AxiosError<Array<string>>).response.data);
+          const axiosError = e as AxiosError<Array<string>>;
+          if (axiosError.response) {
+            setErrors(axiosError.response.data);
+            console.log(axiosError.response.data);
+          }
         }
       }
     })();
@@ -160,8 +164,11 @@ export const ModalForm: React.FC<Props> = (props) => {
       window.location.href = `/customers/orders/${order.id}/complete`;
     } catch (e) {
       if (axios.isAxiosError(e)) {
-        setErrors((e as AxiosError<Array<string>>).response.data);
-        console.log(e.response.data);
+        const axiosError = e as AxiosError<Array<string>>;
+        if (axiosError.response) {
+          setErrors(axiosError.response.data);
+          console.log(axiosError.response.data);
+        }
       }
       console.log(e);
     }
