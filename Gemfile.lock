@@ -214,11 +214,11 @@ GEM
       temple (>= 0.8.2)
       thor
       tilt
-    haml_lint (0.45.0)
+    haml_lint (0.46.0)
       haml (>= 4.0, < 6.2)
       parallel (~> 1.10)
       rainbow
-      rubocop (>= 0.50.0)
+      rubocop (>= 1.0)
       sysexits (~> 1.1)
     has_scope (0.8.1)
       actionpack (>= 5.2)
