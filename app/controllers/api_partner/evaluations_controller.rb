@@ -9,7 +9,6 @@ module ApiPartner
                     .includes(report: [{ order: [:recreation, :user] }, { order: { user: :company } }])
                     .public_and_not_null_message
                     .with_recreation(@recreation)
-                    .load_async
       render_json EvaluationSerializer.new.serialize_list(evaluations:)
     rescue StandardError => e
       logger.error e.message
