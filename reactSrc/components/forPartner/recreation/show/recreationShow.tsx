@@ -12,7 +12,7 @@ const RecreationShow: React.FC = () => {
 
   useEffect(() => {
     (async () => {
-      if (id === undefined) return;
+      if (!id) return;
       try {
         const recreationResponse = await Api.get<Recreation>(`recreations/${id}`, 'partner');
         setRecreation({ ...recreationResponse.data });
@@ -47,6 +47,11 @@ const RecreationShow: React.FC = () => {
         title='レクに表示するプロフィール'
         content={recreation.title}
         url={`/partners/recreations/${id}/edit?formKind=profile`}
+      />
+      <RecreationItem
+        title='このレクの口コミ一覧'
+        content={recreation.title}
+        url={`/partners/recreations/${id}/evaluations`}
       />
     </div>
   );

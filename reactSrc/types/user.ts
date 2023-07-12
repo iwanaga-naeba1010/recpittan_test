@@ -1,3 +1,5 @@
-import { BaseRecord } from './baseRecord';
+import { Company } from './company';
 
-export type User = BaseRecord;
+export interface User {
+  company: Company;
+}
