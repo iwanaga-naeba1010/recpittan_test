@@ -28,10 +28,9 @@ const EvaluationIndex: React.FC = () => {
     return <LoadingContainer />;
   }
 
-
   return (
     <div>
-      {!evaluations.length ? (
+      {evaluations.length ? (
         evaluations.map((evaluation) => <EvaluationItem key={evaluation.id} evaluation={evaluation} />)
         ) : (
           <div className='m-3'>

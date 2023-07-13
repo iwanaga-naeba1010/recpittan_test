@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_04_28_151421) do
+ActiveRecord::Schema[7.0].define(version: 2023_07_13_145907) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -88,6 +88,14 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_28_151421) do
     t.bigint "tag_id", null: false
     t.datetime "created_at", precision: nil, null: false
     t.datetime "updated_at", precision: nil, null: false
+  end
+
+  create_table "evaluation_replies", force: :cascade do |t|
+    t.text "message", null: false
+    t.bigint "evaluation_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["evaluation_id"], name: "index_evaluation_replies_on_evaluation_id"
   end
 
   create_table "evaluations", force: :cascade do |t|
@@ -364,6 +372,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_28_151421) do
   add_foreign_key "company_memos", "companies"
   add_foreign_key "company_tags", "companies", name: "company_tags_company_id_fkey"
   add_foreign_key "company_tags", "tags", name: "company_tags_tag_id_fkey"
+  add_foreign_key "evaluation_replies", "evaluations"
   add_foreign_key "evaluations", "reports", name: "evaluations_report_id_fkey"
   add_foreign_key "invoice_informations", "users"
   add_foreign_key "online_recreation_channel_download_images", "online_recreation_channels"

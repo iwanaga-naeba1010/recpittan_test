@@ -24,6 +24,7 @@
 class Evaluation < ApplicationRecord
   extend Enumerize
   belongs_to :report
+  has_one :evaluation_reply, dependent: :destroy
 
   scope :with_recreation, ->(recreation_id) { joins(report: :order).where(order: { recreation_id: }) }
   scope :public_and_not_null_message, -> { where(is_public: :public).where.not(message: '').where.not(message: 'システムの自動投稿') }
