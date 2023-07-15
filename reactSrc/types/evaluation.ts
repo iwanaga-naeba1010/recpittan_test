@@ -1,5 +1,6 @@
 import { BaseEnum } from './baseEnum';
 import { Report } from './report';
+import { EvaluationReply } from './evaluationReply';
 
 export interface Evaluation extends BaseEnum {
   communication : number;
@@ -11,4 +12,5 @@ export interface Evaluation extends BaseEnum {
   smoothness: BaseEnum;
   wantToOrderAgein: BaseEnum;
   report: Report;
+  evaluationReply?: EvaluationReply;
 }

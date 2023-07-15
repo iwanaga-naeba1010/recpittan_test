@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_07_13_145907) do
+ActiveRecord::Schema[7.0].define(version: 2023_07_29_161543) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -95,7 +95,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_13_145907) do
     t.bigint "evaluation_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["evaluation_id"], name: "index_evaluation_replies_on_evaluation_id"
+    t.index ["evaluation_id"], name: "index_evaluation_replies_on_evaluation_id", unique: true
   end
 
   create_table "evaluations", force: :cascade do |t|
