@@ -140,7 +140,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_22_070718) do
     t.text "zoom_link"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.datetime "datetime", null: false
+    t.datetime "datetime"
     t.index ["online_recreation_channel_id", "date"], name: "index_channel_recreations_on_channel_date", unique: true
     t.index ["online_recreation_channel_id"], name: "index_channel_recreations_on_channel_id"
   end

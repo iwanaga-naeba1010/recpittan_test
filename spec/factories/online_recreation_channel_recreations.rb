@@ -6,7 +6,7 @@
 #
 #  id                           :bigint           not null, primary key
 #  date                         :date
-#  datetime                     :datetime         not null
+#  datetime                     :datetime
 #  link                         :text             not null
 #  memo                         :text
 #  title                        :string           not null
@@ -31,6 +31,6 @@ FactoryBot.define do
     recreation_memo { 'MyText' }
     recreation_title { 'MyString' }
     zoom_link { 'MyText' }
-    datetime { '2021-01-01 00:00:00' }
+    datetime { Time.current }
   end
 end

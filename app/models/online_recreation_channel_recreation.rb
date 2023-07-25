@@ -6,7 +6,7 @@
 #
 #  id                           :bigint           not null, primary key
 #  date                         :date
-#  datetime                     :datetime         not null
+#  datetime                     :datetime
 #  link                         :text             not null
 #  memo                         :text
 #  title                        :string           not null
