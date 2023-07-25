@@ -4,10 +4,10 @@
 ActiveAdmin.register OnlineRecreationChannel do
   permit_params(
     :top_image, :period, :status, :calendar_memo, :zoom_memo,
-    online_recreation_channel_recreations_attributes: %i[
-      id date title link memo zoom_link online_recreation_channel_id _destroy
+    channel_recreations_attributes: %i[
+      id datetime title link memo zoom_link online_recreation_channel_id _destroy
     ],
-    online_recreation_channel_download_images_attributes: %i[
+    channel_download_images_attributes: %i[
       id image kind online_recreation_channel_id _destroy
     ]
   )
@@ -43,7 +43,7 @@ ActiveAdmin.register OnlineRecreationChannel do
     end
 
     panel t('activerecord.models.online_recreation_channel_download_image'), style: 'margin-top: 30px;' do
-      table_for online_recreation_channel.online_recreation_channel_download_images do
+      table_for online_recreation_channel.channel_download_images do
         column :id
         column(:kind, &:kind_text)
         column :image do |image|
@@ -57,9 +57,9 @@ ActiveAdmin.register OnlineRecreationChannel do
     end
 
     panel t('activerecord.models.online_recreation_channel_recreation'), style: 'margin-top: 30px;' do
-      table_for online_recreation_channel.online_recreation_channel_recreations.order(date: :asc) do
+      table_for online_recreation_channel.channel_recreations.order(datetime: :asc) do
         column :id
-        column :date
+        column :datetime
         column :title
         column :link
         column :memo
@@ -81,15 +81,15 @@ ActiveAdmin.register OnlineRecreationChannel do
       f.input :zoom_memo
     end
     f.inputs t('activerecord.models.online_recreation_channel_download_image') do
-      f.has_many :online_recreation_channel_download_images, heading: false, allow_destroy: true, new_record: true do |ff|
+      f.has_many :channel_download_images, heading: false, allow_destroy: true, new_record: true do |ff|
         ff.input :image
         ff.input :kind, as: :select, collection: OnlineRecreationChannelDownloadImage.kind.values.map { |val| [val.text, val] }
       end
     end
     # NOTE: レクの表示順を任意のものに設定できるようにするために、RecreationTopRecommendRecreationのフォームを設置
     f.inputs t('activerecord.models.online_recreation_channel_recreation') do
-      f.has_many :online_recreation_channel_recreations, heading: false, allow_destroy: true, new_record: true do |ff|
-        ff.input :date, as: :datepicker
+      f.has_many :channel_recreations, heading: false, allow_destroy: true, new_record: true do |ff|
+        ff.input :datetime, as: :datetime_picker
         ff.input :title
         ff.input :link, as: :string
         ff.input :memo, as: :string
