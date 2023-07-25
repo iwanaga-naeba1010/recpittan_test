@@ -30,6 +30,7 @@ class OnlineRecreationChannel < ApplicationRecord
 
   enumerize :status, in: { public: 0, private: 1 }, default: 0
 
+  validates :period, :status, presence: true
   validate :unique_period_status_combination
 
   scope :public_channels, -> { where(status: :public) }
@@ -38,7 +39,7 @@ class OnlineRecreationChannel < ApplicationRecord
   delegate :image, :kind, to: :online_recreation_channel_download_images, prefix: true
 
   private def unique_period_status_combination
-    if OnlineRecreationChannel.where(period: period.all_month, status: :public).where.not(id:).exists?
+    if OnlineRecreationChannel.where(period: period&.all_month, status: :public).where.not(id:).exists?
       errors.add(:period, 'その年月のレクは既に存在します')
     end
   end
