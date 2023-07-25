@@ -29,4 +29,5 @@ class OnlineRecreationChannelRecreation < ApplicationRecord
              class_name: 'OnlineRecreationChannel',
              inverse_of: :channel_recreations
   validates :date, uniqueness: { scope: :online_recreation_channel_id }
+  validates :title, :datetime, presence: true
 end
