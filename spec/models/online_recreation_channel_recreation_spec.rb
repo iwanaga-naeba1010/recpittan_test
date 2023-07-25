@@ -5,7 +5,8 @@
 # Table name: online_recreation_channel_recreations
 #
 #  id                           :bigint           not null, primary key
-#  date                         :date             not null
+#  date                         :date
+#  datetime                     :datetime         not null
 #  link                         :text             not null
 #  memo                         :text
 #  title                        :string           not null
