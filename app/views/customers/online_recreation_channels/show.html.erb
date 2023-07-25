@@ -42,10 +42,12 @@
     </div>
   <% end %>
   <table class="mt-5 border mx-auto w-50">
-    <% @online_recreation_channel.online_recreation_channel_recreations.order(date: :asc).each do |channel_recs| %>
+    <% @online_recreation_channel.channel_recreations.order(date: :asc).each do |channel_recs| %>
       <tr>
         <td class="text-start py-2 px-4 border w-50">
-          <p class="mb-0"><%= formatted_date(channel_recs.date) %></p>
+          <% # TODO: 8月以降に消す %>
+          <p class="mb-0"><%= formatted_date(channel_recs.date) if channel_recs.date %></p>
+          <p class="mb-0"><%= formatted_datetime(channel_recs.datetime) if channel_recs.datetime %></p>
           <p class="mb-0 fw-bold"><%= channel_recs.title %></p>
           <p class="mb-0">
             <%= sanitize_link(channel_recs.link) %>
