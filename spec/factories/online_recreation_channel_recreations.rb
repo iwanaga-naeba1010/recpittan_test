@@ -5,8 +5,7 @@
 # Table name: online_recreation_channel_recreations
 #
 #  id                           :bigint           not null, primary key
-#  date                         :date
-#  datetime                     :datetime         not null
+#  date                         :date             not null
 #  link                         :text             not null
 #  memo                         :text
 #  title                        :string           not null
@@ -31,6 +30,6 @@ FactoryBot.define do
     recreation_memo { 'MyText' }
     recreation_title { 'MyString' }
     zoom_link { 'MyText' }
-    datetime { '2021-01-01 00:00:00' }
+    date { '2023-03-13' }
   end
 end

@@ -5,8 +5,7 @@
 # Table name: online_recreation_channel_recreations
 #
 #  id                           :bigint           not null, primary key
-#  date                         :date
-#  datetime                     :datetime         not null
+#  date                         :date             not null
 #  link                         :text             not null
 #  memo                         :text
 #  title                        :string           not null
@@ -25,9 +24,5 @@
 #  fk_rails_...  (online_recreation_channel_id => online_recreation_channels.id)
 #
 class OnlineRecreationChannelRecreation < ApplicationRecord
-  belongs_to :online_recreation_channel,
-             class_name: 'OnlineRecreationChannel',
-             inverse_of: :channel_recreations
   validates :date, uniqueness: { scope: :online_recreation_channel_id }
-  validates :title, :datetime, presence: true
 end
