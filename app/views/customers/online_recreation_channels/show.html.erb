@@ -46,7 +46,7 @@
       <tr>
         <td class="text-start py-2 px-4 border w-50">
           <% # TODO: 8月以降に消す %>
-          <p class="mb-0"><%= formatted_date(channel_recs.date) if channel_recs.date %></p>
+          <p class="mb-0"><%= formatted_date(channel_recs.date) if channel_recs.date && channel_recs.date < Date.new(2023, 8, 1) %></p>
           <p class="mb-0"><%= formatted_datetime(channel_recs.datetime) if channel_recs.datetime %></p>
           <p class="mb-0 fw-bold"><%= channel_recs.title %></p>
           <p class="mb-0">
