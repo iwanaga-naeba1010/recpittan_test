@@ -2,10 +2,10 @@
 # yarn lockfile v1
 
 
-"@activeadmin/activeadmin@^2.14.0":
-  version "2.14.0"
-  resolved "https://registry.yarnpkg.com/@activeadmin/activeadmin/-/activeadmin-2.14.0.tgz#38d94cf3dae4234f680f9b4610224c25aaa79088"
-  integrity sha512-y4eVJb4tZWNkBwy6583pTjltLyyHxfijTfZsYKkzsjcLtwgRq6P1yigghKQ01taMTHYa7RVH7feM5j0QzRGAhw==
+"@activeadmin/activeadmin@^3.0.0":
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/@activeadmin/activeadmin/-/activeadmin-3.0.0.tgz#d2ae0dd700bdd563a4df4a1294ad3dda70a54055"
+  integrity sha512-ULYVr+f8ulJ/+CvavIytf4yOAkjrzkjRPa6DnjEsc78AhX1OJ4IJ059OTkUIFwaCwJltMa3EJhCvlqqLPGGWiQ==
   dependencies:
     jquery "^3.4.1"
     jquery-ui "^1.12.1"
@@ -1633,17 +1633,17 @@
   resolved "https://registry.yarnpkg.com/@types/q/-/q-1.5.5.tgz#75a2a8e7d8ab4b230414505d92335d1dcb53a6df"
   integrity sha512-L28j2FcJfSZOnL1WBjDYp2vUHCeIFlyYI/53EwD/rKUBQ7MtUUfbQWiyKJGpcnv4/WgrhWsFKrcPstcAt/J0tQ==
 
-"@types/react-dom@^18.2.6":
-  version "18.2.6"
-  resolved "https://registry.yarnpkg.com/@types/react-dom/-/react-dom-18.2.6.tgz#ad621fa71a8db29af7c31b41b2ea3d8a6f4144d1"
-  integrity sha512-2et4PDvg6PVCyS7fuTc4gPoksV58bW0RwSxWKcPRcHZf0PRUGq03TKcD/rUHe3azfV6/5/biUBJw+HhCQjaP0A==
+"@types/react-dom@^18.2.7":
+  version "18.2.7"
+  resolved "https://registry.yarnpkg.com/@types/react-dom/-/react-dom-18.2.7.tgz#67222a08c0a6ae0a0da33c3532348277c70abb63"
+  integrity sha512-GRaAEriuT4zp9N4p1i8BDBYmEyfo+xQ3yHjJU4eiK5NDa1RmUZG+unZABUTK4/Ox/M+GaHwb6Ow8rUITrtjszA==
   dependencies:
     "@types/react" "*"
 
-"@types/react@*", "@types/react@^18.2.14":
-  version "18.2.14"
-  resolved "https://registry.yarnpkg.com/@types/react/-/react-18.2.14.tgz#fa7a6fecf1ce35ca94e74874f70c56ce88f7a127"
-  integrity sha512-A0zjq+QN/O0Kpe30hA1GidzyFjatVvrpIvWLxD+xv67Vt91TWWgco9IvrJBkeyHm1trGaFS/FSGqPlhyeZRm0g==
+"@types/react@*", "@types/react@^18.2.15":
+  version "18.2.15"
+  resolved "https://registry.yarnpkg.com/@types/react/-/react-18.2.15.tgz#14792b35df676c20ec3cf595b262f8c615a73066"
+  integrity sha512-oEjE7TQt1fFTFSbf8kkNuc798ahTUzn3Le67/PWjE8MAfYAD/qB7O8hSTcromLFqHCt9bcdOg5GXMokzTjJ5SA==
   dependencies:
     "@types/prop-types" "*"
     "@types/scheduler" "*"
@@ -7218,10 +7218,10 @@ prepend-http@^1.0.0:
   resolved "https://registry.yarnpkg.com/prepend-http/-/prepend-http-1.0.4.tgz#d4f4562b0ce3696e41ac52d0e002e57a635dc6dc"
   integrity sha512-PhmXi5XmoyKw1Un4E+opM2KcsJInDvKyuOumcjjw3waw86ZNjHwVUOOWLc4bCzLdcKNaWBH9e99sbWzDQsVaYg==
 
-prettier-plugin-organize-imports@^3.2.2:
-  version "3.2.2"
-  resolved "https://registry.yarnpkg.com/prettier-plugin-organize-imports/-/prettier-plugin-organize-imports-3.2.2.tgz#91993365e017daa5d0d28d8183179834224d8dd1"
-  integrity sha512-e97lE6odGSiHonHJMTYC0q0iLXQyw0u5z/PJpvP/3vRy6/Zi9kLBwFAbEGjDzIowpjQv8b+J04PDamoUSQbzGA==
+prettier-plugin-organize-imports@^3.2.3:
+  version "3.2.3"
+  resolved "https://registry.yarnpkg.com/prettier-plugin-organize-imports/-/prettier-plugin-organize-imports-3.2.3.tgz#6b0141ac71f7ee9a673ce83e95456319e3a7cf0d"
+  integrity sha512-KFvk8C/zGyvUaE3RvxN2MhCLwzV6OBbFSkwZ2OamCrs9ZY4i5L77jQ/w4UmUr+lqX8qbaqVq6bZZkApn+IgJSg==
 
 prettier@^3.0.0:
   version "3.0.0"
@@ -7410,10 +7410,10 @@ react-dom@^18.2.0:
     loose-envify "^1.1.0"
     scheduler "^0.23.0"
 
-react-hook-form@^7.45.1:
-  version "7.45.1"
-  resolved "https://registry.yarnpkg.com/react-hook-form/-/react-hook-form-7.45.1.tgz#e352c7f4dbc7540f0756abbb4dcfd1122fecc9bb"
-  integrity sha512-6dWoFJwycbuFfw/iKMcl+RdAOAOHDiF11KWYhNDRN/OkUt+Di5qsZHwA0OwsVnu9y135gkHpTw9DJA+WzCeR9w==
+react-hook-form@^7.45.2:
+  version "7.45.2"
+  resolved "https://registry.yarnpkg.com/react-hook-form/-/react-hook-form-7.45.2.tgz#c757f3d5e633ccb186443d57c10fc511df35721a"
+  integrity sha512-9s45OdTaKN+4NSTbXVqeDITd/nwIg++nxJGL8+OD5uf1DxvhsXQ641kaYHk5K28cpIOTYm71O/fYk7rFaygb3A==
 
 react-is@^16.13.1, react-is@^16.7.0:
   version "16.13.1"

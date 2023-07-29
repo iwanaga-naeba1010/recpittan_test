@@ -5,9 +5,9 @@ class Customers::OnlineRecreationChannelsController < Customers::ApplicationCont
 
   def show
     @online_recreation_channel = OnlineRecreationChannel
-                                 .includes(:online_recreation_channel_recreations, :online_recreation_channel_download_images)
+                                 .includes(:channel_recreations, :channel_download_images)
                                  .find(params[:id])
-    @download_image = @online_recreation_channel.online_recreation_channel_download_images
+    @download_image = @online_recreation_channel.channel_download_images
     @next_month_online_recreation_channel = OnlineRecreationChannel
                                             .public_channels
                                             .where(period: @online_recreation_channel.period.next_month)
@@ -16,17 +16,17 @@ class Customers::OnlineRecreationChannelsController < Customers::ApplicationCont
     @download_path = download_customers_online_recreation_channel_path(@online_recreation_channel)
 
     @calendar_download_image = @online_recreation_channel
-                               .online_recreation_channel_download_images
+                               .channel_download_images
                                .where(kind: %w[calendar_image calendar_pdf])
     @flyer_download_image = @online_recreation_channel
-                            .online_recreation_channel_download_images
+                            .channel_download_images
                             .where(kind: %w[flyer_image flyer_pdf])
   end
 
   def download
-    online_recreation_channel = OnlineRecreationChannel.includes(:online_recreation_channel_download_images).find(params[:id])
+    online_recreation_channel = OnlineRecreationChannel.includes(:channel_download_images).find(params[:id])
     image_name = params[:image_name]
-    image = online_recreation_channel.online_recreation_channel_download_images.find_by(kind: image_name)&.image
+    image = online_recreation_channel.channel_download_images.find_by(kind: image_name)&.image
     if image.nil?
       redirect_to customers_online_recreation_channel_path(online_recreation_channel.id), alert: t('action_messages.file_not_found')
     else

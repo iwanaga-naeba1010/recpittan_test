@@ -21,7 +21,7 @@ docker-compose exec web bundle install
 docker-compose exec web yarn install
 
 # pryなどを実行する方法
-docker attach matching_system_web_1
+docker attach matching_system-web-1
 
 # rspecの実行
 docker-compose exec web bundle exec rspec
