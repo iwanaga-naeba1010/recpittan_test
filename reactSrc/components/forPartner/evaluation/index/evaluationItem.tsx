@@ -10,29 +10,36 @@ export const EvaluationItem: React.FC<Props> = (props) => {
   const [replyText, setReplyText] = useState('');
   const [reply, setReply] = useState<EvaluationReply | null>(null);
 
-  const handleSubmit = async () => {
-    const response = await fetch(`/api_partner/recreations/${evaluation.report.order.recreation.id}/evaluation_replies`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ 
-        evaluation_reply: {
-          message: replyText,
-          evaluation_id: evaluation.id
-        }
-      }),
-    });
 
-    if (!response.ok) {
-      console.error('Request failed');
-    } else {
+  const handleSubmit = async (): Promise<void> => {
+    if (replyText.trim() === '') {
+      alert('入力してください');
+      return;
+    }
+    
+    try {
+      const response = await fetch(`/api_partner/recreations/${evaluation.report.order.recreation.id}/evaluation_replies`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ 
+          evaluation_reply: {
+            message: replyText,
+            evaluation_id: evaluation.id
+          }
+        }),
+      });
       const replyData = await response.json() as EvaluationReply;
       setReply(replyData);
-      console.log('Request succeeded');
+      setReplyText('');
+    } catch (e) {
+      if (e instanceof Error) {
+        throw new Error(e.message);
+      } else {
+        throw new Error('An unexpected error occurred.');
+      }
     }
-
-    setReplyText('');
   };
 
   return (
@@ -55,6 +62,7 @@ export const EvaluationItem: React.FC<Props> = (props) => {
               type="text" 
               value={replyText}
               onChange={(e) => setReplyText(e.target.value)}
+              required
             />
             <button 
               className='col-1 ms-1 btn bg-primary text-white fw-bold'
