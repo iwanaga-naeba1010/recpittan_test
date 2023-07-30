@@ -37,4 +37,6 @@ class Evaluation < ApplicationRecord
   enumerize :want_to_order_agein,
             in: { satisfied: 0, somewhat_satisfied: 1, neither: 2, somewhat_dissatisfied: 3, dissatisfied: 4 }, default: 0
   enumerize :is_public, in: { public: 'true', private: 'false' }, default: :public
+
+  delegate :message, :created_at, to: :evaluation_reply, prefix: true
 end
