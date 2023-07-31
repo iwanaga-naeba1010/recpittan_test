@@ -25,8 +25,9 @@ module OnlineRecreationChannelHelper
     sanitize(sanitized_link, tags: %w[a], attributes: %w[href target rel])
   end
 
-  def sanitize_text_link(link)
-    sanitized_link = link.gsub(%r{(https?://\S+)}, '<a href="\1" target="_blank" rel="noopener">\1</a>')
-    sanitize(sanitized_link, tags: %w[a], attributes: %w[href target rel])
+  def sanitize_text_link(text)
+    text.gsub(URI::DEFAULT_PARSER.make_regexp(%w[http https])) do |url|
+      "<a href=\"#{url}\" target=\"_blank\" rel=\"noopener\">#{url}</a>"
+    end
   end
 end

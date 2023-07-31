@@ -17,7 +17,7 @@
 
   <% if @online_recreation_channel.calendar_memo? %>
     <div class="w-50 mx-auto">
-      <p><%= simple_format(@online_recreation_channel.calendar_memo) %></p>
+      <p><%= sanitize sanitize_text_link(simple_format(@online_recreation_channel.calendar_memo)) %></p>
     </div>
   <% end %>
   <div>
@@ -38,7 +38,7 @@
 
   <% if @online_recreation_channel.zoom_memo? %>
     <div class="w-50 mx-auto">
-      <p><%= sanitize_text_link(simple_format(@online_recreation_channel.zoom_memo)) %></p>
+      <p><%= sanitize sanitize_text_link(simple_format(@online_recreation_channel.zoom_memo)) %></p>
     </div>
   <% end %>
   <table class="mt-5 border mx-auto w-50">
@@ -58,7 +58,7 @@
         </td>
         <td class="text-start py-2 px-4 border w-50">
           <% if channel_recs.zoom_link? %>
-            <%= sanitize_text_link(simple_format(channel_recs.zoom_link)) %>
+            <%= sanitize sanitize_text_link(simple_format(channel_recs.zoom_link)) %>
           <% else %>
             <p class="mb-0">zoomリンク公開まで暫くお待ちください</p>
           <% end %>
