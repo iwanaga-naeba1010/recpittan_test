@@ -95,7 +95,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_22_070718) do
     t.bigint "evaluation_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["evaluation_id"], name: "index_evaluation_replies_on_evaluation_id"
+    t.index ["evaluation_id"], name: "index_evaluation_replies_on_evaluation_id", unique: true
   end
 
   create_table "evaluations", force: :cascade do |t|

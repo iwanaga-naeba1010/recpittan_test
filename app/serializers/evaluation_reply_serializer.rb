@@ -18,9 +18,12 @@
 #
 #  fk_rails_...  (evaluation_id => evaluations.id)
 #
-FactoryBot.define do
-  factory :evaluation_reply do
-    evaluation
-    message { 'MyText' }
+class EvaluationReplySerializer
+  def serialize(evaluation_reply:)
+    {
+      id: evaluation_reply.id,
+      message: evaluation_reply.message,
+      evaluation: evaluation_reply.evaluation
+    }
   end
 end

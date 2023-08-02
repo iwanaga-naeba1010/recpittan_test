@@ -28,6 +28,9 @@ class EvaluationSerializer
 
   def serialize(evaluation:)
     report = ReportSerializer.new.serialize(report: evaluation.report)
+    # rubocop:disable Layout/LineLength
+    evaluation_reply = evaluation.evaluation_reply ? EvaluationReplySerializer.new.serialize(evaluation_reply: evaluation.evaluation_reply) : nil
+    # rubocop:enable Layout/LineLength
     {
       id: evaluation.id,
       communication: evaluation.communication,
@@ -40,7 +43,8 @@ class EvaluationSerializer
       want_to_order_agein: { id: evaluation.want_to_order_agein.value,
                              key: evaluation.want_to_order_agein,
                              text: evaluation.want_to_order_agein_text },
-      report:
+      report:,
+      evaluation_reply:
     }
   end
 end

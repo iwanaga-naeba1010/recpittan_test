@@ -12,7 +12,7 @@
 #
 # Indexes
 #
-#  index_evaluation_replies_on_evaluation_id  (evaluation_id)
+#  index_evaluation_replies_on_evaluation_id  (evaluation_id) UNIQUE
 #
 # Foreign Keys
 #
