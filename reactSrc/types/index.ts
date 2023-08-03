@@ -10,3 +10,5 @@ export * from './recreation';
 export * from './recreationPrefecture';
 export * from './tag';
 export * from './user';
+export * from './evaluation';
+export * from './evaluationReply';

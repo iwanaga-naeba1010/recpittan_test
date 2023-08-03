@@ -42,8 +42,10 @@ class UserSerializer
   end
 
   def serialize(user:)
+    company = CompanySerializer.new.serialize(company: user.company)
     {
-      id: user.id
+      id: user.id,
+      company:
     }
   end
 end

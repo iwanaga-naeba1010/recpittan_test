@@ -7,6 +7,8 @@ namespace :api_partner do
     collection do
       get :config_data
     end
+    resources :evaluations, only: %i[index]
+    resources :evaluation_replies, only: %i[create]
   end
 
   resources :profiles, only: %i[index]
