@@ -9,7 +9,7 @@ export class Api {
   static async get<T>(
     path: string,
     type: ApiType,
-    params: Data
+    params: Data = {}
   ): Promise<AxiosResponse<T>> {
     try {
       const response = await axios.get<T>(`${apiDomain(type)}/${path}`, {
@@ -31,7 +31,7 @@ export class Api {
   static async post<T>(
     path: string,
     type: ApiType,
-    data: Data
+    data: Data = {}
   ): Promise<AxiosResponse<T>> {
     try {
       const response = await axios.post<Data>(
@@ -54,7 +54,7 @@ export class Api {
   static async patch<T>(
     path: string,
     type: ApiType,
-    data: Data
+    data: Data = {}
   ): Promise<AxiosResponse<T>> {
     try {
       const response = await axios.patch(
@@ -75,7 +75,7 @@ export class Api {
   static async delete<T>(
     path: string,
     type: ApiType,
-    data: Data
+    data: Data = {}
   ): Promise<AxiosResponse<T>> {
     try {
       const response = await axios.delete<Data>(`${apiDomain(type)}/${path}`, {
