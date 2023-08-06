@@ -3,15 +3,24 @@ import axios, { AxiosResponse } from 'axios';
 import camelcaseKeys from 'camelcase-keys';
 import snakecaseKeys from 'snakecase-keys';
 
+type Data = Record<string, unknown>;
+
 export class Api {
-  static async get<T>(path: string, type: ApiType, params: Record<string, unknown> = {}): Promise<AxiosResponse<T>> {
+  static async get<T>(
+    path: string,
+    type: ApiType,
+    params: Data
+  ): Promise<AxiosResponse<T>> {
     try {
       const response = await axios.get<T>(`${apiDomain(type)}/${path}`, {
         params: snakecaseKeys(params),
-        headers: headers()
+        headers: headers(),
       });
       const data = response.data as unknown as Record<string, unknown>;
-      return { ...response, data: camelcaseKeys(data, { deep: true }) } as AxiosResponse<T>;
+      return {
+        ...response,
+        data: camelcaseKeys(data, { deep: true }) as T,
+      };
     } catch (e) {
       console.log('haitta!', e);
       throw e;
@@ -19,37 +28,64 @@ export class Api {
   }
 
   // TODO(okubo): Promise<any>をaxios returnでgenericsに変更
-  static async post<T>(path: string, type: ApiType, data: Record<string, unknown>): Promise<AxiosResponse<T>> {
+  static async post<T>(
+    path: string,
+    type: ApiType,
+    data: Data
+  ): Promise<AxiosResponse<T>> {
     try {
-      const response = await axios.post<T>(`${apiDomain(type)}/${path}`, snakecaseKeys(data, { deep: true }), {
-        headers: headers()
-      });
-      const responseData = response.data as unknown as Record<string, unknown>;
-      return { ...response, data: camelcaseKeys(responseData, { deep: true }) } as AxiosResponse<T>;
+      const response = await axios.post<Data>(
+        `${apiDomain(type)}/${path}`,
+        snakecaseKeys(data, { deep: true }),
+        {
+          headers: headers(),
+        }
+      );
+      return {
+        ...response,
+        data: camelcaseKeys(response.data, { deep: true }) as T,
+      };
     } catch (e) {
       console.log('haitta!', e);
       throw e;
     }
   }
 
-  static async patch<T>(path: string, type: ApiType, data: Record<string, unknown>): Promise<AxiosResponse<T>> {
+  static async patch<T>(
+    path: string,
+    type: ApiType,
+    data: Data
+  ): Promise<AxiosResponse<T>> {
     try {
-      const response = await axios.patch(`${apiDomain(type)}/${path}`, snakecaseKeys(data), { headers: headers() });
-      return { ...response, data: camelcaseKeys(response.data, { deep: true }) } as AxiosResponse<T>;
+      const response = await axios.patch(
+        `${apiDomain(type)}/${path}`,
+        snakecaseKeys(data),
+        { headers: headers() }
+      );
+      return {
+        ...response,
+        data: camelcaseKeys(response.data, { deep: true }) as T,
+      };
     } catch (e) {
       console.log('haitta!', e);
       throw e;
     }
   }
 
-  static async delete<T>(path: string, type: ApiType, data: Record<string, unknown>): Promise<AxiosResponse<T>> {
+  static async delete<T>(
+    path: string,
+    type: ApiType,
+    data: Data
+  ): Promise<AxiosResponse<T>> {
     try {
-      const response = await axios.delete(`${apiDomain(type)}/${path}`, {
+      const response = await axios.delete<Data>(`${apiDomain(type)}/${path}`, {
         data: snakecaseKeys(data),
-        headers: headers()
+        headers: headers(),
       });
-      const responseData = response.data as unknown as Record<string, unknown>;
-      return { ...response, data: camelcaseKeys(responseData, { deep: true }) } as AxiosResponse<T>;
+      return {
+        ...response,
+        data: camelcaseKeys(response.data, { deep: true }) as T,
+      };
     } catch (e) {
       console.log('haitta!', e);
       throw e;
@@ -67,7 +103,7 @@ const headers = () => {
 
   return {
     'Content-Type': 'application/json',
-    'X-CSRF-TOKEN': token
+    'X-CSRF-TOKEN': token,
   };
 };
 
