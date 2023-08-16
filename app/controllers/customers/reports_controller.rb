@@ -29,7 +29,7 @@ class Customers::ReportsController < Customers::ApplicationController
         レポート本文： #{evaluation.message}
         管理画面案件URL #{admin_order_url(order.id)}
       MESSAGE
-      SlackNotifier.new(channel: '#アクティブチャットスレッド').send('施設が終了報告をしました', message)
+      SlackNotifier.new(channel: '#終了報告スレッド').send('施設が終了報告をしました', message)
 
       if order.report_status&.denied?
         ReportDenyMailer.notify(order:).deliver_now

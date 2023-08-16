@@ -32,7 +32,7 @@ class Partners::ReportsController < Partners::ApplicationController
         レポート本文： #{@order.report_body}
         管理画面案件URL #{admin_order_url(@order.id)}
       MESSAGE
-      SlackNotifier.new(channel: '#アクティブチャットスレッド').send('パートナーが終了報告をしました', message)
+      SlackNotifier.new(channel: '#終了報告スレッド').send('パートナーが終了報告をしました', message)
       redirect_to partners_order_path(@order.id), notice: t('action_messages.created', model_name: Report.model_name.human)
     else
       render :new
