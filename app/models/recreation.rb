@@ -70,4 +70,8 @@ class Recreation < ApplicationRecord
 
     files.first
   end
+
+  def number_of_recreations_held
+    orders.where(status: %i[unreported_completed final_report_admits_not finished invoice_issued paid]).size
+  end
 end
