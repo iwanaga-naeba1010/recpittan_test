@@ -2,7 +2,7 @@ import { LoadingContainer } from '@/components/shared';
 import { Api } from '@/infrastructure';
 import { Evaluation } from '@/types';
 import React, { useEffect, useState } from 'react';
-import ReactDOM from 'react-dom';
+import { createRoot } from 'react-dom/client';
 import { EvaluationItem } from './evaluationItem';
 
 const EvaluationIndex: React.FC = () => {
@@ -14,7 +14,10 @@ const EvaluationIndex: React.FC = () => {
     (async () => {
       if (!id) return;
       try {
-        const evaluationResponse = await Api.get<{ [key: string]: Evaluation }>(`recreations/${id}/evaluations`, 'partner');
+        const evaluationResponse = await Api.get<{ [key: string]: Evaluation }>(
+          `recreations/${id}/evaluations`,
+          'partner'
+        );
         const evaluationArray = Object.values(evaluationResponse.data);
         setEvaluations(evaluationArray);
         setIsLoading(false);
@@ -32,12 +35,11 @@ const EvaluationIndex: React.FC = () => {
     <div>
       {evaluations.length ? (
         evaluations.map((evaluation) => <EvaluationItem key={evaluation.id} evaluation={evaluation} />)
-        ) : (
-          <div className='m-3'>
-            <p>まだ口コミはありません</p>
-          </div>
-        )
-      }
+      ) : (
+        <div className='m-3'>
+          <p>まだ口コミはありません</p>
+        </div>
+      )}
     </div>
   );
 };
@@ -46,7 +48,8 @@ const EvaluationIndex: React.FC = () => {
 document.addEventListener('turbolinks:load', () => {
   const elm = document.querySelector('#evaluationIndex');
   if (elm) {
-    ReactDOM.render(<EvaluationIndex />, elm);
+    const root = createRoot(elm);
+    root.render(<EvaluationIndex />);
   }
 });
 
@@ -54,6 +57,7 @@ document.addEventListener('turbolinks:load', () => {
 $(document).ready(() => {
   const elm = document.querySelector('#evaluationIndex');
   if (elm) {
-    ReactDOM.render(<EvaluationIndex />, elm);
+    const root = createRoot(elm);
+    root.render(<EvaluationIndex />);
   }
 });

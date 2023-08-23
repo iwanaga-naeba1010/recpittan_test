@@ -10,27 +10,29 @@ export const EvaluationItem: React.FC<Props> = (props) => {
   const [replyText, setReplyText] = useState('');
   const [reply, setReply] = useState<EvaluationReply | null>(null);
 
-
   const handleSubmit = async (): Promise<void> => {
     if (replyText.trim() === '') {
       alert('入力してください');
       return;
     }
-    
+
     try {
-      const response = await fetch(`/api_partner/recreations/${evaluation.report.order.recreation.id}/evaluation_replies`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ 
-          evaluation_reply: {
-            message: replyText,
-            evaluation_id: evaluation.id
-          }
-        }),
-      });
-      const replyData = await response.json() as EvaluationReply;
+      const response = await fetch(
+        `/api_partner/recreations/${evaluation.report.order.recreation.id}/evaluation_replies`,
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            evaluation_reply: {
+              message: replyText,
+              evaluation_id: evaluation.id
+            }
+          })
+        }
+      );
+      const replyData = (await response.json()) as EvaluationReply;
       setReply(replyData);
       setReplyText('');
     } catch (e) {
@@ -51,23 +53,20 @@ export const EvaluationItem: React.FC<Props> = (props) => {
       {reply || evaluation.evaluationReply ? (
         <>
           <hr />
-          <p>返信: {reply ? reply.message : (evaluation.evaluationReply?.message || '')}</p>
+          <p>返信: {reply ? reply.message : evaluation.evaluationReply?.message || ''}</p>
         </>
       ) : (
         <>
           <hr />
           <div className='row m-0'>
-            <input 
-              className='col-10 border rounded' 
-              type="text" 
+            <input
+              className='col-10 border rounded'
+              type='text'
               value={replyText}
               onChange={(e) => setReplyText(e.target.value)}
               required
             />
-            <button 
-              className='col-1 ms-1 btn bg-primary text-white fw-bold'
-              onClick={handleSubmit}
-            >
+            <button className='col-1 ms-1 btn bg-primary text-white fw-bold' onClick={handleSubmit}>
               送信
             </button>
           </div>

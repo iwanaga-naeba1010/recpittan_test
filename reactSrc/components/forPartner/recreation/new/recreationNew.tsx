@@ -5,7 +5,7 @@ import { Recreation } from '@/types';
 import { isEmpty } from '@/utils';
 import axios, { AxiosError } from 'axios';
 import React, { useState } from 'react';
-import ReactDOM from 'react-dom';
+import { createRoot } from 'react-dom/client';
 
 const RecreationNew: React.FC = () => {
   const [errors, setErrors] = useState<Array<string>>([]);
@@ -68,7 +68,8 @@ const RecreationNew: React.FC = () => {
 document.addEventListener('turbolinks:load', () => {
   const elm = document.querySelector('#recreationNew');
   if (elm) {
-    ReactDOM.render(<RecreationNew />, elm);
+    const root = createRoot(elm);
+    root.render(<RecreationNew />);
   }
 });
 
@@ -76,6 +77,7 @@ document.addEventListener('turbolinks:load', () => {
 $(document).ready(() => {
   const elm = document.querySelector('#recreationNew');
   if (elm) {
-    ReactDOM.render(<RecreationNew />, elm);
+    const root = createRoot(elm);
+    root.render(<RecreationNew />);
   }
 });

@@ -59,7 +59,7 @@ export const FirstStep: React.FC<Props> = (props) => {
   }, []);
 
   const handleAddPrefecture = async (prefecture: string): Promise<void> => {
-    if (!recreation || !setRecreation)  return;
+    if (!recreation || !setRecreation) return;
     try {
       const createdPrefecture = await Api.post<RecreationPrefecture>(
         `recreations/${recreation.id}/recreation_prefectures`,
@@ -74,7 +74,7 @@ export const FirstStep: React.FC<Props> = (props) => {
   };
 
   const handleUpdatePrefecture = async (id: number, prefectureName: string): Promise<void> => {
-    if (!recreation || !setRecreation)  return;
+    if (!recreation || !setRecreation) return;
     try {
       const updatedPrefecture = await Api.patch<RecreationPrefecture>(
         `recreations/${recreation.id}/recreation_prefectures/${id}`,
@@ -123,12 +123,7 @@ export const FirstStep: React.FC<Props> = (props) => {
         </p>
         {config.kind.map((kind) => (
           <div key={kind.name}>
-            <input
-              type='radio'
-              id={`kind${kind.enumKey}`}
-              value={kind.enumKey}
-              {...register('kind')}
-            />
+            <input type='radio' id={`kind${kind.enumKey}`} value={kind.enumKey} {...register('kind')} />
             <label htmlFor={`kind${kind.enumKey}`}>{kind.name}でレクを実施</label>
           </div>
         ))}
@@ -170,7 +165,9 @@ export const FirstStep: React.FC<Props> = (props) => {
           })}
           onChange={(e) => setSecondTitle(e.target.value)}
         />
-        {errors.secondTitle && errors.secondTitle.message && <ValidationErrorMessage message={errors.secondTitle.message} />}
+        {errors.secondTitle && errors.secondTitle.message && (
+          <ValidationErrorMessage message={errors.secondTitle.message} />
+        )}
         <p className='small my-0'>{secondTitle.length}/35文字まで</p>
       </div>
 
@@ -210,7 +207,9 @@ export const FirstStep: React.FC<Props> = (props) => {
             required: 'タイムスケジュールは必須です'
           })}
         />
-        {errors.flowOfDay && errors.flowOfDay.message && <ValidationErrorMessage message={errors?.flowOfDay?.message} />}
+        {errors.flowOfDay && errors.flowOfDay.message && (
+          <ValidationErrorMessage message={errors?.flowOfDay?.message} />
+        )}
       </div>
 
       <div className='description'>

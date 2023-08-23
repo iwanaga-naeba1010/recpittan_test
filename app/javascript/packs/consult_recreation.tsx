@@ -3,7 +3,7 @@
  */
 
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { createRoot } from 'react-dom/client';
 import { post } from '../utils/requests/base';
 
 interface Props {
@@ -39,7 +39,8 @@ document.addEventListener('turbolinks:load', () => {
     console.log(window.location.pathname.split('/')[3]);
 
     if (elm && recreationId) {
-      ReactDOM.render(<App recreationId={Number(recreationId)} />, elm);
+      const root = createRoot(elm);
+      root.render(<App recreationId={Number(recreationId)} />);
     }
   }
 });

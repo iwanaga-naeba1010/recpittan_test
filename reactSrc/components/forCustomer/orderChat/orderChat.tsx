@@ -8,7 +8,7 @@ import { Order, User } from '@/types';
 import { getQeuryStringValueByKey, removeQueryStringsByKey, strToBool } from '@/utils';
 import * as $ from 'jquery';
 import React, { useEffect, useState } from 'react';
-import ReactDOM from 'react-dom';
+import { createRoot } from 'react-dom/client';
 import { ChatList } from './chatList';
 
 export const OrderChat: React.FC = () => {
@@ -69,9 +69,7 @@ export const OrderChat: React.FC = () => {
                 <h1 className='title-b line-height-140'>{order.recreation?.title}</h1>
                 <div className='category-tags'>
                   <Category id={order.recreation?.category.id} name={order.recreation?.category.text} />
-                  {order.recreation?.tags.map((tag) => (
-                    <Tag key={tag.id} id={tag.id} name={tag.name} />
-                  ))}
+                  {order.recreation?.tags.map((tag) => <Tag key={tag.id} id={tag.id} name={tag.name} />)}
                 </div>
               </div>
             </div>
@@ -179,7 +177,8 @@ export const OrderChat: React.FC = () => {
 document.addEventListener('turbolinks:load', () => {
   const elm = document.querySelector('#OrderChat');
   if (elm) {
-    ReactDOM.render(<OrderChat />, elm);
+    const root = createRoot(elm);
+    root.render(<OrderChat />);
   }
 });
 
@@ -187,6 +186,7 @@ document.addEventListener('turbolinks:load', () => {
 $(document).ready(() => {
   const elm = document.querySelector('#OrderChat');
   if (elm) {
-    ReactDOM.render(<OrderChat />, elm);
+    const root = createRoot(elm);
+    root.render(<OrderChat />);
   }
 });

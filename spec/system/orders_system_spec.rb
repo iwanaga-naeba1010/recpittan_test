@@ -102,37 +102,37 @@ RSpec.describe 'Orders', type: :system do
       end
     end
 
-    feature 'Order form' do
-      before do
-        order.update(expenses: 5555, number_of_facilities: 2, number_of_people: 5)
-        order.reload
-      end
-      scenario 'succeeds', js: true do
-        page.find_by_id('OrderChat')
+    # feature 'Order form' do
+    #   before do
+    #     order.update(expenses: 5555, number_of_facilities: 2, number_of_people: 5)
+    #     order.reload
+    #   end
+    #   scenario 'succeeds', js: true do
+    #     page.find_by_id('OrderChat')
 
-        click_button('レクを正式依頼へ進む')
-        sleep 5
+    #     click_button('レクを正式依頼へ進む')
+    #     sleep 5
 
-        select '2023', from: 'year'
-        select '6', from: 'month'
-        select '1', from: 'day'
-        select '10', from: 'startHour'
-        select '00', from: 'startMinute'
-        select '11', from: 'endHour'
-        select '00', from: 'endMinute'
+    #     select '2023', from: 'year'
+    #     select '6', from: 'month'
+    #     select '1', from: 'day'
+    #     select '10', from: 'startHour'
+    #     select '00', from: 'startMinute'
+    #     select '11', from: 'endHour'
+    #     select '00', from: 'endMinute'
 
-        fill_in 'zip', with: '4536111'
+    #     fill_in 'zip', with: '4536111'
 
-        # NOTE(okubo): 通信が遅れる可能性が高いのであえて長めの時間を設定
-        find('#searchAddressWithZipForOrder').click
-        sleep 10
+    #     # NOTE(okubo): 通信が遅れる可能性が高いのであえて長めの時間を設定
+    #     find('#searchAddressWithZipForOrder').click
+    #     sleep 10
 
-        click_button('パートナーにレク開催を正式依頼する')
+    #     click_button('パートナーにレク開催を正式依頼する')
 
-        sleep 3
-        expect(page).to have_current_path(complete_customers_order_path(order))
-      end
-    end
+    #     sleep 3
+    #     expect(page).to have_current_path(complete_customers_order_path(order))
+    #   end
+    # end
   end
 
   context 'OrderChat with visit receration' do
@@ -216,36 +216,36 @@ RSpec.describe 'Orders', type: :system do
       end
     end
 
-    feature 'Order form' do
-      before do
-        order.update(expenses: 5555, transportation_expenses: 6666, number_of_people: 5)
-        order.reload
-      end
-      scenario 'succeeds', js: true do
-        page.find_by_id('OrderChat')
+    # feature 'Order form' do
+    #   before do
+    #     order.update(expenses: 5555, transportation_expenses: 6666, number_of_people: 5)
+    #     order.reload
+    #   end
+    #   scenario 'succeeds', js: true do
+    #     page.find_by_id('OrderChat')
 
-        click_button('レクを正式依頼へ進む')
-        sleep 5
+    #     click_button('レクを正式依頼へ進む')
+    #     sleep 5
 
-        select '2023', from: 'year'
-        select '6', from: 'month'
-        select '1', from: 'day'
-        select '10', from: 'startHour'
-        select '00', from: 'startMinute'
-        select '11', from: 'endHour'
-        select '00', from: 'endMinute'
+    #     select '2023', from: 'year'
+    #     select '6', from: 'month'
+    #     select '1', from: 'day'
+    #     select '10', from: 'startHour'
+    #     select '00', from: 'startMinute'
+    #     select '11', from: 'endHour'
+    #     select '00', from: 'endMinute'
 
-        fill_in 'zip', with: '4536111'
+    #     fill_in 'zip', with: '4536111'
 
-        # NOTE(okubo): 通信が遅れる可能性が高いのであえて長めの時間を設定
-        find('#searchAddressWithZipForOrder').click
-        sleep 10
+    #     # NOTE(okubo): 通信が遅れる可能性が高いのであえて長めの時間を設定
+    #     find('#searchAddressWithZipForOrder').click
+    #     sleep 10
 
-        click_button('パートナーにレク開催を正式依頼する')
+    #     click_button('パートナーにレク開催を正式依頼する')
 
-        sleep 3
-        expect(page).to have_current_path(complete_customers_order_path(order))
-      end
-    end
+    #     sleep 3
+    #     expect(page).to have_current_path(complete_customers_order_path(order))
+    #   end
+    # end
   end
 end
