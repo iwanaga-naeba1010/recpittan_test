@@ -8,7 +8,7 @@ import { Order, User } from '@/types';
 import { getQeuryStringValueByKey, removeQueryStringsByKey, strToBool } from '@/utils';
 import * as $ from 'jquery';
 import React, { useEffect, useState } from 'react';
-import { createRoot } from 'react-dom/client';
+import ReactDOM from 'react-dom';
 import { ChatList } from './chatList';
 
 export const OrderChat: React.FC = () => {
@@ -179,8 +179,7 @@ export const OrderChat: React.FC = () => {
 document.addEventListener('turbolinks:load', () => {
   const elm = document.querySelector('#OrderChat');
   if (elm) {
-    const root = createRoot(elm);
-    root.render(<OrderChat />);
+    ReactDOM.render(<OrderChat />, elm);
   }
 });
 
@@ -188,7 +187,6 @@ document.addEventListener('turbolinks:load', () => {
 $(document).ready(() => {
   const elm = document.querySelector('#OrderChat');
   if (elm) {
-    const root = createRoot(elm);
-    root.render(<OrderChat />);
+    ReactDOM.render(<OrderChat />, elm);
   }
 });
