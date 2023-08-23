@@ -14,7 +14,10 @@ const EvaluationIndex: React.FC = () => {
     (async () => {
       if (!id) return;
       try {
-        const evaluationResponse = await Api.get<{ [key: string]: Evaluation }>(`recreations/${id}/evaluations`, 'partner');
+        const evaluationResponse = await Api.get<{ [key: string]: Evaluation }>(
+          `recreations/${id}/evaluations`,
+          'partner'
+        );
         const evaluationArray = Object.values(evaluationResponse.data);
         setEvaluations(evaluationArray);
         setIsLoading(false);
@@ -32,12 +35,11 @@ const EvaluationIndex: React.FC = () => {
     <div>
       {evaluations.length ? (
         evaluations.map((evaluation) => <EvaluationItem key={evaluation.id} evaluation={evaluation} />)
-        ) : (
-          <div className='m-3'>
-            <p>まだ口コミはありません</p>
-          </div>
-        )
-      }
+      ) : (
+        <div className='m-3'>
+          <p>まだ口コミはありません</p>
+        </div>
+      )}
     </div>
   );
 };
