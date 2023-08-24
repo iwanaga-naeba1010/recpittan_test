@@ -1,3 +1,4 @@
+import { useEvaluationReplies } from '../hooks/useEvaluationReplies';
 import { Evaluation, EvaluationReply } from '@/types';
 import React, { useState } from 'react';
 
@@ -7,10 +8,9 @@ type Props = {
 
 export const EvaluationItem: React.FC<Props> = (props) => {
   const { evaluation } = props;
+  const { postEvaluationReply } = useEvaluationReplies();
   const [replyText, setReplyText] = useState('');
   const [reply, setReply] = useState<EvaluationReply | null>(null);
-
-
   const handleSubmit = async (): Promise<void> => {
     if (replyText.trim() === '') {
       alert('入力してください');
@@ -18,19 +18,7 @@ export const EvaluationItem: React.FC<Props> = (props) => {
     }
     
     try {
-      const response = await fetch(`/api_partner/recreations/${evaluation.report.order.recreation.id}/evaluation_replies`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ 
-          evaluation_reply: {
-            message: replyText,
-            evaluation_id: evaluation.id
-          }
-        }),
-      });
-      const replyData = await response.json() as EvaluationReply;
+      const replyData = await postEvaluationReply(evaluation.id, replyText);
       setReply(replyData);
       setReplyText('');
     } catch (e) {
