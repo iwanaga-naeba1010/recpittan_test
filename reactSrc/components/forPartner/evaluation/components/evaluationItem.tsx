@@ -16,7 +16,7 @@ export const EvaluationItem: React.FC<Props> = (props) => {
       alert('入力してください');
       return;
     }
-    
+
     try {
       const replyData = await postEvaluationReply(evaluation.id, replyText);
       setReply(replyData);
@@ -39,23 +39,20 @@ export const EvaluationItem: React.FC<Props> = (props) => {
       {reply || evaluation.evaluationReply ? (
         <>
           <hr />
-          <p>返信: {reply ? reply.message : (evaluation.evaluationReply?.message || '')}</p>
+          <p>返信: {reply ? reply.message : evaluation.evaluationReply?.message || ''}</p>
         </>
       ) : (
         <>
           <hr />
           <div className='row m-0'>
-            <input 
-              className='col-10 border rounded' 
-              type="text" 
+            <input
+              className='col-10 border rounded'
+              type='text'
               value={replyText}
               onChange={(e) => setReplyText(e.target.value)}
               required
             />
-            <button 
-              className='col-1 ms-1 btn bg-primary text-white fw-bold'
-              onClick={handleSubmit}
-            >
+            <button className='col-1 ms-1 btn bg-primary text-white fw-bold' onClick={handleSubmit}>
               送信
             </button>
           </div>

@@ -2,7 +2,7 @@ import { LoadingContainer } from '@/components/shared';
 import { Api } from '@/infrastructure';
 import { Recreation } from '@/types';
 import React, { useEffect, useState } from 'react';
-import ReactDOM from 'react-dom';
+import { createRoot } from 'react-dom/client';
 import { RecreationItem } from './recreationItem';
 
 const RecreationShow: React.FC = () => {
@@ -61,7 +61,8 @@ const RecreationShow: React.FC = () => {
 document.addEventListener('turbolinks:load', () => {
   const elm = document.querySelector('#recreationShow');
   if (elm) {
-    ReactDOM.render(<RecreationShow />, elm);
+    const root = createRoot(elm);
+    root.render(<RecreationShow />);
   }
 });
 
@@ -69,6 +70,7 @@ document.addEventListener('turbolinks:load', () => {
 $(document).ready(() => {
   const elm = document.querySelector('#recreationShow');
   if (elm) {
-    ReactDOM.render(<RecreationShow />, elm);
+    const root = createRoot(elm);
+    root.render(<RecreationShow />);
   }
 });

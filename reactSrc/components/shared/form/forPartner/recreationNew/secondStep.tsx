@@ -51,12 +51,8 @@ export const SecondStep: React.FC<Props> = (props) => {
       {!recreation && <RecreationMaterialPrice register={register} />}
       {recreation && <RecreationEditMaterialPrice recreation={recreation} />}
 
-      {!recreation && isShowAdditionalFacilityFee() && (
-        <RecreationAdditionalFacilityFee register={register} />
-      )}
-      {recreation && isShowAdditionalFacilityFee() && (
-        <RecreationEditAdditionalFacilityFee recreation={recreation} />
-      )}
+      {!recreation && isShowAdditionalFacilityFee() && <RecreationAdditionalFacilityFee register={register} />}
+      {recreation && isShowAdditionalFacilityFee() && <RecreationEditAdditionalFacilityFee recreation={recreation} />}
       {/* 修正のタイミングで利用可能に */}
       {recreation && useFile && (
         <>

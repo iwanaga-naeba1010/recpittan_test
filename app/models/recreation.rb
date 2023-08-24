@@ -60,6 +60,7 @@ class Recreation < ApplicationRecord
 
   delegate :name, :title, :description, :image, to: :partner, prefix: true, allow_nil: true
   delegate :name, :title, :description, :image, to: :profile, prefix: true, allow_nil: true
+  delegate :username, to: :user, prefix: true
 
   # NOTE(okubo): publicは予約後なので下記で定義
   scope :public_recs, -> { where(status: :published) }
@@ -69,5 +70,9 @@ class Recreation < ApplicationRecord
     return nil if files.blank?
 
     files.first
+  end
+
+  def number_of_recreations_held
+    orders.where(status: %i[unreported_completed final_report_admits_not finished invoice_issued paid]).size
   end
 end

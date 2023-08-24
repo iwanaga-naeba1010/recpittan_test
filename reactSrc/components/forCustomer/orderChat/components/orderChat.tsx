@@ -16,7 +16,7 @@ import {
 } from '@/utils';
 import * as $ from 'jquery';
 import React, { useEffect, useState } from 'react';
-import ReactDOM from 'react-dom';
+import { createRoot } from 'react-dom/client';
 import { ChatList } from './chatList';
 import { useOrder } from '../hooks';
 import { useUser } from '../../hooks';
@@ -214,7 +214,8 @@ export const OrderChat: React.FC = () => {
 document.addEventListener('turbolinks:load', () => {
   const elm = document.querySelector('#OrderChat');
   if (elm) {
-    ReactDOM.render(<OrderChat />, elm);
+    const root = createRoot(elm);
+    root.render(<OrderChat />);
   }
 });
 
@@ -222,6 +223,7 @@ document.addEventListener('turbolinks:load', () => {
 $(document).ready(() => {
   const elm = document.querySelector('#OrderChat');
   if (elm) {
-    ReactDOM.render(<OrderChat />, elm);
+    const root = createRoot(elm);
+    root.render(<OrderChat />);
   }
 });

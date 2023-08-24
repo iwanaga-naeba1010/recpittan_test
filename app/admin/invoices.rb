@@ -32,6 +32,7 @@ ActiveAdmin.register_page 'Invoices' do
           title: "#{current_time.month}月分レクリエーション費用",
           code: invoice_information.present? ? invoice_information.code : '',
           facility_name: customer.company.facility_name,
+          partner_name: '',
           tax: '',
           payment_due_date: "#{current_time.year}/#{(current_time + 1.month).month}/25",
           items: [],
@@ -39,6 +40,8 @@ ActiveAdmin.register_page 'Invoices' do
         }
 
         orders.each do |order|
+          invoice[:partner_name] = order.recreation.user_username
+
           invoice[:items] << {
             name: "#{order.start_at.strftime('%m/%d')}#{order.recreation_title}",
             price: order.price,
@@ -103,6 +106,7 @@ ActiveAdmin.register_page 'Invoices' do
           invoice[:title],
           invoice[:code],
           invoice[:facility_name],
+          invoice[:partner_name],
           invoice[:tax],
           invoice[:payment_due_date],
           invoice[:items].map do |item|
@@ -113,7 +117,7 @@ ActiveAdmin.register_page 'Invoices' do
 
       # NOTE(okubo): まとめて書くためにflattenで処理
       headers = [
-        %w[請求日 請求番号 件名 取引先管理コード 施設名 消費税設定 お支払い期限],
+        %w[請求日 請求番号 件名 取引先管理コード 施設名 パートナー名 消費税設定 お支払い期限],
         (1..40).map { |i| ["品目#{i}", "数量#{i}", "単位#{i}", "単価#{i}", "消費税率#{i}", "非課税フラグ#{i}"] }.flatten
       ].flatten
 

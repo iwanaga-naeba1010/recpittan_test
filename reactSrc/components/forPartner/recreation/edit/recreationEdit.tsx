@@ -6,7 +6,7 @@ import { RecreationImage } from '@/types/recreationImage';
 import { getQeuryStringValueByKey, isEmpty } from '@/utils';
 import axios, { AxiosError } from 'axios';
 import React, { useEffect, useState } from 'react';
-import ReactDOM from 'react-dom';
+import { createRoot } from 'react-dom/client';
 
 export type UseFile = {
   handleFileAdd: (files: FileList | null, kind: string) => void;
@@ -144,7 +144,8 @@ const RecreationEdit: React.FC = () => {
 document.addEventListener('turbolinks:load', () => {
   const elm = document.querySelector('#recreationEdit');
   if (elm) {
-    ReactDOM.render(<RecreationEdit />, elm);
+    const root = createRoot(elm);
+    root.render(<RecreationEdit />);
   }
 });
 
@@ -152,6 +153,7 @@ document.addEventListener('turbolinks:load', () => {
 $(document).ready(() => {
   const elm = document.querySelector('#recreationEdit');
   if (elm) {
-    ReactDOM.render(<RecreationEdit />, elm);
+    const root = createRoot(elm);
+    root.render(<RecreationEdit />);
   }
 });
