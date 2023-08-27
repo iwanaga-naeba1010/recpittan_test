@@ -1,6 +1,21 @@
 import { Api } from "@/infrastructure";
 import { Recreation } from "@/types";
 
+type UseRecreationsHook = {
+  fetchRecreations: () => Promise<Array<Recreation>>;
+};
+
+export const useRecreations = (): UseRecreationsHook => {
+  const fetchRecreations = async (): Promise<Array<Recreation>> => {
+    const response = await Api.get<{ [key: string]: Recreation }>('/recreations', 'partner');
+    return Object.values(response.data);
+  }
+
+  return {
+    fetchRecreations,
+  }
+}
+
 type UseRecreationHook = {
   fetchRecreation: (id: string) => Promise<Recreation>;
 };
@@ -13,6 +28,21 @@ export const useRecreation = (): UseRecreationHook => {
 
   return {
     fetchRecreation,
+  }
+}
+
+type UseRecreationCreateHook = {
+  createRecreation: (requestBody: { [key: string]: Record<string, unknown> }) => Promise<Recreation>;
+};
+
+export const UseRecreationCreate = (): UseRecreationCreateHook => {
+  const createRecreation = async (requestBody: { [key: string]: Record<string, unknown> }): Promise<Recreation> => {
+    const response = await Api.post<Recreation>('/recreations', 'partner', requestBody);
+    return response.data;
+  }
+
+  return {
+    createRecreation,
   }
 }
 
