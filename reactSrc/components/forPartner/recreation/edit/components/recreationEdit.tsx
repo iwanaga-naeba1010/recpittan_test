@@ -3,7 +3,7 @@ import { Error, LoadingContainer } from '@/components/shared/parts';
 import { Api } from '@/infrastructure';
 import { Recreation } from '@/types';
 import { RecreationImage } from '@/types/recreationImage';
-import { getQeuryStringValueByKey, isEmpty } from '@/utils';
+import { getQueryStringValueByKey, isEmpty } from '@/utils';
 import axios, { AxiosError } from 'axios';
 import React, { useEffect, useState } from 'react';
 import { createRoot } from 'react-dom/client';
@@ -21,7 +21,7 @@ const RecreationEdit: React.FC = () => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [isFileLoading, setIsFileLoading] = useState<boolean>(false);
   const id = window.location.pathname.split('/')[3];
-  const formKind = getQeuryStringValueByKey('formKind') as FormKind;
+  const formKind = getQueryStringValueByKey('formKind') as FormKind;
   const { fetchRecreation } = useRecreation();
   const { updateRecreation } = UseRecreationUpdate();
 

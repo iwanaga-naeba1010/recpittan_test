@@ -1,4 +1,4 @@
-export const getQeuryStringValueByKey = (key: string): string | undefined => {
+export const getQueryStringValueByKey = (key: string): string | undefined => {
   const search = window.location.search;
   const params = new URLSearchParams(search);
   const value = params.get(key);

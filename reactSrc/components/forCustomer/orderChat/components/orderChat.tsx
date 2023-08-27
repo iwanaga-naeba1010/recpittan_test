@@ -10,7 +10,7 @@ import {
 } from '@/components/shared/parts';
 import { Order, User } from '@/types';
 import {
-  getQeuryStringValueByKey,
+  getQueryStringValueByKey,
   removeQueryStringsByKey,
   strToBool,
 } from '@/utils';
@@ -31,7 +31,7 @@ export const OrderChat: React.FC = () => {
   const { fetchUser } = useUser();
 
   useEffect(() => {
-    const isShowFlashParam = getQeuryStringValueByKey('isShowFlash');
+    const isShowFlashParam = getQueryStringValueByKey('isShowFlash');
     setIsShowFlash(isShowFlashParam ? strToBool(isShowFlashParam) : false);
     removeQueryStringsByKey();
     (async () => {
