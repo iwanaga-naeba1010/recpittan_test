@@ -1,5 +1,6 @@
 import { Api } from "@/infrastructure";
 import { Recreation } from "@/types";
+import { useCallback } from 'react';
 
 type UseRecreationsHook = {
   fetchRecreations: () => Promise<Array<Recreation>>;
@@ -7,7 +8,7 @@ type UseRecreationsHook = {
 
 export const useRecreations = (): UseRecreationsHook => {
   const fetchRecreations = async (): Promise<Array<Recreation>> => {
-    const response = await Api.get<{ [key: string]: Recreation }>('/recreations', 'partner');
+    const response = await Api.get<{ [key: string]: Recreation }>('recreations', 'partner');
     return Object.values(response.data);
   }
 
@@ -21,14 +22,14 @@ type UseRecreationHook = {
 };
 
 export const useRecreation = (): UseRecreationHook => {
-  const fetchRecreation = async (id: string): Promise<Recreation> => {
-    const response = await Api.get<Recreation>(`/recreations/${id}`, 'partner');
+  const fetchRecreation = useCallback(async (id: string): Promise<Recreation> => {
+    const response = await Api.get<Recreation>(`recreations/${id}`, 'partner');
     return response.data;
-  }
+  }, []);
 
   return {
     fetchRecreation,
-  }
+  };
 }
 
 type UseRecreationCreateHook = {
@@ -37,7 +38,7 @@ type UseRecreationCreateHook = {
 
 export const UseRecreationCreate = (): UseRecreationCreateHook => {
   const createRecreation = async (requestBody: { [key: string]: Record<string, unknown> }): Promise<Recreation> => {
-    const response = await Api.post<Recreation>('/recreations', 'partner', requestBody);
+    const response = await Api.post<Recreation>('recreations', 'partner', requestBody);
     return response.data;
   }
 
@@ -52,7 +53,7 @@ type UseRecreationUpdateHook = {
 
 export const UseRecreationUpdate = (): UseRecreationUpdateHook => {
   const updateRecreation = async (id: string, requestBody: { [key: string]: Record<string, unknown> }): Promise<Recreation> => {
-    const response = await Api.patch<Recreation>(`/recreations/${id}`, 'partner', requestBody);
+    const response = await Api.patch<Recreation>(`recreations/${id}`, 'partner', requestBody);
     return response.data;
   }
 

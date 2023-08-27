@@ -1,14 +1,14 @@
 import { RecreationFormValues, RecreationNewForm } from '@/components/shared/form';
 import { Error } from '@/components/shared/parts';
-import { Api } from '@/infrastructure';
-import { Recreation } from '@/types';
 import { isEmpty } from '@/utils';
 import axios, { AxiosError } from 'axios';
 import React, { useState } from 'react';
 import { createRoot } from 'react-dom/client';
+import { UseRecreationCreate } from '../../hooks';
 
 const RecreationNew: React.FC = () => {
   const [errors, setErrors] = useState<Array<string>>([]);
+  const { createRecreation } = UseRecreationCreate();
 
   const onSubmit = async (values: RecreationFormValues): Promise<void> => {
     setErrors([]);
@@ -42,9 +42,9 @@ const RecreationNew: React.FC = () => {
     };
 
     try {
-      const createdRecreation = await Api.post<Recreation>(`recreations`, 'partner', requestBody);
+      const createdRecreation = await createRecreation(requestBody);
       const noticeText = 'レクを追加しました！';
-      window.location.href = `/partners/recreations/${createdRecreation.data.id}?notice=${noticeText}`;
+      window.location.href = `/partners/recreations/${createdRecreation.id}?notice=${noticeText}`;
     } catch (e) {
       if (axios.isAxiosError(e)) {
         const axiosError = e as AxiosError<Array<string>>;
