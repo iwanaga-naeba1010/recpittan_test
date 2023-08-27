@@ -1,6 +1,6 @@
-import { useEvaluationReplies } from '../hooks/useEvaluationReplies';
 import { Evaluation, EvaluationReply } from '@/types';
 import React, { useState } from 'react';
+import { useEvaluationReply } from '../hooks';
 
 type Props = {
   evaluation: Evaluation;
@@ -8,7 +8,7 @@ type Props = {
 
 export const EvaluationItem: React.FC<Props> = (props) => {
   const { evaluation } = props;
-  const { postEvaluationReply } = useEvaluationReplies();
+  const { postEvaluationReply } = useEvaluationReply();
   const [replyText, setReplyText] = useState('');
   const [reply, setReply] = useState<EvaluationReply | null>(null);
   const handleSubmit = async (): Promise<void> => {

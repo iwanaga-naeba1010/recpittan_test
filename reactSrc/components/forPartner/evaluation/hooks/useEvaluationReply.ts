@@ -5,8 +5,7 @@ type UseEvaluationRepliesHook = {
   postEvaluationReply: (evaluationId: number, message: string) => Promise<EvaluationReply>;
 };
 
-export const useEvaluationReplies = (): UseEvaluationRepliesHook => {
-  
+export const useEvaluationReply = (): UseEvaluationRepliesHook => {
   const postEvaluationReply = async (evaluationId: number, message: string): Promise<EvaluationReply> => {
     const data = {
       evaluation_reply: {
