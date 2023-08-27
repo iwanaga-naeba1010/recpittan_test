@@ -1,13 +1,11 @@
 import { FormKind, RecreationEditForm, RecreationFormValues } from '@/components/shared/form';
 import { Error, LoadingContainer } from '@/components/shared/parts';
-import { Api } from '@/infrastructure';
 import { Recreation } from '@/types';
-import { RecreationImage } from '@/types/recreationImage';
 import { getQueryStringValueByKey, isEmpty } from '@/utils';
 import axios, { AxiosError } from 'axios';
 import React, { useEffect, useState } from 'react';
 import { createRoot } from 'react-dom/client';
-import { useRecreation, UseRecreationUpdate } from '../../hooks';
+import { useRecreation, useRecreationUpdate, useRecreationCreateImage, useRecreationDeleteImage } from '../../hooks';
 
 export type UseFile = {
   handleFileAdd: (files: FileList | null, kind: string) => void;
@@ -23,7 +21,9 @@ const RecreationEdit: React.FC = () => {
   const id = window.location.pathname.split('/')[3];
   const formKind = getQueryStringValueByKey('formKind') as FormKind;
   const { fetchRecreation } = useRecreation();
-  const { updateRecreation } = UseRecreationUpdate();
+  const { updateRecreation } = useRecreationUpdate();
+  const { createRecreationImage } = useRecreationCreateImage();
+  const { deleteRecreationImage } = useRecreationDeleteImage();
 
   useEffect(() => {
     (async () => {
@@ -54,12 +54,8 @@ const RecreationEdit: React.FC = () => {
           }
         };
         setIsFileLoading(true);
-        const createdImage = await Api.post<RecreationImage>(
-          `recreations/${recreation.id}/recreation_images`,
-          'partner',
-          requestBody
-        );
-        setRecreation({ ...recreation, images: [...recreation.images, createdImage.data] });
+        const createdImage = await createRecreationImage(recreation.id, requestBody);
+        setRecreation({ ...recreation, images: [...recreation.images, createdImage] });
         setIsFileLoading(false);
       }
     };
@@ -69,7 +65,7 @@ const RecreationEdit: React.FC = () => {
   const handleFileDelete = async (id: number): Promise<void> => {
     if (!recreation) return;
     try {
-      await Api.delete(`recreations/${recreation.id}/recreation_images/${id}`, 'partner', {});
+      await deleteRecreationImage(recreation.id, id);
       setRecreation({ ...recreation, images: recreation.images.filter((recreation) => recreation.id !== id) });
     } catch (e) {
       console.log(e);

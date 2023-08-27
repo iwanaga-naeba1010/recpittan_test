@@ -2,6 +2,11 @@ import { Api } from "@/infrastructure";
 import { Recreation } from "@/types";
 import { useCallback } from 'react';
 
+type RecreationRequestBody = {
+  [key: string]: Record<string, unknown>;
+};
+
+// Provides functionality to fetch a list of recreations.
 type UseRecreationsHook = {
   fetchRecreations: () => Promise<Array<Recreation>>;
 };
@@ -17,6 +22,7 @@ export const useRecreations = (): UseRecreationsHook => {
   }
 }
 
+// Provides functionality to fetch details of a specific recreation by ID.
 type UseRecreationHook = {
   fetchRecreation: (id: string) => Promise<Recreation>;
 };
@@ -32,12 +38,13 @@ export const useRecreation = (): UseRecreationHook => {
   };
 }
 
+// Provides functionality to create a new recreation entry.
 type UseRecreationCreateHook = {
-  createRecreation: (requestBody: { [key: string]: Record<string, unknown> }) => Promise<Recreation>;
+  createRecreation: (requestBody: RecreationRequestBody) => Promise<Recreation>;
 };
 
-export const UseRecreationCreate = (): UseRecreationCreateHook => {
-  const createRecreation = async (requestBody: { [key: string]: Record<string, unknown> }): Promise<Recreation> => {
+export const useRecreationCreate = (): UseRecreationCreateHook => {
+  const createRecreation = async (requestBody: RecreationRequestBody): Promise<Recreation> => {
     const response = await Api.post<Recreation>('recreations', 'partner', requestBody);
     return response.data;
   }
@@ -47,12 +54,13 @@ export const UseRecreationCreate = (): UseRecreationCreateHook => {
   }
 }
 
+// Provides functionality to update an existing recreation entry by ID.
 type UseRecreationUpdateHook = {
-  updateRecreation: (id: string, requestBody: { [key: string]: Record<string, unknown> }) => Promise<Recreation>;
+  updateRecreation: (id: string, requestBody: RecreationRequestBody) => Promise<Recreation>;
 };
 
-export const UseRecreationUpdate = (): UseRecreationUpdateHook => {
-  const updateRecreation = async (id: string, requestBody: { [key: string]: Record<string, unknown> }): Promise<Recreation> => {
+export const useRecreationUpdate = (): UseRecreationUpdateHook => {
+  const updateRecreation = async (id: string, requestBody: RecreationRequestBody): Promise<Recreation> => {
     const response = await Api.patch<Recreation>(`recreations/${id}`, 'partner', requestBody);
     return response.data;
   }

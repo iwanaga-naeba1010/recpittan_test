@@ -4,11 +4,11 @@ import { isEmpty } from '@/utils';
 import axios, { AxiosError } from 'axios';
 import React, { useState } from 'react';
 import { createRoot } from 'react-dom/client';
-import { UseRecreationCreate } from '../../hooks';
+import { useRecreationCreate } from '../../hooks';
 
 const RecreationNew: React.FC = () => {
   const [errors, setErrors] = useState<Array<string>>([]);
-  const { createRecreation } = UseRecreationCreate();
+  const { createRecreation } = useRecreationCreate();
 
   const onSubmit = async (values: RecreationFormValues): Promise<void> => {
     setErrors([]);
