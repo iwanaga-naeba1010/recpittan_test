@@ -7,7 +7,7 @@ import { getQeuryStringValueByKey, isEmpty } from '@/utils';
 import axios, { AxiosError } from 'axios';
 import React, { useEffect, useState } from 'react';
 import { createRoot } from 'react-dom/client';
-import { useRecreationEdit } from '../../hooks';
+import { useRecreation, UseRecreationUpdate } from '../../hooks';
 
 export type UseFile = {
   handleFileAdd: (files: FileList | null, kind: string) => void;
@@ -22,21 +22,22 @@ const RecreationEdit: React.FC = () => {
   const [isFileLoading, setIsFileLoading] = useState<boolean>(false);
   const id = window.location.pathname.split('/')[3];
   const formKind = getQeuryStringValueByKey('formKind') as FormKind;
-  const { updateRecreation } = useRecreationEdit();
+  const { fetchRecreation } = useRecreation();
+  const { updateRecreation } = UseRecreationUpdate();
 
   useEffect(() => {
     (async () => {
       if (id === undefined) return;
       try {
-        const recreaionResponse = await Api.get<Recreation>(`/recreations/${id}`, 'partner');
-        console.log(recreaionResponse);
-        setRecreation({ ...recreaionResponse.data });
+        const recreationResponse = await fetchRecreation(id);
+        console.log(recreationResponse);
+        setRecreation({ ...recreationResponse });
         setIsLoading(false);
       } catch (e) {
         console.warn('error is', e);
       }
     })();
-  }, [id]);
+  }, [fetchRecreation, id]);
 
   const handleFileAdd = (files: FileList | null, kind = 'slider') => {
     if (!files || files.length <= 0) return;
