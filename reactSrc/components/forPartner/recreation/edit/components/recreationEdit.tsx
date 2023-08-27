@@ -7,6 +7,7 @@ import { getQeuryStringValueByKey, isEmpty } from '@/utils';
 import axios, { AxiosError } from 'axios';
 import React, { useEffect, useState } from 'react';
 import { createRoot } from 'react-dom/client';
+import { useRecreationEdit } from '../../hooks';
 
 export type UseFile = {
   handleFileAdd: (files: FileList | null, kind: string) => void;
@@ -21,6 +22,7 @@ const RecreationEdit: React.FC = () => {
   const [isFileLoading, setIsFileLoading] = useState<boolean>(false);
   const id = window.location.pathname.split('/')[3];
   const formKind = getQeuryStringValueByKey('formKind') as FormKind;
+  const { updateRecreation } = useRecreationEdit();
 
   useEffect(() => {
     (async () => {
@@ -104,7 +106,7 @@ const RecreationEdit: React.FC = () => {
     console.log(requestBody);
 
     try {
-      await Api.patch(`recreations/${id}`, 'partner', requestBody);
+      await updateRecreation(id, requestBody);
       const noticeText = 'レクを更新しました！';
       window.location.href = `/partners/recreations/${id}?notice=${noticeText}`;
       // TODO(okubo): redirectによる画面遷移
