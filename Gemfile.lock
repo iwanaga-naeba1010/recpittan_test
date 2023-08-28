@@ -61,7 +61,7 @@ GEM
       kaminari (~> 1.0, >= 1.2.1)
       railties (>= 6.1, < 7.1)
       ransack (>= 2.1.1, < 4)
-    activeadmin_addons (1.10.0)
+    activeadmin_addons (1.10.1)
       active_material
       railties
       redcarpet
