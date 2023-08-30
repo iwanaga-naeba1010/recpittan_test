@@ -5,7 +5,7 @@ import { getQueryStringValueByKey, isEmpty } from '@/utils';
 import axios, { AxiosError } from 'axios';
 import React, { useEffect, useState } from 'react';
 import { createRoot } from 'react-dom/client';
-import { useRecreation, useRecreationUpdate, useRecreationCreateImage, useRecreationDeleteImage } from '../../hooks';
+import { useRecreations } from '../../hooks';
 
 export type UseFile = {
   handleFileAdd: (files: FileList | null, kind: string) => void;
@@ -20,10 +20,9 @@ const RecreationEdit: React.FC = () => {
   const [isFileLoading, setIsFileLoading] = useState<boolean>(false);
   const id = window.location.pathname.split('/')[3];
   const formKind = getQueryStringValueByKey('formKind') as FormKind;
-  const { fetchRecreation } = useRecreation();
-  const { updateRecreation } = useRecreationUpdate();
-  const { createRecreationImage } = useRecreationCreateImage();
-  const { deleteRecreationImage } = useRecreationDeleteImage();
+  const {
+    fetchRecreation,
+  } = useRecreations();
 
   useEffect(() => {
     (async () => {

@@ -1,11 +1,12 @@
 import { Api } from "@/infrastructure";
 import { RecreationImage } from '@/types/recreationImage';
 
-type UseRecreationCreateImagesHook = {
+type UseRecreationImagesHook = {
   createRecreationImage: (recreationId: number, requestBody: { [key: string]: Record<string, unknown> }) => Promise<RecreationImage>;
+  deleteRecreationImage: (recreationId: number, recreationImageId: number) => Promise<void>;
 };
 
-export const useRecreationCreateImage = (): UseRecreationCreateImagesHook => {
+export const useRecreationCreateImage = (): UseRecreationImagesHook => {
   const createRecreationImage = async (recreationId: number, requestBody: { [key: string]: Record<string, unknown> }): Promise<RecreationImage> => {
     const response = await Api.post<RecreationImage>(
       `recreations/${recreationId}/recreation_images`,
@@ -14,22 +15,12 @@ export const useRecreationCreateImage = (): UseRecreationCreateImagesHook => {
     );
     return response.data;
   }
-
-  return {
-    createRecreationImage,
-  }
-}
-
-type UseRecreationDeleteImageHook = {
-  deleteRecreationImage: (recreationId: number, recreationImageId: number) => Promise<void>;
-};
-
-export const useRecreationDeleteImage = (): UseRecreationDeleteImageHook => {
   const deleteRecreationImage = async (recreationId: number, recreationImageId: number): Promise<void> => {
     await Api.delete(`recreations/${recreationId}/recreation_images/${recreationImageId}`, "partner");
   }
 
   return {
-    deleteRecreationImage,
+    createRecreationImage,
+    deleteRecreationImage
   }
 }
