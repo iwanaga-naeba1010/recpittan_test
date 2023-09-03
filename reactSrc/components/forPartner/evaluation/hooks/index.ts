@@ -1,2 +1,2 @@
-export * from './useEvaluationReply';
-export * from './useEvaluation';
+export * from './useEvaluationReplyHook';
+export * from './useEvaluationHook';

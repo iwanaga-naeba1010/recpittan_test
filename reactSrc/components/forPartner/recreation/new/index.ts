@@ -1,1 +1,1 @@
-export * from './components/recreationNew';
+export * from './components';

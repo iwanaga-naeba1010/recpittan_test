@@ -14,7 +14,7 @@ export const useEvaluationReply = (): UseEvaluationRepliesHook => {
       }
     };
 
-    const response = await Api.post<EvaluationReply>(`/recreations/${evaluationId}/evaluation_replies`, "partner", data);
+    const response = await Api.post<EvaluationReply>(`/recreations/${evaluationId}/evaluation_replies`, 'partner', data);
     return response.data;
   }
 

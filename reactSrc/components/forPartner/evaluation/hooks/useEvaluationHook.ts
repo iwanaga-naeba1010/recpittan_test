@@ -7,11 +7,9 @@ type UseEvaluationHook = {
 
 export const useEvaluation = (): UseEvaluationHook => {
   const fetchEvaluations = async (recreationId: number): Promise<Array<Evaluation>> => {
-    const response = await Api.get<{ [key: string]: Evaluation }>(`recreations/${recreationId}/evaluations`, "partner");
-    return Object.values(response.data);
+    const response = await Api.get<Array<Evaluation>>(`recreations/${recreationId}/evaluations`, 'partner');
+    return response.data;
   };
 
-  return {
-    fetchEvaluations,
-  };
+  return { fetchEvaluations };
 }
