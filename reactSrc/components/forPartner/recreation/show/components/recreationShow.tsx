@@ -3,12 +3,12 @@ import { Recreation } from '@/types';
 import React, { useEffect, useState } from 'react';
 import { createRoot } from 'react-dom/client';
 import { RecreationItem } from './recreationItem';
-import { useRecreation } from '../../hooks'
+import { useRecreations } from '../../hooks'
 
 const RecreationShow: React.FC = () => {
   const [recreation, setRecreation] = useState<Recreation>();
   const [isLoading, setIsLoading] = useState<boolean>(true);
-  const { fetchRecreation } = useRecreation();
+  const { fetchRecreation } = useRecreations();
   const id = window.location.pathname.split('/')[3];
 
   useEffect(() => {
