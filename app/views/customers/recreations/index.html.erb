@@ -14,6 +14,10 @@
         <%= f.select :kind_eq, options_for_select(Recreation.kind.values.map { |v| [v.text, v.value] }, selected: Recreation.ransack(params[:q]).kind_eq), { include_blank: 'すべて' }, class: 'form-select search-select'%>
       </div>
       <div class="nav-item px-2 mt-3">
+        <p class="font-weight-bold label-size">都道府県</p>
+        <%= f.select :recreation_prefectures_name_eq, options_for_select(@sorted_prefectures, selected: params.dig(:q, :recreation_prefectures_name_eq)), { include_blank: 'すべて' }, class: 'form-select search-select' %>
+      </div>
+      <div class="nav-item px-2 mt-3">
         <p class="font-weight-bold label-size">レクの金額</p>
         <div class="serach-forms">
           <li class="list-unstyled price-list">
