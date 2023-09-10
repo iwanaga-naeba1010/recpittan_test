@@ -1,12 +1,11 @@
 import { FormKind, RecreationEditForm, RecreationFormValues } from '@/components/shared/form';
 import { Error, LoadingContainer } from '@/components/shared/parts';
-import { Api } from '@/infrastructure';
 import { Recreation } from '@/types';
-import { RecreationImage } from '@/types/recreationImage';
-import { getQeuryStringValueByKey, isEmpty } from '@/utils';
+import { getQueryStringValueByKey, isEmpty } from '@/utils';
 import axios, { AxiosError } from 'axios';
 import React, { useEffect, useState } from 'react';
 import { createRoot } from 'react-dom/client';
+import { useRecreations, useRecreationImage } from '../../hooks';
 
 export type UseFile = {
   handleFileAdd: (files: FileList | null, kind: string) => void;
@@ -20,21 +19,29 @@ const RecreationEdit: React.FC = () => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [isFileLoading, setIsFileLoading] = useState<boolean>(false);
   const id = window.location.pathname.split('/')[3];
-  const formKind = getQeuryStringValueByKey('formKind') as FormKind;
+  const formKind = getQueryStringValueByKey('formKind') as FormKind;
+  const {
+    fetchRecreation,
+    updateRecreation,
+  } = useRecreations();
+  const {
+    createRecreationImage,
+    deleteRecreationImage,
+  } = useRecreationImage();
 
   useEffect(() => {
     (async () => {
       if (id === undefined) return;
       try {
-        const recreaionResponse = await Api.get<Recreation>(`/recreations/${id}`, 'partner');
-        console.log(recreaionResponse);
-        setRecreation({ ...recreaionResponse.data });
+        const recreationResponse = await fetchRecreation(id);
+        console.log(recreationResponse);
+        setRecreation({ ...recreationResponse });
         setIsLoading(false);
       } catch (e) {
         console.warn('error is', e);
       }
     })();
-  }, [id]);
+  }, [fetchRecreation, id]);
 
   const handleFileAdd = (files: FileList | null, kind = 'slider') => {
     if (!files || files.length <= 0) return;
@@ -51,12 +58,8 @@ const RecreationEdit: React.FC = () => {
           }
         };
         setIsFileLoading(true);
-        const createdImage = await Api.post<RecreationImage>(
-          `recreations/${recreation.id}/recreation_images`,
-          'partner',
-          requestBody
-        );
-        setRecreation({ ...recreation, images: [...recreation.images, createdImage.data] });
+        const createdImage = await createRecreationImage(recreation.id, requestBody);
+        setRecreation({ ...recreation, images: [...recreation.images, createdImage] });
         setIsFileLoading(false);
       }
     };
@@ -66,7 +69,7 @@ const RecreationEdit: React.FC = () => {
   const handleFileDelete = async (id: number): Promise<void> => {
     if (!recreation) return;
     try {
-      await Api.delete(`recreations/${recreation.id}/recreation_images/${id}`, 'partner', {});
+      await deleteRecreationImage(recreation.id, id);
       setRecreation({ ...recreation, images: recreation.images.filter((recreation) => recreation.id !== id) });
     } catch (e) {
       console.log(e);
@@ -104,7 +107,7 @@ const RecreationEdit: React.FC = () => {
     console.log(requestBody);
 
     try {
-      await Api.patch(`recreations/${id}`, 'partner', requestBody);
+      await updateRecreation(id, requestBody);
       const noticeText = 'レクを更新しました！';
       window.location.href = `/partners/recreations/${id}?notice=${noticeText}`;
       // TODO(okubo): redirectによる画面遷移

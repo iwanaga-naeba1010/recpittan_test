@@ -1,27 +1,28 @@
 import { LoadingContainer } from '@/components/shared';
-import { Api } from '@/infrastructure';
 import { Recreation } from '@/types';
 import React, { useEffect, useState } from 'react';
 import { createRoot } from 'react-dom/client';
 import { RecreationItem } from './recreationItem';
+import { useRecreations } from '../../hooks'
 
 const RecreationShow: React.FC = () => {
   const [recreation, setRecreation] = useState<Recreation>();
   const [isLoading, setIsLoading] = useState<boolean>(true);
+  const { fetchRecreation } = useRecreations();
   const id = window.location.pathname.split('/')[3];
 
   useEffect(() => {
     (async () => {
       if (!id) return;
       try {
-        const recreationResponse = await Api.get<Recreation>(`recreations/${id}`, 'partner');
-        setRecreation({ ...recreationResponse.data });
+        const recreationResponse = await fetchRecreation(id);
+        setRecreation({ ...recreationResponse });
         setIsLoading(false);
       } catch (e) {
         console.warn('error is', e);
       }
     })();
-  }, []);
+  }, [fetchRecreation, id]);
 
   if (isLoading) {
     return <LoadingContainer />;

@@ -18,9 +18,13 @@ const FacilityChat: React.FC<FacilityChatProps> = (props) => {
   const { chat } = props;
   return (
     <div className='row justify-content-end pt-2'>
-      <div className='col-auto align-self-end time'>{prettyHM(chat.createdAt)}</div>
+      <div className='col-auto align-self-end time'>
+        {prettyHM(chat.createdAt)}
+      </div>
       {/* TODO(okubo): linkあればlink化する */}
-      <div className='col-md-auto customer-text'>{replaceNewLineWithBr(chat.message)}</div>
+      <div className='col-md-auto customer-text'>
+        {replaceNewLineWithBr(chat.message)}
+      </div>
     </div>
   );
 };
@@ -40,12 +44,19 @@ const FileItem: React.FC<FileProps> = (props) => {
       <div className='col-md-auto'>
         <div className='name'>{recreation.profile?.name}</div>
         <div className=' text'>
-          <a href={chat.fileUrl} className='text-black' target='_blank' rel='noopener noreferrer'>
+          <a
+            href={chat.fileUrl}
+            className='text-black'
+            target='_blank'
+            rel='noopener noreferrer'
+          >
             {chat.filename}
           </a>
         </div>
       </div>
-      <div className='col-auto align-self-end time'>{prettyHM(chat.createdAt)}</div>
+      <div className='col-auto align-self-end time'>
+        {prettyHM(chat.createdAt)}
+      </div>
     </div>
   );
 };
@@ -69,9 +80,13 @@ const PartnerChat: React.FC<PartnerChatProps> = (props) => {
             {replaceNewLineWithBr(chat.message)}
           </div>
         </div>
-        <div className='col-auto align-self-end time'>{prettyHM(chat.createdAt)}</div>
+        <div className='col-auto align-self-end time'>
+          {prettyHM(chat.createdAt)}
+        </div>
       </div>
-      {chat.fileUrl !== null && <FileItem key={chat.id} chat={chat} recreation={recreation} />}
+      {chat.fileUrl !== null && (
+        <FileItem key={chat.id} chat={chat} recreation={recreation} />
+      )}
     </>
   );
 };
@@ -94,7 +109,9 @@ export const ChatItem: React.FC<Props> = (props) => {
       {chats?.map((chat, i) => (
         <div key={i}>
           {currentUser.id === chat.userId && <FacilityChat chat={chat} />}
-          {currentUser.id !== chat.userId && <PartnerChat recreation={recreation} chat={chat} />}
+          {currentUser.id !== chat.userId && (
+            <PartnerChat recreation={recreation} chat={chat} />
+          )}
         </div>
       ))}
     </>

@@ -1,19 +1,20 @@
 import { LoadingContainer } from '@/components/shared';
-import { Api } from '@/infrastructure';
 import { Recreation } from '@/types';
 import React, { useEffect, useState } from 'react';
 import { createRoot } from 'react-dom/client';
 import { RecreationItem } from './recreationItem';
+import { useRecreations } from '../../hooks'
 
 const RecreationIndex: React.FC = () => {
   const [recreations, setRecreations] = useState<Array<Recreation>>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
+  const { fetchRecreations } = useRecreations();
 
   useEffect(() => {
     (async () => {
       try {
-        const recreationsResponse = await Api.get<Array<Recreation>>('/recreations', 'partner');
-        setRecreations([...recreationsResponse.data]);
+        const recreationsResponse = await fetchRecreations();
+        setRecreations([...recreationsResponse]);
         setIsLoading(false);
       } catch (e) {
         console.warn('error is', e);
