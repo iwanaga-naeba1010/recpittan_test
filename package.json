@@ -11,7 +11,7 @@
   },
   "dependencies": {
     "@activeadmin/activeadmin": "^3.0.0",
-    "@babel/preset-react": "^7.22.5",
+    "@babel/preset-react": "^7.22.15",
     "@babel/preset-typescript": "^7.22.11",
     "@fortawesome/fontawesome-free": "^5.15.4",
     "@popperjs/core": "^2.11.8",
