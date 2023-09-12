@@ -21,7 +21,7 @@ ActiveAdmin.register_page 'Invoices' do
       current_time = Time.zone.now
       invoices = []
 
-      User.customers.all.includes(:company, :orders).each do |customer|
+      User.customers.includes(:company, :orders).find_each do |customer|
         orders = customer.orders.to_a.select { |order| order.status.finished? }
         next if orders.blank?
 
