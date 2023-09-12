@@ -8,7 +8,7 @@ namespace :send_final_check_mail do
       final_check_status: [:not_send, nil],
       start_at: Time.current..3.days.since.end_of_day,
       status: :waiting_for_an_event_to_take_place
-    ).each do |order|
+    ).find_each do |order|
       ActiveRecord::Base.transaction do
         order.update!(final_check_status: :sent)
         FinalCheckMailer.notify(order:).deliver_now
