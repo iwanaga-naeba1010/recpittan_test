@@ -115,6 +115,7 @@ ja:
         profile_id: プロフィール
       order:
         user: 施設
+        partner: パートナー名
         recreation: レク
         zip: 郵便番号
         prefecture: 都道府県

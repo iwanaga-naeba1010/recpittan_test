@@ -5,11 +5,9 @@ class Customers::RecreationsController < Customers::ApplicationController
   skip_before_action :require_customer
 
   def index
-    @q = Recreation.includes(:recreation_images, :recreation_prefectures).public_recs.ransack(params[:q])
+    @q = Recreation.includes(:recreation_images).public_recs.ransack(params[:q])
     @categories = Tag.categories
     @recs = @q.result(distinct: true).page(params[:page]).per(30)
-    @distinct_prefectures = RecreationPrefecture.distinct.pluck(:name)
-    @sorted_prefectures = RecreationPrefecture.names & @distinct_prefectures
     value = @q.base.conditions&.first&.values&.first&.value
     is_tag_class = @q.base.conditions&.first&.attributes&.first&.klass == Tag
     if value && is_tag_class
