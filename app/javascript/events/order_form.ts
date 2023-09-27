@@ -2,12 +2,17 @@
  * order/newと正式依頼のprefectureとcityを動的に扱うformです
  */
 import * as $ from 'jquery';
-import { findAllPrefectures, findCityByPrefectureCode } from '../packs/prefectures';
+import {
+  findAllPrefectures,
+  findCityByPrefectureCode,
+} from '../packs/prefectures';
 import { findAddressByZip } from '../packs/zip';
 
 const App = async () => {
   // NOTE(okubo): spac入ることあるので削除
-  const defaultPrefecture: string = $('#order_prefecture').text().replace(/\s/g, '');
+  const defaultPrefecture: string = $('#order_prefecture')
+    .text()
+    .replace(/\s/g, '');
   const defaultCity: string = $('#order_city').text().replace(/\s/g, '');
 
   const prefectures = await findAllPrefectures();
@@ -17,14 +22,15 @@ const App = async () => {
     $('#order_prefecture').append(
       $('<option>', {
         value: prefecture.prefName,
-        text: prefecture.prefName
+        text: prefecture.prefName,
       })
     );
   });
 
   const applyCity = async () => {
     const prefCode = prefectures.result.filter(
-      (prefecture) => prefecture.prefName === $('#order_prefecture option:selected').text()
+      (prefecture) =>
+        prefecture.prefName === $('#order_prefecture option:selected').text()
     )[0].prefCode;
 
     if (prefCode === null) {
@@ -37,7 +43,7 @@ const App = async () => {
       $('#order_city').append(
         $('<option>', {
           value: city.cityName,
-          text: city.cityName
+          text: city.cityName,
         })
       );
     });
@@ -45,11 +51,17 @@ const App = async () => {
 
   // NOTE(okubo): 新規作成は空stringが入るので、ここで制御
   if (defaultPrefecture !== '' && defaultCity !== '') {
-    $(`#order_prefecture option[value=${defaultPrefecture}]`).attr('selected', 'selected');
+    $(`#order_prefecture option[value=${defaultPrefecture}]`).attr(
+      'selected',
+      'selected'
+    );
     $(`#order_city option[value=${defaultCity}]`).attr('selected', 'selected');
     applyCity().then(() => {
       // NOTE(okubo): 市区町村をセットしてから、デフォルトの市区町村をselect
-      $(`#order_city option[value=${defaultCity}]`).attr('selected', 'selected');
+      $(`#order_city option[value=${defaultCity}]`).attr(
+        'selected',
+        'selected'
+      );
     });
   }
 

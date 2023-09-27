@@ -8,7 +8,7 @@ const inputValue: InputValue = {
   inputZip: 'user_company_attributes_zip',
   inputPrefecture: 'user_company_attributes_prefecture',
   inputCity: 'user_company_attributes_city',
-  inputStreet: 'user_company_attributes_street'
+  inputStreet: 'user_company_attributes_street',
 };
 
 {

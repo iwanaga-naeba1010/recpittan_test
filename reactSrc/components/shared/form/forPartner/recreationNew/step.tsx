@@ -11,7 +11,10 @@ export const Step: React.FC<Props> = ({ totalCounts, activeStep }) => {
     <div className='d-flex'>
       {[...Array(totalCounts)].map((_, step) =>
         step === activeStep ? (
-          <p key={step} className='px-1 small text-black font-weight-bold border border-2 border-dark rounded-pill'>
+          <p
+            key={step}
+            className='px-1 small text-black font-weight-bold border border-2 border-dark rounded-pill'
+          >
             ステップ{step + 1}
           </p>
         ) : (

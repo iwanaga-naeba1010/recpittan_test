@@ -1,9 +1,16 @@
-import { LoadingIndicator, ValidationErrorMessage } from '@/components/shared/parts';
+import {
+  LoadingIndicator,
+  ValidationErrorMessage,
+} from '@/components/shared/parts';
 import { Essential } from '@/components/shared/parts/essential';
 import { Api } from '@/infrastructure';
 import { Recreation, RecreationPrefecture } from '@/types';
 import React, { useEffect, useState } from 'react';
-import { FieldErrors, UseFormGetValues, UseFormRegister } from 'react-hook-form';
+import {
+  FieldErrors,
+  UseFormGetValues,
+  UseFormRegister,
+} from 'react-hook-form';
 import { PrefectureItem } from './prefectureItem';
 import { RecreationFormValues } from './recreationNewForm';
 
@@ -44,13 +51,20 @@ export const FirstStep: React.FC<Props> = (props) => {
   const [show, setShow] = useState(false);
   const [isSending, setIsSending] = useState<boolean>(false);
   const [title, setTitle] = useState<string>(getValues('title'));
-  const [secondTitle, setSecondTitle] = useState<string>(getValues('secondTitle'));
-  const [description, setDescription] = useState<string>(getValues('description'));
+  const [secondTitle, setSecondTitle] = useState<string>(
+    getValues('secondTitle')
+  );
+  const [description, setDescription] = useState<string>(
+    getValues('description')
+  );
 
   useEffect(() => {
     (async () => {
       try {
-        const recreationConfig = await Api.get<Config>(`/recreations/config_data`, 'partner');
+        const recreationConfig = await Api.get<Config>(
+          `/recreations/config_data`,
+          'partner'
+        );
         setConfig(recreationConfig.data);
       } catch (e) {
         console.warn('error is', e);
@@ -66,14 +80,20 @@ export const FirstStep: React.FC<Props> = (props) => {
         'partner',
         { recreationPrefecture: { name: prefecture } }
       );
-      setRecreation({ ...recreation, prefectures: [...recreation.prefectures, createdPrefecture.data] });
+      setRecreation({
+        ...recreation,
+        prefectures: [...recreation.prefectures, createdPrefecture.data],
+      });
       setIsSending(false);
     } catch (e) {
       console.log(e);
     }
   };
 
-  const handleUpdatePrefecture = async (id: number, prefectureName: string): Promise<void> => {
+  const handleUpdatePrefecture = async (
+    id: number,
+    prefectureName: string
+  ): Promise<void> => {
     if (!recreation || !setRecreation) return;
     try {
       const updatedPrefecture = await Api.patch<RecreationPrefecture>(
@@ -82,7 +102,9 @@ export const FirstStep: React.FC<Props> = (props) => {
         { recreationPrefecture: { name: prefectureName } }
       );
       const oldPrefectures = [...recreation.prefectures];
-      const index = oldPrefectures.indexOf(oldPrefectures.filter((p) => p.id == id)[0]);
+      const index = oldPrefectures.indexOf(
+        oldPrefectures.filter((p) => p.id == id)[0]
+      );
       const newPrefectures = oldPrefectures;
       newPrefectures[index] = updatedPrefecture.data;
       setRecreation({ ...recreation, prefectures: newPrefectures });
@@ -94,8 +116,15 @@ export const FirstStep: React.FC<Props> = (props) => {
   const handleRemove = async (id: number): Promise<void> => {
     if (recreation && setRecreation) {
       try {
-        await Api.delete(`recreations/${recreation.id}/recreation_prefectures/${id}`, 'partner', {});
-        setRecreation({ ...recreation, prefectures: recreation.prefectures.filter((p) => p.id !== id) });
+        await Api.delete(
+          `recreations/${recreation.id}/recreation_prefectures/${id}`,
+          'partner',
+          {}
+        );
+        setRecreation({
+          ...recreation,
+          prefectures: recreation.prefectures.filter((p) => p.id !== id),
+        });
       } catch (e) {
         console.log(e);
       }
@@ -119,12 +148,20 @@ export const FirstStep: React.FC<Props> = (props) => {
           <Essential />
         </div>
         <p className='small my-0'>
-          登録するレクの形式を選択してください。 郵送レクは材料を渡して当日は施設の方々だけで実施する形式です
+          登録するレクの形式を選択してください。
+          郵送レクは材料を渡して当日は施設の方々だけで実施する形式です
         </p>
         {config.kind.map((kind) => (
           <div key={kind.name}>
-            <input type='radio' id={`kind${kind.enumKey}`} value={kind.enumKey} {...register('kind')} />
-            <label htmlFor={`kind${kind.enumKey}`}>{kind.name}でレクを実施</label>
+            <input
+              type='radio'
+              id={`kind${kind.enumKey}`}
+              value={kind.enumKey}
+              {...register('kind')}
+            />
+            <label htmlFor={`kind${kind.enumKey}`}>
+              {kind.name}でレクを実施
+            </label>
           </div>
         ))}
       </div>
@@ -134,18 +171,22 @@ export const FirstStep: React.FC<Props> = (props) => {
           <h5 className='text-black font-weight-bold'>タイトルを入力</h5>
           <Essential />
         </div>
-        <p className='small my-0'>レクの分かりやすいタイトルを入力してください(オンラインの記載は必要ありません)</p>
+        <p className='small my-0'>
+          レクの分かりやすいタイトルを入力してください(オンラインの記載は必要ありません)
+        </p>
         <input
           className='p-2 w-100 rounded border border-secondary'
           placeholder='ピアノと歌のジャズコンサート'
           maxLength={42}
           {...register('title', {
             required: 'タイトルは必須です',
-            maxLength: 42
+            maxLength: 42,
           })}
           onChange={(e) => setTitle(e.target.value)}
         />
-        {errors.title && errors.title.message && <ValidationErrorMessage message={errors.title.message} />}
+        {errors.title && errors.title.message && (
+          <ValidationErrorMessage message={errors.title.message} />
+        )}
         <p className='small my-0'>{title.length}/42文字まで</p>
       </div>
 
@@ -161,7 +202,7 @@ export const FirstStep: React.FC<Props> = (props) => {
           maxLength={35}
           {...register('secondTitle', {
             required: 'サブタイトルは必須です',
-            maxLength: 35
+            maxLength: 35,
           })}
           onChange={(e) => setSecondTitle(e.target.value)}
         />
@@ -180,22 +221,30 @@ export const FirstStep: React.FC<Props> = (props) => {
         <select
           className='p-2 w-100 rounded border border-secondary'
           {...register('minutes', {
-            required: '所要時間は必須です'
+            required: '所要時間は必須です',
           })}
         >
           <option></option>
           {config.minutes.map((minute: number) => (
-            <option key={minute} value={minute} selected={getValues('minutes') === minute}>
+            <option
+              key={minute}
+              value={minute}
+              selected={getValues('minutes') === minute}
+            >
               {minute}分
             </option>
           ))}
         </select>
-        {errors.title && errors.title.message && <ValidationErrorMessage message={errors.title.message} />}
+        {errors.title && errors.title.message && (
+          <ValidationErrorMessage message={errors.title.message} />
+        )}
       </div>
 
       <div className='flowOfDay'>
         <div className='d-flex mt-4'>
-          <h5 className='text-black font-weight-bold'>当日のタイムスケジュールを入力</h5>
+          <h5 className='text-black font-weight-bold'>
+            当日のタイムスケジュールを入力
+          </h5>
           <Essential />
         </div>
         <p className='small my-0'>レクのタイムスケジュールを入力してください</p>
@@ -204,7 +253,7 @@ export const FirstStep: React.FC<Props> = (props) => {
           placeholder={flowOfDayPlaceholderText}
           className='p-1 w-100 rounded border border-secondary'
           {...register('flowOfDay', {
-            required: 'タイムスケジュールは必須です'
+            required: 'タイムスケジュールは必須です',
           })}
         />
         {errors.flowOfDay && errors.flowOfDay.message && (
@@ -217,7 +266,9 @@ export const FirstStep: React.FC<Props> = (props) => {
           <h5 className='text-black font-weight-bold'>レクの内容を入力</h5>
           <Essential />
         </div>
-        <p className='small my-0'>どんな内容で、どんな体験ができるのか分かりやすく入力してください</p>
+        <p className='small my-0'>
+          どんな内容で、どんな体験ができるのか分かりやすく入力してください
+        </p>
         <textarea
           rows={15}
           placeholder={descriptionPlaceholderText}
@@ -231,7 +282,9 @@ export const FirstStep: React.FC<Props> = (props) => {
 
       <div className='category'>
         <div className='d-flex mt-4'>
-          <h5 className='text-black font-weight-bold'>レクのカテゴリーを選択</h5>
+          <h5 className='text-black font-weight-bold'>
+            レクのカテゴリーを選択
+          </h5>
           <Essential />
         </div>
         <p className='small my-0'>プログラムに合うカテゴリーを選んでください</p>
@@ -242,22 +295,32 @@ export const FirstStep: React.FC<Props> = (props) => {
         >
           <option></option>
           {config.categories.map((category) => (
-            <option key={category.name} value={category.enumKey} selected={getValues('category') === category.enumKey}>
+            <option
+              key={category.name}
+              value={category.enumKey}
+              selected={getValues('category') === category.enumKey}
+            >
               {category.name}
             </option>
           ))}
         </select>
-        {errors.category?.message && <ValidationErrorMessage message={errors?.category?.message} />}
+        {errors.category?.message && (
+          <ValidationErrorMessage message={errors?.category?.message} />
+        )}
       </div>
 
       {recreation !== undefined && recreation?.kind.key === 'visit' && (
         <div className='area'>
           <div className='d-flex mt-4'>
-            <h5 className='text-black font-weight-bold'>受付可能エリアを選択</h5>
+            <h5 className='text-black font-weight-bold'>
+              受付可能エリアを選択
+            </h5>
             <Essential />
           </div>
 
-          <p className='small my-0'>レクの受付可能エリア（都道府県）を選択してください</p>
+          <p className='small my-0'>
+            レクの受付可能エリア（都道府県）を選択してください
+          </p>
           {recreation?.prefectures?.map((prefecture) => (
             <PrefectureItem
               key={prefecture.id}
@@ -288,13 +351,25 @@ export const FirstStep: React.FC<Props> = (props) => {
           <h5 className='text-black font-weight-bold'>参加人数制限を設定</h5>
           <Essential />
         </div>
-        <p className='small my-0'>レクに参加できる人数制限を設定することができます</p>
-        <input type='radio' id='numberOfFacilitiesTrue' name='number_of_facilities' onClick={() => setShow(true)} />
+        <p className='small my-0'>
+          レクに参加できる人数制限を設定することができます
+        </p>
+        <input
+          type='radio'
+          id='numberOfFacilitiesTrue'
+          name='number_of_facilities'
+          onClick={() => setShow(true)}
+        />
         <label htmlFor='numberOfFacilitiesTrue' onClick={() => setShow(true)}>
           あり
         </label>
         <br />
-        <input type='radio' id='numberOfFacilitiesFalse' name='number_of_facilities' onClick={() => setShow(false)} />
+        <input
+          type='radio'
+          id='numberOfFacilitiesFalse'
+          name='number_of_facilities'
+          onClick={() => setShow(false)}
+        />
         <label htmlFor='numberOfFacilitiesFalse' onClick={() => setShow(false)}>
           なし
         </label>
@@ -308,7 +383,9 @@ export const FirstStep: React.FC<Props> = (props) => {
             />
           </>
         )}
-        {errors.capacity && errors.capacity.message && <ValidationErrorMessage message={errors?.capacity?.message} />}
+        {errors.capacity && errors.capacity.message && (
+          <ValidationErrorMessage message={errors?.capacity?.message} />
+        )}
       </div>
     </div>
   );

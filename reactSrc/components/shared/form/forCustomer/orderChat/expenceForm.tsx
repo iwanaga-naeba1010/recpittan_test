@@ -17,8 +17,8 @@ export const ExpenseForm: React.FC<Props> = (props): JSX.Element => {
   const { register, handleSubmit, setValue } = useForm<ExpenseFormValues>({
     mode: 'onChange',
     defaultValues: {
-      expenses: order.expenses
-    }
+      expenses: order.expenses,
+    },
   });
 
   useEffect(() => {
@@ -28,16 +28,20 @@ export const ExpenseForm: React.FC<Props> = (props): JSX.Element => {
   const onSubmit = async (values: ExpenseFormValues): Promise<void> => {
     const requestBody: { [key: string]: ExpenseFormValues } = {
       order: {
-        expenses: values.expenses
-      }
+        expenses: values.expenses,
+      },
     };
 
     try {
-      const response = await Api.patch<Order>(`/orders/${order.id}`, 'customer', requestBody);
+      const response = await Api.patch<Order>(
+        `/orders/${order.id}`,
+        'customer',
+        requestBody
+      );
       setOrder({
         ...order,
         expenses: response.data.expenses,
-        totalPriceForCustomer: response.data.totalPriceForCustomer
+        totalPriceForCustomer: response.data.totalPriceForCustomer,
       });
       setCanEdit(false);
     } catch (e) {
@@ -52,7 +56,11 @@ export const ExpenseForm: React.FC<Props> = (props): JSX.Element => {
           諸経費
           <br />
           {!canEdit && order.isEditable && (
-            <a id='expensesEditButton' className='clink' onClick={() => setCanEdit(true)}>
+            <a
+              id='expensesEditButton'
+              className='clink'
+              onClick={() => setCanEdit(true)}
+            >
               編集
             </a>
           )}
@@ -60,7 +68,12 @@ export const ExpenseForm: React.FC<Props> = (props): JSX.Element => {
         {canEdit ? (
           <>
             <div className='col-7'>
-              <input id='expensesInput' className='form-control text-end' type='number' {...register('expenses')} />
+              <input
+                id='expensesInput'
+                className='form-control text-end'
+                type='number'
+                {...register('expenses')}
+              />
             </div>
 
             <div className='col-2 py-0'>

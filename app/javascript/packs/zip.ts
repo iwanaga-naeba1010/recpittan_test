@@ -17,5 +17,7 @@ interface Response {
 }
 
 export const findAddressByZip = async (zip: string): Promise<Response> => {
-  return get<Response>(`https://zipcloud.ibsnet.co.jp/api/search?zipcode=${zip}`);
+  return get<Response>(
+    `https://zipcloud.ibsnet.co.jp/api/search?zipcode=${zip}`
+  );
 };

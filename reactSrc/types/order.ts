@@ -28,5 +28,9 @@ export interface Order extends BaseRecord {
 
 export type OrderRequest = Omit<
   Order,
-  'id' | 'totalPriceForCustomer' | 'totalFacilityPriceForCustomer' | 'totalMaterialPriceForCustomer' | 'recreation'
+  | 'id'
+  | 'totalPriceForCustomer'
+  | 'totalFacilityPriceForCustomer'
+  | 'totalMaterialPriceForCustomer'
+  | 'recreation'
 >;

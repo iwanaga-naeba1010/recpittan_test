@@ -3,7 +3,7 @@ import { Report } from './report';
 import { EvaluationReply } from './evaluationReply';
 
 export interface Evaluation extends BaseEnum {
-  communication : number;
+  communication: number;
   ingenuity: number;
   isPublic: boolean;
   message: string;

@@ -15,15 +15,17 @@ export type ChatFormValues = Pick<Chat, 'message'>;
 
 export const ChatForm: React.FC<Props> = (props): JSX.Element => {
   const { order, loadChats } = props;
-  const { register, handleSubmit, setValue } = useForm<ChatFormValues>({ mode: 'onChange' });
+  const { register, handleSubmit, setValue } = useForm<ChatFormValues>({
+    mode: 'onChange',
+  });
   const [errors, setErrors] = useState<Array<string>>([]);
 
   const onSubmit = async (values: ChatFormValues): Promise<void> => {
     setErrors([]);
     const requestBody: { [key: string]: ChatFormValues } = {
       chat: {
-        message: values.message
-      }
+        message: values.message,
+      },
     };
 
     try {
@@ -47,7 +49,11 @@ export const ChatForm: React.FC<Props> = (props): JSX.Element => {
       <form className='chat' onSubmit={handleSubmit(onSubmit)}>
         <div className='row align-items-center'>
           <div className='col-10 pe-0'>
-            <textarea id='chatInput' {...register('message')} className='form-control chat-message' />
+            <textarea
+              id='chatInput'
+              {...register('message')}
+              className='form-control chat-message'
+            />
           </div>
           <div className='col-2 text-center px-1'>
             <button id='chatSubmit' type='submit' className='btn btn-send'>

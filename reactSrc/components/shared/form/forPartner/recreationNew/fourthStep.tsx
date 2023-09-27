@@ -6,7 +6,11 @@ type Props = {
 };
 
 const getRecreationKind = (kind: string): string => {
-  const kinds: { [key: string]: string } = { online: 'オンライン', visit: '訪問', mail: '郵送' };
+  const kinds: { [key: string]: string } = {
+    online: 'オンライン',
+    visit: '訪問',
+    mail: '郵送',
+  };
   return kinds[kind];
 };
 
@@ -19,7 +23,7 @@ const categoryName = (category: string): string => {
     travel: '旅行',
     hobby: '趣味',
     food: '食べ物',
-    other: 'その他'
+    other: 'その他',
   };
   return categories[category];
 };
@@ -39,7 +43,7 @@ export const FourthStep: React.FC<Props> = ({ getValues }) => {
     additionalFacilityFee,
     youtubeId,
     bringYourOwnItem,
-    extraInformation
+    extraInformation,
   } = getValues();
 
   return (
@@ -70,7 +74,9 @@ export const FourthStep: React.FC<Props> = ({ getValues }) => {
       </div>
 
       <div className='mt-4'>
-        <h5 className='text-black font-weight-bold'>当日のタイムスケジュール</h5>
+        <h5 className='text-black font-weight-bold'>
+          当日のタイムスケジュール
+        </h5>
         <p>{flowOfDay}</p>
       </div>
 

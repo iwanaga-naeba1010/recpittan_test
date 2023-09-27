@@ -24,7 +24,7 @@ export const RecreationEditForm: React.FC<Props> = (props) => {
     register,
     handleSubmit,
     getValues,
-    formState: { errors }
+    formState: { errors },
   } = useForm<RecreationFormValues>({
     mode: 'onChange',
     defaultValues: {
@@ -45,8 +45,8 @@ export const RecreationEditForm: React.FC<Props> = (props) => {
       category: recreation.category.key,
       prefectures: [],
       kind: recreation.kind.key,
-      profileId: recreation.profile.id
-    }
+      profileId: recreation.profile.id,
+    },
   });
 
   return (
@@ -62,9 +62,16 @@ export const RecreationEditForm: React.FC<Props> = (props) => {
           />
         )}
         {kind === 'price' && (
-          <SecondStep getValues={getValues} register={register} recreation={recreation} useFile={useFile} />
+          <SecondStep
+            getValues={getValues}
+            register={register}
+            recreation={recreation}
+            useFile={useFile}
+          />
         )}
-        {kind === 'profile' && <ThirdStep register={register} getValues={getValues} />}
+        {kind === 'profile' && (
+          <ThirdStep register={register} getValues={getValues} />
+        )}
         <button
           type='submit'
           className='my-3 py-2 w-100 rounded text-white font-weight-bold bg-primary border border-primary'

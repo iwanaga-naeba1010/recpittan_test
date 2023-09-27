@@ -1,7 +1,12 @@
 import { Error } from '@/components/shared';
 import { Api } from '@/infrastructure';
 import { City, Order, Prefecture, PreferredDate, Recreation } from '@/types';
-import { findAddressByZip, findAllPrefectures, findCityByPrefectureCode, isEmpty } from '@/utils';
+import {
+  findAddressByZip,
+  findAllPrefectures,
+  findCityByPrefectureCode,
+  isEmpty,
+} from '@/utils';
 import axios, { AxiosError } from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
@@ -49,7 +54,7 @@ export const ModalForm: React.FC<Props> = (props) => {
     handleSubmit,
     setValue,
     getValues,
-    formState: { isValid }
+    formState: { isValid },
   } = useForm<ModalForlValues>({
     mode: 'onChange',
     defaultValues: {
@@ -67,8 +72,8 @@ export const ModalForm: React.FC<Props> = (props) => {
       city: order.city,
       street: order.street,
       building: order.building,
-      couponCode: order.couponCode
-    }
+      couponCode: order.couponCode,
+    },
   });
 
   const filterCurrentPrefecture = (prefName: string): Prefecture =>
@@ -78,7 +83,10 @@ export const ModalForm: React.FC<Props> = (props) => {
     (async () => {
       try {
         setErrors([]);
-        const response = await Api.get<PreferredDate>('/orders/preferred_date', 'customer');
+        const response = await Api.get<PreferredDate>(
+          '/orders/preferred_date',
+          'customer'
+        );
         setPreferredDate(response.data);
 
         const { data } = await findAllPrefectures();
@@ -130,19 +138,27 @@ export const ModalForm: React.FC<Props> = (props) => {
   const onSubmit = async (values: ModalForlValues): Promise<void> => {
     setErrors([]);
     const startAt: Date = new Date(
-      `${getValues('year')}-${getValues('month')}-${getValues('day')} ${getValues('startHour')}:${getValues(
-        'startMinute'
-      )}`
+      `${getValues('year')}-${getValues('month')}-${getValues(
+        'day'
+      )} ${getValues('startHour')}:${getValues('startMinute')}`
     );
 
     const endAt: Date = new Date(
-      `${getValues('year')}-${getValues('month')}-${getValues('day')} ${getValues('endHour')}:${getValues('endMinute')}`
+      `${getValues('year')}-${getValues('month')}-${getValues(
+        'day'
+      )} ${getValues('endHour')}:${getValues('endMinute')}`
     );
 
     const requestBody: {
       [key: string]: Omit<
         ModalForlValues,
-        'year' | 'month' | 'day' | 'startHour' | 'startMinute' | 'endHour' | 'endMinute'
+        | 'year'
+        | 'month'
+        | 'day'
+        | 'startHour'
+        | 'startMinute'
+        | 'endHour'
+        | 'endMinute'
       >;
     } = {
       order: {
@@ -155,8 +171,8 @@ export const ModalForm: React.FC<Props> = (props) => {
         numberOfFacilities: values.numberOfFacilities,
         couponCode: isCouponApplied ? values.couponCode : '',
         startAt,
-        endAt
-      }
+        endAt,
+      },
     };
 
     try {
@@ -175,7 +191,13 @@ export const ModalForm: React.FC<Props> = (props) => {
   };
 
   return (
-    <div className='modal' id='orderModal' tabIndex={-1} aria-labelledby='orderModalLabel' aria-hidden='true'>
+    <div
+      className='modal'
+      id='orderModal'
+      tabIndex={-1}
+      aria-labelledby='orderModalLabel'
+      aria-hidden='true'
+    >
       <div className='modal-dialog modal-lg'>
         <div className='modal-content'>
           <div className='modal-header'>
@@ -202,7 +224,10 @@ export const ModalForm: React.FC<Props> = (props) => {
                   <div className='row'>
                     <div className='col-12'>希望日</div>
                     <div className='form-group col-3'>
-                      <select {...register('year', { required: true })} className='form-control'>
+                      <select
+                        {...register('year', { required: true })}
+                        className='form-control'
+                      >
                         <option value=''></option>
                         {preferredDate?.years.map((year) => (
                           <option key={year} value={year}>
@@ -213,7 +238,10 @@ export const ModalForm: React.FC<Props> = (props) => {
                     </div>
                     <div className='col-auto p-0 flex-v-c'>年</div>
                     <div className='form-group col-3'>
-                      <select {...register('month', { required: true })} className='form-control'>
+                      <select
+                        {...register('month', { required: true })}
+                        className='form-control'
+                      >
                         <option value=''></option>
                         {preferredDate?.months.map((month) => (
                           <option key={month} value={month}>
@@ -224,7 +252,10 @@ export const ModalForm: React.FC<Props> = (props) => {
                     </div>
                     <div className='col-auto p-0 flex-v-c'>月</div>
                     <div className='form-group col-3'>
-                      <select {...register('day', { required: true })} className='form-control'>
+                      <select
+                        {...register('day', { required: true })}
+                        className='form-control'
+                      >
                         <option value=''></option>
                         {preferredDate?.days.map((day) => (
                           <option key={day} value={day}>
@@ -238,7 +269,10 @@ export const ModalForm: React.FC<Props> = (props) => {
                   <div className='row'>
                     <div className='col-12'>希望時間</div>
                     <div className='form-group col-2 pe-0'>
-                      <select {...register('startHour', { required: true })} className='form-control'>
+                      <select
+                        {...register('startHour', { required: true })}
+                        className='form-control'
+                      >
                         <option value=''></option>
                         {preferredDate?.hours.map((hour) => (
                           <option key={hour} value={hour}>
@@ -249,7 +283,10 @@ export const ModalForm: React.FC<Props> = (props) => {
                     </div>
                     <div className='col-auto p-0 flex-v-c'>:</div>
                     <div className='form-group col-2 pe-0'>
-                      <select {...register('startMinute', { required: true })} className='form-control'>
+                      <select
+                        {...register('startMinute', { required: true })}
+                        className='form-control'
+                      >
                         <option value=''></option>
                         {preferredDate?.minutes.map((minute) => (
                           <option key={minute} value={minute}>
@@ -260,7 +297,10 @@ export const ModalForm: React.FC<Props> = (props) => {
                     </div>
                     <div className='col-auto p-0 flex-v-c'>~</div>
                     <div className='form-group col-2 pe-0'>
-                      <select {...register('endHour', { required: true })} className='form-control'>
+                      <select
+                        {...register('endHour', { required: true })}
+                        className='form-control'
+                      >
                         <option value=''></option>
                         {preferredDate?.hours.map((hour) => (
                           <option key={hour} value={hour}>
@@ -271,7 +311,10 @@ export const ModalForm: React.FC<Props> = (props) => {
                     </div>
                     <div className='col-auto p-0 flex-v-c'>:</div>
                     <div className='form-group col-2 pe-0'>
-                      <select {...register('endMinute', { required: true })} className='form-control'>
+                      <select
+                        {...register('endMinute', { required: true })}
+                        className='form-control'
+                      >
                         <option value=''></option>
                         {preferredDate?.minutes.map((minute) => (
                           <option key={minute} value={minute}>
@@ -288,18 +331,27 @@ export const ModalForm: React.FC<Props> = (props) => {
                     <span className='label required'>必須</span>
                   </label>
                   <div className='form-group col-3'>
-                    <input {...register('numberOfPeople', { required: true })} className='form-control text-right' />
+                    <input
+                      {...register('numberOfPeople', { required: true })}
+                      className='form-control text-right'
+                    />
                   </div>
                   <div className='col-auto p-0 flex-v-c'>人</div>
                 </div>
 
                 {recreation.kind.key === 'online' && (
                   <div className='row pt-3'>
-                    <label className='col-12 title-b pb-3' htmlFor='participant'>
+                    <label
+                      className='col-12 title-b pb-3'
+                      htmlFor='participant'
+                    >
                       追加で参加する施設がある場合施設数をご記入ください
                     </label>
                     <div className='form-group col-3'>
-                      <input {...register('numberOfFacilities')} className='form-control text-right' />
+                      <input
+                        {...register('numberOfFacilities')}
+                        className='form-control text-right'
+                      />
                     </div>
                     <div className='col-auto p-0 flex-v-c'>施設</div>
                   </div>
@@ -337,11 +389,18 @@ export const ModalForm: React.FC<Props> = (props) => {
                     <select
                       {...register('prefecture', { required: true })}
                       className='form-control p-region'
-                      onChange={(e) => handleCityChange(filterCurrentPrefecture(e.target.value).prefCode)}
+                      onChange={(e) =>
+                        handleCityChange(
+                          filterCurrentPrefecture(e.target.value).prefCode
+                        )
+                      }
                       autoComplete='off'
                     >
                       {prefectures.map((prefecture) => (
-                        <option key={prefecture.prefName} value={prefecture.prefName}>
+                        <option
+                          key={prefecture.prefName}
+                          value={prefecture.prefName}
+                        >
                           {prefecture.prefName}
                         </option>
                       ))}
@@ -371,7 +430,11 @@ export const ModalForm: React.FC<Props> = (props) => {
                   </div>
                   <div className='form-group col-12'>
                     <label htmlFor='postalCode'>建物名</label>
-                    <input {...register('building')} className='form-control p-postal-control' autoComplete='off' />
+                    <input
+                      {...register('building')}
+                      className='form-control p-postal-control'
+                      autoComplete='off'
+                    />
                   </div>
                 </div>
 
@@ -379,9 +442,14 @@ export const ModalForm: React.FC<Props> = (props) => {
                   <label className='col-12 title-b py-3' htmlFor='participant'>
                     <span>クーポンコードをお持ちの方</span>
                   </label>
-                  <input {...register('couponCode')} className='form-control text-right' />
+                  <input
+                    {...register('couponCode')}
+                    className='form-control text-right'
+                  />
                   <button
-                    onClick={() => handleApplyCouponCode(getValues('couponCode'))}
+                    onClick={() =>
+                      handleApplyCouponCode(getValues('couponCode'))
+                    }
                     className='btn btn-csecondar ms-2 px-3 rounded border-0 text-white font-weight-bold'
                     type='button'
                   >
@@ -404,7 +472,9 @@ export const ModalForm: React.FC<Props> = (props) => {
                       <div className='col-auto'>
                         <span id='participantNum'>材料費/1人</span>
                         <br />
-                        <span className='text-muted font-12 color-ba08'>※材料費は人数分の費用が発生します</span>
+                        <span className='text-muted font-12 color-ba08'>
+                          ※材料費は人数分の費用が発生します
+                        </span>
                       </div>
                       <div id='materialPrice' className='col-auto'>
                         &yen;
@@ -414,7 +484,10 @@ export const ModalForm: React.FC<Props> = (props) => {
                     {recreation.kind.key === 'visit' && (
                       <div className='row justify-content-between border-bottom-dotted pb-2'>
                         <div className='col-auto'>交通費</div>
-                        <div id='transportationExpensesForOrderForm' className='col-auto'>
+                        <div
+                          id='transportationExpensesForOrderForm'
+                          className='col-auto'
+                        >
                           &yen;
                           {order?.transportationExpenses?.toLocaleString()}
                         </div>
@@ -431,9 +504,14 @@ export const ModalForm: React.FC<Props> = (props) => {
                       <div className='row justify-content-between border-bottom-dotted pb-2'>
                         <div className='col-auto'>
                           追加施設費 /
-                          <span id='numberOfFacilitiesForOrderFormLabel'>{order.numberOfFacilities} 施設</span>
+                          <span id='numberOfFacilitiesForOrderFormLabel'>
+                            {order.numberOfFacilities} 施設
+                          </span>
                         </div>
-                        <div id='numberOfFacilitiesForOrderForm' className='col-auto'>
+                        <div
+                          id='numberOfFacilitiesForOrderForm'
+                          className='col-auto'
+                        >
                           {order?.totalFacilityPriceForCustomer?.toLocaleString()}
                         </div>
                       </div>
@@ -447,8 +525,13 @@ export const ModalForm: React.FC<Props> = (props) => {
                     </div>
                     {isCouponApplied && (
                       <div className='alert alert-warning' role='alert'>
-                        <div className='font-weight-boild'>クーポン適用中のため合計金額は「&yen; 0」となります</div>
-                        <div>合計金額が表示されていても請求は&yen; 0となります。ご安心ください。</div>
+                        <div className='font-weight-boild'>
+                          クーポン適用中のため合計金額は「&yen; 0」となります
+                        </div>
+                        <div>
+                          合計金額が表示されていても請求は&yen;
+                          0となります。ご安心ください。
+                        </div>
                       </div>
                     )}
                     {isCouponApplied === false && (
@@ -476,7 +559,9 @@ export const ModalForm: React.FC<Props> = (props) => {
                 </div>
                 <div className='row justify-content-center py-3'>
                   <div className='col-7 mb-3 text-center'>
-                    <span className='text-muted'>※パートナーが承認をする事で正式に開催が決まります</span>
+                    <span className='text-muted'>
+                      ※パートナーが承認をする事で正式に開催が決まります
+                    </span>
                   </div>
                   <div className='col-7 text-center'>
                     <button

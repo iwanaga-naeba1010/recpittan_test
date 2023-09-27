@@ -1,7 +1,7 @@
 import * as $ from 'jquery';
 
 const App = (e: JQueryEventObject) => {
-  const buildHTML = (imageSrc: string):string => {
+  const buildHTML = (imageSrc: string): string => {
     return `
     <div class='prev-content'>
       <img src='${imageSrc}', alt='preview' class='prev-image'>
