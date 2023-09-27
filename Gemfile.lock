@@ -186,7 +186,7 @@ GEM
       factory_bot (~> 6.2.0)
       railties (>= 5.0.0)
     ffaker (2.23.0)
-    ffi (1.15.5)
+    ffi (1.16.2)
     fog-aws (3.19.0)
       fog-core (~> 2.1)
       fog-json (~> 1.1)
