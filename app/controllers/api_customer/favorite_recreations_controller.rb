@@ -12,7 +12,7 @@ module ApiCustomer
       if favorite_recreation
         render_json FavoriteRecreationSerializer.new.serialize(favorite_recreation:)
       else
-        render_json({ isFavorite: false })
+        render_json({ is_favorite: false })
       end
     rescue StandardError => e
       Sentry.capture_exception(e)

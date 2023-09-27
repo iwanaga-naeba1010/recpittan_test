@@ -17,7 +17,8 @@ const FavoriteRecreationIndex: React.FC = () => {
     (async () => {
       try {
         const fetchedFavoriteRecreations = await fetchFavoriteRecreations();
-        setFavoriteRecreations(fetchedFavoriteRecreations);
+        const sortedFavoriteRecreations = fetchedFavoriteRecreations.sort((a, b) => b.id - a.id);
+        setFavoriteRecreations(sortedFavoriteRecreations);
         setIsLoading(false);
       } catch (e) {
         console.warn('error is', e);
@@ -28,8 +29,6 @@ const FavoriteRecreationIndex: React.FC = () => {
   if (isLoading) {
     return <LoadingContainer />;
   }
-
-  console.log(favoriteRecreations);
 
   return (
     <div>

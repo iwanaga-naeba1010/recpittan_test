@@ -70,7 +70,7 @@ export const RecreationItem: React.FC<Props> = (props) => {
                 onClick={() =>
                   handleFavoriteRecreationDelete(favoriteRecreation.id)
                 }
-                isFavorited={true}
+                isFavorite={true}
               />
             </div>
 
