@@ -6,9 +6,12 @@ import { useFavoriteRecreations } from '../hooks';
 import { RecreationItem } from './recreationItem';
 
 const FavoriteRecreationIndex: React.FC = () => {
-  const [favoriteRecreations, setFavoriteRecreations] = useState<Array<FavoriteRecreation>>([]);
+  const [favoriteRecreations, setFavoriteRecreations] = useState<
+    Array<FavoriteRecreation>
+  >([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
-  const { fetchFavoriteRecreations, deleteFavoriteRecreation } = useFavoriteRecreations();
+  const { fetchFavoriteRecreations, deleteFavoriteRecreation } =
+    useFavoriteRecreations();
 
   useEffect(() => {
     (async () => {
@@ -31,19 +34,21 @@ const FavoriteRecreationIndex: React.FC = () => {
   return (
     <div>
       {favoriteRecreations.length ? (
-          <article className="container pt-4 px-0">
-            <div className="row">
-              {favoriteRecreations.map((favoriteRecreation) => <RecreationItem
+        <article className='container pt-4 px-0'>
+          <div className='row'>
+            {favoriteRecreations.map((favoriteRecreation) => (
+              <RecreationItem
                 key={favoriteRecreation.id}
                 favoriteRecreation={favoriteRecreation}
                 recreation={favoriteRecreation.recreation}
                 deleteFavoriteRecreation={deleteFavoriteRecreation}
                 setFavoriteRecreations={setFavoriteRecreations}
                 fetchFavoriteRecreations={fetchFavoriteRecreations}
-              />)}
-            </div>
-          </article>
-        ) : (
+              />
+            ))}
+          </div>
+        </article>
+      ) : (
         <div className='m-3'>
           <p>お気に入りにしたレクはありません</p>
         </div>

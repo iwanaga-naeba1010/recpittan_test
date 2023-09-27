@@ -1,1 +1,1 @@
-export * from './useFavoriteRecreationHook'
+export * from './useFavoriteRecreationHook';
