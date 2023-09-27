@@ -34,6 +34,7 @@ ja:
       online_recreation_channel: オンラインレクチャンネル
       online_recreation_channel_recreation: 開催レク
       online_recreation_channel_download_image: ダウンロード画像
+      favorite_recreation: お気に入りレク
     attributes:
       email:
         title: タイトル

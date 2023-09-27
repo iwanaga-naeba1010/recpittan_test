@@ -37,7 +37,13 @@
           <% end %>
         </div>
       <% end %>
-
+      <div class="col-auto">
+        <% if active_link?('favorite_recreations') %>
+            <%= t('activerecord.models.favorite_recreation') %>
+        <% else %>
+          <%= link_to 'お気に入りレク', customers_favorite_recreations_path, class: "clink" %>
+        <% end %>
+      </div>
     </div>
   </div>
 </div>

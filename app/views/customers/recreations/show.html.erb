@@ -81,6 +81,9 @@
                 </svg>
                 <p class="ms-1">開催回数<%= @recreation.number_of_recreations_held + @recreation.number_of_past_events %>件</p>
               </div>
+              <% if current_user.role.customer? %>
+                <div class="me-1" id='favoriteIcon_<%= @recreation.id %>'></div>
+              <% end %>
             </div>
             <div class="category-tags pb-2">
               <%= tag_to_html(@recreation, false) %>

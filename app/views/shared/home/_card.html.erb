@@ -19,8 +19,13 @@
       </svg>
       <p class="ms-1 mb-0">開催回数<%= rec.number_of_recreations_held + rec.number_of_past_events %>件</p>
     </div>
-    <div class="card-body card-body-tag px-2 py-1">
-      <%= tag_to_html(rec) %>
+    <div class="d-flex align-items-center">
+      <div class="card-body card-body-tag px-2 py-1">
+        <%= tag_to_html(rec) %>
+      </div>
+      <% if current_user.role.customer? %>
+        <div class="me-1" id='favoriteIcon_<%= rec.id %>'></div>
+      <% end %>
     </div>
     <div class="card-body card-body-info px-2 py-1">
       <div class="d-md-flex mb-2 align-items-center">
