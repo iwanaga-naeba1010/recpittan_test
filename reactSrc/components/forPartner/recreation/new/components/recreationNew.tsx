@@ -1,4 +1,7 @@
-import { RecreationFormValues, RecreationNewForm } from '@/components/shared/form';
+import {
+  RecreationFormValues,
+  RecreationNewForm,
+} from '@/components/shared/form';
 import { Error } from '@/components/shared/parts';
 import { isEmpty } from '@/utils';
 import axios, { AxiosError } from 'axios';
@@ -37,8 +40,10 @@ const RecreationNew: React.FC = () => {
         // tags: values.tags,
         // targets: values.targets
         recreationProfileAttributes: { profileId: values.profileId },
-        recreationPrefecturesAttributes: values.prefectures.map((p) => ({ name: p }))
-      }
+        recreationPrefecturesAttributes: values.prefectures.map((p) => ({
+          name: p,
+        })),
+      },
     };
 
     try {

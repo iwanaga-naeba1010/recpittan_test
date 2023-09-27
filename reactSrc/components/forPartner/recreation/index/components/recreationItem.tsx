@@ -20,7 +20,9 @@ export const RecreationItem: React.FC<Props> = (props) => {
           <p className='my-1'>{recreation.category.text}</p>
         </div>
         <div className='d-flex'>
-          <p className='my-1 px-2 d-inline-block rounded border'>{recreation.status.text}</p>
+          <p className='my-1 px-2 d-inline-block rounded border'>
+            {recreation.status.text}
+          </p>
           <p className='my-1 ms-auto'>{recreation.price?.toLocaleString()}</p>
         </div>
       </div>

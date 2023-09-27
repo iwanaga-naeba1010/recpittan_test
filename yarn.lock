@@ -1550,10 +1550,10 @@
     "@types/minimatch" "*"
     "@types/node" "*"
 
-"@types/jquery@^3.5.18":
-  version "3.5.18"
-  resolved "https://registry.yarnpkg.com/@types/jquery/-/jquery-3.5.18.tgz#2a4979866954e601361ddc62ea304c9e46311b77"
-  integrity sha512-sNm7O6LECFhHmF+3KYo6QIl2fIbjlPYa0PDgDQwfOaEJzwpK20Eub9Ke7VKkGsSJ2K0HUR50S266qYzRX4GlSw==
+"@types/jquery@^3.5.19":
+  version "3.5.19"
+  resolved "https://registry.yarnpkg.com/@types/jquery/-/jquery-3.5.19.tgz#f9b6cb7ed82cd92584ce33238ee8425798358365"
+  integrity sha512-KFbmk+dXfphHGuVCmlopgcNRCegN/21mkeoD4BzuJhVH0SJW3Uo2mLuAwb6oqTNV79EsRp6J7yC1BbKymjpx/g==
   dependencies:
     "@types/sizzle" "*"
 
@@ -1606,10 +1606,10 @@
   dependencies:
     "@types/react" "*"
 
-"@types/react@*", "@types/react@^18.2.21":
-  version "18.2.21"
-  resolved "https://registry.yarnpkg.com/@types/react/-/react-18.2.21.tgz#774c37fd01b522d0b91aed04811b58e4e0514ed9"
-  integrity sha512-neFKG/sBAwGxHgXiIxnbm3/AAVQ/cMRS93hvBpg8xYRbeQSPVABp9U2bRnPf0iI4+Ucdv3plSxKK+3CW2ENJxA==
+"@types/react@*", "@types/react@^18.2.22":
+  version "18.2.22"
+  resolved "https://registry.yarnpkg.com/@types/react/-/react-18.2.22.tgz#abe778a1c95a07fa70df40a52d7300a40b949ccb"
+  integrity sha512-60fLTOLqzarLED2O3UQImc/lsNRgG0jE/a1mPW9KjMemY0LMITWEsbS4VvZ4p6rorEHd5YKxxmMKSDK505GHpA==
   dependencies:
     "@types/prop-types" "*"
     "@types/scheduler" "*"
@@ -7572,10 +7572,10 @@ react-dom@^18.2.0:
     loose-envify "^1.1.0"
     scheduler "^0.23.0"
 
-react-hook-form@^7.46.1:
-  version "7.46.1"
-  resolved "https://registry.yarnpkg.com/react-hook-form/-/react-hook-form-7.46.1.tgz#39347dbff19d980cb41087ac32a57abdc6045bb3"
-  integrity sha512-0GfI31LRTBd5tqbXMGXT1Rdsv3rnvy0FjEk8Gn9/4tp6+s77T7DPZuGEpBRXOauL+NhyGT5iaXzdIM2R6F/E+w==
+react-hook-form@^7.46.2:
+  version "7.46.2"
+  resolved "https://registry.yarnpkg.com/react-hook-form/-/react-hook-form-7.46.2.tgz#051e3cb2a73f3e86de739f2198c6042902158c43"
+  integrity sha512-x1DWmHQchV7x2Rq9l99M/cQHC8JGchAnw9Z0uTz5KrPa0bTl/Inm1NR7ceOARfIrkNuQNAhuSuZPYa6k7QYn3Q==
 
 react-is@^16.13.1, react-is@^16.7.0:
   version "16.13.1"
@@ -8198,10 +8198,10 @@ snake-case@^3.0.4:
     dot-case "^3.0.4"
     tslib "^2.0.3"
 
-snakecase-keys@^5.4.6:
-  version "5.4.6"
-  resolved "https://registry.yarnpkg.com/snakecase-keys/-/snakecase-keys-5.4.6.tgz#442f61bea9903faf624796d245a97c9ecb449638"
-  integrity sha512-7ipeNts8YTLbx/6zIaT1mQGrHG2vK+0TjywPD79QzIDJDcvNXBLX7DXQOt6by4DFdncu8lDPc+QHKHemtDEoQg==
+snakecase-keys@^5.4.7:
+  version "5.4.7"
+  resolved "https://registry.yarnpkg.com/snakecase-keys/-/snakecase-keys-5.4.7.tgz#8b66d3360eb325669b97286992ec76e20cf39fb2"
+  integrity sha512-li/JvhIBDTbualWBSlUJoHws/kVqMYN9GSw//NyatvoAWBppiGRJVOOniMcRa/PNN5FCwOTYMoZT/SJ2IuBUBw==
   dependencies:
     map-obj "^4.1.0"
     snake-case "^3.0.4"

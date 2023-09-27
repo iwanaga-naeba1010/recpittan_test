@@ -12,7 +12,9 @@ export const RecreationPrice: React.FC<Props> = (props) => {
   return (
     <>
       <div className='d-flex'>
-        <h5 className='text-black font-weight-bold'>金額・メディア・その他の情報を入力</h5>
+        <h5 className='text-black font-weight-bold'>
+          金額・メディア・その他の情報を入力
+        </h5>
       </div>
       <hr className='my-2' />
 
@@ -25,7 +27,7 @@ export const RecreationPrice: React.FC<Props> = (props) => {
         type='text'
         className='p-2 w-100 rounded border border-secondary'
         {...register('price', {
-          required: true
+          required: true,
         })}
       />
       <p className='small my-0'>施設に表示される金額</p>

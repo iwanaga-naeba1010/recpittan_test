@@ -1,2 +1,2 @@
 export * from './useRecreationHook';
-export * from './useRecreationImageHook'
+export * from './useRecreationImageHook';

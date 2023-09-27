@@ -31,7 +31,9 @@ const EvaluationIndex: React.FC = () => {
   return (
     <div>
       {evaluations.length ? (
-        evaluations.map((evaluation) => <EvaluationItem key={evaluation.id} evaluation={evaluation} />)
+        evaluations.map((evaluation) => (
+          <EvaluationItem key={evaluation.id} evaluation={evaluation} />
+        ))
       ) : (
         <div className='m-3'>
           <p>まだ口コミはありません</p>

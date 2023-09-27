@@ -8,26 +8,26 @@ const useSwiper = () => {
     slidesPerView: 1,
     breakpoints: {
       576: {
-        slidesPerView: 2
+        slidesPerView: 2,
       },
       980: {
-        slidesPerView: 3
+        slidesPerView: 3,
       },
       1200: {
-        slidesPerView: 4
-      }
+        slidesPerView: 4,
+      },
     },
     centeredSlides: true,
     spaceBetween: 30,
     grabCursor: true,
     navigation: {
       nextEl: '.swiper-button-next',
-      prevEl: '.swiper-button-prev'
+      prevEl: '.swiper-button-prev',
     },
     pagination: {
       el: '.swiper-pagination',
-      clickable: true
-    }
+      clickable: true,
+    },
   });
 };
 

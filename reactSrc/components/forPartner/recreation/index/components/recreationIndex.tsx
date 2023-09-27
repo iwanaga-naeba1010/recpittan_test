@@ -3,7 +3,7 @@ import { Recreation } from '@/types';
 import React, { useEffect, useState } from 'react';
 import { createRoot } from 'react-dom/client';
 import { RecreationItem } from './recreationItem';
-import { useRecreations } from '../../hooks'
+import { useRecreations } from '../../hooks';
 
 const RecreationIndex: React.FC = () => {
   const [recreations, setRecreations] = useState<Array<Recreation>>([]);
@@ -29,14 +29,19 @@ const RecreationIndex: React.FC = () => {
   return (
     <div>
       {recreations?.length > 0 ? (
-        recreations?.map((recreation) => <RecreationItem key={recreation.id} recreation={recreation} />)
+        recreations?.map((recreation) => (
+          <RecreationItem key={recreation.id} recreation={recreation} />
+        ))
       ) : (
         <div className='m-3'>
           <p>まだ登録中のレクはありません</p>
         </div>
       )}
       <div className='m-3'>
-        <a href='/partners/recreations/new' className='btn btn-primary btn-lg btn-block w-100 p-3 mb-2 text-white'>
+        <a
+          href='/partners/recreations/new'
+          className='btn btn-primary btn-lg btn-block w-100 p-3 mb-2 text-white'
+        >
           新規レクを追加
         </a>
       </div>

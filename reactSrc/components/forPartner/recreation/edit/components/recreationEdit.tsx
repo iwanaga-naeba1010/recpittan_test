@@ -1,4 +1,8 @@
-import { FormKind, RecreationEditForm, RecreationFormValues } from '@/components/shared/form';
+import {
+  FormKind,
+  RecreationEditForm,
+  RecreationFormValues,
+} from '@/components/shared/form';
 import { Error, LoadingContainer } from '@/components/shared/parts';
 import { Recreation } from '@/types';
 import { getQueryStringValueByKey, isEmpty } from '@/utils';
@@ -20,14 +24,8 @@ const RecreationEdit: React.FC = () => {
   const [isFileLoading, setIsFileLoading] = useState<boolean>(false);
   const id = window.location.pathname.split('/')[3];
   const formKind = getQueryStringValueByKey('formKind') as FormKind;
-  const {
-    fetchRecreation,
-    updateRecreation,
-  } = useRecreations();
-  const {
-    createRecreationImage,
-    deleteRecreationImage,
-  } = useRecreationImage();
+  const { fetchRecreation, updateRecreation } = useRecreations();
+  const { createRecreationImage, deleteRecreationImage } = useRecreationImage();
 
   useEffect(() => {
     (async () => {
@@ -54,12 +52,18 @@ const RecreationEdit: React.FC = () => {
           recreationImage: {
             image: event.target?.result,
             filename: file.name,
-            kind: kind
-          }
+            kind: kind,
+          },
         };
         setIsFileLoading(true);
-        const createdImage = await createRecreationImage(recreation.id, requestBody);
-        setRecreation({ ...recreation, images: [...recreation.images, createdImage] });
+        const createdImage = await createRecreationImage(
+          recreation.id,
+          requestBody
+        );
+        setRecreation({
+          ...recreation,
+          images: [...recreation.images, createdImage],
+        });
         setIsFileLoading(false);
       }
     };
@@ -70,7 +74,10 @@ const RecreationEdit: React.FC = () => {
     if (!recreation) return;
     try {
       await deleteRecreationImage(recreation.id, id);
-      setRecreation({ ...recreation, images: recreation.images.filter((recreation) => recreation.id !== id) });
+      setRecreation({
+        ...recreation,
+        images: recreation.images.filter((recreation) => recreation.id !== id),
+      });
     } catch (e) {
       console.log(e);
     }
@@ -90,18 +97,22 @@ const RecreationEdit: React.FC = () => {
         flowOfDay: values.flowOfDay || recreation.flowOfDay,
         capacity: values.capacity || recreation.capacity,
         materialPrice: values.materialPrice || recreation.materialPrice,
-        extraInformation: values.extraInformation || recreation.extraInformation,
+        extraInformation:
+          values.extraInformation || recreation.extraInformation,
         youtubeId: values.youtubeId || recreation.youtubeId,
         borrowItem: values.borrowItem || recreation.borrowItem,
         bringYourOwnItem: '', // TODO(okubo): 追加が必要
-        additionalFacilityFee: values.additionalFacilityFee || recreation.additionalFacilityFee,
+        additionalFacilityFee:
+          values.additionalFacilityFee || recreation.additionalFacilityFee,
         imageUrl: values.imageUrl,
         category: values.category || recreation.category.key, // NOTE(okubo): idじゃないと保存できない
         userId: recreation.userId,
         status: 'in_progress',
         recreationProfileAttributes: { profileId: values.profileId },
-        recreationPrefecturesAttributes: values.prefectures.map((p) => ({ name: p }))
-      }
+        recreationPrefecturesAttributes: values.prefectures.map((p) => ({
+          name: p,
+        })),
+      },
     };
 
     console.log(requestBody);

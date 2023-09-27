@@ -5,7 +5,8 @@ import * as $ from 'jquery';
 
 const App = (inputSelector: string, displaySelector: string) => {
   $(`#${inputSelector}`).on('input', () => {
-    const currentValue = ($(`#${inputSelector}`).val() ?? '').toString().length ?? 0;
+    const currentValue =
+      ($(`#${inputSelector}`).val() ?? '').toString().length ?? 0;
     $(`#${displaySelector}`).text(currentValue);
   });
 };
