@@ -10,12 +10,10 @@ type FavoriteIconProps = {
 };
 
 export const FavoriteIcon: React.FC<Props & FavoriteIconProps> = ({ onClick, isFavorite }) => {
-  const handleClick = onClick || (() => {throw new Error('onClick is not defined')});
-
   return (
     <FavoriteHeartIcon 
       isFavorite={isFavorite}
-      onClick={handleClick}
+      onClick={onClick}
       width="20"
       height="20"
     />

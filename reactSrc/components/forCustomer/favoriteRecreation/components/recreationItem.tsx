@@ -24,13 +24,13 @@ const getKindLabel = (key: string): string => {
 };
 
 export const RecreationItem: React.FC<Props> = (props) => {
-  const { favoriteRecreation, recreation } = props;
+  const { favoriteRecreation, recreation, deleteFavoriteRecreation, fetchFavoriteRecreations, setFavoriteRecreations } = props;
   const handleFavoriteRecreationDelete = async (id: number) => {
     if (!confirm('お気に入りから削除しますか？')) return;
     try {
-      await props.deleteFavoriteRecreation(id);
-      const updatedFavorites = await props.fetchFavoriteRecreations(); // お気に入りを再取得
-      props.setFavoriteRecreations(updatedFavorites); // 新しい一覧を状態にセット
+      await deleteFavoriteRecreation(id);
+      const updatedFavorites = await fetchFavoriteRecreations(); // お気に入りを再取得
+      setFavoriteRecreations(updatedFavorites); // 新しい一覧を状態にセット
     } catch (error) {
       console.error('Error deleting favorite', error);
     }
