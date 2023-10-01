@@ -23,8 +23,10 @@
       <div class="card-body card-body-tag px-2 py-1">
         <%= tag_to_html(rec) %>
       </div>
-      <% if current_user&.role&.customer? %>
-        <div class="me-1" id='favoriteIcon_<%= rec.id %>'></div>
+      <% if user_signed_in? %>
+        <% if current_user.role.customer? %>
+          <div class="me-1" id='favoriteIcon_<%= rec.id %>'></div>
+        <% end %>
       <% end %>
     </div>
     <div class="card-body card-body-info px-2 py-1">

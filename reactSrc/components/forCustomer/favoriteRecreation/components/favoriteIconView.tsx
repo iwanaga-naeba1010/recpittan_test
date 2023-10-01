@@ -13,7 +13,7 @@ const FavoriteIconView: React.FC<{ recreationId: number }> = ({ recreationId }) 
       try {
         const response = await fetchFavoriteRecreation(recreationId);
         setIsFavorite(response.isFavorite);
-        if (response.isFavorite === true) {
+        if (response.isFavorite) {
           setFavoriteId(response.id);
         }
       } catch (error) {
@@ -23,7 +23,7 @@ const FavoriteIconView: React.FC<{ recreationId: number }> = ({ recreationId }) 
     checkIsFavorite();
   }, [recreationId, fetchFavoriteRecreation, refreshCount]);
 
-  const handleClick = async () => {
+  const handleClick = async (): Promise<void> => {
     if (isFavorite && favoriteId) {
       await deleteFavoriteRecreation(favoriteId);
       setIsFavorite(false);
@@ -36,14 +36,12 @@ const FavoriteIconView: React.FC<{ recreationId: number }> = ({ recreationId }) 
   };
 
   return (
-    <>
-      <FavoriteHeartIcon 
-        isFavorite={isFavorite}
-        onClick={handleClick} 
-        width="25"
-        height="25"
-      />  
-    </>
+    <FavoriteHeartIcon 
+      isFavorite={isFavorite}
+      onClick={handleClick} 
+      width="25"
+      height="25"
+    />  
   );
 };
 

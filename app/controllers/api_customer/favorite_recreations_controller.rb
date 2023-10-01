@@ -9,11 +9,9 @@ module ApiCustomer
 
     def show
       favorite_recreation = current_user.favorite_recreations.find_by(recreation_id: params[:id])
-      if favorite_recreation
-        render_json FavoriteRecreationSerializer.new.serialize(favorite_recreation:)
-      else
-        render_json({ is_favorite: false })
-      end
+      return render_json FavoriteRecreationSerializer.new.serialize(favorite_recreation:) if favorite_recreation
+
+      render_json({ is_favorite: false })
     rescue StandardError => e
       Sentry.capture_exception(e)
       logger.error e.message
