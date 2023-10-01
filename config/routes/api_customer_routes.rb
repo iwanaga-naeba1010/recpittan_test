@@ -7,4 +7,5 @@ namespace :api_customer do
     end
     resources :chats, only: %i[index create], module: :orders
   end
+  resources :favorite_recreations, only: %i[index show create destroy]
 end

@@ -29,11 +29,8 @@ export const useRecreations = (): UseRecreationsHook => {
     []
   );
   const fetchRecreations = async (): Promise<Array<Recreation>> => {
-    const response = await Api.get<{ [key: string]: Recreation }>(
-      'recreations',
-      'partner'
-    );
-    return Object.values(response.data);
+    const response = await Api.get<Array<Recreation>>(`recreations`, 'partner');
+    return response.data;
   };
   const createRecreation = async (
     requestBody: RecreationRequestBody

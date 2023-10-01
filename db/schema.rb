@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_07_22_070718) do
+ActiveRecord::Schema[7.0].define(version: 2023_09_27_160140) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -110,6 +110,16 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_22_070718) do
     t.datetime "created_at", precision: nil, null: false
     t.datetime "updated_at", precision: nil, null: false
     t.boolean "is_public", default: true
+  end
+
+  create_table "favorite_recreations", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "recreation_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["recreation_id"], name: "index_favorite_recreations_on_recreation_id"
+    t.index ["user_id", "recreation_id"], name: "index_favorite_recreations_on_user_id_and_recreation_id", unique: true
+    t.index ["user_id"], name: "index_favorite_recreations_on_user_id"
   end
 
   create_table "invoice_informations", force: :cascade do |t|
@@ -375,6 +385,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_22_070718) do
   add_foreign_key "company_tags", "tags", name: "company_tags_tag_id_fkey"
   add_foreign_key "evaluation_replies", "evaluations"
   add_foreign_key "evaluations", "reports", name: "evaluations_report_id_fkey"
+  add_foreign_key "favorite_recreations", "recreations"
+  add_foreign_key "favorite_recreations", "users"
   add_foreign_key "invoice_informations", "users"
   add_foreign_key "online_recreation_channel_download_images", "online_recreation_channels"
   add_foreign_key "online_recreation_channel_recreations", "online_recreation_channels"
