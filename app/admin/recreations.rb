@@ -29,7 +29,7 @@ ActiveAdmin.register Recreation do
 
   csv do
     column :id
-    column(:user) { |recreation| recreation.user.username }
+    column(:user) { |recreation| recreation.user_username }
     column :title
     column :minutes
     column :second_title
