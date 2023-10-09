@@ -517,7 +517,7 @@ GEM
     ssrf_filter (1.1.2)
     switch_user (1.5.4)
     sysexits (1.2.0)
-    temple (0.10.2)
+    temple (0.10.3)
     thor (1.2.2)
     tilt (2.3.0)
     timeout (0.4.0)
