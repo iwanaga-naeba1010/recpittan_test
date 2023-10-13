@@ -210,12 +210,12 @@ GEM
     formtastic_i18n (0.7.0)
     globalid (1.2.1)
       activesupport (>= 6.1)
-    haml (6.1.4)
+    haml (6.2.3)
       temple (>= 0.8.2)
       thor
       tilt
-    haml_lint (0.50.0)
-      haml (>= 4.0, < 6.2)
+    haml_lint (0.51.0)
+      haml (>= 4.0)
       parallel (~> 1.10)
       rainbow
       rubocop (>= 1.0)
@@ -309,7 +309,7 @@ GEM
     oj (3.16.1)
     orm_adapter (0.5.0)
     parallel (1.23.0)
-    parser (3.2.2.3)
+    parser (3.2.2.4)
       ast (~> 2.4.1)
       racc
     pg (1.5.4)
@@ -517,7 +517,7 @@ GEM
     ssrf_filter (1.1.2)
     switch_user (1.5.4)
     sysexits (1.2.0)
-    temple (0.10.2)
+    temple (0.10.3)
     thor (1.2.2)
     tilt (2.3.0)
     timeout (0.4.0)
