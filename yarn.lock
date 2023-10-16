@@ -2018,10 +2018,10 @@ aproba@^1.1.1:
   resolved "https://registry.yarnpkg.com/aproba/-/aproba-1.2.0.tgz#6802e6264efd18c790a1b0d517f0f2627bf2c94a"
   integrity sha512-Y9J6ZjXtoYh8RnXVCMOU/ttDmk1aBjunq9vO0ta5x85WDQiQfUF9sIPBITdbiiIVcBo03Hi3jMxigBtsddlXRw==
 
-arctic_admin@^4.2.5:
-  version "4.2.5"
-  resolved "https://registry.yarnpkg.com/arctic_admin/-/arctic_admin-4.2.5.tgz#45f2aec5f7d1a700ac6c675ec7636ed1f6ccc5ac"
-  integrity sha512-sTP2i7xh9yd2l1ag2M4mom6IjQixAm/EaOu/cOs4ZmeQufOT0JKLR8u+HdkELFZEA5dwO3X+W33CiQL+yLXbuQ==
+arctic_admin@^4.2.6:
+  version "4.2.6"
+  resolved "https://registry.yarnpkg.com/arctic_admin/-/arctic_admin-4.2.6.tgz#d4464e1f678b2a8249e32828d48386a6ea32276e"
+  integrity sha512-zdHHjwrf33LEBxxNInW+2D+cwi3Kneu3DJ+nk0A61rCMWvdkJSjFeKc/AxLQCxZRLTNJ7BYZBYjf1gsJ70pwlA==
 
 argparse@^1.0.7:
   version "1.0.10"
