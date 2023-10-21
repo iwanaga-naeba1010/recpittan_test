@@ -49,6 +49,8 @@ class Recreation < ApplicationRecord
   has_many :tags, through: :recreation_tags
   has_many :recreation_images, dependent: :destroy
   has_many :orders, dependent: :destroy
+  has_many :reports, through: :orders
+  has_many :evaluations, through: :reports
   has_one :recreation_profile, dependent: :destroy
   has_one :profile, through: :recreation_profile
   has_many :recreation_prefectures, dependent: :destroy
@@ -66,6 +68,18 @@ class Recreation < ApplicationRecord
 
   # NOTE(okubo): publicは予約後なので下記で定義
   scope :public_recs, -> { where(status: :published) }
+  scope :sorted_by, ->(sort_order) {
+    case sort_order
+    when 'price_low_to_high'
+      order(price: :asc)
+    when 'price_high_to_low'
+      order(price: :desc)
+    when 'reviews_count'
+      joins(:evaluations).group('recreations.id').order('COUNT(evaluations.id) DESC')
+    else
+      order(created_at: :desc)
+    end
+  }
 
   def flyer
     files = recreation_images.flyers&.to_a
