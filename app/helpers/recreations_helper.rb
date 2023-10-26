@@ -67,11 +67,8 @@ module RecreationsHelper
   end
 
   def sort_order_options
-    [
-      ['新着順', 'newest'],
-      ['価格 (低い順)', 'price_low_to_high'],
-      ['価格 (高い順)', 'price_high_to_low'],
-      ['口コミの数 (多い順)', 'reviews_count']
-    ]
+    Recreation.sort_orders.map do |key, _value|
+      [I18n.t("sort_orders.#{key}"), key.to_s]
+    end
   end
 end

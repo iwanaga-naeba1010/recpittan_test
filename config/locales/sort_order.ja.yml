@@ -1,0 +1,6 @@
+ja:
+  sort_orders:
+    newest: 新着順
+    price_low_to_high: 価格 (低い順)
+    price_high_to_low: 価格 (高い順)
+    reviews_count: 口コミが多い順
