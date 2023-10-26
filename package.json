@@ -15,7 +15,7 @@
     "@babel/preset-typescript": "^7.23.2",
     "@fortawesome/fontawesome-free": "^5.15.4",
     "@popperjs/core": "^2.11.8",
-    "@rails/actioncable": "^7.1.0",
+    "@rails/actioncable": "^7.1.1",
     "@rails/activestorage": "^7.1.1",
     "@rails/ujs": "^7.1.1",
     "@rails/webpacker": "5.4.4",
