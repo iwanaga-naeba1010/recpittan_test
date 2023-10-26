@@ -32,6 +32,7 @@ ActiveAdmin.register Order do
     column :id
     column(:status, &:status_text)
     column(:user) { |order| order.user.company.facility_name }
+    column(:partner) { |order| order.recreation.user_username }
     column(:recreation, &:recreation_title)
     column :zip
     column :prefecture

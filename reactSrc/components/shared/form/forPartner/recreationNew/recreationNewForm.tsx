@@ -46,7 +46,7 @@ export const RecreationNewForm: React.FC<Props> = (props) => {
     register,
     handleSubmit,
     getValues,
-    formState: { errors }
+    formState: { errors },
   } = useForm<RecreationFormValues>({
     mode: 'onChange',
     reValidateMode: 'onChange',
@@ -67,8 +67,8 @@ export const RecreationNewForm: React.FC<Props> = (props) => {
       additionalFacilityFee: 1000,
       category: 'event',
       prefectures: [],
-      kind: 'online'
-    }
+      kind: 'online',
+    },
   });
 
   const handleNext = () => {
@@ -91,7 +91,7 @@ export const RecreationNewForm: React.FC<Props> = (props) => {
       'prefectures',
       'category',
       'profile',
-      'userId'
+      'userId',
     ];
     arr.map((str) => console.log(`${str} is`, getValues(str as any)));
     setCurrentStep(currentStep + 1);
@@ -106,16 +106,29 @@ export const RecreationNewForm: React.FC<Props> = (props) => {
   // TODO(okubo): 4.エラーが出たらdisabledがtrueになるので、そこで制御できるかも？
   //}
 
-  const disabled = errors?.kind !== undefined || errors?.title !== undefined || errors?.secondTitle !== undefined;
+  const disabled =
+    errors?.kind !== undefined ||
+    errors?.title !== undefined ||
+    errors?.secondTitle !== undefined;
   console.log('disabled is ', disabled);
 
   return (
     <div>
       <form className='recreation' onSubmit={handleSubmit(onSubmit)}>
         <Step totalCounts={4} activeStep={currentStep} />
-        {currentStep === 0 && <FirstStep register={register} getValues={getValues} errors={errors} />}
-        {currentStep === 1 && <SecondStep getValues={getValues} register={register} />}
-        {currentStep === 2 && <ThirdStep register={register} getValues={getValues} />}
+        {currentStep === 0 && (
+          <FirstStep
+            register={register}
+            getValues={getValues}
+            errors={errors}
+          />
+        )}
+        {currentStep === 1 && (
+          <SecondStep getValues={getValues} register={register} />
+        )}
+        {currentStep === 2 && (
+          <ThirdStep register={register} getValues={getValues} />
+        )}
         {currentStep === 3 && <FourthStep getValues={getValues} />}
 
         {currentStep !== 3 && (

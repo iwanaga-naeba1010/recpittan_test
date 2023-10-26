@@ -49,18 +49,14 @@ class User < ApplicationRecord
   # TODO: role == userの場合、の条件加えたい
   belongs_to :company, optional: true
   accepts_nested_attributes_for :company, allow_destroy: true
-
   has_one :invoice_information, dependent: :destroy
-
   has_many :recreations, dependent: :destroy
-
   has_many :orders, dependent: :destroy
-
   has_many :chats, dependent: :destroy
-
   has_many :profiles, dependent: :destroy
-
   has_many :user_memos, dependent: :destroy
+  has_many :favorite_recreations, dependent: :destroy
+  has_many :favorited_recreations, through: :favorite_recreations, source: :recreation
 
   scope :customers, -> { where(role: :customer) }
 

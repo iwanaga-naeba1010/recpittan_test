@@ -53,6 +53,8 @@ class Recreation < ApplicationRecord
   has_one :profile, through: :recreation_profile
   has_many :recreation_prefectures, dependent: :destroy
   has_many :recreation_memos, dependent: :destroy
+  has_many :favorite_recreations, dependent: :destroy
+  has_many :favorited_by_users, through: :favorite_recreations, source: :user
 
   accepts_nested_attributes_for :recreation_images, allow_destroy: true
   accepts_nested_attributes_for :recreation_profile, allow_destroy: true

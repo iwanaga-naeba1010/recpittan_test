@@ -3,7 +3,7 @@ import { Recreation } from '@/types';
 import React, { useEffect, useState } from 'react';
 import { createRoot } from 'react-dom/client';
 import { RecreationItem } from './recreationItem';
-import { useRecreations } from '../../hooks'
+import { useRecreations } from '../../hooks';
 
 const RecreationShow: React.FC = () => {
   const [recreation, setRecreation] = useState<Recreation>();

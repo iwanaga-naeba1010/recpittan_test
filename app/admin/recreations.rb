@@ -27,6 +27,37 @@ ActiveAdmin.register Recreation do
   filter :price
   filter :status
 
+  csv do
+    column :id
+    column(:user, &:user_username)
+    column :title
+    column :minutes
+    column :second_title
+    column :category
+    column(:kind, &:kind_text)
+    column(:status, &:status_text)
+    column(:prefecture) { |recreation| recreation.recreation_prefectures.map(&:name).join(',') }
+    column :flow_of_day
+    column :description
+    column :memo
+    column :extra_information
+    column :flyer_color
+    column :price
+    column :is_public_price
+    column :amount
+    column :material_amount
+    column :material_price
+    column :base_code
+    column :additional_facility_fee
+    column :bring_your_own_item
+    column :borrow_item
+    column :capacity
+    column :number_of_past_events
+    column :created_at
+    column :updated_at
+    column :youtube_id
+  end
+
   index do
     id_column
     column :user

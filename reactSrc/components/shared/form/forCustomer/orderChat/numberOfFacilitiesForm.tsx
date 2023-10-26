@@ -14,30 +14,37 @@ export const NumberOfFacilitiesForm: React.FC<Props> = (props): JSX.Element => {
   const { order, setOrder } = props;
   const [canEdit, setCanEdit] = useState<boolean>(false);
 
-  const { register, handleSubmit, setValue } = useForm<NumberOfCacilitiesFormValues>({
-    mode: 'onChange',
-    defaultValues: {
-      numberOfFacilities: order.numberOfFacilities
-    }
-  });
+  const { register, handleSubmit, setValue } =
+    useForm<NumberOfCacilitiesFormValues>({
+      mode: 'onChange',
+      defaultValues: {
+        numberOfFacilities: order.numberOfFacilities,
+      },
+    });
 
   useEffect(() => {
     setValue('numberOfFacilities', order.numberOfFacilities);
   }, [order]);
 
-  const onSubmit = async (values: NumberOfCacilitiesFormValues): Promise<void> => {
+  const onSubmit = async (
+    values: NumberOfCacilitiesFormValues
+  ): Promise<void> => {
     const requestBody: { [key: string]: NumberOfCacilitiesFormValues } = {
       order: {
-        numberOfFacilities: values.numberOfFacilities
-      }
+        numberOfFacilities: values.numberOfFacilities,
+      },
     };
 
     try {
-      const response = await Api.patch<Order>(`/orders/${order.id}`, 'customer', requestBody);
+      const response = await Api.patch<Order>(
+        `/orders/${order.id}`,
+        'customer',
+        requestBody
+      );
       setOrder({
         ...order,
         numberOfFacilities: response.data.numberOfFacilities,
-        totalPriceForCustomer: response.data.totalPriceForCustomer
+        totalPriceForCustomer: response.data.totalPriceForCustomer,
       });
       setCanEdit(false);
     } catch (e) {
@@ -53,14 +60,20 @@ export const NumberOfFacilitiesForm: React.FC<Props> = (props): JSX.Element => {
             追加施設費 / 追加施設数 {order.numberOfFacilities}施設
             <br />
             {!canEdit && order.isEditable && (
-              <a id='numberOfFacilitiesEditButton' className='clink' onClick={() => setCanEdit(true)}>
+              <a
+                id='numberOfFacilitiesEditButton'
+                className='clink'
+                onClick={() => setCanEdit(true)}
+              >
                 編集
               </a>
             )}
           </div>
           <div id='numberOfFacilities' className='col-auto'>
             &yen;
-            {(order.numberOfFacilities * order.additionalFacilityFee)?.toLocaleString()}
+            {(
+              order.numberOfFacilities * order.additionalFacilityFee
+            )?.toLocaleString()}
           </div>
         </div>
       ) : (

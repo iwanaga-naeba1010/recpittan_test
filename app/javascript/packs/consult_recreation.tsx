@@ -15,7 +15,11 @@ const App: React.FC<Props> = ({ recreationId }): JSX.Element => {
     const tokenElement = document.querySelector('[name=csrf-token]');
     const token = tokenElement?.getAttribute('content') || '';
     try {
-      await post(`/api/slack_notifiers`, { recreation_id: recreationId }, { 'X-CSRF-TOKEN': token });
+      await post(
+        `/api/slack_notifiers`,
+        { recreation_id: recreationId },
+        { 'X-CSRF-TOKEN': token }
+      );
       $('#priceModalTrigger').trigger('click');
     } catch (e) {
       console.log(e);
@@ -23,7 +27,12 @@ const App: React.FC<Props> = ({ recreationId }): JSX.Element => {
   };
   return (
     <>
-      <button type='button' role='button' className='btn-cpr' onClick={handleSend}>
+      <button
+        type='button'
+        role='button'
+        className='btn-cpr'
+        onClick={handleSend}
+      >
         相談・依頼する
       </button>
     </>
@@ -31,7 +40,9 @@ const App: React.FC<Props> = ({ recreationId }): JSX.Element => {
 };
 
 document.addEventListener('turbolinks:load', () => {
-  const isRecreationShowPage = /\/customers\/recreations\/[0-9]/.exec(window.location.pathname);
+  const isRecreationShowPage = /\/customers\/recreations\/[0-9]/.exec(
+    window.location.pathname
+  );
   console.log('isRecreationShowPage is ', isRecreationShowPage);
   if (isRecreationShowPage !== null) {
     const elm = document.querySelector('#ConsultRecreation');

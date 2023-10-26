@@ -39,7 +39,10 @@ export const EvaluationItem: React.FC<Props> = (props) => {
       {reply || evaluation.evaluationReply ? (
         <>
           <hr />
-          <p>返信: {reply ? reply.message : evaluation.evaluationReply?.message || ''}</p>
+          <p>
+            返信:{' '}
+            {reply ? reply.message : evaluation.evaluationReply?.message || ''}
+          </p>
         </>
       ) : (
         <>
@@ -52,7 +55,10 @@ export const EvaluationItem: React.FC<Props> = (props) => {
               onChange={(e) => setReplyText(e.target.value)}
               required
             />
-            <button className='col-1 ms-1 btn bg-primary text-white fw-bold' onClick={handleSubmit}>
+            <button
+              className='col-1 ms-1 btn bg-primary text-white fw-bold'
+              onClick={handleSubmit}
+            >
               送信
             </button>
           </div>

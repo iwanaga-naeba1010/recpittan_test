@@ -13,7 +13,7 @@ import * as $ from 'jquery';
         .attr({
           type: 'hidden',
           name: 'report[status]',
-          value: 'accepted'
+          value: 'accepted',
         })
         .appendTo('form');
       $('input[type=submit]').click();
@@ -27,7 +27,7 @@ import * as $ from 'jquery';
         .attr({
           type: 'hidden',
           name: 'report[status]',
-          value: 'denied'
+          value: 'denied',
         })
         .appendTo('form');
       $('input[type=submit]').click();

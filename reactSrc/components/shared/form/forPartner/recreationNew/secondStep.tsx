@@ -22,7 +22,9 @@ type Props = {
 
 export const SecondStep: React.FC<Props> = (props) => {
   const { getValues, register, recreation, useFile } = props;
-  const [extraInformation, setExtraInformation] = useState<string>(getValues('extraInformation'));
+  const [extraInformation, setExtraInformation] = useState<string>(
+    getValues('extraInformation')
+  );
   const sliderRef = useRef<HTMLInputElement>(null);
   const materialRef = useRef<HTMLInputElement>(null);
   const handleSliderRefClickFileInput = (): void => {
@@ -51,28 +53,44 @@ export const SecondStep: React.FC<Props> = (props) => {
       {!recreation && <RecreationMaterialPrice register={register} />}
       {recreation && <RecreationEditMaterialPrice recreation={recreation} />}
 
-      {!recreation && isShowAdditionalFacilityFee() && <RecreationAdditionalFacilityFee register={register} />}
-      {recreation && isShowAdditionalFacilityFee() && <RecreationEditAdditionalFacilityFee recreation={recreation} />}
+      {!recreation && isShowAdditionalFacilityFee() && (
+        <RecreationAdditionalFacilityFee register={register} />
+      )}
+      {recreation && isShowAdditionalFacilityFee() && (
+        <RecreationEditAdditionalFacilityFee recreation={recreation} />
+      )}
       {/* 修正のタイミングで利用可能に */}
       {recreation && useFile && (
         <>
           <div className='mt-4'>
             <h5 className='text-black font-weight-bold'>レク画像を追加</h5>
             <ul className='small my-0 ps-3'>
-              <li>レクの魅力を最大限伝えるためにも、こだわった素材をご活用ください</li>
-              <li>全体のイメージと作品等がある場合は合わせて最低2枚以上を添付してください</li>
+              <li>
+                レクの魅力を最大限伝えるためにも、こだわった素材をご活用ください
+              </li>
+              <li>
+                全体のイメージと作品等がある場合は合わせて最低2枚以上を添付してください
+              </li>
               <li>施設に配布するチラシの素材としても利用します</li>
               <li>後ほど画像を追加/変更することも可能です</li>
-              <li>目安サイズ 16×9（iPhoneで横向きで撮影した写真の大きさでも可）</li>
+              <li>
+                目安サイズ 16×9（iPhoneで横向きで撮影した写真の大きさでも可）
+              </li>
               <li>添付可能ファイルは20MB以下で、形式はJPEG、PNGです</li>
-              <li>削除した画像は元に戻せません。必要に応じて事前にレクページからダウンロードをお願いします</li>
+              <li>
+                削除した画像は元に戻せません。必要に応じて事前にレクページからダウンロードをお願いします
+              </li>
             </ul>
           </div>
           <div className='row'>
             {recreation.images
               .filter((image) => image.kind === 'slider')
               .map((image, i) => (
-                <ImageComponent key={i} image={image} handleDelete={useFile.handleFileDelete} />
+                <ImageComponent
+                  key={i}
+                  image={image}
+                  handleDelete={useFile.handleFileDelete}
+                />
               ))}
           </div>
 
@@ -81,7 +99,9 @@ export const SecondStep: React.FC<Props> = (props) => {
             accept='image/*'
             className='d-none'
             ref={sliderRef}
-            onChange={(event) => useFile.handleFileAdd(event.target.files, 'slider')}
+            onChange={(event) =>
+              useFile.handleFileAdd(event.target.files, 'slider')
+            }
             name='recreationImage'
           />
           <button
@@ -103,36 +123,63 @@ export const SecondStep: React.FC<Props> = (props) => {
             <li>
               無料大容量 ファイル転送サービス GigaFile(ギガファイル)便
               <span>
-                <a href='https://gigafile.nu/' target='_blank' rel='noreferrer' className='text-primary'>
+                <a
+                  href='https://gigafile.nu/'
+                  target='_blank'
+                  rel='noreferrer'
+                  className='text-primary'
+                >
                   FileGiga
                 </a>
               </span>
               にアクセス
             </li>
-            <li>次にファイルをアップロードして、ダウンロード専用URLをコピーします</li>
+            <li>
+              次にファイルをアップロードして、ダウンロード専用URLをコピーします
+            </li>
             <li>最後に専用URLを以下のフォームに入力してください</li>
           </ol>
-          <input type='text' className='p-2 w-100 rounded border border-secondary' {...register('youtubeId')} />
+          <input
+            type='text'
+            className='p-2 w-100 rounded border border-secondary'
+            {...register('youtubeId')}
+          />
         </>
       )}
 
       <div className='mt-4'>
         <h5 className='text-black font-weight-bold'>お借りしたいものを入力</h5>
       </div>
-      <p className='small my-0'>レクに必要なものを施設から借りたい場合は入力してください</p>
-      <input type='text' className='p-2 w-100 rounded border border-secondary' {...register('borrowItem')} />
+      <p className='small my-0'>
+        レクに必要なものを施設から借りたい場合は入力してください
+      </p>
+      <input
+        type='text'
+        className='p-2 w-100 rounded border border-secondary'
+        {...register('borrowItem')}
+      />
 
       <div className='mt-4'>
         <h5 className='text-black font-weight-bold'>持ち込むものを入力</h5>
       </div>
-      <p className='small my-0'>レクに必要なものを自前で施設に持ち込む場合は入力してください</p>
-      <input type='text' className='p-2 w-100 rounded border border-secondary' {...register('bringYourOwnItem')} />
+      <p className='small my-0'>
+        レクに必要なものを自前で施設に持ち込む場合は入力してください
+      </p>
+      <input
+        type='text'
+        className='p-2 w-100 rounded border border-secondary'
+        {...register('bringYourOwnItem')}
+      />
 
       {recreation && useFile && (
         <>
           <div className='d-flex mt-4'>
-            <h5 className='text-black font-weight-bold'>施設に渡したいファイル</h5>
-            <p className='small mt-1 ms-3'>※添付可能ファイルは20MB以下で、形式はPDF、JPEG、PNGです</p>
+            <h5 className='text-black font-weight-bold'>
+              施設に渡したいファイル
+            </h5>
+            <p className='small mt-1 ms-3'>
+              ※添付可能ファイルは20MB以下で、形式はPDF、JPEG、PNGです
+            </p>
           </div>
           <p className='small my-0'>歌詞カードやパンフレットなど</p>
 
@@ -140,7 +187,9 @@ export const SecondStep: React.FC<Props> = (props) => {
             type='file'
             className='d-none'
             ref={materialRef}
-            onChange={(event) => useFile.handleFileAdd(event.target.files, 'material')}
+            onChange={(event) =>
+              useFile.handleFileAdd(event.target.files, 'material')
+            }
             name='recreationProfile'
           />
 
@@ -148,7 +197,11 @@ export const SecondStep: React.FC<Props> = (props) => {
             {recreation.images
               .filter((image) => image.kind === 'material')
               .map((image, i) => (
-                <ImageComponent key={i} image={image} handleDelete={useFile.handleFileDelete} />
+                <ImageComponent
+                  key={i}
+                  image={image}
+                  handleDelete={useFile.handleFileDelete}
+                />
               ))}
           </div>
           {useFile.isLoading ? (
@@ -168,13 +221,15 @@ export const SecondStep: React.FC<Props> = (props) => {
       <div className='mt-4'>
         <h5 className='text-black font-weight-bold'>その他を入力</h5>
       </div>
-      <p className='small my-0'>注意事項やその他備考などありましたら入力してください</p>
+      <p className='small my-0'>
+        注意事項やその他備考などありましたら入力してください
+      </p>
       <textarea
         rows={15}
         className='p-1 w-100 rounded border border-secondary'
         placeholder='その他を入力'
         {...register('extraInformation', {
-          maxLength: 500
+          maxLength: 500,
         })}
         onChange={(e) => setExtraInformation(e.target.value)}
         maxLength={500}

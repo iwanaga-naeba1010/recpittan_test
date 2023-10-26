@@ -10,34 +10,43 @@ type Props = {
 
 type TransportationExpensesFormValues = Pick<Order, 'transportationExpenses'>;
 
-export const TransportationExpensesForm: React.FC<Props> = (props): JSX.Element => {
+export const TransportationExpensesForm: React.FC<Props> = (
+  props
+): JSX.Element => {
   const { order, setOrder } = props;
   const [canEdit, setCanEdit] = useState<boolean>(false);
 
-  const { register, handleSubmit, setValue } = useForm<TransportationExpensesFormValues>({
-    mode: 'onChange',
-    defaultValues: {
-      transportationExpenses: order.transportationExpenses
-    }
-  });
+  const { register, handleSubmit, setValue } =
+    useForm<TransportationExpensesFormValues>({
+      mode: 'onChange',
+      defaultValues: {
+        transportationExpenses: order.transportationExpenses,
+      },
+    });
 
   useEffect(() => {
     setValue('transportationExpenses', order.transportationExpenses);
   }, [order]);
 
-  const onSubmit = async (values: TransportationExpensesFormValues): Promise<void> => {
+  const onSubmit = async (
+    values: TransportationExpensesFormValues
+  ): Promise<void> => {
     const requestBody: { [key: string]: TransportationExpensesFormValues } = {
       order: {
-        transportationExpenses: values.transportationExpenses
-      }
+        transportationExpenses: values.transportationExpenses,
+      },
     };
 
     try {
-      const response = await Api.patch<Order>(`/orders/${order.id}`, 'customer', requestBody);
+      const response = await Api.patch<Order>(
+        `/orders/${order.id}`,
+        'customer',
+        requestBody
+      );
       setOrder({
         ...order,
         transportationExpenses: response.data.transportationExpenses,
-        totalPriceForCustomer: response.data.totalPriceForCustomer
+        totalPriceForCustomer: response.data.totalPriceForCustomer,
       });
       setCanEdit(false);
     } catch (e) {
@@ -52,7 +61,11 @@ export const TransportationExpensesForm: React.FC<Props> = (props): JSX.Element 
           交通費
           <br />
           {!canEdit && order.isEditable && (
-            <a id='transportationExpensesEditButton' className='clink' onClick={() => setCanEdit(true)}>
+            <a
+              id='transportationExpensesEditButton'
+              className='clink'
+              onClick={() => setCanEdit(true)}
+            >
               編集
             </a>
           )}

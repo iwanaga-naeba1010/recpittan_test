@@ -12,7 +12,10 @@ export const SuccessFlash: React.FC<Props> = (props) => {
     return <></>;
   }
   return (
-    <div className='alert alert-success alert-dismissible fade show' role='alert'>
+    <div
+      className='alert alert-success alert-dismissible fade show'
+      role='alert'
+    >
       {message}
       <button
         type='button'
