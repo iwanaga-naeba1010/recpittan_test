@@ -69,12 +69,12 @@ class Recreation < ApplicationRecord
   # NOTE(okubo): publicは予約後なので下記で定義
   scope :public_recs, -> { where(status: :published) }
   scope :sorted_by, ->(sort_order) {
-    case sort_order
-    when 'price_low_to_high'
+    case sort_order.to_sym
+    when :price_low_to_high
       order(price: :asc)
-    when 'price_high_to_low'
+    when :price_high_to_low
       order(price: :desc)
-    when 'reviews_count'
+    when :reviews_count
       joins(:evaluations).group('recreations.id').order('COUNT(evaluations.id) DESC')
     else
       order(created_at: :desc)
