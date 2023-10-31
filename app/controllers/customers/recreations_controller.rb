@@ -7,7 +7,8 @@ class Customers::RecreationsController < Customers::ApplicationController
   def index
     @q = Recreation.includes(:recreation_images).public_recs.ransack(params[:q])
     @categories = Tag.categories
-    @recs = @q.result(distinct: true).page(params[:page]).per(30)
+    sort_order = params[:sort_order] || :newest
+    @recs = @q.result.sorted_by(sort_order).page(params[:page]).per(30)
     value = @q.base.conditions&.first&.values&.first&.value
     is_tag_class = @q.base.conditions&.first&.attributes&.first&.klass == Tag
     if value && is_tag_class

@@ -3,6 +3,7 @@
   'エブリ・プラスは300種類以上の介護レクリエーションを提供しているマッチングサイトです。複数条件から簡単にレクリエーションを簡単検索・発注することが可能です',
   nil, nil) %>
 <%= search_form_for Recreation.ransack(params[:q]), url: customers_recreations_path, class: "d-flex search border-top shadow" do |f| %>
+
   <div class="mx-auto mb-4 list-search-form px-5">
     <div  class="serach-forms">
       <div class="nav-item px-2 mt-3">
@@ -37,6 +38,14 @@
       </div>
       <div class="search-bottum">
         <%= f.submit '絞り込む', class: 'btn btn-csecondar text-white float-right mt-5' %>
+      </div>
+      <div class="nav-item px-2 mt-3">
+        <p class="font-weight-bold label-size">並び順</p>
+        <%= select_tag :sort_order,
+          options_for_select(sort_order_options, selected: params[:sort_order]),
+          class: 'form-select search-select',
+          onchange: 'this.form.submit()'
+        %>
       </div>
     </div>
   </div>
