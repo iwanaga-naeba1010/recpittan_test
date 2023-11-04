@@ -40,7 +40,6 @@ ActiveAdmin.register RecreationPlan do
     f.semantic_errors
 
     f.inputs do
-      f.input :code
       f.input :title
       f.input :release_status, as: :select, collection: RecreationPlan.release_status.values.map { |i| [i.text, i] }
     end
