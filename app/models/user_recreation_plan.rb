@@ -22,6 +22,6 @@
 #
 class UserRecreationPlan < ApplicationRecord
   belongs_to :user
-  has_many :user_recreation_recretion_plans, dependent: :destroy
-  has_many :recreations, through: :user_recreation_recretion_plans
+  has_many :user_recreation_recreation_plans, dependent: :destroy
+  has_many :recreations, through: :user_recreation_recreation_plans
 end

@@ -2,7 +2,7 @@
 
 # == Schema Information
 #
-# Table name: recreation_recretion_plans
+# Table name: recreation_recreation_plans
 #
 #  id                 :bigint           not null, primary key
 #  month              :integer
@@ -13,8 +13,8 @@
 #
 # Indexes
 #
-#  index_recreation_recretion_plans_on_recreation_id       (recreation_id)
-#  index_recreation_recretion_plans_on_recreation_plan_id  (recreation_plan_id)
+#  index_recreation_recreation_plans_on_recreation_id       (recreation_id)
+#  index_recreation_recreation_plans_on_recreation_plan_id  (recreation_plan_id)
 #
 # Foreign Keys
 #
@@ -23,6 +23,6 @@
 #
 require 'rails_helper'
 
-RSpec.describe RecreationRecretionPlan, type: :model do
+RSpec.describe RecreationRecreationPlan, type: :model do
   pending "add some examples to (or delete) #{__FILE__}"
 end

@@ -6,7 +6,7 @@
 #
 #  id             :bigint           not null, primary key
 #  code           :string           not null
-#  release_status :integer          default(0), not null
+#  release_status :integer          default("draft"), not null
 #  title          :string           not null
 #  created_at     :datetime         not null
 #  updated_at     :datetime         not null

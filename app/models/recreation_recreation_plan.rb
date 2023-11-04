@@ -2,7 +2,7 @@
 
 # == Schema Information
 #
-# Table name: recreation_recretion_plans
+# Table name: recreation_recreation_plans
 #
 #  id                 :bigint           not null, primary key
 #  month              :integer
@@ -13,15 +13,17 @@
 #
 # Indexes
 #
-#  index_recreation_recretion_plans_on_recreation_id       (recreation_id)
-#  index_recreation_recretion_plans_on_recreation_plan_id  (recreation_plan_id)
+#  index_recreation_recreation_plans_on_recreation_id       (recreation_id)
+#  index_recreation_recreation_plans_on_recreation_plan_id  (recreation_plan_id)
 #
 # Foreign Keys
 #
 #  fk_rails_...  (recreation_id => recreations.id)
 #  fk_rails_...  (recreation_plan_id => recreation_plans.id)
 #
-class RecreationRecretionPlan < ApplicationRecord
+class RecreationRecreationPlan < ApplicationRecord
   belongs_to :recreation
   belongs_to :recreation_plan
+
+  validates :month, presence: true
 end

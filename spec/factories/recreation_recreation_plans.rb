@@ -2,7 +2,7 @@
 
 # == Schema Information
 #
-# Table name: recreation_recretion_plans
+# Table name: recreation_recreation_plans
 #
 #  id                 :bigint           not null, primary key
 #  month              :integer
@@ -13,8 +13,8 @@
 #
 # Indexes
 #
-#  index_recreation_recretion_plans_on_recreation_id       (recreation_id)
-#  index_recreation_recretion_plans_on_recreation_plan_id  (recreation_plan_id)
+#  index_recreation_recreation_plans_on_recreation_id       (recreation_id)
+#  index_recreation_recreation_plans_on_recreation_plan_id  (recreation_plan_id)
 #
 # Foreign Keys
 #
@@ -22,7 +22,7 @@
 #  fk_rails_...  (recreation_plan_id => recreation_plans.id)
 #
 FactoryBot.define do
-  factory :recreation_recretion_plan do
+  factory :recreation_recreation_plan do
     recreation
     recreation_plan
     month { 1 }
