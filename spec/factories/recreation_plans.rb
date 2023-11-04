@@ -18,7 +18,6 @@
 FactoryBot.define do
   factory :recreation_plan do
     title { 'MyString' }
-    code { 'MyString' }
     release_status { 1 }
   end
 end
