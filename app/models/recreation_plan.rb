@@ -16,6 +16,6 @@
 #  index_recreation_plans_on_code  (code) UNIQUE
 #
 class RecreationPlan < ApplicationRecord
-  has_many :recreations, through: :recreation_recretion_plans
   has_many :recreation_recretion_plans, dependent: :destroy
+  has_many :recreations, through: :recreation_recretion_plans
 end
