@@ -1,5 +1,5 @@
 class CreateRecreationRecreationPlans < ActiveRecord::Migration[7.0]
-  def change
+  def up
     create_table :recreation_recreation_plans do |t|
       t.references :recreation, null: false, foreign_key: true
       t.references :recreation_plan, null: false, foreign_key: true
@@ -7,11 +7,5 @@ class CreateRecreationRecreationPlans < ActiveRecord::Migration[7.0]
 
       t.timestamps
     end
-
-    execute <<-SQL
-      ALTER TABLE recreation_recreation_plans
-      ADD CONSTRAINT check_month
-      CHECK (month >= 1 AND month <= 12);
-    SQL
   end
 end
