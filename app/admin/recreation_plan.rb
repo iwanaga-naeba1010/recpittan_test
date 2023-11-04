@@ -4,7 +4,8 @@ ActiveAdmin.register RecreationPlan do
   permit_params(
     %i[
       code release_status title
-    ]
+    ],
+    recreation_recreation_plans_attributes: %i[id recreation_id month _destroy]
   )
   actions :all
 
@@ -31,6 +32,13 @@ ActiveAdmin.register RecreationPlan do
 
           row :created_at
           row :updated_at
+
+          panel t('activerecord.models.recreation_recreation_plan') do
+            table_for recreation_plan.recreation_recreation_plans.order(month: :asc) do
+              column :recreation
+              column :month
+            end
+          end
         end
       end
     end
