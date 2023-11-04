@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_09_27_160140) do
+ActiveRecord::Schema[7.0].define(version: 2023_11_04_052520) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -252,6 +252,15 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_27_160140) do
     t.index ["recreation_id"], name: "index_recreation_memos_on_recreation_id"
   end
 
+  create_table "recreation_plans", force: :cascade do |t|
+    t.string "title", null: false
+    t.string "code", null: false
+    t.integer "release_status", default: 0, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["code"], name: "index_recreation_plans_on_code", unique: true
+  end
+
   create_table "recreation_prefectures", force: :cascade do |t|
     t.bigint "recreation_id", null: false
     t.string "name"
@@ -264,6 +273,17 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_27_160140) do
     t.bigint "profile_id", null: false
     t.datetime "created_at", precision: nil, null: false
     t.datetime "updated_at", precision: nil, null: false
+  end
+
+  create_table "recreation_recretion_plans", force: :cascade do |t|
+    t.bigint "recreation_id", null: false
+    t.bigint "recreation_plan_id", null: false
+    t.integer "month"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["recreation_id"], name: "index_recreation_recretion_plans_on_recreation_id"
+    t.index ["recreation_plan_id"], name: "index_recreation_recretion_plans_on_recreation_plan_id"
+    t.check_constraint "month >= 1 AND month <= 12", name: "check_month"
   end
 
   create_table "recreation_tags", force: :cascade do |t|
@@ -338,6 +358,27 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_27_160140) do
     t.index ["user_id"], name: "index_user_memos_on_user_id"
   end
 
+  create_table "user_recreation_plans", force: :cascade do |t|
+    t.string "title", null: false
+    t.string "code", null: false
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["code"], name: "index_user_recreation_plans_on_code", unique: true
+    t.index ["user_id"], name: "index_user_recreation_plans_on_user_id"
+  end
+
+  create_table "user_recreation_recreation_plans", force: :cascade do |t|
+    t.bigint "recreation_id", null: false
+    t.bigint "user_recreation_plan_id", null: false
+    t.integer "month"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["recreation_id"], name: "index_user_rec_rec_plans_on_rec_id"
+    t.index ["user_recreation_plan_id"], name: "index_user_rec_rec_plans_on_user_rec_plan_id"
+    t.check_constraint "month >= 1 AND month <= 12", name: "check_month"
+  end
+
   create_table "users", force: :cascade do |t|
     t.integer "role", default: 0, null: false
     t.string "email", default: "", null: false
@@ -400,11 +441,16 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_27_160140) do
   add_foreign_key "recreation_prefectures", "recreations", name: "recreation_prefectures_recreation_id_fkey"
   add_foreign_key "recreation_profiles", "profiles", name: "recreation_profiles_profile_id_fkey"
   add_foreign_key "recreation_profiles", "recreations", name: "recreation_profiles_recreation_id_fkey"
+  add_foreign_key "recreation_recretion_plans", "recreation_plans"
+  add_foreign_key "recreation_recretion_plans", "recreations"
   add_foreign_key "recreation_tags", "recreations", name: "recreation_tags_recreation_id_fkey"
   add_foreign_key "recreation_tags", "tags", name: "recreation_tags_tag_id_fkey"
   add_foreign_key "recreations", "users", name: "recreations_user_id_fkey"
   add_foreign_key "reports", "orders", name: "reports_order_id_fkey"
   add_foreign_key "user_memos", "users"
+  add_foreign_key "user_recreation_plans", "users"
+  add_foreign_key "user_recreation_recreation_plans", "recreations"
+  add_foreign_key "user_recreation_recreation_plans", "user_recreation_plans"
   add_foreign_key "users", "companies", name: "users_company_id_fkey"
   add_foreign_key "zooms", "orders", name: "zooms_order_id_fkey"
 end

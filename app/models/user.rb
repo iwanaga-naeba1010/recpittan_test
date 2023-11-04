@@ -57,6 +57,7 @@ class User < ApplicationRecord
   has_many :user_memos, dependent: :destroy
   has_many :favorite_recreations, dependent: :destroy
   has_many :favorited_recreations, through: :favorite_recreations, source: :recreation
+  has_many :user_recreation_plans, dependent: :destroy
 
   scope :customers, -> { where(role: :customer) }
 
