@@ -1,0 +1,43 @@
+<main class="list">
+  <div class="container pt-4">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+          <%= link_to 'トップ', root_path %>
+        </li>
+        <% if @tag&.present? %>
+          <li class="breadcrumb-item">
+            <%= link_to '一覧', customers_recreations_path %>
+          </li>
+          <li class="breadcrumb-item active">
+            <span class="text-secondary"><%= @tag.name %></span>
+          </li>
+        <% else %>
+          <li class="breadcrumb-item active">
+            <span class="text-secondary">一覧</span>
+          </li>
+        <% end %>
+      </ol>
+    </nav>
+  </div>
+
+  <div>
+    <div class="container">
+      <div class="row">
+        <% @recreation_plans.each do |rp| %>
+          <div class="col-2">
+            <div>
+              <%= image_tag rp.recreations.first.recreation_images.sliders&.first&.image&.to_s, width: 130 %>
+            </div>
+          </div>
+          <div class="col-10">
+            <%= rp.title %>
+            <% total_price = @recreation_plans_with_total_price.find { |plan, price| plan == rp }[1] %>
+            <p>レク回数: <%= rp.recreations.size %>回 <%= total_price %>~</p>
+          </div>
+        <% end %>
+      </div>
+    </div>
+    <%= paginate @recreation_plans %>
+  </div>
+</main>
