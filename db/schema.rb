@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_11_04_052520) do
+ActiveRecord::Schema[7.0].define(version: 2023_11_12_072345) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -252,6 +252,15 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_04_052520) do
     t.index ["recreation_id"], name: "index_recreation_memos_on_recreation_id"
   end
 
+  create_table "recreation_plan_tags", force: :cascade do |t|
+    t.bigint "recreation_id", null: false
+    t.bigint "tag_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["recreation_id"], name: "index_recreation_plan_tags_on_recreation_id"
+    t.index ["tag_id"], name: "index_recreation_plan_tags_on_tag_id"
+  end
+
   create_table "recreation_plans", force: :cascade do |t|
     t.string "title", null: false
     t.string "code", null: false
@@ -437,6 +446,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_04_052520) do
   add_foreign_key "profiles", "users", name: "profiles_user_id_fkey"
   add_foreign_key "recreation_images", "recreations", name: "recreation_images_recreation_id_fkey"
   add_foreign_key "recreation_memos", "recreations"
+  add_foreign_key "recreation_plan_tags", "recreations"
+  add_foreign_key "recreation_plan_tags", "tags"
   add_foreign_key "recreation_prefectures", "recreations", name: "recreation_prefectures_recreation_id_fkey"
   add_foreign_key "recreation_profiles", "profiles", name: "recreation_profiles_profile_id_fkey"
   add_foreign_key "recreation_profiles", "recreations", name: "recreation_profiles_recreation_id_fkey"

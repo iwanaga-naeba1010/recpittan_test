@@ -26,6 +26,7 @@ ja:
       tags/target: 利用者層
       tags/event: イベント
       tags/rental: 貸出可能品
+      tags/plan: プランタグ
       target: 利用者層
       chat: チャット
       invoice_information: 請求書発行先情報
