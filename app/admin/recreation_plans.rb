@@ -6,6 +6,7 @@ ActiveAdmin.register RecreationPlan do
     %i[
       code release_status title
     ],
+    tag_ids: [],
     recreation_recreation_plans_attributes: %i[id recreation_id month _destroy]
   )
   actions :all
@@ -38,6 +39,13 @@ ActiveAdmin.register RecreationPlan do
             table_for recreation_plan.recreation_recreation_plans.order(month: :asc) do
               column :recreation
               column :month
+            end
+          end
+
+          panel 'タグ', style: 'margin-top: 30px;' do
+            table_for recreation_plan.tags.plans do
+              column :id
+              column :name
             end
           end
         end
