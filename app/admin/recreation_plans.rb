@@ -1,10 +1,12 @@
 # frozen_string_literal: true
 
+# rubocop:disable Metrics/BlockLength
 ActiveAdmin.register RecreationPlan do
   permit_params(
     %i[
       code release_status title
     ],
+    tag_ids: [],
     recreation_recreation_plans_attributes: %i[id recreation_id month _destroy]
   )
   actions :all
@@ -39,6 +41,13 @@ ActiveAdmin.register RecreationPlan do
               column :month
             end
           end
+
+          panel 'タグ', style: 'margin-top: 30px;' do
+            table_for recreation_plan.tags.plans do
+              column :id
+              column :name
+            end
+          end
         end
       end
     end
@@ -52,6 +61,8 @@ ActiveAdmin.register RecreationPlan do
       f.input :release_status, as: :select, collection: RecreationPlan.release_status.values.map { |i| [i.text, i] }
     end
 
+    f.input :tags, label: 'タグ', as: :check_boxes, collection: Tag.plans.all
+
     f.inputs t('activerecord.models.recreation_recreation_plan') do
       f.has_many :recreation_recreation_plans, heading: false, allow_destroy: true, new_record: true do |ff|
         ff.input :recreation_id, as: :select, collection: Recreation.all.map { |recreation| [recreation.title, recreation.id] }
@@ -62,3 +73,4 @@ ActiveAdmin.register RecreationPlan do
     f.actions
   end
 end
+# rubocop:enable Metrics/BlockLength

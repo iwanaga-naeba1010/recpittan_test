@@ -22,6 +22,8 @@ class RecreationPlan < ApplicationRecord
   has_many :recreations, through: :recreation_recreation_plans
   has_many :user_recreation_plans, dependent: :destroy
   has_many :users, through: :user_recreation_plans
+  has_many :recreation_plan_tags, dependent: :destroy
+  has_many :tags, through: :recreation_plan_tags
 
   accepts_nested_attributes_for :recreation_recreation_plans, allow_destroy: true
 
