@@ -34,6 +34,11 @@
             <%= rp.title %>
             <% total_price = @recreation_plans_with_total_price.find { |plan, price| plan == rp }[1] %>
             <p>レク回数: <%= rp.recreations.size %>回 <%= total_price %>~</p>
+            <% rp.tags.each do |tag|%>
+              <div class="card-body card-body-tag px-2 py-1">
+                <%= tag.name %>
+              </div>
+            <% end %>
           </div>
         <% end %>
       </div>
