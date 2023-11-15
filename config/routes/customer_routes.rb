@@ -15,7 +15,7 @@ namespace :customers do
       resources :reports, only: %i[edit update]
     end
   end
-  resources :recreation_plans, only: %i[index]
+  resources :recreation_plans, only: %i[index show]
   resources :favorite_recreations, only: %i[index]
   resources :invoice_informations, only: %i[new create edit update]
   resources :online_recreation_channels, only: %i[show] do

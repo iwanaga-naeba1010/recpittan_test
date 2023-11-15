@@ -13,3 +13,4 @@ export * from './user';
 export * from './evaluation';
 export * from './evaluationReply';
 export * from './favoriteRecreation';
+export * from './recreationPlan';

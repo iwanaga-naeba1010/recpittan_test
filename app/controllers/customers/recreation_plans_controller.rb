@@ -8,4 +8,8 @@ class Customers::RecreationPlansController < Customers::ApplicationController
       [plan, total_price]
     end
   end
+
+  def show
+    @recreation_plan = RecreationPlan.find(params[:id])
+  end
 end
