@@ -46,7 +46,7 @@
   "devDependencies": {
     "@types/jquery": "^3.5.25",
     "@types/react": "^18.2.37",
-    "@types/react-dom": "^18.2.14",
+    "@types/react-dom": "^18.2.15",
     "@typescript-eslint/eslint-plugin": "^4.33.0",
     "@typescript-eslint/parser": "^4.33.0",
     "eslint": "^7.32.0",
