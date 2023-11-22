@@ -29,7 +29,6 @@ const RecreationPlanShow: React.FC = () => {
   if (!recreationPlan) {
     return <></>;
   }
-  console.log(recreationPlan);
 
   return (
     <div>
