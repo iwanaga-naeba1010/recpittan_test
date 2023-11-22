@@ -18,7 +18,7 @@
 class RecreationPlanSerializer
   def serialize(recreation_plan:)
     recreation_recreation_plans = RecreationRecreationPlanSerializer.new.serialize_list(
-      recreation_recreation_plan: recreation_plan.recreation_recreation_plan
+      recreation_recreation_plans: recreation_plan.recreation_recreation_plans
     )
     tags = TagSerializer.new.serialize_list(tags: recreation_plan.tags)
     {
@@ -27,6 +27,7 @@ class RecreationPlanSerializer
                         key: recreation_plan.release_status,
                         text: recreation_plan.release_status_text },
       title: recreation_plan.title,
+      code: recreation_plan.code,
       recreation_recreation_plans:,
       tags:
     }

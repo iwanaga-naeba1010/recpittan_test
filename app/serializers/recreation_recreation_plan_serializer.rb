@@ -27,10 +27,10 @@ class RecreationRecreationPlanSerializer
   end
 
   def serialize(recreation_recreation_plan:)
-    recreations = RecreationSerializer.new.serialize_list(recreations: recreation_plan.recreations)
+    recreation = RecreationSerializer.new.serialize(recreation: recreation_recreation_plan.recreation)
     {
       month: recreation_recreation_plan.month,
-      recreations:
+      recreation:
     }
   end
 end

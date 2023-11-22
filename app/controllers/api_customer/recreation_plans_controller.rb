@@ -4,7 +4,7 @@ module ApiCustomer
   class RecreationPlansController < ApplicationController
     def show
       recreation_plan = RecreationPlan.find(params[:id])
-      render json: serialize(recreation_plan:)
+      render json: RecreationPlanSerializer.new.serialize(recreation_plan:)
     end
   end
 end
