@@ -11,7 +11,7 @@ export const RecreationRecreationPlanItem: React.FC<Props> = (props) => {
   return (
     <div key={recreationRecreationPlan.month}>
       <div className='row recreation-section'>
-        <div className='month col-1 d-flex align-items-center justify-content-center'>
+        <div className='recreation-month col-1 d-flex align-items-center justify-content-center rounded'>
           <p className='mb-0 fw-bold'>{recreationRecreationPlan.month}月</p>
         </div>
         <div className='col-3 px-2 d-flex flex-column justify-content-between'>
@@ -21,11 +21,11 @@ export const RecreationRecreationPlanItem: React.FC<Props> = (props) => {
             <span className='badge bg-primary ms-1'>{recreationRecreationPlan.recreation.kind.text}</span>
           </div>
         </div>
-        <div className='col-8 ps-0'>
-          <p className='title mb-0'>{recreationRecreationPlan.recreation.title}</p>
-          <div className='d-flex pt-2'>
+        <div className='col-8 ps-0 d-flex flex-column'>
+          <p className='recreation-title mb-0'>{recreationRecreationPlan.recreation.title}</p>
+          <div className='d-flex mt-auto recreation-price'>
             <p className='price mb-0'>開催費 {recreationRecreationPlan.recreation.price}円</p>
-            <p className='price mb-0 ps-3'>材料費 {recreationRecreationPlan.recreation.materialPrice}円</p>
+            <p className='price mb-0'>材料費 {recreationRecreationPlan.recreation.materialPrice}円</p>
           </div>
         </div>
       </div>
