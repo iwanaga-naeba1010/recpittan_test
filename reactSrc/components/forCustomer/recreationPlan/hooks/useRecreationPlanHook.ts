@@ -6,9 +6,7 @@ type UseRecreationPlanHook = {
 };
 
 export const useRecreationPlan = (): UseRecreationPlanHook => {
-  const fetchRecreationPlan = async (
-    id: string
-  ): Promise<RecreationPlan> => {
+  const fetchRecreationPlan = async (id: string): Promise<RecreationPlan> => {
     const response = await Api.get<RecreationPlan>(
       `recreation_plans/${id}`,
       'customer'

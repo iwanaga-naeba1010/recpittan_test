@@ -1,0 +1,49 @@
+.recreation_plan {
+  .plan-thumbnail {
+    width: 100%;
+    height: auto;
+  }
+
+  .plan-title {
+    font-size: 32px;
+    color: #343A40;
+    line-height: 1.5;
+  }
+
+  .plan-code {
+    font-size: 14px;
+    color: #6C757D;
+  }
+
+  .register-button {
+    background-color: #E83E8C;
+    border: none;
+  }
+
+  .recreation-section {
+    height: 120px;
+  }
+
+  .month {
+    background-color: #FDEACC;
+    p {
+      color: #A86900;
+    }
+  }
+
+  .recreation-image {
+    width: 100%;
+    height: auto;
+  }
+
+  .title {
+    font-size: 16px;
+    font-weight: bold;
+    color: #343A40;
+  }
+
+  .price {
+    font-size: 12px;
+    color: #6C757D;
+  }
+}

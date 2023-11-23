@@ -1,7 +1,7 @@
-import { Recreation } from './recreation';
+import { RecreationRecreationPlan } from './recreationRecreationPlan';
 
 export interface RecreationPlan {
   code: string;
   title: string;
-  recreations: Array<Recreation>;
+  recreationRecreationPlans: Array<RecreationRecreationPlan>;
 }
