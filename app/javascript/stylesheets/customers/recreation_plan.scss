@@ -53,7 +53,17 @@
     font-size: 16px;
     font-weight: bold;
     color: #343A40;
+    line-height: 1.5;
+    text-decoration: underline;
+    text-decoration-color: #343A40;
   }
+
+  .recreation-title:visited,
+  .recreation-title:active {
+    text-decoration-color: #343A40;
+    text-decoration-color: #343A40;
+  }
+
 
   .recreation-price {
     font-size: 12px;

@@ -22,7 +22,7 @@ export const RecreationRecreationPlanItem: React.FC<Props> = (props) => {
           </div>
         </div>
         <div className='col-8 ps-0 d-flex flex-column'>
-          <p className='recreation-title mb-0'>{recreationRecreationPlan.recreation.title}</p>
+          <a className='recreation-title mb-0' href="#"><p>{recreationRecreationPlan.recreation.title}</p></a>
           <div className='d-flex mt-auto recreation-price'>
             <p className='price mb-0'>開催費 ¥{recreationRecreationPlan.recreation.price}円</p>
             <p className='price mb-0 ms-3'>材料費 ¥{recreationRecreationPlan.recreation.materialPrice}円/1人</p>
