@@ -5,12 +5,36 @@ import { RecreationPlan } from '@/types';
 import { useRecreationPlan } from '../hooks';
 import { RecreationRecreationPlanItem } from './recreationRecreationPlanItem';
 import { RecreationPlanSection } from './recreationPlanSection';
+import { TransportationExpenses } from './transportationExpenses';
 
 const RecreationPlanShow: React.FC = () => {
   const [recreationPlan, setRecreationPlan] = useState<RecreationPlan>();
   const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [numberOfPeople, setNumberOfPeople] = useState(10);
   const { fetchRecreationPlan } = useRecreationPlan();
+  const handleNumberOfPeopleChange = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    setNumberOfPeople(parseInt(event.target.value, 10) || 0);
+  };
+  const [totalPrice, setTotalPrice] = useState(0);
+  const [totalMaterialPrice, setTotalMaterialPrice] = useState(0);
+  const [totalTransportationCost, setTotalTransportationCost] = useState(0);
   const id = window.location.pathname.split('/')[3];
+
+  const handleUpdateTotalPrice = (newTotal: number) => {
+    setTotalPrice(newTotal);
+  };
+
+  const handleUpdateTotalMaterialPrice = (newTotal: number) => {
+    setTotalMaterialPrice(newTotal);
+  };
+
+  const handleUpdateTotalTransportationCost = (newTotal: number) => {
+    setTotalTransportationCost(newTotal);
+  };
+
+  const grandTotal = totalPrice + totalMaterialPrice + totalTransportationCost;
 
   useEffect(() => {
     (async () => {
@@ -88,15 +112,17 @@ const RecreationPlanShow: React.FC = () => {
           <h5 className='text-black fw-bold'>お見積もり</h5>
           <p>お見積もり金額をシミュレーションできます</p>
           <form>
-            <label htmlFor='numberInput'>
-              レンタルする人数を入力してください
-            </label>
+            <label htmlFor='numberInput'>参加する人数を入力してください</label>
             <br />
             <input
               type='number'
               id='numberInput'
               name='number_of_people'
               placeholder='10'
+              className='form-control w-25 border-0'
+              value={numberOfPeople}
+              onChange={handleNumberOfPeopleChange}
+              min='1'
             />
           </form>
 
@@ -105,26 +131,37 @@ const RecreationPlanShow: React.FC = () => {
               title='開催費'
               priceProperty='price'
               plans={recreationPlan.recreationRecreationPlans}
+              onTotalUpdate={handleUpdateTotalPrice}
             />
             <RecreationPlanSection
               title='材料費'
               priceProperty='materialPrice'
               plans={recreationPlan.recreationRecreationPlans}
+              numberOfPeople={numberOfPeople}
+              onTotalUpdate={handleUpdateTotalMaterialPrice}
+            />
+            <TransportationExpenses
+              plans={recreationPlan.recreationRecreationPlans}
+              onTotalUpdate={handleUpdateTotalTransportationCost}
             />
 
             <div className='row'>
               <div className='col-4'>
-                <p>交通費</p>
+                <p className='text-black fw-bold'>合計</p>
               </div>
-              <div className='col-8'></div>
+              <div className='col-8 text-end'>
+                <p>¥{grandTotal.toLocaleString()}</p>
+              </div>
             </div>
-
             <div className='row'>
               <div className='col-4'>
-                <p>合計</p>
+                <p className='text-black fw-bold'>利用者一人あたり</p>
               </div>
-              <div className='col-8'></div>
+              <div className='col-8 text-end'>
+                <p>¥{(grandTotal / numberOfPeople).toLocaleString()}</p>
+              </div>
             </div>
+            <p className=''>※交通費は1回あたり1000円を基準値</p>
           </div>
         </div>
       </div>

@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import { RecreationRecreationPlan } from '@/types';
 import { RecreationPlanDetail } from './recreationPlanDetail';
 import { TotalSection } from './totalSection';
@@ -7,11 +7,17 @@ type Props = {
   title: string;
   priceProperty: 'price' | 'materialPrice';
   plans: RecreationRecreationPlan[];
+  numberOfPeople?: number;
+  onTotalUpdate: (newTotal: number) => void;
 };
 
-export const RecreationPlanSection: React.FC<Props> = (props) => {
-  const { title, priceProperty, plans } = props;
-
+export const RecreationPlanSection: React.FC<Props> = ({
+  title,
+  priceProperty,
+  plans,
+  numberOfPeople = 0,
+  onTotalUpdate,
+}) => {
   return (
     <>
       <div className='row'>
@@ -25,6 +31,7 @@ export const RecreationPlanSection: React.FC<Props> = (props) => {
                 key={plan.month}
                 recreationRecreationPlan={plan}
                 priceProperty={priceProperty}
+                numberOfPeople={numberOfPeople}
               />
             ))
           ) : (
@@ -33,9 +40,11 @@ export const RecreationPlanSection: React.FC<Props> = (props) => {
             </div>
           )}
           <TotalSection
-            title={`${title}合計`}
-            plans={plans}
+            title={title}
             property={priceProperty}
+            plans={plans}
+            numberOfPeople={numberOfPeople}
+            onTotalUpdate={onTotalUpdate}
           />
         </div>
       </div>
