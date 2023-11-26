@@ -21,26 +21,30 @@
     </nav>
   </div>
 
-  <div class="container">
-    <div class="row">
+  <div class="recreation_plan_index">
+    <div class="container">
       <% @recreation_plans.each do |rp| %>
-        <div class="col-2">
-          <div>
-            <%= image_tag rp.recreations.first.recreation_images.sliders&.first&.image&.to_s, width: 130 %>
-          </div>
-        </div>
-        <div class="col-10">
-          <%= link_to rp.title, customers_recreation_plan_path(rp.id) %>
-          <% total_price = @recreation_plans_with_total_price.find { |plan, price| plan == rp }[1] %>
-          <p>レク回数: <%= rp.recreations.size %>回 <%= total_price %>~</p>
-          <% rp.tags.each do |tag|%>
-            <div class="card-body card-body-tag px-2 py-1">
-              <%= tag.name %>
+        <div class="row mb-2">
+            <div class="col-2">
+              <div>
+                <%= image_tag rp.recreations.first.recreation_images.sliders&.first&.image&.to_s, width: 130, class: 'rounded w-100' %>
+              </div>
             </div>
-          <% end %>
+            <div class="col-10">
+              <%= link_to rp.title, customers_recreation_plan_path(rp.id), class: 'text-black fw-bold fw-bold text-decoration-none' %>
+              <% total_price = @recreation_plans_with_total_price.find { |plan, price| plan == rp }[1] %>
+              <p class="">レク回数: <%= rp.recreations.size %>回 <%= total_price %>~</p>
+              <div class="d-flex">
+                <% rp.tags.each do |tag| %>
+                  <div class="">
+                    <p class="d-inline-block px-2 border rounded fw-bold me-2"># <%= tag.name %></p>
+                  </div>
+                <% end %>
+              </div>
+            </div>
         </div>
       <% end %>
+      <%= paginate @recreation_plans %>
     </div>
-    <%= paginate @recreation_plans %>
   </div>
 </main>

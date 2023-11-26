@@ -27,12 +27,16 @@ export const RecreationPlanDetail: React.FC<Props> = ({
 
   return (
     <div className='row'>
-      <div className='col-6 row align-items-center'>
-        <div className='col-8 d-flex justify-content-between'>
-          <p>{recreationRecreationPlan.recreation.title}</p>
-        </div>
-        {priceProperty === 'materialPrice' && (
-          <>
+      <div className='col-6 align-items-center'>
+        {(priceProperty === 'materialPrice' && (
+          <div className='row'>
+            <div className='col-8 d-flex justify-content-between'>
+              <p>
+                {recreationRecreationPlan.recreation.title} <br /> ¥
+                {recreationRecreationPlan.recreation.materialPrice.toLocaleString()}{' '}
+                / 1人あたり
+              </p>
+            </div>
             <div className='col-2 d-flex justify-content-between'>
               <p>×</p>
             </div>
@@ -40,14 +44,17 @@ export const RecreationPlanDetail: React.FC<Props> = ({
               <p>人数</p>
               <p>{numberOfPeople}人</p>
             </div>
-          </>
+          </div>
+        )) || (
+          <div className='row'>
+            <div className='col-12 d-flex justify-content-between'>
+              <p>{recreationRecreationPlan.recreation.title}</p>
+            </div>
+          </div>
         )}
       </div>
-      <div className='col-6 row align-items-center'>
-        <div className='col-6'></div>
-        <div className='col-6 d-flex justify-content-between'>
-          <p>¥{totalPrice.toLocaleString()}</p>
-        </div>
+      <div className='col-6 align-items-center d-flex justify-content-end'>
+        <p>¥{totalPrice.toLocaleString()}</p>
       </div>
     </div>
   );

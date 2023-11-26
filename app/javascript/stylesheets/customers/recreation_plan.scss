@@ -1,4 +1,13 @@
-.recreation_plan {
+.recreation_plan_index {
+
+}
+
+.recreation_plan_show {
+  p {
+    margin: 0;
+    margin-bottom: 4px;
+  }
+
   .plan-thumbnail {
     width: 100%;
     height: auto;
@@ -27,6 +36,7 @@
   .recreation-month {
     background-color: #FDEACC;
     p {
+      font-size: 12px;
       color: #A86900;
     }
   }
@@ -64,7 +74,6 @@
     text-decoration-color: #343A40;
   }
 
-
   .recreation-price {
     font-size: 12px;
     color: #6C757D;
@@ -73,5 +82,21 @@
 
   .estimate {
     background-color: #FBFAFA;
+  }
+
+  .num-of-people {
+    font-size: 12px;
+    color: #343A40;
+  }
+
+  .download-button {
+    background-color: #FBFAFA;
+    border: solid 2px #E83E8C;
+    color: #E83E8C;
+  }
+
+  .order-start-button {
+    background-color: #E83E8C;
+    border: none;
   }
 }

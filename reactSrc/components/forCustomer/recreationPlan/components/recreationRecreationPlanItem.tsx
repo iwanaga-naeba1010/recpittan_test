@@ -30,7 +30,10 @@ export const RecreationRecreationPlanItem: React.FC<Props> = (props) => {
           </div>
         </div>
         <div className='col-8 ps-0 d-flex flex-column'>
-          <a className='recreation-title mb-0' href='#'>
+          <a
+            className='recreation-title mb-0'
+            href={`/customers/recreations/${recreationRecreationPlan.recreation.id}`}
+          >
             <p>{recreationRecreationPlan.recreation.title}</p>
           </a>
           <div className='d-flex mt-auto recreation-price'>

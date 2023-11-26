@@ -35,14 +35,11 @@ export const TotalSection: React.FC<Props> = ({
 
   return (
     <div className='row text-black'>
-      <div className='col-6 row'>
+      <div className='col-6'>
         <p>{title}合計</p>
       </div>
-      <div className='col-6 row'>
-        <div className='col-6'></div>
-        <div className='col-6'>
-          <p>¥{total.toLocaleString()}</p>
-        </div>
+      <div className='col-6 text-end'>
+        <p>¥{total.toLocaleString()}</p>
       </div>
     </div>
   );

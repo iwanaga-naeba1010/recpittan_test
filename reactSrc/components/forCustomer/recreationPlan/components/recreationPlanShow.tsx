@@ -38,7 +38,7 @@ const RecreationPlanShow: React.FC = () => {
 
   useEffect(() => {
     (async () => {
-      if (!id) return;
+      if (!id || recreationPlan) return; // 追加: recreationPlanが既に設定されている場合は実行しない
       try {
         const recreationPlanResponse = await fetchRecreationPlan(id);
         setRecreationPlan({ ...recreationPlanResponse });
@@ -47,7 +47,7 @@ const RecreationPlanShow: React.FC = () => {
         console.warn('error is', e);
       }
     })();
-  }, [fetchRecreationPlan, id]);
+  }, [id]);
 
   if (isLoading) {
     return <LoadingContainer />;
@@ -75,6 +75,7 @@ const RecreationPlanShow: React.FC = () => {
             <h2 className='plan-title fw-bold'>{recreationPlan.title}</h2>
             <div className='d-flex align-items-center mt-auto'>
               <p className='plan-code mb-0'>プラン番号 {recreationPlan.code}</p>
+              {/* TODO: プラン登録の発火ロジックを入れる */}
               <button className='ms-auto register-button text-white p-2 rounded'>
                 プランを保存する
               </button>
@@ -111,18 +112,20 @@ const RecreationPlanShow: React.FC = () => {
         <div className='estimate p-3'>
           <h5 className='text-black fw-bold'>お見積もり</h5>
           <p>お見積もり金額をシミュレーションできます</p>
-          <form>
-            <label htmlFor='numberInput'>参加する人数を入力してください</label>
+          <form onSubmit={(e) => e.preventDefault()}>
+            <label className='num-of-people mt-1' htmlFor='numberInput'>
+                レクを受ける人数を入力してください
+            </label>
             <br />
             <input
-              type='number'
-              id='numberInput'
-              name='number_of_people'
-              placeholder='10'
-              className='form-control w-25 border-0'
-              value={numberOfPeople}
-              onChange={handleNumberOfPeopleChange}
-              min='1'
+                type='number'
+                id='numberInput'
+                name='number_of_people'
+                placeholder='10'
+                className='form-control w-25 border-0'
+                value={numberOfPeople}
+                onChange={handleNumberOfPeopleChange}
+                min='1'
             />
           </form>
 
@@ -133,6 +136,7 @@ const RecreationPlanShow: React.FC = () => {
               plans={recreationPlan.recreationRecreationPlans}
               onTotalUpdate={handleUpdateTotalPrice}
             />
+            <hr />
             <RecreationPlanSection
               title='材料費'
               priceProperty='materialPrice'
@@ -140,16 +144,18 @@ const RecreationPlanShow: React.FC = () => {
               numberOfPeople={numberOfPeople}
               onTotalUpdate={handleUpdateTotalMaterialPrice}
             />
+            <hr />
             <TransportationExpenses
               plans={recreationPlan.recreationRecreationPlans}
               onTotalUpdate={handleUpdateTotalTransportationCost}
             />
+            <hr />
 
             <div className='row'>
               <div className='col-4'>
                 <p className='text-black fw-bold'>合計</p>
               </div>
-              <div className='col-8 text-end'>
+              <div className='col-8 text-end text-black'>
                 <p>¥{grandTotal.toLocaleString()}</p>
               </div>
             </div>
@@ -157,13 +163,27 @@ const RecreationPlanShow: React.FC = () => {
               <div className='col-4'>
                 <p className='text-black fw-bold'>利用者一人あたり</p>
               </div>
-              <div className='col-8 text-end'>
-                <p>¥{(grandTotal / numberOfPeople).toLocaleString()}</p>
+              <div className='col-8 text-end text-black'>
+                <p>¥{Math.floor(grandTotal / numberOfPeople).toLocaleString()}</p>
               </div>
             </div>
             <p className=''>※交通費は1回あたり1000円を基準値</p>
           </div>
+          <div className='mt-3 d-flex justify-content-center'>
+            {/* TODO: buttonを押したらページのスクショをPDFに保存させる */}
+            <button className='download-button py-2 px-3 rounded fw-bold'>
+              プランの見積もりをダウンロードする
+            </button>
+          </div>
         </div>
+        <div className='mt-4 d-flex justify-content-center'>
+          <button className='order-start-button text-white p-3 rounded fw-bold'>
+            このプランで相談をはじめる
+          </button>
+        </div>
+        <p className='my-4'>
+          ※ボタンを押しても依頼の決定にはなりません。次のページで各レク毎に「相談を開始する」より日程調整を行います。
+        </p>
       </div>
     </div>
   );

@@ -30,22 +30,26 @@ export const TransportationExpenses: React.FC<Props> = ({
       </div>
       <div className='col-8'>
         <div className='row'>
-          <div className='col-6 row'>
-            <div className='col-6'>
-              <p>1回の交通費</p>
-              <p>¥{transportationCostPerVisit.toLocaleString()}</p>
-            </div>
-            <div className='col-6'>
-              <p>レク回数</p>
-              <p>{visitCount}回</p>
+          <div className='col-6'>
+            <div className='row'>
+              <div className='col-6'>
+                <p>1回の交通費</p>
+                <p>¥{transportationCostPerVisit.toLocaleString()}</p>
+              </div>
+              <div className='col-6'>
+                <p>レク回数</p>
+                <p>{visitCount}回</p>
+              </div>
             </div>
           </div>
-          <div className='col-6 row align-items-center'>
-            <div className='col-6 d-flex justify-content-between'>
-              <p>=</p>
-            </div>
-            <div className='col-6 d-flex justify-content-between'>
-              <p>¥{totalTransportationCost.toLocaleString()}</p>
+          <div className='col-6 d-flex align-items-center justify-content-end'>
+            <div className='row w-100'>
+              <div className='col-6 d-flex justify-content-center'>
+                <p>=</p>
+              </div>
+              <div className='col-6 d-flex justify-content-end'>
+                <p>¥{totalTransportationCost.toLocaleString()}</p>
+              </div>
             </div>
           </div>
         </div>
