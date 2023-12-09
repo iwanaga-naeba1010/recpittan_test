@@ -33,12 +33,9 @@ class RecreationPlan < ApplicationRecord
   validates :code, uniqueness: true
   before_validation :generate_code, on: :create
 
-  private
-
-  def generate_code
-    prefix = 'P'
+  private def generate_code
     date_segment = Time.current.strftime('%Y%m%d') # 例: 20231104
     sequence_num = RecreationPlan.where('created_at >= ?', Time.current.beginning_of_day).count.next.to_s.rjust(3, '0')
-    self.code ||= "#{prefix}#{date_segment}#{sequence_num}"
+    self.code ||= "P#{date_segment}#{sequence_num}"
   end
 end
