@@ -116,3 +116,7 @@ ja:
         calendar_image: カレンダー画像
         flyer_pdf: チラシPDF
         flyer_image: チラシ画像
+    recreation_plan:
+      release_status:
+        draft: 下書き
+        public: 公開

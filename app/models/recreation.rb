@@ -57,6 +57,10 @@ class Recreation < ApplicationRecord
   has_many :recreation_memos, dependent: :destroy
   has_many :favorite_recreations, dependent: :destroy
   has_many :favorited_by_users, through: :favorite_recreations, source: :user
+  has_many :recreation_recreation_plans, dependent: :destroy
+  has_many :recreation_plans, through: :recreation_recreation_plans
+  has_many :user_recreation_recreation_plans, dependent: :destroy
+  has_many :user_recreation_plans, through: :user_recreation_recreation_plans
 
   accepts_nested_attributes_for :recreation_images, allow_destroy: true
   accepts_nested_attributes_for :recreation_profile, allow_destroy: true
