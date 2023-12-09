@@ -72,7 +72,7 @@ export const RecreationNewForm: React.FC<Props> = (props) => {
   });
 
   const handleNext = () => {
-    const arr: (keyof RecreationFormValues)[] = [
+    const arr = [
       'title',
       'secondTitle',
       'minutes',
@@ -81,7 +81,7 @@ export const RecreationNewForm: React.FC<Props> = (props) => {
       'flowOfDay',
       'capacity',
       'materialPrice',
-      'amount',
+      'materialAmount',
       'extraInformation',
       'youtubeId',
       'borrowItem',
@@ -90,11 +90,10 @@ export const RecreationNewForm: React.FC<Props> = (props) => {
       'imageUrl',
       'prefectures',
       'category',
-      'kind',
-      'profileId',
+      'profile',
       'userId',
     ];
-    arr.forEach((key) => console.log(`${key} is`, getValues(key)));
+    arr.map((str) => console.log(`${str} is`, getValues(str as any)));
     setCurrentStep(currentStep + 1);
   };
 

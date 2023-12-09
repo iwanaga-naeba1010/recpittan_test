@@ -9,16 +9,13 @@ type FavoriteIconProps = {
   isFavorite: boolean;
 };
 
-export const FavoriteIcon: React.FC<Props & FavoriteIconProps> = ({
-  onClick,
-  isFavorite,
-}) => {
+export const FavoriteIcon: React.FC<Props & FavoriteIconProps> = ({ onClick, isFavorite }) => {
   return (
-    <FavoriteHeartIcon
+    <FavoriteHeartIcon 
       isFavorite={isFavorite}
       onClick={onClick}
-      width='20'
-      height='20'
+      width="20"
+      height="20"
     />
   );
 };
