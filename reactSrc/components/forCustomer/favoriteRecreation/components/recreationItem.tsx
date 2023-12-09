@@ -24,7 +24,13 @@ const getKindLabel = (key: string): string => {
 };
 
 export const RecreationItem: React.FC<Props> = (props) => {
-  const { favoriteRecreation, recreation, deleteFavoriteRecreation, fetchFavoriteRecreations, setFavoriteRecreations } = props;
+  const {
+    favoriteRecreation,
+    recreation,
+    deleteFavoriteRecreation,
+    fetchFavoriteRecreations,
+    setFavoriteRecreations,
+  } = props;
   const handleFavoriteRecreationDelete = async (id: number) => {
     if (!confirm('お気に入りから削除しますか？')) return;
     try {

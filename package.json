@@ -6,9 +6,6 @@
     "lint": "eslint './{app/javascript,reactSrc,reactTest}/**/*.{ts,tsx}'",
     "lint:fix": "eslint --fix './{app/javascript,reactSrc,reactTest}/**/*.{ts,tsx}' && prettier --write './{app/javascript,reactSrc,reactTest}/**/*.{ts,tsx}'"
   },
-  "engines": {
-    "node": "16.x"
-  },
   "dependencies": {
     "@activeadmin/activeadmin": "^3.1.0",
     "@babel/preset-react": "^7.23.3",
@@ -38,7 +35,7 @@
     "snakecase-keys": "^5.5.0",
     "swiper": "^9.4.1",
     "turbolinks": "^5.2.0",
-    "typescript": "^5.1.6",
+    "typescript": "^5.2.2",
     "webpack": "^4.46.0",
     "webpack-cli": "^3.3.12"
   },
@@ -47,8 +44,8 @@
     "@types/jquery": "^3.5.29",
     "@types/react": "^18.2.41",
     "@types/react-dom": "^18.2.17",
-    "@typescript-eslint/eslint-plugin": "^4.33.0",
-    "@typescript-eslint/parser": "^4.33.0",
+    "@typescript-eslint/eslint-plugin": "^6.0.0",
+    "@typescript-eslint/parser": "^6.0.0",
     "eslint": "^7.32.0",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-config-prettier": "^9.1.0",
