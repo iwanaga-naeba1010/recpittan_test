@@ -17,9 +17,7 @@ const FavoriteRecreationIndex: React.FC = () => {
     (async () => {
       try {
         const fetchedFavoriteRecreations = await fetchFavoriteRecreations();
-        const sortedFavoriteRecreations = fetchedFavoriteRecreations.sort(
-          (a, b) => b.id - a.id
-        );
+        const sortedFavoriteRecreations = fetchedFavoriteRecreations.sort((a, b) => b.id - a.id);
         setFavoriteRecreations(sortedFavoriteRecreations);
         setIsLoading(false);
       } catch (e) {
