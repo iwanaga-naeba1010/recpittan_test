@@ -6,6 +6,7 @@ import { useRecreationPlan } from '../hooks';
 import { RecreationRecreationPlanItem } from './recreationRecreationPlanItem';
 import { RecreationPlanSection } from './recreationPlanSection';
 import { TransportationExpenses } from './transportationExpenses';
+import { useUserRecreationPlan } from '../hooks';
 
 const RecreationPlanShow: React.FC = () => {
   const [recreationPlan, setRecreationPlan] = useState<RecreationPlan>();
@@ -21,6 +22,7 @@ const RecreationPlanShow: React.FC = () => {
   const [totalMaterialPrice, setTotalMaterialPrice] = useState(0);
   const [totalTransportationCost, setTotalTransportationCost] = useState(0);
   const id = window.location.pathname.split('/')[3];
+  const { postUserRecreationPlan } = useUserRecreationPlan();
 
   const handleUpdateTotalPrice = (newTotal: number) => {
     setTotalPrice(newTotal);
@@ -35,6 +37,20 @@ const RecreationPlanShow: React.FC = () => {
   };
 
   const grandTotal = totalPrice + totalMaterialPrice + totalTransportationCost;
+
+  const handleStartConsultation = async () => {
+    if (recreationPlan?.id) {
+      try {
+        await postUserRecreationPlan(recreationPlan.id);
+      } catch (e) {
+        if (e instanceof Error) {
+          throw new Error(e.message);
+        } else {
+          throw new Error('An unexpected error occurred.');
+        }
+      }
+    }
+  };
 
   useEffect(() => {
     (async () => {
@@ -177,7 +193,10 @@ const RecreationPlanShow: React.FC = () => {
           </div>
         </div>
         <div className='mt-4 d-flex justify-content-center'>
-          <button className='order-start-button text-white p-3 rounded fw-bold'>
+          <button 
+            className='order-start-button text-white p-3 rounded fw-bold'
+            onClick={handleStartConsultation}
+          >
             このプランで相談をはじめる
           </button>
         </div>
