@@ -10,7 +10,7 @@
     "node": "16.x"
   },
   "dependencies": {
-    "@activeadmin/activeadmin": "^3.1.0",
+    "@activeadmin/activeadmin": "^3.2.0",
     "@babel/preset-react": "^7.23.3",
     "@babel/preset-typescript": "^7.23.3",
     "@fortawesome/fontawesome-free": "^5.15.4",
