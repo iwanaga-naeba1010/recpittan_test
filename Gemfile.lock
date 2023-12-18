@@ -289,7 +289,7 @@ GEM
     minitest (5.20.0)
     msgpack (1.7.2)
     multi_json (1.15.0)
-    net-imap (0.4.7)
+    net-imap (0.4.8)
       date
       net-protocol
     net-pop (0.1.2)
