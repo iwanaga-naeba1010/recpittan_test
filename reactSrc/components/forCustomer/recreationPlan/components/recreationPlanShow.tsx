@@ -38,20 +38,6 @@ const RecreationPlanShow: React.FC = () => {
 
   const grandTotal = totalPrice + totalMaterialPrice + totalTransportationCost;
 
-  const handleStartConsultation = async () => {
-    if (recreationPlan?.id) {
-      try {
-        await postUserRecreationPlan(recreationPlan.id);
-      } catch (e) {
-        if (e instanceof Error) {
-          throw new Error(e.message);
-        } else {
-          throw new Error('An unexpected error occurred.');
-        }
-      }
-    }
-  };
-
   useEffect(() => {
     (async () => {
       if (!id || recreationPlan) return; // 追加: recreationPlanが既に設定されている場合は実行しない
@@ -71,7 +57,20 @@ const RecreationPlanShow: React.FC = () => {
   if (!recreationPlan) {
     return <></>;
   }
-  console.log(recreationPlan);
+
+  const handleStartConsultation = async () => {
+    if (recreationPlan?.id) {
+      try {
+        await postUserRecreationPlan(recreationPlan.id);
+      } catch (e) {
+        if (e instanceof Error) {
+          throw new Error(e.message);
+        } else {
+          throw new Error('An unexpected error occurred.');
+        }
+      }
+    }
+  };
 
   return (
     <div>
