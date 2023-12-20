@@ -8,7 +8,8 @@ module ApiCustomer
     end
 
     def create
-      recreation_plan = RecreationPlan.find(params[:recreation_plan_id])
+      binding.pry
+      recreation_plan = RecreationPlan.find(params[:user_recreation_plan][:recreation_plan_id])
       user_recreation_plan = UserRecreationPlan.new(
         recreation_plan:,
         user: current_user,
@@ -23,7 +24,6 @@ module ApiCustomer
 
       if user_recreation_plan.save
         render json: UserRecreationPlanSerializer.new.serialize(user_recreation_plan:), status: :created
-        redirect_to root
       else
         render json: { errors: user_recreation_plan.errors.full_messages }, status: :unprocessable_entity
       end
