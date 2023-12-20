@@ -8,7 +8,6 @@ module ApiCustomer
     end
 
     def create
-      binding.pry
       recreation_plan = RecreationPlan.find(params[:user_recreation_plan][:recreation_plan_id])
       user_recreation_plan = UserRecreationPlan.new(
         recreation_plan:,
