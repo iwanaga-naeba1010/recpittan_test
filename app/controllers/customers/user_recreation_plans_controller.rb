@@ -2,6 +2,6 @@
 
 class Customers::UserRecreationPlansController < Customers::ApplicationController
   def index
-    user_recreation_plans = UserRecreationPlan.where(user: current_user)
+    UserRecreationPlan.where(user: current_user)
   end
 end

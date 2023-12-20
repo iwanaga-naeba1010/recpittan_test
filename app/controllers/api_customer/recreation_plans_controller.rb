@@ -5,8 +5,8 @@ module ApiCustomer
     def show
       recreation_plan = RecreationPlan.includes(
         recreation_recreation_plans: [
-          recreation: [
-            :tags, :recreation_profile, :recreation_images, :recreation_prefectures, :profile
+          recreation: %i[
+            tags recreation_profile recreation_images recreation_prefectures profile
           ]
         ]
       ).find(params[:id])
