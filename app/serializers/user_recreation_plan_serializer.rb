@@ -27,13 +27,11 @@ class UserRecreationPlanSerializer
     user_recreation_recreation_plans = UserRecreationRecreationPlanSerializer.new.serialize_list(
       user_recreation_recreation_plans: user_recreation_plan.user_recreation_recreation_plans
     )
-    tags = TagSerializer.new.serialize_list(tags: user_recreation_plan.tags)
     {
       id: user_recreation_plan.id,
-      title: user_recreation_plan.title,
+      title: user_recreation_plan.recreation_plan_title,
       code: user_recreation_plan.code,
       user_recreation_recreation_plans:,
-      tags:
     }
   end
 end

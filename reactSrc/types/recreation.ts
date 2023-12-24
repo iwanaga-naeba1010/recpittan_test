@@ -5,6 +5,7 @@ import { RecreationPrefecture } from './recreationPrefecture';
 import { Tag } from './tag';
 
 export interface Recreation extends BaseEnum {
+  id: number;
   title: string;
   secondTitle: string;
   minutes: number;

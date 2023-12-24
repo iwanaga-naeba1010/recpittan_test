@@ -3,13 +3,13 @@ import { UserRecreationPlan } from '@/types';
 
 type UseUserRecreationPlanHook = {
   postUserRecreationPlan: (
-    recreationPlanId: number,
+    recreationPlanId: number
   ) => Promise<UserRecreationPlan>;
 };
 
 export const useUserRecreationPlan = (): UseUserRecreationPlanHook => {
   const postUserRecreationPlan = async (
-    recreationPlanId: number,
+    recreationPlanId: number
   ): Promise<UserRecreationPlan> => {
     const data = {
       user_recreation_plan: {

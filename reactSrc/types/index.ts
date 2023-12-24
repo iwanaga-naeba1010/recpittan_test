@@ -16,3 +16,4 @@ export * from './favoriteRecreation';
 export * from './recreationPlan';
 export * from './recreationRecreationPlan';
 export * from './userRecreationPlan';
+export * from './userRecreationRecreationPlan';

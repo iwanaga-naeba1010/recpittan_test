@@ -3,7 +3,13 @@
 module ApiCustomer
   class UserRecreationPlansController < ApplicationController
     def show
-      user_recreation_plan = UserRecreationPlan.find(params[:id])
+      user_recreation_plan = UserRecreationPlan.includes(
+        user_recreation_recreation_plans: [
+          recreation: %i[
+            tags recreation_profile recreation_images recreation_prefectures profile
+          ]
+        ]
+      ).find(params[:id])
       render json: UserRecreationPlanSerializer.new.serialize(user_recreation_plan:)
     end
 

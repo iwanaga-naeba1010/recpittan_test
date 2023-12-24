@@ -4,7 +4,8 @@ import { RecreationPlan } from './recreationPlan';
 
 export interface UserRecreationPlan {
   code: string;
+  title: string;
   user: User;
   RecreationPlan: RecreationPlan;
-  recreationRecreationPlans: Array<RecreationRecreationPlan>;
+  userRecreationRecreationPlans: Array<RecreationRecreationPlan>;
 }

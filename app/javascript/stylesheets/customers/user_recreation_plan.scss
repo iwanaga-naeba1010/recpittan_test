@@ -1,7 +1,24 @@
-.recreation_plan_show {
+.user_recreation_plan_index {
+  background-color: #F5F2F0;
+
+  button {
+    background-color: #E83E8C;
+    border: none;
+    color: white;
+    border-radius: 5px;
+    padding: 7px 14px;
+  }
+}
+
+.user_recreation_plan_show {
   p {
     margin: 0;
     margin-bottom: 4px;
+  }
+
+  h2 {
+    margin: 0;
+    margin-bottom: 10px;
   }
 
   .plan-thumbnail {
@@ -10,7 +27,7 @@
   }
 
   .plan-title {
-    font-size: 32px;
+    font-size: 24px;
     color: #343A40;
     line-height: 1.5;
   }
@@ -20,17 +37,18 @@
     color: #6C757D;
   }
 
-  .register-button {
-    background-color: #E83E8C;
-    border: none;
+  .attention {
+    color: #343A40;
+    background-color: #F5F2F0;
   }
 
   .recreation-section {
-    height: 120px;
+    height: 160px;
   }
 
   .recreation-month {
     background-color: #FDEACC;
+    height: 100%;
     p {
       font-size: 12px;
       color: #A86900;
@@ -80,19 +98,12 @@
     background-color: #FBFAFA;
   }
 
-  .num-of-people {
-    font-size: 12px;
-    color: #343A40;
-  }
-
-  .download-button {
-    background-color: #FBFAFA;
+  .start-consultation {
+    background-color: white;
     border: solid 2px #E83E8C;
     color: #E83E8C;
-  }
-
-  .order-start-button {
-    background-color: #E83E8C;
-    border: none;
+    border-radius: 5px;
+    padding: 3px 9px;
+    font-size: 14px;
   }
 }
