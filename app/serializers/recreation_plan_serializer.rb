@@ -23,9 +23,6 @@ class RecreationPlanSerializer
     tags = TagSerializer.new.serialize_list(tags: recreation_plan.tags)
     {
       id: recreation_plan.id,
-      release_status: { id: recreation_plan.release_status.value,
-                        key: recreation_plan.release_status,
-                        text: recreation_plan.release_status_text },
       title: recreation_plan.title,
       code: recreation_plan.code,
       recreation_recreation_plans:,

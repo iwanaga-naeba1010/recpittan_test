@@ -14,7 +14,7 @@ const RecreationPlanShow: React.FC = () => {
   const { fetchRecreationPlan } = useRecreationPlan();
   const handleNumberOfPeopleChange = (
     event: React.ChangeEvent<HTMLInputElement>
-  ) => {
+  ): void => {
     setNumberOfPeople(parseInt(event.target.value, 10) || 0);
   };
   const [totalPrice, setTotalPrice] = useState(0);
@@ -26,11 +26,11 @@ const RecreationPlanShow: React.FC = () => {
     setTotalPrice(newTotal);
   };
 
-  const handleUpdateTotalMaterialPrice = (newTotal: number) => {
+  const handleUpdateTotalMaterialPrice = (newTotal: number): void => {
     setTotalMaterialPrice(newTotal);
   };
 
-  const handleUpdateTotalTransportationCost = (newTotal: number) => {
+  const handleUpdateTotalTransportationCost = (newTotal: number): void => {
     setTotalTransportationCost(newTotal);
   };
 
@@ -55,7 +55,6 @@ const RecreationPlanShow: React.FC = () => {
   if (!recreationPlan) {
     return <></>;
   }
-  console.log(recreationPlan);
 
   return (
     <div>
@@ -114,18 +113,18 @@ const RecreationPlanShow: React.FC = () => {
           <p>お見積もり金額をシミュレーションできます</p>
           <form onSubmit={(e) => e.preventDefault()}>
             <label className='num-of-people mt-1' htmlFor='numberInput'>
-                レクを受ける人数を入力してください
+              レクを受ける人数を入力してください
             </label>
             <br />
             <input
-                type='number'
-                id='numberInput'
-                name='number_of_people'
-                placeholder='10'
-                className='form-control w-25 border-0'
-                value={numberOfPeople}
-                onChange={handleNumberOfPeopleChange}
-                min='1'
+              type='number'
+              id='numberInput'
+              name='number_of_people'
+              placeholder='10'
+              className='form-control w-25 border-0'
+              value={numberOfPeople}
+              onChange={handleNumberOfPeopleChange}
+              min='1'
             />
           </form>
 
@@ -164,7 +163,9 @@ const RecreationPlanShow: React.FC = () => {
                 <p className='text-black fw-bold'>利用者一人あたり</p>
               </div>
               <div className='col-8 text-end text-black'>
-                <p>¥{Math.floor(grandTotal / numberOfPeople).toLocaleString()}</p>
+                <p>
+                  ¥{Math.floor(grandTotal / numberOfPeople).toLocaleString()}
+                </p>
               </div>
             </div>
             <p className=''>※交通費は1回あたり1000円を基準値</p>

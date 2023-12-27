@@ -15,11 +15,13 @@ export const RecreationPlanDetail: React.FC<Props> = ({
   numberOfPeople,
 }) => {
   const unitPrice = recreationRecreationPlan.recreation[priceProperty];
-  let totalPrice = unitPrice;
+  const [totalPrice, setTotalPrice] = React.useState(unitPrice);
 
-  if (priceProperty === 'materialPrice') {
-    totalPrice *= numberOfPeople;
-  }
+  React.useEffect(() => {
+    if (priceProperty === 'materialPrice') {
+      setTotalPrice(unitPrice * numberOfPeople);
+    }
+  }, [unitPrice, numberOfPeople, priceProperty]);
 
   if (typeof unitPrice !== 'number' || unitPrice === 0) {
     return null;
