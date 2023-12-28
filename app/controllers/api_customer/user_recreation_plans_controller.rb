@@ -28,7 +28,10 @@ module ApiCustomer
       end
 
       if user_recreation_plan.save
-        render json: UserRecreationPlanSerializer.new.serialize(user_recreation_plan:), status: :created
+        render json: {
+          user_recreation_plan: UserRecreationPlanSerializer.new.serialize(user_recreation_plan:),
+          redirect_url: '/customers/user_recreation_plans'
+        }, status: :created
       else
         render json: { errors: user_recreation_plan.errors.full_messages }, status: :unprocessable_entity
       end

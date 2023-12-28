@@ -82,7 +82,11 @@ const RecreationPlanShow: React.FC = () => {
   const handleStartConsultation = async () => {
     if (recreationPlan?.id) {
       try {
-        await postUserRecreationPlan(recreationPlan.id);
+        const response = await postUserRecreationPlan(recreationPlan.id);
+        console.log(response);
+        if (response.redirectUrl) {
+          window.location.href = response.redirectUrl;
+        }
       } catch (e) {
         if (e instanceof Error) {
           throw new Error(e.message);
