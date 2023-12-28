@@ -33,12 +33,10 @@
             <div class="col-10">
               <%= link_to rp.title, customers_recreation_plan_path(rp.id), class: 'text-black fw-bold fw-bold text-decoration-none' %>
               <% total_price = @recreation_plans_with_total_price.find { |plan, price| plan == rp }[1] %>
-              <p class="">レク回数: <%= rp.recreations.size %>回 <%= total_price %>~</p>
+              <p class="">レク回数: <%= rp.recreations.size %>回 ¥<%= total_price.to_s(:delimited) %>~</p>
               <div class="d-flex">
                 <% rp.tags.each do |tag| %>
-                  <div class="">
-                    <p class="d-inline-block px-2 border rounded fw-bold me-2"># <%= tag.name %></p>
-                  </div>
+                  <p class="d-inline-block px-2 border rounded fw-bold me-2"># <%= tag.name %></p>
                 <% end %>
               </div>
             </div>

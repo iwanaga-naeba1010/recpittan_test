@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { RecreationRecreationPlan } from '@/types';
 
 type Props = {
@@ -16,20 +16,20 @@ export const TotalSection: React.FC<Props> = ({
   numberOfPeople,
   onTotalUpdate,
 }) => {
-  let total = 0;
-
-  if (property === 'materialPrice') {
-    total = plans.reduce(
-      (sum, plan) => sum + plan.recreation.materialPrice * numberOfPeople,
-      0
-    );
-  } else {
-    total = plans.reduce((sum, plan) => sum + plan.recreation[property], 0);
-  }
+  const [total, setTotal] = useState(0);
 
   useEffect(() => {
-    onTotalUpdate(total);
-  }, [total, onTotalUpdate]);
+    const newTotal =
+      property === 'materialPrice'
+        ? plans.reduce(
+            (sum, plan) => sum + plan.recreation.materialPrice * numberOfPeople,
+            0
+          )
+        : plans.reduce((sum, plan) => sum + plan.recreation[property], 0);
+
+    setTotal(newTotal);
+    onTotalUpdate(newTotal);
+  }, [plans, property, numberOfPeople, onTotalUpdate]);
 
   if (total === 0) return null;
 

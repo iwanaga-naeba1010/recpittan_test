@@ -7,6 +7,8 @@ import { RecreationRecreationPlanItem } from './recreationRecreationPlanItem';
 import { RecreationPlanSection } from './recreationPlanSection';
 import { TransportationExpenses } from './transportationExpenses';
 import { useUserRecreationPlan } from '../hooks';
+import html2canvas from 'html2canvas';
+import jsPDF from 'jspdf';
 
 const RecreationPlanShow: React.FC = () => {
   const [recreationPlan, setRecreationPlan] = useState<RecreationPlan>();
@@ -15,7 +17,7 @@ const RecreationPlanShow: React.FC = () => {
   const { fetchRecreationPlan } = useRecreationPlan();
   const handleNumberOfPeopleChange = (
     event: React.ChangeEvent<HTMLInputElement>
-  ) => {
+  ): void => {
     setNumberOfPeople(parseInt(event.target.value, 10) || 0);
   };
   const [totalPrice, setTotalPrice] = useState(0);
@@ -28,15 +30,34 @@ const RecreationPlanShow: React.FC = () => {
     setTotalPrice(newTotal);
   };
 
-  const handleUpdateTotalMaterialPrice = (newTotal: number) => {
+  const handleUpdateTotalMaterialPrice = (newTotal: number): void => {
     setTotalMaterialPrice(newTotal);
   };
 
-  const handleUpdateTotalTransportationCost = (newTotal: number) => {
+  const handleUpdateTotalTransportationCost = (newTotal: number): void => {
     setTotalTransportationCost(newTotal);
   };
 
   const grandTotal = totalPrice + totalMaterialPrice + totalTransportationCost;
+
+  const pdhDownloadHandler = () => {
+    const target = document.getElementById('pdf-content');
+    if (target === null) return;
+
+    html2canvas(target, { scale: 2.5 }).then((canvas) => {
+      const imgData = canvas.toDataURL('image/svg', 1.0);
+      const pdf = new jsPDF();
+      pdf.addImage(
+        imgData,
+        'SVG',
+        5,
+        10,
+        canvas.width / 18,
+        canvas.height / 18
+      );
+      pdf.save(`recreation-plan.pdf`);
+    });
+  };
 
   useEffect(() => {
     (async () => {
@@ -73,7 +94,7 @@ const RecreationPlanShow: React.FC = () => {
   };
 
   return (
-    <div>
+    <div id='pdf-content'>
       <div className='container mt-4'>
         <div className='row'>
           <div className='col-3 ps-0'>
@@ -187,8 +208,10 @@ const RecreationPlanShow: React.FC = () => {
             <p className=''>※交通費は1回あたり1000円を基準値</p>
           </div>
           <div className='mt-3 d-flex justify-content-center'>
-            {/* TODO: buttonを押したらページのスクショをPDFに保存させる */}
-            <button className='download-button py-2 px-3 rounded fw-bold'>
+            <button
+              onClick={pdhDownloadHandler}
+              className='download-button py-2 px-3 rounded fw-bold'
+            >
               プランの見積もりをダウンロードする
             </button>
           </div>
