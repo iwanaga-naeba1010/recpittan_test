@@ -22,11 +22,16 @@
 #  fk_rails_...  (recreation_plan_id => recreation_plans.id)
 #  fk_rails_...  (user_id => users.id)
 #
-class UserRecreationPlan < ApplicationRecord
-  belongs_to :user
-  belongs_to :recreation_plan
-  has_many :user_recreation_recreation_plans, dependent: :destroy
-  has_many :recreations, through: :user_recreation_recreation_plans
-
-  delegate :title, to: :recreation_plan, prefix: true
+class UserRecreationPlanSerializer
+  def serialize(user_recreation_plan:)
+    user_recreation_recreation_plans = UserRecreationRecreationPlanSerializer.new.serialize_list(
+      user_recreation_recreation_plans: user_recreation_plan.user_recreation_recreation_plans
+    )
+    {
+      id: user_recreation_plan.id,
+      title: user_recreation_plan.recreation_plan_title,
+      code: user_recreation_plan.code,
+      user_recreation_recreation_plans:,
+    }
+  end
 end

@@ -6,6 +6,7 @@ import { useRecreationPlan } from '../hooks';
 import { RecreationRecreationPlanItem } from './recreationRecreationPlanItem';
 import { RecreationPlanSection } from './recreationPlanSection';
 import { TransportationExpenses } from './transportationExpenses';
+import { useUserRecreationPlan } from '../hooks';
 import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
 
@@ -23,6 +24,7 @@ const RecreationPlanShow: React.FC = () => {
   const [totalMaterialPrice, setTotalMaterialPrice] = useState(0);
   const [totalTransportationCost, setTotalTransportationCost] = useState(0);
   const id = window.location.pathname.split('/')[3];
+  const { postUserRecreationPlan } = useUserRecreationPlan();
 
   const handleUpdateTotalPrice = (newTotal: number) => {
     setTotalPrice(newTotal);
@@ -76,6 +78,24 @@ const RecreationPlanShow: React.FC = () => {
   if (!recreationPlan) {
     return <></>;
   }
+
+  const handleStartConsultation = async () => {
+    if (recreationPlan?.id) {
+      try {
+        const response = await postUserRecreationPlan(recreationPlan.id);
+        console.log(response);
+        if (response.redirectUrl) {
+          window.location.href = response.redirectUrl;
+        }
+      } catch (e) {
+        if (e instanceof Error) {
+          throw new Error(e.message);
+        } else {
+          throw new Error('An unexpected error occurred.');
+        }
+      }
+    }
+  };
 
   return (
     <div id='pdf-content'>
@@ -201,7 +221,10 @@ const RecreationPlanShow: React.FC = () => {
           </div>
         </div>
         <div className='mt-4 d-flex justify-content-center'>
-          <button className='order-start-button text-white p-3 rounded fw-bold'>
+          <button
+            className='order-start-button text-white p-3 rounded fw-bold'
+            onClick={handleStartConsultation}
+          >
             このプランで相談をはじめる
           </button>
         </div>
