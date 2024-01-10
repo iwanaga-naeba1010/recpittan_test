@@ -7,7 +7,12 @@ type FavoriteHeartIconProps = {
   height: string;
 };
 
-export const FavoriteHeartIcon: React.FC<FavoriteHeartIconProps> = ({ isFavorite, onClick, width = '20', height = '20' }) => {
+export const FavoriteHeartIcon: React.FC<FavoriteHeartIconProps> = ({
+  isFavorite,
+  onClick,
+  width = '20',
+  height = '20',
+}) => {
   const imgSrc = isFavorite ? '/favorite.svg' : '/not_favorite.svg';
 
   return (
