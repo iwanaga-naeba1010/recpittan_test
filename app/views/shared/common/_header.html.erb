@@ -21,9 +21,11 @@
           <li class="nav-item">
             <%= link_to 'レク一覧', customers_recreations_path, class: 'nav-link' %>
           </li>
-          <li class="nav-item">
-            <%= link_to 'プラン一覧', customers_recreation_plans_path, class: 'nav-link' %>
-          </li>
+          <% if current_user.role.customer? %>
+            <li class="nav-item">
+              <%= link_to 'プラン一覧', customers_recreation_plans_path, class: 'nav-link' %>
+            </li>
+          <% end %>
           <li class="nav-item px-2">
             <%= search_form_for Recreation.ransack(params[:q]), url: customers_recreations_path, class: "d-flex search" do |f| %>
               <div class="input-group mr-sm-2">
