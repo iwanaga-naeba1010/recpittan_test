@@ -115,7 +115,6 @@ const RecreationPlanShow: React.FC = () => {
             <h2 className='plan-title fw-bold'>{recreationPlan.title}</h2>
             <div className='d-flex align-items-center mt-auto'>
               <p className='plan-code mb-0'>プラン番号 {recreationPlan.code}</p>
-              {/* TODO: プラン登録の発火ロジックを入れる */}
               <button
                 className='ms-auto register-button text-white p-2 rounded'
                 onClick={handleStartConsultation}
