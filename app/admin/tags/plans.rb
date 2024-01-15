@@ -3,7 +3,7 @@
 ActiveAdmin.register Tags::Plan do
   permit_params(%i[name kind])
   actions :all
-  menu parent: 'プランタグ'
+  menu parent: 'タグ'
 
   # TODO: filterの設定がなぜかうまういかない
   filter :kind, as: :select, collection: Tag.kind.values.map { |i| [i.text, i] }
@@ -28,7 +28,7 @@ ActiveAdmin.register Tags::Plan do
     f.semantic_errors
 
     f.inputs do
-      f.input :kind, as: :hidden, input_html: { value: :tag }
+      f.input :kind, as: :hidden, input_html: { value: :plan }
       f.input :name
     end
 

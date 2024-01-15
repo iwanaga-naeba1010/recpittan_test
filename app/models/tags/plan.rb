@@ -11,5 +11,5 @@
 #  updated_at :datetime         not null
 #
 class Tags::Plan < Tag
-  default_scope { where(kind: :plan_tag) }
+  default_scope { where(kind: :plan) }
 end
