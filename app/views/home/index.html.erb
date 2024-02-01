@@ -21,9 +21,10 @@
         </div>
       </div>
 
-      <%= render 'shared/home/evaluations', evaluations: @evaluations %>
-      <%= render 'shared/home/categories' %>
-      <%= render 'shared/home/tags', tags: @tags %>
+      <%# <%= render 'shared/home/evaluations', evaluations: @evaluations %>
+      <%# <%= render 'shared/home/categories' %>
+      <%# <%= render 'shared/home/tags', tags: @tags %>
+      <%= render 'shared/home/search_conditions', kinds: @kinds, tags: @tags, prefectures: @prefectures%>
     </div>
   </div>
 

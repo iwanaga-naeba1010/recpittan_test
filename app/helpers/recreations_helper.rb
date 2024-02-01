@@ -35,6 +35,15 @@ module RecreationsHelper
   end
   # rubocop:enable Style/OptionalBooleanParameter
 
+  def category_to_html(category)
+    content_tag :div do
+      concat link_to category[:name], customers_recreations_path(
+        q: { category_eq: category[:id] }
+      ), class: 'category-label font-weight-bold p-1 text-white',
+         style: "margin-right: 4px; background-color: #{categoryname_to_color_code(category[:name])}"
+    end
+  end
+
   def recreation_capacity(capacity)
     return '制限なし' if [0, nil].include?(capacity)
 

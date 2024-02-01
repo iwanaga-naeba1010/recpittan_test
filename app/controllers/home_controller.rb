@@ -46,6 +46,12 @@ class HomeController < ApplicationController
 
   def index
     today = Time.zone.today
+
+    @kinds = Recreation.distinct.pluck(:kind)
+    @prefectures = Recreation.joins(:recreation_prefectures)
+                             .distinct
+                             .pluck('recreation_prefectures.name')
+
     @top_banner = Rails.cache.fetch('home/top_banner', expires_in: 15.minutes) do
       TopBanner.find_by('start_date <= ? AND end_date >= ?', today, today)
     end
