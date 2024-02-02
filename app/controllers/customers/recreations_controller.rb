@@ -5,16 +5,23 @@ class Customers::RecreationsController < Customers::ApplicationController
   skip_before_action :require_customer
 
   def index
-    @q = Recreation.includes(:recreation_images).public_recs.ransack(params[:q])
-    @categories = Tag.categories
     sort_order = params[:sort_order] || :newest
-    @recs = @q.result.sorted_by(sort_order).page(params[:page]).per(30)
-    value = @q.base.conditions&.first&.values&.first&.value
-    is_tag_class = @q.base.conditions&.first&.attributes&.first&.klass == Tag
-    if value && is_tag_class
-      # NOTE(okubo): 吉本のみ文字で検索しているので三項演算子で対応
-      @tag = value.is_a?(Integer) ? Tag.find(value.to_i) : Tag.find_by(name: value)
-    end
+    tags = params[:tags] || []
+    @distinct_prefectures = RecreationPrefecture.distinct.pluck(:name)
+    @sorted_prefectures = RecreationPrefecture.names & @distinct_prefectures
+    @tags = Tag.where(kind: [:tag, :target])
+    recs = Recreation.public_recs.includes(:recreation_images,
+                                           :recreation_prefectures,
+                                           :tags,
+                                           :profile)
+                     .by_kind(params[:kind])
+                     .by_category(params[:category])
+                     .by_prefecture(params[:prefecture])
+                     .by_tags(tags)
+                     .by_price_range(params[:price_range])
+                     .sorted_by(sort_order)
+    @recs_size = recs.size
+    @recs = recs.page(params[:page]).per(params[:per_page] || 30)
   end
 
   def show
