@@ -42,17 +42,17 @@
 
               <div class="nav-item px-2 mt-3">
                 <p class="label-size mb-1">レクの形式</p>
-                <%= select_tag :kind, 
-                    options_for_select(Recreation.kind.values.map { |v| [v.text, v.value] }, selected: params[:kind]), 
-                    { include_blank: 'すべて', class: 'form-select search-select w-75', onchange: 'this.form.submit();' } 
+                <%= select_tag :kind,
+                    options_for_select(Recreation.kind.values.map { |v| [v.text, v.value] }, selected: params[:kind]),
+                    { include_blank: 'すべて', class: 'form-select search-select w-75', onchange: 'this.form.submit();' }
                 %>
               </div>
 
               <div class="nav-item px-2 mt-3">
                 <p class="label-size mb-1">都道府県</p>
-                <%= select_tag :prefecture, 
-                    options_for_select(@sorted_prefectures, selected: params[:prefecture]), 
-                    { include_blank: 'すべて', class: 'form-select search-select w-75', onchange: 'this.form.submit();' } 
+                <%= select_tag :prefecture,
+                    options_for_select(@sorted_prefectures, selected: params[:prefecture]),
+                    { include_blank: 'すべて', class: 'form-select search-select w-75', onchange: 'this.form.submit();' }
                 %>
               </div>
 
@@ -103,9 +103,9 @@
             <div class="col-6 d-flex justify-content-end align-items-center">
               <p class="me-2 mb-0">並び順</p>
               <div class="">
-                <%= select_tag :sort_order, 
-                    options_for_select(sort_order_options, selected: params[:sort_order]), 
-                    class: 'form-select search-select', onchange: 'this.form.submit();' 
+                <%= select_tag :sort_order,
+                    options_for_select(sort_order_options, selected: params[:sort_order]),
+                    class: 'form-select search-select', onchange: 'this.form.submit();'
                 %>
               </div>
             </div>
