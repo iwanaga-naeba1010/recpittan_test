@@ -58,12 +58,13 @@
 .list-search-form {
   .label-size {
     font-size: 13px;
+    p {
+      margin: 0;
+      color: #343A40;
+    }
   }
   .search-select {
-    width: 220px;
-  }
-  .price-list {
-    width: 45%;
+    width: 150px;
   }
   .search-bottum {
     float: right;

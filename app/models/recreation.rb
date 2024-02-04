@@ -85,6 +85,25 @@ class Recreation < ApplicationRecord
     end
   }
 
+  scope :by_kind, ->(kind) { where(kind:) if kind.present? }
+  scope :by_category, ->(category) { where(category:) if category.present? }
+  scope :by_prefecture, ->(prefecture) {
+    joins(:recreation_prefectures).where(recreation_prefectures: { name: prefecture }) if prefecture.present?
+  }
+  scope :by_price_range, ->(price_ranges) {
+    where(price: parse_price_ranges(price_ranges)) if price_ranges.present?
+  }
+  scope :by_tags, ->(tags) {
+    if tags.present?
+      tagged_recs = Recreation.joins(:tags).
+                    where(tags: { name: tags }).
+                    group('recreations.id').
+                    having('COUNT(DISTINCT tags.id) = ?', tags.size).
+                    select('recreations.id')
+      where(id: tagged_recs)
+    end
+  }
+
   enum sort_order: {
     newest: 0,
     price_low_to_high: 1,
@@ -101,5 +120,18 @@ class Recreation < ApplicationRecord
 
   def number_of_recreations_held
     orders.where(status: %i[unreported_completed final_report_admits_not finished invoice_issued paid]).size
+  end
+
+  def self.parse_price_ranges(price_ranges)
+    price_ranges.map do |range|
+      next unless range.include?('-')
+
+      bounds = range.split('-').map(&:to_i)
+      if range.end_with?('-')
+        bounds[0]..Float::INFINITY
+      else
+        Range.new(*bounds)
+      end
+    end
   end
 end
