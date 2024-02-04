@@ -79,7 +79,22 @@ class Recreation < ApplicationRecord
     when :price_high_to_low
       order(price: :desc)
     when :reviews_count
-      joins(:evaluations).group('recreations.id').order('COUNT(evaluations.id) DESC')
+      evaluations_count_subquery = Recreation.left_joins(:evaluations)
+                                             .select('recreations.id, COUNT(evaluations.id) as evaluations_count')
+                                             .group('recreations.id')
+      joins("LEFT JOIN (#{evaluations_count_subquery.to_sql}) as evaluations_count_subquery
+            ON evaluations_count_subquery.id = recreations.id")
+        .order('evaluations_count_subquery.evaluations_count DESC')
+    when :number_of_recreations_held
+      held_recreations_count_subquery = Recreation.left_joins(:orders)
+                                                  .select('recreations.id, COUNT(orders.id) as held_recreations_count')
+                                                  .where(orders: {
+                                                      status: %i[unreported_completed final_report_admits_not finished invoice_issued paid]
+                                                    })
+                                                  .group('recreations.id')
+      joins("LEFT JOIN (#{held_recreations_count_subquery.to_sql}) as held_recreations_count_subquery
+              ON held_recreations_count_subquery.id = recreations.id")
+        .order('held_recreations_count_subquery.held_recreations_count DESC')
     else
       order(created_at: :desc)
     end
@@ -108,7 +123,8 @@ class Recreation < ApplicationRecord
     newest: 0,
     price_low_to_high: 1,
     price_high_to_low: 2,
-    reviews_count: 3
+    reviews_count: 3,
+    number_of_recreations_held: 4
   }
 
   def flyer

@@ -1,4 +1,9 @@
 <%
+    kinds = [
+      { id: 0, name: '訪問', value: 'visit' },
+      { id: 1, name: 'オンライン', value: 'online' },
+      { id: 2, name: '郵送キット', value: 'mailing' },
+    ]
     categories = [
       { id: 2, name: '音楽', value: 'music' },
       { id: 3, name: '健康', value: 'health' },
@@ -17,14 +22,18 @@
     ]
 %>
 
-<h5 class="mt-3 fw-bold text-black d-none d-lg-block">レクを条件から探す</h5>
+<h4 class="mt-3 mb-3 fw-bold text-black d-none d-lg-block">レクを条件から探す</h4>
 <article class="container px-5 w-100 border rounded shadow">
   <div class="row">
     <div class="col-4">
       <p class="mt-5 fw-bold text-black d-none d-lg-block">形式から探す</p>
       <div class="col">
         <% kinds.each do |kind| %>
-          <%= link_to(t("enumerize.recreation.kind.#{kind}"), "#", class: 'my-1 me-3 px-1 tag-label font-weight-bold d-inline-block') %>
+          <%=
+            link_to(t("enumerize.recreation.kind.#{kind[:name]}"),
+            customers_recreations_path(kind: kind[:id]),
+            class: 'my-1 me-3 px-1 tag-label font-weight-bold d-inline-block')
+          %>
         <% end %>
       </div>
     </div>
@@ -32,7 +41,11 @@
       <p class="mt-5 fw-bold text-black d-none d-lg-block">金額から探す</p>
       <div class="col">
         <% prices.each do |price| %>
-          <%= link_to("#{price[:text]}", "#", class: 'my-1 me-3 px-1 tag-label font-weight-bold d-inline-block') %>
+          <%=
+            link_to("#{price[:text]}",
+            customers_recreations_path(price_range: [price[:value]]),
+            class: 'my-1 me-3 px-1 tag-label font-weight-bold d-inline-block')
+          %>
         <% end %>
       </div>
     </div>
@@ -40,7 +53,12 @@
       <p class="mt-5 fw-bold text-black d-none d-lg-block">カテゴリから探す</p>
       <div class="col">
         <% categories.each do |category| %>
-          <%= category_to_html(category) %>
+          <%=
+            link_to(t("enumerize.recreation.category.#{category[:value]}"),
+            customers_recreations_path(category: category[:id]),
+            class: 'my-1 me-3 px-1 tag-label text-white font-weight-bold d-inline-block border-0',
+            style: "background-color: #{categoryname_to_color_code(category[:name])}")
+          %>
         <% end %>
       </div>
     </div>
@@ -51,7 +69,11 @@
       <p class="mt-5 fw-bold text-black d-none d-lg-block">都道府県から探す</p>
       <div class="col">
         <% prefectures.each do |prefecture| %>
-          <%= link_to("#{prefecture}", "#", class: 'my-1 me-3 px-1 tag-label font-weight-bold d-inline-block') %>
+          <%=
+            link_to("#{prefecture}",
+            customers_recreations_path(prefecture: prefecture),
+            class: 'my-1 me-3 px-1 tag-label font-weight-bold d-inline-block')
+          %>
         <% end %>
       </div>
     </div>
@@ -62,7 +84,11 @@
       <p class="mt-5 fw-bold text-black d-none d-lg-block">タグから探す</p>
       <div class="col">
         <% tags.each do |tag| %>
-          <%= link_to("##{tag.name}", customers_recreations_path(q: { tags_id_eq: tag.id }), class: 'my-1 me-3 px-1 tag-label font-weight-bold d-inline-block') %>
+          <%=
+            link_to("##{tag.name}",
+            customers_recreations_path(tags: [tag.name]),
+            class: 'my-1 me-3 px-1 tag-label font-weight-bold d-inline-block')
+          %>
         <% end %>
       </div>
     </div>

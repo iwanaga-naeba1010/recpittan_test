@@ -112,7 +112,9 @@
           </div>
           <div class="row">
             <% @recs.each do |rec| %>
-              <%= render 'shared/home/card', rec: rec %>
+              <section class="col-sm-6 col-md-4 col-lg-4 my-4">
+                <%= render 'shared/home/card', rec: rec %>
+              </section>
             <% end %>
           </div>
         </div>
