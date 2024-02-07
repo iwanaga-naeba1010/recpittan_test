@@ -4,22 +4,22 @@ class HomeController < ApplicationController
   skip_before_action :authenticate_user!
 
   def index
-    @newest_recreations = Recreation
+    @latest_recreations = Recreation
                           .public_recs
                           .includes(:user, :recreation_prefectures)
                           .order(created_at: :desc)
                           .limit(4)
-    @many_held_count_recreations = Recreation
-                                   .public_recs
-                                   .includes(:user, :recreation_prefectures)
-                                   .sorted_by(:number_of_recreations_held)
-                                   .limit(4)
-    @recomend_visit_recreations = Recreation
-                                  .public_recs
-                                  .where(kind: :visit)
-                                  .includes(:user, :recreation_prefectures)
-                                  .sorted_by(:reviews_count)
-                                  .limit(4)
+    @popular_recreations = Recreation
+                           .public_recs
+                           .includes(:user, :recreation_prefectures)
+                           .sorted_by(:number_of_recreations_held)
+                           .limit(4)
+    @recommended_visiting_recreations = Recreation
+                                        .public_recs
+                                        .where(kind: :visit)
+                                        .includes(:user, :recreation_prefectures)
+                                        .sorted_by(:number_of_recreations_held)
+                                        .limit(4)
     @prefectures = Recreation.joins(:recreation_prefectures)
                              .distinct
                              .pluck('recreation_prefectures.name')

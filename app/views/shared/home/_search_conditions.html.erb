@@ -1,34 +1,10 @@
-<%
-    kinds = [
-      { id: 0, name: '訪問', value: 'visit' },
-      { id: 1, name: 'オンライン', value: 'online' },
-      { id: 2, name: '郵送キット', value: 'mailing' },
-    ]
-    categories = [
-      { id: 2, name: '音楽', value: 'music' },
-      { id: 3, name: '健康', value: 'health' },
-      { id: 5, name: '趣味', value: 'hobby' },
-      { id: 1, name: '創作', value: 'work' },
-      { id: 4, name: '旅行', value: 'travel' },
-      { id: 6, name: '飲食', value: 'food' },
-      { id: 0, name: 'イベント', value: 'event' },
-      { id: 7, name: 'その他', value: 'other' },
-    ]
-    prices = [
-      { value: '0-10000', text: '0~ 10,000円' },
-      { value: '10001-20000', text: '10,001~ 20,000円' },
-      { value: '20001-30000', text: '20,001~ 30,000円' },
-      { value: '30000-', text: '30,000円以上' },
-    ]
-%>
-
 <h4 class="mt-3 mb-3 fw-bold text-black d-none d-lg-block">レクを条件から探す</h4>
-<article class="container px-5 w-100 border rounded shadow">
+<article class="search_conditions_box container px-5 w-100 border rounded shadow">
   <div class="row">
     <div class="col-4">
       <p class="mt-5 fw-bold text-black d-none d-lg-block">形式から探す</p>
       <div class="col">
-        <% kinds.each do |kind| %>
+        <% recreation_kinds.each do |kind| %>
           <%=
             link_to(t("enumerize.recreation.kind.#{kind[:name]}"),
             customers_recreations_path(kind: kind[:id]),
@@ -40,7 +16,7 @@
     <div class="col-4">
       <p class="mt-5 fw-bold text-black d-none d-lg-block">金額から探す</p>
       <div class="col">
-        <% prices.each do |price| %>
+        <% recreation_prices.each do |price| %>
           <%=
             link_to("#{price[:text]}",
             customers_recreations_path(price_range: [price[:value]]),
@@ -52,7 +28,7 @@
     <div class="col-4">
       <p class="mt-5 fw-bold text-black d-none d-lg-block">カテゴリから探す</p>
       <div class="col">
-        <% categories.each do |category| %>
+        <% recreation_categories.each do |category| %>
           <%=
             link_to(t("enumerize.recreation.category.#{category[:value]}"),
             customers_recreations_path(category: category[:id]),

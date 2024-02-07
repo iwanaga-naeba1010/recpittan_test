@@ -38,7 +38,7 @@
       </div>
     </div>
     <div class="row">
-      <% @recomend_visit_recreations.each do |rec| %>
+      <% @recommended_visiting_recreations.each do |rec| %>
         <section class="col-sm-6 col-md-4 col-lg-3 my-4">
           <%= render 'shared/home/card', rec: rec %>
         </section>
@@ -58,7 +58,7 @@
       </div>
     </div>
     <div class="row">
-      <% @many_held_count_recreations.each do |rec| %>
+      <% @popular_recreations.each do |rec| %>
         <section class="col-sm-6 col-md-4 col-lg-3 my-4">
           <%= render 'shared/home/card', rec: rec %>
         </section>
@@ -78,7 +78,7 @@
       </div>
     </div>
     <div class="row">
-      <% @newest_recreations.each do |rec| %>
+      <% @latest_recreations.each do |rec| %>
         <section class="col-sm-6 col-md-4 col-lg-3 my-4">
           <%= render 'shared/home/card', rec: rec %>
         </section>

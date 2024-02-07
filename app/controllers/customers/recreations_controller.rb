@@ -7,13 +7,12 @@ class Customers::RecreationsController < Customers::ApplicationController
   def index
     sort_order = params[:sort_order] || :newest
     tags = params[:tags] || []
-    @distinct_prefectures = RecreationPrefecture.distinct.pluck(:name)
-    @sorted_prefectures = RecreationPrefecture.names & @distinct_prefectures
+    @prefectures = RecreationPrefecture.distinct.pluck(:name)
+    @sorted_prefectures = RecreationPrefecture.names & @prefectures
     @tags = Tag.where(kind: [:tag, :target])
-    recs = Recreation.public_recs.includes(:recreation_images,
-                                           :recreation_prefectures,
+    recs = Recreation.public_recs.includes(:recreation_prefectures,
                                            :tags,
-                                           :profile)
+                                           :user)
                      .by_kind(params[:kind])
                      .by_category(params[:category])
                      .by_prefecture(params[:prefecture])

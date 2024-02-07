@@ -86,15 +86,18 @@ class Recreation < ApplicationRecord
             ON evaluations_count_subquery.id = recreations.id")
         .order('evaluations_count_subquery.evaluations_count DESC')
     when :number_of_recreations_held
-      held_recreations_count_subquery = Recreation.left_joins(:orders)
-                                                  .select('recreations.id, COUNT(orders.id) as held_recreations_count')
-                                                  .where(orders: {
-                                                      status: %i[unreported_completed final_report_admits_not finished invoice_issued paid]
-                                                    })
-                                                  .group('recreations.id')
-      joins("LEFT JOIN (#{held_recreations_count_subquery.to_sql}) as held_recreations_count_subquery
-              ON held_recreations_count_subquery.id = recreations.id")
-        .order('held_recreations_count_subquery.held_recreations_count DESC')
+      recs_with_order_count = Recreation
+                              .select('recreations.id, COUNT(orders.id) as orders_count')
+                              .joins('LEFT JOIN orders ON orders.recreation_id = recreations.id')
+                              .where(orders: { status: [Order.status.find_value(:unreported_completed).value,
+                                                        Order.status.find_value(:final_report_admits_not).value,
+                                                        Order.status.find_value(:finished).value,
+                                                        Order.status.find_value(:invoice_issued).value,
+                                                        Order.status.find_value(:paid).value] }.compact)
+                              .group('recreations.id')
+
+      joins("LEFT OUTER JOIN (#{recs_with_order_count.to_sql}) as recs_with_order_count ON recs_with_order_count.id = recreations.id")
+        .order(Arel.sql('COALESCE(recs_with_order_count.orders_count, 0) DESC'))
     else
       order(created_at: :desc)
     end
