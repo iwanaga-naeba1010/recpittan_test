@@ -11,7 +11,7 @@ export const RecreationRecreationPlanItem: React.FC<Props> = (props) => {
   return (
     <div key={recreationRecreationPlan.month}>
       <div className='row recreation-section'>
-        <div className='recreation-month col-1 m-0 d-flex align-items-center justify-content-center rounded'>
+        <div className='recreation-month col-1 p-0 m-0 d-flex align-items-center justify-content-center rounded'>
           <p className='mb-0 fw-bold'>{recreationRecreationPlan.month}月目</p>
         </div>
         <div className='col-3 px-2 d-flex flex-column justify-content-between'>

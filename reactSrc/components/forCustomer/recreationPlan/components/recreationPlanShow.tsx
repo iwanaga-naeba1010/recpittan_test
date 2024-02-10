@@ -79,6 +79,14 @@ const RecreationPlanShow: React.FC = () => {
     return <></>;
   }
 
+  const monthRange = recreationPlan.recreationRecreationPlans.reduce((acc, curr) => {
+    const monthAsNumber = parseInt(curr.month, 10);
+      if (acc.min > monthAsNumber || acc.min === 0) acc.min = monthAsNumber;
+      if (acc.max < monthAsNumber) acc.max = monthAsNumber;
+      return acc;
+  }, { min: 0, max: 0 });
+  const months = monthRange.max - monthRange.min + 1;
+
   const handleStartConsultation = async () => {
     if (recreationPlan?.id) {
       try {
@@ -211,6 +219,18 @@ const RecreationPlanShow: React.FC = () => {
                 </p>
               </div>
             </div>
+
+            <div className='row'>
+              <div className='col-4'>
+                <p className='text-black fw-bold'>一月あたり</p>
+              </div>
+              <div className='col-8 text-end text-black'>
+                <p>
+                  ¥{Math.floor(grandTotal / months).toLocaleString()}
+                </p>
+              </div>
+            </div>
+
             <p className=''>※交通費は1回あたり1000円を基準値</p>
           </div>
           <div className='mt-3 d-flex justify-content-center'>
