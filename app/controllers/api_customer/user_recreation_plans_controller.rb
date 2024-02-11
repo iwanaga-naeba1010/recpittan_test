@@ -15,10 +15,12 @@ module ApiCustomer
 
     def create
       recreation_plan = RecreationPlan.find(params[:user_recreation_plan][:recreation_plan_id])
+      user_recreation_plans_count = current_user.user_recreation_plans.count + 1
+
       user_recreation_plan = UserRecreationPlan.new(
         recreation_plan:,
         user: current_user,
-        code: "#{recreation_plan.code}-#{current_user.id}-#{Time.current.strftime('%Y%m%d%H%M%S')}"
+        code: "#{recreation_plan.code}-#{current_user.id}-#{user_recreation_plans_count}"
       )
       recreation_plan.recreation_recreation_plans.each do |rec_rec_plan|
         user_recreation_plan.user_recreation_recreation_plans.build(
