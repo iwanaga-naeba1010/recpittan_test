@@ -428,6 +428,7 @@ body {
 
     /* カテゴリ＆タグ */
     &.card-body-tag {
+      line-height: 140%;
       .category-label {
         font-family: 'Roboto';
         text-decoration: none;
