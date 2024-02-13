@@ -22,7 +22,7 @@ namespace :recreation do
 
       prefectures = prefecture_data.split(',')
 
-      recreation = Recreation.find_by(id: recreation_id)
+      recreation = Recreation.find_by(id: recreation_id, kind: 0)
       if recreation
         recreation.recreation_prefectures.destroy_all
 
