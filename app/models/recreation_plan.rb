@@ -34,8 +34,12 @@ class RecreationPlan < ApplicationRecord
   before_validation :generate_code, on: :create
 
   private def generate_code
-    recreation_plan_count = RecreationPlan.count + 1
-    sequence_num = recreation_plan_count.to_s.rjust(4, '0')
-    self.code = "P#{sequence_num}"
+    last_code = RecreationPlan.maximum(:code)
+    sequence_num = if last_code
+                     last_code.gsub('P', '').to_i + 1
+                   else
+                     1
+                   end
+    self.code = "P#{sequence_num.to_s.rjust(4, '0')}"
   end
 end
