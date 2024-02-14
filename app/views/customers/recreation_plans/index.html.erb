@@ -27,7 +27,11 @@
         <div class="row mb-2">
             <div class="col-2">
               <div>
-                <%= image_tag rp.recreations.first.recreation_images.sliders&.first&.image&.to_s, width: 130, class: 'rounded w-100' %>
+                <%= image_tag(
+                  rp.recreations.first&.recreation_images&.sliders&.first&.image&.to_s.presence,
+                  width: 130,
+                  class: 'rounded w-100'
+                ) %>
               </div>
             </div>
             <div class="col-10">
