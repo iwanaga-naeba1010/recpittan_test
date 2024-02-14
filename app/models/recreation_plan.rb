@@ -33,6 +33,18 @@ class RecreationPlan < ApplicationRecord
   validates :code, uniqueness: true
   before_validation :generate_code, on: :create
 
+  def monthly_fee
+    latest_month = recreation_recreation_plans.order(month: :desc).first.month
+    recreation_price = recreations.sum(&:price)
+    material_price = recreations.sum(&:material_price)
+    transportation_expenses = recreations.where(kind: :visit).sum do |_rec|
+      1000
+    end
+    total_price = recreation_price + material_price + transportation_expenses
+
+    total_price / latest_month
+  end
+
   private def generate_code
     last_code = RecreationPlan.maximum(:code)
     sequence_num = if last_code
