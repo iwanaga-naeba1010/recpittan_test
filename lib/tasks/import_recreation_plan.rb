@@ -37,7 +37,7 @@ namespace :plan do
       values.each_with_index do |row, index|
         next if index < 2
 
-        recreation = Recreation.find_by(id: row[1])
+        recreation = Recreation.find_by(id: row[1], status: :published)
 
         if recreation
           RecreationRecreationPlan.create(month: row[0].to_i, recreation_plan:,
