@@ -71,4 +71,34 @@ module RecreationsHelper
       [I18n.t("sort_orders.#{key}"), key.to_s]
     end
   end
+
+  def recreation_kinds
+    [
+      { id: 0, name: '訪問', value: 'visit' },
+      { id: 1, name: 'オンライン', value: 'online' },
+      { id: 2, name: '郵送キット', value: 'mailing' },
+    ]
+  end
+
+  def recreation_categories
+    [
+      { id: 2, name: '音楽', value: 'music' },
+      { id: 3, name: '健康', value: 'health' },
+      { id: 5, name: '趣味', value: 'hobby' },
+      { id: 1, name: '創作', value: 'work' },
+      { id: 4, name: '旅行', value: 'travel' },
+      { id: 6, name: '飲食', value: 'food' },
+      { id: 0, name: 'イベント', value: 'event' },
+      { id: 7, name: 'その他', value: 'other' },
+    ]
+  end
+
+  def recreation_prices
+    [
+      { value: '0-10000', text: '0~ 10,000円' },
+      { value: '10001-20000', text: '10,001~ 20,000円' },
+      { value: '20001-30000', text: '20,001~ 30,000円' },
+      { value: '30000-', text: '30,000円以上' },
+    ]
+  end
 end

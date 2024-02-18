@@ -79,9 +79,46 @@ class Recreation < ApplicationRecord
     when :price_high_to_low
       order(price: :desc)
     when :reviews_count
-      joins(:evaluations).group('recreations.id').order('COUNT(evaluations.id) DESC')
+      evaluations_count_subquery = Recreation.left_joins(:evaluations)
+                                             .select('recreations.id, COUNT(evaluations.id) as evaluations_count')
+                                             .group('recreations.id')
+      joins("LEFT JOIN (#{evaluations_count_subquery.to_sql}) as evaluations_count_subquery
+            ON evaluations_count_subquery.id = recreations.id")
+        .order('evaluations_count_subquery.evaluations_count DESC')
+    when :number_of_recreations_held
+      recs_with_order_count = Recreation
+                              .select('recreations.id, COUNT(orders.id) as orders_count')
+                              .joins('LEFT JOIN orders ON orders.recreation_id = recreations.id')
+                              .where(orders: { status: [Order.status.find_value(:unreported_completed).value,
+                                                        Order.status.find_value(:final_report_admits_not).value,
+                                                        Order.status.find_value(:finished).value,
+                                                        Order.status.find_value(:invoice_issued).value,
+                                                        Order.status.find_value(:paid).value] }.compact)
+                              .group('recreations.id')
+
+      joins("LEFT OUTER JOIN (#{recs_with_order_count.to_sql}) as recs_with_order_count ON recs_with_order_count.id = recreations.id")
+        .order(Arel.sql('COALESCE(recs_with_order_count.orders_count, 0) DESC'))
     else
       order(created_at: :desc)
+    end
+  }
+
+  scope :by_kind, ->(kind) { where(kind:) if kind.present? }
+  scope :by_category, ->(category) { where(category:) if category.present? }
+  scope :by_prefecture, ->(prefecture) {
+    joins(:recreation_prefectures).where(recreation_prefectures: { name: prefecture }) if prefecture.present?
+  }
+  scope :by_price_range, ->(price_ranges) {
+    where(price: parse_price_ranges(price_ranges)) if price_ranges.present?
+  }
+  scope :by_tags, ->(tags) {
+    if tags.present?
+      tagged_recs = Recreation.joins(:tags).
+                    where(tags: { name: tags }).
+                    group('recreations.id').
+                    having('COUNT(DISTINCT tags.id) = ?', tags.size).
+                    select('recreations.id')
+      where(id: tagged_recs)
     end
   }
 
@@ -89,7 +126,8 @@ class Recreation < ApplicationRecord
     newest: 0,
     price_low_to_high: 1,
     price_high_to_low: 2,
-    reviews_count: 3
+    reviews_count: 3,
+    number_of_recreations_held: 4
   }
 
   def flyer
@@ -101,5 +139,18 @@ class Recreation < ApplicationRecord
 
   def number_of_recreations_held
     orders.where(status: %i[unreported_completed final_report_admits_not finished invoice_issued paid]).size
+  end
+
+  def self.parse_price_ranges(price_ranges)
+    price_ranges.map do |range|
+      next unless range.include?('-')
+
+      bounds = range.split('-').map(&:to_i)
+      if range.end_with?('-')
+        bounds[0]..Float::INFINITY
+      else
+        Range.new(*bounds)
+      end
+    end
   end
 end
