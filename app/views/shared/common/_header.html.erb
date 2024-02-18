@@ -27,14 +27,13 @@
             </li>
           <% end %>
           <li class="nav-item px-2">
-            <%= search_form_for Recreation.ransack(params[:q]), url: customers_recreations_path, class: "d-flex search" do |f| %>
+            <%= form_tag customers_recreations_path, method: :get, class: "d-flex search" do %>
               <div class="input-group mr-sm-2">
                 <span class="input-group-text bg-white border-end-0">
                   <i class="material-icons every">search</i>
                 </span>
-                <%= f.search_field :title_or_second_title_or_description_cont, class: 'form-control border-start-0', placeholder: 'キーワードを入力' %>
-                <br>
-                <%= f.submit '検索', class: 'btn btn-csecondar text-white' %>
+                <%= text_field_tag :title, params[:title], class: 'form-control border-start-0', placeholder: 'キーワードを入力' %>
+                <%= submit_tag '検索', class: 'btn btn-csecondar text-white' %>
               </div>
             <% end %>
           </li>
@@ -98,13 +97,6 @@
 
         </ul>
       </div>
-      <!-- <ul class="nav nav-pills">
-        <li class="nav-item"><a href="#" class="nav-link active" aria-current="page">Home</a></li>
-        <li class="nav-item"><a href="#" class="nav-link">Features</a></li>
-        <li class="nav-item"><a href="#" class="nav-link">Pricing</a></li>
-        <li class="nav-item"><a href="#" class="nav-link">FAQs</a></li>
-        <li class="nav-item"><a href="#" class="nav-link">About</a></li>
-      </ul> -->
     </div>
   </nav>
 </header>
