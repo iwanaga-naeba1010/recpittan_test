@@ -482,7 +482,7 @@ GEM
       rspec-mocks (~> 3.12)
       rspec-support (~> 3.12)
     rspec-request_describer (0.4.0)
-    rspec-support (3.13.0)
+    rspec-support (3.13.1)
     rspec-validator_spec_helper (1.0.0)
       activemodel
       activesupport
