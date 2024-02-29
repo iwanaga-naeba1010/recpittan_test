@@ -8,18 +8,18 @@ class HomeController < ApplicationController
                           .public_recs
                           .includes(:user, :recreation_prefectures)
                           .order(created_at: :desc)
-                          .limit(4)
+                          .limit(8)
     @popular_recreations = Recreation
                            .public_recs
                            .includes(:user, :recreation_prefectures)
                            .sorted_by(:number_of_recreations_held)
-                           .limit(4)
+                           .limit(8)
     @recommended_visiting_recreations = Recreation
                                         .public_recs
                                         .where(kind: :visit)
                                         .includes(:user, :recreation_prefectures)
                                         .sorted_by(:number_of_recreations_held)
-                                        .limit(4)
+                                        .limit(8)
     @prefectures = Recreation.joins(:recreation_prefectures)
                              .distinct
                              .pluck('recreation_prefectures.name')
