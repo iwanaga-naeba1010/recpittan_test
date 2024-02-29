@@ -219,26 +219,4 @@ class Order < ApplicationRecord
     # TODO: エラーハンドリング入れた方が良いかも
     "#{date} #{start_time} ~ #{end_time}"
   end
-
-  # def reject_empty_date
-  #   empty_date = []
-  #   order_dates.each do |d|
-  #     date_ary = [d.year, d.month, d.date, d.start_hour, d.start_minute, d.end_hour, d.end_minute]
-  #     date_ary.reject(&:empty?)
-  #     empty_date << d if date_ary.reject(&:empty?).empty?
-  #   end
-  #
-  #   errors.add(:orders, '開催日は1つ以上設定してください。') if empty_date.length == 3
-  #   @dates_validate_error = true if empty_date.length == 3
-  # end
-
-  # def restrict_start_at
-  #   if start_at.nil?
-  #     errors.add(:orders, '希望日は必須です')
-  #   end
-  #
-  #   # if start_at < Date.new
-  #   #   errors.add(:orders, '希望日は明日以降で設定してください')
-  #   # end
-  # end
 end

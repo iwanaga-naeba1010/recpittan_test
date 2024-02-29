@@ -86,18 +86,10 @@ class Recreation < ApplicationRecord
             ON evaluations_count_subquery.id = recreations.id")
         .order('evaluations_count_subquery.evaluations_count DESC')
     when :number_of_recreations_held
-      recs_with_order_count = Recreation
-                              .select('recreations.id, COUNT(orders.id) as orders_count')
-                              .joins('LEFT JOIN orders ON orders.recreation_id = recreations.id')
-                              .where(orders: { status: [Order.status.find_value(:unreported_completed).value,
-                                                        Order.status.find_value(:final_report_admits_not).value,
-                                                        Order.status.find_value(:finished).value,
-                                                        Order.status.find_value(:invoice_issued).value,
-                                                        Order.status.find_value(:paid).value] }.compact)
-                              .group('recreations.id')
-
-      joins("LEFT OUTER JOIN (#{recs_with_order_count.to_sql}) as recs_with_order_count ON recs_with_order_count.id = recreations.id")
-        .order(Arel.sql('COALESCE(recs_with_order_count.orders_count, 0) DESC'))
+      left_joins(:orders)
+        .select('recreations.*, COUNT(orders.id) AS orders_count')
+        .group('recreations.id')
+        .order(Arel.sql('COUNT(orders.id) DESC'))
     else
       order(created_at: :desc)
     end

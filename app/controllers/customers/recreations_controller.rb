@@ -11,9 +11,7 @@ class Customers::RecreationsController < Customers::ApplicationController
     @prefectures = RecreationPrefecture.distinct.pluck(:name)
     @sorted_prefectures = RecreationPrefecture.names & @prefectures
     @tags = Tag.where(kind: [:tag, :target])
-    recs = Recreation.public_recs.includes(:recreation_prefectures,
-                                           :tags,
-                                           :user)
+    recs = Recreation.public_recs
                      .by_kind(params[:kind])
                      .by_category(params[:category])
                      .by_prefecture(params[:prefecture])
@@ -22,7 +20,6 @@ class Customers::RecreationsController < Customers::ApplicationController
                      .sorted_by(sort_order)
 
     recs = recs.where('title ILIKE ?', "%#{params[:title]}%") if params[:title].present?
-    @recs_size = recs.size
     @recs = recs.page(params[:page]).per(params[:per_page] || 30)
   end
   # rubocop:enable Metrics/AbcSize
