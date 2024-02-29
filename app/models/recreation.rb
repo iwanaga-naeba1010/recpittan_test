@@ -87,9 +87,9 @@ class Recreation < ApplicationRecord
         .order('evaluations_count_subquery.evaluations_count DESC')
     when :number_of_recreations_held
       left_joins(:orders)
-        .select('recreations.*, COUNT(orders.id) AS orders_count')
+        .where(orders: {status: [:unreported_completed, :final_report_admits_not, :finished, :invoice_issued, :paid]})
         .group('recreations.id')
-        .order(Arel.sql('COUNT(orders.id) DESC'))
+        .order('COUNT(orders.id) DESC')
     else
       order(created_at: :desc)
     end
