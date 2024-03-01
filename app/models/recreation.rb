@@ -91,7 +91,7 @@ class Recreation < ApplicationRecord
                                        .group(:recreation_id)
                                        .to_sql
       joins("LEFT JOIN (#{recreations_held_subquery}) as recreations_held ON recreations_held.recreation_id = recreations.id")
-        .order(Arel.sql('COALESCE(recreations_held.held_count, 0) DESC'))
+        .order(Arel.sql('COALESCE(recreations_held.held_count, 0) + recreations.number_of_past_events DESC'))
     else
       order(created_at: :desc)
     end
@@ -132,7 +132,7 @@ class Recreation < ApplicationRecord
   end
 
   def number_of_recreations_held
-    orders.where(status: %i[unreported_completed final_report_admits_not finished invoice_issued paid]).size
+    orders.where(status: %i[unreported_completed final_report_admits_not finished invoice_issued paid]).size + number_of_past_events
   end
 
   def self.parse_price_ranges(price_ranges)
