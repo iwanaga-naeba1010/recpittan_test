@@ -85,6 +85,14 @@ class Recreation < ApplicationRecord
       joins("LEFT JOIN (#{evaluations_count_subquery.to_sql}) as evaluations_count_subquery
             ON evaluations_count_subquery.id = recreations.id")
         .order('evaluations_count_subquery.evaluations_count DESC')
+    when :number_of_recreations_held
+      held_count_subquery = Recreation.left_joins(:orders)
+                                      .where(orders: { status: %i[unreported_completed final_report_admits_not finished invoice_issued paid] }) # rubocop:disable Layout/LineLength
+                                      .select('recreations.id, COUNT(orders.id) AS held_count')
+                                      .group('recreations.id')
+
+      joins("LEFT JOIN (#{held_count_subquery.to_sql}) AS held_count_subquery ON held_count_subquery.id = recreations.id")
+        .order('held_count_subquery.held_count DESC')
     else
       order(created_at: :desc)
     end
