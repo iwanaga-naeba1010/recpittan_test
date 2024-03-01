@@ -85,13 +85,6 @@ class Recreation < ApplicationRecord
       joins("LEFT JOIN (#{evaluations_count_subquery.to_sql}) as evaluations_count_subquery
             ON evaluations_count_subquery.id = recreations.id")
         .order('evaluations_count_subquery.evaluations_count DESC')
-    when :number_of_recreations_held
-      recreations_held_subquery = Order.where(status: %i[unreported_completed final_report_admits_not finished invoice_issued paid])
-                                       .select('recreation_id, COUNT(*) as held_count')
-                                       .group(:recreation_id)
-                                       .to_sql
-      joins("LEFT JOIN (#{recreations_held_subquery}) as recreations_held ON recreations_held.recreation_id = recreations.id")
-        .order(Arel.sql('COALESCE(recreations_held.held_count, 0) DESC'))
     else
       order(created_at: :desc)
     end
