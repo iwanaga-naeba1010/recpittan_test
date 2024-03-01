@@ -86,12 +86,12 @@ class Recreation < ApplicationRecord
             ON evaluations_count_subquery.id = recreations.id")
         .order('evaluations_count_subquery.evaluations_count DESC')
     when :number_of_recreations_held
-      recreations_held_count_subquery = Order.where(status: %i[unreported_completed final_report_admits_not finished invoice_issued paid])
-                                             .select('recreation_id, COUNT(id) AS recreations_held_count')
-                                             .group(:recreation_id)
-                                             .to_sql
-      joins("LEFT JOIN (#{recreations_held_count_subquery}) recreations_held_count ON recreations_held_count.recreation_id = recreations.id") # rubocop:disable Layout/LineLength
-        .order('recreations_held_count.recreations_held_count DESC NULLS LAST')
+      recreations_held_subquery = Order.where(status: %i[unreported_completed final_report_admits_not finished invoice_issued paid])
+                                       .select('recreation_id, COUNT(*) as held_count')
+                                       .group(:recreation_id)
+                                       .to_sql
+      joins("LEFT JOIN (#{recreations_held_subquery}) as recreations_held ON recreations_held.recreation_id = recreations.id")
+        .order(Arel.sql('COALESCE(recreations_held.held_count, 0) DESC'))
     else
       order(created_at: :desc)
     end
