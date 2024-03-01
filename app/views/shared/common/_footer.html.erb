@@ -9,7 +9,7 @@
               <%= link_to 'エブリ・プラス公式HP', 'https://everyplus.jp', class: 'link-href', target: '_blank' %>
             </li>
             <li class="list-group-item border-0">
-              <%= link_to 'レク一覧', customers_recreations_path, class: 'link-href' %>
+              <%= link_to 'レク一覧', customers_recreations_path(sort_order: :number_of_recreations_held), class: 'link-href' %>
             </li>
             <li class="list-group-item border-0">
               <%= link_to 'レクを提供したい方はこちら', 'https://everyplus.jp/partner', class: 'link-href', target: '_blank' %>
