@@ -41,7 +41,7 @@ const RecreationPlanShow: React.FC = () => {
   const grandTotal = totalPrice + totalMaterialPrice + totalTransportationCost;
 
   const pdhDownloadHandler = () => {
-    const target = document.getElementById('pdf-content');
+    const target = document.getElementById('pdf-download-elm');
     if (target === null) return;
 
     html2canvas(target, { scale: 2.5 }).then((canvas) => {
@@ -106,7 +106,7 @@ const RecreationPlanShow: React.FC = () => {
   };
 
   return (
-    <div id='pdf-content'>
+    <div>
       <div className='container mt-4'>
         <div className='row'>
           <div className='col-3 ps-0'>
@@ -159,7 +159,7 @@ const RecreationPlanShow: React.FC = () => {
             )}
           </div>
         </div>
-        <div className='estimate p-3'>
+        <div className='estimate p-3' id='pdf-download-elm'>
           <h5 className='text-black fw-bold'>お見積もり</h5>
           <p>お見積もり金額をシミュレーションできます</p>
           <form onSubmit={(e) => e.preventDefault()}>
