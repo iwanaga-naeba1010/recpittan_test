@@ -18,21 +18,24 @@
       <%= tag_to_html(rec) %>
     </div>
   </div>
-  <div class="card-body link-text d-flex px-2 py-0">
-    <%= image_pack_tag 'ribbon.svg', class: "logo-navbar", width: "20", height: "20" %>
-    <p class="ms-1 mb-0">開催回数<%= rec.number_of_recreations_held %>件</p>
-  </div>
-  <div class="card-body link-text py-0">
+
+  <div class="">
     <div class="row">
-      <div class="col-8 d-flex px-1">
-        <% if rec.kind.visit? && rec.recreation_prefectures.exists? %>
-          <%= image_pack_tag 'location.svg', class: "logo-navbar", width: "20", height: "20" %>
-          <% rec.recreation_prefectures.take(3).each do |prefecture| %>
-            <p class="ms-1 mb-0"><%= prefecture.name %></p>
+      <div class="card-body link-text py-0 col-9">
+        <div class="link-text d-flex px-1">
+          <%= image_pack_tag 'ribbon.svg', class: "logo-navbar", width: "20", height: "20" %>
+          <p class="ms-1 mb-0">開催回数<%= rec.number_of_recreations_held %>件</p>
+        </div>
+        <div class="d-flex px-1">
+          <% if rec.kind.visit? && rec.recreation_prefectures.exists? %>
+            <%= image_pack_tag 'location.svg', class: "logo-navbar", width: "20", height: "20" %>
+            <% rec.recreation_prefectures.take(3).each do |prefecture| %>
+              <p class="ms-1 mb-0"><%= prefecture.name %></p>
+            <% end %>
           <% end %>
-        <% end %>
+        </div>
       </div>
-      <div class="col-4 text-end">
+      <div class="col-3 text-end">
         <% if user_signed_in? %>
           <% if current_user.role.customer? %>
             <div class="me-1" id='favoriteIcon_<%= rec.id %>'></div>
