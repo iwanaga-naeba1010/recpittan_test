@@ -21,7 +21,7 @@
 
   <div class="">
     <div class="row">
-      <div class="card-body link-text py-0 col-9">
+      <div class="link-text py-0 col-10">
         <div class="link-text d-flex px-1">
           <%= image_pack_tag 'ribbon.svg', class: "logo-navbar", width: "20", height: "20" %>
           <p class="ms-1 mb-0">開催回数<%= rec.number_of_recreations_held %>件</p>
@@ -35,7 +35,7 @@
           <% end %>
         </div>
       </div>
-      <div class="col-3 text-end">
+      <div class="col-2 ps-0">
         <% if user_signed_in? %>
           <% if current_user.role.customer? %>
             <div class="me-1" id='favoriteIcon_<%= rec.id %>'></div>
