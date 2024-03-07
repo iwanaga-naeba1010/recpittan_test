@@ -3,6 +3,7 @@
 class HomeController < ApplicationController
   skip_before_action :authenticate_user!
 
+  # rubocop:disable Metrics/AbcSize
   def index
     @latest_recreations = Recreation
                           .public_recs
@@ -20,7 +21,8 @@ class HomeController < ApplicationController
                                         .includes(:user, :recreation_prefectures)
                                         .sorted_by(:number_of_recreations_held)
                                         .limit(8)
-    @prefectures = Recreation.joins(:recreation_prefectures)
+    @prefectures = Recreation.public_recs
+                             .joins(:recreation_prefectures)
                              .distinct
                              .pluck('recreation_prefectures.name')
                              .sort_by { |name| RecreationPrefecture::NAMES.index(name) || RecreationPrefecture::NAMES.length }
@@ -38,6 +40,7 @@ class HomeController < ApplicationController
                    .load_async
     @tags = Tag.where(kind: :tag).load_async.to_a
   end
+  # rubocop:enable Metrics/AbcSize
 
   private
 
