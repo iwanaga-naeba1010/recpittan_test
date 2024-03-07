@@ -9,7 +9,11 @@ class Customers::RecreationsController < Customers::ApplicationController
     sort_order = params[:sort_order] || :newest
     tags = params[:tags] || []
     @prefectures = RecreationPrefecture.distinct.pluck(:name)
-    @sorted_prefectures = RecreationPrefecture.names & @prefectures
+    @sorted_prefectures = Recreation.public_recs
+                                    .joins(:recreation_prefectures)
+                                    .distinct
+                                    .pluck('recreation_prefectures.name')
+                                    .sort_by { |name| RecreationPrefecture::NAMES.index(name) || RecreationPrefecture::NAMES.length }
     @tags = Tag.where(kind: [:tag, :target])
     recs = Recreation.public_recs
                      .by_kind(params[:kind])
