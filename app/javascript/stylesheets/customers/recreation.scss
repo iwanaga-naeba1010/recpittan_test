@@ -1,5 +1,7 @@
 .search-recreation {
   .tag-form {
+    position: relative;
+    z-index: 100;
     width: 420px;
   }
   .tag_params {
@@ -8,5 +10,8 @@
   }
   .remove-tag-param {
     cursor: pointer;
+  }
+  .searched-tag {
+    font-size: 12px;
   }
 }
