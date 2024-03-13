@@ -7,7 +7,7 @@ class Customers::RecreationsController < Customers::ApplicationController
   # rubocop:disable Metrics/AbcSize
   def index
     sort_order = params[:sort_order] || :newest
-    tags = params[:tags] || []
+    @tag_params = params[:tags] || []
     @prefectures = RecreationPrefecture.distinct.pluck(:name)
     @sorted_prefectures = Recreation.public_recs
                                     .joins(:recreation_prefectures)
@@ -19,7 +19,7 @@ class Customers::RecreationsController < Customers::ApplicationController
                      .by_kind(params[:kind])
                      .by_category(params[:category])
                      .by_prefecture(params[:prefecture])
-                     .by_tags(tags)
+                     .by_tags(@tag_params)
                      .by_price_range(params[:price_range])
                      .sorted_by(sort_order)
 
