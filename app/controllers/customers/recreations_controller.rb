@@ -23,7 +23,6 @@ class Customers::RecreationsController < Customers::ApplicationController
                      .by_price_range(params[:price_range])
                      .sorted_by(sort_order)
 
-    # binding.pry
     recs = recs.where('title ILIKE ?', "%#{params[:title]}%") if params[:title].present?
     @recs = recs.page(params[:page]).per(params[:per_page] || 30)
   end
