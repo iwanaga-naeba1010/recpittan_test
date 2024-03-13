@@ -2,7 +2,7 @@ import * as $ from 'jquery';
 
 $(document).ready(() => {
   $('.remove-tag-param').on('click', function() {
-    const tagContainer = $(this).closest('.tag_params');
+    const tagContainer = $(this).closest('.tag-params');
     const tagName = tagContainer.text().trim().substring(2);
     
     const urlParams = new URLSearchParams(window.location.search);
