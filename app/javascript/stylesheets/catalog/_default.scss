@@ -470,6 +470,22 @@ body {
       }
     }
   }
+  .favorite-icon {
+    cursor: pointer;
+  }
+  .desc-favorite {
+    display: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%);
+    white-space: nowrap;
+    z-index: 10;
+  }
+  .favorite-wrapper:hover .desc-favorite {
+    display: block;
+    color: #6C757D;
+  }
 }
 
 /** 詳細や相談チャットで仕様 **/

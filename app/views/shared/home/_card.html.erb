@@ -35,10 +35,13 @@
           <% end %>
         </div>
       </div>
-      <div class="col-2">
+      <div class="col-2 position-relative">
         <% if user_signed_in? %>
           <% if current_user.role.customer? %>
-            <div class="pe-1" id='favoriteIcon_<%= rec.id %>'></div>
+            <div class="favorite-wrapper">
+              <div class="pe-1 favorite-icon" id='favoriteIcon_<%= rec.id %>'></div>
+              <p class="desc-favorite px-2 py-1 bg-white position-absolute rounded border shadow">お気に入りに追加</p>
+            </div>
           <% end %>
         <% end %>
       </div>
