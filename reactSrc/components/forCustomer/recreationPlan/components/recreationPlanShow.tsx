@@ -159,7 +159,7 @@ const RecreationPlanShow: React.FC = () => {
             )}
           </div>
         </div>
-        <div className='estimate p-3' id='pdf-download-elm'>
+        <div className='estimate p-3'>
           <h5 className='text-black fw-bold'>お見積もり</h5>
           <p>お見積もり金額をシミュレーションできます</p>
           <form onSubmit={(e) => e.preventDefault()}>
@@ -179,7 +179,10 @@ const RecreationPlanShow: React.FC = () => {
             />
           </form>
 
-          <div className='bg-white mt-3 p-3'>
+          <div className='bg-white mt-3 p-3' id='pdf-download-elm'>
+            <h2 className='plan-title fw-bold'>{recreationPlan.title}</h2>
+            <p className='plan-code mb-0'>プラン番号 {recreationPlan.code}</p>
+            <hr />
             <RecreationPlanSection
               title='開催費'
               priceProperty='price'
