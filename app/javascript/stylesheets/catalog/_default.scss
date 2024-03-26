@@ -376,6 +376,7 @@ body {
 
 /* レクカード */
 .recreation-card {
+  border-radius: rem(4);
   &:hover {
     p {
       color: #E83E8C;
