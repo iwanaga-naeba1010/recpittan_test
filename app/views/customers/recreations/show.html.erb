@@ -83,7 +83,7 @@
               </div>
               <% if user_signed_in? %>
                 <% if current_user.role.customer? %>
-                  <div class="me-1" id='favoriteIcon_<%= @recreation.id %>'></div>
+                  <div class="me-1 favorite-icon" id='favoriteIcon_<%= @recreation.id %>'></div>
                   <p>お気に入りに追加</p>
                 <% end %>
               <% end %>
