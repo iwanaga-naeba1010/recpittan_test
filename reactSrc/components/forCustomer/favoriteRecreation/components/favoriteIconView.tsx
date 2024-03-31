@@ -3,7 +3,7 @@ import { createRoot } from 'react-dom/client';
 import { useFavoriteRecreations } from '../hooks';
 import { FavoriteHeartIcon } from './favoriteHeartIcon';
 
-const FavoriteIconView: React.FC<{ recreationId: number, width?: string, height?: string }> = ({
+const FavoriteIconView: React.FC<{ recreationId: number }> = ({
   recreationId,
 }) => {
   const [isFavorite, setIsFavorite] = React.useState<boolean>(false);
