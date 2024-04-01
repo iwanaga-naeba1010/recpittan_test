@@ -46,8 +46,6 @@ const FavoriteIconView: React.FC<{ recreationId: number }> = ({
     <FavoriteHeartIcon
       isFavorite={isFavorite}
       onClick={handleClick}
-      width='25'
-      height='25'
     />
   );
 };

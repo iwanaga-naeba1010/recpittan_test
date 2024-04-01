@@ -376,6 +376,13 @@ body {
 
 /* レクカード */
 .recreation-card {
+  border-radius: rem(4);
+  &:hover .favorite-wrapper {
+    display: block;
+  }
+  &:hover .desc-favorite {
+    color: #6C757D;
+  }
   &:hover {
     p {
       color: #E83E8C;
@@ -383,24 +390,36 @@ body {
   }
   /* 画像 */
   .card-img-top {
-    min-height: rem(120);
+    position: relative;
+    overflow: hidden;
 
-    &.zoom {
-      overflow: hidden;
+    img {
+      display: block;
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      object-position: center top;
+      transition: 0.5s;
+    }
 
-      img {
-        display: block;
-        width: 100%;
-        height: 180px;
-        object-fit: cover;
-        object-position: center top;
-        transition: 0.5s;
-      }
+    // 画像をhoverで少し拡大
+    img:hover {
+      transform: scale(1.1);
+    }
+  }
 
-      // 画像をhoverで少し拡大
-      img:hover {
-        transform: scale(1.1);
-      }
+  .favorite-wrapper {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 180px;
+    text-align: center;
+    background-color: rgba(255, 255, 255, 0.778);
+    .favorite-icon {
+      width: 50px;
+      height: 50px;
     }
   }
 
@@ -473,19 +492,6 @@ body {
   .favorite-icon {
     cursor: pointer;
   }
-  .desc-favorite {
-    display: none;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translateX(-50%);
-    white-space: nowrap;
-    z-index: 10;
-  }
-  .favorite-wrapper:hover .desc-favorite {
-    display: block;
-    color: #6C757D;
-  }
 }
 
 /** 詳細や相談チャットで仕様 **/
@@ -514,6 +520,11 @@ body {
       border-radius: rem(4);
       font-size: rem(12);
     }
+  }
+
+  .favorite-icon {
+    width: 25px;
+    height: 25px;
   }
 }
 
