@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_11_12_072345) do
+ActiveRecord::Schema[7.0].define(version: 2024_04_06_133116) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -23,6 +23,21 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_12_072345) do
     t.bigint "author_id"
     t.datetime "created_at", precision: nil, null: false
     t.datetime "updated_at", precision: nil, null: false
+  end
+
+  create_table "bank_accounts", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.string "bank_name", null: false
+    t.string "bank_code", null: false
+    t.string "branch_name", null: false
+    t.string "branch_code", null: false
+    t.string "account_type", null: false
+    t.string "account_number", null: false
+    t.string "account_holder_name", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id", "account_number"], name: "index_bank_accounts_on_user_id_and_account_number", unique: true
+    t.index ["user_id"], name: "index_bank_accounts_on_user_id"
   end
 
   create_table "channel_plan_subscriber_memos", force: :cascade do |t|
@@ -425,6 +440,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_12_072345) do
     t.datetime "updated_at", precision: nil, null: false
   end
 
+  add_foreign_key "bank_accounts", "users"
   add_foreign_key "channel_plan_subscriber_memos", "channel_plan_subscribers"
   add_foreign_key "channel_plan_subscribers", "companies"
   add_foreign_key "chats", "orders", name: "chats_order_id_fkey"

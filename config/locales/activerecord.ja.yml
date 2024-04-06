@@ -39,6 +39,7 @@ ja:
       recreation_plan: プラン
       user_recreation_plan: 登録プラン
       recreation_recreation_plan: 登録レクリエーション
+      bank_account: 銀行口座
     attributes:
       email:
         title: タイトル
@@ -242,6 +243,14 @@ ja:
       recreation_recreation_plan:
         recreation_id: レク
         month: 月
+      bank_account:
+        account_holder_name: 口座名義
+        account_number: 口座番号
+        account_type: 預金種目
+        bank_code: 金融機関コード
+        bank_name: 金融機関名
+        branch_code: 支点コード
+        branch_name: 支店名
     errors:
       messages:
         duration_over: が上限を越えています
