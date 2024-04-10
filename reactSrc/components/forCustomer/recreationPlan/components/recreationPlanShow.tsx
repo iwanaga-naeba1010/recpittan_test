@@ -106,7 +106,7 @@ const RecreationPlanShow: React.FC = () => {
   };
 
   return (
-    <div>
+    <div id='pdf-download-elm'>
       <div className='container mt-4'>
         <div className='row'>
           <div className='col-3 ps-0'>
@@ -179,7 +179,7 @@ const RecreationPlanShow: React.FC = () => {
             />
           </form>
 
-          <div className='bg-white mt-3 p-3' id='pdf-download-elm'>
+          <div className='bg-white mt-3 p-3'>
             <h2 className='plan-title fw-bold'>{recreationPlan.title}</h2>
             <p className='plan-code mb-0'>プラン番号 {recreationPlan.code}</p>
             <hr />
