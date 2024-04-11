@@ -210,7 +210,7 @@ GEM
     fog-xml (0.1.4)
       fog-core
       nokogiri (>= 1.5.11, < 2.0.0)
-    font-awesome-sass (6.5.1)
+    font-awesome-sass (6.5.2)
       sassc (~> 2.0)
     formatador (1.1.0)
     formtastic (4.0.0)
