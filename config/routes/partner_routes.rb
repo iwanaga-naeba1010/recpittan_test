@@ -4,6 +4,7 @@ resources :partners, only: %i[index]
 namespace :partners do
   get :tos
 
+  resources :registrations, only: %i[new create]
   resources :recreations, only: %i[index new show create edit update complete_final_check] do
     resources :evaluations, only: %i[index]
   end
