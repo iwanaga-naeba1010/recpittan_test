@@ -26,8 +26,8 @@ export const PartnerNewForm: React.FC = () => {
   const disabled = false;
 
   return (
-    <div>
-      <form className='recreation'>
+    <div className='p-3'>
+      <form className='partner-registration'>
         {currentStep === 0 && (
           <FirstStep />
         )}
@@ -46,7 +46,7 @@ export const PartnerNewForm: React.FC = () => {
             className='my-4 py-2 w-100 rounded text-white font-weight-bold bg-primary border border-primary'
             onClick={handleNext}
           >
-            次へ
+            次へ進む
           </button>
         )}
         {currentStep === 3 && (

@@ -6,13 +6,7 @@ import {
 
 const RegistrationForm: React.FC = () => {
   return (
-    <div className='h-100'>
-      <div>
-        <p>あともう少しです！</p>
-        <p>おめでとうございます！あなたは審査を通過しましたのでサービスへ新規登録をお願いします。</p>
-      </div>
-      <PartnerNewForm />
-    </div>
+    <PartnerNewForm />
   );
 };
 
