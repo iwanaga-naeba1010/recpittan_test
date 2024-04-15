@@ -14,9 +14,6 @@ module ApiCustomer
         user_id: params_create[:user_id]
       )
       render_json BankAccountSerializer.new.serialize(bank_account:)
-    rescue StandardError => e
-      logger.error e.message
-      render_json([e.message], status: 422)
     end
 
     private def params_create
