@@ -2,6 +2,7 @@
 
 # rubocop:disable Rails/LexicallyScopedActionFilter
 class CustomDevise::RegistrationsController < Devise::RegistrationsController
+  include Recaptcha::Adapters::ViewMethods
   before_action :configure_sign_up_params, only: [:create]
   before_action :configure_account_update_params, only: [:update]
 
