@@ -26,7 +26,7 @@ export const PartnerNewForm: React.FC = () => {
   const disabled = false;
 
   return (
-    <div className='p-3'>
+    <div>
       <form className='partner-registration'>
         {currentStep === 0 && (
           <FirstStep />
@@ -40,31 +40,37 @@ export const PartnerNewForm: React.FC = () => {
         {currentStep === 3 && <FourthStep />}
 
         {currentStep !== 3 && (
-          <button
-            type='button'
-            disabled={disabled}
-            className='my-4 py-2 w-100 rounded text-white font-weight-bold bg-primary border border-primary'
-            onClick={handleNext}
-          >
-            次へ進む
-          </button>
+          <div className='px-3'>
+            <button
+              type='button'
+              disabled={disabled}
+              className='my-4 py-2 w-100 rounded text-white font-weight-bold bg-primary border border-primary'
+              onClick={handleNext}
+            >
+              次へ進む
+            </button>
+          </div>
         )}
         {currentStep === 3 && (
-          <button
-            type='submit'
-            className='mt-2 py-2 w-100 rounded text-white font-weight-bold bg-primary border border-primary'
-          >
-            申請する
-          </button>
+          <div className='px-3'>
+            <button
+              type='submit'
+              className='mt-2 py-2 w-100 rounded text-white font-weight-bold bg-primary border border-primary'
+            >
+              申請する
+            </button>
+          </div>
         )}
         {currentStep !== 0 && (
-          <button
-            type='button'
-            className='w-100 rounded text-primary font-weight-bold bg-white border border-white'
-            onClick={handlePrev}
-          >
-            ＜戻る
-          </button>
+          <div className='px-3'>
+            <button
+              type='button'
+              className='w-100 rounded text-primary font-weight-bold bg-white border border-white'
+              onClick={handlePrev}
+            >
+              ＜戻る
+            </button>
+          </div>
         )}
       </form>
     </div>
