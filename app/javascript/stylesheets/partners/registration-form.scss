@@ -1,15 +1,12 @@
 .partner-registration {
-  input {
+  input[type="text"] {
     border: 1px solid #E5E3DF;
+    border-radius: 5px;
   }
 
   input[type="checkbox"] {
-    width: 24px;
-    height: 24px;
-  }
-
-  #terms, #privacy {
-    vertical-align: middle;
+    width: 15px;
+    height: 15px;
   }
 
   .terms, .privacy {

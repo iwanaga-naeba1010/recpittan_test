@@ -1,30 +1,20 @@
 import React from 'react';
 
-// const getRecreationKind = (kind: string): string => {
-//   const kinds: { [key: string]: string } = {
-//     online: 'オンライン',
-//     visit: '訪問',
-//     mail: '郵送',
-//   };
-//   return kinds[kind];
-// };
-
-// const categoryName = (category: string): string => {
-//   const categories: { [key: string]: string } = {
-//     event: 'イベント',
-//     music: '音楽',
-//     work: '創作',
-//     health: '健康',
-//     travel: '旅行',
-//     hobby: '趣味',
-//     food: '食べ物',
-//     other: 'その他',
-//   };
-//   return categories[category];
-// };
-
 export const FourthStep: React.FC = () => {
   return (
-    <div>4</div>
+    <>
+      <div className='progress-bar w-100'>
+        <div className='bar h-100 w-75 bg-black'></div>
+      </div>
+      <div className='p-3 text-black'>
+        <h4 className="text-center">エブリぷらすで依頼を行うために</h4>
+        <p className='mb-0'>だるまさんが転んだ法人の要望に合わせた完全カスタマイズプランです。</p>
+        <p>日程調節代行をまるっと依頼したい、オリジナルのレクイベント開発や運営を依頼したい、法人一括導入をしたいので全体に説明をしてほしいなど、要望に合わせてご相談が可能です。</p>
+        <ul>
+          <li>学習コンテンツはレクを実施する上で重要なこと</li>
+          <li>などを記載</li>
+        </ul>
+      </div>
+    </>
   );
 };

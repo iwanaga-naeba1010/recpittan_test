@@ -57,7 +57,7 @@ export const PartnerNewForm: React.FC = () => {
               type='submit'
               className='mt-2 py-2 w-100 rounded text-white font-weight-bold bg-primary border border-primary'
             >
-              申請する
+              学習コンテンツに進む(外部サイト)
             </button>
           </div>
         )}
