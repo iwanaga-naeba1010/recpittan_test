@@ -6,20 +6,6 @@ class CustomDevise::RegistrationsController < Devise::RegistrationsController
   include Recaptcha::Adapters::ViewMethods
   before_action :configure_sign_up_params, only: [:create]
   before_action :configure_account_update_params, only: [:update]
-  prepend_before_action :check_captcha, only: [:create]
-
-  private def check_captcha
-    return if verify_recaptcha
-
-    self.resource = resource_class.new sign_up_params
-    resource.validate
-    set_minimum_password_length
-
-    respond_with_navigational(resource) do
-      flash.discard(:recaptcha_error)
-      render :new
-    end
-  end
 
   # GET /resource/sign_up
   def new
@@ -37,6 +23,11 @@ class CustomDevise::RegistrationsController < Devise::RegistrationsController
 
   # GET /resource/edit
   def create
+    unless verify_recaptcha
+      build_resource(sign_up_params)
+      return render 'new'
+    end
+
     super do
       # TODO(okubo): SQL2回発行していることになっているので、解消したい
       resource.update(
