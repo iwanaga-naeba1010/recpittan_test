@@ -3,6 +3,7 @@ import { FirstStep } from './firstStep';
 import { FourthStep } from './fourthStep';
 import { SecondStep } from './secondStep';
 import { ThirdStep } from './thirdStep';
+import { FifthStep } from './fifthStep';
 
 // type Props = {
 //   onSubmit: (values: RecreationFormValues) => Promise<void>;
@@ -27,6 +28,9 @@ export const PartnerNewForm: React.FC = () => {
 
   return (
     <div>
+      <div className="header bg-white">
+        <h2 className="text-black text-center font-weight-bold p-2 border-bottom">新規登録</h2>
+      </div>
       <form className='partner-registration'>
         {currentStep === 0 && (
           <FirstStep />
@@ -38,8 +42,9 @@ export const PartnerNewForm: React.FC = () => {
           <ThirdStep />
         )}
         {currentStep === 3 && <FourthStep />}
+        {currentStep === 4 && <FifthStep />}
 
-        {currentStep !== 3 && (
+        {currentStep !== 4 && currentStep !== 3 && (
           <div className='px-3'>
             <button
               type='button'
@@ -55,7 +60,9 @@ export const PartnerNewForm: React.FC = () => {
           <div className='px-3'>
             <button
               type='submit'
+              disabled={disabled}
               className='mt-2 py-2 w-100 rounded text-white font-weight-bold bg-primary border border-primary'
+              onClick={handleNext}
             >
               学習コンテンツに進む(外部サイト)
             </button>
