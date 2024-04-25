@@ -41,6 +41,7 @@ export const RecreationEditForm: React.FC<Props> = (props) => {
       extraInformation: recreation.extraInformation,
       youtubeId: recreation.youtubeId,
       borrowItem: recreation.borrowItem,
+      bringYourOwnItem: recreation.bringYourOwnItem,
       additionalFacilityFee: recreation.additionalFacilityFee,
       category: recreation.category.key,
       prefectures: [],
