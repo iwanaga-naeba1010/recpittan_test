@@ -29,15 +29,15 @@
 class Company < ApplicationRecord
   extend Enumerize
   # NOTE: 現状1名のUserしか想定していないためhas_one。複数に対応させる場合は、has_manyに変更でいける
-  has_one :user, dependent: :destroy
+  has_one :user, dependent: :destroy, class_name: 'User'
   accepts_nested_attributes_for :user, allow_destroy: true
 
-  has_one :channel_plan_subscriber, dependent: :destroy
+  has_one :channel_plan_subscriber, dependent: :destroy, class_name: 'ChannelPlanSubscriber'
   accepts_nested_attributes_for :channel_plan_subscriber, allow_destroy: true
 
-  has_many :company_tags, dependent: :destroy
-  has_many :tags, through: :company_tags
-  has_many :company_memos, dependent: :destroy
+  has_many :company_tags, dependent: :destroy, class_name: 'CompanyTag'
+  has_many :tags, through: :company_tags, class_name: 'Tag'
+  has_many :company_memos, dependent: :destroy, class_name: 'CompanyMemo'
 
   validates :name, :facility_name, presence: true
 

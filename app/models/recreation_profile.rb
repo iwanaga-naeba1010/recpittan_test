@@ -16,6 +16,6 @@
 #  recreation_profiles_recreation_id_fkey  (recreation_id => recreations.id)
 #
 class RecreationProfile < ApplicationRecord
-  belongs_to :recreation
-  belongs_to :profile
+  belongs_to :recreation, class_name: 'Recreation'
+  belongs_to :profile, class_name: 'Profile'
 end

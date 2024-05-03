@@ -22,8 +22,8 @@
 #  fk_rails_...  (recreation_plan_id => recreation_plans.id)
 #
 class RecreationRecreationPlan < ApplicationRecord
-  belongs_to :recreation
-  belongs_to :recreation_plan
+  belongs_to :recreation, class_name: 'Recreation'
+  belongs_to :recreation_plan, class_name: 'RecreationPlan'
 
   validates :month, presence: true
 end

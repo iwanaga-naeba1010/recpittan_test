@@ -19,7 +19,7 @@
 #  fk_rails_...  (evaluation_id => evaluations.id)
 #
 class EvaluationReply < ApplicationRecord
-  belongs_to :evaluation
+  belongs_to :evaluation, class_name: 'Evaluation'
 
   validates :message, presence: true
 end

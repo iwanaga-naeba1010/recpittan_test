@@ -15,7 +15,7 @@
 #  recreation_prefectures_recreation_id_fkey  (recreation_id => recreations.id)
 #
 class RecreationPrefecture < ApplicationRecord
-  belongs_to :recreation
+  belongs_to :recreation, class_name: 'Recreation'
 
   NAMES = %w[
     北海道

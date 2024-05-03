@@ -18,7 +18,7 @@
 #
 class RecreationImage < ApplicationRecord
   extend Enumerize
-  belongs_to :recreation
+  belongs_to :recreation, class_name: 'Recreation'
   mount_uploader :image, RecreationImageUploader
 
   validates :image, presence: true
