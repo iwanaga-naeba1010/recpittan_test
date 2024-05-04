@@ -33,6 +33,7 @@ class RecreationPlanEstimate < ApplicationRecord
   validates :start_month, presence: true
   validates :transportation_expenses, presence: true
   validates :user_id, uniqueness: { scope: :estimate_number }
+  validate :start_month_is_valid
 
   before_create :generate_estimate_number
 
@@ -52,5 +53,11 @@ class RecreationPlanEstimate < ApplicationRecord
     number = last_estimate_number[1..].to_i
     new_number = number + 1
     "#{prefix}#{new_number.to_s.rjust(6, '0')}"
+  end
+
+  def start_month_is_valid
+    return if start_month.between?(1, 12)
+
+    errors.add(:start_month, 'は1から12の整数で入力してください')
   end
 end
