@@ -21,10 +21,10 @@ export const RecreationPlanSection: React.FC<Props> = ({
   return (
     <>
       <div className='row'>
-        <div className='col-4'>
+        <div className='col-3'>
           <p>{title}</p>
         </div>
-        <div className='col-8'>
+        <div className='col-9'>
           {plans.length ? (
             plans.map((plan) => (
               <RecreationPlanDetail

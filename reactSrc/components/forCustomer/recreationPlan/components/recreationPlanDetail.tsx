@@ -50,6 +50,7 @@ export const RecreationPlanDetail: React.FC<Props> = ({
         )) || (
           <div className='row'>
             <div className='col-12 d-flex justify-content-between'>
+              <p>{recreationRecreationPlan.month}月</p>
               <p>{recreationRecreationPlan.recreation.title}</p>
             </div>
           </div>

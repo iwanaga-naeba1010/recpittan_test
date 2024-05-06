@@ -162,22 +162,55 @@ const RecreationPlanShow: React.FC = () => {
         <div className='estimate p-3'>
           <h5 className='text-black fw-bold'>お見積もり</h5>
           <p>お見積もり金額をシミュレーションできます</p>
-          <form onSubmit={(e) => e.preventDefault()}>
-            <label className='num-of-people mt-1' htmlFor='numberInput'>
-              レクを受ける人数を入力してください
-            </label>
-            <br />
-            <input
-              type='number'
-              id='numberInput'
-              name='number_of_people'
-              placeholder='10'
-              className='form-control w-25 border-0'
-              value={numberOfPeople}
-              onChange={handleNumberOfPeopleChange}
-              min='1'
-            />
-          </form>
+
+          {/* formを集めた親クラス */}
+          <div className='bg-white p-3 '>
+            <div className='row'>
+              <p className='text-black fw-bold'>お見積りをするために必要な項目を入力してください</p>
+              <div className='col-3'>
+                <form onSubmit={(e) => e.preventDefault()}>
+                  <label className='mt-1' htmlFor='numberInput'>
+                    レクを受ける人数を入力<span className='ms-2 text-danger'>必須</span>
+                  </label>
+                  <br />
+                  <input
+                    type='number'
+                    id='numberInput'
+                    name='number_of_people'
+                    placeholder='10'
+                    className='form-control w-100 mt-1'
+                    value={numberOfPeople}
+                    onChange={handleNumberOfPeopleChange}
+                    min='1'
+                  />
+                </form>
+              </div>
+              <div className='col-3'>
+                <form onSubmit={(e) => e.preventDefault()}>
+                  <label className='mt-1' htmlFor='numberInput'>
+                    レクの開始月を選択<span className='ms-2 text-danger'>必須</span>
+                  </label>
+                  <br />
+                  {/* 1から12までのselect form */}
+                  <select className='form-select w-100 mt-1'>
+                    {Array.from({ length: 12 }, (_, i) => i + 1).map((month) => (
+                      <option key={month} value={month}>
+                        {month}月
+                      </option>
+                    ))}
+                  </select>
+                </form>
+              </div>
+              <div className='col-3'>
+                <form>
+                  <label className='mt-1' htmlFor='numberInput'>
+                    1回の交通費を入力<span className='ms-2 text-danger'>必須</span>
+                  </label>
+                  <input type="number" className="form-control w-100 mt-1" />
+                </form>
+              </div>
+            </div>
+          </div>
 
           <div className='bg-white mt-3 p-3'>
             <h2 className='plan-title fw-bold'>{recreationPlan.title}</h2>
