@@ -75,7 +75,6 @@ gem 'fog-aws'
 gem 'carrierwave'
 
 gem 'kaminari'
-gem 'ransack'
 
 gem 'active_hash'
 gem 'rinku'
