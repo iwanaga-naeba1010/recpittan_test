@@ -462,9 +462,9 @@ GEM
     rspec-parameterized (1.0.2)
       rspec-parameterized-core (< 2)
       rspec-parameterized-table_syntax (< 2)
-    rspec-parameterized-core (1.0.0)
+    rspec-parameterized-core (1.0.1)
       parser
-      proc_to_ast
+      proc_to_ast (>= 0.2.0)
       rspec (>= 2.13, < 4)
       unparser
     rspec-parameterized-table_syntax (1.0.1)
