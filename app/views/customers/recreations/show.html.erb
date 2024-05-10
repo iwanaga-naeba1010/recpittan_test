@@ -18,12 +18,10 @@
         <% category_tag = @recreation.tags.categories&.first %>
         <% if category_tag.present? %>
           <li class="breadcrumb-item">
-            <!-- TODO: Tag.categories.firstを表示 + ransack入れる -->
-            <%= link_to @recreation.category_text, customers_recreations_path(q: { category_eq: @recreation.category.value }) %>
+            <span class="text-secondary"><%= @recreation.category_text %></span>
           </li>
         <% end %>
         <li class="breadcrumb-item active">
-          <!-- TODO: Tag.categories.firstを表示 + ransack入れる -->
           <span class="text-secondary"><%= @recreation.title %></span>
         </li>
       </ol>
