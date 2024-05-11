@@ -1,0 +1,101 @@
+<div class='recreation-plan-estimate text-black'>
+    <div class='top-section'>
+      <h4 class='fw-bold'>御見積書</h4>
+      <div class='row'>
+        <div class='col-8'>
+          <h5>レクリエーションプランのご提案</h5>
+          <p class='small-paragraph mt-5'>下記の内容をご確認ください。</p>
+          <div class='total-price-section row'>
+            <div class='col-4'>
+              <p>見積金額</p>
+            </div>
+            <div class='col-8'>
+              <p class='total-price fw-bold'>1,000,000円</p>
+            </div>
+          </div>
+        </div>
+        <div class='col-4'>
+          <div class='row'>
+            <div class='col-4'>
+              <p class='small-paragraph'>見積日</p>
+            </div>
+            <div class='col-8'>
+              <p class='small-paragraph'>2024年12月12日</p>
+            </div>
+          </div>
+          <div class='row'>
+            <div class='col-4'>
+              <p class='small-paragraph'>見積書番号</p>
+            </div>
+            <div class='col-8'>
+              <p class='small-paragraph'>〇〇〇〇〇〇</p>
+            </div>
+          </div>
+          <div class='row'>
+            <div class='col-4'>
+              <p class='small-paragraph'>有効期限</p>
+            </div>
+            <div class='col-8'>
+              <p class='small-paragraph'>2024年12月12日</p>
+            </div>
+          </div>
+          <p class='middle-paragraph mt-2'>株式会社エブリ・プラス</p>
+          <p class='small-paragraph mt-2'>代表取締役 佐藤 亜以</p>
+          <p class='small-paragraph mt-1'>〒453-0012</p>
+          <p class='small-paragraph mt-1'>愛知県名古屋市中村区井深町１番地１号新名古屋センタービル本陣街２階２４１－１号室</p>
+          <p class='small-paragraph mt-1'>TEL 050-5306-7767</p>
+        </div>
+      </div>
+    </div>
+    <div class='middle-section'>
+      <div class='row'>
+        <p class='title fw-bold col-12 py-2'>プラン内容</p>
+      </div>
+    </div>
+    <div class='bottom-section mt-4'>
+      <div class='row'>
+        <div class='title col-2 text-center fw-bold py-2'>項目</div>
+        <div class='title col-8 text-center fw-bold py-2'>内容</div>
+        <div class='title col-2 text-center fw-bold py-2'>金額</div>
+      </div>
+      <div class='event-fee row'>
+        <div class='col-2 text-center py-2'>開催費</div>
+        <div class='col-8 py-2'>
+          <% @recreation_recreation_plans.each do |plan| %>
+            <div class='row'>
+              <div class='col-2 text-center'><%= plan.month %>月開催</div>
+              <div class='col-8'><%= plan.recreation.title %></div>
+            </div>
+          <% end %>
+        </div>
+        <div class='col-2 text-end'>
+          <% @recreation_recreation_plans.each do |plan| %>
+            <div>¥<%= plan.recreation.price %></div>
+          <% end %>
+        </div>
+      </div>
+
+      <div class='material-fee row'>
+        <div class='col-2 text-center py-2'>材料費</div>
+        <div class='col-8 py-2'>
+          <% @recreation_recreation_plans.each do |plan| %>
+            <div class='row'>
+              <div class='col-10'><%= plan.recreation.title %></div>
+              <div class='col-2'>X <%= @recreation_plan_estimate.number_of_people %>人</div>
+            </div>
+          <% end %>
+        </div>
+        <div class='col-2 text-end'>
+          <% @recreation_recreation_plans.each do |plan| %>
+            <div>¥<%= plan.recreation.material_price %></div>
+          <% end %>
+        </div>
+      </div>
+      <div class="transportation_expenses row">
+        <div class='col-2 text-center py-2'>開催費</div>
+        <div class='col-8'></div>
+        <div class="col-2 text-end"><%= @recreation_plan_estimate.number_of_people * @recreation_recreation_plans.size %></div>
+      </div>
+    </div>
+  </div>
+</div>

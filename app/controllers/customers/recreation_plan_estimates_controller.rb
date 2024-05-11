@@ -8,7 +8,8 @@ class Customers::RecreationPlanEstimatesController < Customers::ApplicationContr
   end
 
   def show
-    id = params[:id]
-    RecreationPlanEstimate.find_by!(id: id, user_id: current_user.id)
+    @recreation_plan_estimate = RecreationPlanEstimate.find_by!(id: params[:id], user_id: current_user.id)
+    @recreation_recreation_plans = @recreation_plan_estimate.recreation_plan.recreation_recreation_plans
+    @recreation_size = @recreation_recreation_plans.size
   end
 end

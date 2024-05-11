@@ -1,0 +1,29 @@
+.recreation-plan-estimate {
+  p {
+    margin: 0;
+  }
+
+  .small-paragraph {
+    font-size: 10px;
+  }
+
+  .middle-paragraph {
+    font-size: 12px;
+  }
+
+  .total-price-section {
+    border-bottom: 3px solid black;
+
+    .total-price {
+      font-size: 22px;
+    }
+  }
+
+  .title {
+    background-color: #F5F2F0;
+  }
+
+  .event-fee, .material-fee {
+    border-bottom: 2px solid #F5F2F0;
+  }
+}
