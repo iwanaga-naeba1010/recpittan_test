@@ -6,9 +6,7 @@ import { useRecreationPlan } from '../hooks';
 import { RecreationRecreationPlanItem } from './recreationRecreationPlanItem';
 import { RecreationPlanSection } from './recreationPlanSection';
 import { TransportationExpenses } from './transportationExpenses';
-import { useUserRecreationPlan } from '../hooks';
-import html2canvas from 'html2canvas';
-import jsPDF from 'jspdf';
+import { useUserRecreationPlan, useRecreationPlanEstimate } from '../hooks';
 
 const RecreationPlanShow: React.FC = () => {
   const [recreationPlan, setRecreationPlan] = useState<RecreationPlan>();
@@ -25,6 +23,7 @@ const RecreationPlanShow: React.FC = () => {
   const [totalTransportationCost, setTotalTransportationCost] = useState(0);
   const id = window.location.pathname.split('/')[3];
   const { postUserRecreationPlan } = useUserRecreationPlan();
+  const { postRecreationPlanEstimate } = useRecreationPlanEstimate();
 
   const handleUpdateTotalPrice = (newTotal: number) => {
     setTotalPrice(newTotal);
@@ -39,25 +38,6 @@ const RecreationPlanShow: React.FC = () => {
   };
 
   const grandTotal = totalPrice + totalMaterialPrice + totalTransportationCost;
-
-  const pdhDownloadHandler = () => {
-    const target = document.getElementById('pdf-download-elm');
-    if (target === null) return;
-
-    html2canvas(target, { scale: 2.5 }).then((canvas) => {
-      const imgData = canvas.toDataURL('image/svg', 1.0);
-      const pdf = new jsPDF();
-      pdf.addImage(
-        imgData,
-        'SVG',
-        5,
-        10,
-        canvas.width / 18,
-        canvas.height / 18
-      );
-      pdf.save(`recreation-plan.pdf`);
-    });
-  };
 
   useEffect(() => {
     (async () => {
@@ -86,6 +66,24 @@ const RecreationPlanShow: React.FC = () => {
       return acc;
   }, { min: 0, max: 0 });
   const months = monthRange.max - monthRange.min + 1;
+
+  const handleCreateRecreationPlanEstimate = async () => {
+    if (recreationPlan?.id) {
+      try {
+        const response = await postRecreationPlanEstimate(recreationPlan.id);
+        console.log(response);
+        if (response.redirectUrl) {
+          window.location.href = response.redirectUrl;
+        }
+      } catch (e) {
+        if (e instanceof Error) {
+          throw new Error(e.message);
+        } else {
+          throw new Error('An unexpected error occurred.');
+        }
+      }
+    }
+  };
 
   const handleStartConsultation = async () => {
     if (recreationPlan?.id) {
@@ -237,10 +235,7 @@ const RecreationPlanShow: React.FC = () => {
             <p className=''>※交通費は1回あたり1000円を基準値</p>
           </div>
           <div className='mt-3 d-flex justify-content-center'>
-            <button
-              onClick={pdhDownloadHandler}
-              className='download-button py-2 px-3 rounded fw-bold'
-            >
+            <button className='download-button py-2 px-3 rounded fw-bold'>
               プランの見積もりをダウンロードする
             </button>
           </div>

@@ -10,7 +10,15 @@ module ApiCustomer
         recreation_plan_id: params_create[:recreation_plan_id].to_i,
         user_id: current_user.id
       )
-      render_json RecreationPlanEstimateSerializer.new.serialize(recreation_plan_estimate:)
+
+      if recreation_plan_estimate.errors.any?
+        render json: {
+          recreation_plan_estimate: RecreationPlanEstimateSerializer.new.serialize(recreation_plan_estimate: recreation_plan_estimate),
+          redirect_url: "/customers/recreation_plan_estimate/#{recreation_plan_estimate.id}"
+        }, status: :created
+      else
+        render json: { errors: recreation_plan_estimate.errors.full_messages }, status: :unprocessable_entity
+      end
     rescue StandardError => e
       render_json([e.message], status: 422)
     end
