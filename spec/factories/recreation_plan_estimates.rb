@@ -27,11 +27,11 @@
 #
 FactoryBot.define do
   factory :recreation_plan_estimate do
-    user { nil }
+    user
     transportation_expenses { 1 }
     start_month { 1 }
     number_of_people { 1 }
-    recreation_plan { nil }
+    recreation_plan
     estimate_number { 'MyString' }
   end
 end

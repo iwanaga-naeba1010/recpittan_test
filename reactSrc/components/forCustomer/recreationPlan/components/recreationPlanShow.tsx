@@ -24,6 +24,8 @@ const RecreationPlanShow: React.FC = () => {
   const id = window.location.pathname.split('/')[3];
   const { postUserRecreationPlan } = useUserRecreationPlan();
   const { postRecreationPlanEstimate } = useRecreationPlanEstimate();
+  const [startMonth, setStartMonth] = useState<number>(1);
+  const [transportationExpenses, setTransportationExpenses] = useState<number>(1000);
 
   const handleUpdateTotalPrice = (newTotal: number) => {
     setTotalPrice(newTotal);
@@ -35,6 +37,15 @@ const RecreationPlanShow: React.FC = () => {
 
   const handleUpdateTotalTransportationCost = (newTotal: number): void => {
     setTotalTransportationCost(newTotal);
+  };
+
+  const handleStartMonthChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    setStartMonth(parseInt(event.target.value, 10));
+  };
+  
+  // 交通費の入力変更ハンドラ
+  const handleTransportationExpensesChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setTransportationExpenses(parseInt(event.target.value, 10) || 0);
   };
 
   const grandTotal = totalPrice + totalMaterialPrice + totalTransportationCost;
@@ -70,7 +81,12 @@ const RecreationPlanShow: React.FC = () => {
   const handleCreateRecreationPlanEstimate = async () => {
     if (recreationPlan?.id) {
       try {
-        const response = await postRecreationPlanEstimate(recreationPlan.id);
+        const response = await postRecreationPlanEstimate(
+          startMonth,
+          numberOfPeople,
+          transportationExpenses,
+          recreationPlan.id
+        );
         console.log(response);
         if (response.redirectUrl) {
           window.location.href = response.redirectUrl;
@@ -190,11 +206,13 @@ const RecreationPlanShow: React.FC = () => {
                   </label>
                   <br />
                   {/* 1から12までのselect form */}
-                  <select className='form-select w-100 mt-1'>
+                  <select
+                    className='form-select w-100 mt-1'
+                    value={startMonth}
+                    onChange={handleStartMonthChange}
+                  >
                     {Array.from({ length: 12 }, (_, i) => i + 1).map((month) => (
-                      <option key={month} value={month}>
-                        {month}月
-                      </option>
+                      <option key={month} value={month}>{month}月</option>
                     ))}
                   </select>
                 </form>
@@ -204,7 +222,12 @@ const RecreationPlanShow: React.FC = () => {
                   <label className='mt-1' htmlFor='numberInput'>
                     1回の交通費を入力<span className='ms-2 text-danger'>必須</span>
                   </label>
-                  <input type="number" className="form-control w-100 mt-1" />
+                  <input
+                    type="number"
+                    className="form-control w-100 mt-1"
+                    value={transportationExpenses}
+                    onChange={handleTransportationExpensesChange}
+                  />
                 </form>
               </div>
             </div>
@@ -268,7 +291,10 @@ const RecreationPlanShow: React.FC = () => {
             <p className=''>※交通費は1回あたり1000円を基準値</p>
           </div>
           <div className='mt-3 d-flex justify-content-center'>
-            <button className='download-button py-2 px-3 rounded fw-bold'>
+            <button
+              className='download-button py-2 px-3 rounded fw-bold'
+              onClick={handleCreateRecreationPlanEstimate}
+            >
               プランの見積もりをダウンロードする
             </button>
           </div>
