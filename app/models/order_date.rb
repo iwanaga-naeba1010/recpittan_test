@@ -21,7 +21,7 @@
 #  order_dates_order_id_fkey  (order_id => orders.id)
 #
 class OrderDate < ApplicationRecord
-  belongs_to :order
+  belongs_to :order, class_name: 'Order'
 
   validate :check_dates
 

@@ -24,7 +24,8 @@ class OnlineRecreationChannelDownloadImage < ApplicationRecord
   extend Enumerize
   mount_uploader :image, ImageUploader
   belongs_to :online_recreation_channel,
-             inverse_of: :channel_download_images
+             inverse_of: :channel_download_images,
+             class_name: 'OnlineRecreationChannel'
 
   enumerize :kind, in: { calendar_image: 0, calendar_pdf: 1, flyer_image: 2, flyer_pdf: 3 }
 

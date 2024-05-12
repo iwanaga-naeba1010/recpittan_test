@@ -16,6 +16,6 @@
 #  company_tags_tag_id_fkey      (tag_id => tags.id)
 #
 class CompanyTag < ApplicationRecord
-  belongs_to :company
-  belongs_to :tag
+  belongs_to :company, class_name: 'Company'
+  belongs_to :tag, class_name: 'Tag'
 end

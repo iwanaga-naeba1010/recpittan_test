@@ -21,9 +21,9 @@
 class Profile < ApplicationRecord
   mount_uploader :image, ImageUploader
 
-  belongs_to :user
-  has_one :recreation_profile, dependent: :destroy
-  has_one :recreation, through: :recreation_profile
+  belongs_to :user, class_name: 'User'
+  has_one :recreation_profile, dependent: :destroy, class_name: 'RecreationProfile'
+  has_one :recreation, through: :recreation_profile, class_name: 'Recreation'
 
   # TODO(okubo): 一時的にdescriptionのvalidationを外してバッチの不具合を回避
   # validates :name, :description, presence: true

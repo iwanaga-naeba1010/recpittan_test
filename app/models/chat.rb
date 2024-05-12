@@ -19,8 +19,8 @@
 #  chats_user_id_fkey   (user_id => users.id)
 #
 class Chat < ApplicationRecord
-  belongs_to :order
-  belongs_to :user
+  belongs_to :order, class_name: 'Order'
+  belongs_to :user, class_name: 'User'
 
   delegate :role, to: :user, prefix: true
 

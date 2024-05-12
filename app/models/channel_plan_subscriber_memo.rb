@@ -19,5 +19,5 @@
 #  fk_rails_...  (channel_plan_subscriber_id => channel_plan_subscribers.id)
 #
 class ChannelPlanSubscriberMemo < ApplicationRecord
-  belongs_to :channel_plan_subscriber
+  belongs_to :channel_plan_subscriber, class_name: 'ChannelPlanSubscriber'
 end

@@ -42,21 +42,21 @@
 class Order < ApplicationRecord
   extend Enumerize
 
-  belongs_to :user
-  belongs_to :recreation
+  belongs_to :user, class_name: 'User'
+  belongs_to :recreation, class_name: 'Recreation'
 
-  has_many :chats, dependent: :destroy
+  has_many :chats, dependent: :destroy, class_name: 'Chat'
 
-  has_many :order_memos, dependent: :destroy
+  has_many :order_memos, dependent: :destroy, class_name: 'OrderMemo'
   accepts_nested_attributes_for :order_memos, allow_destroy: true
 
-  has_many :order_dates, dependent: :destroy
+  has_many :order_dates, dependent: :destroy, class_name: 'OrderDate'
   accepts_nested_attributes_for :order_dates
 
-  has_one :report, dependent: :destroy
+  has_one :report, dependent: :destroy, class_name: 'Report'
   accepts_nested_attributes_for :report, allow_destroy: true
 
-  has_one :zoom, dependent: :destroy
+  has_one :zoom, dependent: :destroy, class_name: 'Zoom'
   accepts_nested_attributes_for :zoom, allow_destroy: true
 
   delegate :title, :price, :minutes, :instructor_name, :capacity, :kind, to: :recreation, prefix: true, allow_nil: true

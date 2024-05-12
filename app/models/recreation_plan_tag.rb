@@ -21,6 +21,6 @@
 #  fk_rails_...  (tag_id => tags.id)
 #
 class RecreationPlanTag < ApplicationRecord
-  belongs_to :recreation_plan
-  belongs_to :tag
+  belongs_to :recreation_plan, class_name: 'RecreationPlan'
+  belongs_to :tag, class_name: 'Tag'
 end
