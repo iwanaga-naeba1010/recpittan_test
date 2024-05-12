@@ -12,10 +12,7 @@ module ApiCustomer
       )
 
       if recreation_plan_estimate.valid?
-        render json: {
-          recreation_plan_estimate: RecreationPlanEstimateSerializer.new.serialize(recreation_plan_estimate:),
-          redirect_url: "/customers/recreation_plan_estimates/#{recreation_plan_estimate.id}"
-        }, status: :created
+        render json: RecreationPlanEstimateSerializer.new.serialize(recreation_plan_estimate:), status: :created
       else
         render json: { errors: recreation_plan_estimate.errors.full_messages }, status: :unprocessable_entity
       end

@@ -33,6 +33,7 @@ class RecreationPlanEstimateSerializer
       number_of_people: recreation_plan_estimate.number_of_people,
       start_month: recreation_plan_estimate.start_month,
       transportation_expenses: recreation_plan_estimate.transportation_expenses,
+      redirect_url: "/customers/recreation_plan_estimates/#{recreation_plan_estimate.id}"
     }
   end
 end

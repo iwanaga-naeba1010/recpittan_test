@@ -91,10 +91,10 @@
           <% end %>
         </div>
       </div>
-      <div class="transportation_expenses row">
-        <div class='col-2 text-center py-2'>開催費</div>
+      <div class="transportation_expenses row mb-2">
+        <div class='col-2 text-center py-2'>交通費</div>
         <div class='col-8'></div>
-        <div class="col-2 text-end"><%= @recreation_plan_estimate.number_of_people * @recreation_recreation_plans.size %></div>
+        <div class="col-2 text-end"><%= @recreation_plan_estimate.transportation_expenses * @recreation_recreation_plans.size %></div>
       </div>
     </div>
   </div>
