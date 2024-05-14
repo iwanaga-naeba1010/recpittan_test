@@ -22,7 +22,7 @@
             <p class='small-paragraph'>見積日</p>
           </div>
           <div class='col-8'>
-            <p class='small-paragraph'>2024年12月12日</p>
+            <p class='small-paragraph'><%= @recreation_plan_estimate.created_at.strftime('%Y年%m月%d日') %></p>
           </div>
         </div>
         <div class='row'>
@@ -30,7 +30,7 @@
             <p class='small-paragraph'>見積書番号</p>
           </div>
           <div class='col-8'>
-            <p class='small-paragraph'>〇〇〇〇〇〇</p>
+            <p class='small-paragraph'><%= @recreation_plan_estimate.estimate_number %></p>
           </div>
         </div>
         <div class='row'>
@@ -73,9 +73,17 @@
   </div>
   <div class='bottom-section mt-4'>
     <div class='row'>
-      <div class='title col-2 text-center fw-bold py-2'>項目</div>
+      <div class='col-2'>
+        <div class='title text-center fw-bold py-2'>
+          項目
+        </div>
+      </div>
       <div class='title col-8 text-center fw-bold py-2'>内容</div>
-      <div class='title col-2 text-center fw-bold py-2'>金額</div>
+      <div class='col-2'>
+        <div class='title text-center fw-bold py-2'>
+          金額
+        </div>
+      </div>
     </div>
     <div class='event-fee row'>
       <div class='col-2 text-center py-2'>開催費</div>
