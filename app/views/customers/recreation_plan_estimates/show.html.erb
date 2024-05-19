@@ -9,7 +9,7 @@
           <div class='total-price-section col-6 d-flex align-items-baseline'>
             <p>見積金額</p>
             <div class="d-flex justify-content-end flex-grow-1">
-              <p class='total-price fw-bold'>1,000,000円</p>
+              <p class='total-price fw-bold'><%= @total_price.to_s(:delimited) %>円</p>
             </div>
           </div>
           <div class='col-6'>
@@ -116,7 +116,7 @@
       </div>
       <div class='col-2 text-end py-2'>
         <% @recreation_recreation_plans.each do |plan| %>
-          <div>¥<%= (plan.recreation.material_price * @recreation_plan_estimate.number_of_people).to_s(:delimited) %></div>
+          <div>¥<%= @recreation_plan_estimate.material_price_for_plan(plan).to_s(:delimited) %></div>
         <% end %>
       </div>
     </div>
@@ -131,12 +131,12 @@
           <div class='col-2'>X <%= @recreation_plan_estimate.number_of_people %>人</div>
         </div>
       </div>
-      <div class="col-2 text-end py-2"><%= (@recreation_plan_estimate.transportation_expenses * @recreation_recreation_plans.size).to_s(:delimited) %></div>
+      <div class="col-2 text-end py-2">¥<%= @recreation_plan_estimate.transportation_expenses_for_plan(@recreation_recreation_plans).to_s(:delimited) %></div>
     </div>
 
     <div class="transportation_expenses row mb-2">
       <div class='col-6 py-2 fw-bold'>合計</div>
-      <div class="col-6 text-end py-2"><%= (@recreation_plan_estimate.transportation_expenses * @recreation_recreation_plans.size).to_s(:delimited) %></div>
+      <div class="col-6 text-end py-2">¥<%= @total_price.to_s(:delimited) %></div>
     </div>
   </div>
 </div>

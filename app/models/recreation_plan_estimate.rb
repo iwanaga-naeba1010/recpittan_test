@@ -37,6 +37,14 @@ class RecreationPlanEstimate < ApplicationRecord
 
   before_create :generate_estimate_number
 
+  def material_price_for_plan(plan)
+    plan.recreation.material_price * number_of_people
+  end
+
+  def transportation_expenses_for_plan(recreation_recreation_plans)
+    transportation_expenses * recreation_recreation_plans.size
+  end
+
   private
 
   def generate_estimate_number
