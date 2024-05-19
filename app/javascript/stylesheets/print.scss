@@ -1,0 +1,16 @@
+/* 印刷時のページ設定 */
+@page {
+  size: A4 portrait; /* A4サイズ、縦向き */
+  margin: 1cm;       /* 必要に応じてマージンを調整 */
+}
+
+/* 一般の印刷用スタイル */
+@media print {
+  /* 印刷時の特定のスタイルをここに追加 */
+  .recreation-plan-estimate {
+    /* 印刷用にスタイルを調整 */
+    page-break-after: always; /* 各 .recreation-plan-estimate を1ページに収める */
+  }
+
+  /* 他のスタイルを必要に応じて追加 */
+}

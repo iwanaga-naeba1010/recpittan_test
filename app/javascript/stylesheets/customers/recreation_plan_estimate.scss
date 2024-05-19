@@ -13,7 +13,7 @@
     font-size: 12px;
   }
 
-  .total-price-section {
+  .top-total-price-section {
     border-bottom: 3px solid black;
 
     .total-price {
@@ -32,6 +32,12 @@
 
     .event-fee, .material-fee, .transportation-expenses {
       border-bottom: 2px solid #F5F2F0;
+    }
+
+    .bottom-total-price-section {
+      .total-price {
+        font-size: 20px;
+      }
     }
   }
 }

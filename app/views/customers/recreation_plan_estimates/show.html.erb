@@ -6,7 +6,7 @@
         <h5>レクリエーションプランのご提案</h5>
         <p class='small-paragraph mt-5'>下記の内容をご確認ください。</p>
         <div class='row'>
-          <div class='total-price-section col-6 d-flex align-items-baseline'>
+          <div class='top-total-price-section col-6 d-flex align-items-baseline'>
             <p>見積金額</p>
             <div class="d-flex justify-content-end flex-grow-1">
               <p class='total-price fw-bold'><%= @total_price.to_s(:delimited) %>円</p>
@@ -111,10 +111,12 @@
     </div>
 
     <div class='material-fee'>
-      <% @recreation_recreation_plans.each_with_index do |plan, index| %>
-        <div class='row <%= 'dot-border' unless index == @recreation_recreation_plans.size - 1 %>'>
-          <% if index == 0 %>
+      <% first_material_fee_displayed = false %>
+      <% @has_material_price_recreations.each_with_index do |plan, index| %>
+        <div class='row <%= 'dot-border' unless index == @has_material_price_recreations.size - 1 %>'>
+          <% unless first_material_fee_displayed %>
             <div class='col-2 text-center py-2'>材料費</div>
+            <% first_material_fee_displayed = true %>
           <% else %>
             <div class='col-2 text-center py-2'></div>
           <% end %>
@@ -146,11 +148,21 @@
       </div>
     </div>
 
-    <div class='transportation-expenses py-2'>
+    <div class='bottom-total-price-section py-2'>
       <div class='row'>
-        <div class='col-6 fw-bold'>合計</div>
-        <div class="col-6 text-end px-0">¥<%= @total_price.to_s(:delimited) %></div>
+        <div class='col-6 fw-bold total-price'>合計</div>
+        <div class="col-6 text-end px-0 total-price">¥<%= @total_price.to_s(:delimited) %></div>
+      </div>
+      <div class='row'>
+        <div class='col-6'>利用者一人当たり</div>
+        <div class="col-6 text-end px-0">¥<%= @total_price_per_person.to_s(:delimited) %></div>
       </div>
     </div>
   </div>
 </div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    window.print();
+  });
+</script>
