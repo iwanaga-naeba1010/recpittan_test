@@ -71,72 +71,78 @@
       <% end %>
     </div>
   </div>
-  <div class='bottom-section mt-4'>
-    <div class='row'>
-      <div class='col-2'>
-        <div class='title text-center fw-bold py-2'>
-          項目
-        </div>
-      </div>
-      <div class='title col-8 text-center fw-bold py-2'>内容</div>
-      <div class='col-2'>
-        <div class='title text-center fw-bold py-2'>
-          金額
-        </div>
+
+  <div class='bottom-section mt-4 row'>
+    <div class='col-2 ps-0'>
+      <div class='title text-center fw-bold py-2'>
+        項目
       </div>
     </div>
-    <div class='event-fee row'>
-      <div class='col-2 text-center py-2'>開催費</div>
-      <div class='col-8 py-2'>
-        <% @recreation_recreation_plans.each do |plan| %>
-          <div class='row'>
-            <div class='col-2 text-center'><%= plan.month %>月開催</div>
-            <div class='col-8'><%= plan.recreation.title %></div>
-          </div>
-        <% end %>
-      </div>
-      <div class='col-2 text-end py-2'>
-        <% @recreation_recreation_plans.each do |plan| %>
-          <div>
-            ¥<%= plan.recreation.price.to_s(:delimited) %>
-          </div>
-        <% end %>
+    <div class='title col-8 text-center fw-bold py-2'>
+      内容
+    </div>
+    <div class='col-2 pe-0'>
+      <div class='title text-center fw-bold py-2'>
+        金額
       </div>
     </div>
 
-    <div class='material-fee row'>
-      <div class='col-2 text-center py-2'>材料費</div>
-      <div class='col-8 py-2'>
-        <% @recreation_recreation_plans.each do |plan| %>
+    <div class='event-fee'>
+      <% @recreation_recreation_plans.each do |plan| %>
+        <div class='dot-border px-0'>
           <div class='row'>
-            <div class='col-10'><%= plan.recreation.title %></div>
+            <div class='col-2 text-center py-2'>開催費</div>
+            <div class="col-8 py-2">
+              <div class="row">
+                <div class='col-4'><%= plan.month %>月開催</div>
+                <div class='col-8'><%= plan.recreation.title %></div>
+              </div>
+            </div>
+            <div class="col-2 text-end py-2 pe-0">
+              ¥<%= plan.recreation.price.to_s(:delimited) %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+
+    <div class='material-fee'>
+      <% @recreation_recreation_plans.each do |plan| %>
+        <div class='row dot-border'>
+          <div class='col-2 text-center py-2'>材料費</div>
+          <div class="col-8 py-2">
+            <div class="row">
+              <div class='col-10'><%= plan.recreation.title %></div>
+              <div class='col-2'>X <%= @recreation_plan_estimate.number_of_people %>人</div>
+            </div>
+          </div>
+          <div class="col-2 text-end py-2 px-0">
+            ¥<%= @recreation_plan_estimate.material_price_for_plan(plan).to_s(:delimited) %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+
+    <div class='transportation-expenses'>
+      <div class='row dot-border'>
+        <div class='col-2 text-center py-2'>材料費</div>
+        <div class="col-8 py-2">
+          <div class="row">
+            <div class='col-10'><p>1回の交通費</p></div>
             <div class='col-2'>X <%= @recreation_plan_estimate.number_of_people %>人</div>
           </div>
-        <% end %>
-      </div>
-      <div class='col-2 text-end py-2'>
-        <% @recreation_recreation_plans.each do |plan| %>
-          <div>¥<%= @recreation_plan_estimate.material_price_for_plan(plan).to_s(:delimited) %></div>
-        <% end %>
-      </div>
-    </div>
-
-    <div class="transportation_expenses row mb-2">
-      <div class='col-2 text-center py-2'>交通費</div>
-      <div class='col-8 py-2'>
-        <div class='row'>
-          <div class='col-10'>
-            <p>1回の交通費</p>
-          </div>
-          <div class='col-2'>X <%= @recreation_plan_estimate.number_of_people %>人</div>
+        </div>
+        <div class="col-2 text-end py-2 px-0">
+          ¥<%= @recreation_plan_estimate.transportation_expenses_for_plan(@recreation_recreation_plans).to_s(:delimited) %>
         </div>
       </div>
-      <div class="col-2 text-end py-2">¥<%= @recreation_plan_estimate.transportation_expenses_for_plan(@recreation_recreation_plans).to_s(:delimited) %></div>
     </div>
 
-    <div class="transportation_expenses row mb-2">
-      <div class='col-6 py-2 fw-bold'>合計</div>
-      <div class="col-6 text-end py-2">¥<%= @total_price.to_s(:delimited) %></div>
+    <div class='transportation-expenses py-2'>
+      <div class='row dot-border'>
+        <div class='col-6 fw-bold'>合計</div>
+        <div class="col-6 text-end px-0">¥<%= @total_price.to_s(:delimited) %></div>
+      </div>
     </div>
   </div>
 </div>
