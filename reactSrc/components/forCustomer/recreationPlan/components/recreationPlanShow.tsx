@@ -87,9 +87,8 @@ const RecreationPlanShow: React.FC = () => {
           transportationExpenses,
           recreationPlan.id
         );
-        console.log(response);
         if (response.redirectUrl) {
-          window.location.href = response.redirectUrl;
+          window.open(response.redirectUrl, '_blank');
         }
       } catch (e) {
         if (e instanceof Error) {
