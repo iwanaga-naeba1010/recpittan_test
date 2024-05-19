@@ -254,6 +254,7 @@ const RecreationPlanShow: React.FC = () => {
             <TransportationExpenses
               plans={recreationPlan.recreationRecreationPlans}
               onTotalUpdate={handleUpdateTotalTransportationCost}
+              transportationCostPerVisit={transportationExpenses}
             />
             <hr />
 
@@ -287,7 +288,6 @@ const RecreationPlanShow: React.FC = () => {
               </div>
             </div>
 
-            <p className=''>※交通費は1回あたり1000円を基準値</p>
           </div>
           <div className='mt-3 d-flex justify-content-center'>
             <button
