@@ -21,11 +21,17 @@
     }
   }
 
-  .title {
-    background-color: #F5F2F0;
-  }
+  .bottom-section {
+    .title {
+      background-color: #F5F2F0;
+    }
 
-  .event-fee, .material-fee, .transportation-expenses {
-    border-bottom: 2px solid #F5F2F0;
+    .dot-border {
+      border-bottom: 2px dotted #F5F2F0;
+    }
+
+    .event-fee, .material-fee, .transportation-expenses {
+      border-bottom: 2px solid #F5F2F0;
+    }
   }
 }

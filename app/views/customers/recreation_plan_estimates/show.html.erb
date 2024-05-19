@@ -88,10 +88,14 @@
     </div>
 
     <div class='event-fee'>
-      <% @recreation_recreation_plans.each do |plan| %>
-        <div class='dot-border px-0'>
+      <% @recreation_recreation_plans.each_with_index do |plan, index| %>
+        <div class='<%= 'dot-border' unless index == @recreation_recreation_plans.size - 1 %> px-0'>
           <div class='row'>
-            <div class='col-2 text-center py-2'>開催費</div>
+            <% if index == 0 %>
+              <div class='col-2 text-center py-2'>開催費</div>
+            <% else %>
+              <div class='col-2 text-center py-2'></div>
+            <% end %>
             <div class="col-8 py-2">
               <div class="row">
                 <div class='col-4'><%= plan.month %>月開催</div>
@@ -107,9 +111,13 @@
     </div>
 
     <div class='material-fee'>
-      <% @recreation_recreation_plans.each do |plan| %>
-        <div class='row dot-border'>
-          <div class='col-2 text-center py-2'>材料費</div>
+      <% @recreation_recreation_plans.each_with_index do |plan, index| %>
+        <div class='row <%= 'dot-border' unless index == @recreation_recreation_plans.size - 1 %>'>
+          <% if index == 0 %>
+            <div class='col-2 text-center py-2'>材料費</div>
+          <% else %>
+            <div class='col-2 text-center py-2'></div>
+          <% end %>
           <div class="col-8 py-2">
             <div class="row">
               <div class='col-10'><%= plan.recreation.title %></div>
@@ -124,12 +132,12 @@
     </div>
 
     <div class='transportation-expenses'>
-      <div class='row dot-border'>
+      <div class='row'>
         <div class='col-2 text-center py-2'>材料費</div>
         <div class="col-8 py-2">
           <div class="row">
             <div class='col-10'><p>1回の交通費</p></div>
-            <div class='col-2'>X <%= @recreation_plan_estimate.number_of_people %>人</div>
+            <div class='col-2'>X <%= @recreation_size %>回</div>
           </div>
         </div>
         <div class="col-2 text-end py-2 px-0">
@@ -139,7 +147,7 @@
     </div>
 
     <div class='transportation-expenses py-2'>
-      <div class='row dot-border'>
+      <div class='row'>
         <div class='col-6 fw-bold'>合計</div>
         <div class="col-6 text-end px-0">¥<%= @total_price.to_s(:delimited) %></div>
       </div>
