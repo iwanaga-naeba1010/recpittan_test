@@ -45,16 +45,10 @@ class RecreationPlanEstimate < ApplicationRecord
     transportation_expenses * recreation_recreation_plans.size
   end
 
-  def valid_plans_with_material_price
-    recreation_plan.recreation_recreation_plans.select do |plan|
-      material_price_for_plan(plan) != 0
-    end
-  end
-
   private
 
   def generate_estimate_number
-    last_estimate = RecreationPlanEstimate.where(user_id: user_id).order(estimate_number: :desc).first
+    last_estimate = RecreationPlanEstimate.where(user_id:).order(estimate_number: :desc).first
     self.estimate_number = if last_estimate
                              increment_estimate_number(last_estimate.estimate_number)
                            else
