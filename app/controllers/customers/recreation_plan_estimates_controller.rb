@@ -20,5 +20,8 @@ class Customers::RecreationPlanEstimatesController < Customers::ApplicationContr
         @recreation_plan_estimate.transportation_expenses
     end
     @total_price_per_person = @total_price / @recreation_plan_estimate.number_of_people
+    @actual_months = @recreation_recreation_plans.map do |plan|
+      ((@recreation_plan_estimate.start_month + plan.month - 1) % 12).zero? ? 12 : (@recreation_plan_estimate.start_month + plan.month - 1) % 12
+    end
   end
 end

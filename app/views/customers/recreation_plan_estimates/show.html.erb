@@ -52,16 +52,11 @@
   <div class='middle-section'>
     <div class='row'>
       <p class='title fw-bold py-2'>プラン内容</p>
-      <% @recreation_recreation_plans.each do |plan| %>
+      <% @recreation_recreation_plans.each_with_index do |plan, index| %>
         <div class="col-4 mt-4">
-          <%# = image_tag plan.recreation.recreation_images.sliders.first&.image.to_s, class="w-100 rounded", loading: 'lazy' %>
           <div class="row">
             <div class="col-5 px-0">
-              <img
-                src="https://matching-system-production.s3.ap-northeast-1.amazonaws.com/uploads/recreation_image/image/678/%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88_2021-07-29_17.07.22.png?X-Amz-Expires=600&X-Amz-Date=20240520T095852Z&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIASN7APX6NOANAVIJ2%2F20240520%2Fap-northeast-1%2Fs3%2Faws4_request&X-Amz-SignedHeaders=host&X-Amz-Signature=3e528554189c6f4f4abb1534f6ca0c111159a2035808b040361d1cc53cd4b9da"
-                alt=""
-                class="w-100 rounded"
-              >
+              <%= image_tag plan.recreation.recreation_images.sliders.first&.image.to_s, class: "w-100 rounded", loading: 'lazy' %>
             </div>
             <div class="col-7">
               <div class=''><%= plan.recreation.title %></div>
@@ -98,7 +93,7 @@
             <% end %>
             <div class="col-8 py-2">
               <div class="row">
-                <div class='col-4'><%= plan.month %>月開催</div>
+                <div class='col-4'><%= @actual_months[index] %>月開催</div>
                 <div class='col-8'><%= plan.recreation.title %></div>
               </div>
             </div>
@@ -161,8 +156,8 @@
   </div>
 </div>
 
-<script>
+<%# <script>
   document.addEventListener("DOMContentLoaded", function() {
     window.print();
   });
-</script>
+</script> %>
