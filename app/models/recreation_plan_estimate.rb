@@ -45,6 +45,30 @@ class RecreationPlanEstimate < ApplicationRecord
     transportation_expenses * recreation_recreation_plans.size
   end
 
+  def actual_months
+    recreation_plan.recreation_recreation_plans.map do |plan|
+      ((start_month + plan.month - 1) % 12).zero? ? 12 : ((start_month + plan.month - 1) % 12)
+    end
+  end
+
+  def total_price
+    recreation_recreation_plans.sum do |plan|
+      plan.recreation.price + material_price_for_plan(plan) + transportation_expenses
+    end
+  end
+
+  def total_price_per_person
+    total_price / number_of_people
+  end
+
+  def recreation_recreation_plans
+    recreation_plan.recreation_recreation_plans
+  end
+
+  def has_material_price_recreations
+    recreation_recreation_plans.reject { |plan| material_price_for_plan(plan).zero? }
+  end
+
   private
 
   def generate_estimate_number
