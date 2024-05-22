@@ -240,6 +240,8 @@ const RecreationPlanShow: React.FC = () => {
               title='開催費'
               priceProperty='price'
               plans={recreationPlan.recreationRecreationPlans}
+              numberOfPeople={numberOfPeople}
+              startMonth={startMonth}
               onTotalUpdate={handleUpdateTotalPrice}
             />
             <hr />
