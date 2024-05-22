@@ -37,6 +37,8 @@ class RecreationPlanEstimate < ApplicationRecord
 
   before_create :generate_estimate_number
 
+  delegate :recreation_recreation_plans, to: :recreation_plan
+
   def material_price_for_plan(plan)
     plan.recreation.material_price * number_of_people
   end
@@ -59,10 +61,6 @@ class RecreationPlanEstimate < ApplicationRecord
 
   def total_price_per_person
     total_price / number_of_people
-  end
-
-  def recreation_recreation_plans
-    recreation_plan.recreation_recreation_plans
   end
 
   def has_material_price_recreations
