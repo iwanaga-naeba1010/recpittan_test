@@ -21,7 +21,7 @@ class Customers::RecreationPlanEstimatesController < Customers::ApplicationContr
     end
     @total_price_per_person = @total_price / @recreation_plan_estimate.number_of_people
     @actual_months = @recreation_recreation_plans.map do |plan|
-      ((@recreation_plan_estimate.start_month + plan.month - 1) % 12).zero? ? 12 : (@recreation_plan_estimate.start_month + plan.month - 1) % 12
+      ((@recreation_plan_estimate.start_month + plan.month - 1) % 12).zero? ? 12 : (@recreation_plan_estimate.start_month + plan.month - 1) % 12 # rubocop:disable Layout/LineLength
     end
   end
 end
