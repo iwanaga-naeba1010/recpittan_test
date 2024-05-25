@@ -56,7 +56,8 @@
         <div class="col-4 mt-4">
           <div class="row">
             <div class="col-5 px-0">
-              <%= image_tag plan.recreation.recreation_images.sliders.first&.image.to_s, class: "w-100 rounded", loading: 'lazy' %>
+              <%#= image_tag plan.recreation.recreation_images.sliders.first&.image.to_s, class: "w-100 rounded", loading: 'lazy' %>
+              <img src="https://matching-system-production.s3.ap-northeast-1.amazonaws.com/uploads/recreation_image/image/678/%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88_2021-07-29_17.07.22.png?X-Amz-Expires=600&X-Amz-Date=20240525T094740Z&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIASN7APX6NOANAVIJ2%2F20240525%2Fap-northeast-1%2Fs3%2Faws4_request&X-Amz-SignedHeaders=host&X-Amz-Signature=20895c54970bdcbc2e6156267c170bd9a980315cf71ea734d1d0f474ff8e7dec", class="w-100 rounded", loading='lazy'>
             </div>
             <div class="col-7">
               <div class=''><%= plan.recreation.title %></div>
@@ -156,8 +157,8 @@
   </div>
 </div>
 
-<script>
+<%# <script>
   document.addEventListener("DOMContentLoaded", function() {
     window.print();
   });
-</script>
+</script> %>
