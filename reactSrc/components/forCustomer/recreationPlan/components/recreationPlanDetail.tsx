@@ -30,8 +30,9 @@ export const RecreationPlanDetail: React.FC<Props> = ({
   }
 
   // startMonthとrecreationRecreationPlan.monthを基に実際の月を計算する
-  const actualMonth = startMonth 
-    ? ((Number(startMonth) + Number(recreationRecreationPlan.month) - 1) % 12) || 12 
+  const actualMonth = startMonth
+    ? (Number(startMonth) + Number(recreationRecreationPlan.month) - 1) % 12 ||
+      12
     : Number(recreationRecreationPlan.month);
 
   return (

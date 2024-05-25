@@ -34,7 +34,7 @@ export const RecreationPlanSection: React.FC<Props> = ({
                 recreationRecreationPlan={plan}
                 priceProperty={priceProperty}
                 numberOfPeople={numberOfPeople}
-                startMonth={startMonth}  // 追加
+                startMonth={startMonth} // 追加
               />
             ))
           ) : (

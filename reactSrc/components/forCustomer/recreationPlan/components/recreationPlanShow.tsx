@@ -25,7 +25,8 @@ const RecreationPlanShow: React.FC = () => {
   const { postUserRecreationPlan } = useUserRecreationPlan();
   const { postRecreationPlanEstimate } = useRecreationPlanEstimate();
   const [startMonth, setStartMonth] = useState<number>(1);
-  const [transportationExpenses, setTransportationExpenses] = useState<number>(1000);
+  const [transportationExpenses, setTransportationExpenses] =
+    useState<number>(1000);
 
   const handleUpdateTotalPrice = (newTotal: number) => {
     setTotalPrice(newTotal);
@@ -39,12 +40,16 @@ const RecreationPlanShow: React.FC = () => {
     setTotalTransportationCost(newTotal);
   };
 
-  const handleStartMonthChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+  const handleStartMonthChange = (
+    event: React.ChangeEvent<HTMLSelectElement>
+  ) => {
     setStartMonth(parseInt(event.target.value, 10));
   };
-  
+
   // 交通費の入力変更ハンドラ
-  const handleTransportationExpensesChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleTransportationExpensesChange = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
     setTransportationExpenses(parseInt(event.target.value, 10) || 0);
   };
 
@@ -70,12 +75,15 @@ const RecreationPlanShow: React.FC = () => {
     return <></>;
   }
 
-  const monthRange = recreationPlan.recreationRecreationPlans.reduce((acc, curr) => {
-    const monthAsNumber = parseInt(curr.month, 10);
+  const monthRange = recreationPlan.recreationRecreationPlans.reduce(
+    (acc, curr) => {
+      const monthAsNumber = parseInt(curr.month, 10);
       if (acc.min > monthAsNumber || acc.min === 0) acc.min = monthAsNumber;
       if (acc.max < monthAsNumber) acc.max = monthAsNumber;
       return acc;
-  }, { min: 0, max: 0 });
+    },
+    { min: 0, max: 0 }
+  );
   const months = monthRange.max - monthRange.min + 1;
 
   const handleCreateRecreationPlanEstimate = async () => {
@@ -179,11 +187,14 @@ const RecreationPlanShow: React.FC = () => {
           {/* formを集めた親クラス */}
           <div className='bg-white p-3 '>
             <div className='row'>
-              <p className='text-black fw-bold'>お見積りをするために必要な項目を入力してください</p>
+              <p className='text-black fw-bold'>
+                お見積りをするために必要な項目を入力してください
+              </p>
               <div className='col-3'>
                 <form onSubmit={(e) => e.preventDefault()}>
                   <label className='mt-1' htmlFor='numberInput'>
-                    レクを受ける人数を入力<span className='ms-2 text-danger'>必須</span>
+                    レクを受ける人数を入力
+                    <span className='ms-2 text-danger'>必須</span>
                   </label>
                   <br />
                   <input
@@ -201,7 +212,8 @@ const RecreationPlanShow: React.FC = () => {
               <div className='col-3'>
                 <form onSubmit={(e) => e.preventDefault()}>
                   <label className='mt-1' htmlFor='numberInput'>
-                    レクの開始月を選択<span className='ms-2 text-danger'>必須</span>
+                    レクの開始月を選択
+                    <span className='ms-2 text-danger'>必須</span>
                   </label>
                   <br />
                   {/* 1から12までのselect form */}
@@ -210,20 +222,25 @@ const RecreationPlanShow: React.FC = () => {
                     value={startMonth}
                     onChange={handleStartMonthChange}
                   >
-                    {Array.from({ length: 12 }, (_, i) => i + 1).map((month) => (
-                      <option key={month} value={month}>{month}月</option>
-                    ))}
+                    {Array.from({ length: 12 }, (_, i) => i + 1).map(
+                      (month) => (
+                        <option key={month} value={month}>
+                          {month}月
+                        </option>
+                      )
+                    )}
                   </select>
                 </form>
               </div>
               <div className='col-3'>
                 <form>
                   <label className='mt-1' htmlFor='numberInput'>
-                    1回の交通費を入力<span className='ms-2 text-danger'>必須</span>
+                    1回の交通費を入力
+                    <span className='ms-2 text-danger'>必須</span>
                   </label>
                   <input
-                    type="number"
-                    className="form-control w-100 mt-1"
+                    type='number'
+                    className='form-control w-100 mt-1'
                     value={transportationExpenses}
                     onChange={handleTransportationExpensesChange}
                   />
@@ -284,12 +301,9 @@ const RecreationPlanShow: React.FC = () => {
                 <p className='text-black fw-bold'>一月あたり</p>
               </div>
               <div className='col-8 text-end text-black'>
-                <p>
-                  ¥{Math.floor(grandTotal / months).toLocaleString()}
-                </p>
+                <p>¥{Math.floor(grandTotal / months).toLocaleString()}</p>
               </div>
             </div>
-
           </div>
           <div className='mt-3 d-flex justify-content-center'>
             <button
