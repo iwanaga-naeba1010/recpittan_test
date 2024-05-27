@@ -1,11 +1,6 @@
 # frozen_string_literal: true
 
 module OnlineRecreationChannelHelper
-  def channel_id
-    channels = OnlineRecreationChannel.public_channels
-    channels.exists? ? channels.current_month.first&.id || channels.last&.id : nil
-  end
-
   def formatted_period(period)
     period.strftime('%-m月')
   end

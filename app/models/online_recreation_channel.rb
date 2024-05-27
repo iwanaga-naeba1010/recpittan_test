@@ -34,7 +34,6 @@ class OnlineRecreationChannel < ApplicationRecord
   validate :unique_period_status_combination
 
   scope :public_channels, -> { where(status: :public) }
-  scope :current_month, -> { where("to_char(period, 'YYYY-MM') = ?", Time.zone.today.strftime('%Y-%m')) }
 
   delegate :image, :kind, to: :online_recreation_channel_download_images, prefix: true
 
