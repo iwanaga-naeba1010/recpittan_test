@@ -67,9 +67,7 @@ class RecreationPlanEstimate < ApplicationRecord
     recreation_recreation_plans.reject { |plan| material_price_for_plan(plan).zero? }
   end
 
-  private
-
-  def generate_estimate_number
+  private def generate_estimate_number
     last_estimate = RecreationPlanEstimate.where(user_id:).order(estimate_number: :desc).first
     self.estimate_number = if last_estimate
                              increment_estimate_number(last_estimate.estimate_number)
@@ -78,14 +76,14 @@ class RecreationPlanEstimate < ApplicationRecord
                            end
   end
 
-  def increment_estimate_number(last_estimate_number)
+  private def increment_estimate_number(last_estimate_number)
     prefix = last_estimate_number[0]
     number = last_estimate_number[1..].to_i
     new_number = number + 1
     "#{prefix}#{new_number.to_s.rjust(6, '0')}"
   end
 
-  def start_month_is_valid
+  private def start_month_is_valid
     return if start_month.between?(1, 12)
 
     errors.add(:start_month, 'は1から12の整数で入力してください')
