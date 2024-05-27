@@ -4,8 +4,8 @@ import { recreationPlanEstimate } from '@/types';
 type UseRecreationPlanEstimateHook = {
   postRecreationPlanEstimate: (
     startMonth: number,
-    number_of_people: number,
-    transportation_expenses: number,
+    numberOfPeople: number,
+    transportationExpenses: number,
     recreationPlanId: number
   ) => Promise<{ data: recreationPlanEstimate; redirectUrl: string }>;
 };
@@ -13,16 +13,16 @@ type UseRecreationPlanEstimateHook = {
 export const useRecreationPlanEstimate = (): UseRecreationPlanEstimateHook => {
   const postRecreationPlanEstimate = async (
     startMonth: number,
-    number_of_people: number,
-    transportation_expenses: number,
+    numberOfPeople: number,
+    transportationExpenses: number,
     recreationPlanId: number
   ): Promise<{ data: recreationPlanEstimate; redirectUrl: string }> => {
     const data = {
-      recreation_plan_estimate: {
-        startMonth: startMonth,
-        number_of_people: number_of_people,
-        transportation_expenses: transportation_expenses,
-        recreation_plan_id: recreationPlanId,
+      recreationPlanEstimate: {
+        startMonth,
+        numberOfPeople,
+        transportationExpenses,
+        recreationPlanId,
       },
     };
 

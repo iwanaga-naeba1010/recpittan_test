@@ -2,8 +2,8 @@ import { RecreationPlan } from './recreationPlan';
 
 export interface recreationPlanEstimate {
   estimate_number: string;
-  number_of_people: number;
-  start_month: number;
-  transportation_expenses: number;
+  numberOfPeople: number;
+  startMonth: number;
+  transportationExpenses: number;
   recreationPlan: RecreationPlan;
 }
