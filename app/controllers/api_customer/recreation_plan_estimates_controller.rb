@@ -17,6 +17,7 @@ module ApiCustomer
         render json: { errors: recreation_plan_estimate.errors.full_messages }, status: :unprocessable_entity
       end
     rescue StandardError => e
+      Sentry.capture_exception(e)
       render_json([e.message], status: 422)
     end
 
