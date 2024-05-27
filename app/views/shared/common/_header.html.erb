@@ -53,14 +53,8 @@
             </a>
           </li>
           <li class="nav-item">
-            <% if current_user&.company&.channel_plan_subscriber && channel_id %>
-              <%= link_to customers_online_recreation_channel_path(channel_id), class: 'nav-link font-weight-bold', target: :_blank do %>
-                レクチャンネル
-            <% end %>
-            <% else %>
-              <%= link_to 'https://channel.everyplus.jp/', class: 'nav-link font-weight-bold', target: :_blank do %>
-                レクチャンネル
-              <% end %>
+            <%= link_to 'https://channel.everyplus.jp/', class: 'nav-link font-weight-bold', target: :_blank do %>
+              レクチャンネル
             <% end %>
           </li>
           <li class="nav-item">
