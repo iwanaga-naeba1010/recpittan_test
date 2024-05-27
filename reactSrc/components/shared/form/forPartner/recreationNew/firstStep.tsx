@@ -366,9 +366,7 @@ export const FirstStep: React.FC<Props> = (props) => {
           onChange={() => setShow(true)}
           checked={show}
         />
-        <label htmlFor='numberOfFacilitiesTrue'>
-          あり
-        </label>
+        <label htmlFor='numberOfFacilitiesTrue'>あり</label>
         <br />
         <input
           type='radio'
@@ -377,9 +375,7 @@ export const FirstStep: React.FC<Props> = (props) => {
           onChange={() => setShow(false)}
           checked={!show}
         />
-        <label htmlFor='numberOfFacilitiesFalse'>
-          なし
-        </label>
+        <label htmlFor='numberOfFacilitiesFalse'>なし</label>
         {/* falseならvalueは0 */}
         {show && (
           <>

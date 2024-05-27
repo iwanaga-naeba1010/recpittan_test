@@ -17,3 +17,5 @@ export * from './recreationPlan';
 export * from './recreationRecreationPlan';
 export * from './userRecreationPlan';
 export * from './userRecreationRecreationPlan';
+export * from './recreationPlanEstimate';
+export * from './userRecreationPlan';

@@ -42,12 +42,7 @@ const FavoriteIconView: React.FC<{ recreationId: number }> = ({
     }
   };
 
-  return (
-    <FavoriteHeartIcon
-      isFavorite={isFavorite}
-      onClick={handleClick}
-    />
-  );
+  return <FavoriteHeartIcon isFavorite={isFavorite} onClick={handleClick} />;
 };
 
 document.addEventListener('turbolinks:load', () => {
