@@ -4,7 +4,7 @@
 ActiveAdmin.register RecreationPlan do
   permit_params(
     %i[
-      code release_status title
+      code release_status title adjustment_fee
     ],
     tag_ids: [],
     recreation_recreation_plans_attributes: %i[id recreation_id month _destroy]
@@ -19,6 +19,7 @@ ActiveAdmin.register RecreationPlan do
     column :code
     column(:release_status, &:release_status_text)
     column :title
+    column :adjustment_fee
 
     actions
   end
@@ -31,6 +32,7 @@ ActiveAdmin.register RecreationPlan do
           row :code
           row(:release_status, &:release_status_text)
           row :title
+          row :adjustment_fee
 
           row :created_at
           row :updated_at
@@ -46,6 +48,7 @@ ActiveAdmin.register RecreationPlan do
             table_for recreation_plan.tags.plans do
               column :id
               column :name
+              column :adjustment_fee
             end
           end
         end
