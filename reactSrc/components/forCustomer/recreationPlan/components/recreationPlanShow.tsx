@@ -57,7 +57,7 @@ const RecreationPlanShow: React.FC = () => {
   const grandTotal =
     totalPrice +
     totalMaterialPrice +
-    totalTransportationCost -
+    totalTransportationCost +
     (recreationPlan?.adjustmentFee || 0);
 
   useEffect(() => {
