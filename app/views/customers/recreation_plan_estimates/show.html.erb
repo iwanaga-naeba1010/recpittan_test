@@ -137,8 +137,16 @@
 
     <div class='bottom-total-price-section py-2'>
       <div class='row'>
+        <div class='col-6'>小計</div>
+        <div class="col-6 text-end px-0">¥<%= @total_price.to_s(:delimited) %></div>
+      </div>
+      <div class='row'>
+        <div class='col-6'>消費税</div>
+        <div class="col-6 text-end px-0">¥<%= @consumption_tax.floor.to_s(:delimited) %></div>
+      </div>
+      <div class='row'>
         <div class='col-6 fw-bold total-price'>合計</div>
-        <div class="col-6 text-end px-0 total-price">¥<%= @total_price.to_s(:delimited) %></div>
+        <div class="col-6 text-end px-0 total-price">¥<%= (@total_price + @consumption_tax).floor.to_s(:delimited) %></div>
       </div>
       <div class='row'>
         <div class='col-6'>利用者一人当たり</div>

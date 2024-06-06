@@ -13,6 +13,7 @@ class Customers::RecreationPlanEstimatesController < Customers::ApplicationContr
     @recreation_size = @recreation_recreation_plans.size
     @has_material_price_recreations = @recreation_plan_estimate.has_material_price_recreations
     @total_price = @recreation_plan_estimate.total_price
+    @consumption_tax = @total_price * 0.1
     @total_price_per_person = @recreation_plan_estimate.total_price_per_person
     @actual_months = @recreation_plan_estimate.actual_months
   end
