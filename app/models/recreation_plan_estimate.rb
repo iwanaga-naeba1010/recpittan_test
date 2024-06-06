@@ -60,7 +60,7 @@ class RecreationPlanEstimate < ApplicationRecord
   end
 
   def total_price_per_person
-    total_price / number_of_people
+    ((total_price * 1.1) / number_of_people).floor
   end
 
   def has_material_price_recreations

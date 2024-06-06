@@ -10,7 +10,7 @@
           <div class='top-total-price-section col-6 d-flex align-items-baseline'>
             <p>見積金額</p>
             <div class="d-flex justify-content-end flex-grow-1">
-              <p class='total-price fw-bold'><%= @total_price.to_s(:delimited) %>円</p>
+              <p class='total-price fw-bold'><%= (@total_price + @consumption_tax).floor.to_s(:delimited) %>円</p>
             </div>
           </div>
           <div class='col-6'>
@@ -42,7 +42,8 @@
       </div>
     </div>
   </div>
-  <div class='middle-section'>
+
+  <div class='middle-section mt-4'>
     <div class='row'>
       <p class='title fw-bold py-2'>プラン内容</p>
       <% @recreation_recreation_plans.each_with_index do |plan, index| %>
