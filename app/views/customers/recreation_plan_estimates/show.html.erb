@@ -10,7 +10,7 @@
           <div class='top-total-price-section col-6 d-flex align-items-baseline'>
             <p>見積金額</p>
             <div class="d-flex justify-content-end flex-grow-1">
-              <p class='total-price fw-bold'><%= (@total_price + @consumption_tax).floor.to_s(:delimited) %>円</p>
+              <p class='total-price fw-bold'><%= @recreation_plan_estimate.total_price.floor.to_s(:delimited) %>円</p>
             </div>
           </div>
           <div class='col-6'>
@@ -87,7 +87,7 @@
             <% end %>
             <div class="col-8 py-2">
               <div class="row">
-                <div class='col-4'><%= @actual_months[index] %>月開催</div>
+                <div class='col-4'><%= @recreation_plan_estimate.actual_months[index] %>月開催</div>
                 <div class='col-8'><%= plan.recreation.title %></div>
               </div>
             </div>
@@ -128,7 +128,7 @@
         <div class="col-8 py-2">
           <div class="row">
             <div class='col-10'><p>1回の交通費</p></div>
-            <div class='col-2'>X <%= @recreation_size %>回</div>
+            <div class='col-2'>X <%= @recreation_recreation_plans.size %>回</div>
           </div>
         </div>
         <div class="col-2 text-end py-2 px-0">
@@ -140,19 +140,19 @@
     <div class='bottom-total-price-section py-2'>
       <div class='row'>
         <div class='col-6'>小計</div>
-        <div class="col-6 text-end px-0">¥<%= @total_price.to_s(:delimited) %></div>
+        <div class="col-6 text-end px-0">¥<%= @recreation_plan_estimate.total_price.to_s(:delimited) %></div>
       </div>
       <div class='row'>
         <div class='col-6'>消費税</div>
-        <div class="col-6 text-end px-0">¥<%= @consumption_tax.floor.to_s(:delimited) %></div>
+        <div class="col-6 text-end px-0">¥<%= @recreation_plan_estimate.consumption_tax.floor.to_s(:delimited) %></div>
       </div>
       <div class='row'>
         <div class='col-6 fw-bold total-price'>合計</div>
-        <div class="col-6 text-end px-0 total-price">¥<%= (@total_price + @consumption_tax).floor.to_s(:delimited) %></div>
+        <div class="col-6 text-end px-0 total-price">¥<%= @recreation_plan_estimate.total_price.floor.to_s(:delimited) %></div>
       </div>
       <div class='row'>
         <div class='col-6'>利用者一人当たり</div>
-        <div class="col-6 text-end px-0">¥<%= @total_price_per_person.to_s(:delimited) %></div>
+        <div class="col-6 text-end px-0">¥<%= @recreation_plan_estimate.total_price_per_person.to_s(:delimited) %></div>
       </div>
     </div>
   </div>

@@ -53,14 +53,22 @@ class RecreationPlanEstimate < ApplicationRecord
     end
   end
 
-  def total_price
+  def total_price_without_consumption_tax
     recreation_recreation_plans.sum do |plan|
       plan.recreation.price + material_price_for_plan(plan) + transportation_expenses
     end
   end
 
+  def consumption_tax
+    total_price * 0.1
+  end
+
+  def total_price
+    (total_price_without_consumption_tax * 1.1).floor
+  end
+
   def total_price_per_person
-    ((total_price * 1.1) / number_of_people).floor
+    (total_price / number_of_people).floor
   end
 
   def has_material_price_recreations
