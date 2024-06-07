@@ -5,6 +5,7 @@ import { RecreationPlan } from '@/types';
 import { useRecreationPlan } from '../hooks';
 import { RecreationRecreationPlanItem } from './recreationRecreationPlanItem';
 import { RecreationPlanSection } from './recreationPlanSection';
+import { AdjustmentFeeSection } from './adjustmentFeeSection';
 import { TransportationExpenses } from './transportationExpenses';
 import { useUserRecreationPlan, useRecreationPlanEstimate } from '../hooks';
 
@@ -53,7 +54,11 @@ const RecreationPlanShow: React.FC = () => {
     setTransportationExpenses(parseInt(event.target.value, 10) || 0);
   };
 
-  const grandTotal = totalPrice + totalMaterialPrice + totalTransportationCost;
+  const grandTotal =
+    totalPrice +
+    totalMaterialPrice +
+    totalTransportationCost +
+    (recreationPlan?.adjustmentFee || 0);
 
   useEffect(() => {
     (async () => {
@@ -276,6 +281,14 @@ const RecreationPlanShow: React.FC = () => {
               transportationCostPerVisit={transportationExpenses}
             />
             <hr />
+            {recreationPlan.adjustmentFee && (
+              <>
+                <AdjustmentFeeSection
+                  adjustmentFee={recreationPlan.adjustmentFee}
+                />
+                <hr />
+              </>
+            )}
 
             <div className='row'>
               <div className='col-4'>
