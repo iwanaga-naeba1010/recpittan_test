@@ -5,6 +5,7 @@
 # Table name: recreation_plans
 #
 #  id             :bigint           not null, primary key
+#  adjustment_fee :integer
 #  code           :string           not null
 #  release_status :integer          default("draft"), not null
 #  title          :string           not null
@@ -40,7 +41,7 @@ class RecreationPlan < ApplicationRecord
     transportation_expenses = recreations.where(kind: :visit).sum do |_rec|
       1000
     end
-    total_price = recreation_price + material_price + transportation_expenses
+    total_price = recreation_price + material_price + transportation_expenses + adjustment_fee
 
     total_price / latest_month
   end

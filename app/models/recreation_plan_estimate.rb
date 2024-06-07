@@ -40,7 +40,7 @@ class RecreationPlanEstimate < ApplicationRecord
 
   before_create :generate_estimate_number
 
-  delegate :recreation_recreation_plans, to: :recreation_plan
+  delegate :recreation_recreation_plans, :adjustment_fee, to: :recreation_plan
 
   def material_price_for_plan(plan)
     plan.recreation.material_price * number_of_people
@@ -56,14 +56,16 @@ class RecreationPlanEstimate < ApplicationRecord
     end
   end
 
-  def total_price_without_consumption_tax
-    recreation_recreation_plans.sum do |plan|
-      plan.recreation.price + material_price_for_plan(plan) + transportation_expenses
-    end
-  end
-
   def consumption_tax
     total_price * CONSUMPTION_TAX_RATE
+  end
+
+  def total_price_without_consumption_tax
+    total_price_without_adjustment_fee = recreation_recreation_plans.sum do |plan|
+      plan.recreation.price + material_price_for_plan(plan) + transportation_expenses
+    end
+
+    total_price_without_adjustment_fee + adjustment_fee
   end
 
   def total_price
