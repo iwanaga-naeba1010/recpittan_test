@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_06_01_134805) do
+ActiveRecord::Schema[7.0].define(version: 2024_06_08_145617) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -282,6 +282,8 @@ ActiveRecord::Schema[7.0].define(version: 2024_06_01_134805) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "adjustment_fee"
+    t.bigint "available_user_id"
+    t.index ["available_user_id"], name: "index_recreation_plans_on_available_user_id"
     t.index ["code"], name: "index_recreation_plans_on_code", unique: true
   end
 
@@ -465,6 +467,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_06_01_134805) do
   add_foreign_key "recreation_plan_estimates", "users"
   add_foreign_key "recreation_plan_tags", "recreation_plans"
   add_foreign_key "recreation_plan_tags", "tags"
+  add_foreign_key "recreation_plans", "users", column: "available_user_id"
   add_foreign_key "recreation_prefectures", "recreations", name: "recreation_prefectures_recreation_id_fkey"
   add_foreign_key "recreation_profiles", "profiles", name: "recreation_profiles_profile_id_fkey"
   add_foreign_key "recreation_profiles", "recreations", name: "recreation_profiles_recreation_id_fkey"
