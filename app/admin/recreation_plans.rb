@@ -20,9 +20,7 @@ ActiveAdmin.register RecreationPlan do
     column(:release_status, &:release_status_text)
     column :title
     column :adjustment_fee
-    column :company do |recreation_plan|
-      recreation_plan.facility_name
-    end
+    column :company, &:facility_name
 
     actions
   end
@@ -36,9 +34,7 @@ ActiveAdmin.register RecreationPlan do
           row(:release_status, &:release_status_text)
           row :title
           row :adjustment_fee
-          row 'Company' do |recreation_plan|
-            recreation_plan.facility_name
-          end
+          row 'Company', &:facility_name
 
           row :created_at
           row :updated_at
