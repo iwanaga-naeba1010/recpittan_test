@@ -4,25 +4,24 @@
 #
 # Table name: recreation_plans
 #
-#  id               :bigint           not null, primary key
-#  adjustment_fee   :integer
-#  code             :string           not null
-#  release_status   :integer          default("draft"), not null
-#  title            :string           not null
-#  created_at       :datetime         not null
-#  updated_at       :datetime         not null
-#  available_user_id :bigint
+#  id             :bigint           not null, primary key
+#  adjustment_fee :integer
+#  code           :string           not null
+#  release_status :integer          default("draft"), not null
+#  title          :string           not null
+#  created_at     :datetime         not null
+#  updated_at     :datetime         not null
+#  company_id     :bigint
 #
 # Indexes
 #
-#  index_recreation_plans_on_code            (code) UNIQUE
-#  index_recreation_plans_on_available_user_id  (available_user_id)
+#  index_recreation_plans_on_code        (code) UNIQUE
+#  index_recreation_plans_on_company_id  (company_id)
 #
 class RecreationPlan < ApplicationRecord
   extend Enumerize
 
-  belongs_to :available_user, class_name: 'User', optional: true
-
+  belongs_to :company, class_name: 'Company', optional: true
   has_many :recreation_recreation_plans, dependent: :destroy, class_name: 'RecreationRecreationPlan'
   has_many :recreations, through: :recreation_recreation_plans, class_name: 'Recreation'
   has_many :user_recreation_plans, dependent: :destroy, class_name: 'UserRecreationPlan'
@@ -38,7 +37,7 @@ class RecreationPlan < ApplicationRecord
   validates :code, uniqueness: true
   before_validation :generate_code, on: :create
 
-  scope :visible_to, ->(user) { where('available_user_id IS NULL OR available_user_id = ?', user.id) }
+  scope :visible_to, ->(user) { where('company_id IS NULL OR company_id = ?', user.company_id) }
 
   def monthly_fee
     latest_month = recreation_recreation_plans.order(month: :desc).first.month
@@ -47,13 +46,9 @@ class RecreationPlan < ApplicationRecord
     transportation_expenses = recreations.where(kind: :visit).sum do |_rec|
       1000
     end
-    total_price = recreation_price + material_price + transportation_expenses + adjustment_fee
+    total_price = recreation_price + material_price + transportation_expenses + adjustment_fee.to_i
 
     total_price / latest_month
-  end
-
-  def visible_to_user?(user)
-    available_user.nil? || available_user == user
   end
 
   private def generate_code

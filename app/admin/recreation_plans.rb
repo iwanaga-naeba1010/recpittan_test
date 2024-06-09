@@ -4,7 +4,7 @@
 ActiveAdmin.register RecreationPlan do
   permit_params(
     %i[
-      code release_status title adjustment_fee
+      code release_status title adjustment_fee company_id
     ],
     tag_ids: [],
     recreation_recreation_plans_attributes: %i[id recreation_id month _destroy]
@@ -20,6 +20,9 @@ ActiveAdmin.register RecreationPlan do
     column(:release_status, &:release_status_text)
     column :title
     column :adjustment_fee
+    column :company do |recreation_plan|
+      recreation_plan.company&.facility_name
+    end
 
     actions
   end
@@ -33,6 +36,9 @@ ActiveAdmin.register RecreationPlan do
           row(:release_status, &:release_status_text)
           row :title
           row :adjustment_fee
+          row 'Company' do |recreation_plan|
+            recreation_plan.company&.facility_name
+          end
 
           row :created_at
           row :updated_at
@@ -62,6 +68,7 @@ ActiveAdmin.register RecreationPlan do
     f.inputs do
       f.input :title
       f.input :release_status, as: :select, collection: RecreationPlan.release_status.values.map { |i| [i.text, i] }
+      f.input :company, as: :select, collection: Company.all.map { |company| [company.facility_name, company.id] }
     end
 
     f.input :tags, label: 'タグ', as: :check_boxes, collection: Tag.plans.all

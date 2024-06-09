@@ -237,6 +237,8 @@ ja:
         code: 管理コード
         release_status: 公開設定
         title: タイトル
+        adjustment_fee: 調整費
+        company: 指定施設名
       user_recreation_plan:
         code: 管理コード
         title: タイトル

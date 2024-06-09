@@ -4,23 +4,19 @@
 #
 # Table name: recreation_plans
 #
-#  id                :bigint           not null, primary key
-#  adjustment_fee    :integer
-#  code              :string           not null
-#  release_status    :integer          default("draft"), not null
-#  title             :string           not null
-#  created_at        :datetime         not null
-#  updated_at        :datetime         not null
-#  available_user_id :bigint
+#  id             :bigint           not null, primary key
+#  adjustment_fee :integer
+#  code           :string           not null
+#  release_status :integer          default("draft"), not null
+#  title          :string           not null
+#  created_at     :datetime         not null
+#  updated_at     :datetime         not null
+#  company_id     :bigint
 #
 # Indexes
 #
-#  index_recreation_plans_on_available_user_id  (available_user_id)
-#  index_recreation_plans_on_code               (code) UNIQUE
-#
-# Foreign Keys
-#
-#  fk_rails_...  (available_user_id => users.id)
+#  index_recreation_plans_on_code        (code) UNIQUE
+#  index_recreation_plans_on_company_id  (company_id)
 #
 require 'rails_helper'
 
