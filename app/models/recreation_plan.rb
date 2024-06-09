@@ -51,6 +51,10 @@ class RecreationPlan < ApplicationRecord
     total_price / latest_month
   end
 
+  def visible_to_company?(user_company)
+    company.nil? || user_company == company
+  end
+
   private def generate_code
     last_code = RecreationPlan.maximum(:code)
     sequence_num = if last_code
