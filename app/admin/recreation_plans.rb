@@ -21,7 +21,7 @@ ActiveAdmin.register RecreationPlan do
     column :title
     column :adjustment_fee
     column :company do |recreation_plan|
-      recreation_plan.company&.facility_name
+      recreation_plan.facility_name
     end
 
     actions
@@ -37,7 +37,7 @@ ActiveAdmin.register RecreationPlan do
           row :title
           row :adjustment_fee
           row 'Company' do |recreation_plan|
-            recreation_plan.company&.facility_name
+            recreation_plan.facility_name
           end
 
           row :created_at

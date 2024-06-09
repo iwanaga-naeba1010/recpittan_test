@@ -39,6 +39,8 @@ class RecreationPlan < ApplicationRecord
 
   scope :visible_to, ->(user) { where('company_id IS NULL OR company_id = ?', user.company_id) }
 
+  delegate :facility_name, to: :company, allow_nil: true
+
   def monthly_fee
     latest_month = recreation_recreation_plans.order(month: :desc).first.month
     recreation_price = recreations.sum(&:price)
