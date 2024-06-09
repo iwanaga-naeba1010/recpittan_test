@@ -26,6 +26,9 @@
 #  fk_rails_...  (user_id => users.id)
 #
 class RecreationPlanEstimate < ApplicationRecord
+  CONSUMPTION_TAX_RATE = 0.1
+  TOTAL_PRICE_MULTIPLIER = 1.1
+
   belongs_to :user, class_name: 'User'
   belongs_to :recreation_plan, class_name: 'RecreationPlan'
 
@@ -53,7 +56,11 @@ class RecreationPlanEstimate < ApplicationRecord
     end
   end
 
-  def total_price
+  def consumption_tax
+    total_price * CONSUMPTION_TAX_RATE
+  end
+
+  def total_price_without_consumption_tax
     total_price_without_adjustment_fee = recreation_recreation_plans.sum do |plan|
       plan.recreation.price + material_price_for_plan(plan) + transportation_expenses
     end
@@ -61,8 +68,12 @@ class RecreationPlanEstimate < ApplicationRecord
     total_price_without_adjustment_fee + adjustment_fee
   end
 
+  def total_price
+    (total_price_without_consumption_tax * TOTAL_PRICE_MULTIPLIER).floor
+  end
+
   def total_price_per_person
-    total_price / number_of_people
+    (total_price / number_of_people).floor
   end
 
   def has_material_price_recreations
