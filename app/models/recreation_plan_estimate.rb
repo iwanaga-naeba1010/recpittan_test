@@ -65,7 +65,7 @@ class RecreationPlanEstimate < ApplicationRecord
       plan.recreation.price + material_price_for_plan(plan) + transportation_expenses
     end
 
-    total_price_without_adjustment_fee + adjustment_fee
+    total_price_without_adjustment_fee + adjustment_fee.to_i
   end
 
   def total_price
