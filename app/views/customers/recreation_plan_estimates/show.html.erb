@@ -144,7 +144,7 @@
           <p>オプション</p>
         </div>
         <div class="col-2 text-end py-2 px-0">
-          ¥<%= @recreation_plan_estimate.adjustment_fee.to_s(:delimited) %>
+          ¥<%= @recreation_plan_estimate.adjustment_fee&.to_s(:delimited) %>
         </div>
       </div>
     </div>
