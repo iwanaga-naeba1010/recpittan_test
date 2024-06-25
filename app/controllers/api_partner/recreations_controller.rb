@@ -50,12 +50,7 @@ module ApiPartner
         profile_id: params_create.dig(:recreation_profile_attributes, :profile_id),
         prefectures: params_create[:recreation_prefectures_attributes]&.pluck(:name)
       )
-
-      if recreation
-        render_json RecreationSerializer.new.serialize(recreation)
-      else
-        render_json(['更新に失敗しました。'], status: 422)
-      end
+      render_json RecreationSerializer.new.serialize(recreation:)
     rescue StandardError => e
       logger.error e.message
       render_json([e.message], status: 422)
