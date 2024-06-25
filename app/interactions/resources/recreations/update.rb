@@ -76,7 +76,7 @@ module Resources
 
       private def notify_slack(recreation, changes)
         message = <<~MESSAGE
-          管理画面案件URL：#{admin_recreation_path(recreation.id)}
+          管理画面案件URL：#{Rails.application.routes.url_helpers.admin_recreation_path(recreation.id)}
           パートナー名: #{recreation.user_username}
           レク名: #{recreation.title}
           レクが更新されました。
