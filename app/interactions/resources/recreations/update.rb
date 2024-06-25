@@ -35,9 +35,12 @@ module Resources
       def execute
         ActiveRecord::Base.transaction do
           @recreation = current_user.recreations.find(id)
+          changes = detect_changes(@recreation, recreation_params)
           @recreation.update!(recreation_params)
           update_profile_relation(profile_id:)
           update_prefectures(recreation_id: @recreation.id)
+
+          notify_slack(@recreation, changes) if changes.any?
         end
 
         @recreation
@@ -60,6 +63,28 @@ module Resources
         RecreationPrefecture.create!(
           prefectures.map { |p| { name: p, recreation_id: } }
         )
+      end
+
+      private def detect_changes(recreation, params)
+        changes = {}
+        params.each do |key, value|
+          original_value = recreation.send(key)
+          changes[key] = { before: original_value, after: value } if original_value != value
+        end
+        changes
+      end
+
+      private def notify_slack(recreation, changes)
+        message = <<~MESSAGE
+          管理画面案件URL：#{Rails.application.routes.url_helpers.admin_recreation_path(recreation.id)}
+          パートナー名: #{recreation.user_username}
+          レク名: #{recreation.title}
+          レクが更新されました。
+          変更箇所:
+          #{changes.map { |field, values| "#{field}: #{values[:before]} -> #{values[:after]}" }.join("\n")}
+        MESSAGE
+
+        SlackNotifier.new(channel: '#product_confirmation_of_recreation').send('レク更新連絡', message)
       end
     end
   end
