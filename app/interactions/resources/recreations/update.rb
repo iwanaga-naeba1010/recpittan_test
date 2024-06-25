@@ -81,7 +81,7 @@ module Resources
           レク名: #{recreation.title}
           レクが更新されました。
           変更箇所:
-          #{changes.map { |field, values| "#{field}: #{values[:before]} -> #{values[:after]}" }.join("\n")}
+          #{changes.map { |field, values| "#{I18n.t("activerecord.attributes.recreation.#{field}")}: #{values[:before]} -> #{values[:after]}" }.join("\n")}
         MESSAGE
 
         SlackNotifier.new(channel: '#product_confirmation_of_recreation').send('レク更新連絡', message)
