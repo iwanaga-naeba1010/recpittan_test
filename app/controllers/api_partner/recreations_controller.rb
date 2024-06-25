@@ -28,6 +28,8 @@ module ApiPartner
       )
       message = <<~MESSAGE
         管理画面案件URL：#{admin_recreation_url(recreation.id)}
+        パートナー名: #{recreation.user_username}
+        レク名: #{recreation.title}
         新規レク登録依頼を確認して、承認作業を行ってください。
       MESSAGE
 
@@ -48,13 +50,12 @@ module ApiPartner
         profile_id: params_create.dig(:recreation_profile_attributes, :profile_id),
         prefectures: params_create[:recreation_prefectures_attributes]&.pluck(:name)
       )
-      message = <<~MESSAGE
-        管理画面案件URL：#{admin_recreation_url(recreation.id)}
-        レクが更新されました。
-      MESSAGE
 
-      SlackNotifier.new(channel: '#product_confirmation_of_recreation').send('レク更新連絡', message)
-      render_json RecreationSerializer.new.serialize(recreation:)
+      if recreation
+        render_json RecreationSerializer.new.serialize(recreation)
+      else
+        render_json(['更新に失敗しました。'], status: 422)
+      end
     rescue StandardError => e
       logger.error e.message
       render_json([e.message], status: 422)
