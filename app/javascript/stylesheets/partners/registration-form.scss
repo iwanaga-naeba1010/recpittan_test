@@ -28,3 +28,31 @@
     color: #FF2323;
   }
 }
+
+.complete-registration {
+  .line-button {
+    background-color: #2DD36F;
+    border: none;
+  }
+
+  .desc-flow {
+    .flow-number {
+      font-size: 24px;
+      background-color: #E0E0E0;
+      color: #339999;
+      width: 40px;
+      height: 40px;
+      line-height: 40px;
+      text-align: center;
+      border-radius: 50%;
+      display: inline-block;
+    }
+  }
+}
+
+.confirm {
+  .reason {
+    background-color: #F4F5F8;
+    border-radius: 10px;
+  }
+}

@@ -7,4 +7,8 @@ class Partners::RegistrationsController < ApplicationController
   def new; end
 
   def create; end
+
+  def complete; end
+
+  def confirm; end
 end

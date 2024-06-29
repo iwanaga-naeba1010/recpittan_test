@@ -1,9 +1,7 @@
 import React, { useState } from 'react';
 import { FirstStep } from './firstStep';
-import { FourthStep } from './fourthStep';
 import { SecondStep } from './secondStep';
 import { ThirdStep } from './thirdStep';
-import { FifthStep } from './fifthStep';
 
 // type Props = {
 //   onSubmit: (values: RecreationFormValues) => Promise<void>;
@@ -28,19 +26,19 @@ export const PartnerNewForm: React.FC = () => {
 
   const renderStepNavigation = () => {
     switch (currentStep) {
-      case 0:
-        return (
-          <div className='px-3'>
-            <button
-              type='button'
-              disabled={disabled}
-              className='my-4 py-2 w-100 rounded text-white font-weight-bold bg-primary border border-primary'
-              onClick={handleNext}
-            >
-              次へ進む
-            </button>
-          </div>
-        );
+      // case 0:
+      //   return (
+      //     <div className='px-3'>
+      //       <button
+      //         type='button'
+      //         disabled={disabled}
+      //         className='my-4 py-2 w-100 rounded text-white font-weight-bold bg-primary border border-primary'
+      //         onClick={handleNext}
+      //       >
+      //         次へ進む
+      //       </button>
+      //     </div>
+      //   );
       case 1:
       case 2:
         return (
@@ -95,8 +93,6 @@ export const PartnerNewForm: React.FC = () => {
         {currentStep === 0 && <FirstStep />}
         {currentStep === 1 && <SecondStep />}
         {currentStep === 2 && <ThirdStep />}
-        {currentStep === 3 && <FourthStep />}
-        {currentStep === 4 && <FifthStep />}
 
         {renderStepNavigation()}
       </form>
