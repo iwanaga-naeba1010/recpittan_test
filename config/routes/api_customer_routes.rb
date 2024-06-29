@@ -10,4 +10,5 @@ namespace :api_customer do
   resources :favorite_recreations, only: %i[index show create destroy]
   resources :recreation_plans, only: %i[show]
   resources :user_recreation_plans, only: %i[show create]
+  resources :bank_accounts, only: %i[create]
 end

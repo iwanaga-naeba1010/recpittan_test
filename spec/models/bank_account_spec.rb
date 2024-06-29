@@ -34,7 +34,7 @@ RSpec.describe BankAccount, type: :model do
       user_id: user.id,
       account_holder_name: 'ナマエタロウ',
       account_number: '1234567890',
-      account_type: '普通',
+      account_type: 'checking',
       bank_code: '0001',
       bank_name: 'テスト銀行',
       branch_code: '001',

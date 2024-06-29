@@ -26,6 +26,8 @@
 #  fk_rails_...  (user_id => users.id)
 #
 class BankAccount < ApplicationRecord
+  extend Enumerize
+
   encrypts :account_holder_name, :account_number, :account_type, :bank_code, :bank_name, :branch_code, :branch_name
 
   belongs_to :user
@@ -38,4 +40,6 @@ class BankAccount < ApplicationRecord
   validates :account_holder_name,
             format: { with: /\A[\p{katakana}ー－]+\z/,
                       message: I18n.t('active_interaction.errors.messages.only_katakana') }
+
+  enumerize :account_type, in: %i[checking savings comprehensive time_deposit], default: :checking, predicates: true, scope: true
 end
