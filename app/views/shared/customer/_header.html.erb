@@ -12,13 +12,13 @@
         <% end %>
       </div>
 
-      <%# <div class="col-auto"> %>
-        <%# if active_link?('user_recreation_plans') %>
-          <%# プラン一覧 %>
-        <%# else %>
-          <%#= link_to 'プラン一覧', customers_user_recreation_plans_path, class: "clink" %>
-        <%# end %>
-      <%# </div> %>
+      <div class="col-auto">
+        <% if active_link?('user_recreation_plans') %>
+          <% プラン一覧 %>
+        <% else %>
+          <%= link_to 'プラン一覧', customers_user_recreation_plans_path, class: "clink" %>
+        <% end %>
+      </div>
 
       <div class="col-auto">
         <% if active_link?('registrations') %>
