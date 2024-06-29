@@ -1,1 +1,1 @@
-export * from './partnerNewForm'
+export * from './partnerNewForm';

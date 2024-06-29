@@ -1,13 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client'; // Import ReactDOM with createRoot
-import {
-  PartnerNewForm,
-} from '@/components/shared/form'; // Import PartnerNewForm
+import { PartnerNewForm } from '@/components/shared/form'; // Import PartnerNewForm
 
 const RegistrationForm: React.FC = () => {
-  return (
-    <PartnerNewForm />
-  );
+  return <PartnerNewForm />;
 };
 
 // Event listener for page transitions with turbolinks

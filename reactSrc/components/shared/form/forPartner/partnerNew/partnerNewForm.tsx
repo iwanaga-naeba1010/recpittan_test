@@ -86,19 +86,15 @@ export const PartnerNewForm: React.FC = () => {
 
   return (
     <div>
-      <div className="header bg-white">
-        <h2 className="text-black text-center font-weight-bold p-2 border-bottom">新規登録</h2>
+      <div className='header bg-white'>
+        <h2 className='text-black text-center font-weight-bold p-2 border-bottom'>
+          新規登録
+        </h2>
       </div>
       <form className='partner-registration'>
-        {currentStep === 0 && (
-          <FirstStep />
-        )}
-        {currentStep === 1 && (
-          <SecondStep />
-        )}
-        {currentStep === 2 && (
-          <ThirdStep />
-        )}
+        {currentStep === 0 && <FirstStep />}
+        {currentStep === 1 && <SecondStep />}
+        {currentStep === 2 && <ThirdStep />}
         {currentStep === 3 && <FourthStep />}
         {currentStep === 4 && <FifthStep />}
 
