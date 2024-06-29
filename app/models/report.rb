@@ -21,8 +21,8 @@
 #
 class Report < ApplicationRecord
   extend Enumerize
-  belongs_to :order
-  has_one :evaluation, dependent: :destroy
+  belongs_to :order, class_name: 'Order'
+  has_one :evaluation, dependent: :destroy, class_name: 'Evaluation'
   accepts_nested_attributes_for :evaluation, allow_destroy: true
 
   delegate :material_price, :number_of_people, :number_of_facilities, :transportation_expenses, :expenses, :support_price,

@@ -4,13 +4,14 @@ import { RecreationRecreationPlan } from '@/types';
 interface Props {
   plans: RecreationRecreationPlan[];
   onTotalUpdate: (newTotal: number) => void;
+  transportationCostPerVisit: number;
 }
 
 export const TransportationExpenses: React.FC<Props> = ({
   plans,
   onTotalUpdate,
+  transportationCostPerVisit,
 }) => {
-  const transportationCostPerVisit = 1000;
   const visitCount = plans.reduce(
     (count, plan) => (plan.recreation.kind.key === 'visit' ? count + 1 : count),
     0

@@ -15,5 +15,5 @@
 #  order_memos_order_id_fkey  (order_id => orders.id)
 #
 class OrderMemo < ApplicationRecord
-  belongs_to :order
+  belongs_to :order, class_name: 'Order'
 end

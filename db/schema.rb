@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_04_06_133116) do
+ActiveRecord::Schema[7.0].define(version: 2024_06_08_145617) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -267,6 +267,20 @@ ActiveRecord::Schema[7.0].define(version: 2024_04_06_133116) do
     t.index ["recreation_id"], name: "index_recreation_memos_on_recreation_id"
   end
 
+  create_table "recreation_plan_estimates", force: :cascade do |t|
+    t.string "estimate_number", null: false
+    t.integer "start_month", null: false
+    t.integer "transportation_expenses", null: false
+    t.integer "number_of_people", null: false
+    t.bigint "recreation_plan_id", null: false
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["recreation_plan_id"], name: "index_recreation_plan_estimates_on_recreation_plan_id"
+    t.index ["user_id", "estimate_number"], name: "index_recreation_plan_estimates_on_user_id_and_estimate_number", unique: true
+    t.index ["user_id"], name: "index_recreation_plan_estimates_on_user_id"
+  end
+
   create_table "recreation_plan_tags", force: :cascade do |t|
     t.bigint "recreation_plan_id", null: false
     t.bigint "tag_id", null: false
@@ -282,7 +296,10 @@ ActiveRecord::Schema[7.0].define(version: 2024_04_06_133116) do
     t.integer "release_status", default: 0, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "adjustment_fee"
+    t.bigint "company_id"
     t.index ["code"], name: "index_recreation_plans_on_code", unique: true
+    t.index ["company_id"], name: "index_recreation_plans_on_company_id"
   end
 
   create_table "recreation_prefectures", force: :cascade do |t|
@@ -462,6 +479,8 @@ ActiveRecord::Schema[7.0].define(version: 2024_04_06_133116) do
   add_foreign_key "profiles", "users", name: "profiles_user_id_fkey"
   add_foreign_key "recreation_images", "recreations", name: "recreation_images_recreation_id_fkey"
   add_foreign_key "recreation_memos", "recreations"
+  add_foreign_key "recreation_plan_estimates", "recreation_plans"
+  add_foreign_key "recreation_plan_estimates", "users"
   add_foreign_key "recreation_plan_tags", "recreation_plans"
   add_foreign_key "recreation_plan_tags", "tags"
   add_foreign_key "recreation_prefectures", "recreations", name: "recreation_prefectures_recreation_id_fkey"

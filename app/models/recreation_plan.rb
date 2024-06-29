@@ -5,25 +5,28 @@
 # Table name: recreation_plans
 #
 #  id             :bigint           not null, primary key
+#  adjustment_fee :integer
 #  code           :string           not null
 #  release_status :integer          default("draft"), not null
 #  title          :string           not null
 #  created_at     :datetime         not null
 #  updated_at     :datetime         not null
+#  company_id     :bigint
 #
 # Indexes
 #
-#  index_recreation_plans_on_code  (code) UNIQUE
+#  index_recreation_plans_on_code        (code) UNIQUE
+#  index_recreation_plans_on_company_id  (company_id)
 #
 class RecreationPlan < ApplicationRecord
   extend Enumerize
 
-  has_many :recreation_recreation_plans, dependent: :destroy
-  has_many :recreations, through: :recreation_recreation_plans
-  has_many :user_recreation_plans, dependent: :destroy
-  has_many :users, through: :user_recreation_plans
-  has_many :recreation_plan_tags, dependent: :destroy
-  has_many :tags, through: :recreation_plan_tags
+  has_many :recreation_recreation_plans, dependent: :destroy, class_name: 'RecreationRecreationPlan'
+  has_many :recreations, through: :recreation_recreation_plans, class_name: 'Recreation'
+  has_many :user_recreation_plans, dependent: :destroy, class_name: 'UserRecreationPlan'
+  has_many :users, through: :user_recreation_plans, class_name: 'User'
+  has_many :recreation_plan_tags, dependent: :destroy, class_name: 'RecreationPlanTag'
+  has_many :tags, through: :recreation_plan_tags, class_name: 'Tag'
 
   accepts_nested_attributes_for :recreation_recreation_plans, allow_destroy: true
 
@@ -40,7 +43,7 @@ class RecreationPlan < ApplicationRecord
     transportation_expenses = recreations.where(kind: :visit).sum do |_rec|
       1000
     end
-    total_price = recreation_price + material_price + transportation_expenses
+    total_price = recreation_price + material_price + transportation_expenses + adjustment_fee.to_i
 
     total_price / latest_month
   end

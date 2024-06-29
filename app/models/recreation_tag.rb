@@ -16,6 +16,6 @@
 #  recreation_tags_tag_id_fkey         (tag_id => tags.id)
 #
 class RecreationTag < ApplicationRecord
-  belongs_to :recreation
-  belongs_to :tag
+  belongs_to :recreation, class_name: 'Recreation'
+  belongs_to :tag, class_name: 'Tag'
 end

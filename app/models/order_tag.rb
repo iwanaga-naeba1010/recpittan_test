@@ -13,6 +13,6 @@
 # Foreign Keys
 #
 class OrderTag < ApplicationRecord
-  belongs_to :order
-  belongs_to :tag
+  belongs_to :order, class_name: 'Order'
+  belongs_to :tag, class_name: 'Tag'
 end

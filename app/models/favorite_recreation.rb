@@ -22,6 +22,6 @@
 #  fk_rails_...  (user_id => users.id)
 #
 class FavoriteRecreation < ApplicationRecord
-  belongs_to :user
-  belongs_to :recreation
+  belongs_to :user, class_name: 'User'
+  belongs_to :recreation, class_name: 'Recreation'
 end

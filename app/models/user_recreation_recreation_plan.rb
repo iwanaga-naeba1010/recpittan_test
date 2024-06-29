@@ -22,6 +22,6 @@
 #  fk_rails_...  (user_recreation_plan_id => user_recreation_plans.id)
 #
 class UserRecreationRecreationPlan < ApplicationRecord
-  belongs_to :recreation
-  belongs_to :user_recreation_plan
+  belongs_to :recreation, class_name: 'Recreation'
+  belongs_to :user_recreation_plan, class_name: 'UserRecreationPlan'
 end

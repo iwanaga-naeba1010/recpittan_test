@@ -2,6 +2,8 @@
 
 # rubocop:disable Rails/LexicallyScopedActionFilter
 class CustomDevise::RegistrationsController < Devise::RegistrationsController
+  include Recaptcha::Adapters::ControllerMethods
+  include Recaptcha::Adapters::ViewMethods
   before_action :configure_sign_up_params, only: [:create]
   before_action :configure_account_update_params, only: [:update]
 
@@ -21,6 +23,11 @@ class CustomDevise::RegistrationsController < Devise::RegistrationsController
 
   # GET /resource/edit
   def create
+    unless verify_recaptcha
+      build_resource(sign_up_params)
+      return render 'new'
+    end
+
     super do
       # TODO(okubo): SQL2回発行していることになっているので、解消したい
       resource.update(

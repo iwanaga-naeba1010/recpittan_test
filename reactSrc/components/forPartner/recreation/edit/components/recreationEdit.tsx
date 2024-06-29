@@ -101,7 +101,8 @@ const RecreationEdit: React.FC = () => {
           values.extraInformation || recreation.extraInformation,
         youtubeId: values.youtubeId || recreation.youtubeId,
         borrowItem: values.borrowItem || recreation.borrowItem,
-        bringYourOwnItem: '', // TODO(okubo): 追加が必要
+        bringYourOwnItem:
+          values.bringYourOwnItem || recreation.bringYourOwnItem,
         additionalFacilityFee:
           values.additionalFacilityFee || recreation.additionalFacilityFee,
         imageUrl: values.imageUrl,

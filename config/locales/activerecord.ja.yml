@@ -37,9 +37,10 @@ ja:
       online_recreation_channel_download_image: ダウンロード画像
       favorite_recreation: お気に入りレク
       recreation_plan: プラン
-      user_recreation_plan: 登録プラン
+      user_recreation_plan: 登録レクリエーションプラン
       recreation_recreation_plan: 登録レクリエーション
       bank_account: 銀行口座
+      recreation_plan_estimate: プラン見積書
     attributes:
       email:
         title: タイトル
@@ -251,6 +252,14 @@ ja:
         bank_name: 金融機関名
         branch_code: 支点コード
         branch_name: 支店名
+      recreation_plan_estimate:
+        estimate_number: 見積書番号
+        number_of_people: 参加人数
+        start_month: 開始月
+        transportation_expenses: 交通費
+        recreation_plan: プラン
+        user: ユーザー
+
     errors:
       messages:
         duration_over: が上限を越えています

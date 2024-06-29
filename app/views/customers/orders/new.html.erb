@@ -11,15 +11,13 @@
         <% category_tag = @recreation.tags.categories&.first %>
         <% if category_tag.present? %>
           <li class="breadcrumb-item">
-            <!-- TODO: Tag.categories.firstを表示 + ransack入れる -->
-            <%= link_to category_tag.name, customers_recreations_path(q: { tags_id_eq: category_tag.id }) %>
+            <span class="text-secondary"><%= category_tag.name %></span>
           </li>
         <% end %>
         <li class="breadcrumb-item">
           <%= link_to @recreation.title, customers_recreation_path(@recreation.id) %>
         </li>
         <li class="breadcrumb-item active">
-          <!-- TODO: Tag.categories.firstを表示 + ransack入れる -->
           <span class="text-secondary">相談・依頼フォーム</span>
         </li>
       </ol>

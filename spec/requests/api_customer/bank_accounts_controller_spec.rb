@@ -40,7 +40,9 @@ RSpec.describe ApiCustomer::BankAccountsController, type: :request do
           }
         }
       end
-      it_behaves_like 'an endpoint returns 4xx status'
+
+      let(:expected) { BankAccountSerializer.new.serialize(evaluation_reply: BankAccount.last) }
+      it_behaves_like 'an endpoint returns record invalid'
     end
   end
 end

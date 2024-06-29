@@ -29,7 +29,7 @@ const RecreationNew: React.FC = () => {
         extraInformation: values.extraInformation,
         youtubeId: values.youtubeId,
         borrowItem: values.borrowItem,
-        bringYourOwnItem: '', // TODO(okubo): 追加が必要
+        bringYourOwnItem: values.bringYourOwnItem,
         additionalFacilityFee: values.additionalFacilityFee,
         imageUrl: values.imageUrl,
         // prefectures: values.prefectures,
