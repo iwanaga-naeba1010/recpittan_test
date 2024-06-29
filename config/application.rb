@@ -21,6 +21,9 @@ module MachingSystem
     config.i18n.default_locale = :ja
     config.i18n.load_path += Dir[Rails.root.join('config/locales/**/*.{rb,yml}').to_s]
     config.paths.add "#{config.root}/app/lib/*", eager_load: true
+    config.active_record.encryption.primary_key = ENV.fetch('ENCRYPTION_PRIMARY_KEY', nil)
+    config.active_record.encryption.deterministic_key = ENV.fetch('ENCRYPTION_DETERMINISTIC_KEY', nil)
+    config.active_record.encryption.key_derivation_salt = ENV.fetch('ENCRYPTION_KEY_DERIVATION_SALT', nil)
 
     config.generators do |g|
       g.stylesheets false
