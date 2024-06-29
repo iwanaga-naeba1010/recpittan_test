@@ -6,13 +6,15 @@ type PriceProperty = 'price' | 'materialPrice';
 type Props = {
   recreationRecreationPlan: RecreationRecreationPlan;
   priceProperty: PriceProperty;
-  numberOfPeople: number; // PropsにnumberOfPeopleを追加
+  numberOfPeople: number;
+  startMonth?: number;
 };
 
 export const RecreationPlanDetail: React.FC<Props> = ({
   recreationRecreationPlan,
   priceProperty,
   numberOfPeople,
+  startMonth,
 }) => {
   const unitPrice = recreationRecreationPlan.recreation[priceProperty];
   const [totalPrice, setTotalPrice] = React.useState(unitPrice);
@@ -26,6 +28,12 @@ export const RecreationPlanDetail: React.FC<Props> = ({
   if (typeof unitPrice !== 'number' || unitPrice === 0) {
     return null;
   }
+
+  // startMonthとrecreationRecreationPlan.monthを基に実際の月を計算する
+  const actualMonth = startMonth
+    ? (Number(startMonth) + Number(recreationRecreationPlan.month) - 1) % 12 ||
+      12
+    : Number(recreationRecreationPlan.month);
 
   return (
     <div className='row'>
@@ -50,6 +58,7 @@ export const RecreationPlanDetail: React.FC<Props> = ({
         )) || (
           <div className='row'>
             <div className='col-12 d-flex justify-content-between'>
+              <p>{actualMonth}月</p>
               <p>{recreationRecreationPlan.recreation.title}</p>
             </div>
           </div>

@@ -3,11 +3,12 @@
 @import 'catalog/default';
 
 @import 'partner';
-@import 'partners/profile';
 @import 'partners/order-item';
+@import 'partners/profile';
 @import 'partners/recreation';
 @import './customers/evaluation';
-@import './customers/online_recreation_channels';
-@import './customers/recreation_plan';
-@import './customers/user_recreation_plan';
 @import './customers/recreation';
+@import './customers/recreation_plan';
+@import './customers/recreation_plan_estimate';
+@import './customers/user_recreation_plan';
+@import './print.scss';

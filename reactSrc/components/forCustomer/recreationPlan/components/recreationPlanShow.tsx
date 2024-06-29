@@ -5,10 +5,9 @@ import { RecreationPlan } from '@/types';
 import { useRecreationPlan } from '../hooks';
 import { RecreationRecreationPlanItem } from './recreationRecreationPlanItem';
 import { RecreationPlanSection } from './recreationPlanSection';
+import { AdjustmentFeeSection } from './adjustmentFeeSection';
 import { TransportationExpenses } from './transportationExpenses';
-import { useUserRecreationPlan } from '../hooks';
-import html2canvas from 'html2canvas';
-import jsPDF from 'jspdf';
+import { useUserRecreationPlan, useRecreationPlanEstimate } from '../hooks';
 
 const RecreationPlanShow: React.FC = () => {
   const [recreationPlan, setRecreationPlan] = useState<RecreationPlan>();
@@ -25,6 +24,10 @@ const RecreationPlanShow: React.FC = () => {
   const [totalTransportationCost, setTotalTransportationCost] = useState(0);
   const id = window.location.pathname.split('/')[3];
   const { postUserRecreationPlan } = useUserRecreationPlan();
+  const { postRecreationPlanEstimate } = useRecreationPlanEstimate();
+  const [startMonth, setStartMonth] = useState<number>(1);
+  const [transportationExpenses, setTransportationExpenses] =
+    useState<number>(1000);
 
   const handleUpdateTotalPrice = (newTotal: number) => {
     setTotalPrice(newTotal);
@@ -38,26 +41,24 @@ const RecreationPlanShow: React.FC = () => {
     setTotalTransportationCost(newTotal);
   };
 
-  const grandTotal = totalPrice + totalMaterialPrice + totalTransportationCost;
-
-  const pdhDownloadHandler = () => {
-    const target = document.getElementById('pdf-download-elm');
-    if (target === null) return;
-
-    html2canvas(target, { scale: 2.5 }).then((canvas) => {
-      const imgData = canvas.toDataURL('image/svg', 1.0);
-      const pdf = new jsPDF();
-      pdf.addImage(
-        imgData,
-        'SVG',
-        5,
-        10,
-        canvas.width / 18,
-        canvas.height / 18
-      );
-      pdf.save(`recreation-plan.pdf`);
-    });
+  const handleStartMonthChange = (
+    event: React.ChangeEvent<HTMLSelectElement>
+  ) => {
+    setStartMonth(parseInt(event.target.value, 10));
   };
+
+  // 交通費の入力変更ハンドラ
+  const handleTransportationExpensesChange = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    setTransportationExpenses(parseInt(event.target.value, 10) || 0);
+  };
+
+  const grandTotalWithoutConsumptionTax =
+    totalPrice +
+    totalMaterialPrice +
+    totalTransportationCost +
+    (recreationPlan?.adjustmentFee || 0);
 
   useEffect(() => {
     (async () => {
@@ -79,13 +80,38 @@ const RecreationPlanShow: React.FC = () => {
     return <></>;
   }
 
-  const monthRange = recreationPlan.recreationRecreationPlans.reduce((acc, curr) => {
-    const monthAsNumber = parseInt(curr.month, 10);
+  const monthRange = recreationPlan.recreationRecreationPlans.reduce(
+    (acc, curr) => {
+      const monthAsNumber = parseInt(curr.month, 10);
       if (acc.min > monthAsNumber || acc.min === 0) acc.min = monthAsNumber;
       if (acc.max < monthAsNumber) acc.max = monthAsNumber;
       return acc;
-  }, { min: 0, max: 0 });
+    },
+    { min: 0, max: 0 }
+  );
   const months = monthRange.max - monthRange.min + 1;
+
+  const handleCreateRecreationPlanEstimate = async () => {
+    if (recreationPlan?.id) {
+      try {
+        const response = await postRecreationPlanEstimate(
+          startMonth,
+          numberOfPeople,
+          transportationExpenses,
+          recreationPlan.id
+        );
+        if (response.redirectUrl) {
+          window.open(response.redirectUrl, '_blank');
+        }
+      } catch (e) {
+        if (e instanceof Error) {
+          throw new Error(e.message);
+        } else {
+          throw new Error('An unexpected error occurred.');
+        }
+      }
+    }
+  };
 
   const handleStartConsultation = async () => {
     if (recreationPlan?.id) {
@@ -162,22 +188,71 @@ const RecreationPlanShow: React.FC = () => {
         <div className='estimate p-3'>
           <h5 className='text-black fw-bold'>お見積もり</h5>
           <p>お見積もり金額をシミュレーションできます</p>
-          <form onSubmit={(e) => e.preventDefault()}>
-            <label className='num-of-people mt-1' htmlFor='numberInput'>
-              レクを受ける人数を入力してください
-            </label>
-            <br />
-            <input
-              type='number'
-              id='numberInput'
-              name='number_of_people'
-              placeholder='10'
-              className='form-control w-25 border-0'
-              value={numberOfPeople}
-              onChange={handleNumberOfPeopleChange}
-              min='1'
-            />
-          </form>
+
+          {/* formを集めた親クラス */}
+          <div className='bg-white p-3 '>
+            <div className='row'>
+              <p className='text-black fw-bold'>
+                お見積りをするために必要な項目を入力してください
+              </p>
+              <div className='col-3'>
+                <form onSubmit={(e) => e.preventDefault()}>
+                  <label className='mt-1' htmlFor='numberInput'>
+                    レクを受ける人数を入力
+                    <span className='ms-2 text-danger'>必須</span>
+                  </label>
+                  <br />
+                  <input
+                    type='number'
+                    id='numberInput'
+                    name='number_of_people'
+                    placeholder='10'
+                    className='form-control w-100 mt-1'
+                    value={numberOfPeople}
+                    onChange={handleNumberOfPeopleChange}
+                    min='1'
+                  />
+                </form>
+              </div>
+              <div className='col-3'>
+                <form onSubmit={(e) => e.preventDefault()}>
+                  <label className='mt-1' htmlFor='numberInput'>
+                    レクの開始月を選択
+                    <span className='ms-2 text-danger'>必須</span>
+                  </label>
+                  <br />
+                  {/* 1から12までのselect form */}
+                  <select
+                    className='form-select w-100 mt-1'
+                    value={startMonth}
+                    onChange={handleStartMonthChange}
+                  >
+                    {Array.from({ length: 12 }, (_, i) => i + 1).map(
+                      (month) => (
+                        <option key={month} value={month}>
+                          {month}月
+                        </option>
+                      )
+                    )}
+                  </select>
+                </form>
+              </div>
+              <div className='col-3'>
+                <form>
+                  <label className='mt-1' htmlFor='numberInput'>
+                    1回の交通費を入力
+                    <span className='ms-2 text-danger'>必須</span>
+                  </label>
+                  <input
+                    type='number'
+                    className='form-control w-100 mt-1'
+                    value={transportationExpenses}
+                    onChange={handleTransportationExpensesChange}
+                  />
+                </form>
+              </div>
+            </div>
+          </div>
 
           <div className='bg-white mt-3 p-3'>
             <h2 className='plan-title fw-bold'>{recreationPlan.title}</h2>
@@ -187,6 +262,8 @@ const RecreationPlanShow: React.FC = () => {
               title='開催費'
               priceProperty='price'
               plans={recreationPlan.recreationRecreationPlans}
+              numberOfPeople={numberOfPeople}
+              startMonth={startMonth}
               onTotalUpdate={handleUpdateTotalPrice}
             />
             <hr />
@@ -201,15 +278,40 @@ const RecreationPlanShow: React.FC = () => {
             <TransportationExpenses
               plans={recreationPlan.recreationRecreationPlans}
               onTotalUpdate={handleUpdateTotalTransportationCost}
+              transportationCostPerVisit={transportationExpenses}
             />
             <hr />
+            {recreationPlan.adjustmentFee && (
+              <>
+                <AdjustmentFeeSection
+                  adjustmentFee={recreationPlan.adjustmentFee}
+                />
+                <hr />
+              </>
+            )}
 
+            <div className='row'>
+              <div className='col-4'>
+                <p className='text-black'>小計</p>
+              </div>
+              <div className='col-8 text-end text-black'>
+                <p>¥{grandTotalWithoutConsumptionTax.toLocaleString()}</p>
+              </div>
+            </div>
+            <div className='row'>
+              <div className='col-4'>
+                <p className='text-black'>消費税</p>
+              </div>
+              <div className='col-8 text-end text-black'>
+                <p>¥{(grandTotalWithoutConsumptionTax * 0.1).toLocaleString()}</p>
+              </div>
+            </div>
             <div className='row'>
               <div className='col-4'>
                 <p className='text-black fw-bold'>合計</p>
               </div>
               <div className='col-8 text-end text-black'>
-                <p>¥{grandTotal.toLocaleString()}</p>
+                <p>¥{(grandTotalWithoutConsumptionTax * 1.1).toLocaleString()}</p>
               </div>
             </div>
             <div className='row'>
@@ -218,7 +320,7 @@ const RecreationPlanShow: React.FC = () => {
               </div>
               <div className='col-8 text-end text-black'>
                 <p>
-                  ¥{Math.floor(grandTotal / numberOfPeople).toLocaleString()}
+                  ¥{Math.floor((grandTotalWithoutConsumptionTax * 1.1) / numberOfPeople).toLocaleString()}
                 </p>
               </div>
             </div>
@@ -228,18 +330,14 @@ const RecreationPlanShow: React.FC = () => {
                 <p className='text-black fw-bold'>一月あたり</p>
               </div>
               <div className='col-8 text-end text-black'>
-                <p>
-                  ¥{Math.floor(grandTotal / months).toLocaleString()}
-                </p>
+                <p>¥{Math.floor((grandTotalWithoutConsumptionTax * 1.1) / months).toLocaleString()}</p>
               </div>
             </div>
-
-            <p className=''>※交通費は1回あたり1000円を基準値</p>
           </div>
           <div className='mt-3 d-flex justify-content-center'>
             <button
-              onClick={pdhDownloadHandler}
               className='download-button py-2 px-3 rounded fw-bold'
+              onClick={handleCreateRecreationPlanEstimate}
             >
               プランの見積もりをダウンロードする
             </button>

@@ -19,5 +19,5 @@
 #  fk_rails_...  (company_id => companies.id)
 #
 class CompanyMemo < ApplicationRecord
-  belongs_to :company
+  belongs_to :company, class_name: 'Company'
 end

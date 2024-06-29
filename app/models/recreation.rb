@@ -44,23 +44,23 @@ class Recreation < ApplicationRecord
   enumerize :status, in: { unapplied: 0, in_progress: 1, published: 2 }, default: 0
   enumerize :category, in: { event: 0, work: 1, music: 2, health: 3, travel: 4, hobby: 5, food: 6, other: 7 }, default: 0
 
-  belongs_to :user
-  has_many :recreation_tags, dependent: :destroy
-  has_many :tags, through: :recreation_tags
-  has_many :recreation_images, dependent: :destroy
-  has_many :orders, dependent: :destroy
-  has_many :reports, through: :orders
-  has_many :evaluations, through: :reports
-  has_one :recreation_profile, dependent: :destroy
-  has_one :profile, through: :recreation_profile
-  has_many :recreation_prefectures, dependent: :destroy
-  has_many :recreation_memos, dependent: :destroy
-  has_many :favorite_recreations, dependent: :destroy
-  has_many :favorited_by_users, through: :favorite_recreations, source: :user
-  has_many :recreation_recreation_plans, dependent: :destroy
-  has_many :recreation_plans, through: :recreation_recreation_plans
-  has_many :user_recreation_recreation_plans, dependent: :destroy
-  has_many :user_recreation_plans, through: :user_recreation_recreation_plans
+  belongs_to :user, class_name: 'User'
+  has_many :recreation_tags, dependent: :destroy, class_name: 'RecreationTag'
+  has_many :tags, through: :recreation_tags, class_name: 'Tag'
+  has_many :recreation_images, dependent: :destroy, class_name: 'RecreationImage'
+  has_many :orders, dependent: :destroy, class_name: 'Order'
+  has_many :reports, through: :orders, class_name: 'Report'
+  has_many :evaluations, through: :reports, class_name: 'Evaluation'
+  has_one :recreation_profile, dependent: :destroy, class_name: 'RecreationProfile'
+  has_one :profile, through: :recreation_profile, class_name: 'Profile'
+  has_many :recreation_prefectures, dependent: :destroy, class_name: 'RecreationPrefecture'
+  has_many :recreation_memos, dependent: :destroy, class_name: 'RecreationMemo'
+  has_many :favorite_recreations, dependent: :destroy, class_name: 'FavoriteRecreation'
+  has_many :favorited_by_users, through: :favorite_recreations, source: :user, class_name: 'User'
+  has_many :recreation_recreation_plans, dependent: :destroy, class_name: 'RecreationRecreationPlan'
+  has_many :recreation_plans, through: :recreation_recreation_plans, class_name: 'RecreationPlan'
+  has_many :user_recreation_recreation_plans, dependent: :destroy, class_name: 'UserRecreationRecreationPlan'
+  has_many :user_recreation_plans, through: :user_recreation_recreation_plans, class_name: 'UserRecreationPlan'
 
   accepts_nested_attributes_for :recreation_images, allow_destroy: true
   accepts_nested_attributes_for :recreation_profile, allow_destroy: true

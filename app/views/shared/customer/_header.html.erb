@@ -12,13 +12,13 @@
         <% end %>
       </div>
 
-      <%# <div class="col-auto"> %>
-        <%# if active_link?('user_recreation_plans') %>
-          <%# プラン一覧 %>
-        <%# else %>
-          <%#= link_to 'プラン一覧', customers_user_recreation_plans_path, class: "clink" %>
-        <%# end %>
-      <%# </div> %>
+      <div class="col-auto">
+        <% if active_link?('user_recreation_plans') %>
+          <% プラン一覧 %>
+        <% else %>
+          <%= link_to 'プラン一覧', customers_user_recreation_plans_path, class: "clink" %>
+        <% end %>
+      </div>
 
       <div class="col-auto">
         <% if active_link?('registrations') %>
@@ -50,6 +50,20 @@
             <%= t('activerecord.models.favorite_recreation') %>
         <% else %>
           <%= link_to 'お気に入りレク', customers_favorite_recreations_path, class: "clink" %>
+        <% end %>
+      </div>
+      <div class="col-auto">
+        <% if active_link?('user_recreation_plans') %>
+            <%= t('activerecord.models.user_recreation_plan') %>
+        <% else %>
+          <%= link_to '登録レクリエーションプラン', customers_user_recreation_plans_path, class: "clink" %>
+        <% end %>
+      </div>
+      <div class="col-auto">
+        <% if active_link?('recreation_plan_estimates') %>
+            <%= t('activerecord.models.recreation_plan_estimate') %>
+        <% else %>
+          <%= link_to 'プラン見積書', customers_recreation_plan_estimates_path, class: "clink" %>
         <% end %>
       </div>
     </div>

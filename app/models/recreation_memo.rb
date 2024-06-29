@@ -19,5 +19,5 @@
 #  fk_rails_...  (recreation_id => recreations.id)
 #
 class RecreationMemo < ApplicationRecord
-  belongs_to :recreation
+  belongs_to :recreation, class_name: 'Recreation'
 end

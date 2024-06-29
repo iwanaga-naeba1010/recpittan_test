@@ -59,6 +59,11 @@ export const FirstStep: React.FC<Props> = (props) => {
   );
 
   useEffect(() => {
+    const capacityValue = getValues('capacity');
+    setShow(capacityValue > 0);
+  }, [getValues]);
+
+  useEffect(() => {
     (async () => {
       try {
         const recreationConfig = await Api.get<Config>(
@@ -358,21 +363,20 @@ export const FirstStep: React.FC<Props> = (props) => {
           type='radio'
           id='numberOfFacilitiesTrue'
           name='number_of_facilities'
-          onClick={() => setShow(true)}
+          onChange={() => setShow(true)}
+          checked={show}
         />
-        <label htmlFor='numberOfFacilitiesTrue' onClick={() => setShow(true)}>
-          あり
-        </label>
+        <label htmlFor='numberOfFacilitiesTrue'>あり</label>
         <br />
         <input
           type='radio'
           id='numberOfFacilitiesFalse'
           name='number_of_facilities'
-          onClick={() => setShow(false)}
+          onChange={() => setShow(false)}
+          checked={!show}
         />
-        <label htmlFor='numberOfFacilitiesFalse' onClick={() => setShow(false)}>
-          なし
-        </label>
+        <label htmlFor='numberOfFacilitiesFalse'>なし</label>
+        {/* falseならvalueは0 */}
         {show && (
           <>
             <p className='small my-0'>何人まで参加できますか？</p>
@@ -381,6 +385,9 @@ export const FirstStep: React.FC<Props> = (props) => {
               className='p-2 w-100 rounded border border-secondary'
               {...register('capacity', { required: '参加人数制限は必須です' })}
             />
+            {errors.capacity && (
+              <ValidationErrorMessage message={errors?.capacity?.message} />
+            )}
           </>
         )}
         {errors.capacity && errors.capacity.message && (

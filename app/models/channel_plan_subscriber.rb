@@ -22,9 +22,9 @@
 class ChannelPlanSubscriber < ApplicationRecord
   extend Enumerize
 
-  belongs_to :company
+  belongs_to :company, class_name: 'Company'
 
-  has_many :channel_plan_subscriber_memos, dependent: :destroy
+  has_many :channel_plan_subscriber_memos, dependent: :destroy, class_name: 'ChannelPlanSubscriberMemo'
 
   validates :company_id, uniqueness: true
 

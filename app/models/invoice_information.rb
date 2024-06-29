@@ -28,7 +28,7 @@
 #  fk_rails_...  (user_id => users.id)
 #
 class InvoiceInformation < ApplicationRecord
-  belongs_to :user
+  belongs_to :user, class_name: 'User'
 
   validates :company_name, :name, :email, :zip, :prefecture, :city, :street, presence: true
 end

@@ -18,7 +18,7 @@
 #
 class Zoom < ApplicationRecord
   extend Enumerize
-  belongs_to :order
+  belongs_to :order, class_name: 'Order'
 
   enumerize :created_by, in: { partner: 0, admin: 1 }, default: 0
 

@@ -23,10 +23,10 @@
 #  fk_rails_...  (user_id => users.id)
 #
 class UserRecreationPlan < ApplicationRecord
-  belongs_to :user
-  belongs_to :recreation_plan
-  has_many :user_recreation_recreation_plans, dependent: :destroy
-  has_many :recreations, through: :user_recreation_recreation_plans
+  belongs_to :user, class_name: 'User'
+  belongs_to :recreation_plan, class_name: 'RecreationPlan'
+  has_many :user_recreation_recreation_plans, dependent: :destroy, class_name: 'UserRecreationRecreationPlan'
+  has_many :recreations, through: :user_recreation_recreation_plans, class_name: 'Recreation'
 
   delegate :title, to: :recreation_plan, prefix: true
 end

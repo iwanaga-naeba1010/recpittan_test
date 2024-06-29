@@ -47,18 +47,18 @@ class User < ApplicationRecord
   enumerize :approval_status, in: { unapproved: 0, approved: 1 }, default: 0
 
   # TODO: role == userの場合、の条件加えたい
-  belongs_to :company, optional: true
+  belongs_to :company, optional: true, class_name: 'Company'
   accepts_nested_attributes_for :company, allow_destroy: true
-  has_one :invoice_information, dependent: :destroy
-  has_many :recreations, dependent: :destroy
-  has_many :orders, dependent: :destroy
-  has_many :chats, dependent: :destroy
-  has_many :profiles, dependent: :destroy
-  has_many :user_memos, dependent: :destroy
-  has_many :favorite_recreations, dependent: :destroy
-  has_many :favorited_recreations, through: :favorite_recreations, source: :recreation
-  has_many :user_recreation_plans, dependent: :destroy
-  has_many :recreation_plans, through: :user_recreation_plans
+  has_one :invoice_information, dependent: :destroy, class_name: 'InvoiceInformation'
+  has_many :recreations, dependent: :destroy, class_name: 'Recreation'
+  has_many :orders, dependent: :destroy, class_name: 'Order'
+  has_many :chats, dependent: :destroy, class_name: 'Chat'
+  has_many :profiles, dependent: :destroy, class_name: 'Profile'
+  has_many :user_memos, dependent: :destroy, class_name: 'UserMemo'
+  has_many :favorite_recreations, dependent: :destroy, class_name: 'FavoriteRecreation'
+  has_many :favorited_recreations, through: :favorite_recreations, source: :recreation, class_name: 'Recreation'
+  has_many :user_recreation_plans, dependent: :destroy, class_name: 'UserRecreationPlan'
+  has_many :recreation_plans, through: :user_recreation_plans, class_name: 'RecreationPlan'
 
   scope :customers, -> { where(role: :customer) }
 
