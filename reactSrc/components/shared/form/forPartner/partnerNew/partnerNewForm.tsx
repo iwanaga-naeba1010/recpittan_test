@@ -26,6 +26,64 @@ export const PartnerNewForm: React.FC = () => {
 
   const disabled = false;
 
+  const renderStepNavigation = () => {
+    switch (currentStep) {
+      case 0:
+        return (
+          <div className='px-3'>
+            <button
+              type='button'
+              disabled={disabled}
+              className='my-4 py-2 w-100 rounded text-white font-weight-bold bg-primary border border-primary'
+              onClick={handleNext}
+            >
+              次へ進む
+            </button>
+          </div>
+        );
+      case 1:
+      case 2:
+        return (
+          <div className='row p-3 border border-top'>
+            <div className='col-3'>
+              <button
+                type='button'
+                className='py-2 w-100 rounded text-primary font-weight-bold bg-white border border-white'
+                onClick={handlePrev}
+              >
+                戻る
+              </button>
+            </div>
+            <div className='col-9'>
+              <button
+                type='button'
+                disabled={disabled}
+                className='py-2 w-100 rounded text-white font-weight-bold bg-primary border border-primary'
+                onClick={currentStep === 2 ? handleNext : handleNext}
+              >
+                {currentStep === 2 ? '登録を完了する' : '次へ進む'}
+              </button>
+            </div>
+          </div>
+        );
+      case 3:
+        return (
+          <div className='px-3'>
+            <button
+              type='submit'
+              disabled={disabled}
+              className='mt-2 py-2 w-100 rounded text-white font-weight-bold bg-primary border border-primary'
+              onClick={handleNext}
+            >
+              学習コンテンツに進む(外部サイト)
+            </button>
+          </div>
+        );
+      default:
+        return null;
+    }
+  };
+
   return (
     <div>
       <div className="header bg-white">
@@ -44,41 +102,7 @@ export const PartnerNewForm: React.FC = () => {
         {currentStep === 3 && <FourthStep />}
         {currentStep === 4 && <FifthStep />}
 
-        {currentStep !== 4 && currentStep !== 3 && (
-          <div className='px-3'>
-            <button
-              type='button'
-              disabled={disabled}
-              className='my-4 py-2 w-100 rounded text-white font-weight-bold bg-primary border border-primary'
-              onClick={handleNext}
-            >
-              次へ進む
-            </button>
-          </div>
-        )}
-        {currentStep === 3 && (
-          <div className='px-3'>
-            <button
-              type='submit'
-              disabled={disabled}
-              className='mt-2 py-2 w-100 rounded text-white font-weight-bold bg-primary border border-primary'
-              onClick={handleNext}
-            >
-              学習コンテンツに進む(外部サイト)
-            </button>
-          </div>
-        )}
-        {currentStep !== 0 && (
-          <div className='px-3'>
-            <button
-              type='button'
-              className='w-100 rounded text-primary font-weight-bold bg-white border border-white'
-              onClick={handlePrev}
-            >
-              ＜戻る
-            </button>
-          </div>
-        )}
+        {renderStepNavigation()}
       </form>
     </div>
   );
