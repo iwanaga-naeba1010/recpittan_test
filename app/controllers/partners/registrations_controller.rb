@@ -5,4 +5,6 @@ class Partners::RegistrationsController < ApplicationController
   layout 'partner_registration'
 
   def new; end
+
+  def create; end
 end
