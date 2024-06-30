@@ -26,21 +26,20 @@ export const PartnerNewForm: React.FC = () => {
 
   const renderStepNavigation = () => {
     switch (currentStep) {
-      // case 0:
-      //   return (
-      //     <div className='px-3'>
-      //       <button
-      //         type='button'
-      //         disabled={disabled}
-      //         className='my-4 py-2 w-100 rounded text-white font-weight-bold bg-primary border border-primary'
-      //         onClick={handleNext}
-      //       >
-      //         次へ進む
-      //       </button>
-      //     </div>
-      //   );
+      case 0:
+        return (
+          <div className='px-3 border border-top'>
+            <button
+              type='button'
+              disabled={disabled}
+              className='my-4 py-2 w-100 rounded text-white font-weight-bold bg-primary border border-primary'
+              onClick={handleNext}
+            >
+              次へ進む
+            </button>
+          </div>
+        );
       case 1:
-      case 2:
         return (
           <div className='row p-3 border border-top'>
             <div className='col-3'>
@@ -57,24 +56,36 @@ export const PartnerNewForm: React.FC = () => {
                 type='button'
                 disabled={disabled}
                 className='py-2 w-100 rounded text-white font-weight-bold bg-primary border border-primary'
-                onClick={currentStep === 2 ? handleNext : handleNext}
+                onClick={handleNext}
               >
-                {currentStep === 2 ? '登録を完了する' : '次へ進む'}
+                次へ進む
               </button>
             </div>
           </div>
         );
-      case 3:
+      case 2:
         return (
-          <div className='px-3'>
-            <button
-              type='submit'
-              disabled={disabled}
-              className='mt-2 py-2 w-100 rounded text-white font-weight-bold bg-primary border border-primary'
-              onClick={handleNext}
-            >
-              学習コンテンツに進む(外部サイト)
-            </button>
+          <div className='row p-3 border border-top'>
+            <div className='col-3'>
+              <button
+                type='button'
+                className='py-2 w-100 rounded text-primary font-weight-bold bg-white border border-white'
+                onClick={handlePrev}
+              >
+                戻る
+              </button>
+            </div>
+            <div className='col-9'>
+              <a href="/partners/registrations/complete">
+                <button
+                  type='button'
+                  disabled={disabled}
+                  className='py-2 w-100 rounded text-white font-weight-bold bg-primary border border-primary'
+                >
+                  登録を完了する
+                </button>
+              </a>
+            </div>
           </div>
         );
       default:

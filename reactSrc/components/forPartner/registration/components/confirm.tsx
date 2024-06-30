@@ -30,7 +30,6 @@ const Confirm: React.FC = () => {
         <button
           type='submit'
           className='mt-2 py-2 w-100 rounded text-primary font-weight-bold bg-white border'
-          onClick={toggleSection}
         >
           学習コンテンツを確認する
         </button>
@@ -99,6 +98,13 @@ const Confirm: React.FC = () => {
             </a>
             を確認しました
           </label>
+        </div>
+        <div>
+          <a href="/partners/recreations">
+            <button className='mt-2 py-2 w-100 rounded text-white font-weight-bold bg-primary border border-primary' >
+              レク登録へ続く
+            </button>
+          </a>
         </div>
       </div>
     </>
