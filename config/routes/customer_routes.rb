@@ -6,10 +6,7 @@ namespace :customers do
   resources :evaluations, only: %i[index]
   resources :favorite_recreations, only: %i[index]
   resources :invoice_informations, only: %i[new create edit update]
-  resources :online_recreation_channels, only: %i[show] do
-    get :download, on: :member
-  end
-  resources :recreation_plan_estimates, only: %i[show]
+  resources :recreation_plan_estimates, only: %i[index show]
   resources :recreation_plans, only: %i[index show]
   resources :recreations, only: %i[show index], shallow: true do
     resources :evaluations, only: %i[index]

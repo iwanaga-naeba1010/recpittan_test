@@ -54,7 +54,7 @@ const RecreationPlanShow: React.FC = () => {
     setTransportationExpenses(parseInt(event.target.value, 10) || 0);
   };
 
-  const grandTotal =
+  const grandTotalWithoutConsumptionTax =
     totalPrice +
     totalMaterialPrice +
     totalTransportationCost +
@@ -292,10 +292,26 @@ const RecreationPlanShow: React.FC = () => {
 
             <div className='row'>
               <div className='col-4'>
+                <p className='text-black'>小計</p>
+              </div>
+              <div className='col-8 text-end text-black'>
+                <p>¥{grandTotalWithoutConsumptionTax.toLocaleString()}</p>
+              </div>
+            </div>
+            <div className='row'>
+              <div className='col-4'>
+                <p className='text-black'>消費税</p>
+              </div>
+              <div className='col-8 text-end text-black'>
+                <p>¥{(grandTotalWithoutConsumptionTax * 0.1).toLocaleString()}</p>
+              </div>
+            </div>
+            <div className='row'>
+              <div className='col-4'>
                 <p className='text-black fw-bold'>合計</p>
               </div>
               <div className='col-8 text-end text-black'>
-                <p>¥{grandTotal.toLocaleString()}</p>
+                <p>¥{(grandTotalWithoutConsumptionTax * 1.1).toLocaleString()}</p>
               </div>
             </div>
             <div className='row'>
@@ -304,7 +320,7 @@ const RecreationPlanShow: React.FC = () => {
               </div>
               <div className='col-8 text-end text-black'>
                 <p>
-                  ¥{Math.floor(grandTotal / numberOfPeople).toLocaleString()}
+                  ¥{Math.floor((grandTotalWithoutConsumptionTax * 1.1) / numberOfPeople).toLocaleString()}
                 </p>
               </div>
             </div>
@@ -314,7 +330,7 @@ const RecreationPlanShow: React.FC = () => {
                 <p className='text-black fw-bold'>一月あたり</p>
               </div>
               <div className='col-8 text-end text-black'>
-                <p>¥{Math.floor(grandTotal / months).toLocaleString()}</p>
+                <p>¥{Math.floor((grandTotalWithoutConsumptionTax * 1.1) / months).toLocaleString()}</p>
               </div>
             </div>
           </div>
