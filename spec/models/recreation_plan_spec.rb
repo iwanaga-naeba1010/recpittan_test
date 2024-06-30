@@ -11,10 +11,12 @@
 #  title          :string           not null
 #  created_at     :datetime         not null
 #  updated_at     :datetime         not null
+#  company_id     :bigint
 #
 # Indexes
 #
-#  index_recreation_plans_on_code  (code) UNIQUE
+#  index_recreation_plans_on_code        (code) UNIQUE
+#  index_recreation_plans_on_company_id  (company_id)
 #
 require 'rails_helper'
 

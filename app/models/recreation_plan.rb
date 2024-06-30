@@ -11,14 +11,17 @@
 #  title          :string           not null
 #  created_at     :datetime         not null
 #  updated_at     :datetime         not null
+#  company_id     :bigint
 #
 # Indexes
 #
-#  index_recreation_plans_on_code  (code) UNIQUE
+#  index_recreation_plans_on_code        (code) UNIQUE
+#  index_recreation_plans_on_company_id  (company_id)
 #
 class RecreationPlan < ApplicationRecord
   extend Enumerize
 
+  belongs_to :company, class_name: 'Company', optional: true
   has_many :recreation_recreation_plans, dependent: :destroy, class_name: 'RecreationRecreationPlan'
   has_many :recreations, through: :recreation_recreation_plans, class_name: 'Recreation'
   has_many :user_recreation_plans, dependent: :destroy, class_name: 'UserRecreationPlan'
@@ -34,6 +37,10 @@ class RecreationPlan < ApplicationRecord
   validates :code, uniqueness: true
   before_validation :generate_code, on: :create
 
+  scope :visible_to, ->(user) { where('company_id IS NULL OR company_id = ?', user.company_id) }
+
+  delegate :facility_name, to: :company, allow_nil: true
+
   def monthly_fee
     latest_month = recreation_recreation_plans.order(month: :desc).first.month
     recreation_price = recreations.sum(&:price)
@@ -44,6 +51,10 @@ class RecreationPlan < ApplicationRecord
     total_price = recreation_price + material_price + transportation_expenses + adjustment_fee.to_i
 
     total_price / latest_month
+  end
+
+  def visible_to_company?(user_company)
+    company.nil? || user_company == company
   end
 
   private def generate_code
