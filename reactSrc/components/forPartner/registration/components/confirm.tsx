@@ -1,7 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 import ReactDOM from 'react-dom/client'; // Import ReactDOM with createRoot
 
 const Confirm: React.FC = () => {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const toggleSection = () => {
+    setIsOpen(!isOpen);
+  };
+
   return (
     <>
       <div className='header bg-white shadow-sm'>
@@ -24,6 +30,7 @@ const Confirm: React.FC = () => {
         <button
           type='submit'
           className='mt-2 py-2 w-100 rounded text-primary font-weight-bold bg-white border'
+          onClick={toggleSection}
         >
           学習コンテンツを確認する
         </button>
@@ -31,7 +38,11 @@ const Confirm: React.FC = () => {
           学習コンテンツは外部サイトへ遷移します
         </p>
         <div className='reason'>
-          <div className='top-section pt-3 pb-2 px-3 d-flex align-items-center justify-content-between'>
+          <div
+            className='top-section pt-3 pb-2 px-3 d-flex align-items-center justify-content-between'
+            onClick={toggleSection}
+            style={{ cursor: 'pointer' }}
+          >
             <div className='d-flex align-items-center'>
               <img
                 src='/partner_registration/attention_image.svg'
@@ -40,12 +51,22 @@ const Confirm: React.FC = () => {
               />
               <p className='fw-bold mb-0'>学習コンテンツがある理由</p>
             </div>
-            <img src='/partner_registration/up_arrow.svg' alt='top_image' />
+            <img
+              src='/partner_registration/up_arrow.svg'
+              alt='top_image'
+              style={{ transform: isOpen ? 'rotate(180deg)' : 'rotate(0deg)' }}
+            />
           </div>
-          <hr className='my-2' />
-          <div className='bottom-section py-1 px-3'>
+          <div
+            className='bottom-section py-1 px-3'
+            style={{
+              maxHeight: isOpen ? '500px' : '0',
+              overflow: 'hidden',
+              transition: 'max-height 0.3s ease-out',
+            }}
+          >
             <p>
-              これから現場にでていただき、レクのプロとして活動していただきます。高齢者、現場のスタッフの皆様はレクの開催を楽しみにしています。
+              これから現場に出ていただき、レクのプロとして活動していただきます。高齢者、現場のスタッフの皆様はレクの開催を楽しみにしています。
               <br />
               同時に一般高齢者とはまた異なる環境での開催となります。
               <br />
