@@ -198,7 +198,7 @@ const RecreationPlanShow: React.FC = () => {
               <div className='col-3'>
                 <form onSubmit={(e) => e.preventDefault()}>
                   <label className='mt-1' htmlFor='numberInput'>
-                    レクを受ける人数を入力
+                    参加人数
                     <span className='ms-2 text-danger'>必須</span>
                   </label>
                   <br />
@@ -303,7 +303,9 @@ const RecreationPlanShow: React.FC = () => {
                 <p className='text-black'>消費税</p>
               </div>
               <div className='col-8 text-end text-black'>
-                <p>¥{(grandTotalWithoutConsumptionTax * 0.1).toLocaleString()}</p>
+                <p>
+                  ¥{(grandTotalWithoutConsumptionTax * 0.1).toLocaleString()}
+                </p>
               </div>
             </div>
             <div className='row'>
@@ -311,7 +313,9 @@ const RecreationPlanShow: React.FC = () => {
                 <p className='text-black fw-bold'>合計</p>
               </div>
               <div className='col-8 text-end text-black'>
-                <p>¥{(grandTotalWithoutConsumptionTax * 1.1).toLocaleString()}</p>
+                <p>
+                  ¥{(grandTotalWithoutConsumptionTax * 1.1).toLocaleString()}
+                </p>
               </div>
             </div>
             <div className='row'>
@@ -320,7 +324,10 @@ const RecreationPlanShow: React.FC = () => {
               </div>
               <div className='col-8 text-end text-black'>
                 <p>
-                  ¥{Math.floor((grandTotalWithoutConsumptionTax * 1.1) / numberOfPeople).toLocaleString()}
+                  ¥
+                  {Math.floor(
+                    (grandTotalWithoutConsumptionTax * 1.1) / numberOfPeople
+                  ).toLocaleString()}
                 </p>
               </div>
             </div>
@@ -330,7 +337,12 @@ const RecreationPlanShow: React.FC = () => {
                 <p className='text-black fw-bold'>一月あたり</p>
               </div>
               <div className='col-8 text-end text-black'>
-                <p>¥{Math.floor((grandTotalWithoutConsumptionTax * 1.1) / months).toLocaleString()}</p>
+                <p>
+                  ¥
+                  {Math.floor(
+                    (grandTotalWithoutConsumptionTax * 1.1) / months
+                  ).toLocaleString()}
+                </p>
               </div>
             </div>
           </div>

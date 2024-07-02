@@ -65,6 +65,7 @@ ActiveAdmin.register RecreationPlan do
       f.input :title
       f.input :release_status, as: :select, collection: RecreationPlan.release_status.values.map { |i| [i.text, i] }
       f.input :company, as: :select, collection: Company.all.map { |company| [company.facility_name, company.id] }
+      f.input :adjustment_fee
     end
 
     f.input :tags, label: 'タグ', as: :check_boxes, collection: Tag.plans.all
