@@ -19,3 +19,4 @@ export * from './userRecreationPlan';
 export * from './userRecreationRecreationPlan';
 export * from './recreationPlanEstimate';
 export * from './userRecreationPlan';
+export * from './bank';

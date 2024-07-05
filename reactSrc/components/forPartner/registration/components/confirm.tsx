@@ -100,8 +100,8 @@ const Confirm: React.FC = () => {
           </label>
         </div>
         <div>
-          <a href="/partners/recreations">
-            <button className='mt-2 py-2 w-100 rounded text-white font-weight-bold bg-primary border border-primary' >
+          <a href='/partners/recreations'>
+            <button className='mt-2 py-2 w-100 rounded text-white font-weight-bold bg-primary border border-primary'>
               レク登録へ続く
             </button>
           </a>

@@ -74,7 +74,7 @@ const renderFlowStep = (
       <p className='fw-bold'>{title}</p>
       <p className='mb-0' dangerouslySetInnerHTML={{ __html: description }} />
       {showButton && (
-        <a href="/partners/registrations/confirm">
+        <a href='/partners/registrations/confirm'>
           <button
             type='submit'
             className='mt-2 py-2 w-100 rounded text-white font-weight-bold bg-primary border border-primary'
