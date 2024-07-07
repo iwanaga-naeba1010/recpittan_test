@@ -62,6 +62,10 @@ class User < ApplicationRecord
 
   scope :customers, -> { where(role: :customer) }
 
+  def facility_name
+    company&.facility_name
+  end
+
   # NOTE: deviseの認証が発火した時に動く。
   def after_confirmation
     # Do something...
