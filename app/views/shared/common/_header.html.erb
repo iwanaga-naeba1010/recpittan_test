@@ -21,7 +21,7 @@
           <li class="nav-item">
             <%= link_to 'レク一覧', customers_recreations_path(sort_order: :number_of_recreations_held), class: 'nav-link' %>
           </li>
-          <% if user_signed_in? && current_user.role.customer? %>
+          <% if user_signed_in? && current_user.role.customer? || current_user.role.admin? %>
             <li class="nav-item">
               <%= link_to 'プラン一覧', customers_recreation_plans_path, class: 'nav-link' %>
             </li>
