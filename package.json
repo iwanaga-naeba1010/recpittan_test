@@ -60,7 +60,7 @@
     "eslint-plugin-react-hooks": "^4.6.2",
     "eslint-webpack-plugin": "^3.2.0",
     "prettier": "^3.3.2",
-    "prettier-plugin-organize-imports": "^3.2.4",
+    "prettier-plugin-organize-imports": "^4.0.0",
     "webpack-dev-server": "^3.11.2"
   }
 }
