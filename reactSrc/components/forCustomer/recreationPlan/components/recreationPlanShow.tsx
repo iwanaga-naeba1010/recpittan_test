@@ -15,7 +15,7 @@ const RecreationPlanShow: React.FC = () => {
   const [numberOfPeople, setNumberOfPeople] = useState(10);
   const { fetchRecreationPlan } = useRecreationPlan();
   const handleNumberOfPeopleChange = (
-    event: React.ChangeEvent<HTMLInputElement>
+    event: React.ChangeEvent<HTMLSelectElement>
   ): void => {
     setNumberOfPeople(parseInt(event.target.value, 10) || 0);
   };
@@ -49,7 +49,7 @@ const RecreationPlanShow: React.FC = () => {
 
   // 交通費の入力変更ハンドラ
   const handleTransportationExpensesChange = (
-    event: React.ChangeEvent<HTMLInputElement>
+    event: React.ChangeEvent<HTMLSelectElement>
   ) => {
     setTransportationExpenses(parseInt(event.target.value, 10) || 0);
   };
@@ -202,27 +202,31 @@ const RecreationPlanShow: React.FC = () => {
                     <span className='ms-2 text-danger'>必須</span>
                   </label>
                   <br />
-                  <input
-                    type='number'
+                  <select
                     id='numberInput'
                     name='number_of_people'
-                    placeholder='10'
                     className='form-control w-100 mt-1'
                     value={numberOfPeople}
                     onChange={handleNumberOfPeopleChange}
-                    min='1'
-                  />
+                  >
+                    {Array.from({ length: 100 }, (_, i) => i + 1).map((num) => (
+                      <option key={num} value={num}>
+                        {num}
+                      </option>
+                    ))}
+                  </select>
                 </form>
               </div>
               <div className='col-3'>
                 <form onSubmit={(e) => e.preventDefault()}>
-                  <label className='mt-1' htmlFor='numberInput'>
+                  <label className='mt-1' htmlFor='startMonth'>
                     レクの開始月を選択
                     <span className='ms-2 text-danger'>必須</span>
                   </label>
                   <br />
                   {/* 1から12までのselect form */}
                   <select
+                    id='startMonth'
                     className='form-select w-100 mt-1'
                     value={startMonth}
                     onChange={handleStartMonthChange}
@@ -239,16 +243,22 @@ const RecreationPlanShow: React.FC = () => {
               </div>
               <div className='col-3'>
                 <form>
-                  <label className='mt-1' htmlFor='numberInput'>
+                  <label className='mt-1' htmlFor='transportationExpenses'>
                     1回の交通費を入力
                     <span className='ms-2 text-danger'>必須</span>
                   </label>
-                  <input
-                    type='number'
+                  <select
+                    id='transportationExpenses'
                     className='form-control w-100 mt-1'
                     value={transportationExpenses}
                     onChange={handleTransportationExpensesChange}
-                  />
+                  >
+                    {[500, 1000, 1500, 2000, 3000, 4000].map((cost) => (
+                      <option key={cost} value={cost}>
+                        ¥{cost.toLocaleString()}
+                      </option>
+                    ))}
+                  </select>
                 </form>
               </div>
             </div>
