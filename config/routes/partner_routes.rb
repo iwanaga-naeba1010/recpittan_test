@@ -11,6 +11,7 @@ namespace :partners do
   resources :recreations, only: %i[index new show create edit update complete_final_check] do
     resources :evaluations, only: %i[index]
   end
+  resources :bank_accounts, only: %i[new edit]
   resources :profiles, except: :show
   resources :orders, only: %i[show update] do
     member do

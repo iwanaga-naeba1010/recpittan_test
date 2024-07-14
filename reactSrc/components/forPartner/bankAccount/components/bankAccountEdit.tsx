@@ -1,13 +1,17 @@
+import { createRoot } from 'react-dom/client';
 import React, { useState, useEffect } from 'react';
-import { useFormContext } from 'react-hook-form';
+import { useForm, FormProvider, useFormContext } from 'react-hook-form';
 import { Bank, Branch } from '@/types';
+import { useBankAccount } from '../hook/useBankAccount';
 
-export const ThirdStep: React.FC = () => {
+const BankAccountEdit: React.FC<{ id: string }> = ({ id }) => {
   const {
     register,
+    handleSubmit,
     setValue,
     formState: { errors, isSubmitted },
   } = useFormContext();
+  const { fetchBankAccount, updateBankAccount } = useBankAccount();
 
   const [bankName, setBankName] = useState('');
   const [suggestedBanks, setSuggestedBanks] = useState<Bank[]>([]);
@@ -18,7 +22,6 @@ export const ThirdStep: React.FC = () => {
   const [branchName, setBranchName] = useState('');
   const [allBanks, setAllBanks] = useState<Bank[]>([]);
 
-  // 銀行情報を取得
   useEffect(() => {
     const fetchAllBanks = async () => {
       let fetchedBanks: Bank[] = [];
@@ -41,10 +44,21 @@ export const ThirdStep: React.FC = () => {
     fetchAllBanks();
   }, []);
 
-  // 銀行名検索で、入力値に一致するデータをサジェストで表示させる
-  const handleBankNameInputChange = (
-    e: React.ChangeEvent<HTMLInputElement>
-  ) => {
+  useEffect(() => {
+    const fetchBankData = async () => {
+      const bankAccount = await fetchBankAccount(id);
+      setValue('bankName', bankAccount.bankName);
+      setValue('bankCode', bankAccount.bankCode);
+      setValue('branchName', bankAccount.branchName);
+      setValue('branchCode', bankAccount.branchCode);
+      setValue('accountType', bankAccount.accountType);
+      setValue('accountNumber', bankAccount.accountNumber);
+      setValue('accountHolderName', bankAccount.accountHolderName);
+    };
+    fetchBankData();
+  }, [id, fetchBankAccount, setValue]);
+
+  const handleBankNameInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setIsSuggestedOpen(true);
     const value = e.target.value;
     setBankName(value);
@@ -62,7 +76,6 @@ export const ThirdStep: React.FC = () => {
     }
   };
 
-  // focusを判定
   const handleFocus = () => {
     setIsFocused(true);
   };
@@ -86,7 +99,6 @@ export const ThirdStep: React.FC = () => {
     ));
   };
 
-  // サジェストされた銀行名を選択
   const handleBankNameClick = (name: string, code: string) => {
     setBankName(name);
     setBankCode(code);
@@ -96,7 +108,6 @@ export const ThirdStep: React.FC = () => {
     setValue('bankCode', code);
   };
 
-  // 選択した金融機関コードを基に全支店情報を取得
   const fetchAllBranches = async (bankCode: string): Promise<Branch[]> => {
     let allBranches: Branch[] = [];
     let currentPage = 1;
@@ -117,10 +128,7 @@ export const ThirdStep: React.FC = () => {
     return allBranches;
   };
 
-  // 支店名入力
-  const handleBranchNameChange = async (
-    e: React.ChangeEvent<HTMLInputElement>
-  ) => {
+  const handleBranchNameChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     setBranchName(value);
     setValue('branchName', value);
@@ -138,7 +146,6 @@ export const ThirdStep: React.FC = () => {
     }
   };
 
-  // 支店コード入力
   const handleBranchCodeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     setBranchCode(value);
@@ -158,8 +165,18 @@ export const ThirdStep: React.FC = () => {
     }
   };
 
+  const onSubmit = async (data: any) => {
+    try {
+      await updateBankAccount(id, { bank_account: data });
+      alert('Bank account updated successfully');
+    } catch (error) {
+      console.error(error);
+      alert('Failed to update bank account');
+    }
+  };
+
   return (
-    <>
+    <form onSubmit={handleSubmit(onSubmit)}>
       <div className='progress-bar w-100'>
         <div className='bar h-100 w-75 bg-black'></div>
       </div>
@@ -169,18 +186,11 @@ export const ThirdStep: React.FC = () => {
             <ul>
               {errors.bankName && <li>{errors.bankName.message as string}</li>}
               {errors.bankCode && <li>{errors.bankCode.message as string}</li>}
-              {errors.branchName && (
-                <li>{errors.branchName.message as string}</li>
-              )}
-              {errors.branchCode && (
-                <li>{errors.branchCode.message as string}</li>
-              )}
-              {errors.accountType && (
-                <li>{errors.accountType.message as string}</li>
-              )}
-              {errors.accountHolderName && (
-                <li>{errors.accountHolderName.message as string}</li>
-              )}
+              {errors.branchName && <li>{errors.branchName.message as string}</li>}
+              {errors.branchCode && <li>{errors.branchCode.message as string}</li>}
+              {errors.accountType && <li>{errors.accountType.message as string}</li>}
+              {errors.accountNumber && <li>{errors.accountNumber.message as string}</li>}
+              {errors.accountHolderName && <li>{errors.accountHolderName.message as string}</li>}
             </ul>
           </div>
         )}
@@ -257,8 +267,8 @@ export const ThirdStep: React.FC = () => {
             className='w-100 p-2'
             {...register('accountType', { required: '預金種目は必須です' })}
           >
-            <option value='普通'>普通</option>
-            <option value='当座'>当座</option>
+            <option value='checking'>普通</option>
+            <option value='current'>当座</option>
           </select>
         </div>
 
@@ -293,7 +303,43 @@ export const ThirdStep: React.FC = () => {
             })}
           />
         </div>
+
+        <button type='submit' className='btn btn-primary'>口座更新</button>
       </div>
-    </>
+    </form>
   );
 };
+
+const App: React.FC<{ id: string }> = ({ id }) => {
+  const methods = useForm();
+
+  return (
+    <FormProvider {...methods}>
+      <BankAccountEdit id={id} />
+    </FormProvider>
+  );
+};
+
+document.addEventListener('turbolinks:load', () => {
+  const elm = document.querySelector('#bankAccountEdit');
+  if (elm) {
+    const root = createRoot(elm);
+    const id = elm.getAttribute('data-id'); // IDを取得する
+    if (id) {
+      root.render(<App id={id} />);
+    }
+  }
+});
+
+$(document).ready(() => {
+  const elm = document.querySelector('#bankAccountEdit');
+  if (elm) {
+    const root = createRoot(elm);
+    const id = elm.getAttribute('data-id'); // IDを取得する
+    if (id) {
+      root.render(<App id={id} />);
+    }
+  }
+});
+
+export default BankAccountEdit;

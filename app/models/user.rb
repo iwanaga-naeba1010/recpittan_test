@@ -59,6 +59,7 @@ class User < ApplicationRecord
   has_many :favorited_recreations, through: :favorite_recreations, source: :recreation, class_name: 'Recreation'
   has_many :user_recreation_plans, dependent: :destroy, class_name: 'UserRecreationPlan'
   has_many :recreation_plans, through: :user_recreation_plans, class_name: 'RecreationPlan'
+  has_one :bank_account, dependent: :destroy, class_name: 'BankAccount'
 
   scope :customers, -> { where(role: :customer) }
 

@@ -4,3 +4,4 @@ export * from './recreation/new';
 export * from './recreation/show';
 export * from './evaluation/index';
 export * from './registration/index';
+export * from './bankAccount/index';

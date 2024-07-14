@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { useForm, FormProvider } from 'react-hook-form';
 import { FirstStep } from './firstStep';
 import { SecondStep } from './secondStep';
-import { ThirdStep } from './thirdStep';
 
 export const PartnerNewForm: React.FC = () => {
   const [currentStep, setCurrentStep] = useState<number>(0);
@@ -186,7 +185,6 @@ export const PartnerNewForm: React.FC = () => {
         >
           {currentStep === 0 && <FirstStep />}
           {currentStep === 1 && <SecondStep />}
-          {currentStep === 2 && <ThirdStep />}
 
           {renderStepNavigation()}
         </form>
