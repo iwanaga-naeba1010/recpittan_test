@@ -44,7 +44,9 @@ const BankAccountNew: React.FC = () => {
     fetchAllBanks();
   }, []);
 
-  const handleBankNameInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleBankNameInputChange = (
+    e: React.ChangeEvent<HTMLInputElement>
+  ) => {
     setIsSuggestedOpen(true);
     const value = e.target.value;
     setBankName(value);
@@ -114,7 +116,9 @@ const BankAccountNew: React.FC = () => {
     return allBranches;
   };
 
-  const handleBranchNameChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleBranchNameChange = async (
+    e: React.ChangeEvent<HTMLInputElement>
+  ) => {
     const value = e.target.value;
     setBranchName(value);
     setValue('branchName', value);
@@ -172,11 +176,21 @@ const BankAccountNew: React.FC = () => {
             <ul>
               {errors.bankName && <li>{errors.bankName.message as string}</li>}
               {errors.bankCode && <li>{errors.bankCode.message as string}</li>}
-              {errors.branchName && <li>{errors.branchName.message as string}</li>}
-              {errors.branchCode && <li>{errors.branchCode.message as string}</li>}
-              {errors.accountType && <li>{errors.accountType.message as string}</li>}
-              {errors.accountNumber && <li>{errors.accountNumber.message as string}</li>}
-              {errors.accountHolderName && <li>{errors.accountHolderName.message as string}</li>}
+              {errors.branchName && (
+                <li>{errors.branchName.message as string}</li>
+              )}
+              {errors.branchCode && (
+                <li>{errors.branchCode.message as string}</li>
+              )}
+              {errors.accountType && (
+                <li>{errors.accountType.message as string}</li>
+              )}
+              {errors.accountNumber && (
+                <li>{errors.accountNumber.message as string}</li>
+              )}
+              {errors.accountHolderName && (
+                <li>{errors.accountHolderName.message as string}</li>
+              )}
             </ul>
           </div>
         )}
@@ -290,7 +304,9 @@ const BankAccountNew: React.FC = () => {
           />
         </div>
 
-        <button type='submit' className='btn btn-primary'>口座作成</button>
+        <button type='submit' className='btn btn-primary'>
+          口座作成
+        </button>
       </div>
     </form>
   );

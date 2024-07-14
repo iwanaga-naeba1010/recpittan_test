@@ -1,5 +1,5 @@
 import { Api } from '@/infrastructure';
-import { Bank } from '@/types';
+import { Bank, BankAccount } from '@/types';
 import { useCallback } from 'react';
 
 type BankAccountRequestBody = {
@@ -7,7 +7,7 @@ type BankAccountRequestBody = {
 };
 
 type UseBankAccountHook = {
-  fetchBankAccount: (id: string) => Promise<Bank>;
+  fetchBankAccount: (id: string) => Promise<BankAccount>;
   createBankAccount: (requestBody: BankAccountRequestBody) => Promise<Bank>;
   updateBankAccount: (
     id: string,
@@ -16,8 +16,8 @@ type UseBankAccountHook = {
 };
 
 export const useBankAccount = (): UseBankAccountHook => {
-  const fetchBankAccount = useCallback(async (id: string): Promise<Bank> => {
-    const response = await Api.get<Bank>(`bank_account/${id}`, 'partner');
+  const fetchBankAccount = useCallback(async (): Promise<BankAccount> => {
+    const response = await Api.get<BankAccount>(`bank_account`, 'partner');
     return response.data;
   }, []);
 
@@ -37,7 +37,7 @@ export const useBankAccount = (): UseBankAccountHook => {
     requestBody: BankAccountRequestBody
   ): Promise<Bank> => {
     const response = await Api.patch<Bank>(
-      `bank_account/${id}`,
+      `bank_accounts/${id}`,
       'partner',
       requestBody
     );

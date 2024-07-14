@@ -4,7 +4,7 @@ import { useForm, FormProvider, useFormContext } from 'react-hook-form';
 import { Bank, Branch } from '@/types';
 import { useBankAccount } from '../hook/useBankAccount';
 
-const BankAccountEdit: React.FC<{ id: string }> = ({ id }) => {
+const BankAccountEdit: React.FC = () => {
   const {
     register,
     handleSubmit,
@@ -21,6 +21,8 @@ const BankAccountEdit: React.FC<{ id: string }> = ({ id }) => {
   const [branchCode, setBranchCode] = useState('');
   const [branchName, setBranchName] = useState('');
   const [allBanks, setAllBanks] = useState<Bank[]>([]);
+  const id = window.location.pathname.split('/')[3];
+  console.log(id);
 
   useEffect(() => {
     const fetchAllBanks = async () => {
@@ -47,6 +49,11 @@ const BankAccountEdit: React.FC<{ id: string }> = ({ id }) => {
   useEffect(() => {
     const fetchBankData = async () => {
       const bankAccount = await fetchBankAccount(id);
+      console.log(bankAccount);
+      setBankName(bankAccount.bankName);
+      setBankCode(bankAccount.bankCode);
+      setBranchName(bankAccount.branchName);
+      setBranchCode(bankAccount.branchCode);
       setValue('bankName', bankAccount.bankName);
       setValue('bankCode', bankAccount.bankCode);
       setValue('branchName', bankAccount.branchName);
@@ -56,9 +63,11 @@ const BankAccountEdit: React.FC<{ id: string }> = ({ id }) => {
       setValue('accountHolderName', bankAccount.accountHolderName);
     };
     fetchBankData();
-  }, [id, fetchBankAccount, setValue]);
+  }, [fetchBankAccount, setValue]);
 
-  const handleBankNameInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleBankNameInputChange = (
+    e: React.ChangeEvent<HTMLInputElement>
+  ) => {
     setIsSuggestedOpen(true);
     const value = e.target.value;
     setBankName(value);
@@ -128,7 +137,9 @@ const BankAccountEdit: React.FC<{ id: string }> = ({ id }) => {
     return allBranches;
   };
 
-  const handleBranchNameChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleBranchNameChange = async (
+    e: React.ChangeEvent<HTMLInputElement>
+  ) => {
     const value = e.target.value;
     setBranchName(value);
     setValue('branchName', value);
@@ -186,11 +197,21 @@ const BankAccountEdit: React.FC<{ id: string }> = ({ id }) => {
             <ul>
               {errors.bankName && <li>{errors.bankName.message as string}</li>}
               {errors.bankCode && <li>{errors.bankCode.message as string}</li>}
-              {errors.branchName && <li>{errors.branchName.message as string}</li>}
-              {errors.branchCode && <li>{errors.branchCode.message as string}</li>}
-              {errors.accountType && <li>{errors.accountType.message as string}</li>}
-              {errors.accountNumber && <li>{errors.accountNumber.message as string}</li>}
-              {errors.accountHolderName && <li>{errors.accountHolderName.message as string}</li>}
+              {errors.branchName && (
+                <li>{errors.branchName.message as string}</li>
+              )}
+              {errors.branchCode && (
+                <li>{errors.branchCode.message as string}</li>
+              )}
+              {errors.accountType && (
+                <li>{errors.accountType.message as string}</li>
+              )}
+              {errors.accountNumber && (
+                <li>{errors.accountNumber.message as string}</li>
+              )}
+              {errors.accountHolderName && (
+                <li>{errors.accountHolderName.message as string}</li>
+              )}
             </ul>
           </div>
         )}
@@ -304,18 +325,20 @@ const BankAccountEdit: React.FC<{ id: string }> = ({ id }) => {
           />
         </div>
 
-        <button type='submit' className='btn btn-primary'>口座更新</button>
+        <button type='submit' className='btn btn-primary mt-2 w-100'>
+          口座更新
+        </button>
       </div>
     </form>
   );
 };
 
-const App: React.FC<{ id: string }> = ({ id }) => {
+const App: React.FC = () => {
   const methods = useForm();
 
   return (
     <FormProvider {...methods}>
-      <BankAccountEdit id={id} />
+      <BankAccountEdit />
     </FormProvider>
   );
 };
@@ -324,10 +347,7 @@ document.addEventListener('turbolinks:load', () => {
   const elm = document.querySelector('#bankAccountEdit');
   if (elm) {
     const root = createRoot(elm);
-    const id = elm.getAttribute('data-id'); // IDを取得する
-    if (id) {
-      root.render(<App id={id} />);
-    }
+    root.render(<App />);
   }
 });
 
@@ -335,11 +355,6 @@ $(document).ready(() => {
   const elm = document.querySelector('#bankAccountEdit');
   if (elm) {
     const root = createRoot(elm);
-    const id = elm.getAttribute('data-id'); // IDを取得する
-    if (id) {
-      root.render(<App id={id} />);
-    }
+    root.render(<App />);
   }
 });
-
-export default BankAccountEdit;

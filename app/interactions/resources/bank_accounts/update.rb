@@ -17,13 +17,13 @@ module Resources
       def execute
         bank_account = BankAccount.find(id)
         bank_account.update!(
-          account_holder_name: account_holder_name,
-          account_number: account_number,
-          account_type: account_type,
-          bank_code: bank_code,
-          bank_name: bank_name,
-          branch_code: branch_code,
-          branch_name: branch_name
+          account_holder_name:,
+          account_number:,
+          account_type:,
+          bank_code:,
+          bank_name:,
+          branch_code:,
+          branch_name:
         )
         bank_account
       end

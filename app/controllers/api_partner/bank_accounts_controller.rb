@@ -22,8 +22,9 @@ module ApiPartner
     end
 
     def update
+      bank_account_id = BankAccount.find_by!(user_id: current_user.id).id
       bank_account = Resources::BankAccounts::Update.run!(
-        id: params[:id],
+        id: bank_account_id,
         account_holder_name: params_update[:account_holder_name],
         account_number: params_update[:account_number],
         account_type: params_update[:account_type],
