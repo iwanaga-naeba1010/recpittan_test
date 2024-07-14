@@ -8,12 +8,15 @@
   <%= display_meta_tags(default_meta_tags) %>
   <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   <%= stylesheet_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+  <!-- 印刷用のCSSファイルのリンクを追加 -->
+  <%= stylesheet_pack_tag 'application', media: 'print' %>
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap&family=Material+Icons" rel="stylesheet">
   <!-- CDN経由はswiper推奨 -->
-  <link href="https://unpkg.com/swiper@7/swiper-bundle.min.css" rel="stylesheet" >
+  <link href="https://unpkg.com/swiper@7/swiper-bundle.min.css" rel="stylesheet">
 
   <!-- Global site tag (gtag.js) - Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=UA-126571542-2"></script>
@@ -38,12 +41,12 @@
 </head>
 
 <body>
-<%= render 'shared/common/header' %>
-<%= render 'shared/common/flash' %>
-
-<%= yield %>
-<%= render 'shared/common/footer' %>
+  <%= render 'shared/common/header' %>
+  <%= render 'shared/common/flash' %>
+  <%= yield %>
+  <%= render 'shared/common/footer' %>
 </body>
+
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
         integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
         crossorigin="anonymous"></script>

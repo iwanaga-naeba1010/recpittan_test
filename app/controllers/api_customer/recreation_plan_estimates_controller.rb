@@ -12,6 +12,14 @@ module ApiCustomer
       )
 
       if recreation_plan_estimate.valid?
+        recreation_plan_title = RecreationPlan.find(recreation_plan_estimate.recreation_plan_id).title
+        message = <<~MESSAGE
+          案件ID： #{recreation_plan_estimate.id}
+          管理画面案件URL： #{admin_recreation_plan_estimate_url(recreation_plan_estimate.id)}
+          プランタイトル: #{recreation_plan_title}
+          施設名: #{recreation_plan_estimate.facility_name}
+        MESSAGE
+        SlackNotifier.new(channel: '#generate_recreation_plan_estimate_notifier').send('施設が見積書を発行しました', message)
         render json: RecreationPlanEstimateSerializer.new.serialize(recreation_plan_estimate:), status: :created
       else
         render json: { errors: recreation_plan_estimate.errors.full_messages }, status: :unprocessable_entity

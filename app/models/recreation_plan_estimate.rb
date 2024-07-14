@@ -41,6 +41,7 @@ class RecreationPlanEstimate < ApplicationRecord
   before_create :generate_estimate_number
 
   delegate :recreation_recreation_plans, :adjustment_fee, to: :recreation_plan
+  delegate :facility_name, to: :user, allow_nil: true
 
   def material_price_for_plan(plan)
     plan.recreation.material_price * number_of_people
