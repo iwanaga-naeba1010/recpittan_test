@@ -304,7 +304,7 @@ const BankAccountNew: React.FC = () => {
           />
         </div>
 
-        <button type='submit' className='btn btn-primary'>
+        <button type='submit' className='btn btn-primary w-100'>
           口座作成
         </button>
       </div>
