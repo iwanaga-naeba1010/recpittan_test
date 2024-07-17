@@ -3,6 +3,7 @@
 resources :partners, only: %i[index]
 namespace :partners do
   get :tos
+  get :setting_menus
 
   resources :registrations, only: %i[new create] do
     get :complete, on: :collection
