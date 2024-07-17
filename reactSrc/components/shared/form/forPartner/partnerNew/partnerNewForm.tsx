@@ -135,29 +135,6 @@ export const PartnerNewForm: React.FC = () => {
             </div>
             <div className='col-9'>
               <button
-                type='button'
-                className='py-2 w-100 rounded text-white font-weight-bold bg-primary border border-primary'
-                onClick={handleNext}
-              >
-                次へ進む
-              </button>
-            </div>
-          </div>
-        );
-      case 2:
-        return (
-          <div className='row p-3 border border-top'>
-            <div className='col-3'>
-              <button
-                type='button'
-                className='py-2 w-100 rounded text-primary font-weight-bold bg-white border border-white'
-                onClick={handlePrev}
-              >
-                戻る
-              </button>
-            </div>
-            <div className='col-9'>
-              <button
                 type='submit'
                 className='py-2 w-100 rounded text-white font-weight-bold bg-primary border border-primary'
               >

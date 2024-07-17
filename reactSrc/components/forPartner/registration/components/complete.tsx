@@ -29,9 +29,14 @@ const CompleteRegistration: React.FC = () => {
           友達登録はこちらから
         </h4>
         <div className='d-flex justify-content-center'>
-          <button className='line-button btn text-center my-2 py-2 px-3 rounded text-white fw-bold'>
+          <a
+            href='https://line.me/R/ti/p/@990oguwm'
+            target='_blank'
+            rel='noopener noreferrer'
+            className='line-button btn text-center my-2 py-2 px-3 rounded text-white fw-bold'
+          >
             友達追加
-          </button>
+          </a>
         </div>
         <hr />
         <div className='desc-flow'>

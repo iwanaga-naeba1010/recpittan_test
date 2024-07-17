@@ -1,11 +1,16 @@
 import React, { useState } from 'react';
-import ReactDOM from 'react-dom/client'; // Import ReactDOM with createRoot
+import ReactDOM from 'react-dom/client';
 
 const Confirm: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [isChecked, setIsChecked] = useState(false);
 
   const toggleSection = () => {
     setIsOpen(!isOpen);
+  };
+
+  const handleCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setIsChecked(e.target.checked);
   };
 
   return (
@@ -28,8 +33,9 @@ const Confirm: React.FC = () => {
           学習コンテンツをご確認の上、ページ下部のチェックを行うと新しくレクを登録することができます。
         </p>
         <button
-          type='submit'
+          type='button'
           className='mt-2 py-2 w-100 rounded text-primary font-weight-bold bg-white border'
+          onClick={() => window.open('https://youtu.be/5XEniVLs97g?si=Slz9I1EhFNgmSl-b', '_blank', 'noopener,noreferrer')}
         >
           学習コンテンツを確認する
         </button>
@@ -91,17 +97,27 @@ const Confirm: React.FC = () => {
             id='check'
             className='mt-3'
             style={{ transform: 'scale(1.2)' }}
+            onChange={handleCheckboxChange}
           />
           <label htmlFor='check' className='check ms-2'>
-            <a href='#' className='text-primary fw-bold'>
+            <a href='https://youtu.be/5XEniVLs97g?si=Slz9I1EhFNgmSl-b' target='blank' className='text-primary fw-bold'>
               学習コンテンツ
             </a>
             を確認しました
           </label>
         </div>
         <div>
-          <a href='/partners/recreations'>
-            <button className='mt-2 py-2 w-100 rounded text-white font-weight-bold bg-primary border border-primary'>
+          <a href={isChecked ? '/partners/recreations' : '#'}>
+            <button
+              className={`mt-2 py-2 w-100 rounded font-weight-bold border ${
+                isChecked ? 'bg-primary text-white border-primary' : 'text-dark'
+              }`}
+              style={{
+                backgroundColor: isChecked ? '' : '#d3d3d3',
+                borderColor: isChecked ? '' : '#d3d3d3'
+              }}
+              disabled={!isChecked}
+            >
               レク登録へ続く
             </button>
           </a>
