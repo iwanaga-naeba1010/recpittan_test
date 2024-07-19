@@ -60,6 +60,8 @@ class User < ApplicationRecord
   has_many :user_recreation_plans, dependent: :destroy, class_name: 'UserRecreationPlan'
   has_many :recreation_plans, through: :user_recreation_plans, class_name: 'RecreationPlan'
   has_one :bank_account, dependent: :destroy, class_name: 'BankAccount'
+  has_one :partner_info, dependent: :destroy, class_name: 'PartnerInfo'
+  accepts_nested_attributes_for :partner_info, allow_destroy: true
 
   scope :customers, -> { where(role: :customer) }
 

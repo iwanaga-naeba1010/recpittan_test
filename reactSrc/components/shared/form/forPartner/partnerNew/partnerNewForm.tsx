@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useForm, FormProvider } from 'react-hook-form';
 import { FirstStep } from './firstStep';
 import { SecondStep } from './secondStep';
+import { usePartner } from '../../../../forPartner/registration/hooks/usePartnerHook';
 
 export const PartnerNewForm: React.FC = () => {
   const [currentStep, setCurrentStep] = useState<number>(0);
@@ -9,9 +10,9 @@ export const PartnerNewForm: React.FC = () => {
     defaultValues: {
       email: '',
       password: '',
-      confirmPassword: '',
-      name: '',
-      nameKana: '',
+      passwordConfirmation: '',
+      username: '',
+      usernameKana: '',
       phoneNumber: '',
       postalCode: '',
       prefecture: '',
@@ -19,14 +20,10 @@ export const PartnerNewForm: React.FC = () => {
       address1: '',
       address2: '',
       companyName: '',
-      bankName: '',
-      bankCode: '',
-      branchName: '',
-      branchCode: '',
-      accountType: '',
-      accountHolderName: '',
     },
   });
+
+  const { createUser } = usePartner();
 
   const handleNext = async () => {
     const isValid = await methods.trigger();
@@ -36,74 +33,32 @@ export const PartnerNewForm: React.FC = () => {
   };
 
   const handlePrev = () => setCurrentStep(currentStep - 1);
-
   const handleSubmit = async (data: any) => {
     try {
-      // First step endpoint
-      const firstResponse = await fetch('/api/first_step_endpoint', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
+      const requestBody = {
+        user: {
           email: data.email,
           password: data.password,
           confirmPassword: data.confirmPassword,
-        }),
-      });
-
-      if (!firstResponse.ok) {
-        throw new Error('First step submission failed');
-      }
-
-      // Second step endpoint
-      const secondResponse = await fetch('/api/second_step_endpoint', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
+          username: data.username,
+          username_kana: data.usernameKana,
+          partner_info_attributes: {
+            phone_number: data.phoneNumber,
+            postal_code: data.postalCode,
+            prefecture: data.prefecture,
+            city: data.city,
+            address1: data.address1,
+            address2: data.address2,
+            company_name: data.companyName,
+          },
         },
-        body: JSON.stringify({
-          name: data.name,
-          nameKana: data.nameKana,
-          phoneNumber: data.phoneNumber,
-          postalCode: data.postalCode,
-          prefecture: data.prefecture,
-          city: data.city,
-          address1: data.address1,
-          address2: data.address2,
-          companyName: data.companyName,
-        }),
-      });
+      };
 
-      if (!secondResponse.ok) {
-        throw new Error('Second step submission failed');
-      }
-
-      // Third step endpoint
-      const thirdResponse = await fetch('/api/third_step_endpoint', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          bankName: data.bankName,
-          bankCode: data.bankCode,
-          branchName: data.branchName,
-          branchCode: data.branchCode,
-          accountType: data.accountType,
-          accountHolderName: data.accountHolderName,
-        }),
-      });
-
-      if (!thirdResponse.ok) {
-        throw new Error('Third step submission failed');
-      }
-
-      // 全てのリクエストが成功した場合の処理
-      console.log('All steps submitted successfully');
+      const user = await createUser(requestBody);
+      console.log('User created successfully', user);
+      window.location.href = '/partners/registrations/complete';
     } catch (error) {
-      // エラーハンドリング
-      console.error(error);
+      console.error('User creation failed', error);
     }
   };
 

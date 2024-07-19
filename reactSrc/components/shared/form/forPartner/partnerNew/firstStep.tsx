@@ -11,17 +11,15 @@ export const FirstStep: React.FC = () => {
 
   return (
     <>
-      <div className='progress-bar w-100'>
-        <div className='bar h-100 w-25 bg-black'></div>
-      </div>
+      <div className='progress-bar w-100'></div>
       <div className='p-3'>
         {Object.keys(errors).length > 0 && (
           <div className='alert alert-danger'>
             <ul>
               {errors.email && <li>{errors.email.message as string}</li>}
               {errors.password && <li>{errors.password.message as string}</li>}
-              {errors.confirmPassword && (
-                <li>{errors.confirmPassword.message as string}</li>
+              {errors.passwordConfirmation && (
+                <li>{errors.passwordConfirmation.message as string}</li>
               )}
               {errors.terms && <li>{errors.terms.message as string}</li>}
               {errors.privacy && <li>{errors.privacy.message as string}</li>}
@@ -66,7 +64,7 @@ export const FirstStep: React.FC = () => {
           <input
             type='password'
             className='w-100 p-2'
-            {...register('confirmPassword', {
+            {...register('passwordConfirmation', {
               required: 'パスワード確認は必須です',
               validate: (value) =>
                 value === password || 'パスワードが一致しません',

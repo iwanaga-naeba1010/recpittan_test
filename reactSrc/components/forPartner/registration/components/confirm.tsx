@@ -35,7 +35,13 @@ const Confirm: React.FC = () => {
         <button
           type='button'
           className='mt-2 py-2 w-100 rounded text-primary font-weight-bold bg-white border'
-          onClick={() => window.open('https://youtu.be/5XEniVLs97g?si=Slz9I1EhFNgmSl-b', '_blank', 'noopener,noreferrer')}
+          onClick={() =>
+            window.open(
+              'https://youtu.be/5XEniVLs97g?si=Slz9I1EhFNgmSl-b',
+              '_blank',
+              'noopener,noreferrer'
+            )
+          }
         >
           学習コンテンツを確認する
         </button>
@@ -100,7 +106,11 @@ const Confirm: React.FC = () => {
             onChange={handleCheckboxChange}
           />
           <label htmlFor='check' className='check ms-2'>
-            <a href='https://youtu.be/5XEniVLs97g?si=Slz9I1EhFNgmSl-b' target='blank' className='text-primary fw-bold'>
+            <a
+              href='https://youtu.be/5XEniVLs97g?si=Slz9I1EhFNgmSl-b'
+              target='blank'
+              className='text-primary fw-bold'
+            >
               学習コンテンツ
             </a>
             を確認しました
@@ -114,7 +124,7 @@ const Confirm: React.FC = () => {
               }`}
               style={{
                 backgroundColor: isChecked ? '' : '#d3d3d3',
-                borderColor: isChecked ? '' : '#d3d3d3'
+                borderColor: isChecked ? '' : '#d3d3d3',
               }}
               disabled={!isChecked}
             >

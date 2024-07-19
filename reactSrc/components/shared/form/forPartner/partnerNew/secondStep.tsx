@@ -74,7 +74,7 @@ export const SecondStep: React.FC = () => {
               type='text'
               className='w-100 p-2'
               placeholder='田中太郎'
-              {...register('name', { required: '氏名は必須です' })}
+              {...register('userName', { required: '氏名は必須です' })}
             />
           </div>
 
@@ -86,7 +86,9 @@ export const SecondStep: React.FC = () => {
               type='text'
               className='w-100 p-2'
               placeholder='タナカタロウ'
-              {...register('nameKana', { required: '氏名（カナ）は必須です' })}
+              {...register('userNameKana', {
+                required: '氏名（カナ）は必須です',
+              })}
             />
           </div>
 
