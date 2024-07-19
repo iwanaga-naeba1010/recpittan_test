@@ -5,7 +5,7 @@ namespace :partners do
   get :tos
   get :setting_menus
 
-  resources :registrations, only: %i[new create] do
+  resources :registrations, only: %i[new] do
     get :complete, on: :collection
     get :confirm, on: :collection
   end
