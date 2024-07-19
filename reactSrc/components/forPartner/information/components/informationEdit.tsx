@@ -1,9 +1,10 @@
+import { createRoot } from 'react-dom/client';
 import React, { useState } from 'react';
-import { useFormContext } from 'react-hook-form';
+import { useFormContext, FormProvider } from 'react-hook-form';
 import { findAddressByZip } from '@/utils/address';
 import { AddressResponse } from '@/types';
 
-export const SecondStep: React.FC = () => {
+export const InformationEdit: React.FC = () => {
   const {
     register,
     setValue,
@@ -147,7 +148,7 @@ export const SecondStep: React.FC = () => {
           <input
             type='text'
             className='w-100 p-2'
-            placeholder='会社名または団体名などを入力'
+            placeholder='タイトルを入力'
             {...register('companyName')}
           />
         </div>
@@ -155,3 +156,29 @@ export const SecondStep: React.FC = () => {
     </>
   );
 };
+
+const App: React.FC = () => {
+  const methods = useFormContext();
+
+  return (
+    <FormProvider {...methods}>
+      <InformationEdit />
+    </FormProvider>
+  );
+};
+
+document.addEventListener('turbolinks:load', () => {
+  const elm = document.querySelector('#partnerInformationEdit');
+  if (elm) {
+    const root = createRoot(elm);
+    root.render(<App />);
+  }
+});
+
+$(document).ready(() => {
+  const elm = document.querySelector('#partnerInformationEdit');
+  if (elm) {
+    const root = createRoot(elm);
+    root.render(<App />);
+  }
+});
