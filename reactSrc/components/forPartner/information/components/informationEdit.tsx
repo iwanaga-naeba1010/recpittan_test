@@ -94,7 +94,7 @@ export const InformationEdit: React.FC = () => {
       <div className='progress-bar w-100'>
         <div className='bar h-100 w-50 bg-black'></div>
       </div>
-      <div className='p-3'>
+      <div className='partner-information p-3'>
         {Object.keys(errors).length > 0 && (
           <div className='alert alert-danger'>
             <ul>
