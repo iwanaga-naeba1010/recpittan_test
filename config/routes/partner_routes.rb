@@ -5,7 +5,7 @@ namespace :partners do
   get :tos
   get :setting_menus
 
-  resources :informations, only: %i[new edit]
+  resources :informations, only: %i[edit]
   resources :registrations, only: %i[new] do
     get :complete, on: :collection
     get :confirm, on: :collection

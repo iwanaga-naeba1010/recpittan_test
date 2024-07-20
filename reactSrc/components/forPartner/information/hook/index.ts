@@ -1,1 +1,1 @@
-export * from './usePartner';
+export * from './usePartnerInformation';

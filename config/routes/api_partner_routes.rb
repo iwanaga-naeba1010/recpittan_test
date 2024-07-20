@@ -13,6 +13,7 @@ namespace :api_partner do
     resources :evaluation_replies, only: %i[create]
   end
   resources :registrations, only: %i[create]
+  resources :partner_information, only: %i[show update]
 
   resources :profiles, only: %i[index]
 end

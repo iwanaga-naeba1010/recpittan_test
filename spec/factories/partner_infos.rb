@@ -26,12 +26,12 @@
 #
 FactoryBot.define do
   factory :partner_info do
-    user { nil }
-    postal_code { 'MyString' }
-    prefecture { 'MyString' }
-    city { 'MyString' }
-    address1 { 'MyString' }
-    address2 { 'MyString' }
-    company_name { 'MyString' }
+    user
+    postal_code { '454-0000' }
+    prefecture { '愛知県' }
+    city { '名古屋市' }
+    address1 { '中村区名駅1' }
+    address2 { '1-1' }
+    company_name { 'company_name' }
   end
 end
