@@ -28,8 +28,6 @@
 class BankAccount < ApplicationRecord
   extend Enumerize
 
-  encrypts :account_holder_name, :account_number, :account_type, :bank_code, :bank_name, :branch_code, :branch_name
-
   belongs_to :user
 
   validates :account_holder_name, :account_number, :account_type, :bank_code, :bank_name, :branch_code, :branch_name, presence: true
