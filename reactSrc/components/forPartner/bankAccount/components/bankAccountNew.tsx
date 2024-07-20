@@ -158,10 +158,10 @@ const BankAccountNew: React.FC = () => {
   const onSubmit = async (data: any) => {
     try {
       await createBankAccount({ bank_account: data });
-      alert('Bank account created successfully');
+      alert('銀行口座を作成しました!');
     } catch (error) {
       console.error(error);
-      alert('Failed to create bank account');
+      alert('銀行口座の作成に失敗しました');
     }
   };
 

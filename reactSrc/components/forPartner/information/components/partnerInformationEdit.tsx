@@ -17,7 +17,6 @@ export const InformationEdit: React.FC = () => {
     const fetchData = async () => {
       const id = window.location.pathname.split('/')[3];
       const partnerInformation = await fetchPartnerInformation(id);
-      console.log(partnerInformation);
       setValue('userName', partnerInformation.username);
       setValue('userNameKana', partnerInformation.usernameKana);
       setValue('phoneNumber', partnerInformation.partnerInfo.phoneNumber);
@@ -52,9 +51,10 @@ export const InformationEdit: React.FC = () => {
 
     try {
       await updatePartnerInformation(id, requestBody);
-      console.log('Information updated successfully');
+      alert('パートナー情報を更新しました！');
     } catch (error) {
-      console.error('Failed to update information', error);
+      alert('情報の更新に失敗しました');
+      console.error('情報の更新に失敗しました', error);
     }
   };
 

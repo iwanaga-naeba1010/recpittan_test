@@ -179,10 +179,10 @@ const BankAccountEdit: React.FC = () => {
   const onSubmit = async (data: any) => {
     try {
       await updateBankAccount(id, { bank_account: data });
-      alert('Bank account updated successfully');
+      alert('銀行口座情報を更新しました!');
     } catch (error) {
       console.error(error);
-      alert('Failed to update bank account');
+      alert('銀行口座情報の更新に失敗しました');
     }
   };
 
