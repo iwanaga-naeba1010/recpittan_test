@@ -11,6 +11,7 @@ module ApiPartner
                     .with_recreation(@recreation)
       render_json EvaluationSerializer.new.serialize_list(evaluations:)
     rescue StandardError => e
+      Sentry.capture_exception(e)
       logger.error e.message
       render_json([e.message], status: 401)
     end

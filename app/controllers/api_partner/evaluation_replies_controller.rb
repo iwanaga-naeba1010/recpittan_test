@@ -7,6 +7,7 @@ module ApiPartner
                     .includes(evaluation: { report: { order: [:recreation, :user, { user: :company }] } })
       render_json EvaluationSerializer.new.serialize_list(evaluations:)
     rescue StandardError => e
+      Sentry.capture_exception(e)
       logger.error e.message
       render_json([e.message], status: 401)
     end
@@ -18,6 +19,7 @@ module ApiPartner
       )
       render_json EvaluationReplySerializer.new.serialize(evaluation_reply:)
     rescue StandardError => e
+      Sentry.capture_exception(e)
       logger.error e.message
       render_json([e.message], status: 422)
     end

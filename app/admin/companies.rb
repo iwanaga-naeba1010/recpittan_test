@@ -137,6 +137,7 @@ ActiveAdmin.register Company do
 
       # NOTE(okubo): hashを検索するときにエラー出るので、cache入れてる
     rescue StandardError => e
+      Sentry.capture_exception(e)
       logger.error e.message
       super
     end
