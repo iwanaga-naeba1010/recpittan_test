@@ -32,7 +32,7 @@ export const InformationEdit: React.FC = () => {
   }, [fetchPartnerInformation, setValue]);
 
   const onSubmit = async (data: any) => {
-    const id = window.location.pathname.split('/')[3]; // 動的にIDを取得
+    const id = window.location.pathname.split('/')[3];
     const requestBody = {
       user: {
         username: data.userName,
@@ -102,7 +102,7 @@ export const InformationEdit: React.FC = () => {
 };
 
 const App: React.FC = () => {
-  const methods = useForm(); // フォームコンテキストを初期化
+  const methods = useForm();
 
   return (
     <FormProvider {...methods}>
