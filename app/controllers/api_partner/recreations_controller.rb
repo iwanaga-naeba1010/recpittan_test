@@ -8,6 +8,7 @@ module ApiPartner
       recreations = current_user.recreations.load_async
       render_json RecreationSerializer.new.serialize_list(recreations:)
     rescue StandardError => e
+      Sentry.capture_exception(e)
       logger.error e.message
       render_json([e.message], status: 401)
     end
@@ -15,6 +16,7 @@ module ApiPartner
     def show
       render_json RecreationSerializer.new.serialize(recreation: @recreation)
     rescue StandardError => e
+      Sentry.capture_exception(e)
       logger.error e.message
       render_json([e.message], status: 401)
     end
@@ -38,6 +40,7 @@ module ApiPartner
         .send('新規レク登録依頼', message)
       render_json RecreationSerializer.new.serialize(recreation:)
     rescue StandardError => e
+      Sentry.capture_exception(e)
       logger.error e.message
       render_json([e.message], status: 422)
     end
@@ -52,6 +55,7 @@ module ApiPartner
       )
       render_json RecreationSerializer.new.serialize(recreation:)
     rescue StandardError => e
+      Sentry.capture_exception(e)
       logger.error e.message
       render_json([e.message], status: 422)
     end

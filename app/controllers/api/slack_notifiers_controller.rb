@@ -17,6 +17,7 @@ module Api
       SlackNotifier.new(channel: '#料金お問い合わせ').send('新規お問い合わせ', message)
       render_json({ status: 'success' })
     rescue StandardError => e
+      Sentry.capture_exception(e)
       logger.error e.message
       render_json({ message: e.message }, status: 422)
     end

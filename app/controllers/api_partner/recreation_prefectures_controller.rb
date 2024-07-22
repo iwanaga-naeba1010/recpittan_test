@@ -9,6 +9,7 @@ module ApiPartner
       )
       render_json RecreationPrefectureSerializer.new.serialize(recreation_prefecture: prefecture)
     rescue StandardError => e
+      Sentry.capture_exception(e)
       logger.error e.message
       render_json([e.message], status: 422)
     end
@@ -21,6 +22,7 @@ module ApiPartner
       )
       render_json RecreationPrefectureSerializer.new.serialize(recreation_prefecture: prefecture)
     rescue StandardError => e
+      Sentry.capture_exception(e)
       logger.error e.message
       render_json([e.message], status: 422)
     end
@@ -31,6 +33,7 @@ module ApiPartner
       )
       render_json true
     rescue StandardError => e
+      Sentry.capture_exception(e)
       logger.error e.message
       render_json([e.message], status: 422)
     end

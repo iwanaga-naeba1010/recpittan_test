@@ -7,6 +7,7 @@ module ApiCustomer
     def show
       render_json OrderSerializer.new.serialize(order: @order)
     rescue StandardError => e
+      Sentry.capture_exception(e)
       logger.error e.message
       render_json({ message: e.message }, status: 422)
     end
@@ -19,6 +20,7 @@ module ApiCustomer
       end
       render_json OrderSerializer.new.serialize(order: @order)
     rescue StandardError => e
+      Sentry.capture_exception(e)
       logger.error e.message
       render_json([e.message], status: 422)
     end

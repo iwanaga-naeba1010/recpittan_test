@@ -9,6 +9,7 @@ module ApiPartner
       )
       render_json RecreationImageSerializer.new.serialize(recreation_image: image)
     rescue StandardError => e
+      Sentry.capture_exception(e)
       logger.error e.message
       render_json([e.message], status: 422)
     end
@@ -19,6 +20,7 @@ module ApiPartner
       )
       render_json true
     rescue StandardError => e
+      Sentry.capture_exception(e)
       logger.error e.message
       render_json([e.message], status: 422)
     end
