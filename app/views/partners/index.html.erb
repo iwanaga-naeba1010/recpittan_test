@@ -1,65 +1,193 @@
-<div class="header">
-  <h2 class="text-white font-weight-bold p-2">
-    <% if params[:is_accepted] == 'true' %>
-      開催決定済の案件
-    <% else %>
-      開催のご相談
+<header class="d-flex justify-content-between align-items-center py-2">
+  <div class="d-flex align-items-center">
+    <%= image_pack_tag 'menu.svg', id: "hamburger", class: "logo-navbar", width: "30", height: "30" %>
+  </div>
+  <h2 class="flex-grow-1 text-center mb-0">案件一覧</h2>
+  <div class="d-flex align-items-center">
+    <%= image_pack_tag 'question.svg', class: "logo-navbar", width: "25", height: "25" %>
+  </div>
+</header>
+
+<nav class="nav nav-tabs justify-content-between my-3 shadow-sm">
+  <a class="nav-link flex-fill py-2 text-center active" href="#consulting" data-bs-toggle="tab">相談中</a>
+  <a class="nav-link flex-fill py-2 text-center" href="#confirmed" data-bs-toggle="tab">開催決定</a>
+  <a class="nav-link flex-fill py-2 text-center" href="#finished" data-bs-toggle="tab">終了</a>
+</nav>
+
+<div class="tab-content h-100">
+  <div class="tab-pane fade show active" id="consulting">
+    <% @orders.each do |order| %>
+      <%= link_to chat_partners_order_path(order.id) do %>
+        <div class="order-item my-2 border-bottom p-3">
+          <div class="">
+            <h3>
+              <%= order.user.company.facility_name.truncate(20) %>
+            </h3>
+          </div>
+          <div class="mb-2">
+            <%= order.recreation_title %>
+          </div>
+          <div class="mb-2">
+            開催形態:
+            <%= order.recreation.kind_text %>
+          </div>
+          <div class="mb-2">
+            開催希望日:
+            <%= dotted_datetime order.start_at %>
+          </div>
+          <small class="mb-2 mr-3">
+            依頼番号:
+            <%= order.id %>
+          </small>
+          <small class="mb-2 mr-3">
+            更新日:
+            <%= dotted_datetime order.updated_at %>
+          </small>
+          <div class="status mb-2">
+            <span class="status__cunsult p-1">
+              <%= I18n.t("partner.order.status.#{order.status}") %>
+            </span>
+          </div>
+        </div>
+      <% end %>
     <% end %>
-  </h2>
-  <%= render 'shared/partner/sidebar_toggle' %>
+  </div>
+
+  <div class="tab-pane fade" id="confirmed">
+    <% @orders.each do |order| %>
+      <%= link_to chat_partners_order_path(order.id) do %>
+        <div class="order-item my-2 border-bottom p-3">
+          <div class="">
+            <h3>
+              <%= order.user.company.facility_name.truncate(20) %>
+            </h3>
+          </div>
+          <div class="mb-2">
+            <%= order.recreation_title %>
+          </div>
+          <div class="mb-2">
+            開催形態:
+            <%= order.recreation.kind_text %>
+          </div>
+          <div class="mb-2">
+            開催希望日:
+            <%= dotted_datetime order.start_at %>
+          </div>
+          <small class="mb-2 mr-3">
+            依頼番号:
+            <%= order.id %>
+          </small>
+          <small class="mb-2 mr-3">
+            更新日:
+            <%= dotted_datetime order.updated_at %>
+          </small>
+          <div class="status mb-2">
+            <span class="status__cunsult p-1">
+              <%= I18n.t("partner.order.status.#{order.status}") %>
+            </span>
+          </div>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+
+  <div class="tab-pane fade" id="finished">
+    <% @orders.where(status: 'finished').each do |order| %>
+      <%= link_to chat_partners_order_path(order.id) do %>
+        <div class="order-item my-2 border-bottom p-3">
+          <div class="">
+            <h3>
+              <%= order.user.company.facility_name.truncate(20) %>
+            </h3>
+          </div>
+          <div class="mb-2">
+            <%= order.recreation_title %>
+          </div>
+          <div class="mb-2">
+            開催形態:
+            <%= order.recreation.kind_text %>
+          </div>
+          <div class="mb-2">
+            開催希望日:
+            <%= dotted_datetime order.start_at %>
+          </div>
+          <small class="mb-2 mr-3">
+            依頼番号:
+            <%= order.id %>
+          </small>
+          <small class="mb-2 mr-3">
+            更新日:
+            <%= dotted_datetime order.updated_at %>
+          </small>
+          <div class="status mb-2">
+            <span class="status__cunsult p-1">
+              <%= I18n.t("partner.order.status.#{order.status}") %>
+            </span>
+          </div>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
 </div>
 
-<div class="my-3 mx-2">
-  <% if params[:is_accepted] == 'true' %>
-    正式依頼が承認され開催が決定した案件の一覧です。
-  <% else %>
-    正式依頼確認中の案件は、早めのご回答をお願いいたします。
-  <% end %>
-</div>
+<!-- 絞り込みボタン -->
+<button type="button" class="btn btn-white text-primary fw-bold border filter-btn" data-bs-toggle="modal" data-bs-target="#filterModal">
+  絞り込み
+</button>
 
-<div class="my-3 mx-2">
-  <% if params[:is_accepted] == 'true' %>
-    <%= link_to '開催日順(降順)', partners_path(column: :start_at, order: :desc, is_accepted: @is_accepted), class: ' text-white btn btn-primary  p-3' %>
-    <%= link_to '開催待ち → 終了報告承認済み', partners_path(column: :status, order: :asc, is_accepted: @is_accepted), class: ' text-white btn btn-primary  p-3' %>
-  <% else %>
-    <%= link_to '依頼番号順', partners_path(column: :id, order: :desc, is_accepted: @is_accepted, is_open: @is_open), class: ' text-white btn btn-primary  p-3' %>
-    <%= link_to '正式依頼確認中 → 相談中',
-        partners_path(column: :status, order: :desc, is_accepted: @is_accepted, is_open: @is_open), class: ' text-white btn btn-primary  p-3' %>
-  <% end %>
-</div>
-
-<% @orders.each do |order| %>
-  <%= link_to chat_partners_order_path(order.id) do %>
-    <div class="order-item my-2 border-bottom p-3">
-      <div class="">
-        <h3>
-          <%= order.user.company.facility_name.truncate(20) %>
-        </h3>
+<!-- モーダル -->
+<div class="modal fade" id="filterModal" tabindex="-1" aria-labelledby="filterModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-fullscreen">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="filterModalLabel">絞り込み</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <div class="mb-2">
-        <%= order.recreation_title %>
+      <div class="modal-body">
+        <!-- 絞り込みフォームの内容 -->
+        <form>
+          <div class="mb-3">
+            <label for="filterStatus" class="form-label">ステータス</label>
+            <select class="form-select" id="filterStatus">
+              <option selected>選択してください</option>
+              <option value="consulting">相談中</option>
+              <option value="confirmed">開催決定</option>
+              <option value="finished">終了</option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label for="filterDate" class="form-label">日付</label>
+            <input type="date" class="form-control" id="filterDate">
+          </div>
+        </form>
       </div>
-      <div class="mb-2">
-        開催形態:
-        <%= order.recreation.kind_text %>
-      </div>
-      <div class="mb-2">
-        開催希望日:
-        <%= dotted_datetime order.start_at %>
-      </div>
-      <small class="mb-2 mr-3">
-        依頼番号:
-        <%= order.id %>
-      </small>
-      <small class="mb-2 mr-3">
-        更新日:
-        <%= dotted_datetime order.updated_at %>
-      </small>
-      <div class="status mb-2">
-        <span class="status__cunsult p-1">
-          <%= I18n.t("partner.order.status.#{order.status}") %>
-        </span>
+      <div class="modal-footer">
+        <button type="button" class="btn text-primary fw-bold me-auto" data-bs-dismiss="modal">キャンセル</button>
+        <button type="button" class="btn btn-primary fw-bold">保存</button>
       </div>
     </div>
-  <% end %>
-<% end %>
+  </div>
+</div>
+
+<style>
+  .filter-btn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 10;
+  }
+
+  .modal-fullscreen .modal-dialog {
+    max-width: 100%;
+    margin: 0;
+  }
+
+  .modal-fullscreen .modal-content {
+    height: 100vh;
+  }
+
+  .modal-body {
+    max-height: calc(100vh - 200px);
+    overflow-y: auto;
+  }
+</style>
