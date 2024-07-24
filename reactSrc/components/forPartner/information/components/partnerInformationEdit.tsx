@@ -55,7 +55,7 @@ export const InformationEdit: React.FC = () => {
       alert('パートナー情報を更新しました！');
     } catch (error) {
       alert('情報の更新に失敗しました');
-      console.error('情報の更新に失敗しました', error);
+      throw new Error(String(error));
     }
   };
 

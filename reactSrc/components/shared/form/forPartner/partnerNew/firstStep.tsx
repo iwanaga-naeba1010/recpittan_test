@@ -4,10 +4,9 @@ import { useFormContext } from 'react-hook-form';
 export const FirstStep: React.FC = () => {
   const {
     register,
-    watch,
+    getValues,
     formState: { errors },
   } = useFormContext();
-  const password = watch('password');
 
   return (
     <>
@@ -67,7 +66,7 @@ export const FirstStep: React.FC = () => {
             {...register('passwordConfirmation', {
               required: 'パスワード確認は必須です',
               validate: (value) =>
-                value === password || 'パスワードが一致しません',
+                value === getValues('password') || 'パスワードが一致しません',
             })}
           />
 

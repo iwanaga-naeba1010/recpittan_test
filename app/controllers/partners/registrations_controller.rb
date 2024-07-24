@@ -11,4 +11,10 @@ class Partners::RegistrationsController < Partners::ApplicationController
   def complete; end
 
   def confirm; end
+
+  private
+
+  def redirect_if_partner_logged_in
+    redirect_to root_path if current_user
+  end
 end

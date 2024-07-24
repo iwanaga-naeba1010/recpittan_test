@@ -25,9 +25,11 @@ export const PartnerInformationForm: React.FC = () => {
           setValue('address1', address.address3);
         } else {
           console.error('住所が見つかりません');
+          throw new Error('住所が見つかりません');
         }
       } catch (error) {
         console.error('住所取得中にエラーが発生しました', error);
+        throw new Error(String(error));
       } finally {
         setIsLoading(false);
       }

@@ -33,6 +33,7 @@ export const PartnerNewForm: React.FC = () => {
   };
 
   const handlePrev = () => setCurrentStep(currentStep - 1);
+
   const handleSubmit = async (data: any) => {
     try {
       const requestBody = {
@@ -59,6 +60,7 @@ export const PartnerNewForm: React.FC = () => {
       window.location.href = '/partners/registrations/complete';
     } catch (error) {
       console.error('User creation failed', error);
+      throw new Error(String(error));
     }
   };
 
