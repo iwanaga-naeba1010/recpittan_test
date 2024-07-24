@@ -11,7 +11,8 @@ export const InformationEdit: React.FC = () => {
     setValue,
   } = useFormContext();
 
-  const { fetchPartnerInformation, updatePartnerInformation } = usePartnerInformation();
+  const { fetchPartnerInformation, updatePartnerInformation } =
+    usePartnerInformation();
 
   useEffect(() => {
     const fetchData = async () => {

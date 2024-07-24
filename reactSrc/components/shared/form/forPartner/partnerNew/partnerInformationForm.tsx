@@ -4,10 +4,7 @@ import { findAddressByZip } from '@/utils/address';
 import { AddressResponse } from '@/types';
 
 export const PartnerInformationForm: React.FC = () => {
-  const {
-    register,
-    setValue,
-  } = useFormContext();
+  const { register, setValue } = useFormContext();
   const [isLoading, setIsLoading] = useState(false);
 
   const handlePostalCodeChange = async (

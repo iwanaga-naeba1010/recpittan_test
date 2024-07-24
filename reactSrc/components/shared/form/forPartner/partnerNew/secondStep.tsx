@@ -17,10 +17,18 @@ export const SecondStep: React.FC = () => {
           <div className='alert alert-danger'>
             <ul>
               {errors.username && <li>{errors.username.message as string}</li>}
-              {errors.usernameKana && <li>{errors.usernameKana.message as string}</li>}
-              {errors.phoneNumber && <li>{errors.phoneNumber.message as string}</li>}
-              {errors.postalCode && <li>{errors.postalCode.message as string}</li>}
-              {errors.prefecture && <li>{errors.prefecture.message as string}</li>}
+              {errors.usernameKana && (
+                <li>{errors.usernameKana.message as string}</li>
+              )}
+              {errors.phoneNumber && (
+                <li>{errors.phoneNumber.message as string}</li>
+              )}
+              {errors.postalCode && (
+                <li>{errors.postalCode.message as string}</li>
+              )}
+              {errors.prefecture && (
+                <li>{errors.prefecture.message as string}</li>
+              )}
               {errors.city && <li>{errors.city.message as string}</li>}
               {errors.address1 && <li>{errors.address1.message as string}</li>}
             </ul>
