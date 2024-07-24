@@ -38,15 +38,7 @@ RSpec.describe ApiPartner::PartnerInformationController, type: :request do
         expect(json_response['id']).to eq(user.id)
         expect(json_response['username']).to eq(user.username)
         expect(json_response['username_kana']).to eq(user.username_kana)
-        expect(json_response['partner_info']).to include(
-          'phone_number' => nil,
-          'postal_code' => nil,
-          'prefecture' => nil,
-          'city' => nil,
-          'address1' => nil,
-          'address2' => nil,
-          'company_name' => nil
-        )
+        expect(json_response['partner_info']).to be_nil
       end
     end
   end
