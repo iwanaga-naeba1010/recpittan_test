@@ -7,17 +7,14 @@ type BankAccountRequestBody = {
 };
 
 type UseBankAccountHook = {
-  fetchBankAccount: (id: string) => Promise<BankAccount>;
+  fetchBankAccount: () => Promise<BankAccount>;
   createBankAccount: (requestBody: BankAccountRequestBody) => Promise<Bank>;
-  updateBankAccount: (
-    id: string,
-    requestBody: BankAccountRequestBody
-  ) => Promise<Bank>;
+  updateBankAccount: (requestBody: BankAccountRequestBody) => Promise<Bank>;
 };
 
 export const useBankAccount = (): UseBankAccountHook => {
   const fetchBankAccount = useCallback(async (): Promise<BankAccount> => {
-    const response = await Api.get<BankAccount>(`bank_account`, 'partner');
+    const response = await Api.get<BankAccount>('bank_account', 'partner');
     return response.data;
   }, []);
 
@@ -25,7 +22,7 @@ export const useBankAccount = (): UseBankAccountHook => {
     requestBody: BankAccountRequestBody
   ): Promise<Bank> => {
     const response = await Api.post<Bank>(
-      'bank_accounts',
+      'bank_account',
       'partner',
       requestBody
     );
@@ -33,11 +30,10 @@ export const useBankAccount = (): UseBankAccountHook => {
   };
 
   const updateBankAccount = async (
-    id: string,
     requestBody: BankAccountRequestBody
   ): Promise<Bank> => {
     const response = await Api.patch<Bank>(
-      `bank_accounts/${id}`,
+      'bank_account',
       'partner',
       requestBody
     );

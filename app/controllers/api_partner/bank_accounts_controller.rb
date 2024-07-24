@@ -4,7 +4,7 @@ module ApiPartner
   class BankAccountsController < ApplicationController
     def show
       bank_account = BankAccount.find_by(user_id: current_user.id)
-      render_json BankAccountSerializer.new.serialize(bank_account:)
+      render json: BankAccountSerializer.new.serialize(bank_account:)
     end
 
     def create
@@ -18,7 +18,7 @@ module ApiPartner
         branch_name: params_create[:branch_name],
         user_id: current_user.id
       )
-      render_json BankAccountSerializer.new.serialize(bank_account:)
+      render json: BankAccountSerializer.new.serialize(bank_account:)
     end
 
     def update
@@ -33,7 +33,7 @@ module ApiPartner
         branch_code: params_update[:branch_code],
         branch_name: params_update[:branch_name]
       )
-      render_json BankAccountSerializer.new.serialize(bank_account:)
+      render json: BankAccountSerializer.new.serialize(bank_account:)
     end
 
     private

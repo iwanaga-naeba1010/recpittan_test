@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { Bank, Branch } from '@/types';
 
+// 外部APIからすべての銀行を取得する
 export const fetchAllBanks = async (): Promise<Bank[]> => {
   let fetchedBanks: Bank[] = [];
   let currentPage = 1;
@@ -20,6 +21,7 @@ export const fetchAllBanks = async (): Promise<Bank[]> => {
   return fetchedBanks;
 };
 
+// 指定された銀行コードのすべての支店を取得する
 export const fetchAllBranches = async (bankCode: string): Promise<Branch[]> => {
   let allBranches: Branch[] = [];
   let currentPage = 1;
@@ -40,6 +42,7 @@ export const fetchAllBranches = async (bankCode: string): Promise<Branch[]> => {
   return allBranches;
 };
 
+// 指定された銀行コードと支店コードで支店情報を取得する
 export const fetchBranchByCode = async (
   bankCode: string,
   branchCode: string

@@ -4,13 +4,13 @@ module Resources
   module BankAccounts
     class Update < ActiveInteraction::Base
       integer :id
-      string :account_holder_name, default: nil
-      string :account_number, default: nil
-      string :account_type, default: nil
-      string :bank_code, default: nil
-      string :bank_name, default: nil
-      string :branch_code, default: nil
-      string :branch_name, default: nil
+      string :account_holder_name
+      string :account_number
+      string :account_type
+      string :bank_code
+      string :bank_name
+      string :branch_code
+      string :branch_name
 
       validates :id, presence: true
 
