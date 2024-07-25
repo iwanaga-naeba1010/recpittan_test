@@ -14,7 +14,7 @@ type UseBankAccountHook = {
 
 export const useBankAccount = (): UseBankAccountHook => {
   const fetchBankAccount = useCallback(async (): Promise<BankAccount> => {
-    const response = await Api.get<BankAccount>('bank_account', 'partner');
+    const response = await Api.get<BankAccount>('bank_accounts', 'partner');
     return response.data;
   }, []);
 
@@ -22,7 +22,7 @@ export const useBankAccount = (): UseBankAccountHook => {
     requestBody: BankAccountRequestBody
   ): Promise<Bank> => {
     const response = await Api.post<Bank>(
-      'bank_account',
+      'bank_accounts',
       'partner',
       requestBody
     );
@@ -33,7 +33,7 @@ export const useBankAccount = (): UseBankAccountHook => {
     requestBody: BankAccountRequestBody
   ): Promise<Bank> => {
     const response = await Api.patch<Bank>(
-      'bank_account',
+      'bank_accounts',
       'partner',
       requestBody
     );

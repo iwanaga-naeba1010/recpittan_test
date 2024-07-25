@@ -1,11 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useFormContext } from 'react-hook-form';
 import { Bank } from '@/types';
-import {
-  fetchAllBanks,
-  fetchAllBranches,
-  fetchBranchByCode,
-} from '@/utils/bank';
+import { useBankApi } from '@/utils/bank';
 
 interface BankAccountFormProps {
   onSubmit: (data: any) => void;
@@ -23,6 +19,8 @@ const BankAccountForm: React.FC<BankAccountFormProps> = ({
     formState: { errors, isSubmitted },
   } = useFormContext();
 
+  const { fetchAllBanks, fetchAllBranches, fetchBranchByCode } = useBankApi();
+
   const [bankName, setBankName] = useState(initialData?.bankName || '');
   const [suggestedBanks, setSuggestedBanks] = useState<Bank[]>([]);
   const [isFocused, setIsFocused] = useState(false);
@@ -38,7 +36,7 @@ const BankAccountForm: React.FC<BankAccountFormProps> = ({
       setAllBanks(banks);
     };
     fetchBanks();
-  }, []);
+  }, [fetchAllBanks]);
 
   useEffect(() => {
     if (initialData) {
