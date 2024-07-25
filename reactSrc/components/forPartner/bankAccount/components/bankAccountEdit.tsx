@@ -10,11 +10,11 @@ const BankAccountEdit: React.FC = () => {
   const [initialData, setInitialData] = useState<any>(null);
 
   useEffect(() => {
-    const fetchData = async () => {
+    const f = async () => {
       const bankAccount = await fetchBankAccount();
       setInitialData(bankAccount);
     };
-    fetchData();
+    f();
   }, [fetchBankAccount]);
 
   const onSubmit = async (data: any) => {

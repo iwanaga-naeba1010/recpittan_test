@@ -15,7 +15,7 @@ export const InformationEdit: React.FC = () => {
     usePartnerInformation();
 
   useEffect(() => {
-    const fetchData = async () => {
+    const f = async () => {
       const id = window.location.pathname.split('/')[3];
       const partnerInformation = await fetchPartnerInformation(id);
       setValue('userName', partnerInformation.username);
@@ -28,8 +28,7 @@ export const InformationEdit: React.FC = () => {
       setValue('address2', partnerInformation.partnerInfo.address2);
       setValue('companyName', partnerInformation.partnerInfo.companyName);
     };
-
-    fetchData();
+    f();
   }, [fetchPartnerInformation, setValue]);
 
   const onSubmit = async (data: any) => {

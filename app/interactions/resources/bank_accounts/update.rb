@@ -13,6 +13,13 @@ module Resources
       string :branch_name
 
       validates :id, presence: true
+      validates :account_holder_name, presence: true
+      validates :account_number, presence: true
+      validates :account_type, presence: true
+      validates :bank_code, presence: true
+      validates :bank_name, presence: true
+      validates :branch_code, presence: true
+      validates :branch_name, presence: true
 
       def execute
         bank_account = BankAccount.find(id)
