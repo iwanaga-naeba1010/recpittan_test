@@ -2,7 +2,7 @@ import * as $ from 'jquery';
 
 (() => {
   document.addEventListener('turbolinks:load', () => {
-    $('.order_menu').on('click', function(event) {
+    $('.order_menu').on('click', function (event) {
       event.stopPropagation(); // イベントのバブルを止める
 
       const orderMenuContainer = $(this).closest('.order_menu_container');
@@ -28,8 +28,11 @@ import * as $ from 'jquery';
     });
 
     // モーダル外をクリックしたらモーダルを非表示にする
-    $(document).on('click', function(event) {
-      if (!$(event.target).closest('.order-menu-modal').length && !$(event.target).closest('.order_menu').length) {
+    $(document).on('click', function (event) {
+      if (
+        !$(event.target).closest('.order-menu-modal').length &&
+        !$(event.target).closest('.order_menu').length
+      ) {
         $('.order-menu-modal').fadeOut();
       }
     });
