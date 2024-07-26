@@ -245,4 +245,18 @@ body {
   .description {
     font-size: 12px;
   }
+
+  .modal-content {
+    position: relative;
+    padding-bottom: 60px;
+  }
+  
+  .modal-footer {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    background-color: white;
+  }
 }
