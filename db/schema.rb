@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_06_08_145617) do
+ActiveRecord::Schema[7.0].define(version: 2024_07_19_161238) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -23,6 +23,21 @@ ActiveRecord::Schema[7.0].define(version: 2024_06_08_145617) do
     t.bigint "author_id"
     t.datetime "created_at", precision: nil, null: false
     t.datetime "updated_at", precision: nil, null: false
+  end
+
+  create_table "bank_accounts", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.string "bank_name", null: false
+    t.string "bank_code", null: false
+    t.string "branch_name", null: false
+    t.string "branch_code", null: false
+    t.string "account_type", null: false
+    t.string "account_number", null: false
+    t.string "account_holder_name", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id", "account_number"], name: "index_bank_accounts_on_user_id_and_account_number", unique: true
+    t.index ["user_id"], name: "index_bank_accounts_on_user_id"
   end
 
   create_table "channel_plan_subscriber_memos", force: :cascade do |t|
@@ -222,6 +237,20 @@ ActiveRecord::Schema[7.0].define(version: 2024_06_08_145617) do
     t.string "memo"
     t.string "coupon_code"
     t.boolean "is_open", default: true, null: false
+  end
+
+  create_table "partner_infos", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.string "phone_number"
+    t.string "postal_code"
+    t.string "prefecture"
+    t.string "city"
+    t.string "address1"
+    t.string "address2"
+    t.string "company_name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_partner_infos_on_user_id"
   end
 
   create_table "profiles", force: :cascade do |t|
@@ -442,6 +471,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_06_08_145617) do
     t.datetime "updated_at", precision: nil, null: false
   end
 
+  add_foreign_key "bank_accounts", "users"
   add_foreign_key "channel_plan_subscriber_memos", "channel_plan_subscribers"
   add_foreign_key "channel_plan_subscribers", "companies"
   add_foreign_key "chats", "orders", name: "chats_order_id_fkey"
@@ -460,6 +490,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_06_08_145617) do
   add_foreign_key "order_memos", "orders", name: "order_memos_order_id_fkey"
   add_foreign_key "orders", "recreations", name: "orders_recreation_id_fkey"
   add_foreign_key "orders", "users", name: "orders_user_id_fkey"
+  add_foreign_key "partner_infos", "users"
   add_foreign_key "profiles", "users", name: "profiles_user_id_fkey"
   add_foreign_key "recreation_images", "recreations", name: "recreation_images_recreation_id_fkey"
   add_foreign_key "recreation_memos", "recreations"

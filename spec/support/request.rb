@@ -147,6 +147,12 @@ RSpec.shared_examples 'an endpoint returns 5xx status' do
   end
 end
 
+RSpec.shared_examples 'an endpoint returns record invalid' do
+  it 'its response should raise ActiveRecord::RecordInvalid' do
+    expect { send_request }.to raise_error(ActiveRecord::RecordInvalid)
+  end
+end
+
 RSpec.shared_examples 'an endpoint redirects to' do |ignore_parameter|
   # let(:expected_redirect_to) {}
 

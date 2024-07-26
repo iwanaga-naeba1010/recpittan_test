@@ -120,3 +120,7 @@ ja:
       release_status:
         draft: 下書き
         public: 公開
+    bank_account:
+      account_type:
+        checking: 普通預金
+        current: 定期預金
