@@ -37,7 +37,7 @@ const Confirm: React.FC = () => {
           className='mt-2 py-2 w-100 rounded text-primary font-weight-bold bg-white border'
           onClick={() =>
             window.open(
-              'https://youtu.be/5XEniVLs97g?si=Slz9I1EhFNgmSl-b',
+              'https://form.run/@info-1629787292',
               '_blank',
               'noopener,noreferrer'
             )
