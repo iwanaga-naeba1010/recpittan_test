@@ -13,8 +13,8 @@
     </div>
   <% end %>
   <div class="d-flex justify-content-between align-items-center mt-2 mb-2">
-    <div class="status">
-      <span class="p-1">
+    <div class="status <%= order.status %>">
+      <span class="status__label p-1">
         <%= I18n.t("partner.order.status.#{order.status}") %>
       </span>
     </div>

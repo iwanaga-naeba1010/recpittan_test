@@ -62,6 +62,42 @@
         border: none;
       }
     }
+
+    .status {
+      &.in_progress,
+      &.waiting_for_a_reply_from_partner,
+      &.waiting_for_a_reply_from_facility,
+      &.facility_request_in_progress,
+      &.request_denied {
+        .status__label {
+          border: #FD7E14 1px solid;
+          color: #FD7E14;
+          border-radius: 15px;
+        }
+      }
+
+      &.waiting_for_an_event_to_take_place {
+        .status__label {
+          border: #339999 1px solid;
+          color: #339999;
+          border-radius: 15px;
+        }
+      }
+
+      &.unreported_completed,
+      &.final_report_admits_not,
+      &.finished,
+      &.invoice_issued,
+      &.paid,
+      &.canceled,
+      &.travled {
+        .status__label {
+          border: red 1px solid;
+          color: red;
+          border-radius: 15px;
+        }
+      }
+    }
   }
 
   .modal {
