@@ -33,7 +33,7 @@
 <% end %>
 
 <% if current_user.bank_account.blank? %>
-  <%= link_to new_partners_bank_account_path(current_user.bank_account) do %>
+  <%= link_to new_partners_bank_accounts_path do %>
     <div class="row py-2 text-black border-bottom">
       <div class="col-6 ps-4">
         銀行口座情報を登録
@@ -44,7 +44,7 @@
     </div>
   <% end %>
 <% else %>
-  <%= link_to edit_partners_bank_account_path(current_user.bank_account) do %>
+  <%= link_to edit_partners_bank_accounts_path(current_user.bank_account) do %>
     <div class="row py-2 text-black border-bottom">
       <div class="col-6 ps-4">
         銀行口座情報を編集
