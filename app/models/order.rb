@@ -77,6 +77,7 @@ class Order < ApplicationRecord
 
   enum sort_order: {
     newest: 0,
+    chat_desc: 1,
   }
 
   # controller のparamsに追加するため
@@ -87,6 +88,16 @@ class Order < ApplicationRecord
   before_save :switch_status_before_save
 
   scope :order_asc, -> { includes(:chats).order('chats.created_at asc') }
+  scope :sorted_by, ->(sort_order) {
+    case sort_order.to_sym
+    when :newest
+      order(created_at: :desc)
+    when :chat_desc
+      includes(:chats).order('chats.created_at desc')
+    else
+      order(created_at: :desc)
+    end
+  }
 
   validates :price, :material_price, :amount,
             :material_amount, :expenses, :transportation_expenses,

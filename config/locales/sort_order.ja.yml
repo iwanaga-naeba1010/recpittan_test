@@ -8,4 +8,5 @@ ja:
       number_of_recreations_held: 開催回数が多い順
   order:
     sort_orders:
-      newest: 更新順
+      newest: 新着順
+      chat_desc: 更新順
