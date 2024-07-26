@@ -4,7 +4,7 @@ class PartnersController < Partners::ApplicationController
   # rubocop:disable Metrics/AbcSize
   def index
     sort_order = params[:sort_order] || :newest
-    @is_accepted = params[:is_accepted]&.to_s&.downcase == 'true' || false
+    is_accepted = params[:is_accepted]&.to_s&.downcase == 'true' || false
     @recreations = current_user.recreations
     rec_ids = params[:recreation_id].presence || @recreations.pluck(:id)
     user_id = params[:user_id].presence
@@ -13,7 +13,7 @@ class PartnersController < Partners::ApplicationController
 
     @orders = Order.includes([:user, :recreation])
                    .by_recreation_id(rec_ids)
-                   .where(is_accepted: @is_accepted)
+                   .where(is_accepted: is_accepted)
                    .where(is_open: true)
                    .by_date_range(start_date, end_date)
                    .sorted_by(sort_order)
