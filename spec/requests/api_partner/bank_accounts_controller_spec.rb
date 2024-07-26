@@ -2,10 +2,10 @@
 
 require 'rails_helper'
 
-RSpec.describe ApiCustomer::BankAccountsController, type: :request do
-  include_context 'with authenticated customer'
+RSpec.describe ApiPartner::BankAccountsController, type: :request do
+  include_context 'with authenticated partner'
 
-  describe 'POST /api_customer/bank_accounts' do
+  describe 'POST /api_partner/bank_accounts' do
     let(:params) do
       {
         bank_account: {

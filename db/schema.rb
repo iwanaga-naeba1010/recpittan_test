@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_06_08_145617) do
+ActiveRecord::Schema[7.0].define(version: 2024_07_19_161238) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -237,6 +237,20 @@ ActiveRecord::Schema[7.0].define(version: 2024_06_08_145617) do
     t.string "memo"
     t.string "coupon_code"
     t.boolean "is_open", default: true, null: false
+  end
+
+  create_table "partner_infos", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.string "phone_number"
+    t.string "postal_code"
+    t.string "prefecture"
+    t.string "city"
+    t.string "address1"
+    t.string "address2"
+    t.string "company_name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_partner_infos_on_user_id"
   end
 
   create_table "profiles", force: :cascade do |t|
@@ -476,6 +490,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_06_08_145617) do
   add_foreign_key "order_memos", "orders", name: "order_memos_order_id_fkey"
   add_foreign_key "orders", "recreations", name: "orders_recreation_id_fkey"
   add_foreign_key "orders", "users", name: "orders_user_id_fkey"
+  add_foreign_key "partner_infos", "users"
   add_foreign_key "profiles", "users", name: "profiles_user_id_fkey"
   add_foreign_key "recreation_images", "recreations", name: "recreation_images_recreation_id_fkey"
   add_foreign_key "recreation_memos", "recreations"

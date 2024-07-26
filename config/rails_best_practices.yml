@@ -59,7 +59,8 @@ RemoveUnusedMethodsInControllersCheck: {
     'CustomDevise::RegistrationsController#configure_sign_up_params',
     'HomeController#pick_recreation_by_id',
     'Partners::ProfilesController#set_profile',
-    'Partners::ProfilesController#params_create'
+    'Partners::ProfilesController#params_create',
+    'Partners::RegistrationsController#redirect_if_partner_logged_in'
   ]
 }
 RemoveUnusedMethodsInHelpersCheck: { except_methods: [] }

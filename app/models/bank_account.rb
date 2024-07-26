@@ -28,7 +28,7 @@
 class BankAccount < ApplicationRecord
   extend Enumerize
 
-  belongs_to :user
+  belongs_to :user, class_name: 'User'
 
   validates :account_holder_name, :account_number, :account_type, :bank_code, :bank_name, :branch_code, :branch_name, presence: true
   validates :account_number, uniqueness: { scope: :user_id },
@@ -39,5 +39,5 @@ class BankAccount < ApplicationRecord
             format: { with: /\A[\p{katakana}ー－]+\z/,
                       message: I18n.t('active_interaction.errors.messages.only_katakana') }
 
-  enumerize :account_type, in: %i[checking savings comprehensive time_deposit], default: :checking, predicates: true, scope: true
+  enumerize :account_type, in: %i[checking current], default: :checking, predicates: true, scope: true
 end

@@ -123,6 +123,4 @@ ja:
     bank_account:
       account_type:
         checking: 普通預金
-        saving: 定期預金
-        comprehensive: 総合口座
-        time_deposit: 積立定期預金
+        current: 定期預金
