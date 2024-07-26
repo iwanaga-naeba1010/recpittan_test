@@ -75,6 +75,10 @@ class Order < ApplicationRecord
     not_send: 0, sent: 1, checked: 2
   }, default: 0
 
+  enum sort_order: {
+    newest: 0,
+  }
+
   # controller のparamsに追加するため
   attribute :title # まずは相談したい、のメッセージ部分
   attribute :message

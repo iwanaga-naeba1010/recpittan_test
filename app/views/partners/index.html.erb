@@ -55,33 +55,61 @@
   </button>
 
   <!-- モーダル -->
-  <div class="modal fade" id="filterModal" tabindex="-1" aria-labelledby="filterModalLabel" aria-hidden="true">
+  <%# <div class="modal fade" id="filterModal" tabindex="-1" aria-labelledby="filterModalLabel" aria-hidden="true"> %>
+  <div class="modal search-order-modal show d-block" id="filterModal" tabindex="-1" aria-labelledby="filterModalLabel" aria-hidden="true" style="display: block;">
     <div class="modal-dialog modal-fullscreen">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="filterModalLabel">絞り込み・並べ替え</h5>
+          <h5 class="modal-title text-black" id="filterModalLabel">絞り込み・並べ替え</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
+          <div class="text-black mb-3">
+            <%= image_pack_tag 'filter.svg', class: "order_menu pointer", width: "15", height: "15" %>
+            絞り込み
+          </div>
           <form>
             <div class="mb-3">
-              <label for="filterStatus" class="form-label">ステータス</label>
-              <select class="form-select" id="filterStatus">
-                <option selected>選択してください</option>
-                <option value="consulting">相談中</option>
-                <option value="confirmed">開催決定</option>
-                <option value="finished">終了</option>
+              <label for="recreation" class="form-label text-black">レク</label>
+              <p class="description mb-0">登録しているレクを選択</p>
+              <select class="form-select" id="recreation">
+                <option value="" selected>選択してください</option>
+                <% @recreations.each do |recreation| %>
+                  <option value="<%= recreation.id %>"><%= recreation.title %></option>
+                <% end %>
               </select>
             </div>
             <div class="mb-3">
-              <label for="filterDate" class="form-label">日付</label>
-              <input type="date" class="form-control" id="filterDate">
+              <label for="facility" class="form-label text-black">施設</label>
+              <p class="description mb-0">相談された事がある施設を選択することができます</p>
+              <select name="facility" id="facility" class="form-select">
+                <option value="" selected>選択してください</option>
+                <% @customers.each do |customer| %> 
+                  <option value="<%= customer.id %>"><%= customer.company.facility_name %></option>
+                <% end %>
+              </select>
+            </div>
+            <div class="mb-3">
+              <label for="filterDate" class="form-label text-black">期間</label>
+              <div class="d-flex align-items-center">
+                <input type="date" class="form-control" id="filterStartDate" style="width: auto;">
+                <span class="mx-2">-</span>
+                <input type="date" class="form-control" id="filterEndDate" style="width: auto;">
+              </div>
+            </div>
+            <div class="mb-3">
+              <%= image_pack_tag 'sort.svg', class: "order_menu pointer", width: "15", height: "15" %>
+              <label for="filterDate" class="form-label text-black">並べ替え</label>
+              <%= select_tag :sort_order,
+                    options_for_select(order_sort_order_options, selected: params[:sort_order]),
+                    class: 'form-select search-select'
+                %>
             </div>
           </form>
         </div>
-        <div class="modal-footer">
-          <button type="button" class="btn text-primary fw-bold me-auto" data-bs-dismiss="modal">キャンセル</button>
-          <button type="button" class="btn btn-primary fw-bold">保存</button>
+        <div class="modal-footer border-top">
+          <button type="button" class="btn text-primary fw-bold me-auto border py-2" data-bs-dismiss="modal">キャンセル</button>
+          <button type="button" class="btn btn-primary fw-bold py-2">保存</button>
         </div>
       </div>
     </div>
