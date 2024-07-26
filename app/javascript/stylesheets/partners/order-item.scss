@@ -1,19 +1,47 @@
-.order-item {
-  border-bottom: #bbbbbb 1px;
-
-  @media (max-width: 767.98px) {
-    .company_name {
-      h3 {
-        font-size: 18px;
-      }
-    }
+.order {
+  .filter-btn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 10;
   }
 
-  .status {
-    &__cunsult {
-      border: #3dc2ff 1px solid;
-      color: #3dc2ff;
+  .modal-fullscreen .modal-dialog {
+    max-width: 100%;
+    margin: 0;
+  }
+
+  .modal-fullscreen .modal-content {
+    height: 100vh;
+  }
+
+  .modal-body {
+    max-height: calc(100vh - 200px);
+    overflow-y: auto;
+  }
+
+  .order-item {
+    border-bottom: #bbbbbb 1px;
+
+    .recreation-title {
+      font-size: 12px;
+    }
+
+    .chat-preview {
+      background-color: #F4F5F8;
       border-radius: 5px;
+    }
+
+    .chat-preview .logo-navbar {
+      margin-right: 0.5rem;
+    }
+    .chat-preview p {
+      margin-bottom: 0;
+    }
+    .last-chat-sended-at {
+      font-size: 12px;
+      margin-left: auto;
+      color: gray;
     }
   }
 }
