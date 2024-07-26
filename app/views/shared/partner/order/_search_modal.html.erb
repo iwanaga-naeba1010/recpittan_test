@@ -27,7 +27,7 @@
             <p class="description mb-0">相談された事がある施設を選択することができます</p>
             <select name="user_id" id="facility" class="form-select">
               <option value="" selected>選択してください</option>
-              <% customers.each do |customer| %> 
+              <% customers.each do |customer| %>
                 <option value="<%= customer.id %>"><%= customer.company.facility_name %></option>
               <% end %>
             </select>

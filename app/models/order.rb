@@ -87,6 +87,17 @@ class Order < ApplicationRecord
 
   before_save :switch_status_before_save
 
+  scope :by_recreation_id, ->(recreation_id) { where(recreation_id:) }
+  scope :by_user_id, ->(user_id) { where(user_id:) }
+  scope :by_date_range, ->(start_date, end_date) {
+    if start_date && end_date
+      where(start_at: start_date..end_date)
+    elsif start_date
+      where(start_at: start_date..)
+    elsif end_date
+      where(start_at: ..end_date)
+    end
+  }
   scope :order_asc, -> { includes(:chats).order('chats.created_at asc') }
   scope :sorted_by, ->(sort_order) {
     case sort_order.to_sym
@@ -94,8 +105,6 @@ class Order < ApplicationRecord
       order(created_at: :desc)
     when :chat_desc
       includes(:chats).order('chats.created_at desc')
-    else
-      order(created_at: :desc)
     end
   }
 

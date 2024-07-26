@@ -18,10 +18,10 @@
   <div class="tab-content h-100">
     <div class="tab-pane fade show active" id="consulting">
       <% @orders.where(status: [
-          'in_progress', 
-          'waiting_for_a_reply_from_partner', 
-          'waiting_for_a_reply_from_facility', 
-          'facility_request_in_progress', 
+          'in_progress',
+          'waiting_for_a_reply_from_partner',
+          'waiting_for_a_reply_from_facility',
+          'facility_request_in_progress',
           'request_denied'
         ]).each do |order| %>
         <%= render 'shared/partner/order/card', order: order %>
@@ -36,12 +36,12 @@
 
     <div class="tab-pane fade" id="finished">
       <% @orders.where(status: [
-          'unreported_completed', 
-          'final_report_admits_not', 
-          'finished', 
-          'invoice_issued', 
-          'paid', 
-          'canceled', 
+          'unreported_completed',
+          'final_report_admits_not',
+          'finished',
+          'invoice_issued',
+          'paid',
+          'canceled',
           'travled'
         ]).each do |order| %>
         <%= render 'shared/partner/order/card', order: order %>

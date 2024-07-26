@@ -41,9 +41,9 @@
         案件を削除すると案件が見ることができなくなりますがよろしいでしょうか？
       </div>
       <div class="px-3 pb-2">
-        <%= button_to partners_order_path(order), 
-            params: { order: { is_open: false } }, 
-            method: :delete, 
+        <%= button_to partners_order_path(order),
+            params: { order: { is_open: false } },
+            method: :delete,
             class: "btn btn-primary fw-bold w-100 py-2 mb-1" do %>
           削除
         <% end %>
