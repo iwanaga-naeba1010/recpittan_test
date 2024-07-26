@@ -35,13 +35,46 @@
     .chat-preview .logo-navbar {
       margin-right: 0.5rem;
     }
+
     .chat-preview p {
       margin-bottom: 0;
     }
+
     .last-chat-sended-at {
       font-size: 12px;
       margin-left: auto;
       color: gray;
+    }
+
+    .order_menu {
+      cursor: pointer;
+    }
+
+    .order-menu-modal {
+      display: none;
+      width: 240px;
+      bottom: 50px;
+      right: 10px;
+      z-index: 10;
+
+      .remove-button {
+        background-color: white;
+        border: none;
+      }
+    }
+  }
+
+  .modal {
+    h5 {
+      font-size: 18px;
+    }
+
+    .modal-header {
+      border-bottom: none;
+    }
+
+    .modal-footer {
+      border-top: none;
     }
   }
 }
