@@ -39,6 +39,7 @@ ja:
       recreation_plan: プラン
       user_recreation_plan: 登録レクリエーションプラン
       recreation_recreation_plan: 登録レクリエーション
+      bank_account: 銀行口座
       recreation_plan_estimate: プラン見積書
     attributes:
       email:
@@ -245,6 +246,14 @@ ja:
       recreation_recreation_plan:
         recreation_id: レク
         month: 月
+      bank_account:
+        account_holder_name: 口座名義
+        account_number: 口座番号
+        account_type: 預金種目
+        bank_code: 金融機関コード
+        bank_name: 金融機関名
+        branch_code: 支点コード
+        branch_name: 支店名
       recreation_plan_estimate:
         estimate_number: 見積書番号
         number_of_people: 参加人数
