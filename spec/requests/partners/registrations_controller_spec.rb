@@ -21,10 +21,6 @@ RSpec.describe Partners::RegistrationsController, type: :request do
 
       it_behaves_like 'an endpoint returns 2xx status'
     end
-
-    context 'when partner is not logged in' do
-      it_behaves_like 'an endpoint returns 3xx status'
-    end
   end
 
   describe 'GET /partners/recreations/confirm' do

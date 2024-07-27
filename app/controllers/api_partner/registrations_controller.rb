@@ -12,7 +12,7 @@ module ApiPartner
 
       if @user.save
         sign_in(@user)
-        AfterConfirmationMailer.notify(user: @user).deliver_now
+        AfterRegistrationPartnerMailer.notify(user: @user).deliver_now
         render json: { message: 'Partner created and logged in successfully' }, status: :created
       else
         render json: { errors: @user.errors.full_messages }, status: :unprocessable_entity
