@@ -10,13 +10,9 @@ module ApiPartner
       @user.role = :partner
       @user.confirmed_at = Time.current
 
-      if @user.save
-        sign_in(@user)
-        AfterConfirmationMailer.notify(user: @user).deliver_now
-        render json: { message: 'Partner created and logged in successfully' }, status: :created
-      else
-        render json: { errors: @user.errors.full_messages }, status: :unprocessable_entity
-      end
+      sign_in(@user)
+      AfterConfirmationMailer.notify(user: @user).deliver_now
+      render json: { message: 'Partner created and logged in successfully' }, status: :created
     end
 
     private
