@@ -5,7 +5,9 @@ import * as $ from 'jquery';
     $('.order_menu').on('click', (event) => {
       event.stopPropagation();
 
-      const orderMenuContainer = $(event.currentTarget).closest('.order_menu_container');
+      const orderMenuContainer = $(event.currentTarget).closest(
+        '.order_menu_container'
+      );
       const orderId = orderMenuContainer.attr('id')?.replace('order-menu-', '');
 
       if (!orderId) {
