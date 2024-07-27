@@ -11,3 +11,4 @@ export * from './recreations';
 export * from './toggle_event_for_sidebar';
 export * from './toggle_event_for_tag_form';
 export * from './remove_tag_param';
+export * from './toggle_order_menu';

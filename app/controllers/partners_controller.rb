@@ -1,18 +1,23 @@
 # frozen_string_literal: true
 
 class PartnersController < Partners::ApplicationController
+  # rubocop:disable Metrics/AbcSize
   def index
-    column = params[:column].presence || :start_at
-    order = params[:order].presence || :desc
-    @is_accepted = params[:is_accepted]&.to_s&.downcase == 'true' || false
-    @is_open = params[:is_open]&.to_s&.downcase == 'true' || false
-    rec_ids = current_user.recreations.pluck(:id)
+    sort_order = params[:sort_order] || :newest
+    params[:is_accepted]&.to_s&.downcase == 'true' || false
+    @recreations = current_user.recreations
+    rec_ids = params[:recreation_id].presence || @recreations.pluck(:id)
+    user_id = params[:user_id].presence
+    start_date = params[:start_date].present? ? params[:start_date].to_date.beginning_of_day : nil
+    end_date = params[:end_date].present? ? params[:end_date].to_date.end_of_day : nil
 
-    # TODO(okubo): model等に移行したい
-    @orders = Order.where(
-      recreation_id: rec_ids,
-      is_accepted: @is_accepted,
-      is_open: @is_open
-    ).order("#{column} #{order} NULLS LAST")
+    @orders = Order.includes([:user, :recreation])
+                   .by_recreation_id(rec_ids)
+                   .by_date_range(start_date, end_date)
+                   .sorted_by(sort_order)
+
+    @orders = @orders.by_user_id(user_id) if user_id.present?
+    @customers = @orders.map(&:user)
   end
+  # rubocop:enable Metrics/AbcSize
 end

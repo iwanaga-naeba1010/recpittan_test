@@ -1,65 +1,58 @@
-<div class="header">
-  <h2 class="text-white font-weight-bold p-2">
-    <% if params[:is_accepted] == 'true' %>
-      開催決定済の案件
-    <% else %>
-      開催のご相談
-    <% end %>
-  </h2>
-  <%= render 'shared/partner/sidebar_toggle' %>
-</div>
+<header class="d-flex justify-content-between align-items-center py-2">
+  <div class="d-flex align-items-center w-25">
+    <%= image_pack_tag 'menu.svg', id: "hamburger", class: "logo-navbar", width: "30", height: "30" %>
+  </div>
+  <h2 class="flex-grow-1 text-center text-black mb-0">案件一覧</h2>
+  <div class="d-flex align-items-center w-25">
+    <%= image_pack_tag 'question.svg', class: "logo-navbar", width: "25", height: "25" %>
+  </div>
+</header>
 
-<div class="my-3 mx-2">
-  <% if params[:is_accepted] == 'true' %>
-    正式依頼が承認され開催が決定した案件の一覧です。
-  <% else %>
-    正式依頼確認中の案件は、早めのご回答をお願いいたします。
-  <% end %>
-</div>
+<div class="order">
+  <nav class="nav nav-tabs justify-content-between my-3 shadow-sm">
+    <a class="nav-link flex-fill py-2 text-center active" href="#consulting" data-bs-toggle="tab">相談中</a>
+    <a class="nav-link flex-fill py-2 text-center" href="#confirmed" data-bs-toggle="tab">開催決定</a>
+    <a class="nav-link flex-fill py-2 text-center" href="#finished" data-bs-toggle="tab">終了</a>
+  </nav>
 
-<div class="my-3 mx-2">
-  <% if params[:is_accepted] == 'true' %>
-    <%= link_to '開催日順(降順)', partners_path(column: :start_at, order: :desc, is_accepted: @is_accepted), class: ' text-white btn btn-primary  p-3' %>
-    <%= link_to '開催待ち → 終了報告承認済み', partners_path(column: :status, order: :asc, is_accepted: @is_accepted), class: ' text-white btn btn-primary  p-3' %>
-  <% else %>
-    <%= link_to '依頼番号順', partners_path(column: :id, order: :desc, is_accepted: @is_accepted, is_open: @is_open), class: ' text-white btn btn-primary  p-3' %>
-    <%= link_to '正式依頼確認中 → 相談中',
-        partners_path(column: :status, order: :desc, is_accepted: @is_accepted, is_open: @is_open), class: ' text-white btn btn-primary  p-3' %>
-  <% end %>
-</div>
-
-<% @orders.each do |order| %>
-  <%= link_to chat_partners_order_path(order.id) do %>
-    <div class="order-item my-2 border-bottom p-3">
-      <div class="">
-        <h3>
-          <%= order.user.company.facility_name.truncate(20) %>
-        </h3>
-      </div>
-      <div class="mb-2">
-        <%= order.recreation_title %>
-      </div>
-      <div class="mb-2">
-        開催形態:
-        <%= order.recreation.kind_text %>
-      </div>
-      <div class="mb-2">
-        開催希望日:
-        <%= dotted_datetime order.start_at %>
-      </div>
-      <small class="mb-2 mr-3">
-        依頼番号:
-        <%= order.id %>
-      </small>
-      <small class="mb-2 mr-3">
-        更新日:
-        <%= dotted_datetime order.updated_at %>
-      </small>
-      <div class="status mb-2">
-        <span class="status__cunsult p-1">
-          <%= I18n.t("partner.order.status.#{order.status}") %>
-        </span>
-      </div>
+  <div class="tab-content h-100">
+    <div class="tab-pane fade show active" id="consulting">
+      <% @orders.where(status: [
+          'in_progress',
+          'waiting_for_a_reply_from_partner',
+          'waiting_for_a_reply_from_facility',
+          'facility_request_in_progress',
+          'request_denied'
+        ]).where(is_open: true).each do |order| %>
+        <%= render 'shared/partner/order/card', order: order %>
+      <% end %>
     </div>
-  <% end %>
-<% end %>
+
+    <div class="tab-pane fade" id="confirmed">
+      <% @orders.where(status: 'waiting_for_an_event_to_take_place').where(is_open: true).each do |order| %>
+        <%= render 'shared/partner/order/card', order: order %>
+      <% end %>
+    </div>
+
+    <div class="tab-pane fade" id="finished">
+      <% @orders.where(status: [
+          'unreported_completed',
+          'final_report_admits_not',
+          'finished',
+          'invoice_issued',
+          'paid',
+          'canceled',
+          'travled'
+        ]).each do |order| %>
+        <%= render 'shared/partner/order/card', order: order %>
+      <% end %>
+    </div>
+  </div>
+
+  <!-- 絞り込みボタン -->
+  <button type="button" class="btn btn-white bg-white text-primary fw-bold border filter-btn py-2 shadow-sm pe-auto" data-bs-toggle="modal" data-bs-target="#filterModal">
+    絞り込み
+  </button>
+
+  <%= render 'shared/partner/order/search_modal', recreations: @recreations, customers: @customers %>
+</div>

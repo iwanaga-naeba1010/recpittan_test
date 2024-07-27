@@ -4,7 +4,10 @@ import { Bank, Branch } from '@/types';
 type BankApi = {
   fetchAllBanks: () => Promise<Bank[]>;
   fetchAllBranches: (bankCode: string) => Promise<Branch[]>;
-  fetchBranchByCode: (bankCode: string, branchCode: string) => Promise<Branch | null>;
+  fetchBranchByCode: (
+    bankCode: string,
+    branchCode: string
+  ) => Promise<Branch | null>;
 };
 
 export const useBankApi = (): BankApi => {

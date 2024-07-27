@@ -1,7 +1,12 @@
 ja:
-  sort_orders:
-    newest: 新着順
-    price_low_to_high: 価格 (低い順)
-    price_high_to_low: 価格 (高い順)
-    reviews_count: 口コミが多い順
-    number_of_recreations_held: 開催回数が多い順
+  recreation:
+    sort_orders:
+      newest: 新着順
+      price_low_to_high: 価格 (低い順)
+      price_high_to_low: 価格 (高い順)
+      reviews_count: 口コミが多い順
+      number_of_recreations_held: 開催回数が多い順
+  order:
+    sort_orders:
+      newest: 新着順
+      chat_desc: チャット更新順

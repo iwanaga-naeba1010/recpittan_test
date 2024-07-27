@@ -75,6 +75,11 @@ class Order < ApplicationRecord
     not_send: 0, sent: 1, checked: 2
   }, default: 0
 
+  enum sort_order: {
+    newest: 0,
+    chat_desc: 1,
+  }
+
   # controller のparamsに追加するため
   attribute :title # まずは相談したい、のメッセージ部分
   attribute :message
@@ -82,7 +87,26 @@ class Order < ApplicationRecord
 
   before_save :switch_status_before_save
 
+  scope :by_recreation_id, ->(recreation_id) { where(recreation_id:) }
+  scope :by_user_id, ->(user_id) { where(user_id:) }
+  scope :by_date_range, ->(start_date, end_date) {
+    if start_date && end_date
+      where(start_at: start_date..end_date)
+    elsif start_date
+      where(start_at: start_date..)
+    elsif end_date
+      where(start_at: ..end_date)
+    end
+  }
   scope :order_asc, -> { includes(:chats).order('chats.created_at asc') }
+  scope :sorted_by, ->(sort_order) {
+    case sort_order.to_sym
+    when :newest
+      order(created_at: :desc)
+    when :chat_desc
+      includes(:chats).order('chats.created_at desc')
+    end
+  }
 
   validates :price, :material_price, :amount,
             :material_amount, :expenses, :transportation_expenses,
