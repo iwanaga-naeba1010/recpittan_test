@@ -6,32 +6,12 @@
     <button id="close-sidebar" class="btn">&times;</button>
   </div>
   <div class="p-2">
-    <%= link_to partners_path(is_open: true) do %>
+    <%= link_to partners_path do %>
       <div class="sidebar-wrapper my-2 border-bottom">
         <div class="lect_item">
           <i class="fas fa-home fa-lg"></i>
         </div>
-        <div class="right_item">開催のご相談</div>
-      </div>
-    <% end %>
-
-    <%= link_to partners_path(is_open: false) do %>
-      <div class="sidebar-wrapper my-2 border-bottom">
-        <div class="lect_item">
-          <i class="fas fa-door-closed"></i>
-        </div>
-        <div class="right_item">終了した開催のご相談</div>
-      </div>
-    <% end %>
-
-    <%= link_to partners_path(is_accepted: true, is_open: true) do %>
-      <div class="sidebar-wrapper my-2 border-bottom">
-        <div class="lect_item">
-          <i class="far fa-calendar fa-lg"></i>
-        </div>
-        <div class="right_item">
-          開催決定済の案件
-        </div>
+        <div class="right_item">案件一覧</div>
       </div>
     <% end %>
 
