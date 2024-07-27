@@ -23,13 +23,13 @@
           'waiting_for_a_reply_from_facility',
           'facility_request_in_progress',
           'request_denied'
-        ]).each do |order| %>
+        ]).where(is_open: true).each do |order| %>
         <%= render 'shared/partner/order/card', order: order %>
       <% end %>
     </div>
 
     <div class="tab-pane fade" id="confirmed">
-      <% @orders.where(status: 'waiting_for_an_event_to_take_place').each do |order| %>
+      <% @orders.where(status: 'waiting_for_an_event_to_take_place').where(is_open: true).each do |order| %>
         <%= render 'shared/partner/order/card', order: order %>
       <% end %>
     </div>

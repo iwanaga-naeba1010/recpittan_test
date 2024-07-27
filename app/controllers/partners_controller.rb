@@ -14,7 +14,6 @@ class PartnersController < Partners::ApplicationController
     @orders = Order.includes([:user, :recreation])
                    .by_recreation_id(rec_ids)
                    .where(is_accepted:)
-                   .where(is_open: true)
                    .by_date_range(start_date, end_date)
                    .sorted_by(sort_order)
 
