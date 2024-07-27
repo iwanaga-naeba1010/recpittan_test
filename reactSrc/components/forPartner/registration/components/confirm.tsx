@@ -107,7 +107,7 @@ const Confirm: React.FC = () => {
           />
           <label htmlFor='check' className='check ms-2'>
             <a
-              href='https://youtu.be/5XEniVLs97g?si=Slz9I1EhFNgmSl-b'
+              href='https://form.run/@info-1629787292'
               target='blank'
               className='text-primary fw-bold'
             >

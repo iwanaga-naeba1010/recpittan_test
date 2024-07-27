@@ -2,7 +2,7 @@
 
 class AfterConfirmationMailer < ApplicationMailer
   def notify(user:)
-    @template = template_by_kind(kind: 'after_confirmation')
+    @template = template_by_kind(kind: 'after_registration_partner')
     @user = user
 
     mail(
