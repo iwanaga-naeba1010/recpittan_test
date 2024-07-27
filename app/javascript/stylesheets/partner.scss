@@ -165,6 +165,10 @@ body {
       box-shadow: rgba(100, 100, 111, 0.2) 0 0 10px 0;
     }
 
+    .nav-tabs .nav-link {
+      border: none;
+    }
+
     .nav-tabs .nav-link.active {
       border-bottom: 3px solid #007bff;
       color: #007bff;
@@ -256,17 +260,37 @@ body {
     font-size: 12px;
   }
 
+  .modal-body .d-flex.align-items-center.w-100 {
+    width: 100%;
+  }
+  
+  .modal-body .form-control {
+    flex: 1;
+  }
+  
+  .modal-body .mx-2 {
+    margin-left: 0.5rem !important;
+    margin-right: 0.5rem !important;
+  }
+
   .modal-content {
     position: relative;
     padding-bottom: 60px;
   }
-  
+
   .modal-footer {
-    position: absolute;
+    position: fixed;
     bottom: 0;
     left: 0;
     width: 100%;
     z-index: 1000;
     background-color: white;
+    padding: 10px 20px;
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+  }
+
+  .modal-body {
+    overflow-y: auto;
+    padding-bottom: 80px;
   }
 }
