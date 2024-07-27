@@ -67,7 +67,7 @@ module RecreationsHelper
   end
 
   def sort_order_options
-    Recreation.sort_orders.map do |key, _value|
+    Recreation.sort_orders.map do |key, _|
       [I18n.t("recreation.sort_orders.#{key}"), key.to_s]
     end
   end

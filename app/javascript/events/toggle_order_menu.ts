@@ -2,14 +2,14 @@ import * as $ from 'jquery';
 
 (() => {
   document.addEventListener('turbolinks:load', () => {
-    $('.order_menu').on('click', function (event) {
-      event.stopPropagation(); // イベントのバブルを止める
+    $('.order_menu').on('click', (event) => {
+      event.stopPropagation();
 
-      const orderMenuContainer = $(this).closest('.order_menu_container');
+      const orderMenuContainer = $(event.currentTarget).closest('.order_menu_container');
       const orderId = orderMenuContainer.attr('id')?.replace('order-menu-', '');
 
       if (!orderId) {
-        console.error('Order ID is undefined');
+        throw new Error('Order ID is not found');
         return;
       }
 
@@ -28,7 +28,7 @@ import * as $ from 'jquery';
     });
 
     // モーダル外をクリックしたらモーダルを非表示にする
-    $(document).on('click', function (event) {
+    $(document).on('click', (event) => {
       if (
         !$(event.target).closest('.order-menu-modal').length &&
         !$(event.target).closest('.order_menu').length

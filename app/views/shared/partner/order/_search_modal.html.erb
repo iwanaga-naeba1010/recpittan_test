@@ -44,7 +44,7 @@
             <%= image_pack_tag 'sort.svg', class: "order_menu pointer", width: "15", height: "15" %>
             <label for="sort_order" class="form-label text-black">並べ替え</label>
             <%= select_tag :sort_order,
-                  options_for_select(order_sort_order_options, selected: params[:sort_order]),
+                  options_for_select(sort_orders_options, selected: params[:sort_order]),
                   class: 'form-select search-select'
               %>
           </div>
