@@ -12,7 +12,6 @@ import * as $ from 'jquery';
 
       if (!orderId) {
         throw new Error('Order ID is not found');
-        return;
       }
 
       const orderMenuModal = $(`#order-menu-modal-${orderId}`);
