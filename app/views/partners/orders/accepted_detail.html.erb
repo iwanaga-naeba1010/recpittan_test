@@ -1,14 +1,5 @@
-<div class="header">
-  <div>
-    <h2 class="text-white font-weight-bold p-2">
-      <%= link_to chat_partners_order_path(@order.id) do %>
-        <i class="fas fa-arrow-left text-white"></i>
-      <% end %>
-      詳細
-    </h2>
-    <%= render 'shared/partner/sidebar_toggle' %>
-  </div>
-</div>
+<%= render 'shared/partner/header_with_link', title: "詳細", path: chat_partners_order_path(@order.id) %>
+
 <div class="body bg-white p-3 mb-3">
   <div>
     <%= link_to partners_order_path(@order.id) do  %>

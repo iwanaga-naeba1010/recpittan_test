@@ -31,58 +31,6 @@
     .fade-in {
       transform: translateX(100%);
     }
-
-    .fadein-btn {
-      display: block;
-      position: absolute;
-      top: 11px;
-      right: 30px;
-      width: 40px;
-      height: 22px;
-      cursor: pointer;
-      transition: 1s;
-    }
-
-    .inner_line {
-      display: block;
-      position: absolute;
-      left: 0;
-      width: 50px;
-      height: 3px;
-      background-color: white;
-      transition: 1s;
-      border-radius: 4px;
-    }
-
-    .line_first {
-      top: 0;
-    }
-
-    .line_second {
-      top: 10px;
-    }
-
-    .line_third {
-      bottom: 0;
-    }
-
-    .line_top,.line_middle,.line_bottom{
-      background: white;
-    }
-
-    .line_top {
-      transform: translateY(10px) rotate(-45deg);
-      top: 0;
-    }
-
-    .line_middle {
-      opacity: 0;
-    }
-
-    .line_bottom {
-      transform: translateY(-10px) rotate(45deg);
-      bottom: 0;
-    }
   }
 }
 

@@ -1,9 +1,4 @@
-<div class="header">
-    <h2 class="text-white font-weight-bold p-2">
-      プロフィール設定
-    </h2>
-    <%= render 'shared/partner/sidebar_toggle' %>
-</div>
+<%= render 'shared/partner/header', title: "プロフィール設定" %>
 
 <% @profiles.each do |profile| %>
   <%= link_to edit_partners_profile_path(profile.id) do %>
