@@ -16,9 +16,7 @@ const Confirm: React.FC = () => {
   return (
     <>
       <div className='header bg-white shadow-sm'>
-        <h2 className='text-black text-center p-2 border-bottom'>
-          登録完了
-        </h2>
+        <h2 className='text-black text-center p-2 border-bottom'>登録完了</h2>
       </div>
       <div className='confirm p-3 text-black'>
         <div className='text-center mb-3'>

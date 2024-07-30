@@ -1,16 +1,3 @@
-
-<div class="header">
-  <div class="d-flex align-items-center justify-content-center position-relative">
-    <h2 class="m-2 pb-2 text-white font-weight-bold position-absolute start-0">
-      <%= link_to partners_recreations_path do %>
-        <i class="fas fa-arrow-left text-white"></i>
-      <% end %>
-    </h2>
-    <h2 class="m-2 pb-2 text-white font-weight-bold">
-      レクリエーション詳細
-    </h2>
-    <%= render 'shared/partner/sidebar_toggle' %>
-  </div>
-</div>
+<%= render 'shared/partner/header_with_link', title: "レクリエーション詳細", path: partners_recreations_path %>
 
 <div id='recreationShow'></div>

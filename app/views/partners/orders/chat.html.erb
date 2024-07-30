@@ -1,14 +1,5 @@
 <div class="header-block">
-  <div class="header">
-    <div>
-      <h2 class="text-white font-weight-bold p-2">
-        <%= link_to partners_path(is_open: true) do %>
-          <i class="fas fa-arrow-left text-white"></i>
-        <% end %>
-        <%= @order.recreation.profile_name %>
-      </h2>
-    </div>
-  </div>
+  <%= render 'shared/partner/header_with_link', title: "#{@order.recreation.profile_name}", path: partners_path(is_open: true) %>
   <%= link_to partners_order_path(id: @order.id, is_accepted: @order.is_accepted) do %>
     <div class="sub_header p-3">
       <div class="d-flex">
@@ -20,7 +11,6 @@
           依頼詳細
           <i class="fas fa-chevron-right"></i>
         </div>
-        <%= render 'shared/partner/sidebar_toggle' %>
       </div>
     </div>
   <% end %>

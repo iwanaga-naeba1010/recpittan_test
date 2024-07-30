@@ -1,15 +1,5 @@
-<div class="header">
-  <div>
-    <h2 class="text-white font-weight-bold p-2">
-      <% path = @order.is_accepted ? partners_order_path(id: @order.id, is_accepted: @order.is_accepted) : chat_partners_order_path(@order.id) %>
-      <%= link_to path do %>
-        <i class="fas fa-arrow-left text-white"></i>
-      <% end %>
-      <%= @order.recreation.profile_name %>
-    </h2>
-    <%= render 'shared/partner/sidebar_toggle' %>
-  </div>
-</div>
+<% path = @order.is_accepted ? partners_order_path(id: @order.id, is_accepted: @order.is_accepted) : chat_partners_order_path(@order.id) %>
+<%= render 'shared/partner/header_with_link', title: "#{@order.recreation.profile_name}", path: path %>
 
 <div class="body bg-white border p-3 mb-3">
   <h4 class="text-black font-weight-bold">アンケート情報</h4>

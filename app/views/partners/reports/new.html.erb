@@ -1,14 +1,4 @@
-<div class="header">
-  <div class="d-flex align-items-center justify-content-center position-relative">
-    <h2 class="m-2 pb-2 text-white font-weight-bold position-absolute start-0">
-      <%= link_to partners_order_path(@report.order.id, is_accepted: true) do %>
-        <i class="fas fa-arrow-left text-white"></i>
-      <% end %>
-    </h2>
-    <h2 class="m-2 pb-2 text-white font-weight-bold">終了報告</h2>
-    <%= render 'shared/partner/sidebar_toggle' %>
-  </div>
-</div>
+<%= render 'shared/partner/header_with_link', title: "終了報告", path: partners_order_path(@report.order.id, is_accepted: true) %>
 
 <div class="p-3">
   <div class="p-4 text-black">
