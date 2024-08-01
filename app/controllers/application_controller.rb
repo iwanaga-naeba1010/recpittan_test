@@ -36,6 +36,12 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  # ログイン後にリダイレクトするための場所を保存
+  def store_location_for(resource_or_scope, location)
+    session_key = Devise::Mapping.find_scope!(resource_or_scope).to_s
+    session["#{session_key}_return_to"] = location
+  end
+
   # NOTE(okubo): 主にreactからflashを与えるための目的で設置
   private def set_query_flash
     flash[:notice] = params[:notice] if params[:notice]

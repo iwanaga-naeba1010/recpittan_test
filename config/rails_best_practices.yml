@@ -60,7 +60,8 @@ RemoveUnusedMethodsInControllersCheck: {
     'HomeController#pick_recreation_by_id',
     'Partners::ProfilesController#set_profile',
     'Partners::ProfilesController#params_create',
-    'Partners::RegistrationsController#redirect_if_partner_logged_in'
+    'Partners::RegistrationsController#redirect_if_partner_logged_in',
+    'Partners::RegistrationsController#store_location'
   ]
 }
 RemoveUnusedMethodsInHelpersCheck: { except_methods: [] }
