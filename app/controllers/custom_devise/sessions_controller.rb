@@ -21,10 +21,16 @@ class CustomDevise::SessionsController < Devise::SessionsController
   # protected
 
   def after_sign_in_path_for(resource)
-    return admin_dashboard_path if resource.role.admin?
-    return partners_path(is_open: true) if resource.role.partner?
+    stored_location = stored_location_for(resource)
+    return stored_location unless stored_location.nil? || stored_location == root_path
 
-    session[:redirect_url] || customers_path
+    if resource.role.admin?
+      admin_dashboard_path
+    elsif resource.role.partner?
+      partners_path(is_open: true)
+    else
+      session[:redirect_url] || customers_path
+    end
   end
 
   # If you have extra params to permit, append them to the sanitizer.
