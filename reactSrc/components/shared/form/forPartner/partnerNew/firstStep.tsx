@@ -30,10 +30,7 @@ export const FirstStep: React.FC = () => {
         </div>
         <div>
           <h5 className='text-center text-black'>あともう少しです！</h5>
-          <p className='pt-2 m-0 text-black'>おめでとうございます！</p>
-          <p className='m-0 text-black'>
-            あなたは審査を通過しましたのでサービスへ新規登録をお願いします。
-          </p>
+          <p className='pt-2 m-0 text-black'>パートナー登録にあたり新規アカウントの作成をお願いいたします。</p>
         </div>
 
         <div className='mt-3'>
