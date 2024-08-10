@@ -76,7 +76,7 @@ export const FirstStep: React.FC = () => {
             />
             <label htmlFor='terms' className='terms'>
               <span>
-                <a href='#' className='ms-1 text-primary fw-bold'>
+                <a href='https://drive.google.com/file/d/1FsBuayCcZDgqD6g6xjpf6Xh0Yxgw4Fgy/view' className='ms-1 text-primary fw-bold'>
                   利用規約
                 </a>
               </span>
@@ -95,7 +95,7 @@ export const FirstStep: React.FC = () => {
             />
             <label htmlFor='privacy' className='privacy'>
               <span>
-                <a href='#' className='ms-1 text-primary fw-bold'>
+                <a href='https://everyplus.jp/policy_privacy' className='ms-1 text-primary fw-bold'>
                   プライバシーポリシー
                 </a>
               </span>
