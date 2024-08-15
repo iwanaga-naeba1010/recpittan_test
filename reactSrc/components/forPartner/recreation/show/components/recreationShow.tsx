@@ -50,6 +50,11 @@ const RecreationShow: React.FC = () => {
         url={`/partners/recreations/${id}/edit?formKind=profile`}
       />
       <RecreationItem
+        title='レク画像・関連ファイルのアップ'
+        content={recreation.title}
+        url={`/partners/recreations/${id}/edit?formKind=file`}
+      />
+      <RecreationItem
         title='このレクの口コミ一覧'
         content={recreation.title}
         url={`/partners/recreations/${id}/evaluations`}

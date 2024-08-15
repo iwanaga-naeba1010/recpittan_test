@@ -6,8 +6,9 @@ import { FirstStep } from './firstStep';
 import { RecreationFormValues } from './recreationNewForm';
 import { SecondStep } from './secondStep';
 import { ThirdStep } from './thirdStep';
+import { ImageStep } from './imageStep';
 
-export type FormKind = 'title' | 'price' | 'profile';
+export type FormKind = 'title' | 'price' | 'profile' | 'file';
 
 type Props = {
   kind: FormKind;
@@ -67,11 +68,18 @@ export const RecreationEditForm: React.FC<Props> = (props) => {
             getValues={getValues}
             register={register}
             recreation={recreation}
-            useFile={useFile}
           />
         )}
         {kind === 'profile' && (
           <ThirdStep register={register} getValues={getValues} />
+        )}
+        {/* 写真や添付ファイルの追加はこちらから */}
+        {kind ==='file' && (
+          <ImageStep
+            register={register}
+            useFile={useFile}
+            recreation={recreation}
+          />
         )}
         <button
           type='submit'
