@@ -51,7 +51,7 @@ GEM
     active_interaction (5.3.0)
       activemodel (>= 5.2, < 8)
       activesupport (>= 5.2, < 8)
-    active_material (2.1.1)
+    active_material (2.1.2)
     activeadmin (2.14.0)
       arbre (~> 1.2, >= 1.2.1)
       formtastic (>= 3.1, < 5.0)
