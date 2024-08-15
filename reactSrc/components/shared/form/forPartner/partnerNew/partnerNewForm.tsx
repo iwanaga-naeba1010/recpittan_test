@@ -116,6 +116,7 @@ export const PartnerNewForm: React.FC = () => {
         <form
           className='partner-registration'
           onSubmit={methods.handleSubmit(handleSubmit)}
+          autoComplete='off'
         >
           {currentStep === 0 && <FirstStep />}
           {currentStep === 1 && <SecondStep />}

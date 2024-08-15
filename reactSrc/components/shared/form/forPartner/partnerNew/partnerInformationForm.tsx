@@ -48,6 +48,7 @@ export const PartnerInformationForm: React.FC = () => {
             className='w-100 p-2'
             placeholder='田中太郎'
             {...register('userName', { required: '氏名は必須です' })}
+            autoComplete='new-name'
           />
         </div>
 
@@ -62,6 +63,7 @@ export const PartnerInformationForm: React.FC = () => {
             {...register('userNameKana', {
               required: '氏名（カナ）は必須です',
             })}
+            autoComplete='new-kana'
           />
         </div>
 
@@ -74,6 +76,7 @@ export const PartnerInformationForm: React.FC = () => {
             className='w-100 p-2'
             placeholder='電話番号'
             {...register('phoneNumber', { required: '電話番号は必須です' })}
+            autoComplete='new-phone'
           />
         </div>
 
@@ -87,6 +90,7 @@ export const PartnerInformationForm: React.FC = () => {
             placeholder='郵便番号(-は不要です)'
             {...register('postalCode', { required: '郵便番号は必須です' })}
             onChange={handlePostalCodeChange}
+            autoComplete='new-postal-code'
           />
           {isLoading && <p>Loading...</p>}
           <input
@@ -94,24 +98,28 @@ export const PartnerInformationForm: React.FC = () => {
             className='w-100 p-2 mb-1'
             placeholder='都道府県'
             {...register('prefecture', { required: '都道府県は必須です' })}
+            autoComplete='new-prefecture'
           />
           <input
             type='text'
             className='w-100 p-2 mb-1'
             placeholder='市区町村'
             {...register('city', { required: '市区町村は必須です' })}
+            autoComplete='new-city'
           />
           <input
             type='text'
             className='w-100 p-2 mb-1'
             placeholder='住所1'
             {...register('address1', { required: '住所1は必須です' })}
+            autoComplete='new-address1'
           />
           <input
             type='text'
             className='w-100 p-2'
             placeholder='建物名・部屋（任意）'
             {...register('address2')}
+            autoComplete='new-address2'
           />
         </div>
 
@@ -122,6 +130,7 @@ export const PartnerInformationForm: React.FC = () => {
           className='w-100 p-2'
           placeholder='会社名または団体名などを入力'
           {...register('companyName')}
+          autoComplete='new-company'
         />
       </div>
     </>
