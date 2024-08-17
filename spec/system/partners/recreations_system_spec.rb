@@ -37,7 +37,7 @@ RSpec.describe '/partners/recreations', type: :system do
         select '音楽', from: 'category'
         find("label[for='numberOfFacilitiesFalse']").click
         click_button('次へ')
-        expect(page).to have_content('金額・メディア・その他の情報を入力')
+        expect(page).to have_content('金額・その他の情報を入力')
 
         input_text_boxes('price', 10000)
         input_text_boxes('materialPrice', 2000)
@@ -130,7 +130,7 @@ RSpec.describe '/partners/recreations', type: :system do
       scenario 'crate recreation_image', js: true do
         expect(page).to have_content('レクリエーション詳細')
         expect(page).to have_content(recreation.title)
-        click_on('金額・メディア・その他の情報')
+        click_on('金額・その他の情報')
         expect(page).to have_current_path(edit_partners_recreation_path(recreation), ignore_query: true)
         expect(recreation.recreation_images.size).to eq 1
         attach_file 'recreationImage', Rails.root.join('spec/files/test.png'), make_visible: true
@@ -141,7 +141,7 @@ RSpec.describe '/partners/recreations', type: :system do
       scenario 'delete recreation_image', js: true do
         expect(page).to have_content('レクリエーション詳細')
         expect(page).to have_content(recreation.title)
-        click_on('金額・メディア・その他の情報')
+        click_on('金額・その他の情報')
         expect(page).to have_current_path(edit_partners_recreation_path(recreation), ignore_query: true)
         expect(recreation.recreation_images.size).to eq 1
         click_button('削除')
@@ -152,7 +152,7 @@ RSpec.describe '/partners/recreations', type: :system do
       scenario 'crate recreation_profile', js: true do
         expect(page).to have_content('レクリエーション詳細')
         expect(page).to have_content(recreation.title)
-        click_on('金額・メディア・その他の情報')
+        click_on('金額・その他の情報')
         expect(page).to have_current_path(edit_partners_recreation_path(recreation), ignore_query: true)
         expect(recreation.recreation_profile.blank?)
         attach_file 'recreationProfile', Rails.root.join('spec/files/test.png'), make_visible: true
@@ -163,7 +163,7 @@ RSpec.describe '/partners/recreations', type: :system do
       scenario 'delete recreation_profile', js: true do
         expect(page).to have_content('レクリエーション詳細')
         expect(page).to have_content(recreation.title)
-        click_on('金額・メディア・その他の情報')
+        click_on('金額・その他の情報')
         expect(page).to have_current_path(edit_partners_recreation_path(recreation), ignore_query: true)
         expect(recreation.recreation_profile.present?)
         click_button('削除')
