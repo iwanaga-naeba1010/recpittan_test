@@ -14,8 +14,8 @@ type Props = {
 
 export const ImageStep: React.FC<Props> = (props) => {
   const { recreation, useFile } = props;
-  const sliderRef = useRef<HTMLInputElement>(null);
-  const materialRef = useRef<HTMLInputElement>(null);
+  const sliderRef = useRef<HTMLInputElement | null>(null);
+  const materialRef = useRef<HTMLInputElement | null>(null);
 
   const handleSliderRefClickFileInput = (): void => {
     if (!sliderRef.current) return;
@@ -26,6 +26,9 @@ export const ImageStep: React.FC<Props> = (props) => {
     if (!materialRef.current) return;
     materialRef.current.click();
   };
+
+  const sliderImages = recreation.images.filter((image) => image.kind === 'slider');
+  const materialImages = recreation.images.filter((image) => image.kind === 'material');
 
   return (
     <div>
@@ -50,15 +53,13 @@ export const ImageStep: React.FC<Props> = (props) => {
         </ul>
       </div>
       <div className='row'>
-        {recreation.images
-          .filter((image) => image.kind === 'slider')
-          .map((image, i) => (
-            <ImageComponent
-              key={i}
-              image={image}
-              handleDelete={useFile.handleFileDelete}
-            />
-          ))}
+        {sliderImages.map((image, i) => (
+          <ImageComponent
+            key={i}
+            image={image}
+            handleDelete={useFile.handleFileDelete}
+          />
+        ))}
       </div>
 
       <input
@@ -100,15 +101,13 @@ export const ImageStep: React.FC<Props> = (props) => {
       />
 
       <div className='row'>
-        {recreation.images
-          .filter((image) => image.kind === 'material')
-          .map((image, i) => (
-            <ImageComponent
-              key={i}
-              image={image}
-              handleDelete={useFile.handleFileDelete}
-            />
-          ))}
+        {materialImages.map((image, i) => (
+          <ImageComponent
+            key={i}
+            image={image}
+            handleDelete={useFile.handleFileDelete}
+          />
+        ))}
       </div>
       {useFile.isLoading ? (
         <LoadingIndicator />
