@@ -74,7 +74,7 @@ export const RecreationEditForm: React.FC<Props> = (props) => {
           <ThirdStep register={register} getValues={getValues} />
         )}
         {/* 写真や添付ファイルの追加はこちらから */}
-        {kind ==='file' && (
+        {kind === 'file' && (
           <ImageStep
             register={register}
             useFile={useFile}

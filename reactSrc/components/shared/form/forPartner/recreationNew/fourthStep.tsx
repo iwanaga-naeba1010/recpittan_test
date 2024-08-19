@@ -125,7 +125,9 @@ export const FourthStep: React.FC<Props> = ({ getValues }) => {
         <p>{extraInformation}</p>
       </div>
       <div className='mt-4'>
-        <p className='text-danger fw-bold'>申請後ページより、レク画像やファイルのアップをお願いいたします</p>
+        <p className='text-danger fw-bold'>
+          申請後ページより、レク画像やファイルのアップをお願いいたします
+        </p>
       </div>
     </div>
   );

@@ -18,17 +18,39 @@ export const ImageStep: React.FC<Props> = (props) => {
   const materialRef = useRef<HTMLInputElement | null>(null);
 
   const handleSliderRefClickFileInput = (): void => {
-    if (!sliderRef.current) return;
-    sliderRef.current.click();
+    if (sliderRef.current) {
+      sliderRef.current.click();
+    }
   };
 
   const handleMaterialRefClickFileInput = (): void => {
-    if (!materialRef.current) return;
-    materialRef.current.click();
+    if (materialRef.current) {
+      materialRef.current.click();
+    }
   };
 
-  const sliderImages = recreation.images.filter((image) => image.kind === 'slider');
-  const materialImages = recreation.images.filter((image) => image.kind === 'material');
+  const handleSliderFileAdd = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ): void => {
+    if (event.target.files) {
+      useFile.handleFileAdd(event.target.files, 'slider');
+    }
+  };
+
+  const handleMaterialFileAdd = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ): void => {
+    if (event.target.files) {
+      useFile.handleFileAdd(event.target.files, 'material');
+    }
+  };
+
+  const sliderImages = recreation.images.filter(
+    (image) => image.kind === 'slider'
+  );
+  const materialImages = recreation.images.filter(
+    (image) => image.kind === 'material'
+  );
 
   return (
     <div>
@@ -43,9 +65,7 @@ export const ImageStep: React.FC<Props> = (props) => {
           </li>
           <li>施設に配布するチラシの素材としても利用します</li>
           <li>後ほど画像を追加/変更することも可能です</li>
-          <li>
-            目安サイズ 16×9（iPhoneで横向きで撮影した写真の大きさでも可）
-          </li>
+          <li>目安サイズ 16×9（iPhoneで横向きで撮影した写真の大きさでも可）</li>
           <li>添付可能ファイルは20MB以下で、形式はJPEG、PNGです</li>
           <li>
             削除した画像は元に戻せません。必要に応じて事前にレクページからダウンロードをお願いします
@@ -67,9 +87,7 @@ export const ImageStep: React.FC<Props> = (props) => {
         accept='image/*'
         className='d-none'
         ref={sliderRef}
-        onChange={(event) =>
-          useFile.handleFileAdd(event.target.files, 'slider')
-        }
+        onChange={handleSliderFileAdd}
         name='recreationImage'
       />
       <button
@@ -81,9 +99,7 @@ export const ImageStep: React.FC<Props> = (props) => {
       </button>
 
       <div className='d-flex mt-4'>
-        <h5 className='text-black font-weight-bold'>
-          施設に渡したいファイル
-        </h5>
+        <h5 className='text-black font-weight-bold'>施設に渡したいファイル</h5>
         <p className='small mt-1 ms-3'>
           ※添付可能ファイルは20MB以下で、形式はPDF、JPEG、PNGです
         </p>
@@ -94,9 +110,7 @@ export const ImageStep: React.FC<Props> = (props) => {
         type='file'
         className='d-none'
         ref={materialRef}
-        onChange={(event) =>
-          useFile.handleFileAdd(event.target.files, 'material')
-        }
+        onChange={handleMaterialFileAdd}
         name='recreationProfile'
       />
 

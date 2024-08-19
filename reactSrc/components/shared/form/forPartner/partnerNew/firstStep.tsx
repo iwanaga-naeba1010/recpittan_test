@@ -30,7 +30,9 @@ export const FirstStep: React.FC = () => {
         </div>
         <div>
           <h5 className='text-center text-black'>あともう少しです！</h5>
-          <p className='pt-2 m-0 text-black'>パートナー登録にあたり新規アカウントの作成をお願いいたします。</p>
+          <p className='pt-2 m-0 text-black'>
+            パートナー登録にあたり新規アカウントの作成をお願いいたします。
+          </p>
         </div>
 
         <div className='mt-3'>
@@ -76,7 +78,10 @@ export const FirstStep: React.FC = () => {
             />
             <label htmlFor='terms' className='terms'>
               <span>
-                <a href='https://drive.google.com/file/d/1FsBuayCcZDgqD6g6xjpf6Xh0Yxgw4Fgy/view' className='ms-1 text-primary fw-bold'>
+                <a
+                  href='https://drive.google.com/file/d/1FsBuayCcZDgqD6g6xjpf6Xh0Yxgw4Fgy/view'
+                  className='ms-1 text-primary fw-bold'
+                >
                   利用規約
                 </a>
               </span>
@@ -95,7 +100,10 @@ export const FirstStep: React.FC = () => {
             />
             <label htmlFor='privacy' className='privacy'>
               <span>
-                <a href='https://everyplus.jp/policy_privacy' className='ms-1 text-primary fw-bold'>
+                <a
+                  href='https://everyplus.jp/policy_privacy'
+                  className='ms-1 text-primary fw-bold'
+                >
                   プライバシーポリシー
                 </a>
               </span>
