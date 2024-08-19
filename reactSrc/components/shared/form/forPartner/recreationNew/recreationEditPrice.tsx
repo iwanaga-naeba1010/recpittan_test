@@ -16,7 +16,7 @@ export const RecreationEditPrice: React.FC<Props> = (props) => {
     <>
       <div className='d-flex'>
         <h5 className='text-black font-weight-bold'>
-          金額・メディア・その他の情報を入力
+          金額・その他の情報を入力
         </h5>
       </div>
       <hr className='my-2' />
