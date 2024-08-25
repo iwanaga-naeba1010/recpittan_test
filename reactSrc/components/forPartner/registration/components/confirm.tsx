@@ -115,7 +115,7 @@ const Confirm: React.FC = () => {
           </label>
         </div>
         <div>
-          <a href={isChecked ? '/partners/recreations' : '#'}>
+          <a href={isChecked ? '/partners/profiles' : '#'}>
             <button
               className={`mt-2 py-2 w-100 rounded font-weight-bold border ${
                 isChecked ? 'bg-primary text-white border-primary' : 'text-dark'
@@ -126,7 +126,7 @@ const Confirm: React.FC = () => {
               }}
               disabled={!isChecked}
             >
-              レク登録へ続く
+              プロフィール登録へ続く
             </button>
           </a>
         </div>
