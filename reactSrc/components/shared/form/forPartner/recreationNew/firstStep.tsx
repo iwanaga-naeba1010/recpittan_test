@@ -163,6 +163,7 @@ export const FirstStep: React.FC<Props> = (props) => {
               id={`kind${kind.enumKey}`}
               value={kind.enumKey}
               {...register('kind')}
+              defaultChecked={!recreation && kind.enumKey === 'visit'}
             />
             <label htmlFor={`kind${kind.enumKey}`}>
               {kind.name}でレクを実施
@@ -295,16 +296,13 @@ export const FirstStep: React.FC<Props> = (props) => {
         <p className='small my-0'>プログラムに合うカテゴリーを選んでください</p>
         <select
           className='p-2 w-100 rounded border border-secondary'
-          placeholder='選択してください'
           {...register('category', { required: 'カテゴリーは必須です' })}
         >
-          <option></option>
+          <option value='' disabled selected>
+            選択してください
+          </option>
           {config.categories.map((category) => (
-            <option
-              key={category.name}
-              value={category.enumKey}
-              selected={getValues('category') === category.enumKey}
-            >
+            <option key={category.enumKey} value={category.enumKey}>
               {category.name}
             </option>
           ))}
@@ -385,11 +383,12 @@ export const FirstStep: React.FC<Props> = (props) => {
               className='p-2 w-100 rounded border border-secondary'
               {...register('capacity', { required: '参加人数制限は必須です' })}
             />
-            {errors.capacity && (
-              <ValidationErrorMessage message={errors?.capacity?.message} />
+            {errors.capacity && errors.capacity.message && (
+              <ValidationErrorMessage message={errors.capacity.message || ''} />
             )}
           </>
         )}
+
         {errors.capacity && errors.capacity.message && (
           <ValidationErrorMessage message={errors?.capacity?.message} />
         )}
