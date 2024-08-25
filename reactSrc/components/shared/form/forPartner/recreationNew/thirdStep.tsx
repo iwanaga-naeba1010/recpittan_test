@@ -39,18 +39,6 @@ export const ThirdStep: React.FC<Props> = (props) => {
           レクに表示するプロフィールを選択
         </h5>
       </div>
-      <p className='small my-0'>
-        プロフィールを登録していない場合は
-        <span>
-          <a className='text-primary' href='/partners/profiles/new'>
-            新規プロフィール
-          </a>
-        </span>
-        を登録してください。
-      </p>
-      <p>
-        戻るボタンを使うと記入内容が消える場合がありますのでご注意ください。
-      </p>
       {profiles.map((profile: Profile, i) => (
         <div key={i}>
           <input
@@ -58,7 +46,7 @@ export const ThirdStep: React.FC<Props> = (props) => {
             id={`profileId${i}`}
             value={profile.id}
             {...register('profileId')}
-            defaultChecked={profile.id === getValues('profileId')}
+            defaultChecked={i === 0 || profile.id === getValues('profileId')}
           />
           <label htmlFor={`profileId${i}`}>{profile.name}</label>
         </div>
