@@ -38,7 +38,7 @@
     "react-hook-form": "^7.52.1",
     "react-loader-spinner": "^6.1.6",
     "snakecase-keys": "^5.5.0",
-    "swiper": "^9.4.1",
+    "swiper": "^11.1.10",
     "turbolinks": "^5.2.0",
     "typescript": "^5.5.4",
     "webpack": "^4.46.0",
