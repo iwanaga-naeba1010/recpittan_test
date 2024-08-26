@@ -15,6 +15,15 @@ type Props = {
   recreation?: Recreation;
 };
 
+const descriptionPlaceholderText = `交通費について
+東京都 北区、豊島区０円
+北区、豊島区以外の東京都内 500円
+神奈川 1000円
+千葉 1500円
+埼玉 1500円
+上記以外はご相談ください
+`;
+
 export const SecondStep: React.FC<Props> = (props) => {
   const { getValues, register, recreation } = props;
   const [extraInformation, setExtraInformation] = useState<string>(
@@ -106,12 +115,12 @@ export const SecondStep: React.FC<Props> = (props) => {
         <h5 className='text-black font-weight-bold'>その他を入力</h5>
       </div>
       <p className='small my-0'>
-        注意事項やその他備考などありましたら入力してください
+        交通費に関する補足や、サポート必要人数、注意事項やその他備考などありました入力してください
       </p>
       <textarea
         rows={15}
         className='p-1 w-100 rounded border border-secondary'
-        placeholder='その他を入力'
+        placeholder={descriptionPlaceholderText}
         {...register('extraInformation', {
           maxLength: 500,
         })}
