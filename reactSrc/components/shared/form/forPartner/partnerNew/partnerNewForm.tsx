@@ -7,7 +7,7 @@ import axios from 'axios';
 
 export const PartnerNewForm: React.FC = () => {
   const [currentStep, setCurrentStep] = useState<number>(0);
-  const [serverError, setServerError] = useState<string | null>(null); // 追加
+  const [serverError, setServerError] = useState<string | null>(null);
   const methods = useForm({
     defaultValues: {
       email: '',
@@ -37,9 +37,8 @@ export const PartnerNewForm: React.FC = () => {
   const handlePrev = () => setCurrentStep(currentStep - 1);
 
   const handleSubmit = async (data: any) => {
+    setServerError(null);
     try {
-      setServerError(null);
-
       const requestBody = {
         user: {
           email: data.email,
@@ -64,7 +63,6 @@ export const PartnerNewForm: React.FC = () => {
       window.location.href = '/partners/registrations/complete';
     } catch (error) {
       if (axios.isAxiosError(error)) {
-        // error が AxiosError 型であることを確認
         if (error.response && error.response.status === 422) {
           setServerError(error.response.data.errors.join(', '));
         } else {
