@@ -116,7 +116,7 @@ class Recreation < ApplicationRecord
     end
   }
 
-  enum sort_order: {
+  enum :sort_order, {
     newest: 0,
     price_low_to_high: 1,
     price_high_to_low: 2,
