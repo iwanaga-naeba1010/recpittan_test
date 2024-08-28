@@ -16,9 +16,11 @@ export const PrefectureItem: React.FC<Props> = (props) => {
         <p>エリア</p>
         <select
           className='p-2 w-100 rounded border border-secondary'
-          placeholder='選択してください'
           onChange={(e) => handleUpdate(prefecture.id, e.target.value)}
         >
+          <option value='' disabled selected>
+            選択してください
+          </option>
           {prefectures?.map((p: string) => (
             <option key={p} value={p} selected={p == prefecture.name}>
               {p}
