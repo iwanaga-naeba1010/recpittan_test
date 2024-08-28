@@ -25,7 +25,7 @@ type Props = {
   register: UseFormRegister<RecreationFormValues>;
   getValues: UseFormGetValues<RecreationFormValues>;
   recreation?: Recreation;
-  setRecreation: React.Dispatch<React.SetStateAction<Recreation | undefined>>;
+  setRecreation?: React.Dispatch<React.SetStateAction<Recreation | undefined>>;
   errors: FieldErrors<RecreationFormValues>;
 };
 
@@ -51,12 +51,13 @@ export const FirstStep: React.FC<Props> = (props) => {
   const [show, setShow] = useState(false);
   const [isSending, setIsSending] = useState<boolean>(false);
   const [title, setTitle] = useState<string>(getValues('title'));
-  const [secondTitle, setSecondTitle] = useState<string>(
-    getValues('secondTitle')
-  );
-  const [description, setDescription] = useState<string>(
-    getValues('description')
-  );
+  const [secondTitle, setSecondTitle] = useState<string>(getValues('secondTitle'));
+  const [description, setDescription] = useState<string>(getValues('description'));
+  // 初期値を決定するためのロジック
+  const [selectedKind, setSelectedKind] = useState<string>(() => {
+    // recreationがある場合はそのkindを、なければ'visit'を初期値として設定
+    return recreation?.kind?.key || 'visit';
+  });
 
   useEffect(() => {
     const capacityValue = getValues('capacity');
@@ -76,6 +77,10 @@ export const FirstStep: React.FC<Props> = (props) => {
       }
     })();
   }, []);
+
+  const handleKindChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSelectedKind(e.target.value);
+  };
 
   const handleAddPrefecture = async (prefecture: string): Promise<void> => {
     if (!recreation || !setRecreation) return;
@@ -135,7 +140,10 @@ export const FirstStep: React.FC<Props> = (props) => {
       }
     }
   };
-  // const disabled = errors?.kind !== undefined || errors?.title !== undefined || errors?.secondTitle !== undefined;
+
+  console.log(selectedKind);
+  const isVisitSelected = selectedKind === 'visit';
+
   if (!config) {
     return <></>;
   }
@@ -147,7 +155,7 @@ export const FirstStep: React.FC<Props> = (props) => {
       </div>
       <hr className='my-2' />
 
-      <div className='isOnline'>
+      <div className='isVisit'>
         <div className='d-flex mt-4'>
           <h5 className='text-black font-weight-bold'>レクの形式を選択</h5>
           <Essential />
@@ -163,7 +171,9 @@ export const FirstStep: React.FC<Props> = (props) => {
               id={`kind${kind.enumKey}`}
               value={kind.enumKey}
               {...register('kind')}
-              defaultChecked={!recreation && kind.enumKey === 'visit'}
+              defaultChecked={selectedKind === kind.enumKey}
+              onChange={handleKindChange}
+              name="kind"
             />
             <label htmlFor={`kind${kind.enumKey}`}>
               {kind.name}でレクを実施
@@ -312,7 +322,7 @@ export const FirstStep: React.FC<Props> = (props) => {
         )}
       </div>
 
-      {recreation !== undefined && recreation?.kind.key === 'visit' && (
+      {isVisitSelected && (
         <div className='area'>
           <div className='d-flex mt-4'>
             <h5 className='text-black font-weight-bold'>
