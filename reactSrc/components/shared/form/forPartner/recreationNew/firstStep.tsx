@@ -1,17 +1,15 @@
 import {
-  LoadingIndicator,
   ValidationErrorMessage,
 } from '@/components/shared/parts';
 import { Essential } from '@/components/shared/parts/essential';
 import { Api } from '@/infrastructure';
-import { Recreation, RecreationPrefecture } from '@/types';
+import { Recreation } from '@/types';
 import React, { useEffect, useState } from 'react';
 import {
   FieldErrors,
   UseFormGetValues,
   UseFormRegister,
 } from 'react-hook-form';
-import { PrefectureItem } from './prefectureItem';
 import { RecreationFormValues } from './recreationNewForm';
 
 type Config = {
@@ -45,11 +43,11 @@ const descriptionPlaceholderText = `しっとりと大人な時間を堪能で�
 演奏だけでなく曲に関するトークやクイズ、質問など皆様とコミュニケーションを取りながら進める参加型コンサートです。
 `;
 
+
 export const FirstStep: React.FC<Props> = (props) => {
-  const { register, getValues, recreation, setRecreation, errors } = props;
+  const { register, getValues, recreation, errors } = props;
   const [config, setConfig] = useState<Config>();
   const [show, setShow] = useState(false);
-  const [isSending, setIsSending] = useState<boolean>(false);
   const [title, setTitle] = useState<string>(getValues('title'));
   const [secondTitle, setSecondTitle] = useState<string>(getValues('secondTitle'));
   const [description, setDescription] = useState<string>(getValues('description'));
@@ -58,6 +56,19 @@ export const FirstStep: React.FC<Props> = (props) => {
     // recreationがある場合はそのkindを、なければ'visit'を初期値として設定
     return recreation?.kind?.key || 'visit';
   });
+  const [selectedPrefectures, setSelectedPrefectures] = useState<string[]>([]);
+  const [newPrefecture, setNewPrefecture] = useState<string>('');
+
+  const handleAddPrefecture = () => {
+    if (newPrefecture && !selectedPrefectures.includes(newPrefecture)) {
+      setSelectedPrefectures([...selectedPrefectures, newPrefecture]);
+      setNewPrefecture('');
+    }
+  };
+
+  const handleRemovePrefecture = (prefecture: string) => {
+    setSelectedPrefectures(selectedPrefectures.filter(p => p !== prefecture));
+  };
 
   useEffect(() => {
     const capacityValue = getValues('capacity');
@@ -82,67 +93,10 @@ export const FirstStep: React.FC<Props> = (props) => {
     setSelectedKind(e.target.value);
   };
 
-  const handleAddPrefecture = async (prefecture: string): Promise<void> => {
-    if (!recreation || !setRecreation) return;
-    try {
-      const createdPrefecture = await Api.post<RecreationPrefecture>(
-        `recreations/${recreation.id}/recreation_prefectures`,
-        'partner',
-        { recreationPrefecture: { name: prefecture } }
-      );
-      setRecreation({
-        ...recreation,
-        prefectures: [...recreation.prefectures, createdPrefecture.data],
-      });
-      setIsSending(false);
-    } catch (e) {
-      console.log(e);
-    }
-  };
-
-  const handleUpdatePrefecture = async (
-    id: number,
-    prefectureName: string
-  ): Promise<void> => {
-    if (!recreation || !setRecreation) return;
-    try {
-      const updatedPrefecture = await Api.patch<RecreationPrefecture>(
-        `recreations/${recreation.id}/recreation_prefectures/${id}`,
-        'partner',
-        { recreationPrefecture: { name: prefectureName } }
-      );
-      const oldPrefectures = [...recreation.prefectures];
-      const index = oldPrefectures.indexOf(
-        oldPrefectures.filter((p) => p.id == id)[0]
-      );
-      const newPrefectures = oldPrefectures;
-      newPrefectures[index] = updatedPrefecture.data;
-      setRecreation({ ...recreation, prefectures: newPrefectures });
-    } catch (e) {
-      console.log(e);
-    }
-  };
-
-  const handleRemove = async (id: number): Promise<void> => {
-    if (recreation && setRecreation) {
-      try {
-        await Api.delete(
-          `recreations/${recreation.id}/recreation_prefectures/${id}`,
-          'partner',
-          {}
-        );
-        setRecreation({
-          ...recreation,
-          prefectures: recreation.prefectures.filter((p) => p.id !== id),
-        });
-      } catch (e) {
-        console.log(e);
-      }
-    }
-  };
-
   console.log(selectedKind);
   const isVisitSelected = selectedKind === 'visit';
+
+  console.log(selectedPrefectures);
 
   if (!config) {
     return <></>;
@@ -334,28 +288,57 @@ export const FirstStep: React.FC<Props> = (props) => {
           <p className='small my-0'>
             レクの受付可能エリア（都道府県）を選択してください
           </p>
-          {recreation?.prefectures?.map((prefecture) => (
-            <PrefectureItem
-              key={prefecture.id}
-              prefecture={prefecture}
-              handleUpdate={handleUpdatePrefecture}
-              handleRemove={handleRemove}
-              prefectures={config.prefectures ?? []}
+
+          <div>
+            <select
+              className='p-2 w-100 rounded border border-secondary'
+              value={newPrefecture}
+              onChange={(e) => setNewPrefecture(e.target.value)}
+            >
+              <option value='' disabled>
+                都道府県を選択
+              </option>
+              {config.prefectures.map((prefecture) => (
+                <option key={prefecture} value={prefecture}>
+                  {prefecture}
+                </option>
+              ))}
+            </select>
+          </div>
+
+          <div className={'question-add-action-wrapper'}>
+            <button
+              type='button'
+              className='text-primary bg-white border-0 font-weight-bold my-1'
+              onClick={handleAddPrefecture}
+            >
+              ＋複数エリアを追加
+            </button>
+          </div>
+
+          <div className='selected-prefectures'>
+            {selectedPrefectures.map((prefecture) => (
+              <div key={prefecture} className='d-flex justify-content-between align-items-center'>
+                <span>{prefecture}</span>
+                <button
+                  type='button'
+                  className='text-danger bg-white border-0 font-weight-bold my-1'
+                  onClick={() => handleRemovePrefecture(prefecture)}
+                >
+                  削除
+                </button>
+              </div>
+            ))}
+          </div>
+
+          {selectedPrefectures.map((prefecture, index) => (
+            <input
+              key={index}
+              type="hidden"
+              value={prefecture}
+              {...register(`prefectures.${index}` as const)}
             />
           ))}
-          <div className={'question-add-action-wrapper'}>
-            {isSending ? (
-              <LoadingIndicator />
-            ) : (
-              <button
-                type='button'
-                className='text-primary bg-white border-0 font-weight-bold my-1'
-                onClick={() => handleAddPrefecture('北海道')}
-              >
-                ＋複数エリアを追加
-              </button>
-            )}
-          </div>
         </div>
       )}
 

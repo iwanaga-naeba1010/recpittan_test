@@ -8,9 +8,7 @@ module Resources
         string :title
         string :second_title
         integer :price
-        # integer :amount
         integer :material_price
-        # integer :material_amount
         integer :minutes
         string :description
         string :flow_of_day
@@ -30,7 +28,6 @@ module Resources
       array :prefectures, default: nil
 
       validates :current_user, presence: true
-
       validates :profile_id, presence: true
 
       def execute
@@ -46,7 +43,8 @@ module Resources
       end
 
       private def create_recreation
-        Recreation.create!(recreation_params.merge(user_id: current_user.id))
+        next_id = Recreation.last&.id.to_i + 1
+        Recreation.create!(recreation_params.merge(user_id: current_user.id, id: next_id))
       end
 
       private def create_profile_relation(recreation_id:)
