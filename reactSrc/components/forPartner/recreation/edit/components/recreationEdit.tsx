@@ -4,7 +4,7 @@ import {
   RecreationFormValues,
 } from '@/components/shared/form';
 import { Error, LoadingContainer } from '@/components/shared/parts';
-import { Recreation } from '@/types';
+import { Recreation, RecreationPrefecture } from '@/types';
 import { getQueryStringValueByKey, isEmpty } from '@/utils';
 import axios, { AxiosError } from 'axios';
 import React, { useEffect, useState } from 'react';
@@ -86,6 +86,11 @@ const RecreationEdit: React.FC = () => {
   const onSubmit = async (values: RecreationFormValues): Promise<void> => {
     setErrors([]);
     if (!recreation) return;
+
+    const selectedPrefectures = values.prefectures.length > 0
+      ? values.prefectures
+      : recreation.prefectures.map((pref: RecreationPrefecture) => pref.name);
+
     const requestBody: { [key: string]: Record<string, unknown> } = {
       recreation: {
         title: values.title || recreation.title,
@@ -106,11 +111,11 @@ const RecreationEdit: React.FC = () => {
         additionalFacilityFee:
           values.additionalFacilityFee || recreation.additionalFacilityFee,
         imageUrl: values.imageUrl,
-        category: values.category || recreation.category.key, // NOTE(okubo): idじゃないと保存できない
+        category: values.category || recreation.category.key,
         userId: recreation.userId,
         status: 'in_progress',
         recreationProfileAttributes: { profileId: values.profileId },
-        recreationPrefecturesAttributes: values.prefectures.map((p) => ({
+        recreationPrefecturesAttributes: selectedPrefectures.map((p) => ({
           name: p,
         })),
       },
@@ -122,8 +127,6 @@ const RecreationEdit: React.FC = () => {
       await updateRecreation(id, requestBody);
       const noticeText = 'レクを更新しました！';
       window.location.href = `/partners/recreations/${id}?notice=${noticeText}`;
-      // TODO(okubo): redirectによる画面遷移
-      //
     } catch (e) {
       if (axios.isAxiosError(e)) {
         const axiosError = e as AxiosError<Array<string>>;
