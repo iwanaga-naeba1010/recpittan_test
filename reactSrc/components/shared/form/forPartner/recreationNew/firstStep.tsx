@@ -108,6 +108,11 @@ export const FirstStep: React.FC<Props> = (props) => {
     return <></>;
   }
 
+  // 選択済みの都道府県を除外したリストを作成
+  const availablePrefectures = config.prefectures.filter(
+    (prefecture) => !selectedPrefectures.includes(prefecture)
+  );
+
   return (
     <div>
       <div className='d-flex'>
@@ -304,7 +309,7 @@ export const FirstStep: React.FC<Props> = (props) => {
               <option value='' disabled>
                 都道府県を選択
               </option>
-              {config.prefectures.map((prefecture) => (
+              {availablePrefectures.map((prefecture) => (
                 <option key={prefecture} value={prefecture}>
                   {prefecture}
                 </option>
