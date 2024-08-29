@@ -1,6 +1,4 @@
-import {
-  ValidationErrorMessage,
-} from '@/components/shared/parts';
+import { ValidationErrorMessage } from '@/components/shared/parts';
 import { Essential } from '@/components/shared/parts/essential';
 import { Api } from '@/infrastructure';
 import { Recreation } from '@/types';
@@ -43,21 +41,32 @@ const descriptionPlaceholderText = `しっとりと大人な時間を堪能で�
 演奏だけでなく曲に関するトークやクイズ、質問など皆様とコミュニケーションを取りながら進める参加型コンサートです。
 `;
 
-
 export const FirstStep: React.FC<Props> = (props) => {
   const { register, getValues, recreation, errors } = props;
   const [config, setConfig] = useState<Config>();
   const [show, setShow] = useState(false);
   const [title, setTitle] = useState<string>(getValues('title'));
-  const [secondTitle, setSecondTitle] = useState<string>(getValues('secondTitle'));
-  const [description, setDescription] = useState<string>(getValues('description'));
-  // 初期値を決定するためのロジック
+  const [secondTitle, setSecondTitle] = useState<string>(
+    getValues('secondTitle')
+  );
+  const [description, setDescription] = useState<string>(
+    getValues('description')
+  );
   const [selectedKind, setSelectedKind] = useState<string>(() => {
-    // recreationがある場合はそのkindを、なければ'visit'を初期値として設定
     return recreation?.kind?.key || 'visit';
   });
   const [selectedPrefectures, setSelectedPrefectures] = useState<string[]>([]);
   const [newPrefecture, setNewPrefecture] = useState<string>('');
+
+  // recreationが存在する場合にselectedPrefecturesを初期化
+  useEffect(() => {
+    if (recreation?.prefectures) {
+      const initialPrefectures = recreation.prefectures.map(
+        (prefecture) => prefecture.name
+      );
+      setSelectedPrefectures(initialPrefectures);
+    }
+  }, [recreation]);
 
   const handleAddPrefecture = () => {
     if (newPrefecture && !selectedPrefectures.includes(newPrefecture)) {
@@ -67,7 +76,7 @@ export const FirstStep: React.FC<Props> = (props) => {
   };
 
   const handleRemovePrefecture = (prefecture: string) => {
-    setSelectedPrefectures(selectedPrefectures.filter(p => p !== prefecture));
+    setSelectedPrefectures(selectedPrefectures.filter((p) => p !== prefecture));
   };
 
   useEffect(() => {
@@ -93,10 +102,7 @@ export const FirstStep: React.FC<Props> = (props) => {
     setSelectedKind(e.target.value);
   };
 
-  console.log(selectedKind);
   const isVisitSelected = selectedKind === 'visit';
-
-  console.log(selectedPrefectures);
 
   if (!config) {
     return <></>;
@@ -127,7 +133,7 @@ export const FirstStep: React.FC<Props> = (props) => {
               {...register('kind')}
               defaultChecked={selectedKind === kind.enumKey}
               onChange={handleKindChange}
-              name="kind"
+              name='kind'
             />
             <label htmlFor={`kind${kind.enumKey}`}>
               {kind.name}でレクを実施
@@ -318,7 +324,10 @@ export const FirstStep: React.FC<Props> = (props) => {
 
           <div className='selected-prefectures'>
             {selectedPrefectures.map((prefecture) => (
-              <div key={prefecture} className='d-flex justify-content-between align-items-center'>
+              <div
+                key={prefecture}
+                className='d-flex justify-content-between align-items-center'
+              >
                 <span>{prefecture}</span>
                 <button
                   type='button'
@@ -334,7 +343,7 @@ export const FirstStep: React.FC<Props> = (props) => {
           {selectedPrefectures.map((prefecture, index) => (
             <input
               key={index}
-              type="hidden"
+              type='hidden'
               value={prefecture}
               {...register(`prefectures.${index}` as const)}
             />
