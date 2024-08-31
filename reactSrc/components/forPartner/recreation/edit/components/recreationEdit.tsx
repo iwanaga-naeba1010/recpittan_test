@@ -4,7 +4,7 @@ import {
   RecreationFormValues,
 } from '@/components/shared/form';
 import { Error, LoadingContainer } from '@/components/shared/parts';
-import { Recreation, RecreationPrefecture } from '@/types';
+import { Recreation } from '@/types';
 import { getQueryStringValueByKey, isEmpty } from '@/utils';
 import axios, { AxiosError } from 'axios';
 import React, { useEffect, useState } from 'react';
@@ -87,9 +87,8 @@ const RecreationEdit: React.FC = () => {
     setErrors([]);
     if (!recreation) return;
 
-    const selectedPrefectures = values.prefectures.length > 0
-      ? values.prefectures
-      : recreation.prefectures.map((pref: RecreationPrefecture) => pref.name);
+    const selectedPrefectures =
+      values.prefectures.length > 0 ? values.prefectures : [];
 
     const requestBody: { [key: string]: Record<string, unknown> } = {
       recreation: {
@@ -121,6 +120,7 @@ const RecreationEdit: React.FC = () => {
       },
     };
 
+    console.log('submitSelectedPrefectures', selectedPrefectures);
     console.log(requestBody);
 
     try {

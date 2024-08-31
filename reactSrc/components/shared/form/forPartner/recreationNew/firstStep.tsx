@@ -7,6 +7,7 @@ import {
   FieldErrors,
   UseFormGetValues,
   UseFormRegister,
+  UseFormSetValue,
 } from 'react-hook-form';
 import { RecreationFormValues } from './recreationNewForm';
 
@@ -20,6 +21,7 @@ type Config = {
 type Props = {
   register: UseFormRegister<RecreationFormValues>;
   getValues: UseFormGetValues<RecreationFormValues>;
+  setValue: UseFormSetValue<RecreationFormValues>;
   recreation?: Recreation;
   setRecreation?: React.Dispatch<React.SetStateAction<Recreation | undefined>>;
   errors: FieldErrors<RecreationFormValues>;
@@ -42,7 +44,7 @@ const descriptionPlaceholderText = `しっとりと大人な時間を堪能で�
 `;
 
 export const FirstStep: React.FC<Props> = (props) => {
-  const { register, getValues, recreation, errors } = props;
+  const { register, getValues, setValue, recreation, errors } = props;
   const [config, setConfig] = useState<Config>();
   const [show, setShow] = useState(false);
   const [title, setTitle] = useState<string>(getValues('title'));
@@ -58,25 +60,31 @@ export const FirstStep: React.FC<Props> = (props) => {
   const [selectedPrefectures, setSelectedPrefectures] = useState<string[]>([]);
   const [newPrefecture, setNewPrefecture] = useState<string>('');
 
-  // recreationが存在する場合にselectedPrefecturesを初期化
   useEffect(() => {
     if (recreation?.prefectures) {
       const initialPrefectures = recreation.prefectures.map(
         (prefecture) => prefecture.name
       );
       setSelectedPrefectures(initialPrefectures);
+      setValue('prefectures', initialPrefectures);
     }
-  }, [recreation]);
+  }, [recreation, setValue]);
 
   const handleAddPrefecture = () => {
     if (newPrefecture && !selectedPrefectures.includes(newPrefecture)) {
-      setSelectedPrefectures([...selectedPrefectures, newPrefecture]);
+      const updatedPrefectures = [...selectedPrefectures, newPrefecture];
+      setSelectedPrefectures(updatedPrefectures);
+      setValue('prefectures', updatedPrefectures);
       setNewPrefecture('');
     }
   };
 
   const handleRemovePrefecture = (prefecture: string) => {
-    setSelectedPrefectures(selectedPrefectures.filter((p) => p !== prefecture));
+    const updatedPrefectures = selectedPrefectures.filter(
+      (p) => p !== prefecture
+    );
+    setSelectedPrefectures(updatedPrefectures);
+    setValue('prefectures', updatedPrefectures);
   };
 
   useEffect(() => {
@@ -108,7 +116,8 @@ export const FirstStep: React.FC<Props> = (props) => {
     return <></>;
   }
 
-  // 選択済みの都道府県を除外したリストを作成
+  console.log('firstStep selectedPrefectures', selectedPrefectures);
+
   const availablePrefectures = config.prefectures.filter(
     (prefecture) => !selectedPrefectures.includes(prefecture)
   );
@@ -381,7 +390,6 @@ export const FirstStep: React.FC<Props> = (props) => {
           checked={!show}
         />
         <label htmlFor='numberOfFacilitiesFalse'>なし</label>
-        {/* falseならvalueは0 */}
         {show && (
           <>
             <p className='small my-0'>何人まで参加できますか？</p>

@@ -1,5 +1,4 @@
-import { BaseEnum } from './baseEnum';
-
-export interface RecreationPrefecture extends BaseEnum {
+export interface RecreationPrefecture {
+  id?: number;
   name: string;
 }

@@ -1,6 +1,6 @@
 import { UseFile } from '@/components/forPartner';
 import { Recreation } from '@/types';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { FirstStep } from './firstStep';
 import { RecreationFormValues } from './recreationNewForm';
@@ -25,6 +25,7 @@ export const RecreationEditForm: React.FC<Props> = (props) => {
     register,
     handleSubmit,
     getValues,
+    setValue,
     formState: { errors },
   } = useForm<RecreationFormValues>({
     mode: 'onChange',
@@ -45,11 +46,26 @@ export const RecreationEditForm: React.FC<Props> = (props) => {
       bringYourOwnItem: recreation.bringYourOwnItem,
       additionalFacilityFee: recreation.additionalFacilityFee,
       category: recreation.category.key,
-      prefectures: [],
+      prefectures: recreation.prefectures.map((pref) => ({
+        id: pref.id,
+        name: pref.name,
+      })),
       kind: recreation.kind.key,
       profileId: recreation.profile.id,
     },
   });
+
+  useEffect(() => {
+    setValue(
+      'prefectures',
+      recreation.prefectures.map((pref) => ({
+        id: pref.id, // `id`をセット
+        name: pref.name,
+      }))
+    );
+  }, [recreation.prefectures, setValue]);
+
+  console.log('recreationEditForm', recreation.prefectures);
 
   return (
     <div>
@@ -58,6 +74,7 @@ export const RecreationEditForm: React.FC<Props> = (props) => {
           <FirstStep
             register={register}
             getValues={getValues}
+            setValue={setValue}
             recreation={recreation}
             setRecreation={setRecreation}
             errors={errors}
@@ -73,7 +90,6 @@ export const RecreationEditForm: React.FC<Props> = (props) => {
         {kind === 'profile' && (
           <ThirdStep register={register} getValues={getValues} />
         )}
-        {/* 写真や添付ファイルの追加はこちらから */}
         {kind === 'file' && (
           <ImageStep
             register={register}
