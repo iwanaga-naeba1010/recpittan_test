@@ -38,7 +38,7 @@ module Resources
           changes = detect_changes(@recreation, recreation_params)
           @recreation.update!(recreation_params)
           update_profile_relation(profile_id:)
-          update_prefectures(recreation_id: @recreation.id)
+          update_prefectures(recreation_id: @recreation.id) if prefectures.present?
 
           notify_slack(@recreation, changes) if changes.any?
         end
@@ -57,17 +57,14 @@ module Resources
       end
 
       private def update_prefectures(recreation_id:)
-        existing_prefectures = RecreationPrefecture.where(recreation_id: recreation_id).pluck(:name)
+        # 送られてきたprefecturesの配列内にないものを削除
+        RecreationPrefecture.where(recreation_id:).where.not(name: prefectures).destroy_all
 
-        # 送られてきた prefectures 配列内にないものを削除
-        RecreationPrefecture.where(recreation_id: recreation_id).where.not(name: prefectures.uniq).destroy_all
-
-        # 新しい prefectures を作成
+        # 新しいprefecturesを作成
         prefectures.uniq.each do |prefecture|
-          RecreationPrefecture.find_or_create_by!(name: prefecture, recreation_id: recreation_id)
+          RecreationPrefecture.find_or_create_by!(name: prefecture, recreation_id:)
         end
       end
-
 
       private def detect_changes(recreation, params)
         changes = {}
