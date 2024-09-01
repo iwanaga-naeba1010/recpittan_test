@@ -4,7 +4,6 @@ namespace :api_partner do
   resource :bank_accounts, only: %i[show create update]
   resources :recreations, only: %i[index show create update] do
     resources :recreation_images, only: %i[create destroy]
-    resources :recreation_prefectures, only: %i[create update destroy]
     collection do
       get :config_data
     end
