@@ -70,23 +70,6 @@ export const FirstStep: React.FC<Props> = (props) => {
     }
   }, [recreation, setValue]);
 
-  const handleAddPrefecture = () => {
-    if (newPrefecture && !selectedPrefectures.includes(newPrefecture)) {
-      const updatedPrefectures = [...selectedPrefectures, newPrefecture];
-      setSelectedPrefectures(updatedPrefectures);
-      setValue('prefectures', updatedPrefectures);
-      setNewPrefecture('');
-    }
-  };
-
-  const handleRemovePrefecture = (prefecture: string) => {
-    const updatedPrefectures = selectedPrefectures.filter(
-      (p) => p !== prefecture
-    );
-    setSelectedPrefectures(updatedPrefectures);
-    setValue('prefectures', updatedPrefectures);
-  };
-
   useEffect(() => {
     const capacityValue = getValues('capacity');
     setShow(capacityValue > 0);
@@ -106,6 +89,30 @@ export const FirstStep: React.FC<Props> = (props) => {
     })();
   }, []);
 
+  const handlePrefectureChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const selectedPrefectureName = e.target.value;
+    if (
+      selectedPrefectureName &&
+      !selectedPrefectures.includes(selectedPrefectureName)
+    ) {
+      const updatedPrefectures = [
+        ...selectedPrefectures,
+        selectedPrefectureName,
+      ];
+      setSelectedPrefectures(updatedPrefectures);
+      setValue('prefectures', updatedPrefectures);
+      setNewPrefecture(''); // Reset selected prefecture
+    }
+  };
+
+  const handleRemovePrefecture = (prefectureName: string) => {
+    const updatedPrefectures = selectedPrefectures.filter(
+      (p) => p !== prefectureName
+    );
+    setSelectedPrefectures(updatedPrefectures);
+    setValue('prefectures', updatedPrefectures);
+  };
+
   const handleKindChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSelectedKind(e.target.value);
   };
@@ -115,8 +122,6 @@ export const FirstStep: React.FC<Props> = (props) => {
   if (!config) {
     return <></>;
   }
-
-  console.log('firstStep selectedPrefectures', selectedPrefectures);
 
   const availablePrefectures = config.prefectures.filter(
     (prefecture) => !selectedPrefectures.includes(prefecture)
@@ -225,8 +230,8 @@ export const FirstStep: React.FC<Props> = (props) => {
             </option>
           ))}
         </select>
-        {errors.title && errors.title.message && (
-          <ValidationErrorMessage message={errors.title.message} />
+        {errors.minutes && errors.minutes.message && (
+          <ValidationErrorMessage message={errors.minutes.message} />
         )}
       </div>
 
@@ -313,7 +318,7 @@ export const FirstStep: React.FC<Props> = (props) => {
             <select
               className='p-2 w-100 rounded border border-secondary'
               value={newPrefecture}
-              onChange={(e) => setNewPrefecture(e.target.value)}
+              onChange={handlePrefectureChange}
             >
               <option value='' disabled>
                 都道府県を選択
@@ -324,16 +329,6 @@ export const FirstStep: React.FC<Props> = (props) => {
                 </option>
               ))}
             </select>
-          </div>
-
-          <div className={'question-add-action-wrapper'}>
-            <button
-              type='button'
-              className='text-primary bg-white border-0 font-weight-bold my-1'
-              onClick={handleAddPrefecture}
-            >
-              ＋複数エリアを追加
-            </button>
           </div>
 
           <div className='selected-prefectures'>

@@ -105,7 +105,7 @@ RSpec.describe '/partners/recreations', type: :system do
         expect(partner.recreations.first.title).to eq changed_title
       end
 
-      scenario 'crate recreation_prefectures', js: true do
+      scenario 'create recreation_prefectures', js: true do
         expect(page).to have_content('レクリエーション詳細')
         expect(page).to have_content(recreation.title)
         click_on('レクの基本情報')
@@ -127,7 +127,7 @@ RSpec.describe '/partners/recreations', type: :system do
         expect(recreation.recreation_prefectures.size).to eq 0
       end
 
-      scenario 'crate recreation_image', js: true do
+      scenario 'create recreation_image', js: true do
         expect(page).to have_content('レクリエーション詳細')
         expect(page).to have_content(recreation.title)
         click_on('レク画像・関連ファイルのアップ')
@@ -145,11 +145,12 @@ RSpec.describe '/partners/recreations', type: :system do
         expect(page).to have_current_path(edit_partners_recreation_path(recreation), ignore_query: true)
         expect(recreation.recreation_images.size).to eq 1
         click_button('削除')
+        click_button('保存する')
         sleep 5
         expect(recreation.recreation_images.size).to eq 0
       end
 
-      scenario 'crate recreation_profile', js: true do
+      scenario 'create recreation_profile', js: true do
         expect(page).to have_content('レクリエーション詳細')
         expect(page).to have_content(recreation.title)
         click_on('レク画像・関連ファイルのアップ')
