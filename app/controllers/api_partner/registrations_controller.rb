@@ -15,6 +15,7 @@ module ApiPartner
         AfterRegistrationPartnerMailer.notify(user: @user).deliver_now
         render json: { message: 'Partner created and logged in successfully' }, status: :created
       else
+        Sentry.capture_exception(@user.errors.full_messages)
         render json: { errors: @user.errors.full_messages }, status: :unprocessable_entity
       end
     end

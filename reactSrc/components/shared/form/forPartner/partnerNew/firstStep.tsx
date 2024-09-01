@@ -16,6 +16,9 @@ export const FirstStep: React.FC = () => {
           <div className='alert alert-danger'>
             <ul>
               {errors.email && <li>{errors.email.message as string}</li>}
+              {errors.emailConfirmation && (
+                <li>{errors.emailConfirmation.message as string}</li>
+              )}
               {errors.password && <li>{errors.password.message as string}</li>}
               {errors.passwordConfirmation && (
                 <li>{errors.passwordConfirmation.message as string}</li>
@@ -41,6 +44,18 @@ export const FirstStep: React.FC = () => {
             type='text'
             className='w-100 p-2'
             {...register('email', { required: 'メールアドレスは必須です' })}
+          />
+
+          <p className='small mt-3 mb-0 text-black'>メールアドレス確認</p>
+          <p className='small mb-1'>同じメールアドレスをご入力ください。</p>
+          <input
+            type='text'
+            className='w-100 p-2'
+            {...register('emailConfirmation', {
+              required: 'メールアドレス確認は必須です',
+              validate: (value) =>
+                value === getValues('email') || 'メールアドレスが一致しません',
+            })}
           />
 
           <p className='small mt-3 mb-0 text-black'>パスワード</p>
