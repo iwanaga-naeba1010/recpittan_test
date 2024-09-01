@@ -5,10 +5,14 @@
 # Table name: recreation_prefectures
 #
 #  id            :bigint           not null, primary key
-#  name          :string
+#  name          :string           not null
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
 #  recreation_id :bigint           not null
+#
+# Indexes
+#
+#  index_recreation_prefectures_on_name_and_recreation_id  (name,recreation_id) UNIQUE
 #
 # Foreign Keys
 #
