@@ -120,13 +120,14 @@ const RecreationEdit: React.FC = () => {
       },
     };
 
-    console.log('submitSelectedPrefectures', selectedPrefectures);
     console.log(requestBody);
 
     try {
       await updateRecreation(id, requestBody);
       const noticeText = 'レクを更新しました！';
       window.location.href = `/partners/recreations/${id}?notice=${noticeText}`;
+      // TODO(okubo): redirectによる画面遷移
+      //
     } catch (e) {
       if (axios.isAxiosError(e)) {
         const axiosError = e as AxiosError<Array<string>>;

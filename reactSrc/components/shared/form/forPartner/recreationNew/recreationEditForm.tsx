@@ -59,7 +59,7 @@ export const RecreationEditForm: React.FC<Props> = (props) => {
     setValue(
       'prefectures',
       recreation.prefectures.map((pref) => ({
-        id: pref.id, // `id`をセット
+        id: pref.id,
         name: pref.name,
       }))
     );

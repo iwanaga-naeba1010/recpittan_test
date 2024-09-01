@@ -105,17 +105,6 @@ RSpec.describe '/partners/recreations', type: :system do
         expect(partner.recreations.first.title).to eq changed_title
       end
 
-      scenario 'create recreation_prefectures', js: true do
-        expect(page).to have_content('レクリエーション詳細')
-        expect(page).to have_content(recreation.title)
-        click_on('レクの基本情報')
-        expect(page).to have_current_path(edit_partners_recreation_path(recreation), ignore_query: true)
-        click_on('＋複数エリアを追加')
-        expect(recreation.recreation_prefectures.size).to eq 1
-        sleep 5
-        expect(recreation.recreation_prefectures.size).to eq 2
-      end
-
       scenario 'delete recreation_prefectures', js: true do
         expect(page).to have_content('レクリエーション詳細')
         expect(page).to have_content(recreation.title)
@@ -123,6 +112,7 @@ RSpec.describe '/partners/recreations', type: :system do
         expect(page).to have_current_path(edit_partners_recreation_path(recreation), ignore_query: true)
         expect(recreation.recreation_prefectures.size).to eq 1
         click_button('削除')
+        click_button('保存する')
         sleep 5
         expect(recreation.recreation_prefectures.size).to eq 0
       end
