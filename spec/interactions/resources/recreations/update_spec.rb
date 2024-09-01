@@ -81,6 +81,26 @@ RSpec.describe Resources::Recreations::Update, type: :interaction do
         end
       end
 
+      context 'when all prefectures are removed' do
+        let!(:recreation_prefectures) do
+          [
+            create(:recreation_prefecture, recreation:, name: '北海道'),
+            create(:recreation_prefecture, recreation:, name: '青森県'),
+            create(:recreation_prefecture, recreation:, name: '岩手県'),
+            create(:recreation_prefecture, recreation:, name: '宮城県')
+          ]
+        end
+
+        let(:prefectures) { [] }
+
+        it 'should remove prefectures' do
+          expect { subject }
+            .to change { recreation.recreation_prefectures.pluck(:name) }
+            .from(recreation_prefectures.pluck(:name))
+            .to([])
+        end
+      end
+
       context 'when some prefectures are removed' do
         let!(:recreation_prefectures) do
           [
