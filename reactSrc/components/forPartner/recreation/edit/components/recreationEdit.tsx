@@ -87,8 +87,7 @@ const RecreationEdit: React.FC = () => {
     setErrors([]);
     if (!recreation) return;
 
-    const selectedPrefectures =
-      values.prefectures.length > 0 ? values.prefectures : [];
+    const selectedPrefectures = values.prefectures ?? [];
 
     const requestBody: { [key: string]: Record<string, unknown> } = {
       recreation: {

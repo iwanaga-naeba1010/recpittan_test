@@ -56,7 +56,7 @@ RSpec.describe Resources::Recreations::Update, type: :interaction do
         )
       end
 
-      context 'when new prefectures are added fron empty' do
+      context 'when new prefectures are added from empty' do
         it 'should create prefectures' do
           expect { subject }
             .to change { recreation.recreation_prefectures.pluck(:name) }

@@ -65,8 +65,6 @@ export const RecreationEditForm: React.FC<Props> = (props) => {
     );
   }, [recreation.prefectures, setValue]);
 
-  console.log('recreationEditForm', recreation.prefectures);
-
   return (
     <div>
       <form className='recreation' onSubmit={handleSubmit(onSubmit)}>

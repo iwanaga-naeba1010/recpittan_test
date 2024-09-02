@@ -54,20 +54,24 @@ export const FirstStep: React.FC<Props> = (props) => {
   const [description, setDescription] = useState<string>(
     getValues('description')
   );
-  const [selectedKind, setSelectedKind] = useState<string>(() => {
-    return recreation?.kind?.key || 'visit';
-  });
+  const [selectedKind, setSelectedKind] = useState<string>(
+    recreation?.kind?.key ?? 'visit'
+  );
   const [selectedPrefectures, setSelectedPrefectures] = useState<string[]>([]);
-  const [newPrefecture, setNewPrefecture] = useState<string>('');
+  const [newPrefecture, setNewPrefecture] = useState<string | null>(null);
+  const isVisitSelected = selectedKind === 'visit';
+  const availablePrefectures = config?.prefectures?.filter(
+    (prefecture) => !selectedPrefectures.includes(prefecture)
+  );
 
   useEffect(() => {
-    if (recreation?.prefectures) {
-      const initialPrefectures = recreation.prefectures.map(
-        (prefecture) => prefecture.name
-      );
-      setSelectedPrefectures(initialPrefectures);
-      setValue('prefectures', initialPrefectures);
-    }
+    if (!recreation?.prefectures) return;
+
+    const initialPrefectures = recreation.prefectures.map(
+      (prefecture) => prefecture.name
+    );
+    setSelectedPrefectures(initialPrefectures);
+    setValue('prefectures', initialPrefectures);
   }, [recreation, setValue]);
 
   useEffect(() => {
@@ -101,7 +105,7 @@ export const FirstStep: React.FC<Props> = (props) => {
       ];
       setSelectedPrefectures(updatedPrefectures);
       setValue('prefectures', updatedPrefectures);
-      setNewPrefecture(''); // Reset selected prefecture
+      setNewPrefecture('');
     }
   };
 
@@ -117,15 +121,9 @@ export const FirstStep: React.FC<Props> = (props) => {
     setSelectedKind(e.target.value);
   };
 
-  const isVisitSelected = selectedKind === 'visit';
-
   if (!config) {
     return <></>;
   }
-
-  const availablePrefectures = config.prefectures.filter(
-    (prefecture) => !selectedPrefectures.includes(prefecture)
-  );
 
   return (
     <div>
@@ -305,25 +303,25 @@ export const FirstStep: React.FC<Props> = (props) => {
         <div className='area'>
           <div className='d-flex mt-4'>
             <h5 className='text-black font-weight-bold'>
-              受付可能エリアを選択
+              受付可能エリアを選択（複数選択可能）
             </h5>
             <Essential />
           </div>
 
           <p className='small my-0'>
-            レクの受付可能エリア（都道府県）を選択してください
+            レクの受付可能エリア（都道府県）を選択してください<br />対応都道府県が複数ある場合は、繰り返し選択してください
           </p>
 
           <div>
             <select
               className='p-2 w-100 rounded border border-secondary'
-              value={newPrefecture}
+              value={newPrefecture ?? ''}
               onChange={handlePrefectureChange}
             >
               <option value='' disabled>
                 都道府県を選択
               </option>
-              {availablePrefectures.map((prefecture) => (
+              {availablePrefectures?.map((prefecture) => (
                 <option key={prefecture} value={prefecture}>
                   {prefecture}
                 </option>
