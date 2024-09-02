@@ -197,7 +197,8 @@ GEM
       net-http
     ffaker (2.23.0)
     ffi (1.16.3)
-    fog-aws (3.24.0)
+    fog-aws (3.25.0)
+      base64 (~> 0.2.0)
       fog-core (~> 2.1)
       fog-json (~> 1.1)
       fog-xml (~> 0.1)
