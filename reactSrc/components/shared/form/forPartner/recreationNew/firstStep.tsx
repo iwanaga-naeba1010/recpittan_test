@@ -105,7 +105,7 @@ export const FirstStep: React.FC<Props> = (props) => {
       ];
       setSelectedPrefectures(updatedPrefectures);
       setValue('prefectures', updatedPrefectures);
-      setNewPrefecture('');
+      setNewPrefecture(null);
     }
   };
 
