@@ -48,7 +48,8 @@ const RecreationNew: React.FC = () => {
 
     try {
       const createdRecreation = await createRecreation(requestBody);
-      const noticeText = 'レクを追加しました！';
+      const noticeText =
+        'レクを追加しました！レク画像・ファイルを追加より画像のアップをお願いします。';
       window.location.href = `/partners/recreations/${createdRecreation.id}?notice=${noticeText}`;
     } catch (e) {
       if (axios.isAxiosError(e)) {

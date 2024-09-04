@@ -2,7 +2,11 @@ import React from 'react';
 import { useFormContext } from 'react-hook-form';
 import { PartnerInformationForm } from './partnerInformationForm';
 
-export const SecondStep: React.FC = () => {
+type SecondStepProps = {
+  serverError: string | null;
+};
+
+export const SecondStep: React.FC<SecondStepProps> = ({ serverError }) => {
   const {
     formState: { errors },
   } = useFormContext();
@@ -13,6 +17,7 @@ export const SecondStep: React.FC = () => {
         <div className='bar h-100 w-50 bg-black'></div>
       </div>
       <div className='p-3'>
+        {serverError && <div className='alert alert-danger'>{serverError}</div>}
         {Object.keys(errors).length > 0 && (
           <div className='alert alert-danger'>
             <ul>

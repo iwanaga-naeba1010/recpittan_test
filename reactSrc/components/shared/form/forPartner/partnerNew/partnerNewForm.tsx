@@ -3,9 +3,11 @@ import { useForm, FormProvider } from 'react-hook-form';
 import { FirstStep } from './firstStep';
 import { SecondStep } from './secondStep';
 import { usePartner } from '../../../../forPartner/registration/hooks/usePartnerHook';
+import axios from 'axios';
 
 export const PartnerNewForm: React.FC = () => {
   const [currentStep, setCurrentStep] = useState<number>(0);
+  const [serverError, setServerError] = useState<string | null>(null);
   const methods = useForm({
     defaultValues: {
       email: '',
@@ -35,6 +37,7 @@ export const PartnerNewForm: React.FC = () => {
   const handlePrev = () => setCurrentStep(currentStep - 1);
 
   const handleSubmit = async (data: any) => {
+    setServerError(null);
     try {
       const requestBody = {
         user: {
@@ -59,8 +62,17 @@ export const PartnerNewForm: React.FC = () => {
       console.log('User created successfully', user);
       window.location.href = '/partners/registrations/complete';
     } catch (error) {
-      console.error('User creation failed', error);
-      throw new Error(String(error));
+      if (axios.isAxiosError(error)) {
+        if (error.response && error.response.status === 422) {
+          setServerError(error.response.data.errors.join(', '));
+        } else {
+          console.error('User creation failed', error);
+          setServerError('ユーザーの作成に失敗しました。');
+        }
+      } else {
+        console.error('An unexpected error occurred', error);
+        setServerError('予期しないエラーが発生しました。');
+      }
     }
   };
 
@@ -119,8 +131,7 @@ export const PartnerNewForm: React.FC = () => {
           autoComplete='off'
         >
           {currentStep === 0 && <FirstStep />}
-          {currentStep === 1 && <SecondStep />}
-
+          {currentStep === 1 && <SecondStep serverError={serverError} />}
           {renderStepNavigation()}
         </form>
       </FormProvider>

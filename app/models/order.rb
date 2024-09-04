@@ -75,7 +75,7 @@ class Order < ApplicationRecord
     not_send: 0, sent: 1, checked: 2
   }, default: 0
 
-  enum sort_order: {
+  enum :sort_order, {
     newest: 0,
     chat_desc: 1,
   }

@@ -40,7 +40,7 @@ const RecreationShow: React.FC = () => {
         url={`/partners/recreations/${id}/edit?formKind=title`}
       />
       <RecreationItem
-        title='金額・メディア・その他の情報'
+        title='金額・その他の情報'
         content={recreation.title}
         url={`/partners/recreations/${id}/edit?formKind=price`}
       />
@@ -48,6 +48,11 @@ const RecreationShow: React.FC = () => {
         title='レクに表示するプロフィール'
         content={recreation.title}
         url={`/partners/recreations/${id}/edit?formKind=profile`}
+      />
+      <RecreationItem
+        title='レク画像・関連ファイルのアップ'
+        content={recreation.title}
+        url={`/partners/recreations/${id}/edit?formKind=file`}
       />
       <RecreationItem
         title='このレクの口コミ一覧'
