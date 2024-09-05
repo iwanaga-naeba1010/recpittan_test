@@ -1,38 +1,32 @@
 import * as $ from 'jquery';
 
-const App = (e: JQueryEventObject) => {
-  const buildHTML = (imageSrc: string): string => {
-    return `
-    <div class='prev-content'>
-      <img src='${imageSrc}', alt='preview' class='prev-image'>
-    </div> `;
-  };
+$(document).ready(function() {
+  const imageField = $('.image_form_contents_field');
+  const previewContent = $('.prev-content');
+  const existingImage = $('.prev-image');
 
-  const target = e.target as HTMLInputElement;
-  if (!target.files) return;
-  if (!target.files.length) return;
+  imageField.on('change', (event) => {
+    const file = (event.target as HTMLInputElement).files?.[0];
+    
+    if (!file) return;
 
-  const file: Blob = target.files[0];
-  const reader = new FileReader();
-  reader.readAsDataURL(file);
-  reader.onload = (onClickEvent: ProgressEvent<FileReader>) => {
-    const targetResult = onClickEvent.target;
-    if (!target) return;
-    if (typeof targetResult === 'string') {
-      const image = targetResult;
-      if ($('.prev-content').length === 0) {
-        const html = buildHTML(image);
-        $('.prev-contents').prepend(html);
-        $('.select-photo').hide();
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      if (!e.target?.result) return;
+
+      const imageUrl = e.target.result.toString();
+      if (existingImage.length === 0) {
+        // 新しい画像要素を作成してプレビュー表示
+        const newImage = $('<img>', {
+          src: imageUrl,
+          class: 'prev-image'
+        });
+        previewContent.empty().append(newImage);
       } else {
-        $('.prev-content .prev-image').attr({ src: image });
+        // 既存の画像要素に画像を設定
+        existingImage.attr('src', imageUrl);
       }
-    }
-  };
-};
-
-$(document).on('turbolinks:load', () => {
-  $(document).on('change', '.hidden_file', (e) => {
-    App(e);
+    };
+    reader.readAsDataURL(file);
   });
 });
