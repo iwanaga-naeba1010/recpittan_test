@@ -5,7 +5,7 @@ $(document).ready(function() {
   const previewContent = $('.prev-content');
   const existingImage = $('.prev-image');
 
-  imageField.on('change', (event: JQuery.ChangeEvent) => {
+  imageField.on('change', (event) => {
     const file = (event.target as HTMLInputElement).files?.[0];
     
     if (!file) return;
