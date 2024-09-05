@@ -56,13 +56,18 @@ module Resources
         @recreation.recreation_profile.update!(profile_id:)
       end
 
-      # NOTE(okubo):ここは未対応
       private def update_prefectures(recreation_id:)
-        return if prefectures.blank?
+        # 送られてきたprefecturesの配列内にないものを削除
+        if prefectures.present?
+          RecreationPrefecture.where(recreation_id:).where.not(name: prefectures).destroy_all
 
-        RecreationPrefecture.create!(
-          prefectures.map { |p| { name: p, recreation_id: } }
-        )
+          # 新しいprefecturesを作成
+          prefectures.uniq.each do |prefecture|
+            RecreationPrefecture.find_or_create_by!(name: prefecture, recreation_id:)
+          end
+        else
+          @recreation.recreation_prefectures.destroy_all
+        end
       end
 
       private def detect_changes(recreation, params)

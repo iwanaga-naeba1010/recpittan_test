@@ -1,17 +1,14 @@
-import {
-  LoadingIndicator,
-  ValidationErrorMessage,
-} from '@/components/shared/parts';
+import { ValidationErrorMessage } from '@/components/shared/parts';
 import { Essential } from '@/components/shared/parts/essential';
 import { Api } from '@/infrastructure';
-import { Recreation, RecreationPrefecture } from '@/types';
+import { Recreation } from '@/types';
 import React, { useEffect, useState } from 'react';
 import {
   FieldErrors,
   UseFormGetValues,
   UseFormRegister,
+  UseFormSetValue,
 } from 'react-hook-form';
-import { PrefectureItem } from './prefectureItem';
 import { RecreationFormValues } from './recreationNewForm';
 
 type Config = {
@@ -24,8 +21,9 @@ type Config = {
 type Props = {
   register: UseFormRegister<RecreationFormValues>;
   getValues: UseFormGetValues<RecreationFormValues>;
+  setValue: UseFormSetValue<RecreationFormValues>;
   recreation?: Recreation;
-  setRecreation: React.Dispatch<React.SetStateAction<Recreation | undefined>>;
+  setRecreation?: React.Dispatch<React.SetStateAction<Recreation | undefined>>;
   errors: FieldErrors<RecreationFormValues>;
 };
 
@@ -46,10 +44,9 @@ const descriptionPlaceholderText = `しっとりと大人な時間を堪能で�
 `;
 
 export const FirstStep: React.FC<Props> = (props) => {
-  const { register, getValues, recreation, setRecreation, errors } = props;
+  const { register, getValues, setValue, recreation, errors } = props;
   const [config, setConfig] = useState<Config>();
   const [show, setShow] = useState(false);
-  const [isSending, setIsSending] = useState<boolean>(false);
   const [title, setTitle] = useState<string>(getValues('title'));
   const [secondTitle, setSecondTitle] = useState<string>(
     getValues('secondTitle')
@@ -57,6 +54,25 @@ export const FirstStep: React.FC<Props> = (props) => {
   const [description, setDescription] = useState<string>(
     getValues('description')
   );
+  const [selectedKind, setSelectedKind] = useState<string>(
+    recreation?.kind?.key ?? 'visit'
+  );
+  const [selectedPrefectures, setSelectedPrefectures] = useState<string[]>([]);
+  const [newPrefecture, setNewPrefecture] = useState<string | null>(null);
+  const isVisitSelected = selectedKind === 'visit';
+  const availablePrefectures = config?.prefectures?.filter(
+    (prefecture) => !selectedPrefectures.includes(prefecture)
+  );
+
+  useEffect(() => {
+    if (!recreation?.prefectures) return;
+
+    const initialPrefectures = recreation.prefectures.map(
+      (prefecture) => prefecture.name
+    );
+    setSelectedPrefectures(initialPrefectures);
+    setValue('prefectures', initialPrefectures);
+  }, [recreation, setValue]);
 
   useEffect(() => {
     const capacityValue = getValues('capacity');
@@ -77,65 +93,34 @@ export const FirstStep: React.FC<Props> = (props) => {
     })();
   }, []);
 
-  const handleAddPrefecture = async (prefecture: string): Promise<void> => {
-    if (!recreation || !setRecreation) return;
-    try {
-      const createdPrefecture = await Api.post<RecreationPrefecture>(
-        `recreations/${recreation.id}/recreation_prefectures`,
-        'partner',
-        { recreationPrefecture: { name: prefecture } }
-      );
-      setRecreation({
-        ...recreation,
-        prefectures: [...recreation.prefectures, createdPrefecture.data],
-      });
-      setIsSending(false);
-    } catch (e) {
-      console.log(e);
+  const handlePrefectureChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const selectedPrefectureName = e.target.value;
+    if (
+      selectedPrefectureName &&
+      !selectedPrefectures.includes(selectedPrefectureName)
+    ) {
+      const updatedPrefectures = [
+        ...selectedPrefectures,
+        selectedPrefectureName,
+      ];
+      setSelectedPrefectures(updatedPrefectures);
+      setValue('prefectures', updatedPrefectures);
+      setNewPrefecture(null);
     }
   };
 
-  const handleUpdatePrefecture = async (
-    id: number,
-    prefectureName: string
-  ): Promise<void> => {
-    if (!recreation || !setRecreation) return;
-    try {
-      const updatedPrefecture = await Api.patch<RecreationPrefecture>(
-        `recreations/${recreation.id}/recreation_prefectures/${id}`,
-        'partner',
-        { recreationPrefecture: { name: prefectureName } }
-      );
-      const oldPrefectures = [...recreation.prefectures];
-      const index = oldPrefectures.indexOf(
-        oldPrefectures.filter((p) => p.id == id)[0]
-      );
-      const newPrefectures = oldPrefectures;
-      newPrefectures[index] = updatedPrefecture.data;
-      setRecreation({ ...recreation, prefectures: newPrefectures });
-    } catch (e) {
-      console.log(e);
-    }
+  const handleRemovePrefecture = (prefectureName: string) => {
+    const updatedPrefectures = selectedPrefectures.filter(
+      (p) => p !== prefectureName
+    );
+    setSelectedPrefectures(updatedPrefectures);
+    setValue('prefectures', updatedPrefectures);
   };
 
-  const handleRemove = async (id: number): Promise<void> => {
-    if (recreation && setRecreation) {
-      try {
-        await Api.delete(
-          `recreations/${recreation.id}/recreation_prefectures/${id}`,
-          'partner',
-          {}
-        );
-        setRecreation({
-          ...recreation,
-          prefectures: recreation.prefectures.filter((p) => p.id !== id),
-        });
-      } catch (e) {
-        console.log(e);
-      }
-    }
+  const handleKindChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSelectedKind(e.target.value);
   };
-  // const disabled = errors?.kind !== undefined || errors?.title !== undefined || errors?.secondTitle !== undefined;
+
   if (!config) {
     return <></>;
   }
@@ -147,7 +132,7 @@ export const FirstStep: React.FC<Props> = (props) => {
       </div>
       <hr className='my-2' />
 
-      <div className='isOnline'>
+      <div className='isVisit'>
         <div className='d-flex mt-4'>
           <h5 className='text-black font-weight-bold'>レクの形式を選択</h5>
           <Essential />
@@ -163,7 +148,9 @@ export const FirstStep: React.FC<Props> = (props) => {
               id={`kind${kind.enumKey}`}
               value={kind.enumKey}
               {...register('kind')}
-              defaultChecked={!recreation && kind.enumKey === 'visit'}
+              defaultChecked={selectedKind === kind.enumKey}
+              onChange={handleKindChange}
+              name='kind'
             />
             <label htmlFor={`kind${kind.enumKey}`}>
               {kind.name}でレクを実施
@@ -241,8 +228,8 @@ export const FirstStep: React.FC<Props> = (props) => {
             </option>
           ))}
         </select>
-        {errors.title && errors.title.message && (
-          <ValidationErrorMessage message={errors.title.message} />
+        {errors.minutes && errors.minutes.message && (
+          <ValidationErrorMessage message={errors.minutes.message} />
         )}
       </div>
 
@@ -312,40 +299,62 @@ export const FirstStep: React.FC<Props> = (props) => {
         )}
       </div>
 
-      {recreation !== undefined && recreation?.kind.key === 'visit' && (
+      {isVisitSelected && (
         <div className='area'>
           <div className='d-flex mt-4'>
             <h5 className='text-black font-weight-bold'>
-              受付可能エリアを選択
+              受付可能エリアを選択（複数選択可能）
             </h5>
             <Essential />
           </div>
 
           <p className='small my-0'>
-            レクの受付可能エリア（都道府県）を選択してください
+            レクの受付可能エリア（都道府県）を選択してください<br />対応都道府県が複数ある場合は、繰り返し選択してください
           </p>
-          {recreation?.prefectures?.map((prefecture) => (
-            <PrefectureItem
-              key={prefecture.id}
-              prefecture={prefecture}
-              handleUpdate={handleUpdatePrefecture}
-              handleRemove={handleRemove}
-              prefectures={config.prefectures ?? []}
+
+          <div>
+            <select
+              className='p-2 w-100 rounded border border-secondary'
+              value={newPrefecture ?? ''}
+              onChange={handlePrefectureChange}
+            >
+              <option value='' disabled>
+                都道府県を選択
+              </option>
+              {availablePrefectures?.map((prefecture) => (
+                <option key={prefecture} value={prefecture}>
+                  {prefecture}
+                </option>
+              ))}
+            </select>
+          </div>
+
+          <div className='selected-prefectures'>
+            {selectedPrefectures.map((prefecture) => (
+              <div
+                key={prefecture}
+                className='d-flex justify-content-between align-items-center'
+              >
+                <span>{prefecture}</span>
+                <button
+                  type='button'
+                  className='text-danger bg-white border-0 font-weight-bold my-1'
+                  onClick={() => handleRemovePrefecture(prefecture)}
+                >
+                  削除
+                </button>
+              </div>
+            ))}
+          </div>
+
+          {selectedPrefectures.map((prefecture, index) => (
+            <input
+              key={index}
+              type='hidden'
+              value={prefecture}
+              {...register(`prefectures.${index}` as const)}
             />
           ))}
-          <div className={'question-add-action-wrapper'}>
-            {isSending ? (
-              <LoadingIndicator />
-            ) : (
-              <button
-                type='button'
-                className='text-primary bg-white border-0 font-weight-bold my-1'
-                onClick={() => handleAddPrefecture('北海道')}
-              >
-                ＋複数エリアを追加
-              </button>
-            )}
-          </div>
         </div>
       )}
 
@@ -374,7 +383,6 @@ export const FirstStep: React.FC<Props> = (props) => {
           checked={!show}
         />
         <label htmlFor='numberOfFacilitiesFalse'>なし</label>
-        {/* falseならvalueは0 */}
         {show && (
           <>
             <p className='small my-0'>何人まで参加できますか？</p>

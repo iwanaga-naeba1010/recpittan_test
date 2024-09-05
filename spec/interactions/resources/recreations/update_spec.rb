@@ -42,5 +42,82 @@ RSpec.describe Resources::Recreations::Update, type: :interaction do
         .to change { Recreation.find(recreation.id).title }
         .from(recreation.title).to(params[:title])
     end
+
+    context 'when prefectures are given' do
+      let(:prefectures) { %w[北海道 青森県 岩手県] }
+
+      subject do
+        Resources::Recreations::Update.run!(
+          id: recreation.id,
+          recreation_params: params,
+          current_user: partner,
+          profile_id: profile.id,
+          prefectures:
+        )
+      end
+
+      context 'when new prefectures are added from empty' do
+        it 'should create prefectures' do
+          expect { subject }
+            .to change { recreation.recreation_prefectures.pluck(:name) }
+            .from([])
+            .to(%w[北海道 青森県 岩手県])
+        end
+      end
+
+      context 'when new prefectures are added' do
+        let!(:recreation_prefectures) do
+          [
+            create(:recreation_prefecture, recreation:, name: '北海道'),
+            create(:recreation_prefecture, recreation:, name: '青森県')
+          ]
+        end
+
+        it 'should create prefectures' do
+          expect { subject }
+            .to change { recreation.recreation_prefectures.pluck(:name) }
+            .from(recreation_prefectures.pluck(:name))
+            .to(%w[北海道 青森県 岩手県])
+        end
+      end
+
+      context 'when all prefectures are removed' do
+        let!(:recreation_prefectures) do
+          [
+            create(:recreation_prefecture, recreation:, name: '北海道'),
+            create(:recreation_prefecture, recreation:, name: '青森県'),
+            create(:recreation_prefecture, recreation:, name: '岩手県'),
+            create(:recreation_prefecture, recreation:, name: '宮城県')
+          ]
+        end
+
+        let(:prefectures) { [] }
+
+        it 'should remove prefectures' do
+          expect { subject }
+            .to change { recreation.recreation_prefectures.pluck(:name) }
+            .from(recreation_prefectures.pluck(:name))
+            .to([])
+        end
+      end
+
+      context 'when some prefectures are removed' do
+        let!(:recreation_prefectures) do
+          [
+            create(:recreation_prefecture, recreation:, name: '北海道'),
+            create(:recreation_prefecture, recreation:, name: '青森県'),
+            create(:recreation_prefecture, recreation:, name: '岩手県'),
+            create(:recreation_prefecture, recreation:, name: '宮城県')
+          ]
+        end
+
+        it 'should update prefectures' do
+          expect { subject }
+            .to change { recreation.recreation_prefectures.pluck(:name) }
+            .from(recreation_prefectures.pluck(:name))
+            .to(%w[北海道 青森県 岩手県])
+        end
+      end
+    end
   end
 end

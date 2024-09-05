@@ -86,6 +86,9 @@ const RecreationEdit: React.FC = () => {
   const onSubmit = async (values: RecreationFormValues): Promise<void> => {
     setErrors([]);
     if (!recreation) return;
+
+    const selectedPrefectures = values.prefectures ?? [];
+
     const requestBody: { [key: string]: Record<string, unknown> } = {
       recreation: {
         title: values.title || recreation.title,
@@ -106,11 +109,11 @@ const RecreationEdit: React.FC = () => {
         additionalFacilityFee:
           values.additionalFacilityFee || recreation.additionalFacilityFee,
         imageUrl: values.imageUrl,
-        category: values.category || recreation.category.key, // NOTE(okubo): idじゃないと保存できない
+        category: values.category || recreation.category.key,
         userId: recreation.userId,
         status: 'in_progress',
         recreationProfileAttributes: { profileId: values.profileId },
-        recreationPrefecturesAttributes: values.prefectures.map((p) => ({
+        recreationPrefecturesAttributes: selectedPrefectures.map((p) => ({
           name: p,
         })),
       },
