@@ -455,8 +455,7 @@ GEM
       actionpack (>= 5.2)
       railties (>= 5.2)
     retriable (3.1.2)
-    rexml (3.3.6)
-      strscan
+    rexml (3.3.7)
     rinku (2.0.6)
     rouge (4.3.0)
     rspec (3.13.0)
@@ -580,7 +579,6 @@ GEM
       activesupport (>= 6.1)
       sprockets (>= 3.0.0)
     ssrf_filter (1.1.2)
-    strscan (3.1.0)
     switch_user (1.5.4)
     sysexits (1.2.0)
     temple (0.10.3)
