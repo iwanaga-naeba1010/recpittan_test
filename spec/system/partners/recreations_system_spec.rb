@@ -90,7 +90,7 @@ RSpec.describe '/partners/recreations', type: :system do
     end
 
     feature 'Recreation edit' do
-      changed_title = 'changed title'
+      # changed_title = 'changed title'
 
       # scenario 'title form', js: true do
       #   expect(page).to have_content('レクリエーション詳細')
