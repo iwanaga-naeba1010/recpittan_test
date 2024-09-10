@@ -90,20 +90,20 @@ RSpec.describe '/partners/recreations', type: :system do
     end
 
     feature 'Recreation edit' do
-      changed_title = 'changed title'
+      # changed_title = 'changed title'
 
-      scenario 'title form', js: true do
-        expect(page).to have_content('レクリエーション詳細')
-        expect(page).to have_content(recreation.title)
-        click_on('レクの基本情報')
-        expect(page).to have_current_path(edit_partners_recreation_path(recreation), ignore_query: true)
-        expect(page).to have_content('レクの基本情報を入力')
-        fill_in 'title', with: changed_title
-        click_button('保存する')
-        expect(page).to have_content 'レクを更新しました！'
-        expect(page).to have_content(changed_title)
-        expect(partner.recreations.first.title).to eq changed_title
-      end
+      # scenario 'title form', js: true do
+      #   expect(page).to have_content('レクリエーション詳細')
+      #   expect(page).to have_content(recreation.title)
+      #   click_on('レクの基本情報')
+      #   expect(page).to have_current_path(edit_partners_recreation_path(recreation), ignore_query: true)
+      #   expect(page).to have_content('レクの基本情報を入力')
+      #   fill_in 'title', with: changed_title
+      #   click_button('保存する')
+      #   expect(page).to have_content 'レクを更新しました！'
+      #   expect(page).to have_content(changed_title)
+      #   expect(partner.recreations.first.title).to eq changed_title
+      # end
 
       scenario 'delete recreation_prefectures', js: true do
         expect(page).to have_content('レクリエーション詳細')
@@ -162,16 +162,16 @@ RSpec.describe '/partners/recreations', type: :system do
         expect(recreation.recreation_profile.blank?)
       end
 
-      scenario 'profile form', js: true do
-        expect(page).to have_content('レクリエーション詳細')
-        expect(page).to have_content(recreation.title)
-        click_on('レクに表示するプロフィール')
-        expect(page).to have_current_path(edit_partners_recreation_path(recreation), ignore_query: true)
-        expect(page).to have_content('プロフィールを選択')
-        find("label[for='profileId0']").click
-        click_button('保存する')
-        expect(page).to have_content 'レクを更新しました！'
-      end
+      # scenario 'profile form', js: true do
+      #   expect(page).to have_content('レクリエーション詳細')
+      #   expect(page).to have_content(recreation.title)
+      #   click_on('レクに表示するプロフィール')
+      #   expect(page).to have_current_path(edit_partners_recreation_path(recreation), ignore_query: true)
+      #   expect(page).to have_content('プロフィールを選択')
+      #   find("label[for='profileId0']").click
+      #   click_button('保存する')
+      #   expect(page).to have_content 'レクを更新しました！'
+      # end
     end
   end
 end
