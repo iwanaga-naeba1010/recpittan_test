@@ -36,7 +36,7 @@ RSpec.describe Partners::ProfilesController, type: :request do
       it 'returns 302 status after created' do
         post partners_profiles_path, params: { profile: attrs }
         expect(response).to have_http_status(:found)
-        expect(response).to redirect_to partners_profiles_path
+        expect(response).to redirect_to partners_recreations_path
       end
 
       it 'can create profile and increase one record' do

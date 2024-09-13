@@ -120,7 +120,7 @@ RSpec.describe '/partners/recreations', type: :system do
       scenario 'create recreation_image', js: true do
         expect(page).to have_content('レクリエーション詳細')
         expect(page).to have_content(recreation.title)
-        click_on('レク画像・関連ファイルのアップ')
+        click_on('レク画像・関連ファイルを追加')
         expect(page).to have_current_path(edit_partners_recreation_path(recreation), ignore_query: true)
         expect(recreation.recreation_images.size).to eq 1
         attach_file 'recreationImage', Rails.root.join('spec/files/test.png'), make_visible: true
@@ -131,7 +131,7 @@ RSpec.describe '/partners/recreations', type: :system do
       scenario 'delete recreation_image', js: true do
         expect(page).to have_content('レクリエーション詳細')
         expect(page).to have_content(recreation.title)
-        click_on('レク画像・関連ファイルのアップ')
+        click_on('レク画像・関連ファイルを追加')
         expect(page).to have_current_path(edit_partners_recreation_path(recreation), ignore_query: true)
         expect(recreation.recreation_images.size).to eq 1
         click_button('削除')
@@ -143,7 +143,7 @@ RSpec.describe '/partners/recreations', type: :system do
       scenario 'create recreation_profile', js: true do
         expect(page).to have_content('レクリエーション詳細')
         expect(page).to have_content(recreation.title)
-        click_on('レク画像・関連ファイルのアップ')
+        click_on('レク画像・関連ファイルを追加')
         expect(page).to have_current_path(edit_partners_recreation_path(recreation), ignore_query: true)
         expect(recreation.recreation_profile.blank?)
         attach_file 'recreationProfile', Rails.root.join('spec/files/test.png'), make_visible: true
@@ -154,7 +154,7 @@ RSpec.describe '/partners/recreations', type: :system do
       scenario 'delete recreation_profile', js: true do
         expect(page).to have_content('レクリエーション詳細')
         expect(page).to have_content(recreation.title)
-        click_on('レク画像・関連ファイルのアップ')
+        click_on('レク画像・関連ファイルを追加')
         expect(page).to have_current_path(edit_partners_recreation_path(recreation), ignore_query: true)
         expect(recreation.recreation_profile.present?)
         click_button('削除')

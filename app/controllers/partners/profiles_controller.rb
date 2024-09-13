@@ -16,7 +16,7 @@ class Partners::ProfilesController < Partners::ApplicationController
   def create
     @profile = current_user.profiles.build(params_create)
     if @profile.save
-      redirect_to partners_profiles_path, notice: t('action_messages.created', model_name: Profile.model_name.human)
+      redirect_to partners_recreations_path, notice: t('action_messages.created', model_name: Profile.model_name.human)
     else
       render :new
     end

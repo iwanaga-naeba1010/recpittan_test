@@ -35,7 +35,7 @@ const Confirm: React.FC = () => {
           className='mt-2 py-2 w-100 rounded text-primary font-weight-bold bg-white border'
           onClick={() =>
             window.open(
-              'https://form.run/@info-1629787292',
+              'https://docs.google.com/forms/d/19uj5TLgm0q1udoBVM8YsBoDimzYB-UeCkynLlAN1ijQ/viewform?edit_requested=true',
               '_blank',
               'noopener,noreferrer'
             )
