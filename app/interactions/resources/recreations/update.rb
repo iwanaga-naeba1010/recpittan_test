@@ -58,14 +58,14 @@ module Resources
 
       private def update_prefectures(recreation_id:)
         # 送られてきたprefecturesの配列内にないものを削除
-        if prefectures.present?
+        if prefectures.compact.any?
           RecreationPrefecture.where(recreation_id:).where.not(name: prefectures).destroy_all
 
           # 新しいprefecturesを作成
           prefectures.uniq.each do |prefecture|
             RecreationPrefecture.find_or_create_by!(name: prefecture, recreation_id:)
           end
-        else
+        elsif prefectures.blank?
           @recreation.recreation_prefectures.destroy_all
         end
       end
