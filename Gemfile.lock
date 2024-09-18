@@ -274,7 +274,7 @@ GEM
       has_scope (>= 0.6)
       railties (>= 6.0)
       responders (>= 2)
-    jbuilder (2.12.0)
+    jbuilder (2.13.0)
       actionview (>= 5.0.0)
       activesupport (>= 5.0.0)
     jmespath (1.6.2)
