@@ -74,7 +74,7 @@ class CustomDevise::RegistrationsController < Devise::RegistrationsController
       keys: [
         :role, :title,
         { company_attributes: %i[
-          name facility_name person_in_charge_name person_in_charge_name_kana genre tel
+          name facility_name person_in_charge_name person_in_charge_name_kana prefecture genre tel
         ] }
       ]
     )

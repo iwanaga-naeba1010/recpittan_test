@@ -30,6 +30,7 @@ ActiveAdmin.register Company do
     column :person_in_charge_name
     column :person_in_charge_name_kana
     column :zip
+    column :prefecture
     column :city
     column :street
     column :building

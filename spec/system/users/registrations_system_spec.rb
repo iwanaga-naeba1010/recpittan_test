@@ -20,7 +20,8 @@ RSpec.describe 'Registrations', type: :system do
             facility_name: 'facility_name',
             person_in_charge_name: 'person_in_charge_name',
             person_in_charge_name_kana: 'person_in_charge_name_kana',
-            genre: 'その他'
+            genre: 'その他',
+            prefecture: '東京都'
           }
         }
 
@@ -29,6 +30,7 @@ RSpec.describe 'Registrations', type: :system do
         input_text_boxes('#user_company_attributes_person_in_charge_name', input[:company][:person_in_charge_name])
         input_text_boxes('#user_company_attributes_person_in_charge_name_kana', input[:company][:person_in_charge_name_kana])
         select(input[:company][:genre], from: 'user_company_attributes_genre')
+        select(input[:company][:prefecture], from: 'user_company_attributes_prefecture')
 
         input_text_boxes('#user_email', input[:user][:email])
         input_text_boxes('#user_password', input[:user][:password])
