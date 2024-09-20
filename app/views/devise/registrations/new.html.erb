@@ -28,6 +28,9 @@
                   <%= ff.input :genre, required: true, input_html: { class: 'form-control ' } %>
                 </div>
                 <div class="mb-3">
+                  <%= ff.input :prefecture, required: true, as: :select, collection: Company.prefectures, input_html: { class: 'form-control' } %>
+                </div>
+                <div class="mb-3">
                   <%= ff.input :facility_name, required: true, input_html: { class: 'form-control ' } %>
                 </div>
                 <div class="mb-3">

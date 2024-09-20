@@ -27,7 +27,10 @@
 #  updated_at                 :datetime         not null
 #
 class Company < ApplicationRecord
+  include PrefectureList
+
   extend Enumerize
+
   # NOTE: 現状1名のUserしか想定していないためhas_one。複数に対応させる場合は、has_manyに変更でいける
   has_one :user, dependent: :destroy, class_name: 'User'
   accepts_nested_attributes_for :user, allow_destroy: true
