@@ -13,7 +13,7 @@ class Customers::RecreationsController < Customers::ApplicationController
                                     .joins(:recreation_prefectures)
                                     .distinct
                                     .pluck('recreation_prefectures.name')
-                                    .sort_by { |name| RecreationPrefecture::NAMES.index(name) || RecreationPrefecture::NAMES.length }
+                                    .sort_by { |name| RecreationPrefecture.names.index(name) || RecreationPrefecture.names.length }
     @tags = Tag.where(kind: [:tag, :target])
     recs = Recreation.public_recs
                      .by_kind(params[:kind])

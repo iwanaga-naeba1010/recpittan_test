@@ -25,7 +25,7 @@ class HomeController < ApplicationController
                              .joins(:recreation_prefectures)
                              .distinct
                              .pluck('recreation_prefectures.name')
-                             .sort_by { |name| RecreationPrefecture::NAMES.index(name) || RecreationPrefecture::NAMES.length }
+                             .sort_by { |name| RecreationPrefecture.names.index(name) || RecreationPrefecture.names.length }
 
     today = Time.zone.today
     @top_banner = Rails.cache.fetch('home/top_banner', expires_in: 15.minutes) do
