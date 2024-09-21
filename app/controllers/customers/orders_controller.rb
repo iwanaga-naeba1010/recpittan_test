@@ -29,7 +29,6 @@ class Customers::OrdersController < Customers::ApplicationController
       @order.save!
 
       message = <<~MESSAGE
-        リクエスト内容
         #{@order.title}
 
         希望日時
