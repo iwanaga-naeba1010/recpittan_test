@@ -40,4 +40,6 @@ class BankAccount < ApplicationRecord
                       message: I18n.t('active_interaction.errors.messages.only_katakana') }
 
   enumerize :account_type, in: %i[checking current], default: :checking, predicates: true, scope: true
+
+  delegate :username, to: :user, prefix: true
 end
