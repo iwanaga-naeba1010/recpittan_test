@@ -32,7 +32,7 @@ FactoryBot.define do
     bank_code { '0001' }
     branch_name { 'MyString' }
     branch_code { '001' }
-    account_type { 'MyString' }
+    account_type { 'checking' }
     account_number { '000001' }
     account_holder_name { 'ナマエタロウ' }
   end
