@@ -30,8 +30,6 @@ export const RecreationPrice: React.FC<Props> = (props) => {
           required: true,
         })}
       />
-      <p className='small my-0'>施設に表示される金額</p>
-      <p className='small my-0'>謝礼＋サービス手数料(35%)が上乗せされます</p>
     </>
   );
 };

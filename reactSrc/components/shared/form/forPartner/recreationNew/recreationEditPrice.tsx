@@ -33,7 +33,6 @@ export const RecreationEditPrice: React.FC<Props> = (props) => {
       />
       <p className='small my-0'>マイページでの金額変更はできません</p>
       <p className='small my-0'>ご希望の際はご一報下さい</p>
-      <p className='small my-0'>謝礼＋サービス手数料(35%)が上乗せされます</p>
     </>
   );
 };
