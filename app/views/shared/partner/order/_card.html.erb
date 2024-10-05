@@ -28,6 +28,19 @@
       削除
     </button>
   </div>
+  <%# 開催期間を表示する要素 %>
+  <div class="event-period">
+    <p class="mb-0">開催日時 
+      <% if order.start_at.present? && order.end_at.present? %>
+        <%= order.start_at.strftime('%Y.%m.%d %H:%M:%S') %> ~ <%= order.end_at.strftime('%H:%M:%S') %>
+      <% else %>
+        日時未定
+      <% end %>
+      <% if order.contract_number.present? %>
+        依頼番号: <%= order.contract_number %>
+      <% end %>
+    </p>
+  </div>
 </div>
 
 <!-- 確認モーダル -->
