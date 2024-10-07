@@ -54,39 +54,6 @@ export const SecondStep: React.FC<Props> = (props) => {
         <RecreationEditAdditionalFacilityFee recreation={recreation} />
       )}
 
-      {!recreation && (
-        <>
-          <div className='d-flex mt-4'>
-            <h5 className='text-black font-weight-bold'>動画を共有</h5>
-          </div>
-          <ol>
-            <li>
-              無料大容量 ファイル転送サービス GigaFile(ギガファイル)便
-              <span>
-                <a
-                  href='https://gigafile.nu/'
-                  target='_blank'
-                  rel='noreferrer'
-                  className='text-primary'
-                >
-                  FileGiga
-                </a>
-              </span>
-              にアクセス
-            </li>
-            <li>
-              次にファイルをアップロードして、ダウンロード専用URLをコピーします
-            </li>
-            <li>最後に専用URLを以下のフォームに入力してください</li>
-          </ol>
-          <input
-            type='text'
-            className='p-2 w-100 rounded border border-secondary'
-            {...register('youtubeId')}
-          />
-        </>
-      )}
-
       <div className='mt-4'>
         <h5 className='text-black font-weight-bold'>お借りしたいものを入力</h5>
       </div>
