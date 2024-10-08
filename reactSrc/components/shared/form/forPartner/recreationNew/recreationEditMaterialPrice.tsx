@@ -24,8 +24,6 @@ export const RecreationEditMaterialPrice: React.FC<Props> = (props) => {
         value={recreation.materialPrice}
         readOnly
       />
-      <p className='small my-0'>施設に表示される金額</p>
-      <p className='small my-0'>材料費＋サービス手数料(15%)が上乗せされます</p>
     </>
   );
 };
