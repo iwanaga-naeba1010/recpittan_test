@@ -78,6 +78,7 @@ class Order < ApplicationRecord
   enum :sort_order, {
     newest: 0,
     chat_desc: 1,
+    event_date: 2
   }
 
   # controller のparamsに追加するため
@@ -105,6 +106,8 @@ class Order < ApplicationRecord
       order(created_at: :desc)
     when :chat_desc
       includes(:chats).order('chats.created_at desc')
+    when :event_date
+      order(start_at: :asc)
     end
   }
 

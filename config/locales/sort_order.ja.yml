@@ -10,3 +10,4 @@ ja:
     sort_orders:
       newest: 新着順
       chat_desc: チャット更新順
+      event_date: 開催日時順

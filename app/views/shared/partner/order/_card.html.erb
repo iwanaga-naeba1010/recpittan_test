@@ -30,15 +30,15 @@
   </div>
   <%# 開催期間を表示する要素 %>
   <div class="event-period">
-    <p class="mb-0">開催日時
+    <p class="mb-0">開催日時：
       <% if order.start_at? && order.end_at? %>
         <%= dotted_datetime(order.start_at) %> ~ <%= time(order.end_at) %>
       <% else %>
         日時未定
       <% end %>
-      <% if order.contract_number? %>
-        依頼番号: <%= order.id %>
-      <% end %>
+    </p>
+    <p class="mb-0">
+      依頼番号：<%= order.id %>
     </p>
   </div>
 </div>
