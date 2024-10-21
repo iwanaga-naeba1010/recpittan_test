@@ -16,7 +16,7 @@
     "@fortawesome/fontawesome-free": "^5.15.4",
     "@popperjs/core": "^2.11.8",
     "@rails/actioncable": "^7.2.101",
-    "@rails/activestorage": "^7.2.100",
+    "@rails/activestorage": "^7.2.101",
     "@rails/ujs": "^7.1.401",
     "@rails/webpacker": "5.4.4",
     "@types/prettier": "^3.0.0",
