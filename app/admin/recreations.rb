@@ -30,6 +30,7 @@ ActiveAdmin.register Recreation do
   csv do
     column :id
     column(:user, &:user_username)
+    column(:user_email, &:user_email)
     column :title
     column :minutes
     column :second_title

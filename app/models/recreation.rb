@@ -69,6 +69,7 @@ class Recreation < ApplicationRecord
   delegate :name, :title, :description, :image, to: :partner, prefix: true, allow_nil: true
   delegate :name, :title, :description, :image, to: :profile, prefix: true, allow_nil: true
   delegate :username, to: :user, prefix: true
+  delegate :email, to: :user, prefix: true
 
   # NOTE(okubo): publicは予約後なので下記で定義
   scope :public_recs, -> { where(status: :published) }
