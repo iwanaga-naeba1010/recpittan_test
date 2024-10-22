@@ -32,34 +32,36 @@ const RecreationShow: React.FC = () => {
   }
 
   return (
-    <div className='body bg-white p-3 mb-3'>
-      {/* 修正リンクに変更する */}
-      <RecreationItem
-        title='レクの基本情報'
-        content={recreation.title}
-        url={`/partners/recreations/${id}/edit?formKind=title`}
-      />
-      <RecreationItem
-        title='金額・その他の情報'
-        content={recreation.title}
-        url={`/partners/recreations/${id}/edit?formKind=price`}
-      />
-      <RecreationItem
-        title='レクに表示するプロフィール'
-        content={recreation.title}
-        url={`/partners/recreations/${id}/edit?formKind=profile`}
-      />
-      <RecreationItem
-        title='レク画像・関連ファイルを追加'
-        content={recreation.title}
-        url={`/partners/recreations/${id}/edit?formKind=file`}
-      />
-      <RecreationItem
-        title='このレクの口コミ一覧'
-        content={recreation.title}
-        url={`/partners/recreations/${id}/evaluations`}
-      />
-    </div>
+    <>
+      <div className='pt-3 w-100'>
+        <div className='text-center'>
+          <h3 className='text-black fw-bold'>{recreation.title}</h3>
+        </div>
+      </div>
+      <div className='body bg-white p-3 mb-3'>
+        {/* 修正リンクに変更する */}
+        <RecreationItem
+          title='レクの基本情報'
+          url={`/partners/recreations/${id}/edit?formKind=title`}
+        />
+        <RecreationItem
+          title='金額・その他の情報'
+          url={`/partners/recreations/${id}/edit?formKind=price`}
+        />
+        <RecreationItem
+          title='レクに表示するプロフィール'
+          url={`/partners/recreations/${id}/edit?formKind=profile`}
+        />
+        <RecreationItem
+          title='レク画像・関連ファイルを追加'
+          url={`/partners/recreations/${id}/edit?formKind=file`}
+        />
+        <RecreationItem
+          title='このレクの口コミ一覧'
+          url={`/partners/recreations/${id}/evaluations`}
+        />
+      </div>
+    </>
   );
 };
 
