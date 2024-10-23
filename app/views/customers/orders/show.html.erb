@@ -70,16 +70,9 @@
                   <h2 class="font-14 font-weight-bold line-height-120 color-ba10 py-2">チラシ</h2>
                   <span class="font-14 font-weight-normal line-height-120 color-ba08 py-2">レクのチラシをダウンロードして印刷することができます。</span>
                   <div>
-                    <% if @order.recreation.flyer.image.identifier&.split('.')&.last&.in?(['pptx', 'ppt']) %>
-                      <%= link_to @order.recreation.flyer.image.url, class: 'clink', download: true do %>
-                        チラシをダウンロード
-                        <i class="material-icons">navigate_next</i>
-                      <% end %>
-                    <% else %>
-                      <%= link_to @order.recreation.flyer.image.url, class: 'clink', target: '_blank', rel: 'noopener' do %>
-                        チラシをダウンロード
-                        <i class="material-icons">navigate_next</i>
-                      <% end %>
+                    <%= link_to @order.recreation.flyer.image.url, class: 'clink', target: '_blank', rel: 'noopener' do %>
+                      チラシをダウンロード
+                      <i class="material-icons ">navigate_next</i>
                     <% end %>
                   </div>
                 </div>
