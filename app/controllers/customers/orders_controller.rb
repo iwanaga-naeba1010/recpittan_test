@@ -85,13 +85,16 @@ class Customers::OrdersController < Customers::ApplicationController
     original_filename = @order.recreation.flyer.image.identifier
 
     if pptx_url.present? && original_filename.present?
-      file_data = URI.open(pptx_url).read
+      uri = URI.parse(pptx_url)
+
+      response = Net::HTTP.get_response(uri)
+      file_data = response.body
       send_data file_data,
                 filename: original_filename,
                 type: 'application/vnd.openxmlformats-officedocument.presentationml.presentation',
                 disposition: 'attachment'
     else
-      redirect_to customers_order_path(@order), alert: 'ファイルが見つかりません。'
+      redirect_to customers_order_path(@order), alert: t('action_messages.file_not_found')
     end
   end
 
