@@ -14,6 +14,7 @@ namespace :customers do
       member do
         get :chat
         get :complete
+        get :download_pptx
       end
       resources :chats, only: %i[create]
       resources :reports, only: %i[edit update]

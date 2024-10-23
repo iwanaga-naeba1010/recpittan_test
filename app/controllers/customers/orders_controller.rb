@@ -2,7 +2,7 @@
 
 class Customers::OrdersController < Customers::ApplicationController
   before_action :set_recreation, only: %i[new create]
-  before_action :set_order, only: %i[show chat complete]
+  before_action :set_order, only: %i[show chat complete download_pptx]
 
   def show; end
 
@@ -78,6 +78,21 @@ class Customers::OrdersController < Customers::ApplicationController
     Sentry.capture_exception(e)
     logger.error e.message
     render :new
+  end
+
+  def download_pptx
+    pptx_url = @order.recreation.flyer.image.url
+    original_filename = @order.recreation.flyer.image.identifier
+
+    if pptx_url.present? && original_filename.present?
+      file_data = URI.open(pptx_url).read
+      send_data file_data,
+                filename: original_filename,
+                type: 'application/vnd.openxmlformats-officedocument.presentationml.presentation',
+                disposition: 'attachment'
+    else
+      redirect_to customers_order_path(@order), alert: 'ファイルが見つかりません。'
+    end
   end
 
   private def set_recreation
