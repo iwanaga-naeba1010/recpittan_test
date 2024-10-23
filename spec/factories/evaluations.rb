@@ -17,9 +17,13 @@
 #  updated_at          :datetime         not null
 #  report_id           :bigint           not null
 #
+# Indexes
+#
+#  index_evaluations_on_report_id  (report_id)
+#
 # Foreign Keys
 #
-#  evaluations_report_id_fkey  (report_id => reports.id)
+#  fk_rails_...  (report_id => reports.id)
 #
 FactoryBot.define do
   factory :evaluation do

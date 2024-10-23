@@ -10,10 +10,15 @@
 #  company_id :bigint           not null
 #  tag_id     :bigint           not null
 #
+# Indexes
+#
+#  index_company_tags_on_company_id  (company_id)
+#  index_company_tags_on_tag_id      (tag_id)
+#
 # Foreign Keys
 #
-#  company_tags_company_id_fkey  (company_id => companies.id)
-#  company_tags_tag_id_fkey      (tag_id => tags.id)
+#  fk_rails_...  (company_id => companies.id)
+#  fk_rails_...  (tag_id => tags.id)
 #
 class CompanyTag < ApplicationRecord
   belongs_to :company, class_name: 'Company'

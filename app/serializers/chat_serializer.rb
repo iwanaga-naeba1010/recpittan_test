@@ -13,10 +13,15 @@
 #  order_id   :bigint           not null
 #  user_id    :bigint           not null
 #
+# Indexes
+#
+#  index_chats_on_order_id  (order_id)
+#  index_chats_on_user_id   (user_id)
+#
 # Foreign Keys
 #
-#  chats_order_id_fkey  (order_id => orders.id)
-#  chats_user_id_fkey   (user_id => users.id)
+#  fk_rails_...  (order_id => orders.id)
+#  fk_rails_...  (user_id => users.id)
 #
 class ChatSerializer
   def serialize_list(chats:)

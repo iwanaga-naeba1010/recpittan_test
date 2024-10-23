@@ -13,10 +13,11 @@
 # Indexes
 #
 #  index_recreation_prefectures_on_name_and_recreation_id  (name,recreation_id) UNIQUE
+#  index_recreation_prefectures_on_recreation_id           (recreation_id)
 #
 # Foreign Keys
 #
-#  recreation_prefectures_recreation_id_fkey  (recreation_id => recreations.id)
+#  fk_rails_...  (recreation_id => recreations.id)
 #
 class RecreationPrefectureSerializer
   def serialize_list(recreation_prefectures:)

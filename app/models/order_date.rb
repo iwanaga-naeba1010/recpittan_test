@@ -16,9 +16,13 @@
 #  updated_at   :datetime         not null
 #  order_id     :bigint           not null
 #
+# Indexes
+#
+#  index_order_dates_on_order_id  (order_id)
+#
 # Foreign Keys
 #
-#  order_dates_order_id_fkey  (order_id => orders.id)
+#  fk_rails_...  (order_id => orders.id)
 #
 class OrderDate < ApplicationRecord
   belongs_to :order, class_name: 'Order'
