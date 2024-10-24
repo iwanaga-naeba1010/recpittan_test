@@ -32,4 +32,13 @@ class Profile < ApplicationRecord
   # TODO(okubo): 一時的にdescriptionのvalidationを外してバッチの不具合を回避
   # validates :name, :description, presence: true
   validates :name, :description, :image, presence: true
+
+  before_destroy :check_recreation_association
+
+  private def check_recreation_association
+    if recreation_profile&.recreation.present?
+      errors.add(:base, 'このプロフィールは関連するレクがあるため削除できません。')
+      throw :abort
+    end
+  end
 end

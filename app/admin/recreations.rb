@@ -109,7 +109,13 @@ ActiveAdmin.register Recreation do
               column :name
               column :title
               column :position
-              column('URL') { |profile| link_to 'URL', admin_profile_path(profile) }
+              column('URL') do |profile|
+                if profile.present?
+                  link_to 'URL', admin_profile_path(profile)
+                else
+                  'プロフィールなし'
+                end
+              end
             end
           end
 
