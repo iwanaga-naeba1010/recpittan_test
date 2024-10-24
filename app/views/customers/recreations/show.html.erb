@@ -122,19 +122,21 @@
                 <div class="text-muted">※状況にあわせて、変わる可能性がございます。</div>
                 <p class="item-text "><%= simple_format @recreation.extra_information %></p>
               </div>
-              <div class="">
-                <h3>このレクリエーションの講師</h3>
-                <div class="row align-items-center">
-                  <div class="col-md-4 text-center">
-                    <%= image_tag @recreation.profile_image&.to_s, class: "align-self-center rounded-circle", width: 90 %>
-                    <h4><%= @recreation.profile_name %></h4>
-                  </div>
-                  <div class="col-md-8">
-                    <h4 class="instructor-position h5"><%= @recreation.profile_title %></h4>
-                    <p class="instructor-content"><%= simple_format @recreation.profile_description %></p>
+              <% if @recreation.profile.present? %>
+                <div class="">
+                  <h3>このレクリエーションの講師</h3>
+                  <div class="row align-items-center">
+                    <div class="col-md-4 text-center">
+                      <%= image_tag @recreation.profile_image&.to_s, class: "align-self-center rounded-circle", width: 90 %>
+                      <h4><%= @recreation.profile_name %></h4>
+                    </div>
+                    <div class="col-md-8">
+                      <h4 class="instructor-position h5"><%= @recreation.profile_title %></h4>
+                      <p class="instructor-content"><%= simple_format @recreation.profile_description %></p>
+                    </div>
                   </div>
                 </div>
-              </div>
+              <% end %>
             <% end %>
           </div>
         </div>
