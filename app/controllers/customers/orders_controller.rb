@@ -4,6 +4,15 @@ class Customers::OrdersController < Customers::ApplicationController
   before_action :set_recreation, only: %i[new create]
   before_action :set_order, only: %i[show chat complete download_pptx]
 
+  MIME_TYPE_MAP = {
+    'pptx' => 'application/vnd.openxmlformats-officedocument.presentationml.presentation',
+    'ppt' => 'application/vnd.ms-powerpoint',
+    'pdf' => 'application/pdf',
+    'jpeg' => 'image/jpeg',
+    'jpg' => 'image/jpeg',
+    'png' => 'image/png'
+  }.freeze
+
   def show; end
 
   def new
@@ -91,7 +100,7 @@ class Customers::OrdersController < Customers::ApplicationController
       file_data = response.body
       send_data file_data,
                 filename: original_filename,
-                type: 'application/vnd.openxmlformats-officedocument.presentationml.presentation',
+                type: MIME_TYPE_MAP[file_extension],
                 disposition: 'attachment'
     else
       redirect_to customers_order_path(@order), alert: t('action_messages.file_not_found')
