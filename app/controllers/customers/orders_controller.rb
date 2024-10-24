@@ -92,6 +92,7 @@ class Customers::OrdersController < Customers::ApplicationController
   def download_pptx
     pptx_url = @order.recreation.flyer.image.url
     original_filename = @order.recreation.flyer.image.identifier
+    file_extension = original_filename&.split('.')&.last
 
     if pptx_url.present? && original_filename.present?
       uri = URI.parse(pptx_url)
