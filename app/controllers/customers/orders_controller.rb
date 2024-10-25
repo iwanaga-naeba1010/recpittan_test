@@ -2,7 +2,7 @@
 
 class Customers::OrdersController < Customers::ApplicationController
   before_action :set_recreation, only: %i[new create]
-  before_action :set_order, only: %i[show chat complete download_pptx]
+  before_action :set_order, only: %i[show chat complete download]
 
   MIME_TYPE_MAP = {
     'pptx' => 'application/vnd.openxmlformats-officedocument.presentationml.presentation',
@@ -89,7 +89,7 @@ class Customers::OrdersController < Customers::ApplicationController
     render :new
   end
 
-  def download_pptx
+  def download
     pptx_url = @order.recreation.flyer.image.url
     original_filename = @order.recreation.flyer.image.identifier
     file_extension = original_filename&.split('.')&.last
