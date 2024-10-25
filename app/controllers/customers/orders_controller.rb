@@ -2,7 +2,16 @@
 
 class Customers::OrdersController < Customers::ApplicationController
   before_action :set_recreation, only: %i[new create]
-  before_action :set_order, only: %i[show chat complete]
+  before_action :set_order, only: %i[show chat complete download]
+
+  MIME_TYPE_MAP = {
+    'pptx' => 'application/vnd.openxmlformats-officedocument.presentationml.presentation',
+    'ppt' => 'application/vnd.ms-powerpoint',
+    'pdf' => 'application/pdf',
+    'jpeg' => 'image/jpeg',
+    'jpg' => 'image/jpeg',
+    'png' => 'image/png'
+  }.freeze
 
   def show; end
 
@@ -78,6 +87,25 @@ class Customers::OrdersController < Customers::ApplicationController
     Sentry.capture_exception(e)
     logger.error e.message
     render :new
+  end
+
+  def download
+    pptx_url = @order.recreation.flyer.image.url
+    original_filename = @order.recreation.flyer.image.identifier
+    file_extension = original_filename&.split('.')&.last
+
+    if pptx_url.present? && original_filename.present?
+      uri = URI.parse(pptx_url)
+
+      response = Net::HTTP.get_response(uri)
+      file_data = response.body
+      send_data file_data,
+                filename: original_filename,
+                type: MIME_TYPE_MAP[file_extension],
+                disposition: 'attachment'
+    else
+      redirect_to customers_order_path(@order), alert: t('action_messages.file_not_found')
+    end
   end
 
   private def set_recreation
