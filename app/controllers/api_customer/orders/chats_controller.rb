@@ -19,6 +19,8 @@ class ApiCustomer::Orders::ChatsController < Api::ApplicationController
     message = <<~MESSAGE
       施設名名： #{current_user.company.facility_name}
       管理画面案件URL： #{admin_order_url(@order.id)}
+      パートナー名: #{@order&.recreation&.user_username}
+      レクリエーション名: #{@order&.recreation_title}
       内容:
       #{params_create[:message]}
     MESSAGE
