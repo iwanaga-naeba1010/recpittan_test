@@ -10,6 +10,7 @@ class Partners::ChatsController < Partners::ApplicationController
       message = <<~MESSAGE
         パートナー名： #{@order.recreation.profile_name}
         管理画面案件URL： #{admin_order_url(@order.id)}
+        施設名: #{@order.user.company.facility_name}
         内容:
         #{params_create[:message]}
       MESSAGE
