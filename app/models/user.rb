@@ -54,6 +54,7 @@ class User < ApplicationRecord
   enumerize :role, in: { customer: 0, partner: 1, admin: 2, cs: 3 }, default: 0
   enumerize :approval_status, in: { unapproved: 0, approved: 1 }, default: 0
 
+  # TODO: role == userの場合、の条件加えたい
   belongs_to :company, optional: true, class_name: 'Company'
   accepts_nested_attributes_for :company, allow_destroy: true
   has_one :invoice_information, dependent: :destroy, class_name: 'InvoiceInformation'
