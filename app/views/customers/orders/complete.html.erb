@@ -1,3 +1,17 @@
+<% if ENV.fetch('DOMAIN', '') == 'recreation.everyplus.jp' %>
+  <head>
+    <script>
+      (function(w,f){w[f]=w[f]||function(){w[f].q=w[f].q||[];w[f].q.push(arguments);};})(window,'dairin');
+      dairin("complete", {
+          // customer_uid:'user@example.com',
+          // sales_amount:0,
+          // event_id:'',
+          campaign_code:'7JtOnDILz5'
+      });
+    </script>
+  </head>
+<% end %>
+
 <main class="detail">
   <div class="container pt-2">
     <nav aria-label="breadcrumb">
