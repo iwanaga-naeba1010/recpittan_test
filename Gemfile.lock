@@ -184,7 +184,7 @@ GEM
       activesupport (>= 3.2)
     erubi (1.13.0)
     erubis (2.7.0)
-    excon (1.1.1)
+    excon (1.2.0)
     factory_bot (6.5.0)
       activesupport (>= 5.0.0)
     factory_bot_rails (6.4.4)
