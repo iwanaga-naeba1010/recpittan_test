@@ -12,13 +12,9 @@
 #  updated_at :datetime         not null
 #  order_id   :bigint           not null
 #
-# Indexes
-#
-#  index_zooms_on_order_id  (order_id)
-#
 # Foreign Keys
 #
-#  fk_rails_...  (order_id => orders.id)
+#  zooms_order_id_fkey  (order_id => orders.id)
 #
 class Zoom < ApplicationRecord
   extend Enumerize

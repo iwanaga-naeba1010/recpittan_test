@@ -32,13 +32,9 @@
 #  user_id                 :bigint           not null
 #  youtube_id              :string
 #
-# Indexes
-#
-#  index_recreations_on_user_id  (user_id)
-#
 # Foreign Keys
 #
-#  fk_rails_...  (user_id => users.id)
+#  recreations_user_id_fkey  (user_id => users.id)
 #
 FactoryBot.define do
   factory :recreation do

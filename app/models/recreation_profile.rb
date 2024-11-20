@@ -10,15 +10,10 @@
 #  profile_id    :bigint           not null
 #  recreation_id :bigint           not null
 #
-# Indexes
-#
-#  index_recreation_profiles_on_profile_id     (profile_id)
-#  index_recreation_profiles_on_recreation_id  (recreation_id)
-#
 # Foreign Keys
 #
-#  fk_rails_...  (profile_id => profiles.id)
-#  fk_rails_...  (recreation_id => recreations.id)
+#  recreation_profiles_profile_id_fkey     (profile_id => profiles.id)
+#  recreation_profiles_recreation_id_fkey  (recreation_id => recreations.id)
 #
 class RecreationProfile < ApplicationRecord
   belongs_to :recreation, class_name: 'Recreation'
