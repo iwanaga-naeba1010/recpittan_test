@@ -39,4 +39,8 @@ class Evaluation < ApplicationRecord
   enumerize :is_public, in: { public: 'true', private: 'false' }, default: :public
 
   delegate :message, :created_at, to: :evaluation_reply, prefix: true
+
+  def recreation
+    report&.order&.recreation
+  end
 end

@@ -1,46 +1,15 @@
 <h5 class="my-3 font-weight-bold text-black text-center">ご利用した施設の声</h5>
-<div class="evaluation-box swiper pb-5">
-  <div class="swiper-wrapper">
-    <% evaluations.each do |evaluation| %>
-      <div class="card evaluation-card swiper-slide rounded border shadow">
-        <div class="card-body position-relative">
-          <h6 class="text-black">
-          <span>
-          <svg width="36" height="28" viewBox="0 0 36 28" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path fill-rule="evenodd" clip-rule="evenodd" d="M4 28.0005C1.79086 28.0005 0 26.2097 0 24.0005V15.658C0 6.95051 1.64928 3.79596 8.45027 0.219596C9.20354 -0.176517 10.1258 -0.0239489 10.7314 0.574089L11.6596 1.49078C12.6986 2.51697 12.308 4.25571 11.0115 4.92801C7.21347 6.89762 6.48004 9.28821 6.48004 15.658H11.4287C13.6378 15.658 15.4287 17.4489 15.4287 19.658V24.0005C15.4287 26.2097 13.6378 28.0005 11.4287 28.0005H4ZM24.5713 28.0006C22.3622 28.0006 20.5713 26.2097 20.5713 24.0006V15.658C20.5713 6.95052 22.2206 3.79598 29.0216 0.219612C29.7749 -0.176501 30.6972 -0.0239332 31.3027 0.574104L32.2309 1.4908C33.2699 2.51699 32.8793 4.25573 31.5829 4.92803C27.7848 6.89764 27.0514 9.28823 27.0514 15.658H32C34.2092 15.658 36 17.4489 36 19.658V24.0006C36 26.2097 34.2092 28.0006 32 28.0006H24.5713Z" fill="#E83E8C"/>
-          </svg>
-          </span><%= evaluation.report.order.user.company.facility_name %>(<%= evaluation.report.order.user.company.genre_text %>)</h6>
-          <p class="my-2 text-black"><%= evaluation.message.truncate(140, omission: '...') %></p>
-          <p class="evaluation-date mb-3 position-absolute bottom-0"><%= evaluation.created_at.strftime('%Y/%m/%d') %></p>
-        </div>
-        <div class="card-footer bg-light p-3 w-100 h-25">
-          <div class="d-flex">
-            <div class="pe-0">
-              <%= image_tag evaluation.report.order.recreation.recreation_images.sliders.first&.image.to_s, width: '70', height: '50', class: 'rounded', loading: 'lazy' %>
-            </div>
-            <div class="ps-0">
-              <%= link_to evaluation.report.order.recreation.title, customers_recreation_path(evaluation.report.order.recreation.id), class: 'evaluation-title mb-0 ms-2 text-decoration-none' %>
-            </div>
-          </div>
-        </div>
+<div class="container evaluations-container">
+  <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+    <% evaluations.each_with_index do |evaluation, index| %>
+      <div class="col card-container">
+        <%= render 'shared/evaluation/card', evaluation: %>
       </div>
     <% end %>
   </div>
-  <div class="swiper-button-prev">
-    <p class="swiper-button p-3 rounded-circle text-white">
-    <svg width="21" height="25" viewBox="0 0 21 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M8.45584 1.13379L1.25242 8.3372C0.689789 8.89979 0.689789 9.81201 1.25242 10.3746L8.45584 17.5781C9.01847 18.1406 9.93065 18.1406 10.4933 17.5781C11.0559 17.0155 11.0559 16.1033 10.4933 15.5406L5.74924 10.7966L19.5593 10.7966C20.355 10.7966 21 10.1516 21 9.3559C21 8.56024 20.355 7.91522 19.5593 7.91522L5.74924 7.91522L10.4933 3.17118C10.7746 2.88989 10.9152 2.52116 10.9152 2.15248C10.9152 1.78381 10.7746 1.41508 10.4933 1.13379C9.93065 0.571156 9.01847 0.571156 8.45584 1.13379Z" fill="white"/>
-    </svg>
-    </p>
-  </div>
-  <div class="swiper-button-next">
-    <p class="swiper-button p-3 rounded-circle text-white">
-    <svg width="21" height="25" viewBox="0 0 21 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M12.5442 16.8662L19.7476 9.6628C20.3102 9.10021 20.3102 8.18799 19.7476 7.62536L12.5442 0.42194C11.9815 -0.140647 11.0694 -0.140647 10.5067 0.42194C9.94409 0.984527 9.94409 1.89675 10.5067 2.45938L15.2508 7.20342H1.44068C0.645021 7.20342 0 7.84844 0 8.6441C0 9.43976 0.645021 10.0848 1.44068 10.0848H15.2508L10.5067 14.8288C10.2254 15.1101 10.0848 15.4788 10.0848 15.8475C10.0848 16.2162 10.2254 16.5849 10.5067 16.8662C11.0694 17.4288 11.9815 17.4288 12.5442 16.8662Z" fill="white"/>
-    </svg>
-    </p>
-  </div>
-  <div class="pagination pb-4">
-    <div class="swiper-pagination"></div>
-  </div>
+  <%= link_to customers_evaluations_path do %>
+    <div class="text-center mt-5">
+      <button class="btn evaluations-btn text-white fw-bold py-2 px-4">もっと見る</button>
+    </div>
+  <% end %>
 </div>

@@ -9,7 +9,7 @@ namespace :customers do
   resources :recreation_plan_estimates, only: %i[index show]
   resources :recreation_plans, only: %i[index show]
   resources :recreations, only: %i[show index], shallow: true do
-    resources :evaluations, only: %i[index]
+    resources :evaluations, only: %i[index], controller: 'recreation_evaluations'
     resources :orders, only: %i[show new create] do
       member do
         get :chat

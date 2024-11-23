@@ -21,7 +21,6 @@ import './consult_recreation'; // recreationで料金相談するボタン
 import './prefectures';
 import '../../../reactSrc/index';
 import '../events/index';
-import './swiper/index';
 
 import "@fortawesome/fontawesome-free/js/all"
 require.context('../images', true)

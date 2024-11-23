@@ -1,10 +1,3 @@
-<% meta_tags_each_page(
-  @recreation.title,
-  @recreation.description,
-  nil,
-  @recreation.recreation_images&.sliders&.first&.image&.to_s
-)%>
-
 <main class="detail">
   <div class="container pt-2">
     <nav aria-label="breadcrumb">
@@ -15,133 +8,34 @@
         <li class="breadcrumb-item">
           <%= link_to '一覧', customers_recreations_path %>
         </li>
-        <% category_tag = @recreation.tags.categories&.first %>
-        <% if category_tag.present? %>
-          <li class="breadcrumb-item">
-            <span class="text-secondary"><%= @recreation.category_text %></span>
-          </li>
-        <% end %>
-        <li class="breadcrumb-item">
-          <span class="text-secondary"><%= @recreation.title %></span>
-        </li>
         <li class="breadcrumb-item active">
-          <span class="text-secondary">レビュー詳細</span>
+          <span class="text-secondary">レビュー一覧</span>
         </li>
       </ol>
     </nav>
   </div>
 
-  <article class="container py-4 px-0">
-    <div class="row">
-      <div class="col-md-7">
-        <%= link_to customers_recreation_path(@recreation.id), class: "return-link" do %>
-          <p>
-            <svg width="15" height="20" viewBox="0 0 8 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M7.18436 13.7285L7.80308 13.1098C7.94952 12.9634 7.94952 12.726 7.80308 12.5795L2.15623 6.9192L7.80308 1.25889C7.94952 1.11245 7.94952 0.875016 7.80308 0.728547L7.18436 0.109828C7.03792 -0.0366094 6.80049 -0.0366094 6.65402 0.109828L0.109828 6.65405C-0.0366094 6.80048 -0.0366094 7.03792 0.109828 7.18439L6.65402 13.7286C6.80049 13.875 7.03792 13.875 7.18436 13.7285Z" fill="#32B2E0"/>
-            </svg>
-            戻る
-          </p>
-        <% end %>
-        <h3 class="title-b font-18 my-1"><%= @evaluations.size %>件のレビュー</h3>
-        <hr>
-        <% @evaluations.each do |evaluation| %>
-          <div class="border rounded shadow mb-4 w-100">
-            <div class="mx-2 p-3">
-              <h6 class="text-black">
-              <span>
-              <svg width="36" height="28" viewBox="0 0 36 28" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path fill-rule="evenodd" clip-rule="evenodd" d="M4 28.0005C1.79086 28.0005 0 26.2097 0 24.0005V15.658C0 6.95051 1.64928 3.79596 8.45027 0.219596C9.20354 -0.176517 10.1258 -0.0239489 10.7314 0.574089L11.6596 1.49078C12.6986 2.51697 12.308 4.25571 11.0115 4.92801C7.21347 6.89762 6.48004 9.28821 6.48004 15.658H11.4287C13.6378 15.658 15.4287 17.4489 15.4287 19.658V24.0005C15.4287 26.2097 13.6378 28.0005 11.4287 28.0005H4ZM24.5713 28.0006C22.3622 28.0006 20.5713 26.2097 20.5713 24.0006V15.658C20.5713 6.95052 22.2206 3.79598 29.0216 0.219612C29.7749 -0.176501 30.6972 -0.0239332 31.3027 0.574104L32.2309 1.4908C33.2699 2.51699 32.8793 4.25573 31.5829 4.92803C27.7848 6.89764 27.0514 9.28823 27.0514 15.658H32C34.2092 15.658 36 17.4489 36 19.658V24.0006C36 26.2097 34.2092 28.0006 32 28.0006H24.5713Z" fill="#E83E8C"/>
-              </svg>
-              </span><%= evaluation.report.order.user.company.facility_name %>(<%= evaluation.report.order.user.company.genre_text %>)</h6>
-              <p class="my-2 text-black"><%= evaluation.message %></p>
-              <p class="evaluation-date mb-0"><%= evaluation.created_at.strftime('%Y/%m/%d') %></p>
-            </div>
-            <% if evaluation.evaluation_reply %>
-              <div class="border-top w-100">
-                <div class="mx-2 p-3">
-                  <div class="w-50 d-flex">
-                    <div class="align-items-center">
-                        <%= image_tag evaluation.report.order.recreation.profile&.image.to_s, width: '40', height: '40', class: 'rounded-circle', loading: 'lazy' %>
-                      </div>
-                      <div class="d-flex align-items-center ms-2">
-                        <h6 class="text-black m-0"><%= evaluation.report.order.recreation.user.username %></h6>
-                      </div>
-                  </div>
-                  <p class="my-2 text-black"><%= evaluation.evaluation_reply_message %></p>
-                  <p class="evaluation-date mb-0"><%= evaluation.evaluation_reply_created_at.strftime('%Y/%m/%d') %></p>
-                </div>
-              </div>
-            <% end %>
-          </div>
-        <% end %>
-      </div>
-      <div class="col-md-4">
-        <div id="leftinfo" class="sticky-md-top">
-          <div class="card ">
-            <div class="card-body">
-              <% if @recreation.is_public_price %>
-                <h3 class="font-24">
-                  <%= price_pipe(@recreation.price, current_user) %><span> / 1回あたり</span>
-                </h3>
-                <% if @recreation.material_price.present? && @recreation.material_price != 0 %>
-                  <p>
-                    <%= "材料費 #{price_pipe(@recreation.material_price, current_user)} / 1名あたり" %>
-                  </p>
-                <% end %>
-              <% else %>
-                <h3 class="title-b font-20">料金はお問い合わせください</h3>
-                <div class="text-muted">レク料金は非公開となっています。<br>知りたい場合はお問い合わせをしてください。</div>
-              <% end %>
-              <div class="border border-bottom-0 p-3">
-                <h4 class="title">所要時間 <%= @recreation.minutes %>分</h4>
-                <div class="text-muted">※ご要望に合わせてご相談が可能です。基本時間のため、ご要望にあわせて調節が可能です。</div>
-              </div>
-              <div class="border p-3">
-                <h4 class="title">対象者目安</h4>
-                <% @recreation.tags.targets.each do |target| %>
-                  <div class="text-muted">・<%= target.name %></div>
-                <% end %>
-              </div>
-
-              <div class="action-area">
-                <% if user_signed_in? %>
-                  <!-- 0円の場合はslackに飛ばしで営業が対応 -->
-                  <% if @recreation.is_public_price %>
-                    <%= link_to '相談・依頼する', new_customers_recreation_order_path(@recreation.id), class: "btn-cpr" %>
-                  <% else %>
-                    <!-- react呼び出し -->
-                    <div id="consultrecreation" data-recreationid=<%= @recreation.id %>></div>
-                  <% end %>
-                <% else %>
-                  <%= link_to 'ログインして相談・依頼する', new_user_session_path, class: "btn-cpr" %>
-                <% end %>
-              </div>
-            </div>
-
-            <%= render 'shared/home/order_flow' %>
-          </div>
+  <article class="container evaluations-container py-4 px-0">
+    <div class="">
+      <%= link_to root_path, class: "return-link" do %>
+        <p>
+          <%= image_pack_tag 'return.svg' %>
+          戻る
+        </p>
+      <% end %>
+      <h3 class="title-b font-18 my-1"><%= @evaluations.total_count %>件のレビュー</h3>
+      <hr>
+    </div>
+    <div class="evaluations-container row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+      <% @evaluations.each do |evaluation| %>
+        <div class="col">
+          <%= render 'shared/evaluation/card', evaluation: %>
         </div>
-      </div>
+      <% end %>
+    </div>
+
+    <div class="mt-4 d-flex justify-content-center fw-bold">
+      <%= paginate @evaluations %>
     </div>
   </article>
 </main>
-
-<!-- note: trigger経由でpricemodalを発火 -->
-<div id="pricemodaltrigger" data-bs-toggle="modal" data-bs-target="#pricemodal" class="d-none"></div>
-<!-- note: reactで制御しているが、要素をnestさせるとclick不可の状態に陥ることあるので、railsで使っている。 -->
-<div id="pricemodal" class="modal fade" tabindex="-1" aria-labelledby="contact-price-modallabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">料金をお問い合わせしました</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="close"></button>
-      </div>
-      <div class="modal-body">
-        <p>「<%= @recreation.title %>」の料金をお問い合わせしました。エブリ・プラスのスタッフからメールで返信致します。少々お待ちください。</p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-cprimary rounded-pill text-white" data-bs-dismiss="modal">閉じる</button>
-      </div>
-    </div>
-  </div>
-</div>
