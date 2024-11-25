@@ -36,7 +36,7 @@ class HomeController < ApplicationController
                    .public_and_not_null_message
                    .includes(report: { order: :recreation })
                    .includes(report: { order: { user: :company } })
-                   .latest(10)
+                   .latest(6)
                    .load_async
     @tags = Tag.where(kind: :tag).load_async.to_a
   end
