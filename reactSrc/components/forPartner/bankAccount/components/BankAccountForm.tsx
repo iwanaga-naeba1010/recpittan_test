@@ -58,12 +58,15 @@ const BankAccountForm: React.FC<BankAccountFormProps> = ({
     setBankName(value);
 
     if (value) {
-      const filteredData = allBanks.filter(
-        (bank) =>
-          bank.name.includes(value) ||
-          bank.hira.includes(value) ||
-          bank.kana.includes(value)
-      );
+      const filteredData = allBanks.filter((bank) => {
+        // 検索する文字列が「銀行」を含む場合、「銀行」を除外して比較する
+        const searchValue = value.replace(/銀行/g, '');
+        return (
+          bank.name.includes(searchValue) ||
+          bank.hira.includes(searchValue) ||
+          bank.kana.includes(searchValue)
+        );
+      });
       setSuggestedBanks(filteredData);
     } else {
       setSuggestedBanks([]);
