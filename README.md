@@ -1,12 +1,15 @@
 ### 概要
+
 マッチングシステムです
 
 ## 環境
-- Ruby 3.1.1
+
+- Ruby 3.3.0
 - Rails 7.0.x
 - PostgreSQL 12.5
 
 ## dockerのセットアップ
+
 ```
 # 最初のセットアップ
 docker-compose build
@@ -47,6 +50,7 @@ docker-compose exec web yarn lint:fix
 ```
 
 ### gitのブランチの命名規則
+
 ```
 issue-{githubのissue番号}で作業ごとにブランチを作成してもらいます。
 例えば、issue番号が10であれば、指定のブランチから新しくissue-10を作成して作業を行ってください。

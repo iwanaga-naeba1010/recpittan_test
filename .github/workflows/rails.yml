@@ -1,5 +1,5 @@
 env:
-  RUBY_VERSION: 3.1.1
+  RUBY_VERSION: 3.3.0
   RAILS_ENV: test
   POSTGRES_USER: postgres
   PGHOST: localhost
@@ -27,10 +27,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2.3.4
-      - name: Set up Ruby 3.1.1
+      - name: Set up Ruby 3.3.0
         uses: ruby/setup-ruby@v1.99.0
         with:
-          ruby-version: 3.1.1
+          ruby-version: 3.3.0
           bundler-cache: true
       - name: Use Node.js 16.x
         uses: actions/setup-node@v2
@@ -92,10 +92,10 @@ jobs:
         options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
     steps:
       - uses: actions/checkout@v2.3.4
-      - name: Set up Ruby 3.1.1
+      - name: Set up Ruby 3.3.0
         uses: ruby/setup-ruby@v1.99.0
         with:
-          ruby-version: 3.1.1
+          ruby-version: 3.3.0
           bundler-cache: true
       - name: Use Node.js 16.x
         uses: actions/setup-node@v2
