@@ -4,7 +4,7 @@
 
 ## 環境
 
-- Ruby 3.3.0
+- Ruby 3.3.6
 - Rails 7.0.x
 - PostgreSQL 12.5
 

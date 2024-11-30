@@ -25,6 +25,11 @@ class OrderDate < ApplicationRecord
 
   validate :check_dates
 
+  def self.ransackable_attributes(_auth_object = nil)
+    %w[created_at date end_hour end_minute id id_value month order_id start_hour start_minute updated_at
+       year]
+  end
+
   private
 
   # rubocop:disable Style/CaseEquality, Metrics/AbcSize

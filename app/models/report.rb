@@ -30,4 +30,9 @@ class Report < ApplicationRecord
   delegate :ingenuity, :communication, :smoothness, :price, :message, to: :evaluation, prefix: true, allow_nil: true
 
   enumerize :status, in: { in_progress: 0, denied: 1, accepted: 2 }, default: 0
+
+  def self.ransackable_attributes(_auth_object = nil)
+    %w[body created_at expenses id id_value number_of_facilities number_of_people order_id status
+       transportation_expenses updated_at]
+  end
 end

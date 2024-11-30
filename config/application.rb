@@ -15,7 +15,10 @@ ActiveSupport::Deprecation.silenced = true
 
 module MachingSystem
   class Application < Rails::Application
-    config.load_defaults 6.1
+    # Initialize configuration defaults for originally generated Rails version.
+    config.load_defaults 7.1
+
+    config.autoload_lib(ignore: %w(assets tasks))
     config.time_zone = 'Tokyo'
     config.active_record.default_timezone = :local
     config.i18n.default_locale = :ja
@@ -41,6 +44,5 @@ module MachingSystem
                        request_specs: true
       g.fixture_replacement :factory_bot, dir: 'spec/factories'
     end
-
   end
 end
