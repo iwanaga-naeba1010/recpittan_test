@@ -1,4 +1,4 @@
-FROM ruby:3.1.1
+FROM ruby:3.3.0
 
 RUN dpkg --add-architecture amd64
 RUN dpkg --print-foreign-architectures
