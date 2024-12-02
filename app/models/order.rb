@@ -40,6 +40,7 @@
 #  orders_user_id_fkey        (user_id => users.id)
 #
 class Order < ApplicationRecord
+  include Ransackable
   extend Enumerize
 
   belongs_to :user, class_name: 'User'
@@ -120,20 +121,6 @@ class Order < ApplicationRecord
 
   # validate :reject_empty_date # TODO(okubo): React化が完了したら削除する
   # validate :restrict_start_at, if: -> { status == :facility_request_in_progress }
-
-  def self.ransackable_attributes(_auth_object = nil)
-    %w[
-      id additional_facility_fee amount building city contract_number coupon_code
-      created_at end_at expenses final_check_status is_accepted is_open material_amount
-      material_price memo number_of_facilities number_of_people prefecture price
-      recreation_id start_at status street support_price transportation_expenses
-      updated_at user_id zip
-    ]
-  end
-
-  def self.ransackable_associations(_auth_object = nil)
-    %w[chats order_dates order_memos recreation report user zoom]
-  end
 
   # rubocop:disable Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity, Metrics/AbcSize
   def switch_status_before_save

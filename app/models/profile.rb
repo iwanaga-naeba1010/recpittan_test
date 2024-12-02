@@ -19,6 +19,8 @@
 #  profiles_user_id_fkey  (user_id => users.id)
 #
 class Profile < ApplicationRecord
+  include Ransackable
+
   mount_uploader :image, ImageUploader
 
   belongs_to :user, class_name: 'User'
@@ -30,14 +32,6 @@ class Profile < ApplicationRecord
   validates :name, :description, :image, presence: true
 
   before_destroy :check_recreation_association
-
-  def self.ransackable_associations(_auth_object = nil)
-    ['recreation', 'recreation_profile', 'user']
-  end
-
-  def self.ransackable_attributes(_auth_object = nil)
-    %w[created_at description id id_value image name position title updated_at user_id]
-  end
 
   private def check_recreation_association
     if recreation_profile&.recreation.present?

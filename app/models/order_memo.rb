@@ -15,9 +15,7 @@
 #  order_memos_order_id_fkey  (order_id => orders.id)
 #
 class OrderMemo < ApplicationRecord
-  belongs_to :order, class_name: 'Order'
+  include Ransackable
 
-  def self.ransackable_attributes(_auth_object = nil)
-    %w[body created_at id id_value order_id updated_at]
-  end
+  belongs_to :order, class_name: 'Order'
 end

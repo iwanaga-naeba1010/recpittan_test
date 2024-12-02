@@ -21,14 +21,11 @@
 #  order_dates_order_id_fkey  (order_id => orders.id)
 #
 class OrderDate < ApplicationRecord
+  include Ransackable
+
   belongs_to :order, class_name: 'Order'
 
   validate :check_dates
-
-  def self.ransackable_attributes(_auth_object = nil)
-    %w[created_at date end_hour end_minute id id_value month order_id start_hour start_minute updated_at
-       year]
-  end
 
   private
 

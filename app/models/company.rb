@@ -28,7 +28,7 @@
 #
 class Company < ApplicationRecord
   include PrefectureList
-
+  include Ransackable
   extend Enumerize
 
   # NOTE: 現状1名のUserしか想定していないためhas_one。複数に対応させる場合は、has_manyに変更でいける
@@ -60,14 +60,5 @@ class Company < ApplicationRecord
 
   def full_address
     "#{prefecture}#{city}#{street}#{building}"
-  end
-
-  def self.ransackable_attributes(_auth_object = nil)
-    %w[building capacity city created_at facility_name facility_name_kana feature genre id id_value memo
-       name nursing_care_level person_in_charge_name person_in_charge_name_kana prefecture request street tel updated_at url zip]
-  end
-
-  def self.ransackable_associations(_auth_object = nil)
-    %w[channel_plan_subscriber company_memos company_tags tags user]
   end
 end

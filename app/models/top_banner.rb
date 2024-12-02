@@ -13,14 +13,12 @@
 #  updated_at :datetime         not null
 #
 class TopBanner < ApplicationRecord
+  include Ransackable
+
   mount_uploader :image, ImageUploader
 
   validates :image, :start_date, :end_date, presence: true
   validate :validate_display_date_no_overlap
-
-  def self.ransackable_attributes(_auth_object = nil)
-    %w[created_at end_date id id_value image start_date updated_at url]
-  end
 
   private
 
