@@ -36,13 +36,16 @@ RSpec.describe ApiPartner::BankAccountsController, type: :request do
             bank_name: '名古屋銀行',
             branch_code: '000',
             branch_name: '名古屋支点',
-            user_id: current_user.id,
+            user_id: current_user.id
           }
         }
       end
 
-      let(:expected) { BankAccountSerializer.new.serialize(evaluation_reply: BankAccount.last) }
-      it_behaves_like 'an endpoint returns record invalid'
+      it 'returns a 422 status with error messages' do
+        post '/api_partner/bank_accounts', params: params
+        expect(response.status).to eq(422)
+        expect(response.parsed_body['error']).to include('預金種目は一覧にありません', '口座名義はカタカナのみで入力してください')
+      end
     end
   end
 end

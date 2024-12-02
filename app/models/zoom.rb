@@ -23,4 +23,8 @@ class Zoom < ApplicationRecord
   enumerize :created_by, in: { partner: 0, admin: 1 }, default: 0
 
   validates :price, :created_by, presence: true
+
+  def self.ransackable_attributes(_auth_object = nil)
+    %w[created_at created_by id id_value order_id price updated_at url]
+  end
 end

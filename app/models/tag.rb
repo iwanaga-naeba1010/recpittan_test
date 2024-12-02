@@ -25,4 +25,12 @@ class Tag < ApplicationRecord
   scope :events, -> { where(kind: :tag) } # TODO: tagsに変更
   scope :targets, -> { where(kind: :target) }
   scope :plans, -> { where(kind: :plan) }
+
+  def self.ransackable_attributes(_auth_object = nil)
+    %w[created_at id id_value kind name updated_at]
+  end
+
+  def self.ransackable_associations(_auth_object = nil)
+    %w[recreation_plan_tags recreation_plans recreation_tags recreations]
+  end
 end

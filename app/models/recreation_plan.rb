@@ -57,6 +57,10 @@ class RecreationPlan < ApplicationRecord
     company.nil? || user_company == company
   end
 
+  def self.ransackable_attributes(_auth_object = nil)
+    %w[adjustment_fee code company_id created_at id id_value release_status title updated_at]
+  end
+
   private def generate_code
     last_code = RecreationPlan.maximum(:code)
     sequence_num = if last_code

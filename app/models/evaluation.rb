@@ -43,4 +43,13 @@ class Evaluation < ApplicationRecord
   def recreation
     report&.order&.recreation
   end
+
+  def self.ransackable_associations(_auth_object = nil)
+    ['evaluation_reply', 'report']
+  end
+
+  def self.ransackable_attributes(_auth_object = nil)
+    %w[communication created_at id id_value ingenuity is_public message other_message price report_id
+       smoothness updated_at want_to_order_agein]
+  end
 end

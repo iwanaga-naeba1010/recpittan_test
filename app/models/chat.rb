@@ -29,6 +29,10 @@ class Chat < ApplicationRecord
 
   mount_uploader :file, ChatFileUploader
 
+  def self.ransackable_attributes(_auth_object = nil)
+    %w[created_at file id id_value is_read message order_id updated_at user_id]
+  end
+
   def restrict_file_size
     if file.size >= 20.megabytes
       errors.add(:file, '20MB以上のファイルは送信できません')

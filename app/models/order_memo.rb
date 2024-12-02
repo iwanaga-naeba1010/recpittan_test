@@ -16,4 +16,8 @@
 #
 class OrderMemo < ApplicationRecord
   belongs_to :order, class_name: 'Order'
+
+  def self.ransackable_attributes(_auth_object = nil)
+    %w[body created_at id id_value order_id updated_at]
+  end
 end

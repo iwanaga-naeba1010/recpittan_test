@@ -69,7 +69,17 @@ RemoveUnusedMethodsInHelpersCheck: { except_methods: [] }
 RemoveUnusedMethodsInModelsCheck: {
   except_methods: [
     'User#after_confirmation',
-    'Company#without_channel_subscribe'
+    'Company#without_channel_subscribe',
+    'BankAccount#ransackable_associations',
+    'Company#ransackable_associations',
+    'Evaluation#ransackable_associations',
+    'InvoiceInformation#ransackable_associations',
+    'Order#ransackable_associations',
+    'Profile#ransackable_associations',
+    'Recreation#ransackable_associations',
+    'RecreationPlanEstimate#ransackable_associations',
+    'Tag#ransackable_associations',
+    'User#ransackable_associations'
   ]
 }
 # NOTE: デグレ回避のため一旦エスケープ

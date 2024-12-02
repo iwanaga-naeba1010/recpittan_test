@@ -31,4 +31,13 @@ class InvoiceInformation < ApplicationRecord
   belongs_to :user, class_name: 'User'
 
   validates :company_name, :name, :email, :zip, :prefecture, :city, :street, presence: true
+
+  def self.ransackable_attributes(_auth_object = nil)
+    %w[building city code company_name created_at email id id_value memo name prefecture street
+       updated_at user_id zip]
+  end
+
+  def self.ransackable_associations(_auth_object = nil)
+    ['user']
+  end
 end

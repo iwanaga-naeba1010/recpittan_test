@@ -19,6 +19,9 @@ module ApiPartner
         user_id: current_user.id
       )
       render json: BankAccountSerializer.new.serialize(bank_account:)
+    rescue ActiveRecord::RecordInvalid => e
+      render json: { error: e.record.errors.full_messages }, status: :unprocessable_entity
+      Sentry.capture_exception(e)
     end
 
     def update

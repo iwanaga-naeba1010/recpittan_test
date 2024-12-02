@@ -42,4 +42,13 @@ class BankAccount < ApplicationRecord
   enumerize :account_type, in: %i[checking current], default: :checking, predicates: true, scope: true
 
   delegate :username, to: :user, prefix: true
+
+  def self.ransackable_attributes(_auth_object = nil)
+    %w[account_holder_name account_number account_type bank_code bank_name branch_code branch_name created_at id
+       id_value updated_at user_id]
+  end
+
+  def self.ransackable_associations(_auth_object = nil)
+    ['user']
+  end
 end

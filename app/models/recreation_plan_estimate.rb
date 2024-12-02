@@ -81,6 +81,15 @@ class RecreationPlanEstimate < ApplicationRecord
     recreation_recreation_plans.reject { |plan| material_price_for_plan(plan).zero? }
   end
 
+  def self.ransackable_associations(_auth_object = nil)
+    ['recreation_plan', 'user']
+  end
+
+  def self.ransackable_attributes(_auth_object = nil)
+    %w[created_at estimate_number id id_value number_of_people recreation_plan_id start_month transportation_expenses
+       updated_at user_id]
+  end
+
   private def generate_estimate_number
     last_estimate = RecreationPlanEstimate.where(user_id:).order(estimate_number: :desc).first
     self.estimate_number = if last_estimate
