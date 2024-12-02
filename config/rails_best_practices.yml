@@ -80,7 +80,6 @@ RemoveUnusedMethodsInModelsCheck: {
     'RecreationPlanEstimate#ransackable_associations',
     'Tag#ransackable_associations',
     'User#ransackable_associations'
-
   ]
 }
 # NOTE: デグレ回避のため一旦エスケープ
