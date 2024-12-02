@@ -35,6 +35,11 @@ module Ransackable
 
     # 除外するカラムを追加するメソッド
     # 個別のモデルでこのメソッドを呼び出すことで、デフォルトの除外リストにカラムを追加可能
+    #
+    # ## 使用例
+    # モデルで以下のように呼び出すことでカラムを除外:
+    #   exclude_attributes :memo, :flyer_color
+    # 上記の場合、`ransackable_attributes`から`memo`と`flyer_color`が除外されます。
     def exclude_attributes(*attributes)
       # デフォルトの除外リストに引数で指定されたカラムを追加する
       define_singleton_method(:default_excluded_attributes) do
@@ -44,6 +49,11 @@ module Ransackable
 
     # 除外するassociationを追加するメソッド
     # 個別のモデルでこのメソッドを呼び出すことで、デフォルトの除外リストにassociationを追加可能
+    #
+    # ## 使用例
+    # モデルで以下のように呼び出すことで関連を除外:
+    #   exclude_associations :orders, :reports
+    # 上記の場合、`ransackable_associations`から`orders`と`reports`が除外されます。
     def exclude_associations(*associations)
       # デフォルトの除外リストに引数で指定されたassociationを追加する
       define_singleton_method(:default_excluded_associations) do
