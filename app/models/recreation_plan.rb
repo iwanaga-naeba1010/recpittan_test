@@ -19,6 +19,7 @@
 #  index_recreation_plans_on_company_id  (company_id)
 #
 class RecreationPlan < ApplicationRecord
+  include Ransackable
   extend Enumerize
 
   belongs_to :company, class_name: 'Company', optional: true
@@ -55,10 +56,6 @@ class RecreationPlan < ApplicationRecord
 
   def visible_to_company?(user_company)
     company.nil? || user_company == company
-  end
-
-  def self.ransackable_attributes(_auth_object = nil)
-    %w[adjustment_fee code company_id created_at id id_value release_status title updated_at]
   end
 
   private def generate_code

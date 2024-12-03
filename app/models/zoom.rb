@@ -17,14 +17,12 @@
 #  zooms_order_id_fkey  (order_id => orders.id)
 #
 class Zoom < ApplicationRecord
+  include Ransackable
+
   extend Enumerize
   belongs_to :order, class_name: 'Order'
 
   enumerize :created_by, in: { partner: 0, admin: 1 }, default: 0
 
   validates :price, :created_by, presence: true
-
-  def self.ransackable_attributes(_auth_object = nil)
-    %w[created_at created_by id id_value order_id price updated_at url]
-  end
 end

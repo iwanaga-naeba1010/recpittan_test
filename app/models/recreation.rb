@@ -37,6 +37,7 @@
 #  recreations_user_id_fkey  (user_id => users.id)
 #
 class Recreation < ApplicationRecord
+  include Ransackable
   extend Enumerize
   # mount_uploader :instructor_image, ImageUploader
 
@@ -135,18 +136,6 @@ class Recreation < ApplicationRecord
 
   def number_of_recreations_held
     orders.where(status: %i[unreported_completed final_report_admits_not finished invoice_issued paid]).size + number_of_past_events
-  end
-
-  def self.ransackable_attributes(_auth_object = nil)
-    %w[additional_facility_fee amount base_code borrow_item bring_your_own_item capacity category created_at
-       description extra_information flow_of_day flyer_color id id_value is_public_price kind material_amount
-       material_price memo minutes number_of_past_events price second_title status title updated_at user_id youtube_id]
-  end
-
-  def self.ransackable_associations(_auth_object = nil)
-    %w[evaluations favorite_recreations favorited_by_users orders profile recreation_images recreation_memos
-       recreation_plans recreation_prefectures recreation_profile recreation_recreation_plans recreation_tags reports
-       tags user user_recreation_plans user_recreation_recreation_plans]
   end
 
   def self.parse_price_ranges(price_ranges)

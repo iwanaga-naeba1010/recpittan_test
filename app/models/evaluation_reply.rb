@@ -19,11 +19,9 @@
 #  fk_rails_...  (evaluation_id => evaluations.id)
 #
 class EvaluationReply < ApplicationRecord
+  include Ransackable
+
   belongs_to :evaluation, class_name: 'Evaluation'
 
   validates :message, presence: true
-
-  def self.ransackable_attributes(_auth_object = nil)
-    %w[created_at evaluation_id id id_value message updated_at]
-  end
 end

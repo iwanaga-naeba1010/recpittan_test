@@ -37,7 +37,9 @@
 #  users_company_id_fkey  (company_id => companies.id)
 #
 class User < ApplicationRecord
+  include Ransackable
   extend Enumerize
+
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable, :confirmable,
@@ -85,17 +87,5 @@ class User < ApplicationRecord
     result = update(params, *options)
     clean_up_passwords
     result
-  end
-
-  def self.ransackable_attributes(_auth_object = nil)
-    %w[approval_status company_id confirmation_sent_at confirmation_token confirmed_at created_at current_sign_in_at
-       current_sign_in_ip email encrypted_password failed_attempts id id_value last_sign_in_at last_sign_in_ip locked_at
-       memo remember_created_at reset_password_sent_at reset_password_token role sign_in_count title unconfirmed_email
-       unlock_token updated_at username username_kana]
-  end
-
-  def self.ransackable_associations(_auth_object = nil)
-    %w[bank_account chats company favorite_recreations favorited_recreations invoice_information orders partner_info
-       profiles recreation_plans recreations user_memos user_recreation_plans]
   end
 end

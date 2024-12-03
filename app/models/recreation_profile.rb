@@ -16,10 +16,8 @@
 #  recreation_profiles_recreation_id_fkey  (recreation_id => recreations.id)
 #
 class RecreationProfile < ApplicationRecord
+  include Ransackable
+
   belongs_to :recreation, class_name: 'Recreation'
   belongs_to :profile, class_name: 'Profile'
-
-  def self.ransackable_attributes(_auth_object = nil)
-    %w[created_at id id_value profile_id recreation_id updated_at]
-  end
 end

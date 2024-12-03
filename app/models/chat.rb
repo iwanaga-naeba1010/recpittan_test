@@ -19,6 +19,8 @@
 #  chats_user_id_fkey   (user_id => users.id)
 #
 class Chat < ApplicationRecord
+  include Ransackable
+
   belongs_to :order, class_name: 'Order'
   belongs_to :user, class_name: 'User'
 
@@ -28,10 +30,6 @@ class Chat < ApplicationRecord
   validate :restrict_file_size
 
   mount_uploader :file, ChatFileUploader
-
-  def self.ransackable_attributes(_auth_object = nil)
-    %w[created_at file id id_value is_read message order_id updated_at user_id]
-  end
 
   def restrict_file_size
     if file.size >= 20.megabytes
