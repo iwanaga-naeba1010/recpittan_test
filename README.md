@@ -42,20 +42,9 @@ docker-compose exec web bundle exec brakeman
 # best practicesの実行
 docker-compose exec web bundle exec rails_best_practices -e node_modules
 
-# ts/jsのlint実行
+# TypeScript/JavaScriptのlint実行
 docker-compose exec web yarn lint
 
-# ts/jsのlint fix実行
+# TypeScript/JavaScriptのlint fix実行
 docker-compose exec web yarn lint:fix
-```
-
-### gitのブランチの命名規則
-
-```
-issue-{githubのissue番号}で作業ごとにブランチを作成してもらいます。
-例えば、issue番号が10であれば、指定のブランチから新しくissue-10を作成して作業を行ってください。
-
-通暁「指定のブランチ」とはdevelopですが、featureブランチという
-機能や新規リリースのためのブランチの場合もあるので、issueに記載がない場合は遠慮せずに効いてください。
-githubのissue番号を
 ```
