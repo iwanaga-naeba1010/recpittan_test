@@ -12,6 +12,8 @@ RUN apt-get update && apt-get install -y git nodejs vim graphviz
 # Add yarnpkg for assets:precompile
 RUN npm install -g yarn webpack-dev-server
 
+WORKDIR /app
+
 COPY Gemfile Gemfile.lock ./
 
 RUN gem install bundler --version 2.2.22 && \
@@ -19,6 +21,6 @@ RUN gem install bundler --version 2.2.22 && \
     bundle install --jobs 4
 
 COPY package.json yarn.lock ./
+
 RUN yarn install
 
-WORKDIR /app
