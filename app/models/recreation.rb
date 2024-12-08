@@ -44,6 +44,8 @@ class Recreation < ApplicationRecord
   enumerize :kind, in: { visit: 0, online: 1, mailing: 2 }, default: 0
   enumerize :status, in: { unapplied: 0, in_progress: 1, published: 2 }, default: 0
   enumerize :category, in: { event: 0, work: 1, music: 2, health: 3, travel: 4, hobby: 5, food: 6, other: 7 }, default: 0
+  enumerize :sort_order, in: { newest: 0, price_low_to_high: 1, price_high_to_low: 2, reviews_count: 3, number_of_recreations_held: 4 },
+                         default: :newest
 
   belongs_to :user, class_name: 'User'
   has_many :recreation_tags, dependent: :destroy, class_name: 'RecreationTag'
@@ -116,15 +118,6 @@ class Recreation < ApplicationRecord
                     select('recreations.id')
       where(id: tagged_recs)
     end
-  }
-
-  attribute :sort_order, :integer, default: 0
-  enum :sort_order, {
-    newest: 0,
-    price_low_to_high: 1,
-    price_high_to_low: 2,
-    reviews_count: 3,
-    number_of_recreations_held: 4
   }
 
   def flyer

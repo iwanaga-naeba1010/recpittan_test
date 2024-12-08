@@ -10,13 +10,10 @@ require 'active_support/parameter_filter'
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
-# NOTE(okubo): DEPRECATION WARNINGを出さないようにする
-ActiveSupport::Deprecation.silenced = true
-
 module MachingSystem
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
-    config.load_defaults 7.1
+    config.load_defaults 7.2
 
     config.autoload_lib(ignore: %w(assets tasks))
     config.time_zone = 'Tokyo'
