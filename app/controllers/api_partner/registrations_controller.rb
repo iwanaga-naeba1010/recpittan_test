@@ -10,14 +10,13 @@ module ApiPartner
       @user.role = :partner
       @user.confirmed_at = Time.current
 
-      if @user.save
-        sign_in(@user)
-        AfterRegistrationPartnerMailer.notify(user: @user).deliver_now
-        render json: { message: 'Partner created and logged in successfully' }, status: :created
-      else
-        Sentry.capture_exception(@user.errors.full_messages)
-        render json: { errors: @user.errors.full_messages }, status: :unprocessable_entity
-      end
+      @user.save!
+      sign_in(@user)
+      AfterRegistrationPartnerMailer.notify(user: @user).deliver_now
+      render json: { message: 'Partner created and logged in successfully' }, status: :created
+    rescue ActiveRecord::RecordInvalid => e
+      Sentry.capture_exception(e)
+      render json: { errors: @user.errors.full_messages }, status: :unprocessable_entity
     end
 
     private
