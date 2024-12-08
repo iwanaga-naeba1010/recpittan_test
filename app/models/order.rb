@@ -75,17 +75,12 @@ class Order < ApplicationRecord
     not_send: 0, sent: 1, checked: 2
   }, default: 0
 
-  enum :sort_order, {
-    newest: 0,
-    chat_desc: 1,
-    event_date: 2
-  }
+  enumerize :sort_order, in: { newest: 0, chat_desc: 1, event_date: 2 }, default: :newest
 
   # controller のparamsに追加するため
   attribute :title # まずは相談したい、のメッセージ部分
   attribute :message
   attribute :tags
-  attribute :sort_order, :integer, default: 0
 
   before_save :switch_status_before_save
 
