@@ -1,0 +1,20 @@
+= render 'shared/customer/header'
+
+.user-recreation-plan-index
+  .container
+    .row.border-bottom
+      .col-2.py-2.d-flex.align-items-center 番号
+      .col-6.py-2.d-flex.align-items-center プラン内容
+      .col-2.py-2.d-flex.align-items-center 保存日
+      .col-2.py-2.d-flex.align-items-center
+
+    - @user_recreation_plans.each do |urp|
+      .row.my-3.py-3.bg-white
+        .col-2.d-flex.align-items-center = urp.code
+        .col-6.d-flex.align-items-center
+          = link_to urp.recreation_plan.title, customers_user_recreation_plan_path(urp.id), class: 'text-black fw-bold text-decoration-none'
+        .col-2.d-flex.align-items-center = urp.created_at.strftime('%Y年%m月%d日')
+        .col-2.d-flex.align-items-center.text-center
+          = link_to customers_user_recreation_plan_path(urp.id) do
+            button.show-link-button.p-2.rounded 詳細を確認
+    = paginate @user_recreation_plans

@@ -1,0 +1,76 @@
+meta_tags_each_page '300種類を超える業界No1の介護レクリーションマッチングサイト',
+                    'エブリ・プラスは300種類以上の介護レクリエーションを提供しているマッチングサイトです。複数条件から簡単にレクリエーションを簡単検索・発注することが可能です'
+
+main.list
+  = form_with url: customers_recreations_path, method: :get, class: "d-flex search border-top shadow", local: true do |f|
+    .container.px-5
+      .container.pt-4
+        nav[aria-label="breadcrumb"]
+          ol.breadcrumb
+            li.breadcrumb-item
+              = link_to 'トップ', root_path
+            - if @tag&.present?
+              li.breadcrumb-item
+                = link_to '一覧', customers_recreations_path
+              li.breadcrumb-item.active
+                span.text-secondary = @tag.name
+            - else
+              li.breadcrumb-item.active
+                span.text-secondary 一覧
+
+      .search-recreation.row
+        .col-3
+          .mx-auto.mb-4
+            .serach-forms
+              .nav-item.px-2.mt-3
+                p.label-size.mb-1 レクのカテゴリ
+                = select_tag :category,
+                    options_for_select(Recreation.category.values.map { |v| [v.text, v.value] }, selected: params[:category]),
+                    include_blank: 'すべて', class: 'form-select search-select w-75', onchange: 'this.form.submit();'
+              .nav-item.px-2.mt-3
+                p.label-size.mb-1 レクの形式
+                = select_tag :kind,
+                    options_for_select(Recreation.kind.values.map { |v| [v.text, v.value] }, selected: params[:kind]),
+                    include_blank: 'すべて', class: 'form-select search-select w-75', onchange: 'this.form.submit();'
+              .nav-item.px-2.mt-3
+                p.label-size.mb-1 都道府県
+                = select_tag :prefecture,
+                    options_for_select(@sorted_prefectures, selected: params[:prefecture]),
+                    include_blank: 'すべて', class: 'form-select search-select w-75', onchange: 'this.form.submit();'
+              .nav-item.px-2.mt-3
+                p.label-size.mb-1 レクの金額
+                .search-forms
+                  - [["0-10000", "0〜 10,000円"], ["10001-20000", "10,001〜 20,000円"], ["20001-30000", "20,001〜 30,000円"], ["30000-", "30,000円以上"]].each do |range, label|
+                    div
+                      = check_box_tag 'price_range[]', range, params[:price_range]&.include?(range), id: "price_#{range.gsub('-', '_')}", class: 'form-check-input', onchange: 'this.form.submit();'
+                      = label_tag "price_#{range.gsub('-', '_')}", label, class: 'form-check-label'
+              .nav-item.px-2.mt-3
+                p.label-size.mb-1 タグ
+                .search-forms
+                  select#display-tag-form-btn.form-select.search-select.w-75.mb-1
+                  .tag-form.row.mt-1.mb-0.py-2.bg-white.d-none.border.rounded#tag-form
+                    p.m-0 タグ
+                    - @tags.each do |tag|
+                      .col-6
+                        = check_box_tag 'tags[]', tag.name, params[:tags]&.include?(tag.name), id: "tag_#{tag.id}", class: 'form-check-input', onchange: 'this.form.submit();'
+                        = label_tag "tag_#{tag.id}", tag.name, class: 'form-check-label'
+                  - @tag_params.each do |tag|
+                    .searched-tag.bg-white.tag-params.p-0.p-1.mb-1.rounded.d-inline-block.fw-bold
+                      | # #{tag}
+                      = image_pack_tag 'close_tag_icon.svg', class: "remove-tag-param", width: "15", height: "15", fill: "#F39800"
+        .col-8
+          .row.align-items-center
+            .col-6.d-flex.align-items-center
+              p.mb-0 = "#{@recs.total_count}件"
+            .col-6.d-flex.justify-content-end.align-items-center
+              p.me-2.mb-0 並び順
+              div
+                = select_tag :sort_order,
+                    options_for_select(sort_order_options, selected: params[:sort_order]),
+                    class: 'form-select search-select', onchange: 'this.form.submit();'
+          .row
+            - @recs.each do |rec|
+              section.col-sm-6.col-md-4.col-lg-4.my-4
+                = render 'shared/home/card', rec: rec
+          article.container.pt-4.px-0
+            = paginate @recs

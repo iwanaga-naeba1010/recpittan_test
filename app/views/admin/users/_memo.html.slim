@@ -1,0 +1,12 @@
+main.order_memo
+  - user.user_memos.each_with_index do |memo, i|
+    .body
+      .message
+        = simple_format memo.body
+      .col-auto.date
+        = dotted_datetime memo.created_at
+  .form
+    = simple_form_for UserMemo.new, url: admin_user_user_memos_path(user) do |f|
+      = f.input :user_id, as: :hidden, input_html: { value: user.id }
+      = f.input :body, label: false
+      = f.submit '送信'

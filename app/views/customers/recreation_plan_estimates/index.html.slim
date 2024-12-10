@@ -1,0 +1,37 @@
+= render 'shared/customer/header'
+.container.recreation-estimate-index.mt-5
+  table.table.table-striped
+    thead
+      tr
+        th
+          = t('activerecord.attributes.recreation_plan_estimate.estimate_number')
+        th
+          = t('activerecord.attributes.recreation_plan_estimate.number_of_people')
+        th
+          = t('activerecord.attributes.recreation_plan_estimate.start_month')
+        th
+          = t('activerecord.attributes.recreation_plan_estimate.transportation_expenses')
+        th
+          | 発行日
+        th
+          = t('activerecord.attributes.recreation_plan_estimate.recreation_plan')
+        th
+    tbody
+      - @recreation_plan_estimates.each do |estimate|
+        tr
+          td
+            = estimate.estimate_number
+          td
+            = estimate.number_of_people
+          td
+            = estimate.start_month
+          td
+            = estimate.transportation_expenses
+          td
+            = estimate.created_at.strftime("%Y-%m-%d")
+          td
+            = estimate.recreation_plan.title
+          td
+            | <a href="
+            = customers_recreation_plan_estimate_path(estimate)
+            | " class="btn show-button text-white fw-bold">詳細

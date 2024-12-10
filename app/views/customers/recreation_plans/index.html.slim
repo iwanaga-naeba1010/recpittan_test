@@ -1,0 +1,37 @@
+main.list
+  .container.pt-4
+    nav[aria-label="breadcrumb"]
+      ol.breadcrumb
+        li.breadcrumb-item
+          = link_to 'トップ', root_path
+        - if @tag&.present?
+          li.breadcrumb-item
+            = link_to 'プラン一覧', customers_recreations_path
+          li.breadcrumb-item.active
+            span.text-secondary = @tag.name
+        - else
+          li.breadcrumb-item.active
+            span.text-secondary 一覧
+
+  .recreation_plan_index
+    .container
+      - @recreation_plans.each do |rp|
+        .row.mb-2
+          .col-2
+            div
+              = image_tag(
+                rp.recreations.first&.recreation_images&.sliders&.first&.image&.to_s.presence,
+                width: 130,
+                height: 125,
+                class: 'rounded w-100'
+              )
+          .col-10
+            = link_to rp.title, customers_recreation_plan_path(rp.id), class: 'text-black fw-bold fw-bold text-decoration-none'
+            - total_price = @recreation_plans_with_total_price.find { |plan, price| plan == rp }[1]
+            p.mb-0 レク回数: #{rp.recreations.size}回
+            p.mb-0 月あたりの金額: ¥#{rp.monthly_fee.to_s(:delimited)}~
+            p.mb-0 全体金額: ¥#{total_price.to_s(:delimited)}~
+            .d-flex
+              - rp.tags.each do |tag|
+                p.d-inline-block.px-2.border.rounded.fw-bold.me-2 # #{tag.name}
+      = paginate @recreation_plans

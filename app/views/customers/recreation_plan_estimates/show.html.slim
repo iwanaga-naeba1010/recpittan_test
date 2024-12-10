@@ -1,0 +1,165 @@
+.recreation-plan-estimate.text-black.mx-auto
+  .top-section
+    .row.pt-5
+      .col-8
+        h5
+          | レクリエーションプランのご提案
+        p.small-paragraph.mt-5
+          | 下記の内容をご確認ください。
+        p.small-paragraph
+          | こちらの金額は
+          = @recreation_plan_estimate.created_at.strftime('%Y年%m月%d日')
+          | 時点での金額です。
+        .row
+          .top-total-price-section.col-6.d-flex.align-items-baseline
+            p
+              | 見積金額
+            .d-flex.justify-content-end.flex-grow-1
+              p.total-price.fw-bold
+                = @recreation_plan_estimate.total_price.floor.to_s(:delimited)
+                | 円
+          .col-6
+
+      .col-4
+        .row
+          .col-4
+            p.small-paragraph
+              | 見積日
+          .col-8
+            p.small-paragraph
+              = @recreation_plan_estimate.created_at.strftime('%Y年%m月%d日')
+        .row
+          .col-4
+            p.small-paragraph
+              | 見積書番号
+          .col-8
+            p.small-paragraph
+              = @recreation_plan_estimate.estimate_number
+        p.middle-paragraph.mt-2
+          | 株式会社エブリ・プラス
+        p.small-paragraph.mt-2
+          | 代表取締役 佐藤 亜以
+        p.small-paragraph.mt-1
+          | 〒453-0012
+        p.small-paragraph.mt-1
+          | 愛知県名古屋市中村区井深町１番地１号新名古屋センタービル本陣街２階２４１－１号室
+        p.small-paragraph.mt-1
+          | TEL 050-5306-7767
+  .middle-section.mt-4
+    .row
+      p.title.fw-bold.py-2
+        | プラン内容
+      - @recreation_recreation_plans.each_with_index do |plan, index|
+        .col-4.mt-4
+          .row
+            .col-5.px-0
+              = image_tag plan.recreation.recreation_images.sliders.first&.image.to_s, class: "w-100 rounded", loading: 'lazy'
+            .col-7
+              div
+                = plan.recreation.title
+  .bottom-section.mt-4.row
+    .col-2.ps-0
+      .title.text-center.fw-bold.py-2
+        |  項目 
+    .title.col-8.text-center.fw-bold.py-2
+      |  内容 
+    .col-2.pe-0
+      .title.text-center.fw-bold.py-2
+        |  金額 
+    .event-fee
+      - @recreation_recreation_plans.each_with_index do |plan, index|
+        |  <div class='
+        = 'dot-border' unless index == @recreation_recreation_plans.size - 1
+        |  px-0'> 
+        .row
+          - if index == 0
+            .col-2.text-center.py-2
+              | 開催費
+          - else
+            .col-2.text-center.py-2
+          .col-8.py-2
+            .row
+              .col-4
+                = @recreation_plan_estimate.actual_months[index]
+                | 月開催
+              .col-8
+                = plan.recreation.title
+          .col-2.text-end.py-2.pe-0
+            |  ¥
+            = plan.recreation.price.to_s(:delimited)
+  .material-fee
+    - first_material_fee_displayed = false
+    - @has_material_price_recreations.each_with_index do |plan, index|
+      |  <div class='row 
+      = 'dot-border' unless index == @has_material_price_recreations.size - 1
+      | '> 
+      - unless first_material_fee_displayed
+        .col-2.text-center.py-2
+          | 材料費
+        - first_material_fee_displayed = true
+      - else
+        .col-2.text-center.py-2
+      .col-8.py-2
+        .row
+          .col-10
+            = plan.recreation.title
+          .col-2
+            | X 
+            = @recreation_plan_estimate.number_of_people
+            | 人
+      .col-2.text-end.py-2.px-0
+        |  ¥
+        = @recreation_plan_estimate.material_price_for_plan(plan).to_s(:delimited)
+.transportation-expenses
+  .row
+    .col-2.text-center.py-2
+      | 交通費
+    .col-8.py-2
+      .row
+        .col-10
+          p
+            | 1回の交通費
+        .col-2
+          | X 
+          = @recreation_recreation_plans.size
+          | 回
+    .col-2.text-end.py-2.px-0
+      |  ¥
+      = @recreation_plan_estimate.transportation_expenses_for_plan(@recreation_recreation_plans).to_s(:delimited)
+.transportation-expenses
+  .row
+    .col-2.text-center.py-2
+      | 調整費
+    .col-8.py-2
+      p
+        | オプション
+    .col-2.text-end.py-2.px-0
+      |  ¥
+      = @recreation_plan_estimate.adjustment_fee&.to_s(:delimited)
+.bottom-total-price-section.py-2
+  .row
+    .col-6
+      | 小計
+    .col-6.text-end.px-0
+      | ¥
+      = @recreation_plan_estimate.total_price.to_s(:delimited)
+  .row
+    .col-6
+      | 消費税
+    .col-6.text-end.px-0
+      | ¥
+      = @recreation_plan_estimate.consumption_tax.floor.to_s(:delimited)
+  .row
+    .col-6.fw-bold.total-price
+      | 合計
+    .col-6.text-end.px-0.total-price
+      | ¥
+      = @recreation_plan_estimate.total_price.floor.to_s(:delimited)
+  .row
+    .col-6
+      | 利用者一人当たり
+    .col-6.text-end.px-0
+      | ¥
+      = @recreation_plan_estimate.total_price_per_person.to_s(:delimited)
+script
+  |  document.addEventListener("DOMContentLoaded", function() { window.print(); });

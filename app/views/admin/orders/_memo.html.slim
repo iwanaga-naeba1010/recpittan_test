@@ -1,0 +1,12 @@
+main.order_memo
+  - order.order_memos.each_with_index do |memo, i|
+    .body
+      .message
+        = simple_format memo.body
+      .col-auto.date
+        = dotted_datetime memo.created_at
+  .form
+    = simple_form_for OrderMemo.new, url: admin_order_order_memos_path(order) do |f|
+      = f.input :order_id, as: :hidden, input_html: { value: order.id }
+      = f.input :body, label: false
+      = f.submit '送信'

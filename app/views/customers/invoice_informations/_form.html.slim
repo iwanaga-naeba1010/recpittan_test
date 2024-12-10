@@ -1,0 +1,38 @@
+= simple_form_for invoice_information, as: 'invoice_information', url: url do |f|
+  .row
+    .col-md-12
+      = f.input :company_name
+    .col-md-12
+      = f.input :name
+  .row.pt-3
+    span.p-country-name[style="display:none;"]
+      | Japan
+    .form-group.col-6
+
+  label.string.required[for="invoice_information_zip"]
+    |  郵便番号 
+  abbr[title="required"]
+    span.label.required
+      | 必須
+  .input-group.mb-3
+    .form-group.string.optional.user_company_zip.form-group-valid
+      = f.input :zip, label: false
+  button#searchAddressWithZipInRegistrationEditForm.btn.btn-outline-secondary.p-postal-code-find[type="button"]
+    |  検索 
+  .form-group.col-6
+    = f.input :prefecture, as: :select, collection: [[f.object.prefecture, f.object.prefecture]]
+  .form-group.col-6
+    = f.input :city, input_html: { class: 'form-control p-locality' }
+  .form-group.col-6
+    = f.input :street, input_html: { class: 'form-control p-street-address' }
+  .form-group.col-12.pt-2
+    = f.input :building, input_html: { class: 'form-control' }
+  .row
+    .col-md-12
+      = f.input :email
+  .row
+    .col-md-12
+      = f.input :memo
+  .row.pt-2
+    .col-auto
+      = f.submit '保存する', class: 'btn btn-cprimary font-14 py-3 px-4 font-weight-bold text-white'

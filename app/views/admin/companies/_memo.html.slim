@@ -1,0 +1,12 @@
+main.order_memo
+  - company.company_memos.each_with_index do |memo, i|
+    .body
+      .message
+        = simple_format memo.body
+      .col-auto.date
+        = dotted_datetime memo.created_at
+  .form
+    = simple_form_for CompanyMemo.new, url: admin_company_company_memos_path(company) do |f|
+      = f.input :company_id, as: :hidden, input_html: { value: company.id }
+      = f.input :body, label: false
+      = f.submit '送信'
