@@ -25,28 +25,29 @@
     <div class="container">
       <% @recreation_plans.each do |rp| %>
         <div class="row mb-2">
-            <div class="col-2">
-              <div>
-                <%= image_tag(
-                  rp.recreations.first&.recreation_images&.sliders&.first&.image&.to_s.presence,
-                  width: 130,
-                  height: 125,
-                  class: 'rounded w-100'
-                ) %>
-              </div>
+          <div class="col-2">
+            <div>
+              <%= image_tag(
+                rp.recreations.first&.recreation_images&.sliders&.first&.image&.to_s.presence,
+                width: 130,
+                height: 125,
+                class: 'rounded w-100'
+              ) %>
             </div>
-            <div class="col-10">
-              <%= link_to rp.title, customers_recreation_plan_path(rp.id), class: 'text-black fw-bold fw-bold text-decoration-none' %>
-              <% total_price = @recreation_plans_with_total_price.find { |plan, price| plan == rp }[1] %>
-              <p class="mb-0">レク回数: <%= rp.recreations.size %>回</p>
-              <p class="mb-0">月あたりの金額: ¥<%= rp.monthly_fee.to_s(:delimited) %>~ </p>
-              <p class="mb-0">全体金額: ¥<%= total_price.to_s(:delimited) %>~</p>
-              <div class="d-flex">
-                <% rp.tags.each do |tag| %>
-                  <p class="d-inline-block px-2 border rounded fw-bold me-2"># <%= tag.name %></p>
-                <% end %>
-              </div>
+          </div>
+          <div class="col-10">
+            <%= link_to rp.title, customers_recreation_plan_path(rp.id), class: 'text-black fw-bold text-decoration-none' %>
+            <% total_price_pair = @recreation_plans_with_total_price.find { |plan, price| plan == rp } %>
+            <% total_price = total_price_pair ? total_price_pair[1] : 0 %>
+            <p class="mb-0">レク回数: <%= rp.recreations.size %>回</p>
+            <p class="mb-0">月あたりの金額: ¥<%= number_with_delimiter(rp.monthly_fee) %>~ </p>
+            <p class="mb-0">全体金額: ¥<%= number_with_delimiter(total_price) %>~</p>
+            <div class="d-flex">
+              <% rp.tags.each do |tag| %>
+                <p class="d-inline-block px-2 border rounded fw-bold me-2"># <%= tag.name %></p>
+              <% end %>
             </div>
+          </div>
         </div>
       <% end %>
       <%= paginate @recreation_plans %>
