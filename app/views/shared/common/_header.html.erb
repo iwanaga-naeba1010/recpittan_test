@@ -21,11 +21,12 @@
           <li class="nav-item">
             <%= link_to 'レク一覧', customers_recreations_path(sort_order: :number_of_recreations_held), class: 'nav-link' %>
           </li>
-          <% if user_signed_in? && (current_user.role.customer? || current_user.role.admin?) %>
-            <li class="nav-item">
-              <%= link_to 'プラン一覧', customers_recreation_plans_path, class: 'nav-link' %>
-            </li>
-          <% end %>
+          <%# 一時的にコメントアウト %>
+          <%# if user_signed_in? && (current_user.role.customer? || current_user.role.admin?) %>
+            <%# <li class="nav-item"> %>
+              <%#= link_to 'プラン一覧', customers_recreation_plans_path, class: 'nav-link' %>
+            <%# </li> %>
+          <%# end %>
           <li class="nav-item px-2">
             <%= form_tag customers_recreations_path, method: :get, class: "d-flex search" do %>
               <div class="input-group mr-sm-2">
