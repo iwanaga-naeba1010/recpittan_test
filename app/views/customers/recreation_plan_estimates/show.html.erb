@@ -9,11 +9,10 @@
           <div class='top-total-price-section col-6 d-flex align-items-baseline'>
             <p>見積金額</p>
             <div class="d-flex justify-content-end flex-grow-1">
-              <p class='total-price fw-bold'><%= @recreation_plan_estimate.total_price.floor.to_s(:delimited) %>円</p>
+              <p class='total-price fw-bold'><%= number_with_delimiter(@recreation_plan_estimate.total_price.floor) %>円</p>
             </div>
           </div>
-          <div class='col-6'>
-          </div>
+          <div class='col-6'></div>
         </div>
       </div>
       <div class='col-4'>
@@ -52,7 +51,7 @@
               <%= image_tag plan.recreation.recreation_images.sliders.first&.image.to_s, class: "w-100 rounded", loading: 'lazy' %>
             </div>
             <div class="col-7">
-              <div class=''><%= plan.recreation.title %></div>
+              <div><%= plan.recreation.title %></div>
             </div>
           </div>
         </div>
@@ -62,17 +61,11 @@
 
   <div class='bottom-section mt-4 row'>
     <div class='col-2 ps-0'>
-      <div class='title text-center fw-bold py-2'>
-        項目
-      </div>
+      <div class='title text-center fw-bold py-2'>項目</div>
     </div>
-    <div class='title col-8 text-center fw-bold py-2'>
-      内容
-    </div>
+    <div class='title col-8 text-center fw-bold py-2'>内容</div>
     <div class='col-2 pe-0'>
-      <div class='title text-center fw-bold py-2'>
-        金額
-      </div>
+      <div class='title text-center fw-bold py-2'>金額</div>
     </div>
 
     <div class='event-fee'>
@@ -91,7 +84,7 @@
               </div>
             </div>
             <div class="col-2 text-end py-2 pe-0">
-              ¥<%= plan.recreation.price.to_s(:delimited) %>
+              ¥<%= number_with_delimiter(plan.recreation.price) %>
             </div>
           </div>
         </div>
@@ -115,7 +108,7 @@
             </div>
           </div>
           <div class="col-2 text-end py-2 px-0">
-            ¥<%= @recreation_plan_estimate.material_price_for_plan(plan).to_s(:delimited) %>
+            ¥<%= number_with_delimiter(@recreation_plan_estimate.material_price_for_plan(plan)) %>
           </div>
         </div>
       <% end %>
@@ -131,7 +124,7 @@
           </div>
         </div>
         <div class="col-2 text-end py-2 px-0">
-          ¥<%= @recreation_plan_estimate.transportation_expenses_for_plan(@recreation_recreation_plans).to_s(:delimited) %>
+          ¥<%= number_with_delimiter(@recreation_plan_estimate.transportation_expenses_for_plan(@recreation_recreation_plans)) %>
         </div>
       </div>
     </div>
@@ -143,7 +136,7 @@
           <p>オプション</p>
         </div>
         <div class="col-2 text-end py-2 px-0">
-          ¥<%= @recreation_plan_estimate.adjustment_fee&.to_s(:delimited) %>
+          ¥<%= number_with_delimiter(@recreation_plan_estimate.adjustment_fee || 0) %>
         </div>
       </div>
     </div>
@@ -151,19 +144,19 @@
     <div class='bottom-total-price-section py-2'>
       <div class='row'>
         <div class='col-6'>小計</div>
-        <div class="col-6 text-end px-0">¥<%= @recreation_plan_estimate.total_price.to_s(:delimited) %></div>
+        <div class="col-6 text-end px-0">¥<%= number_with_delimiter(@recreation_plan_estimate.total_price) %></div>
       </div>
       <div class='row'>
         <div class='col-6'>消費税</div>
-        <div class="col-6 text-end px-0">¥<%= @recreation_plan_estimate.consumption_tax.floor.to_s(:delimited) %></div>
+        <div class="col-6 text-end px-0">¥<%= number_with_delimiter(@recreation_plan_estimate.consumption_tax.floor) %></div>
       </div>
       <div class='row'>
         <div class='col-6 fw-bold total-price'>合計</div>
-        <div class="col-6 text-end px-0 total-price">¥<%= @recreation_plan_estimate.total_price.floor.to_s(:delimited) %></div>
+        <div class="col-6 text-end px-0 total-price">¥<%= number_with_delimiter(@recreation_plan_estimate.total_price.floor) %></div>
       </div>
       <div class='row'>
         <div class='col-6'>利用者一人当たり</div>
-        <div class="col-6 text-end px-0">¥<%= @recreation_plan_estimate.total_price_per_person.to_s(:delimited) %></div>
+        <div class="col-6 text-end px-0">¥<%= number_with_delimiter(@recreation_plan_estimate.total_price_per_person) %></div>
       </div>
     </div>
   </div>
