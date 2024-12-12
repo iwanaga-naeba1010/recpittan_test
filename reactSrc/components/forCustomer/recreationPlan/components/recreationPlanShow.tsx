@@ -305,7 +305,10 @@ const RecreationPlanShow: React.FC = () => {
                 <p className='text-black'>小計</p>
               </div>
               <div className='col-8 text-end text-black'>
-                <p>¥{grandTotalWithoutConsumptionTax.toLocaleString()}</p>
+                <p>
+                  ¥
+                  {Math.floor(grandTotalWithoutConsumptionTax).toLocaleString()}
+                </p>
               </div>
             </div>
             <div className='row'>
@@ -314,7 +317,10 @@ const RecreationPlanShow: React.FC = () => {
               </div>
               <div className='col-8 text-end text-black'>
                 <p>
-                  ¥{(grandTotalWithoutConsumptionTax * 0.1).toLocaleString()}
+                  ¥
+                  {Math.floor(
+                    grandTotalWithoutConsumptionTax * 0.1
+                  ).toLocaleString()}
                 </p>
               </div>
             </div>
@@ -324,7 +330,10 @@ const RecreationPlanShow: React.FC = () => {
               </div>
               <div className='col-8 text-end text-black'>
                 <p>
-                  ¥{(grandTotalWithoutConsumptionTax * 1.1).toLocaleString()}
+                  ¥
+                  {Math.floor(
+                    grandTotalWithoutConsumptionTax * 1.1
+                  ).toLocaleString()}
                 </p>
               </div>
             </div>
