@@ -1,0 +1,16 @@
+div.card.evaluation-card.rounded.border.shadow.h-100.mt-3
+  .card-body.position-relative
+    h6.text-black
+      span
+        = image_pack_tag 'evaluation_icon.svg', id: 'hamburger', class: 'logo-navbar', width: '30', height: '30'
+      = "#{evaluation.report.order.user.company.facility_name}(#{evaluation.report.order.user.company.genre_text})"
+    p.my-2.text-black
+      = evaluation.message.truncate(140, omission: '...')
+    p.evaluation-date.mb-3.position-absolute.bottom-0
+      = evaluation.created_at.strftime('%Y/%m/%d')
+  .card-footer.bg-light.p-3.w-100.h-25
+    .d-flex
+      .pe-0
+        = image_tag evaluation.recreation.recreation_images.sliders.first&.image.to_s, width: '70', height: '50', class: 'rounded', loading: 'lazy'
+      .ps-0
+        = link_to evaluation.recreation.title, customers_recreation_path(evaluation.report.order.recreation.id), class: 'evaluation-title.mb-0.ms-2.text-decoration-none'

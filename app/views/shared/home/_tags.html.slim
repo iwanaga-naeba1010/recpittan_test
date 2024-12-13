@@ -1,0 +1,5 @@
+h5.mt-5.fw-bold.text-black タグからレクを探す
+.row
+  .col
+    - tags.each do |tag|
+      = link_to("##{tag.name}", customers_recreations_path(q: { tags_id_eq: tag.id }), class: 'my-1 me-3 px-1 tag-label font-weight-bold d-inline-block')

@@ -1,8 +1,0 @@
-<%= render 'shared/partner/header_with_link', title: "プロフィール編集", path: partners_profiles_path %>
-
-<div class="p-3">
-  <div class="body bg-white p-3 mb-3">
-    <%= render 'partners/profiles/form', profile: @profile, url: partners_profile_path(@profile.id) %>
-    <%= link_to '削除する', partners_profile_path(@profile.id), method: :delete, data: { confirm: "【確認】このプロフィールを削除してもよろしいですか？" }, class: 'btn btn-danger btn-lg btn-block text-white w-100 p-3 mb-2' %>
-  </div>
-</div>

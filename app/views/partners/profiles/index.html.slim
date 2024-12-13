@@ -1,0 +1,17 @@
+= render 'shared/partner/header', title: "プロフィール設定"
+
+- @profiles.each do |profile|
+  = link_to edit_partners_profile_path(profile.id) do
+    div.my-2.border-bottom.p-3
+      div.d-flex
+        div
+          - if profile.image?
+            = image_tag profile.image&.to_s, width: 60, height: 60
+        div.px-2
+          h5.text-dark = profile.name
+          | #{t('activerecord.attributes.profile.title')} #{profile.title}
+          br
+          = profile.description.truncate(20)
+
+div.m-3
+  = link_to '新規プロフィールを登録', new_partners_profile_path, class: 'btn btn-primary btn-lg btn-block w-100 p-3 mb-2 text-white'

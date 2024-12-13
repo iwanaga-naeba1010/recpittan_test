@@ -1,0 +1,34 @@
+= render 'shared/partner/header', title: "承認の確認"
+
+div.body.bg-white.p-3.mb-3
+  div.p-4.text-center.text-black
+    p
+      = @order.user.company.facility_name
+      | からレクの正式依頼を承認します。よろしいでしょうか？
+      br
+      | 承認後、ぜひお礼のメッセージをチャットでお送りしましょう！
+
+  div
+    p.text-black.pt-2 承認後〜開催までの流れ
+    - if @order.recreation_kind.visit?
+      ul.list-unstyled
+        li ①お礼のメッセージをチャットで送りましょう!
+        li ②開催後、終了報告記載のための確認メールが届きますのでご確認ください。
+    - elsif @order.recreation_kind.online?
+      ul.list-unstyled
+        li ①次ページでzoomリンクの発行手続きを行います。
+        li ②お礼のメッセージをチャットで送りましょう!
+        li ③開催後、終了報告記載のための確認メールが届きますのでご確認ください。
+        li | ※ご自身でzoomリンク発行する場合、開催7日前までを目安にリンクを指定場所に貼り付けしていただければ大丈夫です。
+
+  div.body.bg-white.p-3.mb-3
+    div.col-md-12.text-center.pt-5
+      = link_to 'キャンセル', confirm_partners_order_path, class: 'text-white btn btn-secondary btn-lg btn-block w-100 p-3 mt-2 mb-2'
+
+      = simple_form_for @order, url: partners_order_path(
+        id: @order,
+        redirect_path: @path,
+        message: '承認しました'
+      ) do |f|
+        = f.input :is_accepted, as: :hidden, input_html: { value: true }
+        = f.submit '承認する', class: 'text-white btn btn-primary btn-lg btn-block btn-block w-100 p-3'

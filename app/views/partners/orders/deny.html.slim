@@ -1,0 +1,22 @@
+= render 'shared/partner/header', title: "お断りの確認"
+
+div.body.bg-white.p-3.mb-3
+  div.p-4.text-center.text-black
+    p
+      = @order.user.company.facility_name
+      | からレクの正式依頼をお断りします。よろしいでしょうか？
+      br
+      | お断りした後はチャットで理由を説明しましょう！
+
+  div.body.bg-white.p-3.mb-3
+    div.col-md-12.text-center.pt-5
+      = link_to 'キャンセル', confirm_partners_order_path, class: 'text-white btn btn-secondary btn-lg btn-block w-100 p-3 mt-2 mb-2'
+
+      = simple_form_for @order, url: partners_order_path(
+        id: @order,
+        redirect_path: chat_partners_order_path(@order),
+        message: 'お断りしました'
+      ) do |f|
+        = f.input :start_at, as: :hidden, input_html: { value: nil }
+        = f.input :is_accepted, as: :hidden, input_html: { value: false }
+        = f.submit 'お断りする', class: 'text-white btn btn-danger btn-lg btn-block w-100 p-3 mt-2 mb-2'

@@ -1,0 +1,44 @@
+.order-item.my-2.border-bottom.p-3.position-relative id="order-#{order.id}"
+  = link_to chat_partners_order_path(order.id), class: 'd-block' do
+    div
+      h5.text-black = order.user.company.facility_name.truncate(20)
+    .mb-2.recreation-title
+      p = order.recreation_title
+    .chat-preview.d-flex.align-items-center.p-2
+      = image_pack_tag 'chat.svg', class: "logo-navbar", width: "15", height: "15"
+      p.ms-2.mb-0.text-black = order.chats&.last&.message&.truncate(20)
+      p.ms-auto.mb-0.last-chat-sended-at = order.chats&.last&.created_at&.strftime("%m/%d")
+  .d-flex.justify-content-between.align-items-center.mt-2.mb-2
+    .status class=order.status
+      span.status__label.p-1
+        = I18n.t("partner.order.status.#{order.status}")
+    .order_menu_container id="order-menu-#{order.id}"
+      = image_pack_tag 'order_menu.svg', class: "order_menu pointer", width: "15", height: "15"
+  .order-menu-modal.shadow.rounded.p-3.position-absolute.bg-white id="order-menu-modal-#{order.id}"
+    button.remove-button[type="button" data-bs-toggle="modal" data-bs-target="#confirm-delete-modal-#{order.id}"]
+      = image_pack_tag 'dust_box.svg', class: "order_menu pointer", width: "15", height: "15"
+      | 削除
+  .event-period
+    p.mb-0
+      | 開催日時：
+      - if order.start_at? && order.end_at?
+        = dotted_datetime(order.start_at)
+        |  ~
+        = time(order.end_at)
+      - else
+        | 日時未定
+    p.mb-0
+      | 依頼番号：
+      = order.id
+
+/ 確認モーダル
+.modal.fade id="confirm-delete-modal-#{order.id}" tabindex="-1" aria-labelledby="confirmDeleteModalLabel-#{order.id}" aria-hidden="true"
+  .modal-dialog.modal-dialog-centered
+    .modal-content
+      .modal-header.pb-0
+        h5.modal-title.text-black.fw-bold id="confirmDeleteModalLabel-#{order.id}" 案件を削除
+      .modal-body.text-black 案件を削除すると案件が見ることができなくなりますがよろしいでしょうか？
+      .px-3.pb-2
+        = button_to partners_order_path(order), params: { order: { is_open: false } }, method: :put, class: "btn btn-primary fw-bold w-100 py-2 mb-1" do
+          | 削除
+        button.btn.btn-white.text-primary.fw-bold.w-100.py-2[type="button" data-bs-dismiss="modal"] キャンセル

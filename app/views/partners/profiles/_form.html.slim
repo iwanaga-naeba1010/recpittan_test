@@ -1,0 +1,51 @@
+= simple_form_for profile, url: url do |f|
+  div
+    div.pt-3.w-100.d-flex
+      p.font-weight-bold.text-black.me-2 = t('activerecord.attributes.profile.name')
+      p.text-danger 必須
+    p.text-secondary.small.mt-0 ニックネームや開催時に呼んでほしい名前をご記入ください
+    = f.input :name, label: false, maxlength: 13
+    p.small.mt-0.text-dark
+      span#countOfProfileName = f.object.name&.length || 0
+      | /13文字まで
+
+  div
+    div.pt-3.w-100
+      p.font-weight-bold.text-black.me-2 = t('activerecord.attributes.profile.title')
+    = f.input :title, label: false, maxlength: 40
+    p.small.mt-0.text-dark
+      span#countOfProfileTitle = f.object.title&.length || 0
+      | /40文字まで
+
+  div
+    div.pt-3.w-100.d-flex
+      p.font-weight-bold.text-black.me-2 = t('activerecord.attributes.profile.description')
+      p.text-danger 必須
+    = f.input :description, label: false, maxlength: 200
+    p.small.mt-0.text-dark
+      span#countOfProfileDescription = f.object.description&.length || 0
+      | /200文字まで
+
+  div
+    div.pt-3.w-100.d-flex
+      p.font-weight-bold.text-black.me-2 = t('activerecord.attributes.profile.image')
+      p.text-danger 必須
+    div.form-group
+      div.image_form
+        div.image_form_contents
+          = f.label :image, class: 'image_label' do
+            div.prev-contents
+              div.prev-content
+                - if profile.image?
+                  = image_tag profile.image.url, alt: 'preview', class: 'prev-image'
+                - else
+                  ul.small.mt-0.ps-3
+                    li 信頼される講師のイメージのためにも、プロフィール画像はとても重要です
+                    li 施設に配布するチラシの素材としても利用します
+                    li 正方形の画像が、綺麗に表示されます
+                    li 添付可能ファイルは50MB以下で、形式はJPEG、PNGです
+                  = f.label :image, '+', class: 'select-photo text-primary border p-5'
+            = f.file_field :image, class: 'image_form_contents_field d-none'
+
+  div.my-2
+    = f.submit profile.id? ? '保存する' : '登録する', class: 'btn btn-primary btn-lg btn-block w-100 p-3 mb-2'
