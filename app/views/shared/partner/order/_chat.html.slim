@@ -1,0 +1,30 @@
+- order.chats.each_with_index do |chat, i|
+  - if i == 0 && chat.id.present?
+    .row.justify-content-center.pt-2
+      .col-auto.date.border.rounded-pill = date chat.created_at
+  - elsif chat.created_at&.day != order.chats[i - 1].created_at&.day && chat.id.present?
+    .row.justify-content-center.pt-2
+      .col-auto.date.border.rounded-pill = date chat.created_at
+
+  / パートナー
+  - if chat.user_role.partner?
+    .row.justify-content-end.pt-2
+      .col-auto.align-self-end.time = time chat.created_at
+      .col-md-auto.text-white.mychat.card-header
+        = Rinku.auto_link(simple_format(h(chat.message)), :all, 'target="_blank"').html_safe
+    / fileがあれば表示させる
+    - if chat.file?
+      .row.justify-content-end.pt-2
+        .col-auto.align-self-end.time = time chat.created_at
+        .col-md-auto.customer-text.mychat.card-header
+          = link_to chat.file.url, class: 'text-white', target: '_blank', rel: 'noopener' do
+            = chat.file.file.filename
+
+  / 施設
+  - if chat.user_role.customer?
+    .row.justify-content-start.instructor
+      .col-md-auto
+        .name = chat.user&.company&.facility_name
+        .text.card-header
+          = Rinku.auto_link(simple_format(h(chat.message)), :all, 'target="_blank"').html_safe
+      .col-auto.align-self-end.time = time chat.created_at
