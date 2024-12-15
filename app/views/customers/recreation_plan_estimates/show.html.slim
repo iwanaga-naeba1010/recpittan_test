@@ -61,21 +61,21 @@ div.recreation-plan-estimate.text-black.mx-auto
               .col-2.text-end.py-2.pe-0
                 | ¥
                 = number_with_delimiter(plan.recreation.price)
-            - else
-              .row
-                .col-2.text-center.py-2
-                .col-8.py-2
-                  .row
-                    .col-4 = "#{@recreation_plan_estimate.actual_months[index]}月開催"
-                    .col-8 = plan.recreation.title
-                .col-2.text-end.py-2.pe-0
-                  | ¥
-                  = number_with_delimiter(plan.recreation.price)
+          - else
+            .row
+              .col-2.text-center.py-2
+              .col-8.py-2
+                .row
+                  .col-4 = "#{@recreation_plan_estimate.actual_months[index]}月開催"
+                  .col-8 = plan.recreation.title
+              .col-2.text-end.py-2.pe-0
+                | ¥
+                = number_with_delimiter(plan.recreation.price)
 
     .material-fee
       - first_material_fee_displayed = false
       - @has_material_price_recreations.each_with_index do |plan, index|
-        .row.dot-border[if index != @has_material_price_recreations.size - 1]
+        .row.dot-border
           - unless first_material_fee_displayed
             .col-2.text-center.py-2 材料費
             - first_material_fee_displayed = true
