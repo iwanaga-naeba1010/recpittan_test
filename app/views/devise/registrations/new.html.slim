@@ -45,7 +45,7 @@ main.auth
                   = link_to '利用規約', 'https://everyplus.jp/tos/index.html', class: 'clink', target: '_blank'
                   | に同意します。
               .form-check.mb-3
-                input.form-check-input{{formPrivacyPolicyClass}} type="checkbox" name="privacyPolicy" value="true" {{privacyPolicy}} id="privacyPolicy"
+                input.form-check-input type="checkbox" name="privacyPolicy" value="true" class="#{formPrivacyPolicyClass}" id="privacyPolicy" #{privacyPolicy}
                 label.form-check-label[for="privacyPolicy"]
                   = link_to 'プライバシーポリシー', 'https://everyplus.jp/policy_privacy', class: 'clink', target: '_blank'
                   | に同意します。

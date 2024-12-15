@@ -75,7 +75,7 @@ div.recreation-plan-estimate.text-black.mx-auto
     .material-fee
       - first_material_fee_displayed = false
       - @has_material_price_recreations.each_with_index do |plan, index|
-        .row{ class: ('dot-border' if index != @has_material_price_recreations.size - 1) }
+        .row.dot-border[if index != @has_material_price_recreations.size - 1]
           - unless first_material_fee_displayed
             .col-2.text-center.py-2 材料費
             - first_material_fee_displayed = true

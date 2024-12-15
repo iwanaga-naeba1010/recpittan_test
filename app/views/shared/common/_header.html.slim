@@ -18,13 +18,6 @@ header.sticky-top
           - if user_signed_in? && (current_user.role.customer? || current_user.role.admin?)
             li.nav-item
               = link_to 'プラン一覧', customers_recreation_plans_path, class: 'nav-link'
-          li.nav-item.px-2
-            = form_tag customers_recreations_path, method: :get, class: "d-flex search" do
-              .input-group.mr-sm-2
-                span.input-group-text.bg-white.border-end-0
-                  i.material-icons.every search
-                = text_field_tag :title, params[:title], class: 'form-control.border-start-0', placeholder: 'キーワードを入力'
-                = submit_tag '検索', class: 'btn.btn-csecondar.text-white'
 
         ul.navbar-nav.align-items-center
           li.nav-item
@@ -47,12 +40,7 @@ header.sticky-top
               | まずはご相談
           - if user_signed_in?
             li.nav-item
-              - mypage_path = if current_user.role.customer?
-                                 customers_path
-                               elsif current_user.role.admin?
-                                 admin_dashboard_path
-                               else
-                                 partners_path(is_open: true)
+              - mypage_path = mypage_path
               = link_to mypage_path, class: 'nav-link' do
                 span.material-icons.mypage account_circle
                 | マイページ

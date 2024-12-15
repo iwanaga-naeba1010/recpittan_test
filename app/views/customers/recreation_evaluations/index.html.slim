@@ -1,9 +1,8 @@
-= meta_tags_each_page(
-  @recreation.title,
-  @recreation.description,
-  nil,
-  @recreation.recreation_images&.sliders&.first&.image&.to_s
-)
+meta_tags_each_page @recreation.title,
+                    @recreation.description,
+                    nil,
+                    @recreation.recreation_images&.sliders&.first&.image&.to_s
+
 
 main.detail
   .container.pt-2

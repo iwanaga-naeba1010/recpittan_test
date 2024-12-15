@@ -11,7 +11,7 @@ main.detail
           = link_to 'トップ', root_path
         li.breadcrumb-item
           = link_to '一覧', customers_recreations_path
-        - if (category_tag = @recreation.tags.categories&.first).present?
+        - if @recreation.tags.categories&.first.present?
           li.breadcrumb-item
             span.text-secondary = @recreation.category_text
         li.breadcrumb-item.active

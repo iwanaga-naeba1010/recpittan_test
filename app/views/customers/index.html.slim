@@ -15,14 +15,12 @@ main.customer
             br
             |  新→古 
         .col-2
-          = link_to customers_path(is_open: true, column: :status, order: :asc),
-          -             class: 'btn w-100 btn-cprimary font-14 py-2 px-2 font-weight-bold text-white' do
+          = link_to customers_path(is_open: true, column: :status, order: :asc), class: 'btn w-100 btn-cprimary font-14 py-2 px-2 font-weight-bold text-white' do
           |  ステータス順 
   br
   |  相談中→終了報告承認済み 
   .col-2
-    = link_to customers_path(is_open: false, order: :asc),
-    -             class: 'btn w-100 btn-cprimary font-14 py-2 px-2 font-weight-bold text-white' do
+    = link_to customers_path(is_open: false, order: :asc), class: 'btn w-100 btn-cprimary font-14 py-2 px-2 font-weight-bold text-white' do
     |  終了した相談 
   br
   |  一覧 
