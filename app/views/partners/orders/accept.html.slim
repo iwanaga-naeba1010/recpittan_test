@@ -26,9 +26,9 @@ div.body.bg-white.p-3.mb-3
       = link_to 'キャンセル', confirm_partners_order_path, class: 'text-white btn btn-secondary btn-lg btn-block w-100 p-3 mt-2 mb-2'
 
       = simple_form_for @order, url: partners_order_path(
-          id: @order,
-          redirect_path: @path,
-          message: '承認しました'
-        ) do |f|
-        = f.input :is_accepted, as: :hidden, input_html: { value: true }
-        = f.submit '承認する', class: 'text-white btn btn-primary btn-lg btn-block btn-block w-100 p-3'
+            id: @order,
+            redirect_path: @path,
+            message: '承認しました'
+          ) do |f|
+          = f.input :is_accepted, as: :hidden, input_html: { value: true }
+          = f.submit '承認する', class: 'text-white btn btn-primary btn-lg btn-block btn-block w-100 p-3'
