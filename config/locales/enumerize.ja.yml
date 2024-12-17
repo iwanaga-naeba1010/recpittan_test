@@ -9,6 +9,12 @@ ja:
         visit: 訪問
         online: オンライン
         mailing: 郵送
+      sort_orders:
+        newest: 新着順
+        price_low_to_high: 価格 (低い順)
+        price_high_to_low: 価格 (高い順)
+        reviews_count: 口コミが多い順
+        number_of_recreations_held: 開催回数が多い順
       category:
         event: イベント
         work: 創作
@@ -77,6 +83,10 @@ ja:
         paid: 支払済
         canceled: キャンセル
         travled: トラブル(支払か請求有)
+      sort_orders:
+        newest: 新着順
+        chat_desc: チャット更新順
+        event_date: 開催日時順
     zoom:
       created_by:
         partner: パートナー
