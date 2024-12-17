@@ -2,8 +2,8 @@
 
 module OrdersHelper
   def sort_orders_options
-    Order.sort_order.values do |key, _|
-      [I18n.t("order.sort_orders.#{key}"), key.to_s]
+    Order.sort_order.values.map do |v|
+      [I18n.t("enumerize.order.sort_orders.#{v}"), v]
     end
   end
 end
