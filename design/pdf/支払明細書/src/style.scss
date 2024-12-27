@@ -1,0 +1,196 @@
+@use './global/' as *;
+@use './parts/common';
+
+
+th,
+td {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 40px;
+}
+
+#payment {
+  .content {
+
+    h1 {
+      font-size: 25px;
+      font-weight: 700;
+      text-align: center;
+    }
+
+    p {
+      margin-bottom: 10px;
+    }
+
+    table {
+      border: 2px solid $cBlack;
+      width: 250%;
+
+      @include mq(md) {
+        width: 100%;
+      }
+
+    }
+
+    thead {
+      border-bottom: 2px solid $cBlack;
+
+      th {
+        &:nth-child(1 of th) {
+          width: 20%;
+        }
+
+        &:nth-child(2 of th) {
+          width: 30%;
+        }
+
+        &:nth-child(3 of th) {
+          width: 20%;
+        }
+
+        &:nth-child(4 of th) {
+          width: 30%;
+        }
+      }
+    }
+
+    tbody {
+      align-items: stretch;
+
+      &:nth-child(1 of tbody) {
+        border-bottom: 2px solid $cBlack;
+
+        tr {
+          &:nth-child(1 of tr) {
+            width: 20%;
+          }
+
+          &:nth-child(2 of tr) {
+            width: 30%;
+          }
+
+          &:nth-child(3 of tr) {
+            width: 20%;
+          }
+
+          &:nth-child(4 of tr) {
+            width: 30%;
+          }
+        }
+      }
+
+      &:nth-child(2 of tbody) {
+        border-bottom: 2px solid $cBlack;
+
+        tr {
+          &:nth-child(1 of tr) {
+            width: 70%;
+          }
+
+          &:nth-child(2 of tr) {
+            width: 30%;
+          }
+        }
+      }
+
+      &:nth-child(3 of tbody) {
+        tr {
+          &:nth-child(1 of tr) {
+            width: 20%;
+          }
+
+          &:nth-child(2 of tr) {
+            width: 30%;
+          }
+
+          &:nth-child(3 of tr) {
+            width: 20%;
+          }
+
+          &:nth-child(4 of tr) {
+            width: 30%;
+          }
+        }
+      }
+
+      &:nth-child(4 of tbody) {
+        tr {
+          &:nth-child(1 of tr) {
+            width: 20%;
+          }
+
+          &:nth-child(2 of tr) {
+            width: 50%;
+          }
+
+          &:nth-child(3 of tr) {
+            width: 30%;
+          }
+        }
+      }
+
+      &:nth-child(5 of tbody) {
+        tr {
+          &:nth-child(1 of tr) {
+            width: 20%;
+          }
+
+          &:nth-child(2 of tr) {
+            width: 30%;
+          }
+
+          &:nth-child(3 of tr) {
+            width: 20%;
+          }
+
+          &:nth-child(4 of tr) {
+            width: 30%;
+          }
+        }
+      }
+    }
+
+    tfoot {
+      border-top: 1px solid $cBlack;
+
+      tr {
+        &:nth-child(1) {
+          width: 70%;
+        }
+
+        &:nth-child(2) {
+          width: 30%;
+        }
+      }
+    }
+
+    &__table {
+      overflow-x: scroll;
+
+      @include mq(md) {
+        overflow: auto;
+      }
+    }
+
+    &__inner {
+      padding: 10% 0;
+
+      @include mq(md) {
+        padding: 100px 0;
+      }
+    }
+
+    &__ttl {
+      line-height: 1.7;
+    }
+
+    &__box {
+      text-align: center;
+      width: 100%;
+      max-width: fit-content;
+      margin-left: auto;
+    }
+
+  }
+}

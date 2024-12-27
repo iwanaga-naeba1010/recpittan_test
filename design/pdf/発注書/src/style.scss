@@ -1,0 +1,231 @@
+@use './global/' as *;
+@use './parts/common';
+
+
+p {
+  margin-bottom: 10px;
+}
+
+th,
+td {
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-bottom: 2px solid #ccc;
+}
+
+#orderForm {
+  .content {
+
+    h1 {
+      font-size: 25px;
+      font-weight: 700;
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    table {
+      width: 100%;
+
+      &:nth-child(1) {
+        border-left: 2px solid #ccc;
+
+        thead {
+          th {
+            &:nth-child(1) {
+              width: 10%;
+            }
+
+            &:nth-child(2) {
+              width: 45%;
+            }
+
+            &:nth-child(3) {
+              width: 45%;
+            }
+          }
+        }
+
+        tbody {
+          &:nth-child(1 of tbody) {
+            tr {
+              &:nth-child(1) {
+                width: 10%;
+              }
+
+              &:nth-child(2) {
+                width: 10%;
+              }
+
+              &:nth-child(3) {
+                width: 35%;
+              }
+
+              &:nth-child(4) {
+                width: 45%;
+              }
+            }
+          }
+        }
+
+        tfoot {
+          td {
+            &:nth-child(1) {
+              width: 10%;
+            }
+
+            &:nth-child(2) {
+              width: 10%;
+            }
+
+            &:nth-child(3) {
+              width: 80%;
+            }
+          }
+        }
+      }
+
+      &:nth-child(2 of table) {
+        border: 2px solid #ccc;
+        border-bottom: none;
+
+        tr {
+          &:nth-child(1) {
+            width: 10%;
+          }
+
+          &:nth-child(2) {
+            width: 45%;
+          }
+
+          &:nth-child(3) {
+            width: 45%;
+          }
+        }
+      }
+    }
+
+    tbody {
+      width: 100%;
+    }
+
+    &__inner {
+      padding: 10% 0;
+
+      @include mq(md) {
+        padding: 100px 0;
+      }
+    }
+
+    &__wrap {
+      overflow-x: scroll;
+
+      @include mq(lg) {
+        overflow: auto;
+      }
+
+
+      &-inner {
+        width: 250%;
+
+        @include mq(md) {
+          width: 150%;
+        }
+
+        @include mq(lg) {
+          width: 100%;
+        }
+      }
+    }
+
+    &__ttl {
+      line-height: 1.7;
+      margin-bottom: 30px;
+    }
+
+    &__box {
+      &:nth-child(1 of .content__box) {
+        h2 {
+          span {
+            &:nth-child(1) {
+              width: 80%;
+              text-align: center;
+              background-color: #FEF2C1;
+            }
+          }
+        }
+
+        p {
+          margin-inline: auto;
+
+          span {
+            &:nth-child(1) {
+              width: 30%;
+            }
+
+            &:nth-child(2) {
+              border: 1px solid $cBlack;
+              border-top: none;
+              width: 50%;
+              background-color: #FEF2C1;
+            }
+          }
+        }
+
+        ul {
+          justify-content: space-between;
+        }
+
+        li {
+          &:nth-child(1) {
+            width: 20%;
+            text-align: right;
+          }
+
+          &:nth-child(2) {
+            width: 78%;
+            border-bottom: 2px rgba(128, 128, 128, 0.643) solid;
+          }
+        }
+      }
+
+      &:nth-child(2 of .content__box) {
+        p {
+          span {
+            &:nth-child(1) {
+              width: 30%;
+            }
+
+            &:nth-child(2) {
+              border-left: 1px solid $cBlack;
+              border-right: 1px solid $cBlack;
+              width: 70%;
+              background-color: #FEF2C1;
+            }
+          }
+        }
+      }
+    }
+
+    &__table {
+      overflow-x: scroll;
+
+      @include mq(lg) {
+        overflow-x: auto;
+      }
+
+      &-inner {
+        width: 250%;
+
+        @include mq(md) {
+          width: 150%;
+        }
+
+        @include mq(lg) {
+          width: 100%;
+        }
+      }
+    }
+  }
+}
