@@ -89,7 +89,7 @@ main.customer
                 .col-lg-3.col-4.label Zoom情報
                 .col-auto
                   - if @order.zoom_url
-                    = Rinku.auto_link(simple_format(h(@order.zoom_url)), :all, 'target="_blank"').html_safe
+                    = link_to simple_format(h(@order.zoom_url)).gsub(%r{</?p>}, ''), @order.zoom_url, target: '_blank', rel: 'noopener'
                   - else
                     | 開催日までに発行されますので、今しばらくお待ちください
 
@@ -152,7 +152,7 @@ main.customer
                   .col-auto 合計(税別)
                   .col-auto = number_to_currency(@order.total_price_for_customer)
 
-                - if @order.coupon_code? && @order.coupon_code == "えぶりぷらす"
+                - if @order.coupon_code? && @order.coupon_code == 'えぶりぷらす'
                   .row.justify-content-between.border-top.py-3
                     .alert.alert-warning[role="alert"]
                       .font-weight-boild クーポン適用中のため合計金額は「&yen; 0」となります

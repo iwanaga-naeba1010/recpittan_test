@@ -1,7 +1,7 @@
 h5.my-3.font-weight-bold.text-black.text-center 最新のご利用した施設の声
 .container.evaluations-container
   .row.row-cols-1.row-cols-md-2.row-cols-lg-3.g-4
-    - evaluations.each_with_index do |evaluation, index|
+    - evaluations.each_with_index do |evaluation, _|
       .col.card-container
         = render 'shared/evaluation/card', evaluation: evaluation
   = link_to customers_evaluations_path do

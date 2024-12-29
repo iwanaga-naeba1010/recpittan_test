@@ -28,7 +28,7 @@
               input_html: { rows: 5 },
               placeholder: "施設への感謝のメッセージや感想などをお書きください。\n例)この度は、敬老の日という特別な日に開催をいただきありがとうございます。\nまた、老人ホームえぶりプラスの皆さまにお会いできることを楽しみにしています。"
 
-  div.border.m-2.p-2
+  .border.m-2.p-2
     h4.text-black.font-weight-bold 受取額
     table.w-100
       thead
@@ -70,14 +70,14 @@
           td.pt-2.pb-2 合計(税込)
           td#totalPrice.pt-2.pb-2 = number_to_currency(order.total_price_for_partner)
 
-  div.m-2.p-2.bg-light
+  .m-2.p-2.bg-light
     p.text-black.font-weight-bold.pt-2 ※振込について
     p.text-black 振込は終了後、翌々月の月末に行われます。土・日・祝日の場合は次の営業日となります。
 
-  div.p-2.mt-2
+  .p-2.mt-2
     p.text-black 一度送信した終了報告は修正ができません。よくご確認の上、送信ボタンを押してください。
 
-  div.col-md-12.text-center
+  .col-md-12.text-center
     - if order.status.unreported_completed? || order.status.final_report_admits_not?
       = f.submit '終了報告を送信する', class: 'btn btn-primary btn-lg btn-block w-100 p-3 mb-2'
     - elsif order.status.waiting_for_an_event_to_take_place?
@@ -85,14 +85,14 @@
     - else
       button type='button' class='text-white btn btn-secondary btn-lg btn-block w-100 p-3 mt-2 mb-2' 終了報告送信済み
 
-div.d-none
-  div#dummyAmount = order.amount
-  div#dummyTotalMaterialPrice = order.total_material_price_for_partner
-  div#dummyTransportationExpenses = order.transportation_expenses
-  div#dummyExpenses = order.expenses
-  div#dummyAdditionalFacilityFee = order.additional_facility_fee_for_partner
-  div#dummyMaterialAmount = order.material_amount
-  div#dummyNumberOfPeople = order.number_of_people
-  div#dummyNumberOfFacilities = order.number_of_facilities
-  div#dummyZoomPrice = order.zoom_cost
-  div#dummyTotalFacilityFee = order.total_facility_price_for_partner
+.d-none
+  #dummyAmount = order.amount
+  #dummyTotalMaterialPrice = order.total_material_price_for_partner
+  #dummyTransportationExpenses = order.transportation_expenses
+  #dummyExpenses = order.expenses
+  #dummyAdditionalFacilityFee = order.additional_facility_fee_for_partner
+  #dummyMaterialAmount = order.material_amount
+  #dummyNumberOfPeople = order.number_of_people
+  #dummyNumberOfFacilities = order.number_of_facilities
+  #dummyZoomPrice = order.zoom_cost
+  #dummyTotalFacilityFee = order.total_facility_price_for_partner

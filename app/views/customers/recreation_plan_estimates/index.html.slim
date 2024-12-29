@@ -28,10 +28,8 @@
           td
             = estimate.transportation_expenses
           td
-            = estimate.created_at.strftime("%Y-%m-%d")
+            = estimate.created_at.strftime('%Y-%m-%d')
           td
             = estimate.recreation_plan.title
           td
-            | <a href="
-            = customers_recreation_plan_estimate_path(estimate)
-            | " class="btn show-button text-white fw-bold">詳細
+            = link_to '詳細', customers_recreation_plan_estimate_path(estimate), class: 'btn show-button text-white fw-bold'

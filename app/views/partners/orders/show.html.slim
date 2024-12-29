@@ -1,7 +1,7 @@
 - path = @order.is_accepted ? partners_order_path(id: @order.id, is_accepted: @order.is_accepted) : chat_partners_order_path(@order.id)
-= render 'shared/partner/header_with_link', title: "#{@order.recreation.profile_name}", path: path
+= render 'shared/partner/header_with_link', title: @order.recreation.profile_name.to_s, path: path
 
-div.body.bg-white.border.p-3.mb-3
+.body.bg-white.border.p-3.mb-3
   h4.text-black.font-weight-bold 施設情報
   table.w-100
     thead
@@ -22,7 +22,7 @@ div.body.bg-white.border.p-3.mb-3
         td.pt-2.pb-2.text-black.text-end = @order.user.company.feature
       tr.border-bottom
         td.pt-2.pb-2.w-25 HP
-        td.pt-2.pb-2.text-black.text-end = link_to @order.user.company.url, @order.user.company.url, target: '_blank'
+        td.pt-2.pb-2.text-black.text-end = link_to @order.user.company.url, @order.user.company.url, target: '_blank', rel: 'noopener'
       tr.border-bottom
         td.pt-2.pb-2.w-25 施設定員
         td.pt-2.pb-2.text-black.text-end = "#{@order.user.company.capacity} 人"
@@ -42,11 +42,12 @@ div.body.bg-white.border.p-3.mb-3
         td.pt-2.pb-2.w-25 住所
         td.pt-2.pb-2.text-black.text-end = @order.user.company.full_address
 
-  - if @order&.zoom&.present?
+  - if @order.zoom.present?
     div
       h4.text-black.font-weight-bold.pt-3 Zoom情報
-      div.pt-2.pb-2.text-black.text-end
-        = Rinku.auto_link(simple_format(h(@order.zoom_url)), :all, 'target="_blank"').html_safe
+      .pt-2.pb-2.text-black.text-end
+        - zoom_link = Rinku.auto_link(h(@order.zoom_url), :all, 'target="_blank"')
+        = sanitize(zoom_link, attributes: %w[href target rel])
 
   div
     h4.text-black.font-weight-bold.pt-3 レク情報
@@ -65,7 +66,7 @@ div.body.bg-white.border.p-3.mb-3
           td.pt-2.pb-2.w-25 開催日時
           td.pt-2.pb-2.text-black.text-end = @order.desired_time
 
-  div.border.m-2.p-2
+  .border.m-2.p-2
     h4.text-black.font-weight-bold 受取額
     table.w-100
       thead
@@ -103,33 +104,33 @@ div.body.bg-white.border.p-3.mb-3
           td.pt-2.pb-2 合計(税込)
           td.pt-2.pb-2.text-end = number_to_currency(@order.total_price_for_partner)
 
-  div.col-md-12
+  .col-md-12
     - if @order.can_proceed_to_confirmation?
       p 施設から正式依頼が届いた場合、次へ進むことができます。
-      div.text-center.my-3
+      .text-center.my-3
         = link_to '正式依頼の内容を確認する', confirm_partners_order_path(@order.id), class: 'text-white btn btn-primary btn-lg btn-block w-75 p-3'
     - elsif @order.confirmation_disabled?
-      div.text-center.my-3
+      .text-center.my-3
         button.text-white.btn.btn-secondary.btn-lg.btn-block.w-75.p-3.disabled 正式依頼の内容を確認する
     - elsif @order.can_report_completion?
-      div.text-center.my-3
+      .text-center.my-3
         = link_to '終了報告をする', new_partners_order_report_path(@order.id), class: 'mx-auto text-white btn btn-primary btn-lg btn-block w-75 p-3'
     - elsif @order.completion_report_submitted?
-      div.text-center.my-3
+      .text-center.my-3
         button.text-white.btn.btn-secondary.btn-lg.btn-block.w-75.p-3.disabled 終了報告済みです
-      div.my-3.p-3.rounded style="background-color: #dcdcdc"
+      .my-3.p-3.rounded style="background-color: #dcdcdc"
         p ※振込について
         | 振込は翌々月末に行われます。土日祝日の場合次の営業日となります。
     - else
-      div.text-center.my-3
+      .text-center.my-3
         button.text-white.btn.btn-secondary.btn-lg.btn-block.w-75.p-3.disabled 正式依頼の内容を確認する
 
   - if @order.is_open?
-    div.col-md-12
-      div.text-center.my-3
-        = button_to 'この相談を終了する', partners_order_path(@order), params: { order: { is_open: false } }, method: :put, data: { confirm: "この相談を終了しますか？終了すると、開催の相談一覧では非表示となります" }, class: 'text-white btn btn-danger btn-lg btn-block w-75 p-3'
+    .col-md-12
+      .text-center.my-3
+        = button_to 'この相談を終了する', partners_order_path(@order), params: { order: { is_open: false } }, method: :put, data: { confirm: 'この相談を終了しますか？終了すると、開催の相談一覧では非表示となります' }, class: 'text-white btn btn-danger btn-lg btn-block w-75 p-3'
 
-  - if !@order.is_open?
-    div.col-md-12
-      div.text-center.my-3
-        = button_to 'この相談を再開する', partners_order_path(@order), params: { order: { is_open: true } }, method: :put, data: { confirm: "この相談を再開しますか？" }, class: 'text-white btn btn-primary btn-lg btn-block w-75 p-3'
+  - unless @order.is_open?
+    .col-md-12
+      .text-center.my-3
+        = button_to 'この相談を再開する', partners_order_path(@order), params: { order: { is_open: true } }, method: :put, data: { confirm: 'この相談を再開しますか？' }, class: 'text-white btn btn-primary btn-lg btn-block w-75 p-3'

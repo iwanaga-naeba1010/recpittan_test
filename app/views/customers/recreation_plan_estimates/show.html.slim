@@ -1,5 +1,5 @@
-div.recreation-plan-estimate.text-black.mx-auto
-  div.top-section
+.recreation-plan-estimate.text-black.mx-auto
+  .top-section
     .row.pt-5
       .col-8
         h5 レクリエーションプランのご提案
@@ -11,7 +11,7 @@ div.recreation-plan-estimate.text-black.mx-auto
           .top-total-price-section.col-6.d-flex.align-items-baseline
             p 見積金額
             .d-flex.justify-content-end.flex-grow-1
-              p.total-price.fw-bold = number_with_delimiter(@recreation_plan_estimate.total_price.floor) + '円'
+              p.total-price.fw-bold = "#{number_with_delimiter(@recreation_plan_estimate.total_price.floor)}円"
           .col-6
       .col-4
         .row
@@ -30,18 +30,18 @@ div.recreation-plan-estimate.text-black.mx-auto
         p.small-paragraph.mt-1 愛知県名古屋市中村区井深町１番地１号新名古屋センタービル本陣街２階２４１－１号室
         p.small-paragraph.mt-1 TEL 050-5306-7767
 
-  div.middle-section.mt-4
+  .middle-section.mt-4
     .row
       p.title.fw-bold.py-2 プラン内容
-      - @recreation_recreation_plans.each_with_index do |plan, index|
+      - @recreation_recreation_plans.each do |plan|
         .col-4.mt-4
           .row
             .col-5.px-0
-              = image_tag plan.recreation.recreation_images.sliders.first&.image.to_s, class: "w-100 rounded", loading: 'lazy'
+              = image_tag plan.recreation.recreation_images.sliders.first&.image.to_s, class: 'w-100 rounded', loading: 'lazy'
             .col-7
               div = plan.recreation.title
 
-  div.bottom-section.mt-4.row
+  .bottom-section.mt-4.row
     .col-2.ps-0
       .title.text-center.fw-bold.py-2 項目
     .title.col-8.text-center.fw-bold.py-2 内容
@@ -49,42 +49,31 @@ div.recreation-plan-estimate.text-black.mx-auto
       .title.text-center.fw-bold.py-2 金額
 
     .event-fee
-      - @recreation_recreation_plans.each_with_index do |plan, index|
+      - @recreation_recreation_plans.each do |plan|
         .row.dot-border.px-0
-          - unless index == @recreation_recreation_plans.size - 1
-            .row
-              .col-2.text-center.py-2 開催費
-              .col-8.py-2
-                .row
-                  .col-4 = "#{@recreation_plan_estimate.actual_months[index]}月開催"
-                  .col-8 = plan.recreation.title
-              .col-2.text-end.py-2.pe-0
-                | ¥
-                = number_with_delimiter(plan.recreation.price)
-          - else
-            .row
-              .col-2.text-center.py-2
-              .col-8.py-2
-                .row
-                  .col-4 = "#{@recreation_plan_estimate.actual_months[index]}月開催"
-                  .col-8 = plan.recreation.title
-              .col-2.text-end.py-2.pe-0
-                | ¥
-                = number_with_delimiter(plan.recreation.price)
+          .row
+            .col-2.text-center.py-2 開催費
+            .col-8.py-2
+              .row
+                .col-4 = "#{@recreation_plan_estimate.actual_months[@recreation_recreation_plans.index(plan)]}月開催"
+                .col-8 = plan.recreation.title
+            .col-2.text-end.py-2.pe-0
+              | ¥
+              = number_with_delimiter(plan.recreation.price)
 
     .material-fee
       - first_material_fee_displayed = false
-      - @has_material_price_recreations.each_with_index do |plan, index|
+      - @has_material_price_recreations.each do |plan|
         .row.dot-border
-          - unless first_material_fee_displayed
+          - if first_material_fee_displayed
+            .col-2.text-center.py-2
+          - else
             .col-2.text-center.py-2 材料費
             - first_material_fee_displayed = true
-          - else
-            .col-2.text-center.py-2
           .col-8.py-2
             .row
               .col-10 = plan.recreation.title
-              .col-2 = 'X ' + @recreation_plan_estimate.number_of_people.to_s + '人'
+              .col-2 = "X #{@recreation_plan_estimate.number_of_people}人"
           .col-2.text-end.py-2.px-0
             | ¥
             = number_with_delimiter(@recreation_plan_estimate.material_price_for_plan(plan))
@@ -96,7 +85,7 @@ div.recreation-plan-estimate.text-black.mx-auto
           .row
             .col-10
               p 1回の交通費
-            .col-2 = 'X ' + @recreation_recreation_plans.size.to_s + '回'
+            .col-2 = "X #{@recreation_recreation_plans.size}回"
         .col-2.text-end.py-2.px-0
           | ¥
           = number_with_delimiter(@recreation_plan_estimate.transportation_expenses_for_plan(@recreation_recreation_plans))
@@ -133,6 +122,6 @@ div.recreation-plan-estimate.text-black.mx-auto
           = number_with_delimiter(@recreation_plan_estimate.total_price_per_person)
 
 script
-  | document.addEventListener("DOMContentLoaded", function() {
+  | document.addEventListener('DOMContentLoaded', function() {
   |   window.print();
   | });

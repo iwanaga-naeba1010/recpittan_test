@@ -11,7 +11,8 @@
     .row.justify-content-end.pt-2
       .col-auto.align-self-end.time = time chat.created_at
       .col-md-auto.text-white.mychat.card-header
-        = Rinku.auto_link(simple_format(h(chat.message)), :all, 'target="_blank"').html_safe
+        - message = Rinku.auto_link(h(chat.message), :all, 'target="_blank"')
+        = sanitize(message, attributes: %w[href target rel])
     / fileがあれば表示させる
     - if chat.file?
       .row.justify-content-end.pt-2
@@ -26,5 +27,6 @@
       .col-md-auto
         .name = chat.user&.company&.facility_name
         .text.card-header
-          = Rinku.auto_link(simple_format(h(chat.message)), :all, 'target="_blank"').html_safe
+          - message = Rinku.auto_link(h(chat.message), :all, 'target="_blank"')
+          = sanitize(message, attributes: %w[href target rel])
       .col-auto.align-self-end.time = time chat.created_at

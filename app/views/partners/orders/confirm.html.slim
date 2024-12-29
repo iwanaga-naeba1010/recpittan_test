@@ -1,7 +1,7 @@
-= render 'shared/partner/header', title: "正式依頼を確認"
+= render 'shared/partner/header', title: '正式依頼を確認'
 
-div.body.bg-white.border.p-3.mb-3
-  div.p-4.text-center.text-black
+.body.bg-white.border.p-3.mb-3
+  .p-4.text-center.text-black
     h3.font-weight-bold
       | 正式依頼が届きました！
       br
@@ -10,7 +10,7 @@ div.body.bg-white.border.p-3.mb-3
       = @order.user.company.facility_name
       | からレクの正式依頼が届きました。以下の内容をご確認いただき返信しましょう。
 
-  div.body.bg-white.border.p-3.mb-3
+  .body.bg-white.border.p-3.mb-3
     h4.text-black.font-weight-bold 施設情報
     table.w-100
       thead
@@ -41,7 +41,7 @@ div.body.bg-white.border.p-3.mb-3
             td.pt-2.pb-2.w-25 希望人数
             td.pt-2.pb-2.text-black = "#{@order.number_of_people}人"
 
-    div.border.m-2.p-2
+    .border.m-2.p-2
       h4.text-black.font-weight-bold レク費用
       table.w-100
         thead
@@ -78,6 +78,6 @@ div.body.bg-white.border.p-3.mb-3
         li “却下する”を選択した場合は理由をチャットで施設に共有してください。
         li ご不明点ございましたら運営までご連絡をお願い致します。
 
-    div.col-md-12.text-center.pt-5
+    .col-md-12.text-center.pt-5
       = link_to '却下する', confirm_partners_order_path(is_confirm: :deny), class: 'text-white btn btn-danger btn-lg btn-block w-100 p-3 mt-2 mb-2'
       = link_to '承認する', confirm_partners_order_path(is_confirm: :accept), class: 'text-white btn btn-primary btn-lg btn-block w-100 p-3 mt-2 mb-2'

@@ -1,5 +1,5 @@
 main.order_memo
-  - company.company_memos.each_with_index do |memo, i|
+  - company.company_memos.each do |memo|
     .body
       .message
         = simple_format memo.body

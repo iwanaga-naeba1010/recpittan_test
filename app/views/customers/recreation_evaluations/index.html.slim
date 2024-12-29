@@ -3,10 +3,9 @@ meta_tags_each_page @recreation.title,
                     nil,
                     @recreation.recreation_images&.sliders&.first&.image&.to_s
 
-
 main.detail
   .container.pt-2
-    nav[aria-label="breadcrumb"]
+    nav[aria-label='breadcrumb']
       ol.breadcrumb
         li.breadcrumb-item
           = link_to 'トップ', root_path
@@ -23,7 +22,7 @@ main.detail
   article.container.py-4.px-0
     .row
       .col-md-7
-        = link_to customers_recreation_path(@recreation.id), class: "return-link" do
+        = link_to customers_recreation_path(@recreation.id), class: 'return-link' do
           p
             = image_pack_tag 'return.svg'
             | 戻る
@@ -34,7 +33,7 @@ main.detail
             .mx-2.p-3
               h6.text-black
                 span
-                  = image_pack_tag 'evaluation_icon.svg', id: "hamburger", class: "logo-navbar", width: "30", height: "30"
+                  = image_pack_tag 'evaluation_icon.svg', id: 'hamburger', class: 'logo-navbar', width: '30', height: '30'
                 |
                 = "#{evaluation.report.order.user.company.facility_name}(#{evaluation.report.order.user.company.genre_text})"
               p.my-2.text-black = evaluation.message
@@ -74,24 +73,24 @@ main.detail
               .action-area
                 - if user_signed_in?
                   - if @recreation.is_public_price
-                    = link_to '相談・依頼する', new_customers_recreation_order_path(@recreation.id), class: "btn-cpr"
+                    = link_to '相談・依頼する', new_customers_recreation_order_path(@recreation.id), class: 'btn-cpr'
                   - else
                     #consultrecreation[data-recreationid=@recreation.id]
                 - else
-                  = link_to 'ログインして相談・依頼する', new_user_session_path, class: "btn-cpr"
+                  = link_to 'ログインして相談・依頼する', new_user_session_path, class: 'btn-cpr'
 
             = render 'shared/home/order_flow'
 
-  #pricemodaltrigger.d-none[data-bs-toggle="modal" data-bs-target="#pricemodal"]
+  #pricemodaltrigger.d-none[data-bs-toggle='modal' data-bs-target='#pricemodal']
 
-  #pricemodal.modal.fade[tabindex="-1" aria-labelledby="contact-price-modallabel" aria-hidden="true"]
+  #pricemodal.modal.fade[tabindex='-1' aria-labelledby='contact-price-modallabel' aria-hidden='true']
     .modal-dialog.modal-dialog-centered
       .modal-content
         .modal-header
           h5.modal-title 料金をお問い合わせしました
-          button.btn-close[data-bs-dismiss="modal" aria-label="close"]
+          button.btn-close[data-bs-dismiss='modal' aria-label='close']
         .modal-body
           p
             | 「#{@recreation.title}」の料金をお問い合わせしました。エブリ・プラスのスタッフからメールで返信致します。少々お待ちください。
         .modal-footer
-          button.btn.btn-cprimary.rounded-pill.text-white[data-bs-dismiss="modal"] 閉じる
+          button.btn.btn-cprimary.rounded-pill.text-white[data-bs-dismiss='modal'] 閉じる

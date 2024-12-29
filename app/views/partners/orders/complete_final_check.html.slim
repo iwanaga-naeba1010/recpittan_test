@@ -1,12 +1,12 @@
-= render 'shared/partner/header', title: "確認完了"
+= render 'shared/partner/header', title: '確認完了'
 
-div.body.bg-white.p-3.mb-3
-  div.p-4.text-center.text-black
+.body.bg-white.p-3.mb-3
+  .p-4.text-center.text-black
     h3.font-weight-bold
       | 確認が完了しました！
       br
       | 施設の皆様は楽しみに待っています。
 
-  div.body.bg-white.p-3.mb-3
-    div.col-md-12.text-center.pt-5
+  .body.bg-white.p-3.mb-3
+    .col-md-12.text-center.pt-5
       = link_to '案件の確認', partners_order_path(@order.id), class: 'text-white btn btn-primary btn-lg btn-block btn-block w-100 p-3'

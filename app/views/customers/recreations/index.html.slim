@@ -2,14 +2,14 @@ meta_tags_each_page '300種類を超える業界No1の介護レクリーショ�
                     'エブリ・プラスは300種類以上の介護レクリエーションを提供しているマッチングサイトです。複数条件から簡単にレクリエーションを簡単検索・発注することが可能です'
 
 main.list
-  = form_with url: customers_recreations_path, method: :get, class: "d-flex search border-top shadow", local: true do |f|
+  = form_with url: customers_recreations_path, method: :get, class: 'd-flex search border-top shadow', local: true do
     .container.px-5
       .container.pt-4
-        nav[aria-label="breadcrumb"]
+        nav[aria-label='breadcrumb']
           ol.breadcrumb
             li.breadcrumb-item
               = link_to 'トップ', root_path
-            - if @tag&.present?
+            - if @tag.present?
               li.breadcrumb-item
                 = link_to '一覧', customers_recreations_path
               li.breadcrumb-item.active
@@ -40,7 +40,7 @@ main.list
               .nav-item.px-2.mt-3
                 p.label-size.mb-1 レクの金額
                 .search-forms
-                  - [["0-10000", "0〜 10,000円"], ["10001-20000", "10,001〜 20,000円"], ["20001-30000", "20,001〜 30,000円"], ["30000-", "30,000円以上"]].each do |range, label|
+                  - [['0-10000', '0〜 10,000円'], ['10001-20000', '10,001〜 20,000円'], ['20001-30000', '20,001〜 30,000円'], ['30000-', '30,000円以上']].each do |range, label|
                     div
                       = check_box_tag 'price_range[]', range, params[:price_range]&.include?(range), id: "price_#{range.gsub('-', '_')}", class: 'form-check-input', onchange: 'this.form.submit();'
                       = label_tag "price_#{range.gsub('-', '_')}", label, class: 'form-check-label'
@@ -57,7 +57,7 @@ main.list
                   - @tag_params.each do |tag|
                     .searched-tag.bg-white.tag-params.p-0.p-1.mb-1.rounded.d-inline-block.fw-bold
                       | # #{tag}
-                      = image_pack_tag 'close_tag_icon.svg', class: "remove-tag-param", width: "15", height: "15", fill: "#F39800"
+                      = image_pack_tag 'close_tag_icon.svg', class: 'remove-tag-param', width: '15', height: '15', fill: '#F39800'
         .col-8
           .row.align-items-center
             .col-6.d-flex.align-items-center

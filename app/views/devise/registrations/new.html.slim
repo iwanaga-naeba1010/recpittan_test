@@ -1,10 +1,10 @@
 main.auth
   .container.pt-2
-    nav[aria-label="breadcrumb"]
+    nav[aria-label='breadcrumb']
       ol.breadcrumb
         li.breadcrumb-item
           = link_to 'トップ', root_path
-        li.breadcrumb-item.active[aria-current="page"]
+        li.breadcrumb-item.active[aria-current='page']
           span 新規登録
 
   .container
@@ -35,26 +35,26 @@ main.auth
               .mb-3
                 = f.input :email, required: true, input_html: { class: 'form-control' }
               .mb-3
-                = f.input :password, required: true, hint: ("#{@minimum_password_length} 文字以上で入力してください" if @minimum_password_length), input_html: { autocomplete: "new-password" }
+                = f.input :password, required: true, hint: ("#{@minimum_password_length} 文字以上で入力してください" if @minimum_password_length), input_html: { autocomplete: 'new-password' }
               .mb-3
-                = f.input :password_confirmation, required: true, input_html: { autocomplete: "new-password" }
+                = f.input :password_confirmation, required: true, input_html: { autocomplete: 'new-password' }
 
               .form-check.mb-3
-                input.form-check-input type="checkbox"
+                input.form-check-input type='checkbox'
                 label.form-check-label
-                  = link_to '利用規約', 'https://everyplus.jp/tos/index.html', class: 'clink', target: '_blank'
+                  = link_to '利用規約', 'https://everyplus.jp/tos/index.html', class: 'clink', target: '_blank', rel: 'noopener'
                   | に同意します。
               .form-check.mb-3
-                input.form-check-input type="checkbox" name="privacyPolicy" value="true" class="#{formPrivacyPolicyClass}" id="privacyPolicy" #{privacyPolicy}
-                label.form-check-label[for="privacyPolicy"]
-                  = link_to 'プライバシーポリシー', 'https://everyplus.jp/policy_privacy', class: 'clink', target: '_blank'
+                input.form-check-input type='checkbox' name='privacyPolicy' value='true' class="#{formPrivacyPolicyClass}" id='privacyPolicy' #{privacyPolicy}
+                label.form-check-label[for='privacyPolicy']
+                  = link_to 'プライバシーポリシー', 'https://everyplus.jp/policy_privacy', class: 'clink', target: '_blank', rel: 'noopener'
                   | に同意します。
               .form-check.mb-3
-                input.form-check-input type="checkbox"
+                input.form-check-input type='checkbox'
                 label.form-check-label
                   | 介護サービス提供者、障害福祉サービス提供者、その他これらに準ずる施設として登録することに同意します。<br>
                   | その他サービスで登録を希望される方は運営まで問い合わせをお願い致します。
               = recaptcha_tags
               .row.justify-content-md-center.mt-3
                 .col-md-3
-                  = f.button :submit, '登録', class: "btn btn-cprimary rounded-pill w-100 font-14 py-3 px-4 font-weight-bold text-white"
+                  = f.button :submit, '登録', class: 'btn btn-cprimary rounded-pill w-100 font-14 py-3 px-4 font-weight-bold text-white'

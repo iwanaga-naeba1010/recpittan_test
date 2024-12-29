@@ -67,17 +67,17 @@ Bundler/OrderedGems:
 Style/FrozenStringLiteralComment:
   Enabled: true
 
-Style/PercentLiteralDelimiters:
-  PreferredDelimiters:
-    "%":  "!!"
-    "%i": "[]"
-    "%q": "!!"
-    "%Q": "!!"
-    "%r": "!!"
-    "%s": "!!"
-    "%w": "[]"
-    "%W": "[]"
-    "%x": "()"
+# Style/PercentLiteralDelimiters:
+#   PreferredDelimiters:
+#     "%":  "!!"
+#     "%i": "[]"
+#     "%q": "!!"
+#     "%Q": "!!"
+#     "%r": "!!"
+#     "%s": "!!"
+#     "%w": "[]"
+#     "%W": "[]"
+#     "%x": "()"
 
 Style/StringLiterals:
   EnforcedStyle: single_quotes
@@ -245,6 +245,9 @@ Style/AccessModifierDeclarations:
   Enabled: false
 
 Style/PercentLiteralDelimiters:
+  Enabled: false
+
+Style/SafeNavigationChainLength:
   Enabled: false
 
 Lint/AmbiguousBlockAssociation:

@@ -1,26 +1,26 @@
-= render 'shared/partner/header_with_link', title: "設定", path: partners_path
+= render 'shared/partner/header_with_link', title: '設定', path: partners_path
 
 = link_to edit_partners_information_path(current_user.id) do
-  div.row.py-2.text-black.border-bottom
-    div.col-6.ps-4 アカウント設定
-    div.col-6.pe-4.text-end
-      = image_pack_tag 'right_arrow.svg', class: "left-arrow-icon", width: "18", height: "18"
+  .row.py-2.text-black.border-bottom
+    .col-6.ps-4 アカウント設定
+    .col-6.pe-4.text-end
+      = image_pack_tag 'right_arrow.svg', class: 'left-arrow-icon', width: '18', height: '18'
 
 = link_to partners_profiles_path do
-  div.row.py-2.text-black.border-bottom
-    div.col-6.ps-4 プロフィール設定
-    div.col-6.pe-4.text-end
-      = image_pack_tag 'right_arrow.svg', class: "left-arrow-icon", width: "18", height: "18"
+  .row.py-2.text-black.border-bottom
+    .col-6.ps-4 プロフィール設定
+    .col-6.pe-4.text-end
+      = image_pack_tag 'right_arrow.svg', class: 'left-arrow-icon', width: '18', height: '18'
 
 - if current_user.bank_account.blank?
   = link_to new_partners_bank_accounts_path do
-    div.row.py-2.text-black.border-bottom
-      div.col-6.ps-4 銀行口座情報を登録
-      div.col-6.pe-4.text-end
-        = image_pack_tag 'right_arrow.svg', class: "left-arrow-icon", width: "18", height: "18"
+    .row.py-2.text-black.border-bottom
+      .col-6.ps-4 銀行口座情報を登録
+      .col-6.pe-4.text-end
+        = image_pack_tag 'right_arrow.svg', class: 'left-arrow-icon', width: '18', height: '18'
 - else
   = link_to edit_partners_bank_accounts_path(current_user.bank_account) do
-    div.row.py-2.text-black.border-bottom
-      div.col-6.ps-4 銀行口座情報を編集
-      div.col-6.pe-4.text-end
-        = image_pack_tag 'right_arrow.svg', class: "left-arrow-icon", width: "18", height: "18"
+    .row.py-2.text-black.border-bottom
+      .col-6.ps-4 銀行口座情報を編集
+      .col-6.pe-4.text-end
+        = image_pack_tag 'right_arrow.svg', class: 'left-arrow-icon', width: '18', height: '18'

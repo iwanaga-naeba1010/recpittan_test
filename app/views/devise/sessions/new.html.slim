@@ -1,10 +1,10 @@
 main.auth
   .container.pt-2
-    nav[aria-label="breadcrumb"]
+    nav[aria-label='breadcrumb']
       ol.breadcrumb
         li.breadcrumb-item
           = link_to 'トップ', root_path
-        li.breadcrumb-item.active[aria-current="page"]
+        li.breadcrumb-item.active[aria-current='page']
           span ログイン
 
   .container
@@ -13,7 +13,7 @@ main.auth
         .card.p-4
           .card-body
             .text-center.mb-5
-              = image_pack_tag 'logo.png', class: "logo-navbar"
+              = image_pack_tag 'logo.png', class: 'logo-navbar'
             p.text-muted ユーザ名とパスワードを入力して下さい。
 
             = simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
@@ -29,7 +29,7 @@ main.auth
                   span.input-group-text
                     span.material-icons lock
                 .form-group.flex-grow-1
-                  = f.input :password, label: false, required: true, hint: ("#{@minimum_password_length} 文字以上で入力してください" if @minimum_password_length), placeholder: 'パスワード', input_html: { autocomplete: "new-password" }
+                  = f.input :password, label: false, required: true, hint: ("#{@minimum_password_length} 文字以上で入力してください" if @minimum_password_length), placeholder: 'パスワード', input_html: { autocomplete: 'new-password' }
 
               .row.justify-content-between
                 .col-auto.text-center
@@ -42,4 +42,4 @@ main.auth
           .card-body.border-top.mt-4
             .row.justify-content-center
               .col-md-4.text-center
-                = link_to '新規登録はこちら', new_user_registration_path, class: "registration-link"
+                = link_to '新規登録はこちら', new_user_registration_path, class: 'registration-link'

@@ -5,28 +5,28 @@ article.search-conditions-box.container.px-5.w-100.border.rounded.shadow
       p.mt-5.fw-bold.text-black.d-none.d-lg-block 形式から探す
       .col
         - recreation_kinds.each do |kind|
-          = link_to(t("enumerize.recreation.kind.#{kind[:name]}"), customers_recreations_path(kind: kind[:id]), class: 'my-1 me-3 px-1 tag-label font-weight-bold d-inline-block')
+          = link_to t("enumerize.recreation.kind.#{kind[:name]}"), customers_recreations_path(kind: kind[:id]), class: 'my-1 me-3 px-1 tag-label font-weight-bold d-inline-block'
     .col-4
       p.mt-5.fw-bold.text-black.d-none.d-lg-block 金額から探す
       .col
         - recreation_prices.each do |price|
-          = link_to("#{price[:text]}", customers_recreations_path(price_range: [price[:value]]), class: 'my-1 me-3 px-1 tag-label font-weight-bold d-inline-block')
+          = link_to price[:text].to_s, customers_recreations_path(price_range: [price[:value]]), class: 'my-1 me-3 px-1 tag-label font-weight-bold d-inline-block'
     .col-4
       p.mt-5.fw-bold.text-black.d-none.d-lg-block カテゴリから探す
       .col
         - recreation_categories.each do |category|
-          = link_to(t("enumerize.recreation.category.#{category[:value]}"), customers_recreations_path(category: category[:id]), class: 'my-1 me-3 px-1 tag-label text-white font-weight-bold d-inline-block border-0', style: "background-color: #{categoryname_to_color_code(category[:name])}")
+          = link_to t("enumerize.recreation.category.#{category[:value]}"), customers_recreations_path(category: category[:id]), class: 'my-1 me-3 px-1 tag-label text-white font-weight-bold d-inline-block border-0', style: "background-color: #{categoryname_to_color_code(category[:name])}"
 
   .row
     div
       p.mt-5.fw-bold.text-black.d-none.d-lg-block 都道府県から探す
       .col
         - prefectures.each do |prefecture|
-          = link_to("#{prefecture}", customers_recreations_path(prefecture: prefecture), class: 'my-1 me-3 px-1 tag-label font-weight-bold d-inline-block')
+          = link_to prefecture.to_s, customers_recreations_path(prefecture: prefecture), class: 'my-1 me-3 px-1 tag-label font-weight-bold d-inline-block'
 
   .row.mb-5
     div
       p.mt-5.fw-bold.text-black.d-none.d-lg-block タグから探す
       .col
         - tags.each do |tag|
-          = link_to("##{tag.name}", customers_recreations_path(tags: [tag.name]), class: 'my-1 me-3 px-1 tag-label font-weight-bold d-inline-block')
+          = link_to "##{tag.name}", customers_recreations_path(tags: [tag.name]), class: 'my-1 me-3 px-1 tag-label font-weight-bold d-inline-block'

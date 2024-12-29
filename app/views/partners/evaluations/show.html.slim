@@ -1,7 +1,7 @@
 - path = @order.is_accepted ? partners_order_path(id: @order.id, is_accepted: @order.is_accepted) : chat_partners_order_path(@order.id)
-= render 'shared/partner/header_with_link', title: "#{@order.recreation.profile_name}", path: path
+= render 'shared/partner/header_with_link', title: @order.recreation.profile_name.to_s, path: path
 
-div.body.bg-white.border.p-3.mb-3
+.body.bg-white.border.p-3.mb-3
   h4.text-black.font-weight-bold アンケート情報
   table.w-100
     thead
@@ -12,23 +12,23 @@ div.body.bg-white.border.p-3.mb-3
         td.pt-2.pb-2.w-25 法人名
         td.pt-2.pb-2.text-black.text-end = @order.user.company.name
 
-  div.border.m-2.p-2
-    div.w-100
-      div.border-bottom.d-flex.justify-content-between
+  .border.m-2.p-2
+    .w-100
+      .border-bottom.d-flex.justify-content-between
         p.pt-1.text-black.w-75 = t('activerecord.attributes.evaluation.ingenuity')
         p.pt-1.text-black.text-end = @order.report.evaluation.ingenuity_text
-      div.border-bottom.d-flex.justify-content-between
+      .border-bottom.d-flex.justify-content-between
         p.pt-2.text-black.w-75 = t('activerecord.attributes.evaluation.communication')
         p.pt-2.text-black.text-end = @order.report.evaluation.communication_text
-      div.border-bottom.d-flex.justify-content-between
+      .border-bottom.d-flex.justify-content-between
         p.pt-2.text-black.w-75 = t('activerecord.attributes.evaluation.smoothness')
         p.pt-2.text-black.text-end = @order.report.evaluation.smoothness_text
-      div.border-bottom.d-flex.justify-content-between
+      .border-bottom.d-flex.justify-content-between
         p.pt-2.text-black.w-75 = t('activerecord.attributes.evaluation.price')
         p.pt-2.text-black.text-end = @order.report.evaluation.price_text
-      div.border-bottom.d-flex.justify-content-between
+      .border-bottom.d-flex.justify-content-between
         p.pt-2.text-black.w-75 = t('activerecord.attributes.evaluation.want_to_order_agein')
         p.pt-2.text-black.text-end = @order.report.evaluation.want_to_order_agein_text
-      div.border-bottom
+      .border-bottom
         p.pt-2.pb-2.text-black.w-75 = t('activerecord.attributes.evaluation.message')
         p.text-black = @order.report.evaluation.message

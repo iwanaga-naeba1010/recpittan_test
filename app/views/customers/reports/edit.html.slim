@@ -1,6 +1,6 @@
 main.customer
   .container.pt-2
-    nav[aria-label="breadcrumb"]
+    nav[aria-label='breadcrumb']
       ol.breadcrumb
         li.breadcrumb-item
           = link_to 'トップ', root_path
@@ -102,10 +102,10 @@ main.customer
                 .col-auto 合計(税別)
                 .col-auto = number_to_currency(@report.order.total_price_for_customer)
 
-              - if @report.order_coupon_code.present? && @report.order_coupon_code == "えぶりぷらす"
+              - if @report.order_coupon_code.present? && @report.order_coupon_code == 'えぶりぷらす'
                 .row.justify-content-between.border-top.py-3
-                  .alert.alert-warning[role="alert"]
-                    div.font-weight-bold クーポン適用中のため合計金額は「&yen; 0」となります
+                  .alert.alert-warning[role='alert']
+                    .font-weight-bold クーポン適用中のため合計金額は「&yen; 0」となります
                     div 合計金額が表示されていても請求は&yen; 0となります。ご安心ください。
 
             .row.border-top.mt-5.pt-3
@@ -113,7 +113,7 @@ main.customer
               .col-9
                 .row.align-items-center.mt-2
                   .col-md-4
-                    picture[loading="lazy"]
+                    picture[loading='lazy']
                       = image_tag @report.order.recreation.recreation_images.sliders&.first&.image.to_s, class: 'img-fluid', loading: 'lazy'
                   .col-md-8.recreation
                     h1.font-16.font-weight-bold.line-height-140 = @report.order.recreation.title
@@ -166,17 +166,17 @@ main.customer
 
               .row.pt-3
                 .col-auto
-                  input[type="hidden" name="_csrf" value="{{csrfToken}}"]
-                  button.btn.btn-cprimary.font-14.py-2.px-4.font-weight-bold.reject.text-white[type="button" data-bs-toggle="modal" data-bs-target="#rejectModal"] お断りする
+                  input[type='hidden' name='_csrf' value='{{csrfToken}}']
+                  button.btn.btn-cprimary.font-14.py-2.px-4.font-weight-bold.reject.text-white[type='button' data-bs-toggle='modal' data-bs-target='#rejectModal'] お断りする
                 .col-auto
-                  button.btn.btn-cprimary.font-14.py-2.px-4.font-weight-bold.text-white[type="button" data-bs-toggle="modal" data-bs-target="#approveModal"] 承認する
-                  input[type="hidden" name="action" value=""]
+                  button.btn.btn-cprimary.font-14.py-2.px-4.font-weight-bold.text-white[type='button' data-bs-toggle='modal' data-bs-target='#approveModal'] 承認する
+                  input[type='hidden' name='action' value='']
 
               .d-none
                 = f.submit '送信'
 
 <!-- モーダル -->
-.modal.fade#approveModal[tabindex="-1" aria-labelledby="approveModalLabel" aria-hidden="true"]
+.modal.fade#approveModal[tabindex='-1' aria-labelledby='approveModalLabel' aria-hidden='true']
   .modal-dialog
     .modal-content
       .modal-header
@@ -185,11 +185,11 @@ main.customer
         p 一度承認すると変更はできません。材料費、追加事業所数など、ご確認の上、承認をお願い致します。
         .row.justify-content-end.pt-3
           .col-auto
-            button.btn.btn-cancel.font-14.py-2.px-4.font-weight-bold[data-bs-dismiss="modal" type="button"] キャンセル
+            button.btn.btn-cancel.font-14.py-2.px-4.font-weight-bold[data-bs-dismiss='modal' type='button'] キャンセル
           .col-auto
-            button#approveModalSubmit.btn.btn-cprimary.send.font-14.py-2.px-4.font-weight-bold.text-white[data-action="approve" type="button"] 承認する
+            button#approveModalSubmit.btn.btn-cprimary.send.font-14.py-2.px-4.font-weight-bold.text-white[data-action='approve' type='button'] 承認する
 
-.modal.fade#rejectModal[tabindex="-1" aria-labelledby="rejectModalLabel" aria-hidden="true"]
+.modal.fade#rejectModal[tabindex='-1' aria-labelledby='rejectModalLabel' aria-hidden='true']
   .modal-dialog
     .modal-content
       .modal-header
@@ -198,6 +198,6 @@ main.customer
         p 内容が間違っている場合、お断りをお願い致します。訂正内容をパートナーにチャットで伝えてください。正しい内容として、再度終了報告を提出致します。ご不明な点がありましたらよくある質問またはお問い合わせをお願いします。
         .row.justify-content-end.pt-3
           .col-auto
-            button.btn.btn-cancel.font-14.py-2.px-4.font-weight-bold[data-bs-dismiss="modal" type="button"] キャンセル
+            button.btn.btn-cancel.font-14.py-2.px-4.font-weight-bold[data-bs-dismiss='modal' type='button'] キャンセル
           .col-auto
-            button#rejectModalSubmit.btn.btn-cprimary.send.font-14.py-2.px-4.font-weight-bold.text-white[data-action="reject" type="button"] お断りする
+            button#rejectModalSubmit.btn.btn-cprimary.send.font-14.py-2.px-4.font-weight-bold.text-white[data-action='reject' type='button'] お断りする

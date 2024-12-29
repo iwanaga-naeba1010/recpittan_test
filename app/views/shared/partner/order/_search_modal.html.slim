@@ -1,42 +1,42 @@
 / モーダル
-.modal.search-order-modal.fade id="filterModal" tabindex="-1" aria-labelledby="filterModalLabel" aria-hidden="true"
+.modal.search-order-modal.fade id='filterModal' tabindex='-1' aria-labelledby='filterModalLabel' aria-hidden='true'
   .modal-dialog.modal-fullscreen
     .modal-content
       .modal-header
-        h5.modal-title.text-black id="filterModalLabel" 絞り込み・並べ替え
-        button.btn-close type="button" data-bs-dismiss="modal" aria-label="Close"
-      .modal-body style="padding-bottom: 80px;"
+        h5.modal-title.text-black id='filterModalLabel' 絞り込み・並べ替え
+        button.btn-close type='button' data-bs-dismiss='modal' aria-label='Close'
+      .modal-body style='padding-bottom: 80px;'
         .text-black.mb-3
-          = image_pack_tag 'filter.svg', class: "order_menu pointer", width: "15", height: "15"
+          = image_pack_tag 'filter.svg', class: 'order_menu pointer', width: '15', height: '15'
           | 絞り込み
         = form_with url: partners_path, method: :get, local: true do
           .mb-3
-            label.form-label.text-black for="recreation" レク
+            label.form-label.text-black for='recreation' レク
             p.description.mb-0 登録しているレクを選択
-            select.form-select name="recreation_id" id="recreation"
-              option value="" selected=params[:recreation_id].blank? 選択してください
+            select.form-select name='recreation_id' id='recreation'
+              option value='' selected=params[:recreation_id].blank? 選択してください
               - recreations.each do |recreation|
                 option value="#{recreation.id}" selected=params[:recreation_id].to_s == recreation.id.to_s = recreation.title
           .mb-3
             label.form-label.text-black 施設
             p.description.mb-0 相談された事がある施設を選択することができます
-            select.form-select name="user_id" id="facility"
-              option value="" selected=params[:user_id].blank? 選択してください
+            select.form-select name='user_id' id='facility'
+              option value='' selected=params[:user_id].blank? 選択してください
               - customers.each do |customer|
                 option value="#{customer.id}" selected=params[:user_id].to_s == customer.id.to_s = customer.company.facility_name
           .mb-3
-            label.form-label.text-black for="filterDate" 期間
+            label.form-label.text-black for='filterDate' 期間
             .d-flex.align-items-center
-              input.form-control type="date" name="start_date" id="filterStartDate" value=params[:start_date] style="width: auto;"
+              input.form-control type='date' name='start_date' id='filterStartDate' value=params[:start_date] style='width: auto;'
               span.mx-2 -
-              input.form-control type="date" name="end_date" id="filterEndDate" value=params[:end_date] style="width: auto;"
+              input.form-control type='date' name='end_date' id='filterEndDate' value=params[:end_date] style='width: auto;'
           .mb-3
-            = image_pack_tag 'sort.svg', class: "order_menu pointer", width: "15", height: "15"
-            label.form-label.text-black for="sort_order" 並べ替え
+            = image_pack_tag 'sort.svg', class: 'order_menu pointer', width: '15', height: '15'
+            label.form-label.text-black for='sort_order' 並べ替え
             = select_tag :sort_order,
                   options_for_select(sort_orders_options, selected: params[:sort_order]),
                   class: 'form-select search-select'
           .modal-footer.border-top.fixed-bottom
-            button.btn.text-primary.fw-bold.me-auto.border.py-2 type="button" data-bs-dismiss="modal" キャンセル
-            button.btn.btn-primary.fw-bold.py-2 type="submit" 保存
-            = link_to 'リセット', partners_path, class: "btn btn-secondary text-white fw-bold py-2"
+            button.btn.text-primary.fw-bold.me-auto.border.py-2 type='button' data-bs-dismiss='modal' キャンセル
+            button.btn.btn-primary.fw-bold.py-2 type='submit' 保存
+            = link_to 'リセット', partners_path, class: 'btn btn-secondary text-white fw-bold py-2'

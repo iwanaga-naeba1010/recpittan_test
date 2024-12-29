@@ -1,6 +1,6 @@
 main.detail
   .container.pt-2
-    nav[aria-label="breadcrumb"]
+    nav[aria-label='breadcrumb']
       ol.breadcrumb
         li.breadcrumb-item
           = link_to 'トップ', root_path
@@ -14,73 +14,66 @@ main.detail
         li.breadcrumb-item
           = link_to @recreation.title, customers_recreation_path(@recreation.id)
         li.breadcrumb-item.active
-          span.text-secondary
-            | 相談・依頼フォーム
+          span.text-secondary 相談・依頼フォーム
+
   article.container.py-4.px-0
     .row
       .col-md-4
 
-    a.clink[href=""]
+    a.clink[href='']
       i.material-icons
         | navigate_before
-      |  戻る
+      | 戻る
     .row.align-items-center.mt-2
       .col-md-4
-        picture[loading="lazy"]
-          - if @recreation.recreation_images.sliders.length >= 1
-            = image_tag @recreation.recreation_images.sliders&.first&.image&.to_s, class: 'img-fluid'
+        picture[loading='lazy']
+          - recreation_image = @recreation.recreation_images.sliders&.first&.image&.to_s
+          - if recreation_image.present?
+            = image_tag recreation_image, class: 'img-fluid'
       .col-md-7.recreation
         h1.title-b.line-height-140
           = @recreation.title
         .category-tags
           = tag_to_html(@recreation)
-    h3.title-b
-      | レク情報
+    h3.title-b レク情報
     .card
       .card-body.p-0
         .border-bottom.p-2
-          h4.title
-            | 参加人数制限
+          h4.title 参加人数制限
             = recreation_capacity(@recreation.capacity)
           .text-muted
             | ※目安30名様に1名のスタッフ様のサポートをお願い致します。
         .border-bottom.p-2
-          h4.title
-            | 所要時間
+          h4.title 所要時間
             = @recreation.minutes
             | 分
           .text-muted
             | ※ご要望に合わせてご相談が可能です。基本時間のため、ご要望にあわせて調節が可能です。
         .p-2
-          h4.title
-            | 対象者目安
+          h4.title 対象者目安
           - @recreation.tags.targets.each do |tag|
             .text-muted
               | ・
               = tag.name
-    h3.title-b
-      | お借りしたいもの
+    h3.title-b お借りしたいもの
     .card
       .card-body
-
-    p.text-muted
-      = @recreation.borrow_item
-    .text-muted
-      | ※状況にあわせて、変わる可能性がございます。
-    h3.title-b
-      | 持ち込むもの
+        p.text-muted
+          = @recreation.borrow_item
+        .text-muted
+          | ※状況にあわせて、変わる可能性がございます。
+    h3.title-b 持ち込むもの
     .card
       .card-body
-
-    p.item-muted
-      = @recreation.bring_your_own_item
-    .text-muted
-      | ※状況にあわせて、変わる可能性がございます。
+        p.item-muted
+          = @recreation.bring_your_own_item
+        .text-muted
+          | ※状況にあわせて、変わる可能性がございます。
     = render 'shared/home/order_flow'
+
     .col-md-7
       .card
-        .card-header.bg-white
-          | 相談・依頼フォーム
+        .card-header.bg-white 相談・依頼フォーム
         = simple_form_for @order, url: customers_recreation_orders_path(@recreation), html: { class: 'consult mt-3' } do |f|
           = render 'layouts/error_messages', model: f.object
           = f.input :user_id, as: :hidden, input_html: { value: current_user.id }
@@ -91,124 +84,40 @@ main.detail
           = f.input :additional_facility_fee, as: :hidden, input_html: { value: @recreation.additional_facility_fee }
           .card-body
             .form-group
-
-          label.title-b.pb-3[for="consultType"]
-            | 相談と依頼どちらをご希望ですか？
-            span.label.required
-              | 必須
-          br
-          .form-check.form-check-inline
-
-          input#consultTypeConsult.form-check-input[type="radio" name="order[title]" value="まずは相談したい" checked]
-          label.form-check-label[for="consultTypeConsult"]
-            | まずは相談したい
-      .form-check.form-check-inline
-
-    input#consultTypeOrder.form-check-input[type="radio" name="order[title]" value="依頼をしたい"]
-    label.form-check-label[for="consultTypeOrder"]
-      | 依頼をしたい
-    .form-group
-
-    label.title-b.pb-3
-      | 開催したい希望日と時間を選択してください
-    = f.fields_for :order_dates do |ff|
-      .d-flex.flex-row.align-items-stretch.my-2
-        .desired-no.d-flex.align-items-center.justify-content-center
-          div
-            = ff.index + 1
-        .flex-fill.ps-3
-          .row
-            .col-12
-              | 希望日
-            .form-group.col-3
-              = ff.collection_select :year, Year.all, :value, :value , { prompt: '-' }, class:'form-control'
-            .form-group.col-3
-              = ff.collection_select :month, Month.all, :value , :value , { prompt: '-' }, class:'form-control'
-            .form-group.col-3
-              = ff.collection_select :date, Day.all, :value , :value , { prompt: '-' }, class:'form-control'
-          .row.mt-3
-            .form-group.col-2.pe-0
-              = ff.collection_select :start_hour, Hour.all, :value , :value , { prompt: '-' }, class:'form-control'
-            .col-auto.p-0.flex-v-c
-              | :
-            .form-group.col-2.pe-0
-              = ff.collection_select :start_minute, Minute.all, :value , :value , { prompt: '-' }, class:'form-control'
-            .col-auto.p-0.flex-v-c
-              | ~
-            .form-group.col-2.pe-0
-              = ff.collection_select :end_hour, Hour.all, :value , :value , { prompt: '-' }, class:'form-control'
-            .col-auto.p-0.flex-v-c
-              | :
-            .form-group.col-2.pe-0
-              = ff.collection_select :end_minute, Minute.all, :value , :value , { prompt: '-' }, class:'form-control'
-      = render 'layouts/error_messages', model: ff.object
-    .row.pt-3
-
-    label.col-12.title-b.pb-3[for="participant"]
-      | おおよそ参加予定人数をご記入ください
-    .form-group.col-3
-      = f.input :number_of_people, label: false, class: 'form-control'
-    .col-auto.p-0.flex-v-c
-      | 人
-    - if @recreation.kind.online?
-      .row.pt-3
-
-      label.col-12.title-b.pb-3[for="participant"]
-        | 追加で参加する施設がある場合施設数をご記入ください
-      .form-group.col-3
-        = f.input :number_of_facilities, label: false, class: 'form-control'
-      .col-auto.p-0.flex-v-c
-        | 施設
-    .row.pt-3
-
-    label.col-12.title-b.pb-3
-      | 参加対象者の状態目安を教えてください
-    .form-group.col-12
-      - %w[ほぼ自立可 ほぼ要介助 ほぼ認知症 介護度2以下が多い 介護度3以上が多い].each do |tag|
-        .form-check
-          |  <input class="form-check-input" name="order[tags][]" type="checkbox" value="
-          = tag
-          | ">
-        label.form-check-label
-          = tag
-    .row.pt-3
-
-    label.col-12.title-b.pb-3
-      | 都道府県と市区町村を選択してください
-    .form-group.col-6
-      = f.input :prefecture, as: :select, collection: [], input_html: { class: 'form-select p-region' }
-    .form-group.col-6
-      = f.input :city, as: :select, collection: [], input_html: { class: 'form-select p-region' }
-    .form-group.row.pt-3
-
-    label.col-12.title-b.pb-3[for="comment"]
-      | 相談したいことがありましたらご記入ください
-    .col-12[style="position: relative;"]
-      = f.input :message, label: false, as: :text, input_html: { class: "form-control", rows: "7" }
-    - if @recreation.kind.online?
-      .row.pt-3
-
-      label.col-12.title-b.pt-2
-        | ※このレクはオンライン環境が必要です
-    .row.justify-content-center.pt-3
-      .col-10
-        h4.title-b.font-14.color-ba08
-          | 相談・依頼ボタンをクリックしても、正式に開催が決まるわけではありません。
-      .col-6
-        = f.submit 'パートナーにレク開催を相談・依頼する', class: "btn btn-cprimary py-4 rounded-pill w-100 font-14 py-3 px-4 font-weight-bold text-white"
-#priceModalTrigger.d-none[data-bs-toggle="modal" data-bs-target="#priceModal"]
-#priceModal.modal.fade[tabindex="-1" aria-labelledby="contact-price-modalLabel" aria-hidden="true"]
-  .modal-dialog.modal-dialog-centered
-    .modal-content
-      .modal-header
-        h5.modal-title
-          | 相談・依頼フォームの送信が完了しました
-        button.btn-close[type="button" data-bs-dismiss="modal" aria-label="Close"]
-      .modal-body
-        p
-          | レクの相談・依頼フォームの送信が完了しました。
-          br
-          | エブリ・プラスのスタッフがパートナーへ連絡し調整いたします。調整が完了次第エブリ・プラスのスタッフからメールにて返信いたします。今しばらくお待ちください
-      .modal-footer
-        button.btn.btn-cprimary.rounded-pill.text-white[type="button" data-bs-dismiss="modal"]
-          | 閉じる
+              label.title-b.pb-3[for='consultType'] 相談と依頼どちらをご希望ですか？
+                span.label.required 必須
+              br
+              .form-check.form-check-inline
+                input#consultTypeConsult.form-check-input[type='radio' name='order[title]' value='まずは相談したい' checked]
+                label.form-check-label[for='consultTypeConsult'] まずは相談したい
+              .form-check.form-check-inline
+                input#consultTypeOrder.form-check-input[type='radio' name='order[title]' value='依頼をしたい']
+                label.form-check-label[for='consultTypeOrder'] 依頼をしたい
+            .form-group
+              label.title-b.pb-3 開催したい希望日と時間を選択してください
+              = f.fields_for :order_dates do |ff|
+                .d-flex.flex-row.align-items-stretch.my-2
+                  .desired-no.d-flex.align-items-center.justify-content-center
+                    div = ff.index + 1
+                  .flex-fill.ps-3
+                    .row
+                      .col-12 希望日
+                      .form-group.col-3
+                        = ff.collection_select :year, Year.all, :value, :value, { prompt: '-' }, class: 'form-control'
+                      .form-group.col-3
+                        = ff.collection_select :month, Month.all, :value, :value, { prompt: '-' }, class: 'form-control'
+                      .form-group.col-3
+                        = ff.collection_select :date, Day.all, :value, :value, { prompt: '-' }, class: 'form-control'
+                    .row.mt-3
+                      .form-group.col-2.pe-0
+                        = ff.collection_select :start_hour, Hour.all, :value, :value, { prompt: '-' }, class: 'form-control'
+                      .col-auto.p-0.flex-v-c | :
+                      .form-group.col-2.pe-0
+                        = ff.collection_select :start_minute, Minute.all, :value, :value, { prompt: '-' }, class: 'form-control'
+                      .col-auto.p-0.flex-v-c | ~
+                      .form-group.col-2.pe-0
+                        = ff.collection_select :end_hour, Hour.all, :value, :value, { prompt: '-' }, class: 'form-control'
+                      .col-auto.p-0.flex-v-c | :
+                      .form-group.col-2.pe-0
+                        = ff.collection_select :end_minute, Minute.all, :value, :value, { prompt: '-' }, class: 'form-control'
+              = render 'layouts/error_messages', model: ff.object

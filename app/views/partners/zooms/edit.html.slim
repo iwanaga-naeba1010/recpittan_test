@@ -1,8 +1,8 @@
-= render 'shared/partner/header_with_link', title: "Zoom情報入力", path: partners_order_path(@order.id, is_accepted: true)
+= render 'shared/partner/header_with_link', title: 'Zoom情報入力', path: partners_order_path(@order.id, is_accepted: true)
 
-div.p-3
-  div.p-4.text-black
+.p-3
+  .p-4.text-black
     p ご自身でZoomを発行する場合は発行したZoom URLを下記フォームに貼り付けて保存してください。
 
-  div.body.bg-white.border.p-3.mb-3
+  .body.bg-white.border.p-3.mb-3
     = render 'partners/zooms/form', zoom: @zoom, order: @zoom, url: partners_order_zoom_path(@order.id)

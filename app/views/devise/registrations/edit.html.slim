@@ -10,7 +10,7 @@ main.customer
 
           .card-body
             h3.card-title.font-weight-bold.font-16.color-ba10 基本情報
-            = simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, class: "border-top h-adr order" }) do |f|
+            = simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, class: 'border-top h-adr order' }) do |f|
               = f.error_notification
               - resource.errors.full_messages.each do |message|
                 li = message
@@ -45,13 +45,13 @@ main.customer
                     = ff.input :nursing_care_level, label: false
 
                 .row.pt-3
-                  span.p-country-name style="display:none;" Japan
+                  span.p-country-name style='display:none;' Japan
                   .form-group.col-6
-                    label for="postalCode" 郵便番号
+                    label for='postalCode' 郵便番号
                     .input-group.mb-3
                       .form-group.string.optional.user_company_zip.form-group-valid
                         = ff.input :zip, label: false
-                      button#searchAddressWithZipInRegistrationEditForm.btn.btn-outline-secondary.p-postal-code-find type="button" 検索
+                      button#searchAddressWithZipInRegistrationEditForm.btn.btn-outline-secondary.p-postal-code-find type='button' 検索
                   .form-group.col-6
                     = ff.input :prefecture, as: :select, collection: [[ff.object.prefecture, ff.object.prefecture]]
                   .form-group.col-6
@@ -90,7 +90,7 @@ main.customer
                     = ff.input :tel, label: false, input_html: { class: 'form-control' }
 
               .col-md-6
-                label for="facilityName" メールアドレス
+                label for='facilityName' メールアドレス
                 #facilityName.form-control.border-0 = resource.email
 
               .row.pt-3
