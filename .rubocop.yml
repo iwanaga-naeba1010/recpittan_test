@@ -250,6 +250,9 @@ Style/PercentLiteralDelimiters:
 Style/SafeNavigationChainLength:
   Enabled: false
 
+Lint/SelfAssignment:
+  Enabled: false
+
 Lint/AmbiguousBlockAssociation:
   Exclude:
     - "spec/**/*"
