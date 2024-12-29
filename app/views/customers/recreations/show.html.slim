@@ -5,7 +5,7 @@ meta_tags_each_page @recreation.title,
 
 main.detail
   .container.pt-2
-    nav[aria-label="breadcrumb"]
+    nav aria-label="breadcrumb"
       ol.breadcrumb
         li.breadcrumb-item
           = link_to 'トップ', root_path
@@ -22,38 +22,38 @@ main.detail
       .col-md-7
         .card
           .card-body.p-0
-            #carouselExampleControls.carousel.slide[data-ride="carousel"]
+            #carouselExampleControls.carousel.slide data-ride="carousel"
               .carousel-inner
                 - if @recreation.youtube_id?
-                  #youtubeSection.carousel-item.active[data-interval="false"]
+                  #youtubeSection.carousel-item.active data-interval="false"
                     .ratio.ratio-16x9
-                      iframe[src="https://www.youtube.com/embed/#{@recreation.youtube_id}"][allowfullscreen]
+                      iframe src="https://www.youtube.com/embed/#{@recreation.youtube_id}" allowfullscreen=true
                 - @recreation.recreation_images.sliders.each_with_index do |file, i|
-                  .carousel-item(class="#{'active' if !@recreation.youtube_id? && i == 0}")[data-bs-interval="10000"]
+                  .carousel-item class=("active" if !@recreation.youtube_id? && i == 0) data-bs-interval="10000"
                     = image_tag file&.image.to_s, class: 'd-block w-100 custom-height'
               - if @recreation.youtube_id?
-                button.carousel-control-prev[type="button"][data-bs-target="#carouselExampleControls"][data-bs-slide="prev"]
-                  span.carousel-control-prev-icon[aria-hidden="true"]
+                button.carousel-control-prev type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev"
+                  span.carousel-control-prev-icon aria-hidden="true"
                   span.visually-hidden Previous
-              button.carousel-control-next[type="button"][data-bs-target="#carouselExampleControls"][data-bs-slide="next"]
-                span.carousel-control-next-icon[aria-hidden="true"]
+              button.carousel-control-next type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next"
+                span.carousel-control-next-icon aria-hidden="true"
                 span.visually-hidden Next
+
           .card-body.recreation
             .d-flex.flex-column-reverse
               h1.card-title = @recreation.title
               p.card-subtitle = @recreation.second_title
             .d-flex
               = link_to customers_recreation_evaluations_path(@recreation.id), class: "link-text d-flex me-3" do
-                svg[width="18" height="14" viewBox="0 0 18 14"]
-                  path[d="M12.75 4.87054..."][fill="#343A40"]
-                p.ms-1 = "レビュー数#{@evaluations.size}件"
-              div.link-text.d-flex.me-3
-                svg[width="14" height="18" viewBox="0 0 14 18"]
-                  path[d="M3.80339 12.5144..."][fill="#343A40"]
-                p.ms-1.mb-0 = "開催回数#{@recreation.number_of_recreations_held}件"
-              - if user_signed_in? && current_user.role.customer?
-                .me-1.favorite-icon#favoriteIcon_#{@recreation.id}
-                p お気に入りに追加
+                = image_pack_tag 'evaluation_count.svg', width: 18, height: 14
+                p.ms-1 レビュー数#{@evaluations.size}件
+              .link-text.d-flex.me-3
+                = image_pack_tag 'number_of_held.svg', width: 14, height: 18
+                p.ms-1.mb-0 開催回数#{@recreation.number_of_recreations_held}件
+              - if user_signed_in?
+                - if current_user.role.customer?
+                  .me-1.favorite-icon id="favoriteIcon_#{@recreation.id}"
+                  p お気に入りに追加
             .category-tags.pb-2
               = tag_to_html(@recreation, false)
             .description.border-top.py-3
@@ -90,7 +90,6 @@ main.detail
                     .col-md-8
                       h4.instructor-position.h5 = @recreation.profile_title
                       p.instructor-content = simple_format @recreation.profile_description
-
       .col-md-4
         #leftInfo.sticky-md-top
           .card
