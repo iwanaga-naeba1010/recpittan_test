@@ -12,8 +12,7 @@ main.detail
           = link_to 'トップ', root_path
         li.breadcrumb-item
           = link_to '一覧', customers_recreations_path
-        - category_tag = @recreation.tags.categories&.first
-        - if category_tag.present?
+        - if @recreation.tags.categories&.first.present?
           li.breadcrumb-item
             span.text-secondary = @recreation.category_text
         li.breadcrumb-item
@@ -36,7 +35,7 @@ main.detail
               h6.text-black
                 span
                   = image_pack_tag 'evaluation_icon.svg', id: "hamburger", class: "logo-navbar", width: "30", height: "30"
-                | 
+                |
                 = "#{evaluation.report.order.user.company.facility_name}(#{evaluation.report.order.user.company.genre_text})"
               p.my-2.text-black = evaluation.message
               p.evaluation-date.mb-0 = evaluation.created_at.strftime('%Y/%m/%d')

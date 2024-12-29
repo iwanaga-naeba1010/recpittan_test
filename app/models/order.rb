@@ -243,4 +243,20 @@ class Order < ApplicationRecord
     # TODO: エラーハンドリング入れた方が良いかも
     "#{date} #{start_time} ~ #{end_time}"
   end
+
+  def can_proceed_to_confirmation?
+    start_at? && !is_accepted
+  end
+
+  def can_report_completion?
+    start_at.present? && start_at <= Time.current && report.blank?
+  end
+
+  def completion_report_submitted?
+    start_at.present? && start_at <= Time.current && report.present?
+  end
+
+  def confirmation_disabled?
+    (!start_at? && !is_accepted) || (start_at >= Time.current && is_accepted)
+  end
 end

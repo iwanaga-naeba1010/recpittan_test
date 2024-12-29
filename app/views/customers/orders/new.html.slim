@@ -40,13 +40,13 @@ main.detail
       .card-body.p-0
         .border-bottom.p-2
           h4.title
-            | 参加人数制限 
+            | 参加人数制限
             = recreation_capacity(@recreation.capacity)
           .text-muted
             | ※目安30名様に1名のスタッフ様のサポートをお願い致します。
         .border-bottom.p-2
           h4.title
-            | 所要時間 
+            | 所要時間
             = @recreation.minutes
             | 分
           .text-muted
@@ -80,7 +80,7 @@ main.detail
     .col-md-7
       .card
         .card-header.bg-white
-          |  相談・依頼フォーム 
+          | 相談・依頼フォーム
         = simple_form_for @order, url: customers_recreation_orders_path(@recreation), html: { class: 'consult mt-3' } do |f|
           = render 'layouts/error_messages', model: f.object
           = f.input :user_id, as: :hidden, input_html: { value: current_user.id }
@@ -93,7 +93,7 @@ main.detail
             .form-group
 
           label.title-b.pb-3[for="consultType"]
-            |  相談と依頼どちらをご希望ですか？ 
+            | 相談と依頼どちらをご希望ですか？
             span.label.required
               | 必須
           br
@@ -168,7 +168,7 @@ main.detail
         .form-check
           |  <input class="form-check-input" name="order[tags][]" type="checkbox" value="
           = tag
-          | "> 
+          | ">
         label.form-check-label
           = tag
     .row.pt-3
@@ -206,9 +206,9 @@ main.detail
         button.btn-close[type="button" data-bs-dismiss="modal" aria-label="Close"]
       .modal-body
         p
-          |  レクの相談・依頼フォームの送信が完了しました。
+          | レクの相談・依頼フォームの送信が完了しました。
           br
-          |  エブリ・プラスのスタッフがパートナーへ連絡し調整いたします。調整が完了次第エブリ・プラスのスタッフからメールにて返信いたします。今しばらくお待ちください 
+          | エブリ・プラスのスタッフがパートナーへ連絡し調整いたします。調整が完了次第エブリ・プラスのスタッフからメールにて返信いたします。今しばらくお待ちください
       .modal-footer
         button.btn.btn-cprimary.rounded-pill.text-white[type="button" data-bs-dismiss="modal"]
           | 閉じる

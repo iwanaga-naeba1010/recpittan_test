@@ -104,16 +104,17 @@ div.body.bg-white.border.p-3.mb-3
           td.pt-2.pb-2.text-end = number_to_currency(@order.total_price_for_partner)
 
   div.col-md-12
-    - if @order.start_at? && !@order.is_accepted
+    - if @order.can_proceed_to_confirmation?
       p 施設から正式依頼が届いた場合、次へ進むことができます。
       div.text-center.my-3
         = link_to '正式依頼の内容を確認する', confirm_partners_order_path(@order.id), class: 'text-white btn btn-primary btn-lg btn-block w-75 p-3'
-    - elsif (@order.start_at.blank? && !@order.is_accepted) || (@order.start_at >= Time.current && @order.is_accepted)
-    - elsif @order.start_at <= Time.current && @order.report.blank?
-      - path = @order.report.blank? ? new_partners_order_report_path(@order.id) : edit_partners_order_report_path(id: @order.report.id, order_id: @order.id)
+    - elsif @order.confirmation_disabled?
       div.text-center.my-3
-        = link_to '終了報告をする', path, class: 'mx-auto text-white btn btn-primary btn-lg btn-block w-75 p-3'
-    - elsif @order.start_at <= Time.current && @order.report.present?
+        button.text-white.btn.btn-secondary.btn-lg.btn-block.w-75.p-3.disabled 正式依頼の内容を確認する
+    - elsif @order.can_report_completion?
+      div.text-center.my-3
+        = link_to '終了報告をする', new_partners_order_report_path(@order.id), class: 'mx-auto text-white btn btn-primary btn-lg btn-block w-75 p-3'
+    - elsif @order.completion_report_submitted?
       div.text-center.my-3
         button.text-white.btn.btn-secondary.btn-lg.btn-block.w-75.p-3.disabled 終了報告済みです
       div.my-3.p-3.rounded style="background-color: #dcdcdc"

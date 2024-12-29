@@ -10,7 +10,7 @@
     .form-group.col-6
 
   label.string.required[for="invoice_information_zip"]
-    |  郵便番号 
+    | 郵便番号
   abbr[title="required"]
     span.label.required
       | 必須
@@ -18,7 +18,7 @@
     .form-group.string.optional.user_company_zip.form-group-valid
       = f.input :zip, label: false
   button#searchAddressWithZipInRegistrationEditForm.btn.btn-outline-secondary.p-postal-code-find[type="button"]
-    |  検索 
+    | 検索
   .form-group.col-6
     = f.input :prefecture, as: :select, collection: [[f.object.prefecture, f.object.prefecture]]
   .form-group.col-6
