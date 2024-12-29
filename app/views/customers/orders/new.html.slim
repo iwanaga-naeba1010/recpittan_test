@@ -120,4 +120,4 @@ main.detail
                       .col-auto.p-0.flex-v-c | :
                       .form-group.col-2.pe-0
                         = ff.collection_select :end_minute, Minute.all, :value, :value, { prompt: '-' }, class: 'form-control'
-              = render 'layouts/error_messages', model: ff.object
+                = render 'layouts/error_messages', model: ff.object
