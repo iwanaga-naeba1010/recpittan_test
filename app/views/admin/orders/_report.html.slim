@@ -3,36 +3,46 @@
   table
     tr
       td 参加人数
-      td = report.number_of_people
+      td = report&.order&.number_of_people
+
     tr
       td 交通費
-      td = number_to_currency report.transportation_expenses
+      td = number_to_currency report&.order&.transportation_expenses
+
     tr
       td 諸経費
-      td = number_to_currency report.expenses
+      td = number_to_currency report&.order&.expenses
+
     tr
       td 施設へのメッセージ
-      td = report.body
+      td = report&.body
+
   h3 評価
   table
     tr
       td 工夫の満足度
-      td = report.evaluation_ingenuity_text
+      td = report&.evaluation&.ingenuity_text
+
     tr
       td コミュニケーション力の満足度
-      td = report.evaluation_communication_text
+      td = report&.evaluation&.communication_text
+
     tr
       td スムーズさの満足度
-      td = report.evaluation_smoothness_text
+      td = report&.evaluation&.smoothness_text
+
     tr
       td 料金の満足度
-      td = report.evaluation_price_text
+      td = report&.evaluation&.price_text
+
     tr
       td もう一度開催したいと思うか
-      td = report.evaluation_want_to_order_agein_text
+      td = report&.evaluation&.want_to_order_agein_text
+
     tr
       td レクに対しての感想やご意見をご記入ください（※パートナーとサイトに公開されます）
-      td = report.evaluation_message
+      td = report&.evaluation&.message
+
     tr
       td 運営に対してやその他ご意見をご記入ください（※運営のみが確認できます）
-      td = report.evaluation_other_message
+      td = report&.evaluation&.other_message

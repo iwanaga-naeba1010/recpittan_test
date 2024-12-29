@@ -13,6 +13,7 @@ KeepFindersOnTheirOwnModelCheck: { }
 LawOfDemeterCheck:
   ignored_files:
     - "app/views/admin/orders/_report.html.erb"
+    - "app/views/admin/orders/_report.html.slim"
 #LongLineCheck: { max_line_length: 80 }
 MoveCodeIntoControllerCheck: { }
 MoveCodeIntoHelperCheck: { array_count: 3 }

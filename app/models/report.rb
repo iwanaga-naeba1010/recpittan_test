@@ -27,9 +27,9 @@ class Report < ApplicationRecord
   has_one :evaluation, dependent: :destroy, class_name: 'Evaluation'
   accepts_nested_attributes_for :evaluation, allow_destroy: true
 
-  delegate :number_of_people, :transportation_expenses, :expenses, to: :order, prefix: false, allow_nil: true
-  delegate :ingenuity_text, :communication_text, :smoothness_text, :price_text,
-           :want_to_order_agein_text, :message, :other_message, to: :evaluation, prefix: true, allow_nil: true
+  delegate :material_price, :number_of_people, :number_of_facilities, :transportation_expenses, :expenses, :support_price,
+           :additional_facility_fee, :coupon_code, :start_at, to: :order, prefix: true, allow_nil: true
+  delegate :ingenuity, :communication, :smoothness, :price, :message, to: :evaluation, prefix: true, allow_nil: true
 
   enumerize :status, in: { in_progress: 0, denied: 1, accepted: 2 }, default: 0
 end

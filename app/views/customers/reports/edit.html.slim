@@ -17,7 +17,7 @@ main.customer
     .row
       .col-md-4
         = link_to customers_order_path(@report.order.id), class: 'clink' do
-          i.material-icons navigate_before 戻る
+          i.material-icons.navigate_before 戻る
 
     .row.justify-content-center
       .col-8.mb-5
@@ -64,10 +64,12 @@ main.customer
                 .col-lg-9.col-8.py-2.text-end = number_to_currency(@report.order.total_material_price_for_customer)
 
               .row.justify-content-between.border-bottom-dotted.py-2
-                .col-auto 材料費/名
+                .col-auto
+                  | 材料費/名
                   br
                   span.text-muted.font-12.color-ba08 ※材料費は人数分の費用が発生します
-                .col-auto = number_to_currency(@report.order_material_price)
+                .col-auto
+                  = number_to_currency(@report.order_material_price)
 
               .row.justify-content-between.border-bottom-dotted.py-2
                 .col-lg-3.col-4.label.py-2 参加人数
