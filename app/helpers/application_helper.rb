@@ -11,7 +11,7 @@ module ApplicationHelper
     elsif current_user.role.partner?
       partners_path(is_open: true)
     elsif current_user.role.admin?
-      admin_mypage
+      admin_dashboard_path
     end
   end
 

@@ -1,13 +1,12 @@
 = render 'shared/customer/header'
+
 main.customer
   .h-100.mt-4
     .container.order-container
       .row.py-3
-        .col-auto.font-16.font-weight-bold
-          | 依頼履歴
-        .col-auto
-          = @orders.size
-          | 件
+        .col-auto.font-16.font-weight-bold 依頼履歴
+        .col-auto = @orders.size
+        | 件
       .row
         .col-2
           = link_to customers_path(is_open: true, column: :start_at, order: :desc), class: 'btn w-100 btn-cprimary font-14 py-2 px-2 font-weight-bold text-white' do
@@ -16,48 +15,37 @@ main.customer
             | 新→古
         .col-2
           = link_to customers_path(is_open: true, column: :status, order: :asc), class: 'btn w-100 btn-cprimary font-14 py-2 px-2 font-weight-bold text-white' do
-          | ステータス順
-  br
-  | 相談中→終了報告承認済み
-  .col-2
-    = link_to customers_path(is_open: false, order: :asc), class: 'btn w-100 btn-cprimary font-14 py-2 px-2 font-weight-bold text-white' do
-    | 終了した相談
-  br
-  | 一覧
+            | ステータス順
+            br
+            | 相談中→終了報告承認済み
+        .col-2
+          = link_to customers_path(is_open: false, order: :asc), class: 'btn w-100 btn-cprimary font-14 py-2 px-2 font-weight-bold text-white' do
+            | 終了した相談
+            br
+            | 一覧
+
   .h-100
     .container.order-container
       .row.border-bottom.py-3
-        .col-2
-          | 依頼番号
-        .col-2
-          | レク日時
-        .col-1.text-truncate
-          | ステータス
-        .col-3
-          | レク
-        .col-1
-          | 人数
-        .col-1
-          | 合計費用(税別)
+        .col-2 依頼番号
+        .col-2 レク日時
+        .col-1.text-truncate ステータス
+        .col-3 レク
+        .col-1 人数
+        .col-1 合計費用(税別)
         .col-2
       - @orders.each do |order|
         .row.bg-white.my-2.py-2.shadow-sm.align-items-center
-          .col-2
-            = order.id
-          .col-2
-            = dotted_datetime order.start_at
-          .col-1
-            = I18n.t("customer.order.status.#{order.status}")
-          .col-3.text-2-truncate
-            = order.recreation_title
+          .col-2 = order.id
+          .col-2 = dotted_datetime order.start_at
+          .col-1 = I18n.t("customer.order.status.#{order.status}")
+          .col-3.text-2-truncate = order.recreation_title
           .col-1
             = order.number_of_people
             | 人
-          .col-1
-            = number_to_currency(order.total_price_for_customer)
+          .col-1 = number_to_currency(order.total_price_for_customer)
           .col-2
             = link_to '詳細を見る', customers_order_path(order.id), class: 'btn btn-cprimary font-14 py-2 px-4 font-weight-bold text-white'
           .col-12.pt-2
             .bg-ba01.border.rounded.p-3
-              span.font-weight-bold
-                | 連絡事項
+              span.font-weight-bold 連絡事項
