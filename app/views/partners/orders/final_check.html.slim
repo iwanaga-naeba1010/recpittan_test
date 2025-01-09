@@ -10,7 +10,7 @@
     .check-info
       p ■レク開催の確認について
       .d-md-inline-flex
-        p.rectitle-width 開催日時: = dotted_datetime @order.start_at
+        p.rectitle-width 開催日時: = dotted_datetime(@order.start_at)
         p.rectitle-width 法人名: = @order.user.company.name
         p.rectitle-width 施設名: = @order.user.company.facility_name
         p.pl-5 レク名: = @order.recreation_title
@@ -42,7 +42,7 @@
     .check-info
       p ■レク開催の確認について
       .d-md-inline-flex
-        p.rectitle-width 開催日時: = dotted_datetime @order.start_at
+        p.rectitle-width 開催日時: = dotted_datetime(@order.start_at)
         p.rectitle-width 法人名: = @order.user.company.name
         p.rectitle-width 施設名: = @order.user.company.facility_name
         p.pl-5 レク名: = @order.recreation_title
@@ -77,7 +77,7 @@
     .check-info
       p ■レク開催の確認について
       .d-md-inline-flex
-        p.rectitle-width 開催日時: = dotted_datetime @order.start_at
+        p.rectitle-width 開催日時: = dotted_datetime(@order.start_at)
         p.rectitle-width 法人名: = @order.user.company.name
         p.rectitle-width 施設名: = @order.user.company.facility_name
         p.pl-5 レク名: = @order.recreation_title
