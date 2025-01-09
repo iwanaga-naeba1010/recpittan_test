@@ -7,11 +7,11 @@ module ApplicationHelper
 
   def mypage_path
     if current_user.role.customer?
-      customer_mypage_path
+      customers_path
+    elsif current_user.role.partner?
+      partners_path(is_open: true)
     elsif current_user.role.admin?
       admin_mypage
-    else
-      partners_path(is_open: true)
     end
   end
 
