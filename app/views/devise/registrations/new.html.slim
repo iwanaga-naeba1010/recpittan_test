@@ -16,45 +16,48 @@ main.auth
             = simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
               = f.fields_for :company do |ff|
                 .mb-3
-                  = ff.input :name, required: true, input_html: { class: 'form-control' }
+                  = ff.input :name, required: true, input_html: { class: 'form-control ' }
                 .mb-3
-                  = ff.input :genre, required: true, input_html: { class: 'form-control' }
+                  = ff.input :genre, required: true, input_html: { class: 'form-control ' }
                 .mb-3
                   = ff.input :prefecture, required: true, as: :select, collection: Company.prefectures, input_html: { class: 'form-control' }
                 .mb-3
-                  = ff.input :facility_name, required: true, input_html: { class: 'form-control' }
+                  = ff.input :facility_name, required: true, input_html: { class: 'form-control ' }
                 .mb-3
-                  = ff.input :tel, required: true, input_html: { class: 'form-control' }
+                  = ff.input :tel, required: true, input_html: { class: 'form-control ' }
                 .mb-3
-                  = ff.input :person_in_charge_name, required: true, input_html: { class: 'form-control' }
+                  = ff.input :person_in_charge_name, required: true, input_html: { class: 'form-control ' }
                 .mb-3
-                  = ff.input :person_in_charge_name_kana, required: true, input_html: { class: 'form-control' }
+                  = ff.input :person_in_charge_name_kana, required: true, input_html: { class: 'form-control ' }
 
               .mb-3
-                = f.input :title, required: true, input_html: { class: 'form-control' }
+                = f.input :title, required: true, input_html: { class: 'form-control ' }
+
               .mb-3
-                = f.input :email, required: true, input_html: { class: 'form-control' }
+                = f.input :email, required: true, input_html: { class: 'form-control ' }
               .mb-3
                 = f.input :password, required: true, hint: ("#{@minimum_password_length} 文字以上で入力してください" if @minimum_password_length), input_html: { autocomplete: 'new-password' }
               .mb-3
                 = f.input :password_confirmation, required: true, input_html: { autocomplete: 'new-password' }
 
               .form-check.mb-3
-                input.form-check-input type='checkbox'
+                input.form-check-input[type="checkbox"]
                 label.form-check-label
-                  = link_to '利用規約', 'https://everyplus.jp/tos/index.html', class: 'clink', target: '_blank', rel: 'noopener'
+                  = link_to '利用規約', 'https://everyplus.jp/tos/index.html', class: 'clink', target: '_blank', rel: :noopener
                   | に同意します。
+
               .form-check.mb-3
-                input.form-check-input type='checkbox' name='privacyPolicy' value='true' class="#{formPrivacyPolicyClass}" id='privacyPolicy' #{privacyPolicy}
-                label.form-check-label[for='privacyPolicy']
-                  = link_to 'プライバシーポリシー', 'https://everyplus.jp/privacy', class: 'clink', target: '_blank', rel: 'noopener'
+                input.form-check-input[type="checkbox" name="privacyPolicy" value="true" id="privacyPolicy"]
+                label.form-check-label[for="privacyPolicy"]
+                  = link_to 'プライバシーポリシー', 'https://everyplus.jp/privacy', class: 'clink', target: '_blank', rel: :noopener
                   | に同意します。
+
               .form-check.mb-3
-                input.form-check-input type='checkbox'
+                input.form-check-input[type='checkbox']
                 label.form-check-label
                   | 介護サービス提供者、障害福祉サービス提供者、その他これらに準ずる施設として登録することに同意します。<br>
                   | その他サービスで登録を希望される方は運営まで問い合わせをお願い致します。
-              = recaptcha_tags
+
               .row.justify-content-md-center.mt-3
                 .col-md-3
                   = f.button :submit, '登録', class: 'btn btn-cprimary rounded-pill w-100 font-14 py-3 px-4 font-weight-bold text-white'
