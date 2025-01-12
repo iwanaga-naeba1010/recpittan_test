@@ -1,5 +1,10 @@
-meta_tags_each_page '300種類を超える業界No1の介護レクリーションマッチングサイト',
-                    'エブリ・プラスは300種類以上の介護レクリエーションを提供しているマッチングサイトです。複数条件から簡単にレクリエーションを簡単検索・発注することが可能です'
+ruby:
+ meta_tags_each_page(
+   '300種類を超える業界No1の介護レクリーションマッチングサイト',
+   'エブリ・プラスは300種類以上の介護レクリエーションを提供しているマッチングサイトです。複数条件から簡単にレクリエーションを簡単検索・発注することが可能です',
+   nil,
+   nil
+ )
 
 main.list
   = form_with url: customers_recreations_path, method: :get, class: 'd-flex search border-top shadow', local: true do
