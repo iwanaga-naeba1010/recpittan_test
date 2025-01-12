@@ -24,9 +24,9 @@ main.list
             = link_to rp.title, customers_recreation_plan_path(rp.id), class: 'text-black fw-bold text-decoration-none'
             - total_price_pair = @recreation_plans_with_total_price.find { |plan, _price| plan == rp }
             - total_price = total_price_pair ? total_price_pair[1] : 0
-            p.mb-0 レク回数: = "#{rp.recreations.size}回"
-            p.mb-0 月あたりの金額: ¥= "#{number_with_delimiter(rp.monthly_fee)}~"
-            p.mb-0 全体金額: ¥= "#{number_with_delimiter(total_price)}~"
+            p.mb-0 = "レク回数: #{rp.recreations.size}回"
+            p.mb-0 = "月あたりの金額: ¥#{number_with_delimiter(rp.monthly_fee)}~"
+            p.mb-0 = "全体金額: ¥#{number_with_delimiter(total_price)}~"
             .d-flex
               - rp.tags.each do |tag|
                 p.d-inline-block.px-2.border.rounded.fw-bold.me-2
