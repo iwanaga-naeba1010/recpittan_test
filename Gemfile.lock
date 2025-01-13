@@ -256,7 +256,7 @@ GEM
       retriable (>= 2.0, < 4.a)
     google-apis-discovery_v1 (0.19.0)
       google-apis-core (>= 0.15.0, < 2.a)
-    google-apis-generator (0.15.1)
+    google-apis-generator (0.16.0)
       activesupport (>= 5.0)
       gems (~> 1.2)
       google-apis-core (>= 0.15.0, < 2.a)
