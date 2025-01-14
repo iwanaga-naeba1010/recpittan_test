@@ -8,6 +8,7 @@ main.chat
       .row.justify-content-center.pt-2
         .col-auto.date
           = date chat.created_at
+    / パートナー
     - if chat.user_role.partner?
       .mychat
         .name
@@ -23,6 +24,7 @@ main.chat
               = chat.file.file.filename
           .time
             = time chat.created_at
+    / 施設
     - elsif chat.user_role.customer?
       .your-chat
         .col-md-auto
