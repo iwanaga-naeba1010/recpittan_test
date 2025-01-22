@@ -1,14 +1,13 @@
 / The container tag
-/ available local variables
+/ - available local variables
 /   current_page:  a page object for the currently displayed page
 /   total_pages:   total number of pages
 /   per_page:      number of items to fetch per page
 /   remote:        data-remote
 /   paginator:     the paginator that renders the pagination tags inside
+
 = paginator.render do
-  nav[aria-label="ページナビゲーション"].mt-3
+  nav.mt-3 aria-label="ページナビゲーション"
     ul.pagination.justify-content-center
-      li.page-item.mx-4
-        = prev_page_tag
-      li.page-item.mx-4
-        = next_page_tag
+      li.page-item.mx-4 = prev_page_tag
+      li.page-item.mx-4 = next_page_tag
