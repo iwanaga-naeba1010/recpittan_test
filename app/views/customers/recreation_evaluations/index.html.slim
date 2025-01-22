@@ -84,8 +84,10 @@ main.detail
 
             = render 'shared/home/order_flow'
 
+  / note: trigger経由でpricemodalを発火
   #pricemodaltrigger.d-none[data-bs-toggle='modal' data-bs-target='#pricemodal']
 
+  / note: reactで制御しているが、要素をnestさせるとclick不可の状態に陥ることあるので、railsで使っている。
   #pricemodal.modal.fade[tabindex='-1' aria-labelledby='contact-price-modallabel' aria-hidden='true']
     .modal-dialog.modal-dialog-centered
       .modal-content

@@ -121,9 +121,11 @@ main.detail
                     .text-muted = "・#{prefecture_name}"
               .action-area
                 - if user_signed_in?
+                  / 0円の場合はslackに飛ばしで営業が対応
                   - if @recreation.is_public_price
                     = link_to '相談・依頼する', new_customers_recreation_order_path(@recreation.id), class: 'btn-cpr'
                   - else
+                    / React呼び出し
                     #ConsultRecreation[data-recreationId=@recreation.id]
                 - else
                   = link_to 'ログインして相談・依頼する', new_user_session_path, class: 'btn-cpr'
@@ -146,7 +148,9 @@ main.detail
         .my-3.p-2.d-inline-block.rounded.text-dark[style='background-color: #f5f2f0;']
           = link_to '全てのレビューを見る', customers_recreation_evaluations_path(@recreation.id), class: 'fw-bold', style: 'color: #343a40; text-decoration: none;'
 
+/ NOTE: trigger経由でpriceModalを発火
 #priceModalTrigger.d-none[data-bs-toggle='modal'][data-bs-target='#priceModal']
+/ NOTE: reactで制御しているが、要素をnestさせるとclick不可の状態に陥ることあるので、railsで使っている。
 #priceModal.modal.fade[tabindex='-1'][aria-labelledby='contact-price-modalLabel'][aria-hidden='true']
   .modal-dialog.modal-dialog-centered
     .modal-content

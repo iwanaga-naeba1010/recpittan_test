@@ -124,7 +124,7 @@ main.customer
 
               .col-3.label.pt-3 開催日時
               .col-9.pt-3 = dotted_datetime(@report.order_start_at)
-          <!-- フォーム -->
+          / フォーム
           .card-body
             = simple_form_for @report, url: customers_report_path(@report), input: { class: 'order' } do |f|
               = f.fields_for :evaluation do |ff|
@@ -177,7 +177,7 @@ main.customer
               .d-none
                 = f.submit '送信'
 
-<!-- モーダル -->
+/ モーダル
 .modal.fade#approveModal[tabindex='-1' aria-labelledby='approveModalLabel' aria-hidden='true']
   .modal-dialog
     .modal-content

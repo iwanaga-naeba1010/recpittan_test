@@ -8,17 +8,21 @@
 
   .tab-content.h-100
     .tab-pane.fade.show.active id="consulting"
+      / FIXME: viewでdbにアクセスしているので、controllerで取得するように修正
       - @orders.where(status: %w[in_progress waiting_for_a_reply_from_partner waiting_for_a_reply_from_facility facility_request_in_progress request_denied]).where(is_open: true).find_each do |order|
         = render 'shared/partner/order/card', order: order
 
     .tab-pane.fade id="confirmed"
+      / FIXME: viewでdbにアクセスしているので、controllerで取得するように修正
       - @orders.where(status: 'waiting_for_an_event_to_take_place').where(is_open: true).find_each do |order|
         = render 'shared/partner/order/card', order: order
 
     .tab-pane.fade id="finished"
+      / FIXME: viewでdbにアクセスしているので、controllerで取得するように修正
       - @orders.where(status: %w[unreported_completed final_report_admits_not finished invoice_issued paid canceled travled]).find_each do |order|
         = render 'shared/partner/order/card', order: order
 
+  / 絞り込みボタン
   button.btn.btn-white.bg-white.text-primary.fw-bold.border.filter-btn.py-2.shadow-sm.pe-auto type="button" data-bs-toggle="modal" data-bs-target="#filterModal" 絞り込み
 
   = render 'shared/partner/order/search_modal', recreations: @recreations, customers: @customers

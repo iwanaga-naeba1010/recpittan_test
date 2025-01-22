@@ -109,9 +109,11 @@
       p 施設から正式依頼が届いた場合、次へ進むことができます。
       .text-center.my-3
         = link_to '正式依頼の内容を確認する', confirm_partners_order_path(@order.id), class: 'text-white btn btn-primary btn-lg btn-block w-75 p-3'
+    / 日字指定 && 承認していない || 日時が未来 && 承認した
     - elsif @order.confirmation_disabled?
       .text-center.my-3
         button.text-white.btn.btn-secondary.btn-lg.btn-block.w-75.p-3.disabled 正式依頼の内容を確認する
+    / 開始時間が過ぎている && レポートがない
     - elsif @order.can_report_completion?
       .text-center.my-3
         = link_to '終了報告をする', new_partners_order_report_path(@order.id), class: 'mx-auto text-white btn btn-primary btn-lg btn-block w-75 p-3'

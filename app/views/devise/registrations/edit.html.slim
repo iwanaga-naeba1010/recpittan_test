@@ -53,6 +53,7 @@ main.customer
                         = ff.input :zip, label: false
                       button#searchAddressWithZipInRegistrationEditForm.btn.btn-outline-secondary.p-postal-code-find type='button' 検索
                   .form-group.col-6
+                    / NOTE: 初期値として必須なので削除だめ
                     = ff.input :prefecture, as: :select, collection: [[ff.object.prefecture, ff.object.prefecture]]
                   .form-group.col-6
                     label 市区町村
