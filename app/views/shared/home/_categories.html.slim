@@ -1,0 +1,15 @@
+h5.mt-5.font-weight-bold.text-black.d-none.d-lg-block カテゴリからレクを探す
+article.container.categorys.d-none.d-lg-block.shadow
+  .d-flex.justify-content-around
+    - categories.each do |category|
+      .category
+        = link_to customers_recreations_path(q: { category_eq: category[:id] }), class: 'card border-0 text-decoration-none recreation-category-item' do
+          .card-body.zoom.px-0
+            picture
+              = image_pack_tag "media/images/category/#{category[:image_name]}", class: 'rounded-circle', alt: '', loading: 'lazy'
+            h3.card-title.pt-3 = category[:title]
+            h6.card-subtitle.pt-2.mb-2.text-muted
+              p
+                = category[:descriptions][0]
+                br
+                = category[:descriptions][1]

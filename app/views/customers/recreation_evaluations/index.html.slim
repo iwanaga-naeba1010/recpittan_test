@@ -1,0 +1,101 @@
+ruby:
+  meta_tags_each_page(
+    @recreation.title,
+    @recreation.description,
+    nil,
+    @recreation.recreation_images&.sliders&.first&.image&.to_s
+  )
+
+main.detail
+  .container.pt-2
+    nav[aria-label='breadcrumb']
+      ol.breadcrumb
+        li.breadcrumb-item
+          = link_to 'トップ', root_path
+        li.breadcrumb-item
+          = link_to '一覧', customers_recreations_path
+        - if @recreation.tags.categories&.first.present?
+          li.breadcrumb-item
+            span.text-secondary = @recreation.category_text
+        li.breadcrumb-item
+          span.text-secondary = @recreation.title
+        li.breadcrumb-item.active
+          span.text-secondary レビュー詳細
+
+  article.container.py-4.px-0
+    .row
+      .col-md-7
+        = link_to customers_recreation_path(@recreation.id), class: 'return-link' do
+          p
+            = image_pack_tag 'return.svg'
+            | 戻る
+        h3.title-b.font-18.my-1 = "#{@evaluations.size}件のレビュー"
+        hr
+        - @evaluations.each do |evaluation|
+          .border.rounded.shadow.mb-4.w-100
+            .mx-2.p-3
+              h6.text-black
+                span
+                  = image_pack_tag 'evaluation_icon.svg', id: 'hamburger', class: 'logo-navbar', width: '30', height: '30'
+                |
+                = "#{evaluation.report.order.user.company.facility_name}(#{evaluation.report.order.user.company.genre_text})"
+              p.my-2.text-black = evaluation.message
+              p.evaluation-date.mb-0 = evaluation.created_at.strftime('%Y/%m/%d')
+            - if evaluation.evaluation_reply
+              .border-top.w-100
+                .mx-2.p-3
+                  .w-50.d-flex
+                    .align-items-center
+                      = image_tag evaluation.report.order.recreation.profile&.image.to_s, width: '40', height: '40', class: 'rounded-circle', loading: 'lazy'
+                    .d-flex.align-items-center.ms-2
+                      h6.text-black.m-0 = evaluation.report.order.recreation.user.username
+                  p.my-2.text-black = evaluation.evaluation_reply_message
+                  p.evaluation-date.mb-0 = evaluation.evaluation_reply_created_at.strftime('%Y/%m/%d')
+
+      .col-md-4
+        #leftinfo.sticky-md-top
+          .card
+            .card-body
+              - if @recreation.is_public_price
+                h3.font-24
+                  = "#{price_pipe(@recreation.price, current_user)} / 1回あたり"
+                - if @recreation.material_price.present? && @recreation.material_price != 0
+                  p
+                    = "材料費 #{price_pipe(@recreation.material_price, current_user)} / 1名あたり"
+              - else
+                h3.title-b.font-20 料金はお問い合わせください
+                .text-muted レク料金は非公開となっています。知りたい場合はお問い合わせをしてください。
+              .border.border-bottom-0.p-3
+                h4.title 所要時間 = "#{@recreation.minutes}分"
+                .text-muted ※ご要望に合わせてご相談が可能です。基本時間のため、ご要望にあわせて調節が可能です。
+              .border.p-3
+                h4.title 対象者目安
+                - @recreation.tags.targets.each do |target|
+                  .text-muted = "・#{target.name}"
+
+              .action-area
+                - if user_signed_in?
+                  - if @recreation.is_public_price
+                    = link_to '相談・依頼する', new_customers_recreation_order_path(@recreation.id), class: 'btn-cpr'
+                  - else
+                    #consultrecreation[data-recreationid=@recreation.id]
+                - else
+                  = link_to 'ログインして相談・依頼する', new_user_session_path, class: 'btn-cpr'
+
+            = render 'shared/home/order_flow'
+
+  / note: trigger経由でpricemodalを発火
+  #pricemodaltrigger.d-none[data-bs-toggle='modal' data-bs-target='#pricemodal']
+
+  / note: reactで制御しているが、要素をnestさせるとclick不可の状態に陥ることあるので、railsで使っている。
+  #pricemodal.modal.fade[tabindex='-1' aria-labelledby='contact-price-modallabel' aria-hidden='true']
+    .modal-dialog.modal-dialog-centered
+      .modal-content
+        .modal-header
+          h5.modal-title 料金をお問い合わせしました
+          button.btn-close[data-bs-dismiss='modal' aria-label='close']
+        .modal-body
+          p
+            | 「#{@recreation.title}」の料金をお問い合わせしました。エブリ・プラスのスタッフからメールで返信致します。少々お待ちください。
+        .modal-footer
+          button.btn.btn-cprimary.rounded-pill.text-white[data-bs-dismiss='modal'] 閉じる

@@ -1,0 +1,163 @@
+ruby:
+  meta_tags_each_page(
+    @recreation.title,
+    @recreation.description,
+    nil,
+    @recreation.recreation_images&.sliders&.first&.image&.to_s
+  )
+
+main.detail
+  .container.pt-2
+    nav aria-label='breadcrumb'
+      ol.breadcrumb
+        li.breadcrumb-item
+          = link_to 'トップ', root_path
+        li.breadcrumb-item
+          = link_to '一覧', customers_recreations_path
+        - if @recreation.tags.categories&.first.present?
+          li.breadcrumb-item
+            span.text-secondary = @recreation.category_text
+        li.breadcrumb-item.active
+          span.text-secondary = @recreation.title
+
+  article.container.py-4.px-0
+    .row
+      .col-md-7
+        .card
+          .card-body.p-0
+            #carouselExampleControls.carousel.slide data-ride='carousel'
+              .carousel-inner
+                - if @recreation.youtube_id?
+                  #youtubeSection.carousel-item.active data-interval='false'
+                    .ratio.ratio-16x9
+                      iframe src="https://www.youtube.com/embed/#{@recreation.youtube_id}" allowfullscreen=true
+                - @recreation.recreation_images.sliders.each_with_index do |file, i|
+                  .carousel-item class=('active' if !@recreation.youtube_id? && i == 0) data-bs-interval='10000'
+                    = image_tag file&.image.to_s, class: 'd-block w-100 custom-height'
+              - if @recreation.youtube_id?
+                button.carousel-control-prev type='button' data-bs-target='#carouselExampleControls' data-bs-slide='prev'
+                  span.carousel-control-prev-icon aria-hidden='true'
+                  span.visually-hidden Previous
+              button.carousel-control-next type='button' data-bs-target='#carouselExampleControls' data-bs-slide='next'
+                span.carousel-control-next-icon aria-hidden='true'
+                span.visually-hidden Next
+
+          .card-body.recreation
+            .d-flex.flex-column-reverse
+              h1.card-title = @recreation.title
+              p.card-subtitle = @recreation.second_title
+            .d-flex
+              = link_to customers_recreation_evaluations_path(@recreation.id), class: 'link-text d-flex me-3' do
+                = image_pack_tag 'evaluation_count.svg', width: 18, height: 14
+                p.ms-1 レビュー数#{@evaluations.size}件
+              .link-text.d-flex.me-3
+                = image_pack_tag 'number_of_held.svg', width: 14, height: 18
+                p.ms-1.mb-0 開催回数#{@recreation.number_of_recreations_held}件
+              - if user_signed_in? && current_user.role.customer?
+                .me-1.favorite-icon id="favoriteIcon_#{@recreation.id}"
+                p お気に入りに追加
+            .category-tags.pb-2
+              = tag_to_html(@recreation, false)
+            .description.border-top.py-3
+              h3 このようなことをやります
+              p = simple_format @recreation.description
+            .border-top.py-3
+              h3 当日の流れとタイムスケジュール
+              p = simple_format @recreation.flow_of_day
+            - unless user_signed_in?
+              .border-top.py-3
+                h3 このレクリエーションの講師
+                = link_to new_user_session_path do
+                  = image_pack_tag 'partner-info.png', class: 'w-100'
+            - if user_signed_in?
+              .r-t-a
+                h3 お借りしたいもの
+                .text-muted ※状況にあわせて、変わる可能性がございます。
+                p.item-text = simple_format @recreation.borrow_item
+              .r-t-a
+                h3 持ち込むもの
+                .text-muted ※状況にあわせて、変わる可能性がございます。
+                p.item-text = simple_format @recreation.bring_your_own_item
+              .r-t-a
+                h3 その他
+                .text-muted ※状況にあわせて、変わる可能性がございます。
+                p.item-text = simple_format @recreation.extra_information
+              - if @recreation.profile.present?
+                div
+                  h3 このレクリエーションの講師
+                  .row.align-items-center
+                    .col-md-4.text-center
+                      = image_tag @recreation.profile_image&.to_s, class: 'align-self-center rounded-circle', width: 90
+                      h4 = @recreation.profile_name
+                    .col-md-8
+                      h4.instructor-position.h5 = @recreation.profile_title
+                      p.instructor-content = simple_format @recreation.profile_description
+      .col-md-4
+        #leftInfo.sticky-md-top
+          .card
+            .card-body
+              - if @recreation.is_public_price
+                h3.font-24
+                  = "#{price_pipe(@recreation.price, current_user)} / 1回あたり"
+                - if @recreation.material_price.present? && @recreation.material_price != 0
+                  p = "材料費 #{price_pipe(@recreation.material_price, current_user)} / 1名あたり"
+              - else
+                h3.title-b.font-20 料金はお問い合わせください
+                .text-muted レク料金は非公開となっています。知りたい場合はお問い合わせをしてください。
+              .border.border-bottom-0.p-3
+                h4.title 参加人数制限 #{recreation_capacity(@recreation.capacity)}
+                .text-muted ※目安30名様に1名のスタッフ様のサポートをお願い致します。
+              .border.border-bottom-0.p-3
+                h4.title 所要時間 #{@recreation.minutes}分
+                .text-muted ※ご要望に合わせてご相談が可能です。基本時間のため、ご要望にあわせて調節が可能です。
+              .border.p-3
+                h4.title 対象者目安
+                - @recreation.tags.targets.each do |target|
+                  .text-muted = "・#{target.name}"
+              - if @recreation.kind.visit? && @recreation.recreation_prefectures.exists?
+                .border.p-3
+                  h4.title 対象エリア
+                  - @recreation.recreation_prefectures.pluck(:name).uniq.each do |prefecture_name|
+                    .text-muted = "・#{prefecture_name}"
+              .action-area
+                - if user_signed_in?
+                  / 0円の場合はslackに飛ばしで営業が対応
+                  - if @recreation.is_public_price
+                    = link_to '相談・依頼する', new_customers_recreation_order_path(@recreation.id), class: 'btn-cpr'
+                  - else
+                    / React呼び出し
+                    #ConsultRecreation[data-recreationId=@recreation.id]
+                - else
+                  = link_to 'ログインして相談・依頼する', new_user_session_path, class: 'btn-cpr'
+            = render 'shared/home/order_flow'
+
+    .md-row
+      .col-md-11
+        .row
+          h5.title-b.font-18.mt-3.mb-0 = "#{@evaluations.size}件のレビュー"
+          - @evaluations.latest(3).each do |evaluation|
+            .col-md-4.position-relative
+              .evaluation-card.col-11.border.rounded.shadow.mt-4.px-2.w-100
+                .p-3
+                  h6.text-black
+                    span
+                      = image_pack_tag 'evaluation_icon.svg', id: 'hamburger', class: 'logo-navbar', width: '30', height: '30'
+                    = "#{evaluation.report.order.user.company.facility_name}(#{evaluation.report.order.user.company.genre_text})"
+                  p.my-2.text-black = evaluation.message.truncate(120, omission: '...')
+                  p.evaluation-date.mb-3.position-absolute.bottom-0 = evaluation.created_at.strftime('%Y/%m/%d')
+        .my-3.p-2.d-inline-block.rounded.text-dark[style='background-color: #f5f2f0;']
+          = link_to '全てのレビューを見る', customers_recreation_evaluations_path(@recreation.id), class: 'fw-bold', style: 'color: #343a40; text-decoration: none;'
+
+/ NOTE: trigger経由でpriceModalを発火
+#priceModalTrigger.d-none[data-bs-toggle='modal'][data-bs-target='#priceModal']
+/ NOTE: reactで制御しているが、要素をnestさせるとclick不可の状態に陥ることあるので、railsで使っている。
+#priceModal.modal.fade[tabindex='-1'][aria-labelledby='contact-price-modalLabel'][aria-hidden='true']
+  .modal-dialog.modal-dialog-centered
+    .modal-content
+      .modal-header
+        h5.modal-title 料金をお問い合わせしました
+        button.btn-close[data-bs-dismiss='modal'][aria-label='Close']
+      .modal-body
+        p = "「#{@recreation.title}」の料金をお問い合わせしました。エブリ・プラスのスタッフからメールで返信致します。少々お待ちください。"
+      .modal-footer
+        button.btn.btn-cprimary.rounded-pill.text-white[data-bs-dismiss='modal'] 閉じる
