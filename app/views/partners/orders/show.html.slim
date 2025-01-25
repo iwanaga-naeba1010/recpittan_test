@@ -1,0 +1,138 @@
+- path = @order.is_accepted ? partners_order_path(id: @order.id, is_accepted: @order.is_accepted) : chat_partners_order_path(@order.id)
+= render 'shared/partner/header_with_link', title: @order.recreation.profile_name.to_s, path: path
+
+.body.bg-white.border.p-3.mb-3
+  h4.text-black.font-weight-bold 施設情報
+  table.w-100
+    thead
+      tr.border-bottom
+        td.pt-2.pb-2.w-25 施設名
+        td.pt-2.pb-2.text-black.text-end = @order.user.company.facility_name
+      tr.border-bottom
+        td.pt-2.pb-2.w-25 法人名
+        td.pt-2.pb-2.text-black.text-end = @order.user.company.name
+      tr.border-bottom
+        td.pt-2.pb-2.w-25 事業所種別
+        td.pt-2.pb-2.text-black.text-end = @order.user.company.genre_text
+      tr.border-bottom
+        td.pt-2.pb-2.w-25 電話番号
+        td.pt-2.pb-2.text-black.text-end = @order.user.company.tel
+      tr.border-bottom
+        td.pt-2.pb-2.w-25 施設の特徴
+        td.pt-2.pb-2.text-black.text-end = @order.user.company.feature
+      tr.border-bottom
+        td.pt-2.pb-2.w-25 HP
+        td.pt-2.pb-2.text-black.text-end = link_to @order.user.company.url, @order.user.company.url, target: '_blank', rel: 'noopener'
+      tr.border-bottom
+        td.pt-2.pb-2.w-25 施設定員
+        td.pt-2.pb-2.text-black.text-end = "#{@order.user.company.capacity} 人"
+      tr.border-bottom
+        td.pt-2.pb-2.w-25 平均介護度
+        td.pt-2.pb-2.text-black.text-end = @order.user.company.nursing_care_level
+      tr.border-bottom
+        td.pt-2.pb-2.w-25 レクへの要望
+        td.pt-2.pb-2.text-black.text-end = @order.user.company.request
+      tr.border-bottom
+        td.pt-2.pb-2.w-25 貸出可能品
+        td.pt-2.pb-2.text-black.text-end = @order.user.company.tags.map(&:name).join(', ')
+      tr.border-bottom
+        td.pt-2.pb-2.w-25 担当者
+        td.pt-2.pb-2.text-black.text-end = @order.user.company.person_in_charge_name
+      tr.border-bottom
+        td.pt-2.pb-2.w-25 住所
+        td.pt-2.pb-2.text-black.text-end = @order.user.company.full_address
+
+  - if @order.zoom.present?
+    div
+      h4.text-black.font-weight-bold.pt-3 Zoom情報
+      .pt-2.pb-2.text-black.text-end
+        - zoom_link = Rinku.auto_link(h(@order.zoom_url), :all, 'target="_blank"')
+        = sanitize(zoom_link, attributes: %w[href target rel])
+
+  div
+    h4.text-black.font-weight-bold.pt-3 レク情報
+    table.w-100
+      thead
+        tr.border-bottom
+          td.pt-2.pb-2.w-25 レク名
+          td.pt-2.pb-2.text-black.text-end = @order.recreation_title
+        tr.border-bottom
+          td.pt-2.pb-2.w-25 レク環境
+          td.pt-2.pb-2.text-black.text-end = @order.recreation.kind_text
+        tr.border-bottom
+          td.pt-2.pb-2.w-25 ステータス
+          td.pt-2.pb-2.text-black.text-end = I18n.t("partner.order.status.#{@order.status}")
+        tr.border-bottom
+          td.pt-2.pb-2.w-25 開催日時
+          td.pt-2.pb-2.text-black.text-end = @order.desired_time
+
+  .border.m-2.p-2
+    h4.text-black.font-weight-bold 受取額
+    table.w-100
+      thead
+        tr.border-bottom
+          td.pt-2.pb-2.text-black.w-75 開催費
+          td.pt-2.pb-2.text-black.text-end = number_to_currency(@order.amount)
+        tr.border-bottom
+          td.pt-2.pb-2.text-black.w-75 材料費(合計)
+          td.pt-2.pb-2.text-black.text-end = number_to_currency(@order.total_material_price_for_partner)
+        tr.border-bottom
+          td.pt-2.pb-2.text-black.w-75 材料費/名
+          td.pt-2.pb-2.text-black.text-end = number_to_currency(@order.material_amount)
+        tr.border-bottom
+          td.pt-2.pb-2.text-black.w-75 参加人数
+          td.pt-2.pb-2.text-black.text-end = "#{@order.number_of_people}人"
+        tr.border-bottom
+          td.pt-2.pb-2.text-black.w-75 交通費
+          td.pt-2.pb-2.text-black.text-end = number_to_currency(@order.transportation_expenses)
+        tr.border-bottom
+          td.pt-2.pb-2.text-black.w-75 諸経費
+          td.pt-2.pb-2.text-black.text-end = number_to_currency(@order.expenses_for_partner)
+        tr.border-bottom
+          td.pt-2.pb-2.text-black.w-75 施設追加費用(合計)
+          td.pt-2.pb-2.text-black.text-end = number_to_currency(@order.total_facility_price_for_partner)
+        tr.border-bottom
+          td.pt-2.pb-2.text-black.w-75 施設追加費用/施設
+          td.pt-2.pb-2.text-black.text-end = number_to_currency(@order.additional_facility_fee_for_partner)
+        tr.border-bottom
+          td.pt-2.pb-2.text-black.w-75 施設追加数
+          td.pt-2.pb-2.text-black.text-end = "#{@order.number_of_facilities}施設"
+        tr.border-bottom
+          td.pt-2.pb-2.text-black.w-75 Zoom ID発行料
+          td.pt-2.pb-2.text-black.text-end = "-#{number_to_currency(@order.zoom_cost)}"
+        tr.border-bottom.text-black.font-weight-bold
+          td.pt-2.pb-2 合計(税込)
+          td.pt-2.pb-2.text-end = number_to_currency(@order.total_price_for_partner)
+
+  .col-md-12
+    - if @order.can_proceed_to_confirmation?
+      p 施設から正式依頼が届いた場合、次へ進むことができます。
+      .text-center.my-3
+        = link_to '正式依頼の内容を確認する', confirm_partners_order_path(@order.id), class: 'text-white btn btn-primary btn-lg btn-block w-75 p-3'
+    / 日字指定 && 承認していない || 日時が未来 && 承認した
+    - elsif @order.confirmation_disabled?
+      .text-center.my-3
+        button.text-white.btn.btn-secondary.btn-lg.btn-block.w-75.p-3.disabled 正式依頼の内容を確認する
+    / 開始時間が過ぎている && レポートがない
+    - elsif @order.can_report_completion?
+      .text-center.my-3
+        = link_to '終了報告をする', new_partners_order_report_path(@order.id), class: 'mx-auto text-white btn btn-primary btn-lg btn-block w-75 p-3'
+    - elsif @order.completion_report_submitted?
+      .text-center.my-3
+        button.text-white.btn.btn-secondary.btn-lg.btn-block.w-75.p-3.disabled 終了報告済みです
+      .my-3.p-3.rounded style="background-color: #dcdcdc"
+        p ※振込について
+        | 振込は翌々月末に行われます。土日祝日の場合次の営業日となります。
+    - else
+      .text-center.my-3
+        button.text-white.btn.btn-secondary.btn-lg.btn-block.w-75.p-3.disabled 正式依頼の内容を確認する
+
+  - if @order.is_open?
+    .col-md-12
+      .text-center.my-3
+        = button_to 'この相談を終了する', partners_order_path(@order), params: { order: { is_open: false } }, method: :put, data: { confirm: 'この相談を終了しますか？終了すると、開催の相談一覧では非表示となります' }, class: 'text-white btn btn-danger btn-lg btn-block w-75 p-3'
+
+  - unless @order.is_open?
+    .col-md-12
+      .text-center.my-3
+        = button_to 'この相談を再開する', partners_order_path(@order), params: { order: { is_open: true } }, method: :put, data: { confirm: 'この相談を再開しますか？' }, class: 'text-white btn btn-primary btn-lg btn-block w-75 p-3'

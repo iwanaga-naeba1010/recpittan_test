@@ -1,0 +1,17 @@
+exclude:
+  - 'node_modules/**/*'
+  - 'vendor/**/*'
+
+linters:
+  LineLength:
+    enabled: true
+    max: 300
+  RuboCop:
+    enabled: true
+    config_file: '.rubocop.yml'
+  NestedControlStatements:
+    enabled: false
+  ClassAttributeWithStaticValue:
+    enabled: true
+  LawOfDemeter:
+    enabled: true

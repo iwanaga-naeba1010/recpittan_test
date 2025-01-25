@@ -1,0 +1,7 @@
+button#costBtn[type="button"]
+  | 交通費等コスト&レク金額form
+button#officialRequestBtn[type="button"]
+  | 正式依頼form
+- if order&.report&.id.present?
+  button#evaluationBtn[type="button"]
+    | 終了報告評価form

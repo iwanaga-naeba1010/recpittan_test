@@ -1,0 +1,58 @@
+header.sticky-top
+  nav.navbar.navbar-expand-lg.navbar-light.bg-white
+    .container-fluid
+      .navbar-brand
+        = link_to root_path do
+          = image_pack_tag 'logo.png', width: 170
+        h1.logo-text.d-none.d-lg-block すべての人へ選択肢を
+
+      button.navbar-toggler[type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation"]
+        span.navbar-toggler-icon
+
+      .collapse.justify-content-between.navbar-collapse#navbarNavDropdown
+        ul.navbar-nav
+          li.nav-item
+            = link_to 'ホーム', root_path, class: 'nav-link'
+          li.nav-item
+            a.nav-link[href="https://everyplus.jp/service" target="_blank"] はじめての方へ
+          li.nav-item
+            = link_to 'レク一覧', customers_recreations_path(sort_order: :number_of_recreations_held), class: 'nav-link'
+          - if user_signed_in? && (current_user.role.customer? || current_user.role.admin?)
+            li.nav-item
+              = link_to 'プラン一覧', customers_recreation_plans_path, class: 'nav-link'
+          li.nav-item.px-2
+            = form_tag customers_recreations_path, method: :get, class: 'd-flex search' do
+              .input-group.mr-sm-2
+                span.input-group-text.bg-white.border-end-0
+                  i.material-icons.every search
+                = text_field_tag :title, params[:title], class: 'form-control border-start-0', placeholder: 'キーワードを入力'
+                = submit_tag '検索', class: 'btn btn-csecondar text-white'
+
+        ul.navbar-nav.align-items-center
+          li.nav-item
+            a.nav-link[href="tel://050-5306-7767"]
+              .tel-container.d-flex.align-items-center
+                span.material-icons call
+                div
+                  span.tel-top サービスに関するお問い合わせ
+                  br
+                  span.tel-center 050-5306-7767
+                  br
+                  span.tel-bottom
+                    | [10:00～18:00（土日祝受付）]
+          li.nav-item
+            = link_to 'https://channel.everyplus.jp/', class: 'nav-link font-weight-bold', target: :_blank, rel: :noopener do
+              | レクチャンネル
+          li.nav-item
+            a.nav-link[href="https://everyplus.jp/contact"]
+              | 困ったら<br>まずはご相談
+          - if user_signed_in?
+            li.nav-item
+              = link_to mypage_path, class: 'nav-link' do
+                span.material-icons.mypage account_circle
+                | マイページ
+          - else
+            li.nav-item
+              = link_to 'ログイン', new_user_session_path, class: 'nav-link'
+            li.nav-item
+              = link_to '無料登録', new_user_registration_path, class: 'nav-link link-join'

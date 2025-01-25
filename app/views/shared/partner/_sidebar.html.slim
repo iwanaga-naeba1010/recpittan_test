@@ -1,0 +1,46 @@
+#nav.sidebar
+  .header.d-flex.justify-content-between.align-items-center
+    h2.p-2 Menu
+    button#close-sidebar.btn &times;
+  .p-2
+    = link_to partners_path do
+      .sidebar-wrapper.my-2.border-bottom
+        .lect_item
+          i.fas.fa-home.fa-lg
+        .right_item 案件一覧
+
+    = link_to partners_recreations_path do
+      .sidebar-wrapper.my-2.border-bottom
+        .lect_item
+          i.far.fa-calendar.fa-lg
+        .right_item レクリエーション一覧
+
+    = link_to partners_setting_menus_path do
+      .sidebar-wrapper.my-2.border-bottom
+        .lect_item
+          i.fas.fa-cog.fa-lg
+        .right_item 設定
+
+    = link_to 'https://tayori.com/q/everyplus-partner/' do
+      .sidebar-wrapper.my-2.border-bottom
+        .lect_item
+          i.far.fa-question-circle.fa-lg
+        .right_item よくある質問
+
+    = link_to 'https://tayori.com/q/everyplus-partner/category/107735/' do
+      .sidebar-wrapper.my-2.border-bottom
+        .lect_item
+          i.fas.fa-book.fa-lg
+        .right_item 学習コンテンツ
+
+    = link_to 'https://drive.google.com/file/d/1FsBuayCcZDgqD6g6xjpf6Xh0Yxgw4Fgy/view', target: '_blank', rel: 'noopener' do
+      .sidebar-wrapper.my-2.border-bottom
+        .lect_item
+          i.far.fa-sticky-note.fa-lg
+        .right_item 利用規約
+
+    = link_to destroy_user_session_path, method: 'delete' do
+      .sidebar-wrapper.my-2.border-bottom
+        .lect_item
+          i.fas.fa-sign-out-alt.fa-lg
+        .right_item ログアウト

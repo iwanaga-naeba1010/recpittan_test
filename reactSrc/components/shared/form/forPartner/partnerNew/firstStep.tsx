@@ -116,7 +116,7 @@ export const FirstStep: React.FC = () => {
             <label htmlFor='privacy' className='privacy'>
               <span>
                 <a
-                  href='https://everyplus.jp/policy_privacy'
+                  href='https://everyplus.jp/privacy'
                   className='ms-1 text-primary fw-bold'
                 >
                   プライバシーポリシー

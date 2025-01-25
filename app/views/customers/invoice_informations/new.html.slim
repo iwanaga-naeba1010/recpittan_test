@@ -1,0 +1,11 @@
+= render 'shared/customer/header'
+main.customer
+  article.container.py-4.px-0
+    .row.justify-content-center
+      .col-8.mb-5
+        .card
+          .card-header.bg-white
+            span.font-weight-bold.font-16.color-ba10
+              = t('activerecord.models.invoice_information')
+          .card-body
+            = render 'customers/invoice_informations/form', invoice_information: @invoice_information, url: customers_invoice_informations_path

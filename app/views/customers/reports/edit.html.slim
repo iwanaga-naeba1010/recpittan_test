@@ -1,0 +1,205 @@
+main.customer
+  .container.pt-2
+    nav[aria-label='breadcrumb']
+      ol.breadcrumb
+        li.breadcrumb-item
+          = link_to 'トップ', root_path
+        li.breadcrumb-item
+          = link_to 'マイページ', customers_path
+        li.breadcrumb-item
+          = link_to '依頼履歴', customers_path
+        li.breadcrumb-item
+          = link_to '依頼詳細', customers_order_path(@report.order.id)
+        li.breadcrumb-item.active
+          span.text-secondary 終了報告
+
+  article.container.py-1.px-0
+    .row
+      .col-md-4
+        = link_to customers_order_path(@report.order.id), class: 'clink' do
+          i.material-icons.navigate_before 戻る
+
+    .row.justify-content-center
+      .col-8.mb-5
+        .card.order-detail
+          .card-header.bg-white 終了報告を確認
+          .card-body
+            .row.py-2
+              .col-lg-3.col-4.label 案件番号
+              .col-auto = @report.order.id
+
+            .row.py-2
+              .col-auto
+                | 請求書を発行するために、終了報告の確認をお願い致します。
+                br
+                | 内容ご確認の上、承認をお願い致します。確認いただいた内容の請求書を翌月５日までに発行致します。
+                br
+                | 介護レクイベントプラットフォーム えぶりプラス をご利用いただきありがとうございます。
+                br
+                | 今後も弊社では利用者さんがより楽しく選択肢のある生活をサポートできるサービス提供を目指して参ります。
+                br
+                | サービス向上のために、アンケートのご協力をお願い致します。
+
+            .container-fluid.mt-2.action
+              .row
+                .col-lg-3.col-4.label.py-2 追加施設数
+                .col-lg-9.col-8.py-2 = "#{@report.number_of_facilities}施設"
+
+                .col-lg-3.col-4.label.py-2 参加人数
+                .col-lg-9.col-8.py-2 = "#{@report.number_of_people}人"
+
+                .col-lg-3.col-4.label.py-2 パートナーからのメッセージ
+                .col-lg-9.col-8.py-2
+                  pre = @report.body
+
+            .container-fluid.mt-4.action
+              .row
+                .col-12.label.py-2 レク費用
+              .row.justify-content-between.border-bottom-dotted.py-2
+                .col-lg-3.col-4.label.py-2 開催費
+                .col-lg-9.col-8.py-2.text-end = number_to_currency(@report.order.recreation.price)
+
+              .row.justify-content-between.border-bottom-dotted.py-2
+                .col-lg-3.col-4.label.py-2 材料費(合計)
+                .col-lg-9.col-8.py-2.text-end = number_to_currency(@report.order.total_material_price_for_customer)
+
+              .row.justify-content-between.border-bottom-dotted.py-2
+                .col-auto
+                  | 材料費/名
+                  br
+                  span.text-muted.font-12.color-ba08 ※材料費は人数分の費用が発生します
+                .col-auto
+                  = number_to_currency(@report.order_material_price)
+
+              .row.justify-content-between.border-bottom-dotted.py-2
+                .col-lg-3.col-4.label.py-2 参加人数
+                .col-lg-9.col-8.py-2.text-end = "#{@report.order_number_of_people}人"
+
+              .row.justify-content-between.border-bottom-dotted.py-2
+                .col-lg-3.col-4.label.py-2 交通費
+                .col-lg-9.col-8.py-2.text-end = number_to_currency(@report.order_transportation_expenses)
+
+              .row.justify-content-between.border-bottom-dotted.py-2
+                .col-lg-3.col-4.label.py-2 諸経費
+                .col-lg-9.col-8.py-2.text-end = number_to_currency(@report.order_expenses)
+
+              .row.justify-content-between.border-bottom-dotted.py-2
+                .col-lg-3.col-4.label.py-2 調整費用
+                .col-lg-9.col-8.py-2.text-end = number_to_currency(@report.order_support_price)
+
+              - if @report.order.recreation.kind.online?
+                .row.justify-content-between.border-bottom-dotted.py-2
+                  .col-lg-3.col-4.label.py-2 追加施設費用(合計)
+                  .col-lg-9.col-8.py-2.text-end = number_to_currency(@report.order.total_facility_price_for_customer)
+
+                .row.justify-content-between.border-top-dotted.py-2
+                  .col-auto.align-self-center
+                    span#facilityCount 施設追加費用/施設
+                  .col-auto#additionalPrice = "#{@report.number_of_facilities}施設"
+                  .col-12
+                    span.text-muted.font-12.color-ba08
+                      | ※1施設追加する事に#{number_to_currency(@report.order_additional_facility_fee)}が発生します
+
+              .row.justify-content-between.border-top.py-3
+                .col-auto 合計(税別)
+                .col-auto = number_to_currency(@report.order.total_price_for_customer)
+
+              - if @report.order_coupon_code.present? && @report.order_coupon_code == 'えぶりぷらす'
+                .row.justify-content-between.border-top.py-3
+                  .alert.alert-warning[role='alert']
+                    .font-weight-bold クーポン適用中のため合計金額は「&yen; 0」となります
+                    div 合計金額が表示されていても請求は&yen; 0となります。ご安心ください。
+
+            .row.border-top.mt-5.pt-3
+              .col-3.label レク
+              .col-9
+                .row.align-items-center.mt-2
+                  .col-md-4
+                    picture[loading='lazy']
+                      = image_tag @report.order.recreation.recreation_images.sliders&.first&.image.to_s, class: 'img-fluid', loading: 'lazy'
+                  .col-md-8.recreation
+                    h1.font-16.font-weight-bold.line-height-140 = @report.order.recreation.title
+                    .row.category-tags
+                      .col-auto.px-1 = tag_to_html(@report.order.recreation, false)
+
+              .col-3.label.pt-3 開催日時
+              .col-9.pt-3 = dotted_datetime(@report.order_start_at)
+          / フォーム
+          .card-body
+            = simple_form_for @report, url: customers_report_path(@report), input: { class: 'order' } do |f|
+              = f.fields_for :evaluation do |ff|
+                .mb-3
+                  label.form-label 1. 参加者に合わせた工夫の満足度を教えてください。
+                  div
+                    = ff.input :ingenuity, as: :select, collection: Evaluation.ingenuity.values.map { |i| [i.text, i] }, input_html: { class: 'start-rating w-100' }
+
+                .mb-3
+                  label.form-label 2. パートナーのコミュニケーション力の満足度を教えてください。
+                  div
+                    = ff.input :communication, as: :select, collection: Evaluation.communication.values.map { |i| [i.text, i] }, input_html: { class: 'start-rating w-100' }
+
+                .mb-3
+                  label.form-label 3. 開催までのやりとりのスムーズさの満足度を教えてください。
+                  div
+                    = ff.input :smoothness, as: :select, collection: Evaluation.smoothness.values.map { |i| [i.text, i] }, input_html: { class: 'start-rating w-100' }
+
+                .mb-3
+                  label.form-label 4. 料金納得度を教えてください。
+                  div
+                    = ff.input :price, as: :select, collection: Evaluation.price.values.map { |i| [i.text, i] }, input_html: { class: 'start-rating w-100' }
+
+                .mb-3
+                  label.form-label 5. もう1度開催したいと思いますか？
+                  div
+                    = ff.input :want_to_order_agein, as: :select, collection: Evaluation.want_to_order_agein.values.map { |i| [i.text, i] }, input_html: { class: 'start-rating w-100' }
+
+                .mb-3
+                  label.form-label 6. レクに対しての感想やご意見をご記入ください（※パートナーとサイトに公開されます）
+                  = ff.input :message, label: false, input_html: { class: 'form-control', rows: 3 }
+
+                .pt-3
+                  label.form-label 7. 運営に対してやその他ご意見をご記入ください（※運営のみが確認できます）
+                  = ff.input :other_message, label: false, input_html: { class: 'form-control', rows: 3 }
+
+                .pt-3
+                  label.form-label 8. アンケートを公開しても良いですか？
+                  div
+                    = ff.input :is_public, label: false, as: :select, collection: Evaluation.is_public.values.map { |i| [i.text, i] }, input_html: { class: 'start-rating w-100' }
+
+              .row.pt-3
+                .col-auto
+                  input[type='hidden' name='_csrf' value='{{csrfToken}}']
+                  button.btn.btn-cprimary.font-14.py-2.px-4.font-weight-bold.reject.text-white[type='button' data-bs-toggle='modal' data-bs-target='#rejectModal'] お断りする
+                .col-auto
+                  button.btn.btn-cprimary.font-14.py-2.px-4.font-weight-bold.text-white[type='button' data-bs-toggle='modal' data-bs-target='#approveModal'] 承認する
+                  input[type='hidden' name='action' value='']
+
+              .d-none
+                = f.submit '送信'
+
+/ モーダル
+.modal.fade#approveModal[tabindex='-1' aria-labelledby='approveModalLabel' aria-hidden='true']
+  .modal-dialog
+    .modal-content
+      .modal-header
+        h5.modal-title#approveModalLabel 終了報告を承認
+      .modal-body.p-2
+        p 一度承認すると変更はできません。材料費、追加事業所数など、ご確認の上、承認をお願い致します。
+        .row.justify-content-end.pt-3
+          .col-auto
+            button.btn.btn-cancel.font-14.py-2.px-4.font-weight-bold[data-bs-dismiss='modal' type='button'] キャンセル
+          .col-auto
+            button#approveModalSubmit.btn.btn-cprimary.send.font-14.py-2.px-4.font-weight-bold.text-white[data-action='approve' type='button'] 承認する
+
+.modal.fade#rejectModal[tabindex='-1' aria-labelledby='rejectModalLabel' aria-hidden='true']
+  .modal-dialog
+    .modal-content
+      .modal-header
+        h5.modal-title#rejectModalLabel 終了報告の承認をお断り
+      .modal-body.p-2
+        p 内容が間違っている場合、お断りをお願い致します。訂正内容をパートナーにチャットで伝えてください。正しい内容として、再度終了報告を提出致します。ご不明な点がありましたらよくある質問またはお問い合わせをお願いします。
+        .row.justify-content-end.pt-3
+          .col-auto
+            button.btn.btn-cancel.font-14.py-2.px-4.font-weight-bold[data-bs-dismiss='modal' type='button'] キャンセル
+          .col-auto
+            button#rejectModalSubmit.btn.btn-cprimary.send.font-14.py-2.px-4.font-weight-bold.text-white[data-action='reject' type='button'] お断りする

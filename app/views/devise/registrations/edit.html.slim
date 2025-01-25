@@ -1,0 +1,110 @@
+= render 'shared/customer/header'
+
+main.customer
+  article.container.py-4.px-0
+    .row.justify-content-center
+      .col-8.mb-5
+        .card
+          .card-header.bg-white
+            span.font-weight-bold.font-16.color-ba10 アカウント
+
+          .card-body
+            h3.card-title.font-weight-bold.font-16.color-ba10 基本情報
+            = simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, class: 'border-top h-adr order' }) do |f|
+              = f.error_notification
+              - resource.errors.full_messages.each do |message|
+                li = message
+
+              = f.fields_for :company do |ff|
+                .row.pt-3
+                  .col-auto
+                    h3.card-title.font-weight-bold.font-14.color-ba10 所属
+
+                .row
+                  .col-md-6
+                    label 法人名
+                    = ff.input :name, label: false
+                  .col-md-6
+                    label 施設名
+                    = ff.input :facility_name, label: false
+
+                .row.pt-3
+                  .col-md-6
+                    label 事業所種別
+                    = ff.input :genre, label: false
+                  .col-md-6
+                    label HP
+                    = ff.input :url, label: false
+
+                .row.pt-3
+                  .col-md-6
+                    label 施設定員
+                    = ff.input :capacity, label: false
+                  .col-md-6
+                    label 平均介護度
+                    = ff.input :nursing_care_level, label: false
+
+                .row.pt-3
+                  span.p-country-name style='display:none;' Japan
+                  .form-group.col-6
+                    label for='postalCode' 郵便番号
+                    .input-group.mb-3
+                      .form-group.string.optional.user_company_zip.form-group-valid
+                        = ff.input :zip, label: false
+                      button#searchAddressWithZipInRegistrationEditForm.btn.btn-outline-secondary.p-postal-code-find type='button' 検索
+                  .form-group.col-6
+                    / NOTE: 初期値として必須なので削除だめ
+                    = ff.input :prefecture, as: :select, collection: [[ff.object.prefecture, ff.object.prefecture]]
+                  .form-group.col-6
+                    label 市区町村
+                    = ff.input :city, label: false, input_html: { class: 'form-control p-locality' }
+                  .form-group.col-6
+                    label 町名/番地
+                    = ff.input :street, label: false, input_html: { class: 'form-control p-street-address' }
+                  .form-group.col-12.pt-2
+                    label 建物名
+                    = ff.input :building, label: false, input_html: { class: 'form-control' }
+
+                .row.pt-3
+                  .col-md-12
+                    label レクへの要望
+                    = ff.input :request, label: false, input_html: { rows: 10 }
+
+                .row.pt-3
+                  .col-auto
+                    h3.card-title.font-weight-bold.font-14.color-ba10 貸出可能品
+                    = ff.collection_check_boxes :tag_ids, @tags, :id, :name do |tag|
+                      div
+                        = tag.label { tag.check_box + tag.object.name }
+
+                .row.pt-3
+                  .col-auto
+                    h3.card-title.font-weight-bold.font-14.color-ba10 プロフィール
+                .row
+                  .col-md-6
+                    = ff.input :person_in_charge_name, input_html: { class: 'form-control' }
+                  .col-md-6
+                    = ff.input :person_in_charge_name_kana, input_html: { class: 'form-control' }
+                .row
+                  .col-md-6
+                    label 連絡先電話番号
+                    = ff.input :tel, label: false, input_html: { class: 'form-control' }
+
+              .col-md-6
+                label for='facilityName' メールアドレス
+                #facilityName.form-control.border-0 = resource.email
+
+              .row.pt-3
+                .col-auto
+                  h3.card-title.font-weight-bold.font-14.color-ba10 パスワード
+              .row
+                .col-auto
+                  span.font-weight-normal.font-14.color-ba08 パスワード変更したい方は
+                  = link_to 'こちら', edit_user_password_path, class: 'clink'
+
+              .row.pt-2
+                .col-auto
+                  = f.submit '変更を保存する', class: 'btn.btn-cprimary.font-14.py-3.px-4.font-weight-bold.text-white'
+
+            .mt-3
+              = button_to t('devise.logout'), destroy_user_session_path, method: 'delete', class: 'btn.btn-cprimary.font-14.py-3.px-4.font-weight-bold.text-white'

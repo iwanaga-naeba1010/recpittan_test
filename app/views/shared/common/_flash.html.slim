@@ -1,0 +1,4 @@
+- if flash[:notice]
+  .flash.alert.alert-primary = flash[:notice]
+- elsif flash[:alert]
+  .flash.alert.alert-warning = flash[:alert]
