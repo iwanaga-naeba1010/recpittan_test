@@ -19,7 +19,8 @@ main.list
         .row.mb-2
           .col-2
             div
-              = image_tag rp.recreations.first.recreation_images.sliders.first&.image&.to_s.presence, width: 130, height: 125, class: 'rounded w-100'
+              - if rp.recreations.first.recreation_images.sliders.present?
+                = image_tag rp.recreations.first.recreation_images.sliders.first&.image&.to_s.presence, width: 130, height: 125, class: 'rounded w-100'
           .col-10
             = link_to rp.title, customers_recreation_plan_path(rp.id), class: 'text-black fw-bold text-decoration-none'
             - total_price_pair = @recreation_plans_with_total_price.find { |plan, _price| plan == rp }
