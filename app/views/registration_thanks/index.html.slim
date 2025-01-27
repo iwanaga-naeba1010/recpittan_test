@@ -1,0 +1,17 @@
+main.customer
+  .mt-4.h-100
+    .container
+      .p-5.mx-auto.my-4.bg-white.w-50.list-search-form
+        h3.mx-5.text-center.text-black.font-weight-bold メールアドレス受信確認用のメールを送信しました
+        p 情報をご入力いただきありがとうございます。受信確認用のメールを送信しました。メールをご確認いただき、メールに記載されたURLをクリックしてエブリ・プラスへの登録を完了してください。
+        .p-5.bg-light
+          p.text-black.font-weight-bold メールが届かない場合
+          p 受信確認用メールが届かない場合、以下をご確認ください。
+          ul
+            li 迷惑メールフォルダに振り分けられていたり、フィルターや転送の設定によって受信ボックス以外の場所に保管されていないかご確認ください。
+            li メールの配信に時間がかかる場合がございます。数分待った上でメールが届いているか再度ご確認ください。
+            li 登録にご使用のメールアドレスが正しいかどうかご確認ください。
+          p
+            | もし問題がある場合は
+            = link_to 'こちら', 'https://everyplus.jp/contact', target: :_blank, rel: :noopener
+            | からお問い合わせください。

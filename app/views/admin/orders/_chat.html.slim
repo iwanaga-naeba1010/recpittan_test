@@ -1,0 +1,38 @@
+main.chat
+  - order.chats.each_with_index do |chat, i|
+    - if i == 0
+      .row.justify-content-center.pt-2
+        .col-auto.date
+          = date chat.created_at
+    - elsif chat.created_at.day != order.chats[i - 1].created_at.day
+      .row.justify-content-center.pt-2
+        .col-auto.date
+          = date chat.created_at
+    / パートナー
+    - if chat.user_role.partner?
+      .mychat
+        .name
+          = order.recreation.profile_name
+        .message
+          = simple_format chat.message
+        span.time
+          = time chat.created_at
+      - if chat.file?
+        .mychat
+          .message
+            = link_to chat.file.url, target: '_blank', rel: 'noopener' do
+              = chat.file.file.filename
+          .time
+            = time chat.created_at
+    / 施設
+    - elsif chat.user_role.customer?
+      .your-chat
+        .col-md-auto
+          span.time
+            = time chat.created_at
+          .message
+            = simple_format chat.message
+  = simple_form_for Chat.new, url: admin_chats_path do |f|
+    = f.input :order_id, as: :hidden, input_html: { value: order.id }
+    = f.input :message
+    = f.submit '送信'

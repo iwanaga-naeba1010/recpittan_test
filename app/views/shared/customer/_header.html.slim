@@ -1,0 +1,48 @@
+#customer-header.h-100.bg-white.sticky-top
+  .container
+    .row.border-bottom
+      .col-8.pt-3.pb-1
+        = current_user.company&.facility_name
+    .row.py-3
+      .col-auto
+        - if active_link?('mypage') || active_link?('orders')
+          | 依頼履歴
+        - else
+          = link_to '依頼履歴', customers_path, class: 'clink'
+
+      .col-auto
+        - if active_link?('registrations')
+          | アカウント
+        - else
+          = link_to 'アカウント', edit_user_registration_path, class: 'clink'
+
+      - if current_user.invoice_information.blank?
+        .col-auto
+          - if active_link?('invoice_informations')
+            | 請求情報
+          - else
+            = link_to '請求情報', new_customers_invoice_information_path, class: 'clink'
+      - else
+        .col-auto
+          - if active_link?('invoice_informations')
+            = t('activerecord.models.invoice_information')
+          - else
+            = link_to '請求情報編集', edit_customers_invoice_information_path(current_user.invoice_information.id), class: 'clink'
+
+      .col-auto
+        - if active_link?('favorite_recreations')
+          = t('activerecord.models.favorite_recreation')
+        - else
+          = link_to 'お気に入りレク', customers_favorite_recreations_path, class: 'clink'
+
+      .col-auto
+        - if active_link?('user_recreation_plans')
+          = t('activerecord.models.user_recreation_plan')
+        - else
+          = link_to '登録レクリエーションプラン', customers_user_recreation_plans_path, class: 'clink'
+
+      .col-auto
+        - if active_link?('recreation_plan_estimates')
+          = t('activerecord.models.recreation_plan_estimate')
+        - else
+          = link_to 'プラン見積書', customers_recreation_plan_estimates_path, class: 'clink'
