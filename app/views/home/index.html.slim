@@ -1,0 +1,53 @@
+main.top
+  .jumbotron.jumbotron-top
+    - if @top_banner.present?
+      = link_to @top_banner.url, target: '_blank', rel: 'noopener' do
+        = image_tag @top_banner&.image.to_s, class: 'w-100 h-auto', alt: 'ヒーローヘッダー画像', loading: 'lazy'
+    - else
+      = render 'shared/home/hero_header'
+    .container.px-0.my-2
+      .row
+        .col-md
+          = link_to 'https://everyplus.jp/wp-content/uploads/2025/01/new_user.pdf', target: '_blank', rel: 'noopener' do
+            = image_pack_tag 'new_user.png', class: 'w-100', alt: '初めての方へ', loading: 'lazy'
+        .col-md
+          = link_to 'https://everyplus.jp/content', target: '_blank', rel: 'noopener' do
+            = image_pack_tag 'plan.png', class: 'w-100', alt: 'ご利用施設の活用例', loading: 'lazy'
+      = render 'shared/home/evaluations', evaluations: @evaluations
+      = render 'shared/home/search_conditions', tags: @tags, prefectures: @prefectures
+
+  article.container.px-0.pt-4
+    .row.py-3
+      .col-6
+        h4.mt-5.text-black.font-weight-bold 訪問おすすめランキング
+      .col-6.d-flex.justify-content-end
+        = link_to customers_recreations_path(kind: 0, sort_order: :number_of_recreations_held), class: 'mt-5 text-black font-weight-bold d-none d-lg-block text-decoration-none' do
+          button.look-more.fw-bold.border-0.py-1.px-2.rounded.text-white もっと見る
+    .row
+      - @recommended_visiting_recreations.each do |rec|
+        section.col-sm-6.col-md-4.col-lg-3.my-4
+          = render 'shared/home/card', rec: rec
+
+  article.container.px-0.pt-4
+    .row.py-3
+      .col-6
+        h4.mt-5.text-black.font-weight-bold 開催数ランキング
+      .col-6.d-flex.justify-content-end
+        = link_to customers_recreations_path(sort_order: :number_of_recreations_held), class: 'mt-5 text-black font-weight-bold d-none d-lg-block text-decoration-none' do
+          button.look-more.fw-bold.border-0.py-1.px-2.rounded.text-white もっと見る
+    .row
+      - @popular_recreations.each do |rec|
+        section.col-sm-6.col-md-4.col-lg-3.my-4
+          = render 'shared/home/card', rec: rec
+
+  article.container.px-0.pt-4
+    .row.py-3
+      .col-6
+        h4.mt-5.text-black.font-weight-bold 新着レク
+      .col-6.d-flex.justify-content-end
+        = link_to customers_recreations_path, class: 'mt-5 text-black font-weight-bold d-none d-lg-block text-decoration-none' do
+          button.look-more.fw-bold.border-0.py-1.px-2.rounded.text-white もっと見る
+    .row
+      - @latest_recreations.each do |rec|
+        section.col-sm-6.col-md-4.col-lg-3.my-4
+          = render 'shared/home/card', rec: rec

@@ -1,0 +1,83 @@
+= render 'shared/partner/header', title: '正式依頼を確認'
+
+.body.bg-white.border.p-3.mb-3
+  .p-4.text-center.text-black
+    h3.font-weight-bold
+      | 正式依頼が届きました！
+      br
+      | 早速返信しましょう
+    p
+      = @order.user.company.facility_name
+      | からレクの正式依頼が届きました。以下の内容をご確認いただき返信しましょう。
+
+  .body.bg-white.border.p-3.mb-3
+    h4.text-black.font-weight-bold 施設情報
+    table.w-100
+      thead
+        tr.border-bottom
+          td.pt-2.pb-2.w-25 施設名
+          td.pt-2.pb-2.text-black = @order.user.company.facility_name
+        tr.border-bottom
+          td.pt-2.pb-2.w-25 担当者
+          td.pt-2.pb-2.text-black = @order.user.company.person_in_charge_name
+        tr.border-bottom
+          td.pt-2.pb-2.w-25 住所
+          td.pt-2.pb-2.text-black = @order.user.company.full_address
+
+    div
+      h4.text-black.font-weight-bold.pt-3 レク情報
+      table.w-100
+        thead
+          tr.border-bottom
+            td.pt-2.pb-2.w-25 レク名
+            td.pt-2.pb-2.text-black = @order.recreation_title
+          tr.border-bottom
+            td.pt-2.pb-2.w-25 レク環境
+            td.pt-2.pb-2.text-black = @order.recreation.kind_text
+          tr.border-bottom
+            td.pt-2.pb-2.w-25 希望日時
+            td.pt-2.pb-2.text-black = @order.desired_time
+          tr.border-bottom
+            td.pt-2.pb-2.w-25 希望人数
+            td.pt-2.pb-2.text-black = "#{@order.number_of_people}人"
+
+    .border.m-2.p-2
+      h4.text-black.font-weight-bold レク費用
+      table.w-100
+        thead
+          tr.border-bottom
+            td.pt-2.pb-2.text-black.w-75 謝礼
+            td.pt-2.pb-2.text-black = number_to_currency(@order.amount)
+          tr.border-bottom
+            td.pt-2.pb-2.text-black.w-75 材料費(1人あたり)
+            br
+            | ※材料費は人数分の費用が発生します。
+            td.pt-2.pb-2.text-black = number_to_currency(@order.material_amount)
+          tr.border-bottom
+            td.pt-2.pb-2.text-black.w-75 交通費
+            td.pt-2.pb-2.text-black = number_to_currency(@order.transportation_expenses)
+          tr.border-bottom
+            td.pt-2.pb-2.text-black.w-75 諸経費
+            td.pt-2.pb-2.text-black = number_to_currency(@order.expenses_for_partner)
+          tr.border-bottom
+            td.pt-2.pb-2.text-black.w-75
+              | 追加施設費/追加施設 #{@order.number_of_facilities}
+              br
+              | ※1施設追加する事に費用が発生します。
+            td.pt-2.pb-2.text-black = number_to_currency(@order.total_facility_price_for_partner)
+          tr.border-bottom.text-black.font-weight-bold
+            td.pt-2.pb-2 合計(税込)
+            td.pt-2.pb-2 = number_to_currency(@order.total_price_for_partner)
+
+    div
+      p.text-black.font-weight-bold.pt-2 【必ずご確認ください】
+      ul
+        li 正式依頼を承認したらキャンセルはできません。
+        li 規約内での日程変更は可能です。
+        li 交通費、諸経費が発生する場合あらかじめ施設に伝えてください。承認後に初めて伝えた場合、支払いが難しい場合がございます。当日までわからない場合は目安を事前に伝えてください。
+        li “却下する”を選択した場合は理由をチャットで施設に共有してください。
+        li ご不明点ございましたら運営までご連絡をお願い致します。
+
+    .col-md-12.text-center.pt-5
+      = link_to '却下する', confirm_partners_order_path(is_confirm: :deny), class: 'text-white btn btn-danger btn-lg btn-block w-100 p-3 mt-2 mb-2'
+      = link_to '承認する', confirm_partners_order_path(is_confirm: :accept), class: 'text-white btn btn-primary btn-lg btn-block w-100 p-3 mt-2 mb-2'

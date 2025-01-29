@@ -1,0 +1,119 @@
+- if kind == :customer
+  table
+    tr
+      td
+        | 開催費
+      td
+        = number_to_currency order.price
+    tr
+      td
+        | 材料費(合計)
+      td
+        = number_to_currency order.total_material_price_for_customer
+    tr
+      td
+        | 材料費/名
+      td
+        = number_to_currency order.material_price
+    tr
+      td
+        | 参加人数
+      td
+        = order.number_of_people
+        | 人
+    tr
+      td
+        | 交通費
+      td
+        = number_to_currency order.transportation_expenses
+    tr
+      td
+        | 諸経費
+      td
+        = number_to_currency order.expenses
+    tr
+      td
+        | 調整費用
+      td
+        = number_to_currency order.support_price
+    tr
+      td
+        | 施設追加費用(合計)
+      td
+        = number_to_currency order.total_facility_price_for_customer
+    tr
+      td
+        | 施設追加費用/施設
+      td
+        = number_to_currency order.additional_facility_fee
+    tr
+      td
+        | 施設追加数
+      td
+        = order.number_of_facilities
+        | 施設
+    tr
+      td
+        | 合計(税別)
+      td
+        = number_to_currency order.total_price_for_customer
+- if kind == :partner
+  table
+    tr
+      td
+        | 謝礼
+      td
+        = number_to_currency order.amount
+    tr
+      td
+        | 材料費(合計)
+      td
+        = number_to_currency order.total_material_price_for_partner
+    tr
+      td
+        | 材料費/名
+      td
+        = number_to_currency order.material_amount
+    tr
+      td
+        | 参加人数
+      td
+        = order.number_of_people
+        | 人
+    tr
+      td
+        | 交通費
+      td
+        = number_to_currency order.transportation_expenses
+    tr
+      td
+        | 諸経費
+      td
+        = number_to_currency order.expenses_for_partner
+    tr
+      td
+        | 施設追加費用(合計)
+      td
+        = number_to_currency order.total_facility_price_for_partner
+    tr
+      td
+        | 施設追加費用/施設
+      td
+        = number_to_currency order.additional_facility_fee_for_partner
+    tr
+      td
+        | 施設追加数
+      td
+        = order.number_of_facilities
+        | 施設
+    tr
+      td
+        | Zoom ID発行料
+      td
+        | -
+        = number_to_currency order.zoom_cost
+    tr
+      td
+        | 合計(税込)
+      td
+        = number_to_currency order.total_price_for_partner

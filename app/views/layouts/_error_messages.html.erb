@@ -1,9 +1,0 @@
-<% if model.errors.full_messages_for(model.class.name.underscore.pluralize.to_sym).any? %>
-  <div class="pb-1 text-danger">
-    <ul>
-      <% model.errors.full_messages.each do |message| %>
-        <p><%= message.delete(model.class.name.pluralize) %></p>
-      <% end %>
-    </ul>
-  </div>
-<% end %>

@@ -1,0 +1,169 @@
+= render 'shared/customer/header'
+
+main.customer
+  .container.pt-2
+    nav[aria-label="breadcrumb"]
+      ol.breadcrumb
+        li.breadcrumb-item
+          = link_to 'トップ', root_path
+        li.breadcrumb-item
+          = link_to 'マイページ', customers_path
+        li.breadcrumb-item
+          = link_to '依頼履歴', customers_path
+        li.breadcrumb-item.active
+          span.text-secondary 依頼詳細
+
+  article.container.py-1.px-0
+    .row
+      .col-md-4
+        = link_to customers_path, class: 'clink' do
+          i.material-icons navigate_before
+          | 戻る
+
+    .row.justify-content-center
+      .col-8.mb-5
+        .card.order-detail
+          .card-header.bg-white
+            | 依頼内容
+          .card-body
+            .row.py-2
+              .col-lg-3.col-4.label 案件番号
+              .col-auto = @order.id
+
+            .row.py-2
+              .col-3.label レク
+              .col-9
+                .row.align-items-center.mt-2
+                  .col-md-4
+                    picture[loading="lazy"]
+                      = image_tag @order.recreation.recreation_images.sliders&.first&.image.to_s, class: 'img-fluid'
+                  .col-md-8.recreation
+                    h1.font-16.font-weight-bold.line-height-140 = @order.recreation_title
+                    .row.category-tags
+                      = tag_to_html(@order.recreation, false)
+                  .col-12.py-1
+                    = link_to customers_recreation_path(@order.recreation.id), class: 'clink d-flex align-items-center' do
+                      | レクの詳細を見る
+                      i.material-icons.ml-1 navigate_next
+
+            - if @order.recreation.flyer.present?
+              .row.py-2
+                .col-md-3
+                .col-md-9.rounded.border.p-3
+                  h2.font-14.font-weight-bold.line-height-120.color-ba10.py-2 チラシ
+                  span.font-14.font-weight-normal.line-height-120.color-ba08.py-2 レクのチラシをダウンロードして印刷することができます。
+                  .mt-2
+                    = link_to download_customers_order_path(@order), class: 'clink d-flex align-items-center', download: true do
+                      | チラシをダウンロード
+                      i.material-icons.ml-1 navigate_next
+
+            .row.py-2
+              .col-lg-3.col-4.label 開催日時
+              .col-auto = dotted_datetime(@order.start_at)
+
+            .row.py-2
+              .col-lg-3.col-4.label 参加人数
+              .col-auto = "#{@order.number_of_people}人"
+
+            .row.py-2
+              .col-lg-3.col-4.label 施設住所
+              .col-auto = @order.full_address
+
+            .row.py-2
+              .col-lg-3.col-4.label 合計費用(税別)
+              .col-auto = number_to_currency(@order.total_price_for_customer)
+
+            .row.py-2
+              .col-lg-3.col-4.label ステータス
+              .col-auto = I18n.t("customer.order.status.#{@order.status}")
+
+            .row.py-2
+              .col-lg-3.col-4.label 関連ファイル
+              .col-auto
+                - @order.recreation.recreation_images.materials.each do |file|
+                  div
+                    = link_to file.image.file.filename, file.image.url, class: 'clink mr-5', target: '_blank', rel: 'noopener'
+
+            - if @order.recreation_kind.online?
+              .row.py-2
+                .col-lg-3.col-4.label Zoom情報
+                .col-auto
+                  - if @order.zoom_url
+                    = link_to simple_format(h(@order.zoom_url)).gsub(%r{</?p>}, ''), @order.zoom_url, target: '_blank', rel: 'noopener'
+                  - else
+                    | 開催日までに発行されますので、今しばらくお待ちください
+
+            .row.p-3.justify-content-around
+              .col.action.pb-3
+                .action-header.pt-3 チャット
+                .py-3 終了報告が完了するまでパートナーとチャットができます。
+                - if @order.report_status&.accepted?
+                  span.btn.btn-cprimary.font-14.py-2.px-4.font-weight-bold.text-white.disabled チャットへ進む
+                - else
+                  = link_to 'チャットへ進む', chat_customers_order_path(@order.id), class: 'btn btn-cprimary font-14 py-2 px-4 font-weight-bold text-white'
+
+              - if @order&.report&.id.present?
+                .col.action.pb-3
+                  .action-header.pt-3 終了報告
+                  .py-3[style="min-height: 5rem;"] レクが開催後、パートナーから終了報告の承認依頼が届きます。内容を確認して承認してください。
+                  - if @order.report_status.accepted?
+                    span.btn.btn-cprimary.font-14.py-2.px-4.font-weight-bold.text-white.disabled 終了報告を確認済み
+                  - else
+                    = link_to '終了報告を確認', edit_customers_report_path(@order.report&.id), class: 'btn btn-cprimary font-14 py-2 px-4 font-weight-bold text-white'
+
+            .card.mt-4
+              .card-header.bg-white.pb-3 レク費用
+              .card-body.py-0
+                .row.justify-content-between.border-bottom-dotted.py-2
+                  .col-auto 開催費
+                  .col-auto = number_to_currency(@order.price)
+
+                .row.justify-content-between.border-bottom-dotted.py-2
+                  .col-auto 材料費/1人
+                  span.text-muted.font-12.color-ba08 ※材料費は人数分の費用が発生します
+                  .col-auto = number_to_currency(@order.material_price)
+
+                .row.justify-content-between.border-bottom-dotted.py-2
+                  .col-auto 交通費
+                  .col-auto = number_to_currency(@order.transportation_expenses)
+
+                .row.justify-content-between.border-bottom-dotted.py-2
+                  .col-auto 諸経費
+                  .col-auto = number_to_currency(@order.expenses)
+
+                .row.justify-content-between.border-bottom-dotted.py-2
+                  .col-auto サポート費用
+                  .col-auto = number_to_currency(@order.support_price)
+
+                - if @order.recreation_kind.online?
+                  .row.justify-content-between.border-top-dotted.py-2
+                    .col-auto.align-self-center
+                      span#facilityCount 追加施設費 / #{@order.number_of_facilities} 施設
+                    .col-auto#additionalPrice
+                      - if @order.number_of_facilities.present?
+                        = number_to_currency(@order.number_of_facilities * @order.additional_facility_fee)
+                      - else
+                        = number_to_currency(0)
+                    .col-12
+                      span.text-muted.font-12.color-ba08
+                        | ※1施設追加する事に#{number_to_currency @order.additional_facility_fee}が発生します
+
+                .row.justify-content-between.border-top.py-3
+                  .col-auto 合計(税別)
+                  .col-auto = number_to_currency(@order.total_price_for_customer)
+
+                - if @order.coupon_code? && @order.coupon_code == 'えぶりぷらす'
+                  .row.justify-content-between.border-top.py-3
+                    .alert.alert-warning[role="alert"]
+                      .font-weight-boild クーポン適用中のため合計金額は「&yen; 0」となります
+                      div 合計金額が表示されていても請求は&yen; 0となります。ご安心ください。
+
+            .card.mt-4
+              .card-body
+                h5.card-title.title-b 注意事項
+                p ・一度承認されたレクのキャンセルはできません。規約に準じた日程の変更は可能です。詳しくは利用規約をご確認ください。
+                p ・材料費、オンラインレクの追加施設数、諸経費は開催までの間にパートナーとチャットで相談をして変更することが可能です。その場合、金額の変動がございます。
+                p ・追加施設がある場合、追加事業所にはzoomURLの共有をお願いします。
+                p ・正式依頼後に、パートナーからチャットで共有をされます。コピーをしてzoomにアクセスをお願いします。
+                p ・材料費が必要なレクは参加人数が増える場合や減る場合はパートナーとチャット相談をしてくださ　い。人数が減る場合、レクによっては準備した分の材料費分の請求が発生する場合がございます。詳しくはパートナーにご確認をお願い致します。
+                p ・ご不明な点がありましたらよくある質問またはお問い合わせをお願いします。

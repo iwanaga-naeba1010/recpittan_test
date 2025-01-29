@@ -1,0 +1,36 @@
+= switch_user_select
+/ FIXME: HTMLなので通信容量を消費しないし、DBアクセスのオーバーヘッド削減にもならないので、キャッシュする必要はない
+- cache('footer') do
+  footer.container-fluid.px-0
+    .container
+      .row
+        .mt-2.d-none.d-lg-block
+          ul.list-group.list-group-horizontal.align-items-center.justify-content-md-center
+            li.list-group-item.border-0
+              = link_to 'エブリ・プラス公式HP', 'https://everyplus.jp', class: 'link-href', target: '_blank', rel: 'noopener'
+            li.list-group-item.border-0
+              = link_to 'レク一覧', customers_recreations_path(sort_order: :number_of_recreations_held), class: 'link-href'
+            li.list-group-item.border-0
+              = link_to 'レクを提供したい方はこちら', 'https://recpittan.everyplus.jp/recreation-partner', class: 'link-href', target: '_blank', rel: 'noopener'
+            li.list-group-item.border-0
+              = link_to '導入事例', 'https://everyplus.jp/content', class: 'link-href', target: '_blank', rel: 'noopener'
+            li.list-group-item.border-0
+              = link_to 'よくある質問', 'https://tayori.com/faq/5c0acac6bcdec23e3eac9bdf17d9e7f727d1c3cb', class: 'link-href', target: '_blank', rel: 'noopener'
+            li.list-group-item.border-0
+              = link_to 'お問い合わせ', 'https://everyplus.jp/contact', class: 'link-href', target: '_blank', rel: 'noopener'
+            li.list-group-item.border-0
+              = link_to '会社概要', 'https://everyplus.jp/company', class: 'link-href', target: '_blank', rel: 'noopener'
+
+      .row.align-items-center.justify-content-md-center
+        .col-12.mt-2.text-center
+          = image_pack_tag 'logo_f.png', alt: 'エプリ・プラス'
+
+      .row.d-none.d-lg-flex.justify-content-center
+        .col-2.mt-2.text-center
+          = link_to '利用規約', 'https://everyplus.jp/tos/index.html', class: 'link-href', target: '_blank', rel: 'noopener'
+        .col-2.mt-2.text-center
+          = link_to '個人情報保護方針', 'https://everyplus.jp/privacy', class: 'link-href', target: '_blank', rel: 'noopener'
+
+      .row.align-items-center.justify-content-md-center
+        .col-12.mt-4.text-center
+          span &copy;株式会社エブリ・プラス. All Rights Reserved.

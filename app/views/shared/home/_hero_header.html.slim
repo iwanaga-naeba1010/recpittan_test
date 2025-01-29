@@ -1,0 +1,51 @@
+.hero-header.px-lg-4.ps-2.pe-0
+  .row
+    .first-section.col-lg-1.col-xs-0.px-lg-0
+      .images
+        = image_pack_tag 'hero_header/hero_header1.jpeg', class: 'image py-1 w-100 h-50 d-sm-initial d-xs-none', alt: 'レク風景', loading: 'lazy'
+        = image_pack_tag 'hero_header/hero_header2.jpeg', class: 'image py-1 w-100 h-50 d-sm-initial d-xs-none', alt: '笑顔', loading: 'lazy'
+      .responsive-images.row.h-100.d-lg-none
+        .col-4
+          = image_pack_tag 'hero_header/hero_header1.jpeg', class: 'image py-1 w-100', alt: 'ヒーローヘッダー画像', loading: 'lazy'
+        .col-4
+          = image_pack_tag 'hero_header/hero_header2.jpeg', class: 'image py-1 w-100', alt: 'ヒーローヘッダー画像', loading: 'lazy'
+        .col-4
+          = image_pack_tag 'hero_header/hero_header4.jpeg', class: 'image py-1 w-100', alt: 'ヒーローヘッダー画像', loading: 'lazy'
+    .second-section.col-lg-5.col-8
+      .contents.m-auto.w-md-75
+        p.my-1.my-md-3.text-lg-center.text-pink 日本最大級の介護レクリエーションマッチングサービス
+        h3.top-message.my-md-3.fw-bold.text-dark 利用者さんのやりたい介護レクやイベントの依頼先が見つかる
+        .row.my-3.d-lg-none
+          .col-6
+            .feature.py-1.my-1.text-center.w-100.d-inline-block
+              p.my-0.title.fw-light レク・郵送キット
+              p.my-0.content.fw-bold 約300種類
+            .feature.py-1.my-1.text-center.w-100.d-inline-block
+              p.my-0.title.fw-light 登録介護施設数
+              p.my-0.content.fw-bold 2000施設
+          .d-flex.align-items-center.col-6
+            .feature.py-1.my-1.text-center.w-100.d-inline-block
+              p.my-0.title.fw-light 実施回数
+              p.my-0.content.fw-bold 7000回
+        .feature-space.row.my-3
+          .col-lg-4
+            .feature.text-center.py-md-2.w-100.d-inline-block
+              p.my-0.title.fw-light レク・郵送キット
+              p.content.my-0.fw-bold 約300種類
+          .col-lg-4
+            .feature.text-center.py-md-2.w-100.d-inline-block
+              p.my-0.title.fw-light 登録介護施設数
+              p.content.my-0.fw-bold 2000施設
+          .col-lg-4
+            .feature.text-center.py-md-2.w-100.d-inline-block
+              p.my-0.title.fw-light 実施回数
+              p.content.my-0.fw-bold 7000回
+        .text-center
+          = link_to 'レクを一覧から探す', customers_recreations_path, class: 'link-to-recs btn text-white my-md-4 px-md-4 py-md-3 fw-bold rounded-3'
+    .third-section.col-lg-4.col-xs-0
+      = image_pack_tag 'hero_header/hero_header3.jpeg', class: 'image py-1 h-100 w-100', alt: '大勢でのレク風景', loading: 'lazy'
+    .fourth-section.col-lg-2.col-4.px-lg-0
+      = image_pack_tag 'hero_header/hero_header4.jpeg', class: 'image py-1 w-100 responsive-hidden-img', alt: '造花アレンジをする人', loading: 'lazy'
+      = image_pack_tag 'hero_header/hero_header5.jpeg', class: 'image py-1 w-100', alt: '造花アレンジ', loading: 'lazy'
+      = image_pack_tag 'hero_header/hero_header3.jpeg', class: 'image py-1 w-100 d-lg-none', alt: '大勢でのレク風景スマホ表示', loading: 'lazy'
+      = image_pack_tag 'hero_header/hero_header6.jpeg', class: 'image py-1 w-100', alt: '造花アレンジを教えている人', loading: 'lazy'

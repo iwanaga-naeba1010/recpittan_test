@@ -1,0 +1,16 @@
+= render 'shared/partner/header_with_link', title: 'Zoom情報入力', path: partners_order_path(@order.id, is_accepted: true)
+
+.p-3
+  .body.bg-white.p-3.mb-3
+    h4.text-black.font-weight-bold ■zoomをご自身で発行しない方
+    = link_to 'zoom発行代行を依頼する',
+              'https://docs.google.com/forms/d/e/1FAIpQLSecpvrfGxwEsvIFqHsA7ymTise48AMnrzf5y3VSAYyzhUDq5g/viewform',
+              target: '_blank',
+              class: 'btn btn-primary btn-lg btn-block w-100 p-3 my-2 text-white',
+              rel: 'noopener'
+    p ※300円/回が支払額より引かれます
+
+    h4.text-black.font-weight-bold ■zoomをご自身で発行される方
+    p ※必ずzoom有料アカウントをご利用ください。下記スペースにリンクを貼り付け(コピペ)をお願いいたします。
+
+    = render 'partners/zooms/form', zoom: @zoom, order: @zoom, url: partners_order_zooms_path(@order.id)

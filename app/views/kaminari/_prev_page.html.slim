@@ -1,0 +1,8 @@
+- if current_page.first?
+  a.page-link.shadow style="cursor: not-allowed;"
+    i.material-icons navigate_before
+    | 前へ
+- else
+  = link_to url, rel: 'prev', remote: remote, class: 'page-link shadow' do
+    i.material-icons navigate_before
+    | 前へ

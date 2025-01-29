@@ -1,0 +1,80 @@
+- if ENV.fetch('DOMAIN', '') == 'recreation.everyplus.jp'
+  head
+    script
+      |
+        (function(w,f){w[f]=w[f]||function(){w[f].q=w[f].q||[];w[f].q.push(arguments);};})(window,'dairin');
+        dairin("complete", {
+          // customer_uid:'user@example.com',
+          // sales_amount:0,
+          // event_id:'',
+          campaign_code:'7JtOnDILz5'
+        });
+    script src="https://r.moshimo.com/af/r/result.js?p_id=6457&pc_id=18242&m_v=matching" id="msmaf"
+    noscript
+      img src="https://r.moshimo.com/af/r/result?p_id=6457&pc_id=18242&m_v=matching" width="1" height="1" alt=""
+
+main.detail
+  .container.pt-2
+    nav[aria-label="breadcrumb"]
+      ol.breadcrumb
+        li.breadcrumb-item
+          = link_to 'トップ', root_path
+        li.breadcrumb-item
+          = link_to '一覧', customers_recreations_path
+        - category_tag = @order.recreation.tags.categories&.first
+        - if category_tag.present?
+          li.breadcrumb-item
+            span.text-secondary = category_tag.name
+        li.breadcrumb-item
+          span
+            = link_to @order.recreation_title, customers_recreation_path(@order.recreation.id)
+        li.breadcrumb-item.active
+          span.text-secondary 正式依頼完了
+
+  article.container.py-4.px-0
+    .row.justify-content-center
+      .col-md-8
+        .card
+          .card-header
+            | 正式依頼が完了しました<br>ありがとうございます！
+          .card-body
+            p
+              | 「#{@order.recreation_title}」を正式依頼いただきありがとうございます！
+            .alert.alert-danger.color-at-re10[role="alert"]
+              | パートナーが依頼を承認するとレクが正式に開催されます。承認されましたらメールにてお知らせいたします。もうしばらくお待ちください。
+            .container-fluid
+              .row.py-2.border-top
+                .col-lg-3.col-4.label 案件番号
+                .col-auto = @order.id
+              .row.py-2
+                .col-3.label レク
+                .col-8
+                  .row.align-items-center.mt-2
+                    .col-md-4
+                      picture[loading="lazy"]
+                        = image_tag @order.recreation.recreation_images.sliders&.first&.image.to_s, class: 'img-fluid'
+                    .col-md-8.recreation
+                      h1.font-16.font-weight-bold.line-height-140 = @order.recreation_title
+                      .category-tags
+                        = tag_to_html(@order.recreation, false)
+              .row.py-2
+                .col-lg-3.col-4.label 開催日時
+                .col-auto = dotted_datetime @order.start_at
+              .row.py-2
+                .col-lg-3.col-4.label 参加人数
+                .col-auto = "#{@order.number_of_people}人"
+              - if @order.recreation_kind.online?
+                .row.py-2
+                  .col-lg-3.col-4.label 参加施設数
+                  .col-auto 1施設 （追加施設数 - 施設）
+              .row.py-2
+                .col-lg-3.col-4.label 今回開催する施設の住所
+                .col-auto = @order.full_address
+              .row.py-2.border-bottom
+                .col-lg-3.col-4.label 合計費用(税別)
+                .col-auto = number_to_currency(@order.total_price_for_customer)
+            .row.justify-content-center.py-3
+              .col-12.py-3.text-center
+                = link_to '依頼中のレクを確認する', customers_order_path(@order.id), class: 'btn-cpr'
+              .col-12.py-3.text-center
+                = link_to 'トップへ戻る', root_path, class: 'clink'
