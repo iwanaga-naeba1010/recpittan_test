@@ -94,7 +94,7 @@ export const FirstStep: React.FC = () => {
             <label htmlFor='terms' className='terms'>
               <span>
                 <a
-                  href='https://drive.google.com/file/d/1FsBuayCcZDgqD6g6xjpf6Xh0Yxgw4Fgy/view'
+                  href='https://drive.google.com/file/d/1GD97UAqdMKm9zWLL1qCCtCDca9zZBuBj/view?usp=drive_link'
                   className='ms-1 text-primary fw-bold'
                 >
                   利用規約
