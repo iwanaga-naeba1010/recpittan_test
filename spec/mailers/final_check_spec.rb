@@ -4,25 +4,33 @@ require 'rake'
 require 'rails_helper'
 
 RSpec.describe FinalCheckMailer, type: :mailer do
-  include_context 'with email templates'
-  let!(:template) { templates.find { |t| t['kind'] == 'final_check' } }
-  let(:partner) { create :user, :with_recreations }
-  let(:customer) { create :user, :with_customer }
-  let(:order) { create :order, recreation_id: partner.recreations.first.id, user_id: customer.id }
+  let(:partner) { create(:user, :with_recreations) }
 
-  describe 'final_check' do
-    let(:mail) { FinalCheckMailer.notify(order:) }
+  let(:order) do
+    create(:order,
+           start_at: Time.zone.parse('2025-02-01 10:00'),
+           user: create(:user, company: create(:company, facility_name: 'テスト施設')),
+           recreation: create(:recreation, user: partner))
+  end
 
-    it 'renders the subject' do
-      expect(mail.subject).to eq(template['title'])
-    end
+  let(:mail) { FinalCheckMailer.notify(order:) }
+  let(:template) { FinalCheckMailer.new.send(:template_by_kind, kind: 'final_check') }
 
-    it 'renders the reciever email' do
-      expect(mail.to).to eq([partner.email])
-    end
+  let(:expected_subject) do
+    format(template['title'],
+           start_at: order.start_at.strftime('%Y.%m.%d %H:%M'),
+           facility_name: order.user.company.facility_name)
+  end
 
-    it 'renders the sender email' do
-      expect(mail.from).to eq(['info@everyplus.jp'])
-    end
+  it 'renders the subject' do
+    expect(mail.subject).to eq(expected_subject)
+  end
+
+  it 'renders the receiver email' do
+    expect(mail.to).to eq([partner.email])
+  end
+
+  it 'renders the sender email' do
+    expect(mail.from).to eq(['info@everyplus.jp'])
   end
 end
