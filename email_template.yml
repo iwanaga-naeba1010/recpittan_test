@@ -279,7 +279,7 @@
     TLE:050-5306-7767
     メール:info@everyplus.jp
     ーーーーーーーーーー
-- title: <%= @order.start_at&.strftime('%Y.%m.%d %H:%M') %>  <%= @order.user.company.facility_name %> 様での開催の3日前確認のお願い
+- title: "%{start_at} %{facility_name} 様での開催の3日前確認のお願い"
   explanation: PT:3日前確認
   kind: final_check # 16
   body: |
