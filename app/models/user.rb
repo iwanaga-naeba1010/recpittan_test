@@ -41,9 +41,9 @@ class User < ApplicationRecord
   extend Enumerize
 
   # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
+  # :timeoutable, :trackable, :omniauthable
   devise :database_authenticatable, :registerable, :confirmable,
-         :recoverable, :rememberable, :validatable
+         :recoverable, :rememberable, :validatable, :lockable
 
   enumerize :role, in: { customer: 0, partner: 1, admin: 2, cs: 3 }, default: 0
   enumerize :approval_status, in: { unapproved: 0, approved: 1 }, default: 0
@@ -67,6 +67,8 @@ class User < ApplicationRecord
 
   scope :customers, -> { where(role: :customer) }
 
+  validates :password, password_complexity: true, if: -> { password.present? }
+
   def facility_name
     company&.facility_name
   end
@@ -87,5 +89,15 @@ class User < ApplicationRecord
     result = update(params, *options)
     clean_up_passwords
     result
+  end
+
+  # unlockable なユーザーか判定
+  def lockable?
+    failed_attempts >= Devise.maximum_attempts
+  end
+
+  # ロック解除メソッド
+  def unlock_user!
+    update!(failed_attempts: 0, locked_at: nil, unlock_token: nil)
   end
 end
