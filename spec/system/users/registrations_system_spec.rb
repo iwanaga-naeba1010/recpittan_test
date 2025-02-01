@@ -13,7 +13,7 @@ RSpec.describe 'Registrations', type: :system do
         input = {
           user: {
             email: 'test@gmail.com',
-            password: '11111111'
+            password: 'Aa1!aaaa'
           },
           company: {
             name: 'name',
