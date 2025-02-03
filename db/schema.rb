@@ -10,8 +10,8 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_09_01_045311) do
-  # These are extensions that must be enabled in order to support this database
+ActiveRecord::Schema[7.0].define(version: 2025_02_03_012228) do
+  # These are extensions that must be enabled in order to support this databasex
   enable_extension "plpgsql"
 
   create_table "active_admin_comments", force: :cascade do |t|
@@ -263,6 +263,12 @@ ActiveRecord::Schema[7.2].define(version: 2024_09_01_045311) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_partner_infos_on_user_id"
+  end
+
+  create_table "pdf_files", force: :cascade do |t|
+    t.string "file"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "profiles", force: :cascade do |t|
