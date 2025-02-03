@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class PdfUploader < CarrierWave::Uploader::Base
-  if Rails.env.development? || Rails.env.test?
+  if Rails.env.local?
     storage :file
   else
     storage :fog
