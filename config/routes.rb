@@ -21,11 +21,12 @@ Rails.application.routes.draw do
 
   resources :registration_thanks, only: %i[index]
 
-  draw :customer_routes
-  draw :partner_routes
-  draw :api_routes
+  draw :api_admin_routes
   draw :api_customer_routes
   draw :api_partner_routes
+  draw :api_routes
+  draw :customer_routes
+  draw :partner_routes
 
   get 'sitemap', to: redirect("https://#{ENV['AWS_BUCKET']}.s3-ap-northeast-1.amazonaws.com/sitemaps/sitemap.xml.gz")
 
