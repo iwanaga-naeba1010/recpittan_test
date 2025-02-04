@@ -120,7 +120,7 @@ class Recreation < ApplicationRecord
     end
   }
 
-  validates :price, :material_price, :amount, :material_amount, :additional_facility_fee, presence: true
+  # validates :price, :material_price, :amount, :material_amount, :additional_facility_fee, presence: true
 
   def flyer
     files = recreation_images.flyers&.to_a
