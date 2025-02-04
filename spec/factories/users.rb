@@ -40,7 +40,7 @@ FactoryBot.define do
   factory :user do
     role { :customer }
     email { FFaker::Internet.email }
-    password { '11111111' }
+    password { 'Aa1!aaaa' }
     confirmed_at { Time.now.utc }
   end
 

@@ -54,6 +54,8 @@ export const ModalForm: React.FC<Props> = (props) => {
     handleSubmit,
     setValue,
     getValues,
+    trigger,
+    reset,
     formState: { isValid },
   } = useForm<ModalForlValues>({
     mode: 'onChange',
@@ -104,15 +106,29 @@ export const ModalForm: React.FC<Props> = (props) => {
   }, []);
 
   const handleZipChange = async (): Promise<void> => {
-    const { data } = await findAddressByZip(getValues('zip'));
-    const { address1, address2, address3 } = data.results[0];
+    try {
+      const zip = getValues('zip'); // 事前にzipの値を取得
 
-    const pref = filterCurrentPrefecture(address1);
-    await handleCityChange(pref.prefCode);
+      const { data } = await findAddressByZip(zip);
+      const { address1, address2, address3 } = data.results[0];
 
-    setValue('prefecture', address1, { shouldValidate: true });
-    setValue('city', address2, { shouldValidate: true });
-    setValue('street', address3, { shouldValidate: true });
+      const pref = filterCurrentPrefecture(address1);
+      await handleCityChange(pref.prefCode);
+
+      // 現在のフォームの値を取得し、新しい住所情報を追加
+      const currentValues = getValues();
+      reset({
+        ...currentValues, // 現在の値をすべて保持
+        zip, // zip も明示的にセット
+        prefecture: address1,
+        city: address2,
+        street: address3,
+      });
+
+      await trigger(); // すべてのバリデーションを再評価
+    } catch (error) {
+      console.error('郵便番号検索エラー:', error);
+    }
   };
 
   const handleCityChange = async (prefCode: number): Promise<void> => {

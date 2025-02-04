@@ -1,0 +1,8 @@
+- if current_page.last?
+  a.page-link.shadow style="cursor: not-allowed;"
+    span 次へ
+    i.material-icons navigate_next
+- else
+  = link_to url, rel: 'next', remote: remote, class: 'page-link shadow' do
+    span 次へ
+    i.material-icons navigate_next

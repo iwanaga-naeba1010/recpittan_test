@@ -13,6 +13,7 @@ KeepFindersOnTheirOwnModelCheck: { }
 LawOfDemeterCheck:
   ignored_files:
     - "app/views/admin/orders/_report.html.erb"
+    - "app/views/admin/orders/_report.html.slim"
 #LongLineCheck: { max_line_length: 80 }
 MoveCodeIntoControllerCheck: { }
 MoveCodeIntoHelperCheck: { array_count: 3 }
@@ -64,7 +65,11 @@ RemoveUnusedMethodsInControllersCheck: {
     'Partners::RegistrationsController#store_location'
   ]
 }
-RemoveUnusedMethodsInHelpersCheck: { except_methods: [] }
+RemoveUnusedMethodsInHelpersCheck: {
+  except_methods: [
+    'SeoHelper#meta_tags_each_page'
+  ]
+}
 # NOTE: デグレ回避のため一旦エスケープ
 RemoveUnusedMethodsInModelsCheck: {
   except_methods: [
@@ -79,7 +84,8 @@ RemoveUnusedMethodsInModelsCheck: {
     'Recreation#ransackable_associations',
     'RecreationPlanEstimate#ransackable_associations',
     'Tag#ransackable_associations',
-    'User#ransackable_associations'
+    'User#ransackable_associations',
+    'RecreationPlan#monthly_fee'
   ]
 }
 # NOTE: デグレ回避のため一旦エスケープ

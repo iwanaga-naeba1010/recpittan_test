@@ -1,0 +1,9 @@
+= simple_form_for zoom, url: url do |f|
+  h4.text-black.font-weight-bold 当日のzoomリンク
+  p 入力されたリンクは施設側でも確認が可能です。
+
+  div
+    = f.input :url, as: :text, label: false, input_html: { rows: 10 }
+    = f.input :price, as: :hidden, input_html: { value: 0 }
+    = f.input :created_by, as: :hidden, input_html: { value: :partner }
+    = f.submit '保存', class: 'btn btn-primary btn-lg btn-block w-100 p-3 my-2'

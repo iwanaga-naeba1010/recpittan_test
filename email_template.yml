@@ -271,7 +271,7 @@
     4.お支払い
     月末に開催月分の請求書をえぶりプラスよりまとめて発行致します。
 
-    詳しい利用方法→　<%= link_to "https://everyplus.jp/new_user", "https://everyplus.jp/new_user" %>
+    詳しい利用方法→　<%= link_to "https://everyplus.jp/wp-content/uploads/2025/01/new_user.pdf", "https://everyplus.jp/wp-content/uploads/2025/01/new_user.pdf" %>
 
 
     ーーーーーーーーー
@@ -279,7 +279,7 @@
     TLE:050-5306-7767
     メール:info@everyplus.jp
     ーーーーーーーーーー
-- title: <%= @order.start_at&.strftime('%Y.%m.%d %H:%M') %>  <%= @order.user.company.facility_name %> 様での開催の3日前確認のお願い
+- title: "%{start_at} %{facility_name} 様での開催の3日前確認のお願い"
   explanation: PT:3日前確認
   kind: final_check # 16
   body: |

@@ -1,0 +1,26 @@
+.header-block
+  = render 'shared/partner/header_with_link', title: @order.recreation.profile_name.to_s, path: partners_path(is_open: true)
+  = link_to partners_order_path(id: @order.id, is_accepted: @order.is_accepted) do
+    .sub_header.p-3
+      .d-flex
+        .flex-grow-1
+          | レクリエーション・料金の確認
+        .flex-grow-1
+          | 依頼詳細
+          i.fas.fa-chevron-right
+
+.chat
+  = render 'shared/partner/order/chat', order: @order
+
+.chat_form.border-top
+  = simple_form_for @chat, url: partners_order_chats_path(@order.id) do |f|
+    .m-1.w-75
+      = f.input :user_id, as: :hidden, input_html: { value: current_user.id }
+      div
+        | ※ファイルサイズは20MBが上限で、PDF/PowerPoint/JPEG/jpg/png形式に対応しております
+      .file
+        = f.input :file, as: :file, label: false, input_html: { class: 'form-control' }
+      .d-flex.mt-2
+        .flex-grow-1
+          = f.input :message, as: :text, label: false, input_html: { class: 'form-control' }
+        = f.submit '送信'

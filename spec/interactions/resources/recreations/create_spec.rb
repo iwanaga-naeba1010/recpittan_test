@@ -14,6 +14,8 @@ RSpec.describe Resources::Recreations::Create, type: :interaction do
         price: 5000,
         material_price: 1000,
         minutes: 30,
+        amount: 1000,
+        material_amount: 1000,
         description: 'description',
         flow_of_day: '',
         borrow_item: '',

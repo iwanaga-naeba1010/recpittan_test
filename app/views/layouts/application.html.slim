@@ -1,0 +1,49 @@
+doctype html
+html
+  head
+    meta[name="viewport" content="width=device-width,initial-scale=1"]
+    = csrf_meta_tags
+    = csp_meta_tag
+
+    = display_meta_tags(default_meta_tags)
+    = javascript_pack_tag 'application', 'data-turbolinks-track': 'reload'
+    = stylesheet_pack_tag 'application', 'data-turbolinks-track': 'reload'
+    / 印刷用のCSSファイルのリンクを追加
+    = stylesheet_pack_tag 'application', media: 'print'
+
+    link[rel="preconnect" href="https://fonts.googleapis.com"]
+    link[rel="preconnect" href="https://fonts.gstatic.com" crossorigin=true]
+    link[rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap"]
+    link[rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap&family=Material+Icons"]
+
+    / Global site tag (gtag.js) - Google Analytics
+    script[async src="https://www.googletagmanager.com/gtag/js?id=UA-126571542-2"]
+    script
+      | window.dataLayer = window.dataLayer || [];
+      | function gtag(){dataLayer.push(arguments);}
+      | gtag('js', new Date());
+      | gtag('config', 'UA-126571542-2');
+
+    / Microsoft clarity
+    - if ENV.fetch('DOMAIN', '') == 'recreation.everyplus.jp'
+      script[type="text/javascript"]
+        | (function(c,l,a,r,i,t,y){
+        |     c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        |     t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        |     y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+        | })(window, document, "clarity", "script", "m7iw83mln7");
+      / アフィリエイトタグの追加
+      script[src="https://r.moshimo.com/af/r/maftag.js"]
+      script
+        | (function(w,f){w[f]=w[f]||function(){w[f].q=w[f].q||[];w[f].q.push(arguments);};})(window,'dairin');
+        | dairin("init");
+        | dairin("view");
+      script[src="https://static.dair.in/core/project/3w7A3H-T/dairin.js" type="text/javascript" async=true]
+
+  body
+    = render 'shared/common/header'
+    = render 'shared/common/flash'
+    = yield
+    = render 'shared/common/footer'
+
+  script[src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"]

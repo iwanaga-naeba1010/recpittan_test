@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>支払い通知書</title>
+  <link rel="stylesheet" href="./stylesheets/css/style.min.css">
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body>
+  <div id="container">
+    <main id="payment">
+      <div id="main-container">
+        <div class="content">
+          <div class="content__inner wrap">
+            <h1>支払い通知書</h1>
+            <div class="content__wrap">
+              <div class="content__wrap-inner">
+                <div class="content__head flex justify-between text-[1.2rem] mb-10">
+                  <p>WBHH (正式社名記載) 御中</p>
+                  <p>発行日2024/9/30</p>
+                </div><!-- /.content__ttl -->
+
+                <div class="content__head flex justify-between mb-10">
+                  <div class="content__box w">
+                    <h2 class="flex flex-col text-[1.2rem] mb-3">
+                      <span>○○○○御中</span>
+                      <span>9月分入金分</span>
+                    </h2>
+                    <p>以下の通り支払い申し上げます。</p>
+                    <p>送付後、一定期間以内にご連絡がない場合は確認済みとします。</p>
+                  </div><!-- /.content__box -->
+
+                  <div class="content__box text-[1.2rem]">
+                    <h2 class="mb-3">講師名</h2>
+                    <p class="flex flex-col mb-3">
+                      <span>講師登録番号○○○○</span>
+                      <span>確認依頼メール発行後、一定期間</span>
+                    </p>
+                    <p class="mb-3">株式会社○○○○</p>
+                    <p>東京都渋谷区○○○○○○○○</p>
+                  </div><!-- /.content__box -->
+                </div><!-- /.content__head -->
+
+                <div class="content__ttl text-[1.2rem] mb-3">
+                  <h3>件名:</h3>
+                  <p>9月10日ドッグセラピー</p>
+                  <p>9月15日ドッグセラピー</p>
+                </div><!-- /.content__ttl -->
+
+                <div class="content__table">
+                  <div class="content__table-inner">
+                    <table>
+                      <thead>
+                        <tr class="flex bg-[#D9D9D9]">
+                          <th>商品名</th>
+                          <th>単価</th>
+                          <th>個数</th>
+                          <th>数量</th>
+                          <th>金額</th>
+                        </tr>
+                      </thead>
+                      <tbody class="flex">
+                        <tr class="flex flex-col">
+                          <td>商品A</td>
+                          <td>商品B</td>
+                          <td>商品C</td>
+                          <td>商品D</td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td class="border-b-2 border-b-[#000000]"></td>
+                        </tr>
+                        <tr class="flex flex-col">
+                          <td>3.0</td>
+                          <td>1.0</td>
+                          <td>1.0</td>
+                          <td>2.0</td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td class="border-b-2 border-b-[#000000]"></td>
+                        </tr>
+                        <tr class="flex flex-col">
+                          <td>個</td>
+                          <td>個</td>
+                          <td>個</td>
+                          <td>個</td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td class="border-b-2 border-b-[#000000]"></td>
+                        </tr>
+                        <tr class="flex flex-col">
+                          <td>1,000</td>
+                          <td>2,000</td>
+                          <td>1,000</td>
+                          <td>3,000</td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                        </tr>
+                        <tr class="flex flex-col">
+                          <td>4,000</td>
+                          <td>8,000</td>
+                          <td>1,000</td>
+                          <td>5,000</td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                        </tr>
+                      </tbody>
+                      <tfoot class="flex justify-end border-l border-l-[#000000]  border-b border-b-[#000000]">
+                        <tr class="flex flex-col bg-[#D9D9D9]">
+                          <td>小計(10%対象)</td>
+                          <td>10%消費税</td>
+                          <td>合計</td>
+                        </tr>
+                        <tr class="flex flex-col">
+                          <td>¥17,000</td>
+                          <td>¥1,700</td>
+                          <td>¥18,700</td>
+                        </tr>
+                      </tfoot>
+                    </table>
+                    <p>備考</p>
+                  </div><!-- /.content__table-inner -->
+                </div><!-- /.content__table -->
+              </div><!-- /.content__wrap -->
+            </div><!-- /.content__wrap-inner -->
+          </div><!-- /.content__inner -->
+        </div><!-- /.content -->
+
+      </div><!-- /#main-container -->
+    </main>
+  </div>
+
+</body>
+
+</html>

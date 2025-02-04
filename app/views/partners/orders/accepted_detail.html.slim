@@ -1,0 +1,38 @@
+= render 'shared/partner/header_with_link', title: '詳細', path: chat_partners_order_path(@order.id)
+
+.body.bg-white.p-3.mb-3
+  div
+    = link_to partners_order_path(@order.id) do
+      .d-flex.bd-highlight.border-bottom
+        .py-2.w-100.bd-highlight 開催詳細
+        .py-2.flex-shrink-1.bd-highlight
+          i.fas.fa-chevron-right
+
+    / NOTE: オンラインレクの場合のみ
+    - if @order.recreation_kind.online?
+      - zoom_path = @order.zoom.present? ? edit_partners_order_zoom_path(id: @order.zoom.id, order_id: @order.id) : new_partners_order_zoom_path(@order.id)
+      = link_to zoom_path do
+        .d-flex.bd-highlight.border-bottom
+          .py-2.w-100.bd-highlight Zoom情報入力
+          .py-2.flex-shrink-1.bd-highlight
+            i.fas.fa-chevron-right
+
+    - report_path = @order.report.present? ? edit_partners_order_report_path(id: @order.report.id, order_id: @order.id) : new_partners_order_report_path(@order.id)
+    = link_to report_path do
+      .d-flex.bd-highlight.border-bottom
+        .py-2.w-100.bd-highlight 終了報告
+        .py-2.flex-shrink-1.bd-highlight
+          i.fas.fa-chevron-right
+
+    = link_to 'https://forms.gle/pjHeBDsBjz2eWf4G7', target: '_blank', rel: :noopener do
+      .d-flex.bd-highlight.border-bottom
+        .py-2.w-100.bd-highlight 日程を変更したい場合
+        .py-2.flex-shrink-1.bd-highlight
+          i.fas.fa-chevron-right
+
+    - if @order.report.present? && @order&.report&.evaluation.present?
+      = link_to partners_order_evaluation_path(id: @order.report.evaluation.id, order_id: @order.id) do
+        .d-flex.bd-highlight.border-bottom
+          .py-2.w-100.bd-highlight 評価を確認する
+          .py-2.flex-shrink-1.bd-highlight
+            i.fas.fa-chevron-right

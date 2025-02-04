@@ -1,0 +1,29 @@
+main.auth
+  .container.pt-2
+    nav[aria-label="breadcrumb"]
+      ol.breadcrumb
+        li.breadcrumb-item
+          = link_to 'トップ', root_path
+        li.breadcrumb-item
+          = link_to 'ログイン', new_user_session_path
+        li.breadcrumb-item.active[aria-current="page"]
+          span パスワード再発行
+
+  .container
+    .row.justify-content-center.my-5
+      .col-md-8
+        .card.p-4
+          .card-body
+            h5.card-title.font-24.fw-bold.text-center.line-height-120.text-ba10 パスワード再発行
+            p.text-muted 登録したメールアドレス入力して下さい。
+            = simple_form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f|
+              .input-group.mb-3
+                .input-group-prepend
+                  span.input-group-text
+                    span.material-icons email
+                .form-group.flex-grow-1
+                  = f.input :email, label: false, input_html: { class: 'form-control string email required w-100' }
+              .row.justify-content-between
+                .col-auto.text-center
+                .col-md-6.text-center
+                  = f.button :submit, 'パスワード再発行', class: 'btn btn-cprimary rounded-pill w-100 font-14 py-3 px-4 font-weight-bold text-white'

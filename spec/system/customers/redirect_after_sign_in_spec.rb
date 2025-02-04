@@ -18,7 +18,7 @@ RSpec.describe 'Customers::RedirectAfterSignIn', type: :system do
         click_on('ログインして相談・依頼する')
         expect(page).to have_current_path(new_user_session_path)
         fill_in 'user_email', with: customer.email
-        fill_in 'user_password', with: '11111111'
+        fill_in 'user_password', with: 'Aa1!aaaa'
         click_button('ログイン')
         sleep 3
         expect(page).to have_current_path(redirect_url)

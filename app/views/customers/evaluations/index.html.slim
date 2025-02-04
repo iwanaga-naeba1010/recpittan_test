@@ -1,0 +1,26 @@
+main.detail
+  .container.pt-2
+    nav[aria-label="breadcrumb"]
+      ol.breadcrumb
+        li.breadcrumb-item
+          = link_to 'トップ', root_path
+        li.breadcrumb-item
+          = link_to '一覧', customers_recreations_path
+        li.breadcrumb-item.active
+          span.text-secondary レビュー一覧
+
+  article.container.evaluations-container.py-4.px-0
+    div
+      = link_to root_path, class: 'return-link' do
+        p
+          = image_pack_tag 'return.svg'
+          | 戻る
+      h3.title-b.font-18.my-1 = "#{@evaluations.total_count}件のレビュー"
+      hr
+    .evaluations-container.row.row-cols-1.row-cols-md-2.row-cols-lg-3.g-4
+      - @evaluations.each do |evaluation|
+        .col
+          = render 'shared/evaluation/card', evaluation: evaluation
+
+    .mt-4.d-flex.justify-content-center.fw-bold
+      = paginate @evaluations

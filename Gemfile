@@ -14,6 +14,7 @@ gem 'turbolinks'
 gem 'jbuilder'
 gem 'bootsnap'
 gem 'google-api-client'
+gem 'slim-rails'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
@@ -21,6 +22,7 @@ group :development, :test do
   gem 'pry-rails'
   gem 'pry-remote'
   gem 'rubocop-rails', require: false
+  gem 'slim_lint', require: false
   gem 'brakeman', require: false
   gem 'rails_best_practices', require: false
   gem 'haml_lint', require: false
@@ -102,3 +104,7 @@ gem 'recaptcha'
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
+
+# pdf
+gem 'wicked_pdf'
+gem 'wkhtmltopdf-binary'

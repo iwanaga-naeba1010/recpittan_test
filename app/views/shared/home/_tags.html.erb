@@ -1,8 +1,0 @@
-<h5 class="mt-5 font-weight-bold text-black">タグからレクを探す</h5>
-<div class="row">
-  <div class="col">
-    <% tags.each do |tag| %>
-      <%= link_to("##{tag.name}", customers_recreations_path(q: { tags_id_eq: tag.id }), class: 'my-1 me-3 px-1 tag-label font-weight-bold d-inline-block') %>
-    <% end %>
-  </div>
-</div>
