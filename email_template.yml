@@ -271,7 +271,7 @@
     4.お支払い
     月末に開催月分の請求書をえぶりプラスよりまとめて発行致します。
 
-    詳しい利用方法→　<%= link_to "https://everyplus.jp/wp-content/uploads/2025/01/new_user.pdf", "https://everyplus.jp/wp-content/uploads/2025/01/new_user.pdf" %>
+    詳しい利用方法→　<%= link_to "http://everyplus.jp/wp-content/uploads/2025/02/new_user.pdf", "http://everyplus.jp/wp-content/uploads/2025/02/new_user.pdf" %>
 
 
     ーーーーーーーーー
