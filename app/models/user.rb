@@ -43,7 +43,8 @@ class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :timeoutable, :trackable, :omniauthable
   devise :database_authenticatable, :registerable, :confirmable,
-         :recoverable, :rememberable, :validatable, :lockable
+         :recoverable, :rememberable, :validatable, :lockable,
+         :timeoutable
 
   enumerize :role, in: { customer: 0, partner: 1, admin: 2, cs: 3 }, default: 0
   enumerize :approval_status, in: { unapproved: 0, approved: 1 }, default: 0
