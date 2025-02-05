@@ -8,9 +8,9 @@ module Resources
         string :title
         string :second_title
         integer :price
-        integer :amount
+        # integer :amount
         integer :material_price
-        integer :material_amount
+        # integer :material_amount
         integer :minutes
         string :description
         string :flow_of_day
