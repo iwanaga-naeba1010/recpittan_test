@@ -20,7 +20,7 @@ RSpec.describe DeviseCustomMailer, type: :mailer do
     end
 
     it 'renders the sender email' do
-      expect(mail.from).to eq(['test@gmail.com'])
+      expect(mail.from).to eq(['no-reply@ep.net'])
     end
   end
 end
