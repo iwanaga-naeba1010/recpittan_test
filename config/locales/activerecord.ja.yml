@@ -147,7 +147,7 @@ ja:
         memo: メモ
         coupon_code: クーポンコード
       zoom:
-        price: zoomレンタル使用料金
+        price: 金額
         url: URL
         created_by: 発行者
       order_date:
