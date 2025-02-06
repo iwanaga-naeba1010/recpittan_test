@@ -25,27 +25,27 @@ ActiveAdmin.register_page 'Invoices' do
       User.customers.includes(:company, :orders).find_each do |customer|
         # 注文データのうち、完了しているものを取得
         orders = customer.orders.to_a.select { |order| order.status.finished? }
-        next if orders.blank? # 注文がなければスキップ
+        next if orders.blank?
 
         # 請求先情報を取得
         invoice_information = customer.invoice_information
 
         # 請求書データを作成
         invoice = {
-          invoice_at: current_time.strftime('%Y/%m/%d'), # 請求日
-          title: "#{current_time.month}月分レクリエーション費用", # 請求件名
-          code: invoice_information.present? ? invoice_information.code : '', # 取引先管理コード
-          facility_name: customer.company.facility_name, # 施設名
+          invoice_at: current_time.strftime('%Y/%m/%d'),
+          title: "#{current_time.month}月分レクリエーション費用",
+          code: invoice_information.present? ? invoice_information.code : '',
+          facility_name: customer.company.facility_name,
           partner_name: '',
           tax: '',
-          payment_due_date: "#{current_time.year}/#{(current_time + 1.month).month}/25", # 支払い期限
-          items: [], # 商品明細
+          payment_due_date: "#{current_time.year}/#{(current_time + 1.month).month}/25",
+          items: [],
           memo: '恐れ入りますが、振込手数料はご負担いただきますようお願い申し上げます。'
         }
 
         # 注文ごとに請求書のアイテムを追加
         orders.each do |order|
-          invoice[:partner_name] = order.recreation.user_username # パートナー名を設定
+          invoice[:partner_name] = order.recreation.user_username
 
           invoice[:items] << {
             name: "#{order.start_at.strftime('%m/%d')}#{order.recreation_title}",
