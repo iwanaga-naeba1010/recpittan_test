@@ -10,5 +10,10 @@ if Rails.env.production?
   )
 
   Rails.logger = ActiveSupport::TaggedLogging.new(Logger.new($stdout))
-  Rails.logger.extend(ActiveSupport::Logger.broadcast(cloudwatch_logger))
+  Rails.logger.extend(Module.new do
+    define_method(:add) do |severity, message = nil, progname = nil, &block|
+      super(severity, message, progname, &block)
+      cloudwatch_logger.log(message || progname, level: severity)
+    end
+  end)
 end
