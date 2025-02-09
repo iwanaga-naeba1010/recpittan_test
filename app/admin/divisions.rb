@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# rubocop:disable Metrics/BlockLength
 ActiveAdmin.register Division do
   permit_params(
     %i[
@@ -69,9 +70,10 @@ ActiveAdmin.register Division do
 
   controller do
     def create
-      super do |success, failure|
+      super do |success, _failure|
         success.html { redirect_to resource_path(resource) } # 作成後に詳細画面へリダイレクト
       end
     end
   end
 end
+# rubocop:enable Metrics/BlockLength
