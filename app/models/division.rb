@@ -19,4 +19,5 @@
 #  updated_at :datetime         not null
 #
 class Division < ApplicationRecord
+  include Ransackable
 end
