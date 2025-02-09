@@ -41,6 +41,7 @@ ja:
       recreation_recreation_plan: 登録レクリエーション
       bank_account: 銀行口座
       recreation_plan_estimate: プラン見積書
+      division: 区分マスタ
     attributes:
       email:
         title: タイトル
@@ -261,6 +262,17 @@ ja:
         transportation_expenses: 交通費
         recreation_plan: プラン
         user: ユーザー
+      division:
+        classname: 区分名
+        code: 区分コード
+        valuetext: 名称
+        valueint: 区分値
+        valuedate: 日付値
+        disporder: 表示順
+        memo: メモ
+        key: key
+        i18n_flag: i18nフラグ
+        i18n_class: i18nクラス
 
     errors:
       messages:
