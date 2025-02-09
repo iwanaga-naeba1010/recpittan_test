@@ -121,7 +121,7 @@ ActiveRecord::Schema[7.2].define(version: 2025_02_09_134706) do
     t.integer "disporder"
     t.text "memo"
     t.string "key"
-    t.boolean "i18n_flag"
+    t.boolean "i18n_flag", default: false
     t.string "i18n_class"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

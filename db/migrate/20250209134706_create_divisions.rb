@@ -9,7 +9,7 @@ class CreateDivisions < ActiveRecord::Migration[7.2]
       t.integer :disporder
       t.text :memo
       t.string :key
-      t.boolean :i18n_flag
+      t.boolean :i18n_flag, default: false
       t.string :i18n_class
 
       t.timestamps

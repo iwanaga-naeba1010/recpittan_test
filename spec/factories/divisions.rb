@@ -9,7 +9,7 @@
 #  code       :string
 #  disporder  :integer
 #  i18n_class :string
-#  i18n_flag  :boolean
+#  i18n_flag  :boolean          default(FALSE)
 #  key        :string
 #  memo       :text
 #  valuedate  :datetime
