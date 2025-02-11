@@ -19,10 +19,11 @@ class ApiAdmin::UsersController < ApiAdmin::ApplicationController
       return
     end
 
-    user.unlock_user!
+    user.unlock!
 
     render json: { message: 'ユーザーのロックを解除しました' }, status: :ok
   rescue StandardError => e
+    Sentry.capture_exception(e)
     render json: { error: e.message }, status: :internal_server_error
   end
 end

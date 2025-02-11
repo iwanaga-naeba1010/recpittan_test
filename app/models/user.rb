@@ -98,7 +98,7 @@ class User < ApplicationRecord
   end
 
   # ロック解除メソッド
-  def unlock_user!
+  def unlock!
     update!(failed_attempts: 0, locked_at: nil, unlock_token: nil)
   end
 end
