@@ -146,6 +146,45 @@ ja:
         contract_number: 契約番号
         memo: メモ
         coupon_code: クーポンコード
+        is_managercontrol: 運営管理フラグ
+        order_create_source_code: 案件作成元区分
+        manage_company_code: 案件管理会社区分
+        business_integration_flag: 業務統合フラグ
+        is_withholding_tax: 源泉徴収フラグ
+        status_updated_at: ステータス更新日
+        facility_request_approved_at: 正式依頼承認日（ダウンロード日）
+        approved_total_partner_payment: 正式依頼承認時のパートナー謝礼全体（税込）
+        final_report_approved_at: 施設の終了報告の承認日
+        tax_rate: 消費税率
+        tax_amount: 消費税
+        amount_with_tax: パートナー謝礼（税込）
+        total_material_amount: 材料費合計
+        total_additional_facility_fee: 追加施設費合計
+        total_partner_payment_with_tax: パートナー謝礼全体（税込）
+        partner_fee_rate: パートナー手数料率
+        additional_facility_fee_commission: 追加施設手数料
+        total_additional_facility_fee_commission: 追加施設手数料計
+        partner_invoice_registration_flag: パートナーインボイス登録フラグ
+        non_invoice_partner_fee_rate: インボイス非登録パートナー手数率
+        non_invoice_partner_fee: インボイス非登録パートナー手数料
+        zoom_rental_fee: zoomレンタル料
+        recreation_kind: レクマスタ、レク種類
+        is_zoom_rental: zoomレンタルフラグ
+        zoom_rental_actual_fee: zoomレンタル使用料金
+        partner_service_fee: パートナーサービス利用料
+        partner_deduction_subtotal: パートナー控除小計
+        facility_fee_rate: 施設手数料率
+        facility_fee_base_amount: 施設手数料計算金額
+        facility_fee: 施設手数料（税込）
+        facility_service_fee: 施設サービス利用料
+        facility_fee_subtotal: 施設手数料小計
+        withholding_tax_rate: 源泉徴収税率
+        withholding_tax_amount: 源泉徴収税額
+        specific_facility_plan_management_code: 特定施設プラン管理コード
+        partner_payment_amount: パートナー支払額
+        gross_profit_incl_tax: 粗利（税込）
+        gross_profit_margin: 粗利率
+        facility_billing_amount: 施設請求額
       zoom:
         price: zoomレンタル使用料金
         url: URL
