@@ -302,15 +302,15 @@ ja:
         recreation_plan: プラン
         user: ユーザー
       division:
-        classname: 区分名
+        classname: 区分クラス
         code: 区分コード
-        valuetext: 名称
+        valuetext: 区分名
         valueint: 区分値
         valuedate: 日付値
         disporder: 表示順
         memo: メモ
-        key: key
-        i18n_flag: i18nフラグ
+        key: u18n_key
+        is_i18n: i18nフラグ
         i18n_class: i18nクラス
 
     errors:
