@@ -186,7 +186,7 @@ ja:
         gross_profit_margin: 粗利率
         facility_billing_amount: 施設請求額
       zoom:
-        price: zoomレンタル使用料金
+        price: 金額
         url: URL
         created_by: 発行者
       order_date:
