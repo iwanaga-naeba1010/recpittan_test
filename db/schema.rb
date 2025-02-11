@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_02_03_012228) do
+ActiveRecord::Schema[7.2].define(version: 2025_02_10_062816) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -414,6 +414,16 @@ ActiveRecord::Schema[7.2].define(version: 2025_02_03_012228) do
     t.datetime "updated_at", null: false
     t.integer "status"
     t.index ["order_id"], name: "index_reports_on_order_id"
+  end
+
+  create_table "system_parameters", force: :cascade do |t|
+    t.string "param_code"
+    t.string "param_name"
+    t.decimal "value_int", precision: 15, scale: 4
+    t.string "value_text"
+    t.datetime "applied_date"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "tags", force: :cascade do |t|
