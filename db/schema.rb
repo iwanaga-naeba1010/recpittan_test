@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_02_03_012228) do
+ActiveRecord::Schema[7.2].define(version: 2025_02_10_034013) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -247,6 +247,45 @@ ActiveRecord::Schema[7.2].define(version: 2025_02_03_012228) do
     t.string "memo"
     t.string "coupon_code"
     t.boolean "is_open", default: true, null: false
+    t.boolean "is_managercontrol", default: false, null: false, comment: "運営管理フラグ"
+    t.string "order_create_source_code", comment: "案件作成元区分"
+    t.string "manage_company_code", comment: "案件管理会社区分"
+    t.boolean "business_integration_flag", default: true, null: false, comment: "業務統合フラグ"
+    t.boolean "is_withholding_tax", default: false, null: false, comment: "源泉徴収フラグ"
+    t.datetime "status_updated_at", comment: "ステータス更新日"
+    t.datetime "facility_request_approved_at", comment: "正式依頼承認日（ダウンロード日）"
+    t.integer "approved_total_partner_payment", comment: "正式依頼承認時のパートナー謝礼全体（税込）"
+    t.datetime "final_report_approved_at", comment: "施設の終了報告の承認日"
+    t.decimal "tax_rate", precision: 15, scale: 3, comment: "消費税率"
+    t.integer "tax_amount", comment: "消費税"
+    t.integer "amount_with_tax", comment: "パートナー謝礼（税込）"
+    t.integer "total_material_amount", comment: "材料費合計"
+    t.integer "total_additional_facility_fee", comment: "追加施設費合計"
+    t.integer "total_partner_payment_with_tax", comment: "パートナー謝礼全体（税込）"
+    t.decimal "partner_fee_rate", precision: 15, scale: 3, comment: "パートナー手数料率"
+    t.integer "additional_facility_fee_commission", comment: "追加施設手数料"
+    t.integer "total_additional_facility_fee_commission", comment: "追加施設手数料計"
+    t.boolean "partner_invoice_registration_flag", default: false, null: false, comment: "パートナーインボイス登録フラグ"
+    t.decimal "non_invoice_partner_fee_rate", precision: 15, scale: 3, comment: "インボイス非登録パートナー手数率"
+    t.integer "non_invoice_partner_fee", comment: "インボイス非登録パートナー手数料"
+    t.integer "zoom_rental_fee", comment: "zoomレンタル料"
+    t.integer "recreation_kind", comment: "レクマスタ、レク種類"
+    t.boolean "is_zoom_rental", default: false, null: false, comment: "zoomレンタルフラグ"
+    t.integer "zoom_rental_actual_fee", comment: "zoomレンタル使用料金"
+    t.integer "partner_service_fee", comment: "パートナーサービス利用料"
+    t.integer "partner_deduction_subtotal", comment: "パートナー控除小計"
+    t.decimal "facility_fee_rate", precision: 15, scale: 3, comment: "施設手数料率"
+    t.integer "facility_fee_base_amount", comment: "施設手数料計算金額"
+    t.integer "facility_fee", comment: "施設手数料（税込）"
+    t.integer "facility_service_fee", comment: "施設サービス利用料"
+    t.integer "facility_fee_subtotal", comment: "施設手数料小計"
+    t.decimal "withholding_tax_rate", precision: 15, scale: 3, comment: "源泉徴収税率"
+    t.integer "withholding_tax_amount", comment: "源泉徴収税額"
+    t.string "specific_facility_plan_management_code", comment: "特定施設プラン管理コード"
+    t.integer "partner_payment_amount", comment: "パートナー支払額"
+    t.integer "gross_profit_incl_tax", comment: "粗利（税込）"
+    t.decimal "gross_profit_margin", precision: 15, scale: 3, comment: "粗利率"
+    t.integer "facility_billing_amount", comment: "施設請求額"
     t.index ["recreation_id"], name: "index_orders_on_recreation_id"
     t.index ["user_id"], name: "index_orders_on_user_id"
   end
