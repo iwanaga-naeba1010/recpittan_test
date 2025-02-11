@@ -11,7 +11,7 @@
 # It's strongly recommended that you check this file into your version control system.
 
 
-ActiveRecord::Schema[7.2].define(version: 2025_02_10_062816) do
+ActiveRecord::Schema[7.2].define(version: 2025_02_09_134706) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -111,6 +111,21 @@ ActiveRecord::Schema[7.2].define(version: 2025_02_10_062816) do
     t.datetime "updated_at", null: false
     t.index ["company_id"], name: "index_company_tags_on_company_id"
     t.index ["tag_id"], name: "index_company_tags_on_tag_id"
+  end
+
+  create_table "divisions", force: :cascade do |t|
+    t.string "classname"
+    t.string "code"
+    t.string "valuetext"
+    t.integer "valueint"
+    t.datetime "valuedate"
+    t.integer "disporder"
+    t.text "memo"
+    t.string "key"
+    t.boolean "i18n_flag", default: false
+    t.string "i18n_class"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "evaluation_replies", force: :cascade do |t|
