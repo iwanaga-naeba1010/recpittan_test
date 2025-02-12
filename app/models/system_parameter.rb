@@ -14,4 +14,5 @@
 #  updated_at   :datetime         not null
 #
 class SystemParameter < ApplicationRecord
+  include Ransackable
 end
