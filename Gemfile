@@ -108,3 +108,8 @@ gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 # pdf
 gem 'wicked_pdf'
 gem 'wkhtmltopdf-binary'
+
+# logs
+gem 'aws-sdk-cloudwatchlogs'
+
+gem 'draper'

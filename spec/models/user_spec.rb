@@ -49,16 +49,28 @@
 #
 #  fk_rails_...  (company_id => companies.id)
 #
-class UserSerializer
-  def serialize_list(users:)
-    users.map { |user| serialize(user:) }
+require 'rails_helper'
+
+RSpec.describe User, type: :model do
+  let(:user) { create(:user) }
+
+  it { is_expected.to have_db_column(:mfa_enabled_flag).of_type(:boolean).with_options(default: false, null: false) }
+  it { is_expected.to have_db_column(:mfa_authenticated_at).of_type(:datetime).with_options(null: true) }
+  it { is_expected.to have_db_column(:partner_flag).of_type(:boolean).with_options(null: true) }
+  it { is_expected.to have_db_column(:facility_flag).of_type(:boolean).with_options(null: true) }
+  it { is_expected.to have_db_column(:manage_company_code).of_type(:string).with_options(null: true) }
+
+  it 'includes Devise timeoutable module' do
+    expect(User.devise_modules).to include(:timeoutable)
   end
 
-  def serialize(user:)
-    company = CompanySerializer.new.serialize(company: user.company)
-    {
-      id: user.id,
-      company:
-    }
+  it 'times out after 24 hours of inactivity' do
+    last_access_time = 25.hours.ago
+    expect(user.timedout?(last_access_time)).to be true
+  end
+
+  it 'does not time out before 24 hours' do
+    last_access_time = 23.hours.ago
+    expect(user.timedout?(last_access_time)).to be false
   end
 end

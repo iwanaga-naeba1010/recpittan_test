@@ -33,7 +33,7 @@ ActiveAdmin.register Orders::ForceCompleteFromInProgress do
       row :street
       row :building
       row :number_of_people
-      row :number_of_facilitiese
+      row :number_of_facilities
       row :is_accepted
       row :start_at
       row :end_at

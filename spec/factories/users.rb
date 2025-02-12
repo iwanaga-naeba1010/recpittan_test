@@ -13,11 +13,16 @@
 #  current_sign_in_ip     :string
 #  email                  :string           default(""), not null
 #  encrypted_password     :string           default(""), not null
+#  facility_flag          :boolean          default(FALSE)
 #  failed_attempts        :integer          default(0), not null
 #  last_sign_in_at        :datetime
 #  last_sign_in_ip        :string
 #  locked_at              :datetime
+#  manage_company_code    :string
 #  memo                   :string
+#  mfa_authenticated_at   :datetime
+#  mfa_enabled_flag       :boolean          default(FALSE), not null
+#  partner_flag           :boolean          default(FALSE)
 #  remember_created_at    :datetime
 #  reset_password_sent_at :datetime
 #  reset_password_token   :string
@@ -32,9 +37,17 @@
 #  updated_at             :datetime         not null
 #  company_id             :bigint
 #
+# Indexes
+#
+#  index_users_on_company_id            (company_id)
+#  index_users_on_confirmation_token    (confirmation_token) UNIQUE
+#  index_users_on_email                 (email) UNIQUE
+#  index_users_on_reset_password_token  (reset_password_token) UNIQUE
+#  index_users_on_unlock_token          (unlock_token) UNIQUE
+#
 # Foreign Keys
 #
-#  users_company_id_fkey  (company_id => companies.id)
+#  fk_rails_...  (company_id => companies.id)
 #
 FactoryBot.define do
   factory :user do
