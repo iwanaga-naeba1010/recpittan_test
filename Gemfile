@@ -111,3 +111,5 @@ gem 'wkhtmltopdf-binary'
 
 # logs
 gem 'aws-sdk-cloudwatchlogs'
+
+gem 'draper'

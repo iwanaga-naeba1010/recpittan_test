@@ -42,6 +42,7 @@ ja:
       bank_account: 銀行口座
       recreation_plan_estimate: プラン見積書
       division: 区分マスタ
+      system_parameter: システムパラメータ
     attributes:
       email:
         title: タイトル
@@ -321,6 +322,12 @@ ja:
         key: u18n_key
         is_i18n: i18nフラグ
         i18n_class: i18nクラス
+      system_parameter:
+        param_code: パラメーターコード
+        param_name: パラメータ名
+        value_int: パラメータ値
+        value_text: パラメータ値
+        applied_date: 適用日
 
     errors:
       messages:
