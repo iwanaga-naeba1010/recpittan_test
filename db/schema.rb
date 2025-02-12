@@ -10,8 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-
-ActiveRecord::Schema[7.2].define(version: 2025_02_09_134706) do
+ActiveRecord::Schema[7.2].define(version: 2025_02_11_083454) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -94,6 +93,10 @@ ActiveRecord::Schema[7.2].define(version: 2025_02_09_134706) do
     t.text "request"
     t.string "memo"
     t.string "facility_name_kana"
+    t.string "trading_target_code"
+    t.string "pref_code"
+    t.string "manage_company_code"
+    t.string "common_trading_target_code"
   end
 
   create_table "company_memos", force: :cascade do |t|

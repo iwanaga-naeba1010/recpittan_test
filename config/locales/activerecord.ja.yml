@@ -75,6 +75,10 @@ ja:
         genre: 事業所種別
         user_company_id: ユーザー一覧
         memo: メモ
+        trading_target_code: 取引先コード
+        pref_code: 都道府県コード
+        manage_company_code: 運営管理会社区分
+        common_trading_target_code: 共通取引先コード
       partner:
         name: 名前
         title: 肩書き
