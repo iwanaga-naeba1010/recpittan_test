@@ -10,8 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-
-ActiveRecord::Schema[7.2].define(version: 2025_02_09_134706) do
+ActiveRecord::Schema[7.2].define(version: 2025_02_11_085010) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -553,6 +552,11 @@ ActiveRecord::Schema[7.2].define(version: 2025_02_09_134706) do
     t.string "title"
     t.string "memo"
     t.integer "approval_status", default: 0
+    t.boolean "mfa_enabled_flag", default: false, null: false
+    t.datetime "mfa_authenticated_at"
+    t.boolean "partner_flag", default: false
+    t.boolean "facility_flag", default: false
+    t.string "manage_company_code"
     t.index ["company_id"], name: "index_users_on_company_id"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
