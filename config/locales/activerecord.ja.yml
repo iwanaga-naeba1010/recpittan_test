@@ -55,6 +55,11 @@ ja:
         title: 役職
         memo: メモ
         approval_status: 運営認証
+        mfa_enabled_flag: MFA有効フラグ
+        mfa_authenticated_at: MFA認証日時
+        partner_flag: パートナーフラグ
+        facility_flag: 施設フラグ
+        manage_company_code: 運営管理会社区分
       company:
         name: 法人名
         facility_name: 事業所名
