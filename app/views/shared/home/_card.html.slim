@@ -1,50 +1,51 @@
-.card.recreation-card.h-100.shadow.text-decoration-none
-  = link_to customers_recreation_path(rec.id), class: 'card-img-top zoom' do
-    picture[loading='lazy']
-      = image_tag rec.recreation_images.sliders.first&.image.to_s, class: 'img-fluid position-relative', loading: 'lazy'
+= link_to customers_recreation_path(rec.id), class: 'text-reset text-decoration-none' do
+  .card.recreation-card.h-100.shadow
+    .card-img-top.zoom
+      picture[loading='lazy']
+        = image_tag rec.recreation_images.sliders.first&.image.to_s, class: 'img-fluid position-relative', loading: 'lazy'
 
-  - if user_signed_in? && current_user.role.customer?
-    .favorite-wrapper.text-center.w-100
-      p.desc-favorite.fw-bold.pt-3 お気に入りに追加
-      .favorite-icon.mx-auto id='favoriteIcon_#{rec.id}'
+    - if user_signed_in? && current_user.role.customer?
+      .favorite-wrapper.text-center
+        p.desc-favorite.fw-bold.pt-3 お気に入りに追加
+        .favorite-icon.mx-auto id='favoriteIcon_#{rec.id}'
 
-  = link_to customers_recreation_path(rec.id), class: 'card-body card-body-main p-2 pb-0' do
-    h1.card-title.mb-0
-      p = rec.title
+    .card-body.card-body-main.p-2.pb-0
+      h1.card-title.mb-0
+        p = rec.title
 
-  .d-flex.align-items-center
-    .card-body.card-body-tag.px-2.py-1
-      = tag_to_html(rec)
+    .d-flex.align-items-center
+      .card-body.card-body-tag.px-2.py-1
+        = tag_labels_only(rec)
 
-  .card-body.link-text.px-2.py-1
-    .link-text.d-flex.mb-1
-      = image_pack_tag 'ribbon.svg', class: 'logo-navbar', width: '18', height: '18'
-      p.ms-1.mb-0 開催回数#{rec.number_of_recreations_held}件
+    .card-body.link-text.px-2.py-1
+      .link-text.d-flex.mb-1
+        = image_pack_tag 'ribbon.svg', class: 'logo-navbar', width: '18', height: '18'
+        p.ms-1.mb-0 開催回数#{rec.number_of_recreations_held}件
 
-    .link-text.d-flex.mb-1
-      = image_pack_tag 'flag.svg', class: 'logo-navbar', width: '18', height: '18'
-      p.ms-1.mb-0 = t("enumerize.recreation.kind.#{rec.kind}")
+      .link-text.d-flex.mb-1
+        = image_pack_tag 'flag.svg', class: 'logo-navbar', width: '18', height: '18'
+        p.ms-1.mb-0 = t("enumerize.recreation.kind.#{rec.kind}")
 
-    .link-text.d-flex.mb-1
-      = image_pack_tag 'location.svg', class: 'logo-navbar', width: '18', height: '18'
-      - if rec.kind.visit? && rec.recreation_prefectures.exists?
-        - rec.recreation_prefectures.take(3).each do |prefecture|
-          p.ms-1.mb-0 = prefecture.name
-        - if rec.recreation_prefectures.size > 3
-          p.ms-1.mb-0 +#{rec.recreation_prefectures.size - 3}
-      - elsif rec.kind.mailing?
-        p.ms-1.mb-0 全国
-      - else
-        p.ms-1.mb-0 -
-
-  .card-body.card-body-info.px-2.py-1.border-top.mt-1
-    .d-md-flex.my-1.align-items-center
-      - if rec.user.approval_status.approved?
-        .mx-md-2
-          i.fas.fa-solid.fa-check
-          span.value 面談済
-      div
-        - if rec.is_public_price
-          span.value = price_pipe(rec&.price, current_user)
+      .link-text.d-flex.mb-1
+        = image_pack_tag 'location.svg', class: 'logo-navbar', width: '18', height: '18'
+        - if rec.kind.visit? && rec.recreation_prefectures.exists?
+          - rec.recreation_prefectures.take(3).each do |prefecture|
+            p.ms-1.mb-0 = prefecture.name
+          - if rec.recreation_prefectures.size > 3
+            p.ms-1.mb-0 +#{rec.recreation_prefectures.size - 3}
+        - elsif rec.kind.mailing?
+          p.ms-1.mb-0 全国
         - else
-          span.value お問い合わせ下さい
+          p.ms-1.mb-0 -
+
+    .card-body.card-body-info.px-2.py-1.border-top.mt-1
+      .d-md-flex.my-1.align-items-center
+        - if rec.user.approval_status.approved?
+          .mx-md-2
+            i.fas.fa-solid.fa-check
+            span.value 面談済
+        div
+          - if rec.is_public_price
+            span.value = price_pipe(rec&.price, current_user)
+          - else
+            span.value お問い合わせ下さい

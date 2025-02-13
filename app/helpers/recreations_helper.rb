@@ -35,6 +35,29 @@ module RecreationsHelper
   end
   # rubocop:enable Style/OptionalBooleanParameter
 
+  def tag_labels_only(recreation, limit: true)
+    return if recreation.blank?
+
+    tags = recreation.tags
+    category = recreation.category_text
+    content_tag :div do
+      # カテゴリ表示
+      if category.present?
+        concat content_tag(:span, category,
+                           class: 'category-label event',
+                           style: "margin-right: 4px; background-color: #{categoryname_to_color_code(category)}")
+      end
+
+      # タグ表示 (リンクなし)
+      tags = tags.first(2) if limit
+      tags.each do |tag|
+        concat content_tag(:span, "##{tag.name}",
+                           class: 'tag-label px-1 my-1 font-weight-bold d-inline-block',
+                           style: 'margin-right: 4px;')
+      end
+    end
+  end
+
   def recreation_capacity(capacity)
     return '制限なし' if [0, nil].include?(capacity)
 

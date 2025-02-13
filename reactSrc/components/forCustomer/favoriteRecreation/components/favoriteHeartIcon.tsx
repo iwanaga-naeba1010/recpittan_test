@@ -2,7 +2,7 @@ import React from 'react';
 
 type FavoriteHeartIconProps = {
   isFavorite: boolean;
-  onClick: () => void;
+  onClick: React.MouseEventHandler<HTMLDivElement>;
 };
 
 export const FavoriteHeartIcon: React.FC<FavoriteHeartIconProps> = ({

@@ -30,7 +30,10 @@ const FavoriteIconView: React.FC<{ recreationId: number }> = ({
     checkIsFavorite();
   }, [recreationId, fetchFavoriteRecreation, refreshCount]);
 
-  const handleClick = async (): Promise<void> => {
+  const handleClick = async (event: React.MouseEvent<HTMLDivElement, MouseEvent>): Promise<void> => {
+    event.stopPropagation();
+    event.preventDefault();
+
     if (isFavorite && favoriteId) {
       await deleteFavoriteRecreation(favoriteId);
       setIsFavorite(false);
