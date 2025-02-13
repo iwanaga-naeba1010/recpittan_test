@@ -31,8 +31,8 @@ const FavoriteIconView: React.FC<{ recreationId: number }> = ({
   }, [recreationId, fetchFavoriteRecreation, refreshCount]);
 
   const handleClick = async (event: React.MouseEvent<HTMLDivElement, MouseEvent>): Promise<void> => {
-    event.stopPropagation();
-    event.preventDefault();
+    event.stopPropagation(); // カードのクリックイベントを無効化
+    event.preventDefault();  // リンク遷移をキャンセル
 
     if (isFavorite && favoriteId) {
       await deleteFavoriteRecreation(favoriteId);
