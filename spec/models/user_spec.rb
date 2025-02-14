@@ -13,16 +13,16 @@
 #  current_sign_in_ip     :string
 #  email                  :string           default(""), not null
 #  encrypted_password     :string           default(""), not null
-#  facility_flag          :boolean          default(FALSE)
 #  failed_attempts        :integer          default(0), not null
+#  is_facility            :boolean          default(FALSE)
+#  is_mfa_enabled         :boolean          default(FALSE), not null
+#  is_partner             :boolean          default(FALSE)
 #  last_sign_in_at        :datetime
 #  last_sign_in_ip        :string
 #  locked_at              :datetime
 #  manage_company_code    :string
 #  memo                   :string
 #  mfa_authenticated_at   :datetime
-#  mfa_enabled_flag       :boolean          default(FALSE), not null
-#  partner_flag           :boolean          default(FALSE)
 #  remember_created_at    :datetime
 #  reset_password_sent_at :datetime
 #  reset_password_token   :string
@@ -54,10 +54,10 @@ require 'rails_helper'
 RSpec.describe User, type: :model do
   let(:user) { create(:user) }
 
-  it { is_expected.to have_db_column(:mfa_enabled_flag).of_type(:boolean).with_options(default: false, null: false) }
+  it { is_expected.to have_db_column(:is_mfa_enabled).of_type(:boolean).with_options(default: false, null: false) }
   it { is_expected.to have_db_column(:mfa_authenticated_at).of_type(:datetime).with_options(null: true) }
-  it { is_expected.to have_db_column(:partner_flag).of_type(:boolean).with_options(null: true) }
-  it { is_expected.to have_db_column(:facility_flag).of_type(:boolean).with_options(null: true) }
+  it { is_expected.to have_db_column(:is_partner).of_type(:boolean).with_options(null: true) }
+  it { is_expected.to have_db_column(:is_facility).of_type(:boolean).with_options(null: true) }
   it { is_expected.to have_db_column(:manage_company_code).of_type(:string).with_options(null: true) }
 
   it 'includes Devise timeoutable module' do
