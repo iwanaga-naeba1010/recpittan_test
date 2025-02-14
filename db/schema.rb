@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_02_13_021817) do
+ActiveRecord::Schema[7.2].define(version: 2025_02_13_043032) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -179,6 +179,18 @@ ActiveRecord::Schema[7.2].define(version: 2025_02_13_021817) do
     t.string "company_name", null: false
     t.string "email", null: false
     t.index ["user_id"], name: "index_invoice_informations_on_user_id"
+  end
+
+  create_table "m_numberings", force: :cascade do |t|
+    t.string "numbering_name", null: false
+    t.string "numbering_unit", null: false
+    t.text "numbering_datetime"
+    t.string "code_name", null: false
+    t.string "code", null: false
+    t.integer "numbering_value", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["numbering_name", "numbering_unit", "numbering_datetime", "code"], name: "idx_on_numbering_name_numbering_unit_numbering_date_5c271ae9b2", unique: true
   end
 
   create_table "online_recreation_channel_download_images", force: :cascade do |t|
