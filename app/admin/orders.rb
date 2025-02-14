@@ -3,6 +3,7 @@
 # rubocop:disable Metrics/BlockLength, Metrics/AbcSize
 ActiveAdmin.register Order do
   includes :user
+  decorate_with OrderDecorator
 
   permit_params(
     %i[
@@ -31,31 +32,93 @@ ActiveAdmin.register Order do
   csv do
     column :id
     column(:status, &:status_text)
-    column(:user) { |order| order.user.company.facility_name }
-    column(:partner) { |order| order.recreation.user_username }
-    column(:recreation, &:recreation_title)
-    column :zip
-    column :prefecture
-    column :city
-    column :street
-    column :building
-    column :number_of_people
-    column :number_of_facilities
-    column :is_accepted
+    column 'ステータス更新日（できれば）', &:status_updated_at
+    column :facility_request_approved_at
+    column :approved_total_partner_payment
+    column :final_report_approved_at
+    column "CSVダウンロード日\nyyyy/mm/dd hh:mm", humanize_name: false do
+      Time.current
+    end
+
+    # 施設
+    column "施設ID\nレク開催施設ID", humanize_name: false, &:facility_id
+    column "施設名\nレク開催施設", &:facility_name
+    column "郵便番号\nレク開催施設", &:facility_zip
+    column "都道府県\nレク開催施設", &:facility_prefecture
+    column "市区町村\nレク開催施設", &:facility_city
+    column "町名/番地\nレク開催施設", &:facility_street
+    column "建物名\nレク開催施設", &:facility_building
+
+    # パートナー情報
+    column 'パートナーID', humanize_name: false, &:recreation_user_id
+    column 'パートナー名', &:recreation_profile_name
+    column 'レクID', &:recreation_id
+    column 'レク', &:recreation_title
+
+    # 案件情報
     column :start_at
     column :end_at
-    column :price
+    column :number_of_people
+    column :number_of_facilities
+
+    # その他
+    column :memo
+    column :is_accepted
+    column :contract_number
+    column :is_managercontrol
+    column :order_create_source_code
+    column :manage_company_code
+
     column :amount
-    column :material_price
+    column :tax_rate
+    column :tax_amount
+    column :amount_with_tax
+
+    # 正式依頼
     column :material_amount
-    column :additional_facility_fee
+    column :total_material_amount
     column :transportation_expenses
     column :expenses
+
+    # パートナー終了報告
+    column '追加施設費用 （設定値）', &:additional_facility_fee
+    column :additional_facility_fee
+    column :number_of_facilities
+    column :total_additional_facility_fee
+    column :total_partner_payment_with_tax
+
+    # 確定支払
+    column :partner_fee_rate
+    column 'パートナー手数料計算金額', &:partner_fee_base_amount
+    column 'パートナー手数料（税込）', &:partner_fee_with_tax
+    column :additional_facility_fee_commission
+    column :total_additional_facility_fee_commission
+    column :non_invoice_partner_fee_rate
+    column :non_invoice_partner_fee
+    column 'zoomレンタル料（設定値）', &:zoom_rental_fee
+    column :recreation_kind
+    column :is_zoom_rental
+    column :zoom_rental_actual_fee
+    column :partner_service_fee
+    column :partner_deduction_subtotal
+
+    # 確定請求
+    column :facility_fee_rate
+    column :facility_fee_base_amount
+    column :facility_fee
+    column :facility_service_fee
     column :support_price
-    column('zoom利用料', &:zoom_cost)
-    column :contract_number
-    column('パートナー支払額', &:total_price_for_partner)
-    column('施設請求額', &:total_price_for_customer)
+    column :facility_fee_subtotal
+
+    # 確定支払
+    column :withholding_tax_rate
+    column :withholding_tax_amount
+    column :partner_payment_amount
+
+    # 確定請求
+    column :gross_profit_incl_tax
+    column :gross_profit_margin
+    column :facility_billing_amount
   end
 
   index do
