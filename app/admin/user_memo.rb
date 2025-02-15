@@ -23,7 +23,17 @@ ActiveAdmin.register UserMemo do
         管理画面ユーザーURL： #{admin_user_url(user_id)}
         内容: #{body}
       MESSAGE
-      SlackNotifier.new(channel: '#-メモ投稿履').send('管理画面からユーザーに関するメモを記録しました', message)
+
+      begin
+        SlackNotifier.new(channel: '#-メモ投稿履').send(
+          '管理画面からユーザーに関するメモを記録しました',
+          message
+        )
+      rescue Slack::Notifier::APIError => e
+        Rails.logger.error("Slack通知エラー: #{e.message}")
+        Sentry.capture_exception(e)
+      end
+
       redirect_to admin_user_path(user_id)
     end
   end

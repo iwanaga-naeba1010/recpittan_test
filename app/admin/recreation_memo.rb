@@ -23,7 +23,17 @@ ActiveAdmin.register RecreationMemo do
         管理画面レクリエーションURL： #{admin_recreation_url(recreation_id)}
         内容: #{body}
       MESSAGE
-      SlackNotifier.new(channel: '#-メモ投稿履').send('管理画面からレクリエーションに関するメモを記録しました', message)
+
+      begin
+        SlackNotifier.new(channel: '#-メモ投稿履').send(
+          '管理画面からレクリエーションに関するメモを記録しました',
+          message
+        )
+      rescue Slack::Notifier::APIError => e
+        Rails.logger.error("Slack通知エラー: #{e.message}")
+        Sentry.capture_exception(e)
+      end
+
       redirect_to admin_recreation_path(recreation_id)
     end
   end

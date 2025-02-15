@@ -22,7 +22,17 @@ ActiveAdmin.register OrderMemo do
         管理画面案件URL： #{admin_order_url(order_id)}
         内容: #{body}
       MESSAGE
-      SlackNotifier.new(channel: '#-メモ投稿履').send('管理画面から案件に関するメモを記録しました', message)
+
+      begin
+        SlackNotifier.new(channel: '#-メモ投稿履').send(
+          '管理画面から案件に関するメモを記録しました',
+          message
+        )
+      rescue Slack::Notifier::APIError => e
+        Rails.logger.error("Slack通知エラー: #{e.message}")
+        Sentry.capture_exception(e)
+      end
+
       redirect_to admin_order_path(order_id)
     end
   end
