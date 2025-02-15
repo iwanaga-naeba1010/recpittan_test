@@ -97,6 +97,8 @@ ja:
         position: ポジション
         description: プロフィール説明
         image: パートナー画像
+        recreation_profile: レクに登録されたプロフィール
+        recreation: レク
       recreation:
         kind: 種類
         partner: パートナー
