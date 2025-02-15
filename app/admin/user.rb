@@ -11,7 +11,7 @@ ActiveAdmin.register User do
   filter :id
   filter :username
   filter :email
-  filter :role
+  filter :role, as: :select, collection: User.role.values.map { |v| [v.text, v.value] }
   filter :company, label: 'Company', as: :select, collection: -> {
                                                                 Company.pluck(:name, :id).map do |company|
                                                                   ["#{company[0]} (ID: #{company[1]})", company[1]]
