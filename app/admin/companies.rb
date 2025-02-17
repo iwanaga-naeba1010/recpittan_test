@@ -14,6 +14,7 @@ ActiveAdmin.register Company do
   actions :all, except: [:destroy]
 
   filter :id
+  filter :manage_company_code
   filter :name
   filter :facility_name
   filter :person_in_charge_name
@@ -48,6 +49,7 @@ ActiveAdmin.register Company do
 
   index do
     id_column
+    column :manage_company_code
     column :name
     column :facility_name
     column :facility_name_kana
