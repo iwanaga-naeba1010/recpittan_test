@@ -12,6 +12,15 @@
 #  bank_name           :string           not null
 #  branch_code         :string           not null
 #  branch_name         :string           not null
+#  corporate_number    :string
+#  corporate_type_code :string
+#  investments         :integer
+#  invoice_number      :string
+#  is_corporate        :boolean          default(FALSE), not null
+#  is_foreignresident  :boolean          default(FALSE), not null
+#  is_invoice          :boolean          default(FALSE), not null
+#  is_subcontract      :boolean          default(FALSE), not null
+#  my_number           :string
 #  created_at          :datetime         not null
 #  updated_at          :datetime         not null
 #  user_id             :bigint           not null
@@ -42,6 +51,16 @@ RSpec.describe BankAccount, type: :model do
     }
   end
   let(:bank_account) { BankAccount.new(valid_attributes) }
+
+  it { is_expected.to have_db_column(:is_corporate).of_type(:boolean).with_options(default: false, null: false) }
+  it { is_expected.to have_db_column(:corporate_type_code).of_type(:string).with_options(null: true) }
+  it { is_expected.to have_db_column(:is_foreignresident).of_type(:boolean).with_options(default: false, null: false) }
+  it { is_expected.to have_db_column(:investments).of_type(:integer).with_options(null: true) }
+  it { is_expected.to have_db_column(:is_invoice).of_type(:boolean).with_options(default: false, null: false) }
+  it { is_expected.to have_db_column(:invoice_number).of_type(:string).with_options(null: true) }
+  it { is_expected.to have_db_column(:corporate_number).of_type(:string).with_options(null: true) }
+  it { is_expected.to have_db_column(:my_number).of_type(:string).with_options(null: true) }
+  it { is_expected.to have_db_column(:is_subcontract).of_type(:boolean).with_options(default: false, null: false) }
 
   describe 'validations' do
     it 'is valid with all valid attributes' do

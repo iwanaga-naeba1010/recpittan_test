@@ -309,6 +309,15 @@ ja:
         bank_name: 金融機関名
         branch_code: 支点コード
         branch_name: 支店名
+        is_corporate: 法人フラグ
+        corporate_type_code: 法人形態
+        is_foreignresident: 国外在住フラグ
+        investments: 出資金
+        is_invoice: インボイス登録フラグ
+        invoice_number: インボイス番号
+        corporate_number: 法人番号
+        my_number: マイナンバー
+        is_subcontract: 下請法対象フラグ
       recreation_plan_estimate:
         estimate_number: 見積書番号
         number_of_people: 参加人数
