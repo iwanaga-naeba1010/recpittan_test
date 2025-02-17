@@ -129,6 +129,8 @@ ja:
       recreation_image:
         image: ファイル
         kind: 種別
+        title: タイトル
+        document_kind: 資料種類区分
       recreation_prefecture:
         name: 都道府県
       recreation_profile:

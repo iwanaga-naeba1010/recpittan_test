@@ -22,15 +22,9 @@
 #
 #  fk_rails_...  (recreation_id => recreations.id)
 #
-class RecreationImage < ApplicationRecord
-  extend Enumerize
-  belongs_to :recreation, class_name: 'Recreation'
-  mount_uploader :image, RecreationImageUploader
+require 'rails_helper'
 
-  validates :image, presence: true
-  enumerize :kind, in: { slider: 0, flyer: 1, material: 2 }, default: 0
-
-  scope :sliders, -> { where(kind: :slider) }
-  scope :flyers, -> { where(kind: :flyer) }
-  scope :materials, -> { where(kind: :material) }
+RSpec.describe RecreationImage, type: :model do
+  it { is_expected.to have_db_column(:title).of_type(:string).with_options(null: true) }
+  it { is_expected.to have_db_column(:document_kind).of_type(:string).with_options(null: true) }
 end

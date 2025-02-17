@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_02_13_043032) do
+ActiveRecord::Schema[7.2].define(version: 2025_02_17_010729) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -360,6 +360,8 @@ ActiveRecord::Schema[7.2].define(version: 2025_02_13_043032) do
     t.datetime "updated_at", null: false
     t.integer "kind", default: 0
     t.string "filename"
+    t.string "title"
+    t.string "document_kind"
     t.index ["recreation_id"], name: "index_recreation_images_on_recreation_id"
   end
 
