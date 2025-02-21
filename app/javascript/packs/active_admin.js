@@ -12,7 +12,7 @@ import * as $ from 'jquery';
 
 import React from "react";
 import { createRoot } from "react-dom/client";
-import AdminDatePicker from "../components/admin_datepicker.ts";
+import AdminDatePicker from "../components/admin_datepicker";
 
 document.addEventListener("DOMContentLoaded", () => {
   document.querySelectorAll(".react-datepicker").forEach((element) => {

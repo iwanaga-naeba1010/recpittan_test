@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useCallback } from 'react';
-// import { createRoot } from 'react-dom/client';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { format, isValid } from 'date-fns';
@@ -7,14 +6,8 @@ import { ja } from "date-fns/locale";
 
 const DATE_FORMAT = 'yyyy-MM-dd h:mm aa';
 
-type AdminDatePickerProps = {
-  name: string;
-  id: string;
-  value?: Date | null;
-};
-
-const AdminDatePicker: React.FC<AdminDatePickerProps> = ({ name, id, value }) => {
-  const parseDate = (val: Date | string | null) => {
+const AdminDatePicker = ({ name, id, value }) => {
+  const parseDate = (val) => {
     if (val instanceof Date && isValid(val)) return val;
 
     if (typeof val === 'string') {
@@ -25,16 +18,16 @@ const AdminDatePicker: React.FC<AdminDatePickerProps> = ({ name, id, value }) =>
     return null;
   };
 
-  const [dateTime, setDateTime] = useState<Date | null>(parseDate(value));
+  const [dateTime, setDateTime] = useState(parseDate(value));
 
   useEffect(() => {
-    const hiddenInput = document.getElementById(`${id}_hidden`) as HTMLInputElement | null;
+    const hiddenInput = document.getElementById(`${id}_hidden`);
     if (hiddenInput) {
       hiddenInput.value = dateTime ? format(dateTime, DATE_FORMAT) : '';
     }
   }, [dateTime, id]);
 
-  const onChange = useCallback((date: Date | null) => setDateTime(date), []);
+  const onChange = useCallback((date) => setDateTime(date), []);
 
   return (
     <DatePicker
