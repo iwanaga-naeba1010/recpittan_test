@@ -9,6 +9,7 @@ import "@fortawesome/fontawesome-free/css/all.css";
 import 'arctic_admin'
 import '../events/admin/order';
 import * as $ from 'jquery';
+import "activeadmin_reorderable";
 
 import React from "react";
 import { createRoot } from "react-dom/client";

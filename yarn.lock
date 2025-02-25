@@ -2,7 +2,7 @@
 # yarn lockfile v1
 
 
-"@activeadmin/activeadmin@^3.2.5":
+"@activeadmin/activeadmin@^3.2.0", "@activeadmin/activeadmin@^3.2.5":
   version "3.2.5"
   resolved "https://registry.yarnpkg.com/@activeadmin/activeadmin/-/activeadmin-3.2.5.tgz#fe515b69e96accf45d5fce2ca82285cc073b6363"
   integrity sha512-xWbnRljhpijfyS7PD8G9WTTryuf44tOicquCG6Nav26iYsADezIAtfbqUHwtJRxc9dJq9n+ma9j+U0X03UekFg==
@@ -1924,6 +1924,13 @@ activeadmin_addons@^1.0.0:
   dependencies:
     jquery-datetimepicker "^2.5.21"
     select2 "^4.0.13"
+
+activeadmin_reorderable@^0.3.4:
+  version "0.3.4"
+  resolved "https://registry.yarnpkg.com/activeadmin_reorderable/-/activeadmin_reorderable-0.3.4.tgz#3b49f48f754b21806223d431597fc273e13acb38"
+  integrity sha512-L4tDLAdEz/BYwbbShf7jx0FSzHH91F9B6vgqLJQrTtyTsOmzdBpVfqh1qWW51Hiy8qsiI5XpORTNiIUKCIRlqQ==
+  dependencies:
+    "@activeadmin/activeadmin" "^3.2.0"
 
 aggregate-error@^3.0.0:
   version "3.1.0"

@@ -21,6 +21,7 @@
     "@rails/webpacker": "5.4.4",
     "@types/prettier": "^3.0.0",
     "activeadmin_addons": "^1.0.0",
+    "activeadmin_reorderable": "^0.3.4",
     "arctic_admin": "^4.3.1",
     "axios": "^1.7.9",
     "babel-plugin-transform-react-remove-prop-types": "^0.4.24",
