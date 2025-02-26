@@ -11,7 +11,7 @@ RUN apt-get update -qq \
 RUN curl -fsSL https://deb.nodesource.com/setup_16.x | bash -
 
 # Add packages
-RUN apt-get update && apt-get install -y git nodejs vim graphviz
+RUN apt-get update && apt-get install -y git nodejs vim graphviz cron
 
 # Add yarnpkg for assets:precompile
 RUN npm install -g yarn webpack-dev-server
@@ -28,4 +28,3 @@ RUN gem install bundler --version 2.2.22 && \
 COPY package.json yarn.lock ./
 
 RUN yarn install
-

@@ -11,7 +11,7 @@ namespace :send_final_check_mail do
     ).find_each do |order|
       ActiveRecord::Base.transaction do
         order.update!(final_check_status: :sent)
-        FinalCheckMailer.notify(order:).deliver_now
+        FinalCheckMailer.notify(order:).deliver_later
       end
     rescue StandardError => e
       logger.error e.message

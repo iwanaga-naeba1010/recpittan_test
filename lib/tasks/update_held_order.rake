@@ -9,7 +9,7 @@ namespace :update_held_order do
 
       if order.start_at <= Time.current && order.status == :waiting_for_an_event_to_take_place
         order.update(status: :unreported_completed)
-        PartnerCompleteReportMailer.notify(order:).deliver_now
+        PartnerCompleteReportMailer.notify(order:).deliver_later
       end
     end
   end
