@@ -91,6 +91,7 @@ class Order < ApplicationRecord
   belongs_to :recreation, class_name: 'Recreation'
 
   has_many :chats, dependent: :destroy, class_name: 'Chat'
+  has_many :order_desire_dates, dependent: :destroy, class_name: 'OrderDesireDate'
 
   has_many :order_memos, dependent: :destroy, class_name: 'OrderMemo'
   accepts_nested_attributes_for :order_memos, allow_destroy: true

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_02_17_010729) do
+ActiveRecord::Schema[7.2].define(version: 2025_02_26_132027) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -239,6 +239,17 @@ ActiveRecord::Schema[7.2].define(version: 2025_02_17_010729) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["order_id"], name: "index_order_dates_on_order_id"
+  end
+
+  create_table "order_desire_dates", force: :cascade do |t|
+    t.bigint "order_id", null: false
+    t.integer "desire_no"
+    t.date "desire_date"
+    t.time "time_from"
+    t.time "time_to"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["order_id"], name: "index_order_desire_dates_on_order_id"
   end
 
   create_table "order_memos", force: :cascade do |t|
@@ -608,6 +619,7 @@ ActiveRecord::Schema[7.2].define(version: 2025_02_17_010729) do
   add_foreign_key "online_recreation_channel_download_images", "online_recreation_channels"
   add_foreign_key "online_recreation_channel_recreations", "online_recreation_channels"
   add_foreign_key "order_dates", "orders"
+  add_foreign_key "order_desire_dates", "orders"
   add_foreign_key "order_memos", "orders"
   add_foreign_key "orders", "recreations"
   add_foreign_key "orders", "users"
