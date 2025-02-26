@@ -22,6 +22,8 @@
 #  fk_rails_...  (order_id => orders.id)
 #
 class OrderDesireDate < ApplicationRecord
+  include Ransackable
+
   belongs_to :order, class_name: 'Order'
 
   validates :desire_no, inclusion: { in: 1..3 }
