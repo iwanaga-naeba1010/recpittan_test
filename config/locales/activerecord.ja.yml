@@ -43,6 +43,7 @@ ja:
       recreation_plan_estimate: プラン見積書
       division: 区分マスタ
       system_parameter: システムパラメータ
+      order_desire_date: レク開催候補日
     attributes:
       email:
         title: タイトル
@@ -332,6 +333,11 @@ ja:
         value_int: パラメータ値
         value_text: パラメータ値
         applied_date: 適用日
+      order_desire_date:
+        desire_no: 希望番号
+        desire_date: 開催年月日
+        dtime_from: 開催時間開始
+        time_to: 開催時間終了
 
     errors:
       messages:
