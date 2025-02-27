@@ -11,6 +11,7 @@
 #  company_name :string
 #  phone_number :string
 #  postal_code  :string
+#  pref_code    :string
 #  prefecture   :string
 #  created_at   :datetime         not null
 #  updated_at   :datetime         not null
@@ -22,10 +23,10 @@
 #
 # Foreign Keys
 #
-#  fk_rails_...  (user_id => users.id)
+#  partner_infos_user_id_fkey  (user_id => users.id)
 #
 require 'rails_helper'
 
 RSpec.describe PartnerInfo, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  it { is_expected.to have_db_column(:pref_code).of_type(:string).with_options(null: true) }
 end
