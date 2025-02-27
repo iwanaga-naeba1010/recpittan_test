@@ -58,6 +58,8 @@ class Company < ApplicationRecord
     rehabilitation_for_the_aged: 6, short_stay: 7, other: 8
   }, default: 0
 
+  enumerize :manage_company_code, in: { EP: 0, WB: 1, RP: 2 }, default: 2
+
   def full_address
     "#{prefecture}#{city}#{street}#{building}"
   end
