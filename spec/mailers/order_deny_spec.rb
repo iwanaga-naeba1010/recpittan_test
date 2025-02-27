@@ -8,25 +8,32 @@ RSpec.describe OrderDenyMailer, type: :mailer do
   let!(:template) { templates.find { |t| t['kind'] == 'order_deny' } }
   let(:partner) { create :user, :with_recreations }
   let(:customer) { create :user, :with_customer }
-  let(:order) { create :order, recreation_id: partner.recreations.first.id, user_id: customer.id }
 
   describe 'order_accept' do
     let(:mail) { OrderDenyMailer.notify(order:) }
 
-    it 'renders the subject' do
-      expect(mail.subject).to eq(template['title'])
+    context 'when order is not controlled by manager' do
+      let(:order) { create :order, recreation_id: partner.recreations.first.id, user_id: customer.id }
+
+      it 'renders the subject' do
+        expect(mail.subject).to eq(template['title'])
+      end
+
+      it 'renders the reciever email' do
+        expect(mail.to).to eq([customer.email])
+      end
+
+      it 'renders the sender email' do
+        expect(mail.from).to eq(['info@everyplus.jp'])
+      end
     end
 
-    it 'renders the reciever email' do
-      expect(mail.to).to eq([customer.email])
-    end
+    context 'when order is controlled by manager' do
+      let(:order) { create :order, recreation_id: partner.recreations.first.id, user_id: customer.id, is_managercontrol: true }
 
-    it 'renders the sender email' do
-      expect(mail.from).to eq(['info@everyplus.jp'])
+      it 'does not send an email' do
+        expect(mail.to).to be_nil
+      end
     end
-
-    # it 'renders the body' do
-    #   expect(mail.body.parts.first.decoded).to match('MyText')
-    # end
   end
 end
