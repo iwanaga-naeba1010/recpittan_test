@@ -16,10 +16,10 @@
 #  corporate_type_code :string
 #  investments         :integer
 #  invoice_number      :string
-#  is_corporate        :boolean          default(FALSE), not null
-#  is_foreignresident  :boolean          default(FALSE), not null
-#  is_invoice          :boolean          default(FALSE), not null
-#  is_subcontract      :boolean          default(FALSE), not null
+#  is_corporate        :boolean          default(FALSE)
+#  is_foreignresident  :boolean          default(FALSE)
+#  is_invoice          :boolean          default(FALSE)
+#  is_subcontract      :boolean          default(FALSE)
 #  my_number           :string
 #  created_at          :datetime         not null
 #  updated_at          :datetime         not null
