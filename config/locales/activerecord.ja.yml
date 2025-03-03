@@ -127,6 +127,7 @@ ja:
         is_public_price: 料金を公開
         additional_facility_fee: 施設追加費用
         memo: メモ
+        is_withholding_tax: 要源泉徴収
       recreation_image:
         image: ファイル
         kind: 種別
