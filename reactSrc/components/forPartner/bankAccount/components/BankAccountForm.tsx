@@ -332,10 +332,12 @@ const BankAccountForm: React.FC<BankAccountFormProps> = ({
             )}
 
             <div className='mb-2'>
-              <label>
-                <input type='checkbox' {...register('isForeignresident')} />
-                国外在住
-              </label>
+              <p className='small mb-1 text-black'>国外在住</p>
+              <input
+                type='checkbox'
+                {...register('isForeignresident')}
+                style={{ transform: "scale(1.5)" }}
+              />
             </div>
 
             <div className='mb-2'>
@@ -349,10 +351,12 @@ const BankAccountForm: React.FC<BankAccountFormProps> = ({
             </div>
 
             <div className='mb-2'>
-              <label>
-                <input type='checkbox' {...register('isInvoice')} />
-                インボイス番号登録
-              </label>
+              <p className='small mb-1 text-black'>インボイス番号登録</p>
+              <input
+                type='checkbox'
+                {...register('isInvoice')}
+                style={{ transform: "scale(1.5)" }}
+              />
             </div>
 
             {isInvoice && (
