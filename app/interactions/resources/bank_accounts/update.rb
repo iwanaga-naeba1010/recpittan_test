@@ -29,6 +29,10 @@ module Resources
 
       def execute
         bank_account = BankAccount.find(id)
+
+        self.corporate_type_code = nil unless is_corporate
+        self.invoice_number = nil unless is_invoice
+
         bank_account.update!(
           account_holder_name:,
           account_number:,
@@ -44,6 +48,7 @@ module Resources
           is_invoice:,
           invoice_number:
         )
+
         bank_account
       end
     end

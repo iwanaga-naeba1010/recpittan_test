@@ -8,27 +8,31 @@ const BankAccountEdit: React.FC = () => {
   const methods = useForm();
   const { fetchBankAccount, updateBankAccount } = useBankAccount();
   const [initialData, setInitialData] = useState<any>(null);
+  const [isUpdating, setIsUpdating] = useState(false);
+
+  const loadBankAccount = async () => {
+    setIsUpdating(true);
+    const bankAccount = await fetchBankAccount();
+    setInitialData(bankAccount);
+    setIsUpdating(false);
+  };
 
   useEffect(() => {
-    const f = async () => {
-      const bankAccount = await fetchBankAccount();
-      setInitialData(bankAccount);
-    };
-    f();
-  }, [fetchBankAccount]);
+    loadBankAccount();
+  }, []);
 
   const onSubmit = async (data: any) => {
     try {
       await updateBankAccount({ bank_account: data });
       alert('銀行口座情報を更新しました!');
+      await loadBankAccount();
     } catch (error) {
       console.error(error);
       alert('銀行口座情報の更新に失敗しました');
-      throw new Error(String(error));
     }
   };
 
-  if (!initialData) return <div>Loading...</div>;
+  if (!initialData || isUpdating) return <div>Loading...</div>;
 
   return (
     <FormProvider {...methods}>
