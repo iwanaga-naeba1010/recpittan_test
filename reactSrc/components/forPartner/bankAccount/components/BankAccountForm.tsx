@@ -16,6 +16,7 @@ const BankAccountForm: React.FC<BankAccountFormProps> = ({
     register,
     handleSubmit,
     setValue,
+    watch,
     formState: { errors, isSubmitted },
   } = useFormContext();
 
@@ -29,6 +30,8 @@ const BankAccountForm: React.FC<BankAccountFormProps> = ({
   const [branchCode, setBranchCode] = useState(initialData?.branchCode || '');
   const [branchName, setBranchName] = useState(initialData?.branchName || '');
   const [allBanks, setAllBanks] = useState<Bank[]>([]);
+  const isCorporate = watch('is_corporate', initialData?.is_corporate || false) === true || watch('is_corporate') === "true";
+  const isInvoice = watch('is_invoice', initialData?.is_invoice || false);
 
   useEffect(() => {
     const fetchBanks = async () => {
@@ -47,6 +50,12 @@ const BankAccountForm: React.FC<BankAccountFormProps> = ({
       setValue('accountType', initialData.accountType);
       setValue('accountNumber', initialData.accountNumber);
       setValue('accountHolderName', initialData.accountHolderName);
+      setValue('is_corporate', initialData.is_corporate);
+      setValue('corporate_type_code', initialData.corporate_type_code);
+      setValue('is_foreignresident', initialData.is_foreignresident);
+      setValue('investments', initialData.investments);
+      setValue('is_invoice', initialData.is_invoice);
+      setValue('invoice_number', initialData.invoice_number);
     }
   }, [initialData, setValue]);
 
@@ -282,6 +291,79 @@ const BankAccountForm: React.FC<BankAccountFormProps> = ({
             })}
           />
         </div>
+
+        <div className='mb-2'>
+          <p className='small mb-1 text-black'>個人 or 法人</p>
+          <select
+            {...register('is_corporate')}
+            className='w-100 p-2'
+          >
+            <option value='false'>個人</option>
+            <option value='true'>法人</option>
+          </select>
+        </div>
+
+        {isCorporate && (
+          <div className='mb-2'>
+            <p className='small mb-1 text-black'>法人形態</p>
+            <select
+              {...register('corporate_type_code', {
+                required: { value: true, message: '法人形態は必須です' },
+              })}
+              className='w-100 p-2'
+            >
+              <option value=''>選択してください</option>
+              <option value='kabu'>株式会社</option>
+              <option value='goumei'>合名会社</option>
+              <option value='goushi'>合資会社</option>
+              <option value='yugen'>有限会社</option>
+            </select>
+          </div>
+        )}
+
+        <div className='mb-2'>
+          <label>
+            <input type='checkbox' {...register('is_foreignresident')} />
+            国外在住
+          </label>
+        </div>
+
+        <div className='mb-2'>
+          <p className='small mb-1 text-black'>資本金・出資金</p>
+          <input
+            type='number'
+            className='w-100 p-2'
+            placeholder='0'
+            {...register('investments', { valueAsNumber: true, min: 0 })}
+          />
+        </div>
+
+        <div className='mb-2'>
+          <label>
+            <input type='checkbox' {...register('is_invoice')} />
+            インボイス番号登録
+          </label>
+        </div>
+
+        {isInvoice && (
+          <div className='mb-2'>
+            <p className='small mb-1 text-black'>インボイス番号</p>
+            <input
+              type='text'
+              className='w-100 p-2'
+              {...register('invoice_number', {
+                required: isInvoice ? 'インボイス番号は必須です' : false,
+                pattern: {
+                  value: /^T\d{13}$/,
+                  message: 'インボイス番号は「T + 13桁の数字」で入力してください',
+                },
+              })}
+            />
+            {errors.invoice_number && (
+              <p className='error-text'>{errors.invoice_number.message as string}</p>
+            )}
+          </div>
+        )}
 
         <button type='submit' className='btn btn-primary w-100'>
           口座作成
