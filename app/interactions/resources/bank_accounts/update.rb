@@ -48,7 +48,6 @@ module Resources
           is_invoice:,
           invoice_number:
         )
-
         bank_account
       end
     end
