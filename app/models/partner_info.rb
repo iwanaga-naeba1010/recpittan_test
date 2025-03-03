@@ -25,5 +25,5 @@
 #  fk_rails_...  (user_id => users.id)
 #
 class PartnerInfo < ApplicationRecord
-  belongs_to :user, class_name: 'User'
+  belongs_to :user, class_name: 'User', inverse_of: :partner_info
 end
