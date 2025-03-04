@@ -113,3 +113,6 @@ gem 'wkhtmltopdf-binary'
 gem 'aws-sdk-cloudwatchlogs'
 
 gem 'draper'
+
+gem 'whenever', require: false
+gem 'delayed_job_active_record'

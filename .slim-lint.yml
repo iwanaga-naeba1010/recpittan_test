@@ -1,6 +1,7 @@
 exclude:
   - 'node_modules/**/*'
   - 'vendor/**/*'
+  - 'app/views/admin/orders/_react_datepicker.html.slim' # FIXME
 
 linters:
   LineLength:

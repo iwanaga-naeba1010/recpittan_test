@@ -4,7 +4,7 @@
 ActiveAdmin.register User do
   menu priority: 3
   permit_params(
-    %i[username username_kana role email password password_confirmation memo approval_status]
+    %i[username username_kana role email password password_confirmation memo approval_status manage_company_code]
   )
   actions :all
 
@@ -23,6 +23,7 @@ ActiveAdmin.register User do
     column :username
     column :username_kana
     column :email
+    column(:manage_company_code, &:manage_company_code_text)
     column(:role, &:role_text)
     column(:approval_status, &:approval_status_text)
     column :memo
@@ -37,6 +38,7 @@ ActiveAdmin.register User do
           row :username
           row :username_kana
           row :email
+          row(:manage_company_code, &:manage_company_code_text)
           row(:role, &:role_text)
           row(:approval_status, &:approval_status_text) if user.role == 'partner'
           row :company if user.role == 'customer'
@@ -59,6 +61,7 @@ ActiveAdmin.register User do
       f.input :username
       f.input :username_kana
       f.input :email
+      f.input :manage_company_code, as: :select, collection: User.manage_company_code.values.map { |i| [i.text, i] }
       f.input :password if f.object.new_record?
       f.input :password_confirmation if f.object.new_record?
       f.inputs do

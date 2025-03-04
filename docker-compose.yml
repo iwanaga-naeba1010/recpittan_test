@@ -50,6 +50,14 @@ services:
     user: root
     working_dir: /app
 
+  cron_job:
+    <<: *web
+    command: /bin/sh -c "bundle exec whenever --update-crontab && cron -f"
+    expose: []
+    ports: []
+    depends_on:
+      - web
+
   webpacker:
     <<: *web
     command: "bin/webpack-dev-server"
@@ -62,11 +70,12 @@ services:
     depends_on:
       - web
 
-  # worker:
-  #   <<: *web
-  #   command: ["bin/rails", "jobs:work"]
-  #   expose: []
-  #   ports: []
+  worker:
+    <<: *web
+    command: ["bin/rails", "jobs:work"]
+    expose: []
+    ports: []
+
   chrome:
     image: seleniarm/standalone-chromium
     ports:

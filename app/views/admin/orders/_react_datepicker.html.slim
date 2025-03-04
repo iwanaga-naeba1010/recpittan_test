@@ -1,0 +1,6 @@
+- input_html = { id: attribute, class: 'react-datepicker', data: { name: name, value: value } }
+
+- form.li(class: 'input common-field')
+  - form.label(attribute, class: 'label required')
+  - form.div(**input_html)
+  - form.hidden_field(attribute, id: "#{attribute}_hidden")

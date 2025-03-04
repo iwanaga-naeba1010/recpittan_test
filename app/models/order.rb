@@ -123,6 +123,16 @@ class Order < ApplicationRecord
 
   enumerize :sort_order, in: { newest: 0, chat_desc: 1, event_date: 2 }, default: :newest
 
+  enumerize :order_create_source_code, in: {
+    spot: 0, # 単発施設依頼案件
+    from_plan: 1, # プラン案件
+    manager_scheduled: 2 # 日程調整案件
+  }, default: 0
+
+  # EP: エブリプラス
+  # WB: ウェルビーイング
+  enumerize :manage_company_code, in: [:EP, :WB], default: :EP
+
   # controller のparamsに追加するため
   attribute :title # まずは相談したい、のメッセージ部分
   attribute :message
