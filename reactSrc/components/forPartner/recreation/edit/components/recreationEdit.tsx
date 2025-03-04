@@ -99,6 +99,7 @@ const RecreationEdit: React.FC = () => {
         kind: values.kind || recreation.kind,
         flowOfDay: values.flowOfDay || recreation.flowOfDay,
         capacity: values.capacity || recreation.capacity,
+        isWithholdingTax: values.isWithholdingTax,
         materialPrice: values.materialPrice || recreation.materialPrice,
         extraInformation:
           values.extraInformation || recreation.extraInformation,

@@ -119,6 +119,7 @@ ActiveAdmin.register Recreation do
             end
           end
 
+          row :is_withholding_tax
           row :is_public_price
           row :memo
 
@@ -198,6 +199,17 @@ ActiveAdmin.register Recreation do
       f.input :material_amount
       f.input :is_public_price
       f.input :additional_facility_fee, hint: 'エブリ・プラス取り分の1000円 + パートナー支払い分の合計を入力してください'
+
+      if f.object.id.present?
+        li class: 'input' do
+          content_tag(:label, Order.human_attribute_name(:is_withholding_tax), class: 'label', style: 'padding-top: 0px;') +
+          f.check_box_tag('order[is_withholding_tax]', '1', f.object.is_withholding_tax)
+        end
+
+        div style: 'display: flex; justify-content: center;' do
+          image_tag '/recreations/flow_is_withholding_tax.png', width: 800
+        end
+      end
     end
 
     f.inputs '', for: [:recreation_profile, f.object.recreation_profile || recreation.build_recreation_profile] do |p|

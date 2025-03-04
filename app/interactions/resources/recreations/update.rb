@@ -22,6 +22,7 @@ module Resources
         integer :additional_facility_fee, default: 0
         string :category
         string :kind
+        boolean :is_withholding_tax
       end
 
       integer :id

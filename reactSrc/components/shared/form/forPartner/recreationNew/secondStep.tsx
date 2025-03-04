@@ -8,6 +8,7 @@ import { RecreationEditPrice } from './recreationEditPrice';
 import { RecreationMaterialPrice } from './recreationMaterialPrice';
 import { RecreationFormValues } from './recreationNewForm';
 import { RecreationPrice } from './recreationPrice';
+import { RecreationIsWithholdingTax } from './recreationIsWithholdingTax';
 
 type Props = {
   getValues: UseFormGetValues<RecreationFormValues>;
@@ -53,6 +54,8 @@ export const SecondStep: React.FC<Props> = (props) => {
       {recreation && isShowAdditionalFacilityFee() && (
         <RecreationEditAdditionalFacilityFee recreation={recreation} />
       )}
+
+      {recreation && <RecreationIsWithholdingTax register={register} />}
 
       <div className='mt-4'>
         <h5 className='text-black font-weight-bold'>お借りしたいものを入力</h5>

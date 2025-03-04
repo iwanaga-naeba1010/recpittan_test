@@ -44,7 +44,10 @@ export const FourthStep: React.FC<Props> = ({ getValues }) => {
     youtubeId,
     bringYourOwnItem,
     extraInformation,
+    isWithholdingTax,
   } = getValues();
+
+  const isWithholdingTaxText = isWithholdingTax ? 'はい' : 'いいえ';
 
   return (
     <div>
@@ -88,6 +91,11 @@ export const FourthStep: React.FC<Props> = ({ getValues }) => {
       <div className='mt-4'>
         <h5 className='text-black font-weight-bold'>レクの内容</h5>
         <p>{description}</p>
+      </div>
+
+      <div className='mt-4'>
+        <h5 className='text-black font-weight-bold'>要源泉徴収</h5>
+        <p>{isWithholdingTaxText}</p>
       </div>
 
       <div className='mt-4'>

@@ -10,6 +10,7 @@ import {
   UseFormSetValue,
 } from 'react-hook-form';
 import { RecreationFormValues } from './recreationNewForm';
+import { RecreationIsWithholdingTax } from './recreationIsWithholdingTax';
 
 type Config = {
   categories: Array<{ name: string; enumKey: string }>;
@@ -403,6 +404,8 @@ export const FirstStep: React.FC<Props> = (props) => {
           <ValidationErrorMessage message={errors?.capacity?.message} />
         )}
       </div>
+
+      {!recreation && <RecreationIsWithholdingTax register={register} />}
     </div>
   );
 };
