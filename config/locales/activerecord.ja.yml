@@ -49,6 +49,7 @@ ja:
         title: タイトル
         body: 内容
       user:
+        id: id
         role: 権限
         email: メールアドレス
         image: 画像
@@ -91,6 +92,15 @@ ja:
         title: 肩書き
         description: 詳細
         image: 画像
+      partner_info:
+        user_id: パートナーID
+        company_name: 会社名または団体名
+        postal_code: 郵便番号
+        prefecture: 住所（都道府県）
+        city: 住所（市区町村）
+        address1: 住所（以下）
+        address2: 住所（建物名・部屋）
+        phone_number: 電話番号
       profile:
         user: パートナー
         name: パートナー名

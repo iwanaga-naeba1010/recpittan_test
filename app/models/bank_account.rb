@@ -38,7 +38,7 @@ class BankAccount < ApplicationRecord
   include Ransackable
   extend Enumerize
 
-  belongs_to :user, class_name: 'User'
+  belongs_to :user, class_name: 'User', inverse_of: :bank_account
 
   validates :account_holder_name, :account_number, :account_type, :bank_code, :bank_name, :branch_code, :branch_name, presence: true
   validates :account_number, uniqueness: { scope: :user_id },
