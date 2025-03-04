@@ -12,15 +12,15 @@
 #  bank_name           :string           not null
 #  branch_code         :string           not null
 #  branch_name         :string           not null
-#  corporate_number    :text
-#  corporate_type_code :text
+#  corporate_number    :string
+#  corporate_type_code :string
 #  investments         :integer
-#  invoice_number      :text
-#  is_corporate        :boolean
-#  is_foreignresident  :boolean
-#  is_invoice          :boolean
-#  is_subcontract      :boolean
-#  my_number           :text
+#  invoice_number      :string
+#  is_corporate        :boolean          default(FALSE)
+#  is_foreignresident  :boolean          default(FALSE)
+#  is_invoice          :boolean          default(FALSE)
+#  is_subcontract      :boolean          default(FALSE)
+#  my_number           :string
 #  created_at          :datetime         not null
 #  updated_at          :datetime         not null
 #  user_id             :bigint           not null
