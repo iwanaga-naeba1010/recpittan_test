@@ -61,6 +61,7 @@ class User < ApplicationRecord
 
   enumerize :role, in: { customer: 0, partner: 1, admin: 2, cs: 3 }, default: 0
   enumerize :approval_status, in: { unapproved: 0, approved: 1 }, default: 0
+  enumerize :manage_company_code, in: { EP: 0, WB: 1, RP: 2 }, default: 2
 
   # TODO: role == userの場合、の条件加えたい
   belongs_to :company, optional: true, class_name: 'Company'
