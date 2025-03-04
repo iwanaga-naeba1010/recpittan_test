@@ -159,7 +159,7 @@ ja:
         additional_facility_fee: 施設追加費用
         transportation_expenses: 交通費
         expenses: 諸経費
-        contract_number: 契約番号
+        contract_number: 指定施設プラン管理コード
         memo: メモ
         coupon_code: クーポンコード
         is_managercontrol: 運営管理フラグ

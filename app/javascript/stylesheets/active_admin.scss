@@ -18,6 +18,20 @@
 //
 //   .status_tag { background: #6090DB; }
 
+// reactdatepicker
+.react-datepicker-input { width: 100%!important; }
+.react-datepicker-time__input { min-width: 130px; }
+.react-datepicker-wrapper { min-width: 328px; }
+
+.label.required:after { content: "*" }
+
+// Admin orders
+.status_tag {
+  &.pink {
+    background: #EE73AB;
+  }
+}
+
 // OrderのChatUI
 .chat {
   .mychat {

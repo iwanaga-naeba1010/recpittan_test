@@ -24,6 +24,22 @@ class OrderDecorator < ApplicationDecorator
     safe_multiply_and_round(partner_fee_base_amount, object.partner_fee_rate)
   end
 
+  def display_is_managercontrol
+    return unless object.is_managercontrol?
+
+    status_tag('運営管理', class: 'pink')
+  end
+
+  def display_order_header
+    h.safe_join([
+      '案件id : #',
+      object.id,
+      recreation_title,
+      ' ',
+      display_is_managercontrol
+    ])
+  end
+
   private
 
   def safe_to_i(value)

@@ -112,4 +112,61 @@ RSpec.describe OrderDecorator do
       it { is_expected.to eq(0) }
     end
   end
+
+  describe '#display_is_managercontrol' do
+    context 'when is_managercontrol is true' do
+      before do
+        allow(order).to receive(:is_managercontrol?).and_return(true)
+      end
+
+      it 'returns a span with the text "運営管理" and class "pink"' do
+        status_tag = decorated_order.display_is_managercontrol
+        expect(status_tag).to have_selector('span.status_tag.運営管理.pink', text: '運営管理')
+      end
+    end
+
+    context 'when is_managercontrol is false' do
+      before do
+        allow(order).to receive(:is_managercontrol?).and_return(false)
+      end
+
+      it 'returns nil' do
+        expect(decorated_order.display_is_managercontrol).to be_nil
+      end
+    end
+  end
+
+  describe '#display_order_header' do
+    let(:text_is_managercontrol) { '運営管理' }
+    let(:recreation_title) { 'Recreation Title' }
+    let(:case_id_text) { '案件id : #' }
+
+    context 'when is_managercontrol is true' do
+      before do
+        allow(order).to receive(:is_managercontrol?).and_return(true)
+        allow(decorated_order).to receive(:recreation_title).and_return(recreation_title)
+      end
+
+      it 'returns the header correct format and with is_managercontrol status' do
+        header = decorated_order.display_order_header
+        expect(header).to include(case_id_text)
+        expect(header).to include(recreation_title)
+        expect(header).to include(text_is_managercontrol)
+      end
+    end
+
+    context 'when is_managercontrol is false' do
+      before do
+        allow(order).to receive(:is_managercontrol?).and_return(false)
+        allow(decorated_order).to receive(:recreation_title).and_return(recreation_title)
+      end
+
+      it 'returns the header correct format and without is_managercontrol status' do
+        header = decorated_order.display_order_header
+        expect(header).to include(case_id_text)
+        expect(header).to include(recreation_title)
+        expect(header).not_to include(text_is_managercontrol)
+      end
+    end
+  end
 end

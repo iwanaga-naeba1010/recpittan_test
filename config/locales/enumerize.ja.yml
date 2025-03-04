@@ -87,6 +87,13 @@ ja:
         newest: 新着順
         chat_desc: チャット更新順
         event_date: 開催日時順
+      order_create_source_code:
+        spot: 単発施設依頼案件
+        from_plan: プラン案件
+        manager_scheduled: 日程調整案件
+      manage_company_code:
+        EP: エブリプラス
+        WB: ウェルビーイング
     zoom:
       created_by:
         partner: パートナー
