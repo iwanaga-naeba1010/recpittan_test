@@ -39,6 +39,15 @@ ActiveRecord::Schema[7.2].define(version: 2025_02_26_132027) do
     t.string "account_holder_name", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "is_corporate", default: false
+    t.string "corporate_type_code"
+    t.boolean "is_foreignresident", default: false
+    t.integer "investments"
+    t.boolean "is_invoice", default: false
+    t.string "invoice_number"
+    t.string "corporate_number"
+    t.string "my_number"
+    t.boolean "is_subcontract", default: false
     t.index ["user_id", "account_number"], name: "index_bank_accounts_on_user_id_and_account_number", unique: true
     t.index ["user_id"], name: "index_bank_accounts_on_user_id"
   end
