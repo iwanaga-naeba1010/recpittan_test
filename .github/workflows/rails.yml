@@ -37,7 +37,7 @@ jobs:
         with:
           node-version: '16.x'
       - name: Cache node modules
-        uses: actions/cache@v2.1.4
+        uses: actions/cache@v4
         with:
           path: node_modules
           key: ${{ runner.os }}-node-${{ hashFiles('**/yarn.lock') }}
@@ -105,7 +105,7 @@ jobs:
         with:
           node-version: '16.x'
       - name: Cache node modules
-        uses: actions/cache@v2.1.4
+        uses: actions/cache@v4
         with:
           path: node_modules
           key: ${{ runner.os }}-node-${{ hashFiles('**/yarn.lock') }}
@@ -115,7 +115,7 @@ jobs:
         run: yarn install --check-files
 
       - name: bundle install
-        uses: actions/cache@v2.1.4
+        uses: actions/cache@v4
         with:
           path: vendor/bundle
           key: bundle-${{ hashFiles('**/Gemfile.lock') }}
