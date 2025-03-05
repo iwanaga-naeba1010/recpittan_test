@@ -16,7 +16,6 @@ const BankAccountForm: React.FC<BankAccountFormProps> = ({
     register,
     handleSubmit,
     setValue,
-    watch,
     formState: { errors, isSubmitted },
   } = useFormContext();
 
@@ -30,7 +29,9 @@ const BankAccountForm: React.FC<BankAccountFormProps> = ({
   const [branchCode, setBranchCode] = useState(initialData?.branchCode || '');
   const [branchName, setBranchName] = useState(initialData?.branchName || '');
   const [allBanks, setAllBanks] = useState<Bank[]>([]);
-  const [isCorporate, setIsCorporate] = useState(initialData?.isCorporate || false);
+  const [isCorporate, setIsCorporate] = useState(
+    initialData?.isCorporate || false
+  );
   const [isInvoice, setIsInvoice] = useState(initialData?.isInvoice || false);
 
   useEffect(() => {
@@ -48,11 +49,13 @@ const BankAccountForm: React.FC<BankAccountFormProps> = ({
     }
   }, [initialData]);
 
-  const handleCorporateChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const value = event.target.value === "true";
+  const handleCorporateChange = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    const value = event.target.value === 'true';
     setIsCorporate(value);
     setValue('isCorporate', value);
-    
+
     if (!value) {
       setValue('corporateTypeCode', '');
     }
@@ -338,7 +341,7 @@ const BankAccountForm: React.FC<BankAccountFormProps> = ({
                     {...register('isCorporate')}
                     checked={!isCorporate}
                     onChange={handleCorporateChange}
-                    style={{ transform: "scale(1.5)" }}
+                    style={{ transform: 'scale(1.5)' }}
                   />
                   個人
                 </label>
@@ -350,7 +353,7 @@ const BankAccountForm: React.FC<BankAccountFormProps> = ({
                     {...register('isCorporate')}
                     checked={isCorporate}
                     onChange={handleCorporateChange}
-                    style={{ transform: "scale(1.5)" }}
+                    style={{ transform: 'scale(1.5)' }}
                   />
                   法人
                 </label>
@@ -380,7 +383,7 @@ const BankAccountForm: React.FC<BankAccountFormProps> = ({
               <input
                 type='checkbox'
                 {...register('isForeignresident')}
-                style={{ transform: "scale(1.5)" }}
+                style={{ transform: 'scale(1.5)' }}
               />
             </div>
 
@@ -401,7 +404,7 @@ const BankAccountForm: React.FC<BankAccountFormProps> = ({
                 {...register('isInvoice')}
                 checked={isInvoice}
                 onChange={handleInvoiceChange}
-                style={{ transform: "scale(1.5)" }}
+                style={{ transform: 'scale(1.5)' }}
               />
             </div>
 
@@ -415,12 +418,15 @@ const BankAccountForm: React.FC<BankAccountFormProps> = ({
                     required: isInvoice ? 'インボイス番号は必須です' : false,
                     pattern: {
                       value: /^T\d{13}$/,
-                      message: 'インボイス番号は「T + 13桁の数字」で入力してください',
+                      message:
+                        'インボイス番号は「T + 13桁の数字」で入力してください',
                     },
                   })}
                 />
                 {errors.invoiceNumber && (
-                  <p className='error-text'>{errors.invoiceNumber.message as string}</p>
+                  <p className='error-text'>
+                    {errors.invoiceNumber.message as string}
+                  </p>
                 )}
               </div>
             )}
