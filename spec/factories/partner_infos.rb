@@ -11,6 +11,7 @@
 #  company_name :string
 #  phone_number :string
 #  postal_code  :string
+#  pref_code    :string
 #  prefecture   :string
 #  created_at   :datetime         not null
 #  updated_at   :datetime         not null
@@ -22,7 +23,7 @@
 #
 # Foreign Keys
 #
-#  fk_rails_...  (user_id => users.id)
+#  partner_infos_user_id_fkey  (user_id => users.id)
 #
 FactoryBot.define do
   factory :partner_info do
