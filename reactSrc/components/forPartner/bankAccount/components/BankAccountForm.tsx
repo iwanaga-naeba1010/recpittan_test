@@ -30,10 +30,8 @@ const BankAccountForm: React.FC<BankAccountFormProps> = ({
   const [branchCode, setBranchCode] = useState(initialData?.branchCode || '');
   const [branchName, setBranchName] = useState(initialData?.branchName || '');
   const [allBanks, setAllBanks] = useState<Bank[]>([]);
-  const isCorporate = watch('isCorporate', initialData?.isCorporate || false) === true || watch('isCorporate') === "true";
-  const isInvoice = watch('isInvoice', initialData?.isInvoice || false);
-
-  console.log(initialData);
+  const [isCorporate, setIsCorporate] = useState(initialData?.isCorporate || false);
+  const [isInvoice, setIsInvoice] = useState(initialData?.isInvoice || false);
 
   useEffect(() => {
     const fetchBanks = async () => {
@@ -42,6 +40,33 @@ const BankAccountForm: React.FC<BankAccountFormProps> = ({
     };
     fetchBanks();
   }, [fetchAllBanks]);
+
+  useEffect(() => {
+    if (initialData) {
+      setIsCorporate(initialData.isCorporate || false);
+      setIsInvoice(initialData.isInvoice || false);
+    }
+  }, [initialData]);
+
+  const handleCorporateChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const value = event.target.value === "true";
+    setIsCorporate(value);
+    setValue('isCorporate', value);
+    
+    if (!value) {
+      setValue('corporateTypeCode', '');
+    }
+  };
+
+  const handleInvoiceChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const checked = event.target.checked;
+    setIsInvoice(checked);
+    setValue('isInvoice', checked);
+
+    if (!checked) {
+      setValue('invoiceNumber', '');
+    }
+  };
 
   useEffect(() => {
     if (initialData) {
@@ -304,13 +329,32 @@ const BankAccountForm: React.FC<BankAccountFormProps> = ({
           <>
             <div className='mb-2'>
               <p className='small mb-1 text-black'>個人 or 法人</p>
-              <select
-                {...register('isCorporate')}
-                className='w-100 p-2'
-              >
-                <option value='false'>個人</option>
-                <option value='true'>法人</option>
-              </select>
+              <div className='d-flex'>
+                <label className='me-3'>
+                  <input
+                    className='me-2'
+                    type='radio'
+                    value='false'
+                    {...register('isCorporate')}
+                    checked={!isCorporate}
+                    onChange={handleCorporateChange}
+                    style={{ transform: "scale(1.5)" }}
+                  />
+                  個人
+                </label>
+                <label>
+                  <input
+                    className='me-2'
+                    type='radio'
+                    value='true'
+                    {...register('isCorporate')}
+                    checked={isCorporate}
+                    onChange={handleCorporateChange}
+                    style={{ transform: "scale(1.5)" }}
+                  />
+                  法人
+                </label>
+              </div>
             </div>
 
             {isCorporate && (
@@ -355,6 +399,8 @@ const BankAccountForm: React.FC<BankAccountFormProps> = ({
               <input
                 type='checkbox'
                 {...register('isInvoice')}
+                checked={isInvoice}
+                onChange={handleInvoiceChange}
                 style={{ transform: "scale(1.5)" }}
               />
             </div>
@@ -378,7 +424,6 @@ const BankAccountForm: React.FC<BankAccountFormProps> = ({
                 )}
               </div>
             )}
-
           </>
         )}
 
