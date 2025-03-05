@@ -415,7 +415,7 @@ const BankAccountForm: React.FC<BankAccountFormProps> = ({
                   type='text'
                   className='w-100 p-2'
                   {...register('invoiceNumber', {
-                    required: isInvoice ? 'インボイス番号は必須です' : false,
+                    required: { value: true, message: 'インボイス番号は必須です' },
                     pattern: {
                       value: /^T\d{13}$/,
                       message:
