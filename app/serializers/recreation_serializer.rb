@@ -17,6 +17,7 @@
 #  flow_of_day             :text
 #  flyer_color             :string
 #  is_public_price         :boolean          default(TRUE)
+#  is_withholding_tax      :boolean          default(FALSE)
 #  kind                    :integer          default("visit"), not null
 #  material_amount         :integer
 #  material_price          :integer
@@ -57,6 +58,7 @@ class RecreationSerializer
       description: recreation.description,
       price: recreation.price,
       amount: recreation.amount,
+      is_withholding_tax: recreation.is_withholding_tax,
       kind: { id: recreation.kind.value, key: recreation.kind, text: recreation.kind_text },
       status: { id: recreation.status.value, key: recreation.status, text: recreation.status_text },
       category: { id: recreation.category.value, key: recreation.category, text: recreation.category_text },

@@ -149,3 +149,8 @@ ja:
       account_type:
         checking: 普通預金
         current: 定期預金
+    partner:
+      manage_company_code:
+        EP: エブリプラス
+        WB: ウェルビーイング
+        RP: レクぴったん

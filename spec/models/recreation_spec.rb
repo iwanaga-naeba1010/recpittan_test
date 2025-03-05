@@ -33,29 +33,16 @@
 #  user_id                 :bigint           not null
 #  youtube_id              :string
 #
+# Indexes
+#
+#  index_recreations_on_user_id  (user_id)
+#
 # Foreign Keys
 #
-#  recreations_user_id_fkey  (user_id => users.id)
+#  fk_rails_...  (user_id => users.id)
 #
-FactoryBot.define do
-  factory :recreation do
-    user
-    title { 'MyString' }
-    second_title { 'MyString' }
-    price { 20000 }
-    amount { 10000 }
-    material_price { 1000 }
-    material_amount { 500 }
-    minutes { 60 }
-    description { 'MyText' }
-    flow_of_day { 'MyString' }
-    borrow_item { 'MyString' }
-    bring_your_own_item { 'MyString' }
-    extra_information { 'MyString' }
-    youtube_id { '' }
-    capacity { 5 }
-    status { 'unapplied' }
-    category { 'event' }
-    kind { 'online' }
-  end
+require 'rails_helper'
+
+RSpec.describe Recreation, type: :model do
+  it { is_expected.to have_db_column(:is_withholding_tax).of_type(:boolean).with_options(default: false, null: true) }
 end

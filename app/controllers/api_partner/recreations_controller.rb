@@ -81,6 +81,7 @@ module ApiPartner
           title second_title price material_price
           minutes description flow_of_day borrow_item bring_your_own_item extra_information
           youtube_id capacity category status kind additional_facility_fee
+          is_withholding_tax
         ],
         recreation_profile_attributes: %i[profile_id], # NOTE(okubo): profileの中間テーブル作成
         recreation_prefectures_attributes: %i[name]

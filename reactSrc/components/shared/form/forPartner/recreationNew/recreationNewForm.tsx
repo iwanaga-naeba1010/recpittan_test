@@ -31,6 +31,7 @@ export type RecreationFormValues = Pick<
   | 'imageUrl'
   | 'prefectures'
   | 'userId'
+  | 'isWithholdingTax'
 > & {
   kind: string;
   category: string;
@@ -69,6 +70,7 @@ export const RecreationNewForm: React.FC<Props> = (props) => {
       category: 'event',
       prefectures: [],
       kind: 'online',
+      isWithholdingTax: false,
     },
   });
 
@@ -81,6 +83,7 @@ export const RecreationNewForm: React.FC<Props> = (props) => {
       'description',
       'flowOfDay',
       'capacity',
+      'isWithholdingTax',
       'materialPrice',
       'materialAmount',
       'extraInformation',

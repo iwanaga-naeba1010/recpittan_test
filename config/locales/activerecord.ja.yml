@@ -49,6 +49,7 @@ ja:
         title: タイトル
         body: 内容
       user:
+        id: id
         role: 権限
         email: メールアドレス
         image: 画像
@@ -91,6 +92,15 @@ ja:
         title: 肩書き
         description: 詳細
         image: 画像
+      partner_info:
+        user_id: パートナーID
+        company_name: 会社名または団体名
+        postal_code: 郵便番号
+        prefecture: 住所（都道府県）
+        city: 住所（市区町村）
+        address1: 住所（以下）
+        address2: 住所（建物名・部屋）
+        phone_number: 電話番号
       profile:
         user: パートナー
         name: パートナー名
@@ -127,6 +137,7 @@ ja:
         is_public_price: 料金を公開
         additional_facility_fee: 施設追加費用
         memo: メモ
+        is_withholding_tax: 要源泉徴収
       recreation_image:
         image: ファイル
         kind: 種別

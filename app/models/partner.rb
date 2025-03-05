@@ -37,6 +37,13 @@
 #  users_company_id_fkey  (company_id => companies.id)
 #
 class Partner < User
+  extend Enumerize
+
   # NOTE: 本来使うべきではないが、管理画面のためだけに使うので、ひとまず許容
   default_scope { where(role: :partner) }
+
+  accepts_nested_attributes_for :partner_info, allow_destroy: true
+  accepts_nested_attributes_for :bank_account, allow_destroy: true
+
+  enumerize :manage_company_code, in: { EP: 0, WB: 1, RP: 2 }, default: 2
 end
