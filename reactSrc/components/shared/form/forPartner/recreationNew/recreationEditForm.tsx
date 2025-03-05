@@ -52,6 +52,7 @@ export const RecreationEditForm: React.FC<Props> = (props) => {
       })),
       kind: recreation.kind.key,
       profileId: recreation.profile.id,
+      isWithholdingTax: recreation.isWithholdingTax,
     },
   });
 
