@@ -34,7 +34,13 @@ module ApiPartner
         bank_code: params_update[:bank_code],
         bank_name: params_update[:bank_name],
         branch_code: params_update[:branch_code],
-        branch_name: params_update[:branch_name]
+        branch_name: params_update[:branch_name],
+        is_corporate: params_update[:is_corporate],
+        corporate_type_code: params_update[:corporate_type_code],
+        is_foreignresident: params_update[:is_foreignresident],
+        investments: params_update[:investments],
+        is_invoice: params_update[:is_invoice],
+        invoice_number: params_update[:invoice_number]
       )
       render json: BankAccountSerializer.new.serialize(bank_account:)
     end
@@ -49,7 +55,8 @@ module ApiPartner
 
     def params_update
       params.require(:bank_account).permit(
-        :account_holder_name, :account_number, :account_type, :bank_code, :bank_name, :branch_code, :branch_name
+        :account_holder_name, :account_number, :account_type, :bank_code, :bank_name, :branch_code, :branch_name,
+        :is_corporate, :corporate_type_code, :is_foreignresident, :investments, :is_invoice, :invoice_number
       )
     end
   end

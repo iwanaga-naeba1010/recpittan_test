@@ -12,6 +12,7 @@ const BankAccountNew: React.FC = () => {
     try {
       await createBankAccount({ bank_account: data });
       alert('銀行口座を作成しました!');
+      window.location.href = `/partners/bank_accounts/edit`;
     } catch (error) {
       console.error(error);
       alert('銀行口座の作成に失敗しました');

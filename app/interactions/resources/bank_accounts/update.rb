@@ -11,6 +11,12 @@ module Resources
       string :bank_name
       string :branch_code
       string :branch_name
+      boolean :is_corporate, default: false
+      string :corporate_type_code, default: nil
+      boolean :is_foreignresident, default: false
+      integer :investments, default: nil
+      boolean :is_invoice, default: false
+      string :invoice_number, default: nil
 
       validates :id, presence: true
       validates :account_holder_name, presence: true
@@ -23,6 +29,10 @@ module Resources
 
       def execute
         bank_account = BankAccount.find(id)
+
+        self.corporate_type_code = nil unless is_corporate
+        self.invoice_number = nil unless is_invoice
+
         bank_account.update!(
           account_holder_name:,
           account_number:,
@@ -30,7 +40,13 @@ module Resources
           bank_code:,
           bank_name:,
           branch_code:,
-          branch_name:
+          branch_name:,
+          is_corporate:,
+          corporate_type_code:,
+          is_foreignresident:,
+          investments:,
+          is_invoice:,
+          invoice_number:
         )
         bank_account
       end
