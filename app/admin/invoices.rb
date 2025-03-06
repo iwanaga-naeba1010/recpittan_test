@@ -4,13 +4,17 @@ require 'csv'
 
 # rubocop:disable Metrics/BlockLength, Metrics/AbcSize, Metrics/MethodLength, Style/Next, Metrics/PerceivedComplexity, Metrics/CyclomaticComplexity
 ActiveAdmin.register_page 'Invoices' do
-  menu priority: 1, label: proc { '請求書CSV生成' }
+  menu priority: 1, label: proc { '請求・支払業務' }
 
-  content title: proc { '請求書CSV生成' } do
+  content title: proc { '請求・支払業務' } do
     columns do
       column do
-        panel 'CSV生成' do
+        panel 'CSV生成', style: 'margin-bottom: 30px;' do
           button_to 'CSVの生成実行', admin_invoices_path
+        end
+
+        panel '支払CSV生成' do
+          button_to 'CSVの生成実行', admin_invoices_export_payment_to_csv_path
         end
       end
     end
@@ -137,6 +141,14 @@ ActiveAdmin.register_page 'Invoices' do
       # CSV をダウンロード用に送信
       send_data csv_data, filename: '請求データ.csv'
     end
+  end
+
+  page_action :export_payment_to_csv, method: :post do
+    orders = Order.with_payments_in_previous_month.includes(:recreation)
+    partners = Partner.joins(recreations: :orders).includes(:bank_account).merge(orders).distinct
+    csv_data = Exports::PartnerPaymentStatementCsvService.new(partners, orders).call
+
+    send_data csv_data, filename: "payment_statement_#{Time.current.to_i}.csv"
   end
 end
 # rubocop:enable Metrics/BlockLength, Metrics/AbcSize, Metrics/MethodLength, Style/Next, Metrics/PerceivedComplexity, Metrics/CyclomaticComplexity
