@@ -27,6 +27,12 @@ ActiveAdmin.register Recreation do
   filter :price
   filter :status
 
+  before_save do |recreation|
+    recreation.recreation_images.each do |recreation_image|
+      recreation_image.document_kind = recreation_image.kind_value
+    end
+  end
+
   csv do
     column :id
     column(:user, &:user_username)

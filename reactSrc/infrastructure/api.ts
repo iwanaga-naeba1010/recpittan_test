@@ -9,18 +9,25 @@ export class Api {
   static async get<T>(
     path: string,
     type: ApiType,
-    params: Data = {}
+    params: Data = {},
+    responseType: 'json' | 'blob' = 'json'
   ): Promise<AxiosResponse<T>> {
     try {
       const response = await axios.get<T>(`${apiDomain(type)}/${path}`, {
         params: snakecaseKeys(params),
         headers: headers(),
+        responseType,
       });
-      const data = response.data as unknown as Record<string, unknown>;
-      return {
-        ...response,
-        data: camelcaseKeys(data, { deep: true }) as T,
-      };
+
+      if (responseType === 'json') {
+        const data = response.data as unknown as Record<string, unknown>;
+        return {
+          ...response,
+          data: camelcaseKeys(data, { deep: true }) as T,
+        };
+      }
+
+      return response;
     } catch (e) {
       console.log('haitta!', e);
       throw e;

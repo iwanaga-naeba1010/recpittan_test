@@ -14,13 +14,9 @@
 #  updated_at    :datetime         not null
 #  recreation_id :bigint           not null
 #
-# Indexes
-#
-#  index_recreation_images_on_recreation_id  (recreation_id)
-#
 # Foreign Keys
 #
-#  fk_rails_...  (recreation_id => recreations.id)
+#  recreation_images_recreation_id_fkey  (recreation_id => recreations.id)
 #
 class RecreationImageSerializer
   def serialize_list(recreation_images:)
@@ -33,6 +29,7 @@ class RecreationImageSerializer
       image_url: recreation_image.image.to_s,
       filename: recreation_image.filename,
       kind: recreation_image.kind,
+      title: recreation_image.title,
     }
   end
 end

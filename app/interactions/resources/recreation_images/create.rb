@@ -22,6 +22,7 @@ module Resources
             filename: params[:filename],
             kind: params[:kind]
           )
+          image.document_kind = image.kind_value
           image.save!
           image
         end
