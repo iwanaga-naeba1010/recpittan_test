@@ -102,7 +102,7 @@ ActiveAdmin.register User do
     end
 
     def update
-      user                = User.find(params[:id].to_i)
+      user = User.find(params[:id].to_i)
       approval_status_was = user.approval_status
 
       if permitted_params[:user][:password].blank?
@@ -112,17 +112,13 @@ ActiveAdmin.register User do
       # partner.skip_confirmation!
       user.skip_reconfirmation!
 
-      if user.update_without_current_password(permitted_params[:user])
-        if user.approval_status.approved? && approval_status_was != user.approval_status
-          Rails.logger.info "User changed approval status: #{user.id} - #{user.username}"
-        end
+      return super unless user.update_without_current_password(permitted_params[:user])
 
-        redirect_to admin_user_path(user.id)
-      else
-        # HACK: superを毎回呼ぶとcompany.createがダブルっぽいので、失敗した時のrenderのためにsuper入れる。
-        # ちなみにrender :newは機能しない
-        super
+      if user.approval_status.approved? && approval_status_was != user.approval_status
+        Rails.logger.info "User changed approval status: #{user.id} - #{user.username}"
       end
+
+      redirect_to admin_user_path(user.id)
     end
   end
 end
