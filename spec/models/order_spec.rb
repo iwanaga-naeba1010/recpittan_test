@@ -152,6 +152,20 @@ RSpec.describe Order, type: :model do
     end
   end
 
+  describe 'scope :with_payments_in_previous_month' do
+    let!(:order_beginning_of_prev_month) { create(:order, start_at: 1.month.ago.beginning_of_month + 2.days) }
+    let!(:order_end_of_prev_month) { create(:order, start_at: 1.month.ago.end_of_month - 2.days) }
+    let!(:order_this_month) { create(:order, start_at: Time.current.beginning_of_month) }
+    let!(:order_two_months_ago) { create(:order, start_at: 2.months.ago) }
+
+    it 'returns orders within the previous month' do
+      result = Order.with_payments_in_previous_month
+
+      expect(result).to include(order_beginning_of_prev_month, order_end_of_prev_month)
+      expect(result).not_to include(order_this_month, order_two_months_ago)
+    end
+  end
+
   it { is_expected.to have_db_column(:is_managercontrol).of_type(:boolean).with_options(default: false, null: false) }
   it { is_expected.to have_db_column(:order_create_source_code).of_type(:string).with_options(null: true) }
   it { is_expected.to have_db_column(:manage_company_code).of_type(:string).with_options(null: true) }

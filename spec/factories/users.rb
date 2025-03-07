@@ -94,4 +94,21 @@ FactoryBot.define do
       user.update(role: :cs)
     end
   end
+
+  trait :partner_with_orders do
+    start_date = Time.current.last_month.beginning_of_month
+    end_date = Time.current.last_month.end_of_month
+    max_order = 3
+
+    after(:create) do |user|
+      user.update(role: :partner, username: 'hogehoge')
+      rec = create(:recreation, user:, status: 'published', kind: 'visit')
+      create(:profile, user:)
+      create(:bank_account, user:, invoice_number: '1234567')
+
+      create_list(:order, max_order, recreation: rec) do |order|
+        order.update(start_at: rand(start_date..end_date))
+      end
+    end
+  end
 end

@@ -104,6 +104,11 @@ FactoryBot.define do
     is_withholding_tax { false }
     partner_invoice_registration_flag { false }
     is_zoom_rental { false }
+    total_partner_payment_with_tax { 10000 }
+    withholding_tax_amount { 20000 }
+    partner_deduction_subtotal { 60000 }
+    non_invoice_partner_fee { 20000 }
+    partner_payment_amount { 80000 }
   end
 
   trait :with_report do
