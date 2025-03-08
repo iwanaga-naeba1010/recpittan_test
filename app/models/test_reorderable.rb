@@ -19,8 +19,12 @@
 #  index_recreation_plans_on_code        (code) UNIQUE
 #  index_recreation_plans_on_company_id  (company_id)
 #
-require 'rails_helper'
+class TestReorderable < RecreationPlan
+  DISPORDER_STEP = 1000
 
-RSpec.describe RecreationPlan, type: :model do
-  it { is_expected.to have_db_column(:disporder).of_type(:integer).with_options(default: 0) }
+  def insert_at(position)
+    self.disporder  = position * DISPORDER_STEP
+    self.updated_at = Time.current
+    self.save
+  end
 end

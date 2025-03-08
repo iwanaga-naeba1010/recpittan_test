@@ -440,6 +440,7 @@ ActiveRecord::Schema[7.2].define(version: 2025_02_27_064051) do
     t.datetime "updated_at", null: false
     t.integer "adjustment_fee"
     t.bigint "company_id"
+    t.integer "disporder", default: 0
     t.index ["code"], name: "index_recreation_plans_on_code", unique: true
     t.index ["company_id"], name: "index_recreation_plans_on_company_id"
   end

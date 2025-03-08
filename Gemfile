@@ -116,3 +116,4 @@ gem 'draper'
 
 gem 'whenever', require: false
 gem 'delayed_job_active_record'
+gem 'activeadmin_reorderable', '~> 0.3.4'

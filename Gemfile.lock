@@ -69,6 +69,7 @@ GEM
       sassc
       sassc-rails
       xdan-datetimepicker-rails (~> 2.5.1)
+    activeadmin_reorderable (0.3.4)
     activejob (7.2.2.1)
       activesupport (= 7.2.2.1)
       globalid (>= 0.3.6)
@@ -747,6 +748,7 @@ DEPENDENCIES
   active_interaction
   activeadmin
   activeadmin_addons
+  activeadmin_reorderable (~> 0.3.4)
   annotate
   arctic_admin
   aws-sdk-cloudwatchlogs
