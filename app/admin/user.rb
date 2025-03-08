@@ -62,8 +62,8 @@ ActiveAdmin.register User do
       f.input :username_kana
       f.input :email
       f.input :manage_company_code, as: :select, collection: User.manage_company_code.values.map { |i| [i.text, i] }
-      f.input :password if f.object.new_record?
-      f.input :password_confirmation if f.object.new_record?
+      f.input :password, required: f.object.new_record?
+      f.input :password_confirmation
       f.inputs do
         f.input :role, as: :select, collection: User.role.values.map { |i| [i.text, i] }
       end
@@ -103,6 +103,8 @@ ActiveAdmin.register User do
 
     def update
       user = User.find(params[:id].to_i)
+      approval_status_was = user.approval_status
+
       if permitted_params[:user][:password].blank?
         %w[password password_confirmation].each { |p| permitted_params[:user].delete(p) }
       end
@@ -110,13 +112,15 @@ ActiveAdmin.register User do
       # partner.skip_confirmation!
       user.skip_reconfirmation!
 
-      if user.update_without_password(permitted_params[:user])
-        redirect_to admin_user_path(user.id)
-      else
-        # HACK: superを毎回呼ぶとcompany.createがダブルっぽいので、失敗した時のrenderのためにsuper入れる。
-        # ちなみにrender :newは機能しない
-        super
+      # HACK: superを毎回呼ぶとcompany.createがダブルっぽいので、失敗した時のrenderのためにsuper入れる。
+      # ちなみにrender :newは機能しない
+      return super unless user.update_without_current_password(permitted_params[:user])
+
+      if user.approval_status.approved? && approval_status_was != user.approval_status
+        Rails.logger.info "User changed approval status: #{user.id} - #{user.username}"
       end
+
+      redirect_to admin_user_path(user.id)
     end
   end
 end
