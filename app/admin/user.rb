@@ -112,6 +112,8 @@ ActiveAdmin.register User do
       # partner.skip_confirmation!
       user.skip_reconfirmation!
 
+      # HACK: superを毎回呼ぶとcompany.createがダブルっぽいので、失敗した時のrenderのためにsuper入れる。
+      # ちなみにrender :newは機能しない
       return super unless user.update_without_current_password(permitted_params[:user])
 
       if user.approval_status.approved? && approval_status_was != user.approval_status
