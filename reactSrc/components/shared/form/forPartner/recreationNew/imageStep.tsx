@@ -4,6 +4,7 @@ import { Recreation } from '@/types';
 import React, { useRef } from 'react';
 import { UseFormRegister } from 'react-hook-form';
 import { RecreationImage as ImageComponent } from './recreationImage';
+import { RecreationMaterialImage } from './recreationMaterialImage';
 import { RecreationFormValues } from './recreationNewForm';
 
 type Props = {
@@ -114,12 +115,14 @@ export const ImageStep: React.FC<Props> = (props) => {
         name='recreationProfile'
       />
 
-      <div className='row'>
+      <div className='row px-4'>
         {materialImages.map((image, i) => (
-          <ImageComponent
+          <RecreationMaterialImage
             key={i}
             image={image}
             handleDelete={useFile.handleFileDelete}
+            handleDownload={useFile.handleFileDownload}
+            handleChangeTitle={useFile.handleChangeTitle}
           />
         ))}
       </div>

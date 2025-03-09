@@ -14,13 +14,9 @@
 #  updated_at    :datetime         not null
 #  recreation_id :bigint           not null
 #
-# Indexes
-#
-#  index_recreation_images_on_recreation_id  (recreation_id)
-#
 # Foreign Keys
 #
-#  fk_rails_...  (recreation_id => recreations.id)
+#  recreation_images_recreation_id_fkey  (recreation_id => recreations.id)
 #
 class RecreationImage < ApplicationRecord
   extend Enumerize
@@ -29,6 +25,7 @@ class RecreationImage < ApplicationRecord
 
   validates :image, presence: true
   enumerize :kind, in: { slider: 0, flyer: 1, material: 2 }, default: 0
+  enumerize :document_kind, in: { TH: 0, FL: 1, AF: 2 }, default: 0
 
   scope :sliders, -> { where(kind: :slider) }
   scope :flyers, -> { where(kind: :flyer) }

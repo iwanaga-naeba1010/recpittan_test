@@ -14,6 +14,8 @@ import { useRecreations, useRecreationImage } from '../../hooks';
 export type UseFile = {
   handleFileAdd: (files: FileList | null, kind: string) => void;
   handleFileDelete: (id: number) => Promise<void>;
+  handleFileDownload: (imageUrl: string, filename: string) => Promise<void>;
+  handleChangeTitle: (id: number, filename: string) => Promise<void>;
   isLoading: boolean;
 };
 
@@ -25,7 +27,12 @@ const RecreationEdit: React.FC = () => {
   const id = window.location.pathname.split('/')[3];
   const formKind = getQueryStringValueByKey('formKind') as FormKind;
   const { fetchRecreation, updateRecreation } = useRecreations();
-  const { createRecreationImage, deleteRecreationImage } = useRecreationImage();
+  const {
+    createRecreationImage,
+    deleteRecreationImage,
+    changeTitleRecreationImage,
+    downloadRecreationImage,
+  } = useRecreationImage();
 
   useEffect(() => {
     (async () => {
@@ -78,6 +85,42 @@ const RecreationEdit: React.FC = () => {
         ...recreation,
         images: recreation.images.filter((recreation) => recreation.id !== id),
       });
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  const handleFileDownload = async (
+    imageUrl: string,
+    filename: string
+  ): Promise<void> => {
+    const response = await downloadRecreationImage(imageUrl);
+
+    if (response.status === 200) {
+      const blob = new Blob([response.data]);
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = filename;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      window.URL.revokeObjectURL(url);
+    }
+  };
+
+  const handleChangeTitle = async (
+    id: number,
+    title: string
+  ): Promise<void> => {
+    const requestBody: { [key: string]: Record<string, unknown> } = {
+      recreationImage: {
+        title,
+      },
+    };
+
+    try {
+      await changeTitleRecreationImage(recreation.id, id, requestBody);
     } catch (e) {
       console.log(e);
     }
@@ -153,7 +196,13 @@ const RecreationEdit: React.FC = () => {
         recreation={recreation}
         setRecreation={setRecreation}
         onSubmit={onSubmit}
-        useFile={{ handleFileAdd, handleFileDelete, isLoading: isFileLoading }}
+        useFile={{
+          handleFileAdd,
+          handleFileDelete,
+          handleFileDownload,
+          handleChangeTitle,
+          isLoading: isFileLoading,
+        }}
       />
     </div>
   );

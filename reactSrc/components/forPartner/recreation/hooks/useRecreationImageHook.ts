@@ -10,6 +10,11 @@ type UseRecreationImagesHook = {
     recreationId: number,
     recreationImageId: number
   ) => Promise<void>;
+  changeTitleRecreationImage: (
+    recreationId: number,
+    recreationImageId: number,
+    requestBody: { [key: string]: Record<string, unknown> }
+  ) => Promise<void>;
 };
 
 export const useRecreationImage = (): UseRecreationImagesHook => {
@@ -34,8 +39,31 @@ export const useRecreationImage = (): UseRecreationImagesHook => {
     );
   };
 
+  const changeTitleRecreationImage = async (
+    recreationId: number,
+    recreationImageId: number,
+    requestBody: { [key: string]: Record<string, unknown> }
+  ): Promise<void> => {
+    await Api.patch(
+      `recreations/${recreationId}/recreation_images/${recreationImageId}/change_title`,
+      'partner',
+      requestBody
+    );
+  };
+
+  const downloadRecreationImage = async (imageUrl: string): Promise<void> => {
+    return await Api.get<Blob>(
+      `recreation_images/download`,
+      'partner',
+      { url: imageUrl },
+      'blob'
+    );
+  };
+
   return {
     createRecreationImage,
     deleteRecreationImage,
+    downloadRecreationImage,
+    changeTitleRecreationImage,
   };
 };
