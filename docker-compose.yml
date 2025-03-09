@@ -1,4 +1,5 @@
-version: "3.8"
+#version: "3.8"
+# version is ingore for latest docker-compose
 
 services:
   db:
@@ -49,6 +50,14 @@ services:
     user: root
     working_dir: /app
 
+  cron_job:
+    <<: *web
+    command: /bin/sh -c "bundle exec whenever --update-crontab && cron -f"
+    expose: []
+    ports: []
+    depends_on:
+      - web
+
   webpacker:
     <<: *web
     command: "bin/webpack-dev-server"
@@ -61,15 +70,27 @@ services:
     depends_on:
       - web
 
-  # worker:
-  #   <<: *web
-  #   command: ["bin/rails", "jobs:work"]
-  #   expose: []
-  #   ports: []
+  worker:
+    <<: *web
+    command: ["bin/rails", "jobs:work"]
+    expose: []
+    ports: []
+
   chrome:
     image: seleniarm/standalone-chromium
     ports:
       - '4444:4444'
+
+  mailhog:
+    image: mailhog/mailhog:latest
+    ports:
+      - "8025:8025"  # mail web page port
+      - "1025:1025"
+    environment:
+      MH_STORAGE: maildir
+      MH_MAILDIR_PATH: /tmp
+    volumes:
+      - maildir:/tmp
 
 volumes:
   postgres:
@@ -78,3 +99,4 @@ volumes:
   rails_cache:
   packs:
   packs_test:
+  maildir:

@@ -5,24 +5,36 @@ import * as $ from 'jquery';
 import { findAddressByZip } from '../../packs/zip';
 
 $(document).ready(() => {
+  // mark fields for both 交通費等コスト&レク金額form and 正式依頼form
+  const commonFieldsSelector = '.common-field';
+  const hideCommonFields = () => {
+    $(commonFieldsSelector).hide();
+  }
+  const showCommonFields = () => {
+    $(commonFieldsSelector).show();
+  }
+
   // NOTE(okubo): 一応念の為全てのformをdisplay noneに変更する
   const hideAllForm = () => {
     $('.official_input').css('display', 'none');
     $('.recreation_input').css('display', 'none');
     $('.cost_input').css('display', 'none');
     $('.evaluation_input').css('display', 'none');
+    hideCommonFields();
   };
 
   // NOTE(okubo): 正式依頼のformを表示
   $('#officialRequestBtn').on('click', () => {
     hideAllForm();
     $('.official_input').css('display', 'block');
+    showCommonFields();
   });
 
   // NOTE(okubo): 正式依頼のcostのform表示
   $('#costBtn').on('click', () => {
     hideAllForm();
     $('.cost_input').css('display', 'block');
+    showCommonFields();
   });
 
   $('#evaluationBtn').on('click', () => {

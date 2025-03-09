@@ -25,6 +25,7 @@ const RecreationNew: React.FC = () => {
         kind: values.kind,
         flowOfDay: values.flowOfDay,
         capacity: values.capacity || 0,
+        isWithholdingTax: values.isWithholdingTax,
         materialPrice: values.materialPrice,
         extraInformation: values.extraInformation,
         youtubeId: values.youtubeId,

@@ -21,12 +21,16 @@ ActiveAdmin.register_page 'Invoices' do
       current_time = Time.zone.now
       invoices = []
 
+      # ユーザー（顧客）のデータを取得し、請求書データを作成
       User.customers.includes(:company, :orders).find_each do |customer|
+        # 注文データのうち、完了しているものを取得
         orders = customer.orders.to_a.select { |order| order.status.finished? }
         next if orders.blank?
 
+        # 請求先情報を取得
         invoice_information = customer.invoice_information
 
+        # 請求書データを作成
         invoice = {
           invoice_at: current_time.strftime('%Y/%m/%d'),
           title: "#{current_time.month}月分レクリエーション費用",
@@ -39,6 +43,7 @@ ActiveAdmin.register_page 'Invoices' do
           memo: '恐れ入りますが、振込手数料はご負担いただきますようお願い申し上げます。'
         }
 
+        # 注文ごとに請求書のアイテムを追加
         orders.each do |order|
           invoice[:partner_name] = order.recreation.user_username
 
@@ -98,7 +103,7 @@ ActiveAdmin.register_page 'Invoices' do
         invoices << invoice
       end
 
-      # NOTE(okubo): csv用のarrayに変換。あえて分けているのは責務の分割のため
+      # 請求書データを CSV 用のフォーマットに変換
       invoices_for_csv = invoices.map do |invoice|
         [
           invoice[:invoice_at],
@@ -112,22 +117,24 @@ ActiveAdmin.register_page 'Invoices' do
           invoice[:items].map do |item|
             [item[:name], item[:amount], item[:unit], item[:price], 10, ''].compact.flatten
           end
-        ].flatten
+        ].flatten # 一次元配列に変換（CSV の行として扱う）
       end
 
-      # NOTE(okubo): まとめて書くためにflattenで処理
+      # CSV のヘッダー定義
       headers = [
         %w[請求日 請求番号 件名 取引先管理コード 施設名 パートナー名 消費税設定 お支払い期限],
         (1..40).map { |i| ["品目#{i}", "数量#{i}", "単位#{i}", "単価#{i}", "消費税率#{i}", "非課税フラグ#{i}"] }.flatten
       ].flatten
 
+      # CSV データを生成
       csv_data = CSV.generate do |csv|
-        csv << headers
+        csv << headers # ヘッダー行を追加
         invoices_for_csv.each do |invoice|
-          csv << invoice
+          csv << invoice # データ行を追加
         end
       end
 
+      # CSV をダウンロード用に送信
       send_data csv_data, filename: '請求データ.csv'
     end
   end

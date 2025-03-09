@@ -41,11 +41,15 @@ ja:
       recreation_recreation_plan: 登録レクリエーション
       bank_account: 銀行口座
       recreation_plan_estimate: プラン見積書
+      division: 区分マスタ
+      system_parameter: システムパラメータ
+      order_desire_date: レク開催候補日
     attributes:
       email:
         title: タイトル
         body: 内容
       user:
+        id: id
         role: 権限
         email: メールアドレス
         image: 画像
@@ -54,6 +58,11 @@ ja:
         title: 役職
         memo: メモ
         approval_status: 運営認証
+        is_mfa_enabled: MFA有効フラグ
+        mfa_authenticated_at: MFA認証日時
+        is_partner: パートナーフラグ
+        is_facility: 施設フラグ
+        manage_company_code: 運営管理会社区分
       company:
         name: 法人名
         facility_name: 事業所名
@@ -74,11 +83,24 @@ ja:
         genre: 事業所種別
         user_company_id: ユーザー一覧
         memo: メモ
+        trading_target_code: 取引先コード
+        pref_code: 都道府県コード
+        manage_company_code: 運営管理会社区分
+        common_trading_target_code: 共通取引先コード
       partner:
         name: 名前
         title: 肩書き
         description: 詳細
         image: 画像
+      partner_info:
+        user_id: パートナーID
+        company_name: 会社名または団体名
+        postal_code: 郵便番号
+        prefecture: 住所（都道府県）
+        city: 住所（市区町村）
+        address1: 住所（以下）
+        address2: 住所（建物名・部屋）
+        phone_number: 電話番号
       profile:
         user: パートナー
         name: パートナー名
@@ -86,6 +108,8 @@ ja:
         position: ポジション
         description: プロフィール説明
         image: パートナー画像
+        recreation_profile: レクに登録されたプロフィール
+        recreation: レク
       recreation:
         kind: 種類
         partner: パートナー
@@ -113,9 +137,12 @@ ja:
         is_public_price: 料金を公開
         additional_facility_fee: 施設追加費用
         memo: メモ
+        is_withholding_tax: 要源泉徴収
       recreation_image:
         image: ファイル
         kind: 種別
+        title: タイトル
+        document_kind: 資料種類区分
       recreation_prefecture:
         name: 都道府県
       recreation_profile:
@@ -143,9 +170,48 @@ ja:
         additional_facility_fee: 施設追加費用
         transportation_expenses: 交通費
         expenses: 諸経費
-        contract_number: 契約番号
+        contract_number: 指定施設プラン管理コード
         memo: メモ
         coupon_code: クーポンコード
+        is_managercontrol: 運営管理フラグ
+        order_create_source_code: 案件作成元区分
+        manage_company_code: 案件管理会社区分
+        business_integration_flag: 業務統合フラグ
+        is_withholding_tax: 源泉徴収フラグ
+        status_updated_at: ステータス更新日
+        facility_request_approved_at: 正式依頼承認日（ダウンロード日）
+        approved_total_partner_payment: 正式依頼承認時のパートナー謝礼全体（税込）
+        final_report_approved_at: 施設の終了報告の承認日
+        tax_rate: 消費税率
+        tax_amount: 消費税
+        amount_with_tax: パートナー謝礼（税込）
+        total_material_amount: 材料費合計
+        total_additional_facility_fee: 追加施設費合計
+        total_partner_payment_with_tax: パートナー謝礼全体（税込）
+        partner_fee_rate: パートナー手数料率
+        additional_facility_fee_commission: 追加施設手数料
+        total_additional_facility_fee_commission: 追加施設手数料計
+        partner_invoice_registration_flag: パートナーインボイス登録フラグ
+        non_invoice_partner_fee_rate: インボイス非登録パートナー手数率
+        non_invoice_partner_fee: インボイス非登録パートナー手数料
+        zoom_rental_fee: zoomレンタル料
+        recreation_kind: レクマスタ、レク種類
+        is_zoom_rental: zoomレンタルフラグ
+        zoom_rental_actual_fee: zoomレンタル使用料金
+        partner_service_fee: パートナーサービス利用料
+        partner_deduction_subtotal: パートナー控除小計
+        facility_fee_rate: 施設手数料率
+        facility_fee_base_amount: 施設手数料計算金額
+        facility_fee: 施設手数料（税込）
+        facility_service_fee: 施設サービス利用料
+        facility_fee_subtotal: 施設手数料小計
+        withholding_tax_rate: 源泉徴収税率
+        withholding_tax_amount: 源泉徴収税額
+        specific_facility_plan_management_code: 特定施設プラン管理コード
+        partner_payment_amount: パートナー支払額
+        gross_profit_incl_tax: 粗利（税込）
+        gross_profit_margin: 粗利率
+        facility_billing_amount: 施設請求額
       zoom:
         price: 金額
         url: URL
@@ -254,6 +320,15 @@ ja:
         bank_name: 金融機関名
         branch_code: 支点コード
         branch_name: 支店名
+        is_corporate: 法人フラグ
+        corporate_type_code: 法人形態
+        is_foreignresident: 国外在住フラグ
+        investments: 出資金
+        is_invoice: インボイス登録フラグ
+        invoice_number: インボイス番号
+        corporate_number: 法人番号
+        my_number: マイナンバー
+        is_subcontract: 下請法対象フラグ
       recreation_plan_estimate:
         estimate_number: 見積書番号
         number_of_people: 参加人数
@@ -261,6 +336,28 @@ ja:
         transportation_expenses: 交通費
         recreation_plan: プラン
         user: ユーザー
+      division:
+        classname: 区分クラス
+        code: 区分コード
+        valuetext: 区分名
+        valueint: 区分値
+        valuedate: 日付値
+        disporder: 表示順
+        memo: メモ
+        key: u18n_key
+        is_i18n: i18nフラグ
+        i18n_class: i18nクラス
+      system_parameter:
+        param_code: パラメーターコード
+        param_name: パラメータ名
+        value_int: パラメータ値
+        value_text: パラメータ値
+        applied_date: 適用日
+      order_desire_date:
+        desire_no: 希望番号
+        desire_date: 開催年月日
+        dtime_from: 開催時間開始
+        time_to: 開催時間終了
 
     errors:
       messages:

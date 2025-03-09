@@ -23,6 +23,7 @@ module Resources
         string :category
         string :status
         string :kind
+        boolean :is_withholding_tax
       end
 
       object :current_user, class: User

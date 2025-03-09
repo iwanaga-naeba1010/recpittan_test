@@ -1,0 +1,26 @@
+version: '8.0'
+
+
+environment:
+  COMPOSE_EXT: development
+  STAGE: "staging"
+  
+
+compose:
+  files:
+    - docker/docker-compose.yml
+  project_name: recpittan
+
+interaction:
+  clean_cache:
+    description: Delete cache files on the host machine
+    command: rm -rf $(pwd)/tmp/cache/*
+    
+provision:
+  - dip compose down --volumes
+  - dip clean_cache
+  - docker-compose build
+  - dip compose up -d db web mailhog
+#  - dip bash -c ./bin/setup
+  
+  

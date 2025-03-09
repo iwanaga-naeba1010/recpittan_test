@@ -1,0 +1,193 @@
+/******************************************************************
+
+StyleSheet: ベーススタイル
+
+******************************************************************/
+
+@use "../global" as *;
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: "Noto Sans JP", "Hiragino Kaku Gothic Pro", "Meiryo", "Arial", sans-serif;
+  letter-spacing: 0.05em;
+  font-weight: 500;
+}
+
+a {
+  transition: opacity 0.5s;
+
+  &:hover {
+    opacity: 0.7;
+  }
+}
+
+img {
+  max-width: 100%;
+  vertical-align: bottom;
+}
+
+
+#container {
+  min-width: 330px;
+}
+
+#main-container {
+  max-width: 1200px;
+  margin-inline: auto;
+}
+
+.wrap {
+  margin: 0 20px;
+
+  @include mq(md) {
+    width: 95%;
+    margin: 0 auto;
+  }
+}
+
+.text-right {
+  text-align: right;
+}
+
+
+/********************************
+ ディスプレイ用
+*********************************/
+.d-none {
+  display: none;
+}
+
+.md-flex {
+  display: none !important;
+
+  @include mq(md) {
+    display: flex !important;
+  }
+}
+
+.md-none {
+  @include mq(md) {
+    display: none !important;
+  }
+}
+
+.md-block {
+  display: none !important;
+
+  @include mq(md) {
+    display: block !important;
+  }
+}
+
+.md-inline {
+  display: none !important;
+
+  @include mq(md) {
+    display: inline !important;
+  }
+}
+
+.sm-none {
+  @include mq(sm) {
+    display: none !important;
+  }
+}
+
+.sm-block {
+  display: none !important;
+
+  @include mq(sm) {
+    display: block !important;
+  }
+}
+
+.sm-flex {
+  display: none !important;
+
+  @include mq(sm) {
+    display: flex !important;
+  }
+}
+
+
+/********************************
+ 共通クラス
+*********************************/
+.flex-row {
+  display: flex;
+  align-items: center;
+}
+
+.flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.absolute {
+  position: absolute;
+}
+
+.relative {
+  position: relative;
+}
+
+/* font-weight */
+.fw-bold {
+  font-weight: 700;
+}
+
+.fw-medium {
+  font-weight: 500;
+}
+
+.fw-light {
+  font-weight: 300;
+}
+
+.hidden {
+  visibility: hidden;
+}
+
+
+/********************************
+ 微調整
+*********************************/
+.ls-100 {
+  letter-spacing: -0.5px;
+
+  @include mq(sm) {
+    letter-spacing: normal;
+  }
+}
+
+.ls-200 {
+  letter-spacing: -1px;
+
+  @include mq(sm) {
+    letter-spacing: normal;
+  }
+}
+
+.ls-300 {
+  letter-spacing: -1.5px;
+
+  @include mq(sm) {
+    letter-spacing: normal;
+  }
+}
+
+.ls-400 {
+  @include mq(lg) {
+    letter-spacing: -1px;
+  }
+}

@@ -1,3 +1,4 @@
+@import "activeadmin_reorderable/app/assets/stylesheets/activeadmin_reorderable.scss";
 @import 'activeadmin_addons/src/stylesheets/all';
 // Sass variable overrides must be declared before loading up Active Admin's styles.
 //
@@ -17,6 +18,22 @@
 // For example, to change the default status-tag color:
 //
 //   .status_tag { background: #6090DB; }
+
+@import 'admin/partners/partner-details';
+
+// reactdatepicker
+.react-datepicker-input { width: 100%!important; }
+.react-datepicker-time__input { min-width: 130px; }
+.react-datepicker-wrapper { min-width: 328px; }
+
+.label.required:after { content: "*" }
+
+// Admin orders
+.status_tag {
+  &.pink {
+    background: #EE73AB;
+  }
+}
 
 // OrderのChatUI
 .chat {

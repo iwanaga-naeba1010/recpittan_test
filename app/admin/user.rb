@@ -4,14 +4,14 @@
 ActiveAdmin.register User do
   menu priority: 3
   permit_params(
-    %i[username username_kana role email password password_confirmation memo approval_status]
+    %i[username username_kana role email password password_confirmation memo approval_status manage_company_code]
   )
   actions :all
 
   filter :id
   filter :username
   filter :email
-  filter :role
+  filter :role, as: :select, collection: User.role.values.map { |v| [v.text, v.value] }
   filter :company, label: 'Company', as: :select, collection: -> {
                                                                 Company.pluck(:name, :id).map do |company|
                                                                   ["#{company[0]} (ID: #{company[1]})", company[1]]
@@ -23,6 +23,7 @@ ActiveAdmin.register User do
     column :username
     column :username_kana
     column :email
+    column(:manage_company_code, &:manage_company_code_text)
     column(:role, &:role_text)
     column(:approval_status, &:approval_status_text)
     column :memo
@@ -37,6 +38,7 @@ ActiveAdmin.register User do
           row :username
           row :username_kana
           row :email
+          row(:manage_company_code, &:manage_company_code_text)
           row(:role, &:role_text)
           row(:approval_status, &:approval_status_text) if user.role == 'partner'
           row :company if user.role == 'customer'
@@ -59,8 +61,9 @@ ActiveAdmin.register User do
       f.input :username
       f.input :username_kana
       f.input :email
-      f.input :password if f.object.new_record?
-      f.input :password_confirmation if f.object.new_record?
+      f.input :manage_company_code, as: :select, collection: User.manage_company_code.values.map { |i| [i.text, i] }
+      f.input :password, required: f.object.new_record?
+      f.input :password_confirmation
       f.inputs do
         f.input :role, as: :select, collection: User.role.values.map { |i| [i.text, i] }
       end
@@ -100,6 +103,8 @@ ActiveAdmin.register User do
 
     def update
       user = User.find(params[:id].to_i)
+      approval_status_was = user.approval_status
+
       if permitted_params[:user][:password].blank?
         %w[password password_confirmation].each { |p| permitted_params[:user].delete(p) }
       end
@@ -107,13 +112,15 @@ ActiveAdmin.register User do
       # partner.skip_confirmation!
       user.skip_reconfirmation!
 
-      if user.update_without_password(permitted_params[:user])
-        redirect_to admin_user_path(user.id)
-      else
-        # HACK: superを毎回呼ぶとcompany.createがダブルっぽいので、失敗した時のrenderのためにsuper入れる。
-        # ちなみにrender :newは機能しない
-        super
+      # HACK: superを毎回呼ぶとcompany.createがダブルっぽいので、失敗した時のrenderのためにsuper入れる。
+      # ちなみにrender :newは機能しない
+      return super unless user.update_without_current_password(permitted_params[:user])
+
+      if user.approval_status.approved? && approval_status_was != user.approval_status
+        Rails.logger.info "User changed approval status: #{user.id} - #{user.username}"
       end
+
+      redirect_to admin_user_path(user.id)
     end
   end
 end

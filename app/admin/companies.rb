@@ -8,12 +8,14 @@ ActiveAdmin.register Company do
     :name, :facility_name, :facility_name_kana, :person_in_charge_name, :person_in_charge_name_kana,
     :zip, :prefecture, :city, :street, :building, :tel,
     :genre, :url, :feature, :capacity, :nursing_care_level, :request, :user_company_id, :memo,
+    :manage_company_code,
     tag_ids: []
   )
 
   actions :all, except: [:destroy]
 
   filter :id
+  filter :manage_company_code
   filter :name
   filter :facility_name
   filter :person_in_charge_name
@@ -48,6 +50,7 @@ ActiveAdmin.register Company do
 
   index do
     id_column
+    column(:manage_company_code, &:manage_company_code_text)
     column :name
     column :facility_name
     column :facility_name_kana
@@ -61,6 +64,7 @@ ActiveAdmin.register Company do
       tab '詳細' do
         attributes_table do
           row :id
+          row(:manage_company_code, &:manage_company_code_text)
           row :name
           row :facility_name
           row :facility_name_kana
@@ -100,6 +104,7 @@ ActiveAdmin.register Company do
     f.semantic_errors
 
     f.inputs do
+      f.input :manage_company_code, as: :select, collection: Company.manage_company_code.values.map { |i| [i.text, i] }
       f.input :name
       f.input :facility_name
       f.input :facility_name_kana

@@ -5,6 +5,13 @@ ActiveAdmin.register Profile do
 
   actions :all
 
+  filter :user_id, as: :select, collection: -> { User.where(role: :partner).pluck(:username, :id) }, label: 'パートナー'
+  filter :recreation, as: :select, collection: -> { Recreation.pluck(:title, :id) }, label: 'レク'
+  filter :name
+  filter :description
+  filter :position
+  filter :title
+
   index do
     id_column
     column :user

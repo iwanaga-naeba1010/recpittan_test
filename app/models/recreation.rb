@@ -17,6 +17,7 @@
 #  flow_of_day             :text
 #  flyer_color             :string
 #  is_public_price         :boolean          default(TRUE)
+#  is_withholding_tax      :boolean          default(FALSE)
 #  kind                    :integer          default("visit"), not null
 #  material_amount         :integer
 #  material_price          :integer
@@ -32,9 +33,13 @@
 #  user_id                 :bigint           not null
 #  youtube_id              :string
 #
+# Indexes
+#
+#  index_recreations_on_user_id  (user_id)
+#
 # Foreign Keys
 #
-#  recreations_user_id_fkey  (user_id => users.id)
+#  fk_rails_...  (user_id => users.id)
 #
 class Recreation < ApplicationRecord
   include Ransackable

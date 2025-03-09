@@ -7,6 +7,7 @@
 #  id             :bigint           not null, primary key
 #  adjustment_fee :integer
 #  code           :string           not null
+#  disporder      :integer          default(0)
 #  release_status :integer          default("draft"), not null
 #  title          :string           not null
 #  created_at     :datetime         not null
@@ -21,5 +22,5 @@
 require 'rails_helper'
 
 RSpec.describe RecreationPlan, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  it { is_expected.to have_db_column(:disporder).of_type(:integer).with_options(default: 0) }
 end

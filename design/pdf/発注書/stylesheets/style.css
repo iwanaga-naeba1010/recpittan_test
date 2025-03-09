@@ -1,0 +1,364 @@
+@charset "UTF-8";
+.background-set {
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+/******************************************************************
+
+StyleSheet: ベーススタイル
+
+******************************************************************/
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: "Noto Sans JP", "Hiragino Kaku Gothic Pro", "Meiryo", "Arial", sans-serif;
+  letter-spacing: 0.05em;
+  font-weight: 500;
+}
+
+a {
+  transition: opacity 0.5s;
+}
+a:hover {
+  opacity: 0.7;
+}
+
+img {
+  max-width: 100%;
+  vertical-align: bottom;
+}
+
+#container {
+  min-width: 330px;
+}
+
+#main-container {
+  max-width: 1200px;
+  margin-inline: auto;
+}
+
+.wrap {
+  margin: 0 20px;
+}
+@media screen and (min-width: 768px) {
+  .wrap {
+    width: 95%;
+    margin: 0 auto;
+  }
+}
+
+.text-right {
+  text-align: right;
+}
+
+/********************************
+ ディスプレイ用
+*********************************/
+.d-none {
+  display: none;
+}
+
+.md-flex {
+  display: none !important;
+}
+@media screen and (min-width: 768px) {
+  .md-flex {
+    display: flex !important;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .md-none {
+    display: none !important;
+  }
+}
+
+.md-block {
+  display: none !important;
+}
+@media screen and (min-width: 768px) {
+  .md-block {
+    display: block !important;
+  }
+}
+
+.md-inline {
+  display: none !important;
+}
+@media screen and (min-width: 768px) {
+  .md-inline {
+    display: inline !important;
+  }
+}
+
+@media screen and (min-width: 480px) {
+  .sm-none {
+    display: none !important;
+  }
+}
+
+.sm-block {
+  display: none !important;
+}
+@media screen and (min-width: 480px) {
+  .sm-block {
+    display: block !important;
+  }
+}
+
+.sm-flex {
+  display: none !important;
+}
+@media screen and (min-width: 480px) {
+  .sm-flex {
+    display: flex !important;
+  }
+}
+
+/********************************
+ 共通クラス
+*********************************/
+.flex-row {
+  display: flex;
+  align-items: center;
+}
+
+.flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.absolute {
+  position: absolute;
+}
+
+.relative {
+  position: relative;
+}
+
+/* font-weight */
+.fw-bold {
+  font-weight: 700;
+}
+
+.fw-medium {
+  font-weight: 500;
+}
+
+.fw-light {
+  font-weight: 300;
+}
+
+.hidden {
+  visibility: hidden;
+}
+
+/********************************
+ 微調整
+*********************************/
+.ls-100 {
+  letter-spacing: -0.5px;
+}
+@media screen and (min-width: 480px) {
+  .ls-100 {
+    letter-spacing: normal;
+  }
+}
+
+.ls-200 {
+  letter-spacing: -1px;
+}
+@media screen and (min-width: 480px) {
+  .ls-200 {
+    letter-spacing: normal;
+  }
+}
+
+.ls-300 {
+  letter-spacing: -1.5px;
+}
+@media screen and (min-width: 480px) {
+  .ls-300 {
+    letter-spacing: normal;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .ls-400 {
+    letter-spacing: -1px;
+  }
+}
+
+p {
+  margin-bottom: 10px;
+}
+
+th,
+td {
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-bottom: 2px solid #ccc;
+}
+
+#orderForm .content h1 {
+  font-size: 25px;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 30px;
+}
+#orderForm .content table {
+  width: 100%;
+}
+#orderForm .content table:nth-child(1) {
+  border-left: 2px solid #ccc;
+}
+#orderForm .content table:nth-child(1) thead th:nth-child(1) {
+  width: 10%;
+}
+#orderForm .content table:nth-child(1) thead th:nth-child(2) {
+  width: 45%;
+}
+#orderForm .content table:nth-child(1) thead th:nth-child(3) {
+  width: 45%;
+}
+#orderForm .content table:nth-child(1) tbody:nth-child(1 of tbody) tr:nth-child(1) {
+  width: 10%;
+}
+#orderForm .content table:nth-child(1) tbody:nth-child(1 of tbody) tr:nth-child(2) {
+  width: 10%;
+}
+#orderForm .content table:nth-child(1) tbody:nth-child(1 of tbody) tr:nth-child(3) {
+  width: 35%;
+}
+#orderForm .content table:nth-child(1) tbody:nth-child(1 of tbody) tr:nth-child(4) {
+  width: 45%;
+}
+#orderForm .content table:nth-child(1) tfoot td:nth-child(1) {
+  width: 10%;
+}
+#orderForm .content table:nth-child(1) tfoot td:nth-child(2) {
+  width: 10%;
+}
+#orderForm .content table:nth-child(1) tfoot td:nth-child(3) {
+  width: 80%;
+}
+#orderForm .content table:nth-child(2 of table) {
+  border: 2px solid #ccc;
+  border-bottom: none;
+}
+#orderForm .content table:nth-child(2 of table) tr:nth-child(1) {
+  width: 10%;
+}
+#orderForm .content table:nth-child(2 of table) tr:nth-child(2) {
+  width: 45%;
+}
+#orderForm .content table:nth-child(2 of table) tr:nth-child(3) {
+  width: 45%;
+}
+#orderForm .content tbody {
+  width: 100%;
+}
+#orderForm .content__inner {
+  padding: 10% 0;
+}
+@media screen and (min-width: 768px) {
+  #orderForm .content__inner {
+    padding: 100px 0;
+  }
+}
+#orderForm .content__wrap {
+  overflow-x: scroll;
+}
+@media screen and (min-width: 1024px) {
+  #orderForm .content__wrap {
+    overflow: auto;
+  }
+}
+#orderForm .content__wrap-inner {
+  width: 250%;
+}
+@media screen and (min-width: 768px) {
+  #orderForm .content__wrap-inner {
+    width: 150%;
+  }
+}
+@media screen and (min-width: 1024px) {
+  #orderForm .content__wrap-inner {
+    width: 100%;
+  }
+}
+#orderForm .content__ttl {
+  line-height: 1.7;
+  margin-bottom: 30px;
+}
+#orderForm .content__box:nth-child(1 of .content__box) h2 span:nth-child(1) {
+  width: 80%;
+  text-align: center;
+  background-color: #FEF2C1;
+}
+#orderForm .content__box:nth-child(1 of .content__box) p {
+  margin-inline: auto;
+}
+#orderForm .content__box:nth-child(1 of .content__box) p span:nth-child(1) {
+  width: 30%;
+}
+#orderForm .content__box:nth-child(1 of .content__box) p span:nth-child(2) {
+  border: 1px solid #000000;
+  border-top: none;
+  width: 50%;
+  background-color: #FEF2C1;
+}
+#orderForm .content__box:nth-child(1 of .content__box) ul {
+  justify-content: space-between;
+}
+#orderForm .content__box:nth-child(1 of .content__box) li:nth-child(1) {
+  width: 20%;
+  text-align: right;
+}
+#orderForm .content__box:nth-child(1 of .content__box) li:nth-child(2) {
+  width: 78%;
+  border-bottom: 2px rgba(128, 128, 128, 0.643) solid;
+}
+#orderForm .content__box:nth-child(2 of .content__box) p span:nth-child(1) {
+  width: 30%;
+}
+#orderForm .content__box:nth-child(2 of .content__box) p span:nth-child(2) {
+  border-left: 1px solid #000000;
+  border-right: 1px solid #000000;
+  width: 70%;
+  background-color: #FEF2C1;
+}
+#orderForm .content__table {
+  overflow-x: scroll;
+}
+@media screen and (min-width: 1024px) {
+  #orderForm .content__table {
+    overflow-x: auto;
+  }
+}
+#orderForm .content__table-inner {
+  width: 250%;
+}
+@media screen and (min-width: 768px) {
+  #orderForm .content__table-inner {
+    width: 150%;
+  }
+}
+@media screen and (min-width: 1024px) {
+  #orderForm .content__table-inner {
+    width: 100%;
+  }
+}

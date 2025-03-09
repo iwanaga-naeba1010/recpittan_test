@@ -104,3 +104,16 @@ gem 'recaptcha'
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
+
+# pdf
+gem 'wicked_pdf'
+gem 'wkhtmltopdf-binary'
+
+# logs
+gem 'aws-sdk-cloudwatchlogs'
+
+gem 'draper'
+
+gem 'whenever', require: false
+gem 'delayed_job_active_record'
+gem 'activeadmin_reorderable', '~> 0.3.4'

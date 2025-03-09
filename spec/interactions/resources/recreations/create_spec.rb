@@ -24,7 +24,8 @@ RSpec.describe Resources::Recreations::Create, type: :interaction do
         additional_facility_fee: 0,
         category: 'event',
         status: 'in_progress',
-        kind: 'online'
+        kind: 'online',
+        is_withholding_tax: false
       )
     end
 

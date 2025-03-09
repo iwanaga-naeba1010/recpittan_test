@@ -51,6 +51,10 @@ ja:
       approval_status:
         unapproved: 未承認
         approved: 承認
+      manage_company_code:
+        EP: エブリプラス
+        WB: ウェルビーイング
+        RP: レクぴったん
     company:
       genre:
         residential_fee_based_nursing_home: 住宅型有料老人ホーム
@@ -62,6 +66,10 @@ ja:
         rehabilitation_for_the_aged: 老健
         short_stay: ショートステイ
         other: その他
+      manage_company_code:
+        EP: エブリプラス
+        WB: ウェルビーイング
+        RP: レクぴったん
     tag:
       kind:
         category: カテゴリー
@@ -87,6 +95,13 @@ ja:
         newest: 新着順
         chat_desc: チャット更新順
         event_date: 開催日時順
+      order_create_source_code:
+        spot: 単発施設依頼案件
+        from_plan: プラン案件
+        manager_scheduled: 日程調整案件
+      manage_company_code:
+        EP: エブリプラス
+        WB: ウェルビーイング
     zoom:
       created_by:
         partner: パートナー
@@ -134,3 +149,8 @@ ja:
       account_type:
         checking: 普通預金
         current: 定期預金
+    partner:
+      manage_company_code:
+        EP: エブリプラス
+        WB: ウェルビーイング
+        RP: レクぴったん

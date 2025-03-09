@@ -8,7 +8,11 @@ class FinalCheckMailer < ApplicationMailer
     mail(
       from: 'info@everyplus.jp',
       to: @order.recreation.user.email,
-      subject: @template['title'],
+      subject: format(
+        @template['title'],
+        start_at: @order.start_at&.strftime('%Y.%m.%d %H:%M'),
+        facility_name: @order.user.company.facility_name
+      ),
       template_path: 'common_mailer_template'
     )
   end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_09_01_045311) do
+ActiveRecord::Schema[7.2].define(version: 2025_02_27_064051) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -39,6 +39,15 @@ ActiveRecord::Schema[7.2].define(version: 2024_09_01_045311) do
     t.string "account_holder_name", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "is_corporate", default: false
+    t.string "corporate_type_code"
+    t.boolean "is_foreignresident", default: false
+    t.integer "investments"
+    t.boolean "is_invoice", default: false
+    t.string "invoice_number"
+    t.string "corporate_number"
+    t.string "my_number"
+    t.boolean "is_subcontract", default: false
     t.index ["user_id", "account_number"], name: "index_bank_accounts_on_user_id_and_account_number", unique: true
     t.index ["user_id"], name: "index_bank_accounts_on_user_id"
   end
@@ -93,6 +102,10 @@ ActiveRecord::Schema[7.2].define(version: 2024_09_01_045311) do
     t.text "request"
     t.string "memo"
     t.string "facility_name_kana"
+    t.string "trading_target_code"
+    t.string "pref_code"
+    t.string "manage_company_code"
+    t.string "common_trading_target_code"
   end
 
   create_table "company_memos", force: :cascade do |t|
@@ -110,6 +123,36 @@ ActiveRecord::Schema[7.2].define(version: 2024_09_01_045311) do
     t.datetime "updated_at", null: false
     t.index ["company_id"], name: "index_company_tags_on_company_id"
     t.index ["tag_id"], name: "index_company_tags_on_tag_id"
+  end
+
+  create_table "delayed_jobs", force: :cascade do |t|
+    t.integer "priority", default: 0, null: false
+    t.integer "attempts", default: 0, null: false
+    t.text "handler", null: false
+    t.text "last_error"
+    t.datetime "run_at"
+    t.datetime "locked_at"
+    t.datetime "failed_at"
+    t.string "locked_by"
+    t.string "queue"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.index ["priority", "run_at"], name: "delayed_jobs_priority"
+  end
+
+  create_table "divisions", force: :cascade do |t|
+    t.string "classname"
+    t.string "code"
+    t.string "valuetext"
+    t.integer "valueint"
+    t.datetime "valuedate"
+    t.integer "disporder"
+    t.text "memo"
+    t.string "key"
+    t.boolean "i18n_flag", default: false
+    t.string "i18n_class"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "evaluation_replies", force: :cascade do |t|
@@ -162,6 +205,18 @@ ActiveRecord::Schema[7.2].define(version: 2024_09_01_045311) do
     t.index ["user_id"], name: "index_invoice_informations_on_user_id"
   end
 
+  create_table "m_numberings", force: :cascade do |t|
+    t.string "numbering_name", null: false
+    t.string "numbering_unit", null: false
+    t.text "numbering_datetime"
+    t.string "code_name", null: false
+    t.string "code", null: false
+    t.integer "numbering_value", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["numbering_name", "numbering_unit", "numbering_datetime", "code"], name: "idx_on_numbering_name_numbering_unit_numbering_date_5c271ae9b2", unique: true
+  end
+
   create_table "online_recreation_channel_download_images", force: :cascade do |t|
     t.text "image", null: false
     t.integer "kind", null: false
@@ -210,6 +265,17 @@ ActiveRecord::Schema[7.2].define(version: 2024_09_01_045311) do
     t.index ["order_id"], name: "index_order_dates_on_order_id"
   end
 
+  create_table "order_desire_dates", force: :cascade do |t|
+    t.bigint "order_id", null: false
+    t.integer "desire_no"
+    t.date "desire_date"
+    t.time "time_from"
+    t.time "time_to"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["order_id"], name: "index_order_desire_dates_on_order_id"
+  end
+
   create_table "order_memos", force: :cascade do |t|
     t.bigint "order_id", null: false
     t.text "body"
@@ -247,6 +313,45 @@ ActiveRecord::Schema[7.2].define(version: 2024_09_01_045311) do
     t.string "memo"
     t.string "coupon_code"
     t.boolean "is_open", default: true, null: false
+    t.boolean "is_managercontrol", default: false, null: false, comment: "運営管理フラグ"
+    t.string "order_create_source_code", comment: "案件作成元区分"
+    t.string "manage_company_code", comment: "案件管理会社区分"
+    t.boolean "business_integration_flag", default: true, null: false, comment: "業務統合フラグ"
+    t.boolean "is_withholding_tax", default: false, null: false, comment: "源泉徴収フラグ"
+    t.datetime "status_updated_at", comment: "ステータス更新日"
+    t.datetime "facility_request_approved_at", comment: "正式依頼承認日（ダウンロード日）"
+    t.integer "approved_total_partner_payment", comment: "正式依頼承認時のパートナー謝礼全体（税込）"
+    t.datetime "final_report_approved_at", comment: "施設の終了報告の承認日"
+    t.decimal "tax_rate", precision: 15, scale: 3, comment: "消費税率"
+    t.integer "tax_amount", comment: "消費税"
+    t.integer "amount_with_tax", comment: "パートナー謝礼（税込）"
+    t.integer "total_material_amount", comment: "材料費合計"
+    t.integer "total_additional_facility_fee", comment: "追加施設費合計"
+    t.integer "total_partner_payment_with_tax", comment: "パートナー謝礼全体（税込）"
+    t.decimal "partner_fee_rate", precision: 15, scale: 3, comment: "パートナー手数料率"
+    t.integer "additional_facility_fee_commission", comment: "追加施設手数料"
+    t.integer "total_additional_facility_fee_commission", comment: "追加施設手数料計"
+    t.boolean "partner_invoice_registration_flag", default: false, null: false, comment: "パートナーインボイス登録フラグ"
+    t.decimal "non_invoice_partner_fee_rate", precision: 15, scale: 3, comment: "インボイス非登録パートナー手数率"
+    t.integer "non_invoice_partner_fee", comment: "インボイス非登録パートナー手数料"
+    t.integer "zoom_rental_fee", comment: "zoomレンタル料"
+    t.integer "recreation_kind", comment: "レクマスタ、レク種類"
+    t.boolean "is_zoom_rental", default: false, null: false, comment: "zoomレンタルフラグ"
+    t.integer "zoom_rental_actual_fee", comment: "zoomレンタル使用料金"
+    t.integer "partner_service_fee", comment: "パートナーサービス利用料"
+    t.integer "partner_deduction_subtotal", comment: "パートナー控除小計"
+    t.decimal "facility_fee_rate", precision: 15, scale: 3, comment: "施設手数料率"
+    t.integer "facility_fee_base_amount", comment: "施設手数料計算金額"
+    t.integer "facility_fee", comment: "施設手数料（税込）"
+    t.integer "facility_service_fee", comment: "施設サービス利用料"
+    t.integer "facility_fee_subtotal", comment: "施設手数料小計"
+    t.decimal "withholding_tax_rate", precision: 15, scale: 3, comment: "源泉徴収税率"
+    t.integer "withholding_tax_amount", comment: "源泉徴収税額"
+    t.string "specific_facility_plan_management_code", comment: "特定施設プラン管理コード"
+    t.integer "partner_payment_amount", comment: "パートナー支払額"
+    t.integer "gross_profit_incl_tax", comment: "粗利（税込）"
+    t.decimal "gross_profit_margin", precision: 15, scale: 3, comment: "粗利率"
+    t.integer "facility_billing_amount", comment: "施設請求額"
     t.index ["recreation_id"], name: "index_orders_on_recreation_id"
     t.index ["user_id"], name: "index_orders_on_user_id"
   end
@@ -262,7 +367,14 @@ ActiveRecord::Schema[7.2].define(version: 2024_09_01_045311) do
     t.string "company_name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "pref_code"
     t.index ["user_id"], name: "index_partner_infos_on_user_id"
+  end
+
+  create_table "pdf_files", force: :cascade do |t|
+    t.string "file"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "profiles", force: :cascade do |t|
@@ -284,6 +396,8 @@ ActiveRecord::Schema[7.2].define(version: 2024_09_01_045311) do
     t.datetime "updated_at", null: false
     t.integer "kind", default: 0
     t.string "filename"
+    t.string "title"
+    t.string "document_kind"
     t.index ["recreation_id"], name: "index_recreation_images_on_recreation_id"
   end
 
@@ -326,6 +440,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_09_01_045311) do
     t.datetime "updated_at", null: false
     t.integer "adjustment_fee"
     t.bigint "company_id"
+    t.integer "disporder", default: 0
     t.index ["code"], name: "index_recreation_plans_on_code", unique: true
     t.index ["company_id"], name: "index_recreation_plans_on_company_id"
   end
@@ -394,6 +509,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_09_01_045311) do
     t.integer "kind", default: 0, null: false
     t.integer "number_of_past_events", default: 0, null: false
     t.string "memo"
+    t.boolean "is_withholding_tax", default: false
     t.index ["user_id"], name: "index_recreations_on_user_id"
   end
 
@@ -408,6 +524,16 @@ ActiveRecord::Schema[7.2].define(version: 2024_09_01_045311) do
     t.datetime "updated_at", null: false
     t.integer "status"
     t.index ["order_id"], name: "index_reports_on_order_id"
+  end
+
+  create_table "system_parameters", force: :cascade do |t|
+    t.string "param_code"
+    t.string "param_name"
+    t.decimal "value_int", precision: 15, scale: 4
+    t.string "value_text"
+    t.datetime "applied_date"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "tags", force: :cascade do |t|
@@ -482,6 +608,11 @@ ActiveRecord::Schema[7.2].define(version: 2024_09_01_045311) do
     t.string "title"
     t.string "memo"
     t.integer "approval_status", default: 0
+    t.boolean "is_mfa_enabled", default: false, null: false
+    t.datetime "mfa_authenticated_at"
+    t.boolean "is_partner", default: false
+    t.boolean "is_facility", default: false
+    t.string "manage_company_code"
     t.index ["company_id"], name: "index_users_on_company_id"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
@@ -515,6 +646,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_09_01_045311) do
   add_foreign_key "online_recreation_channel_download_images", "online_recreation_channels"
   add_foreign_key "online_recreation_channel_recreations", "online_recreation_channels"
   add_foreign_key "order_dates", "orders"
+  add_foreign_key "order_desire_dates", "orders"
   add_foreign_key "order_memos", "orders"
   add_foreign_key "orders", "recreations"
   add_foreign_key "orders", "users"

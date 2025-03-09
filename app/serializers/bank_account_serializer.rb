@@ -12,6 +12,15 @@
 #  bank_name           :string           not null
 #  branch_code         :string           not null
 #  branch_name         :string           not null
+#  corporate_number    :string
+#  corporate_type_code :string
+#  investments         :integer
+#  invoice_number      :string
+#  is_corporate        :boolean          default(FALSE)
+#  is_foreignresident  :boolean          default(FALSE)
+#  is_invoice          :boolean          default(FALSE)
+#  is_subcontract      :boolean          default(FALSE)
+#  my_number           :string
 #  created_at          :datetime         not null
 #  updated_at          :datetime         not null
 #  user_id             :bigint           not null
@@ -36,6 +45,15 @@ class BankAccountSerializer
       bank_name: bank_account.bank_name,
       branch_code: bank_account.branch_code,
       branch_name: bank_account.branch_name,
+      is_corporate: bank_account.is_corporate,
+      corporate_type_code: bank_account.corporate_type_code,
+      is_foreignresident: bank_account.is_foreignresident,
+      investments: bank_account.investments,
+      is_invoice: bank_account.is_invoice,
+      invoice_number: bank_account.invoice_number,
+      corporate_number: bank_account.corporate_number,
+      my_number: bank_account.my_number,
+      is_subcontract: bank_account.is_subcontract,
       user: bank_account.user
     }
   end

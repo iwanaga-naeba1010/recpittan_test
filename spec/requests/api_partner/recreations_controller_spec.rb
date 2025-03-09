@@ -61,6 +61,7 @@ RSpec.describe ApiPartner::RecreationsController, type: :request do
           category: 1,
           status: 'in_progress',
           kind: 'online',
+          is_withholding_tax: false,
           recreation_profile_attributes: {
             profile_id: profile.id
           }
@@ -105,6 +106,7 @@ RSpec.describe ApiPartner::RecreationsController, type: :request do
           category: 1,
           status: 'in_progress',
           kind: 'online',
+          is_withholding_tax: false,
           recreation_profile_attributes: {
             profile_id: profile.id
           }

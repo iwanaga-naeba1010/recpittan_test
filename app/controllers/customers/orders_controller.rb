@@ -35,6 +35,10 @@ class Customers::OrdersController < Customers::ApplicationController
       @order.order_dates.map do |d|
         d.destroy if d.year.empty? && d.month.empty? && d.date.empty? && d.start_hour.empty? && d.start_minute.empty? && d.end_hour.empty? && d.end_minute.empty?
       end.compact
+
+      # copy value is_withholding_tax from recreation
+      @order.is_withholding_tax = @recreation.is_withholding_tax
+
       @order.save!
 
       message = <<~MESSAGE

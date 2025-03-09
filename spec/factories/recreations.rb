@@ -17,6 +17,7 @@
 #  flow_of_day             :text
 #  flyer_color             :string
 #  is_public_price         :boolean          default(TRUE)
+#  is_withholding_tax      :boolean          default(FALSE)
 #  kind                    :integer          default("visit"), not null
 #  material_amount         :integer
 #  material_price          :integer

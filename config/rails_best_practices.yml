@@ -85,7 +85,8 @@ RemoveUnusedMethodsInModelsCheck: {
     'RecreationPlanEstimate#ransackable_associations',
     'Tag#ransackable_associations',
     'User#ransackable_associations',
-    'RecreationPlan#monthly_fee'
+    'RecreationPlan#monthly_fee',
+    'TestReorderable#insert_at'
   ]
 }
 # NOTE: デグレ回避のため一旦エスケープ

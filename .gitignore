@@ -45,3 +45,5 @@ coverage
 erd.pdf
 .tags
 .solargraph.yml
+.DS_Store
+*~
