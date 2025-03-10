@@ -51,14 +51,13 @@ RSpec.describe 'Admin::Invoices', type: :request do
   describe 'POST /admin/invoices/export_payment_to_csv' do
     let!(:partner_list) { create_list(:user, 2, :partner_with_orders) }
 
-    context '請求データが存在する場合' do
-      it 'CSVをダウンロードできる' do
+    context 'when payment data exists' do
+      it 'download the CSV file' do
         post admin_invoices_export_payment_to_csv_path
 
         expect(response).to have_http_status(:success)
         expect(response.headers['Content-Type']).to include('text/csv')
 
-        # Content-Disposition の filename を URLデコードして比較
         content_disposition = response.headers['Content-Disposition']
         decoded_filename = CGI.unescape(content_disposition.match(/filename\*?=UTF-8''(.+?)$/)[1])
 
@@ -69,17 +68,17 @@ RSpec.describe 'Admin::Invoices', type: :request do
       end
     end
 
-    context '請求データが存在しない場合' do
-      before { Order.destroy_all } # 注文データを削除
+    context 'when payment data does not exist' do
+      before { Order.destroy_all }
 
-      it '空のCSVをダウンロードする' do
+      it 'download an empty CSV file' do
         post admin_invoices_export_payment_to_csv_path
 
         expect(response).to have_http_status(:success)
         expect(response.headers['Content-Type']).to include('text/csv')
 
         csv_lines = CSV.parse(response.body, headers: true)
-        expect(csv_lines.count).to eq(0) # データがないことを確認
+        expect(csv_lines.count).to eq(0)
       end
     end
   end
