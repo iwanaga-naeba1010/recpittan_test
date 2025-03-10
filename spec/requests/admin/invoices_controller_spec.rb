@@ -47,4 +47,39 @@ RSpec.describe 'Admin::Invoices', type: :request do
       end
     end
   end
+
+  describe 'POST /admin/invoices/export_payment_to_csv' do
+    let!(:partner_list) { create_list(:user, 2, :partner_with_orders) }
+
+    context 'when payment data exists' do
+      it 'download the CSV file' do
+        post admin_invoices_export_payment_to_csv_path
+
+        expect(response).to have_http_status(:success)
+        expect(response.headers['Content-Type']).to include('text/csv')
+
+        content_disposition = response.headers['Content-Disposition']
+        decoded_filename = CGI.unescape(content_disposition.match(/filename\*?=UTF-8''(.+?)$/)[1])
+
+        expect(decoded_filename).to include('payment_statement')
+
+        csv_lines = CSV.parse(response.body, headers: true)
+        expect(csv_lines.count).to eq(2)
+      end
+    end
+
+    context 'when payment data does not exist' do
+      before { Order.destroy_all }
+
+      it 'download an empty CSV file' do
+        post admin_invoices_export_payment_to_csv_path
+
+        expect(response).to have_http_status(:success)
+        expect(response.headers['Content-Type']).to include('text/csv')
+
+        csv_lines = CSV.parse(response.body, headers: true)
+        expect(csv_lines.count).to eq(0)
+      end
+    end
+  end
 end

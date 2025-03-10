@@ -163,6 +163,13 @@ class Order < ApplicationRecord
     end
   }
 
+  scope :with_payments_in_previous_month, -> {
+    start_date = Time.current.prev_month.beginning_of_month
+    end_date = Time.current.prev_month.end_of_month
+
+    where(start_at: start_date..end_date)
+  }
+
   validates :price, :material_price, :amount,
             :material_amount, :expenses, :transportation_expenses,
             :additional_facility_fee, presence: true
