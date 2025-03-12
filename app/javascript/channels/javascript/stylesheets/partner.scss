@@ -1,0 +1,244 @@
+@import '~@fortawesome/fontawesome-free/scss/fontawesome';
+// Extra small devices (portrait phones, less than 576px)
+@media (max-width: 575.98px) {
+  .chat_form{
+    .chat-message{
+      width: 300px !important;
+    }
+  }
+
+  .partner-site {
+    .sidebar {
+      width: 60% !important;
+      left: -60% !important;
+      position: absolute;
+      z-index: 10;
+      height: 100vh;
+      background: #ffffff;
+      transition: .7s;
+
+      .header {
+        .btn-close {
+          font-size: 1.5rem;
+          background: none;
+          border: none;
+          cursor: pointer;
+          padding: 0;
+        }
+      }
+    }
+
+    .fade-in {
+      transform: translateX(100%);
+    }
+  }
+}
+
+// Small devices (landscape phones, less than 768px)
+@media (max-width: 767.98px) {
+  //display: none;
+}
+
+// Medium devices (tablets, less than 992px)
+@media (max-width: 991.98px) {
+
+}
+
+// Large devices (desktops, less than 1200px)
+@media (max-width: 1199.98px) {
+
+}
+body {
+  height: 100%;
+  background-color: white;
+}
+
+.partner-site {
+  background-color: white;
+
+  .sidebar {
+    width: 30%;
+    color: #6C757D;
+
+    a {
+      text-decoration: none;
+      color: #6C757D;
+    }
+
+    .header {
+      box-shadow: rgba(100, 100, 111, 0.2) 0 0 10px 0;
+    }
+
+    .sidebar-wrapper {
+      border-bottom: #bbbbbb 1px;
+      display: grid;
+      grid-auto-rows: 50px;
+      grid-template-columns: 50px 1fr;
+
+      .lect_item {
+        grid-row: 1;
+        grid-column: 1;
+      }
+
+      .right_item {
+        grid-row: 1;
+        grid-column: 2;
+      }
+    }
+  }
+
+  .main_contents {
+    width: 100%;
+    height: 100%;
+    a {
+      text-decoration: none;
+      color: #6C757D;
+    }
+
+    .header-block {
+      position: fixed;
+      width: 100%;
+    }
+
+    .header {
+      margin-bottom: 0 !important;
+      background-color: #3880ff;
+      h2 {
+        margin-bottom: 0 !important;
+      }
+    }
+
+    .sub_header {
+      background-color: white;
+      box-shadow: rgba(100, 100, 111, 0.2) 0 0 10px 0;
+    }
+
+    .nav-tabs .nav-link {
+      border: none;
+    }
+
+    .nav-tabs .nav-link.active {
+      border-bottom: 3px solid #007bff;
+      color: #007bff;
+    }
+  }
+
+  // chat list
+  .chat {
+    margin: 0 30px;
+    // width: 100%;
+    padding-top: 150px;
+    padding-bottom: 150px;
+    overflow-y: scroll;
+    // TODO(okubo): 本来はcalcで計算すべきだが、急ぎなので下記で対応
+    height: 2000px;
+
+    .mychat {
+      background-color: #3880ff;
+      color: white;
+      border-radius: 5px;
+
+      a {
+        color: white;
+      }
+    }
+
+    .text {
+      background-color: #eee;
+      color: black;
+      border-radius: 5px;
+    }
+  }
+
+  // 画面下部のchat
+  .chat_form {
+    height: 200px;
+    bottom: 0;
+    width: 100%;
+    position: fixed;
+    background-color: white;
+  }
+
+  .disabled {
+    pointer-events: none;
+  }
+
+  .rectitle-width {
+    width: 300px;
+  }
+
+  .check-info{
+    display: grid;
+  }
+
+  .partner-information {
+    input[type="text"] {
+      border: 1px solid #E5E3DF;
+      border-radius: 5px;
+    }
+  
+    input[type="checkbox"] {
+      width: 15px;
+      height: 15px;
+    }
+  
+    .terms, .privacy {
+      vertical-align: bottom;
+    }
+  
+    .progress-bar {
+      position: relative;
+      height: 5px;
+      background-color: #F4F5F8;
+      box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
+    }
+  
+    .bar {
+      border-radius: 0 3px 3px 0;
+    }
+  
+    .essential {
+      color: #FF2323;
+    }
+  }
+}
+
+.search-order-modal {
+  .description {
+    font-size: 12px;
+  }
+
+  .modal-body .d-flex.align-items-center.w-100 {
+    width: 100%;
+  }
+  
+  .modal-body .form-control {
+    flex: 1;
+  }
+  
+  .modal-body .mx-2 {
+    margin-left: 0.5rem !important;
+    margin-right: 0.5rem !important;
+  }
+
+  .modal-content {
+    position: relative;
+    padding-bottom: 60px;
+  }
+
+  .modal-footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    background-color: white;
+    padding: 10px 20px;
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+  }
+
+  .modal-body {
+    overflow-y: auto;
+    padding-bottom: 80px;
+  }
+}

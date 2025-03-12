@@ -1,0 +1,109 @@
+.user_recreation_plan_index {
+  background-color: #F5F2F0;
+
+  button {
+    background-color: #E83E8C;
+    border: none;
+    color: white;
+    border-radius: 5px;
+    padding: 7px 14px;
+  }
+}
+
+.user_recreation_plan_show {
+  p {
+    margin: 0;
+    margin-bottom: 4px;
+  }
+
+  h2 {
+    margin: 0;
+    margin-bottom: 10px;
+  }
+
+  .plan-thumbnail {
+    width: 100%;
+    height: auto;
+  }
+
+  .plan-title {
+    font-size: 24px;
+    color: #343A40;
+    line-height: 1.5;
+  }
+
+  .plan-code {
+    font-size: 14px;
+    color: #6C757D;
+  }
+
+  .attention {
+    color: #343A40;
+    background-color: #F5F2F0;
+  }
+
+  .recreation-section {
+    height: 160px;
+  }
+
+  .recreation-month {
+    background-color: #FDEACC;
+    height: 100%;
+    p {
+      font-size: 12px;
+      color: #A86900;
+    }
+  }
+
+  .recreation-image {
+    width: 100%;
+    height: auto;
+  }
+
+  .recreation-category {
+    font-size: 12px;
+    border: 1px solid #F24051;
+    background-color: #F24051;
+    color: white;
+  }
+
+  .recreation-kind {
+    font-size: 12px;
+    border: 1px solid #A3A7AB;
+    color: #A3A7AB;
+  }
+
+  .recreation-title {
+    font-size: 16px;
+    font-weight: bold;
+    color: #343A40;
+    line-height: 1.5;
+    text-decoration: underline;
+    text-decoration-color: #343A40;
+  }
+
+  .recreation-title:visited,
+  .recreation-title:active {
+    text-decoration-color: #343A40;
+    text-decoration-color: #343A40;
+  }
+
+  .recreation-price {
+    font-size: 12px;
+    color: #6C757D;
+    margin-bottom: 35px;
+  }
+
+  .estimate {
+    background-color: #FBFAFA;
+  }
+
+  .start-consultation {
+    background-color: white;
+    border: solid 2px #E83E8C;
+    color: #E83E8C;
+    border-radius: 5px;
+    padding: 3px 9px;
+    font-size: 14px;
+  }
+}

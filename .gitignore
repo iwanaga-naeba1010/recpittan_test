@@ -48,3 +48,9 @@ erd.pdf
 .DS_Store
 *~
 erd.pdf
+#*
+vendor/bundle/*
+vendor/cache/*
+config/certs/server.crt
+config/certs/server.key
+

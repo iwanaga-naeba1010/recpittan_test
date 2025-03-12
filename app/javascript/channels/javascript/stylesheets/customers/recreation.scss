@@ -1,0 +1,17 @@
+.search-recreation {
+  .tag-form {
+    position: relative;
+    z-index: 100;
+    width: 420px;
+  }
+  .tag-params {
+    color: #F39800;
+    border: 1px solid #F39800;
+  }
+  .remove-tag-param {
+    cursor: pointer;
+  }
+  .searched-tag {
+    font-size: 12px;
+  }
+}

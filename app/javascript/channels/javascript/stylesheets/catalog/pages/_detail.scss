@@ -1,0 +1,312 @@
+/* 詳細 ページ */
+//body {
+  // display: block;
+  // min-height: 150vh;
+  // position: relative;
+  //overflow-y: hidden;
+.detail {
+  background-color: #ffffff;
+
+  .sticky-md-top {
+    top: 170px;
+    z-index: 10;
+  }
+
+  main.detail {
+
+    // min-height: 50vh;
+    // max-height: 200vh;
+    // overflow-y: scroll;
+    // position: relative;
+    #leftInfo {
+      z-index: 10;
+    }
+  }
+
+  /* recreation-detail */
+  .r-d {
+
+    .card-body {
+
+      /* タイトル サブタイトル */
+      .r-t-s {
+      }
+
+      /* カテゴリ タグ */
+      .t-c-t {
+      }
+    }
+  }
+
+  .action-area {
+    margin-top: rem(32);
+    text-align: center;
+
+    a {
+      text-decoration: none;
+
+    }
+
+    .btn-blue {
+      color: white;
+      font-weight: bold;
+      background-color: #3cb2df;
+      padding-top: rem(12);
+      padding-bottom: rem(12);
+      padding-left: rem(16);
+      padding-right: rem(16);
+      border-radius: rem(60);
+      border-color: #3cb2df;
+      border-style: solid;
+    }
+  }
+
+  .carousel-control-prev, .carousel-control-next {
+    width: 5%;
+    height: 90%;
+  }
+
+  .carousel-control-prev-icon, .carousel-control-next-icon {
+    position: absolute;
+    top: 50%;
+  }
+
+  /* 共通 */
+  .title-b {
+    font-family: "Roboto";
+    font-style: normal;
+    font-weight: bold;
+    font-size: rem(16);
+    line-height: 120%;
+    color: $ba10;
+  }
+
+  .title {
+    font-family: "Roboto";
+    font-style: normal;
+    font-weight: normal;
+    font-size: rem(16);
+    line-height: 120%;
+    color: $ba10;
+  }
+
+  .text {
+    font-family: "Roboto";
+    font-style: normal;
+    font-weight: normal;
+    font-size: rem(14);
+    line-height: 140%;
+    color: $ba10;
+  }
+
+  .text-muted {
+    /* BA8 */
+    font-family: "Roboto";
+    font-style: normal;
+    font-weight: normal;
+    font-size: rem(14);
+    line-height: 120%;
+    color: $ba08;
+  }
+
+  .muted-box {
+    background: $ba01;
+    border: 1px solid #E6E3DF;
+    box-sizing: border-box;
+    border-radius: rem(4);
+  }
+
+  /* チャットルーム */
+  .chat-container {
+    .card-body {
+      max-height: 70vh;
+      overflow-y: auto;
+
+      // 日付
+      .date {
+        border: 1px solid $ba04;
+        box-sizing: border-box;
+        border-radius: rem(40);
+        font-family: "Roboto";
+        font-style: normal;
+        font-weight: normal;
+        font-size: rem(12);
+        line-height: 120%;
+      }
+
+      // 時刻
+      .time {
+        font-family: "Roboto";
+        font-style: normal;
+        font-weight: normal;
+        font-size: rem(12);
+        line-height: 120%;
+      }
+
+      // システムメッセージ
+      .system {
+        background-color: $secondary03;
+        border-radius: rem(24);
+        padding: rem(12);
+        font-family: "Roboto";
+        font-style: normal;
+        font-weight: normal;
+        font-size: rem(14);
+        line-height: 120%;
+        color: $secondary16;
+      }
+
+      // 顧客メッセージ
+      .customer-text {
+        background-color: $secondary03;
+        border-radius: rem(24);
+        padding: rem(12);
+        font-family: "Roboto";
+        font-style: normal;
+        font-weight: normal;
+        font-size: rem(14);
+        line-height: 120%;
+        color: $secondary16;
+      }
+
+      // パートナー
+      .instructor {
+        .image {
+          img {
+            width: rem(28);
+            border-radius: 50%;
+          }
+        }
+
+        .name {
+          font-family: "Roboto";
+          font-style: normal;
+          font-weight: normal;
+          font-size: rem(12);
+          line-height: 120%;
+          /* or 14px */
+
+
+          /* BA8 */
+
+          color: #6C757D;
+          padding-bottom: rem(8);
+        }
+
+        .text {
+          background-color: $ba00;
+          border-radius: rem(24);
+          padding: rem(12);
+          font-family: "Roboto";
+          font-style: normal;
+          font-weight: normal;
+          font-size: rem(14);
+          line-height: 120%;
+          color: $ba10;
+        }
+      }
+
+      // CS
+      .support {
+        .image {
+          img {
+            width: rem(28);
+            border-radius: 50%;
+          }
+        }
+
+        .name {
+          font-family: "Roboto";
+          font-style: normal;
+          font-weight: normal;
+          font-size: rem(12);
+          line-height: 120%;
+          /* or 14px */
+
+
+          /* BA8 */
+
+          color: #757e85;
+          padding-bottom: rem(8);
+        }
+
+        .text {
+          background-color: #e9967a;
+          border-radius: rem(24);
+          padding: rem(12);
+          font-family: "Roboto";
+          font-style: normal;
+          font-weight: normal;
+          font-size: rem(14);
+          line-height: 120%;
+          color: $ba10;
+        }
+      }
+
+    }
+
+    .card-footer {
+      .chat-message {
+        resize: none;
+        // min-height:auto;
+        height: rem(16);
+        background: $ba01;
+        border: 1px solid $ba04;
+        box-sizing: border-box;
+        border-radius: rem(24);
+        font-family: "Roboto";
+        font-style: normal;
+        font-weight: normal;
+        font-size: rem(14);
+        line-height: 120%;
+        /* BA10 */
+
+        color: $ba10;
+      }
+
+      .btn-send {
+        background-color: $secondary10;
+        border-radius: rem(70);
+        padding-top: rem(15);
+        padding-bottom: rem(15);
+        padding-left: rem(24);
+        padding-right: rem(24);
+        font-family: "Roboto";
+        font-style: normal;
+        font-weight: bold;
+        font-size: rem(14);
+        line-height: 100%;
+        color: #ffffff;
+      }
+    }
+  }
+}
+//}
+
+/* 相談フォーム */
+//form {
+.consult {
+
+  // 希望日 No
+  .desired-no {
+    background-color: #FDEACC;
+    color: #F39800;
+    width: rem(33);
+    border-radius: rem(4);
+  }
+
+  .form-check-input:checked {
+    background-color: $catalog-link;
+    border-color: $catalog-link;
+  }
+
+  /* チャットフォーム ←*/
+  .btn-inline-edit {
+
+    &:focus-within,
+    &:hover {
+      background-color: $ba02;
+    }
+  }
+}
+//}

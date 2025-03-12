@@ -1,0 +1,98 @@
+.recreation-plan-show {
+  p {
+    margin: 0;
+    margin-bottom: 4px;
+  }
+
+  .plan-thumbnail {
+    width: 100%;
+    height: auto;
+  }
+
+  .plan-title {
+    font-size: 32px;
+    color: #343A40;
+    line-height: 1.5;
+  }
+
+  .plan-code {
+    font-size: 14px;
+    color: #6C757D;
+  }
+
+  .register-button {
+    background-color: #E83E8C;
+    border: none;
+  }
+
+  .recreation-section {
+    height: 120px;
+  }
+
+  .recreation-month {
+    background-color: #FDEACC;
+    p {
+      font-size: 12px;
+      color: #A86900;
+    }
+  }
+
+  .recreation-image {
+    width: 141px;
+    height: 82px;
+  }
+
+  .recreation-category {
+    font-size: 12px;
+    border: 1px solid #F24051;
+    background-color: #F24051;
+    color: white;
+  }
+
+  .recreation-kind {
+    font-size: 12px;
+    border: 1px solid #A3A7AB;
+    color: #A3A7AB;
+  }
+
+  .recreation-title {
+    font-size: 16px;
+    font-weight: bold;
+    color: #343A40;
+    line-height: 1.5;
+    text-decoration: underline;
+    text-decoration-color: #343A40;
+  }
+
+  .recreation-title:visited,
+  .recreation-title:active {
+    text-decoration-color: #343A40;
+    text-decoration-color: #343A40;
+  }
+
+  .recreation-price {
+    font-size: 12px;
+    color: #6C757D;
+    margin-bottom: 35px;
+  }
+
+  .estimate {
+    background-color: #FBFAFA;
+  }
+
+  .num-of-people {
+    font-size: 12px;
+    color: #343A40;
+  }
+
+  .download-button {
+    background-color: #FBFAFA;
+    border: solid 2px #E83E8C;
+    color: #E83E8C;
+  }
+
+  .order-start-button {
+    background-color: #E83E8C;
+    border: none;
+  }
+}

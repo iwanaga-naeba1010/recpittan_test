@@ -1,0 +1,72 @@
+@import 'activeadmin_addons/src/stylesheets/all';
+// Sass variable overrides must be declared before loading up Active Admin's styles.
+//
+// To view the variables that Active Admin provides, take a look at
+// `app/assets/stylesheets/active_admin/mixins/_variables.scss` in the
+// Active Admin source.
+//
+// For example, to change the sidebar width:
+// $sidebar-width: 242px;
+
+// Active Admin's got SASS!
+@import '~arctic_admin/src/scss/main';
+//@import "~@activeadmin/activeadmin/src/scss/mixins";
+//@import "~@activeadmin/activeadmin/src/scss/base";
+
+// Overriding any non-variable Sass must be done after the fact.
+// For example, to change the default status-tag color:
+//
+//   .status_tag { background: #6090DB; }
+
+// OrderのChatUI
+.chat {
+  .mychat {
+    margin: 10px 0;
+    .message {
+      background-color: #bbdefb;
+      display: inline-block;
+      border-radius: 5px;
+      padding: 10px;
+    }
+    .time {
+      vertical-align: bottom;
+      margin-left: 10px;
+    }
+  }
+
+  .your-chat{
+    margin-left: 30rem;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    .message {
+      background-color: #ffc0cb;
+      display: inline-block;
+      border-radius: 5px;
+      padding: 10px;
+    }
+    .time {
+      vertical-align: bottom;
+      margin-left: 10px;
+    }
+  }
+}
+
+.order_memo {
+  .body {
+    background-color: #EFEEED;
+    padding: 10px;
+    border-radius: 10px;
+    margin: 10px 0;
+  }
+  .form {
+    margin-top: 40px;
+  }
+}
+
+.official_input {
+  display: none;
+}
+
+.evaluation_input {
+  display: none;
+}

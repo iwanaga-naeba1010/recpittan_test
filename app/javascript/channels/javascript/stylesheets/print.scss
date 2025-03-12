@@ -1,0 +1,66 @@
+@import "bootstrap/scss/bootstrap";
+
+@page {
+  size: A4 portrait;
+  margin: 0.5cm;
+}
+
+@media print {
+  header, footer {
+    display: none;
+  }
+
+  body {
+    -webkit-print-color-adjust: exact;
+    padding: 12px;
+    font-size: 0.7em; /* 全体のフォントサイズを縮小 */
+  }
+
+  .recreation-plan-estimate {
+    page-break-inside: avoid;
+    margin: 0;
+    padding: 0;
+    font-size: 0.8em; /* 必要に応じて調整 */
+  }
+
+  .recreation-plan-estimate .top-section,
+  .recreation-plan-estimate .middle-section,
+  .recreation-plan-estimate .bottom-section {
+    page-break-inside: avoid;
+  }
+
+  .recreation-plan-estimate .top-total-price-section,
+  .recreation-plan-estimate .event-fee,
+  .recreation-plan-estimate .material-fee,
+  .recreation-plan-estimate .transportation-expenses,
+  .recreation-plan-estimate .bottom-total-price-section {
+    page-break-inside: avoid;
+  }
+
+  .recreation-plan-estimate .row {
+    margin: 0;
+    padding: 0;
+  }
+
+  .recreation-plan-estimate .col-2, 
+  .recreation-plan-estimate .col-4, 
+  .recreation-plan-estimate .col-6, 
+  .recreation-plan-estimate .col-8, 
+  .recreation-plan-estimate .col-10 {
+    padding: 0; 
+    margin: 0; 
+  }
+
+  .recreation-plan-estimate .total-price {
+    font-size: 1em; /* 必要に応じて調整 */
+  }
+
+  .recreation-plan-estimate .small-paragraph, .recreation-plan-estimate .middle-paragraph {
+    font-size: 0.9em; /* 必要に応じて調整 */
+  }
+
+  .recreation-plan-estimate img {
+    width: 80%; /* 画像のサイズを縮小 */
+    height: auto;
+  }
+}

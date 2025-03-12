@@ -1,0 +1,15 @@
+// @import '~bootstrap/scss/bootstrap';
+
+@import 'catalog/default';
+
+@import 'partner';
+@import 'partners/order-item';
+@import 'partners/profile';
+@import 'partners/recreation';
+@import 'partners/registration-form';
+@import './customers/evaluation';
+@import './customers/recreation';
+@import './customers/recreation_plan';
+@import './customers/recreation_plan_estimate';
+@import './customers/user_recreation_plan';
+@import './print';

@@ -14,6 +14,7 @@ RUN addgroup --gid "${GROUP_ID}" "${USER_NAME}" && \
   adduser  -u "${USER_ID}" "${USER_NAME}"  -G "${USER_NAME}" -D  && \
   chmod -R 777 /usr/local/bundle
 
+
 RUN mkdir /app
 #WORKDIR /app
 #COPY --chown=${USER_ID}:${GROUP_ID}  /app/vendor /app/vendor
@@ -40,6 +41,7 @@ COPY . ./
 #RUN apk --update --no-cache add shadow sudo busybox-suid execline tzdata postgresql-dev \
 #    cp /usr/share/zoneinfo/Asia/Tokyo /etc/localtime && \
 #    apk del --purge tzdata
+
 
 #COPY package.json yarn.lock ./
 #RUN yarn install && yarn cache clean
