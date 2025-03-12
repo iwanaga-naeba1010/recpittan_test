@@ -3,6 +3,12 @@
     h2.p-2 Menu
     button#close-sidebar.btn &times;
   .p-2
+    = link_to partner_announcement_path, target: '_blank', rel: :noopener do
+      .sidebar-wrapper.my-2.border-bottom
+        .lect_item
+          i.fas.fa-info.fa-lg
+        .right_item お知らせ
+
     = link_to partners_path do
       .sidebar-wrapper.my-2.border-bottom
         .lect_item

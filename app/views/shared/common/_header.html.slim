@@ -20,6 +20,8 @@ header.sticky-top
           - if user_signed_in? && (current_user.role.customer? || current_user.role.admin?)
             li.nav-item
               = link_to 'プラン一覧', customers_recreation_plans_path, class: 'nav-link'
+          li.nav-item
+            = link_to 'お知らせ', company_announcement_public_path, class: 'nav-link', target: '_blank', rel: :noopener
           li.nav-item.px-2
             = form_tag customers_recreations_path, method: :get, class: 'd-flex search' do
               .input-group.mr-sm-2
