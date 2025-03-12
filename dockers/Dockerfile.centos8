@@ -1,5 +1,5 @@
 #FROM ruby:3.3.6
-FROM ruby:3.3.6-alpine
+FROM centos:8
 
 
 ENV LANG=C.UTF-8
@@ -10,21 +10,26 @@ ENV USER_ID="1000"
 ENV GROUP_ID="1000"
 ENV USER_NAME="app"
 
-RUN addgroup --gid "${GROUP_ID}" "${USER_NAME}" && \
-  adduser  -u "${USER_ID}" "${USER_NAME}"  -G "${USER_NAME}" -D  && \
-  chmod -R 777 /usr/local/bundle
+#RUN addgroup --gid "${GROUP_ID}" "${USER_NAME}" && \
+#  adduser  -u "${USER_ID}" "${USER_NAME}"  -G "${USER_NAME}" -D  && \
+#  chmod -R 777 /usr/local/bundle
+#RUN addgroup --gid "${GROUP_ID}" "${USER_NAME}" && \
+#  adduser  -u "${USER_ID}" "${USER_NAME}"  -G "${USER_NAME}" -D  && \
+#  chmod -R 777 /usr/local/bundle
 
 RUN mkdir /app
-#WORKDIR /app
+WORKDIR /app
 #COPY --chown=${USER_ID}:${GROUP_ID}  /app/vendor /app/vendor
 #COPY --chown=${USER_ID}:${GROUP_ID}  . /app/vendor
 
-RUN apk update && \
-  apk upgrade && \
-  apk add --no-cache tzdata bash
-#    gcc g++ libc-dev libxml2-dev linux-headers make postgresql-dev \
-#    yarn graphviz
-#    yarn graphviz chromium-chromedriver git openssh    
+#RUN apk update && \
+#  apk upgrade && \
+#  apk add --no-cache tzdata bash \
+#    gcc g++ libc-dev libxml2-dev linux-headers make postgresql-dev yarn graphviz
+
+#RUN dnf update && \
+#  dnf install -y  --no-cache tzdata bash \
+#    gcc g++ libc-dev libxml2-dev linux-headers make postgresql-dev yarn graphviz
 
 COPY . ./
 

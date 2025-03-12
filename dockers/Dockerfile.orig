@@ -15,16 +15,15 @@ RUN addgroup --gid "${GROUP_ID}" "${USER_NAME}" && \
   chmod -R 777 /usr/local/bundle
 
 RUN mkdir /app
-#WORKDIR /app
+WORKDIR /app
 #COPY --chown=${USER_ID}:${GROUP_ID}  /app/vendor /app/vendor
 #COPY --chown=${USER_ID}:${GROUP_ID}  . /app/vendor
 
 RUN apk update && \
   apk upgrade && \
-  apk add --no-cache tzdata bash
-#    gcc g++ libc-dev libxml2-dev linux-headers make postgresql-dev \
-#    yarn graphviz
-#    yarn graphviz chromium-chromedriver git openssh    
+  apk add --no-cache tzdata bash \
+    gcc g++ libc-dev libxml2-dev linux-headers make postgresql-dev \
+    yarn graphviz chromium-chromedriver git openssh
 
 COPY . ./
 

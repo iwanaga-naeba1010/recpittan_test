@@ -8,19 +8,40 @@ environment:
 
 compose:
   files:
-    - docker/docker-compose.yml
+    - docker-compose.yml
   project_name: recpittan
 
 interaction:
   clean_cache:
     description: Delete cache files on the host machine
     command: rm -rf $(pwd)/tmp/cache/*
-    
+
+  bash:
+    description: run bash on container web as root
+    command: docker compose exec web bash
+
+  build:
+    description: rails setup (bundle install)
+    command: docker compose exec web bin/build.sh
+
+  start:
+    description: start up rails setver
+    command: docker compose exec web bin/rails-startup.sh
+
+  lint:
+    description: lint check by rubocop
+    command: docker compose exec web bundle exec rubocop
+
+  rspec:
+    description: rspec exec
+    command: docker compose exec -e RAILS_ENV=test web bundle exec rspec
+
 provision:
   - dip compose down --volumes
   - dip clean_cache
-  - docker-compose build
-  - dip compose up -d db web mailhog
+  - docker compose build
+  - docker compose up -d web  
+#  - dip compose up -d db web mailhog
 #  - dip bash -c ./bin/setup
   
   
