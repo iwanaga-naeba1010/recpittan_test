@@ -23,7 +23,17 @@ ActiveAdmin.register CompanyMemo do
         管理画面施設URL： #{admin_company_url(company_id)}
         内容: #{body}
       MESSAGE
-      SlackNotifier.new(channel: '#-メモ投稿履').send('管理画面から施設に関するメモを記録しました', message)
+
+      begin
+        SlackNotifier.new(channel: '#-メモ投稿履').send(
+          '管理画面から施設に関するメモを記録しました',
+          message
+        )
+      rescue Slack::Notifier::APIError => e
+        Rails.logger.error("Slack通知エラー: #{e.message}")
+        Sentry.capture_exception(e)
+      end
+
       redirect_to admin_company_path(company_id)
     end
   end
