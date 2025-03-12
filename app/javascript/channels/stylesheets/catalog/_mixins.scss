@@ -1,9 +1,0 @@
-// @use "sass:math";
-// Helpers
-@import 'mixins/breakpoints';
-
-/** pxをrem相当に変換 **/
-@function rem($sizePx) {
-  //    @return $sizePx/ 1rem * 1rem;
-  @return $sizePx / $baseFontSize * 1rem;
-}
