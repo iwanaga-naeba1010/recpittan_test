@@ -1,9 +1,5 @@
 name: Deploy weldev to AWS ECR
 
-# Secretに登録したら削除
-env:
-  AWS_ACCESS_KEY_ID: AKIASN7APX6NOANAVIJ2
-  AWS_SECRET_ACCESS_KEY: 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
 
 on:
   workflow_dispatch: 
