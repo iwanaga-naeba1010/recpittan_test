@@ -17,7 +17,7 @@ jobs:
           ref: main
       - name: Check aws deploy target branch
         run: |
-          BRANCHS=$(git branch --contains ${{ github.ref_name }})
+          BRANCHS=$( git branch --contains ${{ github.ref_name }} )
           set -- $BRANCHS
           for BRANCH in $BRANCHS ; do
             if [[ "$BRANCH" == "welbing" ]]; then
