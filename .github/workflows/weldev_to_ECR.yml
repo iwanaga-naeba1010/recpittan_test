@@ -12,14 +12,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # リポジトリのコードをチェックアウト
-      - name: Checkout repository
-        uses: actions/checkout@v4
-        with:
-          ref: main  # weldev内のブランチをビルド
-      #    sparse-checkout: |
-      #      app  # app ディレクトリのみチェックアウト
-      #    sparse-checkout-cone-mode: false
       - name: Check tagged branch
         run: |
           BRANCHS=$(git branch --contains ${{ github.ref_name }})
@@ -30,6 +22,18 @@ jobs:
             fi
           done
           exit 1
+      - check branch name
+        run: echo ${{ github.ref_name }}
+	env:
+	  branch: ${{ github.ref_name }}
+      # リポジトリのコードをチェックアウト
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref_name }}  # weldev内のブランチをビルド
+      #    sparse-checkout: |
+      #      app  # app ディレクトリのみチェックアウト
+      #    sparse-checkout-cone-mode: false
       # Amazon ECR へのログイン
       - name: Login to Amazon ECR
         id: login-ecr
