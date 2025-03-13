@@ -18,7 +18,7 @@ jobs:
           ref: main
       - name: Check aws deploy target branch
         run: |
-          branch=${{ github.ref_name }}
+          branch=$( ${{ github.ref_name }} )
           if [[ "$branch" == "webing" ]]; then
             exit 0
           fi
