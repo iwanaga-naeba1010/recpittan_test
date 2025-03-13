@@ -12,6 +12,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          ref: main  # main
       - name: Check aws deploy target branch
         run: |
           BRANCHS=$( git branch --contains ${{ github.ref_name }} )
