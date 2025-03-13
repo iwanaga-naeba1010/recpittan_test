@@ -53,7 +53,7 @@ jobs:
       - name: Tag Docker image
         run: |
           target="167437647770.dkr.ecr.ap-northeast-1.amazonaws.com/${branch}:latest"
-          docker tag "${branch}:latest# $target
+          docker tag "${branch}:latest" $target
 
       # push to Amazon ECR 
       - name: Push Docker image to Amazon ECR
