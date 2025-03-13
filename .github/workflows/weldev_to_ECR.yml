@@ -5,8 +5,9 @@ env:
   AWS_SECRET_ACCESS_KEY : ${{ secrets.AWS_SECRET_ACCESS_KEY }}
 
 on:
-  workflow_dispatch: 
-  # 手動実行とする
+  push:
+    tags:
+      - 'welbing'
 
 jobs:
   build-and-push:
