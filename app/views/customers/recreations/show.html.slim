@@ -120,9 +120,9 @@ main.detail
                   - @recreation.recreation_prefectures.pluck(:name).uniq.each do |prefecture_name|
                     .text-muted = "・#{prefecture_name}"
               .action-area.d-flex.justify-content-center.flex-column.gap-3
-                - flyer = @recreation.flyer
-                - if flyer.present?
-                  = button_tag type: 'button', class: 'btn-download-flyer', name: 'download-recreation-flyer', data: { file_url: flyer.image.url, file_name: flyer.image.identifier } do
+                - latest_flyer = @recreation.latest_flyer
+                - if latest_flyer.present?
+                  = button_tag type: 'button', class: 'btn-download-flyer', name: 'download-recreation-flyer', data: { file_url: latest_flyer.image.url, file_name: latest_flyer.image.identifier } do
                     i.fas.fa-download
                     | &nbsp;
                     span
