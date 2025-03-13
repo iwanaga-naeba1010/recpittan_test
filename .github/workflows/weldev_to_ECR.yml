@@ -12,6 +12,8 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      env:
+        branch: ${{ github.ref_name }}
       - name: Check tagged branch
         run: |
           BRANCHS=$(git branch --contains ${{ github.ref_name }})
@@ -22,10 +24,8 @@ jobs:
             fi
           done
           exit 1
-      - name: "check branch name"
+      - name: check branch name
         run: echo "${{ github.ref_name }}"
-	env:
-	  branch: ${{ github.ref_name }}
       # リポジトリのコードをチェックアウト
       - name: Checkout repository
         uses: actions/checkout@v4
