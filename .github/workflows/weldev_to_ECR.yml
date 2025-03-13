@@ -29,7 +29,6 @@ jobs:
             fi
           done
           exit 1
-	  # weldev or welbingの場合、awsへpush
       - name: check branch name
         run: echo "${{ github.ref_name }}"
 	env:
