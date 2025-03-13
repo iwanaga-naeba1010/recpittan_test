@@ -1,30 +1,24 @@
-FROM ruby:3.3.6
+FROM ruby:3.3.6-alpine
 
-RUN dpkg --add-architecture amd64
-RUN dpkg --print-foreign-architectures
 
-# Installing the ttf-takao-mincho package will add support for displaying Japanese text in Ubuntu.
-RUN apt-get update -qq \
-  && apt install -yq fonts-noto-unhinted fonts-noto-cjk fonts-takao-mincho
+ENV LANG=C.UTF-8
+ENV TZ=Asia/Tokyo
+ARG RAILS_ENV=development
+ENV USER_ID="1000"
+ENV GROUP_ID="1000"
+ENV USER_NAME="app"
 
-# Using Node.js v16.x(LTS)
-RUN curl -fsSL https://deb.nodesource.com/setup_16.x | bash -
+RUN addgroup --gid "${GROUP_ID}" "${USER_NAME}" && \
+  adduser  -u "${USER_ID}" "${USER_NAME}"  -G "${USER_NAME}" -D  && \
+  chmod -R 777 /usr/local/bundle
 
-# Add packages
-RUN apt-get update && apt-get install -y git nodejs vim graphviz cron
 
-# Add yarnpkg for assets:precompile
-RUN npm install -g yarn webpack-dev-server
+RUN mkdir /app
 
-WORKDIR /app
+RUN apk update && \
+  apk upgrade && \
+  apk add --no-cache tzdata bash
 
-COPY Gemfile Gemfile.lock ./
+COPY . ./
 
-RUN echo 'gem: --no-document' > /usr/local/etc/gemrc
-RUN gem install bundler --version 2.2.22 && \
-    bundle config set --local path /usr/local/bundle && \
-    bundle install --jobs 4
-
-COPY package.json yarn.lock ./
-
-RUN yarn install
+# comment : run build on bin/build.sh

@@ -9,10 +9,10 @@ env:
   SLACK_WEBHOOK: https://hooks.slack.com/services/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
   SLACK_USERNAME: github_actions_bot
   SLACK_CHANNEL: product_matching_system
-  AWS_ACCESS_KEY_ID: AKIASN7APX6NOANAVIJ2
+  AWS_ACCESS_KEY_ID : ${{ secrets.AWS_ACCESS_KEY_ID }}
+  AWS_SECRET_ACCESS_KEY : ${{ secrets.AWS_SECRET_ACCESS_KEY }}
   AWS_BUCKET: matching-system-staging
   AWS_REGION: ap-northeast-1
-  AWS_SECRET_ACCESS_KEY: 0Mf2Hjc4SUuOZ5dfAxPZI/Q4GrByML5hEA30Yl+p
   DOMAIN: http://localhost:3000
   ENCRYPTION_PRIMARY_KEY: uuOdXEZGRdODjRTtyMoz21KGyYUKTQYX
   ENCRYPTION_DETERMINISTIC_KEY: cQDGBHptxP4rDwAOYB8J98r6oSgCwiGN
@@ -32,10 +32,10 @@ jobs:
         with:
           ruby-version: 3.3.6
           bundler-cache: true
-      - name: Use Node.js 16.x
+      - name: Use Node.js 22.x
         uses: actions/setup-node@v2
         with:
-          node-version: '16.x'
+          node-version: '22.x'
       - name: Cache node modules
         uses: actions/cache@v4
         with:
@@ -100,10 +100,10 @@ jobs:
         with:
           ruby-version: 3.3.6
           bundler-cache: true
-      - name: Use Node.js 16.x
+      - name: Use Node.js 22.x
         uses: actions/setup-node@v2
         with:
-          node-version: '16.x'
+          node-version: '22.x'
       - name: Cache node modules
         uses: actions/cache@v4
         with:

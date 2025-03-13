@@ -7,7 +7,7 @@
     "lint:fix": "eslint --fix './{app/javascript,reactSrc,reactTest}/**/*.{ts,tsx}' && prettier --write './{app/javascript,reactSrc,reactTest}/**/*.{ts,tsx}'"
   },
   "engines": {
-    "node": "16.x"
+    "node": "22.x"
   },
   "dependencies": {
     "@activeadmin/activeadmin": "^3.2.5",
