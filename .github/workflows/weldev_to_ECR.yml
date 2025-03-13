@@ -12,8 +12,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      env:
-        branch: ${{ github.ref_name }}
       - name: Check tagged branch
         run: |
           BRANCHS=$(git branch --contains ${{ github.ref_name }})
