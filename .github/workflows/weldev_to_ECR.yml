@@ -12,18 +12,28 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          ref: main  # weldev内のブランチをビルド
       - name: Check aws deploy target branch
         run: |
           BRANCHS=$( git branch --contains ${{ github.ref_name }} )
           set -- $BRANCHS
           for BRANCH in $BRANCHS ; do
-            if [[ "$BRANCH" == "main" ]]; then
+            if [[ "$BRANCH" == "welbing" ]]; then
+              exit 0
+            fi
+            if [[ "$BRANCH" == "weldev" ]]; then
               exit 0
             fi
           done
           exit 1
+	  # weldev or welbingの場合、awsへpush
       - name: check branch name
         run: echo "${{ github.ref_name }}"
+	env:
+	 branch: ${{ github.ref_name }}
       # リポジトリのコードをチェックアウト
       - name: Checkout repository
         uses: actions/checkout@v4
