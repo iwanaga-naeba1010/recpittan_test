@@ -14,11 +14,10 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-        with:
-          ref: main
       - name: Check aws deploy target branch
         run: |
           echo ${{ github.ref_name }}
+	  
           BRANCHS=$( git branch --contains ${{ github.ref_name }} )
           set -- $BRANCHS
           for BRANCH in $BRANCHS ; do
