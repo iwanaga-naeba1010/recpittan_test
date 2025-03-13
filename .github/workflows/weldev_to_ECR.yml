@@ -6,8 +6,6 @@ env:
 
 on:
   push:
-    tags:
-      - 'welbing'
 
 jobs:
   build-and-push:
