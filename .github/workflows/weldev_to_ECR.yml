@@ -54,8 +54,8 @@ jobs:
         run: |
           docker tag weldev:latest 167437647770.dkr.ecr.ap-northeast-1.amazonaws.com/weldev:latest
 
-      # Amazon ECR へ Push
+      # push to Amazon ECR 
       - name: Push Docker image to Amazon ECR
         run: |
-          echo $branch	
-          docker push 167437647770.dkr.ecr.ap-northeast-1.amazonaws.com/:"$branch":latest"
+          echo $branch
+          docker push 167437647770.dkr.ecr.ap-northeast-1.amazonaws.com/:"$branch":latest
