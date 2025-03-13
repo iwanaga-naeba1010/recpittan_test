@@ -23,7 +23,7 @@ jobs:
           done
           exit 1
       - check branch name
-        run: echo ${{ github.ref_name }}
+        run: echo "${{ github.ref_name }}"
 	env:
 	  branch: ${{ github.ref_name }}
       # リポジトリのコードをチェックアウト
