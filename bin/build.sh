@@ -1,9 +1,7 @@
 #!/bin/bash
 
-
 apk add --no-cache  gcc g++ libc-dev libxml2-dev linux-headers make postgresql-dev
 apk add yarn graphviz chromium-chromedriver git openssh
-
 
 mkdir -p vendor/bundle
 mkdir -p vendor/cache
@@ -23,7 +21,6 @@ chmod 1777 /tmp
 #gem install bundler --version 2.5.23
 echo 'gem: --no-document' > /usr/local/etc/gemrc
 gem install bundler --version 2.5.23
-
 
 cd /app
 
@@ -45,7 +42,6 @@ echo "webpack compile"
 #su -c "bin/rails  webpacker:compile" app
 su -c "bin/webpack -d & " app
 
-
 # webpackがcompileを完了しないと、aseets:precompileがerrorになるので、
 # 暫定対応としてsleepする
 # manifest.jsonが存在していればコンパイル済みとして処理する
@@ -63,7 +59,6 @@ do
     fi
 done
 
-
 echo ""
 echo "assets:precompile"
 su -c 'bin/rails assets:precompile' app
@@ -78,7 +73,6 @@ echo ""
 echo "db:seed"
 su -c 'bin/rails db:seed' app
 echo "done : db:seed"
-
 
 rm -f tmp/pids/server.pid
 
