@@ -17,7 +17,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
-          ref: weldev  # weldev内のブランチをビルド
+          ref: main  # weldev内のブランチをビルド
       #    sparse-checkout: |
       #      app  # app ディレクトリのみチェックアウト
       #    sparse-checkout-cone-mode: false
