@@ -22,7 +22,16 @@ jobs:
       #    sparse-checkout: |
       #      app  # app ディレクトリのみチェックアウト
       #    sparse-checkout-cone-mode: false
-
+      - name: Check tagged branch
+        run: |
+          BRANCHS=$(git branch --contains ${{ github.ref_name }})
+          set -- $BRANCHS
+          for BRANCH in $BRANCHS ; do
+            if [[ "$BRANCH" == "main" ]]; then
+              exit 0
+            fi
+          done
+          exit 1
       # AWS 認証情報をセットアップ。※将来的にGithubActionsのSecretsで管理
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
