@@ -58,4 +58,6 @@ jobs:
       - name: Push Docker image to Amazon ECR
         run: |
           echo $branch
-          docker push 167437647770.dkr.ecr.ap-northeast-1.amazonaws.com/:"$branch":latest
+          target="167437647770.dkr.ecr.ap-northeast-1.amazonaws.com/:${branch}:latest"
+          dcho $target
+          docker push $target
