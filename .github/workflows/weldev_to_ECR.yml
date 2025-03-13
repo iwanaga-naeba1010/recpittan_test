@@ -19,7 +19,7 @@ jobs:
       - name: Check aws deploy target branch
         run: |
           branch=${{ github.ref_name }}
-          if [[ "$branch" == "webing" ]]; then
+          if [[ "$branch" == "welbing" ]]; then
             exit 0
           fi
           if [[ "$branch" == "weldev" ]]; then
