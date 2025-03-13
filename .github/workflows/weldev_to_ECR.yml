@@ -30,14 +30,6 @@ jobs:
             fi
           done
           exit 1
-      # AWS 認証情報をセットアップ。※将来的にGithubActionsのSecretsで管理
-      - name: Configure AWS credentials
-        uses: aws-actions/configure-aws-credentials@v1
-        with:
-          aws-access-key-id: ${{ env.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ env.AWS_SECRET_ACCESS_KEY }}
-          aws-region: ap-northeast-1
-
       # Amazon ECR へのログイン
       - name: Login to Amazon ECR
         id: login-ecr
