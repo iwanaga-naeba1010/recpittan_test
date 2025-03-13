@@ -47,12 +47,13 @@ jobs:
       # Docker イメージをビルド
       - name: Build Docker image
         run: |
-          docker build -t weldev . # rootディレクトリの Dockerfile を使用
+          docker build -t $branch . # rootディレクトリの Dockerfile を使用
 
       # Docker イメージに latestタグを付ける
       - name: Tag Docker image
         run: |
-          docker tag weldev:latest 167437647770.dkr.ecr.ap-northeast-1.amazonaws.com/weldev:latest
+          target="167437647770.dkr.ecr.ap-northeast-1.amazonaws.com/${branch}:latest"
+          docker tag "${branch}:latest# $target
 
       # push to Amazon ECR 
       - name: Push Docker image to Amazon ECR
