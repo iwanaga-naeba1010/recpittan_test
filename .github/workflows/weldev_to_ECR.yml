@@ -31,8 +31,8 @@ jobs:
           exit 1
       - name: check branch name
         run: echo "${{ github.ref_name }}"
-	env:
-	 branch: ${{ github.ref_name }}
+        env:
+          branch: ${{ github.ref_name }}
       # リポジトリのコードをチェックアウト
       - name: Checkout repository
         uses: actions/checkout@v4
