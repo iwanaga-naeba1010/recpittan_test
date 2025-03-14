@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/bin/bash
 set -e  # エラーが発生した場合にスクリプトを即終了
 
 # 証明書を保存するディレクトリを作成※ここはアプリに合わせて変更してください
@@ -20,3 +20,8 @@ sudo chown root:root "$CERT_DIR/server.crt"
 sudo chown root:root "$CERT_DIR/server.key"
 
 echo "SSL certificate setup completed successfully."
+
+# get SLACK_WEBHOOK
+slackwebhook=$( aws ssm get-parameter --with-decryption --query "Parameter.Value" --output text --name "SLACK_WEBHOOK" )
+echo "SLACK_WEBHOOK=${slackwebhook}" >> .env
+

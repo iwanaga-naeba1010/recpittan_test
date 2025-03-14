@@ -16,4 +16,14 @@ rm -fr coverage
 cat /dev/null  > config/certs/server.crt
 cat /dev/null > config/certs/server.key
 
+log/.bash_history
 
+ls -l config/certs
+
+echo "check AWS KEY"
+grep -ir AKIASN *
+grep -ir AKIASN .*
+
+echo "check Slack webhook"
+grep -ir hooks.slack *
+grep -ir hooks.slack .*
