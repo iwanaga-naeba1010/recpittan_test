@@ -7,6 +7,7 @@ env:
   POSTGRES_DB: ep_matching_test
   MAIL_SENDER_FROM: no-reply@ep.net
 #  SLACK_WEBHOOK: https://hooks.slack.com/services/QSG***/MHE***/iVe***
+  SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
   SLACK_USERNAME: github_actions_bot
   SLACK_CHANNEL: product_matching_system
   AWS_ACCESS_KEY_ID : ${{ secrets.AWS_ACCESS_KEY_ID }}
