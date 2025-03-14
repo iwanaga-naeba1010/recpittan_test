@@ -589,6 +589,10 @@ a.clink {
     opacity: 0.5;
     cursor: not-allowed;
   }
+
+  &:hover {
+    color: #E83E8C;
+  }
 }
 
 .btn-cancel {

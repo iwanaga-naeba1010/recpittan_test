@@ -126,7 +126,7 @@ class Recreation < ApplicationRecord
   }
 
   def latest_flyer
-    recreation_images.flyers.order(updated_at: :desc).limit(1).first
+    recreation_images.flyers.order(updated_at: :desc).take
   end
 
   def flyer
