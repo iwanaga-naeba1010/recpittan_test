@@ -71,6 +71,6 @@ jobs:
       # test : ec2 deploy
       - name: ec2 deploy
         run: |
-          echo ${{ secrets.AWS_PRIVATE_KEY }} > private_key
+          echo "${{ secrets.AWS_PRIVATE_KEY }}" > private_key
           chmod 600
           ssh -oStrictHostKeyChecking=no ${{ secrets.AWS_USER }}@${{ secrets.AWS_HOST }} -i private_key "docker pull ${awsuid}.dkr.ecr.ap-northeast-1.amazonaws.com/${branch} && docker run -p 8443:8443 -e AWS_ACCESS_KEY_ID=${{ secrets.AKEY }} -e AWS_SECRET_ACCESS_KEY=${{ secrets.ASECRET }} -it ${awsuid}.dkr.ecr.ap-northeast-1.amazonaws.com/${branch}"
