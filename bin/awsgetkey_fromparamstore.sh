@@ -44,7 +44,7 @@ echo "SSL certificate setup completed successfully."
 
 env | grep SLACK_WEBHOOK > /dev/null
 ret=$?
-if [ $ret -ne 0 ];
+if [ $ret -ne 0 ]; then
     echo "get slack webhook"    
     slackwebhook=$( aws ssm get-parameter --with-decryption --query "Parameter.Value" --output text --name "SLACK_WEBHOOK" )
     echo "SLACK_WEBHOOK=${slackwebhook}" >> .env
