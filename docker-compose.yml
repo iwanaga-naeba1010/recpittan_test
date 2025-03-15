@@ -28,6 +28,7 @@ services:
       - rails_cache:/app/tmp/cache
       - packs:/app/public/packs
       - packs_test:/app/public/packs-test
+      - certs:/app/config/certs
     tmpfs:
       - /tmp
     environment:
@@ -40,7 +41,7 @@ services:
 #      DATABASE_USER: 'postgres'
 #      DATABASE_PASSWORD: 'postgres'
 #      SELENIUM_DRIVER_URL: http://chrome:4444/wd/hub
-#      LOCAL: 'true'
+      LOCAL: 'true'
       RAILS_MASTER_KEY:
 #    depends_on:
 #      - db
@@ -103,3 +104,4 @@ volumes:
   packs:
   packs_test:
   maildir:
+  certs:
