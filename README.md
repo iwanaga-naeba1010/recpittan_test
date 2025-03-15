@@ -49,3 +49,4 @@ docker-compose exec web yarn lint
 docker-compose exec web yarn lint:fix
 ```
 
+# dip
