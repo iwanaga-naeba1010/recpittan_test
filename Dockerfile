@@ -19,6 +19,8 @@ RUN apk update && \
   apk upgrade && \
   apk add --no-cache tzdata bash
 
+WORKDIR /app
 COPY . ./
 
 # comment : run build on bin/build.sh
+ENTRYPOINT ["/app/dockers/entrypoint.sh"]

@@ -41,6 +41,7 @@ echo ""
 echo "webpack compile"
 #su -c "bin/rails  webpacker:compile" app
 su -c "bin/webpack -d & " app
+sleep 10
 
 # webpackがcompileを完了しないと、aseets:precompileがerrorになるので、
 # 暫定対応としてsleepする
@@ -73,6 +74,3 @@ echo ""
 echo "db:seed"
 su -c 'bin/rails db:seed' app
 echo "done : db:seed"
-
-rm -f tmp/pids/server.pid
-
