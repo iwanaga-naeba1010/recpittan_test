@@ -39,17 +39,10 @@ jobs:
           ref: ${{ github.ref_name }}  # weldev内のブランチをビルド
 
       - name: Configure AWS Credentials
-<<<<<<< HEAD
         uses: aws-actions/configure-aws-credentials@v4
         with:
           aws-access-key-id: ${{ secrets.AKEY }}
           aws-secret-access-key: ${{ secrets.ASECRET }}
-=======
-        uses: aws-actions/configure-aws-credentials@v2
-        with:
-          aws-access-key-id: ${AWS_ACCESS_KEY_ID}
-          aws-secret-access-key: ${AWS_SECRET_ACCESS_KEY}
->>>>>>> bdde461b0e2d711d3e815a14e6a5b6223d1dd9ff
           aws-region: ap-northeast-1
 
       - name: Login to Amazon ECR
@@ -78,12 +71,6 @@ jobs:
       # test : ec2 deploy
       - name: ec2 deploy
         run: |
-<<<<<<< HEAD
           echo ${{ secrets.AWS_PRIVATE_KEY }} > private_key
           chmod 600
           ssh -oStrictHostKeyChecking=no ${{ secrets.AWS_USER }}@${{ secrets.AWS_HOST }} -i private_key "docker pull ${awsuid}.dkr.ecr.ap-northeast-1.amazonaws.com/${branch} && docker run -p 8443:8443 -e AWS_ACCESS_KEY_ID=${{ secrets.AKEY }} -e AWS_SECRET_ACCESS_KEY=${{ secrets.ASECRET }} -it ${awsuid}.dkr.ecr.ap-northeast-1.amazonaws.com/${branch}"
-=======
-          echo ${awspkey} > private_key
-          chmod 600
-          ssh -oStrictHostKeyChecking=no ${awsuser}@${awshost} -i private_key "docker pull ${awsuid}.dkr.ecr.ap-northeast-1.amazonaws.com/${branch} && docker run -p 8443:8443 -e AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID} -e AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY} -it ${awsuid}.dkr.ecr.ap-northeast-1.amazonaws.com/${branch}"
->>>>>>> bdde461b0e2d711d3e815a14e6a5b6223d1dd9ff
