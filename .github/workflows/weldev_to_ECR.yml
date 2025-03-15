@@ -1,6 +1,8 @@
 name: Deploy weldev to AWS ECR
 
 env:
+  branch: ${{ github.ref_name }}
+  awsuid: ${{ secrets.AWS_UID }}
 
 on:
   push:
@@ -14,48 +16,61 @@ jobs:
         uses: actions/checkout@v4
         with:
           ref: main
+
       - name: Check aws deploy target branch
         run: |
-          BRANCHS=$( git branch --contains ${{ github.ref_name }} )
-          set -- $BRANCHS
-          for BRANCH in $BRANCHS ; do
-            if [[ "$BRANCH" == "welbing" ]]; then
-              exit 0
-            fi
-            if [[ "$BRANCH" == "weldev" ]]; then
-              exit 0
-            fi
-          done
+          if [[ "$branch" == "welbing" ]]; then
+            exit 0
+          fi
+          if [[ "$branch" == "weldev" ]]; then
+            exit 0
+          fi
           exit 1
+
       - name: check branch name
         run: echo "${{ github.ref_name }}"
         env:
           branch: ${{ github.ref_name }}
+
       # リポジトリのコードをチェックアウト
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
           ref: ${{ github.ref_name }}  # weldev内のブランチをビルド
-      #    sparse-checkout: |
-      #      app  # app ディレクトリのみチェックアウト
-      #    sparse-checkout-cone-mode: false
-      # Amazon ECR へのログイン
+
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AKEY }}
+          aws-secret-access-key: ${{ secrets.ASECRET }}
+          aws-region: ap-northeast-1
+
       - name: Login to Amazon ECR
-        id: login-ecr
-        run: |
-          aws ecr get-login-password --region ap-northeast-1 | docker login --username AWS --password-stdin 167437647770.dkr.ecr.ap-northeast-1.amazonaws.com
+        id: login-ecr        
+        uses: aws-actions/amazon-ecr-login@v2
 
       # Docker イメージをビルド
       - name: Build Docker image
         run: |
-          docker build -t weldev . # rootディレクトリの Dockerfile を使用
+          docker build -t $branch . # rootディレクトリの Dockerfile を使用
 
       # Docker イメージに latestタグを付ける
       - name: Tag Docker image
         run: |
-          docker tag weldev:latest 167437647770.dkr.ecr.ap-northeast-1.amazonaws.com/weldev:latest
+          target="${awsuid}.dkr.ecr.ap-northeast-1.amazonaws.com/${branch}:latest"
+          docker tag "${branch}:latest" $target
 
-      # Amazon ECR へ Push
+      # push to Amazon ECR 
       - name: Push Docker image to Amazon ECR
         run: |
-          docker push 167437647770.dkr.ecr.ap-northeast-1.amazonaws.com/weldev:latest
+          echo $branch
+          target="${awsuid}.dkr.ecr.ap-northeast-1.amazonaws.com/${branch}:latest"
+          echo $target
+          docker push $target
+
+      # test : ec2 deploy
+      - name: ec2 deploy
+        run: |
+          echo ${{ secrets.AWS_PRIVATE_KEY }} > private_key
+          chmod 600
+          ssh -oStrictHostKeyChecking=no ${{ secrets.AWS_USER }}@${{ secrets.AWS_HOST }} -i private_key "docker pull ${awsuid}.dkr.ecr.ap-northeast-1.amazonaws.com/${branch} && docker run -p 8443:8443 -e AWS_ACCESS_KEY_ID=${{ secrets.AKEY }} -e AWS_SECRET_ACCESS_KEY=${{ secrets.ASECRET }} -it ${awsuid}.dkr.ecr.ap-northeast-1.amazonaws.com/${branch}"
