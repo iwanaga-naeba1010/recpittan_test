@@ -1,5 +1,6 @@
 #!/bin/bash
 
+mkdir -p log
 log=log/build.log
 touch $log
 chown 1000:1000 $log
