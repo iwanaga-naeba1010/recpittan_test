@@ -21,6 +21,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           ref: main
+
       - name: Check aws deploy target branch
         run: |
           if [[ "$branch" == "welbing" ]]; then
@@ -30,23 +31,28 @@ jobs:
             exit 0
           fi
           exit 1
+
       - name: check branch name
         run: echo "${{ github.ref_name }}"
         env:
           branch: ${{ github.ref_name }}
+
       # リポジトリのコードをチェックアウト
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
           ref: ${{ github.ref_name }}  # weldev内のブランチをビルド
-      #    sparse-checkout: |
-      #      app  # app ディレクトリのみチェックアウト
-      #    sparse-checkout-cone-mode: false
-      # Amazon ECR へのログイン
+
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${AWS_ACCESS_KEY_ID}
+          aws-secret-access-key: ${AWS_SECRET_ACCESS_KEY}
+          aws-region: ap-northeast-1
+
       - name: Login to Amazon ECR
-        id: login-ecr
-        run: |
-          aws ecr get-login-password --region ap-northeast-1 | docker login --username AWS --password-stdin 167437647770.dkr.ecr.ap-northeast-1.amazonaws.com
+        id: login-ecr        
+        uses: aws-actions/amazon-ecr-login@v2
 
       # Docker イメージをビルド
       - name: Build Docker image
@@ -56,14 +62,14 @@ jobs:
       # Docker イメージに latestタグを付ける
       - name: Tag Docker image
         run: |
-          target="167437647770.dkr.ecr.ap-northeast-1.amazonaws.com/${branch}:latest"
+          target="${awsuid}.dkr.ecr.ap-northeast-1.amazonaws.com/${branch}:latest"
           docker tag "${branch}:latest" $target
 
       # push to Amazon ECR 
       - name: Push Docker image to Amazon ECR
         run: |
           echo $branch
-          target="167437647770.dkr.ecr.ap-northeast-1.amazonaws.com/${branch}:latest"
+          target="${awsuid}.dkr.ecr.ap-northeast-1.amazonaws.com/${branch}:latest"
           echo $target
           docker push $target
 
