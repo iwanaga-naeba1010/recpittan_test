@@ -55,4 +55,5 @@ dip build
 dip start
 
 # container
-docers/ 環境構築用のfolder
+dockers/ 環境構築用のfolder
+dockers/entrypoint.sh
