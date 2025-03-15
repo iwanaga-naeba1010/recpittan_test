@@ -1,6 +1,7 @@
 #!/bin/bash
 
 log=log/build.log
+touch $log
 chown 1000:1000 $log
 chmod 666 $log
 echo "local=${LOCAL}" >> $log
