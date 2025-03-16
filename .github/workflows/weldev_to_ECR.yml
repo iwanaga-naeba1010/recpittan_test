@@ -78,4 +78,5 @@ jobs:
           if [ "$cid" != "" ]; then
             docker stop $cid > /dev/null
           fi
-          ssh -oStrictHostKeyChecking=no ${{ secrets.AWS_USER }}@${{ secrets.AWS_HOST }} -i private_key "docker pull ${awsuid}.dkr.ecr.ap-northeast-1.amazonaws.com/${branch} && docker run -d -p 8443:8443 --env-file env -e BRANCH=$branch ${awsuid}.dkr.ecr.ap-northeast-1.amazonaws.com/${branch}"
+          ssh -oStrictHostKeyChecking=no ${{ secrets.AWS_USER }}@${{ secrets.AWS_HOST }} -i private_key "docker pull ${awsuid}.dkr.ecr.ap-northeast-1.amazonaws.com/${branch} && docker run -d -p 8443:8443 --env-file env --env AWS_ACCESS_KEY_ID=${{ secrets.AWS_ACCESS_KEY} --env AWS_SECRET_ACCESS_KEY=${{ secrets.AWS_SECRET_ACCESS_KEY }} AWS_ACCESS_KEY_ID= ${awsuid}.dkr.ecr.ap-northeast-1.amazonaws.com/${branch}"
+
