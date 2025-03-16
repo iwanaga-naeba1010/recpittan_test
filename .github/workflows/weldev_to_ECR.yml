@@ -65,7 +65,6 @@ jobs:
         run: |
           echo $branch
           aws ecr get-login-password | docker login --username AWS --password-stdin https://${awsuid}.dkr.ecr.<region>.amazonaws.com
-Login Succeeded
           target="${awsuid}.dkr.ecr.ap-northeast-1.amazonaws.com/${branch}:latest"
           echo $target
           docker push $target
