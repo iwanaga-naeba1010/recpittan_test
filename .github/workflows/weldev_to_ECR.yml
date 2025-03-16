@@ -64,7 +64,7 @@ jobs:
       - name: Push Docker image to Amazon ECR
         run: |
           echo $branch
-          aws ecr get-login-password | docker login --username AWS --password-stdin https://${awsuid}.dkr.ecr.<region>.amazonaws.com
+#          aws ecr get-login-password | docker login --username AWS --password-stdin https://${awsuid}.dkr.ecr.<region>.amazonaws.com
           target="${awsuid}.dkr.ecr.ap-northeast-1.amazonaws.com/${branch}:latest"
           echo $target
           docker push $target
