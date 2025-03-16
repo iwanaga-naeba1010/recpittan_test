@@ -6,7 +6,9 @@ touch config/certs/server.key
 
 rm -f tmp/pids/server.pid
 
-bin/webpack -d &
+mkdir -p log
+log=log/webpack.log
+bin/webpack -d > $log 2>&1  &
 
 #bin/rails s -p 3000 -b '0.0.0.0'
 

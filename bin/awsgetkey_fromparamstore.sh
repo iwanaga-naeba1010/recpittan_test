@@ -42,18 +42,16 @@ chmod 600 "$CERT_DIR/server.key"
 
 echo "SSL certificate setup completed successfully."
 
-env | grep SLACK_WEBHOOK > /dev/null
-ret=$?
-if [ $ret -ne 0 ]; then
-    echo "get slack webhook"    
-    slackwebhook=$( aws ssm get-parameter --with-decryption --query "Parameter.Value" --output text --name "SLACK_WEBHOOK" )
-    echo "SLACK_WEBHOOK=${slackwebhook}" >> .env
+if [ -f .env ]; then
+    eval "$(cat .env <(echo) <(declare -x))"
 fi
 
-env | grep DATABASE_P > /dev/null
+echo $BRANCH
+env | grep MAIL_SENDER_FROM > /dev/null
 ret=$?
 if [ $ret -ne 0 ]; then
-    echo "get db"
-    dbpass=$( aws ssm get-parameter --with-decryption --query "Parameter.Value" --output text --name "DATABASE_PASSWORD" )
-    echo "DATABASE_PASSWORD=${dbpass}" >> .env
+    echo "get env"
+    envs=$( aws ssm get-parameter --with-decryption --query "Parameter.Value" --output text --name "/env/${BRANCH}" )
+    echo "$envs" >> .env
 fi
+

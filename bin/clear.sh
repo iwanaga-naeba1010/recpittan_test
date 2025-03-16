@@ -4,10 +4,11 @@ rm -fr erd.pdf
 
 sudo chown -R 1000:1000 *
 
+echo "" > log/build.log
 echo "" > log/bullet.log
 echo "" > log/development.log
 echo "" > log/test.log
-echo "" > log/build.log
+echo "" > log/webpack.log
 rm -fr public/assets/*
 rm -fr public/packs/*
 rm -fr tmp/local_secret.txt
@@ -19,7 +20,7 @@ cat /dev/null > config/certs/server.key
 
 log/.bash_history
 
-ls -l config/certs
+
 
 echo "check AWS KEY"
 grep -ir AKIASN *
@@ -29,5 +30,8 @@ echo "check Slack webhook"
 grep -ir hooks.slack *
 grep -ir hooks.slack .*
 
-echo "app/javascript/channels"
+echo "check app/javascript/channels"
 ls -l app/javascript/channels
+
+echo "check certs"
+ls -l config/certs

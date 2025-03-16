@@ -17,6 +17,8 @@ elsif Rails.env.development?
   host = ENV['MAIL_ADDRESS']
   port = ENV['MAIL_PORT']
   begin
+    # check mailhog is running
+    # if not , use gem letter_opener_web
     s = Socket.tcp(host,port)
     ActionMailer::Base.perform_caching = false
     ActionMailer::Base.perform_deliveries = true

@@ -8,9 +8,11 @@ mkdir -p vendor/cache
 mkdir -p config/certs
 mkdir -p tmp/pids
 mkdir -p node_modules
+mkdir -p log
 
 touch config/certs/server.crt
 touch config/certs/server.key
+touch .env
 
 chown -R app:app ./*
 chmod 600 config/certs/*
@@ -40,7 +42,10 @@ su -c 'yarn install' app
 echo ""
 echo "webpack compile"
 #su -c "bin/rails  webpacker:compile" app
-su -c "bin/webpack -d & " app
+mkdir -p log
+log=log/webpack.log
+touch $log
+su -c "bin/webpack -d > $log 2>&1  & " app
 sleep 10
 
 # webpackがcompileを完了しないと、aseets:precompileがerrorになるので、
@@ -74,3 +79,4 @@ echo ""
 echo "db:seed"
 su -c 'bin/rails db:seed' app
 echo "done : db:seed"
+
