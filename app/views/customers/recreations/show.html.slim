@@ -119,7 +119,14 @@ main.detail
                   h4.title 対象エリア
                   - @recreation.recreation_prefectures.pluck(:name).uniq.each do |prefecture_name|
                     .text-muted = "・#{prefecture_name}"
-              .action-area
+              .action-area.d-flex.justify-content-center.flex-column.gap-3
+                - latest_flyer = @recreation.latest_flyer
+                - if latest_flyer.present?
+                  = link_to latest_flyer.image.download_url, class: 'btn-download-flyer' do
+                    i.fas.fa-download
+                    | &nbsp;
+                    span
+                      | レクチラシ
                 - if user_signed_in?
                   / 0円の場合はslackに飛ばしで営業が対応
                   - if @recreation.is_public_price

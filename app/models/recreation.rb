@@ -121,6 +121,10 @@ class Recreation < ApplicationRecord
     end
   }
 
+  def latest_flyer
+    recreation_images.flyers.order(updated_at: :desc).take
+  end
+
   def flyer
     files = recreation_images.flyers&.to_a
     return nil if files.blank?
