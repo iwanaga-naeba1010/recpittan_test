@@ -14,10 +14,15 @@
 #  email                  :string           default(""), not null
 #  encrypted_password     :string           default(""), not null
 #  failed_attempts        :integer          default(0), not null
+#  is_facility            :boolean          default(FALSE)
+#  is_mfa_enabled         :boolean          default(FALSE), not null
+#  is_partner             :boolean          default(FALSE)
 #  last_sign_in_at        :datetime
 #  last_sign_in_ip        :string
 #  locked_at              :datetime
+#  manage_company_code    :string
 #  memo                   :string
+#  mfa_authenticated_at   :datetime
 #  remember_created_at    :datetime
 #  reset_password_sent_at :datetime
 #  reset_password_token   :string

@@ -8,19 +8,23 @@
 #  building                   :string
 #  capacity                   :integer
 #  city                       :string
+#  common_trading_target_code :string
 #  facility_name              :string
 #  facility_name_kana         :string
 #  feature                    :text
 #  genre                      :integer          default("residential_fee_based_nursing_home")
+#  manage_company_code        :string
 #  memo                       :string
 #  name                       :string
 #  nursing_care_level         :string
 #  person_in_charge_name      :string
 #  person_in_charge_name_kana :string
+#  pref_code                  :string
 #  prefecture                 :string
 #  request                    :text
 #  street                     :string
 #  tel                        :string
+#  trading_target_code        :string
 #  url                        :string
 #  zip                        :string
 #  created_at                 :datetime         not null

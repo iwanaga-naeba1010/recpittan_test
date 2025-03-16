@@ -18,4 +18,8 @@ class ImageUploader < CarrierWave::Uploader::Base
   def filename
     original_filename
   end
+
+  def download_url
+    file.url(response_content_disposition: 'attachment')
+  end
 end

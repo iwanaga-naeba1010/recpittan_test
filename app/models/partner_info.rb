@@ -23,7 +23,7 @@
 #
 # Foreign Keys
 #
-#  partner_infos_user_id_fkey  (user_id => users.id)
+#  fk_rails_...  (user_id => users.id)
 #
 class PartnerInfo < ApplicationRecord
   belongs_to :user, class_name: 'User', inverse_of: :partner_info

@@ -27,4 +27,20 @@ module ApplicationHelper
       { id: 7, title: 'その他', descriptions: ['アニマルセラピー', '写真撮影など'], image_name: 'others.jpg' }
     ]
   end
+
+  def company_announcement_public_path
+    SystemParameter.available.company_announcement_public.order(applied_date: :desc, updated_at: :desc).limit(1).first&.value_text
+  end
+
+  def company_announcement_path
+    return '' unless current_user.role.customer?
+
+    SystemParameter.available.company_announcement.order(applied_date: :desc, updated_at: :desc).limit(1).first&.value_text
+  end
+
+  def partner_announcement_path
+    return '' unless current_user.role.partner?
+
+    SystemParameter.available.partner_announcement.order(applied_date: :desc, updated_at: :desc).limit(1).first&.value_text
+  end
 end

@@ -15,4 +15,20 @@
 #
 class SystemParameter < ApplicationRecord
   include Ransackable
+
+  scope :available, -> {
+    where(applied_date: ..Time.current)
+  }
+
+  scope :company_announcement_public, -> {
+    where(param_code: 'company_announcement_public')
+  }
+
+  scope :company_announcement, -> {
+    where(param_code: 'company_announcement')
+  }
+
+  scope :partner_announcement, -> {
+    where(param_code: 'partner_announcement')
+  }
 end
