@@ -122,7 +122,7 @@ main.detail
               .action-area.d-flex.justify-content-center.flex-column.gap-3
                 - latest_flyer = @recreation.latest_flyer
                 - if latest_flyer.present?
-                  = link_to download_url(latest_flyer.image), class: 'btn-download-flyer' do
+                  = link_to latest_flyer.image.download_url, class: 'btn-download-flyer' do
                     i.fas.fa-download
                     | &nbsp;
                     span
