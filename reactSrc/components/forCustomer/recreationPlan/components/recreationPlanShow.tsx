@@ -54,7 +54,7 @@ const RecreationPlanShow: React.FC = () => {
     setTransportationExpenses(parseInt(event.target.value, 10) || 0);
   };
 
-  const grandTotalWithoutConsumptionTax =
+    const grandTotalWithoutConsumptionTax =
     totalPrice +
     totalMaterialPrice +
     totalTransportationCost +
@@ -133,7 +133,7 @@ const RecreationPlanShow: React.FC = () => {
 
   return (
     <div id='pdf-download-elm'>
-      <div className='container mt-4'>
+      <div classNaame='container mt-4'>
         <div className='row'>
           <div className='col-3 ps-0'>
             <img

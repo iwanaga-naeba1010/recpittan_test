@@ -1,4 +1,6 @@
 import { get } from '../utils/requests/base';
+import { xapikeyenv }  from '../utils/opendata_xapikey';
+
 
 interface Prefecture {
   prefCode: number;
@@ -25,7 +27,7 @@ export const findAllPrefectures = async (): Promise<PrefectureResponse> => {
   return get<PrefectureResponse>(
     'https://opendata.resas-portal.go.jp/api/v1/prefectures',
     {
-      'X-API-KEY': 'ZNVO5KCcD10yRBAjMMUknk9MVQ2w53VWv5LWTJoN',
+      'X-API-KEY': xapikeyenv,
     }
   );
 };
@@ -36,7 +38,8 @@ export const findCityByPrefectureCode = async (
   return get<CityResponse>(
     `https://opendata.resas-portal.go.jp/api/v1/cities?prefCode=${prefCode.toString()}`,
     {
-      'X-API-KEY': 'ZNVO5KCcD10yRBAjMMUknk9MVQ2w53VWv5LWTJoN',
+      'X-API-KEY': xapikeyenv,
     }
   );
 };
+
