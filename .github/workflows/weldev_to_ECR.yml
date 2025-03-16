@@ -53,7 +53,7 @@ jobs:
       - name: Build Docker image
         run: |
           docker build -t $branch . # rootディレクトリの Dockerfile を使用
-	  docker exec -t $branch bin/build.sh
+          docker exec -t $branch bin/build.sh
 
       # Docker イメージに latestタグを付ける
       - name: Tag Docker image
