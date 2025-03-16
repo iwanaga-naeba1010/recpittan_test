@@ -42,6 +42,7 @@ chmod 600 "$CERT_DIR/server.key"
 
 echo "SSL certificate setup completed successfully."
 
+
 if [ -f .env ]; then
     eval "$(cat .env <(echo) <(declare -x))"
 fi
@@ -54,4 +55,3 @@ if [ $ret -ne 0 ]; then
     envs=$( aws ssm get-parameter --with-decryption --query "Parameter.Value" --output text --name "/env/${BRANCH}" )
     echo "$envs" >> .env
 fi
-
