@@ -34,7 +34,8 @@ interaction:
 
   rspec:
     description: rspec exec
-    command: docker compose exec -e RAILS_ENV=test web bundle exec rspec
+    command: docker compose  up -d chrome && docker compose exec -e RAILS_ENV=test web bundle exec rspec
+      
 
 provision:
   - dip compose down --volumes
