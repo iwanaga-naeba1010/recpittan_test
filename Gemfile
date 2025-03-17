@@ -45,7 +45,6 @@ group :test do
   gem 'rspec-rails'
   gem 'capybara'
   gem 'selenium-webdriver'
-#  gem 'webdrivers', require: false # replaced selenium-webdriver
   gem 'database_cleaner'
   gem 'simplecov', require: false
   gem 'rails-controller-testing'
