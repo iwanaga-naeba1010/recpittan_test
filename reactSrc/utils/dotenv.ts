@@ -1,4 +1,4 @@
-const dotenv = require('dotenv')
+import dotenv = require('dotenv')
 
 const dotenvFiles = [
   '/app/.env'
