@@ -27,15 +27,15 @@ $at-re10: #FF2323;
 /* bootstrap val */
 $font-size-root: 16;
 $font-family-sans-serif: "Roboto",
-sans-serif !default;
+  sans-serif !default;
 
 $font-family-monospace: SFMono-Regular,
-Menlo,
-Monaco,
-Consolas,
-"Liberation Mono",
-"Courier New",
-monospace !default;
+  Menlo,
+  Monaco,
+  Consolas,
+  "Liberation Mono",
+  "Courier New",
+  monospace !default;
 @import "bootstrap";
 
 
@@ -284,8 +284,7 @@ body {
         vertical-align: middle;
       }
 
-      span.required {
-      }
+      span.required {}
     }
 
   }
@@ -377,17 +376,21 @@ body {
 /* レクカード */
 .recreation-card {
   border-radius: rem(4);
+
   &:hover .favorite-wrapper {
     display: block;
   }
+
   &:hover .desc-favorite {
     color: #6C757D;
   }
+
   &:hover {
     p {
       color: #E83E8C;
     }
   }
+
   /* 画像 */
   .card-img-top {
     position: relative;
@@ -417,6 +420,7 @@ body {
     height: 180px;
     text-align: center;
     background-color: rgba(255, 255, 255, 0.778);
+
     .favorite-icon {
       width: 50px;
       height: 50px;
@@ -448,6 +452,7 @@ body {
     /* カテゴリ＆タグ */
     &.card-body-tag {
       line-height: 140%;
+
       .category-label {
         font-family: 'Roboto';
         text-decoration: none;
@@ -469,6 +474,7 @@ body {
         border: 1px solid #92949C;
         border-radius: rem(4);
         font-size: rem(12);
+
         &:hover {
           color: #92949C;
         }
@@ -489,6 +495,7 @@ body {
       }
     }
   }
+
   .favorite-icon {
     cursor: pointer;
   }
@@ -566,6 +573,28 @@ a.clink {
   }
 }
 
+.btn-download-flyer {
+  color: #E83E8C;
+  font-weight: bold;
+  background-color: white;
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  border-radius: 3.75rem;
+  border-color: #E83E8C;
+  border-style: solid;
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  &:hover {
+    color: #E83E8C;
+  }
+}
+
 .btn-cancel {
   text-decoration: none;
   color: $ba10;
@@ -595,5 +624,6 @@ a.clink {
   display: flex;
   justify-content: center;
 }
+
 /* 各ページ */
 @import "pages";

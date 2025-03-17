@@ -1,5 +1,6 @@
 #!/bin/bash
 
+
 mkdir -p log
 log=log/build.log
 touch $log
@@ -19,7 +20,4 @@ else
 	sleep 10
     done
 fi
-
-
-
 

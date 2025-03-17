@@ -1,5 +1,4 @@
 #!/bin/bash
-#set -e  # エラーが発生した場合にスクリプトを即終了
 
 touch .env
 
@@ -41,7 +40,6 @@ chmod 600 "$CERT_DIR/server.crt"
 chmod 600 "$CERT_DIR/server.key"
 
 echo "SSL certificate setup completed successfully."
-
 
 if [ -f .env ]; then
     eval "$(cat .env <(echo) <(declare -x))"

@@ -34,6 +34,7 @@ echo ""
 echo "bundle install"
 su -c 'bin/bundle install --jobs 4' app
 
+
 echo ""
 echo "yarn install"
 #yarn install
@@ -42,11 +43,13 @@ su -c 'yarn install' app
 echo ""
 echo "webpack compile"
 #su -c "bin/rails  webpacker:compile" app
+
 mkdir -p log
 log=log/webpack.log
 touch $log
 su -c "bin/webpack -d > $log 2>&1  & " app
 sleep 10
+
 
 # webpackがcompileを完了しないと、aseets:precompileがerrorになるので、
 # 暫定対応としてsleepする
