@@ -3,6 +3,7 @@ name: Deploy weldev to AWS ECR
 env:
   branch: ${{ github.ref_name }}
   awsuid: ${{ secrets.AWS_UID }}
+  awsregion: ap-northeast-1
 
 on:
   push:
@@ -62,7 +63,7 @@ jobs:
 
       - name: set login ECR to docker
         run: |       
-           aws ecr get-login-password | docker login --username AWS --password-stdin https://${awsuid}.dkr.ecr.<region>.amazonaws.com         
+           aws ecr get-login-password | docker login --username AWS --password-stdin https://${awsuid}.dkr.ecr.${awsregion}.amazonaws.com
 
       # push to Amazon ECR 
       - name: Push Docker image to Amazon ECR
