@@ -12,6 +12,8 @@ mkdir -p log
 
 touch config/certs/server.crt
 touch config/certs/server.key
+touch log/build.log
+touch log/webpack.log
 touch .env
 
 chown -R app:app ./*
