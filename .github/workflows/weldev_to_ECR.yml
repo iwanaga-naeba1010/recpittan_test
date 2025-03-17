@@ -60,11 +60,14 @@ jobs:
           target="${awsuid}.dkr.ecr.ap-northeast-1.amazonaws.com/${branch}:latest"
           docker tag "${branch}:latest" $target
 
+      - name: set login ECR to docker
+        run: |       
+           #aws ecr get-login-password | docker login --username AWS --password-stdin https://${awsuid}.dkr.ecr.<region>.amazonaws.com         
+
       # push to Amazon ECR 
       - name: Push Docker image to Amazon ECR
         run: |
           echo $branch
-          #aws ecr get-login-password | docker login --username AWS --password-stdin https://${awsuid}.dkr.ecr.<region>.amazonaws.com
           target="${awsuid}.dkr.ecr.ap-northeast-1.amazonaws.com/${branch}:latest"
           echo $target
           docker push $target
