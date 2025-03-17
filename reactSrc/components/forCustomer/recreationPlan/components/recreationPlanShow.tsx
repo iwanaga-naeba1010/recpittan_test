@@ -133,7 +133,7 @@ const RecreationPlanShow: React.FC = () => {
 
   return (
     <div id='pdf-download-elm'>
-      <div classNaame='container mt-4'>
+      <div className='container mt-4'>
         <div className='row'>
           <div className='col-3 ps-0'>
             <img

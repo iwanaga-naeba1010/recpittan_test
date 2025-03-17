@@ -37,9 +37,11 @@ docker-compose exec web bin/rails db:migrate RAILS_ENV=test
 docker-compose exec web bundle exec rubocop
 
 # brakemanの実行
+# security check
 docker-compose exec web bundle exec brakeman
 
 # best practicesの実行
+# 静的コード解析ツール
 docker-compose exec web bundle exec rails_best_practices -e node_modules
 
 # TypeScript/JavaScriptのlint実行

@@ -15,6 +15,7 @@ touch config/certs/server.key
 touch log/build.log
 touch log/webpack.log
 touch .env
+touch erd.pdf
 
 chown -R app:app ./*
 chmod 600 config/certs/*
@@ -46,6 +47,9 @@ echo ""
 echo "webpack compile"
 #su -c "bin/rails  webpacker:compile" app
 
+NODE_OPTIONS=--openssl-legacy-provider
+export NODE_OPTIONS
+# for Error: error:0308010C:digital envelope routines::unsupported
 mkdir -p log
 log=log/webpack.log
 touch $log

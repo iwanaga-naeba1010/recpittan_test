@@ -1,6 +1,6 @@
-const dotenvFiles = [
-  '/app/.env'
-]
+// const dotenvFiles = [
+//   '/app/.env'
+// ]
 
 import '../../../node_modules/dotenv/config';
 

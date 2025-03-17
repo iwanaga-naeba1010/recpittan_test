@@ -45,7 +45,7 @@ if [ -f .env ]; then
     eval "$(cat .env <(echo) <(declare -x))"
 fi
 
-echo $BRANCH
+echo "branch=${BRANCH}"
 a=$( cat .env )
 if [ "$a" == "" ]; then
     echo "get env"

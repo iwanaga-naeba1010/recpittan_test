@@ -1,7 +1,6 @@
 import { AddressResponse, CityResponse, PrefectureResponse } from '@/types';
 import axios, { AxiosResponse } from 'axios';
-import { xapikeyenv } from '@/utils/dotenv'
-
+import { xapikeyenv } from '@/utils/getdotenv'
 
 export const findAddressByZip = async (
   zip: string
@@ -13,7 +12,7 @@ export const findAddressByZip = async (
 export const findAllPrefectures = async (): Promise<
   AxiosResponse<PrefectureResponse>
 > =>
-  axios.get<PrefectureResponse>(
+   axios.get<PrefectureResponse>(
     'https://opendata.resas-portal.go.jp/api/v1/prefectures',
     {
       headers: { 'X-API-KEY': xapikeyenv },
