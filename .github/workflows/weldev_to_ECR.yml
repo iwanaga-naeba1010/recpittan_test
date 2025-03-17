@@ -62,7 +62,7 @@ jobs:
 
       - name: set login ECR to docker
         run: |       
-           #aws ecr get-login-password | docker login --username AWS --password-stdin https://${awsuid}.dkr.ecr.<region>.amazonaws.com         
+           aws ecr get-login-password | docker login --username AWS --password-stdin https://${awsuid}.dkr.ecr.<region>.amazonaws.com         
 
       # push to Amazon ECR 
       - name: Push Docker image to Amazon ECR
