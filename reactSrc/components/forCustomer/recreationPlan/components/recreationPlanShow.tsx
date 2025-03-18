@@ -54,7 +54,7 @@ const RecreationPlanShow: React.FC = () => {
     setTransportationExpenses(parseInt(event.target.value, 10) || 0);
   };
 
-    const grandTotalWithoutConsumptionTax =
+  const grandTotalWithoutConsumptionTax =
     totalPrice +
     totalMaterialPrice +
     totalTransportationCost +

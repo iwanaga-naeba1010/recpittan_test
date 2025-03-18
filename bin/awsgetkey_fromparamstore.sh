@@ -46,8 +46,9 @@ if [ -f .env ]; then
 fi
 
 echo "branch=${BRANCH}"
-a=$( cat .env )
-if [ "$a" == "" ]; then
+grep DATABASE_HOST .env > /dev/null
+ret=$?
+if [ $ret -ne 0 ]; then
     echo "get env"
     envs=$( aws ssm get-parameter --with-decryption --query "Parameter.Value" --output text --name "/env/${BRANCH}" )
     echo "$envs" >> .env

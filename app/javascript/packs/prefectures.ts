@@ -1,5 +1,5 @@
 import { get } from '../utils/requests/base';
-import { xapikeyenv }  from '../utils/opendata_xapikey';
+import { xapikeyenv }  from '../utils/getapikey';
 
 
 interface Prefecture {

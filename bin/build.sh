@@ -43,6 +43,15 @@ echo "yarn install"
 #yarn install
 su -c 'yarn install' app
 
+echo "set frontend key"
+xapi=$( grep XAPIKEY  .env | cut -d '=' -f 2)
+jsconstfile=app/javascript/utils/getapikey.ts
+echo "export const xapikeyenv = '${xapi}'" > $jsconstfile
+jsconstfile=reactSrc/utils/getapikey.ts
+echo "export const xapikeyenv = '${xapi}'" > $jsconstfile
+
+
+
 echo ""
 echo "webpack compile"
 #su -c "bin/rails  webpacker:compile" app

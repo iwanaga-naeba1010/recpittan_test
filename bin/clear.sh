@@ -9,6 +9,11 @@ echo "" > log/bullet.log
 echo "" > log/development.log
 echo "" > log/test.log
 echo "" > log/webpack.log
+
+echo "" > app/javascript/utils/getapikey.ts
+echo "" > reactSrc/utils/getapikey.ts
+
+
 rm -fr public/assets/*
 rm -fr public/packs/*
 rm -fr tmp/local_secret.txt

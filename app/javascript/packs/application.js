@@ -13,7 +13,7 @@ Turbolinks.start()
 ActiveStorage.start()
 
 require('jquery');
-require('cocoon');
+require('cocoon-js');
 
 import 'bootstrap';
 import '../stylesheets/application.scss';
