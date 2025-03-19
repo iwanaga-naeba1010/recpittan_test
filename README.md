@@ -52,6 +52,7 @@ docker-compose exec web yarn lint:fix
 ```
 
 # dip
+localdevの環境構築 util command
 dip provision (dip p)
 dip build
 dip start
