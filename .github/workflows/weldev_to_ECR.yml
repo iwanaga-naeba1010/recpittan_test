@@ -80,9 +80,12 @@ jobs:
         run: |
           echo "${{ secrets.AWS_PRIVATE_KEY }}" > private_key
           chmod 600 private_key
-          cid=$( docker ps | grep ${branch} | cut -d ' ' -f 1 )
+          # get sslport
+          cat /dev/null > envs.txt
+          for word in $envs; do echo $word >> envs.txt; done
+          sslport=$( grep SSLPORT envs.txt | cut -d '=' -f 2 )
+          cid=$( dokcer ps | grep sslport | cut -d ' ' -f 1 )
           if [ "$cid" != "" ]; then
             docker stop $cid > /dev/null
           fi
           ssh -oStrictHostKeyChecking=no ${{ secrets.AWS_USER }}@${{ secrets.AWS_HOST }} -i private_key "docker pull ${awsuid}.dkr.ecr.${awsregion}.amazonaws.com/${branch} && docker run -d -p 8443:8443 --env-file env --env AWS_ACCESS_KEY_ID=${{ secrets.AKEY }} --env AWS_SECRET_ACCESS_KEY=${{ secrets.ASECRET }} --env BRANCH=${branch}  ${awsuid}.dkr.ecr.${awsregion}.amazonaws.com/${branch}"
-
