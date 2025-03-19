@@ -58,20 +58,20 @@ jobs:
       # Docker イメージに latestタグを付ける
       - name: Tag Docker image
         run: |
-          target="${awsuid}.dkr.ecr.ap-northeast-1.amazonaws.com/${branch}:latest"
+          target="${awsuid}.dkr.ecr.${awsregion}.amazonaws.com/${branch}:latest"
           docker tag "${branch}:latest" $target
 
       - name: set login ECR to docker
         run: |       
           echo "${{ secrets.AWS_PRIVATE_KEY }}" > private_key
           chmod 600 private_key
-          ssh -oStrictHostKeyChecking=no ${{ secrets.AWS_USER }}@${{ secrets.AWS_HOST }} -i private_key "aws ecr get-login-password | docker login --username AWS --password-stdin https://${awsuid}.dkr.ecr.<region>.amazonaws.com"
+          ssh -oStrictHostKeyChecking=no ${{ secrets.AWS_USER }}@${{ secrets.AWS_HOST }} -i private_key "aws ecr get-login-password | docker login --username AWS --password-stdin https://${awsuid}.dkr.ecr.${awsregion}.amazonaws.com"
 
       # push to Amazon ECR 
       - name: Push Docker image to Amazon ECR
         run: |
           echo $branch
-          target="${awsuid}.dkr.ecr.ap-northeast-1.amazonaws.com/${branch}:latest"
+          target="${awsuid}.dkr.ecr.${awsregion}.amazonaws.com/${branch}:latest"
           echo $target
           docker push $target
 
@@ -84,5 +84,5 @@ jobs:
           if [ "$cid" != "" ]; then
             docker stop $cid > /dev/null
           fi
-          ssh -oStrictHostKeyChecking=no ${{ secrets.AWS_USER }}@${{ secrets.AWS_HOST }} -i private_key "docker pull ${awsuid}.dkr.ecr.ap-northeast-1.amazonaws.com/${branch} && docker run -d -p 8443:8443 --env-file env --env AWS_ACCESS_KEY_ID=${{ secrets.AKEY }} --env AWS_SECRET_ACCESS_KEY=${{ secrets.ASECRET }} --env BRANCH=${branch}  ${awsuid}.dkr.ecr.ap-northeast-1.amazonaws.com/${branch}"
+          ssh -oStrictHostKeyChecking=no ${{ secrets.AWS_USER }}@${{ secrets.AWS_HOST }} -i private_key "docker pull ${awsuid}.dkr.ecr.${awsregion}.amazonaws.com/${branch} && docker run -d -p 8443:8443 --env-file env --env AWS_ACCESS_KEY_ID=${{ secrets.AKEY }} --env AWS_SECRET_ACCESS_KEY=${{ secrets.ASECRET }} --env BRANCH=${branch}  ${awsuid}.dkr.ecr.${awsregion}.amazonaws.com/${branch}"
 
