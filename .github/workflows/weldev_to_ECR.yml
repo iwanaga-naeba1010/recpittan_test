@@ -76,7 +76,7 @@ jobs:
           docker push $target
 
       - name: get params from AWS parametor store
-        run |
+        run: |
           cat /dev/null > envs.txt
           aws aws ssm get-parameter --with-decryption --query "Parameter.Value" --output text --name "/env/${branch}" > envs.txt
 
