@@ -90,7 +90,7 @@ jobs:
           # get sslport
           sslport=$( grep SSLPORT envs.txt | cut -d '=' -f 2 )
           echo "sslport:${sslport}"
-          ssh -oStrictHostKeyChecking=no -i private_key ${{ secrets.AWS_USER }}@${{ secrets.AWS_HOST }} "export sslport && echo localsslport:${sslport} && cid=$( docker ps | grep $sslport | cut -d ' ' -f 1 ) && echo cid; echo ${cid} && if [ -z $cid ]; then echo docker_stop; echo $cid; docker stop $cid; fi"
+          ssh -oStrictHostKeyChecking=no -i private_key ${{ secrets.AWS_USER }}@${{ secrets.AWS_HOST }} "export sslport && echo localsslport:${sslport} && cid=$( docker ps | grep $sslport | cut -d ' ' -f 1 ) && echo cid; echo ${cid} && if [ $cid ]; then echo docker_stop; echo $cid; docker stop $cid; fi"
 
       # test : ec2 deploy
       - name: ec2 deploy
