@@ -89,7 +89,7 @@ jobs:
           # get sslport
           sslport=$( grep SSLPORT envs.txt | cut -d '=' -f 2 )
           echo "sslport: ${sslport}"
-          ssh -oStrictHostKeyChecking=no ${{ secrets.AWS_USER }}@${{ secrets.AWS_HOST }} -i private_key "cid=$( docker ps | grep $sslport | cut -d ' ' -f 1 ) && echo "cid:${cid}" && if [ "$cid" != "" ]; then docker stop $cid; echo "docker stop ${cid}"; fi" sslport=$sslport
+          ssh -oStrictHostKeyChecking=no ${{ secrets.AWS_USER }}@${{ secrets.AWS_HOST }} -i private_key "cid=$( docker ps | grep $sslport | cut -d ' ' -f 1 ) && echo "cid:${cid}" && if [ "$cid" != "" ]; then docker stop $cid; echo "docker stop ${cid}"; fi" "sslport=${sslport}"
           ssh -oStrictHostKeyChecking=no ${{ secrets.AWS_USER }}@${{ secrets.AWS_HOST }} -i private_key "docker pull ${awsuid}.dkr.ecr.${awsregion}.amazonaws.com/${branch} && docker run -d -p ${sslport}:${sslport} --env-file env --env AWS_ACCESS_KEY_ID=${{ secrets.AKEY }} --env AWS_SECRET_ACCESS_KEY=${{ secrets.ASECRET }} --env BRANCH=${branch}  ${awsuid}.dkr.ecr.${awsregion}.amazonaws.com/${branch}"
 
 
