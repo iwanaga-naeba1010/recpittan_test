@@ -89,7 +89,7 @@ jobs:
           # get sslport
           sslport=$( grep SSLPORT envs.txt | cut -d '=' -f 2 )
           echo $sslport
-          cid=$( dokcer ps | grep $sslport | cut -d ' ' -f 1 )
+          cid=$( docker ps | grep $sslport | cut -d ' ' -f 1 )
           echo $cid
           if [ "$cid" != "" ]; then
             docker stop $cid > /dev/null
