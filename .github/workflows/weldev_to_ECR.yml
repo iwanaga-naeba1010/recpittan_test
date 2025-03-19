@@ -47,7 +47,7 @@ jobs:
           aws-region: ap-northeast-1
 
       - name: Login to Amazon ECR
-        id: login-ecr        
+        id: login-ecr
         uses: aws-actions/amazon-ecr-login@v2
 
       # Docker イメージをビルド
@@ -62,12 +62,12 @@ jobs:
           docker tag "${branch}:latest" $target
 
       - name: set login ECR to docker
-        run: |       
+        run: |
           echo "${{ secrets.AWS_PRIVATE_KEY }}" > private_key
           chmod 600 private_key
           ssh -oStrictHostKeyChecking=no ${{ secrets.AWS_USER }}@${{ secrets.AWS_HOST }} -i private_key "aws ecr get-login-password | docker login --username AWS --password-stdin https://${awsuid}.dkr.ecr.${awsregion}.amazonaws.com"
 
-      # push to Amazon ECR 
+      # push to Amazon ECR
       - name: Push Docker image to Amazon ECR
         run: |
           echo $branch
@@ -80,7 +80,7 @@ jobs:
           cat /dev/null > envs.txt
           $envs=$( aws aws ssm get-parameter --with-decryption --query "Parameter.Value" --output text --name "/env/${branch}" )
           for word in $envs; do echo $word >> envs.txt; done
-	  
+
       # test : ec2 deploy
       - name: ec2 deploy
         run: |
