@@ -59,7 +59,8 @@ dip start
 
 # container
 dockers/ 環境構築用のfolder
-dockers/entrypoint.sh
+dockers/entrypoint.sh container起動時の処理
+  現在はbundle installも含む
 dockers/env.sample
 
 #残タスク
