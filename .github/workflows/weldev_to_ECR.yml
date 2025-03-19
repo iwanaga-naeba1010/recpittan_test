@@ -78,7 +78,7 @@ jobs:
       - name: get params from AWS parametor store
         run: |
           cat /dev/null > envs.txt
-          $envs=$( aws aws ssm get-parameter --with-decryption --query "Parameter.Value" --output text --name "/env/${branch}" )
+          envs=$( aws aws ssm get-parameter --with-decryption --query "Parameter.Value" --output text --name "/env/${branch}" )
           for word in $envs; do echo $word >> envs.txt; done
 
       # test : ec2 deploy
