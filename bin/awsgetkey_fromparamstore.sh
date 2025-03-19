@@ -45,6 +45,12 @@ if [ -f .env ]; then
     eval "$(cat .env <(echo) <(declare -x))"
 fi
 
+echo "get env from paramstore"
+if [ "$BRANCH" == "" ]; then
+    echo "no set env BRANCH"
+    exit
+fi
+
 echo "branch=${BRANCH}"
 grep DATABASE_HOST .env > /dev/null
 ret=$?
