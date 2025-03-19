@@ -88,9 +88,10 @@ jobs:
           chmod 600 private_key
           # get sslport
           sslport=$( grep SSLPORT envs.txt | cut -d '=' -f 2 )
-          echo $sslport
+          echo "sslport: ${sslport}"
           cid=$( docker ps | grep $sslport | cut -d ' ' -f 1 )
-          echo $cid
+          docker ps | grep $sslport | cut -d ' ' -f 1
+          echo "running docker : ${cid}"
           if [ "$cid" != "" ]; then
             docker stop $cid > /dev/null
           fi
